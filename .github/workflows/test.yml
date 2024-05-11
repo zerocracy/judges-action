@@ -32,5 +32,5 @@ jobs:
       - uses: ./
         with:
           token: ???
-          factbase: /tmp/test.fb
-      - run: test -e /tmp/test.fb
+          factbase: test.fb
+      - run: test -e test.fb
