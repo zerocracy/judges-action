@@ -21,9 +21,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-set -x
 set -e
 set -o pipefail
+
+if [ -z "${GITHUB_WORKSPACE}" ]; then
+    echo 'Probably you are running this Docker image not from GitHub Actions.'
+    echo 'In order to do it right, do this:'
+    echo '  docker build . -t judges-action'
+    echo '  docker run -it --rm --entrypoint /bin/bash judges-action'
+    exit 1
+fi
 
 cd "${GITHUB_WORKSPACE-/w}"
 
