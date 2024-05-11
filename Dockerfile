@@ -29,5 +29,6 @@ RUN gem install judges:0.0.1
 
 WORKDIR /home
 COPY entry.sh /home
+COPY judges /
 
 ENTRYPOINT ["/home/entry.sh"]
