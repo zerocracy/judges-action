@@ -1,7 +1,7 @@
 #!/bin/bash
 # MIT License
 #
-# Copyright (c) 2021-2024 Yegor Bugayenko
+# Copyright (c) 2024 Zerocracy
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -34,4 +34,6 @@ fi
 
 cd "${GITHUB_WORKSPACE-/w}"
 
-judges update -e= /judges "${INPUT_FACTBASE}"
+judges update -e "${GITHUB_TOKEN=INPUT_TOKEN}" /judges "${INPUT_FACTBASE}"
+
+judges print --format=yaml "${INPUT_FACTBASE}"
