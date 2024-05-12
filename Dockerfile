@@ -25,7 +25,7 @@ FROM ruby:3.3
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
 
-RUN gem install judges:0.0.1
+RUN gem install judges:0.0.8
 
 WORKDIR /home
 COPY entry.sh /home

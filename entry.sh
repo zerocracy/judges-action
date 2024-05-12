@@ -34,4 +34,4 @@ fi
 
 cd "${GITHUB_WORKSPACE-/w}"
 
-judges /judges "${INPUT_FACTBASE}"
+judges update -e= /judges "${INPUT_FACTBASE}"

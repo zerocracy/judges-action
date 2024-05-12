@@ -29,6 +29,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+      - run: gem install judge:0.0.8
+      - run: judge test judges
       - uses: ./
         with:
           token: ???
