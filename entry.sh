@@ -34,6 +34,10 @@ fi
 
 cd "${GITHUB_WORKSPACE-/w}"
 
-judges update -e "${GITHUB_TOKEN=INPUT_TOKEN}" /judges "${INPUT_FACTBASE}"
+fb=${INPUT_FACTBASE}
 
-judges print --format=yaml "${INPUT_FACTBASE}"
+judges update -e "${GITHUB_TOKEN=INPUT_TOKEN}" /judges "${fb}"
+
+judges print --format=yaml --auto "${fb}"
+judges print --format=xml --auto "${fb}"
+judges print --format=json --auto "${fb}"
