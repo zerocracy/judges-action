@@ -40,7 +40,12 @@ fb=${INPUT_FACTBASE}
 
 set -x
 
-judges --verbose update --option "${INPUT_OPTIONS}" /judges "${fb}"
+declare -a options=()
+while IFS= read -r o; do
+    options+=("--option=${o}")
+done <<< "${INPUT_OPTIONS}"
+
+judges --verbose update "${options[@]}" /judges "${fb}"
 
 judges print --format=yaml --auto "${fb}"
 judges print --format=xml --auto "${fb}"

@@ -36,14 +36,23 @@ octokit.repository_events($options.github_repository).each do |e|
   n = $fb.insert
   n.kind = 'GitHub event'
   n.time = e[:created_at].iso8601
-  n.github_type = e[:type]
+  n.github_event_type = e[:type]
   n.github_event_id = e[:id]
   n.github_repository = e[:repo][:name]
+  n.github_repository_id = e[:repo][:id]
   n.github_action = e[:payload][:type] if e[:payload][:type]
-  n.github_actor = e[:actor][:login] if e[:actor][:login]
+  n.github_actor = e[:actor][:login] if e[:actor]
+  n.github_actor_id = e[:actor][:id] if e[:actor]
+  if e[:type] == 'PushEvent'
+    n.github_push_id = e[:payload][:push_id]
+  end
   seen += 1
-  if seen >= $options.github_max_events
+  if !$options.github_max_events.nil? && seen >= $options.github_max_events
     $loog.info("Already scanned #{seen} events, that's enough (due to 'github_max_events' option)")
+    break
+  end
+  if octokit.rate_limit.remaining < 10
+    $loog.info("To much GitHub API quota consumed already, stopping")
     break
   end
 end

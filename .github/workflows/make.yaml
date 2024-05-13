@@ -19,13 +19,14 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-once($fb).query("(and (eq kind 'GitHub event') (eq github_type 'LabelAttached'))").each do |f|
-  n = $fb.insert
-  n.kind = 'bug was accepted'
-  # n.github_reporter = f.github_actor
-  # n.github_reporter_id = f.github_actor_id
-  n.github_acceptor = f.github_actor
-  n.github_acceptor_id = f.github_actor_id
-  n.issue = ''
-end
+---
+name: make
+'on':
+  push:
+  pull_request:
+jobs:
+  make:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: make

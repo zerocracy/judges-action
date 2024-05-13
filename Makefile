@@ -20,8 +20,44 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-test:
-	docker run --rm -v "$$(pwd):/w" $$(docker build -q .)
+.SHELLFLAGS: -c
+.ONESHELL:
+.PHONY: clean test all entry rmi verify
+
+all: test entry rmi verify
+
+test: target/docker-image.txt
+	img=$$(cat target/docker-image.txt)
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test /judges'
+	echo $? > target/test.exit
+
+entry: target/docker-image.txt
+	img=$$(cat target/docker-image.txt)
+	(
+		echo 'github_repository=yegor256/judges'
+		echo 'github_max_events=3'
+	) > target/opts.txt
+	docker run --rm \
+		-e GITHUB_WORKSPACE=/tmp \
+		-e INPUT_FACTBASE=/tmp/recent.fb \
+		-e "INPUT_OPTIONS=$$(cat target/opts.txt)" \
+		"$${img}"
+	echo $? > target/entry.exit
+
+rmi: target/docker-image.txt
+	img=$$(cat $<)
+	docker rmi "$${img}"
+	rm "$<"
+
+verify:
+	e1=$$(cat target/test.exit)
+	test "${e1}" = "0"
+	e2=$$(cat target/entry.exit)
+	test "${e2}" = "0"
+
+target/docker-image.txt:
+	mkdir -p "$$(dirname $@)"
+	docker build -q . > "$@"
 
 clean:
-	rm -f *.dvi *.pdf *.fls *.aux *.fdb_latexmk *.log
+	rm -f target
