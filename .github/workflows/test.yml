@@ -36,6 +36,8 @@ jobs:
       - run: GLI_DEBUG=true judges test ./judges
       - uses: ./
         with:
-          options: github_repository=yegor256/judges,github_max_events=1
+          options:
+            github_repository=yegor256/judges,
+            github_max_events=1
           factbase: test.fb
       - run: test -e test.fb
