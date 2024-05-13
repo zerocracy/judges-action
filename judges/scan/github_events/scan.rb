@@ -35,11 +35,12 @@ octokit.repository_events($options.github_repository).each do |e|
   $loog.info("Detected new event ##{e[:id]} in #{e[:repo][:name]}: #{e[:type]}")
   n = $fb.insert
   n.kind = 'GitHub event'
-  n.type = e[:created_at].iso8601
+  n.time = e[:created_at].iso8601
   n.github_type = e[:type]
   n.github_event_id = e[:id]
   n.github_repository = e[:repo][:name]
-  n.github_action = e[:payload][:type]
+  n.github_action = e[:payload][:type] if e[:payload][:type]
+  n.github_actor = e[:actor][:login] if e[:actor][:login]
   seen += 1
   if seen >= $options.github_max_events
     $loog.info("Already scanned #{seen} events, that's enough (due to 'github_max_events' option)")
