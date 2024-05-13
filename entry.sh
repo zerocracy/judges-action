@@ -36,7 +36,7 @@ cd "${GITHUB_WORKSPACE-/w}"
 
 fb=${INPUT_FACTBASE}
 
-judges update -e "${GITHUB_TOKEN=INPUT_TOKEN}" /judges "${fb}"
+judges update --option "${INPUT_OPTIONS}" /judges "${fb}"
 
 judges print --format=yaml --auto "${fb}"
 judges print --format=xml --auto "${fb}"

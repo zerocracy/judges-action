@@ -26,6 +26,7 @@ LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
 
 RUN gem install judges
+RUN gem install octokit
 
 WORKDIR /home
 COPY entry.sh /home

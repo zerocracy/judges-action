@@ -19,23 +19,29 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: test
-'on':
-  push:
-  pull_request:
-jobs:
-  test:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2
-      - run: gem install judges
-      - run: judges test ./judges
-      - uses: ./
-        with:
-          options: --github_repository=yegor256/judges,github_max_events=1
-          factbase: test.fb
-      - run: test -e test.fb
+
+require 'octokit'
+
+$options.github_token = ''
+
+octokit = Octokit::Client.new
+unless $options.github_token.empty?
+  octokit = Octokit::Client.new(access_token: $options.github_token)
+  $loog.info('Accessing GitHub with a token!')
+end
+
+seen = 0
+octokit.repository_events($options.github_repository).each do |e|
+  n = $fb.insert
+  n.kind = 'GitHub event'
+  n.type = e[:created_at].iso8601
+  n.github_type = e[:type]
+  n.github_event_id = e[:id]
+  n.github_repository = e[:repo][:name]
+  n.github_action = e[:payload][:type]
+  seen += 1
+  if seen >= $options.github_max_events
+    $loog.info("Already scanned #{seen} events, that's enough (due to 'github_max_events' option)")
+    break
+  end
+end

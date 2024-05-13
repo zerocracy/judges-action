@@ -19,23 +19,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: test
-'on':
-  push:
-  pull_request:
-jobs:
-  test:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2
-      - run: gem install judges
-      - run: judges test ./judges
-      - uses: ./
-        with:
-          options: --github_repository=yegor256/judges,github_max_events=1
-          factbase: test.fb
-      - run: test -e test.fb
+
+once($fb).query("(eq kind 'bug was accepted')").each do |f|
+  n = $fb.insert
+  n.kind = 'nominate for good bug'
+  n.payee = f.reporter
+  n.amount = 15
+  n.message = 'thanks for reporting a bug; you get +15 points for this'
+end
