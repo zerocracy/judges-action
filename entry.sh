@@ -38,6 +38,8 @@ cd "${GITHUB_WORKSPACE-/w}"
 
 fb=${INPUT_FACTBASE}
 
+set -x
+
 judges update --option "${INPUT_OPTIONS}" /judges "${fb}"
 
 judges print --format=yaml --auto "${fb}"
