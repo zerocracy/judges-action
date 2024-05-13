@@ -25,8 +25,10 @@ FROM ruby:3.3
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
 
-RUN gem install judges
-RUN gem install octokit
+RUN gem install \
+    judges \
+    octokit \
+    faraday-retry
 
 WORKDIR /home
 COPY entry.sh /home
