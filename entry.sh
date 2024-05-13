@@ -40,7 +40,7 @@ fb=${INPUT_FACTBASE}
 
 set -x
 
-judges update --verbose --option "${INPUT_OPTIONS}" /judges "${fb}"
+judges --verbose update --option "${INPUT_OPTIONS}" /judges "${fb}"
 
 judges print --format=yaml --auto "${fb}"
 judges print --format=xml --auto "${fb}"
