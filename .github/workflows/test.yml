@@ -33,7 +33,7 @@ jobs:
         with:
           ruby-version: 3.2
       - run: gem install judges octokit faraday-retry
-      - run: GLI_DEBUG=true judges test ./judges
+      - run: GLI_DEBUG=true judges --verbose test ./judges
       - uses: ./
         with:
           options:
