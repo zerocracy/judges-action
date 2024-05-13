@@ -42,7 +42,9 @@ set -x
 
 declare -a options=()
 while IFS= read -r o; do
-    options+=("--option=${o}")
+    v=$(echo "${o}" | xargs)
+    if [ "${v}" = "" ]; then continue; fi
+    options+=("--option=${v}")
 done <<< "${INPUT_OPTIONS}"
 
 judges --verbose update "${options[@]}" /judges "${fb}"
