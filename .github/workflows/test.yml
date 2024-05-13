@@ -32,10 +32,10 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2
-      - run: gem install judges
+      - run: gem install judges octokit faraday-retry
       - run: judges test ./judges
       - uses: ./
         with:
-          options: --github_repository=yegor256/judges,github_max_events=1
+          options: github_repository=yegor256/judges,github_max_events=1
           factbase: test.fb
       - run: test -e test.fb

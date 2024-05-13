@@ -22,10 +22,8 @@
 
 require 'octokit'
 
-$options.github_token = ''
-
 octokit = Octokit::Client.new
-unless $options.github_token.empty?
+unless $options.github_token.nil?
   octokit = Octokit::Client.new(access_token: $options.github_token)
   $loog.info('Accessing GitHub with a token!')
 end
