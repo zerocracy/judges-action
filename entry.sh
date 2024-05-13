@@ -32,6 +32,8 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     exit 1
 fi
 
+export GLI_DEBUG=true
+
 cd "${GITHUB_WORKSPACE-/w}"
 
 fb=${INPUT_FACTBASE}
