@@ -28,7 +28,7 @@ all: test entry rmi verify
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test /judges'
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test /judges-action/judges'
 	echo "$$?" > target/test.exit
 
 entry: target/docker-image.txt
@@ -57,7 +57,7 @@ verify:
 
 target/docker-image.txt:
 	mkdir -p "$$(dirname $@)"
-	docker build -q . > "$@"
+	docker build -t judges-action -q . > "$@"
 
 clean:
 	rm -f target

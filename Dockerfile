@@ -32,6 +32,8 @@ RUN gem install \
 
 WORKDIR /home
 COPY entry.sh /home
-COPY judges /judges
+RUN mkdir /judges-action
+COPY judges /judges-action/judges
+COPY lib /judges-action/lib
 
 ENTRYPOINT ["/home/entry.sh"]

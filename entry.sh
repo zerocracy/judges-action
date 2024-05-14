@@ -53,7 +53,7 @@ if [ -e "${fb}" ]; then
 fi
 
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
-judges --verbose update "${options[@]}" /judges "${fb}"
+judges --verbose update "${options[@]}" /judges-action/judges "${fb}"
 
 # Convert the factbase to a few human-readable formats
 for f in yaml xml json; do
