@@ -24,21 +24,94 @@ facts:
   github_repository: zerocracy/judges-action
 - id: 5
   kind: GitHub event
-  time: '2024-05-13T16:00:56Z'
-  github_event_type: PushEvent
-  github_event_id: '38329587365'
-  github_repository: zerocracy/judges-action
-  github_repository_id: 799177290
-  github_actor: github-actions[bot]
-  github_actor_id: 41898282
-  github_push_id: 18397811770
+  github_issue: 16
+  github_action: issue-closed
+  time: '2024-05-14T20:10:57Z'
+  github_event_type: IssuesEvent
+  github_event_id: '38375409420'
+  github_repository: yegor256/judges
+  github_repository_id: 799113787
+  github_actor: yegor256
+  github_actor_id: 526301
 - id: 6
   kind: GitHub event
-  time: '2024-05-13T16:00:19Z'
+  github_issue: 16
+  github_action: comment-posted
+  github_comment_id: 2111048311
+  github_comment_body: |-
+    > @rultor release, tag is `0.0.17`
+
+    @yegor256 Done! FYI, the full log is [here](https://www.rultor.com/t/41195-2111028556) (took me 8min)
+  github_comment_author: rultor
+  github_comment_author_id: 8086956
+  time: '2024-05-14T20:04:31Z'
+  github_event_type: IssueCommentEvent
+  github_event_id: '38375230462'
+  github_repository: yegor256/judges
+  github_repository_id: 799113787
+  github_actor: rultor
+  github_actor_id: 8086956
+- id: 7
+  kind: GitHub event
+  github_action: push
+  github_push_id: 18415271797
+  time: '2024-05-14T15:27:39Z'
   github_event_type: PushEvent
-  github_event_id: '38329564320'
+  github_event_id: '38367149477'
+  github_repository: yegor256/factbase
+  github_repository_id: 798641472
+  github_actor: yegor256
+  github_actor_id: 526301
+- id: 8
+  kind: GitHub event
+  github_action: push
+  github_push_id: 18419145435
+  time: '2024-05-14T20:10:51Z'
+  github_event_type: PushEvent
+  github_event_id: '38375406738'
   github_repository: zerocracy/judges-action
   github_repository_id: 799177290
   github_actor: yegor256
   github_actor_id: 526301
-  github_push_id: 18397801550
+- id: 9
+  github_event_type: LabelAttached
+  github_repository: yegor256/judges
+  github_issue: 15
+  github_label: enhancement
+  kind: GitHub event
+  time: 2024-05-14 20:11:28.137429585 +00:00
+- id: 10
+  github_event_type: LabelAttached
+  github_repository: yegor256/judges
+  github_issue: 14
+  github_label: bug
+  kind: GitHub event
+  time: 2024-05-14 20:11:28.137677980 +00:00
+- id: 11
+  github_event_type: LabelAttached
+  github_repository: yegor256/judges
+  github_issue: 14
+  github_label: enhancement
+  kind: GitHub event
+  time: 2024-05-14 20:11:28.137919492 +00:00
+- id: 12
+  github_event_type: LabelAttached
+  github_repository: yegor256/factbase
+  github_issue: 12
+  github_label: bug
+  kind: GitHub event
+  time: 2024-05-14 20:11:28.395470739 +00:00
+- id: 13
+  github_event_type: LabelAttached
+  github_repository: yegor256/factbase
+  github_issue: 12
+  github_label: help wanted
+  kind: GitHub event
+  time: 2024-05-14 20:11:28.395769678 +00:00
+- id: 14
+  github_event_type: LabelAttached
+  github_repository: yegor256/factbase
+  github_issue: 12
+  github_label: good first issue
+  kind: GitHub event
+  time: 2024-05-14 20:11:28.396096230 +00:00
