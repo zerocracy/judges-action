@@ -19,25 +19,22 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: test
-'on':
-  push:
-  pull_request:
-jobs:
-  test:
-    runs-on: ubuntu-22.04
-    env:
-      GLI_DEBUG: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./
-        with:
-          options: |
-            github_repositories=yegor256/judges
-            github_max_events=1
-          factbase: test.fb
-      - run: test -e test.fb
-      - run: test -e test.yaml
-      - run: test -e test.json
-      - run: test -e test.xml
+
+require_relative '../../../lib/octokit'
+
+repositories do |repo|
+  octokit.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
+    e[:labels].each do |label|
+      n = if_absent($fb) do |f|
+        f.github_event_type = 'LabelAttached'
+        f.github_repository = repo
+        f.github_issue = e[:number]
+        f.github_label = label[:name]
+      end
+      next if n.nil?
+      $loog.info("Detected new label '##{label[:name]}' at #{repo}##{e[:number]}")
+      n.kind = 'GitHub event'
+      n.time = Time.now
+    end
+  end
+end

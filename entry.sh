@@ -47,8 +47,15 @@ while IFS= read -r o; do
     options+=("--option=${v}")
 done <<< "${INPUT_OPTIONS}"
 
+if [ -e "${fb}" ]; then
+    # Remove facts that are too old
+    judges --verbose trim "${fb}"
+fi
+
+# Add new facts, using the judges (Ruby scripts) in the /judges directory
 judges --verbose update "${options[@]}" /judges "${fb}"
 
-judges print --format=yaml --auto "${fb}"
-judges print --format=xml --auto "${fb}"
-judges print --format=json --auto "${fb}"
+# Convert the factbase to a few human-readable formats
+for f in yaml xml json; do
+    judges print --format "${f}" --auto "${fb}"
+done

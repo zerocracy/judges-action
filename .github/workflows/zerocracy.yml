@@ -19,7 +19,7 @@
 # SOFTWARE.
 ---
 name: zerocracy
-on:
+'on':
   push:
   # schedule:
   #   - cron: '0,10,20,30,50,50 * * * *'
@@ -41,7 +41,7 @@ jobs:
           options: |
             github_token=${{ secrets.GITHUB_TOKEN }}
             github_max_events=2
-            github_repository=${{ github.repository }}
+            github_repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action
           factbase: recent.fb
       - run: mkdir gh-pages && cp recent.yaml gh-pages
       - uses: JamesIves/github-pages-deploy-action@v4.6.0

@@ -34,7 +34,7 @@ test: target/docker-image.txt
 entry: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
 	(
-		echo 'github_repository=yegor256/judges'
+		echo 'github_repositories=yegor256/judges'
 		echo 'github_max_events=3'
 	) > target/opts.txt
 	docker run --rm \

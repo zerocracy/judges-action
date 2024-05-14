@@ -19,25 +19,22 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: test
-'on':
-  push:
-  pull_request:
-jobs:
-  test:
-    runs-on: ubuntu-22.04
-    env:
-      GLI_DEBUG: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./
-        with:
-          options: |
-            github_repositories=yegor256/judges
-            github_max_events=1
-          factbase: test.fb
-      - run: test -e test.fb
-      - run: test -e test.yaml
-      - run: test -e test.json
-      - run: test -e test.xml
+
+require 'octokit'
+
+def octokit
+  octokit = Octokit::Client.new
+  unless $options.github_token.nil?
+    token = $options.github_token
+    octokit = Octokit::Client.new(access_token: token)
+    $loog.info("Accessing GitHub with a token (#{token.length} chars)")
+  end
+  octokit
+end
+
+def repositories
+  $options.github_repositories.split(',').each do |repo|
+    $loog.info("Scanning #{repo}...")
+    yield repo
+  end
+end
