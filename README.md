@@ -41,7 +41,8 @@ In order to test this action, just run (provided, you have
 make
 ```
 
-This should build a new Docker image named `judges-action` and then run the entire cycle
+This should build a new Docker image named `judges-action`
+and then run the entire cycle
 inside a new Docker container. Obviously, you need to have
 [Docker](https://docs.docker.com/get-docker/) installed. The Docker image
 will be deleted by the end of Make build.

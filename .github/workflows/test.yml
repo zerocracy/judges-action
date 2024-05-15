@@ -33,11 +33,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./
         with:
+          pages: ppp
           options: |
             github_repositories=yegor256/judges
             github_max_events=1
           factbase: test.fb
       - run: test -e test.fb
-      - run: test -e test.yaml
-      - run: test -e test.json
-      - run: test -e test.xml
+      - run: test -e ppp/test.yaml
+      - run: test -e ppp/test.json
+      - run: test -e ppp/test.xml
