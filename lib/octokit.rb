@@ -23,13 +23,16 @@
 require 'octokit'
 
 def octokit
-  octokit = Octokit::Client.new
-  unless $options.github_token.nil?
-    token = $options.github_token
-    octokit = Octokit::Client.new(access_token: token)
-    $loog.info("Accessing GitHub with a token (#{token.length} chars)")
+  $octokit ||= begin
+    o = Octokit::Client.new
+    unless $options.github_token.nil?
+      token = $options.github_token
+      o = Octokit::Client.new(access_token: token)
+      $loog.info("Accessing GitHub with a token (#{token.length} chars)")
+    end
+    o
   end
-  octokit
+  $octokit
 end
 
 def repositories
