@@ -20,12 +20,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-once($fb).query("(and (eq kind 'GitHub event') (eq github_type 'LabelAttached'))").each do |f|
-  n = $fb.insert
-  n.kind = 'bug was accepted'
-  # n.github_reporter = f.github_actor
-  # n.github_reporter_id = f.github_actor_id
-  n.github_acceptor = f.github_actor
-  n.github_acceptor_id = f.github_actor_id
-  n.issue = ''
+$fb.query("(and (eq kind 'GitHub event')
+  (eq github_action 'label-attached')
+  (exists github_issue)
+  (exists github_repository)
+  (eq github_label 'bug'))").each do |f1|
+  issue = f1.github_issue
+  repo = f1.github_repository
+  once($fb).query("(and (eq kind 'GitHub event')
+    (eq github_action 'issue-opened')
+    (eq github_issue #{issue}) (eq github_repository '#{repo}'))").each do |f2|
+    n = $fb.insert
+    n.kind = 'bug was accepted'
+    n.time = Time.now
+    n.github_reporter = f2.github_actor
+    n.github_issue = issue
+    n.github_repository = repo
+  end
 end
