@@ -43,6 +43,7 @@ entry: target/docker-image.txt
 	docker run --rm \
 		-e GITHUB_WORKSPACE=/tmp \
 		-e INPUT_FACTBASE=/tmp/recent.fb \
+		-e INPUT_PAGES=pages \
 		-e "INPUT_OPTIONS=$$(cat target/opts.txt)" \
 		"$${img}"
 	echo "$$?" > target/entry.exit

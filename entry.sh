@@ -56,8 +56,13 @@ fi
 judges --verbose update --max-cycles 5 "${options[@]}" /judges-action/judges "${fb}"
 
 # Convert the factbase to a few human-readable formats
+if [ -z "${INPUT_PAGES}" ]; then
+    echo "It is mandatory to specify 'pages' argument, which is the name"
+    echo "of a directory where YAML, JSON, and other human-readable files are generated"
+    exit 1
+fi
 mkdir -p "${INPUT_PAGES}"
 for f in yaml xml json; do
     judges print --format "${f}" --auto "${fb}"
-    mv "${fb}.${f}" "${INPUT_PAGES}"
+    mv "${fb%.*}.${f}" "${INPUT_PAGES}"
 done
