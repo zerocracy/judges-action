@@ -43,9 +43,8 @@ jobs:
             github_max_events=2
             github_repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action
           factbase: recent.fb
-      - run: mkdir gh-pages && cp recent.yaml gh-pages
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
-          folder: gh-pages
+          folder: zerocracy-pages
           clean: false

@@ -21,14 +21,18 @@
 input:
   -
     kind: bug was accepted
-    reporter: yegor256
-    time: 2024-01-01T03:15:45
+    github_reporter: yegor256
+    github_issue: 42
+    github_repository: foo/foo
+    time: 2024-01-01T03:15:45Z
     seen:
       - one
       - two
       - three
 expected:
   - /fb[count(f)=2]
-  - /fb/f[kind='nominate for good bug']
+  - /fb/f[kind='reward for good bug']
   - /fb/f[payee='yegor256']
-  - /fb/f[amount='15']
+  - /fb/f[github_issue='42']
+  - /fb/f[github_repository='foo/foo']
+  - /fb/f[award='15']

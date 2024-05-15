@@ -26,12 +26,13 @@ LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
 
 RUN gem install \
+    faraday:2.7.4 \
+    faraday-retry:2.2.1 \
     octokit:8.1.0 \
     obk:0.3.1 \
-    faraday-retry:2.2.1 \
     rubocop:1.63.5
 
-RUN gem install judges:0.0.21
+RUN gem install judges:0.0.23
 
 WORKDIR /home
 COPY entry.sh /home

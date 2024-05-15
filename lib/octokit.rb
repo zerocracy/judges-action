@@ -35,12 +35,31 @@ def octokit
     end
     o
   end
-  Obk.new($octokit, pause: 500)
+  if $options.testing.nil?
+    Obk.new($octokit, pause: 500)
+  else
+    FakeOctokit.new
+  end
 end
 
 def repositories
   $options.github_repositories.split(',').each do |repo|
     $loog.info("Scanning #{repo}...")
     yield repo
+  end
+end
+
+# Fake GitHub client, for tests.
+class FakeOctokit
+  def add_comment(repo, issue, text)
+    # nothing
+  end
+
+  def search_issues(_query)
+    { items: [] }
+  end
+
+  def repository_events(_repo)
+    []
   end
 end

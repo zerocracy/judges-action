@@ -83,8 +83,9 @@ catch :stop do
         $loog.info("Already scanned #{seen} events, that's enough (due to 'github_max_events' option)")
         throw :stop
       end
-      if octokit.rate_limit.remaining < 10
-        $loog.info('To much GitHub API quota consumed already, stopping')
+      left = octokit.rate_limit.remaining
+      if left < 5
+        $loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
         throw :stop
       end
     end

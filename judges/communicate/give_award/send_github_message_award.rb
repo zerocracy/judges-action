@@ -22,20 +22,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require_relative '../../../lib/octokit'
+
 once($fb).query("(and
-  (eq kind 'bug was accepted')
+  (exists payee)
+  (exists award)
+  (exists reason)
   (exists github_issue)
-  (exists github_repository)
-  (exists github_reporter))").each do |f|
-  n = $fb.insert
-  n.time = Time.now
-  n.kind = 'reward for good bug'
-  n.github_issue = f.github_issue
-  n.github_repository = f.github_repository
-  n.payee = f.github_reporter
-  n.award = 15
-  n.reason = 'Thanks for reporting a new bug! You earn +15 points for this. \
-    By reporting bugs, you help our project improve its quality.
-    If you find anything else in the repository that doesn\'t look
-    as good as you might expect, do not hesitate to report it.'
+  (exists github_repository))").each do |f|
+  octokit.add_comment(
+    f.github_repository,
+    f.github_issue,
+    f.reason
+  )
 end

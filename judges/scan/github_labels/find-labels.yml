@@ -20,10 +20,7 @@
 ---
 input: []
 options:
-  github_max_labels: 1
+  testing: yes
   github_repositories: yegor256/judges
 expected:
-  - /fb/f[id]
-  - /fb/f[kind='GitHub event']
-  - /fb/f[time]
-  - /fb/f[github_action='label-attached']
+  - /fb

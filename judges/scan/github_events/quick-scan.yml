@@ -20,14 +20,8 @@
 ---
 input: []
 options:
+  testing: yes
   github_max_events: 1
   github_repositories: yegor256/judges
 expected:
-  - /fb[count(f)=1]
-  - /fb/f[id]
-  - /fb/f[kind='GitHub event']
-  - /fb/f[time]
-  - /fb/f[github_event_id]
-  - /fb/f[github_repository='yegor256/judges']
-  - /fb/f[github_actor]
-  - /fb/f[github_actor_id]
+  - /fb
