@@ -13,18 +13,35 @@ jobs:
   zerocracy:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: zerocracy/judges-action@0.0.1
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: recent.fb
+          key: zerocracy
+          restore-keys: zerocracy
+      - uses: zerocracy/judges-action@master
+        with:
+          options: |
+            github_token=${{ secrets.GITHUB_TOKEN }}
+            github_repositories=yegor256/judges
+          factbase: recent.fb
+      - uses: JamesIves/github-pages-deploy-action@v4.6.0
+        with:
+          branch: gh-pages
+          folder: zerocracy-pages
+          clean: false
 ```
 
 ## How to Contribute
 
-In order to test this action, just run:
+In order to test this action, just run (provided, you have
+[GNU make](https://www.gnu.org/software/make/) installed):
 
 ```bash
-make test
+make
 ```
 
-This should build a new Docker image and then try to use it
-in order to render a simple `test.tex` document. You need to have
-[Docker](https://docs.docker.com/get-docker/) installed.
+This should build a new Docker image and then run the entire cycle
+inside a new Docker container. You need to have
+[Docker](https://docs.docker.com/get-docker/) installed. The image
+will be deleted by the end of Make build.

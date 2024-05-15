@@ -29,6 +29,10 @@ inputs:
   options:
     description: 'Command line options for the "judges" tool'
     required: false
+  pages:
+    description: 'Directory path with YAML, XML, JSON and other files generated'
+    required: false
+    default: 'zerocracy-pages'
   factbase:
     description: 'Path of the factbase file'
     required: false

@@ -56,6 +56,8 @@ fi
 judges --verbose update --max-cycles 5 "${options[@]}" /judges-action/judges "${fb}"
 
 # Convert the factbase to a few human-readable formats
+mkdir -p "${INPUT_PAGES}"
 for f in yaml xml json; do
     judges print --format "${f}" --auto "${fb}"
+    mv "${fb}.${f}" "${INPUT_PAGES}"
 done
