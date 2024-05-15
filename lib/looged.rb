@@ -22,29 +22,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require_relative '../../../lib/octokit'
-require_relative '../../../lib/looged'
+require 'factbase'
+require 'loog'
 
-catch :stop do
-  repositories do |repo|
-    octokit.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
-      e[:labels].each do |label|
-        n = if_absent(looged($fb)) do |f|
-          f.kind = 'GitHub event'
-          f.github_action = 'label-attached'
-          f.github_repository = repo
-          f.github_issue = e[:number]
-          f.github_label = label[:name]
-        end
-        next if n.nil?
-
-        $loog.info("Detected new label '##{label[:name]}' at #{repo}##{e[:number]}")
-        n.time = Time.now
-        if octokit.rate_limit.remaining < 10
-          $loog.info('To much GitHub API quota consumed already, stopping')
-          throw :stop
-        end
-      end
-    end
-  end
+def looged(fb)
+  Factbase::Looged.new(fb, Loog::VERBOSE)
 end

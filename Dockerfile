@@ -30,7 +30,7 @@ RUN gem install \
     faraday-retry:2.2.1 \
     rubocop:1.63.5
 
-RUN gem install judges:0.0.19
+RUN gem install judges:0.0.20
 
 WORKDIR /home
 COPY entry.sh /home
