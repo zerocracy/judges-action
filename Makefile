@@ -27,7 +27,7 @@
 all: rubocop test entry rmi verify
 
 rubocop:
-	rubocop
+	if rubocop --version; then rubocop; fi
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
