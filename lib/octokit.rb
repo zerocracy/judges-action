@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'obk'
 require 'octokit'
 
 def octokit
@@ -34,7 +35,7 @@ def octokit
     end
     o
   end
-  $octokit
+  Obk.new($octokit, pause: 500)
 end
 
 def repositories

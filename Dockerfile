@@ -27,6 +27,7 @@ LABEL "maintainer"="Yegor Bugayenko"
 
 RUN gem install \
     octokit:8.1.0 \
+    obk:0.3.1 \
     faraday-retry:2.2.1 \
     rubocop:1.63.5
 
