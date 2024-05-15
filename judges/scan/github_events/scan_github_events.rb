@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -27,15 +29,17 @@ catch :stop do
   repositories do |repo|
     octokit.repository_events(repo).each do |e|
       next unless $fb.query("(eq github_event_id #{e[:id]})").extend(Enumerable).to_a.empty?
+
       $loog.info("Detected new event ##{e[:id]} in #{e[:repo][:name]}: #{e[:type]}")
       n = $fb.insert
       n.kind = 'GitHub event'
 
-      if e[:type] == 'PushEvent'
+      case e[:type]
+      when 'PushEvent'
         n.github_action = 'push'
         n.github_push_id = e[:payload][:push_id]
 
-      elsif e[:type] == 'IssuesEvent'
+      when 'IssuesEvent'
         n.github_issue = e[:payload][:issue][:number]
         if e[:payload][:action] == 'closed'
           n.github_action = 'issue-closed'
@@ -43,7 +47,7 @@ catch :stop do
           n.github_action = 'issue-opened'
         end
 
-      elsif e[:type] == 'IssueCommentEvent'
+      when 'IssueCommentEvent'
         n.github_issue = e[:payload][:issue][:number]
         if e[:payload][:action] == 'created'
           n.github_action = 'comment-posted'
@@ -53,7 +57,7 @@ catch :stop do
           n.github_comment_author_id = e[:payload][:comment][:user][:id]
         end
 
-      elsif e[:type] == 'ReleaseEvent'
+      when 'ReleaseEvent'
         n.github_release_id = e[:payload][:release][:id]
         if e[:payload][:action] == 'published'
           n.github_action = 'release-published'
@@ -61,7 +65,7 @@ catch :stop do
           n.github_release_author_id = e[:payload][:release][:author][:id]
         end
 
-      elsif e[:type] == 'CreateEvent'
+      when 'CreateEvent'
         if e[:payload][:ref_type] == 'tag'
           n.github_action = 'tag-created'
           n.github_tag = e[:payload][:ref]
@@ -80,7 +84,7 @@ catch :stop do
         throw :stop
       end
       if octokit.rate_limit.remaining < 10
-        $loog.info("To much GitHub API quota consumed already, stopping")
+        $loog.info('To much GitHub API quota consumed already, stopping')
         throw :stop
       end
     end

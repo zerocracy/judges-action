@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -22,19 +24,26 @@
 
 require_relative '../../../lib/octokit'
 
-repositories do |repo|
-  octokit.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
-    e[:labels].each do |label|
-      n = if_absent($fb) do |f|
-        f.github_action = 'label-attached'
-        f.github_repository = repo
-        f.github_issue = e[:number]
-        f.github_label = label[:name]
+catch :stop do
+  repositories do |repo|
+    octokit.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
+      e[:labels].each do |label|
+        n = if_absent($fb) do |f|
+          f.github_action = 'label-attached'
+          f.github_repository = repo
+          f.github_issue = e[:number]
+          f.github_label = label[:name]
+        end
+        next if n.nil?
+
+        $loog.info("Detected new label '##{label[:name]}' at #{repo}##{e[:number]}")
+        n.kind = 'GitHub event'
+        n.time = Time.now
+        if octokit.rate_limit.remaining < 10
+          $loog.info('To much GitHub API quota consumed already, stopping')
+          throw :stop
+        end
       end
-      next if n.nil?
-      $loog.info("Detected new label '##{label[:name]}' at #{repo}##{e[:number]}")
-      n.kind = 'GitHub event'
-      n.time = Time.now
     end
   end
 end

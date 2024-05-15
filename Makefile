@@ -22,9 +22,12 @@
 
 .SHELLFLAGS: -c
 .ONESHELL:
-.PHONY: clean test all entry rmi verify
+.PHONY: clean test all entry rmi verify rubocop
 
-all: test entry rmi verify
+all: rubocop test entry rmi verify
+
+rubocop:
+	rubocop
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
