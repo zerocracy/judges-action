@@ -53,7 +53,7 @@ if [ -e "${fb}" ]; then
 fi
 
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
-judges --verbose update --max-cycles 5 "${options[@]}" /judges-action/judges "${fb}"
+judges --verbose update --quiet --max-cycles 5 "${options[@]}" /judges-action/judges "${fb}"
 
 # Convert the factbase to a few human-readable formats
 if [ -z "${INPUT_PAGES}" ]; then
