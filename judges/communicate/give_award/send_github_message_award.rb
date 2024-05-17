@@ -22,15 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require_relative '../../../lib/octokit'
-
 once($fb).query("(and
   (exists payee)
   (exists award)
   (exists reason)
   (exists github_issue)
   (exists github_repository))").each do |f|
-  octokit.add_comment(
+  octo.add_comment(
     f.github_repository,
     f.github_issue,
     f.reason

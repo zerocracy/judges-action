@@ -34,7 +34,6 @@ $fb.query("(and (eq kind 'GitHub event')
     (eq github_issue #{issue}) (eq github_repository '#{repo}'))").each do |f2|
     n = $fb.insert
     n.kind = 'bug was accepted'
-    n.time = Time.now
     n.github_reporter = f2.github_actor
     n.github_issue = issue
     n.github_repository = repo

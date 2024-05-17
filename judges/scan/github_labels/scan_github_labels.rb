@@ -22,11 +22,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require_relative '../../../lib/octokit'
-
 catch :stop do
-  repositories do |repo|
-    octokit.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
+  each_repo do |repo|
+    octo.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
       e[:labels].each do |label|
         n = if_absent($fb) do |f|
           f.kind = 'GitHub event'
@@ -38,12 +36,7 @@ catch :stop do
         next if n.nil?
 
         $loog.info("Detected new label '##{label[:name]}' at #{repo}##{e[:number]}")
-        n.time = Time.now
-        left = octokit.rate_limit.remaining
-        if left < 5
-          $loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
-          throw :stop
-        end
+        throw :stop if octo.off_quota
       end
     end
   end

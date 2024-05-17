@@ -22,44 +22,23 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'obk'
-require 'octokit'
+require 'rubygems'
+require 'rake'
+require 'rake/clean'
 
-def octokit
-  $octokit ||= begin
-    o = Octokit::Client.new
-    unless $options.github_token.nil?
-      token = $options.github_token
-      o = Octokit::Client.new(access_token: token)
-      $loog.info("Accessing GitHub with a token (#{token.length} chars)")
-    end
-    o
-  end
-  if $options.testing.nil?
-    Obk.new($octokit, pause: 500)
-  else
-    FakeOctokit.new
-  end
+task default: %i[clean test rubocop]
+
+require 'rake/testtask'
+desc 'Run all unit tests'
+Rake::TestTask.new(:test) do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/test_*.rb'
+  test.warning = true
+  test.verbose = false
 end
 
-def repositories
-  $options.github_repositories.split(',').each do |repo|
-    $loog.info("Scanning #{repo}...")
-    yield repo
-  end
-end
-
-# Fake GitHub client, for tests.
-class FakeOctokit
-  def add_comment(repo, issue, text)
-    # nothing
-  end
-
-  def search_issues(_query)
-    { items: [] }
-  end
-
-  def repository_events(_repo)
-    []
-  end
+require 'rubocop/rake_task'
+desc 'Run RuboCop on all directories'
+RuboCop::RakeTask.new(:rubocop) do |task|
+  task.fail_on_error = true
 end

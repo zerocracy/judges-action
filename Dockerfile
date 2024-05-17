@@ -25,19 +25,14 @@ FROM ruby:3.3
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
 
-RUN gem install \
-    faraday:2.7.4 \
-    faraday-retry:2.2.1 \
-    octokit:8.1.0 \
-    obk:0.3.1 \
-    rubocop:1.63.5
-
-RUN gem install judges:0.0.23
-
 WORKDIR /home
 COPY entry.sh /home
 RUN mkdir /judges-action
 COPY judges /judges-action/judges
 COPY lib /judges-action/lib
+COPY Gemfile /judges-action/
+COPY Gemfile.lock /judges-action/
+
+RUN bundle install --gemfile=/judges-action/Gemfile
 
 ENTRYPOINT ["/home/entry.sh"]

@@ -33,16 +33,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
-          path: recent.fb
-          key: judges
-          restore-keys: judges
+          path: ./zerocracy.fb
+          key: zerocracy
       - uses: zerocracy/judges-action@master
         with:
           options: |
             github_token=${{ secrets.GITHUB_TOKEN }}
             github_max_events=2
             github_repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action
-          factbase: recent.fb
+          factbase: zerocracy.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages

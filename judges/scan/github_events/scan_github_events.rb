@@ -22,13 +22,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require_relative '../../../lib/octokit'
-
 seen = 0
 catch :stop do
-  repositories do |repo|
-    octokit.repository_events(repo).each do |e|
-      next unless $fb.query("(eq github_event_id #{e[:id]})").extend(Enumerable).to_a.empty?
+  each_repo do |repo|
+    octo.repository_events(repo).each do |e|
+      next unless $fb.query("(eq github_event_id #{e[:id]})").each.to_a.empty?
 
       $loog.info("Detected new event ##{e[:id]} in #{e[:repo][:name]}: #{e[:type]}")
       n = $fb.insert
@@ -83,11 +81,7 @@ catch :stop do
         $loog.info("Already scanned #{seen} events, that's enough (due to 'github_max_events' option)")
         throw :stop
       end
-      left = octokit.rate_limit.remaining
-      if left < 5
-        $loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
-        throw :stop
-      end
+      throw :stop if octo.off_quota
     end
   end
 end

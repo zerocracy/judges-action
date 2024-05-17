@@ -28,7 +28,6 @@ once($fb).query("(and
   (exists github_repository)
   (exists github_reporter))").each do |f|
   n = $fb.insert
-  n.time = Time.now
   n.kind = 'reward for good bug'
   n.github_issue = f.github_issue
   n.github_repository = f.github_repository

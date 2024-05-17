@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -20,45 +22,33 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-.SHELLFLAGS: -c
-.ONESHELL:
-.PHONY: clean test all entry rmi verify rubocop
+require 'obk'
+require 'octokit'
+require_relative 'octo/fake_octokit'
 
-all: rubocop test entry rmi verify
-
-test: target/docker-image.txt
-	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --lib /judges-action/lib /judges-action/judges'
-	echo "$$?" > target/test.exit
-
-entry: target/docker-image.txt
-	img=$$(cat target/docker-image.txt)
-	(
-		echo 'github_repositories=yegor256/judges'
-		echo 'github_max_events=3'
-	) > target/opts.txt
-	docker run --rm \
-		-e GITHUB_WORKSPACE=/tmp \
-		-e INPUT_FACTBASE=/tmp/recent.fb \
-		-e INPUT_PAGES=pages \
-		-e "INPUT_OPTIONS=$$(cat target/opts.txt)" \
-		"$${img}"
-	echo "$$?" > target/entry.exit
-
-rmi: target/docker-image.txt
-	img=$$(cat $<)
-	docker rmi "$${img}"
-	rm "$<"
-
-verify:
-	e1=$$(cat target/test.exit)
-	test "$${e1}" = "0"
-	e2=$$(cat target/entry.exit)
-	test "$${e2}" = "0"
-
-target/docker-image.txt:
-	mkdir -p "$$(dirname $@)"
-	docker build -t judges-action -q . > "$@"
-
-clean:
-	rm -f target
+def octo
+  $global[:octo] ||= begin
+    if $options.testing.nil?
+      o = Octokit::Client.new
+      unless $options.github_token.nil?
+        token = $options.github_token
+        o = Octokit::Client.new(access_token: token)
+        $loog.info("Accessing GitHub with a token (#{token.length} chars)")
+      end
+      o = Obk.new(o, pause: 500)
+    else
+      o = FakeOctokit.new
+    end
+    def o.off_quota
+      left = rate_limit.remaining
+      if left < 5
+        $loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
+        true
+      else
+        false
+      end
+    end
+    o
+  end
+  $global[:octo]
+end
