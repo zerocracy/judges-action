@@ -26,7 +26,7 @@ require 'rubygems'
 require 'rake'
 require 'rake/clean'
 
-task default: %i[clean test rubocop]
+task default: %i[clean test judges rubocop]
 
 require 'rake/testtask'
 desc 'Run all unit tests'
@@ -35,6 +35,11 @@ Rake::TestTask.new(:test) do |test|
   test.pattern = 'test/**/test_*.rb'
   test.warning = true
   test.verbose = false
+end
+
+desc 'Test all judges'
+task :judges do
+  sh 'judges test --lib lib judges'
 end
 
 require 'rubocop/rake_task'
