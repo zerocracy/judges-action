@@ -22,12 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-once($fb).query("(and
+once(fb).query("(and
   (eq kind 'bug was accepted')
   (exists github_issue)
   (exists github_repository)
   (exists github_reporter))").each do |f|
-  n = $fb.insert
+  n = fb.insert
   n.kind = 'reward for good bug'
   n.github_issue = f.github_issue
   n.github_repository = f.github_repository

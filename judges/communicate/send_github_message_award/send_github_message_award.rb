@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-once($fb).query("(and
+once(fb).query("(and
   (exists payee)
   (exists award)
   (exists reason)

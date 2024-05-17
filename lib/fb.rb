@@ -22,9 +22,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'factbase/inv'
 require 'factbase/pre'
 
-$fb = Factbase::Pre.new($fb) do |f|
-  f.id = $fb.size
-  f.time = Time.now
+def fb
+  fb = Factbase::Inv.new($fb) do |p, v|
+    raise '"time" must be of type Time' if p == 'time' && !v.is_a?(Time)
+    raise '"id" must be of type Integer' if p == 'id' && !v.is_a?(Integer)
+  end
+  Factbase::Pre.new(fb) do |f|
+    f.id = $fb.size
+    f.time = Time.now
+  end
 end

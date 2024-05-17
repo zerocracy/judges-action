@@ -26,10 +26,10 @@ seen = 0
 catch :stop do
   each_repo do |repo|
     octo.repository_events(repo).each do |e|
-      next unless $fb.query("(eq github_event_id #{e[:id]})").each.to_a.empty?
+      next unless fb.query("(eq github_event_id #{e[:id]})").each.to_a.empty?
 
       $loog.info("Detected new event ##{e[:id]} in #{e[:repo][:name]}: #{e[:type]}")
-      n = $fb.insert
+      n = fb.insert
       n.kind = 'GitHub event'
 
       case e[:type]
@@ -69,7 +69,7 @@ catch :stop do
           n.github_tag = e[:payload][:ref]
         end
       end
-      n.time = e[:created_at].iso8601
+      n.time = Time.parse(e[:created_at].iso8601)
       n.github_event_type = e[:type]
       n.github_event_id = e[:id]
       n.github_repository = e[:repo][:name]
