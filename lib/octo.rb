@@ -30,12 +30,14 @@ def octo
   $global[:octo] ||= begin
     if $options.testing.nil?
       o = Octokit::Client.new
-      unless $options.github_token.nil?
+      if $options.github_token.nil?
+        $loog.warn('Accessing GitHub API without a token!')
+      else
         token = $options.github_token
         o = Octokit::Client.new(access_token: token)
-        $loog.info("Accessing GitHub with a token (#{token.length} chars)")
+        $loog.info("Accessing GitHub API with a token (#{token.length} chars)")
       end
-      o = Obk.new(o, pause: 500)
+      o = Obk.new(o, pause: 1000)
     else
       o = FakeOctokit.new
     end
