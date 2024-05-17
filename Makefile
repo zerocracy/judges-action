@@ -22,7 +22,7 @@
 
 .SHELLFLAGS: -c
 .ONESHELL:
-.PHONY: clean test all entry rmi verify rubocop
+.PHONY: clean test all entry entry rmi verify rubocop
 
 all: rubocop test entry rmi verify
 

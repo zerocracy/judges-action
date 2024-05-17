@@ -43,6 +43,7 @@ pages=$(realpath "${INPUT_PAGES}")
 cd /judges-action
 
 if [ -e "${fb}" ]; then
+    rm "${fb}"
     # Remove facts that are too old
     bundle exec judges --verbose trim "${fb}"
 fi
