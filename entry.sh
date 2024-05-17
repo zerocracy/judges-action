@@ -22,6 +22,7 @@
 # SOFTWARE.
 
 set -e
+set -x
 set -o pipefail
 
 if [ -z "${GITHUB_WORKSPACE}" ]; then
@@ -36,7 +37,7 @@ export GLI_DEBUG=true
 
 cd "${GITHUB_WORKSPACE-/w}"
 
-fb=$(realpath ${INPUT_FACTBASE})
+fb=$(realpath "${INPUT_FACTBASE}")
 
 cd /judges-action
 
@@ -67,6 +68,7 @@ if [ -z "${INPUT_PAGES}" ]; then
 fi
 mkdir -p "${INPUT_PAGES}"
 for f in yaml xml json; do
-    bundle exec judges print --format "${f}" --auto "${fb}"
-    mv "${fb%.*}.${f}" "${INPUT_PAGES}"
+    target="${fb%.*}.${f}"
+    bundle exec judges print --format "${f}" "${fb}" "${target}"
+    mv "${target}" "${INPUT_PAGES}"
 done
