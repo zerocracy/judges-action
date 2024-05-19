@@ -34,7 +34,7 @@ fb.query("(and (eq what 'label-attached')
     (eq issue #{f1.issue})
     (eq repository #{f1.repository}))").each do |f2|
     fb.txn do |fbt|
-      n = follow(fbt, f1, ['repository', 'issue'])
+      n = follow(fbt, f1, %w[repository issue])
       n.what = 'bug-was-accepted'
       n.who = f2.who
       n.details =

@@ -41,7 +41,7 @@ class FakeOctokit
     ]
   end
 
-  def add_comment(repo, issue, text)
+  def add_comment(_repo, _issue, _text)
     42
   end
 

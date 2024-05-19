@@ -33,8 +33,8 @@ def fb
   )
   fb = Factbase::Inv.new(fb) do |p, v|
     raise '"time" must be of type Time' if p == 'time' && !v.is_a?(Time)
-    ['id', 'issue', 'repository', 'who'].each do |i|
-      raise '"#{i}" must be of type Integer' if p == i && !v.is_a?(Integer)
+    %w[id issue repository who award].each do |i|
+      raise %("#{i}" must be of type Integer) if p == i && !v.is_a?(Integer)
     end
     raise '"what" must match a pattern' if p == 'what' && !v.match?(/^[a-z]+(-[a-z]+)*$/)
   end

@@ -27,8 +27,9 @@ once(fb).query("(and
   (exists issue)
   (exists repository)
   (exists who))").each do |f|
+  $loog.debug("Bug was accepted in the issue ##{f.issue}")
   fb.txn do |fbt|
-    n = follow(fbt, f, ['repository', 'issue', 'who'])
+    n = follow(fbt, f, %w[repository issue who])
     n.what = 'reward-for-good-bug'
     n.award = 15
     n.reason =

@@ -23,11 +23,12 @@
 # SOFTWARE.
 
 once(fb).query("(and
-  (exists payee)
+  (exists who)
   (exists award)
   (exists reason)
   (exists issue)
-  (exists repository))").each do |f|
+  (exists repository)
+  (not (exists href)))").each do |f|
   id = octo.add_comment(
     f.repository,
     f.issue,
