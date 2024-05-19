@@ -33,6 +33,10 @@ catch :stop do
           f.label = label[:name]
         end
         next if n.nil?
+        n.details =
+          "The '#{n.label}' label was attached to the issue ##{n.issue} " \
+          'by someone (GitHub API doesn\'t provide this information) some time ago ' \
+          '(this information is also not provided)'
 
         $loog.info("Detected new label '##{label[:name]}' at #{repo}##{e[:number]}")
         throw :stop if octo.off_quota

@@ -36,7 +36,8 @@ def fb
     %w[id issue repository who award].each do |i|
       raise %("#{i}" must be of type Integer) if p == i && !v.is_a?(Integer)
     end
-    raise '"what" must match a pattern' if p == 'what' && !v.match?(/^[a-z]+(-[a-z]+)*$/)
+    raise '"what" is invalid' if p == 'what' && !v.match?(/^[a-z]+(-[a-z]+)*$/)
+    raise '"details" is invalid' if p == 'details' && v.include?('  ')
   end
   Factbase::Pre.new(fb) do |f|
     f.id = $fb.size
