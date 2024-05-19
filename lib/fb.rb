@@ -24,9 +24,14 @@
 
 require 'factbase/inv'
 require 'factbase/pre'
+require 'factbase/rules'
 
 def fb
-  fb = Factbase::Inv.new($fb) do |p, v|
+  fb = Factbase::Rules.new(
+    $fb,
+    Dir.glob(File.join('rules', '*.fe')).map { |f| File.read(f) }.join("\n")
+  )
+  fb = Factbase::Inv.new(fb) do |p, v|
     raise '"time" must be of type Time' if p == 'time' && !v.is_a?(Time)
     raise '"id" must be of type Integer' if p == 'id' && !v.is_a?(Integer)
   end

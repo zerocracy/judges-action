@@ -25,6 +25,13 @@
 def put_new_github_event(json)
   n = fb.insert
   n.kind = 'GitHub event'
+  n.time = Time.parse(json[:created_at].iso8601)
+  n.github_event_type = json[:type]
+  n.github_event_id = json[:id]
+  n.github_repository = json[:repo][:name]
+  n.github_repository_id = json[:repo][:id]
+  n.github_actor = json[:actor][:login] if json[:actor]
+  n.github_actor_id = json[:actor][:id] if json[:actor]
 
   case json[:type]
   when 'PushEvent'
@@ -63,13 +70,6 @@ def put_new_github_event(json)
       n.github_tag = json[:payload][:ref]
     end
   end
-  n.time = Time.parse(json[:created_at].iso8601)
-  n.github_event_type = json[:type]
-  n.github_event_id = json[:id]
-  n.github_repository = json[:repo][:name]
-  n.github_repository_id = json[:repo][:id]
-  n.github_actor = json[:actor][:login] if json[:actor]
-  n.github_actor_id = json[:actor][:id] if json[:actor]
 end
 
 seen = 0

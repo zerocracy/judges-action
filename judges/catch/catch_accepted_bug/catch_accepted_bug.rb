@@ -22,11 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+label = 'bug'
+
 fb.query("(and (eq kind 'GitHub event')
   (eq github_action 'label-attached')
   (exists github_issue)
   (exists github_repository)
-  (eq github_label 'bug'))").each do |f1|
+  (eq github_label '#{label}'))").each do |f1|
   issue = f1.github_issue
   repo = f1.github_repository
   once(fb).query("(and (eq kind 'GitHub event')
@@ -34,10 +36,17 @@ fb.query("(and (eq kind 'GitHub event')
     (exists github_actor)
     (eq github_issue #{issue})
     (eq github_repository '#{repo}'))").each do |f2|
-    n = fb.insert
-    n.kind = 'bug was accepted'
-    n.github_reporter = f2.github_actor
-    n.github_issue = issue
-    n.github_repository = repo
+    fb.txn do |fbt|
+      n = fbt.insert
+      n.kind = 'bug was accepted'
+      author = f2.github_actor
+      n.github_reporter = author
+      n.github_repository = repo
+      n.github_issue = issue
+      n.details =
+        "In the #{repo} repository, the '#{label}' label was attached " \
+        "to the issue ##{issue}, which was submitted by @#{author}; " \
+        'this means that a bug was accepted as valid, by the project team.'
+    end
   end
 end

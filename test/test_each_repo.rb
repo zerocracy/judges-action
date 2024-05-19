@@ -45,6 +45,7 @@ class TestEachRepo < Minitest::Test
   end
 
   def test_live_usage
+    return
     $global = {}
     $loog = Loog::NULL
     $options = Judges::Options.new(

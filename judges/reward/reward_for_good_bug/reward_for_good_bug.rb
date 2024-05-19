@@ -27,14 +27,17 @@ once(fb).query("(and
   (exists github_issue)
   (exists github_repository)
   (exists github_reporter))").each do |f|
-  n = fb.insert
-  n.kind = 'reward for good bug'
-  n.github_issue = f.github_issue
-  n.github_repository = f.github_repository
-  n.payee = f.github_reporter
-  n.award = 15
-  n.reason = 'Thanks for reporting a new bug! You earn +15 points for this. \
-    By reporting bugs, you help our project improve its quality.
-    If you find anything else in the repository that doesn\'t look
-    as good as you might expect, do not hesitate to report it.'
+  fb.txn do |fbt|
+    n = fbt.insert
+    n.kind = 'reward for good bug'
+    n.github_repository = f.github_repository
+    n.github_issue = f.github_issue
+    n.payee = f.github_reporter
+    n.award = 15
+    n.reason =
+      "@#{n.payee} thanks for reporting a new bug! You've earned #{n.award} points for this. " \
+      'By reporting bugs, you help our project improve its quality. ' \
+      'If you find anything else in the repository that doesn\'t look ' \
+      'as good as you might expect, do not hesitate to report it.'
+  end
 end
