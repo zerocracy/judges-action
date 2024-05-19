@@ -38,7 +38,6 @@ export GLI_DEBUG=true
 cd "${GITHUB_WORKSPACE-/w}"
 
 fb=$(realpath "${INPUT_FACTBASE}")
-pages=$(realpath "${INPUT_PAGES}")
 
 cd /judges-action
 
