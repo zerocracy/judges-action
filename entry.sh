@@ -48,6 +48,8 @@ fi
 
 if [ -n "${INPUT_TRIM}" ]; then
     if [ -e "${fb}" ]; then
+        # Clean up some garbage
+        bundle exec judges "${gopts[@]}" trim --query '(not (eq "Time" (type time)))' "${fb}"
         # Remove facts that are too old
         bundle exec judges "${gopts[@]}" trim --days "${INPUT_TRIM}" "${fb}"
     fi
