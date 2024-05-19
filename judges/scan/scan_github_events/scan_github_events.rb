@@ -22,60 +22,63 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+def put_new_github_event(json)
+  n = fb.insert
+  n.kind = 'GitHub event'
+
+  case json[:type]
+  when 'PushEvent'
+    n.github_action = 'push'
+    n.github_push_id = json[:payload][:push_id]
+
+  when 'IssuesEvent'
+    n.github_issue = json[:payload][:issue][:number]
+    if json[:payload][:action] == 'closed'
+      n.github_action = 'issue-closed'
+    elsif json[:payload][:action] == 'opened'
+      n.github_action = 'issue-opened'
+    end
+
+  when 'IssueCommentEvent'
+    n.github_issue = json[:payload][:issue][:number]
+    if json[:payload][:action] == 'created'
+      n.github_action = 'comment-posted'
+      n.github_comment_id = json[:payload][:comment][:id]
+      n.github_comment_body = json[:payload][:comment][:body]
+      n.github_comment_author = json[:payload][:comment][:user][:login]
+      n.github_comment_author_id = json[:payload][:comment][:user][:id]
+    end
+
+  when 'ReleaseEvent'
+    n.github_release_id = json[:payload][:release][:id]
+    if json[:payload][:action] == 'published'
+      n.github_action = 'release-published'
+      n.github_release_author = json[:payload][:release][:author][:login]
+      n.github_release_author_id = json[:payload][:release][:author][:id]
+    end
+
+  when 'CreateEvent'
+    if json[:payload][:ref_type] == 'tag'
+      n.github_action = 'tag-created'
+      n.github_tag = json[:payload][:ref]
+    end
+  end
+  n.time = Time.parse(json[:created_at].iso8601)
+  n.github_event_type = json[:type]
+  n.github_event_id = json[:id]
+  n.github_repository = json[:repo][:name]
+  n.github_repository_id = json[:repo][:id]
+  n.github_actor = json[:actor][:login] if json[:actor]
+  n.github_actor_id = json[:actor][:id] if json[:actor]
+end
+
 seen = 0
 catch :stop do
   each_repo do |repo|
-    octo.repository_events(repo).each do |e|
-      next unless fb.query("(eq github_event_id #{e[:id]})").each.to_a.empty?
-
-      $loog.info("Detected new event ##{e[:id]} in #{e[:repo][:name]}: #{e[:type]}")
-      n = fb.insert
-      n.kind = 'GitHub event'
-
-      case e[:type]
-      when 'PushEvent'
-        n.github_action = 'push'
-        n.github_push_id = e[:payload][:push_id]
-
-      when 'IssuesEvent'
-        n.github_issue = e[:payload][:issue][:number]
-        if e[:payload][:action] == 'closed'
-          n.github_action = 'issue-closed'
-        elsif e[:payload][:action] == 'opened'
-          n.github_action = 'issue-opened'
-        end
-
-      when 'IssueCommentEvent'
-        n.github_issue = e[:payload][:issue][:number]
-        if e[:payload][:action] == 'created'
-          n.github_action = 'comment-posted'
-          n.github_comment_id = e[:payload][:comment][:id]
-          n.github_comment_body = e[:payload][:comment][:body]
-          n.github_comment_author = e[:payload][:comment][:user][:login]
-          n.github_comment_author_id = e[:payload][:comment][:user][:id]
-        end
-
-      when 'ReleaseEvent'
-        n.github_release_id = e[:payload][:release][:id]
-        if e[:payload][:action] == 'published'
-          n.github_action = 'release-published'
-          n.github_release_author = e[:payload][:release][:author][:login]
-          n.github_release_author_id = e[:payload][:release][:author][:id]
-        end
-
-      when 'CreateEvent'
-        if e[:payload][:ref_type] == 'tag'
-          n.github_action = 'tag-created'
-          n.github_tag = e[:payload][:ref]
-        end
-      end
-      n.time = Time.parse(e[:created_at].iso8601)
-      n.github_event_type = e[:type]
-      n.github_event_id = e[:id]
-      n.github_repository = e[:repo][:name]
-      n.github_repository_id = e[:repo][:id]
-      n.github_actor = e[:actor][:login] if e[:actor]
-      n.github_actor_id = e[:actor][:id] if e[:actor]
+    octo.repository_events(repo).each do |json|
+      next unless fb.query("(eq github_event_id #{json[:id]})").each.to_a.empty?
+      $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
+      put_new_github_event(json)
       seen += 1
       if !$options.github_max_events.nil? && seen >= $options.github_max_events
         $loog.info("Already scanned #{seen} events, that's enough (due to 'github_max_events' option)")

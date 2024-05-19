@@ -32,6 +32,14 @@ class FakeOctokit
     o
   end
 
+  def repositories(user = nil)
+    [
+      {
+        name: 'yegor256/judges'
+      }
+    ]
+  end
+
   def add_comment(repo, issue, text)
     # nothing
   end

@@ -22,35 +22,36 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def mask_to_regex(mask)
-  org, repo = mask.split('/')
-  raise "Org '#{org}' can't have an asterisk" if org.include?('*')
-  Regexp.compile("#{org}\/#{repo.gsub('*', '.*')}")
-end
+require 'minitest/autorun'
+require 'judges/options'
+require 'loog'
+require_relative '../lib/each_repo'
 
-def each_repo
-  repos = []
-  masks = $options.github_repositories.split(',')
-  masks.each do |mask|
-    next if mask.start_with?('-')
-    unless mask.include?('*')
-      repos << mask
-      next
-    end
-    re = mask_to_regex(mask)
-    octo.repositories(mask.split('/')[0]).each do |r|
-      repos << r[:name] if re.match?(r[:name])
-    end
+# Test.
+# Author:: Yegor Bugayenko (yegor256@gmail.com)
+# Copyright:: Copyright (c) 2024 Yegor Bugayenko
+# License:: MIT
+class TestEachRepo < Minitest::Test
+  def test_simple_use
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new(
+      {
+        'testing' => true,
+        'github_repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
+      }
+    )
+    assert(each_repo.each.to_a.size.positive?)
   end
-  masks.each do |mask|
-    next unless mask.start_with?('-')
-    re = mask_to_regex(mask)
-    repos.reject! { |r| re.match?(r) }
-  end
-  $loog.debug("#{repos.size} repositories match: #{repos.join(', ')}")
-  return to_enum(__method__) unless block_given?
-  repos.each do |repo|
-    $loog.debug("Scanning #{repo}...")
-    yield repo
+
+  def test_live_usage
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new(
+      {
+        'github_repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
+      }
+    )
+    assert(each_repo.each.to_a.size.positive?)
   end
 end

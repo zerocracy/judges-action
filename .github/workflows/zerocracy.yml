@@ -37,13 +37,21 @@ jobs:
           key: zerocracy
       - uses: zerocracy/judges-action@master
         with:
+          verbose: true
           options: |
             github_token=${{ secrets.GITHUB_TOKEN }}
             github_max_events=2
-            github_repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action
+            github_repositories=yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: zerocracy.fb
+          trim: 5
+      - uses: zerocracy/pages-action@master
+        with:
+          verbose: true
+          factbase: zerocracy.fb
+          formats: [xml json yaml]
+          dir: pages
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
-          folder: zerocracy-pages
+          folder: pages
           clean: false

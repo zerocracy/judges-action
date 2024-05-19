@@ -31,7 +31,9 @@ fb.query("(and (eq kind 'GitHub event')
   repo = f1.github_repository
   once(fb).query("(and (eq kind 'GitHub event')
     (eq github_action 'issue-opened')
-    (eq github_issue #{issue}) (eq github_repository '#{repo}'))").each do |f2|
+    (exists github_actor)
+    (eq github_issue #{issue})
+    (eq github_repository '#{repo}'))").each do |f2|
     n = fb.insert
     n.kind = 'bug was accepted'
     n.github_reporter = f2.github_actor
