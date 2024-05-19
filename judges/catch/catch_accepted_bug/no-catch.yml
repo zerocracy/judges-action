@@ -27,7 +27,12 @@ input:
   -
     what: issue-opened
     issue: 42
-    repository: 666
+    repository: 555
     who: 777
 expected:
-  - /fb[count(f)=2]
+  - /fb[count(f)=3]
+  - /fb/f[time]
+  - /fb/f[what='bug-was-accepted']
+  - /fb/f[who='777']
+  - /fb/f[repository='555']
+  - /fb/f[issue='42']
