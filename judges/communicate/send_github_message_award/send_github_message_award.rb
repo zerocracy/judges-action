@@ -26,13 +26,13 @@ once(fb).query("(and
   (exists payee)
   (exists award)
   (exists reason)
-  (exists github_issue)
-  (exists github_repository))").each do |f|
+  (exists issue)
+  (exists repository))").each do |f|
   id = octo.add_comment(
-    f.github_repository,
-    f.github_issue,
+    f.repository,
+    f.issue,
     f.reason
   )
-  f.href = "https://github.com/#{f.github_repository}/issues/#{f.github_issue}/#{id}"
+  f.href = "https://github.com/#{f.repository}/issues/#{f.issue}/#{id}"
   $loog.info("Comment ##{id} posted with an award")
 end

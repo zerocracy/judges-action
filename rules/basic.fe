@@ -21,8 +21,8 @@
 # SOFTWARE.
 
 (when
-  (exists github_issue)
-  (exists github_repository))
+  (exists issue)
+  (exists repository))
 
 (when
   (exists award)
@@ -31,5 +31,5 @@
     (exists reason)))
 
 (when
-  (eq github_action 'label-attached')
-  (exists github_label))
+  (eq action 'label-attached')
+  (exists label))

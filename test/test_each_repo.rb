@@ -38,7 +38,7 @@ class TestEachRepo < Minitest::Test
     $options = Judges::Options.new(
       {
         'testing' => true,
-        'github_repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
+        'repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
       }
     )
     assert(each_repo.each.to_a.size.positive?)
@@ -50,7 +50,7 @@ class TestEachRepo < Minitest::Test
     $loog = Loog::NULL
     $options = Judges::Options.new(
       {
-        'github_repositories' => 'zerocracy/*,-zerocracy/judges-action'
+        'repositories' => 'zerocracy/*,-zerocracy/judges-action'
       }
     )
     list = each_repo.each.to_a

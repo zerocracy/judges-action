@@ -20,22 +20,22 @@
 ---
 input:
   -
-    kind: GitHub event
-    github_action: label-attached
-    github_issue: 42
-    github_repository: foo/foo
-    github_label: bug
+    kind: github-event
+    action: label-attached
+    issue: 42
+    repository: foo/foo
+    label: bug
   -
-    kind: GitHub event
-    github_action: issue-opened
-    github_issue: 42
-    github_repository: foo/foo
-    github_actor: yegor256
+    kind: github-event
+    action: issue-opened
+    issue: 42
+    repository: foo/foo
+    actor: yegor256
 expected:
   - /fb[count(f)=3]
   - /fb/f[id]
-  - /fb/f[kind='bug was accepted']
+  - /fb/f[kind='bug-was-accepted']
   - /fb/f[time]
-  - /fb/f[github_issue='42']
-  - /fb/f[github_repository='foo/foo']
-  - /fb/f[github_reporter='yegor256']
+  - /fb/f[issue='42']
+  - /fb/f[repository='foo/foo']
+  - /fb/f[reporter='yegor256']

@@ -23,16 +23,16 @@
 # SOFTWARE.
 
 once(fb).query("(and
-  (eq kind 'bug was accepted')
-  (exists github_issue)
-  (exists github_repository)
-  (exists github_reporter))").each do |f|
+  (eq kind 'bug-was-accepted')
+  (exists issue)
+  (exists repository)
+  (exists reporter))").each do |f|
   fb.txn do |fbt|
     n = fbt.insert
-    n.kind = 'reward for good bug'
-    n.github_repository = f.github_repository
-    n.github_issue = f.github_issue
-    n.payee = f.github_reporter
+    n.kind = 'reward-for-good-bug'
+    n.repository = f.repository
+    n.issue = f.issue
+    n.payee = f.reporter
     n.award = 15
     n.reason =
       "@#{n.payee} thanks for reporting a new bug! You've earned #{n.award} points for this. " \

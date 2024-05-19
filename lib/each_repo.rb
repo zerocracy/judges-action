@@ -30,7 +30,7 @@ end
 
 def each_repo
   repos = []
-  masks = $options.github_repositories.split(',')
+  masks = $options.repositories.split(',')
   masks.reject { |m| m.start_with?('-') }.each do |mask|
     unless mask.include?('*')
       repos << mask

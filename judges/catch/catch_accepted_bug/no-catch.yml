@@ -20,16 +20,16 @@
 ---
 input:
   -
-    kind: GitHub event
-    github_action: label-attached
-    github_issue: 42
-    github_repository: foo/first
-    github_label: bug
+    kind: github-event
+    action: label-attached
+    issue: 42
+    repository: foo/first
+    label: bug
   -
-    kind: GitHub event
-    github_action: issue-opened
-    github_issue: 42
-    github_repository: foo/second
-    github_actor: yegor256
+    kind: github-event
+    action: issue-opened
+    issue: 42
+    repository: foo/second
+    actor: yegor256
 expected:
   - /fb[count(f)=2]

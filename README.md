@@ -23,8 +23,8 @@ jobs:
       - uses: zerocracy/judges-action@master
         with:
           options: |
-            github_token=${{ secrets.GITHUB_TOKEN }}
-            github_repositories=yegor256/judges
+            token=${{ secrets.GITHUB_TOKEN }}
+            repositories=yegor256/judges
           factbase: recent.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:

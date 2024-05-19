@@ -39,9 +39,9 @@ jobs:
         with:
           verbose: true
           options: |
-            github_token=${{ secrets.GITHUB_TOKEN }}
-            github_max_events=2
-            github_repositories=yegor256/judges,yegor256/factbase,zerocracy/*
+            token=${{ secrets.GITHUB_TOKEN }}
+            max_events=2
+            repositories=yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: zerocracy.fb
           trim: 5
       - uses: zerocracy/pages-action@master

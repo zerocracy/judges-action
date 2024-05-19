@@ -34,6 +34,7 @@ def fb
   fb = Factbase::Inv.new(fb) do |p, v|
     raise '"time" must be of type Time' if p == 'time' && !v.is_a?(Time)
     raise '"id" must be of type Integer' if p == 'id' && !v.is_a?(Integer)
+    raise '"kind" must match a pattern' if p == 'kind' && !v.match?(/^[a-z]+(-[a-z]+)*$/)
   end
   Factbase::Pre.new(fb) do |f|
     f.id = $fb.size

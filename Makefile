@@ -35,8 +35,8 @@ entry: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
 	(
 		echo 'testing=yes'
-		echo 'github_repositories=yegor256/judges'
-		echo 'github_max_events=3'
+		echo 'repositories=yegor256/judges'
+		echo 'max_events=3'
 	) > target/opts.txt
 	docker run --rm \
 		-e GITHUB_WORKSPACE=/tmp \
