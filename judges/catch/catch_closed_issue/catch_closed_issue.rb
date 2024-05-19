@@ -35,6 +35,7 @@ fb.query("(and (eq what 'label-attached')
       n = follow(fbt, f1, %w[repository issue])
       n.what = 'issue-was-closed'
       n.who = f2.who
+      # how long it was alive? let's add the data
       n.details =
         "In the repository ##{n.repository}, the issue ##{n.issue}" \
         "was closed by ##{n.who}"

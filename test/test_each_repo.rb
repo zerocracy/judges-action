@@ -45,7 +45,7 @@ class TestEachRepo < Minitest::Test
   end
 
   def test_live_usage
-    return
+    skip('Run it only manually, since it touches GitHub API')
     $global = {}
     $loog = Loog::NULL
     $options = Judges::Options.new(
