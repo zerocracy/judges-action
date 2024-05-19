@@ -1,6 +1,7 @@
 # Judges Zerocracy Action
 
 [![test](https://github.com/zerocracy/judges-action/actions/workflows/test.yml/badge.svg)](https://github.com/zerocracy/judges-action/actions/workflows/test.yml)
+[![Hits-of-Code](https://hitsofcode.com/github/zerocracy/judges-action)](https://hitsofcode.com/view/github/zerocracy/judges-action)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/zerocracy/judges-action/blob/master/LICENSE.txt)
 
 Add it to your project:
