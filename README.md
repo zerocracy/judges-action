@@ -1,6 +1,6 @@
 # Judges Zerocracy Action
 
-[![test](https://github.com/zerocracy/judges-action/actions/workflows/make.yml/badge.svg)](https://github.com/zerocracy/judges-action/actions/workflows/make.yml)
+[![make](https://github.com/zerocracy/judges-action/actions/workflows/make.yaml/badge.svg)](https://github.com/zerocracy/judges-action/actions/workflows/make.yaml)
 [![Hits-of-Code](https://hitsofcode.com/github/zerocracy/judges-action)](https://hitsofcode.com/view/github/zerocracy/judges-action)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/zerocracy/judges-action/blob/master/LICENSE.txt)
 
