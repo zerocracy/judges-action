@@ -23,17 +23,17 @@
 # SOFTWARE.
 
 once(fb).query("(and
-  (eq what 'bug-was-closed')
+  (eq what 'issue-was-closed')
   (exists issue)
   (exists repository)
   (exists who))").each do |f|
-  $loog.debug("Bug was closed in the issue ##{f.issue}")
+  $loog.debug("The issue ##{f.issue} was closed")
   fb.txn do |fbt|
     n = follow(fbt, f, %w[repository issue who])
-    n.what = 'reward-for-closed-bug'
+    n.what = 'reward-for-closed-issue'
     n.award = 5
     n.reason =
-      "@#{n.who} thanks for closing this bug! " \
+      "@#{n.who} thanks for closing this issue! " \
       "You've earned #{n.award} points for this. "
   end
 end

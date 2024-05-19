@@ -20,19 +20,19 @@
 ---
 input:
   -
-    what: bug-was-closed
-    who: 4444
+    what: label-attached
     issue: 42
-    repository: 100
-    time: 2024-01-01T03:15:45Z
-    seen:
-      - one
-      - two
-      - three
+    repository: 555
+    label: question
+  -
+    what: issue-closed
+    issue: 42
+    repository: 555
+    who: 777
 expected:
-  - /fb[count(f)=2]
-  - /fb/f[what='reward-for-closed-bug']
-  - /fb/f[who='4444']
+  - /fb[count(f)=3]
+  - /fb/f[time]
+  - /fb/f[what='issue-was-closed']
+  - /fb/f[who='777']
+  - /fb/f[repository='555']
   - /fb/f[issue='42']
-  - /fb/f[repository='100']
-  - /fb/f[award='5']
