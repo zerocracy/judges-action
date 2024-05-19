@@ -31,8 +31,7 @@ end
 def each_repo
   repos = []
   masks = $options.github_repositories.split(',')
-  masks.each do |mask|
-    next if mask.start_with?('-')
+  masks.reject { |m| m.start_with?('-') }.each do |mask|
     unless mask.include?('*')
       repos << mask
       next
@@ -42,8 +41,7 @@ def each_repo
       repos << r[:full_name] if re.match?(r[:full_name])
     end
   end
-  masks.each do |mask|
-    next unless mask.start_with?('-')
+  masks.select { |m| m.start_with?('-') }.each do |mask|
     re = mask_to_regex(mask[1..])
     repos.reject! { |r| re.match?(r) }
   end
