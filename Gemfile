@@ -24,7 +24,7 @@
 
 source 'https://rubygems.org'
 
-gem 'factbase', '0.0.27'
+gem 'factbase', '0.0.28'
 gem 'faraday', '2.9.0'
 gem 'faraday-retry', '2.2.1'
 gem 'judges', '0.0.27'
