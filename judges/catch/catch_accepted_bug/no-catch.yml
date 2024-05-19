@@ -20,16 +20,14 @@
 ---
 input:
   -
-    kind: github-event
-    action: label-attached
+    what: label-attached
     issue: 42
-    repository: foo/first
+    repository: 555
     label: bug
   -
-    kind: github-event
-    action: issue-opened
+    what: issue-opened
     issue: 42
-    repository: foo/second
-    actor: yegor256
+    repository: 666
+    who: 777
 expected:
   - /fb[count(f)=2]

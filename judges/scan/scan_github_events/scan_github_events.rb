@@ -22,51 +22,47 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def put_new_event(json)
-  n = fb.insert
-  n.kind = 'github-event'
+def put_new_event(fbt, json)
+  n = fbt.insert
   n.time = Time.parse(json[:created_at].iso8601)
   n.event_type = json[:type]
   n.event_id = json[:id]
-  n.repository = json[:repo][:name]
-  n.repository_id = json[:repo][:id]
-  n.actor = json[:actor][:login] if json[:actor]
-  n.actor_id = json[:actor][:id] if json[:actor]
+  n.repository = json[:repo][:id]
+  n.who = json[:actor][:id] if json[:actor]
+  n.details = "A new event happened in GitHub #{json[:repo][:name]} repository."
 
   case json[:type]
   when 'PushEvent'
-    n.action = 'push'
+    n.what = 'git-push'
     n.push_id = json[:payload][:push_id]
 
   when 'IssuesEvent'
     n.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'closed'
-      n.action = 'issue-closed'
+      n.what = 'issue-closed'
     elsif json[:payload][:action] == 'opened'
-      n.action = 'issue-opened'
+      n.what = 'issue-opened'
     end
 
   when 'IssueCommentEvent'
     n.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'created'
-      n.action = 'comment-posted'
+      n.what = 'comment-posted'
       n.comment_id = json[:payload][:comment][:id]
       n.comment_body = json[:payload][:comment][:body]
-      n.comment_author = json[:payload][:comment][:user][:login]
-      n.comment_author_id = json[:payload][:comment][:user][:id]
+      n.who = json[:payload][:comment][:user][:id]
     end
 
   when 'ReleaseEvent'
     n.release_id = json[:payload][:release][:id]
     if json[:payload][:action] == 'published'
-      n.action = 'release-published'
-      n.release_author = json[:payload][:release][:author][:login]
-      n.release_author_id = json[:payload][:release][:author][:id]
+      n.what = 'release-published'
+      n.who = json[:payload][:release][:author][:id]
     end
 
   when 'CreateEvent'
     if json[:payload][:ref_type] == 'tag'
-      n.action = 'tag-created'
+      n.what = 'tag-created'
       n.tag = json[:payload][:ref]
     end
   end
@@ -78,7 +74,9 @@ catch :stop do
     octo.repository_events(repo).each do |json|
       next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
       $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
-      put_new_event(json)
+      fb.txn do |fbt|
+        put_new_event(fbt, json)
+      end
       seen += 1
       if !$options.max_events.nil? && seen >= $options.max_events
         $loog.info("Already scanned #{seen} events, that's enough (due to 'max_events' option)")

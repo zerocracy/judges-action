@@ -22,19 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-once(fb).query("(and
-  (eq what 'bug-was-accepted')
-  (exists issue)
-  (exists repository)
-  (exists who))").each do |f|
-  fb.txn do |fbt|
-    n = follow(fbt, f, ['repository', 'issue', 'who'])
-    n.what = 'reward-for-good-bug'
-    n.award = 15
-    n.reason =
-      "@#{n.who} thanks for reporting a new bug! You've earned #{n.award} points for this. " \
-      'By reporting bugs, you help our project improve its quality. ' \
-      'If you find anything else in the repository that doesn\'t look ' \
-      'as good as you might expect, do not hesitate to report it.'
-  end
+def find_repo_id(name)
+  42
 end

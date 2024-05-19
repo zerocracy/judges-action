@@ -42,7 +42,7 @@ class FakeOctokit
   end
 
   def add_comment(repo, issue, text)
-    # nothing
+    42
   end
 
   def search_issues(_query)

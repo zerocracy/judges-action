@@ -39,7 +39,7 @@ end
 
 desc 'Test all judges'
 task :judges do
-  sh 'judges test --lib lib judges'
+  sh 'judges --verbose test --lib lib judges'
 end
 
 require 'rubocop/rake_task'

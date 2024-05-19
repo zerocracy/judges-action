@@ -20,10 +20,10 @@
 ---
 input:
   -
-    kind: bug-was-accepted
-    reporter: yegor256
+    what: bug-was-accepted
+    who: 4444
     issue: 42
-    repository: foo/foo
+    repository: 100
     time: 2024-01-01T03:15:45Z
     seen:
       - one
@@ -31,8 +31,8 @@ input:
       - three
 expected:
   - /fb[count(f)=2]
-  - /fb/f[kind='reward-for-good-bug']
-  - /fb/f[payee='yegor256']
+  - /fb/f[what='reward-for-good-bug']
+  - /fb/f[who='4444']
   - /fb/f[issue='42']
-  - /fb/f[repository='foo/foo']
+  - /fb/f[repository='100']
   - /fb/f[award='15']

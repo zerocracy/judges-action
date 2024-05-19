@@ -24,28 +24,22 @@
 
 label = 'bug'
 
-fb.query("(and (eq kind 'github-event')
-  (eq action 'label-attached')
+fb.query("(and (eq what 'label-attached')
   (exists issue)
   (exists repository)
   (eq label '#{label}'))").each do |f1|
-  issue = f1.issue
-  repo = f1.repository
-  once(fb).query("(and (eq kind 'github-event')
-    (eq action 'issue-opened')
-    (exists actor)
-    (eq issue #{issue})
-    (eq repository '#{repo}'))").each do |f2|
+  $loog.debug("Label '#{f1.label}' was attached to issue ##{f1.issue}")
+  once(fb).query("(and (eq what 'issue-opened')
+    (exists who)
+    (eq issue #{f1.issue})
+    (eq repository #{f1.repository}))").each do |f2|
     fb.txn do |fbt|
-      n = fbt.insert
-      n.kind = 'bug-was-accepted'
-      author = f2.actor
-      n.reporter = author
-      n.repository = repo
-      n.issue = issue
+      n = follow(fbt, f1, ['repository', 'issue'])
+      n.what = 'bug-was-accepted'
+      n.who = f2.who
       n.details =
-        "In the #{repo} repository, the '#{label}' label was attached " \
-        "to the issue ##{issue}, which was submitted by @#{author}; " \
+        "In the repository ##{f1.repository}, the '#{label}' label was attached " \
+        "to the issue ##{f1.issue}, which was submitted by the user ##{n.who}; " \
         'this means that a bug-was-accepted as valid, by the project team.'
     end
   end

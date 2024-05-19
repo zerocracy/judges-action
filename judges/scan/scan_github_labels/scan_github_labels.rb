@@ -27,9 +27,8 @@ catch :stop do
     octo.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
       e[:labels].each do |label|
         n = if_absent(fb) do |f|
-          f.kind = 'github-event'
-          f.action = 'label-attached'
-          f.repository = repo
+          f.what = 'label-attached'
+          f.repository = find_repo_id(repo)
           f.issue = e[:number]
           f.label = label[:name]
         end
