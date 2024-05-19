@@ -25,7 +25,7 @@
 def mask_to_regex(mask)
   org, repo = mask.split('/')
   raise "Org '#{org}' can't have an asterisk" if org.include?('*')
-  Regexp.compile("#{org}\/#{repo.gsub('*', '.*')}")
+  Regexp.compile("#{org}/#{repo.gsub('*', '.*')}")
 end
 
 def each_repo
@@ -39,12 +39,12 @@ def each_repo
     end
     re = mask_to_regex(mask)
     octo.repositories(mask.split('/')[0]).each do |r|
-      repos << r[:name] if re.match?(r[:name])
+      repos << r[:full_name] if re.match?(r[:full_name])
     end
   end
   masks.each do |mask|
     next unless mask.start_with?('-')
-    re = mask_to_regex(mask)
+    re = mask_to_regex(mask[1..])
     repos.reject! { |r| re.match?(r) }
   end
   $loog.debug("#{repos.size} repositories match: #{repos.join(', ')}")

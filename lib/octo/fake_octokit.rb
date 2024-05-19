@@ -32,10 +32,11 @@ class FakeOctokit
     o
   end
 
-  def repositories(user = nil)
+  def repositories(_user = nil)
     [
       {
-        name: 'yegor256/judges'
+        name: 'judges',
+        full_name: 'yegor256/judges'
       }
     ]
   end

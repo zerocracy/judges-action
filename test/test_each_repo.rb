@@ -49,9 +49,12 @@ class TestEachRepo < Minitest::Test
     $loog = Loog::NULL
     $options = Judges::Options.new(
       {
-        'github_repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
+        'github_repositories' => 'zerocracy/*,-zerocracy/judges-action'
       }
     )
-    assert(each_repo.each.to_a.size.positive?)
+    list = each_repo.each.to_a
+    assert(list.size.positive?)
+    assert(list.include?('zerocracy/pages-action'))
+    assert(!list.include?('zerocracy/judges-action'))
   end
 end
