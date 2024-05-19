@@ -48,7 +48,7 @@ jobs:
         with:
           verbose: true
           factbase: zerocracy.fb
-          dir: pages
+          output: pages
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
