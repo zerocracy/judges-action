@@ -48,7 +48,6 @@ jobs:
         with:
           verbose: true
           factbase: zerocracy.fb
-          formats: [xml json yaml]
           dir: pages
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
