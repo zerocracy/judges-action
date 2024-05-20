@@ -30,7 +30,7 @@ once(fb).query("(and
   $loog.debug("The issue ##{f.issue} was closed")
   fb.txn do |fbt|
     n = follow(fbt, f, %w[repository issue who])
-    n.what = 'reward-for-closed-issue'
+    n.what = 'reward-for-resolved-bug'
     # let's add extra points if it was done fast and decrease points if too slow
     n.award = 5
     n.reason =
