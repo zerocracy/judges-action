@@ -28,5 +28,6 @@ def follow(fb, before, props)
     v = before.send(p)
     after.send("#{p}=", v)
   end
+  after.cause = before.id
   after
 end

@@ -23,7 +23,7 @@
 # SOFTWARE.
 
 once(fb).query("(and
-  (eq what 'issue-was-closed')
+  (eq what 'bug-was-resolved')
   (exists issue)
   (exists repository)
   (exists who))").each do |f|

@@ -33,8 +33,9 @@ fb.query("(and (eq what 'label-attached')
     (eq repository #{f1.repository}))").each do |f2|
     fb.txn do |fbt|
       n = follow(fbt, f1, %w[repository issue])
-      n.what = 'issue-was-closed'
+      n.what = 'bug-was-resolved'
       n.who = f2.who
+      n.cause = f2.id
       # how long it was alive? let's add the data
       n.details =
         "In the repository ##{n.repository}, the issue ##{n.issue}" \

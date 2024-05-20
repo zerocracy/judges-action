@@ -22,11 +22,13 @@
 ---
 input:
   -
+    id: 1
     what: label-attached
     issue: 42
     repository: 555
     label: question
   -
+    id: 2
     what: issue-closed
     issue: 42
     repository: 555
@@ -34,7 +36,7 @@ input:
 expected:
   - /fb[count(f)=3]
   - /fb/f[time]
-  - /fb/f[what='issue-was-closed']
+  - /fb/f[what='bug-was-resolved']
   - /fb/f[who='777']
   - /fb/f[repository='555']
   - /fb/f[issue='42']

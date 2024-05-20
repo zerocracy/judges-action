@@ -31,5 +31,31 @@
     (exists reason)))
 
 (when
-  (eq action 'label-attached')
+  (eq what 'label-attached')
+  (exists issue)
   (exists label))
+
+(when
+  (eq what 'issue-opened')
+  (exists issue)
+  (exists who))
+
+(when
+  (eq what 'issue-closed')
+  (exists issue)
+  (exists who))
+
+(when
+  (eq what 'bug-was-resolved')
+  (eq (size cause) 2)
+  (exists issue)
+  (exists details)
+  (exists who))
+
+(when
+  (eq what 'bug-was-accepted')
+  (eq (size cause) 2)
+  (exists issue)
+  (exists details)
+  (exists who))
+
