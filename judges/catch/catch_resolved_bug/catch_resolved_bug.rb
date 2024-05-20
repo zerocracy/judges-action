@@ -38,8 +38,8 @@ fb.query("(and (eq what 'label-attached')
       n.cause = f2.id
       # how long it was alive? let's add the data
       n.details =
-        "In the repository ##{n.repository}, the issue ##{n.issue}" \
-        "was closed by ##{n.who}"
+        "In the repository ##{n.repository}, the issue ##{n.issue} " \
+        "was closed by ##{n.who}."
     end
   end
 end

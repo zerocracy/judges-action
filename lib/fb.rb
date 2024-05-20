@@ -26,21 +26,39 @@ require 'factbase/inv'
 require 'factbase/pre'
 require 'factbase/rules'
 
-def fb
-  fb = Factbase::Rules.new(
-    $fb,
-    Dir.glob(File.join('rules', '*.fe')).map { |f| File.read(f) }.join("\n")
-  )
-  fb = Factbase::Inv.new(fb) do |p, v|
+def fb_inv(fb)
+  Factbase::Inv.new(fb) do |p, v|
     raise '"time" must be of type Time' if p == 'time' && !v.is_a?(Time)
+
     %w[id issue repository who award].each do |i|
       raise %("#{i}" must be of type Integer) if p == i && !v.is_a?(Integer)
     end
+
     raise '"what" is invalid' if p == 'what' && !v.match?(/^[a-z]+(-[a-z]+)*$/)
-    raise '"details" is invalid' if p == 'details' && v.include?('  ')
+
+    if p == 'details'
+      raise '"details" has two double space' if v.include?('  ')
+      raise '"details" doesn\'t end with a dot' unless v.end_with?('.')
+    end
   end
+end
+
+def fb_rules(fb)
+  Factbase::Rules.new(
+    fb,
+    Dir.glob(File.join('rules', '*.fe')).map { |f| File.read(f) }.join("\n")
+  )
+end
+
+def fb_pre(fb)
   Factbase::Pre.new(fb) do |f|
     f.id = $fb.size
     f.time = Time.now
   end
+end
+
+def fb
+  fb = fb_rules($fb)
+  fb = fb_inv(fb)
+  fb_pre(fb)
 end
