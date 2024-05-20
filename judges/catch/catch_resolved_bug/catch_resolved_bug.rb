@@ -39,7 +39,8 @@ fb.query("(and (eq what 'label-attached')
       # how long it was alive? let's add the data
       n.details =
         "In the repository ##{n.repository}, the issue ##{n.issue} " \
-        "was closed by ##{n.who}."
+        "was closed by ##{n.who}, which is considered as a resolved bug " \
+        "because the issue has the '#{f1.label}' label attached."
     end
   end
 end

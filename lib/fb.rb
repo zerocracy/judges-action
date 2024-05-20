@@ -39,6 +39,7 @@ def fb_inv(fb)
     if p == 'details'
       raise '"details" has two double space' if v.include?('  ')
       raise '"details" doesn\'t end with a dot' unless v.end_with?('.')
+      raise '"details" is too short' if v.length < 100
     end
   end
 end
