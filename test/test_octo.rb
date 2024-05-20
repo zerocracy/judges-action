@@ -28,7 +28,7 @@ require_relative '../lib/octo'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
+# Copyright:: Copyright (c) 2024 Zerocracy
 # License:: MIT
 class TestOcto < Minitest::Test
   def test_simple_use

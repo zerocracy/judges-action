@@ -29,7 +29,7 @@ require_relative '../lib/each_repo'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
+# Copyright:: Copyright (c) 2024 Zerocracy
 # License:: MIT
 class TestEachRepo < Minitest::Test
   def test_simple_use

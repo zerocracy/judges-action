@@ -27,7 +27,7 @@ require_relative '../../lib/octo/fake_octokit'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
+# Copyright:: Copyright (c) 2024 Zerocracy
 # License:: MIT
 class TestFakeOctokit < Minitest::Test
   def test_rate_limit

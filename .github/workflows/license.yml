@@ -20,39 +20,29 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-name: zerocracy
+name: license
 'on':
   push:
-  # schedule:
-  #   - cron: '0,10,20,30,50,50 * * * *'
-concurrency:
-  group: zerocracy
-  cancel-in-progress: true
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
-  zerocracy:
+  license:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: ./zerocracy.fb
-          key: zerocracy
-      - uses: zerocracy/judges-action@master
-        with:
-          verbose: true
-          options: |
-            token=${{ secrets.GITHUB_TOKEN }}
-            max_events=2
-            repositories=yegor256/judges,yegor256/factbase,zerocracy/*
-          factbase: zerocracy.fb
-          trim: 5
-      - uses: zerocracy/pages-action@master
-        with:
-          verbose: true
-          factbase: zerocracy.fb
-          output: pages
-      - uses: JamesIves/github-pages-deploy-action@v4.6.0
-        with:
-          branch: gh-pages
-          folder: pages
-          clean: false
+      - shell: bash
+        run: |
+          header="Copyright (c) $(date +%Y) Zerocracy"
+          failed="false"
+          while IFS= read -r file; do
+              if ! grep -q "$header" "$file"; then
+                  failed="true"
+                  echo "⚠️ Copyright header is not found in: ${file}"
+              fi
+          done < <(find . -type f \( -name "*.sh" -o -name "*.rb" -o -name "*.yml" \) -print)
+          if [ "${failed}" = "true" ]; then
+            exit 1
+          fi
