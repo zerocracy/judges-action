@@ -38,10 +38,12 @@ jobs:
           header="Copyright (c) $(date +%Y) Zerocracy"
           failed="false"
           while IFS= read -r file; do
-              if ! grep -q "$header" "$file"; then
-                  failed="true"
-                  echo "⚠️ Copyright header is not found in: ${file}"
-              fi
+            if ! grep -q "${header}" "${file}"; then
+              failed="true"
+              echo "⚠️ Copyright header is not found in: ${file}"
+            else
+              echo "File looks good: ${file}"
+            fi
           done < <(find . -type f \( \
             -name "*.sh" -o \
             -name "*.rb" -o \
