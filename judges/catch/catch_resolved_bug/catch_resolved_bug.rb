@@ -33,7 +33,6 @@ fb.query("(and (eq what 'label-attached')
     (eq repository #{f1.repository}))").each do |f2|
     fb.txn do |fbt|
       n = follow(fbt, f1, %w[repository issue])
-      n.what = 'bug-was-resolved'
       n.who = f2.who
       n.cause = f2.id
       # how long it was alive? let's add the data
@@ -41,6 +40,7 @@ fb.query("(and (eq what 'label-attached')
         "In the repository ##{n.repository}, the issue ##{n.issue} " \
         "was closed by ##{n.who}, which is considered as a resolved bug " \
         "because the issue has the '#{f1.label}' label attached."
+      n.what = 'bug-was-resolved'
     end
   end
 end

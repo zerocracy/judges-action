@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,23 +21,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-input:
-  -
-    id: 1
-    what: bug-was-resolved
-    who: 4444
-    issue: 42
-    repository: 100
-    time: 2024-01-01T03:15:45Z
-    seen:
-      - one
-      - two
-      - three
-expected:
-  - /fb[count(f)=2]
-  - /fb/f[what='reward-for-resolved-bug']
-  - /fb/f[who='4444']
-  - /fb/f[issue='42']
-  - /fb/f[repository='100']
-  - /fb/f[award='5']
+
+once(fb).query("(and
+  (eq what 'bug-was-resolved')
+  (exists issue)
+  (exists repository)
+  (exists who))").each do |f|
+  $loog.debug("The issue ##{f.issue} was closed")
+  fb.txn do |fbt|
+    n = follow(fbt, f, %w[repository issue who])
+    award = 5
+    # TODO: let's add extra points if it was done fast and decrease points if too slow
+    n.reason =
+      "@#{n.who} thanks for closing this issue! " \
+      "You've earned #{award} points for this. "
+    n.award = award
+    n.what = 'reward-for-resolved-bug'
+  end
+end

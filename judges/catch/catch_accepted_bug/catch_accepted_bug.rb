@@ -35,13 +35,13 @@ fb.query("(and (eq what 'label-attached')
     (eq repository #{f1.repository}))").each do |f2|
     fb.txn do |fbt|
       n = follow(fbt, f1, %w[repository issue])
-      n.what = 'bug-was-accepted'
       n.who = f2.who
       n.cause = f2.id
       n.details =
         "In the repository ##{f1.repository}, the '#{label}' label was attached " \
         "to the issue ##{f1.issue}, which was submitted by the user ##{n.who}; " \
         'this means that a bug-was-accepted as valid, by the project team.'
+      n.what = 'bug-was-accepted'
     end
   end
 end

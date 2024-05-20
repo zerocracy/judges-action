@@ -42,8 +42,10 @@ def put_new_event(fbt, json)
   when 'IssuesEvent'
     n.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'closed'
+      n.who = 1 # TODO: we should figure it out!
       n.what = 'issue-closed'
     elsif json[:payload][:action] == 'opened'
+      n.who = 1 # TODO: we should figure it out!
       n.what = 'issue-opened'
     end
 

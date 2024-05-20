@@ -30,12 +30,13 @@ once(fb).query("(and
   $loog.debug("Bug was accepted in the issue ##{f.issue}")
   fb.txn do |fbt|
     n = follow(fbt, f, %w[repository issue who])
-    n.what = 'reward-for-good-bug'
-    n.award = 15
+    award = 15
     n.reason =
-      "@#{n.who} thanks for reporting a new bug! You've earned #{n.award} points for this. " \
+      "@#{n.who} thanks for reporting a new bug! You've earned #{award} points for this. " \
       'By reporting bugs, you help our project improve its quality. ' \
       'If you find anything else in the repository that doesn\'t look ' \
       'as good as you might expect, do not hesitate to report it.'
+    n.award = award
+    n.what = 'reward-for-good-bug'
   end
 end
