@@ -40,6 +40,22 @@
     (not (matches details "[^.]$")))))
 
 (explain (when
+  (exists id)
+  (eq "Integer" (type id))))
+(explain (when
+  (exists issue)
+  (eq "Integer" (type id))))
+(explain (when
+  (exists repository)
+  (eq "Integer" (type repository))))
+(explain (when
+  (exists who)
+  (eq "Integer" (type who))))
+(explain (when
+  (exists award)
+  (eq "Integer" (type award))))
+
+(explain (when
   (exists when)
   (eq "Time" (type when))))
 
