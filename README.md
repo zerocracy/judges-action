@@ -12,7 +12,7 @@ at the `.github/workflows/` directory
 name: zerocracy
 'on':
   schedule:
-    - cron: '0,10,20,30,50,50 * * * *'
+    - cron: '0,10,20,30,40,50 * * * *'
 jobs:
   zerocracy:
     runs-on: ubuntu-22.04
@@ -47,6 +47,25 @@ for bad things (like delays in reviewing pull requests).
 The plugin will also generate a summary `foo.html` file, which will
 be automatically deployed to the `gh-pages` branch.
 
+The following options are expected:
+
+* `options` is a list of `k=v` pairs, which are explained below.
+* `factbase` is the path of the [Factbase][factbase] file
+(where everything is kept)
+* `verbose`
+
+The following `k=v` pairs inside the `options` may be important:
+
+* `token=..` is a GitHub token (set it to `${{ secrets.GITHUB_TOKEN }}`)
+* `repositories=..` is a comma-separated list of masks that
+determine the repositories to manage, where
+`yegor256/*` means all repos of the user,
+`yegor256/judges` means a specific repo,
+and
+`-yegor256/judges` means an exclusion of the repo from the list.
+* `max_events=..` is the maximum number of GitHub API events to scan
+at a time (better don't change it)
+
 ## How to Contribute
 
 In order to test this action, just run (provided, you have
@@ -60,4 +79,6 @@ This should build a new Docker image named `judges-action`
 and then run the entire cycle
 inside a new Docker container. Obviously, you need to have
 [Docker](https://docs.docker.com/get-docker/) installed. The Docker image
-will be deleted by the end of Make build.
+will be deleted by the end of the build (either success or failure).
+
+[factbase]: https://github.com/yegor256/factbase
