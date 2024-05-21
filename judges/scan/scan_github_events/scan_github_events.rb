@@ -30,9 +30,9 @@ def put_new_event(fbt, json)
   n.repository = json[:repo][:id]
   n.who = json[:actor][:id] if json[:actor]
   n.details =
-    "A new event ##{json[:id]} happened in GitHub '#{json[:repo][:name]}' repository " \
+    "A new event ##{json[:id]} happened in GitHub #{json[:repo][:name]} repository " \
     "(id: #{json[:repo][:id]}) of type '#{json[:type]}', " \
-    "with the creation time '#{json[:created_at].iso8601}'."
+    "with the creation time #{json[:created_at].iso8601}."
 
   case json[:type]
   when 'PushEvent'
@@ -42,10 +42,8 @@ def put_new_event(fbt, json)
   when 'IssuesEvent'
     n.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'closed'
-      n.who = 1 # TODO: we should figure it out!
       n.what = 'issue-closed'
     elsif json[:payload][:action] == 'opened'
-      n.who = 1 # TODO: we should figure it out!
       n.what = 'issue-opened'
     end
 
@@ -73,11 +71,16 @@ def put_new_event(fbt, json)
   end
 end
 
+# Taking the largest ID of GitHub event that was seen so far
+largest = fb.query('(and (exists repository) (max event_id))').each.to_a[0]
+largest = largest.event_id unless largest.nil?
+
 seen = 0
 catch :stop do
   each_repo do |repo|
     octo.repository_events(repo).each do |json|
       next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
+      throw :stop if largest && json[:event_id] <= largest
       $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
       fb.txn do |fbt|
         put_new_event(fbt, json)

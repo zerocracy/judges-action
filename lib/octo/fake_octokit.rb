@@ -72,6 +72,10 @@ class FakeOctokit
         payload: {
           push_id: 42
         },
+        actor: {
+          id: 888,
+          name: 'torvalds'
+        },
         created_at: Time.now
       },
       {
@@ -87,6 +91,10 @@ class FakeOctokit
             number: 42
           }
         },
+        actor: {
+          id: 888,
+          name: 'torvalds'
+        },
         created_at: Time.now
       },
       {
@@ -101,6 +109,10 @@ class FakeOctokit
           issue: {
             number: 42
           }
+        },
+        actor: {
+          id: 888,
+          name: 'torvalds'
         },
         created_at: Time.now
       }

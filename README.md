@@ -75,6 +75,31 @@ The `zerocracy/pages-action` plugin is responsible for rendering
 the summary HTML page: its configuration is not explained here,
 check its [own repository](https://github.com/zerocracy/pages-action).
 
+## Awards & Punishments
+
+To be rewarded, do the following:
+
+* Create a new issue, which is labeled as `bug`, `enhancement`, or `question`
+* Put one of those labels to an issue
+* Merge a pull request
+* Review a pull request
+* Create a new release
+
+To avoid punishment, do the following:
+
+* Triage issues timely
+* Review and merge/reject pull requests timely
+* Release frequently
+* Keep GitHub Action jobs green
+
+* Punish architect for ignoring bug reports
+* Punish for long merged pull request
+* Punish for stale pull request
+* Punish architect for lack of fresh releases
+* Punish for rejected bug report
+* Punish for rejected pull request
+
+
 ## How to Contribute
 
 In order to test this action, just run (provided, you have
