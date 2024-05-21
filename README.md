@@ -1,8 +1,13 @@
 # Judges Zerocracy Action
 
-[![make](https://github.com/zerocracy/judges-action/actions/workflows/make.yaml/badge.svg)](https://github.com/zerocracy/judges-action/actions/workflows/make.yaml)
+[![make](https://github.com/zerocracy/judges-action/actions/workflows/make.yml/badge.svg)](https://github.com/zerocracy/judges-action/actions/workflows/make.yml)
 [![Hits-of-Code](https://hitsofcode.com/github/zerocracy/judges-action)](https://hitsofcode.com/view/github/zerocracy/judges-action)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/zerocracy/judges-action/blob/master/LICENSE.txt)
+
+**ATTENTION**: The repository is in active development right now. It is
+"work in progress" — most likely it won't work correctly if you use it "as is."
+If you are interested in this plugin, better wait for a few weeks until it's
+stable version 0.1.0 is released.
 
 Add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
@@ -77,7 +82,7 @@ check its [own repository](https://github.com/zerocracy/pages-action).
 
 ## Awards & Punishments
 
-To be rewarded, do the following:
+In order to be _rewarded_, do the following:
 
 * Create a new issue, which is labeled as `bug`, `enhancement`, or `question`
 * Put one of those labels to an issue
@@ -85,7 +90,7 @@ To be rewarded, do the following:
 * Review a pull request
 * Create a new release
 
-To avoid punishment, do the following:
+I order to avoid _punishment_, do the following:
 
 * Triage issues timely
 * Review and merge/reject pull requests timely
