@@ -41,13 +41,18 @@ jobs:
 Once the file is added, GitHub will start running this job every ten
 minutes, collecting information about most important activities of
 your programmers. The plugin will give them awards for good things
-they do (like fixing bugs) and will punish them by deducting points
-for bad things (like delays in reviewing pull requests).
+they do (like fixing bugs) and will also punish them (by deducting points)
+for bad things (like stale pull requests).
 
 The plugin will also generate a summary `foo.html` file, which will
-be automatically deployed to the `gh-pages` branch.
+be automatically deployed to the `gh-pages` branch. You can configure
+your GitHub repository to render the branch as a static website. Thus,
+the summary page will be updated every ten minutes and you will see
+who is the best performer in your team.
 
-The following options are expected:
+## Configuration
+
+The following options are expected by the `zerocracy/judges-action` plugin:
 
 * `options` is a list of `k=v` pairs, which are explained below.
 * `factbase` is the path of the [Factbase][factbase] file
@@ -65,6 +70,10 @@ and
 `-yegor256/judges` means an exclusion of the repo from the list.
 * `max_events=..` is the maximum number of GitHub API events to scan
 at a time (better don't change it)
+
+The `zerocracy/pages-action` plugin is responsible for rendering
+the summary HTML page: its configuration is not explained here,
+check its [own repository](https://github.com/zerocracy/pages-action).
 
 ## How to Contribute
 
