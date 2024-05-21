@@ -32,8 +32,6 @@ def fb_inv(fb)
       raise %("#{i}" must be of type Integer) if p == i && !v.is_a?(Integer)
     end
 
-    raise '"what" is invalid' if p == 'what' && !v.match?(/^[a-z]+(-[a-z]+)*$/)
-
     if p == 'details'
       raise '"details" has two double space' if v.include?('  ')
       raise '"details" doesn\'t end with a dot' unless v.end_with?('.')

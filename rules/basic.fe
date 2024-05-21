@@ -29,6 +29,10 @@
   ')
 
 (explain (when
+  (exists what)
+  (matches what "^[a-z]+(-[a-z]+)*$")))
+
+(explain (when
   (exists when)
   (eq "Time" (type when))))
 
