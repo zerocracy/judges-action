@@ -33,6 +33,13 @@
   (matches what "^[a-z]+(-[a-z]+)*$")))
 
 (explain (when
+  (exists details)
+  (and
+    (not (matches details "  "))
+    (not (matches details "^.{,120}$"))
+    (not (matches details "[^.]$")))))
+
+(explain (when
   (exists when)
   (eq "Time" (type when))))
 

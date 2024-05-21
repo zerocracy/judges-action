@@ -31,12 +31,6 @@ def fb_inv(fb)
     %w[id issue repository who award].each do |i|
       raise %("#{i}" must be of type Integer) if p == i && !v.is_a?(Integer)
     end
-
-    if p == 'details'
-      raise '"details" has two double space' if v.include?('  ')
-      raise '"details" doesn\'t end with a dot' unless v.end_with?('.')
-      raise '"details" is too short' if v.length < 120
-    end
   end
 end
 
