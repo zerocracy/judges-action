@@ -20,47 +20,73 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-(when
-  (exists issue)
-  (exists repository))
+(defn explain '
+  r = @operands[0].evaluate(fact);
+  if !r
+    $loog.error(\'This rule failed: \' + self.to_s)
+  end
+  return r
+  ')
 
-(when
+(explain (when
+  (exists when)
+  (eq "Time" (type when))))
+
+(explain (when
+  (exists issue)
+  (exists repository)))
+
+(explain (when
   (exists award)
   (and
+    (exists when)
     (exists who)
-    (exists reason)))
+    (exists reason))))
 
-(when
+(explain (when
   (eq what 'label-attached')
   (and
     (exists issue)
-    (exists label)))
+    (exists label))))
 
-(when
+(explain (when
   (eq what 'issue-opened')
   (and
     (exists issue)
-    (exists who)))
+    (exists when)
+    (exists who))))
 
-(when
+(explain (when
   (eq what 'issue-closed')
   (and
     (exists issue)
-    (exists who)))
+    (exists when)
+    (exists who))))
 
-(when
+(explain (when
   (eq what 'bug-was-resolved')
   (and
     (eq (size cause) 2)
+    (exists when)
     (exists issue)
     (exists details)
-    (exists who)))
+    (exists who))))
 
-(when
+(explain (when
   (eq what 'bug-was-accepted')
   (and
     (eq (size cause) 2)
+    # (exists when)
     (exists issue)
     (exists details)
-    (exists who)))
+    (exists who))))
+
+(explain (when
+  (eq what 'reward-for-good-bug')
+  (and
+    (eq (size cause) 1)
+    (exists award)
+    (exists when)
+    (exists issue)
+    (exists repository))))
 

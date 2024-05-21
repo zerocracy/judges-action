@@ -1,3 +1,21 @@
+PATH
+  remote: /code/gems/factbase
+  specs:
+    factbase (0.0.0)
+      json (~> 2.7)
+      loog (~> 0.2)
+      nokogiri (~> 1.10)
+      yaml (~> 0.3)
+
+PATH
+  remote: /code/gems/judges
+  specs:
+    judges (0.0.0)
+      backtrace (~> 0.3)
+      gli (~> 2.21)
+      loog (~> 0.2)
+      nokogiri (~> 1.10)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -6,11 +24,6 @@ GEM
     ast (2.4.2)
     backtrace (0.4.0)
     base64 (0.2.0)
-    factbase (0.0.28)
-      json (~> 2.7)
-      loog (~> 0.2)
-      nokogiri (~> 1.10)
-      yaml (~> 0.3)
     faraday (2.9.0)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
@@ -19,20 +32,12 @@ GEM
       faraday (~> 2.0)
     gli (2.21.1)
     json (2.7.2)
-    judges (0.0.29)
-      backtrace (~> 0.3)
-      factbase (~> 0.0.28)
-      gli (~> 2.21)
-      loog (~> 0.2)
-      nokogiri (~> 1.10)
     language_server-protocol (3.17.0.3)
     loog (0.5.1)
     minitest (5.22.3)
     net-http (0.4.1)
       uri
     nokogiri (1.16.5-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.5-x86_64-linux)
       racc (~> 1.4)
     obk (0.3.1)
     octokit (8.1.0)
@@ -77,10 +82,10 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  factbase (= 0.0.28)
+  factbase!
   faraday (= 2.9.0)
   faraday-retry (= 2.2.1)
-  judges (= 0.0.29)
+  judges!
   minitest (= 5.22.3)
   obk (= 0.3.1)
   octokit (= 8.1.0)

@@ -24,7 +24,7 @@
 
 def put_new_event(fbt, json)
   n = fbt.insert
-  n.time = Time.parse(json[:created_at].iso8601)
+  n.when = Time.parse(json[:created_at].iso8601)
   n.event_type = json[:type]
   n.event_id = json[:id]
   n.repository = json[:repo][:id]

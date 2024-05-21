@@ -31,6 +31,7 @@ once(fb).query("(and
   fb.txn do |fbt|
     n = follow(fbt, f, %w[repository issue who])
     award = 5
+    n.when = Time.now
     # TODO: let's add extra points if it was done fast and decrease points if too slow
     n.reason =
       "@#{n.who} thanks for closing this issue! " \

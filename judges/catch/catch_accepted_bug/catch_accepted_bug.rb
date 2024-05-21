@@ -37,6 +37,7 @@ fb.query("(and (eq what 'label-attached')
       n = follow(fbt, f1, %w[repository issue])
       n.who = f2.who
       n.cause = f2.id
+      # TODO: n.when = when the acceptance happened?
       n.details =
         "In the repository ##{f1.repository}, the '#{label}' label was attached " \
         "to the issue ##{f1.issue}, which was submitted by the user ##{n.who}; " \

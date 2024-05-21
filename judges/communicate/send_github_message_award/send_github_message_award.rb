@@ -24,6 +24,7 @@
 
 once(fb).query("(and
   (exists who)
+  (exists when)
   (exists award)
   (exists reason)
   (exists issue)

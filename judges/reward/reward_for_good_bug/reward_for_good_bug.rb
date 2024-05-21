@@ -31,6 +31,7 @@ once(fb).query("(and
   fb.txn do |fbt|
     n = follow(fbt, f, %w[repository issue who])
     award = 15
+    n.when = Time.now
     n.reason =
       "@#{n.who} thanks for reporting a new bug! You've earned #{award} points for this. " \
       'By reporting bugs, you help our project improve its quality. ' \

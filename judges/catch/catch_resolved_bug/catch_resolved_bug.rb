@@ -29,12 +29,12 @@ fb.query("(and (eq what 'label-attached')
   $loog.debug("Label '#{f1.label}' was attached to issue ##{f1.issue}")
   once(fb).query("(and (eq what 'issue-closed')
     (exists who)
+    (exists when)
     (eq issue #{f1.issue})
     (eq repository #{f1.repository}))").each do |f2|
     fb.txn do |fbt|
-      n = follow(fbt, f1, %w[repository issue])
-      n.who = f2.who
-      n.cause = f2.id
+      n = follow(fbt, f2, %w[repository issue when who])
+      n.cause = f1.id
       # how long it was alive? let's add the data
       n.details =
         "In the repository ##{n.repository}, the issue ##{n.issue} " \

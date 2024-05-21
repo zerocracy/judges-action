@@ -33,9 +33,10 @@ input:
     issue: 42
     repository: 555
     who: 777
+    when: 2024-05-20T23:54:24Z
 expected:
   - /fb[count(f)=3]
-  - /fb/f[time]
+  - /fb/f[when]
   - /fb/f[what='bug-was-resolved']
   - /fb/f[who='777']
   - /fb/f[repository='555']

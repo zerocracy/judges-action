@@ -28,8 +28,6 @@ require 'factbase/rules'
 
 def fb_inv(fb)
   Factbase::Inv.new(fb) do |p, v|
-    raise '"time" must be of type Time' if p == 'time' && !v.is_a?(Time)
-
     %w[id issue repository who award].each do |i|
       raise %("#{i}" must be of type Integer) if p == i && !v.is_a?(Integer)
     end
@@ -55,7 +53,6 @@ end
 def fb_pre(fb)
   Factbase::Pre.new(fb) do |f|
     f.id = $fb.size
-    f.time = Time.now
   end
 end
 
