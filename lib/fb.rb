@@ -26,14 +26,6 @@ require 'factbase/inv'
 require 'factbase/pre'
 require 'factbase/rules'
 
-def fb_inv(fb)
-  Factbase::Inv.new(fb) do |p, v|
-    %w[id issue repository who award].each do |i|
-      raise %("#{i}" must be of type Integer) if p == i && !v.is_a?(Integer)
-    end
-  end
-end
-
 def fb_rules(fb)
   rules = Dir.glob(File.join('rules', '*.fe')).map { |f| File.read(f) }
   Factbase::Rules.new(
@@ -50,6 +42,5 @@ end
 
 def fb
   fb = fb_rules($fb)
-  fb = fb_inv(fb)
   fb_pre(fb)
 end
