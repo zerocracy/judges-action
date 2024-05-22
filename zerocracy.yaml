@@ -1,147 +1,99 @@
 ---
 facts:
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475615201
-  time: '2024-05-17T19:23:17Z'
-  github_event_type: PushEvent
-  github_event_id: '38485575708'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475605676
-  time: '2024-05-17T19:22:22Z'
-  github_event_type: PushEvent
-  github_event_id: '38485556753'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/judges
-  github_issue: 21
-  github_label: bug
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/judges
-  github_issue: 21
-  github_label: enhancement
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/judges
-  github_issue: 19
-  github_label: enhancement
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/judges
-  github_issue: 15
-  github_label: enhancement
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/judges
-  github_issue: 14
-  github_label: bug
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/judges
-  github_issue: 14
-  github_label: enhancement
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/factbase
-  github_issue: 12
-  github_label: bug
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/factbase
-  github_issue: 12
-  github_label: help wanted
-- kind: GitHub event
-  github_action: label-attached
-  github_repository: yegor256/factbase
-  github_issue: 12
-  github_label: good first issue
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475615201
-  time: '2024-05-17T19:23:17Z'
-  github_event_type: PushEvent
-  github_event_id: '38485575708'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475605676
-  time: '2024-05-17T19:22:22Z'
-  github_event_type: PushEvent
-  github_event_id: '38485556753'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475615201
-  time: '2024-05-17T19:23:17Z'
-  github_event_type: PushEvent
-  github_event_id: '38485575708'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475605676
-  time: '2024-05-17T19:22:22Z'
-  github_event_type: PushEvent
-  github_event_id: '38485556753'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475615201
-  time: '2024-05-17T19:23:17Z'
-  github_event_type: PushEvent
-  github_event_id: '38485575708'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475605676
-  time: '2024-05-17T19:22:22Z'
-  github_event_type: PushEvent
-  github_event_id: '38485556753'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475615201
-  time: '2024-05-17T19:23:17Z'
-  github_event_type: PushEvent
-  github_event_id: '38485575708'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
-- kind: GitHub event
-  github_action: push
-  github_push_id: 18475605676
-  time: '2024-05-17T19:22:22Z'
-  github_event_type: PushEvent
-  github_event_id: '38485556753'
-  github_repository: yegor256/judges
-  github_repository_id: 799113787
-  github_actor: yegor256
-  github_actor_id: 526301
+- id: 0
+  when: 2024-05-21 14:08:43.000000000 Z
+  event_type: IssuesEvent
+  event_id: '38571626142'
+  repository: 799113787
+  who: 526301
+  details: 'A new event #38571626142 happened in GitHub yegor256/judges repository
+    (id: 799113787) of type ''IssuesEvent'', with the creation time 2024-05-21T14:08:43Z.'
+  issue: 31
+  what: issue-closed
+- id: 1
+  when: 2024-05-21 14:06:43.000000000 Z
+  event_type: IssueCommentEvent
+  event_id: '38571551405'
+  repository: 799113787
+  who: 8086956
+  details: 'A new event #38571551405 happened in GitHub yegor256/judges repository
+    (id: 799113787) of type ''IssueCommentEvent'', with the creation time 2024-05-21T14:06:43Z.'
+  issue: 31
+  what: comment-posted
+  comment_id: 2122722209
+  comment_body: |-
+    > @rultor release, tag is `0.0.31`
+
+    @yegor256 Done! FYI, the full log is [here](https://www.rultor.com/t/41335-2122696912) (took me 8min)
+- id: 3
+  repository: 42
+  issue: 21
+  label: bug
+  what: label-attached
+  details: 'The ''bug'' label was attached to the issue #21 by someone (GitHub API
+    doesn''t provide this information) some time ago (this information also is not
+    available).'
+- id: 4
+  repository: 42
+  issue: 21
+  label: enhancement
+  what: label-attached
+  details: 'The ''enhancement'' label was attached to the issue #21 by someone (GitHub
+    API doesn''t provide this information) some time ago (this information also is
+    not available).'
+- id: 5
+  repository: 42
+  issue: 19
+  label: enhancement
+  what: label-attached
+  details: 'The ''enhancement'' label was attached to the issue #19 by someone (GitHub
+    API doesn''t provide this information) some time ago (this information also is
+    not available).'
+- id: 6
+  repository: 42
+  issue: 15
+  label: enhancement
+  what: label-attached
+  details: 'The ''enhancement'' label was attached to the issue #15 by someone (GitHub
+    API doesn''t provide this information) some time ago (this information also is
+    not available).'
+- id: 7
+  repository: 42
+  issue: 14
+  label: bug
+  what: label-attached
+  details: 'The ''bug'' label was attached to the issue #14 by someone (GitHub API
+    doesn''t provide this information) some time ago (this information also is not
+    available).'
+- id: 8
+  repository: 42
+  issue: 14
+  label: enhancement
+  what: label-attached
+  details: 'The ''enhancement'' label was attached to the issue #14 by someone (GitHub
+    API doesn''t provide this information) some time ago (this information also is
+    not available).'
+- id: 9
+  repository: 42
+  issue: 12
+  label: bug
+  what: label-attached
+  details: 'The ''bug'' label was attached to the issue #12 by someone (GitHub API
+    doesn''t provide this information) some time ago (this information also is not
+    available).'
+- id: 10
+  repository: 42
+  issue: 12
+  label: help wanted
+  what: label-attached
+  details: 'The ''help wanted'' label was attached to the issue #12 by someone (GitHub
+    API doesn''t provide this information) some time ago (this information also is
+    not available).'
+- id: 11
+  repository: 42
+  issue: 12
+  label: good first issue
+  what: label-attached
+  details: 'The ''good first issue'' label was attached to the issue #12 by someone
+    (GitHub API doesn''t provide this information) some time ago (this information
+    also is not available).'
