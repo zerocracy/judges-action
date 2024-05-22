@@ -62,7 +62,7 @@ The following options are expected by the `zerocracy/judges-action` plugin:
 * `options` is a list of `k=v` pairs, which are explained below.
 * `factbase` is the path of the [Factbase][factbase] file
 (where everything is kept)
-* `verbose`
+* `verbose` makes it print debugging info if set to `true`
 
 The following `k=v` pairs inside the `options` may be important:
 

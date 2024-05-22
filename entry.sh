@@ -69,6 +69,8 @@ while IFS= read -r o; do
     options+=("--option=${v}")
 done <<< "${INPUT_OPTIONS}"
 
+echo "The 'judges-action' ${VERSION} is used"
+
 cd "${SELF}"
 bundle exec judges "${gopts[@]}" update \
     --lib "${SELF}/lib" \
