@@ -32,7 +32,8 @@ once(fb).query("(and
     n = follow(fbt, f, %w[repository issue who])
     award = 5
     n.when = Time.now
-    # TODO: let's add extra points if it was done fast and decrease points if too slow
+    # @todo #1:30min Let's add extra points if it was done fast and
+    #  decrease points if too slow.
     n.reason =
       "@#{n.who} thanks for closing this issue! " \
       "You've earned #{award} points for this. "
