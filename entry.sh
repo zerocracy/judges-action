@@ -25,6 +25,14 @@ set -e
 set -x
 set -o pipefail
 
+VERSION=0.0.0
+
+if [ -z "$1" ]; then
+    SELF=$(pwd)
+else
+    SELF=$1
+fi
+
 if [ -z "${GITHUB_WORKSPACE}" ]; then
     echo 'Probably you are running this Docker image not from GitHub Actions.'
     echo 'In order to do it right, do this:'
@@ -38,8 +46,6 @@ export GLI_DEBUG=true
 cd "${GITHUB_WORKSPACE-/w}"
 
 fb=$(realpath "${INPUT_FACTBASE}")
-
-cd /judges-action
 
 declare -a gopts=()
 if [ -n "${INPUT_VERBOSE}" ]; then
@@ -63,8 +69,9 @@ while IFS= read -r o; do
     options+=("--option=${v}")
 done <<< "${INPUT_OPTIONS}"
 
+cd "${SELF}"
 bundle exec judges "${gopts[@]}" update \
-    --lib /judges-action/lib \
+    --lib "${SELF}/lib" \
     --quiet \
     --max-cycles 5 \
-    "${options[@]}" /judges-action/judges "${fb}"
+    "${options[@]}" "${SELF}/judges" "${fb}"

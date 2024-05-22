@@ -35,4 +35,4 @@ COPY Gemfile.lock /judges-action/
 
 RUN bundle install --gemfile=/judges-action/Gemfile
 
-ENTRYPOINT ["/home/entry.sh"]
+ENTRYPOINT ["/home/entry.sh", "/judges-action"]
