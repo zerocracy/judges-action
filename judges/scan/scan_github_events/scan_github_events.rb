@@ -80,7 +80,7 @@ catch :stop do
   each_repo do |repo|
     octo.repository_events(repo).each do |json|
       next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
-      throw :stop if largest && json[:event_id] <= largest
+      throw :stop if largest && json[:id] <= largest
       $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
       fb.txn do |fbt|
         put_new_event(fbt, json)
