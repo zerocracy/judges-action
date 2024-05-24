@@ -22,10 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+detect = %w[bug enhancement question]
+
 catch :stop do
   each_repo do |repo|
-    octo.search_issues("repo:#{repo} label:bug,enhancement,question")[:items].each do |e|
+    octo.search_issues("repo:#{repo} label:#{detect.join(',')}")[:items].each do |e|
       e[:labels].each do |label|
+        next unless detect.include?(label)
         n = if_absent(fb) do |f|
           f.repository = find_repo_id(repo)
           f.issue = e[:number]
@@ -38,7 +41,7 @@ catch :stop do
           'by someone (GitHub API doesn\'t provide this information) some time ago ' \
           '(this information also is not available).'
         # @todo #1:30min n.when -- let's find out when the label was attached
-        $loog.info("Detected new label '##{label[:name]}' at #{repo}##{e[:number]}")
+        $loog.info("Detected '#{label[:name]}' label at #{repo}##{e[:number]}")
         throw :stop if octo.off_quota
       end
     end
