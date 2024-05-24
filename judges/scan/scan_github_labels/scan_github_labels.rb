@@ -50,7 +50,7 @@ catch :stop do
           "The '#{n.label}' label was attached to the issue ##{n.issue} " \
           'by someone (GitHub API doesn\'t provide this information) some time ago ' \
           '(this information also is not available).'
-        $loog.info("Detected '#{label[:name]}' label at #{repo}##{e[:number]}")
+        $loog.info("Detected '##{n.label}' at #{repo}##{e[:number]}, attached by ##{n.who}")
         throw :stop if octo.off_quota
       end
       if !$options.max_labels.nil? && found >= $options.max_labels
