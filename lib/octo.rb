@@ -32,7 +32,7 @@ def octo
       o = Octokit::Client.new
       token = $options.token
       $loog.debug("The 'token' option is not provided") if token.nil?
-      token = ENV.fetch('GITHUB_TOKEN') if token.nil?
+      token = ENV.fetch('GITHUB_TOKEN', nil) if token.nil?
       $loog.debug("The 'GITHUB_TOKEN' environment variable is not set") if token.nil?
       if token.nil?
         $loog.warn('Accessing GitHub API without a token!')
@@ -42,6 +42,7 @@ def octo
       end
       o = Obk.new(o, pause: 1000)
     else
+      $loog.debug('The connection to GitHub API is mocked')
       o = FakeOctokit.new
     end
     def o.off_quota

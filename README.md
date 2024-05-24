@@ -66,7 +66,8 @@ The following options are expected by the `zerocracy/judges-action` plugin:
 
 The following `k=v` pairs inside the `options` may be important:
 
-* `token=..` is a GitHub token (set it to `${{ secrets.GITHUB_TOKEN }}`)
+* `token=..` is a GitHub token (set it to `${{ secrets.GITHUB_TOKEN }}`
+or simply skip this option, the default will be used)
 * `repositories=..` is a comma-separated list of masks that
 determine the repositories to manage, where
 `yegor256/*` means all repos of the user,

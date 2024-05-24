@@ -60,6 +60,22 @@ class FakeOctokit
     }
   end
 
+  def issue_timeline(_repo, _issue)
+    [
+      {
+        actor: {
+          id: 888,
+          name: 'torvalds'
+        },
+        event: 'labeled',
+        label: {
+          name: 'bug'
+        },
+        created_at: Time.now
+      }
+    ]
+  end
+
   def repository_events(repo)
     [
       {

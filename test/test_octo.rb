@@ -24,6 +24,7 @@
 
 require 'minitest/autorun'
 require 'judges/options'
+require 'loog'
 require_relative '../lib/octo'
 
 # Test.
@@ -34,6 +35,7 @@ class TestOcto < Minitest::Test
   def test_simple_use
     $global = {}
     $options = Judges::Options.new({ 'testing' => true })
+    $loog = Loog::NULL
     o = octo
     assert(!o.off_quota)
   end

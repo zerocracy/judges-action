@@ -24,11 +24,14 @@
 
 detect = %w[bug enhancement question]
 
+found = 0
 catch :stop do
   each_repo do |repo|
     octo.search_issues("repo:#{repo} label:#{detect.join(',')}")[:items].each do |e|
+      $loog.debug("Issue #{repo}##{e[:number]} found with #{e[:labels].map { |l| l[:name] }.join(', ')}")
       e[:labels].each do |label|
-        next unless detect.include?(label)
+        next unless detect.include?(label[:name])
+        found += 1
         n = if_absent(fb) do |f|
           f.repository = find_repo_id(repo)
           f.issue = e[:number]
@@ -36,6 +39,13 @@ catch :stop do
           f.what = 'label-attached'
         end
         next if n.nil?
+        octo.issue_timeline(repo, e[:number]).each do |te|
+          next unless te[:event] == 'labeled'
+          next unless te[:label][:name] == label[:name]
+          n.who = te[:actor][:id]
+          n.when = te[:created_at]
+          break
+        end
         n.details =
           "The '#{n.label}' label was attached to the issue ##{n.issue} " \
           'by someone (GitHub API doesn\'t provide this information) some time ago ' \
@@ -43,6 +53,10 @@ catch :stop do
         # @todo #1:30min n.when -- let's find out when the label was attached
         $loog.info("Detected '#{label[:name]}' label at #{repo}##{e[:number]}")
         throw :stop if octo.off_quota
+      end
+      if !$options.max_labels.nil? && found >= $options.max_labels
+        $loog.info("Already found #{found} labels, that's enough (due to 'max_labels' option)")
+        throw :stop
       end
     end
   end
