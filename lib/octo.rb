@@ -59,7 +59,7 @@ def octo
       page = 1
       catch :break do
         loop do
-          r = send(m, *(args + [{ page: page }]))
+          r = send(m, *(args + [{ page: }]))
           break if r.empty?
           yield r
           page += 1
