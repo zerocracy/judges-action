@@ -21,6 +21,9 @@
 # SOFTWARE.
 ---
 name: zerocracy
+permissions:
+  issues: write
+  pull-requests: write
 'on':
   push:
     branches:
@@ -43,7 +46,6 @@ jobs:
         with:
           verbose: true
           options: |
-            token=${{ secrets.GITHUB_TOKEN }}
             max_events=2
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action
           factbase: zerocracy.fb
