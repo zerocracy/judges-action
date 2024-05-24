@@ -45,7 +45,7 @@ class FakeOctokit
     42
   end
 
-  def search_issues(_query)
+  def search_issues(_query, _options = {})
     {
       items: [
         {
@@ -60,7 +60,7 @@ class FakeOctokit
     }
   end
 
-  def issue_timeline(_repo, _issue)
+  def issue_timeline(_repo, _issue, _options = {})
     [
       {
         actor: {
@@ -76,7 +76,7 @@ class FakeOctokit
     ]
   end
 
-  def repository_events(repo)
+  def repository_events(repo, _options = {})
     [
       {
         id: 123,

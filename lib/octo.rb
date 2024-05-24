@@ -54,6 +54,18 @@ def octo
         false
       end
     end
+    def o.through_pages(*args)
+      m = args.shift
+      page = 1
+      catch :break do
+        loop do
+          r = send(m, *(args + [{ page: page }]))
+          break if r.empty?
+          yield r
+          page += 1
+        end
+      end
+    end
     o
   end
   $global[:octo]

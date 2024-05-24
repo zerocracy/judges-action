@@ -78,19 +78,21 @@ largest = largest.event_id unless largest.nil?
 seen = 0
 catch :stop do
   each_repo do |repo|
-    octo.repository_events(repo).each do |json|
-      next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
-      throw :stop if largest && json[:id] <= largest
-      $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
-      fb.txn do |fbt|
-        put_new_event(fbt, json)
+    octo.through_pages(:repository_events, repo) do |page|
+      page.each do |json|
+        next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
+        throw :stop if largest && json[:id] <= largest
+        $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
+        fb.txn do |fbt|
+          put_new_event(fbt, json)
+        end
+        seen += 1
+        if !$options.max_events.nil? && seen >= $options.max_events
+          $loog.info("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
+          throw :stop
+        end
+        throw :stop if octo.off_quota
       end
-      seen += 1
-      if !$options.max_events.nil? && seen >= $options.max_events
-        $loog.info("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
-        throw :stop
-      end
-      throw :stop if octo.off_quota
     end
   end
 end
