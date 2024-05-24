@@ -50,7 +50,6 @@ catch :stop do
           "The '#{n.label}' label was attached to the issue ##{n.issue} " \
           'by someone (GitHub API doesn\'t provide this information) some time ago ' \
           '(this information also is not available).'
-        # @todo #1:30min n.when -- let's find out when the label was attached
         $loog.info("Detected '#{label[:name]}' label at #{repo}##{e[:number]}")
         throw :stop if octo.off_quota
       end
