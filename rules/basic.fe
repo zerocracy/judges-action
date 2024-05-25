@@ -71,20 +71,20 @@
     (exists reason))))
 
 (explain (when
-  (eq what 'label-attached')
+  (eq what 'label-was-attached')
   (and
     (exists issue)
     (exists label))))
 
 (explain (when
-  (eq what 'issue-opened')
+  (eq what 'issue-was-opened')
   (and
     (exists issue)
     (exists when)
     (exists who))))
 
 (explain (when
-  (eq what 'issue-closed')
+  (eq what 'issue-was-closed')
   (and
     (exists issue)
     (exists when)
@@ -106,10 +106,11 @@
     (exists when)
     (exists issue)
     (exists details)
+    (exists reporter)
     (exists who))))
 
 (explain (when
-  (eq what 'reward-for-good-bug')
+  (eq what 'bug-report-was-rewarded')
   (and
     (eq (size cause) 1)
     (exists award)

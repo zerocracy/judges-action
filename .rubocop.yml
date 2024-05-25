@@ -28,6 +28,8 @@ AllCops:
   SuggestExtensions: false
   NewCops: enable
 
+Naming/FileName:
+  Regex: !ruby/regexp '/^[a-z-._]*$/'
 Style/GlobalVars:
   Enabled: false
 Metrics/MethodLength:

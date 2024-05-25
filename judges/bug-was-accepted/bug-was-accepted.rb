@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,25 +21,24 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-input:
-  -
-    id: 1
-    what: label-attached
-    issue: 42
-    repository: 555
-    label: question
-  -
-    id: 2
-    what: issue-closed
-    issue: 42
-    repository: 555
-    who: 777
-    when: 2024-05-20T23:54:24Z
-expected:
-  - /fb[count(f)=3]
-  - /fb/f[when]
-  - /fb/f[what='bug-was-resolved']
-  - /fb/f[who='777']
-  - /fb/f[repository='555']
-  - /fb/f[issue='42']
+
+conclude do
+  on '(and (eq what "issue-was-opened")
+    (exists who)
+    (exists is_human)
+    (exists issue)
+    (exists repository))'
+  on '(and (eq what "label-was-attached")
+    (exists who)
+    (eq issue {f0.issue})
+    (eq repository {f0.repository})
+    (eq label "bug"))'
+  follow 'when who repository issue'
+  draw do |n, opened, attached|
+    n.reporter = opened.who
+    "In the repository ##{n.repository}, the user ##{n.who} attached " \
+      "the '##{attached.label}' label to the issue ##{n.issue} " \
+      "reported by the user ##{n.reporter}; " \
+      'this means that a bug was-accepted as valid, by the project team.'
+  end
+end

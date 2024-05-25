@@ -22,12 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def follow(fb, before, props)
+def follow(fb, pred, props)
   after = fb.insert
   props.each do |p|
-    v = before.send(p)
+    v = pred.send(p)
     after.send("#{p}=", v)
   end
-  after.cause = before.id
+  after.cause = pred.id
   after
 end

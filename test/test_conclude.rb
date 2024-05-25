@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,24 +21,32 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-input:
-  -
-    id: 1
-    what: bug-was-accepted
-    who: 777
-    when: 2024-01-01T03:15:45
-    cause:
-      - 1
-      - 2
-    issue: 44
-    details:
-      some long enough details to explain what happened here...
-      some long enough details to explain what happened here...
-      some long enough details to explain what happened here...
-    seen:
-      - one
-      - good_bug
-      - two
-expected:
-  - /fb[count(f)=1]
+
+require 'minitest/autorun'
+require 'loog'
+require 'factbase'
+require_relative '../lib/conclude'
+
+# Test.
+# Author:: Yegor Bugayenko (yegor256@gmail.com)
+# Copyright:: Copyright (c) 2024 Zerocracy
+# License:: MIT
+class TestConclude < Minitest::Test
+  def test_simple_use
+    fb = Factbase.new
+    fb.insert.foo = 1
+    fb.insert.bar = 2
+    conclude(fb, 'judge-one', Loog::VERBOSE) do
+      on '(exists foo)'
+      on '(exists bar)'
+      draw do |n, f1, f2|
+        n.sum = f1.foo + f2.bar
+        'something funny'
+      end
+    end
+    f = fb.query('(exists sum)').each.to_a[0]
+    assert_equal(3, f.sum)
+    assert_equal('judge-one', f.what)
+    assert_equal('something funny', f.details)
+  end
+end

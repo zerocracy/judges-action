@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,23 +19,22 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-once(fb).query("(and
-  (eq what 'bug-was-resolved')
-  (exists issue)
-  (exists repository)
-  (exists who))").each do |f|
-  $loog.debug("The issue ##{f.issue} was closed")
-  fb.txn do |fbt|
-    n = follow(fbt, f, %w[repository issue who])
-    award = 5
-    n.when = Time.now
-    # @todo #1:30min Let's add extra points if it was done fast and
-    #  decrease points if too slow.
-    n.reason =
-      "@#{n.who} thanks for closing this issue! " \
-      "You've earned #{award} points for this. "
-    n.award = award
-    n.what = 'reward-for-resolved-bug'
-  end
-end
+---
+input:
+  -
+    id: 2
+    what: issue-was-opened
+    issue: 42
+    repository: 555
+    who: 777
+    when: 2024-05-20T23:54:24Z
+  -
+    id: 1
+    what: label-was-attached
+    issue: 42
+    repository: 555
+    label: another-label
+    who: 777
+    when: 2024-05-20T23:54:11Z
+expected:
+  - /fb[count(f)=2]

@@ -22,23 +22,47 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-once(fb).query("(and
-  (eq what 'bug-was-accepted')
-  (exists when)
-  (exists issue)
-  (exists repository)
-  (exists who))").each do |f|
-  $loog.debug("Bug was accepted in the issue ##{f.issue}")
-  fb.txn do |fbt|
-    n = follow(fbt, f, %w[repository issue who])
-    award = 15
-    n.when = Time.now
-    n.reason =
-      "@#{n.who} thanks for reporting a new bug! You've earned #{award} points for this. " \
-      'By reporting bugs, you help our project improve its quality. ' \
-      'If you find anything else in the repository that doesn\'t look ' \
-      'as good as you might expect, do not hesitate to report it.'
-    n.award = award
-    n.what = 'reward-for-good-bug'
+require 'judges/fb/chain'
+
+# Conclude.
+# Author:: Yegor Bugayenko (yegor256@gmail.com)
+# Copyright:: Copyright (c) 2024 Zerocracy
+# License:: MIT
+class Conclude
+  def initialize(fb, judge, loog)
+    @fb = fb
+    @judge = judge
+    @loog = loog
+    @queries = []
+    @follows = {}
   end
+
+  def on(query)
+    @queries << query
+  end
+
+  def follow(props)
+    @follows[@queries.size - 1] = props.split
+  end
+
+  def draw
+    chain_txn(@fb, *@queries, judge: @judge) do |a|
+      fbt = a.shift
+      n = fbt.insert
+      @follows.each do |i, props|
+        props.each do |p|
+          v = a[i].send(p)
+          n.send("#{p}=", v)
+        end
+      end
+      n.details = yield [n] + a
+      $loog.debug("#{@judge}: #{n.details}")
+      n.what = @judge
+    end
+  end
+end
+
+def conclude(fb = $fb, judge = $judge, loog = $loog, &)
+  c = Conclude.new(fb, judge, loog)
+  c.instance_eval(&)
 end

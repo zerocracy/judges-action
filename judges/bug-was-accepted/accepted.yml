@@ -22,20 +22,21 @@
 ---
 input:
   -
+    id: 2
+    what: issue-was-opened
+    issue: 42
+    repository: 77
+    is_human: 1
+    who: 4444
+    when: 2024-05-20T23:54:44Z
+  -
     id: 1
-    what: label-attached
+    what: label-was-attached
     issue: 42
     repository: 77
     label: bug
     who: 33
     when: 2024-05-20T23:54:24Z
-  -
-    id: 2
-    what: issue-opened
-    issue: 42
-    repository: 77
-    who: 4444
-    when: 2024-05-20T23:54:44Z
 expected:
   - /fb[count(f)=3]
   - /fb/f[id]
