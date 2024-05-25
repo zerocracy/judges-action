@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,48 +19,18 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'judges/fb/chain'
-
-# Conclude.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Zerocracy
-# License:: MIT
-class Conclude
-  def initialize(fb, judge, loog)
-    @fb = fb
-    @judge = judge
-    @loog = loog
-    @queries = []
-    @follows = {}
-  end
-
-  def on(query)
-    @queries << query
-  end
-
-  def follow(props)
-    @follows[@queries.size - 1] = props.split
-  end
-
-  def draw
-    chain_txn(@fb, *@queries, judge: @judge) do |a|
-      fbt = a.shift
-      n = fbt.insert
-      @follows.each do |i, props|
-        props.each do |p|
-          v = a[i].send(p)
-          n.send("#{p}=", v)
-        end
-      end
-      n.details = yield [n] + a
-      @loog.debug("#{@judge}: #{n.details}")
-      n.what = @judge
-    end
-  end
-end
-
-def conclude(fb = $fb, judge = $judge, loog = $loog, &)
-  c = Conclude.new(fb, judge, loog)
-  c.instance_eval(&)
-end
+---
+input:
+  -
+    what: git-push
+    when: 2024-05-20T23:54:24Z
+    push_id: 333
+    event_type: PushEvent
+    repository: 444
+    event_id: 42
+options:
+  testing: true
+  max_events: 1
+  repositories: yegor256/judges
+expected:
+  - /fb[count(f)=2]
