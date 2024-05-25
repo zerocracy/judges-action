@@ -29,10 +29,6 @@ def put_new_event(fbt, json)
   n.event_id = json[:id]
   n.repository = json[:repo][:id]
   n.who = json[:actor][:id] if json[:actor]
-  n.details =
-    "A new event ##{json[:id]} happened in GitHub #{json[:repo][:name]} repository " \
-    "(id: #{json[:repo][:id]}) of type '#{json[:type]}', " \
-    "with the creation time #{json[:created_at].iso8601}."
 
   case json[:type]
   when 'PushEvent'
@@ -69,6 +65,11 @@ def put_new_event(fbt, json)
       n.tag = json[:payload][:ref]
     end
   end
+
+  n.details =
+    "A new event ##{json[:id]} happened in GitHub #{json[:repo][:name]} repository " \
+    "(id: #{json[:repo][:id]}) of type '#{json[:type]}', " \
+    "with the creation time #{json[:created_at].iso8601}."
 end
 
 # Taking the largest ID of GitHub event that was seen so far
