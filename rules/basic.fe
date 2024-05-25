@@ -103,7 +103,7 @@
   (eq what 'bug-was-accepted')
   (and
     (eq (size cause) 2)
-    # (exists when)
+    (exists when)
     (exists issue)
     (exists details)
     (exists who))))

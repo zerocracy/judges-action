@@ -28,7 +28,7 @@ input:
     repository: 555
     label: bug
     who: 777
-    when: 2024-05-20T23:54:24Z
+    when: 2024-05-20T23:54:11Z
   -
     id: 2
     what: issue-opened
@@ -38,7 +38,7 @@ input:
     when: 2024-05-20T23:54:24Z
 expected:
   - /fb[count(f)=3]
-  - /fb/f[when]
+  - /fb/f[when='2024-05-20T23:54:11Z']
   - /fb/f[what='bug-was-accepted']
   - /fb/f[who='777']
   - /fb/f[repository='555']

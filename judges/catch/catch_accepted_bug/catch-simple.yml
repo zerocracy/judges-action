@@ -35,12 +35,12 @@ input:
     issue: 42
     repository: 77
     who: 4444
-    when: 2024-05-20T23:54:24Z
+    when: 2024-05-20T23:54:44Z
 expected:
   - /fb[count(f)=3]
   - /fb/f[id]
   - /fb/f[what='bug-was-accepted']
-  - /fb/f[when]
+  - /fb/f[when='2024-05-20T23:54:24Z']
   - /fb/f[issue='42']
   - /fb/f[repository='77']
-  - /fb/f[who='4444']
+  - /fb/f[who='33']

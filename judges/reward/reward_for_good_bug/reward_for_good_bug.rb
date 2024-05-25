@@ -24,6 +24,7 @@
 
 once(fb).query("(and
   (eq what 'bug-was-accepted')
+  (exists when)
   (exists issue)
   (exists repository)
   (exists who))").each do |f|

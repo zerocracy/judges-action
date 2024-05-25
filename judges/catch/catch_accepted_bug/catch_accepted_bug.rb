@@ -25,6 +25,8 @@
 label = 'bug'
 
 fb.query("(and (eq what 'label-attached')
+  (exists when)
+  (exists who)
   (exists issue)
   (exists repository)
   (eq label '#{label}'))").each do |f1|
@@ -34,12 +36,10 @@ fb.query("(and (eq what 'label-attached')
     (eq issue #{f1.issue})
     (eq repository #{f1.repository}))").each do |f2|
     fb.txn do |fbt|
-      n = follow(fbt, f1, %w[repository issue])
-      n.who = f2.who
+      n = follow(fbt, f1, %w[repository issue when who])
       n.cause = f2.id
-      # @todo #1:03min n.when = when the acceptance happened?
       n.details =
-        "In the repository ##{f1.repository}, the '#{label}' label was attached " \
+        "In the repository ##{f1.repository}, the '##{label}' label was attached " \
         "to the issue ##{f1.issue}, which was submitted by the user ##{n.who}; " \
         'this means that a bug-was-accepted as valid, by the project team.'
       n.what = 'bug-was-accepted'
