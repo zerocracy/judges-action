@@ -12,7 +12,6 @@ stable version 0.1.0 is released.
 First, get a free authentication token from
 [zerocracy.com](https://www.zerocracy.com) and add it as
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
-
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
 (replace `foo` with the name of your team):
