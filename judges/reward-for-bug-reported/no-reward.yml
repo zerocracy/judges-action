@@ -24,19 +24,10 @@ input:
   -
     id: 1
     what: bug-was-accepted
+    reporter: 43
+    seen: reward-for-bug-reported
     who: 777
     when: 2024-01-01T03:15:45
-    cause:
-      - 1
-      - 2
     issue: 44
-    details:
-      some long enough details to explain what happened here...
-      some long enough details to explain what happened here...
-      some long enough details to explain what happened here...
-    seen:
-      - one
-      - good_bug
-      - two
 expected:
   - /fb[count(f)=1]
