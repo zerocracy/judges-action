@@ -55,7 +55,8 @@ fi
 if [ -n "${INPUT_TRIM}" ]; then
     if [ -e "${fb}" ]; then
         # Remove facts that are too old
-        bundle exec judges "${gopts[@]}" trim --days "${INPUT_TRIM}" "${fb}"
+        time=$(ruby -e "require 'time'; puts (Time.now - ${INPUT_TRIM} * 24 * 60 * 60).utc.iso8601")
+        bundle exec judges "${gopts[@]}" trim --query "(lt _time ${time})" "${fb}"
     fi
 fi
 
