@@ -9,7 +9,11 @@
 If you are interested in this plugin, better wait for a few weeks until it's
 stable version 0.1.0 is released.
 
-Add this `zerocracy.yml` file to your GitHub repository
+First, get a free authentication token from
+[zerocracy.com](https://www.zerocracy.com) and add it as
+`ZEROCRACY_TOKEN` [secret][secrets] to your repository.
+
+Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
 (replace `foo` with the name of your team):
 
@@ -23,19 +27,16 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: foo.fb
-          key: zerocracy
       - uses: zerocracy/judges-action@master
         with:
+          token: ${{ secrets.ZEROCRACY_TOKEN }}
           options: |
             token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/*,-yegor256/test
           factbase: foo.fb
       - uses: zerocracy/pages-action@master
         with:
-          factbase: recent.fb
+          factbase: foo.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
@@ -114,3 +115,4 @@ inside a new Docker container. Obviously, you need to have
 will be deleted by the end of the build (either success or failure).
 
 [factbase]: https://github.com/yegor256/factbase
+[secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
