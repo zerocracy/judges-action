@@ -34,7 +34,7 @@ class Conclude
     @judge = judge
     @loog = loog
     @queries = []
-    @follows = {}
+    @follows = []
     @threshold = 9999
     @quota_aware = false
   end
@@ -52,7 +52,7 @@ class Conclude
   end
 
   def follow(props)
-    @follows[@queries.size - 1] = props.split
+    @follows = props.split
   end
 
   def draw(&)
@@ -96,11 +96,14 @@ class Conclude
   end
 
   def fill(fact, others)
-    @follows.each do |i, props|
-      props.each do |p|
-        v = others[i].send(p)
-        fact.send("#{p}=", v)
+    @follows.each do |follow|
+      i = @queries.size - 1
+      if follow.include?('.')
+        i, follow = follow.split('.')
+        i = i[1..].to_i
       end
+      v = others[i].send(follow)
+      fact.send("#{follow}=", v)
     end
     r = yield [fact] + others
     return unless r.is_a?(String)
