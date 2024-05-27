@@ -107,7 +107,8 @@ class FakeOctokit
   def user(name)
     {
       id: 444,
-      login: 'yegor256'
+      login: 'yegor256',
+      type: name == 29139614 ? 'Bot' : 'User'
     }
   end
 

@@ -75,6 +75,7 @@ class Conclude
     roll do |fbt, a|
       f = a.shift
       fill(f, a, &)
+      nil
     end
   end
 
@@ -88,7 +89,7 @@ class Conclude
         throw :stop if passed >= @threshold
         fbt = a.shift
         n = yield fbt, a
-        @loog.info("#{n.what}: #{n.details}")
+        @loog.info("#{n.what}: #{n.details}") unless n.nil?
         passed += 1
       end
     end
@@ -101,7 +102,9 @@ class Conclude
         n.send("#{p}=", v)
       end
     end
-    n.details = yield [n] + a
+    r = yield [n] + a
+    return unless r.is_a?(String)
+    n.details = r
     n.what = @judge
   end
 end
