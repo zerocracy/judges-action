@@ -23,6 +23,8 @@ GEM
       yaml (~> 0.3)
     faraday (2.9.0)
       faraday-net_http (>= 2.0, < 3.2)
+    faraday-http-cache (2.5.1)
+      faraday (>= 0.8)
     faraday-net_http (3.1.0)
       net-http
     faraday-retry (2.2.1)
@@ -83,6 +85,7 @@ PLATFORMS
 DEPENDENCIES
   factbase (~> 0.0.38)
   faraday (= 2.9.0)
+  faraday-http-cache (= 2.5.1)
   faraday-retry (= 2.2.1)
   judges!
   minitest (= 5.23.1)

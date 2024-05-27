@@ -20,11 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-skip: true
-input: []
+category: live
+input:
+  -
+    _id: 2
+    _time: 2024-05-20T23:54:44Z
+    what: issue-was-opened
+    issue: 37
+    repository: 799113787
+    who: 526301
+    when: 2024-05-20T23:54:44Z
 options:
   max_labels: 1
-  repositories: yegor256/judges
 expected:
   - /fb/f/label
   - /fb/f/who

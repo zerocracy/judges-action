@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,29 +19,12 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'rubygems'
-require 'rake'
-require 'rake/clean'
-
-task default: %i[clean test judges rubocop]
-
-require 'rake/testtask'
-desc 'Run all unit tests'
-Rake::TestTask.new(:test) do |test|
-  test.libs << 'lib' << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.warning = true
-  test.verbose = false
-end
-
-desc 'Test all judges'
-task :judges do
-  sh 'judges --verbose test --disable live --lib lib --option=judges_action_version=0.0.0 judges'
-end
-
-require 'rubocop/rake_task'
-desc 'Run RuboCop on all directories'
-RuboCop::RakeTask.new(:rubocop) do |task|
-  task.fail_on_error = true
-end
+---
+category: live
+input:
+  -
+    who: 29139614
+expected:
+  - /fb[count(f)=1]
+  - /fb/f[is_bot='1']
+  - /fb/f[not(is_human)]

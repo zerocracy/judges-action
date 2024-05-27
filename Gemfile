@@ -26,6 +26,7 @@ source 'https://rubygems.org'
 
 gem 'factbase', '~>0.0.38'
 gem 'faraday', '2.9.0'
+gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-retry', '2.2.1'
 gem 'judges', path: '/code/gems/judges'
 # gem 'judges', '~>0.0.32'

@@ -24,6 +24,7 @@
 
 require 'obk'
 require 'octokit'
+require 'faraday/http_cache'
 
 def octo
   $global[:octo] ||= begin
@@ -39,6 +40,19 @@ def octo
         o = Octokit::Client.new(access_token: token)
         $loog.info("Accessing GitHub API with a token (#{token.length} chars)")
       end
+      o.auto_paginate = true
+      o.connection_options = {
+        request: {
+          open_timeout: 5,
+          timeout: 5
+        }
+      }
+      stack = Faraday::RackBuilder.new do |builder|
+        builder.use Faraday::HttpCache, serializer: Marshal, shared_cache: false
+        builder.use Octokit::Response::RaiseError
+        builder.adapter Faraday.default_adapter
+      end
+      Octokit.middleware = stack
       o = Obk.new(o, pause: 1000)
     else
       $loog.debug('The connection to GitHub API is mocked')
@@ -62,20 +76,14 @@ def octo
     def o.repo_id_by_name(name)
       json = repository(name)
       id = json[:id]
-      $loog.debug("GitHub repository #{id} has an ID: #{id}")
+      $loog.debug("GitHub repository #{name} has an ID: #{id}")
       id
     end
-    def o.through_pages(*args, &block)
-      m = args.shift
-      page = 1
-      catch :break do
-        loop do
-          r = send(m, *(args + [{ page: }]))
-          break if r.empty?
-          r.each(&block)
-          page += 1
-        end
-      end
+    def o.repo_name_by_id(id)
+      json = repositories(id)
+      name = json[:full_name]
+      $loog.debug("GitHub repository ##{id} has a name: #{name}")
+      name
     end
     o
   end
@@ -92,14 +100,14 @@ class FakeOctokit
     o
   end
 
-  def repositories(_user = nil)
-    [
-      {
-        name: 'judges',
-        full_name: 'yegor256/judges',
-        id: 444
-      }
-    ]
+  def repositories(user = nil)
+    r = {
+      name: 'judges',
+      full_name: 'yegor256/judges',
+      id: 444
+    }
+    r = [r] unless user.is_a?(Integer)
+    r
   end
 
   def user(name)

@@ -82,7 +82,7 @@ catch :stop do
         (max event_id)))"
     ).each.to_a[0]
     largest = largest.event_id unless largest.nil?
-    octo.through_pages(:repository_events, repo) do |json|
+    octo.repository_events(repo).each do |json|
       next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
       throw :stop if largest && json[:id] <= largest
       $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
