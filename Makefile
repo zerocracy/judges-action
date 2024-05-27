@@ -28,7 +28,7 @@ all: rubocop test entry rmi verify
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --lib /judges-action/lib /judges-action/judges'
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --disable live --lib /judges-action/lib /judges-action/judges'
 	echo "$$?" > target/test.exit
 
 entry: target/docker-image.txt
