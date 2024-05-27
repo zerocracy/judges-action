@@ -43,6 +43,7 @@ conclude do
   follow 'f1.when f2.who repository issue'
   draw do |n, attached, closed, assigned|
     n.seconds = closed.when - assigned.when
+    n.closer = closed.who
     repo = octo.repo_name_by_id(n.repository)
     "The bug/feature in the issue #{repo}##{n.issue} was resolved, " \
       "because it was closed by ##{closed.who} and earlier it was" \

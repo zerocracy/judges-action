@@ -32,10 +32,14 @@ conclude do
   follow 'repository issue'
   draw do |n, accepted|
     n.award = 15
+    n.when = Time.now
     n.who = accepted.reporter
-    "Thanks for reporting a new bug! You've earned #{n.award} points for this. " \
+    n.message =
+      "Thanks for reporting a new bug! You've earned #{n.award} points for this. " \
       'By reporting bugs, you help our project improve its quality. ' \
       'If you find anything else in the repository that doesn\'t look ' \
       'as good as you might expect, do not hesitate to report it.'
+    "It's time to reward ##{n.who} for the issue reported in " \
+      "#{n.repository}##{n.issue}, the reward amount is #{n.award}"
   end
 end

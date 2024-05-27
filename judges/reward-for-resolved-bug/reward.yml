@@ -20,22 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-options:
-  testing: yes
 input:
   -
     id: 1
-    what: bug-was-accepted
-    reporter: 42
+    what: bug-was-resolved
     who: 4444
     issue: 42
     repository: 100
     when: 2024-01-01T03:15:45Z
 expected:
   - /fb[count(f)=2]
-  - /fb/f[what='reward-for-bug-reported']
-  - /fb/f[who='42']
+  - /fb/f[what='reward-for-resolved-bug']
+  - /fb/f[who='4444']
   - /fb/f[issue='42']
   - /fb/f[repository='100']
-  - /fb/f[award='15']
+  - /fb/f[award='30']
   - /fb/f[message]

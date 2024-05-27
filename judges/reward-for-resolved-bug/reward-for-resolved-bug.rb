@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,23 +21,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-options:
-  testing: yes
-input:
-  -
-    id: 1
-    what: bug-was-accepted
-    reporter: 42
-    who: 4444
-    issue: 42
-    repository: 100
-    when: 2024-01-01T03:15:45Z
-expected:
-  - /fb[count(f)=2]
-  - /fb/f[what='reward-for-bug-reported']
-  - /fb/f[who='42']
-  - /fb/f[issue='42']
-  - /fb/f[repository='100']
-  - /fb/f[award='15']
-  - /fb/f[message]
+
+conclude do
+  on '(and (eq what "bug-was-resolved")
+    (exists when)
+    (exists issue)
+    (exists repository)
+    (exists who))'
+  follow 'repository issue who'
+  draw do |n, _resolved|
+    n.award = 30
+    n.when = Time.now
+    n.message =
+      'Thanks for closing this issue! ' \
+      "You've earned #{n.award} points for this."
+    "It's time to reward ##{n.who} for the issue closed in " \
+      "#{n.repository}##{n.issue}, the reward amount is #{n.award}"
+  end
+end
