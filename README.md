@@ -91,7 +91,7 @@ In order to be _rewarded_, do the following:
 * Review a pull request
 * Create a new release
 
-I order to avoid _punishment_, do the following:
+In order to avoid _punishment_, do the following:
 
 * Triage issues timely
 * Review and merge/reject pull requests timely
