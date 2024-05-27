@@ -22,44 +22,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-detect = %w[bug enhancement question]
+# Taking the latest GitHub issue number that we checked for labels
+latest = fb.query("(and (eq what '#{$judge}') (exists issue) (max _time))").each.to_a[0]
+latest = latest.issue unless latest.nil?
+latest = 0 if latest.nil?
 
-found = 0
-catch :stop do
-  each_repo do |repo|
-    octo.through_pages(:search_issues, "repo:#{repo} label:#{detect.join(',')}") do |page|
-      page[:items].each do |e|
-        $loog.debug("Issue #{repo}##{e[:number]} found with [#{e[:labels].map { |l| l[:name] }.join(', ')}]")
-        e[:labels].each do |label|
-          next unless detect.include?(label[:name])
-          found += 1
-          n = if_absent(fb) do |f|
-            f.repository = find_repo_id(repo)
-            f.issue = e[:number]
-            f.label = label[:name]
-            f.what = 'label-attached'
-          end
-          next if n.nil?
-          octo.through_pages(:issue_timeline, repo, e[:number]) do |pp|
-            pp.each do |te|
-              next unless te[:event] == 'labeled'
-              next unless te[:label][:name] == label[:name]
-              n.who = te[:actor][:id]
-              n.when = te[:created_at]
-              throw :break
-            end
-          end
-          n.details =
-            "The '##{n.label}' label was attached by ##{n.who} " \
-            "to the issue #{repo}##{n.issue} at #{n.when}, which may trigger future judges."
-          $loog.info("Detected '##{n.label}' at #{repo}##{e[:number]}, attached by ##{n.who}")
-          throw :stop if octo.off_quota
-        end
-        if !$options.max_labels.nil? && found >= $options.max_labels
-          $loog.info("Already found #{found} labels, that's enough (due to 'max_labels' option)")
-          throw :stop
-        end
-      end
+conclude do
+  quota_aware
+  on "(and (eq what 'issue-was-opened')
+    (eq issue (agg (gt issue #{latest}) (min issue))))"
+  follow 'repository issue'
+  threshold $options.max_labels || 16
+  maybe do |n, opened|
+    octo.through_pages(:issue_timeline, n.repository, n.issue) do |te|
+      next unless te[:event] == 'labeled'
+      badge = te[:label][:name]
+      next unless %w[bug enhancement question].include?(badge)
+      n.label = badge
+      n.who = te[:actor][:id]
+      n.when = te[:created_at]
+      break "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
+        "to the issue #{te[:repository][:full_name]}##{n.issue} at #{n.when}, " \
+        '; which may trigger future judges.'
     end
   end
 end

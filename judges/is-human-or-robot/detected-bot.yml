@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,27 +19,13 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'minitest/autorun'
-require 'judges/options'
-require 'loog'
-require_relative '../lib/octo'
-
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Zerocracy
-# License:: MIT
-class TestOcto < Minitest::Test
-  def test_simple_use
-    $global = {}
-    $options = Judges::Options.new({ 'testing' => true })
-    $loog = Loog::NULL
-    o = octo
-    assert(!o.off_quota)
-  end
-
-  def test_rate_limit
-    o = FakeOctokit.new
-    assert_equal(100, o.rate_limit.remaining)
-  end
-end
+---
+options:
+  testing: true
+input:
+  -
+    who: 29139614
+expected:
+  - /fb[count(f)=1]
+  - /fb/f[is_bot='1']
+  - /fb/f[not(is_human)]

@@ -35,7 +35,9 @@ end
 
 def fb_pre(fb)
   Factbase::Pre.new(fb) do |f|
-    f.id = $fb.size
+    f._id = $fb.size
+    f._time = Time.now
+    f._version = "#{Factbase::VERSION}/#{Judges::VERSION}/#{$options.judges_action_version}"
   end
 end
 

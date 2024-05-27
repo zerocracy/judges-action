@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 (defn explain '
-  r = @operands[0].evaluate(fact);
+  r = @operands[0].evaluate(fact, maps);
   if !r
     $loog.error(\'This rule failed: \' + self.to_s)
   end
@@ -40,11 +40,14 @@
     (not (matches details "[^.]$")))))
 
 (explain (when
-  (exists id)
-  (eq "Integer" (type id))))
+  (exists _id)
+  (eq "Integer" (type _id))))
+(explain (when
+  (exists _time)
+  (eq "Time" (type _time))))
 (explain (when
   (exists issue)
-  (eq "Integer" (type id))))
+  (eq "Integer" (type issue))))
 (explain (when
   (exists repository)
   (eq "Integer" (type repository))))

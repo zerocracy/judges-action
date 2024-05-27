@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'judges/fb/chain'
+require 'judges/fb/once'
 
 # Conclude.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
@@ -35,30 +35,74 @@ class Conclude
     @loog = loog
     @queries = []
     @follows = {}
+    @threshold = 9999
+    @quota_aware = false
+  end
+
+  def quota_aware
+    @quota_aware = true
   end
 
   def on(query)
     @queries << query
   end
 
+  def threshold(max)
+    @threshold = max
+  end
+
   def follow(props)
     @follows[@queries.size - 1] = props.split
   end
 
-  def draw
-    chain_txn(@fb, *@queries, judge: @judge) do |a|
-      fbt = a.shift
+  def draw(&)
+    roll do |fbt, a|
       n = fbt.insert
-      @follows.each do |i, props|
-        props.each do |p|
-          v = a[i].send(p)
-          n.send("#{p}=", v)
-        end
-      end
-      n.details = yield [n] + a
-      @loog.debug("#{@judge}: #{n.details}")
-      n.what = @judge
+      fill(n, a, &)
+      n
     end
+  end
+
+  def maybe(&)
+    roll do |fbt, a|
+      if_absent(fbt) do |n|
+        fill(n, a, &)
+      end
+    end
+  end
+
+  def consider(&)
+    roll do |fbt, a|
+      f = a.shift
+      fill(f, a, &)
+    end
+  end
+
+  private
+
+  def roll(&)
+    catch :stop do
+      passed = 0
+      each_tuple_once_txn(@fb, *@queries, judge: @judge) do |a|
+        throw :stop if @quota_aware && octo.off_quota
+        throw :stop if passed >= @threshold
+        fbt = a.shift
+        n = yield fbt, a
+        @loog.info("#{n.what}: #{n.details}")
+        passed += 1
+      end
+    end
+  end
+
+  def fill(n, a)
+    @follows.each do |i, props|
+      props.each do |p|
+        v = a[i].send(p)
+        n.send("#{p}=", v)
+      end
+    end
+    n.details = yield [n] + a
+    n.what = @judge
   end
 end
 

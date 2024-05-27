@@ -22,26 +22,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'minitest/autorun'
-require 'judges/options'
-require 'loog'
-require_relative '../lib/octo'
-
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Zerocracy
-# License:: MIT
-class TestOcto < Minitest::Test
-  def test_simple_use
-    $global = {}
-    $options = Judges::Options.new({ 'testing' => true })
-    $loog = Loog::NULL
-    o = octo
-    assert(!o.off_quota)
-  end
-
-  def test_rate_limit
-    o = FakeOctokit.new
-    assert_equal(100, o.rate_limit.remaining)
+conclude do
+  quota_aware
+  on '(and (exists who) (not (exists is_human)) (not (exists is_robot)))'
+  consider do |f, _|
+    json = octo.user(f.who)
+    type = json[:type]
+    if type == 'Bot'
+      f.is_bot = 1
+      $loog.info("GitHub user ##{f.who} is actually a bot")
+    else
+      f.is_human = 1
+      $loog.info("GitHub user ##{f.who} is not a bot")
+    end
   end
 end

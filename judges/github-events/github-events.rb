@@ -72,28 +72,28 @@ def put_new_event(fbt, json)
     "with the creation time #{json[:created_at].iso8601}."
 end
 
-# Taking the largest ID of GitHub event that was seen so far
-largest = fb.query('(and (exists repository) (max event_id))').each.to_a[0]
-largest = largest.event_id unless largest.nil?
-
 seen = 0
 catch :stop do
   each_repo do |repo|
-    octo.through_pages(:repository_events, repo) do |page|
-      page.each do |json|
-        next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
-        throw :stop if largest && json[:id] <= largest
-        $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
-        fb.txn do |fbt|
-          put_new_event(fbt, json)
-        end
-        seen += 1
-        if !$options.max_events.nil? && seen >= $options.max_events
-          $loog.info("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
-          throw :stop
-        end
-        throw :stop if octo.off_quota
+    # Taking the largest ID of GitHub event that was seen so far:
+    largest = fb.query(
+      "(eq event_id
+        (agg (eq repository #{octo.repo_id_by_name(repo)})
+        (max event_id)))").each.to_a[0]
+    largest = largest.event_id unless largest.nil?
+    octo.through_pages(:repository_events, repo) do |json|
+      next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
+      throw :stop if largest && json[:id] <= largest
+      $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
+      fb.txn do |fbt|
+        put_new_event(fbt, json)
       end
+      seen += 1
+      if !$options.max_events.nil? && seen >= $options.max_events
+        $loog.info("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
+        throw :stop
+      end
+      throw :stop if octo.off_quota
     end
   end
 end

@@ -3,7 +3,7 @@ PATH
   specs:
     judges (0.0.0)
       backtrace (~> 0.3)
-      factbase (~> 0.0.33)
+      factbase (~> 0.0.38)
       gli (~> 2.21)
       loog (~> 0.2)
       nokogiri (~> 1.10)
@@ -16,7 +16,7 @@ GEM
     ast (2.4.2)
     backtrace (0.4.0)
     base64 (0.2.0)
-    factbase (0.0.33)
+    factbase (0.0.38)
       json (~> 2.7)
       loog (~> 0.2)
       nokogiri (~> 1.10)
@@ -81,13 +81,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  factbase (= 0.0.33)
+  factbase (~> 0.0.38)
   faraday (= 2.9.0)
   faraday-retry (= 2.2.1)
   judges!
   minitest (= 5.23.1)
-  obk (= 0.3.1)
-  octokit (= 8.1.0)
+  obk (~> 0.3.1)
+  octokit (~> 8.1.0)
   rake (= 13.2.1)
   rubocop (= 1.64.0)
 
