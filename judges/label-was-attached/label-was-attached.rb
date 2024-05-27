@@ -33,7 +33,7 @@ conclude do
     (eq issue (agg (gt issue #{latest}) (min issue))))"
   follow 'repository issue'
   threshold $options.max_labels || 16
-  maybe do |n, opened|
+  maybe do |n, _opened|
     octo.through_pages(:issue_timeline, n.repository, n.issue) do |te|
       next unless te[:event] == 'labeled'
       badge = te[:label][:name]
@@ -42,8 +42,8 @@ conclude do
       n.who = te[:actor][:id]
       n.when = te[:created_at]
       break "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{te[:repository][:full_name]}##{n.issue} at #{n.when}, " \
-        '; which may trigger future judges.'
+            "to the issue #{te[:repository][:full_name]}##{n.issue} at #{n.when}, " \
+            '; which may trigger future judges.'
     end
   end
 end

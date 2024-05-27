@@ -79,7 +79,8 @@ catch :stop do
     largest = fb.query(
       "(eq event_id
         (agg (eq repository #{octo.repo_id_by_name(repo)})
-        (max event_id)))").each.to_a[0]
+        (max event_id)))"
+    ).each.to_a[0]
     largest = largest.event_id unless largest.nil?
     octo.through_pages(:repository_events, repo) do |json|
       next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?

@@ -72,7 +72,7 @@ class Conclude
   end
 
   def consider(&)
-    roll do |fbt, a|
+    roll do |_fbt, a|
       f = a.shift
       fill(f, a, &)
       nil
@@ -95,17 +95,17 @@ class Conclude
     end
   end
 
-  def fill(n, a)
+  def fill(fact, others)
     @follows.each do |i, props|
       props.each do |p|
-        v = a[i].send(p)
-        n.send("#{p}=", v)
+        v = others[i].send(p)
+        fact.send("#{p}=", v)
       end
     end
-    r = yield [n] + a
+    r = yield [fact] + others
     return unless r.is_a?(String)
-    n.details = r
-    n.what = @judge
+    fact.details = r
+    fact.what = @judge
   end
 end
 

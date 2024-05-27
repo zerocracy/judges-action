@@ -65,16 +65,14 @@ def octo
       $loog.debug("GitHub repository #{id} has an ID: #{id}")
       id
     end
-    def o.through_pages(*args)
+    def o.through_pages(*args, &block)
       m = args.shift
       page = 1
       catch :break do
         loop do
           r = send(m, *(args + [{ page: }]))
           break if r.empty?
-          r.each do |json|
-            yield json
-          end
+          r.each(&block)
           page += 1
         end
       end
@@ -108,7 +106,7 @@ class FakeOctokit
     {
       id: 444,
       login: 'yegor256',
-      type: name == 29139614 ? 'Bot' : 'User'
+      type: name == 29_139_614 ? 'Bot' : 'User'
     }
   end
 
