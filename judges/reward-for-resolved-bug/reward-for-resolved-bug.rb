@@ -24,6 +24,7 @@
 
 conclude do
   on '(and (eq what "bug-was-resolved")
+    (exists seconds)
     (exists when)
     (exists issue)
     (exists repository)
