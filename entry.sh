@@ -41,6 +41,15 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     exit 1
 fi
 
+name=$(basename "${INPUT_FACTBASE}")
+name=${name%.*}
+if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
+    echo "The base name of the factbase file (${name}) doesn't match the expected pattern."
+    echo "It must only include low-case English letters and numbers,"
+    echo "may start only with a letter, and may not be longer than 24 characters."
+    exit 1
+fi
+
 export GLI_DEBUG=true
 
 cd "${GITHUB_WORKSPACE-/w}"
