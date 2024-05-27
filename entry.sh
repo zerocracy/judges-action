@@ -67,7 +67,7 @@ while IFS= read -r o; do
     if [ "${v}" = "" ]; then continue; fi
     options+=("--option=${v}")
 done <<< "${INPUT_OPTIONS}"
-options+=("--option=${judges_action_version}=${VERSION}")
+options+=("--option=judges_action_version=${VERSION}")
 
 echo "The 'judges-action' ${VERSION} is running"
 
