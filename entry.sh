@@ -44,8 +44,9 @@ fi
 name=$(basename "${INPUT_FACTBASE}")
 name=${name%.*}
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
-    echo "The base name of the factbase file (${name}) doesn't match the expected pattern."
-    echo "It must only include low-case English letters and numbers,"
+    echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
+    echo "The file name is: \"${INPUT_FACTBASE}\""
+    echo "A base name must only include low-case English letters, numbers, and a dash,"
     echo "may start only with a letter, and may not be longer than 24 characters."
     exit 1
 fi
