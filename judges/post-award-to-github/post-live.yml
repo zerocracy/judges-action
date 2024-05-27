@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,21 +19,16 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-conclude do
-  on '(and
-    (exists who)
-    (exists when)
-    (exists award)
-    (exists message)
-    (exists issue)
-    (exists repository)
-    (not (exists href)))'
-  consider do |f, _|
-    name = octo.user_name_by_id(f.who)
-    repo = octo.repo_name_by_id(f.repository)
-    id = octo.add_comment(repo, f.issue, "@#{name} #{f.message}")
-    f.href = "https://github.com/#{repo}/issues/#{f.issue}/#{id}"
-    $loog.info("Comment ##{id} posted with an award to #{f.href}")
-  end
-end
+---
+category: live
+input:
+  -
+    issue: 17
+    repository: 799177290
+    who: 526301
+    award: 15
+    message: This is just a test, ignore it please
+    when: 2024-05-20T23:54:24Z
+expected:
+  - /fb[count(f)=1]
+  - /fb/f/href
