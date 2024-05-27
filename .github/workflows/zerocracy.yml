@@ -40,10 +40,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: zerocracy.fb
-          key: ${{ hashFiles('zerocracy.fb') }}
+      - uses: actions/download-artifact@v4
       - uses: zerocracy/judges-action@master
         with:
           verbose: true
@@ -53,6 +50,12 @@ jobs:
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action
           factbase: zerocracy.fb
           trim: 5
+      - uses: actions/upload-artifact@v4
+        with:
+          path: zerocracy.fb
+          name: factbase
+          if-no-files-found: error
+          overwrite: true
       - uses: zerocracy/pages-action@0.0.4
         with:
           verbose: true
