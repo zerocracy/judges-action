@@ -42,13 +42,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
-          path: ./zerocracy.fb
+          path: zerocracy.fb
           key: zerocracy
       - uses: zerocracy/judges-action@master
         with:
           verbose: true
           options: |
             max_events=2
+            token={{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action
           factbase: zerocracy.fb
           trim: 5
