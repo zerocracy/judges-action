@@ -10,7 +10,7 @@ If you are interested in this plugin, better wait for a few weeks until it's
 stable version 0.1.0 is released.
 
 First, get a free authentication token from
-[zerocracy.com](https://www.zerocracy.com) and add it as
+[Zerocracy.com](https://www.zerocracy.com) and add it as
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
@@ -60,23 +60,25 @@ who is the best performer in your team.
 
 The following options are expected by the `zerocracy/judges-action` plugin:
 
+* `token` is an authentication token from
+  [Zerocracy.com](https://www.zerocracy.com)
 * `options` is a list of `k=v` pairs, which are explained below.
 * `factbase` is the path of the [Factbase][factbase] file
-(where everything is kept)
+  (where everything is kept)
 * `verbose` makes it print debugging info if set to `true`
 
 The following `k=v` pairs inside the `options` may be important:
 
 * `token=..` is a GitHub token (set it to `${{ secrets.GITHUB_TOKEN }}`
-or simply skip this option, the default will be used)
+  or simply skip this option, the default will be used)
 * `repositories=..` is a comma-separated list of masks that
-determine the repositories to manage, where
+  determine the repositories to manage, where
 `yegor256/*` means all repos of the user,
 `yegor256/judges` means a specific repo,
-and
-`-yegor256/judges` means an exclusion of the repo from the list.
+  and
+  `-yegor256/judges` means an exclusion of the repo from the list.
 * `max_events=..` is the maximum number of GitHub API events to scan
-at a time (better don't change it)
+  at a time (better don't change it)
 
 The `zerocracy/pages-action` plugin is responsible for rendering
 the summary HTML page: its configuration is not explained here,
