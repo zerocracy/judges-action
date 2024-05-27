@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,46 +21,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: zerocracy
-permissions:
-  issues: write
-  pull-requests: write
-  pages: write
-  contents: write
-'on':
-  push:
-    branches:
-      - master
-  # schedule:
-  #   - cron: '0,10,20,30,40,50 * * * *'
-concurrency:
-  group: zerocracy
-  cancel-in-progress: true
-jobs:
-  zerocracy:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: ./zerocracy.fb
-          key: zerocracy
-      - uses: zerocracy/judges-action@master
-        with:
-          verbose: true
-          options: |
-            max_events=2
-            repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action
-          factbase: zerocracy.fb
-          trim: 5
-      - uses: zerocracy/pages-action@0.0.3
-        with:
-          verbose: true
-          factbase: zerocracy.fb
-          output: pages
-      - uses: JamesIves/github-pages-deploy-action@v4.6.1
-        with:
-          branch: gh-pages
-          folder: pages
-          clean: false
+
+fb.query('(not (exists _id))').delete!
+
+fb.query('(not (exists _time))').delete!
