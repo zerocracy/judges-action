@@ -52,7 +52,8 @@ for bad things (like stale pull requests).
 
 The plugin will also generate a summary `foo.html` file, which will
 be automatically deployed to the `gh-pages` branch. You can configure
-your GitHub repository to render the branch as a static website. Thus,
+your GitHub repository to render the branch as a static website via
+[GitHub Pages](https://pages.github.com/). Thus,
 the summary page will be updated every ten minutes and you will see
 who is the best performer in your team.
 
