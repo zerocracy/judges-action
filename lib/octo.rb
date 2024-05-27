@@ -80,7 +80,7 @@ def octo
       id
     end
     def o.repo_name_by_id(id)
-      json = repositories(id)
+      json = repository(id)
       name = json[:full_name]
       $loog.debug("GitHub repository ##{id} has a name: #{name}")
       name
@@ -100,14 +100,14 @@ class FakeOctokit
     o
   end
 
-  def repositories(user = nil)
-    r = {
-      name: 'judges',
-      full_name: 'yegor256/judges',
-      id: 444
-    }
-    r = [r] unless user.is_a?(Integer)
-    r
+  def repositories(_user = nil)
+    [
+      {
+        name: 'judges',
+        full_name: 'yegor256/judges',
+        id: 444
+      }
+    ]
   end
 
   def user(name)
