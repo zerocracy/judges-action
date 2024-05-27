@@ -49,7 +49,7 @@ jobs:
           verbose: true
           options: |
             max_events=2
-            token={{ secrets.GITHUB_TOKEN }}
+            token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action
           factbase: zerocracy.fb
           trim: 5
