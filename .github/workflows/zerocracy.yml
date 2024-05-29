@@ -27,11 +27,8 @@ permissions:
   pages: write
   contents: write
 'on':
-  push:
-    branches:
-      - master
-  # schedule:
-  #   - cron: '0,10,20,30,40,50 * * * *'
+  schedule:
+    - cron: '0,10,20,30,40,50 * * * *'
 concurrency:
   group: zerocracy
   cancel-in-progress: true

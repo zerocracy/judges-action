@@ -29,7 +29,7 @@ release:
   pre: false
   script: |-
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
-    sed -i -e "s/0.0.0/${tag}/" Dockerfile
-    git add Dockerfile
+    sed -i -e "s/0.0.0/${tag}/" entry.sh
+    git add entry.sh
     git commit -m "version set to ${tag}"
     sudo make "--directory=$(pwd)"
