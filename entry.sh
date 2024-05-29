@@ -25,7 +25,7 @@ set -e
 set -x
 set -o pipefail
 
-VERSION=0.0.0
+VERSION=0.0.3
 
 if [ -z "$1" ]; then
     SELF=$(pwd)
