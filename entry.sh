@@ -62,6 +62,10 @@ if [ -n "${INPUT_VERBOSE}" ]; then
     gopts+=("--verbose")
 fi
 
+if [ -n "${INPUT_TOKEN}" ]; then
+    bundle exec judges "${gopts[@]}" pull "--token=${INPUT_TOKEN}" "${name}" "${fb}"
+fi
+
 if [ -n "${INPUT_TRIM}" ]; then
     if [ -e "${fb}" ]; then
         # Remove facts that are too old
@@ -87,3 +91,7 @@ bundle exec judges "${gopts[@]}" update \
     --quiet \
     --max-cycles 5 \
     "${options[@]}" "${SELF}/judges" "${fb}"
+
+if [ -n "${INPUT_TOKEN}" ]; then
+    bundle exec judges "${gopts[@]}" push "--token=${INPUT_TOKEN}" "${name}" "${fb}"
+fi
