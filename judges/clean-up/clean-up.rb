@@ -25,3 +25,5 @@
 fb.query('(not (exists _id))').delete!
 
 fb.query('(not (exists _time))').delete!
+
+fb.query('(not (eq "Integer" (type event_id)))').delete!
