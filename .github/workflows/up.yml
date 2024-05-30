@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - run:
+      - run: |
           git fetch --tags --force
           latest=$(git tag --sort=creatordate | tail -1)
           sed -E -i "s/judges-action@.+$/judges-action@${latest}/g" README.md
