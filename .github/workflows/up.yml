@@ -40,6 +40,8 @@ jobs:
           cd pages-action
           git fetch --tags --force
           latest=$(git tag --sort=creatordate | tail -1)
+          cd ..
+          rm -rf pages-action
           sed -E -i "s/pages-action@.+$/pages-action@${latest}/g" README.md
       - uses: peter-evans/create-pull-request@v6
         with:
