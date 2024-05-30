@@ -22,15 +22,15 @@
 ---
 input:
   -
-    what: git-push
+    what: tag-was-created
     when: 2024-05-20T23:54:24Z
     push_id: 333
-    event_type: PushEvent
+    event_type: CreateEvent
     repository: 444
     event_id: 42
 options:
   testing: true
-  max_events: 1
+  max_events: 2
   repositories: yegor256/judges
 expected:
   - /fb[count(f)=2]

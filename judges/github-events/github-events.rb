@@ -34,6 +34,7 @@ def put_new_event(fbt, json)
   when 'PushEvent'
     n.what = 'git-was-pushed'
     n.push_id = json[:payload][:push_id]
+    raise Factbase::Rollback
 
   when 'IssuesEvent'
     n.issue = json[:payload][:issue][:number]
