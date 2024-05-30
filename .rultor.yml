@@ -22,6 +22,8 @@
 ---
 docker:
   image: yegor256/rultor-image:1.23.1
+assets:
+  docker-password: yegor256/home#assets/docker-password
 merge:
   script: |-
     sudo make
@@ -30,6 +32,15 @@ release:
   script: |-
     [[ "${tag}" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || exit -1
     sed -i -e "s/0.0.0/${tag}/" entry.sh
+    sed -i -e "s/0.0.0/${tag}/" action.yml
+    sed -i -e "s/0.0.0/${tag}/" Dockerfile
     git add entry.sh
+    git add action.yml
+    git add Dockerfile
     git commit -m "version set to ${tag}"
-    sudo make "--directory=$(pwd)"
+    repo=yegor256/judges-action
+    sudo docker build "$(pwd)" --tag "${repo}:${tag}"
+    sudo docker build "$(pwd)" --tag "${repo}:latest"
+    cat ../docker-password | sudo docker login --password-stdin -u yegor256
+    sudo docker push "${repo}:${tag}"
+    sudo docker push "${repo}:latest"

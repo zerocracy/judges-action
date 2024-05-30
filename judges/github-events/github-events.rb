@@ -86,11 +86,11 @@ def one_repo(repo, seen)
     end
     octo.repository_events(repo).each do |json|
       unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
-        $loog.debug("The event ##{json[:id]} has already been seen, skipping")
+        $loog.debug("The event ##{json[:id]} (#{json[:type]}) has already been seen, skipping")
         next
       end
       if largest && json[:id].to_i <= largest
-        $loog.debug("The event ##{json[:id]} is below the largest ID #{largest}, skipping")
+        $loog.debug("The event ##{json[:id]} (#{json[:type]}) is below the largest ID #{largest}, skipping")
         throw :stop
       end
       $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
@@ -99,7 +99,7 @@ def one_repo(repo, seen)
       end
       seen += 1
       if !$options.max_events.nil? && seen >= $options.max_events
-        $loog.info("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
+        $loog.debug("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
         throw :stop
       end
       throw :alarm if octo.off_quota
