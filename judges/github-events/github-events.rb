@@ -81,10 +81,19 @@ catch :stop do
         (agg (eq repository #{octo.repo_id_by_name(repo)})
         (max event_id)))"
     ).each.to_a[0]
-    largest = largest.event_id unless largest.nil?
+    unless largest.nil?
+      largest = largest.event_id
+      $loog.debug("The largest ID we've seen so far is #{largest} (everything below this number will be ignored)")
+    end
     octo.repository_events(repo).each do |json|
-      next unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
-      throw :stop if largest && json[:id] <= largest
+      unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
+        $loog.debug("The event ##{json[:id]} has already been seen, skipping")
+        next
+      end
+      if largest && json[:id] <= largest
+        $loog.debug("The event ##{json[:id]} is below the largest ID #{largest}, skipping")
+        throw :stop
+      end
       $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
       fb.txn do |fbt|
         put_new_event(fbt, json)
