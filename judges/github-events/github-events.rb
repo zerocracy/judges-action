@@ -90,7 +90,7 @@ catch :stop do
         $loog.debug("The event ##{json[:id]} has already been seen, skipping")
         next
       end
-      if largest && json[:id] <= largest
+      if largest && json[:id].to_i <= largest
         $loog.debug("The event ##{json[:id]} is below the largest ID #{largest}, skipping")
         throw :stop
       end

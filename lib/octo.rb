@@ -167,7 +167,7 @@ class FakeOctokit
   def repository_events(repo, _options = {})
     [
       {
-        id: 123,
+        id: '123',
         repo: {
           id: 42,
           name: repo
@@ -183,7 +183,7 @@ class FakeOctokit
         created_at: Time.now
       },
       {
-        id: 124,
+        id: '124',
         repo: {
           id: 42,
           name: repo
@@ -202,7 +202,7 @@ class FakeOctokit
         created_at: Time.now
       },
       {
-        id: 125,
+        id: '125',
         repo: {
           id: 42,
           name: repo
