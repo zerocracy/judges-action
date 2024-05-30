@@ -32,10 +32,15 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - run: |-
-          git fetch --tags --force && \
-          latest=$(git tag --sort=creatordate | tail -1) && \
+      - run:
+          git fetch --tags --force
+          latest=$(git tag --sort=creatordate | tail -1)
           sed -E -i "s/judges-action@.+$/judges-action@${latest}/g" README.md
+          git clone --depth=1 https://github.com/zerocracy/pages-action
+          cd pages-action
+          git fetch --tags --force
+          latest=$(git tag --sort=creatordate | tail -1)
+          sed -E -i "s/pages-action@.+$/pages-action@${latest}/g" README.md
       - uses: peter-evans/create-pull-request@v6
         with:
           branch: version-up

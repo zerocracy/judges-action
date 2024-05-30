@@ -21,6 +21,9 @@ name: zerocracy
 'on':
   schedule:
     - cron: '0,10,20,30,40,50 * * * *'
+concurrency:
+  group: zerocracy
+  cancel-in-progress: false
 jobs:
   zerocracy:
     runs-on: ubuntu-22.04
