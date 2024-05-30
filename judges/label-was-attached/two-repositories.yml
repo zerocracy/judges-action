@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,16 +19,34 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-source 'https://rubygems.org'
-
-gem 'factbase', '~>0.0.40'
-gem 'faraday', '2.9.0'
-gem 'faraday-http-cache', '2.5.1'
-gem 'faraday-retry', '2.2.1'
-gem 'judges', '~>0.0.37'
-gem 'minitest', '5.23.1'
-gem 'obk', '~>0.3.1'
-gem 'octokit', '~>8.1.0'
-gem 'rake', '13.2.1'
-gem 'rubocop', '1.64.0'
+---
+input:
+  -
+    _id: 1
+    _time: 2024-05-10T23:54:44Z
+    what: issue-was-opened
+    issue: 41
+    repository: 3333
+    who: 4444
+    when: 2024-05-20T23:54:44Z
+  -
+    _id: 1
+    _time: 2024-05-20T23:54:44Z
+    what: issue-was-opened
+    issue: 42
+    repository: 3333
+    who: 4444
+    when: 2024-05-20T23:54:44Z
+  -
+    _id: 2
+    _time: 2024-05-20T23:54:44Z
+    what: issue-was-closed
+    issue: 1
+    repository: 2222
+    who: 4444
+    when: 2024-05-20T23:54:44Z
+options:
+  testing: true
+  max_labels: 1
+expected:
+  - /fb/f/label

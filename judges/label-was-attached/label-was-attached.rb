@@ -22,29 +22,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Taking the latest GitHub issue number that we checked for labels
-latest = fb.query("(and (eq what '#{$judge}') (exists issue) (max _time))").each.to_a[0]
-latest = latest.issue unless latest.nil?
-latest = 0 if latest.nil?
+# Taking the latest GitHub issue number that we checked for labels.
+def latest(repo)
+  f = fb.query("(and (eq what '#{$judge}') (eq repository #{repo}) (exists issue) (max _time))").each.to_a[0]
+  issue = f.issue unless f.nil?
+  issue = 0 if f.nil?
+  issue
+end
 
-conclude do
-  quota_aware
-  on "(and (eq what 'issue-was-opened')
-    (eq issue (agg (gt issue #{latest}) (min issue))))"
-  follow 'repository issue'
-  threshold $options.max_labels || 16
-  maybe do |n, _opened|
-    octo.issue_timeline(n.repository, n.issue).each do |te|
-      next unless te[:event] == 'labeled'
-      badge = te[:label][:name]
-      next unless %w[bug enhancement question].include?(badge)
-      n.label = badge
-      n.who = te[:actor][:id]
-      n.when = te[:created_at]
-      repo = octo.repo_name_by_id(n.repository)
-      break "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
-            "to the issue #{repo}##{n.issue} at #{n.when}, " \
-            '; which may trigger future judges.'
+fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
+  latest = latest(repo)
+  conclude do
+    quota_aware
+    on "(and (eq what 'issue-was-opened')
+      (eq issue (agg (and (eq repository #{repo}) (gt issue #{latest})) (min issue))))"
+    follow 'repository issue'
+    threshold $options.max_labels || 16
+    maybe do |n, _opened|
+      octo.issue_timeline(n.repository, n.issue).each do |te|
+        next unless te[:event] == 'labeled'
+        badge = te[:label][:name]
+        next unless %w[bug enhancement question].include?(badge)
+        n.label = badge
+        n.who = te[:actor][:id]
+        n.when = te[:created_at]
+        repo = octo.repo_name_by_id(n.repository)
+        break "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
+              "to the issue #{repo}##{n.issue} at #{n.when}, " \
+              '; which may trigger future judges.'
+      end
     end
   end
 end
