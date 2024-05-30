@@ -72,9 +72,8 @@ def put_new_event(fbt, json)
     "with the creation time #{json[:created_at].iso8601}."
 end
 
-seen = 0
-catch :stop do
-  each_repo do |repo|
+def one_repo(repo, seen)
+  catch :stop do
     # Taking the largest ID of GitHub event that was seen so far:
     largest = fb.query(
       "(eq event_id
@@ -103,7 +102,15 @@ catch :stop do
         $loog.info("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
         throw :stop
       end
-      throw :stop if octo.off_quota
+      throw :alarm if octo.off_quota
     end
+  end
+  seen
+end
+
+seen = 0
+catch :alarm do
+  each_repo do |repo|
+    seen += one_repo(repo, seen)
   end
 end
