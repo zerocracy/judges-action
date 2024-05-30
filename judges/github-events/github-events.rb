@@ -26,27 +26,27 @@ def put_new_event(fbt, json)
   n = fbt.insert
   n.when = Time.parse(json[:created_at].iso8601)
   n.event_type = json[:type]
-  n.event_id = json[:id]
-  n.repository = json[:repo][:id]
-  n.who = json[:actor][:id] if json[:actor]
+  n.event_id = json[:id].to_i
+  n.repository = json[:repo][:id].to_i
+  n.who = json[:actor][:id].to_i if json[:actor]
 
   case json[:type]
   when 'PushEvent'
-    n.what = 'git-push'
+    n.what = 'git-was-pushed'
     n.push_id = json[:payload][:push_id]
 
   when 'IssuesEvent'
     n.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'closed'
-      n.what = 'issue-closed'
+      n.what = 'issue-was-closed'
     elsif json[:payload][:action] == 'opened'
-      n.what = 'issue-opened'
+      n.what = 'issue-was-opened'
     end
 
   when 'IssueCommentEvent'
     n.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'created'
-      n.what = 'comment-posted'
+      n.what = 'comment-was-posted'
       n.comment_id = json[:payload][:comment][:id]
       n.comment_body = json[:payload][:comment][:body]
       n.who = json[:payload][:comment][:user][:id]
@@ -61,7 +61,7 @@ def put_new_event(fbt, json)
 
   when 'CreateEvent'
     if json[:payload][:ref_type] == 'tag'
-      n.what = 'tag-created'
+      n.what = 'tag-was-created'
       n.tag = json[:payload][:ref]
     end
   end

@@ -30,6 +30,20 @@
 
 (explain (when
   (exists what)
+  (or
+    (eq what 'issue-was-closed')
+    (eq what 'issue-was-opened')
+    (eq what 'git-was-pushed')
+    (eq what 'bug-was-resolved')
+    (eq what 'comment-was-posted')
+    (eq what 'release-published')
+    (eq what 'tag-was-created')
+    (eq what 'reward-for-bug-reported')
+    (eq what 'reward-for-resolved-bug')
+    (eq what 'label-was-attached'))))
+
+(explain (when
+  (exists what)
   (matches what "^[a-z]+(-[a-z]+)*$")))
 
 (explain (when
