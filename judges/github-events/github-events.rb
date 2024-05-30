@@ -52,6 +52,7 @@ def put_new_event(fbt, json)
       n.comment_body = json[:payload][:comment][:body]
       n.who = json[:payload][:comment][:user][:id]
     end
+    raise Factbase::Rollback
 
   when 'ReleaseEvent'
     n.release_id = json[:payload][:release][:id]
