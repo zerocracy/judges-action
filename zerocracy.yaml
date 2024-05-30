@@ -161,3 +161,68 @@ facts:
     (id: 802720676) of type ''PushEvent'', with the creation time 2024-05-30T09:41:51Z.'
   is_human: 1
   seen: is-human-or-robot
+- _id: 11
+  _time: 2024-05-30 10:34:16.153750585 Z
+  _version: 0.0.38/0.0.36/0.0.0
+  when: 2024-05-30 10:02:37.000000000 Z
+  event_type: PushEvent
+  event_id: 38845118752
+  repository: 799177290
+  who: 41898282
+  what: git-was-pushed
+  push_id: 18653926790
+  details: 'A new event #38845118752 happened in GitHub zerocracy/judges-action repository
+    (id: 799177290) of type ''PushEvent'', with the creation time 2024-05-30T10:02:37Z.'
+  is_bot: 1
+  seen: is-human-or-robot
+- _id: 12
+  _time: 2024-05-30 10:34:17.153642474 Z
+  _version: 0.0.38/0.0.36/0.0.0
+  when: 2024-05-30 10:01:06.000000000 Z
+  event_type: PushEvent
+  event_id: 38845066865
+  repository: 799177290
+  who: 526301
+  what: git-was-pushed
+  push_id: 18653902375
+  details: 'A new event #38845066865 happened in GitHub zerocracy/judges-action repository
+    (id: 799177290) of type ''PushEvent'', with the creation time 2024-05-30T10:01:06Z.'
+  is_human: 1
+  seen: is-human-or-robot
+- _id: 13
+  _time: 2024-05-30 10:34:19.861558312 Z
+  _version: 0.0.38/0.0.36/0.0.0
+  when: 2024-05-30 09:44:47.000000000 Z
+  event_type: IssueCommentEvent
+  event_id: 38844537788
+  repository: 802720676
+  who: 8086956
+  issue: 6
+  what: comment-was-posted
+  comment_id: 2139176101
+  comment_body: |-
+    > @rultor release, tag is `0.0.5`
+
+    @yegor256 Oops, I failed. You can see the full log [here](https://www.rultor.com/t/41606-2139171163) (spent 6s)
+
+    ```
+    + set -e
+    + set -o pipefail
+    ++ dirname ./run.sh
+    + cd .
+    + echo 995
+    + echo '2.0-SNAPSHOT BUILD'
+    2.0-SNAPSHOT BUILD
+    + date
+    Thu May 30 09:44:41 UTC 2024
+    + uptime
+     09:44:41 up 0 min,  0 users,  load average: 1.57, 0.40, 0.13
+    + cat
+    .rultor.yml in yegor256/home doesn't allow zerocracy/pages-action to use its assets (there are 138 friends), see http://doc.rultor.com/reference.html#assets
+    + exit -1
+    'cid' file is absent, most probably the Docker container wasn't started correctly
+    ```
+  details: 'A new event #38844537788 happened in GitHub zerocracy/pages-action repository
+    (id: 802720676) of type ''IssueCommentEvent'', with the creation time 2024-05-30T09:44:47Z.'
+  is_human: 1
+  seen: is-human-or-robot
