@@ -24,7 +24,7 @@
 
 source 'https://rubygems.org'
 
-gem 'factbase', '~>0.0.38'
+gem 'factbase', '~>0.0.39'
 gem 'faraday', '2.9.0'
 gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-retry', '2.2.1'
