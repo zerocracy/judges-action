@@ -88,7 +88,6 @@ echo "The 'judges-action' ${VERSION} is running"
 cd "${SELF}"
 bundle exec judges "${gopts[@]}" update \
     --lib "${SELF}/lib" \
-    --quiet \
     --max-cycles 5 \
     "${options[@]}" "${SELF}/judges" "${fb}"
 

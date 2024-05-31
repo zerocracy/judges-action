@@ -27,6 +27,6 @@
   '(not (exists _time))',
   '(not (eq "Integer" (type event_id)))',
   '(eq what "git-was-pushed")',
-  '(eq event_type "DeleteEvent")'
+  '(eq event_type "DeleteEvent")',
   '(eq what "comment-was-posted")'
 ].each { |q| fb.query(q).delete! }
