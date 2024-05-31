@@ -34,8 +34,13 @@ fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
   latest = latest(repo)
   conclude do
     quota_aware
-    on "(and (eq what 'issue-was-opened')
-      (eq issue (agg (and (eq repository #{repo}) (gt issue #{latest})) (min issue))))"
+    on "(eq issue
+      (agg
+        (and
+          (eq what 'issue-was-opened')
+          (eq repository #{repo})
+          (gt issue #{latest}))
+        (min issue)))"
     follow 'repository issue'
     threshold $options.max_labels || 16
     maybe do |n, _opened|
