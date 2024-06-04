@@ -170,7 +170,7 @@ class FakeOctokit
         id: '123',
         repo: {
           id: 42,
-          full_name: repo
+          name: repo
         },
         type: 'PushEvent',
         payload: {
@@ -186,7 +186,7 @@ class FakeOctokit
         id: '124',
         repo: {
           id: 42,
-          full_name: repo
+          name: repo
         },
         type: 'IssuesEvent',
         payload: {
@@ -205,7 +205,7 @@ class FakeOctokit
         id: '125',
         repo: {
           id: 42,
-          full_name: repo
+          name: repo
         },
         type: 'IssuesEvent',
         payload: {
