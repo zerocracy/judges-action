@@ -73,18 +73,19 @@ fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
         next unless te[:event] == 'labeled'
         badge = te[:label][:name]
         next unless %w[bug enhancement question].include?(badge)
-        if_absent(fb) do |n|
+        nn = if_absent(fb) do |n|
           n.repository = f.repository
           n.issue = f.issue
           n.label = te[:label][:name]
           n.who = te[:actor][:id]
           n.when = te[:created_at]
           n.what = $judge
-          n.details =
-            "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
-            "to the issue #{octo.repo_name_by_id(n.repository)}##{n.issue} " \
-            "at #{n.when.utc.iso8601}; this may trigger future judges."
         end
+        next if nn.nil?
+        nn.details =
+          "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
+          "to the issue #{octo.repo_name_by_id(nn.repository)}##{nn.issue} " \
+          "at #{nn.when.utc.iso8601}; this may trigger future judges."
       end
       f.seen = $judge
     end

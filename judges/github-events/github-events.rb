@@ -78,18 +78,23 @@ def put_new_event(fbt, json)
     'this fact must be interpreted later by other judges.'
 end
 
+# Taking the largest ID of GitHub event that was seen so far (or NIL)
+def largest(repo)
+  largest = fb.query(
+    "(eq event_id
+      (agg (eq repository #{octo.repo_id_by_name(repo)})
+      (max event_id)))"
+  ).each.to_a[0]
+  unless largest.nil?
+    largest = largest.event_id
+    $loog.debug("The largest ID we've seen so far is #{largest} (everything below this number will be ignored)")
+  end
+  largest
+end
+
 def one_repo(repo, seen)
   catch :stop do
-    # Taking the largest ID of GitHub event that was seen so far:
-    largest = fb.query(
-      "(eq event_id
-        (agg (eq repository #{octo.repo_id_by_name(repo)})
-        (max event_id)))"
-    ).each.to_a[0]
-    unless largest.nil?
-      largest = largest.event_id
-      $loog.debug("The largest ID we've seen so far is #{largest} (everything below this number will be ignored)")
-    end
+    largest = largest(repo)
     octo.repository_events(repo).each do |json|
       unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
         $loog.debug("The event ##{json[:id]} (#{json[:type]}) has already been seen, skipping")
