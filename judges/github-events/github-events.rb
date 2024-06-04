@@ -67,7 +67,7 @@ def put_new_event(fbt, json)
       n.tag = json[:payload][:ref]
     end
 
-  when 'DeleteEvent'
+  else
     raise Factbase::Rollback
   end
 
