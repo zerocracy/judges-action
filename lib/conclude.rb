@@ -83,6 +83,13 @@ class Conclude
     end
   end
 
+  def look(&)
+    roll do |_fbt, a|
+      yield a
+      nil
+    end
+  end
+
   private
 
   def roll(&)

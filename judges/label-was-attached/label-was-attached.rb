@@ -67,21 +67,26 @@ fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
           (eq repository #{repo})
           (gt issue #{latest}))
         (min issue)))"
-    follow 'repository issue'
     threshold $options.max_labels || 16
-    maybe do |n, _opened|
-      octo.issue_timeline(n.repository, n.issue).each do |te|
+    look do |f, _|
+      octo.issue_timeline(f.repository, f.issue).each do |te|
         next unless te[:event] == 'labeled'
         badge = te[:label][:name]
         next unless %w[bug enhancement question].include?(badge)
-        n.label = badge
-        n.who = te[:actor][:id]
-        n.when = te[:created_at]
-        repo = octo.repo_name_by_id(n.repository)
-        break "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
-              "to the issue #{repo}##{n.issue} at #{n.when.utc.iso8601}; " \
-              'this may trigger future judges.'
+        if_absent(fb) do |n|
+          n.repository = f.repository
+          n.issue = f.issue
+          n.label = te[:label][:name]
+          n.who = te[:actor][:id]
+          n.when = te[:created_at]
+          n.what = $judge
+          n.details =
+            "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
+            "to the issue #{octo.repo_name_by_id(n.repository)}##{n.issue} " \
+            "at #{n.when.utc.iso8601}; this may trigger future judges."
+        end
       end
+      f.seen = $judge
     end
   end
 end
