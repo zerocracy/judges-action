@@ -35,7 +35,8 @@ end
 
 def fb_pre(fb)
   Factbase::Pre.new(fb) do |f|
-    f._id = $fb.size
+    max = $fb.query('(eq _id (max _id))').each.to_a[0]
+    f._id = (max.nil? ? 0 : max._id) + 1
     f._time = Time.now
     f._version = "#{Factbase::VERSION}/#{Judges::VERSION}/#{$options.judges_action_version}"
   end
