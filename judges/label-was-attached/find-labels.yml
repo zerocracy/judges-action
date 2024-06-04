@@ -22,15 +22,43 @@
 ---
 input:
   -
-    _id: 2
-    _time: 2024-05-20T23:54:44Z
+    _id: 1
+    what: issue-was-opened
+    issue: 41
+    repository: 77
+    who: 4444
+    when: 2024-05-20T23:54:44Z
+    details: 'A new event #38871262246 happened in GitHub yegor256/judges repository
+      (id: 799113787) of type ''IssuesEvent'', with the creation time 2024-05-31T03:49:55Z.'
+    seen:
+      - is-human-or-robot
+      - label-was-attached
+  -
+    _id: 3
     what: issue-was-opened
     issue: 42
     repository: 77
     who: 4444
     when: 2024-05-20T23:54:44Z
+    details: 'A new event #38871262246 happened in GitHub yegor256/judges repository
+      (id: 799113787) of type ''IssuesEvent'', with the creation time 2024-05-31T03:49:55Z.'
+    seen: is-human-or-robot
+  -
+    _id: 2
+    what: issue-was-opened
+    issue: 43
+    repository: 77
+    who: 4444
+    when: 2024-05-20T23:54:44Z
+    details: 'A new event #38871262246 happened in GitHub yegor256/judges repository
+      (id: 799113787) of type ''IssuesEvent'', with the creation time 2024-05-31T03:49:55Z.'
+    seen:
+      - is-human-or-robot
+      - label-was-attached
 options:
   testing: true
-  max_labels: 1
+  max_labels: 10
 expected:
+  - /fb[count(f)=4]
   - /fb/f/label
+  - /fb/f[label and issue=42]

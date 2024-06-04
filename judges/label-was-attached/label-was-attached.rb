@@ -62,6 +62,7 @@ fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
     on "(eq issue
       (agg
         (and
+          (not (eq seen '#{$judge}'))
           (eq what 'issue-was-opened')
           (eq repository #{repo})
           (gt issue #{latest}))
