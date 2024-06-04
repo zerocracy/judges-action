@@ -32,15 +32,17 @@ end
 
 # Take the maximum GitHub issue number for this repo.
 def max(repo)
-  f = fb.query("(and (eq what 'issue-was-opened') (eq repository #{repo}) (eq issue (max issue)))").each.to_a[0]
+  f = fb.query("(eq issue (agg (and (eq what 'issue-was-opened') (eq repository #{repo})) (max issue)))").each.to_a[0]
   return nil? if f.nil?
   f.issue
 end
 
 fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
   latest = latest(repo)
-  max = max(repo)
-  latest = 0 if max.nil? || latest == max
+  unless latest.zero?
+    max = max(repo)
+    latest = 0 if max.nil? || latest == max
+  end
   conclude do
     quota_aware
     on "(eq issue
