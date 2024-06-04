@@ -22,9 +22,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'judges/fb/once'
-require 'judges/fb/if_absent'
-
 # Create a conclude code block.
 def conclude(fbx = fb, judge = $judge, loog = $loog, &)
   c = Conclude.new(fbx, judge, loog)

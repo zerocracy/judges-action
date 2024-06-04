@@ -155,6 +155,22 @@ class FakeOctokit
           id: 888,
           full_name: 'yegor256/judges'
         },
+        event: 'renamed',
+        rename: {
+          from: 'before',
+          to: 'after'
+        },
+        created_at: Time.now
+      },
+      {
+        actor: {
+          id: 888,
+          login: 'torvalds'
+        },
+        repository: {
+          id: 888,
+          full_name: 'yegor256/judges'
+        },
         event: 'labeled',
         label: {
           name: 'bug'
