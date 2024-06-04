@@ -31,7 +31,7 @@ input:
     who: 4444
     when: 2024-05-20T23:54:44Z
   -
-    id: 1
+    _id: 1
     what: label-was-attached
     issue: 42
     repository: 77
@@ -40,8 +40,9 @@ input:
     when: 2024-05-20T23:54:24Z
 expected:
   - /fb[count(f)=3]
-  - /fb/f[id]
-  - /fb/f[what='bug-was-accepted']
+  - /fb/f[_id]
+  - /fb/f[cause]
+  - /fb/f[what='bug-was-accepted' and _id]
   - /fb/f[when='2024-05-20T23:54:24Z']
   - /fb/f[issue='42']
   - /fb/f[repository='77']

@@ -23,6 +23,13 @@
 # SOFTWARE.
 
 require 'judges/fb/once'
+require 'judges/fb/if_absent'
+
+# Create a conclude code block.
+def conclude(fbx = fb, judge = $judge, loog = $loog, &)
+  c = Conclude.new(fbx, judge, loog)
+  c.instance_eval(&)
+end
 
 # Conclude.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
@@ -104,15 +111,11 @@ class Conclude
       end
       v = others[i].send(follow)
       fact.send("#{follow}=", v)
+      fact.cause = others[i]._id
     end
     r = yield [fact] + others
     return unless r.is_a?(String)
     fact.details = r
     fact.what = @judge
   end
-end
-
-def conclude(fb = $fb, judge = $judge, loog = $loog, &)
-  c = Conclude.new(fb, judge, loog)
-  c.instance_eval(&)
 end

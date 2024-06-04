@@ -33,7 +33,7 @@ conclude do
     (eq issue {f0.issue})
     (eq repository {f0.repository})
     (eq label "bug"))'
-  follow 'when who repository issue'
+  follow 'when who repository f0.issue'
   draw do |n, opened, attached|
     n.reporter = opened.who
     "In the repository ##{n.repository}, the user ##{n.who} attached " \

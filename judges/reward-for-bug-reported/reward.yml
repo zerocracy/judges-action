@@ -24,13 +24,19 @@ options:
   testing: yes
 input:
   -
-    id: 1
+    _id: 1
+    cause:
+      - 5
+      - 6
     what: bug-was-accepted
     reporter: 42
     who: 4444
     issue: 42
     repository: 100
     when: 2024-01-01T03:15:45Z
+    details: >-
+      The bug was accepted some time ago, this is why this fact is here.
+      The bug was accepted some time ago, this is why this fact is here.
 expected:
   - /fb[count(f)=2]
   - /fb/f[what='reward-for-bug-reported']
@@ -38,4 +44,4 @@ expected:
   - /fb/f[issue='42']
   - /fb/f[repository='100']
   - /fb/f[award='15']
-  - /fb/f[message]
+  - /fb/f[reason]

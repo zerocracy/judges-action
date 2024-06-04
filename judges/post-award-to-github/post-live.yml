@@ -24,11 +24,12 @@ skip: true
 category: live
 input:
   -
+    _id: 666
     issue: 17
     repository: 799177290
     who: 526301
     award: 15
-    message: This is just a test, ignore it please
+    reason: This is just a test, ignore it please.
     when: 2024-05-20T23:54:24Z
 expected:
   - /fb[count(f)=1]

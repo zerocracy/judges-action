@@ -44,9 +44,8 @@ conclude do
   draw do |n, attached, closed, assigned|
     n.seconds = closed.when - assigned.when
     n.closer = closed.who
-    repo = octo.repo_name_by_id(n.repository)
-    "The bug/feature in the issue #{repo}##{n.issue} was resolved, " \
-      "because it was closed by ##{closed.who} and earlier it was" \
-      "assigned to ##{n.who}' and the label '##{attached.label}' was attached."
+    "The bug/feature in the issue #{octo.repo_name_by_id(n.repository)}##{n.issue} was resolved, " \
+      "because it was closed by @#{octo.user_name_by_id(closed.who)} and earlier it was" \
+      "assigned to @#{octo.user_name_by_id(n.who)}' and the label '##{attached.label}' was attached."
   end
 end

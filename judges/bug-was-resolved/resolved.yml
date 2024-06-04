@@ -24,21 +24,21 @@ options:
   testing: yes
 input:
   -
-    id: 1
+    _id: 1
     what: label-was-attached
     issue: 42
     repository: 555
     label: question
     when: 2024-05-20T23:54:24Z
   -
-    id: 2
+    _id: 2
     what: issue-was-closed
     issue: 42
     repository: 555
     who: 777
     when: 2024-07-29T23:54:24Z
   -
-    id: 2
+    _id: 3
     what: issue-was-assigned
     issue: 42
     repository: 555
@@ -47,8 +47,9 @@ input:
     when: 2024-05-20T23:54:24Z
 expected:
   - /fb[count(f)=4]
+  - /fb/f[cause]
   - /fb/f[when]
-  - /fb/f[what='bug-was-resolved']
+  - /fb/f[what='bug-was-resolved' and _id]
   - /fb/f[who='4535']
   - /fb/f[closer='777']
   - /fb/f[when='2024-07-29T23:54:24Z']

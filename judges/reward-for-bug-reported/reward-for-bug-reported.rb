@@ -34,12 +34,13 @@ conclude do
     n.award = 15
     n.when = Time.now
     n.who = accepted.reporter
-    n.message =
+    n.reason =
       "Thanks for reporting a new bug! You've earned #{n.award} points for this. " \
       'By reporting bugs, you help our project improve its quality. ' \
       'If you find anything else in the repository that doesn\'t look ' \
       'as good as you might expect, do not hesitate to report it.'
-    "It's time to reward ##{n.who} for the issue reported in " \
-      "#{n.repository}##{n.issue}, the reward amount is #{n.award}"
+    "It's time to reward @#{octo.user_name_by_id(n.who)} for the issue reported in " \
+      "#{octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
+      'this reward should be delivered to the user by one of the future judges.'
   end
 end

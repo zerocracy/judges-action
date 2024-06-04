@@ -42,6 +42,5 @@ def fb_pre(fb)
 end
 
 def fb
-  fb = fb_rules($fb)
-  fb_pre(fb)
+  fb_pre(fb_rules($fb))
 end

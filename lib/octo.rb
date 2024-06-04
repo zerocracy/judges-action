@@ -121,7 +121,7 @@ class FakeOctokit
   def repository(name)
     {
       id: 444,
-      full_name: name
+      full_name: name.is_a?(Integer) ? 'yegor256/test' : name
     }
   end
 
@@ -149,7 +149,7 @@ class FakeOctokit
       {
         actor: {
           id: 888,
-          name: 'torvalds'
+          login: 'torvalds'
         },
         repository: {
           id: 888,
@@ -170,7 +170,7 @@ class FakeOctokit
         id: '123',
         repo: {
           id: 42,
-          name: repo
+          full_name: repo
         },
         type: 'PushEvent',
         payload: {
@@ -178,7 +178,7 @@ class FakeOctokit
         },
         actor: {
           id: 888,
-          name: 'torvalds'
+          login: 'torvalds'
         },
         created_at: Time.now
       },
@@ -186,7 +186,7 @@ class FakeOctokit
         id: '124',
         repo: {
           id: 42,
-          name: repo
+          full_name: repo
         },
         type: 'IssuesEvent',
         payload: {
@@ -197,7 +197,7 @@ class FakeOctokit
         },
         actor: {
           id: 888,
-          name: 'torvalds'
+          login: 'torvalds'
         },
         created_at: Time.now
       },
@@ -205,7 +205,7 @@ class FakeOctokit
         id: '125',
         repo: {
           id: 42,
-          name: repo
+          full_name: repo
         },
         type: 'IssuesEvent',
         payload: {
@@ -216,7 +216,7 @@ class FakeOctokit
         },
         actor: {
           id: 888,
-          name: 'torvalds'
+          login: 'torvalds'
         },
         created_at: Time.now
       }

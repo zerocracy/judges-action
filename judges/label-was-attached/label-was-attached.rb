@@ -22,16 +22,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Taking the latest GitHub issue number that we checked for labels.
+# Take the latest GitHub issue number that we checked for labels.
 def latest(repo)
-  f = fb.query("(and (eq what '#{$judge}') (eq repository #{repo}) (exists issue) (max _time))").each.to_a[0]
+  f = fb.query("(and (eq what '#{$judge}') (eq repository #{repo}) (exists issue) (eq _time (max _time)))").each.to_a[0]
   issue = f.issue unless f.nil?
   issue = 0 if f.nil?
   issue
 end
 
+# Take the maximum GitHub issue number for this repo.
+def max(repo)
+  f = fb.query("(and (eq what 'issue-was-opened') (eq repository #{repo}) (eq issue (max issue)))").each.to_a[0]
+  return nil? if f.nil?
+  f.issue
+end
+
 fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
   latest = latest(repo)
+  max = max(repo)
+  latest = 0 if max.nil? || latest == max
   conclude do
     quota_aware
     on "(eq issue
@@ -53,8 +62,8 @@ fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
         n.when = te[:created_at]
         repo = octo.repo_name_by_id(n.repository)
         break "The '##{n.label}' label was attached by @#{te[:actor][:login]} " \
-              "to the issue #{repo}##{n.issue} at #{n.when}, " \
-              '; which may trigger future judges.'
+              "to the issue #{repo}##{n.issue} at #{n.when.utc.iso8601}; " \
+              'this may trigger future judges.'
       end
     end
   end

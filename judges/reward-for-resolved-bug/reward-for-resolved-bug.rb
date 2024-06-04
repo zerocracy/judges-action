@@ -33,10 +33,11 @@ conclude do
   draw do |n, _resolved|
     n.award = 30
     n.when = Time.now
-    n.message =
+    n.reason =
       'Thanks for closing this issue! ' \
       "You've earned #{n.award} points for this."
-    "It's time to reward ##{n.who} for the issue closed in " \
-      "#{n.repository}##{n.issue}, the reward amount is #{n.award}"
+    "It's time to reward ##{octo.user_name_by_id(n.who)} for the issue closed in " \
+      "#{octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
+      'this reward should be delivered to the user by one of the future judges.'
   end
 end

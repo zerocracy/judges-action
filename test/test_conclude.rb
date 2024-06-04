@@ -25,7 +25,10 @@
 require 'minitest/autorun'
 require 'loog'
 require 'factbase'
+require 'factbase/syntax'
+require 'judges/options'
 require_relative '../lib/conclude'
+require_relative '../lib/fb'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
@@ -48,5 +51,25 @@ class TestConclude < Minitest::Test
     assert_equal(3, f.sum)
     assert_equal('judge-one', f.what)
     assert_equal('something funny', f.details)
+  end
+
+  def test_maybe_with_id
+    $fb = Factbase.new
+    $options = Judges::Options.new
+    $loog = Loog::NULL
+    fb.insert.foo = 1
+    conclude(fb, 'issue-was-opened', Loog::VERBOSE) do
+      on '(exists foo)'
+      maybe do |n, _|
+        n.repository = 111
+        n.issue = 42
+        n.who = 777
+        n.when = Time.now
+        "it's a test." * 20
+      end
+    end
+    f = fb.query('(exists issue)').each.to_a[0]
+    assert_equal(42, f.issue)
+    assert(f._id.positive?)
   end
 end

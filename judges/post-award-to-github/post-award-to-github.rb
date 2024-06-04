@@ -27,14 +27,14 @@ conclude do
     (exists who)
     (exists when)
     (exists award)
-    (exists message)
+    (exists reason)
     (exists issue)
     (exists repository)
     (not (exists href)))'
   consider do |f, _|
     name = octo.user_name_by_id(f.who)
     repo = octo.repo_name_by_id(f.repository)
-    id = octo.add_comment(repo, f.issue, "@#{name} #{f.message}")
+    id = octo.add_comment(repo, f.issue, "@#{name} #{f.reason}")
     f.href = "https://github.com/#{repo}/issues/#{f.issue}/#{id}"
     $loog.info("Comment ##{id} posted with an award to #{f.href}")
   end

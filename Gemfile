@@ -24,11 +24,13 @@
 
 source 'https://rubygems.org'
 
-gem 'factbase', '~>0.0.40'
+# gem 'factbase', path: '/code/gems/factbase'
+gem 'factbase', '~>0.0'
 gem 'faraday', '2.9.0'
 gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-retry', '2.2.1'
-gem 'judges', '~>0.1.0'
+# gem 'judges', path: '/code/gems/judges'
+gem 'judges', '~>0.2'
 gem 'minitest', '5.23.1'
 gem 'obk', '~>0.3.1'
 gem 'octokit', '~>8.1.0'

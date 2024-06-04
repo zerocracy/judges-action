@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+(undef explain)
 (defn explain '
   r = @operands[0].evaluate(fact, maps);
   if !r
@@ -31,16 +32,18 @@
 (explain (when
   (exists what)
   (or
-    (eq what 'issue-was-closed')
-    (eq what 'issue-was-opened')
-    (eq what 'git-was-pushed')
+    (eq what 'bug-was-accepted')
     (eq what 'bug-was-resolved')
     (eq what 'comment-was-posted')
+    (eq what 'git-was-pushed')
+    (eq what 'issue-was-closed')
+    (eq what 'issue-was-opened')
+    (eq what 'issue-was-assigned')
+    (eq what 'label-was-attached')
     (eq what 'release-published')
-    (eq what 'tag-was-created')
     (eq what 'reward-for-bug-reported')
     (eq what 'reward-for-resolved-bug')
-    (eq what 'label-was-attached'))))
+    (eq what 'tag-was-created'))))
 
 (explain (when
   (exists what)

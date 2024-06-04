@@ -72,9 +72,10 @@ def put_new_event(fbt, json)
   end
 
   n.details =
-    "A new event ##{json[:id]} happened in GitHub #{json[:repo][:name]} repository " \
-    "(id: #{json[:repo][:id]}) of type '#{json[:type]}', " \
-    "with the creation time #{json[:created_at].iso8601}."
+    "A new event ##{json[:id]} happened in GitHub repository #{json[:repo][:full_name]} " \
+    "(##{json[:repo][:id]}) of type '#{json[:type]}', " \
+    "with the creation time #{json[:created_at].iso8601}; " \
+    'this fact must be interpreted later by other judges.'
 end
 
 def one_repo(repo, seen)
@@ -98,7 +99,7 @@ def one_repo(repo, seen)
         $loog.debug("The event ##{json[:id]} (#{json[:type]}) is below the largest ID #{largest}, skipping")
         throw :stop
       end
-      $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
+      $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:full_name]}: #{json[:type]}")
       fb.txn do |fbt|
         put_new_event(fbt, json)
       end
