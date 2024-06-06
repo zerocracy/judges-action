@@ -22,95 +22,78 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-def put_new_event(fbt, json)
-  n = fbt.insert
-  n.when = Time.parse(json[:created_at].iso8601)
-  n.event_type = json[:type]
-  n.event_id = json[:id].to_i
-  n.repository = json[:repo][:id].to_i
-  n.who = json[:actor][:id].to_i if json[:actor]
+def put_new_event(fact, json)
+  fact.when = Time.parse(json[:created_at].iso8601)
+  fact.event_type = json[:type]
+  fact.event_id = json[:id].to_i
+  fact.repository = json[:repo][:id].to_i
+  fact.who = json[:actor][:id].to_i if json[:actor]
 
   case json[:type]
   when 'PushEvent'
-    n.what = 'git-was-pushed'
-    n.push_id = json[:payload][:push_id]
+    fact.what = 'git-was-pushed'
+    fact.push_id = json[:payload][:push_id]
     raise Factbase::Rollback
 
   when 'IssuesEvent'
-    n.issue = json[:payload][:issue][:number]
+    fact.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'closed'
-      n.what = 'issue-was-closed'
+      fact.what = 'issue-was-closed'
     elsif json[:payload][:action] == 'opened'
-      n.what = 'issue-was-opened'
+      fact.what = 'issue-was-opened'
     end
 
   when 'IssueCommentEvent'
-    n.issue = json[:payload][:issue][:number]
+    fact.issue = json[:payload][:issue][:number]
     if json[:payload][:action] == 'created'
-      n.what = 'comment-was-posted'
-      n.comment_id = json[:payload][:comment][:id]
-      n.comment_body = json[:payload][:comment][:body]
-      n.who = json[:payload][:comment][:user][:id]
+      fact.what = 'comment-was-posted'
+      fact.comment_id = json[:payload][:comment][:id]
+      fact.comment_body = json[:payload][:comment][:body]
+      fact.who = json[:payload][:comment][:user][:id]
     end
     raise Factbase::Rollback
 
   when 'ReleaseEvent'
-    n.release_id = json[:payload][:release][:id]
+    fact.release_id = json[:payload][:release][:id]
     if json[:payload][:action] == 'published'
-      n.what = 'release-published'
-      n.who = json[:payload][:release][:author][:id]
+      fact.what = 'release-published'
+      fact.who = json[:payload][:release][:author][:id]
     end
 
   when 'CreateEvent'
     if json[:payload][:ref_type] == 'tag'
-      n.what = 'tag-was-created'
-      n.tag = json[:payload][:ref]
+      fact.what = 'tag-was-created'
+      fact.tag = json[:payload][:ref]
     end
 
   else
     raise Factbase::Rollback
   end
 
-  n.details =
+  fact.details =
     "A new event ##{json[:id]} happened in GitHub repository #{json[:repo][:name]} " \
     "(##{json[:repo][:id]}) of type '#{json[:type]}', " \
     "with the creation time #{json[:created_at].iso8601}; " \
     'this fact must be interpreted later by other judges.'
 end
 
-# Taking the largest ID of GitHub event that was seen so far (or NIL)
-def largest(repo)
-  largest = fb.query(
-    "(eq event_id
-      (agg (eq repository #{octo.repo_id_by_name(repo)})
-      (max event_id)))"
-  ).each.to_a[0]
-  unless largest.nil?
-    largest = largest.event_id
-    $loog.debug("The largest ID we've seen so far is #{largest} (everything below this number will be ignored)")
-  end
-  largest
-end
-
-def one_repo(repo, seen)
+def one_repo(repo, limit)
+  seen = 0
   catch :stop do
-    largest = largest(repo)
     octo.repository_events(repo).each do |json|
       unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
         $loog.debug("The event ##{json[:id]} (#{json[:type]}) has already been seen, skipping")
         next
       end
-      if largest && json[:id].to_i <= largest
-        $loog.debug("The event ##{json[:id]} (#{json[:type]}) is below the largest ID #{largest}, skipping")
-        throw :stop
-      end
       $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
       fb.txn do |fbt|
-        put_new_event(fbt, json)
+        if_absent(fbt) do |n|
+          put_new_event(n, json)
+        end
       end
       seen += 1
-      if !$options.max_events.nil? && seen >= $options.max_events
-        $loog.debug("Already scanned #{seen} events, that's enough (due to 'max_events' option)")
+      if seen >= limit
+        $loog.debug("Already scanned #{seen} events, that's enough (>=#{limit})")
         throw :stop
       end
       throw :alarm if octo.off_quota
@@ -119,9 +102,13 @@ def one_repo(repo, seen)
   seen
 end
 
-seen = 0
+limit = $options.max_events
+limit = 1000 if limit.nil?
+raise "It is impossible to scan deeper than 10,000 GitHub events, you asked for #{limit}" if limit > 10_000
+
 catch :alarm do
-  each_repo do |repo|
-    seen += one_repo(repo, seen)
+  repos = each_repo.each.to_a
+  repos.each do |repo|
+    one_repo(repo, limit / repos.size)
   end
 end
