@@ -42,7 +42,9 @@ facts:
   is_human: 1
   issue: 47
   repository: 799113787
-  seen: is-human-or-robot
+  seen:
+  - is-human-or-robot
+  - label-was-attached
   what: issue-was-closed
   when: 2024-06-04 06:57:01.000000000 Z
   who: 526301
@@ -72,7 +74,9 @@ facts:
   is_human: 1
   issue: 59
   repository: 798641472
-  seen: is-human-or-robot
+  seen:
+  - is-human-or-robot
+  - label-was-attached
   what: issue-was-closed
   when: 2024-06-04 07:13:17.000000000 Z
   who: 526301
@@ -132,7 +136,9 @@ facts:
   is_human: 1
   issue: 47
   repository: 799113787
-  seen: is-human-or-robot
+  seen:
+  - is-human-or-robot
+  - label-was-attached
   what: issue-was-closed
   when: 2024-06-04 08:42:22.000000000 Z
   who: 526301
@@ -164,7 +170,9 @@ facts:
   is_human: 1
   issue: 48
   repository: 799113787
-  seen: is-human-or-robot
+  seen:
+  - is-human-or-robot
+  - label-was-attached
   what: issue-was-closed
   when: 2024-06-04 12:57:29.000000000 Z
   who: 526301
@@ -179,7 +187,9 @@ facts:
   is_human: 1
   issue: 8
   repository: 802720676
-  seen: is-human-or-robot
+  seen:
+  - is-human-or-robot
+  - label-was-attached
   what: issue-was-closed
   when: 2024-05-30 13:39:18.000000000 Z
   who: 526301
@@ -295,8 +305,713 @@ facts:
   when: 2024-06-06 11:23:39.000000000 Z
   who: 526301
 - _id: 50
-  _time: 2024-06-06 12:45:44.993049978 Z
-  _version: 0.0.42/0.3.0/0.0.0
+  _time: 2024-06-06 12:50:00.075382742 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #39059615025 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''ReleaseEvent'', with the creation time 2024-06-06T12:42:29Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 39059615025
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 159184496
+  repository: 799113787
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-06-06 12:42:29.000000000 Z
+  who: 8086956
+- _id: 51
+  _time: 2024-06-06 12:50:01.075702335 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #39059560263 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-06-06T12:40:53Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 39059560263
+  event_type: CreateEvent
+  is_human: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  tag: 0.4.0
+  what: tag-was-created
+  when: 2024-06-06 12:40:53.000000000 Z
+  who: 8086956
+- _id: 52
+  _time: 2024-06-06 12:50:10.077509762 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38983660290 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''ReleaseEvent'', with the creation time 2024-06-04T12:55:38Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38983660290
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 158795804
+  repository: 799113787
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-06-04 12:55:38.000000000 Z
+  who: 8086956
+- _id: 53
+  _time: 2024-06-06 12:50:11.077462428 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38983624687 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-06-04T12:54:46Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38983624687
+  event_type: CreateEvent
+  is_human: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  tag: 0.3.0
+  what: tag-was-created
+  when: 2024-06-04 12:54:46.000000000 Z
+  who: 8086956
+- _id: 54
+  _time: 2024-06-06 12:50:15.078112487 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38983147124 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-06-04T12:42:25Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38983147124
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 48
+  repository: 799113787
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-06-04 12:42:25.000000000 Z
+  who: 526301
+- _id: 56
+  _time: 2024-06-06 12:50:28.080473348 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38971487025 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-06-04T06:56:46Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38971487025
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 47
+  repository: 799113787
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-06-04 06:56:46.000000000 Z
+  who: 526301
+- _id: 61
+  _time: 2024-06-06 12:50:37.082203017 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38874640185 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-05-31T06:57:21Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38874640185
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 44
+  repository: 799113787
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-closed
+  when: 2024-05-31 06:57:21.000000000 Z
+  who: 526301
+- _id: 62
+  _time: 2024-06-06 12:50:39.093803441 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38871539212 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''ReleaseEvent'', with the creation time 2024-05-31T04:08:25Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38871539212
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 158278396
+  repository: 799113787
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-05-31 04:08:25.000000000 Z
+  who: 8086956
+- _id: 63
+  _time: 2024-06-06 12:50:40.083659178 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38871531369 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-05-31T04:07:53Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38871531369
+  event_type: CreateEvent
+  is_human: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  tag: 0.1.0
+  what: tag-was-created
+  when: 2024-05-31 04:07:53.000000000 Z
+  who: 8086956
+- _id: 64
+  _time: 2024-06-06 12:50:48.084165322 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38871262246 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-05-31T03:49:55Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38871262246
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 44
+  repository: 799113787
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-05-31 03:49:55.000000000 Z
+  who: 526301
+- _id: 65
+  _time: 2024-06-06 12:50:49.084351996 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38871147771 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-05-31T03:42:24Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38871147771
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 43
+  repository: 799113787
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-05-31 03:42:24.000000000 Z
+  who: 526301
+- _id: 66
+  _time: 2024-06-06 12:51:03.979389875 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38974710594 happened in GitHub repository yegor256/factbase
+    (#798641472) of type ''ReleaseEvent'', with the creation time 2024-06-04T08:36:09Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38974710594
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 158752599
+  repository: 798641472
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-06-04 08:36:09.000000000 Z
+  who: 8086956
+- _id: 67
+  _time: 2024-06-06 12:51:24.983342821 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38943207638 happened in GitHub repository yegor256/factbase
+    (#798641472) of type ''IssuesEvent'', with the creation time 2024-06-03T12:05:10Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38943207638
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 59
+  repository: 798641472
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-06-03 12:05:10.000000000 Z
+  who: 526301
+- _id: 70
+  _time: 2024-06-06 12:51:38.986082754 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38936971926 happened in GitHub repository yegor256/factbase
+    (#798641472) of type ''ReleaseEvent'', with the creation time 2024-06-03T08:59:55Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38936971926
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 158568019
+  repository: 798641472
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-06-03 08:59:55.000000000 Z
+  who: 8086956
+- _id: 71
+  _time: 2024-06-06 12:51:39.986250743 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38936940265 happened in GitHub repository yegor256/factbase
+    (#798641472) of type ''CreateEvent'', with the creation time 2024-06-03T08:59:00Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38936940265
+  event_type: CreateEvent
+  is_human: 1
+  repository: 798641472
+  seen: is-human-or-robot
+  tag: 0.0.41
+  what: tag-was-created
+  when: 2024-06-03 08:59:00.000000000 Z
+  who: 8086956
+- _id: 77
+  _time: 2024-06-06 12:52:33.397910619 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #39056768103 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''ReleaseEvent'', with the creation time 2024-06-06T11:13:41Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 39056768103
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 159170029
+  repository: 802720676
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-06-06 11:13:41.000000000 Z
+  who: 8086956
+- _id: 78
+  _time: 2024-06-06 12:52:34.398148861 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #39056740205 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''CreateEvent'', with the creation time 2024-06-06T11:12:45Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 39056740205
+  event_type: CreateEvent
+  is_human: 1
+  repository: 802720676
+  seen: is-human-or-robot
+  tag: 0.0.8
+  what: tag-was-created
+  when: 2024-06-06 11:12:45.000000000 Z
+  who: 8086956
+- _id: 79
+  _time: 2024-06-06 12:52:39.398964729 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38851903812 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''ReleaseEvent'', with the creation time 2024-05-30T13:36:00Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38851903812
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 158177345
+  repository: 802720676
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-05-30 13:36:00.000000000 Z
+  who: 8086956
+- _id: 80
+  _time: 2024-06-06 12:52:40.399016999 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38851874341 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''CreateEvent'', with the creation time 2024-05-30T13:35:11Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38851874341
+  event_type: CreateEvent
+  is_human: 1
+  repository: 802720676
+  seen: is-human-or-robot
+  tag: 0.0.7
+  what: tag-was-created
+  when: 2024-05-30 13:35:11.000000000 Z
+  who: 8086956
+- _id: 81
+  _time: 2024-06-06 12:52:44.399836492 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38851096537 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-30T13:13:48Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38851096537
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 8
+  repository: 802720676
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-05-30 13:13:48.000000000 Z
+  who: 526301
+- _id: 82
+  _time: 2024-06-06 12:52:46.400992168 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38850987997 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-30T13:10:49Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38850987997
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 7
+  repository: 802720676
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-closed
+  when: 2024-05-30 13:10:49.000000000 Z
+  who: 526301
+- _id: 83
+  _time: 2024-06-06 12:52:48.401057289 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38850959896 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''ReleaseEvent'', with the creation time 2024-05-30T13:10:01Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38850959896
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 158171720
+  repository: 802720676
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-05-30 13:10:01.000000000 Z
+  who: 8086956
+- _id: 84
+  _time: 2024-06-06 12:52:49.400952329 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38850922409 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''CreateEvent'', with the creation time 2024-05-30T13:08:55Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38850922409
+  event_type: CreateEvent
+  is_human: 1
+  repository: 802720676
+  seen: is-human-or-robot
+  tag: 0.0.6
+  what: tag-was-created
+  when: 2024-05-30 13:08:55.000000000 Z
+  who: 8086956
+- _id: 85
+  _time: 2024-06-06 12:52:53.401438668 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38850471929 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-30T12:56:05Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38850471929
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 7
+  repository: 802720676
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-05-30 12:56:05.000000000 Z
+  who: 526301
+- _id: 86
+  _time: 2024-06-06 12:52:54.403501726 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38846534567 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-30T10:48:22Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38846534567
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 6
+  repository: 802720676
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-closed
+  when: 2024-05-30 10:48:22.000000000 Z
+  who: 526301
+- _id: 87
+  _time: 2024-06-06 12:53:13.405682081 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38844439594 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-30T09:41:42Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38844439594
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 6
+  repository: 802720676
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-05-30 09:41:42.000000000 Z
+  who: 526301
+- _id: 88
+  _time: 2024-06-06 12:53:14.406182121 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38744313468 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-27T13:56:57Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38744313468
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 5
+  repository: 802720676
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-closed
+  when: 2024-05-27 13:56:57.000000000 Z
+  who: 526301
+- _id: 89
+  _time: 2024-06-06 12:53:16.405919037 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38744273626 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''ReleaseEvent'', with the creation time 2024-05-27T13:55:41Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38744273626
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 157636835
+  repository: 802720676
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-05-27 13:55:41.000000000 Z
+  who: 8086956
+- _id: 90
+  _time: 2024-06-06 12:53:17.406121101 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38744241033 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''CreateEvent'', with the creation time 2024-05-27T13:54:42Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38744241033
+  event_type: CreateEvent
+  is_human: 1
+  repository: 802720676
+  seen: is-human-or-robot
+  tag: 0.0.4
+  what: tag-was-created
+  when: 2024-05-27 13:54:42.000000000 Z
+  who: 8086956
+- _id: 91
+  _time: 2024-06-06 12:55:06.365311588 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #39059759882 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-06-06T12:46:28Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 39059759882
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 49
+  repository: 799113787
+  seen: is-human-or-robot
+  what: issue-was-closed
+  when: 2024-06-06 12:46:28.000000000 Z
+  who: 526301
+- _id: 97
+  _time: 2024-06-06 12:55:47.374000328 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38846320978 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-05-30T10:40:53Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38846320978
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 42
+  repository: 799113787
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-closed
+  when: 2024-05-30 10:40:53.000000000 Z
+  who: 526301
+- _id: 98
+  _time: 2024-06-06 12:55:49.373981717 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38846306793 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''ReleaseEvent'', with the creation time 2024-05-30T10:40:25Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38846306793
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 158149052
+  repository: 799113787
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-05-30 10:40:25.000000000 Z
+  who: 8086956
+- _id: 99
+  _time: 2024-06-06 12:55:50.373525695 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38846285174 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-05-30T10:39:40Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38846285174
+  event_type: CreateEvent
+  is_human: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  tag: 0.0.37
+  what: tag-was-created
+  when: 2024-05-30 10:39:40.000000000 Z
+  who: 8086956
+- _id: 107
+  _time: 2024-06-06 12:58:21.885536644 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38737864899 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-27T10:33:42Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38737864899
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 5
+  repository: 802720676
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-05-27 10:33:42.000000000 Z
+  who: 526301
+- _id: 108
+  _time: 2024-06-06 12:58:22.885017181 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38737631821 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''IssuesEvent'', with the creation time 2024-05-27T10:26:22Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38737631821
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 4
+  repository: 802720676
+  seen: is-human-or-robot
+  what: issue-was-closed
+  when: 2024-05-27 10:26:22.000000000 Z
+  who: 526301
+- _id: 109
+  _time: 2024-06-06 12:58:24.885726303 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38737619594 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''ReleaseEvent'', with the creation time 2024-05-27T10:26:00Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38737619594
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 157601224
+  repository: 802720676
+  seen: is-human-or-robot
+  what: release-published
+  when: 2024-05-27 10:26:00.000000000 Z
+  who: 8086956
+- _id: 110
+  _time: 2024-06-06 12:58:25.885636270 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38737593322 happened in GitHub repository zerocracy/pages-action
+    (#802720676) of type ''CreateEvent'', with the creation time 2024-05-27T10:25:12Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38737593322
+  event_type: CreateEvent
+  is_human: 1
+  repository: 802720676
+  seen: is-human-or-robot
+  tag: 0.0.3
+  what: tag-was-created
+  when: 2024-05-27 10:25:12.000000000 Z
+  who: 8086956
+- _id: 116
+  _time: 2024-06-06 13:00:08.322782090 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38845538894 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-05-30T10:15:37Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38845538894
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 42
+  repository: 799113787
+  seen:
+  - is-human-or-robot
+  - label-was-attached
+  what: issue-was-opened
+  when: 2024-05-30 10:15:37.000000000 Z
+  who: 526301
+- _id: 117
+  _time: 2024-06-06 13:07:37.178411736 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38974927203 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''IssuesEvent'', with the creation time 2024-06-04T08:42:19Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38974927203
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 47
+  repository: 799113787
+  seen: is-human-or-robot
+  when: 2024-06-04 08:42:19.000000000 Z
+  who: 526301
+- _id: 118
+  _time: 2024-06-06 13:07:49.180703797 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38939488380 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-06-03T10:11:27Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38939488380
+  event_type: CreateEvent
+  is_bot: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  when: 2024-06-03 10:11:27.000000000 Z
+  who: 29139614
+- _id: 119
+  _time: 2024-06-06 13:07:50.180358521 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38939487882 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-06-03T10:11:26Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38939487882
+  event_type: CreateEvent
+  is_bot: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  when: 2024-06-03 10:11:26.000000000 Z
+  who: 29139614
+- _id: 120
+  _time: 2024-06-06 13:07:53.180805344 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38877170163 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-05-31T08:26:05Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38877170163
+  event_type: CreateEvent
+  is_bot: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  when: 2024-05-31 08:26:05.000000000 Z
+  who: 29139614
+- _id: 121
+  _time: 2024-06-06 13:07:54.181028034 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38877169631 happened in GitHub repository yegor256/judges
+    (#799113787) of type ''CreateEvent'', with the creation time 2024-05-31T08:26:04Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38877169631
+  event_type: CreateEvent
+  is_bot: 1
+  repository: 799113787
+  seen: is-human-or-robot
+  when: 2024-05-31 08:26:04.000000000 Z
+  who: 29139614
+- _id: 122
+  _time: 2024-06-06 13:08:54.200418300 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38940414471 happened in GitHub repository yegor256/factbase
+    (#798641472) of type ''CreateEvent'', with the creation time 2024-06-03T10:39:07Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38940414471
+  event_type: CreateEvent
+  is_bot: 1
+  repository: 798641472
+  seen: is-human-or-robot
+  when: 2024-06-03 10:39:07.000000000 Z
+  who: 29139614
+- _id: 123
+  _time: 2024-06-06 13:08:55.200845384 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #38940413638 happened in GitHub repository yegor256/factbase
+    (#798641472) of type ''CreateEvent'', with the creation time 2024-06-03T10:39:06Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 38940413638
+  event_type: CreateEvent
+  is_bot: 1
+  repository: 798641472
+  seen: is-human-or-robot
+  when: 2024-06-03 10:39:06.000000000 Z
+  who: 29139614
+- _id: 124
+  _time: 2024-06-06 13:09:10.036329675 Z
+  _version: 0.0.43/0.4.0/0.0.0
+  details: 'A new event #39059848577 happened in GitHub repository zerocracy/judges-action
+    (#799177290) of type ''CreateEvent'', with the creation time 2024-06-06T12:48:57Z;
+    this fact must be interpreted later by other judges.'
+  event_id: 39059848577
+  event_type: CreateEvent
+  is_bot: 1
+  repository: 799177290
+  seen: is-human-or-robot
+  when: 2024-06-06 12:48:57.000000000 Z
+  who: 41898282
+- _id: 125
+  _time: 2024-06-06 13:09:18.037193367 Z
+  _version: 0.0.43/0.4.0/0.0.0
   details: 'A new event #39058279122 happened in GitHub repository zerocracy/judges-action
     (#799177290) of type ''CreateEvent'', with the creation time 2024-06-06T12:03:14Z;
     this fact must be interpreted later by other judges.'
@@ -307,9 +1022,9 @@ facts:
   seen: is-human-or-robot
   when: 2024-06-06 12:03:14.000000000 Z
   who: 29139614
-- _id: 51
-  _time: 2024-06-06 12:45:45.993466146 Z
-  _version: 0.0.42/0.3.0/0.0.0
+- _id: 126
+  _time: 2024-06-06 13:09:19.037425443 Z
+  _version: 0.0.43/0.4.0/0.0.0
   details: 'A new event #39058278418 happened in GitHub repository zerocracy/judges-action
     (#799177290) of type ''CreateEvent'', with the creation time 2024-06-06T12:03:13Z;
     this fact must be interpreted later by other judges.'
@@ -320,9 +1035,9 @@ facts:
   seen: is-human-or-robot
   when: 2024-06-06 12:03:13.000000000 Z
   who: 29139614
-- _id: 52
-  _time: 2024-06-06 12:45:53.994720224 Z
-  _version: 0.0.42/0.3.0/0.0.0
+- _id: 127
+  _time: 2024-06-06 13:09:27.038904652 Z
+  _version: 0.0.43/0.4.0/0.0.0
   details: 'A new event #39056443228 happened in GitHub repository zerocracy/judges-action
     (#799177290) of type ''CreateEvent'', with the creation time 2024-06-06T11:03:16Z;
     this fact must be interpreted later by other judges.'
@@ -333,9 +1048,9 @@ facts:
   seen: is-human-or-robot
   when: 2024-06-06 11:03:16.000000000 Z
   who: 29139614
-- _id: 53
-  _time: 2024-06-06 12:45:55.995283760 Z
-  _version: 0.0.42/0.3.0/0.0.0
+- _id: 128
+  _time: 2024-06-06 13:09:29.039266316 Z
+  _version: 0.0.43/0.4.0/0.0.0
   details: 'A new event #39056437469 happened in GitHub repository zerocracy/judges-action
     (#799177290) of type ''CreateEvent'', with the creation time 2024-06-06T11:03:04Z;
     this fact must be interpreted later by other judges.'
@@ -345,30 +1060,4 @@ facts:
   repository: 799177290
   seen: is-human-or-robot
   when: 2024-06-06 11:03:04.000000000 Z
-  who: 29139614
-- _id: 54
-  _time: 2024-06-06 12:47:45.014438334 Z
-  _version: 0.0.42/0.3.0/0.0.0
-  details: 'A new event #39029132981 happened in GitHub repository zerocracy/judges-action
-    (#799177290) of type ''CreateEvent'', with the creation time 2024-06-05T15:46:26Z;
-    this fact must be interpreted later by other judges.'
-  event_id: 39029132981
-  event_type: CreateEvent
-  is_bot: 1
-  repository: 799177290
-  seen: is-human-or-robot
-  when: 2024-06-05 15:46:26.000000000 Z
-  who: 29139614
-- _id: 55
-  _time: 2024-06-06 12:47:46.014544041 Z
-  _version: 0.0.42/0.3.0/0.0.0
-  details: 'A new event #39029132395 happened in GitHub repository zerocracy/judges-action
-    (#799177290) of type ''CreateEvent'', with the creation time 2024-06-05T15:46:25Z;
-    this fact must be interpreted later by other judges.'
-  event_id: 39029132395
-  event_type: CreateEvent
-  is_bot: 1
-  repository: 799177290
-  seen: is-human-or-robot
-  when: 2024-06-05 15:46:25.000000000 Z
   who: 29139614
