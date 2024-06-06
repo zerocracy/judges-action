@@ -79,26 +79,40 @@ end
 
 def one_repo(repo, limit)
   seen = 0
-  catch :stop do
-    octo.repository_events(repo).each do |json|
-      unless fb.query("(eq event_id #{json[:id]})").each.to_a.empty?
-        $loog.debug("The event ##{json[:id]} (#{json[:type]}) has already been seen, skipping")
-        next
-      end
-      $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}")
-      fb.txn do |fbt|
-        if_absent(fbt) do |n|
-          put_new_event(n, json)
-        end
-      end
-      seen += 1
-      if seen >= limit
-        $loog.debug("Already scanned #{seen} events, that's enough (>=#{limit})")
-        throw :stop
-      end
-      throw :alarm if octo.off_quota
+  repo_id = octo.repo_id_by_name(repo)
+  q = "(and (eq what '#{$judge}') (eq repository #{repo_id}))"
+  prev = fb.query(q).each.to_a[0]
+  fb.query(q).delete!
+  first = nil
+  last = nil
+  octo.repository_events(repo).each do |json|
+    first = json[:id] if first.nil?
+    last = json[:id]
+    if !prev.nil? && last <= prev.first_event_id
+      $loog.debug(
+        "No reason to scan what was scanned before: first_event_id=#{prev.first_event_id}, " \
+        "prev.last_event_id=#{prev.last_event_id}, first=#{first}, last=#{last}"
+      )
+      break
     end
+    fb.txn do |fbt|
+      f = if_absent(fbt) do |n|
+        put_new_event(n, json)
+      end
+      $loog.info("Detected new event ##{json[:id]} in #{json[:repo][:name]}: #{json[:type]}") unless f.nil?
+    end
+    seen += 1
+    if seen >= limit
+      $loog.debug("Already scanned #{seen} events in #{repo}, that's enough (>=#{limit})")
+      break
+    end
+    break if octo.off_quota
   end
+  f = fb.insert
+  f.repository = repo_id
+  f.first_event_id = first
+  f.last_event_id = last
+  f.what = $judge
   seen
 end
 
@@ -106,9 +120,8 @@ limit = $options.max_events
 limit = 1000 if limit.nil?
 raise "It is impossible to scan deeper than 10,000 GitHub events, you asked for #{limit}" if limit > 10_000
 
-catch :alarm do
-  repos = each_repo.each.to_a
-  repos.each do |repo|
-    one_repo(repo, limit / repos.size)
-  end
+repos = each_repo.each.to_a
+repos.each do |repo|
+  one_repo(repo, limit / repos.size)
+  break if octo.off_quota
 end

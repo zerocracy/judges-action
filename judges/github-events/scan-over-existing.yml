@@ -34,4 +34,8 @@ options:
   max_events: 2
   repositories: yegor256/judges
 expected:
-  - /fb[count(f)=2]
+  - /fb[count(f)=3]
+  - /fb/f[event_id=124]
+  - /fb/f[what='github-events']
+  - /fb/f[what='github-events' and first_event_id='123']
+  - /fb/f[what='github-events' and last_event_id='124']

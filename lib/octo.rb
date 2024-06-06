@@ -52,7 +52,7 @@ def octo
         builder.use Octokit::Response::RaiseError
         builder.adapter Faraday.default_adapter
       end
-      Octokit.middleware = stack
+      o.middleware = stack
       o = Obk.new(o, pause: 1000)
     else
       $loog.debug('The connection to GitHub API is mocked')

@@ -36,6 +36,7 @@
     (eq what 'bug-was-resolved')
     (eq what 'comment-was-posted')
     (eq what 'git-was-pushed')
+    (eq what 'github-events')
     (eq what 'issue-was-closed')
     (eq what 'issue-was-opened')
     (eq what 'issue-was-assigned')
@@ -89,6 +90,13 @@
     (exists when)
     (exists who)
     (exists reason))))
+
+(explain (when
+  (eq what 'github-events')
+  (and
+    (exists repository)
+    (exists first_event_id)
+    (exists last_event_id))))
 
 (explain (when
   (eq what 'label-was-attached')
