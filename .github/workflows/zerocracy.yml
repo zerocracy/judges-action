@@ -28,6 +28,8 @@ permissions:
   contents: write
 'on':
   push:
+    branches:
+      - master
   # schedule:
   #   - cron: '0,10,20,30,40,50 * * * *'
 concurrency:
