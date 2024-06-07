@@ -86,8 +86,8 @@ def one_repo(repo, limit)
   first = nil
   last = nil
   octo.repository_events(repo).each do |json|
-    first = json[:id] if first.nil?
-    last = json[:id]
+    last = json[:id].to_i
+    first = last if first.nil?
     if !prev.nil? && last <= prev.first_event_id
       $loog.debug(
         "No reason to scan what was scanned before: first_event_id=#{prev.first_event_id}, " \
