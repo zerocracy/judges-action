@@ -26,7 +26,7 @@ source 'https://rubygems.org'
 
 # gem 'factbase', path: '/code/gems/factbase'
 gem 'factbase', '~>0.0'
-gem 'faraday', '2.9.0'
+gem 'faraday', '2.9.1'
 gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-retry', '2.2.1'
 gem 'judges', '~>0.3'
