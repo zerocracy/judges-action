@@ -36,7 +36,7 @@ jobs:
             token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/*,-yegor256/test
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.0.7
+      - uses: zerocracy/pages-action@0.0.8
         with:
           factbase: foo.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
