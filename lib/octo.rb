@@ -43,14 +43,14 @@ def octo
       o.auto_paginate = true
       o.connection_options = {
         request: {
-          open_timeout: 5,
-          timeout: 5
+          open_timeout: 15,
+          timeout: 15
         }
       }
       stack = Faraday::RackBuilder.new do |builder|
-        builder.use Faraday::HttpCache, serializer: Marshal, shared_cache: false
-        builder.use Octokit::Response::RaiseError
-        builder.adapter Faraday.default_adapter
+        builder.use(Faraday::HttpCache, serializer: Marshal, shared_cache: true)
+        builder.use(Octokit::Response::RaiseError)
+        builder.adapter(Faraday.default_adapter)
       end
       o.middleware = stack
       o = Obk.new(o, pause: 1000)
