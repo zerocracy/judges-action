@@ -64,6 +64,9 @@
   (exists _time)
   (eq "Time" (type _time))))
 (explain (when
+  (exists _version)
+  (eq "String" (type _version))))
+(explain (when
   (exists issue)
   (eq "Integer" (type issue))))
 (explain (when
@@ -96,13 +99,16 @@
   (and
     (exists repository)
     (exists first_event_id)
-    (exists last_event_id))))
+    (eq "Integer" (type first_event_id))
+    (exists last_event_id)
+    (eq "Integer" (type last_event_id)))))
 
 (explain (when
   (eq what 'label-was-attached')
   (and
     (exists issue)
-    (exists label))))
+    (exists label)
+    (eq "String" (type label)))))
 
 (explain (when
   (eq what 'issue-was-opened')
@@ -135,6 +141,7 @@
     (exists issue)
     (exists details)
     (exists reporter)
+    (eq "Integer" (type reporter))
     (exists who))))
 
 (explain (when
@@ -142,6 +149,7 @@
   (and
     (eq (size cause) 1)
     (exists award)
+    (eq "Integer" (type award))
     (exists when)
     (exists issue)
     (exists repository))))
