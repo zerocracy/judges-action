@@ -90,6 +90,10 @@ def octo
   $global[:octo]
 end
 
+def random_time
+  Time.now - rand(10_000)
+end
+
 # Fake GitHub client, for tests.
 class FakeOctokit
   def rate_limit
@@ -160,7 +164,7 @@ class FakeOctokit
           from: 'before',
           to: 'after'
         },
-        created_at: Time.now
+        created_at: random_time
       },
       {
         actor: {
@@ -175,7 +179,7 @@ class FakeOctokit
         label: {
           name: 'bug'
         },
-        created_at: Time.now
+        created_at: random_time
       }
     ]
   end
@@ -196,7 +200,7 @@ class FakeOctokit
           id: 888,
           login: 'torvalds'
         },
-        created_at: Time.now
+        created_at: random_time
       },
       {
         id: '124',
@@ -215,7 +219,7 @@ class FakeOctokit
           id: 888,
           login: 'torvalds'
         },
-        created_at: Time.now
+        created_at: random_time
       },
       {
         id: '125',
@@ -234,7 +238,7 @@ class FakeOctokit
           id: 888,
           login: 'torvalds'
         },
-        created_at: Time.now
+        created_at: random_time
       }
     ]
   end

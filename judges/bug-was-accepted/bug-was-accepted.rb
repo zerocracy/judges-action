@@ -25,7 +25,7 @@
 conclude do
   on '(and (eq what "issue-was-opened")
     (exists who)
-    (exists is_human)
+    (eq is_human 1)
     (exists issue)
     (exists repository))'
   on '(and (eq what "label-was-attached")

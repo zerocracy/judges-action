@@ -24,12 +24,12 @@
 
 conclude do
   quota_aware
-  on '(and (exists who) (not (exists is_human)) (not (exists is_robot)))'
+  on '(and (exists who) (not (exists is_human)))'
   consider do |f, _|
     json = octo.user(f.who)
     type = json[:type]
     if type == 'Bot'
-      f.is_bot = 1
+      f.is_human = 0
       $loog.info("GitHub user ##{f.who} is actually a bot")
     else
       f.is_human = 1

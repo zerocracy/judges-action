@@ -48,7 +48,7 @@ end
 
 def each_tuple_once_txn(fb, *queries, judge: $judge)
   fb.txn do |fbt|
-    each_tuple_once(fb, *queries, judge:) do |fs|
+    each_tuple_once(fbt, *queries, judge:) do |fs|
       yield [fbt] + fs
     end
   end

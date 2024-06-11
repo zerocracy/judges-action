@@ -37,7 +37,7 @@ conclude do
   on '(and (eq what "issue-was-assigned")
     (exists when)
     (eq issue {f0.issue})
-    (exists is_human)
+    (eq is_human 1)
     (eq repository {f0.repository})
     (exists who))'
   follow 'f1.when f2.who repository issue'
