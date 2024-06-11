@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'factbase/looged'
 require 'factbase/pre'
 require 'factbase/rules'
 
@@ -43,5 +44,5 @@ def fb_pre(fb)
 end
 
 def fb
-  fb_pre(fb_rules($fb))
+  Factbase::Looged.new(fb_pre(fb_rules($fb)), Loog::VERBOSE)
 end

@@ -22,6 +22,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+def skip_event(json)
+  $loog.debug("The #{json[:type]} GitHub event ##{json[:id]} is ignored")
+  raise Factbase::Rollback
+end
+
 def put_new_event(fact, json)
   fact.when = Time.parse(json[:created_at].iso8601)
   fact.event_type = json[:type]
@@ -33,7 +38,7 @@ def put_new_event(fact, json)
   when 'PushEvent'
     fact.what = 'git-was-pushed'
     fact.push_id = json[:payload][:push_id]
-    raise Factbase::Rollback
+    skip_event(json)
 
   when 'IssuesEvent'
     fact.issue = json[:payload][:issue][:number]
@@ -51,7 +56,7 @@ def put_new_event(fact, json)
       fact.comment_body = json[:payload][:comment][:body]
       fact.who = json[:payload][:comment][:user][:id]
     end
-    raise Factbase::Rollback
+    skip_event(json)
 
   when 'ReleaseEvent'
     fact.release_id = json[:payload][:release][:id]
@@ -67,7 +72,7 @@ def put_new_event(fact, json)
     end
 
   else
-    raise Factbase::Rollback
+    skip_event(json)
   end
 
   fact.details =
