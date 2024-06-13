@@ -24,12 +24,12 @@
 
 source 'https://rubygems.org'
 
-gem 'factbase', '~>0.0'
+gem 'factbase', '~>0.0.50'
 gem 'faraday', '2.9.1'
 gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-multipart', '1.0.4'
 gem 'faraday-retry', '2.2.1'
-gem 'judges', '~>0.3'
+gem 'judges', '~>0.8'
 gem 'minitest', '5.23.1'
 gem 'obk', '~>0.3.1'
 gem 'octokit', '~>9.1.0'
