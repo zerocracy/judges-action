@@ -29,6 +29,7 @@ def mask_to_regex(mask)
 end
 
 def each_repo
+  return to_enum(__method__) unless block_given?
   repos = []
   masks = $options.repositories.split(',')
   masks.reject { |m| m.start_with?('-') }.each do |mask|
@@ -46,7 +47,6 @@ def each_repo
     repos.reject! { |r| re.match?(r) }
   end
   $loog.debug("#{repos.size} repositories match: #{repos.join(', ')}")
-  return to_enum(__method__) unless block_given?
   repos.each do |repo|
     $loog.debug("Scanning #{repo}...")
     yield repo

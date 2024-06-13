@@ -89,7 +89,7 @@ cd "${SELF}"
 bundle exec judges "${gopts[@]}" update \
     --no-log \
     --lib "${SELF}/lib" \
-    --max-cycles 5 \
+    --max-cycles "${INPUT_CYCLES}" \
     "${options[@]}" "${SELF}/judges" "${fb}"
 
 if [ -n "${INPUT_TOKEN}" ]; then

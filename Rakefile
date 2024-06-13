@@ -40,7 +40,7 @@ end
 desc 'Test all judges'
 task :judges do
   live = ARGV.include?('--live') ? '' : '--disable live'
-  sh "judges --verbose test #{live} --lib lib --option=judges_action_version=0.0.0 judges"
+  sh "judges --verbose test #{live} --no-log --lib lib --option=judges_action_version=0.0.0 judges"
 end
 
 require 'rubocop/rake_task'
