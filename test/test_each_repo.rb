@@ -41,7 +41,7 @@ class TestEachRepo < Minitest::Test
         'repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
       }
     )
-    assert(each_repo.each.to_a.size.positive?)
+    assert(repositories.size.positive?)
   end
 
   def test_live_usage
@@ -53,7 +53,7 @@ class TestEachRepo < Minitest::Test
         'repositories' => 'zerocracy/*,-zerocracy/judges-action'
       }
     )
-    list = each_repo.each.to_a
+    list = repositories
     assert(list.size.positive?)
     assert(list.include?('zerocracy/pages-action'))
     assert(!list.include?('zerocracy/judges-action'))

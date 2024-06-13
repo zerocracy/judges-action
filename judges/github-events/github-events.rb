@@ -82,6 +82,9 @@ def put_new_event(fact, json)
     'this fact must be interpreted later by other judges.'
 end
 
+# Scan one repo.
+# @param [String] repo Name of the repo, like "yegor256/judges"
+# @param [Integer] limit How many events to scan (if more, stop)
 def one_repo(repo, limit)
   seen = 0
   repo_id = octo.repo_id_by_name(repo)
@@ -125,8 +128,9 @@ limit = $options.max_events
 limit = 1000 if limit.nil?
 raise "It is impossible to scan deeper than 10,000 GitHub events, you asked for #{limit}" if limit > 10_000
 
-repos = each_repo.each.to_a
+repos = repositories
 repos.each do |repo|
+  $loog.debug("Scanning #{repo}...")
   one_repo(repo, limit / repos.size)
   break if octo.off_quota
 end

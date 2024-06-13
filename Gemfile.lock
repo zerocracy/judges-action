@@ -28,7 +28,7 @@ GEM
     gli (2.21.1)
     iri (0.8.0)
     json (2.7.2)
-    judges (0.9.0)
+    judges (0.10.0)
       backtrace (~> 0.3)
       concurrent-ruby (= 1.2.3)
       factbase (~> 0.0)
@@ -88,6 +88,9 @@ GEM
       ethon (>= 0.9.0)
     unicode-display_width (2.5.0)
     uri (0.13.0)
+    verbose (0.0.2)
+      loog (~> 0.2)
+      tago (~> 0.0)
     yaml (0.3.0)
 
 PLATFORMS
@@ -105,6 +108,7 @@ DEPENDENCIES
   octokit (~> 9.1.0)
   rake (= 13.2.1)
   rubocop (= 1.64.1)
+  verbose (~> 0.0)
 
 BUNDLED WITH
    2.5.6

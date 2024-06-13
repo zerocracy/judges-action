@@ -24,6 +24,7 @@
 
 require 'obk'
 require 'octokit'
+require 'verbose'
 require 'faraday/http_cache'
 
 def octo
@@ -53,7 +54,7 @@ def octo
         builder.adapter(Faraday.default_adapter)
       end
       o.middleware = stack
-      o = Obk.new(o, pause: 1000)
+      o = Verbose.new(Obk.new(o, pause: 1000), $loog)
     else
       $loog.debug('The connection to GitHub API is mocked')
       o = FakeOctokit.new
@@ -94,6 +95,11 @@ def random_time
   Time.now - rand(10_000)
 end
 
+def name_to_number(name)
+  return name unless name.is_a?(String)
+  name.chars.map(&:ord).inject(0, :+)
+end
+
 # Fake GitHub client, for tests.
 class FakeOctokit
   def rate_limit
@@ -124,7 +130,7 @@ class FakeOctokit
 
   def repository(name)
     {
-      id: 444,
+      id: name_to_number(name),
       full_name: name.is_a?(Integer) ? 'yegor256/test' : name
     }
   end
@@ -156,7 +162,7 @@ class FakeOctokit
           login: 'torvalds'
         },
         repository: {
-          id: 888,
+          id: name_to_number('yegor256/judges'),
           full_name: 'yegor256/judges'
         },
         event: 'renamed',
@@ -172,7 +178,7 @@ class FakeOctokit
           login: 'torvalds'
         },
         repository: {
-          id: 888,
+          id: name_to_number('yegor256/judges'),
           full_name: 'yegor256/judges'
         },
         event: 'labeled',
@@ -189,7 +195,7 @@ class FakeOctokit
       {
         id: '123',
         repo: {
-          id: 42,
+          id: name_to_number(repo),
           name: repo
         },
         type: 'PushEvent',
@@ -205,7 +211,7 @@ class FakeOctokit
       {
         id: '124',
         repo: {
-          id: 42,
+          id: name_to_number(repo),
           name: repo
         },
         type: 'IssuesEvent',
@@ -224,7 +230,7 @@ class FakeOctokit
       {
         id: '125',
         repo: {
-          id: 42,
+          id: name_to_number(repo),
           name: repo
         },
         type: 'IssuesEvent',
