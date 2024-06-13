@@ -26,7 +26,7 @@
   '(not (exists _id))',
   '(not (exists _time))',
   '(not (exists what))',
-  '(not (eq "Integer" (type event_id)))',
+  '(and (exists event_id) (not (eq "Integer" (type event_id))))',
   '(eq what "git-was-pushed")',
   '(eq event_type "DeleteEvent")',
   '(eq what "comment-was-posted")'
