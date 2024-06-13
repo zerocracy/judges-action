@@ -30,7 +30,8 @@ def fb_rules(fb)
   rules = Dir.glob(File.join('rules', '*.fe')).map { |f| File.read(f) }
   Factbase::Rules.new(
     fb,
-    "(and \n#{rules.join("\n")}\n)"
+    "(and \n#{rules.join("\n")}\n)",
+    uid: '_id'
   )
 end
 
