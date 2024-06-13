@@ -20,9 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-.SHELLFLAGS: -c
 .ONESHELL:
 .PHONY: clean test all entry entry rmi verify rubocop
+.SHELLFLAGS := -e -o pipefail -c
+SHELL := /bin/bash
 
 all: rubocop test entry rmi verify
 
