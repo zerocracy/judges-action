@@ -26,6 +26,7 @@ require 'obk'
 require 'octokit'
 require 'verbose'
 require 'faraday/http_cache'
+require 'faraday/retry'
 
 def octo
   $global[:octo] ||= begin
@@ -49,12 +50,13 @@ def octo
         }
       }
       stack = Faraday::RackBuilder.new do |builder|
+        builder.use(Faraday::Retry::Middleware)
         builder.use(Faraday::HttpCache, serializer: Marshal, shared_cache: true)
         builder.use(Octokit::Response::RaiseError)
         builder.adapter(Faraday.default_adapter)
       end
       o.middleware = stack
-      o = Verbose.new(Obk.new(o, pause: 1000), log: $loog)
+      o = Verbose.new(o, log: $loog)
     else
       $loog.debug('The connection to GitHub API is mocked')
       o = FakeOctokit.new
