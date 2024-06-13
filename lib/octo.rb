@@ -54,7 +54,7 @@ def octo
         builder.adapter(Faraday.default_adapter)
       end
       o.middleware = stack
-      o = Verbose.new(Obk.new(o, pause: 1000), $loog)
+      o = Verbose.new(Obk.new(o, pause: 1000), log: $loog)
     else
       $loog.debug('The connection to GitHub API is mocked')
       o = FakeOctokit.new
