@@ -52,16 +52,19 @@ class Iterate
   end
 
   def limit(limit)
+    raise 'Cannot set "limit" to nil' if limit.nil?
     @limit = limit
   end
 
   def by(query)
     raise 'Query is already set' unless @query.nil?
+    raise 'Cannot set query to nil' if query.nil?
     @query = query
   end
 
   def as(label)
     raise 'Label is already set' unless @label.nil?
+    raise 'Cannot set "label" to nil' if label.nil?
     @label = label
   end
 
