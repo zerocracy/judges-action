@@ -88,7 +88,7 @@ iterate do
       'this fact must be interpreted later by other judges.'
   end
 
-  each do |repository, latest|
+  over do |repository, latest|
     id = nil
     octo.repository_events(repository).each_with_index do |json, idx|
       break if idx >= $options.max_events

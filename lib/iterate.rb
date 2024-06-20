@@ -65,7 +65,7 @@ class Iterate
     @label = label
   end
 
-  def each(&)
+  def over(&)
     raise 'Use "as" first' if @label.nil?
     raise 'Use "by" first' if @query.nil?
     seen = {}

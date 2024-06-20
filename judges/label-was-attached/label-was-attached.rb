@@ -27,7 +27,7 @@ iterate do
   by "(agg (and (eq repository $repository) (eq what 'issue-was-opened') (gt issue $before)) (min issue))"
   limit $options.max_labels
   quota_aware
-  each do |repository, issue|
+  over do |repository, issue|
     octo.issue_timeline(repository, issue).each do |te|
       next unless te[:event] == 'labeled'
       badge = te[:label][:name]
