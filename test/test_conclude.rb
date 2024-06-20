@@ -35,41 +35,55 @@ require_relative '../lib/fb'
 # Copyright:: Copyright (c) 2024 Zerocracy
 # License:: MIT
 class TestConclude < Minitest::Test
-  def test_simple_use
+  def test_draw
     fb = Factbase.new
     fb.insert.foo = 1
     fb.insert.bar = 2
     conclude(fb, 'judge-one', Loog::VERBOSE) do
       on '(exists foo)'
-      on '(exists bar)'
-      draw do |n, f1, f2|
-        n.sum = f1.foo + f2.bar
+      draw do |n, prev|
+        n.sum = prev.foo + 1
         'something funny'
       end
     end
     f = fb.query('(exists sum)').each.to_a[0]
-    assert_equal(3, f.sum)
+    assert_equal(2, f.sum)
     assert_equal('judge-one', f.what)
     assert_equal('something funny', f.details)
   end
 
-  def test_maybe_with_id
+  def test_maybe
     $fb = Factbase.new
     $options = Judges::Options.new
     $loog = Loog::NULL
     fb.insert.foo = 1
     conclude(fb, 'issue-was-opened', Loog::VERBOSE) do
       on '(exists foo)'
-      maybe do |n, _|
+      maybe do |n, prev|
         n.repository = 111
-        n.issue = 42
+        n.issue = prev.foo
         n.who = 777
         n.when = Time.now
         "it's a test." * 20
       end
     end
     f = fb.query('(exists issue)').each.to_a[0]
-    assert_equal(42, f.issue)
+    assert_equal(1, f.issue)
     assert(f._id.positive?)
+  end
+
+  def test_consider
+    $fb = Factbase.new
+    $options = Judges::Options.new
+    $loog = Loog::NULL
+    fb.insert.foo = 1
+    conclude(fb, 'issue-was-closed', Loog::VERBOSE) do
+      on '(exists foo)'
+      consider do |_prev|
+        fb.insert.bar = 42
+      end
+    end
+    f = fb.query('(exists bar)').each.to_a[0]
+    assert_equal(42, f.bar)
   end
 end

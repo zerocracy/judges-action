@@ -22,25 +22,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'loog'
 require 'obk'
 require 'octokit'
 require 'verbose'
 require 'faraday/http_cache'
 require 'faraday/retry'
 
-def octo
-  $global[:octo] ||= begin
-    if $options.testing.nil?
+def octo(options: $options, global: $global, loog: Loog::NULL)
+  raise 'The $global is not set' if global.nil?
+  global[:octo] ||= begin
+    if options.testing.nil?
       o = Octokit::Client.new
-      token = $options.token
-      $loog.debug("The 'token' option is not provided") if token.nil?
+      token = options.token
+      loog.debug("The 'token' option is not provided") if token.nil?
       token = ENV.fetch('GITHUB_TOKEN', nil) if token.nil?
-      $loog.debug("The 'GITHUB_TOKEN' environment variable is not set") if token.nil?
+      loog.debug("The 'GITHUB_TOKEN' environment variable is not set") if token.nil?
       if token.nil?
-        $loog.warn('Accessing GitHub API without a token!')
+        loog.warn('Accessing GitHub API without a token!')
       else
         o = Octokit::Client.new(access_token: token)
-        $loog.info("Accessing GitHub API with a token (#{token.length} chars)")
+        loog.info("Accessing GitHub API with a token (#{token.length} chars)")
       end
       o.auto_paginate = true
       o.connection_options = {
@@ -58,13 +60,13 @@ def octo
       o.middleware = stack
       o = Verbose.new(o, log: $loog)
     else
-      $loog.debug('The connection to GitHub API is mocked')
-      o = FakeOctokit.new
+      loog.debug('The connection to GitHub API is mocked')
+      o = FakeOctokit.new(loog:)
     end
     def o.off_quota
       left = rate_limit.remaining
       if left < 5
-        $loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
+        @loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
         true
       else
         false
@@ -73,24 +75,23 @@ def octo
     def o.user_name_by_id(id)
       json = user(id)
       name = json[:login]
-      $loog.debug("GitHub user ##{id} has a name: @#{name}")
+      @loog.debug("GitHub user ##{id} has a name: @#{name}")
       name
     end
     def o.repo_id_by_name(name)
       json = repository(name)
       id = json[:id]
-      $loog.debug("GitHub repository #{name} has an ID: #{id}")
+      @loog.debug("GitHub repository #{name} has an ID: ##{id}")
       id
     end
     def o.repo_name_by_id(id)
       json = repository(id)
       name = json[:full_name]
-      $loog.debug("GitHub repository ##{id} has a name: #{name}")
+      @loog.debug("GitHub repository ##{id} has a name: #{name}")
       name
     end
     o
   end
-  $global[:octo]
 end
 
 def random_time
@@ -104,6 +105,10 @@ end
 
 # Fake GitHub client, for tests.
 class FakeOctokit
+  def initialize(loog: Loog::NULL)
+    @loog = loog
+  end
+
   def rate_limit
     o = Object.new
     def o.remaining

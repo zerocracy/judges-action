@@ -22,40 +22,29 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'minitest/autorun'
-require 'judges/options'
-require 'loog'
-require_relative '../lib/each_repo'
+def mask_to_regex(mask)
+  org, repo = mask.split('/')
+  raise "Org '#{org}' can't have an asterisk" if org.include?('*')
+  Regexp.compile("#{org}/#{repo.gsub('*', '.*')}")
+end
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Zerocracy
-# License:: MIT
-class TestEachRepo < Minitest::Test
-  def test_simple_use
-    $global = {}
-    $loog = Loog::NULL
-    $options = Judges::Options.new(
-      {
-        'testing' => true,
-        'repositories' => 'yegor256/tacit,zerocracy/*,-zerocracy/judges-action'
-      }
-    )
-    assert(repositories.size.positive?)
+def unmask_repos(options: $options, global: $global, loog: $loog)
+  repos = []
+  masks = (options.repositories || '').split(',')
+  masks.reject { |m| m.start_with?('-') }.each do |mask|
+    unless mask.include?('*')
+      repos << mask
+      next
+    end
+    re = mask_to_regex(mask)
+    octo(loog:, global:, options:).repositories(mask.split('/')[0]).each do |r|
+      repos << r[:full_name] if re.match?(r[:full_name])
+    end
   end
-
-  def test_live_usage
-    skip('Run it only manually, since it touches GitHub API')
-    $global = {}
-    $loog = Loog::NULL
-    $options = Judges::Options.new(
-      {
-        'repositories' => 'zerocracy/*,-zerocracy/judges-action'
-      }
-    )
-    list = repositories
-    assert(list.size.positive?)
-    assert(list.include?('zerocracy/pages-action'))
-    assert(!list.include?('zerocracy/judges-action'))
+  masks.select { |m| m.start_with?('-') }.each do |mask|
+    re = mask_to_regex(mask[1..])
+    repos.reject! { |r| re.match?(r) }
   end
+  loog.debug("Scanning #{repos.size} repositories: #{repos.join(', ')}...")
+  repos
 end

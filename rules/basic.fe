@@ -23,7 +23,7 @@
 (undef explain)
 (defn explain '
   r = @operands[0].evaluate(fact, maps);
-  if !r
+  if !r && !$loog.nil?
     $loog.error(\'This rule failed: \' + self.to_s)
   end
   return r
@@ -32,11 +32,13 @@
 (explain (when
   (exists what)
   (or
+    (eq what 'events-were-scanned')
+    (eq what 'labels-were-scanned')
     (eq what 'bug-was-accepted')
     (eq what 'bug-was-resolved')
     (eq what 'comment-was-posted')
     (eq what 'git-was-pushed')
-    (eq what 'github-events')
+    (eq what 'events-were-scanned')
     (eq what 'issue-was-closed')
     (eq what 'issue-was-opened')
     (eq what 'issue-was-assigned')
@@ -68,7 +70,9 @@
   (eq "String" (type _version))))
 (explain (when
   (exists issue)
-  (eq "Integer" (type issue))))
+  (and
+    (eq "Integer" (type issue))
+    (gt issue 0))))
 (explain (when
   (exists repository)
   (eq "Integer" (type repository))))
@@ -95,13 +99,11 @@
     (exists reason))))
 
 (explain (when
-  (eq what 'github-events')
+  (eq what 'events-were-scanned')
   (and
     (exists repository)
-    (exists first_event_id)
-    (eq "Integer" (type first_event_id))
-    (exists last_event_id)
-    (eq "Integer" (type last_event_id)))))
+    (exists latest)
+    (eq "Integer" (type latest)))))
 
 (explain (when
   (eq what 'label-was-attached')
@@ -127,7 +129,7 @@
 (explain (when
   (eq what 'bug-was-resolved')
   (and
-    (eq (size cause) 2)
+    (exists cause)
     (exists when)
     (exists issue)
     (exists details)
@@ -136,7 +138,7 @@
 (explain (when
   (eq what 'bug-was-accepted')
   (and
-    (eq (size cause) 2)
+    (exists cause)
     (exists when)
     (exists issue)
     (exists details)
@@ -147,7 +149,7 @@
 (explain (when
   (eq what 'bug-report-was-rewarded')
   (and
-    (eq (size cause) 1)
+    (exists cause)
     (exists award)
     (eq "Integer" (type award))
     (exists when)

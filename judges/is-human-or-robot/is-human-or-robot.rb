@@ -25,7 +25,7 @@
 conclude do
   quota_aware
   on '(and (exists who) (not (exists is_human)))'
-  consider do |f, _|
+  consider do |f|
     json = octo.user(f.who)
     type = json[:type]
     if type == 'Bot'

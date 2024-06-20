@@ -37,7 +37,7 @@ class Conclude
     @fb = fb
     @judge = judge
     @loog = loog
-    @queries = []
+    @query = nil
     @follows = []
     @threshold = 9999
     @quota_aware = false
@@ -48,7 +48,8 @@ class Conclude
   end
 
   def on(query)
-    @queries << query
+    raise 'Query is already set' unless @query.nil?
+    @query = query
   end
 
   def threshold(max)
@@ -77,14 +78,6 @@ class Conclude
 
   def consider(&)
     roll do |_fbt, a|
-      f = a.shift
-      fill(f, a, &)
-      nil
-    end
-  end
-
-  def look(&)
-    roll do |_fbt, a|
       yield a
       nil
     end
@@ -95,29 +88,25 @@ class Conclude
   def roll(&)
     catch :stop do
       passed = 0
-      each_tuple_once_txn(@fb, *@queries, judge: @judge) do |a|
-        throw :stop if @quota_aware && octo.off_quota
-        throw :stop if passed >= @threshold
-        fbt = a.shift
-        n = yield fbt, a
-        @loog.info("#{n.what}: #{n.details}") unless n.nil?
-        passed += 1
+      @fb.txn do |fbt|
+        fbt.query(@query).each do |a|
+          throw :stop if @quota_aware && octo(loog: @loog).off_quota
+          throw :stop if passed >= @threshold
+          n = yield fbt, a
+          @loog.info("#{n.what}: #{n.details}") unless n.nil?
+          passed += 1
+        end
       end
     end
   end
 
-  def fill(fact, others)
+  def fill(fact, prev)
     @follows.each do |follow|
-      i = @queries.size - 1
-      if follow.include?('.')
-        i, follow = follow.split('.')
-        i = i[1..].to_i
-      end
-      v = others[i].send(follow)
+      v = prev.send(follow)
       fact.send("#{follow}=", v)
-      fact.cause = others[i]._id
+      fact.cause = prev._id
     end
-    r = yield [fact] + others
+    r = yield fact, prev
     return unless r.is_a?(String)
     fact.details = r
     fact.what = @judge

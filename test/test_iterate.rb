@@ -22,34 +22,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'factbase/tuples'
+require 'minitest/autorun'
+require 'loog'
+require 'factbase'
+require 'judges/options'
+require_relative '../lib/iterate'
 
-# Returns a decorated global factbase, which only touches facts once.
-def each_once(fb, query, judge: $judge)
-  return to_enum(__method__, fb, query, judge:) unless block_given?
-  q = "(and #{query} (not (eq seen '#{judge}')))"
-  fb.query(q).each do |f|
-    yield f
-    f.seen = judge
-  end
-end
-
-# Returns a decorated global factbase, which only touches a tuple once.
-def each_tuple_once(fb, *queries, judge: $judge)
-  return to_enum(__method__, fb, *queries, judge:) unless block_given?
-  qq = queries.map { |q| "(and #{q} (not (eq seen '#{judge}')))" }
-  Factbase::Tuples.new(fb, qq).each do |fs|
-    yield fs
-    fs.each do |f|
-      f.seen = judge
+# Test.
+# Author:: Yegor Bugayenko (yegor256@gmail.com)
+# Copyright:: Copyright (c) 2024 Zerocracy
+# License:: MIT
+class TestIterate < Minitest::Test
+  def test_simple
+    $options = Judges::Options.new(['repositories=foo/bar', 'testing=true'])
+    $global = {}
+    $fb = Factbase.new
+    $fb.insert.foo = 42
+    iterate($fb, Loog::VERBOSE) do
+      as 'labels-were-scanned'
+      by '(agg (always) (max foo))'
+      limit 2
+      each do |_repository, foo|
+        f = $fb.insert
+        f.foo = foo + 1
+        f.foo
+      end
     end
-  end
-end
-
-def each_tuple_once_txn(fb, *queries, judge: $judge)
-  fb.txn do |fbt|
-    each_tuple_once(fbt, *queries, judge:) do |fs|
-      yield [fbt] + fs
-    end
+    assert_equal(4, $fb.size)
   end
 end

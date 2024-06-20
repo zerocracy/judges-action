@@ -23,29 +23,35 @@
 # SOFTWARE.
 
 conclude do
-  on '(and (eq what "label-was-attached")
+  on "(and
+    (eq what 'issue-was-closed')
+    (exists who)
     (exists when)
     (exists issue)
     (exists repository)
+    (join 'label' (and
+      (eq what 'label-was-attached')
+      (eq issue $issue)
+      (eq repository $repository)
+      (or (eq label 'bug') (eq label 'enhancement') (eq label 'question'))))
     (exists label)
-    (or (eq label "bug") (eq label "enhancement") (eq label "question")))'
-  on '(and (eq what "issue-was-closed")
-    (exists who)
-    (exists when)
-    (eq issue {f0.issue})
-    (eq repository {f0.repository}))'
-  on '(and (eq what "issue-was-assigned")
-    (exists when)
-    (eq issue {f0.issue})
-    (eq is_human 1)
-    (eq repository {f0.repository})
-    (exists who))'
-  follow 'f1.when f2.who repository issue'
-  draw do |n, attached, closed, assigned|
-    n.seconds = closed.when - assigned.when
-    n.closer = closed.who
+    (join 'assigned_when<=when,assigner<=who' (and
+        (eq what 'issue-was-assigned')
+        (eq issue $issue)
+        (eq repository $repository)
+        (eq is_human 1)))
+    (exists assigner)
+    (empty (and
+      (eq what '#{$judge}')
+      (eq issue $issue)
+      (eq repository $repository))))"
+  follow 'when repository issue label'
+  draw do |n, prev|
+    n.seconds = prev.when - prev.assigned_when
+    n.closer = prev.who
+    n.who = prev.assigner
     "The bug/feature in the issue #{octo.repo_name_by_id(n.repository)}##{n.issue} was resolved, " \
-      "because it was closed by @#{octo.user_name_by_id(closed.who)} and earlier it was" \
-      "assigned to @#{octo.user_name_by_id(n.who)}' and the label '##{attached.label}' was attached."
+      "because it was closed by @#{octo.user_name_by_id(n.closer)} and earlier it was" \
+      "assigned to @#{octo.user_name_by_id(n.who)}' and the label '##{n.label}' was attached."
   end
 end

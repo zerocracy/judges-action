@@ -33,10 +33,9 @@ require_relative '../lib/octo'
 # License:: MIT
 class TestOcto < Minitest::Test
   def test_simple_use
-    $global = {}
-    $options = Judges::Options.new({ 'testing' => true })
-    $loog = Loog::NULL
-    o = octo
+    global = {}
+    options = Judges::Options.new({ 'testing' => true })
+    o = octo(loog: Loog::NULL, global:, options:)
     assert(!o.off_quota)
   end
 

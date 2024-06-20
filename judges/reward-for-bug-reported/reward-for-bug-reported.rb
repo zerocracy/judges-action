@@ -23,12 +23,17 @@
 # SOFTWARE.
 
 conclude do
-  on '(and (eq what "bug-was-accepted")
+  on "(and
+    (eq what 'bug-was-accepted')
     (exists when)
     (exists reporter)
     (exists issue)
     (exists repository)
-    (exists who))'
+    (exists who)
+    (empty (and
+      (eq what '#{$judge}')
+      (eq issue $issue)
+      (eq repository $repository))))"
   follow 'repository issue'
   draw do |n, accepted|
     n.award = 15

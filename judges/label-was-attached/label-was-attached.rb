@@ -22,72 +22,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# Take the latest GitHub issue number that we checked for labels.
-def latest(repo)
-  f = fb.query("(and (eq seen '#{$judge}') (eq repository #{repo}) (exists issue) (eq _time (max _time)))").each.to_a[0]
-  issue = f.issue unless f.nil?
-  if f.nil?
-    issue = 0
-    $loog.debug("We never searched for labels in the ##{repo} repo")
-  else
-    $loog.debug("We most recently checked issue ##{issue} in ##{repo} repo, for labels")
-  end
-  issue
-end
-
-# Take the maximum GitHub issue number for this repo.
-def max(repo)
-  f = fb.query("(eq issue (agg (and (eq what 'issue-was-opened') (eq repository #{repo})) (max issue)))").each.to_a[0]
-  if f.nil?
-    $loog.debug("No issues have been opened in the ##{repo} repo")
-    return nil?
-  end
-  $loog.debug("The issues #{f.issue} is the largest in the ##{repo} repo")
-  f.issue
-end
-
-fb.query('(unique repository)').each.to_a.map(&:repository).each do |repo|
-  latest = latest(repo)
-  unless latest.zero?
-    max = max(repo)
-    if max.nil? || latest == max
-      latest = 0
-      $loog.debug("It's time to start from the first issue, since we reached the max issue ##{max}")
-    else
-      $loog.debug("The latest was the issue ##{latest}, while the max is ##{max}")
-    end
-  end
-  conclude do
-    quota_aware
-    on "(eq issue
-      (agg
-        (and
-          (not (eq seen '#{$judge}'))
-          (eq what 'issue-was-opened')
-          (eq repository #{repo})
-          (gt issue #{latest}))
-        (min issue)))"
-    threshold $options.max_labels || 16
-    look do |f, _|
-      octo.issue_timeline(f.repository, f.issue).each do |te|
-        next unless te[:event] == 'labeled'
-        badge = te[:label][:name]
-        next unless %w[bug enhancement question].include?(badge)
-        nn = if_absent(fb) do |n|
-          n.repository = f.repository
-          n.issue = f.issue
-          n.label = te[:label][:name]
-          n.who = te[:actor][:id]
-          n.when = te[:created_at]
-          n.what = $judge
-        end
-        next if nn.nil?
-        nn.details =
-          "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
-          "to the issue #{octo.repo_name_by_id(nn.repository)}##{nn.issue} " \
-          "at #{nn.when.utc.iso8601}; this may trigger future judges."
+iterate do
+  as 'labels-were-scanned'
+  by "(agg (and (eq repository $repository) (eq what 'issue-was-opened') (gt issue $before)) (min issue))"
+  limit $options.max_labels
+  quota_aware
+  each do |repository, issue|
+    octo.issue_timeline(repository, issue).each do |te|
+      next unless te[:event] == 'labeled'
+      badge = te[:label][:name]
+      next unless %w[bug enhancement question].include?(badge)
+      nn = if_absent(fb) do |n|
+        n.repository = repository
+        n.issue = issue
+        n.label = te[:label][:name]
+        n.what = $judge
       end
-      f.seen = $judge
+      next if nn.nil?
+      nn.who = te[:actor][:id]
+      nn.when = te[:created_at]
+      nn.details =
+        "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
+        "to the issue #{octo.repo_name_by_id(nn.repository)}##{nn.issue} " \
+        "at #{nn.when.utc.iso8601}; this may trigger future judges."
     end
+    issue
   end
 end

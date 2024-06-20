@@ -31,7 +31,7 @@ conclude do
     (exists issue)
     (exists repository)
     (not (exists href)))'
-  consider do |f, _|
+  consider do |f|
     name = octo.user_name_by_id(f.who)
     repo = octo.repo_name_by_id(f.repository)
     id = octo.add_comment(repo, f.issue, "@#{name} #{f.reason}")

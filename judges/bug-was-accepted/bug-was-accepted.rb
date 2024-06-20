@@ -23,21 +23,26 @@
 # SOFTWARE.
 
 conclude do
-  on '(and (eq what "issue-was-opened")
+  on "
+  (and
+    (eq what 'label-was-attached')
     (exists who)
-    (eq is_human 1)
     (exists issue)
-    (exists repository))'
-  on '(and (eq what "label-was-attached")
-    (exists who)
-    (eq issue {f0.issue})
-    (eq repository {f0.repository})
-    (eq label "bug"))'
-  follow 'when who repository f0.issue'
-  draw do |n, opened, attached|
-    n.reporter = opened.who
+    (exists repository)
+    (join 'reporter<=who' (and
+        (eq what 'issue-was-opened')
+        (eq issue $issue)
+        (eq repository $repository)))
+    (exists reporter)
+    (empty (and
+      (eq what '#{$judge}')
+      (eq issue $issue)
+      (eq repository $repository)))
+    (eq label 'bug'))"
+  follow 'when who repository issue reporter'
+  draw do |n, prev|
     "In the repository ##{n.repository}, the user ##{n.who} attached " \
-      "the '##{attached.label}' label to the issue ##{n.issue} " \
+      "the '##{prev.label}' label to the issue ##{n.issue} " \
       "reported by the user ##{n.reporter}; " \
       'this means that a bug was-accepted as valid, by the project team.'
   end

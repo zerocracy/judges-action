@@ -24,7 +24,8 @@
 
 source 'https://rubygems.org'
 
-gem 'factbase', '~>0.0.50'
+gem 'factbase', '~>0.0.52'
+# gem 'factbase', path: '/code/gems/factbase'
 gem 'faraday', '2.9.1'
 gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-multipart', '1.0.4'
