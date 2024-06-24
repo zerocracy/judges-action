@@ -101,9 +101,11 @@ in #{json[:repo][:name]} is ignored")
       fb.txn do |fbt|
         f = if_absent(fbt) do |n|
           put_new_event(n, json)
+        end
+        unless f.nil?
+          $loog.info("Detected new event ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
           detected += 1
         end
-        $loog.info("Detected new event ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}") unless f.nil?
       end
     end
     $loog.info("In #{repository}, Detected #{detected} events out of #{total} scanned")
