@@ -42,6 +42,8 @@ entry: target/docker-image.txt
 	docker run --rm \
 		-e GITHUB_WORKSPACE=/tmp \
 		-e INPUT_FACTBASE=/tmp/recent.fb \
+		-e INPUT_CYCLES=2 \
+		-e INPUT_VERBOSE=true \
 		-e INPUT_PAGES=pages \
 		-e "INPUT_OPTIONS=$$(cat target/opts.txt)" \
 		"$${img}"
@@ -60,6 +62,7 @@ verify:
 
 target/docker-image.txt:
 	mkdir -p "$$(dirname $@)"
+	docker build -t judges-action --progress=plain .
 	docker build -t judges-action -q . > "$@"
 
 clean:
