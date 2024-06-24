@@ -26,7 +26,7 @@ source 'https://rubygems.org'
 
 gem 'decoor', '~>0.0'
 gem 'factbase', '~>0.0.52'
-gem 'faraday', '2.9.1'
+gem 'faraday', '2.9.2'
 gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-multipart', '1.0.4'
 gem 'faraday-retry', '2.2.1'
