@@ -29,7 +29,8 @@ iterate do
   limit 1
 
   def self.skip_event(json)
-    $loog.debug("The #{json[:type]} GitHub event ##{json[:id]} is ignored")
+    $loog.debug("The #{json[:type]} GitHub event ##{json[:id]} \
+in #{json[:repo][:name]} is ignored")
     raise Factbase::Rollback
   end
 
