@@ -29,8 +29,10 @@ iterate do
   limit 1
 
   def self.skip_event(json)
-    $loog.debug("The #{json[:type]} GitHub event ##{json[:id]} \
-in #{json[:repo][:name]} is ignored")
+    $loog.debug(
+      "The #{json[:type]} GitHub event ##{json[:id]} " \
+      "in #{json[:repo][:name]} is ignored"
+    )
     raise Factbase::Rollback
   end
 
@@ -94,10 +96,16 @@ in #{json[:repo][:name]} is ignored")
     total = 0
     detected = 0
     octo.repository_events(repository).each_with_index do |json, idx|
-      break if idx >= $options.max_events
+      if idx >= $options.max_events
+        $loog.debug("Have already scanned #{idx} events, it's time to stop")
+        break
+      end
       total += 1
       id = json[:id].to_i
-      break if id < latest
+      if id < latest
+        $loog.debug("The event ID ##{id} is smaller than the latest ##{latest}, time to stop")
+        break
+      end
       fb.txn do |fbt|
         f = if_absent(fbt) do |n|
           put_new_event(n, json)
@@ -108,7 +116,10 @@ in #{json[:repo][:name]} is ignored")
         end
       end
     end
-    $loog.info("In #{repository}, Detected #{detected} events out of #{total} scanned")
+    $loog.info(
+      "In #{octo.repo_name_by_id(repository)}, " \
+      "detected #{detected} events out of #{total} scanned"
+    )
     id
   end
 end
