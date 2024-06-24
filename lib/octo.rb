@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 require 'loog'
+require 'decoor'
 require 'obk'
 require 'octokit'
 require 'verbose'
@@ -58,39 +59,43 @@ def octo(options: $options, global: $global, loog: Loog::NULL)
         builder.adapter(Faraday.default_adapter)
       end
       o.middleware = stack
-      o = Verbose.new(o, log: $loog)
+      o = Verbose.new(o, log: loog)
     else
       loog.debug('The connection to GitHub API is mocked')
-      o = FakeOctokit.new(loog:)
+      o = FakeOctokit.new
     end
-    def o.off_quota
-      left = rate_limit.remaining
-      if left < 5
-        @loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
-        true
-      else
-        false
+    decoor(o, loog:) do
+      def off_quota
+        left = @origin.rate_limit.remaining
+        if left < 5
+          @loog.info("To much GitHub API quota consumed already (remaining=#{left}), stopping")
+          true
+        else
+          false
+        end
+      end
+
+      def user_name_by_id(id)
+        json = @origin.user(id)
+        name = json[:login]
+        @loog.debug("GitHub user ##{id} has a name: @#{name}")
+        name
+      end
+
+      def repo_id_by_name(name)
+        json = @origin.repository(name)
+        id = json[:id]
+        @loog.debug("GitHub repository #{name} has an ID: ##{id}")
+        id
+      end
+
+      def repo_name_by_id(id)
+        json = @origin.repository(id)
+        name = json[:full_name]
+        @loog.debug("GitHub repository ##{id} has a name: #{name}")
+        name
       end
     end
-    def o.user_name_by_id(id)
-      json = user(id)
-      name = json[:login]
-      @loog.debug("GitHub user ##{id} has a name: @#{name}")
-      name
-    end
-    def o.repo_id_by_name(name)
-      json = repository(name)
-      id = json[:id]
-      @loog.debug("GitHub repository #{name} has an ID: ##{id}")
-      id
-    end
-    def o.repo_name_by_id(id)
-      json = repository(id)
-      name = json[:full_name]
-      @loog.debug("GitHub repository ##{id} has a name: #{name}")
-      name
-    end
-    o
   end
 end
 
@@ -105,10 +110,6 @@ end
 
 # Fake GitHub client, for tests.
 class FakeOctokit
-  def initialize(loog: Loog::NULL)
-    @loog = loog
-  end
-
   def rate_limit
     o = Object.new
     def o.remaining

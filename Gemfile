@@ -24,8 +24,8 @@
 
 source 'https://rubygems.org'
 
+gem 'decoor', '~>0.0'
 gem 'factbase', '~>0.0.52'
-# gem 'factbase', path: '/code/gems/factbase'
 gem 'faraday', '2.9.1'
 gem 'faraday-http-cache', '2.5.1'
 gem 'faraday-multipart', '1.0.4'
@@ -34,6 +34,7 @@ gem 'judges', '~>0.8'
 gem 'minitest', '5.23.1'
 gem 'obk', '~>0.3.1'
 gem 'octokit', '~>9.1.0'
+gem 'others', '~>0.0'
 gem 'rake', '13.2.1'
 gem 'rubocop', '1.64.1'
 gem 'verbose', '~>0.0'

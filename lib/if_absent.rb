@@ -23,11 +23,19 @@
 # SOFTWARE.
 
 require 'time'
+require 'others'
 
 # Injects a fact if it's absent in the factbase.
 def if_absent(fb)
   attrs = {}
-  f = Accumulator.new(attrs)
+  f = others(map: attrs) do |*args|
+    k = args[0]
+    if k.end_with?('=')
+      @map[k[0..-2].to_sym] = args[1]
+    else
+      @map[k.to_sym]
+    end
+  end
   yield f
   q = attrs.except('_id', '_time', '_version').map do |k, v|
     vv = v.to_s
@@ -43,33 +51,4 @@ def if_absent(fb)
   n = fb.insert
   attrs.each { |k, v| n.send("#{k}=", v) }
   n
-end
-
-# Predents to be a fact, just accumulating all attribute sets.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
-class Accumulator
-  def initialize(map)
-    @map = map
-  end
-
-  def method_missing(*args)
-    k = args[0]
-    if k.end_with?('=')
-      @map[k[0..-2].to_sym] = args[1]
-    else
-      @map[k.to_sym]
-    end
-  end
-
-  # rubocop:disable Style/OptionalBooleanParameter
-  def respond_to?(_method, _include_private = false)
-    # rubocop:enable Style/OptionalBooleanParameter
-    true
-  end
-
-  def respond_to_missing?(_method, _include_private = false)
-    true
-  end
 end
