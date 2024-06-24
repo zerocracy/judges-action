@@ -91,17 +91,22 @@ in #{json[:repo][:name]} is ignored")
 
   over do |repository, latest|
     id = nil
+    total = 0
+    detected = 0
     octo.repository_events(repository).each_with_index do |json, idx|
       break if idx >= $options.max_events
+      total += 1
       id = json[:id].to_i
       break if id < latest
       fb.txn do |fbt|
         f = if_absent(fbt) do |n|
           put_new_event(n, json)
+          detected += 1
         end
         $loog.info("Detected new event ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}") unless f.nil?
       end
     end
+    $loog.info("In #{repository}, Detected #{detected} events out of #{total} scanned")
     id
   end
 end
