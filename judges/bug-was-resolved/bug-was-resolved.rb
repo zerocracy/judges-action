@@ -41,15 +41,15 @@ conclude do
         (eq repository $repository)
         (eq is_human 1)))
     (exists assigner)
+    (as seconds (minus when assigned_when))
+    (as closer who) # who closed the bug
+    (as who assigner) # who assigned the bug to the resolver
     (empty (and
       (eq what '#{$judge}')
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'when repository issue label'
-  draw do |n, prev|
-    n.seconds = prev.when - prev.assigned_when
-    n.closer = prev.who
-    n.who = prev.assigner
+  follow 'when repository issue label seconds closer who'
+  draw do |n, _|
     "The bug/feature in the issue #{octo.repo_name_by_id(n.repository)}##{n.issue} was resolved, " \
       "because it was closed by @#{octo.user_name_by_id(n.closer)} and earlier it was" \
       "assigned to @#{octo.user_name_by_id(n.who)}' and the label '##{n.label}' was attached."

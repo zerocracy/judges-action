@@ -34,6 +34,7 @@ conclude do
         (eq issue $issue)
         (eq repository $repository)))
     (exists reporter)
+    (not (eq who reporter))
     (empty (and
       (eq what '#{$judge}')
       (eq issue $issue)
