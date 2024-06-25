@@ -45,7 +45,7 @@ jobs:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           verbose: true
           options: |
-            max_events=100
+            max_events=1000
             token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action
           factbase: zerocracy.fb
