@@ -54,7 +54,7 @@ def octo(options: $options, global: $global, loog: Loog::NULL)
       }
       stack = Faraday::RackBuilder.new do |builder|
         builder.use(Faraday::Retry::Middleware)
-        builder.use(Faraday::HttpCache, serializer: Marshal, shared_cache: true)
+        builder.use(Faraday::HttpCache, serializer: Marshal, shared_cache: false)
         builder.use(Octokit::Response::RaiseError)
         builder.adapter(Faraday.default_adapter)
       end
