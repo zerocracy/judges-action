@@ -63,7 +63,10 @@ if [ -n "${INPUT_VERBOSE}" ]; then
 fi
 
 if [ -n "${INPUT_TOKEN}" ]; then
-    bundle exec judges "${gopts[@]}" pull "--token=${INPUT_TOKEN}" "${name}" "${fb}"
+    bundle exec judges "${gopts[@]}" pull \
+        "--token=${INPUT_TOKEN}" \
+        "--owner=${INPUT_OWNER}" \
+        "${name}" "${fb}"
 fi
 
 if [ -n "${INPUT_TRIM}" ]; then
@@ -93,5 +96,8 @@ bundle exec judges "${gopts[@]}" update \
     "${options[@]}" "${SELF}/judges" "${fb}"
 
 if [ -n "${INPUT_TOKEN}" ]; then
-    bundle exec judges "${gopts[@]}" push "--token=${INPUT_TOKEN}" "${name}" "${fb}"
+    bundle exec judges "${gopts[@]}" push \
+        "--owner=${INPUT_OWNER}" \
+        "--token=${INPUT_TOKEN}" \
+        "${name}" "${fb}"
 fi
