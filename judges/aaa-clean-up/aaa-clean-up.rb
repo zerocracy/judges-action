@@ -22,6 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'fbe/fb'
+
 [
   '(not (exists _id))',
   '(not (exists _time))',
@@ -31,4 +33,4 @@
   '(eq what "git-was-pushed")',
   '(eq event_type "DeleteEvent")',
   '(eq what "comment-was-posted")'
-].each { |q| fb.query(q).delete! }
+].each { |q| Fbe.fb.query(q).delete! }

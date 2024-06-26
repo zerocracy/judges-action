@@ -22,7 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-conclude do
+require 'fbe/octo'
+require 'fbe/conclude'
+
+Fbe.conclude do
   on '(and (eq what "bug-was-resolved")
     (exists seconds)
     (exists when)
@@ -36,8 +39,8 @@ conclude do
     n.reason =
       'Thanks for closing this issue! ' \
       "You've earned #{n.award} points for this."
-    "It's time to reward ##{octo.user_name_by_id(n.who)} for the issue closed in " \
-      "#{octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
+    "It's time to reward ##{Fbe.octo.user_name_by_id(n.who)} for the issue closed in " \
+      "#{Fbe.octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
       'this reward should be delivered to the user by one of the future judges.'
   end
 end

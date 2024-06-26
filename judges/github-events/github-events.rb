@@ -22,7 +22,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-iterate do
+require 'fbe/octo'
+require 'fbe/iterate'
+require 'fbe/if_absent'
+
+Fbe.iterate do
   as 'events-were-scanned'
   by '(plus 0 $before)'
   quota_aware
@@ -95,7 +99,7 @@ iterate do
     id = nil
     total = 0
     detected = 0
-    octo.repository_events(repository).each_with_index do |json, idx|
+    Fbe.octo.repository_events(repository).each_with_index do |json, idx|
       if idx >= $options.max_events
         $loog.debug("Have already scanned #{idx} events, it's time to stop")
         break
@@ -106,8 +110,8 @@ iterate do
         $loog.debug("The event ID ##{id} is smaller than the latest ##{latest}, time to stop")
         break
       end
-      fb.txn do |fbt|
-        f = if_absent(fbt) do |n|
+      Fbe.fb.txn do |fbt|
+        f = Fbe.if_absent(fbt) do |n|
           put_new_event(n, json)
         end
         unless f.nil?
@@ -117,7 +121,7 @@ iterate do
       end
     end
     $loog.info(
-      "In #{octo.repo_name_by_id(repository)}, " \
+      "In #{Fbe.octo.repo_name_by_id(repository)}, " \
       "detected #{detected} events out of #{total} scanned"
     )
     id

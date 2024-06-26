@@ -5,7 +5,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     backtrace (0.4.0)
-    concurrent-ruby (1.2.3)
+    concurrent-ruby (1.3.3)
     decoor (0.0.1)
     ethon (0.16.0)
       ffi (>= 1.15.0)
@@ -18,7 +18,7 @@ GEM
       others (~> 0.0)
       tago (~> 0.0)
       yaml (~> 0.3)
-    faraday (2.9.1)
+    faraday (2.9.2)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-http-cache (2.5.1)
       faraday (>= 0.8)
@@ -28,14 +28,27 @@ GEM
       net-http
     faraday-retry (2.2.1)
       faraday (~> 2.0)
+    fbe (0.0.2)
+      backtrace (~> 0.3)
+      decoor (~> 0.0)
+      factbase (~> 0.0)
+      faraday (~> 2.9)
+      faraday-http-cache (~> 2.5)
+      faraday-multipart (~> 1.0)
+      faraday-retry (~> 2.2)
+      judges (~> 0.0)
+      loog (~> 0.2)
+      obk (~> 0.0)
+      octokit (~> 9.1.0)
+      others (~> 0.0)
+      verbose (~> 0.0)
     ffi (1.17.0-arm64-darwin)
-    ffi (1.17.0-x86_64-linux-gnu)
     gli (2.21.1)
     iri (0.8.0)
     json (2.7.2)
-    judges (0.12.0)
+    judges (0.13.0)
       backtrace (~> 0.3)
-      concurrent-ruby (= 1.2.3)
+      concurrent-ruby (~> 1.2)
       factbase (~> 0.0)
       gli (~> 2.21)
       iri (~> 0.8)
@@ -54,8 +67,6 @@ GEM
     net-http (0.4.1)
       uri
     nokogiri (1.16.6-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.6-x86_64-linux)
       racc (~> 1.4)
     obk (0.3.1)
     octokit (9.1.0)
@@ -104,23 +115,16 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
-  x86_64-linux
 
 DEPENDENCIES
   decoor (~> 0.0)
   factbase (~> 0.0.52)
-  faraday (= 2.9.1)
-  faraday-http-cache (= 2.5.1)
-  faraday-multipart (= 1.0.4)
-  faraday-retry (= 2.2.1)
+  fbe (~> 0.0)
   judges (~> 0.8)
   minitest (= 5.23.1)
-  obk (~> 0.3.1)
-  octokit (~> 9.1.0)
   others (~> 0.0)
   rake (= 13.2.1)
   rubocop (= 1.64.1)
-  verbose (~> 0.0)
 
 BUNDLED WITH
    2.5.6

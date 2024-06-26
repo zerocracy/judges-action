@@ -91,6 +91,8 @@ echo "The 'judges-action' ${VERSION} is running"
 cd "${SELF}"
 bundle exec judges "${gopts[@]}" update \
     --no-log \
+    --quiet \
+    --summary \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
     "${options[@]}" "${SELF}/judges" "${fb}"

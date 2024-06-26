@@ -22,7 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-conclude do
+require 'fbe/octo'
+require 'fbe/conclude'
+
+Fbe.conclude do
   on "(and
     (eq what 'bug-was-accepted')
     (exists when)
@@ -44,8 +47,8 @@ conclude do
       'By reporting bugs, you help our project improve its quality. ' \
       'If you find anything else in the repository that doesn\'t look ' \
       'as good as you might expect, do not hesitate to report it.'
-    "It's time to reward @#{octo.user_name_by_id(n.who)} for the issue reported in " \
-      "#{octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
+    "It's time to reward @#{Fbe.octo.user_name_by_id(n.who)} for the issue reported in " \
+      "#{Fbe.octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
       'this reward should be delivered to the user by one of the future judges.'
   end
 end

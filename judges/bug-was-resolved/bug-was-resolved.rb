@@ -22,7 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-conclude do
+require 'fbe/octo'
+require 'fbe/conclude'
+
+Fbe.conclude do
   on "(and
     (eq what 'issue-was-closed')
     (exists who)
@@ -50,8 +53,8 @@ conclude do
       (eq repository $repository))))"
   follow 'when repository issue label seconds closer who'
   draw do |n, _|
-    "The bug/feature in the issue #{octo.repo_name_by_id(n.repository)}##{n.issue} was resolved, " \
-      "because it was closed by @#{octo.user_name_by_id(n.closer)} and earlier it was" \
-      "assigned to @#{octo.user_name_by_id(n.who)}' and the label '##{n.label}' was attached."
+    "The bug/feature in the issue #{Fbe.octo.repo_name_by_id(n.repository)}##{n.issue} was resolved, " \
+      "because it was closed by @#{Fbe.octo.user_name_by_id(n.closer)} and earlier it was" \
+      "assigned to @#{Fbe.octo.user_name_by_id(n.who)}' and the label '##{n.label}' was attached."
   end
 end

@@ -22,17 +22,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-iterate do
+require 'fbe/octo'
+require 'fbe/iterate'
+require 'fbe/if_absent'
+
+Fbe.iterate do
   as 'labels-were-scanned'
   by "(agg (and (eq repository $repository) (eq what 'issue-was-opened') (gt issue $before)) (min issue))"
   limit $options.max_labels || 10
   quota_aware
   over do |repository, issue|
-    octo.issue_timeline(repository, issue).each do |te|
+    Fbe.octo.issue_timeline(repository, issue).each do |te|
       next unless te[:event] == 'labeled'
       badge = te[:label][:name]
       next unless %w[bug enhancement question].include?(badge)
-      nn = if_absent(fb) do |n|
+      nn = Fbe.if_absent(Fbe.fb) do |n|
         n.repository = repository
         n.issue = issue
         n.label = te[:label][:name]
@@ -43,7 +47,7 @@ iterate do
       nn.when = te[:created_at]
       nn.details =
         "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{octo.repo_name_by_id(nn.repository)}##{nn.issue} " \
+        "to the issue #{Fbe.octo.repo_name_by_id(nn.repository)}##{nn.issue} " \
         "at #{nn.when.utc.iso8601}; this may trigger future judges."
     end
     issue
