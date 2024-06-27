@@ -44,9 +44,9 @@ jobs:
             token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action
           factbase: zerocracy.fb
-          trim: 5
+          trim: 90
           cycles: 2
-      - uses: zerocracy/pages-action@0.0.10
+      - uses: zerocracy/pages-action@0.0.11
         with:
           verbose: true
           factbase: zerocracy.fb

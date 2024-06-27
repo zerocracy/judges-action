@@ -27,11 +27,11 @@ runs:
   image: Dockerfile
 inputs:
   token:
-    description: 'Authentication token from Zerocracyl.com'
-    required: false
+    description: 'Authentication token from www.zerocracy.com'
+    required: true
   owner:
     description: 'Unique ID of the running script'
-    required: false
+    required: true
     default: 'github-actions'
   options:
     description: 'Command line options for the "judges" tool'
@@ -39,15 +39,16 @@ inputs:
   verbose:
     description: 'Log as much debug information as possible'
     required: false
+    default: false
   factbase:
-    description: 'Path of the factbase file'
-    required: false
-    default: 'recent.fb'
+    description: 'Path of the factbase file (also the name of the job in Zerocracy)'
+    required: true
+    default: 'default.fb'
   trim:
-    description: 'Trim by how many days'
+    description: 'Trim by how many days (better not less than 90)'
     required: false
     default: 999999
   cycles:
-    description: 'How many update cycles to run'
-    required: false
+    description: 'How many update cycles to run (keep it under 10)'
+    required: true
     default: 5
