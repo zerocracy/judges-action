@@ -95,7 +95,9 @@ bundle exec judges "${gopts[@]}" update \
     --summary \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
-    "${options[@]}" "${SELF}/judges" "${fb}"
+    "${options[@]}" \
+    "${SELF}/judges" \
+    "${fb}"
 
 if [ -n "${INPUT_TOKEN}" ]; then
     bundle exec judges "${gopts[@]}" push \
