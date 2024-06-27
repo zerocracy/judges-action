@@ -20,7 +20,7 @@ at the `.github/workflows/` directory
 name: zerocracy
 'on':
   schedule:
-    - cron: '0,10,20,30,40,50 * * * *'
+    - cron: '0 * * * *'
 concurrency:
   group: zerocracy
   cancel-in-progress: false

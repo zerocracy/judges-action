@@ -21,11 +21,6 @@
 # SOFTWARE.
 ---
 name: zerocracy
-permissions:
-  issues: write
-  pull-requests: write
-  pages: write
-  contents: write
 'on':
   push:
     branches:
@@ -37,7 +32,6 @@ concurrency:
   cancel-in-progress: false
 jobs:
   zerocracy:
-    permissions: write-all
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +46,7 @@ jobs:
           factbase: zerocracy.fb
           trim: 5
           cycles: 2
-      - uses: zerocracy/pages-action@0.0.9
+      - uses: zerocracy/pages-action@0.0.10
         with:
           verbose: true
           factbase: zerocracy.fb
