@@ -46,7 +46,7 @@ jobs:
           factbase: zerocracy.fb
           trim: 90
           cycles: 2
-      - uses: zerocracy/pages-action@0.0.12
+      - uses: zerocracy/pages-action@0.0.13
         with:
           options: |
             token=${{ secrets.GITHUB_TOKEN }}
