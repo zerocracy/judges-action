@@ -33,6 +33,7 @@ Fbe.conclude do
     (exists repository)
     (join 'reporter<=who' (and
         (eq what 'issue-was-opened')
+        (eq is_human 1)
         (eq issue $issue)
         (eq repository $repository)))
     (exists reporter)
