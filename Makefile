@@ -63,7 +63,7 @@ verify:
 
 target/docker-image.txt:
 	mkdir -p "$$(dirname $@)"
-	docker build -t judges-action --progress=plain .
+	docker build -t judges-action .
 	docker build -t judges-action -q . > "$@"
 
 clean:
