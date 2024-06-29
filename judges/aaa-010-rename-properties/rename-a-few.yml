@@ -20,38 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-options:
-  testing: true
 input:
   -
-    _id: 1
-    what: bug-was-accepted
-    cause:
-      - 4
-      - 2
-    reporter: 43
-    details: >-
-      The bug was accepted some time ago, this is why this fact is here.
-      The bug was accepted some time ago, this is why this fact is here.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:45
-    issue: 44
-  -
-    _id: 2
-    what: reward-for-bug-reported
-    cause:
-      - 4
-      - 2
-    award: 15
-    why: Because it's important.
-    details: >-
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:50
-    issue: 44
+    _id: 666
+    reason: Hello, world!
 expected:
-  - /fb[count(f)=2]
+  - /fb[count(f)=1]
+  - /fb/f[why]
+  - /fb/f[_id='666']

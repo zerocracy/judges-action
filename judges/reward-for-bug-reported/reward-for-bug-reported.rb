@@ -42,13 +42,13 @@ Fbe.conclude do
     n.award = 15
     n.when = Time.now
     n.who = accepted.reporter
-    n.reason =
-      "Thanks for reporting a new bug! You've earned #{n.award} points for this. " \
+    n.why =
+      "Thanks for reporting a new bug! You've just earned #{J.award(n)} points for this. " \
       'By reporting bugs, you help our project improve its quality. ' \
       'If you find anything else in the repository that doesn\'t look ' \
       'as good as you might expect, do not hesitate to report it.'
-    "It's time to reward @#{Fbe.octo.user_name_by_id(n.who)} for the issue reported in " \
-      "#{Fbe.octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
+    "It's time to reward #{J.who(n)} for the issue reported in " \
+      "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
       'this reward should be delivered to the user by one of the future judges.'
   end
 end

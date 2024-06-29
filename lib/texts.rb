@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,39 +21,21 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-options:
-  testing: true
-input:
-  -
-    _id: 1
-    what: bug-was-accepted
-    cause:
-      - 4
-      - 2
-    reporter: 43
-    details: >-
-      The bug was accepted some time ago, this is why this fact is here.
-      The bug was accepted some time ago, this is why this fact is here.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:45
-    issue: 44
-  -
-    _id: 2
-    what: reward-for-bug-reported
-    cause:
-      - 4
-      - 2
-    award: 15
-    why: Because it's important.
-    details: >-
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:50
-    issue: 44
-expected:
-  - /fb[count(f)=2]
+
+require 'fbe/octo'
+
+module J; end
+
+def J.issue(fact)
+  "#{Fbe.octo.repo_name_by_id(fact.repository)}##{fact.issue}"
+end
+
+def J.who(fact, prop = :who)
+  "@#{Fbe.octo.user_name_by_id(fact.send(prop.to_s))}"
+end
+
+def J.award(fact, prop = :award)
+  format('%+d', fact.send(prop.to_s))
+end
+
+

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,39 +21,31 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-options:
-  testing: true
-input:
-  -
-    _id: 1
-    what: bug-was-accepted
-    cause:
-      - 4
-      - 2
-    reporter: 43
-    details: >-
-      The bug was accepted some time ago, this is why this fact is here.
-      The bug was accepted some time ago, this is why this fact is here.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:45
-    issue: 44
-  -
-    _id: 2
-    what: reward-for-bug-reported
-    cause:
-      - 4
-      - 2
-    award: 15
-    why: Because it's important.
-    details: >-
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:50
-    issue: 44
-expected:
-  - /fb[count(f)=2]
+
+require 'fbe/octo'
+require 'fbe/conclude'
+
+Fbe.conclude do
+  on "(and
+    (eq what 'issue-was-closed')
+    (exists who)
+    (exists when)
+    (exists issue)
+    (exists repository)
+    (exists assigner)
+    (as seconds (minus when submitted_when))
+    (as closer who) # who closed the bug
+    (as who assigner) # who assigned the bug to the resolver
+    (empty (and
+      (eq what '#{$judge}')
+      (eq issue $issue)
+      (eq repository $repository))))"
+  follow 'when repository issue label seconds closer who'
+  draw do |n, _|
+    "The pull request #{J.issue(n)} " \
+      "created by @#{J.who(n)}' was merged, " \
+      "after #{Time.seconds}" \
+      "after #{n.comments} comments " \
+      "#{n['reviewer'].nil? ? 'by no reviewers' : "by #{n['reviewer'].size} reviewers"}"
+  end
+end

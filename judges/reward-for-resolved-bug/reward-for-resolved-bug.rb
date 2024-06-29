@@ -36,11 +36,11 @@ Fbe.conclude do
   draw do |n, _resolved|
     n.award = 30
     n.when = Time.now
-    n.reason =
+    n.why =
       'Thanks for closing this issue! ' \
       "You've earned #{n.award} points for this."
-    "It's time to reward ##{Fbe.octo.user_name_by_id(n.who)} for the issue closed in " \
-      "#{Fbe.octo.repo_name_by_id(n.repository)}##{n.issue}, the reward amount is #{n.award}; " \
+    "It's time to reward #{J.who(n)} for the issue closed in " \
+      "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
       'this reward should be delivered to the user by one of the future judges.'
   end
 end

@@ -53,8 +53,8 @@ Fbe.conclude do
       (eq repository $repository))))"
   follow 'when repository issue label seconds closer who'
   draw do |n, _|
-    "The bug/feature in the issue #{Fbe.octo.repo_name_by_id(n.repository)}##{n.issue} was resolved, " \
-      "because it was closed by @#{Fbe.octo.user_name_by_id(n.closer)} and earlier it was" \
-      "assigned to @#{Fbe.octo.user_name_by_id(n.who)}' and the label '##{n.label}' was attached."
+    "The bug/feature in the issue #{J.issue(n)} was resolved, " \
+      "because it was closed by #{J.who(n, :closer)} and earlier it was" \
+      "assigned to #{J.who(n)} and the label '##{n.label}' was attached."
   end
 end

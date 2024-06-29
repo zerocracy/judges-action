@@ -47,7 +47,7 @@ Fbe.iterate do
       nn.when = te[:created_at]
       nn.details =
         "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{Fbe.octo.repo_name_by_id(nn.repository)}##{nn.issue} " \
+        "to the issue #{J.issue(nn)} " \
         "at #{nn.when.utc.iso8601}; this may trigger future judges."
     end
     issue
