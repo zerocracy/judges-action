@@ -63,8 +63,8 @@ verify:
 
 target/docker-image.txt:
 	mkdir -p "$$(dirname $@)"
-	docker build -t judges-action .
-	docker build -t judges-action -q . > "$@"
+	sudo docker build -t judges-action "$(pwd)"
+	sudo docker build -t judges-action -q "$(pwd)" > "$@"
 
 clean:
 	rm -f target
