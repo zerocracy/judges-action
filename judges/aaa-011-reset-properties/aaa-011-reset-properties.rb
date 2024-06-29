@@ -24,7 +24,8 @@
 
 {
   'what' => {
-    'reward-for-bug-reported' => 'bug-report-was-rewarded'
+    'reward-for-bug-reported' => 'bug-report-was-rewarded',
+    'reward-for-resolved-bug' => 'resolved-bug-was-rewarded'
   }
 }.each do |prop, resets|
   q = "(exists #{prop})"
