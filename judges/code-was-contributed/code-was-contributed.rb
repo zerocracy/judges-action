@@ -22,30 +22,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/octo'
 require 'fbe/conclude'
 
 Fbe.conclude do
   on "(and
-    (eq what 'issue-was-closed')
+    (eq what 'pull-was-merged')
     (exists who)
     (exists when)
     (exists issue)
     (exists repository)
-    (exists assigner)
+    (join 'submitted_when<=when,submitter<=who' (and
+        (eq what 'issue-was-opened')
+        (eq issue $issue)
+        (eq repository $repository)
+        (eq is_human 1)))
+    (exists submitter)
     (as seconds (minus when submitted_when))
-    (as closer who) # who closed the bug
-    (as who assigner) # who assigned the bug to the resolver
+    (as merger who) # who merged the pull request
+    (as who submitter) # who submitted the pull request
     (empty (and
       (eq what '#{$judge}')
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'when repository issue label seconds closer who'
+  follow 'when repository issue seconds who merger'
   draw do |n, _|
     "The pull request #{J.issue(n)} " \
-      "created by @#{J.who(n)}' was merged, " \
-      "after #{Time.seconds}" \
-      "after #{n.comments} comments " \
-      "#{n['reviewer'].nil? ? 'by no reviewers' : "by #{n['reviewer'].size} reviewers"}"
+      "created by @#{J.who(n)} was merged by @#{J.who(n, :merger)} " \
+      "after #{n.seconds} of being in review"
   end
 end

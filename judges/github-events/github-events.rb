@@ -53,6 +53,11 @@ Fbe.iterate do
       fact.push_id = json[:payload][:push_id]
       skip_event(json)
 
+    when 'PullRequestEvent'
+      fact.issue = json[:payload][:pull_request][:number]
+      skip_event(json) unless json[:payload][:action] == 'closed'
+      fact.what = "pull-was-#{json[:payload][:pull_request][:merged_at].nil? ? 'closed' : 'merged'}"
+
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
       if json[:payload][:action] == 'closed'

@@ -26,26 +26,26 @@ input:
   -
     _id: 2
     what: issue-was-opened
+    is_human: 1
     issue: 42
     repository: 555
     who: 777
-    when: 2024-07-29T23:54:24Z
+    when: 2024-03-29T23:54:24Z
   -
     _id: 3
-    what: pull-request-was-merged
+    what: pull-was-merged
     issue: 42
     repository: 555
-    is_human: 1
     who: 4535
     when: 2024-05-20T23:54:24Z
 expected:
-  - /fb[count(f)=4]
+  - /fb[count(f)=3]
   - /fb/f[cause]
   - /fb/f[when]
   - /fb/f[what='code-was-contributed' and _id]
-  - /fb/f[who='4535']
-  - /fb/f[closer='777']
-  - /fb/f[when='2024-07-29T23:54:24Z']
+  - /fb/f[who='777']
+  - /fb/f[merger='4535']
+  - /fb/f[when='2024-05-20T23:54:24Z']
   - /fb/f[seconds]
   - /fb/f[repository='555']
   - /fb/f[issue='42']

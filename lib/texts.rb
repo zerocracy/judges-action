@@ -24,6 +24,7 @@
 
 require 'fbe/octo'
 
+# Supplementary text manipulation functions.
 module J; end
 
 def J.issue(fact)
@@ -37,5 +38,3 @@ end
 def J.award(fact, prop = :award)
   format('%+d', fact.send(prop.to_s))
 end
-
-

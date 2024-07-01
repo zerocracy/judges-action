@@ -25,7 +25,7 @@
 source 'https://rubygems.org'
 
 gem 'decoor', '~>0.0'
-gem 'factbase', '~>0.0.52'
+gem 'factbase', '~>0.0'
 gem 'fbe', '~>0.0'
 gem 'judges', '~>0.8'
 gem 'minitest', '5.24.0'
