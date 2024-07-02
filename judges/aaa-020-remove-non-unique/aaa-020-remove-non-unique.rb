@@ -30,7 +30,7 @@
   q =
     "(and #{props.map { |s| "(exists #{s})" }.join(' ')} " \
     "(not (unique (concat #{props.map { |s| "'-' #{s} '-'" }.join(' ')}))))"
-  с = $fb.query(q).delete!
+  c = $fb.query(q).delete!
   if c.positive?
     $loog.info("#{q} -> deleted #{c} fact(s)")
   else
