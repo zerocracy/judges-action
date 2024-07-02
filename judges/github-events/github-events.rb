@@ -40,11 +40,7 @@ Fbe.iterate do
     raise Factbase::Rollback
   end
 
-  def self.put_new_event(fact, json)
-    fact.when = Time.parse(json[:created_at].iso8601)
-    fact.event_type = json[:type]
-    fact.event_id = json[:id].to_i
-    fact.repository = json[:repo][:id].to_i
+  def self.fill_up_event(fact, json)
     fact.who = json[:actor][:id].to_i if json[:actor]
 
     case json[:type]
@@ -52,7 +48,7 @@ Fbe.iterate do
       fact.what = 'git-was-pushed'
       fact.push_id = json[:payload][:push_id]
       fact.details =
-        "A new Git push ##{json[:payload][:push_id]} arrived to #{json[:repo][:name]} " \
+        "A new Git push ##{json[:payload][:push_id]} has arrived to #{json[:repo][:name]}, " \
         "made by #{J.who(fact)}."
       skip_event(json)
 
@@ -62,16 +58,16 @@ Fbe.iterate do
       fact.what = "pull-was-#{json[:payload][:pull_request][:merged_at].nil? ? 'closed' : 'merged'}"
       fact.details =
         "The pull request ##{json[:id]} in #{json[:repo][:name]} " \
-        "was #{json[:payload][:action]} by #{J.who(fact)}."
+        "has been #{json[:payload][:action]} by #{J.who(fact)}."
 
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
       if json[:payload][:action] == 'closed'
         fact.what = 'issue-was-closed'
-        fact.details = "The issue ##{json[:id]} in #{json[:repo][:name]} was closed by #{J.who(fact)}."
+        fact.details = "The issue #{json[:repo][:name]}##{json[:id]} has been closed by #{J.who(fact)}."
       elsif json[:payload][:action] == 'opened'
         fact.what = 'issue-was-opened'
-        fact.details = "The issue ##{json[:id]} in #{json[:repo][:name]} was opened by #{J.who(fact)}."
+        fact.details = "The issue #{json[:repo][:name]}##{json[:id]} has been opened by #{J.who(fact)}."
       end
 
     when 'IssueCommentEvent'
@@ -82,8 +78,8 @@ Fbe.iterate do
         fact.comment_body = json[:payload][:comment][:body]
         fact.who = json[:payload][:comment][:user][:id]
         fact.details =
-          "A new comment ##{json[:payload][:comment][:id]} was posted " \
-          "to the issue ##{fact.issue} in #{json[:repo][:name]} by #{J.who(fact)}."
+          "A new comment ##{json[:payload][:comment][:id]} has been posted " \
+          "to #{json[:repo][:name]}##{fact.issue} by #{J.who(fact)}."
       end
       skip_event(json)
 
@@ -128,9 +124,13 @@ Fbe.iterate do
       end
       Fbe.fb.txn do |fbt|
         f = Fbe.if_absent(fbt) do |n|
-          put_new_event(n, json)
+          n.when = Time.parse(json[:created_at].iso8601)
+          n.event_type = json[:type]
+          n.event_id = json[:id].to_i
+          n.repository = json[:repo][:id].to_i
         end
         unless f.nil?
+          fill_up_event(f, json)
           $loog.info("Detected new event ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
           detected += 1
         end
