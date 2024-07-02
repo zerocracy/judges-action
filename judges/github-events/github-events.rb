@@ -147,6 +147,7 @@ Fbe.iterate do
       end
       Fbe.fb.txn do |fbt|
         f = Fbe.if_absent(fbt) do |n|
+          n.where = 'github'
           n.event_id = json[:id].to_i
         end
         unless f.nil?

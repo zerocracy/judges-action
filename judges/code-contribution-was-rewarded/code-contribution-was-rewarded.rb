@@ -25,14 +25,16 @@
 require 'fbe/conclude'
 
 Fbe.conclude do
-  on '(and (eq what "code-was-contributed")
+  on '(and
+    (eq what "code-was-contributed")
+    (exists where)
     (exists seconds)
     (exists when)
     (exists issue)
     (exists repository)
     (exists who)
     (eq is_human 1))'
-  follow 'repository issue who'
+  follow 'where repository issue who'
   draw do |n, _resolved|
     n.award = 20
     n.when = Time.now

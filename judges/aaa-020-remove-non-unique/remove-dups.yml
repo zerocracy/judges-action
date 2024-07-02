@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,33 +19,18 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'fbe/conclude'
-
-Fbe.conclude do
-  on "
-  (and
-    (eq what 'label-was-attached')
-    (exists where)
-    (exists who)
-    (exists issue)
-    (exists repository)
-    (join 'reporter<=who' (and
-        (eq what 'issue-was-opened')
-        (eq issue $issue)
-        (eq repository $repository)))
-    (exists reporter)
-    (not (eq who reporter))
-    (empty (and
-      (eq what '#{$judge}')
-      (eq issue $issue)
-      (eq repository $repository)))
-    (eq label 'bug'))"
-  follow 'where when who repository issue reporter'
-  draw do |n, prev|
-    "In the repository ##{n.repository}, the user ##{n.who} attached " \
-      "the '##{prev.label}' label to the issue ##{n.issue} " \
-      "reported by the user ##{n.reporter}; " \
-      'this means that a bug was-accepted as valid, by the project team.'
-  end
-end
+---
+input:
+  -
+    event_id: 666
+    reason: Hello, world!
+  -
+    event_id: 666
+    reason: something else
+  -
+    event_id: 777
+    reason: something else
+expected:
+  - /fb[count(f)=2]
+  - /fb/f[event_id='777']
+  - /fb/f[event_id='666']

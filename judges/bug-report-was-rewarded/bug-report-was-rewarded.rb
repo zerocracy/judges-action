@@ -28,6 +28,7 @@ require 'fbe/conclude'
 Fbe.conclude do
   on "(and
     (eq what 'bug-was-accepted')
+    (exists where)
     (exists when)
     (exists reporter)
     (exists issue)
@@ -38,7 +39,7 @@ Fbe.conclude do
       (eq what '#{$judge}')
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'repository issue'
+  follow 'where repository issue'
   draw do |n, accepted|
     n.award = 15
     n.when = Time.now

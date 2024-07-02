@@ -27,6 +27,7 @@ require 'fbe/conclude'
 Fbe.conclude do
   on "(and
     (eq what 'issue-was-closed')
+    (exists where)
     (exists who)
     (exists when)
     (exists issue)
@@ -49,7 +50,7 @@ Fbe.conclude do
       (eq what '#{$judge}')
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'when repository issue label seconds closer who'
+  follow 'where when repository issue label seconds closer who'
   draw do |n, _|
     "The bug/feature in the issue #{J.issue(n)} was resolved, " \
       "aftet #{J.sec(n)} of waiting, " \

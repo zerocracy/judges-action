@@ -37,6 +37,7 @@ Fbe.iterate do
       badge = te[:label][:name]
       next unless %w[bug enhancement question].include?(badge)
       nn = Fbe.if_absent(Fbe.fb) do |n|
+        n.where = 'github'
         n.repository = repository
         n.issue = issue
         n.label = te[:label][:name]

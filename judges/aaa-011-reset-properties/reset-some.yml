@@ -24,6 +24,7 @@ input:
   -
     _id: 666
     what: reward-for-bug-reported
+    where: github
 expected:
   - /fb[count(f)=1]
   - /fb/f[what='bug-report-was-rewarded']

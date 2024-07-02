@@ -27,6 +27,7 @@ require 'fbe/conclude'
 Fbe.conclude do
   on "(and
     (eq what 'pull-was-merged')
+    (exists where)
     (exists who)
     (exists when)
     (exists issue)
@@ -43,7 +44,7 @@ Fbe.conclude do
       (eq what '#{$judge}')
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'when repository issue seconds who merger'
+  follow 'where when repository issue seconds who merger'
   draw do |n, _|
     "The pull request #{J.issue(n)} " \
       "created by #{J.who(n)} was merged by #{J.who(n, :merger)} " \

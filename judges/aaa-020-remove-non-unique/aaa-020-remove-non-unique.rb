@@ -22,32 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/conclude'
-
-Fbe.conclude do
-  on "
-  (and
-    (eq what 'label-was-attached')
-    (exists where)
-    (exists who)
-    (exists issue)
-    (exists repository)
-    (join 'reporter<=who' (and
-        (eq what 'issue-was-opened')
-        (eq issue $issue)
-        (eq repository $repository)))
-    (exists reporter)
-    (not (eq who reporter))
-    (empty (and
-      (eq what '#{$judge}')
-      (eq issue $issue)
-      (eq repository $repository)))
-    (eq label 'bug'))"
-  follow 'where when who repository issue reporter'
-  draw do |n, prev|
-    "In the repository ##{n.repository}, the user ##{n.who} attached " \
-      "the '##{prev.label}' label to the issue ##{n.issue} " \
-      "reported by the user ##{n.reporter}; " \
-      'this means that a bug was-accepted as valid, by the project team.'
-  end
+[
+  %w[_id],
+  %w[event_id],
+  %w[where what when who repository issue]
+].each do |props|
+  $fb.query(
+    "(and #{props.map { |s| "(exists #{s})" }.join(' ')} " \
+    "(not (unique (concat #{props.map { |s| "'-' #{s} '-'" }.join(' ')}))))"
+  ).delete!
 end
