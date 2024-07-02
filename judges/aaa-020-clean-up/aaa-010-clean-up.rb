@@ -27,8 +27,9 @@ require 'fbe/fb'
 [
   '(not (exists _id))',
   '(not (exists _time))',
+  '(not (exists _version))',
   '(not (exists what))',
-  '(not (exists where))',
+  '(and (exists repository) (not (exists where)))',
   '(exists seen)',
   '(and (exists event_id) (not (eq "Integer" (type event_id))))',
   '(eq what "git-was-pushed")',
