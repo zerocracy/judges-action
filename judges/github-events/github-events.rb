@@ -96,10 +96,8 @@ Fbe.iterate do
         fact.details =
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
           "to #{json[:repo][:name]}##{fact.issue} by #{J.who(fact)}."
-        skip_event(json)
-      else
-        skip_event(json)
       end
+      skip_event(json)
 
     when 'ReleaseEvent'
       fact.release_id = json[:payload][:release][:id]
