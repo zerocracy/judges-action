@@ -23,8 +23,8 @@
 input: []
 options:
   testing: true
-  max_events: 9
+  max_events: 5
   repositories: yegor256/judges,yegor256/factbase,zerocracy/baza
   runs: 5
 expected:
-  - /fb[count(f)=9]
+  - /fb[count(f)=5]

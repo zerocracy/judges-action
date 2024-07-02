@@ -41,6 +41,9 @@ Fbe.iterate do
   end
 
   def self.fill_up_event(fact, json)
+    fact.when = Time.parse(json[:created_at].iso8601)
+    fact.event_type = json[:type]
+    fact.repository = json[:repo][:id].to_i
     fact.who = json[:actor][:id].to_i if json[:actor]
 
     case json[:type]
@@ -124,10 +127,7 @@ Fbe.iterate do
       end
       Fbe.fb.txn do |fbt|
         f = Fbe.if_absent(fbt) do |n|
-          n.when = Time.parse(json[:created_at].iso8601)
-          n.event_type = json[:type]
           n.event_id = json[:id].to_i
-          n.repository = json[:repo][:id].to_i
         end
         unless f.nil?
           fill_up_event(f, json)
