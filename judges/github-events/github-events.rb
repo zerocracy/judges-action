@@ -51,19 +51,27 @@ Fbe.iterate do
     when 'PushEvent'
       fact.what = 'git-was-pushed'
       fact.push_id = json[:payload][:push_id]
+      fact.details =
+        "A new Git push ##{json[:payload][:push_id]} arrived to #{json[:repo][:name]} " \
+        "made by #{J.who(fact)}."
       skip_event(json)
 
     when 'PullRequestEvent'
       fact.issue = json[:payload][:pull_request][:number]
       skip_event(json) unless json[:payload][:action] == 'closed'
       fact.what = "pull-was-#{json[:payload][:pull_request][:merged_at].nil? ? 'closed' : 'merged'}"
+      fact.details =
+        "The pull request ##{json[:id]} in #{json[:repo][:name]} " \
+        "was #{json[:payload][:action]} by #{J.who(fact)}."
 
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
       if json[:payload][:action] == 'closed'
         fact.what = 'issue-was-closed'
+        fact.details = "The issue ##{json[:id]} in #{json[:repo][:name]} was closed by #{J.who(fact)}."
       elsif json[:payload][:action] == 'opened'
         fact.what = 'issue-was-opened'
+        fact.details = "The issue ##{json[:id]} in #{json[:repo][:name]} was opened by #{J.who(fact)}."
       end
 
     when 'IssueCommentEvent'
@@ -73,6 +81,9 @@ Fbe.iterate do
         fact.comment_id = json[:payload][:comment][:id]
         fact.comment_body = json[:payload][:comment][:body]
         fact.who = json[:payload][:comment][:user][:id]
+        fact.details =
+          "A new comment ##{json[:payload][:comment][:id]} was posted " \
+          "to the issue ##{fact.issue} in #{json[:repo][:name]} by #{J.who(fact)}."
       end
       skip_event(json)
 
@@ -81,23 +92,23 @@ Fbe.iterate do
       if json[:payload][:action] == 'published'
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
+        fact.details =
+          "A new release '#{json[:payload][:release][:name]}' has been published " \
+          "in #{json[:repo][:name]} by #{J.who(fact)}."
       end
 
     when 'CreateEvent'
       if json[:payload][:ref_type] == 'tag'
         fact.what = 'tag-was-created'
         fact.tag = json[:payload][:ref]
+        fact.details =
+          "A new tag '#{fact.tag}' has been created " \
+          "in #{json[:repo][:name]} by #{J.who(fact)}."
       end
 
     else
       skip_event(json)
     end
-
-    fact.details =
-      "A new event ##{json[:id]} happened in GitHub repository #{json[:repo][:name]} " \
-      "(##{json[:repo][:id]}) of type '#{json[:type]}', " \
-      "with the creation time #{json[:created_at].iso8601}; " \
-      'this fact must be interpreted later by other judges.'
   end
 
   over do |repository, latest|
