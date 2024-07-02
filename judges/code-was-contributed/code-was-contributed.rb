@@ -36,7 +36,7 @@ Fbe.conclude do
         (eq issue $issue)
         (eq repository $repository)))
     (exists submitter)
-    (as seconds (minus when submitted_when))
+    (as seconds (to_int (minus when submitted_when)))
     (as merger who) # who merged the pull request
     (as who submitter) # who submitted the pull request
     (empty (and

@@ -42,7 +42,7 @@ Fbe.conclude do
         (eq issue $issue)
         (eq repository $repository)))
     (exists assigner)
-    (as seconds (minus when assigned_when))
+    (as seconds (to_int (minus when assigned_when)))
     (as closer who) # who closed the bug
     (as who assigner) # who assigned the bug to the resolver
     (empty (and
