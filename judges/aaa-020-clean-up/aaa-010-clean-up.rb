@@ -35,4 +35,11 @@ require 'fbe/fb'
   '(eq what "git-was-pushed")',
   '(eq event_type "DeleteEvent")',
   '(eq what "comment-was-posted")'
-].each { |q| Fbe.fb.query(q).delete! }
+].each do |q|
+  c = Fbe.fb.query(q).delete!
+  if c.positive?
+    $loog.info("#{q} -> deleted #{c} fact(s)")
+  else
+    $loog.debug("#{q} -> no facts deleted")
+  end
+end
