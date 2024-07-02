@@ -57,20 +57,29 @@ Fbe.iterate do
 
     when 'PullRequestEvent'
       fact.issue = json[:payload][:pull_request][:number]
-      skip_event(json) unless json[:payload][:action] == 'closed'
-      fact.what = "pull-was-#{json[:payload][:pull_request][:merged_at].nil? ? 'closed' : 'merged'}"
-      fact.details =
-        "The pull request ##{json[:id]} in #{json[:repo][:name]} " \
-        "has been #{json[:payload][:action]} by #{J.who(fact)}."
+      case json[:payload][:action]
+      when 'opened'
+        fact.what = 'pull-was-opened'
+        fact.details =
+          "The pull request  in #{json[:repo][:name]}##{fact.issue} " \
+          "has been opened by #{J.who(fact)}."
+      when 'closed'
+        fact.what = "pull-was-#{json[:payload][:pull_request][:merged_at].nil? ? 'closed' : 'merged'}"
+        fact.details =
+          "The pull request #{json[:repo][:name]}##{fact.issue} " \
+          "has been #{json[:payload][:action]} by #{J.who(fact)}."
+      else
+        skip_event(json)
+      end
 
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
       if json[:payload][:action] == 'closed'
         fact.what = 'issue-was-closed'
-        fact.details = "The issue #{json[:repo][:name]}##{json[:id]} has been closed by #{J.who(fact)}."
+        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been closed by #{J.who(fact)}."
       elsif json[:payload][:action] == 'opened'
         fact.what = 'issue-was-opened'
-        fact.details = "The issue #{json[:repo][:name]}##{json[:id]} has been opened by #{J.who(fact)}."
+        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been opened by #{J.who(fact)}."
       end
 
     when 'IssueCommentEvent'

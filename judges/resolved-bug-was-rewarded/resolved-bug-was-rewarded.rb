@@ -30,7 +30,8 @@ Fbe.conclude do
     (exists when)
     (exists issue)
     (exists repository)
-    (exists who))'
+    (exists who)
+    (eq is_human 1))'
   follow 'repository issue who'
   draw do |n, _resolved|
     n.award = 30
@@ -38,7 +39,7 @@ Fbe.conclude do
     n.why =
       'Thanks for closing this issue! ' \
       "You've earned #{n.award} points for this."
-    "It's time to reward #{J.who(n)} for the issue closed in " \
+    "It's time to reward #{J.who(n)} for the bug resolved in " \
       "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
       'this reward should be delivered to the user by one of the future judges.'
   end

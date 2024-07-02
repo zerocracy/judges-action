@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,30 +21,26 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-options:
-  testing: true
-input:
-  -
-    _id: 11
-    what: bug-was-resolved
-    who: 4444
-    is_human: 1
-    issue: 42
-    seconds: 8999
-    repository: 100
-    when: 2024-01-01T03:15:45Z
-    details: >-
-      The bug was resolved some time ago, this is why this fact is here.
-      The bug was resolved some time ago, this is why this fact is here.
-    cause:
-      - 1
-      - 2
-expected:
-  - /fb[count(f)=2]
-  - /fb/f[what='resolved-bug-was-rewarded' and _id]
-  - /fb/f[who='4444']
-  - /fb/f[issue='42']
-  - /fb/f[repository='100']
-  - /fb/f[award='30']
-  - /fb/f[why]
+
+require 'fbe/conclude'
+
+Fbe.conclude do
+  on '(and (eq what "code-was-contributed")
+    (exists seconds)
+    (exists when)
+    (exists issue)
+    (exists repository)
+    (exists who)
+    (eq is_human 1))'
+  follow 'repository issue who'
+  draw do |n, _resolved|
+    n.award = 20
+    n.when = Time.now
+    n.why =
+      'Thanks for the contribution! ' \
+      "You've earned #{n.award} points for this."
+    "It's time to reward #{J.who(n)} for the code contributed in " \
+      "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
+      'this reward should be delivered to the user by one of the future judges.'
+  end
+end

@@ -40,8 +40,7 @@ Fbe.conclude do
     (join 'assigned_when<=when,assigner<=who' (and
         (eq what 'issue-was-assigned')
         (eq issue $issue)
-        (eq repository $repository)
-        (eq is_human 1)))
+        (eq repository $repository)))
     (exists assigner)
     (as seconds (minus when assigned_when))
     (as closer who) # who closed the bug

@@ -32,10 +32,9 @@ Fbe.conclude do
     (exists issue)
     (exists repository)
     (join 'submitted_when<=when,submitter<=who' (and
-        (eq what 'issue-was-opened')
+        (eq what 'pull-was-opened')
         (eq issue $issue)
-        (eq repository $repository)
-        (eq is_human 1)))
+        (eq repository $repository)))
     (exists submitter)
     (as seconds (minus when submitted_when))
     (as merger who) # who merged the pull request

@@ -33,6 +33,7 @@ Fbe.conclude do
     (exists issue)
     (exists repository)
     (exists who)
+    (eq is_human 1)
     (empty (and
       (eq what '#{$judge}')
       (eq issue $issue)
