@@ -38,3 +38,16 @@ end
 def J.award(fact, prop = :award)
   format('%+d', fact.send(prop.to_s))
 end
+
+def J.sec(fact, prop = :seconds)
+  s = fact.send(prop.to_s)
+  if s < 60
+    format('%d seconds', s)
+  elsif s < 60 * 60
+    format('%d minutes', s / 60)
+  elsif s < 60 * 60 * 24
+    format('%d hours', s / (60 * 60))
+  else
+    format('%d days', s / (60 * 60 * 24))
+  end
+end

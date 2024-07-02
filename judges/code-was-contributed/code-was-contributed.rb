@@ -46,7 +46,7 @@ Fbe.conclude do
   follow 'when repository issue seconds who merger'
   draw do |n, _|
     "The pull request #{J.issue(n)} " \
-      "created by @#{J.who(n)} was merged by @#{J.who(n, :merger)} " \
-      "after #{n.seconds} of being in review"
+      "created by #{J.who(n)} was merged by #{J.who(n, :merger)} " \
+      "after #{J.sec(n)} of being in review"
   end
 end

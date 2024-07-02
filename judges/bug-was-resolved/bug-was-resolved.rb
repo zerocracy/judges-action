@@ -52,6 +52,7 @@ Fbe.conclude do
   follow 'when repository issue label seconds closer who'
   draw do |n, _|
     "The bug/feature in the issue #{J.issue(n)} was resolved, " \
+      "aftet #{J.sec(n)} of waiting, " \
       "because it was closed by #{J.who(n, :closer)} and earlier it was" \
       "assigned to #{J.who(n)} and the label '##{n.label}' was attached."
   end
