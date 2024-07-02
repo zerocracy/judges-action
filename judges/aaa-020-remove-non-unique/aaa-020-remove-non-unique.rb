@@ -27,8 +27,13 @@
   %w[event_id],
   %w[where what when who repository issue]
 ].each do |props|
-  $fb.query(
+  q =
     "(and #{props.map { |s| "(exists #{s})" }.join(' ')} " \
     "(not (unique (concat #{props.map { |s| "'-' #{s} '-'" }.join(' ')}))))"
-  ).delete!
+  с = $fb.query(q).delete!
+  if c.positive?
+    $loog.info("#{q} -> deleted #{c} fact(s)")
+  else
+    $loog.debug("#{q} -> no facts deleted")
+  end
 end
