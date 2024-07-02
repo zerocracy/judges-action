@@ -74,17 +74,21 @@ Fbe.iterate do
 
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
-      if json[:payload][:action] == 'closed'
+      case json[:payload][:action]
+      when 'closed'
         fact.what = 'issue-was-closed'
         fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been closed by #{J.who(fact)}."
-      elsif json[:payload][:action] == 'opened'
+      when 'opened'
         fact.what = 'issue-was-opened'
         fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been opened by #{J.who(fact)}."
+      else
+        skip_event(json)
       end
 
     when 'IssueCommentEvent'
       fact.issue = json[:payload][:issue][:number]
-      if json[:payload][:action] == 'created'
+      case json[:payload][:action]
+      when 'created'
         fact.what = 'comment-was-posted'
         fact.comment_id = json[:payload][:comment][:id]
         fact.comment_body = json[:payload][:comment][:body]
@@ -92,26 +96,33 @@ Fbe.iterate do
         fact.details =
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
           "to #{json[:repo][:name]}##{fact.issue} by #{J.who(fact)}."
+      else
+        skip_event(json)
       end
-      skip_event(json)
 
     when 'ReleaseEvent'
       fact.release_id = json[:payload][:release][:id]
-      if json[:payload][:action] == 'published'
+      case json[:payload][:action]
+      when 'published'
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
           "in #{json[:repo][:name]} by #{J.who(fact)}."
+      else
+        skip_event(json)
       end
 
     when 'CreateEvent'
-      if json[:payload][:ref_type] == 'tag'
+      case json[:payload][:ref_type]
+      when 'tag'
         fact.what = 'tag-was-created'
         fact.tag = json[:payload][:ref]
         fact.details =
           "A new tag '#{fact.tag}' has been created " \
           "in #{json[:repo][:name]} by #{J.who(fact)}."
+      else
+        skip_event(json)
       end
 
     else
