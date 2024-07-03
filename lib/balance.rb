@@ -25,7 +25,10 @@
 # Supplementary text manipulation functions.
 module J; end
 
-def J.balance(who)
-  b = Fbe.fb.query("(and (exists award) (eq who #{who}))").each.to_a.inject(0) { |a, f| a + f.award }
-  J.award(b)
+def J.balance(who, days: 28)
+  b = Fbe.fb.query(
+    "(and (exists award) (eq who #{who}) (gt when #{(Time.now - (days * 24 * 60 * 60)).utc.iso8601}))"
+  ).each.to_a.inject(0) { |a, f| a + f.award }
+  return '' if b.zero?
+  "Your running balance is #{J.award(b)}"
 end

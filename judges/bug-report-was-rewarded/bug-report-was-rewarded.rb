@@ -54,7 +54,7 @@ Fbe.conclude do
       'as good as you might expect, ' \
       '[do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to ' \
       '[report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. ' \
-      "Your running balance is #{J.balance(n.who)}."
+      "#{J.balance(n.who)}."
     "It's time to reward #{J.who(n)} for the issue reported in " \
       "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
       'this reward should be delivered to the user by one of the future judges.'
