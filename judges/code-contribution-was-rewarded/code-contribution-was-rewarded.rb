@@ -47,7 +47,8 @@ Fbe.conclude do
     n.greeting =
       'Thanks for the contribution! ' \
       "You've earned #{J.award(n)} points for this. " \
-      'Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming.'
+      'Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. ' \
+      "#{J.balance(n.who)}."
     "It's time to reward #{J.who(n)} for the code contributed in " \
       "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
       'this reward should be delivered to the user by one of the future judges.'

@@ -22,34 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/octo'
-
 # Supplementary text manipulation functions.
 module J; end
 
-def J.issue(fact)
-  "#{Fbe.octo.repo_name_by_id(fact.repository)}##{fact.issue}"
-end
-
-def J.who(fact, prop = :who)
-  "@#{Fbe.octo.user_name_by_id(fact.send(prop.to_s))}"
-end
-
-def J.award(fact, prop = :award)
-  a = fact
-  a = a.send(prop.to_s) unless a.is_a?(Integer)
-  format('%+d', a)
-end
-
-def J.sec(fact, prop = :seconds)
-  s = fact.send(prop.to_s)
-  if s < 60
-    format('%d seconds', s)
-  elsif s < 60 * 60
-    format('%d minutes', s / 60)
-  elsif s < 60 * 60 * 24
-    format('%d hours', s / (60 * 60))
-  else
-    format('%d days', s / (60 * 60 * 24))
-  end
+def J.balance(who, days: 28)
+  b = Fbe.fb.query(
+    "(and (exists award) (eq who #{who}) (gt when #{(Time.now - (days * 24 * 60 * 60)).utc.iso8601}))"
+  ).each.to_a.inject(0) { |a, f| a + f.award }
+  return '' if b.zero?
+  "Your running balance is #{J.award(b)}"
 end
