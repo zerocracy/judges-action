@@ -26,6 +26,6 @@
 module J; end
 
 def J.balance(who)
-  b = Fbe.fb.query("(and (exists award) (eq who #{who}))").each.to_a.inject { |a, f| a + f.award }
+  b = Fbe.fb.query("(and (exists award) (eq who #{who}))").each.to_a.inject(0) { |a, f| a + f.award }
   J.award(b)
 end

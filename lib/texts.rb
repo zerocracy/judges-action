@@ -37,7 +37,7 @@ end
 
 def J.award(fact, prop = :award)
   a = fact
-  a = fact.send(prop.to_s) unless fact.is_a?(Integer)
+  a = a.send(prop.to_s) unless a.is_a?(Integer)
   format('%+d', a)
 end
 
