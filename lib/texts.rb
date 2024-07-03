@@ -36,7 +36,9 @@ def J.who(fact, prop = :who)
 end
 
 def J.award(fact, prop = :award)
-  format('%+d', fact.send(prop.to_s))
+  a = fact
+  a = fact.send(prop.to_s) unless fact.is_a?(Integer)
+  format('%+d', a)
 end
 
 def J.sec(fact, prop = :seconds)
