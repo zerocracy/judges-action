@@ -26,29 +26,27 @@ require 'fbe/conclude'
 
 Fbe.conclude do
   on "(and
-    (eq what 'pull-was-merged')
+    (eq what 'pull-was-reviewed')
     (exists where)
     (exists who)
     (exists when)
     (exists issue)
     (exists repository)
-    (join 'submitted_when<=when,submitter<=who' (and
+    (join 'submitted_when<=when,author<=who' (and
         (eq what 'pull-was-opened')
         (eq issue $issue)
         (eq repository $repository)))
-    (exists submitter)
+    (exists author)
     (as seconds (to_int (minus when submitted_when)))
-    (as merger who) # who merged the pull request
-    (as who submitter) # who submitted the pull request
     (empty (and
       (eq what '#{$judge}')
       (eq where $where)
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'where when repository issue seconds who merger'
+  follow 'where when repository issue who author seconds'
   draw do |n, _|
     "The pull request #{J.issue(n)} " \
-      "created by #{J.who(n)} was merged by #{J.who(n, :merger)} " \
-      "after #{J.sec(n)} of being in review."
+      "created by #{J.who(n, :author)} was reviewed by #{J.who(n)} " \
+      "after #{J.sec(n)}."
   end
 end

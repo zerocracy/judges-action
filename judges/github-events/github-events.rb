@@ -61,7 +61,7 @@ Fbe.iterate do
       when 'opened'
         fact.what = 'pull-was-opened'
         fact.details =
-          "The pull request  in #{json[:repo][:name]}##{fact.issue} " \
+          "The pull request #{json[:repo][:name]}##{fact.issue} " \
           "has been opened by #{J.who(fact)}."
       when 'closed'
         fact.what = "pull-was-#{json[:payload][:pull_request][:merged_at].nil? ? 'closed' : 'merged'}"
@@ -71,6 +71,13 @@ Fbe.iterate do
       else
         skip_event(json)
       end
+
+    when 'PullRequestReviewEvent'
+      fact.issue = json[:payload][:pull_request][:number]
+      fact.what = 'pull-was-reviewed'
+      fact.details =
+        "The pull request #{json[:repo][:name]}##{fact.issue} " \
+        "has been reviewed by #{J.who(fact)}."
 
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]

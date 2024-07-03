@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,34 +19,36 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'fbe/conclude'
-
-Fbe.conclude do
-  on "(and
-    (eq what 'pull-was-merged')
-    (exists where)
-    (exists who)
-    (exists when)
-    (exists issue)
-    (exists repository)
-    (join 'submitted_when<=when,submitter<=who' (and
-        (eq what 'pull-was-opened')
-        (eq issue $issue)
-        (eq repository $repository)))
-    (exists submitter)
-    (as seconds (to_int (minus when submitted_when)))
-    (as merger who) # who merged the pull request
-    (as who submitter) # who submitted the pull request
-    (empty (and
-      (eq what '#{$judge}')
-      (eq where $where)
-      (eq issue $issue)
-      (eq repository $repository))))"
-  follow 'where when repository issue seconds who merger'
-  draw do |n, _|
-    "The pull request #{J.issue(n)} " \
-      "created by #{J.who(n)} was merged by #{J.who(n, :merger)} " \
-      "after #{J.sec(n)} of being in review."
-  end
-end
+---
+runs: 2
+options:
+  testing: true
+input:
+  -
+    _id: 2
+    what: pull-was-opened
+    where: github
+    is_human: 1
+    issue: 42
+    repository: 555
+    who: 777
+    when: 2024-03-29T23:54:24Z
+  -
+    _id: 3
+    what: pull-was-reviewed
+    where: github
+    issue: 42
+    repository: 555
+    who: 4535
+    when: 2024-05-20T23:54:24Z
+expected:
+  - /fb[count(f)=3]
+  - /fb/f[cause]
+  - /fb/f[when]
+  - /fb/f[what='code-was-reviewed' and _id]
+  - /fb/f[who='4535']
+  - /fb/f[author='777']
+  - /fb/f[when='2024-05-20T23:54:24Z']
+  - /fb/f[seconds]
+  - /fb/f[repository='555']
+  - /fb/f[issue='42']
