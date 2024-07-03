@@ -4,7 +4,7 @@
   removed: 8
   version: 0.15.0
   what: judges-summary
-  when: 2024-07-03 05:08:39.011174694 Z
+  when: 2024-07-03 06:08:56.538534804 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -5907,6 +5907,7 @@
   details: It's time to reward @yegor256 for the code contributed in zerocracy/baza#97,
     the reward amount is +20; this reward should be delivered to the user by one of
     the future judges.
+  href: https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234
   is_human: 1
   issue: 97
   repository: 728758275
@@ -5924,6 +5925,7 @@
   details: It's time to reward @yegor256 for the code contributed in zerocracy/baza#97,
     the reward amount is +20; this reward should be delivered to the user by one of
     the future judges.
+  href: https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234
   is_human: 1
   issue: 97
   repository: 728758275
@@ -5933,71 +5935,181 @@
   who: 526301
   why: Thanks for the contribution! You've earned 20 points for this. Please, [keep
     them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
-- _id: 3187
-  _time: 2024-07-03 05:07:09.523790656 Z
+- _id: 3246
+  _time: 2024-07-03 06:06:29.206675302 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  details: The pull request zerocracy/baza#99 has been closed by @rultor.
+  event_id: 39819822435
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 99
+  repository: 728758275
+  what: pull-was-merged
+  when: 2024-07-03 00:03:02.000000000 Z
+  where: github
+  who: 8086956
+- _id: 3247
+  _time: 2024-07-03 06:06:29.573892655 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  details: The pull request zerocracy/baza#100 has been closed by @rultor.
+  event_id: 39819627813
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 100
+  repository: 728758275
+  what: pull-was-merged
+  when: 2024-07-02 23:48:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 3248
+  _time: 2024-07-03 06:06:30.096950695 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  details: The pull request  in zerocracy/baza#100 has been opened by @renovate[bot].
+  event_id: 39818851686
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 100
+  repository: 728758275
+  what: pull-was-opened
+  when: 2024-07-02 22:53:29.000000000 Z
+  where: github
+  who: 29139614
+- _id: 3249
+  _time: 2024-07-03 06:06:30.380405414 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  details: The pull request  in zerocracy/baza#99 has been opened by @renovate[bot].
+  event_id: 39818848257
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 99
+  repository: 728758275
+  what: pull-was-opened
+  when: 2024-07-02 22:53:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 3250
+  _time: 2024-07-03 06:06:30.540729936 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  details: The pull request zerocracy/baza#98 has been closed by @rultor.
+  event_id: 39818831362
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 98
+  repository: 728758275
+  what: pull-was-merged
+  when: 2024-07-02 22:52:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 3302
+  _time: 2024-07-03 06:07:02.525461389 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  cause: 3246
+  details: The pull request zerocracy/baza#99 created by @renovate[bot] was merged
+    by @rultor after 1 hours of being in review
+  is_human: 0
+  issue: 99
+  merger: 8086956
+  repository: 728758275
+  seconds: 4188
+  what: code-was-contributed
+  when: 2024-07-03 00:03:02.000000000 Z
+  where: github
+  who: 29139614
+- _id: 3302
+  _time: 2024-07-03 06:07:03.071190697 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  cause: 3247
+  details: The pull request zerocracy/baza#100 created by @renovate[bot] was merged
+    by @rultor after 55 minutes of being in review
+  is_human: 0
+  issue: 100
+  merger: 8086956
+  repository: 728758275
+  seconds: 3310
+  what: code-was-contributed
+  when: 2024-07-02 23:48:39.000000000 Z
+  where: github
+  who: 29139614
+- _id: 3302
+  _time: 2024-07-03 06:07:03.144305048 Z
+  _version: 0.0.60/0.15.0/0.0.0
+  cause: 3250
+  details: The pull request zerocracy/baza#98 created by @renovate[bot] was merged
+    by @rultor after 1 hours of being in review
+  is_human: 0
+  issue: 98
+  merger: 8086956
+  repository: 728758275
+  seconds: 6360
+  what: code-was-contributed
+  when: 2024-07-02 22:52:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 3303
+  _time: 2024-07-03 06:07:21.461841385 Z
   _version: 0.0.60/0.15.0/0.0.0
   latest: 38815759800
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 3188
-  _time: 2024-07-03 05:07:26.912941742 Z
+- _id: 3304
+  _time: 2024-07-03 06:07:40.327558251 Z
   _version: 0.0.60/0.15.0/0.0.0
   latest: 38972163139
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 3189
-  _time: 2024-07-03 05:07:48.776799647 Z
+- _id: 3305
+  _time: 2024-07-03 06:08:03.513716953 Z
   _version: 0.0.60/0.15.0/0.0.0
-  latest: 39602705214
+  latest: 39603566956
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 3190
-  _time: 2024-07-03 05:08:06.655309490 Z
+- _id: 3306
+  _time: 2024-07-03 06:08:22.068376734 Z
   _version: 0.0.60/0.15.0/0.0.0
   latest: 38504504699
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 3191
-  _time: 2024-07-03 05:08:25.849264430 Z
+- _id: 3307
+  _time: 2024-07-03 06:08:42.072829301 Z
   _version: 0.0.60/0.15.0/0.0.0
-  latest: 39445935795
+  latest: 39448668386
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 3237
-  _time: 2024-07-03 05:08:38.204017523 Z
+- _id: 3353
+  _time: 2024-07-03 06:08:55.415441623 Z
   _version: 0.0.60/0.15.0/0.0.0
-  latest: 67
+  latest: 63
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 3238
-  _time: 2024-07-03 05:08:38.275613044 Z
+- _id: 3354
+  _time: 2024-07-03 06:08:55.837313749 Z
   _version: 0.0.60/0.15.0/0.0.0
-  latest: 0
+  latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 3239
-  _time: 2024-07-03 05:08:38.350518280 Z
+- _id: 3355
+  _time: 2024-07-03 06:08:55.910122449 Z
   _version: 0.0.60/0.15.0/0.0.0
   latest: 0
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 3240
-  _time: 2024-07-03 05:08:38.720917702 Z
+- _id: 3356
+  _time: 2024-07-03 06:08:56.226354188 Z
   _version: 0.0.60/0.15.0/0.0.0
-  latest: 4
+  latest: 8
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 3241
-  _time: 2024-07-03 05:08:38.986295691 Z
+- _id: 3357
+  _time: 2024-07-03 06:08:56.513164704 Z
   _version: 0.0.60/0.15.0/0.0.0
   latest: 75
   repository: 728758275
