@@ -37,6 +37,7 @@ Fbe.conclude do
     (eq is_human 1)
     (empty (and
       (eq what '#{$judge}')
+      (eq where $where)
       (eq issue $issue)
       (eq repository $repository))))"
   follow 'where repository issue'
@@ -44,7 +45,8 @@ Fbe.conclude do
     n.award = 15
     n.when = Time.now
     n.who = accepted.reporter
-    n.why =
+    n.why = "Bug #{J.issue(n)} was accepted"
+    n.greeting =
       "Thanks for reporting a new bug! You've just earned #{J.award(n)} points for this. " \
       'By reporting bugs, you help our project improve its quality. ' \
       'If you find anything else in the repository that ' \

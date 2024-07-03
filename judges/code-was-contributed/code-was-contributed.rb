@@ -42,6 +42,7 @@ Fbe.conclude do
     (as who submitter) # who submitted the pull request
     (empty (and
       (eq what '#{$judge}')
+      (eq where $where)
       (eq issue $issue)
       (eq repository $repository))))"
   follow 'where when repository issue seconds who merger'

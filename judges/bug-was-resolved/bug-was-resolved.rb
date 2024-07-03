@@ -48,6 +48,7 @@ Fbe.conclude do
     (as who assigner) # who assigned the bug to the resolver
     (empty (and
       (eq what '#{$judge}')
+      (eq where $where)
       (eq issue $issue)
       (eq repository $repository))))"
   follow 'where when repository issue label seconds closer who'

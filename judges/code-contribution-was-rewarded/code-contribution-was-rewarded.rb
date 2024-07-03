@@ -25,23 +25,29 @@
 require 'fbe/conclude'
 
 Fbe.conclude do
-  on '(and
-    (eq what "code-was-contributed")
+  on "(and
+    (eq what 'code-was-contributed')
     (exists where)
     (exists seconds)
     (exists when)
     (exists issue)
     (exists repository)
     (exists who)
-    (eq is_human 1))'
+    (eq is_human 1)
+    (empty (and
+      (eq what '#{$judge}')
+      (eq where $where)
+      (eq issue $issue)
+      (eq repository $repository))))"
   follow 'where repository issue who'
   draw do |n, _resolved|
     n.award = 20
     n.when = Time.now
-    n.why =
+    n.why = "Code was contributed in #{J.issue(n)}"
+    n.greeting =
       'Thanks for the contribution! ' \
-      "You've earned #{n.award} points for this. " \
-      'Please, [keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).'
+      "You've earned #{J.award(n)} points for this. " \
+      'Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming.'
     "It's time to reward #{J.who(n)} for the code contributed in " \
       "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
       'this reward should be delivered to the user by one of the future judges.'

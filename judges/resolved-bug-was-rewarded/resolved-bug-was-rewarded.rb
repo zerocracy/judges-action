@@ -25,20 +25,26 @@
 require 'fbe/conclude'
 
 Fbe.conclude do
-  on '(and
-    (eq what "bug-was-resolved")
+  on "(and
+    (eq what 'bug-was-resolved')
     (exists where)
     (exists seconds)
     (exists when)
     (exists issue)
     (exists repository)
     (exists who)
-    (eq is_human 1))'
+    (eq is_human 1)
+    (empty (and
+      (eq what '#{$judge}')
+      (eq where $where)
+      (eq issue $issue)
+      (eq repository $repository))))"
   follow 'where repository issue who'
   draw do |n, _resolved|
     n.award = 30
     n.when = Time.now
-    n.why =
+    n.why = "Bug #{J.issue(n)} was resolved"
+    n.greeting =
       'Thanks for closing this issue! ' \
       "You've earned #{n.award} points for this."
     "It's time to reward #{J.who(n)} for the bug resolved in " \

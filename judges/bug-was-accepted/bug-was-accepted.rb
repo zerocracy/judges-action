@@ -40,6 +40,7 @@ Fbe.conclude do
     (not (eq who reporter))
     (empty (and
       (eq what '#{$judge}')
+      (eq where $where)
       (eq issue $issue)
       (eq repository $repository)))
     (eq label 'bug'))"
