@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,35 +19,33 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'fbe/octo'
-require 'fbe/iterate'
-require 'fbe/if_absent'
-
-Fbe.iterate do
-  as 'labels-were-scanned'
-  by "(agg (and (eq repository $repository) (eq what 'issue-was-opened') (gt issue $before)) (min issue))"
-  limit $options.max_labels || 10
-  quota_aware
-  over do |repository, issue|
-    Fbe.octo.issue_timeline(repository, issue).each do |te|
-      next unless te[:event] == 'labeled'
-      badge = te[:label][:name]
-      next unless %w[bug enhancement question].include?(badge)
-      nn = Fbe.if_absent(Fbe.fb) do |n|
-        n.where = 'github'
-        n.repository = repository
-        n.issue = issue
-        n.label = te[:label][:name]
-        n.what = $judge
-      end
-      next if nn.nil?
-      nn.who = te[:actor][:id]
-      nn.when = te[:created_at]
-      nn.details =
-        "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{J.issue(nn)}."
-    end
-    issue
-  end
-end
+---
+runs: 2
+options:
+  testing: true
+input:
+  -
+    _id: 1
+    cause:
+      - 5
+      - 6
+    what: code-was-reviewed
+    where: github
+    seconds: 8800
+    is_human: 1
+    who: 4444
+    merger: 888
+    issue: 42
+    repository: 100
+    when: 2024-01-01T03:15:45Z
+    details: >-
+      The bug was accepted some time ago, this is why this fact is here.
+      The bug was accepted some time ago, this is why this fact is here.
+expected:
+  - /fb[count(f)=2]
+  - /fb/f[what='code-review-was-rewarded']
+  - /fb/f[who='4444']
+  - /fb/f[issue='42']
+  - /fb/f[repository='100']
+  - /fb/f[award='25']
+  - /fb/f[why]

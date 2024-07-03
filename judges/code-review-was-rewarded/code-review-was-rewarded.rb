@@ -22,34 +22,33 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/octo'
-require 'fbe/iterate'
-require 'fbe/if_absent'
+require 'fbe/conclude'
 
-Fbe.iterate do
-  as 'labels-were-scanned'
-  by "(agg (and (eq repository $repository) (eq what 'issue-was-opened') (gt issue $before)) (min issue))"
-  limit $options.max_labels || 10
-  quota_aware
-  over do |repository, issue|
-    Fbe.octo.issue_timeline(repository, issue).each do |te|
-      next unless te[:event] == 'labeled'
-      badge = te[:label][:name]
-      next unless %w[bug enhancement question].include?(badge)
-      nn = Fbe.if_absent(Fbe.fb) do |n|
-        n.where = 'github'
-        n.repository = repository
-        n.issue = issue
-        n.label = te[:label][:name]
-        n.what = $judge
-      end
-      next if nn.nil?
-      nn.who = te[:actor][:id]
-      nn.when = te[:created_at]
-      nn.details =
-        "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{J.issue(nn)}."
-    end
-    issue
+Fbe.conclude do
+  on "(and
+    (eq what 'code-was-reviewed')
+    (exists where)
+    (exists seconds)
+    (exists when)
+    (exists issue)
+    (exists repository)
+    (exists who)
+    (eq is_human 1)
+    (empty (and
+      (eq what '#{$judge}')
+      (eq where $where)
+      (eq issue $issue)
+      (eq repository $repository))))"
+  follow 'where repository issue who'
+  draw do |n, _resolved|
+    n.award = 25
+    n.when = Time.now
+    n.why = "Code was reviewed in #{J.issue(n)}"
+    n.greeting =
+      'Thanks for the review! ' \
+      "You've earned #{J.award(n)} points for this. " \
+      "#{J.balance(n.who)}."
+    "It's time to reward #{J.who(n)} for the code review in " \
+      "#{J.issue(n)}, the reward amount is #{J.award(n)}."
   end
 end

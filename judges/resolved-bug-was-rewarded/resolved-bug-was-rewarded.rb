@@ -49,7 +49,6 @@ Fbe.conclude do
       "You've earned #{n.award} points for this. " \
       "#{J.balance(n.who)}."
     "It's time to reward #{J.who(n)} for the bug resolved in " \
-      "#{J.issue(n)}, the reward amount is #{J.award(n)}; " \
-      'this reward should be delivered to the user by one of the future judges.'
+      "#{J.issue(n)}, the reward amount is #{J.award(n)}."
   end
 end
