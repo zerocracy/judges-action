@@ -34,7 +34,6 @@ jobs:
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           options: |
-            token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/*,-yegor256/test
             summary_url=...
           factbase: foo.fb
@@ -63,25 +62,26 @@ who is the best performer in your team.
 
 ## Configuration
 
-The following options are expected by the `zerocracy/judges-action` plugin:
+The following options are expected by the `zerocracy/judges-action` plugin
+(see how we [configure][ours] it):
 
-* `token` is an authentication token from
+* `token` (mandatory) is an authentication token from
   [Zerocracy.com](https://www.zerocracy.com)
-* `options` is a list of `k=v` pairs, which are explained below.
-* `factbase` is the path of the [Factbase][factbase] file
+* `options` (mandatory) is a list of `k=v` pairs, which are explained below
+* `factbase` (mandatory) is the path of the [Factbase][factbase] file
   (where everything is kept)
-* `verbose` makes it print debugging info if set to `true`
+* `verbose` (optional) makes it print debugging info if set to `true`
+* `cycles` (optional) is a number of update cycles to run
+* `trim` (optional) is the number of days to keep facts in the factbase
 
 The following `k=v` pairs inside the `options` may be important:
 
-* `token=..` is a GitHub token (set it to `${{ secrets.GITHUB_TOKEN }}`
-  or simply skip this option, the default will be used)
 * `repositories=..` is a comma-separated list of masks that
-  determine the repositories to manage, where
+determine the repositories to manage, where
 `yegor256/*` means all repos of the user,
 `yegor256/judges` means a specific repo,
-  and
-  `-yegor256/judges` means an exclusion of the repo from the list.
+and
+`-yegor256/judges` means an exclusion of the repo from the list.
 
 The `zerocracy/pages-action` plugin is responsible for rendering
 the summary HTML page: its configuration is not explained here,
@@ -104,3 +104,4 @@ will be deleted by the end of the build (either success or failure).
 
 [factbase]: https://github.com/yegor256/factbase
 [secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
+[ours]: https://github.com/zerocracy/judges-action/blob/master/.github/workflows/zerocracy.yml
