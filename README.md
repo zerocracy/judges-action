@@ -90,7 +90,8 @@ check its [own repository](https://github.com/zerocracy/pages-action).
 ## How to Contribute
 
 In order to test this action, just run (provided, you have
-[GNU make](https://www.gnu.org/software/make/) installed):
+[Ruby](https://www.ruby-lang.org/en/) 3+, [Bundler](https://bundler.io/),
+and [GNU make](https://www.gnu.org/software/make/) installed):
 
 ```bash
 rake && make
