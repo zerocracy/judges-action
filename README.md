@@ -93,7 +93,7 @@ In order to test this action, just run (provided, you have
 [GNU make](https://www.gnu.org/software/make/) installed):
 
 ```bash
-make
+rake && make
 ```
 
 This should build a new Docker image named `judges-action`
