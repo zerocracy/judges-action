@@ -14,7 +14,8 @@ First, get a free authentication token from
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
-(replace `foo` with the name of your team):
+(replace `foo` with the name of your team and set the
+`summary_url` pointing to the place where the summary HTML is deployed):
 
 ```yaml
 name: zerocracy
@@ -35,6 +36,7 @@ jobs:
           options: |
             token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/*,-yegor256/test
+            summary_url=...
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.0.14
         with:
@@ -80,29 +82,10 @@ The following `k=v` pairs inside the `options` may be important:
 `yegor256/judges` means a specific repo,
   and
   `-yegor256/judges` means an exclusion of the repo from the list.
-* `max_events=..` is the maximum number of GitHub API events to scan
-  at a time (better don't change it)
 
 The `zerocracy/pages-action` plugin is responsible for rendering
 the summary HTML page: its configuration is not explained here,
 check its [own repository](https://github.com/zerocracy/pages-action).
-
-## Awards & Punishments
-
-In order to be _rewarded_, do the following:
-
-* Create a new issue, which is labeled as `bug`, `enhancement`, or `question`
-* Put one of those labels to an issue
-* Merge a pull request
-* Review a pull request
-* Create a new release
-
-In order to avoid _punishment_, do the following:
-
-* Triage issues timely
-* Review and merge/reject pull requests timely
-* Release frequently
-* Keep GitHub Action jobs green
 
 ## How to Contribute
 
