@@ -25,6 +25,10 @@ options:
   testing: true
 input:
   -
+    what: pmp
+    area: hr
+    days_to_reward: 99999
+  -
     _id: 11
     what: bug-was-resolved
     where: github
@@ -41,7 +45,7 @@ input:
       - 1
       - 2
 expected:
-  - /fb[count(f)=2]
+  - /fb[count(f)=3]
   - /fb/f[what='resolved-bug-was-rewarded' and _id]
   - /fb/f[who='4444']
   - /fb/f[issue='42']

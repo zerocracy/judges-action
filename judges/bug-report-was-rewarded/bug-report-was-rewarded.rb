@@ -30,6 +30,7 @@ Fbe.conclude do
     (eq what 'bug-was-accepted')
     (exists where)
     (exists when)
+    (gt when #{(Time.now - (J.pmp.hr.days_to_reward * 24 * 60 * 60)).utc.iso8601})
     (exists reporter)
     (exists issue)
     (exists repository)

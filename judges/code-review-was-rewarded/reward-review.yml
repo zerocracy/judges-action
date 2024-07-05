@@ -25,6 +25,10 @@ options:
   testing: true
 input:
   -
+    what: pmp
+    area: hr
+    days_to_reward: 99999
+  -
     _id: 1
     cause:
       - 5
@@ -42,7 +46,7 @@ input:
       The bug was accepted some time ago, this is why this fact is here.
       The bug was accepted some time ago, this is why this fact is here.
 expected:
-  - /fb[count(f)=2]
+  - /fb[count(f)=3]
   - /fb/f[what='code-review-was-rewarded']
   - /fb/f[who='4444']
   - /fb/f[issue='42']

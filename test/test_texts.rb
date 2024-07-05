@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,45 +21,20 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-options:
-  testing: true
-input:
-  -
-    what: pmp
-    area: hr
-    days_to_reward: 99999
-  -
-    _id: 1
-    what: bug-was-accepted
-    where: github
-    cause:
-      - 4
-      - 2
-    reporter: 43
-    details: >-
-      The bug was accepted some time ago, this is why this fact is here.
-      The bug was accepted some time ago, this is why this fact is here.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:45
-    issue: 44
-  -
-    _id: 2
-    what: bug-report-was-rewarded
-    where: github
-    cause:
-      - 4
-      - 2
-    award: 15
-    why: Because it's important.
-    details: >-
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:50
-    issue: 44
-expected:
-  - /fb[count(f)=3]
+
+require 'minitest/autorun'
+require 'factbase'
+require_relative '../lib/texts'
+
+# Test.
+# Author:: Yegor Bugayenko (yegor256@gmail.com)
+# Copyright:: Copyright (c) 2024 Yegor Bugayenko
+# License:: MIT
+class TestTexts < Minitest::Test
+  def test_sec
+    fb = Factbase.new
+    f = fb.insert
+    f.seconds = 333
+    assert_equal('5 minutes', J.sec(f))
+  end
+end

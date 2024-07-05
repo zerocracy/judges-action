@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,45 +21,39 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-options:
-  testing: true
-input:
-  -
-    what: pmp
-    area: hr
-    days_to_reward: 99999
-  -
-    _id: 1
-    what: bug-was-accepted
-    where: github
-    cause:
-      - 4
-      - 2
-    reporter: 43
-    details: >-
-      The bug was accepted some time ago, this is why this fact is here.
-      The bug was accepted some time ago, this is why this fact is here.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:45
-    issue: 44
-  -
-    _id: 2
-    what: bug-report-was-rewarded
-    where: github
-    cause:
-      - 4
-      - 2
-    award: 15
-    why: Because it's important.
-    details: >-
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-      Because it's important. Because it's important. Because it's important.
-    repository: 333
-    who: 777
-    when: 2024-01-01T03:15:50
-    issue: 44
-expected:
-  - /fb[count(f)=3]
+
+require 'others'
+require 'fbe/fb'
+
+# Project management functions.
+module J; end
+
+def J.pmp
+  defaults = {
+    hr: {
+      days_to_reward: 7,
+      days_of_running_balance: 28
+    }
+  }
+  others do |*args1|
+    area = args1.first
+    d = defaults[area]
+    raise "Unknown area 'pmp.#{area}'" if d.nil?
+    others do |*args2|
+      param = args2.first
+      d = d[param]
+      raise "Unknown parameter 'pmp.#{area}.#{param}'" if d.nil?
+      f = Fbe.fb.query("(and (eq what 'pmp') (eq area '#{area}'))").each.to_a.first
+      if f.nil?
+        d
+      else
+        r = f[param]
+        if r.nil?
+          d
+        else
+          r.first
+        end
+      end
+    end
+  end
+end
