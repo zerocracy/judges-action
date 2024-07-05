@@ -137,7 +137,7 @@ Fbe.iterate do
   end
 
   over do |repository, latest|
-    $loog.debug("Starting to scan #{repository}, the latest event_id was #{latest}...")
+    $loog.debug("Starting to scan repository ##{repository}, the latest event_id was #{latest}...")
     id = nil
     total = 0
     detected = 0
