@@ -26,14 +26,13 @@ LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
 LABEL "version"="0.0.0"
 
-WORKDIR /home
-COPY entry.sh /home
-RUN mkdir /judges-action
-COPY judges /judges-action/judges
-COPY lib /judges-action/lib
-COPY Gemfile /judges-action/
-COPY Gemfile.lock /judges-action/
+WORKDIR /action
+COPY entry.sh /action
+COPY judges /action/judges
+COPY lib /action/lib
+COPY Gemfile /action
+COPY Gemfile.lock /action
 
-RUN bundle install --gemfile=/judges-action/Gemfile
+RUN bundle update --gemfile=/action/Gemfile
 
-ENTRYPOINT ["/home/entry.sh", "/judges-action"]
+ENTRYPOINT ["/action/entry.sh", "/action"]

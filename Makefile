@@ -29,7 +29,7 @@ all: rubocop test entry rmi verify
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --disable live --lib /judges-action/lib /judges-action/judges'
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --disable live --lib /action/lib /action/judges'
 	echo "$$?" > target/test.exit
 
 entry: target/docker-image.txt
@@ -61,7 +61,7 @@ verify:
 	e2=$$(cat target/entry.exit)
 	test "$${e2}" = "0"
 
-target/docker-image.txt:
+target/docker-image.txt: Makefile Dockerfile
 	mkdir -p "$$(dirname $@)"
 	sudo docker build -t judges-action "$$(pwd)"
 	sudo docker build -t judges-action -q "$$(pwd)" > "$@"
