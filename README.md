@@ -73,7 +73,6 @@ The following options are expected by the `zerocracy/judges-action` plugin
   (where everything is kept)
 * `verbose` (optional) makes it print debugging info if set to `true`
 * `cycles` (optional) is a number of update cycles to run
-* `trim` (optional) is the number of days to keep facts in the factbase
 
 The following `k=v` pairs inside the `options` may be important:
 

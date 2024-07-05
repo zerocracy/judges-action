@@ -44,10 +44,6 @@ inputs:
     description: 'Path of the factbase file (also the name of the job in Zerocracy)'
     required: true
     default: 'default.fb'
-  trim:
-    description: 'Trim by how many days (better not less than 90)'
-    required: false
-    default: 999999
   cycles:
     description: 'How many update cycles to run (keep it under 10)'
     required: true

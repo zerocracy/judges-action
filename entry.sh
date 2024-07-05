@@ -79,14 +79,6 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "${name}" "${fb}"
 fi
 
-if [ -n "${INPUT_TRIM}" ]; then
-    if [ -e "${fb}" ]; then
-        # Remove facts that are too old
-        time=$(ruby -e "require 'time'; puts (Time.now - ${INPUT_TRIM} * 24 * 60 * 60).utc.iso8601")
-        ${JUDGES} "${gopts[@]}" trim --query "(lt _time ${time})" "${fb}"
-    fi
-fi
-
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
 declare -a options=()
 while IFS= read -r o; do
