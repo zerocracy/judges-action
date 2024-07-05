@@ -137,6 +137,7 @@ Fbe.iterate do
   end
 
   over do |repository, latest|
+    $loog.debug("Starting to scan #{repository}, the latest event_id was #{latest}...")
     id = nil
     total = 0
     detected = 0
@@ -148,7 +149,7 @@ Fbe.iterate do
       total += 1
       id = json[:id].to_i
       if id < latest
-        $loog.debug("The event ID ##{id} is smaller than the latest ##{latest}, time to stop")
+        $loog.debug("The event_id ##{id} (no.#{idx}) is smaller than the latest ##{latest}, time to stop")
         break
       end
       Fbe.fb.txn do |fbt|
@@ -158,7 +159,7 @@ Fbe.iterate do
         end
         unless f.nil?
           fill_up_event(f, json)
-          $loog.info("Detected new event ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
+          $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
           detected += 1
         end
       end
@@ -167,6 +168,7 @@ Fbe.iterate do
       "In #{Fbe.octo.repo_name_by_id(repository)}, " \
       "detected #{detected} events out of #{total} scanned"
     )
+    $loog.debug("Finished scannig #{repository}, the latest event_id is #{id}")
     id
   end
 end

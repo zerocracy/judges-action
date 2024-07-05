@@ -27,6 +27,10 @@ set -o pipefail
 
 VERSION=0.0.0
 
+if [ -z "${JUDGES}" ]; then
+    JUDGES=judges
+fi
+
 if [ -z "$1" ]; then
     SELF=$(pwd)
 else
@@ -62,8 +66,10 @@ fi
 
 owner="${INPUT_OWNER} $(hostname)"
 
+cd "${GITHUB_WORKSPACE}"
+
 if [ -n "${INPUT_TOKEN}" ]; then
-    bundle exec judges "${gopts[@]}" pull \
+    ${JUDGES} "${gopts[@]}" pull \
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${fb}"
@@ -73,7 +79,7 @@ if [ -n "${INPUT_TRIM}" ]; then
     if [ -e "${fb}" ]; then
         # Remove facts that are too old
         time=$(ruby -e "require 'time'; puts (Time.now - ${INPUT_TRIM} * 24 * 60 * 60).utc.iso8601")
-        bundle exec judges "${gopts[@]}" trim --query "(lt _time ${time})" "${fb}"
+        ${JUDGES} "${gopts[@]}" trim --query "(lt _time ${time})" "${fb}"
     fi
 fi
 
@@ -89,7 +95,7 @@ options+=("--option=judges_action_version=${VERSION}")
 echo "The 'judges-action' ${VERSION} is running"
 
 cd "${SELF}"
-bundle exec judges "${gopts[@]}" update \
+${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
     --summary \
@@ -100,7 +106,7 @@ bundle exec judges "${gopts[@]}" update \
     "${fb}"
 
 if [ -n "${INPUT_TOKEN}" ]; then
-    bundle exec judges "${gopts[@]}" push \
+    ${JUDGES} "${gopts[@]}" push \
         "--owner=${owner}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
