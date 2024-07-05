@@ -24,7 +24,7 @@ name: 'judges-action'
 description: 'Scan the repository and build a Factbase'
 runs:
   using: 'docker'
-  image: 'docker://yegor256/judges-action:latest'
+  image: 'docker://yegor256/judges-action:0.0.8'
 inputs:
   token:
     description: 'Authentication token from www.zerocracy.com'
