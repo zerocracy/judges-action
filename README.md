@@ -37,7 +37,7 @@ jobs:
             repositories=yegor256/judges,yegor256/*,-yegor256/test
             summary_url=...
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.0.14
+      - uses: zerocracy/pages-action@0.0.15
         with:
           factbase: foo.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
