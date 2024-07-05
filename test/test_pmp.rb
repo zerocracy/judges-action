@@ -33,11 +33,13 @@ require_relative '../lib/pmp'
 class TestPmp < Minitest::Test
   def test_defaults
     $fb = Factbase.new
+    $global = {}
     assert_equal(7, J.pmp.hr.days_to_reward)
   end
 
   def test_fail_on_wrong_area
     $fb = Factbase.new
+    $global = {}
     assert_raises { J.pmp.something }
   end
 end
