@@ -60,7 +60,7 @@ if [ -n "${INPUT_VERBOSE}" ]; then
     gopts+=("--verbose")
 fi
 
-owner=${INPUT_OWNER} $(hostname)
+owner="${INPUT_OWNER} $(hostname)"
 
 if [ -n "${INPUT_TOKEN}" ]; then
     bundle exec judges "${gopts[@]}" pull \

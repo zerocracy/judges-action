@@ -61,7 +61,7 @@ verify:
 	e2=$$(cat target/entry.exit)
 	test "$${e2}" = "0"
 
-target/docker-image.txt: Makefile Dockerfile
+target/docker-image.txt: Makefile Dockerfile entry.sh
 	mkdir -p "$$(dirname $@)"
 	sudo docker build -t judges-action "$$(pwd)"
 	sudo docker build -t judges-action -q "$$(pwd)" > "$@"
