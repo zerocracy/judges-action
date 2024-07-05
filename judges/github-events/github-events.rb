@@ -142,7 +142,7 @@ Fbe.iterate do
     total = 0
     detected = 0
     Fbe.octo.repository_events(repository).each_with_index do |json, idx|
-      if idx >= $options.max_events
+      if !$options.max_events.nil? && idx >= $options.max_events
         $loog.debug("Have already scanned #{idx} events, it's time to stop")
         break
       end
