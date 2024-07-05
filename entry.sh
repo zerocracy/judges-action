@@ -53,8 +53,6 @@ fi
 
 export GLI_DEBUG=true
 
-cd "${GITHUB_WORKSPACE-/w}"
-
 fb=$(realpath "${INPUT_FACTBASE}")
 
 declare -a gopts=()
@@ -101,7 +99,7 @@ bundle exec judges "${gopts[@]}" update \
 
 if [ -n "${INPUT_TOKEN}" ]; then
     bundle exec judges "${gopts[@]}" push \
-        "--owner=${INPUT_OWNER}" \
+        "--owner=${INPUT_OWNER} $(hostname)" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
