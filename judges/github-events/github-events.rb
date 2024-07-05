@@ -143,13 +143,13 @@ Fbe.iterate do
     detected = 0
     Fbe.octo.repository_events(repository).each_with_index do |json, idx|
       if !$options.max_events.nil? && idx >= $options.max_events
-        $loog.debug("Have already scanned #{idx} events, it's time to stop")
+        $loog.debug("Already scanned #{idx} events in #{Fbe.octo.repo_name_by_id(repository)}, stop now")
         break
       end
       total += 1
       id = json[:id].to_i
       if id < latest
-        $loog.debug("The event_id ##{id} (no.#{idx}) is smaller than the latest ##{latest}, time to stop")
+        $loog.debug("The event_id ##{id} (no.#{idx}) is smaller than ##{latest}, stop in #{json[:repo][:name]}")
         break
       end
       Fbe.fb.txn do |fbt|
@@ -168,7 +168,12 @@ Fbe.iterate do
       "In #{Fbe.octo.repo_name_by_id(repository)}, " \
       "detected #{detected} events out of #{total} scanned"
     )
-    $loog.debug("Finished scannig #{repository}, the latest event_id is #{id}")
-    id
+    if id.nil?
+      $loog.debug("No events found in #{repository}, the latest event_id remains #{latest}")
+      latest
+    else
+      $loog.debug("Finished scanning #{repository}, the latest event_id is #{id}")
+      id
+    end
   end
 end
