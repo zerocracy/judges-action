@@ -60,10 +60,12 @@ if [ -n "${INPUT_VERBOSE}" ]; then
     gopts+=("--verbose")
 fi
 
+owner=${INPUT_OWNER} $(hostname)
+
 if [ -n "${INPUT_TOKEN}" ]; then
     bundle exec judges "${gopts[@]}" pull \
         "--token=${INPUT_TOKEN}" \
-        "--owner=${INPUT_OWNER}" \
+        "--owner=${owner}" \
         "${name}" "${fb}"
 fi
 
@@ -99,7 +101,7 @@ bundle exec judges "${gopts[@]}" update \
 
 if [ -n "${INPUT_TOKEN}" ]; then
     bundle exec judges "${gopts[@]}" push \
-        "--owner=${INPUT_OWNER} $(hostname)" \
+        "--owner=${owner}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
