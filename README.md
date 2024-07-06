@@ -67,7 +67,7 @@ who is the best performer in your team.
 
 ## Configuration
 
-The following options are expected by the `zerocracy/judges-action` plugin
+The following options are expected by the plugin
 (see how we [configure][ours] it):
 
 * `token` (mandatory) is an authentication token from
