@@ -34,13 +34,15 @@ jobs:
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           options: |
-            token=${{ secrets.GITHUB_TOKEN }}
+            github_token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/*,-yegor256/test
             summary_url=...
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.0.16
         with:
           factbase: foo.fb
+          options: |
+            github_token=${{ secrets.GITHUB_TOKEN }}
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
@@ -76,7 +78,7 @@ The following options are expected by the `zerocracy/judges-action` plugin
 
 The following `k=v` pairs inside the `options` may be important:
 
-* `token=...` is a default GitHub token, usually to be set to
+* `github_token=...` is a default GitHub token, usually to be set to
 `${{ secrets.GITHUB_TOKEN }}`
 * `repositories=..` is a comma-separated list of masks that
 determine the repositories to manage, where
