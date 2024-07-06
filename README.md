@@ -14,8 +14,7 @@ First, get a free authentication token from
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
-(replace `foo` with the name of your team and set the
-`summary_url` pointing to the place where the summary HTML is deployed):
+(replace `foo` with the name of your team):
 
 ```yaml
 name: zerocracy
@@ -35,7 +34,7 @@ jobs:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           options: |
             github_token=${{ secrets.GITHUB_TOKEN }}
-            repositories=yegor256/judges,yegor256/*,-yegor256/test
+            repositories=...
             summary_url=...
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.0.16
@@ -49,6 +48,10 @@ jobs:
           folder: pages
           clean: false
 ```
+
+In the file, there are two places that you should configure. First,
+the `repositories=...` should have a comma-separated list
+of repositories where your team works (instead of `...`).
 
 Once the file is added, GitHub will start running this job every ten
 minutes, collecting information about most important activities of
