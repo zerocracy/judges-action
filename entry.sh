@@ -91,7 +91,7 @@ done <<< "${INPUT_OPTIONS}"
 options+=("--option=judges_action_version=${VERSION}")
 
 if [ ! "${summary_url_set}" = true ]; then
-    GITHUB_REPO_NAME=${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}
+    GITHUB_REPO_NAME=${GITHUB_REPOSITORY#${GITHUB_REPOSITORY_OWNER}/}
     SUMMARY_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}.html
     options+=("--option=summary_url=${SUMMARY_URL}")
 fi
