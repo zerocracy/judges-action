@@ -29,7 +29,6 @@ require 'fbe/if_absent'
 Fbe.iterate do
   as 'labels-were-scanned'
   by "(agg (and (eq repository $repository) (eq what 'issue-was-opened') (gt issue $before)) (min issue))"
-  limit $options.max_labels || 10
   quota_aware
   over do |repository, issue|
     Fbe.octo.issue_timeline(repository, issue).each do |te|

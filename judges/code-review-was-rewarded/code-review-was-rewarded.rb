@@ -30,6 +30,7 @@ Fbe.conclude do
     (exists where)
     (exists seconds)
     (exists when)
+    (gt when #{(Time.now - (J.pmp.hr.days_to_reward * 24 * 60 * 60)).utc.iso8601})
     (exists issue)
     (exists repository)
     (exists who)
@@ -46,8 +47,7 @@ Fbe.conclude do
     n.why = "Code was reviewed in #{J.issue(n)}"
     n.greeting =
       'Thanks for the review! ' \
-      "You've earned #{J.award(n)} points for this. " \
-      "#{J.balance(n.who)}."
+      "You've earned #{J.award(n)} points for this.#{J.balance(n.who)}"
     "It's time to reward #{J.who(n)} for the code review in " \
       "#{J.issue(n)}, the reward amount is #{J.award(n)}."
   end

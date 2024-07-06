@@ -30,7 +30,6 @@ Fbe.iterate do
   as 'events-were-scanned'
   by '(plus 0 $before)'
   quota_aware
-  limit 1
 
   def self.skip_event(json)
     $loog.debug(
@@ -137,19 +136,22 @@ Fbe.iterate do
   end
 
   over do |repository, latest|
-    $loog.debug("Starting to scan repository ##{repository}, the latest event_id was #{latest}...")
+    rname = Fbe.octo.repo_name_by_id(repository)
+    $loog.debug("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
     id = nil
     total = 0
     detected = 0
+    first = nil
     Fbe.octo.repository_events(repository).each_with_index do |json, idx|
       if !$options.max_events.nil? && idx >= $options.max_events
-        $loog.debug("Already scanned #{idx} events in #{Fbe.octo.repo_name_by_id(repository)}, stop now")
+        $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
         break
       end
       total += 1
       id = json[:id].to_i
-      if id < latest
-        $loog.debug("The event_id ##{id} (no.#{idx}) is smaller than ##{latest}, stop in #{json[:repo][:name]}")
+      first = id if first.nil?
+      if id <= latest
+        $loog.debug("The event_id ##{id} (no.#{idx}) is not larger than ##{latest}, good stop in #{json[:repo][:name]}")
         break
       end
       Fbe.fb.txn do |fbt|
@@ -164,16 +166,16 @@ Fbe.iterate do
         end
       end
     end
-    $loog.info(
-      "In #{Fbe.octo.repo_name_by_id(repository)}, " \
-      "detected #{detected} events out of #{total} scanned"
-    )
+    $loog.info("In #{rname}, detected #{detected} events out of #{total} scanned")
     if id.nil?
-      $loog.debug("No events found in #{repository}, the latest event_id remains #{latest}")
+      $loog.debug("No events found in #{rname}, the latest event_id remains ##{latest}")
       latest
+    elsif id <= latest || latest.zero?
+      $loog.debug("Finished scanning #{rname} correctly, next time will scan until ##{first}")
+      first
     else
-      $loog.debug("Finished scanning #{repository}, the latest event_id is #{id}")
-      id
+      $loog.debug("Scanning of #{rname} fininshed, but not completely, next time will start from ##{latest}")
+      latest
     end
   end
 end

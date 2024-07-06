@@ -32,5 +32,5 @@ def J.balance(who, days: 28)
   return '' if b.zero?
   md = J.award(b)
   md = "[#{md}](#{$options.summary_url})" unless $options.summary_url.nil?
-  "Your running balance is #{md}"
+  " Your running balance is #{md}."
 end
