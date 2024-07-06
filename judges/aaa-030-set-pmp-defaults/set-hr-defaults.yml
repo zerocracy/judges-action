@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,23 +19,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'others'
-require 'fbe/fb'
-
-# Project management functions.
-module J; end
-
-def J.pmp(fb: Fbe.fb, global: $global, options: $options)
-  others do |*args1|
-    area = args1.first
-    others do |*args2|
-      param = args2.first
-      f = Fbe.fb(global:, fb:, options:).query("(and (eq what 'pmp') (eq area '#{area}'))").each.to_a.first
-      raise "Unknown area '#{area}'" if f.nil?
-      r = f[param]
-      raise "Unknown '#{param}' in '#{area}' area" if r.nil?
-      r.first
-    end
-  end
-end
+---
+input: []
+expected:
+  - /fb[count(f)=1]
+  - /fb/f[what='pmp' and area='hr' and days_to_reward='7']

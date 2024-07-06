@@ -22,22 +22,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'others'
 require 'fbe/fb'
 
-# Project management functions.
-module J; end
-
-def J.pmp(fb: Fbe.fb, global: $global, options: $options)
-  others do |*args1|
-    area = args1.first
-    others do |*args2|
-      param = args2.first
-      f = Fbe.fb(global:, fb:, options:).query("(and (eq what 'pmp') (eq area '#{area}'))").each.to_a.first
-      raise "Unknown area '#{area}'" if f.nil?
-      r = f[param]
-      raise "Unknown '#{param}' in '#{area}' area" if r.nil?
-      r.first
-    end
+{
+  hr: {
+    days_to_reward: 7,
+    days_of_running_balance: 28
+  }
+}.each do |area, props|
+  f = Fbe.fb.query("(and (eq what 'pmp') (eq area '#{area}'))").each.to_a.first
+  if f.nil?
+    f = Fbe.fb.insert
+    f.what = 'pmp'
+    f.area = area.to_s
+  end
+  props.each do |k, v|
+    f.send("#{k}=", v) if f[k].nil?
   end
 end

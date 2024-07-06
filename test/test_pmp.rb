@@ -24,6 +24,7 @@
 
 require 'minitest/autorun'
 require 'factbase'
+require 'judges/options'
 require_relative '../lib/pmp'
 
 # Test.
@@ -34,12 +35,16 @@ class TestPmp < Minitest::Test
   def test_defaults
     $fb = Factbase.new
     $global = {}
-    assert_equal(7, J.pmp.hr.days_to_reward)
+    $options = Judges::Options.new
+    f = Fbe.fb.insert
+    f.what = 'pmp'
+    f.area = 'hr'
+    f.days_to_reward = 55
+    assert_equal(55, J.pmp.hr.days_to_reward)
   end
 
   def test_fail_on_wrong_area
-    $fb = Factbase.new
     $global = {}
-    assert_raises { J.pmp.something }
+    assert_raises { J.pmp(Factbase.new).something }
   end
 end

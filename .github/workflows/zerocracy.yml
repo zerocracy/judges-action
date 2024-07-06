@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@master
+      - uses: zerocracy/judges-action@0.0.10
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           verbose: true
@@ -46,7 +46,7 @@ jobs:
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action,zerocracy/baza
           factbase: zerocracy.fb
           cycles: 2
-      - uses: zerocracy/pages-action@0.0.15
+      - uses: zerocracy/pages-action@0.0.16
         with:
           options: |
             token=${{ secrets.GITHUB_TOKEN }}
