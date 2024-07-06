@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.0.9
+      - uses: zerocracy/judges-action@0.0.11
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           options: |
@@ -38,7 +38,7 @@ jobs:
             repositories=yegor256/judges,yegor256/*,-yegor256/test
             summary_url=...
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.0.15
+      - uses: zerocracy/pages-action@0.0.16
         with:
           factbase: foo.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
