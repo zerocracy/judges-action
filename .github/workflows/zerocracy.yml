@@ -38,7 +38,6 @@ jobs:
           verbose: true
           options: |
             max_events=1000
-            summary_url=https://${{ }}.github.io/${{ }}/zerocracy.html
             github_token=${{ secrets.GITHUB_TOKEN }}
             repositories=yegor256/judges,yegor256/factbase,zerocracy/judges-action,zerocracy/pages-action,zerocracy/baza
           factbase: zerocracy.fb
