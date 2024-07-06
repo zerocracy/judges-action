@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'tago'
 require 'fbe/octo'
 require 'fbe/iterate'
 require 'fbe/if_absent'
@@ -32,9 +33,10 @@ Fbe.iterate do
   quota_aware
 
   def self.skip_event(json)
+    t = Time.parse(json[:created_at].iso8601)
     $loog.debug(
-      "The #{json[:type]} GitHub event ##{json[:id]} " \
-      "in #{json[:repo][:name]} is ignored"
+      "Event ##{json[:id]} (#{json[:type]}) " \
+      "in #{json[:repo][:name]} ignored (#{t.ago} ago)"
     )
     raise Factbase::Rollback
   end
@@ -159,7 +161,9 @@ Fbe.iterate do
           n.where = 'github'
           n.event_id = json[:id].to_i
         end
-        unless f.nil?
+        if f.nil?
+          $loog.debug("The event ##{id} just detected is already in the factbase")
+        else
           fill_up_event(f, json)
           $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
           detected += 1
@@ -174,7 +178,7 @@ Fbe.iterate do
       $loog.debug("Finished scanning #{rname} correctly, next time will scan until ##{first}")
       first
     else
-      $loog.debug("Scanning of #{rname} fininshed, but not completely, next time will start from ##{latest}")
+      $loog.debug("Scanning of #{rname} wasn't completed, next time will try again until ##{latest}")
       latest
     end
   end
