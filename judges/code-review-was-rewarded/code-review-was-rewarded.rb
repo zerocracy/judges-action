@@ -35,6 +35,11 @@ Fbe.conclude do
     (exists repository)
     (exists who)
     (eq is_human 1)
+    (join 'merged_when<=when' (and
+        (eq what 'pull-was-merged')
+        (eq issue $issue)
+        (eq repository $repository)))
+    (exists merged_when)
     (empty (and
       (eq what '#{$judge}')
       (eq where $where)
