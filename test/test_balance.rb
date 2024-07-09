@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,44 +21,29 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-runs: 2
-options:
-  testing: true
-input:
-  -
-    what: pmp
-    area: hr
-    days_to_reward: 99999
-  -
-    _id: 1
-    who: 4444
-    when: 2024-01-01T03:15:45Z
-    award: 100
-  -
-    _id: 1
-    cause:
-      - 5
-      - 6
-    what: code-was-contributed
-    where: github
-    seconds: 8800
-    hoc: 888
-    comments: 7979
-    is_human: 1
-    who: 4444
-    merger: 888
-    issue: 42
-    repository: 100
-    when: 2024-01-01T03:15:45Z
-    details: >-
-      The bug was accepted some time ago, this is why this fact is here.
-      The bug was accepted some time ago, this is why this fact is here.
-expected:
-  - /fb[count(f)=4]
-  - /fb/f[what='code-contribution-was-rewarded']
-  - /fb/f[who='4444']
-  - /fb/f[issue='42']
-  - /fb/f[repository='100']
-  - /fb/f[award='40']
-  - /fb/f[why]
+
+require 'minitest/autorun'
+require_relative '../lib/balance'
+
+# Test.
+# Author:: Yegor Bugayenko (yegor256@gmail.com)
+# Copyright:: Copyright (c) 2024 Yegor Bugayenko
+# License:: MIT
+class TestBalance < Minitest::Test
+  def test_with_balance
+    fb = Factbase.new
+    f = fb.insert
+    f.award = 40
+    f.when = Time.now
+    f.who = 444
+    options = Judges::Options.new(['summary_url=https://zerocracy.com'])
+    b = J.balance(444, fb:, global: {}, options:)
+    assert_equal('Your running balance is [+40](https://zerocracy.com). ', b)
+  end
+
+  def test_with_no_history
+    fb = Factbase.new
+    b = J.balance(444, fb:, global: {})
+    assert_equal('', b)
+  end
+end

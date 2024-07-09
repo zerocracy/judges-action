@@ -30,7 +30,7 @@ def J.balance(who, days: 28, fb: $fb, global: $global, options: $options)
     "(and (exists award) (eq who #{who}) (gt when #{(Time.now - (days * 24 * 60 * 60)).utc.iso8601}))"
   ).each.to_a.inject(0) { |a, f| a + f.award }
   return '' if b.zero?
-  md = J.award(b)
+  md = format('%+d', b)
   md = "[#{md}](#{options.summary_url})" unless options.summary_url.nil?
   "Your running balance is #{md}. "
 end
