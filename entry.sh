@@ -64,7 +64,7 @@ if [ -n "${INPUT_VERBOSE}" ]; then
     gopts+=("--verbose")
 fi
 
-owner="${INPUT_OWNER} ${name} $(hostname)"
+owner=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
 
 cd "${GITHUB_WORKSPACE}"
 
