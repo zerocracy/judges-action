@@ -44,6 +44,8 @@ input:
     what: code-was-reviewed
     where: github
     seconds: 8800
+    hoc: 90
+    comments: 6
     is_human: 1
     who: 4444
     merger: 888
@@ -59,5 +61,5 @@ expected:
   - /fb/f[who='4444']
   - /fb/f[issue='42']
   - /fb/f[repository='100']
-  - /fb/f[award='25']
+  - /fb/f[award='40']
   - /fb/f[why]

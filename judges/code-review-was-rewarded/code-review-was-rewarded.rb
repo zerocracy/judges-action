@@ -29,6 +29,8 @@ Fbe.conclude do
     (eq what 'code-was-reviewed')
     (exists where)
     (exists seconds)
+    (exists hoc)
+    (exists comments)
     (exists when)
     (gt when #{(Time.now - (J.pmp.hr.days_to_reward * 24 * 60 * 60)).utc.iso8601})
     (exists issue)
@@ -46,12 +48,38 @@ Fbe.conclude do
       (eq issue $issue)
       (eq repository $repository))))"
   follow 'where repository issue who'
-  draw do |n, _resolved|
+  draw do |n, reviewed|
     a = J.award(
       {
         kind: :const,
         points: 25,
         because: 'as a basis'
+      },
+      {
+        kind: :linear,
+        x: reviewed.hoc,
+        k: 0.1,
+        because: "for #{reviewed.hoc} hits-of-code",
+        max: 40,
+        at_least: 5
+      },
+      {
+        kind: :linear,
+        x: reviewed.comments,
+        k: 1,
+        because: "for #{reviewed.comments} comments",
+        max: 20,
+        at_least: 5
+      },
+      {
+        kind: :at_most,
+        points: 100,
+        because: 'it is too many'
+      },
+      {
+        kind: :at_least,
+        points: 5,
+        because: 'it is too few'
       }
     )
     n.award = a[:points]
