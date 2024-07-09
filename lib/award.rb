@@ -30,6 +30,7 @@ module J; end
 def J.award(*rows)
   bills = []
   rows.each do |row|
+    next if !row[:if].nil? && !row[:if]
     case row[:kind]
     when :const
       v = row[:points]
@@ -51,6 +52,7 @@ def J.award(*rows)
     v = 0 if !row[:at_least].nil? && v.abs < row[:at_least].abs
     bills << { v:, reason: "#{format('%+d', v)} #{row[:because]}" }
   end
+  bills.compact!
   bills.reject! { |b| b[:v].zero? }
   total = bills.map { |b| b[:v] }.inject(&:+).to_i
   explain = bills.map { |b| b[:reason] }.join(', ')

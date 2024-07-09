@@ -41,12 +41,27 @@ Fbe.conclude do
       (eq issue $issue)
       (eq repository $repository))))"
   follow 'where repository issue who'
-  draw do |n, _resolved|
+  draw do |n, resolved|
+    hours = resolved.seconds / (60 * 60)
     a = J.award(
       {
         kind: :const,
         points: 30,
         because: 'as a basis'
+      },
+      {
+        kind: :const,
+        points: +10,
+        if: hours < 24,
+        because: 'for resolving it in less than 24 hours'
+      },
+      {
+        kind: :linear,
+        x: hours / 24,
+        k: -1,
+        because: "for #{hours / 24} days of delay",
+        min: -20,
+        at_least: -5
       }
     )
     n.award = a[:points]
