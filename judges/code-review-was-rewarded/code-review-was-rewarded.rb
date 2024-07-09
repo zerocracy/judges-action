@@ -47,13 +47,22 @@ Fbe.conclude do
       (eq repository $repository))))"
   follow 'where repository issue who'
   draw do |n, _resolved|
-    n.award = 25
+    a = J.award(
+      {
+        kind: :const,
+        points: 25,
+        because: 'as a basis'
+      }
+    )
+    n.award = a[:points]
     n.when = Time.now
     n.why = "Code was reviewed in #{J.issue(n)}"
-    n.greeting =
-      'Thanks for the review! ' \
-      "You've earned #{J.award(n)} points for this.#{J.balance(n.who)}"
+    n.greeting = [
+      'Thanks for the review!',
+      a[:greeting],
+      J.balance(n.who)
+    ].join(' ')
     "It's time to reward #{J.who(n)} for the code review in " \
-      "#{J.issue(n)}, the reward amount is #{J.award(n)}."
+      "#{J.issue(n)}, the reward amount is #{n.award}."
   end
 end

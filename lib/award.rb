@@ -22,42 +22,40 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/conclude'
+require 'fbe/octo'
 
-Fbe.conclude do
-  on "(and
-    (eq what 'bug-was-resolved')
-    (exists where)
-    (exists seconds)
-    (exists when)
-    (gt when #{(Time.now - (J.pmp.hr.days_to_reward * 24 * 60 * 60)).utc.iso8601})
-    (exists issue)
-    (exists repository)
-    (exists who)
-    (eq is_human 1)
-    (empty (and
-      (eq what '#{$judge}')
-      (eq where $where)
-      (eq issue $issue)
-      (eq repository $repository))))"
-  follow 'where repository issue who'
-  draw do |n, _resolved|
-    a = J.award(
-      {
-        kind: :const,
-        points: 30,
-        because: 'as a basis'
-      }
-    )
-    n.award = a[:points]
-    n.when = Time.now
-    n.why = "Bug #{J.issue(n)} was resolved"
-    n.greeting = [
-      'Thanks for closing this issue! ',
-      a[:greeting],
-      J.balance(n.who)
-    ].join
-    "It's time to reward #{J.who(n)} for the bug resolved in " \
-      "#{J.issue(n)}, the reward amount is #{n.award}."
+# Supplementary functions.
+module J; end
+
+def J.award(*rows)
+  bills = []
+  rows.each do |row|
+    case row[:kind]
+    when :const
+      v = row[:points]
+    when :linear
+      v = row[:x] * row[:k]
+    when :at_most
+      sum = bills.map { |b| b[:v] }.inject(&:+)
+      diff = row[:points] - sum
+      v = diff.negative? ? diff : 0
+    when :at_least
+      sum = bills.map { |b| b[:v] }.inject(&:+)
+      diff = row[:points] - sum
+      v = diff.positive? ? diff : 0
+    else
+      raise "Unknown kind of row '#{row[:kind]}'"
+    end
+    v = [v, row[:max]].min unless row[:max].nil?
+    v = [v, row[:min]].max unless row[:min].nil?
+    v = 0 if !row[:at_least].nil? && v.abs < row[:at_least].abs
+    bills << { v:, reason: "#{format('%+d', v)} #{row[:because]}" }
   end
+  bills.reject! { |b| b[:v].zero? }
+  total = bills.map { |b| b[:v] }.inject(&:+).to_i
+  explain = bills.map { |b| b[:reason] }.join(', ')
+  {
+    points: total,
+    greeting: "You've earned #{format('%+d', total)} points for this (#{explain}). "
+  }
 end

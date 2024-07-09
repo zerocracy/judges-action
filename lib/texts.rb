@@ -35,12 +35,6 @@ def J.who(fact, prop = :who)
   "@#{Fbe.octo.user_name_by_id(fact.send(prop.to_s))}"
 end
 
-def J.award(fact, prop = :award)
-  a = fact
-  a = a.send(prop.to_s) unless a.is_a?(Integer)
-  format('%+d', a)
-end
-
 def J.sec(fact, prop = :seconds)
   s = fact.send(prop.to_s)
   if s < 60

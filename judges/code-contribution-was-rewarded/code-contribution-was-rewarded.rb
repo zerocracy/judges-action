@@ -29,6 +29,8 @@ Fbe.conclude do
     (eq what 'code-was-contributed')
     (exists where)
     (exists seconds)
+    (exists hoc)
+    (exists comments)
     (exists when)
     (gt when #{(Time.now - (J.pmp.hr.days_to_reward * 24 * 60 * 60)).utc.iso8601})
     (exists issue)
@@ -41,16 +43,50 @@ Fbe.conclude do
       (eq issue $issue)
       (eq repository $repository))))"
   follow 'where repository issue who'
-  draw do |n, _resolved|
-    n.award = 20
+  draw do |n, contrib|
+    a = J.award(
+      {
+        kind: :const,
+        points: 20,
+        because: 'as a basis'
+      },
+      {
+        kind: :linear,
+        x: contrib.hoc,
+        k: 0.1,
+        because: "for #{contrib.hoc} hits-of-code",
+        max: 40,
+        at_least: 5
+      },
+      {
+        kind: :linear,
+        x: contrib.comments,
+        k: -1,
+        because: "for #{contrib.comments} comments",
+        min: -20,
+        at_least: -5
+      },
+      {
+        kind: :at_most,
+        points: 100,
+        because: 'it is too many'
+      },
+      {
+        kind: :at_least,
+        points: 5,
+        because: 'it is too few'
+      }
+    )
+    n.award = a[:points]
     n.when = Time.now
     n.why = "Code was contributed in #{J.issue(n)}"
-    n.greeting =
-      'Thanks for the contribution! ' \
-      "You've earned #{J.award(n)} points for this. " \
-      'Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) ' \
-      "them coming.#{J.balance(n.who)}"
+    n.greeting = [
+      'Thanks for the contribution! ',
+      a[:greeting],
+      'Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. ',
+      J.balance(n.who)
+    ].join
     "It's time to reward #{J.who(n)} for the code contributed in " \
-      "#{J.issue(n)}, the reward amount is #{J.award(n)}."
+      "#{J.issue(n)}, the reward amount is #{n.award}."
   end
 end

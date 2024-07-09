@@ -22,42 +22,52 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/conclude'
+require 'minitest/autorun'
+require_relative '../lib/award'
 
-Fbe.conclude do
-  on "(and
-    (eq what 'bug-was-resolved')
-    (exists where)
-    (exists seconds)
-    (exists when)
-    (gt when #{(Time.now - (J.pmp.hr.days_to_reward * 24 * 60 * 60)).utc.iso8601})
-    (exists issue)
-    (exists repository)
-    (exists who)
-    (eq is_human 1)
-    (empty (and
-      (eq what '#{$judge}')
-      (eq where $where)
-      (eq issue $issue)
-      (eq repository $repository))))"
-  follow 'where repository issue who'
-  draw do |n, _resolved|
+# Test.
+# Author:: Yegor Bugayenko (yegor256@gmail.com)
+# Copyright:: Copyright (c) 2024 Yegor Bugayenko
+# License:: MIT
+class TestAward < Minitest::Test
+  def test_simple
     a = J.award(
       {
         kind: :const,
-        points: 30,
+        points: 20,
         because: 'as a basis'
+      },
+      {
+        kind: :linear,
+        x: 123,
+        k: 0.1,
+        because: 'for 123 hits-of-code',
+        max: 40,
+        min: 5
+      },
+      {
+        kind: :linear,
+        x: 3,
+        k: -1,
+        because: 'for 3 comments',
+        min: -20,
+        at_least: -5
+      },
+      {
+        kind: :at_most,
+        points: 100,
+        because: 'it is too many'
+      },
+      {
+        kind: :at_least,
+        points: 5,
+        because: 'it is too few'
       }
     )
-    n.award = a[:points]
-    n.when = Time.now
-    n.why = "Bug #{J.issue(n)} was resolved"
-    n.greeting = [
-      'Thanks for closing this issue! ',
-      a[:greeting],
-      J.balance(n.who)
-    ].join
-    "It's time to reward #{J.who(n)} for the bug resolved in " \
-      "#{J.issue(n)}, the reward amount is #{n.award}."
+    assert(a[:points] <= 100)
+    assert(a[:points] >= 5)
+    assert_equal(32, a[:points])
+    assert(a[:greeting].include?('You\'ve earned +32 points for this'))
+    assert(!a[:greeting].include?('for 3 comments'))
   end
 end

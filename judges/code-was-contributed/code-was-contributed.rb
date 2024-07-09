@@ -45,10 +45,10 @@ Fbe.conclude do
       (eq where $where)
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'where when repository issue seconds who merger'
+  follow 'where when repository issue seconds who merger hoc comments'
   draw do |n, _|
-    "The pull request #{J.issue(n)} " \
+    "The pull request #{J.issue(n)} with #{n.hoc} HoC " \
       "created by #{J.who(n)} was merged by #{J.who(n, :merger)} " \
-      "after #{J.sec(n)} of being in review."
+      "after #{J.sec(n)} of being in review and #{n.comments} comments."
   end
 end

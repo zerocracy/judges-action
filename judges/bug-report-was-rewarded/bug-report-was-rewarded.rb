@@ -43,20 +43,29 @@ Fbe.conclude do
       (eq repository $repository))))"
   follow 'where repository issue'
   draw do |n, accepted|
-    n.award = 15
+    a = J.award(
+      {
+        kind: :const,
+        points: 15,
+        because: 'as a basis'
+      }
+    )
+    n.award = a[:points]
     n.when = Time.now
     n.who = accepted.reporter
     n.why = "Bug #{J.issue(n)} was accepted"
-    n.greeting =
-      "Thanks for reporting a new bug! You've just earned #{J.award(n)} points for this. " \
-      'By reporting bugs, you help our project improve its quality. ' \
-      'If you find anything else in the repository that ' \
-      '[doesn\'t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) ' \
-      'as good as you might expect, ' \
-      '[do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to ' \
-      '[report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) ' \
-      "it.#{J.balance(n.who)}"
+    n.greeting = [
+      'Thanks for reporting a new bug! ',
+      a[:greeting],
+      'By reporting bugs, you help our project improve its quality. ',
+      'If you find anything else in the repository that ',
+      '[doesn\'t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) ',
+      'as good as you might expect, ',
+      '[do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to ',
+      '[report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. ',
+      J.balance(n.who)
+    ].join
     "It's time to reward #{J.who(n)} for the issue reported in " \
-      "#{J.issue(n)}, the reward amount is #{J.award(n)}."
+      "#{J.issue(n)}, the reward amount is #{n.award}."
   end
 end
