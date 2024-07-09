@@ -78,11 +78,11 @@ Fbe.iterate do
       end
 
     when 'PullRequestReviewEvent'
-      pl = json[:payload][:pull_request]
-      fact.issue = pl[:number]
+      fact.issue = json[:payload][:pull_request][:number]
       fact.what = 'pull-was-reviewed'
-      fact.hoc = pl[:additions] + pl[:deletions]
-      fact.comments = pl[:comments] + pl[:review_comments]
+      pull = Fbe.octo.pull_request(json[:repo][:name], fact.issue)
+      fact.hoc = pull[:additions] + pull[:deletions]
+      fact.comments = pull[:comments] + pull[:review_comments]
       fact.details =
         "The pull request #{json[:repo][:name]}##{fact.issue} " \
         "has been reviewed by #{J.who(fact)} " \
