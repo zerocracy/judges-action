@@ -64,11 +64,7 @@ if [ -n "${INPUT_VERBOSE}" ]; then
     gopts+=("--verbose")
 fi
 
-# The 'owner' is a unique identifier of the process for zerocracy, which
-# enables synchronization. It's better to keep it as general as possible.
-# Don't add anything to it, like hostname or process ID. This will only
-# make synchronization more error-prone.
-owner="${INPUT_OWNER}"
+owner="${INPUT_OWNER} ${name} $(hostname)"
 
 cd "${GITHUB_WORKSPACE}"
 
