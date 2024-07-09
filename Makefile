@@ -47,7 +47,6 @@ entry: target/docker-image.txt
 		-e GITHUB_WORKSPACE=/tmp \
 		-e INPUT_FACTBASE=/tmp/recent.fb \
 		-e INPUT_CYCLES=2 \
-		-e INPUT_OWNER=makefile \
 		-e INPUT_VERBOSE=true \
 		-e INPUT_PAGES=pages \
 		-e "INPUT_OPTIONS=$$(cat target/opts.txt)" \
