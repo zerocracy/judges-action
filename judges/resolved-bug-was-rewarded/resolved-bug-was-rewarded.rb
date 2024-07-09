@@ -50,9 +50,9 @@ Fbe.conclude do
         because: 'as a basis'
       },
       {
+        if: hours < 24,
         kind: :const,
         points: +10,
-        if: hours < 24,
         because: 'for resolving it in less than 24 hours'
       },
       {
