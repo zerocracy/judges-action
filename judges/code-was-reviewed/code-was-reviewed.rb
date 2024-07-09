@@ -28,6 +28,8 @@ Fbe.conclude do
   on "(and
     (eq what 'pull-was-reviewed')
     (exists where)
+    (exists hoc)
+    (exists comments)
     (exists who)
     (exists when)
     (exists issue)
@@ -43,10 +45,10 @@ Fbe.conclude do
       (eq where $where)
       (eq issue $issue)
       (eq repository $repository))))"
-  follow 'where when repository issue who author seconds'
+  follow 'where when repository issue who author seconds hoc comments'
   draw do |n, _|
-    "The pull request #{J.issue(n)} " \
+    "The pull request #{J.issue(n)} with #{n.hoc} HoC " \
       "created by #{J.who(n, :author)} was reviewed by #{J.who(n)} " \
-      "after #{J.sec(n)}."
+      "after #{J.sec(n)} and #{n.comments} comments."
   end
 end

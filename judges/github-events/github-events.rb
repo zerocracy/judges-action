@@ -71,17 +71,22 @@ Fbe.iterate do
         fact.comments = pl[:comments] + pl[:review_comments]
         fact.details =
           "The pull request #{json[:repo][:name]}##{fact.issue} " \
-          "has been #{json[:payload][:action]} by #{J.who(fact)}."
+          "has been #{json[:payload][:action]} by #{J.who(fact)}, " \
+          "with #{fact.hoc} HoC and #{fact.comments} comments."
       else
         skip_event(json)
       end
 
     when 'PullRequestReviewEvent'
-      fact.issue = json[:payload][:pull_request][:number]
+      pl = json[:payload][:pull_request]
+      fact.issue = pl[:number]
       fact.what = 'pull-was-reviewed'
+      fact.hoc = pl[:additions] + pl[:deletions]
+      fact.comments = pl[:comments] + pl[:review_comments]
       fact.details =
         "The pull request #{json[:repo][:name]}##{fact.issue} " \
-        "has been reviewed by #{J.who(fact)}."
+        "has been reviewed by #{J.who(fact)} " \
+        "with #{fact.hoc} HoC and #{fact.comments} comments."
 
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
