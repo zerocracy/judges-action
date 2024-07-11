@@ -50,14 +50,16 @@ def J.award(*rows)
     v = [v, row[:max]].min unless row[:max].nil?
     v = [v, row[:min]].max unless row[:min].nil?
     v = 0 if !row[:at_least].nil? && v.abs < row[:at_least].abs
-    bills << { v:, reason: "#{format('%+d', v)} #{row[:because]}" }
+    bills << { v:, reason: "#{format('%+d', v)} #{row[:because]}", basis: row[:basis] }
   end
   bills.compact!
   bills.reject! { |b| b[:v].zero? }
   total = bills.map { |b| b[:v] }.inject(&:+).to_i
   explain = bills.map { |b| b[:reason] }.join(', ')
+  explain = " (#{explain})"
+  explain = '' if bills.size == 1 && bills.first[:basis]
   {
     points: total,
-    greeting: "You've earned #{format('%+d', total)} points for this (#{explain}). "
+    greeting: "You've earned #{format('%+d', total)} points for this#{explain}. "
   }
 end

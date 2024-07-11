@@ -70,4 +70,23 @@ class TestAward < Minitest::Test
     assert(a[:greeting].include?('You\'ve earned +32 points for this'))
     assert(!a[:greeting].include?('for 3 comments'))
   end
+
+  def test_only_basis
+    a = J.award(
+      {
+        basis: true,
+        kind: :const,
+        points: 20,
+        because: 'as a basis'
+      },
+      {
+        kind: :const,
+        if: false,
+        points: 100,
+        because: '...'
+      }
+    )
+    assert_equal(20, a[:points])
+    assert_equal('You\'ve earned +20 points for this. ', a[:greeting])
+  end
 end
