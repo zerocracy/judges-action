@@ -25,6 +25,8 @@ set -e
 set -x
 set -o pipefail
 
+start=$(date +%s)
+
 VERSION=0.0.0
 
 if [ -z "${JUDGES}" ]; then
@@ -105,9 +107,13 @@ ${JUDGES} "${gopts[@]}" update \
     "${SELF}/judges" \
     "${fb}"
 
+end=$(date +%s)
+
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" push \
         "--owner=${owner}" \
+        "--meta=pages_url:${pages_url}" \
+        "--meta=duration:$((end - start))" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
