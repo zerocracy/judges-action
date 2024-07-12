@@ -31,6 +31,6 @@ def J.balance(who, days: 28, fb: $fb, global: $global, options: $options)
   ).each.to_a.inject(0) { |a, f| a + f.award }
   return '' if b.zero?
   md = format('%+d', b)
-  md = "[#{md}](#{options.summary_url})" unless options.summary_url.nil?
+  md = "[#{md}](#{options.pages_url})" unless options.pages_url.nil?
   "Your running balance is #{md}. "
 end

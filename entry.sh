@@ -77,19 +77,19 @@ fi
 
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
 declare -a options=()
-summary_url_set=false
+pages_url_set=false
 while IFS= read -r o; do
     v=$(echo "${o}" | xargs)
     if [ "${v}" = "" ]; then continue; fi
-    if [[ "${v}" == summary_url=* ]]; then summary_url_set=true; fi
+    if [[ "${v}" == pages_url=* ]]; then pages_url_set=true; fi
     options+=("--option=${v}")
 done <<< "${INPUT_OPTIONS}"
 options+=("--option=judges_action_version=${VERSION}")
 
-if [ ! "${summary_url_set}" = true ]; then
+if [ ! "${pages_url_set}" = true ]; then
     GITHUB_REPO_NAME=${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}
-    SUMMARY_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}.html
-    options+=("--option=summary_url=${SUMMARY_URL}")
+    pages_url=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}.html
+    options+=("--option=pages_url=${pages_url}")
 fi
 
 echo "The 'judges-action' ${VERSION} is running"

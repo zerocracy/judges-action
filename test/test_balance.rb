@@ -36,7 +36,7 @@ class TestBalance < Minitest::Test
     f.award = 40
     f.when = Time.now
     f.who = 444
-    options = Judges::Options.new(['summary_url=https://zerocracy.com'])
+    options = Judges::Options.new(['pages_url=https://zerocracy.com'])
     b = J.balance(444, fb:, global: {}, options:)
     assert_equal('Your running balance is [+40](https://zerocracy.com). ', b)
   end
