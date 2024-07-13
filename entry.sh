@@ -86,8 +86,8 @@ declare -a options=()
 while IFS= read -r o; do
     s=$(echo "${o}" | xargs)
     if [ "${s}" = "" ]; then continue; fi
-    k=$(echo ${s} | cut -f1 -d '=')
-    v=$(echo ${s} | cut -f2- -d '=')
+    k=$(echo "${s} "| cut -f1 -d '=')
+    v=$(echo "${s}" | cut -f2- -d '=')
     if [[ "${k}" == pages_url ]]; then
         PAGES_URL=${v}
         continue
