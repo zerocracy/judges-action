@@ -77,22 +77,25 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "${name}" "${fb}"
 fi
 
+# Set URL of the published pages:
+GITHUB_REPO_NAME=${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}
+PAGES_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}.html
+
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
 declare -a options=()
-pages_url_set=false
 while IFS= read -r o; do
-    v=$(echo "${o}" | xargs)
-    if [ "${v}" = "" ]; then continue; fi
-    if [[ "${v}" == pages_url=* ]]; then pages_url_set=true; fi
-    options+=("--option=${v}")
+    s=$(echo "${o}" | xargs)
+    if [ "${s}" = "" ]; then continue; fi
+    k=$(echo ${s} | cut -f1 -d '=')
+    v=$(echo ${s} | cut -f2- -d '=')
+    if [[ "${k}" == pages_url ]]; then
+        PAGES_URL=${v}
+        continue
+    fi
+    options+=("--option=${k}=${v}")
 done <<< "${INPUT_OPTIONS}"
 options+=("--option=judges_action_version=${VERSION}")
-
-if [ ! "${pages_url_set}" = true ]; then
-    GITHUB_REPO_NAME=${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}
-    pages_url=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}.html
-    options+=("--option=pages_url=${pages_url}")
-fi
+options+=("--option=pages_url=${PAGES_URL}")
 
 echo "The 'judges-action' ${VERSION} is running"
 
@@ -107,13 +110,11 @@ ${JUDGES} "${gopts[@]}" update \
     "${SELF}/judges" \
     "${fb}"
 
-end=$(date +%s)
-
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" push \
         "--owner=${owner}" \
-        "--meta=pages_url:${pages_url}" \
-        "--meta=duration:$((end - start))" \
+        "--meta=pages_url:${PAGES_URL}" \
+        "--meta=duration:$(($(date +%s) - start))" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
