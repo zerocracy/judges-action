@@ -43,7 +43,6 @@ jobs:
             github_token=${{ secrets.GITHUB_TOKEN }}
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
-          branch: gh-pages
           folder: pages
           clean: false
 ```
