@@ -36,6 +36,10 @@ Fbe.conclude do
     (exists issue)
     (exists repository)
     (exists who)
+    (join 'reviewed_when<=when' (and
+        (eq what 'pull-was-reviewed')
+        (eq issue $issue)
+        (eq repository $repository)))
     (eq is_human 1)
     (empty (and
       (eq what '#{$judge}')
@@ -70,6 +74,12 @@ Fbe.conclude do
         kind: :const,
         points: -15,
         because: "for way too many hits-of-code (#{contrib.hoc})"
+      },
+      {
+        if: contrib['reviewed_when'].nil?,
+        kind: :const,
+        points: -15,
+        because: 'for the lack of code review'
       },
       {
         kind: :linear,
