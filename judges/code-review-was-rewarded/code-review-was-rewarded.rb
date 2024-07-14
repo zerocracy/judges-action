@@ -37,6 +37,11 @@ Fbe.conclude do
     (exists repository)
     (exists who)
     (eq is_human 1)
+    (join 'author<=who' (and
+        (eq what 'pull-was-opened')
+        (eq issue $issue)
+        (eq repository $repository)))
+    (exists author)
     (join 'merged_when<=when' (and
         (eq what 'pull-was-merged')
         (eq issue $issue)
@@ -56,6 +61,13 @@ Fbe.conclude do
         because: 'as a basis'
       },
       {
+        if: reviewed.who == reviewed.author,
+        kind: :const,
+        points: -40,
+        because: 'for reviewing your own contribution'
+      },
+      {
+        if: reviewed.who != reviewed.author,
         kind: :linear,
         x: reviewed.hoc,
         k: 0.1,
@@ -64,6 +76,7 @@ Fbe.conclude do
         at_least: 5
       },
       {
+        if: reviewed.who != reviewed.author,
         kind: :linear,
         x: reviewed.comments,
         k: 1,

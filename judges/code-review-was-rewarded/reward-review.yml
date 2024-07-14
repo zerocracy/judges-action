@@ -30,6 +30,14 @@ input:
     days_to_reward: 99999
   -
     _id: 3
+    what: pull-was-opened
+    where: github
+    issue: 42
+    repository: 100
+    who: 765
+    when: 2024-05-15T23:54:24Z
+  -
+    _id: 3
     what: pull-was-merged
     where: github
     issue: 42
@@ -56,7 +64,7 @@ input:
       The bug was accepted some time ago, this is why this fact is here.
       The bug was accepted some time ago, this is why this fact is here.
 expected:
-  - /fb[count(f)=4]
+  - /fb[count(f)=5]
   - /fb/f[what='code-review-was-rewarded']
   - /fb/f[who='4444']
   - /fb/f[issue='42']
