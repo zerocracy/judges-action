@@ -51,12 +51,25 @@ Fbe.conclude do
         because: 'as a basis'
       },
       {
+        if: contrib.hoc < 100,
         kind: :linear,
         x: contrib.hoc,
         k: 0.1,
         because: "for #{contrib.hoc} hits-of-code",
         max: 40,
         at_least: 5
+      },
+      {
+        if: contrib.hoc >= 100,
+        kind: :const,
+        points: -7,
+        because: "for too many hits-of-code (#{contrib.hoc})"
+      },
+      {
+        if: contrib.hoc >= 400,
+        kind: :const,
+        points: -15,
+        because: "for way too many hits-of-code (#{contrib.hoc})"
       },
       {
         kind: :linear,
