@@ -45,6 +45,10 @@ entry: target/docker-image.txt
 	) > target/opts.txt
 	docker run --rm \
 		-e GITHUB_WORKSPACE=/tmp \
+		-e GITHUB_REPOSITORY=zerocracy/judges-action \
+		-e GITHUB_REPOSITORY_OWNER=zerocracy \
+		-e GITHUB_SERVER_URL=https://github.com \
+		-e GITHUB_RUN_ID=0000 \
 		-e INPUT_FACTBASE=/tmp/recent.fb \
 		-e INPUT_CYCLES=2 \
 		-e INPUT_VERBOSE=true \
