@@ -24,7 +24,7 @@ FROM ruby:3.3
 
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
-LABEL "version"="0.0.0"
+LABEL "version"="0.0.28"
 
 WORKDIR /action
 COPY entry.sh /action
