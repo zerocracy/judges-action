@@ -33,6 +33,7 @@ input:
     who: 765
     when: 2024-05-15T23:54:24Z
     branch: hello
+    is_human: 1
 expected:
   - /fb[count(f)=2]
   - /fb/f[what='bad-branch-name-was-punished']

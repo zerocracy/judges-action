@@ -30,6 +30,7 @@ Fbe.conclude do
     (exists where)
     (eq where 'github')
     (exists who)
+    (eq is_human 1)
     (exists when)
     (exists issue)
     (exists repository)
@@ -56,7 +57,7 @@ Fbe.conclude do
       "It is not a good idea to name Git branches the way you named this one: \"`#{opened.branch}`\". ",
       a[:greeting],
       'Next time, give your branch the same name as the number of the ticket that you are solving. ',
-      "In this case, a perfect name would be \"`#{opened.issue}`\". ",
+      "In this case, a perfect name, for example, would be \"`#{opened.issue}`\". ",
       J.balance(n.who)
     ].join
     "It's time to punish #{J.who(n)} for the branch named wrong in " \
