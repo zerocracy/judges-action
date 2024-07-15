@@ -67,5 +67,5 @@ def J.award(*rows)
     explain,
     '. '
   ].join
-  { points: total, greeting: }
+  { points: total, greeting: total.zero? ? '' : greeting }
 end
