@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 241.885434452
+  seconds: 215.143456767
   version: 0.17.0
   what: judges-summary
-  when: 2024-07-15 14:08:37.909759731 Z
+  when: 2024-07-15 15:09:50.546183035 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -11151,6 +11151,7 @@
     "`version-up`". You''ve earned -10 points for this (-10 as a basis). Next time,
     give your branch the same name as the number of the ticket that you are solving.
     In this case, a perfect name would be "`100`". '
+  href: https://github.com/zerocracy/judges-action/issues/100/#issuecomment-2228596999
   is_human: 0
   issue: 100
   repository: 799177290
@@ -11159,71 +11160,210 @@
   where: github
   who: 41898282
   why: Branch name was wrong in zerocracy/judges-action#100
-- _id: 35469
-  _time: 2024-07-15 14:06:36.604072534 Z
+- _id: 35556
+  _time: 2024-07-15 15:06:22.902729638 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  details: The issue zerocracy/judges-action#102 has been opened by @yegor256.
+  event_id: 40150947624
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 102
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-15 12:23:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 35557
+  _time: 2024-07-15 15:06:23.722794275 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  details: The pull request zerocracy/judges-action#101 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 40150903450
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 1
+  issue: 101
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-07-15 12:21:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 35558
+  _time: 2024-07-15 15:06:24.360841911 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The pull request zerocracy/judges-action#101 has been opened by @renovate[bot].
+  event_id: 40150289105
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 101
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-07-15 12:02:41.000000000 Z
+  where: github
+  who: 29139614
+- _id: 35559
+  _time: 2024-07-15 15:06:25.710324134 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  branch: version-up
+  comments: 0
+  details: The pull request zerocracy/judges-action#100 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 40150266068
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 1
+  issue: 100
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-07-15 12:01:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 35560
+  _time: 2024-07-15 15:06:25.973833967 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  details: The issue zerocracy/judges-action#99 has been closed by @yegor256.
+  event_id: 40150263225
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 99
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-07-15 12:01:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 35620
+  _time: 2024-07-15 15:07:57.261940968 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  award: -10
+  branch: renovate/zerocracy-judges-action-0.x
+  cause: 35558
+  details: It's time to punish @renovate[bot] for the branch named wrong in zerocracy/judges-action#101,
+    the penalty amount is -10.
+  greeting: 'It is not a good idea to name Git branches the way you named this one:
+    "`renovate/zerocracy-judges-action-0.x`". You''ve earned -10 points for this (-10
+    as a basis). Next time, give your branch the same name as the number of the ticket
+    that you are solving. In this case, a perfect name would be "`101`". '
+  is_human: 0
+  issue: 101
+  repository: 799177290
+  what: bad-branch-name-was-punished
+  when: 2024-07-15 15:07:57.262252862 Z
+  where: github
+  who: 29139614
+  why: Branch name was wrong in zerocracy/judges-action#101
+- _id: 35621
+  _time: 2024-07-15 15:08:00.176947900 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  cause: 35557
+  comments: 0
+  details: The pull request zerocracy/judges-action#101 with 2 HoC created by @renovate[bot]
+    was merged by @yegor256 after 19 minutes of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 101
+  merger: 526301
+  repository: 799177290
+  seconds: 1143
+  what: code-was-contributed
+  when: 2024-07-15 12:21:44.000000000 Z
+  where: github
+  who: 29139614
+- _id: 35621
+  _time: 2024-07-15 15:08:00.497382131 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  cause: 35559
+  comments: 0
+  details: The pull request zerocracy/judges-action#100 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 25 minutes of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 100
+  merger: 526301
+  repository: 799177290
+  seconds: 1547
+  what: code-was-contributed
+  when: 2024-07-15 12:01:57.000000000 Z
+  where: github
+  who: 41898282
+- _id: 35622
+  _time: 2024-07-15 15:08:02.017239939 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 40130148582
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 35470
-  _time: 2024-07-15 14:06:38.636136690 Z
+- _id: 35623
+  _time: 2024-07-15 15:08:03.343086860 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 40134052530
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 35471
-  _time: 2024-07-15 14:07:46.066544058 Z
+- _id: 35624
+  _time: 2024-07-15 15:09:08.961880886 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 39796845938
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 35472
-  _time: 2024-07-15 14:07:48.453926731 Z
+- _id: 35625
+  _time: 2024-07-15 15:09:10.626698834 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 40115510304
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 35473
-  _time: 2024-07-15 14:07:50.572107017 Z
+- _id: 35626
+  _time: 2024-07-15 15:09:12.311259143 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 40146946811
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 35491
-  _time: 2024-07-15 14:08:01.823421985 Z
+- _id: 35644
+  _time: 2024-07-15 15:09:21.392653832 Z
+  _version: 0.0.60/0.17.0/0.0.25
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#102.
+  issue: 102
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-15 12:23:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 35650
+  _time: 2024-07-15 15:09:23.959956404 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 0
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 35541
-  _time: 2024-07-15 14:08:30.994962849 Z
+- _id: 35696
+  _time: 2024-07-15 15:09:44.952869520 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 35551
-  _time: 2024-07-15 14:08:36.745955851 Z
+- _id: 35706
+  _time: 2024-07-15 15:09:49.642090185 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 35552
-  _time: 2024-07-15 14:08:37.321835221 Z
+- _id: 35707
+  _time: 2024-07-15 15:09:50.069227221 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 35553
-  _time: 2024-07-15 14:08:37.857900214 Z
+- _id: 35708
+  _time: 2024-07-15 15:09:50.496239138 Z
   _version: 0.0.60/0.17.0/0.0.25
   latest: 31
   repository: 802720676
