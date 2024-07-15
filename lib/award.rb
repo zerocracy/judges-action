@@ -58,8 +58,14 @@ def J.award(*rows)
   explain = bills.map { |b| b[:reason] }.join(', ')
   explain = " (#{explain})"
   explain = '' if bills.size == 1 && bills.first[:basis]
-  {
-    points: total,
-    greeting: "You've earned #{format('%+d', total)} points for this#{explain}. "
-  }
+  greeting = [
+    'You\'ve ',
+    total.positive? ? 'earned' : 'got',
+    ' ',
+    format('%+d', total),
+    ' points for this',
+    explain,
+    '. '
+  ].join
+  { points: total, greeting: }
 end
