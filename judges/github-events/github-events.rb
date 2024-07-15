@@ -26,6 +26,7 @@ require 'tago'
 require 'fbe/octo'
 require 'fbe/iterate'
 require 'fbe/if_absent'
+require 'fbe/who'
 
 Fbe.iterate do
   as 'events-were-scanned'
@@ -53,7 +54,7 @@ Fbe.iterate do
       fact.push_id = json[:payload][:push_id]
       fact.details =
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{json[:repo][:name]}, " \
-        "made by #{J.who(fact)}."
+        "made by #{Fbe.who(fact)}."
       skip_event(json)
 
     when 'PullRequestEvent'
@@ -65,7 +66,7 @@ Fbe.iterate do
         fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{json[:repo][:name]}##{fact.issue} " \
-          "has been opened by #{J.who(fact)}."
+          "has been opened by #{Fbe.who(fact)}."
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
@@ -73,7 +74,7 @@ Fbe.iterate do
         fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{json[:repo][:name]}##{fact.issue} " \
-          "has been #{json[:payload][:action]} by #{J.who(fact)}, " \
+          "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
       else
         skip_event(json)
@@ -87,7 +88,7 @@ Fbe.iterate do
       fact.comments = pull[:comments] + pull[:review_comments]
       fact.details =
         "The pull request #{json[:repo][:name]}##{fact.issue} " \
-        "has been reviewed by #{J.who(fact)} " \
+        "has been reviewed by #{Fbe.who(fact)} " \
         "with #{fact.hoc} HoC and #{fact.comments} comments."
 
     when 'IssuesEvent'
@@ -95,10 +96,10 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'closed'
         fact.what = 'issue-was-closed'
-        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been closed by #{J.who(fact)}."
+        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been closed by #{Fbe.who(fact)}."
       when 'opened'
         fact.what = 'issue-was-opened'
-        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been opened by #{J.who(fact)}."
+        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been opened by #{Fbe.who(fact)}."
       else
         skip_event(json)
       end
@@ -113,7 +114,7 @@ Fbe.iterate do
         fact.who = json[:payload][:comment][:user][:id]
         fact.details =
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
-          "to #{json[:repo][:name]}##{fact.issue} by #{J.who(fact)}."
+          "to #{json[:repo][:name]}##{fact.issue} by #{Fbe.who(fact)}."
       end
       skip_event(json)
 
@@ -125,7 +126,7 @@ Fbe.iterate do
         fact.who = json[:payload][:release][:author][:id]
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
-          "in #{json[:repo][:name]} by #{J.who(fact)}."
+          "in #{json[:repo][:name]} by #{Fbe.who(fact)}."
       else
         skip_event(json)
       end
@@ -137,7 +138,7 @@ Fbe.iterate do
         fact.tag = json[:payload][:ref]
         fact.details =
           "A new tag '#{fact.tag}' has been created " \
-          "in #{json[:repo][:name]} by #{J.who(fact)}."
+          "in #{json[:repo][:name]} by #{Fbe.who(fact)}."
       else
         skip_event(json)
       end

@@ -39,6 +39,7 @@ release:
     git add Dockerfile
     git commit -m "version set to ${tag}"
     repo=yegor256/judges-action
+    sudo make -C "$(pwd)"
     sudo docker build "$(pwd)" --tag "${repo}:${tag}"
     sudo docker build "$(pwd)" --tag "${repo}:latest"
     cat ../docker-password | sudo docker login --password-stdin -u yegor256

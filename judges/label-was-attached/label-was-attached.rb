@@ -25,6 +25,7 @@
 require 'fbe/octo'
 require 'fbe/iterate'
 require 'fbe/if_absent'
+require 'fbe/issue'
 
 Fbe.iterate do
   as 'labels-were-scanned'
@@ -48,7 +49,7 @@ Fbe.iterate do
       nn.when = te[:created_at]
       nn.details =
         "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{J.issue(nn)}."
+        "to the issue #{Fbe.issue(nn)}."
     end
     issue
   end
