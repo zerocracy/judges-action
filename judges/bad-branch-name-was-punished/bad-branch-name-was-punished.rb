@@ -45,6 +45,7 @@ Fbe.conclude do
   draw do |n, opened|
     a = J.award(
       {
+        basis: true,
         kind: :const,
         points: -10,
         because: 'as a basis'
