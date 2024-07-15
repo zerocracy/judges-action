@@ -55,7 +55,8 @@ Fbe.conclude do
     n.when = Time.now
     n.why = "Branch name was wrong in #{J.issue(n)}"
     n.greeting = [
-      "It is not a good idea to name Git branches the way you named this one: \"`#{opened.branch}`\". ",
+      'It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) ',
+      "to name Git branches the way you named this one: \"`#{opened.branch}`\". ",
       a[:greeting],
       'Next time, give your branch the same name as the number of the ticket that you are solving. ',
       "In this case, a perfect name, for example, would be \"`#{opened.issue}`\". ",
