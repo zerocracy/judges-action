@@ -62,6 +62,7 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'opened'
         fact.what = 'pull-was-opened'
+        fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{json[:repo][:name]}##{fact.issue} " \
           "has been opened by #{J.who(fact)}."
@@ -69,6 +70,7 @@ Fbe.iterate do
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
         fact.comments = pl[:comments] + pl[:review_comments]
+        fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{json[:repo][:name]}##{fact.issue} " \
           "has been #{json[:payload][:action]} by #{J.who(fact)}, " \
