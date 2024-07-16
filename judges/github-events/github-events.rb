@@ -27,6 +27,7 @@ require 'fbe/octo'
 require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/who'
+require 'fbe/issue'
 
 Fbe.iterate do
   as 'events-were-scanned'
@@ -52,10 +53,17 @@ Fbe.iterate do
     when 'PushEvent'
       fact.what = 'git-was-pushed'
       fact.push_id = json[:payload][:push_id]
+      fact.ref = json[:payload][:ref]
+      fact.commit = json[:payload][:head]
+      fact.default_branch = Fbe.octo.repository(json[:repo][:name])[:default_branch]
+      fact.to_master = fact.default_branch == fact.ref.split('/')[2] ? 1 : 0
+      if fact.to_master.zero?
+        $loog.debug("Push has been made not to the default branch '#{fact.default_branch}', ignoring it")
+        skip_event(json)
+      end
       fact.details =
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{json[:repo][:name]}, " \
-        "made by #{Fbe.who(fact)}."
-      skip_event(json)
+        "made by #{Fbe.who(fact)} (default branch is '#{fact.default_branch}')."
 
     when 'PullRequestEvent'
       pl = json[:payload][:pull_request]
@@ -64,16 +72,14 @@ Fbe.iterate do
       when 'opened'
         fact.what = 'pull-was-opened'
         fact.branch = pl[:head][:ref]
-        fact.details =
-          "The pull request #{json[:repo][:name]}##{fact.issue} " \
-          "has been opened by #{Fbe.who(fact)}."
+        fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
         fact.comments = pl[:comments] + pl[:review_comments]
         fact.branch = pl[:head][:ref]
         fact.details =
-          "The pull request #{json[:repo][:name]}##{fact.issue} " \
+          "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
       else
@@ -87,7 +93,7 @@ Fbe.iterate do
       fact.hoc = pull[:additions] + pull[:deletions]
       fact.comments = pull[:comments] + pull[:review_comments]
       fact.details =
-        "The pull request #{json[:repo][:name]}##{fact.issue} " \
+        "The pull request #{Fbe.issue(fact)} " \
         "has been reviewed by #{Fbe.who(fact)} " \
         "with #{fact.hoc} HoC and #{fact.comments} comments."
 
@@ -96,10 +102,10 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'closed'
         fact.what = 'issue-was-closed'
-        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been closed by #{Fbe.who(fact)}."
+        fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
       when 'opened'
         fact.what = 'issue-was-opened'
-        fact.details = "The issue #{json[:repo][:name]}##{fact.issue} has been opened by #{Fbe.who(fact)}."
+        fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
       else
         skip_event(json)
       end
@@ -114,7 +120,7 @@ Fbe.iterate do
         fact.who = json[:payload][:comment][:user][:id]
         fact.details =
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
-          "to #{json[:repo][:name]}##{fact.issue} by #{Fbe.who(fact)}."
+          "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
       end
       skip_event(json)
 

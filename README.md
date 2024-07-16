@@ -99,7 +99,9 @@ In order to test this action, just run (provided, you have
 and [GNU make](https://www.gnu.org/software/make/) installed):
 
 ```bash
-rake && make
+bundle update
+bundle exec rake
+make
 ```
 
 This should build a new Docker image named `judges-action`
@@ -107,6 +109,12 @@ and then run the entire cycle
 inside a new Docker container. Obviously, you need to have
 [Docker](https://docs.docker.com/get-docker/) installed. The Docker image
 will be deleted by the end of the build (either success or failure).
+
+In order to run "live" tests of some judges, do this:
+
+```bash
+bundle exec rake -- --live
+```
 
 [factbase]: https://github.com/yegor256/factbase
 [secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
