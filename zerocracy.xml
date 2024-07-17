@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.0.60" size="286858">
+<fb version="0.1.1" size="291178">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <removed t="I">8</removed>
-    <seconds t="F">7.608762898</seconds>
+    <seconds t="F">93.046728834</seconds>
     <version t="S">0.17.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-07-17T17:06:33Z</when>
+    <when t="T">2024-07-17T19:05:50Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -8566,8 +8566,14 @@
     <_time t="T">2024-07-06T11:05:10Z</_time>
     <_version t="S">0.0.60/0.15.3/0.0.12</_version>
     <area t="S">hr</area>
+    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author.') (let fee -10) (give fee 'as a basis'))</bad_branch_name_was_punished>
+    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus.') (let bonus 15) (give bonus 'as a basis'))</bug_report_was_rewarded>
+    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus.') (in hoc 'total number of hits-of-code in the contribution') (in comments 'total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (let basis 20) (give basis 'as a basis') (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (min b1 hoc_max)) (set b1 (max b1 hoc_min)) (give b1 'for ${hoc} hits-of-code') (let fee2 -7) (set b2 (if (gte hoc hoc_threshold) fee2 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') (let hoc_threshold2 400) (let fee3 -15) (set b3 (if (gte hoc hoc_threshold2) fee3 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') (let fee4 -15) (set b4 (if (eq reviews 0) fee4 0)) (give b4 'for the lack of code review') (let comments_k -1) (let comments_max -20) (let comments_min -5) (set b5 (times comments comments_k)) (set b5 (min b5 comments_min)) (set b5 (max b5 comments_max)) (give b5 'for ${comments} comments') (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something'))</code_contribution_was_rewarded>
+    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus.') (in hoc 'total number of hits-of-code in the contribution') (in comments 'total number of comments made by all reviewers') (in self 'the review was made for their own code contribution') (let basis 25) (give basis 'as a basis') (let self_fee -40) (set b1 (if (eq self 1) self_fee 0)) (give b1 'for reviewing your own contribution') (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b2 (min b2 hoc_max)) (set b2 (max b2 hoc_min)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for ${hoc} hits-of-code') (let comments_k -1) (let comments_max -20) (let comments_min -5) (set b3 (times comments comments_k)) (set b3 (min b3 comments_min)) (set b3 (max b3 comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something'))</code_review_was_rewarded>
     <days_of_running_balance t="I">28</days_of_running_balance>
     <days_to_reward t="I">7</days_to_reward>
+    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, such a behavior is punished.') (let fee -20) (give fee 'as a basis'))</push_to_master_was_punished>
+    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus.') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (let basis 30) (give basis 'as a basis') (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') (let day_fee -1) (let days_fee_max -20) (set b2 (times days day_fee)) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay'))</resolved_bug_was_rewarded>
     <what t="S">pmp</what>
   </f>
   <f>
@@ -13906,8 +13912,40 @@
     <who t="I">29139614</who>
   </f>
   <f>
-    <_id t="I">42008</_id>
-    <_time t="T">2024-07-17T18:05:22Z</_time>
+    <_id t="I">42077</_id>
+    <_time t="T">2024-07-17T19:04:22Z</_time>
+    <_version t="S">0.0.60/0.17.0/0.0.30</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/judges-action#121 has been opened by @renovate[bot].</details>
+    <event_id t="I">40225491767</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">121</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-17T13:08:39Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">42080</_id>
+    <_time t="T">2024-07-17T19:04:27Z</_time>
+    <_version t="S">0.0.60/0.17.0/0.0.30</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/baza#123 has been opened by @renovate[bot].</details>
+    <event_id t="I">40231296378</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">123</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-17T15:44:19Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">42166</_id>
+    <_time t="T">2024-07-17T19:05:12Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">40217110228</latest>
     <repository t="I">799113787</repository>
@@ -13915,8 +13953,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42009</_id>
-    <_time t="T">2024-07-17T18:05:25Z</_time>
+    <_id t="I">42167</_id>
+    <_time t="T">2024-07-17T19:05:13Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">40211740674</latest>
     <repository t="I">798641472</repository>
@@ -13924,17 +13962,17 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42010</_id>
-    <_time t="T">2024-07-17T18:05:27Z</_time>
+    <_id t="I">42168</_id>
+    <_time t="T">2024-07-17T19:05:15Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
-    <latest t="I">40223356407</latest>
+    <latest t="I">40226512740</latest>
     <repository t="I">799177290</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42011</_id>
-    <_time t="T">2024-07-17T18:05:29Z</_time>
+    <_id t="I">42169</_id>
+    <_time t="T">2024-07-17T19:05:16Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">40231725272</latest>
     <repository t="I">802720676</repository>
@@ -13942,17 +13980,17 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42012</_id>
-    <_time t="T">2024-07-17T18:05:32Z</_time>
+    <_id t="I">42170</_id>
+    <_time t="T">2024-07-17T19:05:18Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
-    <latest t="I">40210448911</latest>
+    <latest t="I">40231296378</latest>
     <repository t="I">728758275</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42036</_id>
-    <_time t="T">2024-07-17T18:05:46Z</_time>
+    <_id t="I">42194</_id>
+    <_time t="T">2024-07-17T19:05:30Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">0</latest>
     <repository t="I">802720676</repository>
@@ -13960,8 +13998,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42047</_id>
-    <_time t="T">2024-07-17T18:05:52Z</_time>
+    <_id t="I">42205</_id>
+    <_time t="T">2024-07-17T19:05:35Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">0</latest>
     <repository t="I">798641472</repository>
@@ -13969,8 +14007,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42071</_id>
-    <_time t="T">2024-07-17T18:06:06Z</_time>
+    <_id t="I">42229</_id>
+    <_time t="T">2024-07-17T19:05:47Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">0</latest>
     <repository t="I">799113787</repository>
@@ -13978,8 +14016,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42073</_id>
-    <_time t="T">2024-07-17T18:06:07Z</_time>
+    <_id t="I">42231</_id>
+    <_time t="T">2024-07-17T19:05:48Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">0</latest>
     <repository t="I">728758275</repository>
@@ -13987,8 +14025,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">42074</_id>
-    <_time t="T">2024-07-17T18:06:09Z</_time>
+    <_id t="I">42232</_id>
+    <_time t="T">2024-07-17T19:05:50Z</_time>
     <_version t="S">0.0.60/0.17.0/0.0.30</_version>
     <latest t="I">91</latest>
     <repository t="I">799177290</repository>
