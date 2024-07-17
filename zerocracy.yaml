@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 104.413740375
+  seconds: 102.005821554
   version: 0.17.0
   what: judges-summary
-  when: 2024-07-17 21:06:24.780302343 Z
+  when: 2024-07-17 22:07:03.234912735 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -12549,60 +12549,6 @@
   when: 2024-07-17 13:47:31.000000000 Z
   where: github
   who: 29139614
-- _id: 42397
-  _time: 2024-07-17 21:04:49.108145362 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  commit: 95bddda60d3b74654aa2f30f29a6d283fe5522dd
-  default_branch: master
-  details: 'A new Git push #19363544784 has arrived to zerocracy/pages-action, made
-    by @yegor256 (default branch is ''master'').'
-  event_id: 40236198300
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19363544784
-  ref: refs/heads/master
-  repository: 802720676
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-17 18:35:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 42398
-  _time: 2024-07-17 21:04:49.422793888 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  commit: aa3eedc5a1194eec237d5d408d6f2d76a480e40d
-  default_branch: master
-  details: 'A new Git push #19363520306 has arrived to zerocracy/pages-action, made
-    by @yegor256 (default branch is ''master'').'
-  event_id: 40236147930
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19363520306
-  ref: refs/heads/master
-  repository: 802720676
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-17 18:33:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 42399
-  _time: 2024-07-17 21:04:49.739611424 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  commit: 40c850232d90c2b5bdeee87a428d0b072125d01a
-  default_branch: master
-  details: 'A new Git push #19363320239 has arrived to zerocracy/pages-action, made
-    by @yegor256 (default branch is ''master'').'
-  event_id: 40235737167
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19363320239
-  ref: refs/heads/master
-  repository: 802720676
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-17 18:18:44.000000000 Z
-  where: github
-  who: 526301
 - _id: 42401
   _time: 2024-07-17 21:04:52.641111840 Z
   _version: 0.0.60/0.17.0/0.0.30
@@ -12620,89 +12566,128 @@
   when: 2024-07-17 16:51:58.000000000 Z
   where: github
   who: 8086956
-- _id: 42402
-  _time: 2024-07-17 21:04:52.958589293 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  commit: 3b58368d2335cf33217280f10e4e6d07925b599b
-  default_branch: master
-  details: 'A new Git push #19362148677 has arrived to zerocracy/baza, made by @rultor
-    (default branch is ''master'').'
-  event_id: 40233304889
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19362148677
-  ref: refs/heads/master
+- _id: 42556
+  _time: 2024-07-17 21:06:38.169211100 Z
+  _version: 0.1.1/0.18.1/
+  cause: 42401
+  comments: 2
+  details: The pull request zerocracy/baza#123 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1 hours of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 123
+  merger: 8086956
   repository: 728758275
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-17 16:51:57.000000000 Z
+  seconds: 4059
+  what: code-was-contributed
+  when: 2024-07-17 16:51:58.000000000 Z
+  where: github
+  who: 29139614
+- _id: 42560
+  _time: 2024-07-17 22:05:29.374842594 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  details: The issue zerocracy/pages-action#47 has been closed by @yegor256.
+  event_id: 40236748608
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 47
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-07-17 18:56:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 42561
+  _time: 2024-07-17 22:05:30.255482376 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  details: A new release 'show policy' has been published in zerocracy/pages-action
+    by @rultor.
+  event_id: 40236736807
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 165912761
+  repository: 802720676
+  what: release-published
+  when: 2024-07-17 18:55:43.000000000 Z
   where: github
   who: 8086956
-- _id: 42488
-  _time: 2024-07-17 21:05:42.032888103 Z
+- _id: 42562
+  _time: 2024-07-17 22:05:30.569429073 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  details: A new tag '0.0.18' has been created in zerocracy/pages-action by @rultor.
+  event_id: 40236685127
+  event_type: CreateEvent
+  is_human: 1
+  repository: 802720676
+  tag: 0.0.18
+  what: tag-was-created
+  when: 2024-07-17 18:53:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 42649
+  _time: 2024-07-17 22:06:21.230241692 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 42489
-  _time: 2024-07-17 21:05:43.782973287 Z
+- _id: 42650
+  _time: 2024-07-17 22:06:22.979996625 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 42490
-  _time: 2024-07-17 21:05:45.630680615 Z
+- _id: 42651
+  _time: 2024-07-17 22:06:24.809365535 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40227686727
+  latest: 40230013652
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 42491
-  _time: 2024-07-17 21:05:47.739423150 Z
+- _id: 42652
+  _time: 2024-07-17 22:06:26.934379236 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40236302929
+  latest: 40236748608
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 42492
-  _time: 2024-07-17 21:05:49.578248395 Z
+- _id: 42653
+  _time: 2024-07-17 22:06:28.811906127 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40233353723
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 42521
-  _time: 2024-07-17 21:06:04.900808926 Z
+- _id: 42682
+  _time: 2024-07-17 22:06:44.345912164 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 42528
-  _time: 2024-07-17 21:06:08.507315379 Z
+- _id: 42689
+  _time: 2024-07-17 22:06:47.700698232 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 42552
-  _time: 2024-07-17 21:06:21.577256542 Z
+- _id: 42713
+  _time: 2024-07-17 22:07:00.122273730 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 42554
-  _time: 2024-07-17 21:06:22.466315231 Z
+- _id: 42715
+  _time: 2024-07-17 22:07:00.932185790 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 42555
-  _time: 2024-07-17 21:06:24.767583520 Z
+- _id: 42716
+  _time: 2024-07-17 22:07:03.222904648 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 91
   repository: 799177290
