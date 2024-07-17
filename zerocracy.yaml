@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 93.002622381
+  seconds: 104.413740375
   version: 0.17.0
   what: judges-summary
-  when: 2024-07-17 20:05:59.850552663 Z
+  when: 2024-07-17 21:06:24.780302343 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -12519,24 +12519,6 @@
   when: 2024-07-17 13:47:31.000000000 Z
   where: github
   who: 8086956
-- _id: 42236
-  _time: 2024-07-17 20:04:33.130351293 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  commit: 44dbe00e0c4ebd54d3d9bcab449fd6a94d0109e4
-  default_branch: master
-  details: 'A new Git push #19359164134 has arrived to zerocracy/judges-action, made
-    by @rultor (default branch is ''master'').'
-  event_id: 40226936450
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19359164134
-  ref: refs/heads/master
-  repository: 799177290
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-17 13:47:29.000000000 Z
-  where: github
-  who: 8086956
 - _id: 42238
   _time: 2024-07-17 20:04:35.521778235 Z
   _version: 0.0.60/0.17.0/0.0.30
@@ -12550,71 +12532,177 @@
   when: 2024-07-17 17:46:34.000000000 Z
   where: github
   who: 526301
-- _id: 42325
-  _time: 2024-07-17 20:05:21.719808674 Z
+- _id: 42393
+  _time: 2024-07-17 20:06:12.696745080 Z
+  _version: 0.1.1/0.18.1/
+  cause: 42235
+  comments: 2
+  details: The pull request zerocracy/judges-action#121 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 38 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 121
+  merger: 8086956
+  repository: 799177290
+  seconds: 2332
+  what: code-was-contributed
+  when: 2024-07-17 13:47:31.000000000 Z
+  where: github
+  who: 29139614
+- _id: 42397
+  _time: 2024-07-17 21:04:49.108145362 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  commit: 95bddda60d3b74654aa2f30f29a6d283fe5522dd
+  default_branch: master
+  details: 'A new Git push #19363544784 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master'').'
+  event_id: 40236198300
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19363544784
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-17 18:35:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 42398
+  _time: 2024-07-17 21:04:49.422793888 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  commit: aa3eedc5a1194eec237d5d408d6f2d76a480e40d
+  default_branch: master
+  details: 'A new Git push #19363520306 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master'').'
+  event_id: 40236147930
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19363520306
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-17 18:33:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 42399
+  _time: 2024-07-17 21:04:49.739611424 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  commit: 40c850232d90c2b5bdeee87a428d0b072125d01a
+  default_branch: master
+  details: 'A new Git push #19363320239 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master'').'
+  event_id: 40235737167
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19363320239
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-17 18:18:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 42401
+  _time: 2024-07-17 21:04:52.641111840 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  branch: renovate/judges-0.x-lockfile
+  comments: 2
+  details: The pull request zerocracy/baza#123 has been closed by @rultor, with 2
+    HoC and 2 comments.
+  event_id: 40233305194
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 1
+  issue: 123
+  repository: 728758275
+  what: pull-was-merged
+  when: 2024-07-17 16:51:58.000000000 Z
+  where: github
+  who: 8086956
+- _id: 42402
+  _time: 2024-07-17 21:04:52.958589293 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  commit: 3b58368d2335cf33217280f10e4e6d07925b599b
+  default_branch: master
+  details: 'A new Git push #19362148677 has arrived to zerocracy/baza, made by @rultor
+    (default branch is ''master'').'
+  event_id: 40233304889
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19362148677
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-17 16:51:57.000000000 Z
+  where: github
+  who: 8086956
+- _id: 42488
+  _time: 2024-07-17 21:05:42.032888103 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 42326
-  _time: 2024-07-17 20:05:23.156076353 Z
+- _id: 42489
+  _time: 2024-07-17 21:05:43.782973287 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 42327
-  _time: 2024-07-17 20:05:24.748970921 Z
+- _id: 42490
+  _time: 2024-07-17 21:05:45.630680615 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40227686727
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 42328
-  _time: 2024-07-17 20:05:26.625196924 Z
+- _id: 42491
+  _time: 2024-07-17 21:05:47.739423150 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40234840391
+  latest: 40236302929
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 42329
-  _time: 2024-07-17 20:05:28.223503373 Z
+- _id: 42492
+  _time: 2024-07-17 21:05:49.578248395 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40232995998
+  latest: 40233353723
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 42358
-  _time: 2024-07-17 20:05:42.203301296 Z
+- _id: 42521
+  _time: 2024-07-17 21:06:04.900808926 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 42365
-  _time: 2024-07-17 20:05:45.482426334 Z
+- _id: 42528
+  _time: 2024-07-17 21:06:08.507315379 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 42389
-  _time: 2024-07-17 20:05:56.929101889 Z
+- _id: 42552
+  _time: 2024-07-17 21:06:21.577256542 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 42391
-  _time: 2024-07-17 20:05:57.723374216 Z
+- _id: 42554
+  _time: 2024-07-17 21:06:22.466315231 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 42392
-  _time: 2024-07-17 20:05:59.838663508 Z
+- _id: 42555
+  _time: 2024-07-17 21:06:24.767583520 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 91
   repository: 799177290
