@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 3
+  cycles: 2
   removed: 8
-  seconds: 21.52858195
+  seconds: 10.024294243
   version: 0.18.1
   what: judges-summary
-  when: 2024-07-18 13:09:27.114494809 Z
+  when: 2024-07-18 14:05:43.129511529 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -13205,7 +13205,48 @@
   where: github
   who: 526301
   why: Push to default branch 'master' in zerocracy/judges-action
+- _id: 44583
+  _time: 2024-07-18 13:09:24.546634497 Z
+  _version: 0.1.1/0.18.1/
+  cause: 44420
+  comments: 2
+  details: The pull request zerocracy/pages-action#50 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 59 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 50
+  merger: 8086956
+  repository: 802720676
+  seconds: 3542
+  what: code-was-contributed
+  when: 2024-07-18 09:51:00.000000000 Z
+  where: github
+  who: 29139614
+- _id: 44584
+  _time: 2024-07-18 13:09:26.953451817 Z
+  _version: 0.1.1/0.18.1/
+  award: -20
+  cause: 44419
+  commit: efde0f393bef8be30a90a5eb74a22c8002eb3b6d
+  default_branch: master
+  details: It's time to punish @rultor for pushing to the default branch 'master'
+    in zerocracy/pages-action, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points for
+    this: -20 as a basis. Next time, create a new branch, push your changes over there,
+    then make a pull request and merge it. Even if you are flying solo, contributing
+    via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is -20. '
+  href: https://github.com/zerocracy/pages-action/commit/efde0f393bef8be30a90a5eb74a22c8002eb3b6d/#commitcomment-144382093
+  is_human: 1
+  repository: 802720676
+  what: push-to-master-was-punished
+  when: 2024-07-18 13:09:26.960937080 Z
+  where: github
+  who: 8086956
+  why: Push to default branch 'master' in zerocracy/pages-action
 - _id:
+  - 44654
   - 44582
   - 44579
   - 44576
@@ -13214,6 +13255,8 @@
   - 44404
   - 13815
   _time:
+  - 2024-07-18 14:05:39.135524758 Z
+  - 2024-07-18 14:05:33.529084329 Z
   - 2024-07-18 13:09:20.805038951 Z
   - 2024-07-18 13:09:13.126946477 Z
   - 2024-07-18 13:09:06.076480580 Z
@@ -13336,112 +13379,73 @@
     days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} for each
     day of delay in resolving the problem, but no more than ${days_fee_max}'))"
   what: pmp
-- _id: 44583
-  _time: 2024-07-18 13:09:24.546634497 Z
-  _version: 0.1.1/0.18.1/
-  cause: 44420
-  comments: 2
-  details: The pull request zerocracy/pages-action#50 with 2 HoC created by @renovate[bot]
-    was merged by @rultor after 59 minutes of being in review and 2 comments.
-  hoc: 2
-  is_human: 0
-  issue: 50
-  merger: 8086956
-  repository: 802720676
-  seconds: 3542
-  what: code-was-contributed
-  when: 2024-07-18 09:51:00.000000000 Z
-  where: github
-  who: 29139614
-- _id: 44584
-  _time: 2024-07-18 13:09:26.953451817 Z
-  _version: 0.1.1/0.18.1/
-  award: -20
-  cause: 44419
-  commit: efde0f393bef8be30a90a5eb74a22c8002eb3b6d
-  default_branch: master
-  details: It's time to punish @rultor for pushing to the default branch 'master'
-    in zerocracy/pages-action, the penalty amount is -20.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -20 points for
-    this: -20 as a basis. Next time, create a new branch, push your changes over there,
-    then make a pull request and merge it. Even if you are flying solo, contributing
-    via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is -20. '
-  is_human: 1
-  repository: 802720676
-  what: push-to-master-was-punished
-  when: 2024-07-18 13:09:26.960937080 Z
-  where: github
-  who: 8086956
-  why: Push to default branch 'master' in zerocracy/pages-action
-- _id: 44585
-  _time: 2024-07-18 14:04:36.771333726 Z
+- _id: 44655
+  _time: 2024-07-18 15:05:28.356317017 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 44586
-  _time: 2024-07-18 14:04:38.557663912 Z
+- _id: 44656
+  _time: 2024-07-18 15:05:30.833358856 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 44587
-  _time: 2024-07-18 14:04:41.525887666 Z
+- _id: 44657
+  _time: 2024-07-18 15:05:34.873489555 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40262299553
+  latest: 40264424513
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 44588
-  _time: 2024-07-18 14:04:43.703283647 Z
+- _id: 44658
+  _time: 2024-07-18 15:05:37.710685002 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40255952087
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 44589
-  _time: 2024-07-18 14:04:45.600168985 Z
+- _id: 44659
+  _time: 2024-07-18 15:05:40.521783374 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40247981572
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 44623
-  _time: 2024-07-18 14:05:05.620896816 Z
+- _id: 44697
+  _time: 2024-07-18 15:06:07.491437664 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
-  repository: 802720676
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 44626
-  _time: 2024-07-18 14:05:07.064265859 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 44650
-  _time: 2024-07-18 14:05:20.551294000 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 44652
-  _time: 2024-07-18 14:05:21.526084359 Z
+- _id: 44731
+  _time: 2024-07-18 15:06:30.958750110 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 44653
-  _time: 2024-07-18 14:05:23.966388920 Z
+- _id: 44741
+  _time: 2024-07-18 15:06:38.040541346 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 91
-  repository: 799177290
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 44742
+  _time: 2024-07-18 15:06:38.743050647 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 44743
+  _time: 2024-07-18 15:06:39.376575829 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  latest: 31
+  repository: 802720676
   what: labels-were-scanned
   where: github
