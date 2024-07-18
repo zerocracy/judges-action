@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 133.889787204
-  version: 0.17.0
+  seconds: 10.990117159
+  version: 0.18.1
   what: judges-summary
-  when: 2024-07-18 20:07:01.055567872 Z
+  when: 2024-07-18 20:07:20.760702005 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -13518,7 +13518,69 @@
   where: github
   who: 526301
   why: Push to default branch 'master' in zerocracy/pages-action
+- _id: 45404
+  _time: 2024-07-18 20:04:59.178893489 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  details: A new release 'show version' has been published in zerocracy/pages-action
+    by @rultor.
+  event_id: 40263713058
+  event_type: ReleaseEvent
+  is_human: 1
+  release_id: 166056800
+  repository: 802720676
+  what: release-published
+  when: 2024-07-18 13:47:17.000000000 Z
+  where: github
+  who: 8086956
+- _id: 45405
+  _time: 2024-07-18 20:04:59.599607999 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  details: A new tag '0.0.20' has been created in zerocracy/pages-action by @rultor.
+  event_id: 40263641834
+  event_type: CreateEvent
+  is_human: 1
+  repository: 802720676
+  tag: 0.0.20
+  what: tag-was-created
+  when: 2024-07-18 13:45:28.000000000 Z
+  where: github
+  who: 8086956
+- _id: 45406
+  _time: 2024-07-18 20:05:00.284233818 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  details: The issue zerocracy/pages-action#51 has been closed by @yegor256.
+  event_id: 40263113027
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 51
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-07-18 13:31:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 45564
+  _time: 2024-07-18 20:07:11.947343556 Z
+  _version: 0.1.1/0.18.1/
+  award: 5
+  cause: 45398
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/pages-action#52,
+    the reward amount is 5.
+  greeting: 'Thanks for the contribution! You''ve earned +5 points for this: +20 as
+    a basis; +5 for 8 hits-of-code; -15 for the lack of code review; -5 for 0 comments.
+    Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them
+    coming. Your running balance is +55. '
+  href: https://github.com/zerocracy/pages-action/issues/52/#issuecomment-2237472894
+  is_human: 1
+  issue: 52
+  repository: 802720676
+  what: code-contribution-was-rewarded
+  when: 2024-07-18 20:07:11.953849116 Z
+  where: github
+  who: 526301
+  why: Code was contributed in zerocracy/pages-action#52
 - _id:
+  - 45565
+  - 45563
   - 45400
   - 45397
   - 45233
@@ -13537,6 +13599,8 @@
   - 44404
   - 13815
   _time:
+  - 2024-07-18 20:07:16.457888943 Z
+  - 2024-07-18 20:07:10.256365551 Z
   - 2024-07-18 19:07:12.305097884 Z
   - 2024-07-18 19:07:07.182408012 Z
   - 2024-07-18 18:08:04.740207874 Z
@@ -13671,113 +13735,73 @@
     days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} for each
     day of delay in resolving the problem, but no more than ${days_fee_max}'))"
   what: pmp
-- _id: 45404
-  _time: 2024-07-18 20:04:59.178893489 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  details: A new release 'show version' has been published in zerocracy/pages-action
-    by @rultor.
-  event_id: 40263713058
-  event_type: ReleaseEvent
-  is_human: 1
-  release_id: 166056800
-  repository: 802720676
-  what: release-published
-  when: 2024-07-18 13:47:17.000000000 Z
-  where: github
-  who: 8086956
-- _id: 45405
-  _time: 2024-07-18 20:04:59.599607999 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  details: A new tag '0.0.20' has been created in zerocracy/pages-action by @rultor.
-  event_id: 40263641834
-  event_type: CreateEvent
-  is_human: 1
-  repository: 802720676
-  tag: 0.0.20
-  what: tag-was-created
-  when: 2024-07-18 13:45:28.000000000 Z
-  where: github
-  who: 8086956
-- _id: 45406
-  _time: 2024-07-18 20:05:00.284233818 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  details: The issue zerocracy/pages-action#51 has been closed by @yegor256.
-  event_id: 40263113027
-  event_type: IssuesEvent
-  is_human: 1
-  issue: 51
-  repository: 802720676
-  what: issue-was-closed
-  when: 2024-07-18 13:31:07.000000000 Z
-  where: github
-  who: 526301
-- _id: 45474
-  _time: 2024-07-18 20:05:51.504944797 Z
+- _id: 45566
+  _time: 2024-07-18 21:04:35.429300460 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 45475
-  _time: 2024-07-18 20:05:53.987593536 Z
+- _id: 45567
+  _time: 2024-07-18 21:04:36.954278178 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 45476
-  _time: 2024-07-18 20:05:56.573904008 Z
+- _id: 45568
+  _time: 2024-07-18 21:04:38.950542434 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40272136469
+  latest: 40273714668
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 45477
-  _time: 2024-07-18 20:05:59.386298299 Z
+- _id: 45569
+  _time: 2024-07-18 21:04:41.218563551 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40263717020
+  latest: 40264404823
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 45478
-  _time: 2024-07-18 20:06:02.095603375 Z
+- _id: 45570
+  _time: 2024-07-18 21:04:43.177236397 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40257971804
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 45516
-  _time: 2024-07-18 20:06:29.156420620 Z
+- _id: 45607
+  _time: 2024-07-18 21:05:03.194733186 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
-  repository: 799177290
+  repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 45550
-  _time: 2024-07-18 20:06:52.268631831 Z
+- _id: 45609
+  _time: 2024-07-18 21:05:04.159434055 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 45632
+  _time: 2024-07-18 21:05:16.221305698 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 45634
+  _time: 2024-07-18 21:05:17.166301147 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 45560
-  _time: 2024-07-18 20:06:59.755315509 Z
+- _id: 45635
+  _time: 2024-07-18 21:05:19.312690085 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 67
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 45561
-  _time: 2024-07-18 20:07:00.407782495 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  latest: 87
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 45562
-  _time: 2024-07-18 20:07:01.040357421 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  latest: 31
-  repository: 802720676
+  latest: 91
+  repository: 799177290
   what: labels-were-scanned
   where: github
