@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 3
   removed: 8
-  seconds: 104.272623587
+  seconds: 18.750175709
   version: 0.18.1
   what: judges-summary
-  when: 2024-07-19 11:06:08.077946482 Z
+  when: 2024-07-19 11:06:39.282309819 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -14103,8 +14103,90 @@
   when: 2024-07-19 04:24:58.000000000 Z
   where: github
   who: 526301
-- _id: 47444
-  _time: 2024-07-19 10:06:54.953955097 Z
+- _id: 47449
+  _time: 2024-07-19 11:04:32.258515395 Z
+  _version: 0.1.1/0.18.1/0.0.31
+  commit: 134fe3ece622cf4916998b5e32010db4c257de7c
+  default_branch: master
+  details: 'A new Git push #19387548555 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40284542745
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19387548555
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-19 05:51:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 47450
+  _time: 2024-07-19 11:04:32.858227551 Z
+  _version: 0.1.1/0.18.1/0.0.31
+  commit: '08d3181af0da08b59920bc4ba9a224f028c1adad'
+  default_branch: master
+  details: 'A new Git push #19387400522 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40284255447
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19387400522
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-19 05:35:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 47608
+  _time: 2024-07-19 11:06:26.613528392 Z
+  _version: 0.1.1/0.18.1/
+  award: -20
+  cause: 47449
+  commit: 134fe3ece622cf4916998b5e32010db4c257de7c
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/baza, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points for
+    this: -20 as a basis. Next time, create a new branch, push your changes over there,
+    then make a pull request and merge it. Even if you are flying solo, contributing
+    via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is +45. '
+  href: https://github.com/zerocracy/baza/commit/134fe3ece622cf4916998b5e32010db4c257de7c/#commitcomment-144419703
+  is_human: 1
+  repository: 728758275
+  what: push-to-master-was-punished
+  when: 2024-07-19 11:06:26.622531123 Z
+  where: github
+  who: 526301
+  why: Push to default branch 'master' in zerocracy/baza
+- _id: 47610
+  _time: 2024-07-19 11:06:33.310175349 Z
+  _version: 0.1.1/0.18.1/
+  award: -20
+  cause: 47450
+  commit: '08d3181af0da08b59920bc4ba9a224f028c1adad'
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/baza, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points for
+    this: -20 as a basis. Next time, create a new branch, push your changes over there,
+    then make a pull request and merge it. Even if you are flying solo, contributing
+    via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is +25. '
+  href: https://github.com/zerocracy/baza/commit/08d3181af0da08b59920bc4ba9a224f028c1adad/#commitcomment-144419710
+  is_human: 1
+  repository: 728758275
+  what: push-to-master-was-punished
+  when: 2024-07-19 11:06:33.316466771 Z
+  where: github
+  who: 526301
+  why: Push to default branch 'master' in zerocracy/baza
+- _id: 47611
+  _time: 2024-07-19 11:06:33.853283908 Z
   _version: 0.1.1/0.18.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -14171,109 +14253,73 @@
     b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee}
     for each day of delay in resolving the problem, but no more than ${days_fee_max}'))"
   what: pmp
-- _id: 47449
-  _time: 2024-07-19 11:04:32.258515395 Z
-  _version: 0.1.1/0.18.1/0.0.31
-  commit: 134fe3ece622cf4916998b5e32010db4c257de7c
-  default_branch: master
-  details: 'A new Git push #19387548555 has arrived to zerocracy/baza, made by @yegor256
-    (default branch is ''master''), not associated with any pull request.'
-  event_id: 40284542745
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19387548555
-  ref: refs/heads/master
-  repository: 728758275
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-19 05:51:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 47450
-  _time: 2024-07-19 11:04:32.858227551 Z
-  _version: 0.1.1/0.18.1/0.0.31
-  commit: '08d3181af0da08b59920bc4ba9a224f028c1adad'
-  default_branch: master
-  details: 'A new Git push #19387400522 has arrived to zerocracy/baza, made by @yegor256
-    (default branch is ''master''), not associated with any pull request.'
-  event_id: 40284255447
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19387400522
-  ref: refs/heads/master
-  repository: 728758275
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-19 05:35:13.000000000 Z
-  where: github
-  who: 526301
-- _id: 47537
-  _time: 2024-07-19 11:05:24.840975639 Z
+- _id: 47612
+  _time: 2024-07-19 12:06:28.035168439 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 47538
-  _time: 2024-07-19 11:05:26.339708326 Z
+- _id: 47613
+  _time: 2024-07-19 12:06:29.747936445 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 47539
-  _time: 2024-07-19 11:05:28.062472541 Z
+- _id: 47614
+  _time: 2024-07-19 12:06:32.072510726 Z
   _version: 0.1.1/0.18.1/0.0.31
-  latest: 40291278701
+  latest: 40292873673
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 47540
-  _time: 2024-07-19 11:05:29.870421357 Z
+- _id: 47615
+  _time: 2024-07-19 12:06:34.134685942 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40287530811
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 47541
-  _time: 2024-07-19 11:05:31.475861637 Z
+- _id: 47616
+  _time: 2024-07-19 12:06:36.091090673 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40284542745
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 47578
-  _time: 2024-07-19 11:05:51.520463938 Z
+- _id: 47659
+  _time: 2024-07-19 12:07:02.476078042 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 0
-  repository: 798641472
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 47580
-  _time: 2024-07-19 11:05:52.418270852 Z
-  _version: 0.1.1/0.18.1/0.0.31
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 47603
-  _time: 2024-07-19 11:06:04.903031462 Z
-  _version: 0.1.1/0.18.1/0.0.31
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 47605
-  _time: 2024-07-19 11:06:05.851583842 Z
+- _id: 47689
+  _time: 2024-07-19 12:07:20.357160539 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 47606
-  _time: 2024-07-19 11:06:08.064974348 Z
+- _id: 47699
+  _time: 2024-07-19 12:07:26.842440680 Z
   _version: 0.1.1/0.18.1/0.0.31
-  latest: 91
-  repository: 799177290
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 47700
+  _time: 2024-07-19 12:07:27.453775998 Z
+  _version: 0.1.1/0.18.1/0.0.31
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 47701
+  _time: 2024-07-19 12:07:28.017472416 Z
+  _version: 0.1.1/0.18.1/0.0.31
+  latest: 31
+  repository: 802720676
   what: labels-were-scanned
   where: github
