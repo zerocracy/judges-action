@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 96.127202505
-  version: 0.17.0
+  seconds: 11.12210709
+  version: 0.18.1
   what: judges-summary
-  when: 2024-07-18 23:06:01.910547936 Z
+  when: 2024-07-18 23:06:19.244118575 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -13592,8 +13592,83 @@
   when: 2024-07-18 13:25:25.000000000 Z
   where: github
   who: 29139614
-- _id: 45797
-  _time: 2024-07-18 22:06:13.137533642 Z
+- _id: 45802
+  _time: 2024-07-18 23:04:34.623200294 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  branch: renovate/zache-0.x-lockfile
+  comments: 2
+  details: The pull request zerocracy/baza#124 has been closed by @rultor, with 2
+    HoC and 2 comments.
+  event_id: 40264037601
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 1
+  issue: 124
+  repository: 728758275
+  what: pull-was-merged
+  when: 2024-07-18 13:55:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 45803
+  _time: 2024-07-18 23:04:34.976556426 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  commit: 2d7f40aa313efd200b21a9c37678706cf445f5aa
+  default_branch: master
+  details: 'A new Git push #19377363448 has arrived to zerocracy/baza, made by @rultor
+    (default branch is ''master'').'
+  event_id: 40264037062
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19377363448
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-18 13:55:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 45960
+  _time: 2024-07-18 23:06:12.353117358 Z
+  _version: 0.1.1/0.18.1/
+  cause: 45802
+  comments: 2
+  details: The pull request zerocracy/baza#124 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 30 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 124
+  merger: 8086956
+  repository: 728758275
+  seconds: 1826
+  what: code-was-contributed
+  when: 2024-07-18 13:55:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 45961
+  _time: 2024-07-18 23:06:13.259091782 Z
+  _version: 0.1.1/0.18.1/
+  award: -20
+  cause: 45803
+  commit: 2d7f40aa313efd200b21a9c37678706cf445f5aa
+  default_branch: master
+  details: It's time to punish @rultor for pushing to the default branch 'master'
+    in zerocracy/baza, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points for
+    this: -20 as a basis. Next time, create a new branch, push your changes over there,
+    then make a pull request and merge it. Even if you are flying solo, contributing
+    via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is -60. '
+  href: https://github.com/zerocracy/baza/commit/2d7f40aa313efd200b21a9c37678706cf445f5aa/#commitcomment-144404077
+  is_human: 1
+  repository: 728758275
+  what: push-to-master-was-punished
+  when: 2024-07-18 23:06:13.265053622 Z
+  where: github
+  who: 8086956
+  why: Push to default branch 'master' in zerocracy/baza
+- _id: 45962
+  _time: 2024-07-18 23:06:13.806201813 Z
   _version: 0.1.1/0.18.1/
   area: hr
   bad_branch_name_was_punished:
@@ -13707,108 +13782,73 @@
     days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} for each
     day of delay in resolving the problem, but no more than ${days_fee_max}'))"
   what: pmp
-- _id: 45802
-  _time: 2024-07-18 23:04:34.623200294 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  branch: renovate/zache-0.x-lockfile
-  comments: 2
-  details: The pull request zerocracy/baza#124 has been closed by @rultor, with 2
-    HoC and 2 comments.
-  event_id: 40264037601
-  event_type: PullRequestEvent
-  hoc: 2
-  is_human: 1
-  issue: 124
-  repository: 728758275
-  what: pull-was-merged
-  when: 2024-07-18 13:55:51.000000000 Z
-  where: github
-  who: 8086956
-- _id: 45803
-  _time: 2024-07-18 23:04:34.976556426 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  commit: 2d7f40aa313efd200b21a9c37678706cf445f5aa
-  default_branch: master
-  details: 'A new Git push #19377363448 has arrived to zerocracy/baza, made by @rultor
-    (default branch is ''master'').'
-  event_id: 40264037062
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19377363448
-  ref: refs/heads/master
-  repository: 728758275
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-18 13:55:51.000000000 Z
-  where: github
-  who: 8086956
-- _id: 45889
-  _time: 2024-07-18 23:05:21.580567205 Z
+- _id: 45963
+  _time: 2024-07-19 00:16:32.578235482 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 45890
-  _time: 2024-07-18 23:05:22.919304569 Z
+- _id: 45964
+  _time: 2024-07-19 00:16:34.172864692 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 45891
-  _time: 2024-07-18 23:05:24.333265606 Z
+- _id: 45965
+  _time: 2024-07-19 00:16:36.127551486 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40277825428
+  latest: 40278751922
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 45892
-  _time: 2024-07-18 23:05:26.017736785 Z
+- _id: 45966
+  _time: 2024-07-19 00:16:38.067269861 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40264404823
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 45893
-  _time: 2024-07-18 23:05:27.517246590 Z
+- _id: 45967
+  _time: 2024-07-19 00:16:39.669564495 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40264087797
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 45930
-  _time: 2024-07-18 23:05:46.141669243 Z
+- _id: 46005
+  _time: 2024-07-19 00:17:01.124996428 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
-  repository: 798641472
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 45932
-  _time: 2024-07-18 23:05:46.980746840 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 45955
-  _time: 2024-07-18 23:05:58.782068092 Z
-  _version: 0.0.60/0.17.0/0.0.30
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 45957
-  _time: 2024-07-18 23:05:59.609771411 Z
+- _id: 46039
+  _time: 2024-07-19 00:17:19.038022739 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 45958
-  _time: 2024-07-18 23:06:01.896967691 Z
+- _id: 46049
+  _time: 2024-07-19 00:17:24.447960370 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 91
-  repository: 799177290
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 46050
+  _time: 2024-07-19 00:17:24.974178521 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 46051
+  _time: 2024-07-19 00:17:25.480846843 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  latest: 31
+  repository: 802720676
   what: labels-were-scanned
   where: github
