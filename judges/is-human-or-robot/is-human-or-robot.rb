@@ -34,6 +34,9 @@ Fbe.conclude do
     if type == 'Bot'
       f.is_human = 0
       $loog.info("GitHub user ##{f.who} is actually a bot")
+    elsif f.who == 8_086_956
+      f.is_human = 0
+      $loog.info("GitHub user ##{f.who} is Rultor, our friend-bot")
     else
       f.is_human = 1
       $loog.info("GitHub user ##{f.who} is not a bot")
