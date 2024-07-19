@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 131.360048806
+  seconds: 120.057686331
   version: 0.17.0
   what: judges-summary
-  when: 2024-07-19 04:07:22.325740683 Z
+  when: 2024-07-19 05:07:14.050626221 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -13667,8 +13667,49 @@
   where: github
   who: 8086956
   why: Push to default branch 'master' in zerocracy/baza
-- _id: 46284
-  _time: 2024-07-19 03:06:00.796083539 Z
+- _id: 46289
+  _time: 2024-07-19 04:05:25.370128701 Z
+  _version: 0.0.60/0.17.0/0.0.30
+  commit: 54ba179b6ffae9a214ffed6a9692a52293a8025c
+  default_branch: master
+  details: 'A new Git push #19381648516 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master'').'
+  event_id: 40272947737
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19381648516
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-18 18:38:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 46446
+  _time: 2024-07-19 04:07:31.434073436 Z
+  _version: 0.1.1/0.18.1/
+  award: -20
+  cause: 46289
+  commit: 54ba179b6ffae9a214ffed6a9692a52293a8025c
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/baza, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points for
+    this: -20 as a basis. Next time, create a new branch, push your changes over there,
+    then make a pull request and merge it. Even if you are flying solo, contributing
+    via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is +60. '
+  href: https://github.com/zerocracy/baza/commit/54ba179b6ffae9a214ffed6a9692a52293a8025c/#commitcomment-144409119
+  is_human: 1
+  repository: 728758275
+  what: push-to-master-was-punished
+  when: 2024-07-19 04:07:31.441669366 Z
+  where: github
+  who: 526301
+  why: Push to default branch 'master' in zerocracy/baza
+- _id: 46447
+  _time: 2024-07-19 04:07:32.150180807 Z
   _version: 0.1.1/0.18.1/
   area: hr
   bad_branch_name_was_punished:
@@ -13782,89 +13823,84 @@
     days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} for each
     day of delay in resolving the problem, but no more than ${days_fee_max}'))"
   what: pmp
-- _id: 46289
-  _time: 2024-07-19 04:05:25.370128701 Z
+- _id: 46450
+  _time: 2024-07-19 05:05:21.320082748 Z
   _version: 0.0.60/0.17.0/0.0.30
-  commit: 54ba179b6ffae9a214ffed6a9692a52293a8025c
-  default_branch: master
-  details: 'A new Git push #19381648516 has arrived to zerocracy/baza, made by @yegor256
-    (default branch is ''master'').'
-  event_id: 40272947737
-  event_type: PushEvent
+  details: The issue zerocracy/judges-action#128 has been opened by @yegor256.
+  event_id: 40283301364
+  event_type: IssuesEvent
   is_human: 1
-  push_id: 19381648516
-  ref: refs/heads/master
-  repository: 728758275
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-07-18 18:38:21.000000000 Z
+  issue: 128
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-19 04:39:07.000000000 Z
   where: github
   who: 526301
-- _id: 46375
-  _time: 2024-07-19 04:06:27.093645309 Z
+- _id: 46539
+  _time: 2024-07-19 05:06:23.146918874 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 46376
-  _time: 2024-07-19 04:06:29.457099675 Z
+- _id: 46540
+  _time: 2024-07-19 05:06:25.249355480 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 46377
-  _time: 2024-07-19 04:06:32.148111445 Z
+- _id: 46541
+  _time: 2024-07-19 05:06:27.308137404 Z
   _version: 0.0.60/0.17.0/0.0.30
-  latest: 40281908325
+  latest: 40283304427
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 46378
-  _time: 2024-07-19 04:06:35.069199231 Z
+- _id: 46542
+  _time: 2024-07-19 05:06:29.614638330 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40275198007
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 46379
-  _time: 2024-07-19 04:06:37.900912570 Z
+- _id: 46543
+  _time: 2024-07-19 05:06:32.138634110 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 40272947737
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 46416
-  _time: 2024-07-19 04:07:02.176350903 Z
+- _id: 46580
+  _time: 2024-07-19 05:06:54.991654890 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 46418
-  _time: 2024-07-19 04:07:03.173512234 Z
+- _id: 46582
+  _time: 2024-07-19 05:06:55.981501440 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 46441
-  _time: 2024-07-19 04:07:18.488260768 Z
+- _id: 46605
+  _time: 2024-07-19 05:07:10.504134043 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 46443
-  _time: 2024-07-19 04:07:19.471797885 Z
+- _id: 46607
+  _time: 2024-07-19 05:07:11.457407105 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 46444
-  _time: 2024-07-19 04:07:22.311866847 Z
+- _id: 46608
+  _time: 2024-07-19 05:07:14.037657159 Z
   _version: 0.0.60/0.17.0/0.0.30
   latest: 91
   repository: 799177290
