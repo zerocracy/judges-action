@@ -58,12 +58,18 @@ Fbe.iterate do
       fact.default_branch = Fbe.octo.repository(json[:repo][:name])[:default_branch]
       fact.to_master = fact.default_branch == fact.ref.split('/')[2] ? 1 : 0
       if fact.to_master.zero?
-        $loog.debug("Push has been made not to the default branch '#{fact.default_branch}', ignoring it")
+        $loog.debug("Push #{fact.commit} has been made to non-default branch '#{fact.default_branch}', ignoring it")
+        skip_event(json)
+      end
+      pulls = Fbe.octo.commit_pulls(json[:repo][:name], fact.commit)
+      unless pulls.empty?
+        $loog.debug("Push #{fact.commit} has been made inside #{pulls.size} pull request(s), ignoring it")
         skip_event(json)
       end
       fact.details =
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{json[:repo][:name]}, " \
-        "made by #{Fbe.who(fact)} (default branch is '#{fact.default_branch}')."
+        "made by #{Fbe.who(fact)} (default branch is '#{fact.default_branch}'), " \
+        'not associated with any pull request.'
 
     when 'PullRequestEvent'
       pl = json[:payload][:pull_request]
