@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 10.065880552
+  seconds: 9.866956417
   version: 0.18.1
   what: judges-summary
-  when: 2024-07-21 16:06:47.859536195 Z
+  when: 2024-07-21 17:05:21.090713890 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -14431,8 +14431,8 @@
   where: github
   who: 526301
   why: Push 187e1bf89 to default branch 'master' in zerocracy/baza
-- _id: 52161
-  _time: 2024-07-21 16:06:43.439341990 Z
+- _id: 52252
+  _time: 2024-07-21 17:05:16.596476242 Z
   _version: 0.1.1/0.18.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -14453,6 +14453,7 @@
               but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
   days_of_running_balance: 28
   days_to_reward: 7
+  master_punish_days: 4
   push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
     default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis')
     '${fee} points'))"
@@ -14466,73 +14467,73 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 52162
-  _time: 2024-07-21 17:04:07.532773056 Z
+- _id: 52253
+  _time: 2024-07-21 18:04:37.591566258 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40217110228
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 52163
-  _time: 2024-07-21 17:04:08.972514518 Z
+- _id: 52254
+  _time: 2024-07-21 18:04:39.932578973 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40211740674
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 52164
-  _time: 2024-07-21 17:04:11.107584907 Z
+- _id: 52255
+  _time: 2024-07-21 18:04:42.837836766 Z
   _version: 0.1.1/0.18.1/0.0.31
-  latest: 40329722729
+  latest: 40330238520
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 52165
-  _time: 2024-07-21 17:04:13.033099458 Z
+- _id: 52256
+  _time: 2024-07-21 18:04:45.552447207 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40287530811
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 52166
-  _time: 2024-07-21 17:04:14.623583547 Z
+- _id: 52257
+  _time: 2024-07-21 18:04:48.173424472 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 40320631603
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 52209
-  _time: 2024-07-21 17:04:39.422352953 Z
+- _id: 52294
+  _time: 2024-07-21 18:05:13.376579814 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 0
-  repository: 799177290
+  repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 52239
-  _time: 2024-07-21 17:04:55.791715432 Z
+- _id: 52296
+  _time: 2024-07-21 18:05:14.433166562 Z
+  _version: 0.1.1/0.18.1/0.0.31
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 52319
+  _time: 2024-07-21 18:05:29.814770284 Z
+  _version: 0.1.1/0.18.1/0.0.31
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 52321
+  _time: 2024-07-21 18:05:30.886320832 Z
   _version: 0.1.1/0.18.1/0.0.31
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 52249
-  _time: 2024-07-21 17:05:01.394023350 Z
+- _id: 52322
+  _time: 2024-07-21 18:05:33.744516792 Z
   _version: 0.1.1/0.18.1/0.0.31
-  latest: 67
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 52250
-  _time: 2024-07-21 17:05:01.978859886 Z
-  _version: 0.1.1/0.18.1/0.0.31
-  latest: 87
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 52251
-  _time: 2024-07-21 17:05:02.501174426 Z
-  _version: 0.1.1/0.18.1/0.0.31
-  latest: 31
-  repository: 802720676
+  latest: 91
+  repository: 799177290
   what: labels-were-scanned
   where: github

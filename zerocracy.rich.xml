@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.1.1" size="376311">
+<fb version="0.1.1" size="376339">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <removed t="I">8</removed>
-    <seconds t="F">10.065880552</seconds>
+    <seconds t="F">9.866956417</seconds>
     <version t="S">0.18.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-07-21T16:06:47Z</when>
+    <when t="T">2024-07-21T17:05:21Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -16945,8 +16945,8 @@
     <why t="S">Push 187e1bf89 to default branch 'master' in zerocracy/baza</why>
   </f>
   <f>
-    <_id t="I">52161</_id>
-    <_time t="T">2024-07-21T16:06:43Z</_time>
+    <_id t="I">52252</_id>
+    <_time t="T">2024-07-21T17:05:16Z</_time>
     <_version t="S">0.1.1/0.18.1/</_version>
     <area t="S">hr</area>
     <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
@@ -16961,13 +16961,14 @@
           but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
     <days_of_running_balance t="I">28</days_of_running_balance>
     <days_to_reward t="I">7</days_to_reward>
+    <master_punish_days t="I">4</master_punish_days>
     <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
     <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
     <what t="S">pmp</what>
   </f>
   <f>
-    <_id t="I">52162</_id>
-    <_time t="T">2024-07-21T17:04:07Z</_time>
+    <_id t="I">52253</_id>
+    <_time t="T">2024-07-21T18:04:37Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
     <latest t="I">40217110228</latest>
     <repository t="I">799113787</repository>
@@ -16975,8 +16976,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52163</_id>
-    <_time t="T">2024-07-21T17:04:08Z</_time>
+    <_id t="I">52254</_id>
+    <_time t="T">2024-07-21T18:04:39Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
     <latest t="I">40211740674</latest>
     <repository t="I">798641472</repository>
@@ -16984,17 +16985,17 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52164</_id>
-    <_time t="T">2024-07-21T17:04:11Z</_time>
+    <_id t="I">52255</_id>
+    <_time t="T">2024-07-21T18:04:42Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
-    <latest t="I">40329722729</latest>
+    <latest t="I">40330238520</latest>
     <repository t="I">799177290</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52165</_id>
-    <_time t="T">2024-07-21T17:04:13Z</_time>
+    <_id t="I">52256</_id>
+    <_time t="T">2024-07-21T18:04:45Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
     <latest t="I">40287530811</latest>
     <repository t="I">802720676</repository>
@@ -17002,8 +17003,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52166</_id>
-    <_time t="T">2024-07-21T17:04:14Z</_time>
+    <_id t="I">52257</_id>
+    <_time t="T">2024-07-21T18:04:48Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
     <latest t="I">40320631603</latest>
     <repository t="I">728758275</repository>
@@ -17011,17 +17012,35 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52209</_id>
-    <_time t="T">2024-07-21T17:04:39Z</_time>
+    <_id t="I">52294</_id>
+    <_time t="T">2024-07-21T18:05:13Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
     <latest t="I">0</latest>
-    <repository t="I">799177290</repository>
+    <repository t="I">798641472</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52239</_id>
-    <_time t="T">2024-07-21T17:04:55Z</_time>
+    <_id t="I">52296</_id>
+    <_time t="T">2024-07-21T18:05:14Z</_time>
+    <_version t="S">0.1.1/0.18.1/0.0.31</_version>
+    <latest t="I">0</latest>
+    <repository t="I">802720676</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">52319</_id>
+    <_time t="T">2024-07-21T18:05:29Z</_time>
+    <_version t="S">0.1.1/0.18.1/0.0.31</_version>
+    <latest t="I">0</latest>
+    <repository t="I">799113787</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">52321</_id>
+    <_time t="T">2024-07-21T18:05:30Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
     <latest t="I">0</latest>
     <repository t="I">728758275</repository>
@@ -17029,35 +17048,17 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52249</_id>
-    <_time t="T">2024-07-21T17:05:01Z</_time>
+    <_id t="I">52322</_id>
+    <_time t="T">2024-07-21T18:05:33Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.31</_version>
-    <latest t="I">67</latest>
-    <repository t="I">799113787</repository>
+    <latest t="I">91</latest>
+    <repository t="I">799177290</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">52250</_id>
-    <_time t="T">2024-07-21T17:05:01Z</_time>
-    <_version t="S">0.1.1/0.18.1/0.0.31</_version>
-    <latest t="I">87</latest>
-    <repository t="I">798641472</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">52251</_id>
-    <_time t="T">2024-07-21T17:05:02Z</_time>
-    <_version t="S">0.1.1/0.18.1/0.0.31</_version>
-    <latest t="I">31</latest>
-    <repository t="I">802720676</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">52252</_id>
-    <_time t="T">2024-07-21T17:05:06Z</_time>
+    <_id t="I">52323</_id>
+    <_time t="T">2024-07-21T18:05:38Z</_time>
     <_version t="S">0.1.1/0.18.1/</_version>
     <html t="S">&lt;div&gt;&lt;p&gt;When a bug is resolved, the person who was assigned to it gets a bonus. Here is how it&amp;#39;s calculated: First, assume that &lt;em&gt;hours&lt;/em&gt; is how many hours it took to resolve the bug. Then, set &lt;em&gt;days&lt;/em&gt; to &lt;em&gt;hours&lt;/em&gt; ÷ &lt;strong&gt;24&lt;/strong&gt;, and award 30 points. Then, add 10 points if it was resolved in less than 24 hours. Then, deduct 1 points for each day of delay, but no more than -20 points.&lt;/p&gt;
 &lt;p&gt;When someone pushes directly to the default branch, they get a penalty. Here is how it&amp;#39;s calculated: Just -20 points.&lt;/p&gt;
