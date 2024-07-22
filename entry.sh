@@ -113,6 +113,7 @@ ${JUDGES} "${gopts[@]}" update \
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" push \
         "--owner=${owner}" \
+        "--meta=workflow_url:${owner}" \
         "--meta=pages_url:${PAGES_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
         "--token=${INPUT_TOKEN}" \
