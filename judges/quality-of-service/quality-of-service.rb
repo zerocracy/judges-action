@@ -27,7 +27,7 @@ require 'fbe/octo'
 return unless Fbe.fb.query(
   "(and
     (eq what '#{$judge}')
-    (gt when (minus (to_time (env 'TODAY' '#{Time.now}')) '7 days')))"
+    (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '7 days')))"
 ).each.to_a.empty?
 
 pmp = Fbe.fb.query('(and (eq what "pmp") (eq area "quality") (exists qos_days))').each.to_a.first
@@ -42,7 +42,7 @@ f.when = Time.now
 total = 0
 success = 0
 Fbe.unmask_repos.each do |repo|
-  Fbe.octo.repository_workflow_runs(repo, created: ">#{$SINCE}")[:workflow_runs].each do |json|
+  Fbe.octo.repository_workflow_runs(repo, created: ">#{$SINCE.utc.iso8601[0..10]}")[:workflow_runs].each do |json|
     total += 1
     success += json[:conclusion] == 'success' ? 1 : 0
   end
