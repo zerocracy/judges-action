@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.1.1" size="393242">
+<fb version="0.1.1" size="405920">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <removed t="I">8</removed>
-    <seconds t="F">129.363217589</seconds>
+    <seconds t="F">129.081169753</seconds>
     <version t="S">0.18.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-07-22T10:06:47Z</when>
+    <when t="T">2024-07-22T11:06:33Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -17529,28 +17529,6 @@
     <why t="S">Push bea686463 to default branch 'master' in yegor256/judges</why>
   </f>
   <f>
-    <_id t="I">53980</_id>
-    <_time t="T">2024-07-22T09:07:56Z</_time>
-    <_version t="S">0.2.0/0.18.1/</_version>
-    <area t="S">hr</area>
-    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
-    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
-    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 1) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_max comments_min)) (give b5 'for ${comments} comments of reviewers') 'deduct ${comments_k} points for every comment, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
-    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
-    <days_of_running_balance t="I">28</days_of_running_balance>
-    <days_to_reward t="I">7</days_to_reward>
-    <master_punish_days t="I">4</master_punish_days>
-    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
-    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
-    <what t="S">pmp</what>
-  </f>
-  <f>
     <_id t="I">53981</_id>
     <_time t="T">2024-07-22T10:04:40Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
@@ -17696,17 +17674,320 @@
     <who_name t="S">yegor256</who_name>
   </f>
   <f>
-    <_id t="I">54080</_id>
-    <_time t="T">2024-07-22T10:05:55Z</_time>
+    <_id t="I">54153</_id>
+    <_time t="T">2024-07-22T10:07:02Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">53813</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request yegor256/factbase#101 with 318 HoC created by @yegor256 was merged by @yegor256 after 2 minutes of being in review and 0 comments.</details>
+    <hoc t="I">318</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">101</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">798641472</repository>
+    <seconds t="I">135</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-22T08:30:48Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+  </f>
+  <f>
+    <_id t="I">54154</_id>
+    <_time t="T">2024-07-22T10:07:03Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53138</cause>
+    <commit t="S">c99fbc249a690e9dfcc4dc58242ae6cdfa6847d7</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-135](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <href t="S">https://github.com/zerocracy/baza/commit/c99fbc249a690e9dfcc4dc58242ae6cdfa6847d7/#commitcomment-144489145</href>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push c99fbc249 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54156</_id>
+    <_time t="T">2024-07-22T10:07:13Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53139</cause>
+    <commit t="S">642cca135215e465a96daf07cbba3eacce4848c8</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-155](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <href t="S">https://github.com/zerocracy/baza/commit/642cca135215e465a96daf07cbba3eacce4848c8/#commitcomment-144489149</href>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push 642cca135 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54157</_id>
+    <_time t="T">2024-07-22T10:07:18Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <area t="S">hr</area>
+    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
+    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
+    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 1) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_max comments_min)) (give b5 'for ${comments} comments of reviewers') 'deduct ${comments_k} points for every comment, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
+    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
+    <days_of_running_balance t="I">28</days_of_running_balance>
+    <days_to_reward t="I">7</days_to_reward>
+    <master_punish_days t="I">4</master_punish_days>
+    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
+    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
+    <what t="S">pmp</what>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:24Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53140</cause>
+    <commit t="S">9dff2f6171bb1ba5b71171ed9b97110cc86d4827</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push 9dff2f617 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:24Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53303</cause>
+    <commit t="S">816af5163f6b970b5e86b7b948c8f22fd7cf9b40</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push 816af5163 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:24Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53304</cause>
+    <commit t="S">dd0d539dfc6d6ee1a552afa4b121dc30d944b13d</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push dd0d539df to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:25Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53474</cause>
+    <commit t="S">b17ac6219273e0c645d92441e97cde6a3f70b5f5</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:25Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push b17ac6219 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:25Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53475</cause>
+    <commit t="S">7dfec4a80ae6d9c16c55deb06464fba4122b7586</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:25Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push 7dfec4a80 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:26Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53989</cause>
+    <commit t="S">55b3000966efe0be0a2f3d2be8bea775d71b42e5</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:26Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push 55b300096 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:26Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53990</cause>
+    <commit t="S">c9a3be23f7fb8e9fb944988667f057dcf2b7bd5e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:26Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push c9a3be23f to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:26Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53991</cause>
+    <commit t="S">40dbcf9851d9adf284d44758c9ab241ce14856d3</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:26Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push 40dbcf985 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54158</_id>
+    <_time t="T">2024-07-22T10:07:27Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">53992</cause>
+    <commit t="S">58471bdb3b1bc3aa8600420a262540cc58525ecb</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/baza, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-175](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <is_human t="I">1</is_human>
+    <repository t="I">728758275</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T10:07:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <who_name t="S">yegor256</who_name>
+    <why t="S">Push 58471bdb3 to default branch 'master' in zerocracy/baza</why>
+  </f>
+  <f>
+    <_id t="I">54162</_id>
+    <_time t="T">2024-07-22T11:04:35Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
-    <latest t="I">40343911608</latest>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/pages-action#55 has been opened by @renovate[bot].</details>
+    <event_id t="I">40346513602</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">55</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T10:26:38Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+    <who_name t="S">renovate[bot]</who_name>
+  </f>
+  <f>
+    <_id t="I">54164</_id>
+    <_time t="T">2024-07-22T11:04:38Z</_time>
+    <_version t="S">0.1.1/0.18.1/0.0.32</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/baza#127 has been opened by @renovate[bot].</details>
+    <event_id t="I">40344887556</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">127</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T09:36:53Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+    <who_name t="S">renovate[bot]</who_name>
+  </f>
+  <f>
+    <_id t="I">54165</_id>
+    <_time t="T">2024-07-22T11:04:39Z</_time>
+    <_version t="S">0.1.1/0.18.1/0.0.32</_version>
+    <branch t="S">renovate/factbase-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/baza#126 has been opened by @renovate[bot].</details>
+    <event_id t="I">40344878129</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">126</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T09:36:35Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+    <who_name t="S">renovate[bot]</who_name>
+  </f>
+  <f>
+    <_id t="I">54253</_id>
+    <_time t="T">2024-07-22T11:05:40Z</_time>
+    <_version t="S">0.1.1/0.18.1/0.0.32</_version>
+    <latest t="I">40345533444</latest>
     <repository t="I">799113787</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54081</_id>
-    <_time t="T">2024-07-22T10:05:57Z</_time>
+    <_id t="I">54254</_id>
+    <_time t="T">2024-07-22T11:05:42Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
     <latest t="I">40343168041</latest>
     <repository t="I">798641472</repository>
@@ -17714,35 +17995,35 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54082</_id>
-    <_time t="T">2024-07-22T10:05:59Z</_time>
+    <_id t="I">54255</_id>
+    <_time t="T">2024-07-22T11:05:44Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
-    <latest t="I">40344946924</latest>
+    <latest t="I">40345881746</latest>
     <repository t="I">799177290</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54083</_id>
-    <_time t="T">2024-07-22T10:06:01Z</_time>
+    <_id t="I">54256</_id>
+    <_time t="T">2024-07-22T11:05:47Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
-    <latest t="I">40339733148</latest>
+    <latest t="I">40346513602</latest>
     <repository t="I">802720676</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54084</_id>
-    <_time t="T">2024-07-22T10:06:04Z</_time>
+    <_id t="I">54257</_id>
+    <_time t="T">2024-07-22T11:05:49Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
-    <latest t="I">40343441686</latest>
+    <latest t="I">40345895443</latest>
     <repository t="I">728758275</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54123</_id>
-    <_time t="T">2024-07-22T10:06:28Z</_time>
+    <_id t="I">54296</_id>
+    <_time t="T">2024-07-22T11:06:14Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
     <latest t="I">0</latest>
     <repository t="I">802720676</repository>
@@ -17750,8 +18031,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54126</_id>
-    <_time t="T">2024-07-22T10:06:30Z</_time>
+    <_id t="I">54299</_id>
+    <_time t="T">2024-07-22T11:06:16Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
     <latest t="I">0</latest>
     <repository t="I">798641472</repository>
@@ -17759,8 +18040,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54149</_id>
-    <_time t="T">2024-07-22T10:06:44Z</_time>
+    <_id t="I">54322</_id>
+    <_time t="T">2024-07-22T11:06:30Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
     <latest t="I">0</latest>
     <repository t="I">728758275</repository>
@@ -17768,8 +18049,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54150</_id>
-    <_time t="T">2024-07-22T10:06:44Z</_time>
+    <_id t="I">54323</_id>
+    <_time t="T">2024-07-22T11:06:31Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
     <latest t="I">0</latest>
     <repository t="I">799113787</repository>
@@ -17777,8 +18058,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54151</_id>
-    <_time t="T">2024-07-22T10:06:47Z</_time>
+    <_id t="I">54324</_id>
+    <_time t="T">2024-07-22T11:06:33Z</_time>
     <_version t="S">0.1.1/0.18.1/0.0.32</_version>
     <latest t="I">91</latest>
     <repository t="I">799177290</repository>
@@ -17786,8 +18067,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">54152</_id>
-    <_time t="T">2024-07-22T10:06:51Z</_time>
+    <_id t="I">54325</_id>
+    <_time t="T">2024-07-22T11:06:38Z</_time>
     <_version t="S">0.1.1/0.18.1/</_version>
     <html t="S">&lt;div&gt;&lt;p&gt;When a bug is resolved, the person who was assigned to it gets a bonus. Here is how it&amp;#39;s calculated: First, assume that &lt;em&gt;hours&lt;/em&gt; is how many hours it took to resolve the bug. Then, set &lt;em&gt;days&lt;/em&gt; to &lt;em&gt;hours&lt;/em&gt; ÷ &lt;strong&gt;24&lt;/strong&gt;, and award 30 points. Then, add 10 points if it was resolved in less than 24 hours. Then, deduct 1 points for each day of delay, but no more than -20 points.&lt;/p&gt;
 &lt;p&gt;When someone pushes directly to the default branch, they get a penalty. Here is how it&amp;#39;s calculated: Just -20 points.&lt;/p&gt;
