@@ -20,41 +20,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 ---
-AllCops:
-  Exclude:
-    - 'vendor/**/*'
-  DisplayCopNames: true
-  TargetRubyVersion: 3.2
-  SuggestExtensions: false
-  NewCops: enable
-
-Naming/FileName:
-  Regex: !ruby/regexp '/^[a-z0-9\-._]*$/'
-Style/GlobalVars:
-  Enabled: false
-Metrics/MethodLength:
-  Enabled: false
-Lint/NestedMethodDefinition:
-  Enabled: false
-Gemspec/RequiredRubyVersion:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
-Layout/MultilineMethodCallIndentation:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-Metrics/BlockLength:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Metrics/PerceivedComplexity:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Layout/CaseIndentation:
-  Enabled: false
-Naming/MethodParameterName:
-  MinNameLength: 2
+options:
+  TODAY: 2024-03-03T00:00:00
+  repositories: yegor256/judges
+  testing: true
+input:
+  -
+    what: pmp
+    area: quality
+    qos_days: 7
+  -
+    what: quality-of-service
+    when: 2024-01-01T00:00:00
+expected:
+  - /fb[count(f)=3]
+  - /fb/f[average_issue_lifetime = 0]
+  - /fb/f[average_pull_lifetime = 0]
+  - /fb/f[average_release_interval != 0]
+  - /fb/f[average_workflow_success_rate != 0]
