@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -21,32 +19,16 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-require 'fbe/octo'
-
-return unless Fbe.fb.query(
-  "(and
-    (eq what '#{$judge}')
-    (gt when (minus (to_time (env 'TODAY' '#{Time.now}')) '7 days')))"
-).each.to_a.empty?
-
-f = Fbe.fb.insert
-f.what = $judge
-f.when = Time.now
-
-def lifetime(days, type)
-  ages = []
-  Fbe.unmask_repos.each do |repo|
-    q = "repo:#{repo} type:#{type} closed:>#{(Time.now - (days * 24 * 60 * 60)).utc.iso8601[0..10]}"
-    ages += Fbe.octo.search_issues(q)[:items].map do |json|
-      next if json[:closed_at].nil?
-      next if json[:created_at].nil?
-      json[:closed_at] - json[:created_at]
-    end
-  end
-  ages.compact!
-  ages.empty? ? 0 : ages.inject(&:+) / ages.size
-end
-
-f.average_issue_lifetime = lifetime(28, 'issue')
-f.average_pull_lifetime = lifetime(28, 'pr')
+---
+options:
+  TODAY: 2024-03-03T00:00:00
+  repositories: yegor256/judges
+  testing: true
+input:
+  -
+    what: quality-of-service
+    when: 2024-01-01T00:00:00
+expected:
+  - /fb[count(f)=2]
+  - /fb/f[average_issue_lifetime=0]
+  - /fb/f[average_pull_lifetime=0]
