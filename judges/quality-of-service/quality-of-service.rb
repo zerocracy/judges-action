@@ -30,13 +30,26 @@ return unless Fbe.fb.query(
     (gt when (minus (to_time (env 'TODAY' '#{Time.now}')) '7 days')))"
 ).each.to_a.empty?
 
-$DAYS = 28
+pmp = Fbe.fb.query('(and (eq what "pmp") (eq area "quality") (exists qos_days))').each.to_a.first
+$DAYS = pmp.nil? ? 28 : pmp.qos_days
 $SINCE = Time.now - ($DAYS * 24 * 60 * 60)
 
 f = Fbe.fb.insert
 f.what = $judge
 f.when = Time.now
 
+# Workflow runs:
+total = 0
+success = 0
+Fbe.unmask_repos.each do |repo|
+  Fbe.octo.repository_workflow_runs(repo, created: ">#{$SINCE}")[:workflow_runs].each do |json|
+    total += 1
+    success += json[:conclusion] == 'success' ? 1 : 0
+  end
+end
+f.average_workflow_success_rate = total.zero? ? 0 : success.to_f / total
+
+# Release intervals:
 dates = []
 Fbe.unmask_repos.each do |repo|
   Fbe.octo.releases(repo).each do |json|
@@ -48,6 +61,7 @@ dates.sort!
 diffs = (1..dates.size - 1).map { |i| dates[i] - dates[i - 1] }
 f.average_release_interval = diffs.empty? ? 0 : diffs.inject(&:+) / diffs.size
 
+# Issue and PR lifetimes:
 def lifetime(type)
   ages = []
   Fbe.unmask_repos.each do |repo|
@@ -59,8 +73,7 @@ def lifetime(type)
     end
   end
   ages.compact!
-  ages.empty? ? 0 : ages.inject(&:+) / ages.size
+  ages.empty? ? 0 : ages.inject(&:+).to_f / ages.size
 end
-
 f.average_issue_lifetime = lifetime('issue')
 f.average_pull_lifetime = lifetime('pr')
