@@ -23,7 +23,7 @@
 options:
   TODAY: 2024-03-03T00:00:00
   repositories: yegor256/judges
-  testing: true
+  # testing: true
 input:
   -
     what: quality-of-service
@@ -32,3 +32,4 @@ expected:
   - /fb[count(f)=2]
   - /fb/f[average_issue_lifetime=0]
   - /fb/f[average_pull_lifetime=0]
+  - /fb/f[average_release_interval=0]

@@ -30,14 +30,28 @@ return unless Fbe.fb.query(
     (gt when (minus (to_time (env 'TODAY' '#{Time.now}')) '7 days')))"
 ).each.to_a.empty?
 
+$DAYS = 28
+$SINCE = Time.now - ($DAYS * 24 * 60 * 60)
+
 f = Fbe.fb.insert
 f.what = $judge
 f.when = Time.now
 
-def lifetime(days, type)
+dates = []
+Fbe.unmask_repos.each do |repo|
+  Fbe.octo.releases(repo).each do |json|
+    break if json[:published_at] < $SINCE
+    dates << json[:published_at]
+  end
+end
+dates.sort!
+diffs = (1..dates.size - 1).map { |i| dates[i] - dates[i - 1] }
+f.average_release_interval = diffs.empty? ? 0 : diffs.inject(&:+) / diffs.size
+
+def lifetime(type)
   ages = []
   Fbe.unmask_repos.each do |repo|
-    q = "repo:#{repo} type:#{type} closed:>#{(Time.now - (days * 24 * 60 * 60)).utc.iso8601[0..10]}"
+    q = "repo:#{repo} type:#{type} closed:>#{$SINCE.utc.iso8601[0..10]}"
     ages += Fbe.octo.search_issues(q)[:items].map do |json|
       next if json[:closed_at].nil?
       next if json[:created_at].nil?
@@ -48,5 +62,5 @@ def lifetime(days, type)
   ages.empty? ? 0 : ages.inject(&:+) / ages.size
 end
 
-f.average_issue_lifetime = lifetime(28, 'issue')
-f.average_pull_lifetime = lifetime(28, 'pr')
+f.average_issue_lifetime = lifetime('issue')
+f.average_pull_lifetime = lifetime('pr')
