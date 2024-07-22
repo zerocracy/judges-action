@@ -1,11 +1,13 @@
 ---
 - added: 8
   cycles: 2
+  error: 'GET https://api.github.com/repositories/799177290/actions/runs?created=%3E2024-06-24T&page=10&per_page=100:
+    502 - Server Error'
   removed: 8
-  seconds: 369.224151562
+  seconds: 316.259599122
   version: 0.19.0
   what: judges-summary
-  when: 2024-07-22 17:10:43.009183556 Z
+  when: 2024-07-22 18:10:29.480674447 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -15577,42 +15579,6 @@
   when: 2024-07-22 14:56:28.000000000 Z
   where: github
   who: 526301
-- _id: 54937
-  _time: 2024-07-22 16:07:34.255359380 Z
-  _version: 0.2.0/0.19.0/
-  area: hr
-  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
-    obey the convention, a penalty is given to the author') (aka (let fee -10) (give
-    fee 'as a basis') 'deduct ${fee} points'))"
-  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
-    the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis')
-    'award ${bonus} points'))"
-  code_contribution_was_rewarded: |-
-    (award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-              but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
-              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
-              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 1) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_max comments_min)) (give b5 'for ${comments} comments of reviewers') 'deduct ${comments_k} points for every comment, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
-  code_review_was_rewarded: |-
-    (award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-              but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
-  days_of_running_balance: 28
-  days_to_reward: 7
-  master_punish_days: 4
-  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
-    default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis')
-    '${fee} points'))"
-  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
-    who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve
-    the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis')
-    'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if
-    (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold}
-    hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours')
-    (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max
-    -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct
-    ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
-  what: pmp
 - _id: 54940
   _time: 2024-07-22 17:04:40.341217822 Z
   _version: 0.2.0/0.19.0/0.0.33
@@ -15760,76 +15726,6 @@
   average_workflow_success_rate: 0.985981308411215
   what: quality-of-service
   when: 2024-07-22 17:05:35.169474934 Z
-- _id: 55021
-  _time: 2024-07-22 17:07:40.282815439 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 40345533444
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 55022
-  _time: 2024-07-22 17:07:41.908169821 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 40347728363
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 55023
-  _time: 2024-07-22 17:07:43.508610692 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 40356334671
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 55024
-  _time: 2024-07-22 17:07:45.327191200 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 40356838261
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 55025
-  _time: 2024-07-22 17:07:47.017084179 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 40351671183
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 55073
-  _time: 2024-07-22 17:08:18.066263352 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 55099
-  _time: 2024-07-22 17:08:33.979493205 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 55109
-  _time: 2024-07-22 17:08:40.410547554 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 67
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 55110
-  _time: 2024-07-22 17:08:41.197901964 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 87
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 55111
-  _time: 2024-07-22 17:08:41.770624738 Z
-  _version: 0.2.0/0.19.0/0.0.33
-  latest: 31
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
 - _id: 55112
   _time: 2024-07-22 17:08:42.171257676 Z
   _version: 0.2.0/0.19.0/0.0.33
@@ -15839,3 +15735,192 @@
   average_workflow_success_rate: 0.985981308411215
   what: quality-of-service
   when: 2024-07-22 17:08:42.171438362 Z
+- _id: 55114
+  _time: 2024-07-22 17:10:56.717864318 Z
+  _version: 0.2.0/0.19.0/
+  award: 5
+  cause: 54936
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#138,
+    the reward amount is 5.
+  greeting: 'Thanks for the contribution! You''ve earned +5 points for this: +20 as
+    a basis; +5 for 167 hits-of-code; -7 for too many hits-of-code (167 >= 100); -15
+    for the lack of code review; -5 for 0 comments of reviewers; +7 to give you at
+    least something. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running balance is [-350](https://zerocracy.github.io/judges-action/zerocracy.html). '
+  href: https://github.com/zerocracy/judges-action/issues/138/#issuecomment-2243434770
+  is_human: 1
+  issue: 138
+  repository: 799177290
+  what: code-contribution-was-rewarded
+  when: 2024-07-22 17:10:56.728575088 Z
+  where: github
+  who: 526301
+  why: Code was contributed in zerocracy/judges-action#138
+- _id: 55115
+  _time: 2024-07-22 17:11:00.372418995 Z
+  _version: 0.2.0/0.19.0/
+  cause: 54940
+  comments: 0
+  details: The pull request zerocracy/judges-action#139 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 5 minutes of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 139
+  merger: 526301
+  repository: 799177290
+  seconds: 329
+  what: code-was-contributed
+  when: 2024-07-22 15:13:25.000000000 Z
+  where: github
+  who: 41898282
+- _id: 55116
+  _time: 2024-07-22 17:11:03.239340325 Z
+  _version: 0.2.0/0.19.0/
+  area: hr
+  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
+    obey the convention, a penalty is given to the author') (aka (let fee -10) (give
+    fee 'as a basis') 'deduct ${fee} points'))"
+  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
+    the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis')
+    'award ${bonus} points'))"
+  code_contribution_was_rewarded: |-
+    (award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+              but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
+              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
+              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 1) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_max comments_min)) (give b5 'for ${comments} comments of reviewers') 'deduct ${comments_k} points for every comment, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
+  code_review_was_rewarded: |-
+    (award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+              but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
+  days_of_running_balance: 28
+  days_to_reward: 7
+  master_punish_days: 4
+  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
+    default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis')
+    '${fee} points'))"
+  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
+    who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve
+    the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis')
+    'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if
+    (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold}
+    hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours')
+    (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max
+    -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct
+    ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
+  what: pmp
+- _id: 55119
+  _time: 2024-07-22 18:05:21.131391870 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  details: The pull request zerocracy/judges-action#140 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 40358538288
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 1
+  issue: 140
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-07-22 16:20:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 55120
+  _time: 2024-07-22 18:05:21.724032493 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The pull request zerocracy/judges-action#140 has been opened by @renovate[bot].
+  event_id: 40358144590
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 140
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-07-22 16:07:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 55192
+  _time: 2024-07-22 18:06:14.384248489 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  what: quality-of-service
+  when: 2024-07-22 18:06:14.384375388 Z
+- _id: 55193
+  _time: 2024-07-22 18:07:21.576009101 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 40345533444
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 55194
+  _time: 2024-07-22 18:07:23.621545981 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 40347728363
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 55195
+  _time: 2024-07-22 18:07:25.614873427 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 40358550732
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 55196
+  _time: 2024-07-22 18:07:27.688582032 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 40356838261
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 55197
+  _time: 2024-07-22 18:07:29.897233661 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 40351671183
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 55245
+  _time: 2024-07-22 18:08:09.222043974 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 55271
+  _time: 2024-07-22 18:08:26.918163212 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 55281
+  _time: 2024-07-22 18:08:33.632431496 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 55282
+  _time: 2024-07-22 18:08:34.321845619 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 55283
+  _time: 2024-07-22 18:08:34.941300944 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  latest: 31
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 55284
+  _time: 2024-07-22 18:08:35.331926628 Z
+  _version: 0.2.0/0.19.0/0.0.33
+  average_issue_lifetime: 144850.09302325582
+  average_pull_lifetime: 105094.2012195122
+  average_release_interval: 35452.878787878784
+  average_workflow_success_rate: 0.9861111111111112
+  what: quality-of-service
+  when: 2024-07-22 18:08:35.332061051 Z
