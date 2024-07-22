@@ -116,6 +116,7 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "--meta=workflow_url:${owner}" \
         "--meta=pages_url:${PAGES_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
+        "--meta=judges_action_version:${VERSION}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
