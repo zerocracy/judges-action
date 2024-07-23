@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.1.1" size="393927">
+<fb version="0.2.1" size="444783">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
-    <error t="S">GET https://api.github.com/repositories/799177290/actions/runs?created=%3E2024-06-24T&amp;page=10&amp;per_page=100: 502 - Server Error</error>
     <removed t="I">8</removed>
-    <seconds t="F">316.259599122</seconds>
-    <version t="S">0.19.0</version>
+    <seconds t="F">206.016837543</seconds>
+    <version t="S">0.20.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-07-22T18:10:29Z</when>
+    <when t="T">2024-07-23T06:09:08Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -17309,28 +17308,6 @@
     <who t="I">41898282</who>
   </f>
   <f>
-    <_id t="I">55116</_id>
-    <_time t="T">2024-07-22T17:11:03Z</_time>
-    <_version t="S">0.2.0/0.19.0/</_version>
-    <area t="S">hr</area>
-    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
-    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
-    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 1) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_max comments_min)) (give b5 'for ${comments} comments of reviewers') 'deduct ${comments_k} points for every comment, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
-    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
-    <days_of_running_balance t="I">28</days_of_running_balance>
-    <days_to_reward t="I">7</days_to_reward>
-    <master_punish_days t="I">4</master_punish_days>
-    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
-    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
-    <what t="S">pmp</what>
-  </f>
-  <f>
     <_id t="I">55119</_id>
     <_time t="T">2024-07-22T18:05:21Z</_time>
     <_version t="S">0.2.0/0.19.0/0.0.33</_version>
@@ -17372,96 +17349,6 @@
     <when t="T">2024-07-22T18:06:14Z</when>
   </f>
   <f>
-    <_id t="I">55193</_id>
-    <_time t="T">2024-07-22T18:07:21Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">40345533444</latest>
-    <repository t="I">799113787</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55194</_id>
-    <_time t="T">2024-07-22T18:07:23Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">40347728363</latest>
-    <repository t="I">798641472</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55195</_id>
-    <_time t="T">2024-07-22T18:07:25Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">40358550732</latest>
-    <repository t="I">799177290</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55196</_id>
-    <_time t="T">2024-07-22T18:07:27Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">40356838261</latest>
-    <repository t="I">802720676</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55197</_id>
-    <_time t="T">2024-07-22T18:07:29Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">40351671183</latest>
-    <repository t="I">728758275</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55245</_id>
-    <_time t="T">2024-07-22T18:08:09Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">0</latest>
-    <repository t="I">799177290</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55271</_id>
-    <_time t="T">2024-07-22T18:08:26Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">0</latest>
-    <repository t="I">728758275</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55281</_id>
-    <_time t="T">2024-07-22T18:08:33Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">67</latest>
-    <repository t="I">799113787</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55282</_id>
-    <_time t="T">2024-07-22T18:08:34Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">87</latest>
-    <repository t="I">798641472</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">55283</_id>
-    <_time t="T">2024-07-22T18:08:34Z</_time>
-    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
-    <latest t="I">31</latest>
-    <repository t="I">802720676</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">55284</_id>
     <_time t="T">2024-07-22T18:08:35Z</_time>
     <_version t="S">0.2.0/0.19.0/0.0.33</_version>
@@ -17471,5 +17358,2297 @@
     <average_workflow_success_rate t="F">0.9861111111111112</average_workflow_success_rate>
     <what t="S">quality-of-service</what>
     <when t="T">2024-07-22T18:08:35Z</when>
+  </f>
+  <f>
+    <_id t="I">55286</_id>
+    <_time t="T">2024-07-22T18:10:40Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">55119</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#140 with 2 HoC created by @renovate[bot] was merged by @yegor256 after 12 minutes of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">140</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">779</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-22T16:20:47Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">55361</_id>
+    <_time t="T">2024-07-22T19:05:18Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">143312.14942528735</average_issue_lifetime>
+    <average_pull_lifetime t="F">103834.93373493975</average_pull_lifetime>
+    <average_release_interval t="F">35088.477611940296</average_release_interval>
+    <average_workflow_success_rate t="F">0.985897435897436</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T19:05:18Z</when>
+  </f>
+  <f>
+    <_id t="I">55453</_id>
+    <_time t="T">2024-07-22T19:08:22Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">143312.14942528735</average_issue_lifetime>
+    <average_pull_lifetime t="F">103834.93373493975</average_pull_lifetime>
+    <average_release_interval t="F">35088.477611940296</average_release_interval>
+    <average_workflow_success_rate t="F">0.985897435897436</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T19:08:22Z</when>
+  </f>
+  <f>
+    <_id t="I">55455</_id>
+    <_time t="T">2024-07-22T19:10:29Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">54946</cause>
+    <commit t="S">521ebab54ccbbe0f29988682a4bdd99b757ef22a</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/pages-action, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-345](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <href t="S">https://github.com/zerocracy/pages-action/commit/521ebab54ccbbe0f29988682a4bdd99b757ef22a/#commitcomment-144512997</href>
+    <is_human t="I">1</is_human>
+    <repository t="I">802720676</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T19:10:29Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Push 521ebab54 to default branch 'master' in zerocracy/pages-action</why>
+  </f>
+  <f>
+    <_id t="I">55457</_id>
+    <_time t="T">2024-07-22T20:04:45Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">427214d523fcd02e40c42206d09b0c7a7ec30b76</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429608426 has arrived to yegor256/judges, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40362344547</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429608426</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799113787</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T18:37:04Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55460</_id>
+    <_time t="T">2024-07-22T20:04:51Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">version-up</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#142 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40362181417</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">142</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-22T18:30:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55461</_id>
+    <_time t="T">2024-07-22T20:04:51Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">version-up</branch>
+    <details t="S">The pull request zerocracy/judges-action#142 has been opened by @github-actions[bot].</details>
+    <event_id t="I">40361853041</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">142</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T18:18:58Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">55462</_id>
+    <_time t="T">2024-07-22T20:04:53Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#141 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40361845623</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">141</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-22T18:18:42Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55463</_id>
+    <_time t="T">2024-07-22T20:04:54Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/zerocracy-pages-action-0.x</branch>
+    <details t="S">The pull request zerocracy/judges-action#141 has been opened by @renovate[bot].</details>
+    <event_id t="I">40361632349</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">141</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T18:11:25Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">55465</_id>
+    <_time t="T">2024-07-22T20:04:57Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue zerocracy/pages-action#56 has been closed by @yegor256.</details>
+    <event_id t="I">40361832864</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">56</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T18:18:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55466</_id>
+    <_time t="T">2024-07-22T20:04:58Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">A new release 'render QoS graphs' has been published in zerocracy/pages-action by @rultor.</details>
+    <event_id t="I">40361649762</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">1</is_human>
+    <release_id t="I">166567114</release_id>
+    <repository t="I">802720676</repository>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-22T18:12:01Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">55467</_id>
+    <_time t="T">2024-07-22T20:04:59Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">A new tag '0.0.21' has been created in zerocracy/pages-action by @rultor.</details>
+    <event_id t="I">40361616210</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">1</is_human>
+    <repository t="I">802720676</repository>
+    <tag t="S">0.0.21</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-22T18:10:53Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">55468</_id>
+    <_time t="T">2024-07-22T20:05:01Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">5dfbef3707b210e137097eb00ef685db7de96015</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429016033 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40361130054</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429016033</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T17:53:11Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55469</_id>
+    <_time t="T">2024-07-22T20:05:02Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">303bc140c27d59beebe93eeeea5930625a4c728f</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429008089 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40361113460</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429008089</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T17:52:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55470</_id>
+    <_time t="T">2024-07-22T20:05:03Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">a2223a738f92e5ac749dd62f3ebd7feb5af1e5f0</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429000075 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40361096697</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429000075</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T17:51:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55471</_id>
+    <_time t="T">2024-07-22T20:05:04Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">1a2d747804d63b0c4d4f04e4b6e96147395fbe1d</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19428985638 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40361066463</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19428985638</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T17:50:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55542</_id>
+    <_time t="T">2024-07-22T20:05:50Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">143312.14942528735</average_issue_lifetime>
+    <average_pull_lifetime t="F">103213.20359281437</average_pull_lifetime>
+    <average_release_interval t="F">35088.477611940296</average_release_interval>
+    <average_workflow_success_rate t="F">0.985418265541059</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T20:05:50Z</when>
+  </f>
+  <f>
+    <_id t="I">55634</_id>
+    <_time t="T">2024-07-22T20:08:47Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_release_interval t="F">35088.477611940296</average_release_interval>
+    <average_workflow_success_rate t="F">0.985418265541059</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T20:08:47Z</when>
+  </f>
+  <f>
+    <_id t="I">55636</_id>
+    <_time t="T">2024-07-22T20:10:53Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">55460</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#142 with 2 HoC created by @github-actions[bot] was merged by @yegor256 after 11 minutes of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">142</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">713</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-22T18:30:51Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">55638</_id>
+    <_time t="T">2024-07-22T20:11:01Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">55462</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#141 with 2 HoC created by @renovate[bot] was merged by @yegor256 after 7 minutes of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">141</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">437</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-22T18:18:42Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">55642</_id>
+    <_time t="T">2024-07-22T21:04:47Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">135</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#143 has been closed by @yegor256, with 4 HoC and 0 comments.</details>
+    <event_id t="I">40363580032</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">143</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-22T19:24:38Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55643</_id>
+    <_time t="T">2024-07-22T21:04:47Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">135</branch>
+    <details t="S">The pull request zerocracy/judges-action#143 has been opened by @yegor256.</details>
+    <event_id t="I">40363577198</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">143</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T19:24:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55646</_id>
+    <_time t="T">2024-07-22T21:04:52Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">13cc6e831add6edbfba546765a6284be9f7d57d1</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19430338175 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40363850708</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19430338175</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T19:35:29Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55716</_id>
+    <_time t="T">2024-07-22T21:05:37Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">143312.14942528735</average_issue_lifetime>
+    <average_pull_lifetime t="F">103213.20359281437</average_pull_lifetime>
+    <average_release_interval t="F">35088.477611940296</average_release_interval>
+    <average_workflow_success_rate t="F">0.9846821547102375</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T21:05:37Z</when>
+  </f>
+  <f>
+    <_id t="I">55808</_id>
+    <_time t="T">2024-07-22T21:08:31Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">143312.14942528735</average_issue_lifetime>
+    <average_pull_lifetime t="F">103213.20359281437</average_pull_lifetime>
+    <average_release_interval t="F">35088.477611940296</average_release_interval>
+    <average_workflow_success_rate t="F">0.9847133757961783</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T21:08:31Z</when>
+  </f>
+  <f>
+    <_id t="I">55810</_id>
+    <_time t="T">2024-07-22T21:10:43Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">55642</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#143 with 4 HoC created by @yegor256 was merged by @yegor256 after 6 seconds of being in review and 0 comments.</details>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">143</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">6</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-22T19:24:38Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55814</_id>
+    <_time t="T">2024-07-22T22:04:31Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">88f2c97c810d1cbb8428faf9305123fd2cd0d7fc</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19430697489 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40364585366</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19430697489</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T20:04:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55816</_id>
+    <_time t="T">2024-07-22T22:04:34Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue zerocracy/pages-action#57 has been opened by @yegor256.</details>
+    <event_id t="I">40364754683</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">57</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-22T20:11:21Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55817</_id>
+    <_time t="T">2024-07-22T22:04:34Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">10b987c520168a9f2fcb2c73cc76580e47194599</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19430265961 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40363705407</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19430265961</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T19:29:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55819</_id>
+    <_time t="T">2024-07-22T22:04:37Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">09b4cf15286d25c79c599527f8149989a3d66df4</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19430668795 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40364525902</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19430668795</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T20:02:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55820</_id>
+    <_time t="T">2024-07-22T22:04:38Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">56327028179e748ea6fe4abf5a1337c73108c444</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19430489394 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40364157672</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19430489394</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T19:47:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55891</_id>
+    <_time t="T">2024-07-22T22:05:26Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">141693.125</average_issue_lifetime>
+    <average_pull_lifetime t="F">103709.18072289157</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.982111363063744</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T22:05:26Z</when>
+  </f>
+  <f>
+    <_id t="I">55983</_id>
+    <_time t="T">2024-07-22T22:08:36Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">141693.125</average_issue_lifetime>
+    <average_pull_lifetime t="F">103709.18072289157</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.982111363063744</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T22:08:36Z</when>
+  </f>
+  <f>
+    <_id t="I">55985</_id>
+    <_time t="T">2024-07-22T22:10:44Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">5</award>
+    <cause t="I">55810</cause>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#143, the reward amount is 5.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +5 points for this: +20 as a basis; +5 for 4 hits-of-code; -15 for the lack of code review; -5 for 0 comments of reviewers. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running balance is [-365](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <href t="S">https://github.com/zerocracy/judges-action/issues/143/#issuecomment-2243897930</href>
+    <is_human t="I">1</is_human>
+    <issue t="I">143</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2024-07-22T22:10:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Code was contributed in zerocracy/judges-action#143</why>
+  </f>
+  <f>
+    <_id t="I">55986</_id>
+    <_time t="T">2024-07-22T22:10:50Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">-20</award>
+    <cause t="I">55814</cause>
+    <commit t="S">88f2c97c810d1cbb8428faf9305123fd2cd0d7fc</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/judges-action, the penalty amount is -20.</details>
+    <greeting t="S">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-360](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <href t="S">https://github.com/zerocracy/judges-action/commit/88f2c97c810d1cbb8428faf9305123fd2cd0d7fc/#commitcomment-144517890</href>
+    <is_human t="I">1</is_human>
+    <repository t="I">799177290</repository>
+    <what t="S">push-to-master-was-punished</what>
+    <when t="T">2024-07-22T22:10:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Push 88f2c97c8 to default branch 'master' in zerocracy/judges-action</why>
+  </f>
+  <f>
+    <_id t="I">55988</_id>
+    <_time t="T">2024-07-22T23:04:33Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue yegor256/judges#92 has been closed by @yegor256.</details>
+    <event_id t="I">40366450018</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">92</issue>
+    <repository t="I">799113787</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T21:21:42Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55989</_id>
+    <_time t="T">2024-07-22T23:04:33Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">A new release 'more logging information on start' has been published in yegor256/judges by @rultor.</details>
+    <event_id t="I">40366438998</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">1</is_human>
+    <release_id t="I">166594287</release_id>
+    <repository t="I">799113787</repository>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-22T21:21:17Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">55990</_id>
+    <_time t="T">2024-07-22T23:04:34Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">A new tag '0.20.0' has been created in yegor256/judges by @rultor.</details>
+    <event_id t="I">40366422995</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">1</is_human>
+    <repository t="I">799113787</repository>
+    <tag t="S">0.20.0</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-22T21:20:22Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">55991</_id>
+    <_time t="T">2024-07-22T23:04:36Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">a367c05a7d337d3b8eef7c4497e60da78b504989</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19431456259 has arrived to yegor256/judges, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40366137418</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19431456259</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799113787</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T21:08:06Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55992</_id>
+    <_time t="T">2024-07-22T23:04:36Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue yegor256/judges#92 has been opened by @yegor256.</details>
+    <event_id t="I">40366125576</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">92</issue>
+    <repository t="I">799113787</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-22T21:07:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">55993</_id>
+    <_time t="T">2024-07-22T23:04:37Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">b84753b003b24165c0f66c7200a9ee73a2a7da9f</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19431421246 has arrived to yegor256/judges, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40366067387</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19431421246</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799113787</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T21:05:09Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56070</_id>
+    <_time t="T">2024-07-22T23:05:33Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">141693.125</average_issue_lifetime>
+    <average_pull_lifetime t="F">103381.92814371258</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.981859410430839</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T23:05:33Z</when>
+  </f>
+  <f>
+    <_id t="I">56162</_id>
+    <_time t="T">2024-07-22T23:08:27Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">141693.125</average_issue_lifetime>
+    <average_pull_lifetime t="F">103381.92814371258</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.981859410430839</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-22T23:08:27Z</when>
+  </f>
+  <f>
+    <_id t="I">56166</_id>
+    <_time t="T">2024-07-23T00:16:53Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <comments t="I">2</comments>
+    <details t="S">The pull request zerocracy/judges-action#137 has been closed by @rultor, with 2 HoC and 2 comments.</details>
+    <event_id t="I">40368071888</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">137</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-22T22:46:44Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">56168</_id>
+    <_time t="T">2024-07-23T00:16:58Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/pages-action#60 has been opened by @renovate[bot].</details>
+    <event_id t="I">40366604663</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">60</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T21:28:47Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56169</_id>
+    <_time t="T">2024-07-23T00:16:59Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/fbe-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/pages-action#59 has been opened by @renovate[bot].</details>
+    <event_id t="I">40366600937</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">59</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T21:28:36Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56170</_id>
+    <_time t="T">2024-07-23T00:17:00Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">57</branch>
+    <details t="S">The pull request zerocracy/pages-action#58 has been opened by @yegor256.</details>
+    <event_id t="I">40366586122</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">58</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T21:27:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56244</_id>
+    <_time t="T">2024-07-23T00:17:54Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">148107.63095238095</average_issue_lifetime>
+    <average_pull_lifetime t="F">53844.60248447205</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.9815610002525891</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T00:17:54Z</when>
+  </f>
+  <f>
+    <_id t="I">56249</_id>
+    <_time t="T">2024-07-23T00:19:58Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <details t="S">The pull request zerocracy/baza#128 has been opened by @renovate[bot].</details>
+    <event_id t="I">40368607554</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">128</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T23:20:51Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56337</_id>
+    <_time t="T">2024-07-23T00:21:02Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">148107.63095238095</average_issue_lifetime>
+    <average_pull_lifetime t="F">53844.60248447205</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.9815610002525891</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T00:21:02Z</when>
+  </f>
+  <f>
+    <_id t="I">56339</_id>
+    <_time t="T">2024-07-23T00:23:13Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">56166</cause>
+    <comments t="I">2</comments>
+    <details t="S">The pull request zerocracy/judges-action#137 with 2 HoC created by @renovate[bot] was merged by @rultor after 13 hours of being in review and 2 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">137</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">49058</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-22T22:46:44Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56345</_id>
+    <_time t="T">2024-07-23T01:31:00Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <comments t="I">2</comments>
+    <details t="S">The pull request zerocracy/baza#128 has been closed by @rultor, with 2 HoC and 2 comments.</details>
+    <event_id t="I">40369029541</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">128</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-22T23:47:38Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">56418</_id>
+    <_time t="T">2024-07-23T01:31:52Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">148107.63095238095</average_issue_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.9813084112149533</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T01:31:52Z</when>
+  </f>
+  <f>
+    <_id t="I">56510</_id>
+    <_time t="T">2024-07-23T01:35:03Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">148107.63095238095</average_issue_lifetime>
+    <average_pull_lifetime t="F">53844.60248447205</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.9813084112149533</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T01:35:03Z</when>
+  </f>
+  <f>
+    <_id t="I">56512</_id>
+    <_time t="T">2024-07-23T01:37:05Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">56345</cause>
+    <comments t="I">2</comments>
+    <details t="S">The pull request zerocracy/baza#128 with 2 HoC created by @renovate[bot] was merged by @rultor after 26 minutes of being in review and 2 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">128</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">728758275</repository>
+    <seconds t="I">1607</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-22T23:47:38Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56517</_id>
+    <_time t="T">2024-07-23T02:18:12Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">45510adb96218fac381a107737dfc4e6e33c0389</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434143244 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40371306892</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434143244</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T02:14:14Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56518</_id>
+    <_time t="T">2024-07-23T02:18:14Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">57</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/pages-action#58 has been closed by @yegor256, with 101 HoC and 0 comments.</details>
+    <event_id t="I">40371159623</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">101</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">58</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T02:06:00Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56519</_id>
+    <_time t="T">2024-07-23T02:18:17Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/fbe-0.x-lockfile</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/pages-action#59 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40371096013</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">59</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T02:02:06Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56520</_id>
+    <_time t="T">2024-07-23T02:18:18Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">renovate/judges-0.x-lockfile</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/pages-action#60 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40371091958</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">60</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T02:01:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56594</_id>
+    <_time t="T">2024-07-23T02:19:17Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">148107.63095238095</average_issue_lifetime>
+    <average_pull_lifetime t="F">53161.35365853659</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.9780247537256883</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T02:19:17Z</when>
+  </f>
+  <f>
+    <_id t="I">56686</_id>
+    <_time t="T">2024-07-23T02:22:23Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">148107.63095238095</average_issue_lifetime>
+    <average_pull_lifetime t="F">53161.35365853659</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.9780247537256883</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T02:22:23Z</when>
+  </f>
+  <f>
+    <_id t="I">56688</_id>
+    <_time t="T">2024-07-23T02:24:19Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">56518</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/pages-action#58 with 101 HoC created by @yegor256 was merged by @yegor256 after 4 hours of being in review and 0 comments.</details>
+    <hoc t="I">101</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">58</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">802720676</repository>
+    <seconds t="I">16686</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-23T02:06:00Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56690</_id>
+    <_time t="T">2024-07-23T02:24:27Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">56519</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/pages-action#59 with 2 HoC created by @renovate[bot] was merged by @yegor256 after 4 hours of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">59</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">802720676</repository>
+    <seconds t="I">16410</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-23T02:02:06Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56692</_id>
+    <_time t="T">2024-07-23T02:24:35Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">56520</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/pages-action#60 with 2 HoC created by @renovate[bot] was merged by @yegor256 after 4 hours of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">60</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">802720676</repository>
+    <seconds t="I">16383</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-23T02:01:50Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56694</_id>
+    <_time t="T">2024-07-23T03:05:42Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">100</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request yegor256/factbase#103 has been closed by @yegor256, with 22 HoC and 0 comments.</details>
+    <event_id t="I">40371986702</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">22</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">103</issue>
+    <repository t="I">798641472</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T02:57:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56695</_id>
+    <_time t="T">2024-07-23T03:05:43Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <branch t="S">100</branch>
+    <details t="S">The pull request yegor256/factbase#103 has been opened by @yegor256.</details>
+    <event_id t="I">40371936014</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">103</issue>
+    <repository t="I">798641472</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-23T02:54:18Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56696</_id>
+    <_time t="T">2024-07-23T03:05:44Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue yegor256/factbase#102 has been opened by @yegor256.</details>
+    <event_id t="I">40371924105</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">102</issue>
+    <repository t="I">798641472</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T02:53:30Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56698</_id>
+    <_time t="T">2024-07-23T03:05:47Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue zerocracy/judges-action#144 has been opened by @yegor256.</details>
+    <event_id t="I">40372108181</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">144</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T03:05:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56700</_id>
+    <_time t="T">2024-07-23T03:05:51Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">b6fcd5837db4765fc820b2a910c45051d6cff0cd</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434507112 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40372014506</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434507112</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T02:59:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56701</_id>
+    <_time t="T">2024-07-23T03:05:53Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">7cd8e278f9870b10a75fddcb4e64895922ab23c6</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434347161 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40371702086</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434347161</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T02:39:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56702</_id>
+    <_time t="T">2024-07-23T03:05:53Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">a3b900b4841532b9b935df35ee8b733d4210eadc</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434341349 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40371690011</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434341349</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T02:38:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56703</_id>
+    <_time t="T">2024-07-23T03:05:54Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">7446e0ba1e11310eb46cc7b472c183de37841ab8</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434332400 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40371672349</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434332400</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T02:37:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56704</_id>
+    <_time t="T">2024-07-23T03:05:55Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue zerocracy/pages-action#57 has been closed by @yegor256.</details>
+    <event_id t="I">40371666828</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">57</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-23T02:36:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56705</_id>
+    <_time t="T">2024-07-23T03:05:56Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <details t="S">The issue zerocracy/pages-action#61 has been opened by @yegor256.</details>
+    <event_id t="I">40371452737</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">61</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T02:23:35Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56781</_id>
+    <_time t="T">2024-07-23T03:06:58Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">146637.4</average_issue_lifetime>
+    <average_pull_lifetime t="F">52840.38181818182</average_pull_lifetime>
+    <average_release_interval t="F">34739.25</average_release_interval>
+    <average_workflow_success_rate t="F">0.9766917293233083</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T03:06:58Z</when>
+  </f>
+  <f>
+    <_id t="I">56784</_id>
+    <_time t="T">2024-07-23T03:09:05Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <commit t="S">4b52b7339272c0c601d6a42e99c64775a20e5ee1</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434565570 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40372123162</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434565570</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T03:06:35Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56875</_id>
+    <_time t="T">2024-07-23T03:10:20Z</_time>
+    <_version t="S">0.2.0/0.19.0/0.0.33</_version>
+    <average_issue_lifetime t="F">144944.89534883722</average_issue_lifetime>
+    <average_pull_lifetime t="F">52840.38181818182</average_pull_lifetime>
+    <average_release_interval t="F">34539.23188405797</average_release_interval>
+    <average_workflow_success_rate t="F">0.9766917293233083</average_workflow_success_rate>
+    <what t="S">quality-of-service</what>
+    <when t="T">2024-07-23T03:10:20Z</when>
+  </f>
+  <f>
+    <_id t="I">56877</_id>
+    <_time t="T">2024-07-23T03:12:25Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <award t="I">5</award>
+    <cause t="I">56688</cause>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/pages-action#58, the reward amount is 5.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +5 points for this: +20 as a basis; +5 for 101 hits-of-code; -7 for too many hits-of-code (101 &gt;= 100); -15 for the lack of code review; -5 for 0 comments of reviewers; +7 to give you at least something. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running balance is [-380](https://zerocracy.github.io/judges-action/zerocracy.html). </greeting>
+    <href t="S">https://github.com/zerocracy/pages-action/issues/58/#issuecomment-2244167414</href>
+    <is_human t="I">1</is_human>
+    <issue t="I">58</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2024-07-23T03:12:25Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Code was contributed in zerocracy/pages-action#58</why>
+  </f>
+  <f>
+    <_id t="I">56878</_id>
+    <_time t="T">2024-07-23T03:12:30Z</_time>
+    <_version t="S">0.2.0/0.19.0/</_version>
+    <cause t="I">56694</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request yegor256/factbase#103 with 22 HoC created by @yegor256 was merged by @yegor256 after 3 minutes of being in review and 0 comments.</details>
+    <hoc t="I">22</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">103</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">798641472</repository>
+    <seconds t="I">199</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-23T02:57:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56881</_id>
+    <_time t="T">2024-07-23T04:05:19Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">The issue yegor256/factbase#102 has been closed by @yegor256.</details>
+    <event_id t="I">40372197243</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">102</issue>
+    <repository t="I">798641472</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-23T03:11:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56882</_id>
+    <_time t="T">2024-07-23T04:05:19Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">The issue yegor256/factbase#105 has been opened by @yegor256.</details>
+    <event_id t="I">40372196341</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">105</issue>
+    <repository t="I">798641472</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T03:11:29Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56883</_id>
+    <_time t="T">2024-07-23T04:05:20Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">A new release '`(env)` doesn't use default correctly' has been published in yegor256/factbase by @rultor.</details>
+    <event_id t="I">40372173758</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">1</is_human>
+    <release_id t="I">166620145</release_id>
+    <repository t="I">798641472</repository>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-23T03:10:00Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">56884</_id>
+    <_time t="T">2024-07-23T04:05:21Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">The issue yegor256/factbase#104 has been opened by @yegor256.</details>
+    <event_id t="I">40372171021</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">104</issue>
+    <repository t="I">798641472</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T03:09:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56885</_id>
+    <_time t="T">2024-07-23T04:05:21Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">A new tag '0.2.1' has been created in yegor256/factbase by @rultor.</details>
+    <event_id t="I">40372166169</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">1</is_human>
+    <repository t="I">798641472</repository>
+    <tag t="S">0.2.1</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-23T03:09:28Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">56887</_id>
+    <_time t="T">2024-07-23T04:05:23Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <branch t="S">version-up</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#147 has been closed by @github-actions[bot], with 2 HoC and 0 comments.</details>
+    <event_id t="I">40372504126</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">147</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-07-23T03:31:45Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">56888</_id>
+    <_time t="T">2024-07-23T04:05:25Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <branch t="S">version-up</branch>
+    <details t="S">The pull request zerocracy/judges-action#147 has been opened by @github-actions[bot].</details>
+    <event_id t="I">40372502778</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">147</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-23T03:31:40Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">56889</_id>
+    <_time t="T">2024-07-23T04:05:27Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <branch t="S">version-up</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#145 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40372500031</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">145</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T03:31:30Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56890</_id>
+    <_time t="T">2024-07-23T04:05:28Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#146 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40372497548</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">146</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T03:31:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56891</_id>
+    <_time t="T">2024-07-23T04:05:29Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">The issue zerocracy/judges-action#144 has been closed by @yegor256.</details>
+    <event_id t="I">40372467940</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">144</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-23T03:29:31Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56892</_id>
+    <_time t="T">2024-07-23T04:05:30Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">A new release '`pages_url` with `-index` suffix' has been published in zerocracy/judges-action by @rultor.</details>
+    <event_id t="I">40372428655</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">1</is_human>
+    <release_id t="I">166621553</release_id>
+    <repository t="I">799177290</repository>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-23T03:26:55Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">56893</_id>
+    <_time t="T">2024-07-23T04:05:30Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <branch t="S">renovate/zerocracy-judges-action-0.x</branch>
+    <details t="S">The pull request zerocracy/judges-action#146 has been opened by @renovate[bot].</details>
+    <event_id t="I">40372417680</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">146</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-23T03:26:10Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">56894</_id>
+    <_time t="T">2024-07-23T04:05:31Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <branch t="S">version-up</branch>
+    <details t="S">The pull request zerocracy/judges-action#145 has been opened by @github-actions[bot].</details>
+    <event_id t="I">40372413149</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">145</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-23T03:25:52Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">56895</_id>
+    <_time t="T">2024-07-23T04:05:32Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">A new tag '0.0.34' has been created in zerocracy/judges-action by @rultor.</details>
+    <event_id t="I">40372408632</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">1</is_human>
+    <repository t="I">799177290</repository>
+    <tag t="S">0.0.34</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-23T03:25:35Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">56896</_id>
+    <_time t="T">2024-07-23T04:05:34Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">365301b71f7debcabe7c5f2a2f6b50f9a0a9252e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434608413 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40372203031</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434608413</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T03:11:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56898</_id>
+    <_time t="T">2024-07-23T04:05:38Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">1befcbb54907ef923f4a6c15841ac7b37e6145e7</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434806290 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40372573416</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434806290</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T03:36:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56899</_id>
+    <_time t="T">2024-07-23T04:05:41Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">f364c9eecb806e6d724804e44d9b277e382ac895</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434683707 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40372337671</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434683707</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T03:21:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56901</_id>
+    <_time t="T">2024-07-23T04:05:44Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">b7fd05f42399949a15056dda1f5bdfef9e8f10bd</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19434752803 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40372471322</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19434752803</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T03:29:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56949</_id>
+    <_time t="T">2024-07-23T04:06:18Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">The '#bug' label was attached by @yegor256 to the issue yegor256/factbase#104.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">104</issue>
+    <label t="S">bug</label>
+    <repository t="I">798641472</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-23T03:09:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">56955</_id>
+    <_time t="T">2024-07-23T04:06:23Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">The '#bug' label was attached by @yegor256 to the issue yegor256/factbase#105.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">105</issue>
+    <label t="S">bug</label>
+    <repository t="I">798641472</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-23T03:11:28Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57073</_id>
+    <_time t="T">2024-07-23T04:08:03Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <award t="I">5</award>
+    <cause t="I">56878</cause>
+    <details t="S">It's time to reward @yegor256 for the code contributed in yegor256/factbase#103, the reward amount is 5.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +5 points for this: +20 as a basis; +5 for 22 hits-of-code; -15 for the lack of code review; -5 for 0 comments of reviewers. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running balance is [-375](https://zerocracy.github.io/judges-action/zerocracy-index.html). </greeting>
+    <href t="S">https://github.com/yegor256/factbase/issues/103/#issuecomment-2244211883</href>
+    <is_human t="I">1</is_human>
+    <issue t="I">103</issue>
+    <repository t="I">798641472</repository>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2024-07-23T04:08:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Code was contributed in yegor256/factbase#103</why>
+  </f>
+  <f>
+    <_id t="I">57074</_id>
+    <_time t="T">2024-07-23T04:08:07Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <cause t="I">56889</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#145 with 2 HoC created by @github-actions[bot] was merged by @yegor256 after 5 minutes of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">145</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">338</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-23T03:31:30Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">57076</_id>
+    <_time t="T">2024-07-23T04:08:16Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <cause t="I">56890</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#146 with 2 HoC created by @renovate[bot] was merged by @yegor256 after 5 minutes of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">146</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">310</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-23T03:31:20Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">57081</_id>
+    <_time t="T">2024-07-23T05:04:43Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">A new release 'don't overwrite HTML file' has been published in zerocracy/pages-action by @rultor.</details>
+    <event_id t="I">40373812833</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">1</is_human>
+    <release_id t="I">166631293</release_id>
+    <repository t="I">802720676</repository>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-23T04:55:30Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">57082</_id>
+    <_time t="T">2024-07-23T05:04:43Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <details t="S">A new tag '0.0.22' has been created in zerocracy/pages-action by @rultor.</details>
+    <event_id t="I">40373801583</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">1</is_human>
+    <repository t="I">802720676</repository>
+    <tag t="S">0.0.22</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-23T04:54:49Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">57083</_id>
+    <_time t="T">2024-07-23T05:04:45Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">81cd612da9cde38bdf2a1d6ed1a900ed7c80568f</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435333358 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40373573243</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435333358</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T04:40:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57084</_id>
+    <_time t="T">2024-07-23T05:04:47Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">95042369d4ee1979510eb48d73dea96096ab6edf</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435195177 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40373313156</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435195177</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T04:24:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57086</_id>
+    <_time t="T">2024-07-23T05:04:51Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">071ade84d86c86d2fc9092b90d7fb760e764e9ce</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435403489 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40373709424</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435403489</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T04:49:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57087</_id>
+    <_time t="T">2024-07-23T05:04:51Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">78e5338f368ab1d7f2b5e89187fecd4337744b2b</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435358674 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40373622019</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435358674</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T04:43:56Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57088</_id>
+    <_time t="T">2024-07-23T05:04:52Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <commit t="S">5a062852d581cff6ee9d85abf187eaad1df7f868</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435277789 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40373467362</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435277789</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T04:34:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57257</_id>
+    <_time t="T">2024-07-23T05:07:47Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.34</_version>
+    <area t="S">hr</area>
+    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
+    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
+    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 1) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_max comments_min)) (give b5 'for ${comments} comments of reviewers') 'deduct ${comments_k} points for every comment, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
+    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b3 (times comments comments_k)) (set b3 (between b3 comments_min comments_max)) (set b3 (if (eq self 1) 0 b3)) (give b3 'for ${comments} comments') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b4 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b4 'to not go over the cap') (let min_bonus 5) (set b5 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b5 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
+    <days_of_running_balance t="I">28</days_of_running_balance>
+    <days_to_reward t="I">7</days_to_reward>
+    <master_punish_days t="I">4</master_punish_days>
+    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
+    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
+    <what t="S">pmp</what>
+  </f>
+  <f>
+    <_id t="I">57260</_id>
+    <_time t="T">2024-07-23T06:05:51Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">7938d4c1f40bbddda19a8ffd88f9d0d4e04b6115</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19436132240 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40375101265</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19436132240</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T06:03:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57261</_id>
+    <_time t="T">2024-07-23T06:05:54Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <branch t="S">version-up</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#150 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40375090665</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">150</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T06:02:33Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57262</_id>
+    <_time t="T">2024-07-23T06:05:54Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">The issue zerocracy/judges-action#149 has been closed by @yegor256.</details>
+    <event_id t="I">40375088130</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">149</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-23T06:02:26Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57263</_id>
+    <_time t="T">2024-07-23T06:05:55Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">A new release '`vitals_url` instead of `pages_url`' has been published in zerocracy/judges-action by @rultor.</details>
+    <event_id t="I">40375080146</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">1</is_human>
+    <release_id t="I">166636008</release_id>
+    <repository t="I">799177290</repository>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-23T06:02:04Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">57264</_id>
+    <_time t="T">2024-07-23T06:05:56Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <branch t="S">version-up</branch>
+    <details t="S">The pull request zerocracy/judges-action#150 has been opened by @github-actions[bot].</details>
+    <event_id t="I">40375064238</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">150</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-23T06:01:21Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">57265</_id>
+    <_time t="T">2024-07-23T06:05:57Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">A new tag '0.0.35' has been created in zerocracy/judges-action by @rultor.</details>
+    <event_id t="I">40375056575</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">1</is_human>
+    <repository t="I">799177290</repository>
+    <tag t="S">0.0.35</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-23T06:01:01Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">57266</_id>
+    <_time t="T">2024-07-23T06:06:01Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <branch t="S">version-up</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#148 has been closed by @yegor256, with 2 HoC and 0 comments.</details>
+    <event_id t="I">40374795594</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">148</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T05:48:07Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57267</_id>
+    <_time t="T">2024-07-23T06:06:02Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">202d7741141d1c932bdab8241ee9b799094ba629</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435908796 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374660946</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435908796</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:41:11Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57268</_id>
+    <_time t="T">2024-07-23T06:06:03Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">The issue zerocracy/judges-action#149 has been opened by @yegor256.</details>
+    <event_id t="I">40374632471</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">149</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T05:39:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57269</_id>
+    <_time t="T">2024-07-23T06:06:04Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <branch t="S">version-up</branch>
+    <details t="S">The pull request zerocracy/judges-action#148 has been opened by @github-actions[bot].</details>
+    <event_id t="I">40374107869</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">148</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-23T05:12:31Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">57270</_id>
+    <_time t="T">2024-07-23T06:06:05Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">352d1ec0019601aa8d640fa5fcacc76da0fd0f6a</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435608266 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374103303</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435608266</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:12:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57272</_id>
+    <_time t="T">2024-07-23T06:06:10Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">bf34fb92af4e1b1a1ca1a25c22323c8d4e447cdd</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19436010514 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374859344</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19436010514</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:51:17Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57273</_id>
+    <_time t="T">2024-07-23T06:06:11Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">e11db04f21ba59ef23faf3560774655a82957d37</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435998837 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374836541</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435998837</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:50:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57274</_id>
+    <_time t="T">2024-07-23T06:06:12Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">The issue zerocracy/pages-action#62 has been opened by @yegor256.</details>
+    <event_id t="I">40374830971</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">62</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T05:49:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57275</_id>
+    <_time t="T">2024-07-23T06:06:12Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">The issue zerocracy/pages-action#61 has been closed by @yegor256.</details>
+    <event_id t="I">40374083900</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">61</issue>
+    <repository t="I">802720676</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-23T05:11:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57277</_id>
+    <_time t="T">2024-07-23T06:06:16Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">b7558938260a582c7727121bc95867f5ce2a26ab</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435967320 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374774552</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435967320</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:47:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57278</_id>
+    <_time t="T">2024-07-23T06:06:17Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">118871f9ddfd23a504de653d56dae354e54790d0</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435961178 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374762440</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435961178</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:46:26Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57279</_id>
+    <_time t="T">2024-07-23T06:06:18Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">8199363f6dd2113165a899ba2c708038ccd89aac</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435807843 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374462762</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435807843</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:30:48Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57280</_id>
+    <_time t="T">2024-07-23T06:06:19Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">a7c5f82130dfd0ffc95043b125ec40b27304043a</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435796504 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374442564</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435796504</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:29:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57281</_id>
+    <_time t="T">2024-07-23T06:06:20Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">1eb4b9c70c3e4d4b51f61f5268b1383f37bd409a</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435775599 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374403219</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435775599</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:27:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57282</_id>
+    <_time t="T">2024-07-23T06:06:21Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <commit t="S">233dc69696d85e27995edb03447281896b9d8f0d</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19435711183 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40374292916</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19435711183</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-23T05:22:35Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57283</_id>
+    <_time t="T">2024-07-23T06:06:22Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">The issue zerocracy/baza#129 has been opened by @yegor256.</details>
+    <event_id t="I">40374205348</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">129</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-23T05:18:04Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57284</_id>
+    <_time t="T">2024-07-23T06:06:24Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <branch t="S">renovate/factbase-0.x-lockfile</branch>
+    <comments t="I">3</comments>
+    <details t="S">The pull request zerocracy/baza#126 has been closed by @yegor256, with 2 HoC and 3 comments.</details>
+    <event_id t="I">40374190560</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">126</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-23T05:17:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57357</_id>
+    <_time t="T">2024-07-23T06:07:27Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <details t="S">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/baza#129.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">129</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">728758275</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-23T05:18:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">57364</_id>
+    <_time t="T">2024-07-23T06:07:36Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">40366450018</latest>
+    <repository t="I">799113787</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57365</_id>
+    <_time t="T">2024-07-23T06:07:39Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">40373052367</latest>
+    <repository t="I">798641472</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57366</_id>
+    <_time t="T">2024-07-23T06:07:42Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">40375101265</latest>
+    <repository t="I">799177290</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57367</_id>
+    <_time t="T">2024-07-23T06:07:45Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">40374989432</latest>
+    <repository t="I">802720676</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57368</_id>
+    <_time t="T">2024-07-23T06:07:48Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">40374774552</latest>
+    <repository t="I">728758275</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57426</_id>
+    <_time t="T">2024-07-23T06:08:41Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">0</latest>
+    <repository t="I">799177290</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57448</_id>
+    <_time t="T">2024-07-23T06:09:00Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">0</latest>
+    <repository t="I">728758275</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57455</_id>
+    <_time t="T">2024-07-23T06:09:06Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">67</latest>
+    <repository t="I">799113787</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57456</_id>
+    <_time t="T">2024-07-23T06:09:07Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">87</latest>
+    <repository t="I">798641472</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">57457</_id>
+    <_time t="T">2024-07-23T06:09:08Z</_time>
+    <_version t="S">0.2.1/0.20.0/0.0.35</_version>
+    <latest t="I">31</latest>
+    <repository t="I">802720676</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
   </f>
 </fb>
