@@ -79,7 +79,7 @@ fi
 
 # Set URL of the published pages:
 GITHUB_REPO_NAME=${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}
-PAGES_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}.html
+PAGES_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-index.html
 
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
 declare -a options=()

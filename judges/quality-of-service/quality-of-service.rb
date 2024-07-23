@@ -22,13 +22,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'fbe/fb'
 require 'fbe/octo'
+require 'fbe/unmask_repos'
 
-return unless Fbe.fb.query(
+unless Fbe.fb.query(
   "(and
     (eq what '#{$judge}')
     (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '7 days')))"
 ).each.to_a.empty?
+  $loog.debug('QoS statistics have recently been collected, skipping now')
+  return
+end
 
 pmp = Fbe.fb.query('(and (eq what "pmp") (eq area "quality") (exists qos_days))').each.to_a.first
 $DAYS = pmp.nil? ? 28 : pmp.qos_days
