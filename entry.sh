@@ -79,7 +79,7 @@ fi
 
 # Set URL of the published pages:
 GITHUB_REPO_NAME=${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}
-PAGES_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-index.html
+VITALS_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html
 
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
 declare -a options=()
@@ -88,14 +88,14 @@ while IFS= read -r o; do
     if [ "${s}" = "" ]; then continue; fi
     k=$(echo "${s} "| cut -f1 -d '=')
     v=$(echo "${s}" | cut -f2- -d '=')
-    if [[ "${k}" == pages_url ]]; then
-        PAGES_URL=${v}
+    if [[ "${k}" == vitals_url ]]; then
+        VITALS_URL=${v}
         continue
     fi
     options+=("--option=${k}=${v}")
 done <<< "${INPUT_OPTIONS}"
 options+=("--option=judges_action_version=${VERSION}")
-options+=("--option=pages_url=${PAGES_URL}")
+options+=("--option=pages_url=${VITALS_URL}")
 
 echo "The 'judges-action' ${VERSION} is running"
 
@@ -114,7 +114,7 @@ if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" push \
         "--owner=${owner}" \
         "--meta=workflow_url:${owner}" \
-        "--meta=pages_url:${PAGES_URL}" \
+        "--meta=vitals_url:${VITALS_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
         "--meta=judges_action_version:${VERSION}" \
         "--token=${INPUT_TOKEN}" \
