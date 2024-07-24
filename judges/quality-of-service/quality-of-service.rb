@@ -52,7 +52,7 @@ Fbe.unmask_repos.each do |repo|
     success += json[:conclusion] == 'success' ? 1 : 0
   end
 end
-f.average_workflow_success_rate = total.zero? ? 0 : success.to_f / total
+f.average_build_success_rate = total.zero? ? 0 : success.to_f / total
 
 # Release intervals:
 dates = []
