@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 191.939006181
+  seconds: 167.95553115
   version: 0.20.0
   what: judges-summary
-  when: 2024-07-26 07:08:09.027978460 Z
+  when: 2024-07-26 08:08:16.809484470 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -19344,8 +19344,58 @@
   where: github
   who: 526301
   why: Code was reviewed in zerocracy/baza#138
-- _id: 70970
-  _time: 2024-07-26 06:09:24.619198963 Z
+- _id: 70975
+  _time: 2024-07-26 07:05:10.621152121 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The issue zerocracy/baza#142 has been opened by @yegor256.
+  event_id: 40485209680
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 142
+  repository: 728758275
+  what: issue-was-opened
+  when: 2024-07-26 06:58:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 70976
+  _time: 2024-07-26 07:05:11.461307825 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The issue zerocracy/baza#141 has been opened by @yegor256.
+  event_id: 40485196375
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 141
+  repository: 728758275
+  what: issue-was-opened
+  when: 2024-07-26 06:57:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 71096
+  _time: 2024-07-26 07:07:12.115181439 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/baza#141.
+  is_human: 1
+  issue: 141
+  label: enhancement
+  repository: 728758275
+  what: label-was-attached
+  when: 2024-07-26 06:57:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 71102
+  _time: 2024-07-26 07:07:17.518611726 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/baza#142.
+  is_human: 1
+  issue: 142
+  label: enhancement
+  repository: 728758275
+  what: label-was-attached
+  when: 2024-07-26 06:58:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 71159
+  _time: 2024-07-26 07:08:28.620864649 Z
   _version: 0.2.1/0.20.0/0.0.35
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -19380,34 +19430,26 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 70975
-  _time: 2024-07-26 07:05:10.621152121 Z
+- _id: 71164
+  _time: 2024-07-26 08:05:39.422173989 Z
   _version: 0.2.1/0.20.0/0.0.35
-  details: The issue zerocracy/baza#142 has been opened by @yegor256.
-  event_id: 40485209680
-  event_type: IssuesEvent
+  commit: 7215e44302d9607cc4c6c367fab46f84c9157d71
+  default_branch: master
+  details: 'A new Git push #19490974281 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40485641426
+  event_type: PushEvent
   is_human: 1
-  issue: 142
+  push_id: 19490974281
+  ref: refs/heads/master
   repository: 728758275
-  what: issue-was-opened
-  when: 2024-07-26 06:58:15.000000000 Z
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-26 07:15:23.000000000 Z
   where: github
   who: 526301
-- _id: 70976
-  _time: 2024-07-26 07:05:11.461307825 Z
-  _version: 0.2.1/0.20.0/0.0.35
-  details: The issue zerocracy/baza#141 has been opened by @yegor256.
-  event_id: 40485196375
-  event_type: IssuesEvent
-  is_human: 1
-  issue: 141
-  repository: 728758275
-  what: issue-was-opened
-  when: 2024-07-26 06:57:41.000000000 Z
-  where: github
-  who: 526301
-- _id: 71045
-  _time: 2024-07-26 07:06:16.815152623 Z
+- _id: 71233
+  _time: 2024-07-26 08:06:37.824705939 Z
   _version: 0.2.1/0.20.0/0.0.35
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
   is_human: 1
@@ -19418,93 +19460,71 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 71067
-  _time: 2024-07-26 07:06:37.775721685 Z
+- _id: 71255
+  _time: 2024-07-26 08:06:56.802728992 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 40483410687
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 71068
-  _time: 2024-07-26 07:06:40.054061012 Z
+- _id: 71256
+  _time: 2024-07-26 08:06:58.646218854 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 40435124696
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 71069
-  _time: 2024-07-26 07:06:42.483693576 Z
+- _id: 71257
+  _time: 2024-07-26 08:07:00.761847133 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40484110979
+  latest: 40485461932
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 71070
-  _time: 2024-07-26 07:06:44.991240922 Z
+- _id: 71258
+  _time: 2024-07-26 08:07:02.796370869 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 40483633429
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 71071
-  _time: 2024-07-26 07:06:47.661256730 Z
+- _id: 71259
+  _time: 2024-07-26 08:07:04.826446396 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40485209680
+  latest: 40485641426
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 71096
-  _time: 2024-07-26 07:07:12.115181439 Z
-  _version: 0.2.1/0.20.0/0.0.35
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/baza#141.
-  issue: 141
-  label: enhancement
-  repository: 728758275
-  what: label-was-attached
-  when: 2024-07-26 06:57:39.000000000 Z
-  where: github
-  who: 526301
-- _id: 71102
-  _time: 2024-07-26 07:07:17.518611726 Z
-  _version: 0.2.1/0.20.0/0.0.35
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/baza#142.
-  issue: 142
-  label: enhancement
-  repository: 728758275
-  what: label-was-attached
-  when: 2024-07-26 06:58:14.000000000 Z
-  where: github
-  who: 526301
-- _id: 71108
-  _time: 2024-07-26 07:07:22.390760839 Z
+- _id: 71294
+  _time: 2024-07-26 08:07:34.763533995 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 71151
-  _time: 2024-07-26 07:08:02.676911619 Z
+- _id: 71337
+  _time: 2024-07-26 08:08:10.998891335 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 0
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 71156
-  _time: 2024-07-26 07:08:07.223743701 Z
+- _id: 71342
+  _time: 2024-07-26 08:08:15.188976953 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 71157
-  _time: 2024-07-26 07:08:08.116872960 Z
+- _id: 71343
+  _time: 2024-07-26 08:08:15.985063397 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 71158
-  _time: 2024-07-26 07:08:09.001620638 Z
+- _id: 71344
+  _time: 2024-07-26 08:08:16.782305659 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 31
   repository: 802720676
