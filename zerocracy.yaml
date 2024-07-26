@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 197.07490955
+  seconds: 176.69291921
   version: 0.20.0
   what: judges-summary
-  when: 2024-07-26 05:08:48.331823992 Z
+  when: 2024-07-26 06:08:55.153226861 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -19095,8 +19095,75 @@
   where: github
   who: 88084038
   why: Branch name was wrong in zerocracy/baza#138
-- _id: 70588
-  _time: 2024-07-26 04:08:43.803847667 Z
+- _id: 70593
+  _time: 2024-07-26 05:05:48.900929437 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  branch: integration-tests
+  comments: 3
+  details: The pull request zerocracy/baza#138 has been closed by @rultor, with 732
+    HoC and 3 comments.
+  event_id: 40482444501
+  event_type: PullRequestEvent
+  hoc: 732
+  is_human: 1
+  issue: 138
+  repository: 728758275
+  what: pull-was-merged
+  when: 2024-07-26 04:30:20.000000000 Z
+  where: github
+  who: 8086956
+- _id: 70594
+  _time: 2024-07-26 05:05:50.734950252 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  comments: 4
+  details: The pull request zerocracy/baza#138 has been reviewed by @yegor256 with
+    732 HoC and 4 comments.
+  event_id: 40482265969
+  event_type: PullRequestReviewEvent
+  hoc: 732
+  is_human: 1
+  issue: 138
+  repository: 728758275
+  what: pull-was-reviewed
+  when: 2024-07-26 04:18:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 70771
+  _time: 2024-07-26 05:14:25.824893647 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  author: 88084038
+  cause: 70594
+  comments: 4
+  details: The pull request zerocracy/baza#138 with 732 HoC created by @Suban05 was
+    reviewed by @yegor256 after 7 hours and 4 comments.
+  hoc: 732
+  is_human: 1
+  issue: 138
+  repository: 728758275
+  seconds: 28320
+  what: code-was-reviewed
+  when: 2024-07-26 04:18:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 70773
+  _time: 2024-07-26 05:19:46.031930152 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  cause: 70593
+  comments: 3
+  details: The pull request zerocracy/baza#138 with 732 HoC created by @Suban05 was
+    merged by @rultor after 8 hours of being in review and 3 comments.
+  hoc: 732
+  is_human: 1
+  issue: 138
+  merger: 8086956
+  repository: 728758275
+  seconds: 29040
+  what: code-was-contributed
+  when: 2024-07-26 04:30:20.000000000 Z
+  where: github
+  who: 88084038
+- _id: 70774
+  _time: 2024-07-26 05:19:48.902136259 Z
   _version: 0.2.1/0.20.0/0.0.35
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -19131,41 +19198,114 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 70593
-  _time: 2024-07-26 05:05:48.900929437 Z
+- _id: 70775
+  _time: 2024-07-26 06:06:00.754447722 Z
   _version: 0.2.1/0.20.0/0.0.35
-  branch: integration-tests
-  comments: 3
-  details: The pull request zerocracy/baza#138 has been closed by @rultor, with 732
-    HoC and 3 comments.
-  event_id: 40482444501
-  event_type: PullRequestEvent
-  hoc: 732
+  commit: 60791b0e282349675b11fd6947d374bfc788ea9b
+  default_branch: master
+  details: 'A new Git push #19489834087 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40483410687
+  event_type: PushEvent
   is_human: 1
-  issue: 138
-  repository: 728758275
-  what: pull-was-merged
-  when: 2024-07-26 04:30:20.000000000 Z
-  where: github
-  who: 8086956
-- _id: 70594
-  _time: 2024-07-26 05:05:50.734950252 Z
-  _version: 0.2.1/0.20.0/0.0.35
-  comments: 4
-  details: The pull request zerocracy/baza#138 has been reviewed by @yegor256 with
-    732 HoC and 4 comments.
-  event_id: 40482265969
-  event_type: PullRequestReviewEvent
-  hoc: 732
-  is_human: 1
-  issue: 138
-  repository: 728758275
-  what: pull-was-reviewed
-  when: 2024-07-26 04:18:20.000000000 Z
+  push_id: 19489834087
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-26 05:30:44.000000000 Z
   where: github
   who: 526301
-- _id: 70663
-  _time: 2024-07-26 05:06:57.405187483 Z
+- _id: 70778
+  _time: 2024-07-26 06:06:05.922547770 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  commit: b988ac9d3a1d5cfdacb017e78e14ccd87f7e3ca9
+  default_branch: master
+  details: 'A new Git push #19489992617 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40483716193
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19489992617
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-26 05:48:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 70780
+  _time: 2024-07-26 06:06:09.655562064 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  commit: bcbc5f12881e26470cfa5c6e798a381bf2dee011
+  default_branch: master
+  details: 'A new Git push #19489949667 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40483633429
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19489949667
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-26 05:43:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 70781
+  _time: 2024-07-26 06:06:10.466467350 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The issue zerocracy/pages-action#67 has been opened by @yegor256.
+  event_id: 40483564323
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 67
+  repository: 802720676
+  what: issue-was-opened
+  when: 2024-07-26 05:39:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 70783
+  _time: 2024-07-26 06:06:13.215087097 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The issue zerocracy/baza#140 has been opened by @yegor256.
+  event_id: 40483162855
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 140
+  repository: 728758275
+  what: issue-was-opened
+  when: 2024-07-26 05:16:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 70784
+  _time: 2024-07-26 06:06:14.414728120 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The issue zerocracy/baza#47 has been closed by @yegor256.
+  event_id: 40483135000
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 47
+  repository: 728758275
+  what: issue-was-closed
+  when: 2024-07-26 05:15:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 70785
+  _time: 2024-07-26 06:06:15.033311063 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The issue zerocracy/baza#139 has been opened by @yegor256.
+  event_id: 40483114752
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 139
+  repository: 728758275
+  what: issue-was-opened
+  when: 2024-07-26 05:13:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 70854
+  _time: 2024-07-26 06:07:14.123470553 Z
   _version: 0.2.1/0.20.0/0.0.35
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
   is_human: 1
@@ -19176,71 +19316,105 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 70684
-  _time: 2024-07-26 05:07:18.092573675 Z
+- _id: 70863
+  _time: 2024-07-26 06:07:21.624738417 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40450411203
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/pages-action#67.
+  is_human: 1
+  issue: 67
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-26 05:39:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 70877
+  _time: 2024-07-26 06:07:33.858904656 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  latest: 40483410687
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 70685
-  _time: 2024-07-26 05:07:20.922729210 Z
+- _id: 70878
+  _time: 2024-07-26 06:07:35.890296455 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 40435124696
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 70686
-  _time: 2024-07-26 05:07:23.664076763 Z
+- _id: 70879
+  _time: 2024-07-26 06:07:38.000606824 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40482198175
+  latest: 40483716193
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 70687
-  _time: 2024-07-26 05:07:26.656169898 Z
+- _id: 70880
+  _time: 2024-07-26 06:07:40.239786720 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40375787210
+  latest: 40483633429
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 70688
-  _time: 2024-07-26 05:07:29.662476077 Z
+- _id: 70881
+  _time: 2024-07-26 06:07:42.325694914 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40482446048
+  latest: 40483162855
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 70703
-  _time: 2024-07-26 05:07:44.422773904 Z
+- _id: 70896
+  _time: 2024-07-26 06:07:55.563560835 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#139.
+  issue: 139
+  label: bug
+  repository: 728758275
+  what: label-was-attached
+  when: 2024-07-26 05:13:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 70902
+  _time: 2024-07-26 06:08:00.602220498 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#140.
+  issue: 140
+  label: bug
+  repository: 728758275
+  what: label-was-attached
+  when: 2024-07-26 05:17:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 70908
+  _time: 2024-07-26 06:08:05.216343246 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 70762
-  _time: 2024-07-26 05:08:41.819523979 Z
+- _id: 70959
+  _time: 2024-07-26 06:08:49.224525800 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 0
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 70767
-  _time: 2024-07-26 05:08:46.464954176 Z
+- _id: 70964
+  _time: 2024-07-26 06:08:53.478916710 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 70768
-  _time: 2024-07-26 05:08:47.402146229 Z
+- _id: 70965
+  _time: 2024-07-26 06:08:54.322776457 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 70769
-  _time: 2024-07-26 05:08:48.305753064 Z
+- _id: 70966
+  _time: 2024-07-26 06:08:55.126113844 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 31
   repository: 802720676
