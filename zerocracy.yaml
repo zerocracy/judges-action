@@ -1,11 +1,12 @@
 ---
 - added: 8
   cycles: 2
+  error: end of file reached
   removed: 8
-  seconds: 210.237734148
+  seconds: 163.830571808
   version: 0.20.0
   what: judges-summary
-  when: 2024-07-26 13:09:43.207698552 Z
+  when: 2024-07-26 14:07:16.386735903 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -19435,8 +19436,31 @@
   where: github
   who: 526301
   why: Push da2efb937 to default branch 'master' in yegor256/judges
-- _id: 72087
-  _time: 2024-07-26 12:10:04.564663573 Z
+- _id: 72273
+  _time: 2024-07-26 13:10:12.559228510 Z
+  _version: 0.2.1/0.20.0/0.0.35
+  award: -20
+  cause: 55646
+  commit: 13cc6e831add6edbfba546765a6284be9f7d57d1
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/baza, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-320](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/zerocracy/baza/commit/13cc6e831add6edbfba546765a6284be9f7d57d1/#commitcomment-144689115
+  is_human: 1
+  repository: 728758275
+  what: push-to-master-was-punished
+  when: 2024-07-26 13:10:12.568975078 Z
+  where: github
+  who: 526301
+  why: Push 13cc6e831 to default branch 'master' in zerocracy/baza
+- _id: 72274
+  _time: 2024-07-26 13:10:14.413773024 Z
   _version: 0.2.1/0.20.0/0.0.35
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -19471,8 +19495,8 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 72160
-  _time: 2024-07-26 13:07:40.968058585 Z
+- _id: 72347
+  _time: 2024-07-26 14:05:53.182681312 Z
   _version: 0.2.1/0.20.0/0.0.35
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
   is_human: 1
@@ -19483,73 +19507,66 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 72182
-  _time: 2024-07-26 13:08:03.743290658 Z
+- _id: 72369
+  _time: 2024-07-26 14:06:14.416081328 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 40490576920
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 72183
-  _time: 2024-07-26 13:08:06.579601355 Z
+- _id: 72370
+  _time: 2024-07-26 14:06:16.899835231 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 40435124696
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 72184
-  _time: 2024-07-26 13:08:09.556307382 Z
+- _id: 72371
+  _time: 2024-07-26 14:06:19.552754545 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40493844034
+  latest: 40495661712
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 72185
-  _time: 2024-07-26 13:08:12.785606377 Z
+- _id: 72372
+  _time: 2024-07-26 14:06:22.248505247 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 40483633429
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 72186
-  _time: 2024-07-26 13:08:15.933384937 Z
+- _id: 72373
+  _time: 2024-07-26 14:06:24.891436214 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 40493414811
+  latest: 40495674289
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 72221
-  _time: 2024-07-26 13:08:52.507069264 Z
+- _id: 72408
+  _time: 2024-07-26 14:06:58.725572647 Z
   _version: 0.2.1/0.20.0/0.0.35
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 72264
-  _time: 2024-07-26 13:09:36.246098866 Z
+- _id: 72424
+  _time: 2024-07-26 14:07:13.896295433 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 0
-  repository: 799177290
+  latest: 11
+  repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 72269
-  _time: 2024-07-26 13:09:41.205029721 Z
+- _id: 72425
+  _time: 2024-07-26 14:07:15.106575168 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 67
+  latest: 56
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 72270
-  _time: 2024-07-26 13:09:42.218957811 Z
+- _id: 72426
+  _time: 2024-07-26 14:07:16.196989639 Z
   _version: 0.2.1/0.20.0/0.0.35
-  latest: 87
+  latest: 74
   repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 72271
-  _time: 2024-07-26 13:09:43.179966299 Z
-  _version: 0.2.1/0.20.0/0.0.35
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
