@@ -47,8 +47,8 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     exit 1
 fi
 
-name=$(basename "${INPUT_FACTBASE}")
-name=${name%.*}
+name="$(basename "${INPUT_FACTBASE}")"
+name="${name%.*}"
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
     echo "The file name is: \"${INPUT_FACTBASE}\""
@@ -66,7 +66,7 @@ if [ -n "${INPUT_VERBOSE}" ]; then
     gopts+=("--verbose")
 fi
 
-owner=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
 cd "${GITHUB_WORKSPACE}"
 
@@ -78,8 +78,8 @@ if [ -n "${INPUT_TOKEN}" ]; then
 fi
 
 # Set URL of the published pages:
-GITHUB_REPO_NAME=${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}
-VITALS_URL=https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html
+GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
+VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html"
 
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
 declare -a options=()
@@ -89,13 +89,16 @@ while IFS= read -r o; do
     k=$(echo "${s} "| cut -f1 -d '=')
     v=$(echo "${s}" | cut -f2- -d '=')
     if [[ "${k}" == vitals_url ]]; then
-        VITALS_URL=${v}
+        VITALS_URL="${v}"
         continue
+    fi
+    if [[ "${k}" == github_token ]]; then
+        GITHUB_TOKEN="${v}"
     fi
     options+=("--option=${k}=${v}")
 done <<< "${INPUT_OPTIONS}"
 options+=("--option=judges_action_version=${VERSION}")
-options+=("--option=pages_url=${VITALS_URL}")
+options+=("--option=vitals_url=${VITALS_URL}")
 
 echo "The 'judges-action' ${VERSION} is running"
 
@@ -117,6 +120,7 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "--meta=vitals_url:${VITALS_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
         "--meta=judges_action_version:${VERSION}" \
+        "--meta=github_token:${GITHUB_TOKEN}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
