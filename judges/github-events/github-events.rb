@@ -131,7 +131,7 @@ Fbe.iterate do
       skip_event(json)
 
     when 'ReleaseEvent'
-      fact.release_id = json[:payload][:release][:id]
+      fact.release = json[:payload][:release][:id]
       case json[:payload][:action]
       when 'published'
         fact.what = 'release-published'
