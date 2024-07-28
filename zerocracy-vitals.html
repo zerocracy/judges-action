@@ -20,7 +20,7 @@
               src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"> </script>
       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"> </script>
       <script type="text/javascript">$(function(){const ctx=document.getElementById("qos");new Chart(ctx,{type:"line",data:qos_data,options:{responsive:false}})});</script>
-      <style>.policy{counter-reset:par}.policy .columns{column-count:5;font-size:.85em;line-height:1.2}.policy .columns p{display:inline-block}.policy .columns p::before{content:"R" counter(par) ": ";counter-increment:par}.policy .columns strong{color:#b8336a;font-family:monospace;font-weight:bolder}.policy .columns em{color:#1c448e;font-family:serif;font-weight:bolder}@media(max-width: 1280px){.policy .columns{column-count:4}}@media(max-width: 768px){.policy .columns{column-count:3}}section{width:auto}footer{color:#282828;font-size:.8em;line-height:1.2em;text-align:center}article{border:0}header{text-align:center}header img{height:64px;vertical-align:middle}header img:hover{text-decoration:none}header span{background-color:#131515;border-radius:.2em;color:#fff;font-size:2em;font-weight:bolder;margin-left:1em;padding:0em .2em;vertical-align:middle}.ff{font-family:monospace}td.avatar{text-align:center;vertical-align:middle}td.avatar img{height:1.5em;vertical-align:middle;width:1.5em}tr.p_{font-size:90%}</style>
+      <style>tr.sub td{padding:0}.sorter{cursor:pointer}.policy{counter-reset:par}.policy .columns{column-count:5;font-size:.85em;line-height:1.2}.policy .columns p{display:inline-block}.policy .columns p::before{content:"R" counter(par) ": ";counter-increment:par}.policy .columns strong{color:#b8336a;font-family:monospace;font-weight:bolder}.policy .columns em{color:#1c448e;font-family:serif;font-weight:bolder}@media(max-width: 1280px){.policy .columns{column-count:4}}@media(max-width: 768px){.policy .columns{column-count:3}}section{width:auto}footer{color:#282828;font-size:.8em;line-height:1.2em;text-align:center}article{border:0}header{text-align:center}header img{height:64px;vertical-align:middle}header img:hover{text-decoration:none}header span{background-color:#131515;border-radius:.2em;color:#fff;font-size:2em;font-weight:bolder;margin-left:1em;padding:0em .2em;vertical-align:middle}.ff{font-family:monospace}td.avatar{text-align:center;vertical-align:middle}td.avatar img{height:1.5em;vertical-align:middle;width:1.5em}tr.p_{font-size:90%}</style>
    </head>
    <body>
       <section>
@@ -33,22 +33,36 @@
             </p>
          </header>
          <article>
+            <script xmlns:xs="http://www.w3.org/2001/XMLSchema" type="text/javascript">
+      $(function() {
+        $("#awards").tablesorter();
+      });
+    </script>
             <table xmlns:xs="http://www.w3.org/2001/XMLSchema" id="awards" border="1">
-               <colgroup>
+               <colgroup span="4">
                   <col style="width: 2em;"/>
                   <col style="width: 2.5em;"/>
                   <col style="width: 2em;"/>
-                  <col style="width: 40em;"/>
                   <col/>
-                  <col style="width: 15em;"/>
+               </colgroup>
+               <colgroup span="5">
+                  <col style="width: 3em;"/>
+                  <col style="width: 3em;"/>
+                  <col style="width: 3em;"/>
+                  <col style="width: 3em;"/>
+                  <col style="width: 3em;"/>
                </colgroup>
                <thead>
                   <tr>
                      <th class="right">#</th>
                      <th> </th>
-                     <th colspan="2">Programmer / Award Reason</th>
-                     <th class="right">Score</th>
                      <th> </th>
+                     <th>Programmer / Award Reason</th>
+                     <th class="right" title="Week #27 in 2024, starting on Monday 2024-07-01Z">w27</th>
+                     <th class="right" title="Week #28 in 2024, starting on Monday 2024-07-08Z">w28</th>
+                     <th class="right" title="Week #29 in 2024, starting on Monday 2024-07-15Z">w29</th>
+                     <th class="right" title="Week #30 in 2024, starting on Monday 2024-07-22Z">w30</th>
+                     <th class="right sorter">Total</th>
                   </tr>
                </thead>
                <tbody>
@@ -63,11 +77,15 @@
                      <td colspan="2">
                         <span class="ff">
                            <a href="https://github.com/yegor256">@yegor256</a>
-                        </span> (<a href="" onclick="$('.p_yegor256').show(); return false;">58 awards</a>)</td>
+                        </span> (<a href=""
+                           onclick="$('.p_yegor256').show(); $('th.sorter').removeClass('sorter'); return false;">58 awards</a>)</td>
+                     <td class="right">+180</td>
+                     <td class="right">+50</td>
+                     <td class="right">-345</td>
+                     <td class="right">-240</td>
                      <td class="right">-355</td>
-                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -75,9 +93,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -85,9 +106,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -95,9 +119,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -105,9 +132,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -115,9 +145,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -125,9 +158,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -135,9 +171,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -145,9 +184,12 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/97/#issuecomment-2204919234">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -155,497 +197,647 @@
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/47/#issuecomment-2207008478">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was reviewed in zerocracy/judges-action#81</td>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/81/#issuecomment-2218344615">+25</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was reviewed in zerocracy/judges-action#85</td>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/85/#issuecomment-2221238335">+25</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was reviewed in zerocracy/baza#117</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/117/#issuecomment-2228143724">+25</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/d7f0e8abb777bb1fe6603348de6a2aa2b8d27f9b/#commitcomment-144365801">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/cff3edd6aa9d7ea6d82619e1e81399f8752c0ca6/#commitcomment-144365804">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/3f6259882bee21309463f9aa25c3b5f6947aed85/#commitcomment-144367250">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/6699fedd68b25edba0453e14686eafcbf3bc6dea/#commitcomment-144373451">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/judges-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/commit/423c0c9cb3504dbf13c517f09e87200a134f4fbb/#commitcomment-144377320">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/judges-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/commit/5c885cc45fb739952864b464c0bb8d2e99c86aa8/#commitcomment-144379586">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/judges-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/commit/826ca24af27ccd8cc1dc6b358ce0337e942d68c2/#commitcomment-144379591">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/6a6cdbb2bc9857f84ffe18cc268a2448a1770623/#commitcomment-144391095">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/a34ea1c71527c5f53a40e8a4214eb98d1a281e66/#commitcomment-144394027">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/8d0d32e5138bb1398e3d120ee7dff15870cf3243/#commitcomment-144396980">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/pages-action#52</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/issues/52/#issuecomment-2237472894">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/54ba179b6ffae9a214ffed6a9692a52293a8025c/#commitcomment-144409119">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/judges-action#129</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/129/#issuecomment-2238604657">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/134fe3ece622cf4916998b5e32010db4c257de7c/#commitcomment-144419703">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/08d3181af0da08b59920bc4ba9a224f028c1adad/#commitcomment-144419710">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/d61b59e75bc7396b7ffb37595feea05f4b0b5212/#commitcomment-144452760">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 8c2a76849 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/8c2a7684933136b3a637db236d67cea43e3132b9/#commitcomment-144453290">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 4bde8f0fb to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/4bde8f0fb887c4d29beb791f4d6e0b41280ae06a/#commitcomment-144453293">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 60bba7421 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/60bba7421f953931b53850efb82e4f0ad3d6fadb/#commitcomment-144453851">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 72c712ebb to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/72c712ebb0e5c3b8ee6b8a8ec230f417a4f3b337/#commitcomment-144454945">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 187e1bf89 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/187e1bf89c97d636b7f62efbe5ff555d0ac4f5a0/#commitcomment-144454946">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push bea686463 to default branch 'master' in yegor256/judges</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/yegor256/judges/commit/bea6864638c66034c2b7b696bf35f589ee634ef8/#commitcomment-144487092">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push c99fbc249 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/c99fbc249a690e9dfcc4dc58242ae6cdfa6847d7/#commitcomment-144489145">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 642cca135 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/642cca135215e465a96daf07cbba3eacce4848c8/#commitcomment-144489149">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 9dff2f617 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/9dff2f6171bb1ba5b71171ed9b97110cc86d4827/#commitcomment-144491459">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in yegor256/factbase#101</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/yegor256/factbase/issues/101/#issuecomment-2242692735">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 816af5163 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/816af5163f6b970b5e86b7b948c8f22fd7cf9b40/#commitcomment-144491464">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push dd0d539df to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/dd0d539dfc6d6ee1a552afa4b121dc30d944b13d/#commitcomment-144491471">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push b17ac6219 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/b17ac6219273e0c645d92441e97cde6a3f70b5f5/#commitcomment-144493663">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 7dfec4a80 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/7dfec4a80ae6d9c16c55deb06464fba4122b7586/#commitcomment-144493668">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 55b300096 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/55b3000966efe0be0a2f3d2be8bea775d71b42e5/#commitcomment-144493675">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push c9a3be23f to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/c9a3be23f7fb8e9fb944988667f057dcf2b7bd5e/#commitcomment-144496055">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 40dbcf985 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/40dbcf9851d9adf284d44758c9ab241ce14856d3/#commitcomment-144496058">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 58471bdb3 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/58471bdb3b1bc3aa8600420a262540cc58525ecb/#commitcomment-144496061">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/judges-action#138</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/138/#issuecomment-2243434770">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 521ebab54 to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/521ebab54ccbbe0f29988682a4bdd99b757ef22a/#commitcomment-144512997">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/judges-action#143</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/143/#issuecomment-2243897930">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 88f2c97c8 to default branch 'master' in zerocracy/judges-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/commit/88f2c97c810d1cbb8428faf9305123fd2cd0d7fc/#commitcomment-144517890">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/pages-action#58</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/issues/58/#issuecomment-2244167414">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in yegor256/factbase#103</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/yegor256/factbase/issues/103/#issuecomment-2244211883">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was reviewed in zerocracy/baza#138</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/138/#issuecomment-2252042515">+70</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push da2efb937 to default branch 'master' in yegor256/judges</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/yegor256/judges/commit/da2efb937197f6ba9d23323d1615db9e1f2efc36/#commitcomment-144683887">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 13cc6e831 to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/13cc6e831add6edbfba546765a6284be9f7d57d1/#commitcomment-144689115">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 6add7d09f to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/6add7d09f5efb8ae4c9be07e1efcbac48078b65e/#commitcomment-144705578">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push 4b52b7339 to default branch 'master' in zerocracy/judges-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/commit/4b52b7339272c0c601d6a42e99c64775a20e5ee1/#commitcomment-144709626">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_yegor256" style="display: none;">
+                  <tr class="sub p_ p_yegor256" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was reviewed in zerocracy/baza#143</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/143/#issuecomment-2254386748">+25</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
                   <tr>
                      <td class="ff right">#2</td>
@@ -658,59 +850,78 @@
                      <td colspan="2">
                         <span class="ff">
                            <a href="https://github.com/Suban05">@Suban05</a>
-                        </span> (<a href="" onclick="$('.p_Suban05').show(); return false;">5 awards</a>)</td>
+                        </span> (<a href=""
+                           onclick="$('.p_Suban05').show(); $('th.sorter').removeClass('sorter'); return false;">5 awards</a>)</td>
+                     <td class="right">0</td>
+                     <td class="right">+20</td>
+                     <td class="right">+20</td>
+                     <td class="right">+10</td>
                      <td class="right">+50</td>
-                     <td> </td>
                   </tr>
-                  <tr class="p_ p_Suban05" style="display: none;">
+                  <tr class="sub p_ p_Suban05" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/baza#105</td>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/105/#issuecomment-2222648875">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_Suban05" style="display: none;">
+                  <tr class="sub p_ p_Suban05" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/baza#117</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/117/#issuecomment-2228143674">+20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_Suban05" style="display: none;">
+                  <tr class="sub p_ p_Suban05" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Bug zerocracy/baza#136 was accepted</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/136/#issuecomment-2250416534">+15</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_Suban05" style="display: none;">
+                  <tr class="sub p_ p_Suban05" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Branch name was wrong in zerocracy/baza#138</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/138/#issuecomment-2251484492">-10</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_Suban05" style="display: none;">
+                  <tr class="sub p_ p_Suban05" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/baza#138</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/138/#issuecomment-2252042481">+5</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
                   <tr>
                      <td class="ff right">#3</td>
@@ -723,11 +934,15 @@
                      <td colspan="2">
                         <span class="ff">
                            <a href="https://github.com/davvd">@davvd</a>
-                        </span> (<a href="" onclick="$('.p_davvd').show(); return false;">1 award</a>)</td>
+                        </span> (<a href=""
+                           onclick="$('.p_davvd').show(); $('th.sorter').removeClass('sorter'); return false;">1 award</a>)</td>
                      <td class="right">+15</td>
-                     <td> </td>
+                     <td class="right">0</td>
+                     <td class="right">0</td>
+                     <td class="right">0</td>
+                     <td class="right">+15</td>
                   </tr>
-                  <tr class="p_ p_davvd" style="display: none;">
+                  <tr class="sub p_ p_davvd" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
@@ -735,7 +950,10 @@
                      <td class="ff right">
                         <a href="https://github.com/yegor256/judges/issues/63/#issuecomment-2203006231">+15</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
                   <tr>
                      <td class="ff right">#4</td>
@@ -748,39 +966,52 @@
                      <td colspan="2">
                         <span class="ff">
                            <a href="https://github.com/tank-bohr">@tank-bohr</a>
-                        </span> (<a href="" onclick="$('.p_tank-bohr').show(); return false;">3 awards</a>)</td>
+                        </span> (<a href=""
+                           onclick="$('.p_tank-bohr').show(); $('th.sorter').removeClass('sorter'); return false;">3 awards</a>)</td>
+                     <td class="right">0</td>
+                     <td class="right">0</td>
+                     <td class="right">0</td>
                      <td class="right">+44</td>
-                     <td> </td>
+                     <td class="right">+44</td>
                   </tr>
-                  <tr class="p_ p_tank-bohr" style="display: none;">
+                  <tr class="sub p_ p_tank-bohr" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Bug yegor256/factbase#106 was accepted</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/yegor256/factbase/issues/106/#issuecomment-2248625386">+15</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_tank-bohr" style="display: none;">
+                  <tr class="sub p_ p_tank-bohr" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Bug zerocracy/baza#135 was accepted</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/135/#issuecomment-2250065982">+15</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_tank-bohr" style="display: none;">
+                  <tr class="sub p_ p_tank-bohr" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Code was contributed in zerocracy/baza#143</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/issues/143/#issuecomment-2254405909">+14</a>
                      </td>
-                     <td>earlier</td>
+                     <td> </td>
                   </tr>
                   <tr>
                      <td class="ff right">#5</td>
@@ -793,19 +1024,26 @@
                      <td colspan="2">
                         <span class="ff">
                            <a href="https://github.com/github-actions[bot]">@github-actions[bot]</a>
-                        </span> (<a href="" onclick="$('.p_github-actions[bot]').show(); return false;">1 award</a>)</td>
+                        </span> (<a href=""
+                           onclick="$('.p_github-actions[bot]').show(); $('th.sorter').removeClass('sorter'); return false;">1 award</a>)</td>
+                     <td class="right">0</td>
+                     <td class="right">0</td>
                      <td class="right">-10</td>
-                     <td> </td>
+                     <td class="right">0</td>
+                     <td class="right">-10</td>
                   </tr>
-                  <tr class="p_ p_github-actions[bot]" style="display: none;">
+                  <tr class="sub p_ p_github-actions[bot]" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Branch name was wrong in zerocracy/judges-action#100</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/100/#issuecomment-2228596999">-10</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
                   <tr>
                      <td class="ff right">#6</td>
@@ -818,19 +1056,26 @@
                      <td colspan="2">
                         <span class="ff">
                            <a href="https://github.com/renovate[bot]">@renovate[bot]</a>
-                        </span> (<a href="" onclick="$('.p_renovate[bot]').show(); return false;">1 award</a>)</td>
+                        </span> (<a href=""
+                           onclick="$('.p_renovate[bot]').show(); $('th.sorter').removeClass('sorter'); return false;">1 award</a>)</td>
+                     <td class="right">0</td>
+                     <td class="right">0</td>
                      <td class="right">-10</td>
-                     <td> </td>
+                     <td class="right">0</td>
+                     <td class="right">-10</td>
                   </tr>
-                  <tr class="p_ p_renovate[bot]" style="display: none;">
+                  <tr class="sub p_ p_renovate[bot]" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Branch name was wrong in zerocracy/judges-action#101</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/issues/101/#issuecomment-2228734924">-10</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
                   <tr>
                      <td class="ff right">#7</td>
@@ -843,51 +1088,80 @@
                      <td colspan="2">
                         <span class="ff">
                            <a href="https://github.com/rultor">@rultor</a>
-                        </span> (<a href="" onclick="$('.p_rultor').show(); return false;">4 awards</a>)</td>
+                        </span> (<a href=""
+                           onclick="$('.p_rultor').show(); $('th.sorter').removeClass('sorter'); return false;">4 awards</a>)</td>
+                     <td class="right">0</td>
+                     <td class="right">0</td>
                      <td class="right">-80</td>
-                     <td> </td>
+                     <td class="right">0</td>
+                     <td class="right">-80</td>
                   </tr>
-                  <tr class="p_ p_rultor" style="display: none;">
+                  <tr class="sub p_ p_rultor" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/6998efeb6ca724152ed99c2c0d111689686723f9/#commitcomment-144377322">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_rultor" style="display: none;">
+                  <tr class="sub p_ p_rultor" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/pages-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/pages-action/commit/efde0f393bef8be30a90a5eb74a22c8002eb3b6d/#commitcomment-144382093">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_rultor" style="display: none;">
+                  <tr class="sub p_ p_rultor" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/judges-action</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/judges-action/commit/c580146c8ab25a0e2af3cacd92b1a1a5add267e4/#commitcomment-144388358">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
-                  <tr class="p_ p_rultor" style="display: none;">
+                  <tr class="sub p_ p_rultor" style="display: none;">
                      <td> </td>
                      <td> </td>
                      <td> </td>
                      <td>Push to default branch 'master' in zerocracy/baza</td>
+                     <td class="ff right"/>
+                     <td class="ff right"/>
                      <td class="ff right">
                         <a href="https://github.com/zerocracy/baza/commit/2d7f40aa313efd200b21a9c37678706cf445f5aa/#commitcomment-144404077">-20</a>
                      </td>
-                     <td>earlier</td>
+                     <td class="ff right"/>
+                     <td> </td>
                   </tr>
                </tbody>
+               <tfoot>
+                  <tr>
+                     <td> </td>
+                     <td> </td>
+                     <td> </td>
+                     <td> </td>
+                     <td class="right">+195</td>
+                     <td class="right">+70</td>
+                     <td class="right">-425</td>
+                     <td class="right">-186</td>
+                     <td class="right">-346</td>
+                  </tr>
+               </tfoot>
             </table>
             <div class="policy">
                <h2>Rules of the Game</h2>
@@ -905,17 +1179,17 @@
 <p>If a branch has a name that doesn&#39;t obey the convention, a penalty is given to the author. Here is how it&#39;s calculated: Just deduct <strong>-10</strong> points.</p>
 </div></div>
             </div>
-            <div class="qos">
+            <div xmlns:xs="http://www.w3.org/2001/XMLSchema" class="qos">
                <h2>Quality of Service</h2>
                <div style="width: 800px;">
                   <canvas id="qos" style="width: 100%"> </canvas>
                </div>
             </div>
-            <script type="text/javascript">const qos_data = { labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],datasets: [{ label: 'average_issue_lifetime', data: [0.0, 0.0, , 0.0, -0.010617484365174316, -0.010617484365174316, -0.010617484365174316, , -0.010617484365174316, -0.010617484365174316, -0.021794725549461418, -0.021794725549461418, -0.021794725549461418, -0.021794725549461418, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.012339011590812191, 0.0006544857763134715, 0.5022102793290135] }, { label: 'average_pull_lifetime', data: [0.0, 0.0, , 0.0, -0.011982273712154531, -0.011982273712154531, -0.017898205656170743, , -0.017898205656170743, -0.017898205656170743, -0.013178847934033051, -0.013178847934033051, -0.01629274551716856, -0.01629274551716856, -0.4876539156332152, -0.4876539156332152, , -0.4876539156332152, -0.4941552146393169, -0.4941552146393169, -0.4972093492788138, -0.4972093492788138, -0.5669462800564217] }, { label: 'average_release_interval', data: [0.0, 0.0, , 0.0, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.02577073950150386, 0.019139223390567603] }, { label: 'average_workflow_success_rate', data: [0.0, 0.0, , 0.00013164823591363408, -8.506501397497049e-05, -8.506501397497049e-05, -0.0005710482190207375, -0.0005710482190207375, -0.0013176250806123029, -0.0012859600929755696, -0.003924968267103271, -0.003924968267103271, -0.004180503164931097, -0.004180503164931097, -0.004483156141923929, -0.004483156141923929, -0.004739336492891052, -0.004739336492891052, -0.008069681055463093, -0.008069681055463093, -0.00942165841143147, -0.00942165841143147, ] }] };</script>
+            <script xmlns:xs="http://www.w3.org/2001/XMLSchema" type="text/javascript">const qos_data = { labels: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],datasets: [{ label: 'average_issue_lifetime', data: [0.0, 0.0, , 0.0, -0.010617484365174316, -0.010617484365174316, -0.010617484365174316, , -0.010617484365174316, -0.010617484365174316, -0.021794725549461418, -0.021794725549461418, -0.021794725549461418, -0.021794725549461418, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.02248902890660988, 0.012339011590812191, 0.0006544857763134715, 0.5022102793290135] }, { label: 'average_pull_lifetime', data: [0.0, 0.0, , 0.0, -0.011982273712154531, -0.011982273712154531, -0.017898205656170743, , -0.017898205656170743, -0.017898205656170743, -0.013178847934033051, -0.013178847934033051, -0.01629274551716856, -0.01629274551716856, -0.4876539156332152, -0.4876539156332152, , -0.4876539156332152, -0.4941552146393169, -0.4941552146393169, -0.4972093492788138, -0.4972093492788138, -0.5669462800564217] }, { label: 'average_release_interval', data: [0.0, 0.0, , 0.0, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.01027846506115255, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.020128937685104757, -0.02577073950150386, 0.019139223390567603] }, { label: 'average_workflow_success_rate', data: [0.0, 0.0, , 0.00013164823591363408, -8.506501397497049e-05, -8.506501397497049e-05, -0.0005710482190207375, -0.0005710482190207375, -0.0013176250806123029, -0.0012859600929755696, -0.003924968267103271, -0.003924968267103271, -0.004180503164931097, -0.004180503164931097, -0.004483156141923929, -0.004483156141923929, -0.004739336492891052, -0.004739336492891052, -0.008069681055463093, -0.008069681055463093, -0.00942165841143147, -0.00942165841143147, ] }] };</script>
          </article>
          <footer>
-            <p>The page was generated by the <a href="https://github.com/zerocracy/pages-action">pages-action</a> plugin (0.0.23) on 2024-07-28T13:08:39.815Z.<br/>
-               <a href="https://github.com/yegor256/factbase">Factbase</a>: 1419 facts, 549324 bytes, version 0.2.1; <a href="https://github.com/zerocracy/fbe">Fbe</a>: 0.0.27.<br/>The XML with all the data <a href="zerocracy.xml">is here</a> (it's big).</p>
+            <p>The value of "today" is 2024-07-28T14:07:52Z.<br/>The page was generated by the <a href="https://github.com/zerocracy/pages-action">pages-action</a> plugin (0.0.24) on 2024-07-28T14:07:53.977Z.<br/>
+               <a href="https://github.com/yegor256/factbase">Factbase</a>: 1431 facts, 553375 bytes, version 0.2.1; <a href="https://github.com/zerocracy/fbe">Fbe</a>: 0.0.28.<br/>The XML with all the data <a href="zerocracy.xml">is here</a>, HTML <a href="zerocracy.html">is here</a>.</p>
             <p>Made by <a href="https://www.zerocracy.com">Zerocracy</a>.</p>
          </footer>
       </section>
