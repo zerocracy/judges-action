@@ -132,6 +132,7 @@ Fbe.iterate do
 
     when 'ReleaseEvent'
       fact.release = json[:payload][:release][:id]
+      fact.tag = json[:payload][:release][:tag_name]
       case json[:payload][:action]
       when 'published'
         fact.what = 'release-published'
