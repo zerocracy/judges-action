@@ -95,3 +95,12 @@ Fbe.unmask_repos.each do |repo|
 end
 f.average_stars = stars.empty? ? 0 : stars.inject(&:+) / stars.size
 f.average_forks = forks.empty? ? 0 : forks.inject(&:+) / forks.size
+
+# Average issues
+issues = []
+Fbe.unmask_repos.each do |repo|
+  Fbe.octo.repository(repo).then do |json|
+    issues << json[:open_issues]
+  end
+end
+f.average_backlog_size = issues.empty? ? 0 : issues.inject(&:+) / issues.size
