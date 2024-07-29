@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 21.530902308
+  seconds: 181.406557378
   version: 0.20.0
   what: judges-summary
-  when: 2024-07-29 02:22:58.993431243 Z
+  when: 2024-07-29 04:08:35.802305875 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -21749,8 +21749,29 @@
   when: 2024-07-29 02:04:25.000000000 Z
   where: github
   who: 526301
-- _id: 78951
-  _time: 2024-07-29 02:22:49.498991335 Z
+- _id: 79021
+  _time: 2024-07-29 03:06:32.978744381 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  award: 5
+  cause: 78950
+  details: It's time to reward @yegor256 for the code contributed in yegor256/judges#97,
+    the reward amount is 5.
+  greeting: 'Thanks for the contribution! You''ve earned +5 points for this: +20 as
+    a basis; +5 for the 146 hits-of-code that you wrote; -7 for too many hits-of-code
+    (146 >= 100); -15 for the lack of code review; -5 for the 0 comments that were
+    made by the reviewer(s); +7 to give you at least something. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running balance is [-336](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/yegor256/judges/issues/97/#issuecomment-2254855409
+  is_human: 1
+  issue: 97
+  repository: 799113787
+  what: code-contribution-was-rewarded
+  when: 2024-07-29 03:06:32.992145742 Z
+  where: github
+  who: 526301
+  why: Contributed code in yegor256/judges#97
+- _id: 79022
+  _time: 2024-07-29 03:06:41.902742749 Z
   _version: 0.2.1/0.20.0/0.0.36
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -21789,73 +21810,188 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for #{days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 78952
-  _time: 2024-07-29 03:05:06.792909372 Z
+- _id: 79023
+  _time: 2024-07-29 04:05:36.484383188 Z
   _version: 0.2.1/0.20.0/0.0.36
-  latest: 40533995212
+  commit: e49b9ba79a945fed74d9db860083876840aec617
+  default_branch: master
+  details: 'A new Git push #19519691412 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40535212937
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19519691412
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-29 03:47:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 79026
+  _time: 2024-07-29 04:05:42.163755180 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  commit: a1059b0783a9ee919a48af29b141d27f9b14159e
+  default_branch: master
+  details: 'A new Git push #19519692539 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40535215055
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19519692539
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-29 03:47:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 79028
+  _time: 2024-07-29 04:05:45.875213192 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  commit: 9d1d1268220804666684ed2c06005e4748653b7c
+  default_branch: master
+  details: 'A new Git push #19519556626 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40534961798
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19519556626
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-29 03:29:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 79029
+  _time: 2024-07-29 04:05:46.832031709 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  branch: renovate/judges-0.x-lockfile
+  details: The pull request zerocracy/pages-action#75 has been opened by @renovate[bot].
+  event_id: 40534702238
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 75
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-07-29 03:11:07.000000000 Z
+  where: github
+  who: 29139614
+- _id: 79031
+  _time: 2024-07-29 04:05:50.414585834 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  commit: 7b86f3db0eadd28672246cd403989ddcf939df0a
+  default_branch: master
+  details: 'A new Git push #19519692832 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40535215617
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19519692832
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-29 03:47:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 79133
+  _time: 2024-07-29 04:07:28.207134986 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  latest: 40535212937
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 78953
-  _time: 2024-07-29 03:05:08.657037972 Z
+- _id: 79134
+  _time: 2024-07-29 04:07:30.139999047 Z
   _version: 0.2.1/0.20.0/0.0.36
   latest: 40435124696
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 78954
-  _time: 2024-07-29 03:05:11.437730055 Z
+- _id: 79135
+  _time: 2024-07-29 04:07:32.291225903 Z
   _version: 0.2.1/0.20.0/0.0.36
-  latest: 40534051867
+  commit: e95a6b3ecd489f7bb6581f8addca309d35dbac14
+  default_branch: master
+  details: 'A new Git push #19519828917 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40535477483
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19519828917
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-29 04:06:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 79136
+  _time: 2024-07-29 04:07:33.362884679 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  latest: 40535477483
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 78955
-  _time: 2024-07-29 03:05:13.625398097 Z
+- _id: 79137
+  _time: 2024-07-29 04:07:35.240947297 Z
   _version: 0.2.1/0.20.0/0.0.36
-  latest: 40528939217
+  latest: 40534961798
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 78956
-  _time: 2024-07-29 03:05:15.787103685 Z
+- _id: 79138
+  _time: 2024-07-29 04:07:37.451330951 Z
   _version: 0.2.1/0.20.0/0.0.36
-  latest: 40533975456
+  latest: 40535215617
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 78965
-  _time: 2024-07-29 03:05:24.122452747 Z
+- _id: 79141
+  _time: 2024-07-29 04:07:40.065910254 Z
   _version: 0.2.1/0.20.0/0.0.36
   latest: 0
-  repository: 802720676
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 78990
-  _time: 2024-07-29 03:05:46.957930405 Z
+- _id: 79171
+  _time: 2024-07-29 04:08:07.983122099 Z
   _version: 0.2.1/0.20.0/0.0.36
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 79004
-  _time: 2024-07-29 03:05:59.960365801 Z
+- _id: 79185
+  _time: 2024-07-29 04:08:21.368593387 Z
   _version: 0.2.1/0.20.0/0.0.36
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 79018
-  _time: 2024-07-29 03:06:13.076841505 Z
+- _id: 79188
+  _time: 2024-07-29 04:08:24.061333661 Z
+  _version: 0.2.1/0.20.0/0.0.36
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 79200
+  _time: 2024-07-29 04:08:34.870662290 Z
   _version: 0.2.1/0.20.0/0.0.36
   latest: 0
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 79019
-  _time: 2024-07-29 03:06:13.993112440 Z
+- _id: 79201
+  _time: 2024-07-29 04:08:35.765158395 Z
   _version: 0.2.1/0.20.0/0.0.36
-  latest: 91
-  repository: 799177290
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
