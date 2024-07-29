@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.2.1" size="597536">
+<fb version="0.2.1" size="601309">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <removed t="I">8</removed>
-    <seconds t="F">234.235804195</seconds>
+    <seconds t="F">215.381786423</seconds>
     <version t="S">0.21.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-07-29T20:08:46Z</when>
+    <when t="T">2024-07-29T21:08:56Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -25508,33 +25508,6 @@
     <what t="S">pmp</what>
   </f>
   <f>
-    <_id t="I">81519</_id>
-    <_time t="T">2024-07-29T19:06:33Z</_time>
-    <_version t="S">0.2.1/0.21.0/</_version>
-    <area t="S">hr</area>
-    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
-    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
-    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_min comments_max)) (give b5 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let fee5 10) (let comments_needed 5) (set b6 (if (lt comments comments_needed) (times -1 fee5) 0)) (give b6 'for too few (${comments}) comments') 'deduct ${fee5} points if there were less than ${comments_needed} comments made during review') (aka (let max_bonus 100) (set b7 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b7 'to not go over the cap') (let min_bonus 5) (set b8 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b8 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
-    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee1 10) (let comments_needed 6) (set b3 (if (lt comments comments_needed) (times -1 fee1) 0)) (give b3 'for too few (${comments}) comments') 'deduct ${fee1} points if there were less than ${comments_needed} comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b4 (times comments comments_k)) (set b4 (between b4 comments_min comments_max)) (set b4 (if (eq self 1) 0 b4)) (give b4 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b5 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b5 'to not go over the cap') (let min_bonus 5) (set b6 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b6 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
-    <days_of_running_balance t="I">28</days_of_running_balance>
-    <days_to_reward t="I">7</days_to_reward>
-    <dud_was_punished t="S">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</dud_was_punished>
-    <enhancement_suggestion_was_rewarded t="S">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</enhancement_suggestion_was_rewarded>
-    <master_punish_days t="I">4</master_punish_days>
-    <published_release_was_rewarded t="S">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points'))</published_release_was_rewarded>
-    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
-    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
-    <what t="S">pmp</what>
-  </f>
-  <f>
     <_id t="I">81522</_id>
     <_time t="T">2024-07-29T20:05:00Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.38</_version>
@@ -25865,11 +25838,262 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">81612</_id>
-    <_time t="T">2024-07-29T20:07:03Z</_time>
+    <_id t="I">81692</_id>
+    <_time t="T">2024-07-29T20:09:07Z</_time>
+    <_version t="S">0.2.1/0.21.0/</_version>
+    <cause t="I">81525</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#185 with 2 HoC created by @github-actions[bot] was merged by @yegor256 after 5 minutes of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">185</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">349</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-29T19:06:18Z</when>
+    <where t="S">github</where>
+    <who t="I">41898282</who>
+  </f>
+  <f>
+    <_id t="I">81693</_id>
+    <_time t="T">2024-07-29T20:09:10Z</_time>
+    <_version t="S">0.2.1/0.21.0/</_version>
+    <author t="I">2566462</author>
+    <cause t="I">81531</cause>
+    <comments t="I">3</comments>
+    <details t="S">The pull request zerocracy/judges-action#183 with 10 HoC created by @Yegorov was reviewed by @yegor256 after 12 minutes and 3 comments.</details>
+    <hoc t="I">10</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">183</issue>
+    <repository t="I">799177290</repository>
+    <seconds t="I">766</seconds>
+    <what t="S">code-was-reviewed</what>
+    <when t="T">2024-07-29T18:49:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">81695</_id>
+    <_time t="T">2024-07-29T20:09:27Z</_time>
+    <_version t="S">0.2.1/0.21.0/</_version>
+    <cause t="I">81526</cause>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/judges-action#186 with 2 HoC created by @renovate[bot] was merged by @yegor256 after 5 minutes of being in review and 0 comments.</details>
+    <hoc t="I">2</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">186</issue>
+    <merger t="I">526301</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">326</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-29T19:06:09Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">81696</_id>
+    <_time t="T">2024-07-29T20:09:35Z</_time>
+    <_version t="S">0.2.1/0.21.0/</_version>
+    <area t="S">hr</area>
+    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
+    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
+    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_min comments_max)) (give b5 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let fee5 10) (let comments_needed 5) (set b6 (if (lt comments comments_needed) (times -1 fee5) 0)) (give b6 'for too few (${comments}) comments') 'deduct ${fee5} points if there were less than ${comments_needed} comments made during review') (aka (let max_bonus 100) (set b7 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b7 'to not go over the cap') (let min_bonus 5) (set b8 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b8 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
+    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee1 10) (let comments_needed 6) (set b3 (if (lt comments comments_needed) (times -1 fee1) 0)) (give b3 'for too few (${comments}) comments') 'deduct ${fee1} points if there were less than ${comments_needed} comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b4 (times comments comments_k)) (set b4 (between b4 comments_min comments_max)) (set b4 (if (eq self 1) 0 b4)) (give b4 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b5 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b5 'to not go over the cap') (let min_bonus 5) (set b6 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b6 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
+    <days_of_running_balance t="I">28</days_of_running_balance>
+    <days_to_reward t="I">7</days_to_reward>
+    <dud_was_punished t="S">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</dud_was_punished>
+    <enhancement_suggestion_was_rewarded t="S">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</enhancement_suggestion_was_rewarded>
+    <master_punish_days t="I">4</master_punish_days>
+    <published_release_was_rewarded t="S">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points'))</published_release_was_rewarded>
+    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
+    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
+    <what t="S">pmp</what>
+  </f>
+  <f>
+    <_id t="I">81697</_id>
+    <_time t="T">2024-07-29T20:09:46Z</_time>
+    <_version t="S">0.2.1/0.21.0/</_version>
+    <cause t="I">81529</cause>
+    <comments t="I">2</comments>
+    <details t="S">The pull request zerocracy/judges-action#183 with 10 HoC created by @Yegorov was merged by @rultor after 23 minutes of being in review and 2 comments.</details>
+    <hoc t="I">10</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">183</issue>
+    <merger t="I">8086956</merger>
+    <repository t="I">799177290</repository>
+    <seconds t="I">1438</seconds>
+    <what t="S">code-was-contributed</what>
+    <when t="T">2024-07-29T19:00:14Z</when>
+    <where t="S">github</where>
+    <who t="I">2566462</who>
+  </f>
+  <f>
+    <_id t="I">81700</_id>
+    <_time t="T">2024-07-29T21:05:29Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <commit t="S">edf0936aaf8c5338a08b83b514f75aad2fb2eb90</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19533157756 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40563182081</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19533157756</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T19:41:09Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">81702</_id>
+    <_time t="T">2024-07-29T21:05:33Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <commit t="S">a8e8ff0d5d428518ac1e85f474ca2948bab57c48</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19532740702 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40562321437</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19532740702</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T19:08:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">81704</_id>
+    <_time t="T">2024-07-29T21:05:36Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <commit t="S">620e1682410a2a13dda5ee37511ff25b4b59066e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19533159436 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40563185662</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19533159436</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T19:41:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">81705</_id>
+    <_time t="T">2024-07-29T21:05:37Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <commit t="S">e7714cb4f1c195c5b2c9167d9cd5d4f718a47d46</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19532745680 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40562331495</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19532745680</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T19:08:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">81714</_id>
+    <_time t="T">2024-07-29T21:05:48Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <details t="S">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#184.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">184</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">799177290</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-29T18:50:45Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">81791</_id>
+    <_time t="T">2024-07-29T21:07:15Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">40552601430</latest>
+    <repository t="I">799113787</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81792</_id>
+    <_time t="T">2024-07-29T21:07:17Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">40435124696</latest>
+    <repository t="I">798641472</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81793</_id>
+    <_time t="T">2024-07-29T21:07:20Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">40563916827</latest>
+    <repository t="I">799177290</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81794</_id>
+    <_time t="T">2024-07-29T21:07:22Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">40562321437</latest>
+    <repository t="I">802720676</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81795</_id>
+    <_time t="T">2024-07-29T21:07:24Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">40563185662</latest>
+    <repository t="I">728758275</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81840</_id>
+    <_time t="T">2024-07-29T21:08:14Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">0</latest>
+    <repository t="I">728758275</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81854</_id>
+    <_time t="T">2024-07-29T21:08:30Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">0</latest>
+    <repository t="I">798641472</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81859</_id>
+    <_time t="T">2024-07-29T21:08:36Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.38</_version>
     <details t="S">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.</details>
-    <is_human t="I">1</is_human>
     <issue t="I">65</issue>
     <label t="S">enhancement</label>
     <repository t="I">802720676</repository>
@@ -25879,92 +26103,29 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">81645</_id>
-    <_time t="T">2024-07-29T20:07:42Z</_time>
+    <_id t="I">81876</_id>
+    <_time t="T">2024-07-29T21:08:54Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">40552601430</latest>
-    <repository t="I">799113787</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81646</_id>
-    <_time t="T">2024-07-29T20:07:44Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">40435124696</latest>
-    <repository t="I">798641472</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81647</_id>
-    <_time t="T">2024-07-29T20:07:47Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">40562312817</latest>
-    <repository t="I">799177290</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81648</_id>
-    <_time t="T">2024-07-29T20:07:50Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">40561382631</latest>
-    <repository t="I">802720676</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81649</_id>
-    <_time t="T">2024-07-29T20:07:53Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">40557734573</latest>
-    <repository t="I">728758275</repository>
-    <what t="S">events-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81650</_id>
-    <_time t="T">2024-07-29T20:07:54Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">0</latest>
+    <latest t="I">98</latest>
     <repository t="I">799113787</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">81669</_id>
-    <_time t="T">2024-07-29T20:08:15Z</_time>
+    <_id t="I">81877</_id>
+    <_time t="T">2024-07-29T21:08:55Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">0</latest>
-    <repository t="I">802720676</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81682</_id>
-    <_time t="T">2024-07-29T20:08:30Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">0</latest>
-    <repository t="I">728758275</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81689</_id>
-    <_time t="T">2024-07-29T20:08:37Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">0</latest>
-    <repository t="I">798641472</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">81690</_id>
-    <_time t="T">2024-07-29T20:08:46Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
-    <latest t="I">167</latest>
+    <latest t="I">91</latest>
     <repository t="I">799177290</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">81878</_id>
+    <_time t="T">2024-07-29T21:08:56Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.38</_version>
+    <latest t="I">73</latest>
+    <repository t="I">802720676</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
   </f>
