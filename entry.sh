@@ -92,9 +92,6 @@ while IFS= read -r o; do
         VITALS_URL="${v}"
         continue
     fi
-    if [[ "${k}" == github_token ]]; then
-        GITHUB_TOKEN="${v}"
-    fi
     options+=("--option=${k}=${v}")
 done <<< "${INPUT_OPTIONS}"
 options+=("--option=judges_action_version=${VERSION}")
@@ -120,7 +117,6 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "--meta=vitals_url:${VITALS_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
         "--meta=action_version:${VERSION}" \
-        "--meta=github_token:${GITHUB_TOKEN}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
