@@ -49,7 +49,7 @@ entry: target/docker-image.txt
 		-e GITHUB_REPOSITORY_OWNER=zerocracy \
 		-e GITHUB_SERVER_URL=https://github.com \
 		-e GITHUB_RUN_ID=0000 \
-		-e "INPUT_FACTBASE=/tmp/fake$$(LC_ALL=C tr -dc '[a-z]' </dev/urandom | head -c 16).fb" \
+		-e "INPUT_FACTBASE=/tmp/fake$$(LC_ALL=C tr -dc 'a-z' </dev/urandom | head -c 16).fb" \
 		-e INPUT_CYCLES=2 \
 		-e INPUT_VERBOSE=true \
 		-e INPUT_PAGES=pages \
