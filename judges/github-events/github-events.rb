@@ -93,17 +93,22 @@ Fbe.iterate do
       end
 
     when 'PullRequestReviewEvent'
-      fact.issue = json[:payload][:pull_request][:number]
-      fact.what = 'pull-was-reviewed'
-      pull = Fbe.octo.pull_request(json[:repo][:name], fact.issue)
-      fact.hoc = pull[:additions] + pull[:deletions]
-      fact.comments = pull[:comments] + pull[:review_comments]
-      fact.commits = pull[:commits]
-      fact.files = pull[:changed_files]
-      fact.details =
-        "The pull request #{Fbe.issue(fact)} " \
-        "has been reviewed by #{Fbe.who(fact)} " \
-        "with #{fact.hoc} HoC and #{fact.comments} comments."
+      case json[:payload][:action]
+      when 'created'
+        fact.issue = json[:payload][:pull_request][:number]
+        fact.what = 'pull-was-reviewed'
+        pull = Fbe.octo.pull_request(json[:repo][:name], fact.issue)
+        fact.hoc = pull[:additions] + pull[:deletions]
+        fact.comments = pull[:comments] + pull[:review_comments]
+        fact.commits = pull[:commits]
+        fact.files = pull[:changed_files]
+        fact.details =
+          "The pull request #{Fbe.issue(fact)} " \
+          "has been reviewed by #{Fbe.who(fact)} " \
+          "with #{fact.hoc} HoC and #{fact.comments} comments."
+      else
+        skip_event(json)
+      end
 
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
