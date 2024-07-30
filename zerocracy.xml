@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.2.1" size="631900">
+<fb version="0.2.1" size="694838">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <removed t="I">8</removed>
-    <seconds t="F">241.597693538</seconds>
+    <seconds t="F">663.760975767</seconds>
     <version t="S">0.21.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-07-30T07:08:44Z</when>
+    <when t="T">2024-07-30T08:17:02Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -27282,33 +27282,6 @@
     <who t="I">41898282</who>
   </f>
   <f>
-    <_id t="I">83249</_id>
-    <_time t="T">2024-07-30T06:10:56Z</_time>
-    <_version t="S">0.2.1/0.21.0/</_version>
-    <area t="S">hr</area>
-    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
-    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
-    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_min comments_max)) (give b5 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let fee5 10) (let comments_needed 5) (set b6 (if (lt comments comments_needed) (times -1 fee5) 0)) (give b6 'for too few (${comments}) comments') 'deduct ${fee5} points if there were less than ${comments_needed} comments made during review') (aka (let max_bonus 100) (set b7 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b7 'to not go over the cap') (let min_bonus 5) (set b8 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b8 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
-    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee1 10) (let comments_needed 6) (set b3 (if (lt comments comments_needed) (times -1 fee1) 0)) (give b3 'for too few (${comments}) comments') 'deduct ${fee1} points if there were less than ${comments_needed} comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b4 (times comments comments_k)) (set b4 (between b4 comments_min comments_max)) (set b4 (if (eq self 1) 0 b4)) (give b4 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b5 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b5 'to not go over the cap') (let min_bonus 5) (set b6 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b6 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
-    <days_of_running_balance t="I">28</days_of_running_balance>
-    <days_to_reward t="I">7</days_to_reward>
-    <dud_was_punished t="S">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</dud_was_punished>
-    <enhancement_suggestion_was_rewarded t="S">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</enhancement_suggestion_was_rewarded>
-    <master_punish_days t="I">4</master_punish_days>
-    <published_release_was_rewarded t="S">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points'))</published_release_was_rewarded>
-    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
-    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
-    <what t="S">pmp</what>
-  </f>
-  <f>
     <_id t="I">83312</_id>
     <_time t="T">2024-07-30T07:06:05Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
@@ -27365,8 +27338,2969 @@
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">83355</_id>
-    <_time t="T">2024-07-30T07:06:56Z</_time>
+    <_id t="I">83443</_id>
+    <_time t="T">2024-07-30T07:09:11Z</_time>
+    <_version t="S">0.2.1/0.21.0/</_version>
+    <area t="S">hr</area>
+    <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
+    <bug_report_was_rewarded t="S">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</bug_report_was_rewarded>
+    <code_contribution_was_rewarded t="S">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_min comments_max)) (give b5 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let fee5 10) (let comments_needed 5) (set b6 (if (lt comments comments_needed) (times -1 fee5) 0)) (give b6 'for too few (${comments}) comments') 'deduct ${fee5} points if there were less than ${comments_needed} comments made during review') (aka (let max_bonus 100) (set b7 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b7 'to not go over the cap') (let min_bonus 5) (set b8 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b8 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_contribution_was_rewarded>
+    <code_review_was_rewarded t="S">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee1 10) (let comments_needed 6) (set b3 (if (lt comments comments_needed) (times -1 fee1) 0)) (give b3 'for too few (${comments}) comments') 'deduct ${fee1} points if there were less than ${comments_needed} comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b4 (times comments comments_k)) (set b4 (between b4 comments_min comments_max)) (set b4 (if (eq self 1) 0 b4)) (give b4 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let max_bonus 100) (set b5 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b5 'to not go over the cap') (let min_bonus 5) (set b6 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b6 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</code_review_was_rewarded>
+    <days_of_running_balance t="I">28</days_of_running_balance>
+    <days_to_reward t="I">7</days_to_reward>
+    <dud_was_punished t="S">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</dud_was_punished>
+    <enhancement_suggestion_was_rewarded t="S">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</enhancement_suggestion_was_rewarded>
+    <master_punish_days t="I">4</master_punish_days>
+    <published_release_was_rewarded t="S">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points'))</published_release_was_rewarded>
+    <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
+    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
+    <what t="S">pmp</what>
+  </f>
+  <f>
+    <_id t="I">83446</_id>
+    <_time t="T">2024-07-30T08:06:08Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">93d359ca8fa2c697a88cff47573026de156c9a2e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19540366387 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40577340598</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19540366387</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-30T07:52:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83448</_id>
+    <_time t="T">2024-07-30T08:06:14Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">76130c26d9d43d735f3a8ccb1e4f0196b7aa5675</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19539896860 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40576365703</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19539896860</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-30T07:20:33Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83449</_id>
+    <_time t="T">2024-07-30T08:06:15Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">68052eb95e7590a9df868186e8e3e46db844521f</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19539870819 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40576312088</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19539870819</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-30T07:18:43Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83450</_id>
+    <_time t="T">2024-07-30T08:06:16Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">f26b723c2665093f0af6581abcccf13d238773e1</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19539816429 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40576200368</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19539816429</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-30T07:14:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83452</_id>
+    <_time t="T">2024-07-30T08:06:21Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/baza#149 has been opened by @yegor256.</details>
+    <event_id t="I">40577161773</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">149</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-30T07:46:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83454</_id>
+    <_time t="T">2024-07-30T08:06:26Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#46 has been opened by @yegor256.</details>
+    <event_id t="I">40573264915</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">46</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-30T05:08:04Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83455</_id>
+    <_time t="T">2024-07-30T08:06:28Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'fix missing require (ref: #43)' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40568994494</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">167747831</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.34</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-30T00:30:05Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83456</_id>
+    <_time t="T">2024-07-30T08:06:29Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.34' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40568988790</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.34</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-30T00:29:44Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83457</_id>
+    <_time t="T">2024-07-30T08:06:33Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">fix-build</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/fbe#45 has been closed by @yegor256, with 1 HoC and 0 comments.</details>
+    <event_id t="I">40568811169</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">1</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">45</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-30T00:17:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83458</_id>
+    <_time t="T">2024-07-30T08:06:35Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">fix-build</branch>
+    <details t="S">The pull request zerocracy/fbe#45 has been opened by @Yegorov.</details>
+    <event_id t="I">40564747799</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">45</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-29T20:41:48Z</when>
+    <where t="S">github</where>
+    <who t="I">2566462</who>
+  </f>
+  <f>
+    <_id t="I">83459</_id>
+    <_time t="T">2024-07-30T08:06:38Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'Fbe.octo is not aware of GitHub API quota' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40562656623</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">167717782</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.33</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-29T19:21:03Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83460</_id>
+    <_time t="T">2024-07-30T08:06:39Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.33' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40562644740</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.33</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-29T19:20:35Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83461</_id>
+    <_time t="T">2024-07-30T08:06:42Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">873ed5a5eaaca972dfe90879a21c7faa531aba8b</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19532751493 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40562343248</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19532751493</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T19:09:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83462</_id>
+    <_time t="T">2024-07-30T08:06:45Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#37 has been closed by @rultor.</details>
+    <event_id t="I">40562060950</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">37</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-29T18:58:44Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83463</_id>
+    <_time t="T">2024-07-30T08:06:46Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">bugfix/37</branch>
+    <comments t="I">25</comments>
+    <details t="S">The pull request zerocracy/fbe#43 has been closed by @rultor, with 200 HoC and 25 comments.</details>
+    <event_id t="I">40562060667</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">200</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-29T18:58:43Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83464</_id>
+    <_time t="T">2024-07-30T08:06:53Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @Suban05 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40558367422</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T16:45:26Z</when>
+    <where t="S">github</where>
+    <who t="I">88084038</who>
+  </f>
+  <f>
+    <_id t="I">83465</_id>
+    <_time t="T">2024-07-30T08:06:54Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40558245848</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T16:41:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83466</_id>
+    <_time t="T">2024-07-30T08:06:57Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40558230496</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T16:40:40Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83467</_id>
+    <_time t="T">2024-07-30T08:06:59Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40558218391</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T16:40:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83468</_id>
+    <_time t="T">2024-07-30T08:07:02Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @Suban05 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40557240483</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T16:07:19Z</when>
+    <where t="S">github</where>
+    <who t="I">88084038</who>
+  </f>
+  <f>
+    <_id t="I">83469</_id>
+    <_time t="T">2024-07-30T08:07:05Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40556838387</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T15:54:36Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83470</_id>
+    <_time t="T">2024-07-30T08:07:07Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40556809522</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T15:53:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83471</_id>
+    <_time t="T">2024-07-30T08:07:09Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40556771301</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T15:52:30Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83472</_id>
+    <_time t="T">2024-07-30T08:07:11Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40556720977</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T15:50:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83473</_id>
+    <_time t="T">2024-07-30T08:07:13Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#44 has been closed by @yegor256.</details>
+    <event_id t="I">40555400484</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">44</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-29T15:12:40Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83474</_id>
+    <_time t="T">2024-07-30T08:07:15Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release '' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40555052540</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">167674101</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.32</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-29T15:03:02Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83475</_id>
+    <_time t="T">2024-07-30T08:07:16Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.32' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40555008758</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.32</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-29T15:01:50Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83476</_id>
+    <_time t="T">2024-07-30T08:07:19Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">b48dc9d1e6f40f305e2dc98cc387cfe20fb79a96</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19529040672 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40554587947</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19529040672</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T14:50:33Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83477</_id>
+    <_time t="T">2024-07-30T08:07:21Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">9e9b5beecd337ea9c66c84ad86dbfc672495659e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19528919382 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40554323938</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19528919382</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T14:43:28Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83478</_id>
+    <_time t="T">2024-07-30T08:07:22Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#44 has been opened by @yegor256.</details>
+    <event_id t="I">40554174339</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">44</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-29T14:39:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83479</_id>
+    <_time t="T">2024-07-30T08:07:23Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">71872bd2e4fef15759f52b95fe59cc552e866025</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19528833952 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40554138470</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19528833952</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T14:38:23Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83480</_id>
+    <_time t="T">2024-07-30T08:07:26Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40554114090</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:37:43Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83481</_id>
+    <_time t="T">2024-07-30T08:07:28Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40554106693</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:37:31Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83482</_id>
+    <_time t="T">2024-07-30T08:07:29Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40554077515</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:36:43Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83483</_id>
+    <_time t="T">2024-07-30T08:07:32Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40554066974</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:36:25Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83484</_id>
+    <_time t="T">2024-07-30T08:07:34Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40554052215</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:36:00Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83485</_id>
+    <_time t="T">2024-07-30T08:07:36Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40554038525</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:35:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83486</_id>
+    <_time t="T">2024-07-30T08:07:38Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40553970980</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:33:48Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83487</_id>
+    <_time t="T">2024-07-30T08:07:40Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40553964427</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:33:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83488</_id>
+    <_time t="T">2024-07-30T08:07:43Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40553945053</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:33:07Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83489</_id>
+    <_time t="T">2024-07-30T08:07:45Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">26</comments>
+    <commits t="I">14</commits>
+    <details t="S">The pull request zerocracy/fbe#43 has been reviewed by @yegor256 with 200 HoC and 26 comments.</details>
+    <event_id t="I">40553923385</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">5</files>
+    <hoc t="I">200</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-29T14:32:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83490</_id>
+    <_time t="T">2024-07-30T08:07:47Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">bugfix/37</branch>
+    <details t="S">The pull request zerocracy/fbe#43 has been opened by @Suban05.</details>
+    <event_id t="I">40550048710</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">43</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-29T12:50:27Z</when>
+    <where t="S">github</where>
+    <who t="I">88084038</who>
+  </f>
+  <f>
+    <_id t="I">83491</_id>
+    <_time t="T">2024-07-30T08:07:48Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#42 has been closed by @yegor256.</details>
+    <event_id t="I">40535177813</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">42</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-29T03:44:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83492</_id>
+    <_time t="T">2024-07-30T08:07:50Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release '`between` fails on zero inputs' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40535165012</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">167573972</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.31</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-29T03:44:03Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83493</_id>
+    <_time t="T">2024-07-30T08:07:51Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.31' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40535147416</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.31</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-29T03:42:47Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83494</_id>
+    <_time t="T">2024-07-30T08:07:54Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">c4d7af3b7f33d4849e251d13d0bf2c987d4dd6d2</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19519579582 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40535006145</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19519579582</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-29T03:32:44Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83495</_id>
+    <_time t="T">2024-07-30T08:07:56Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#42 has been opened by @yegor256.</details>
+    <event_id t="I">40535000243</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">42</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-29T03:32:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83496</_id>
+    <_time t="T">2024-07-30T08:07:57Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#41 has been closed by @yegor256.</details>
+    <event_id t="I">40528532601</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">41</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-28T16:14:48Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83497</_id>
+    <_time t="T">2024-07-30T08:07:59Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'octo.user fails on bot IDs' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40528529471</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">167524772</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.30</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-28T16:14:25Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83498</_id>
+    <_time t="T">2024-07-30T08:08:00Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.30' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40528520423</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.30</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-28T16:13:33Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83499</_id>
+    <_time t="T">2024-07-30T08:08:03Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">0a80057202a3ed13ac99f503edf9c09c8ac2f6b1</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19515576842 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40528420138</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19515576842</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-28T16:02:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83500</_id>
+    <_time t="T">2024-07-30T08:08:05Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#41 has been opened by @yegor256.</details>
+    <event_id t="I">40528416214</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">41</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-28T16:01:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83501</_id>
+    <_time t="T">2024-07-30T08:08:06Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#40 has been closed by @yegor256.</details>
+    <event_id t="I">40527879621</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">40</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-28T15:04:39Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83502</_id>
+    <_time t="T">2024-07-30T08:08:08Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'different users on different IDs' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40527869585</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">167522299</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.29</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-28T15:03:36Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83503</_id>
+    <_time t="T">2024-07-30T08:08:09Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.29' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40527861877</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.29</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-28T15:02:49Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83504</_id>
+    <_time t="T">2024-07-30T08:08:12Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">e69dbf05028894f1f19bf779dbfd7d9e2e7bad6b</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19515126308 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40527724468</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19515126308</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-28T14:48:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83505</_id>
+    <_time t="T">2024-07-30T08:08:14Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#40 has been opened by @yegor256.</details>
+    <event_id t="I">40527722977</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">40</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-28T14:48:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83506</_id>
+    <_time t="T">2024-07-30T08:08:15Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">69e5945a5ba4eec329d2521bb0c71e843af0babf</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19511627511 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40522489065</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19511627511</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-28T04:12:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83507</_id>
+    <_time t="T">2024-07-30T08:08:16Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">6eee64bb841ef6773990c48020e5aa0cab478dfd</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19511622089 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40522481210</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19511622089</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-28T04:11:11Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83508</_id>
+    <_time t="T">2024-07-30T08:08:18Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">dad8301a7b40445ad69bdbc849b2e9739d1e580e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19511613519 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40522468905</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19511613519</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-28T04:09:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83509</_id>
+    <_time t="T">2024-07-30T08:08:22Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#38 has been closed by @yegor256.</details>
+    <event_id t="I">40512399912</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">38</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-27T05:31:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83510</_id>
+    <_time t="T">2024-07-30T08:08:24Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'the `between` in Award must not give anything when too small value' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40511286638</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">167447169</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.28</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-27T03:00:30Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83511</_id>
+    <_time t="T">2024-07-30T08:08:25Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.28' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40511276661</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.28</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-27T02:59:17Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83512</_id>
+    <_time t="T">2024-07-30T08:08:30Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">bugfix/38</branch>
+    <comments t="I">3</comments>
+    <details t="S">The pull request zerocracy/fbe#39 has been closed by @rultor, with 23 HoC and 3 comments.</details>
+    <event_id t="I">40511197540</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">23</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">39</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-27T02:47:42Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83513</_id>
+    <_time t="T">2024-07-30T08:08:35Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <comments t="I">5</comments>
+    <commits t="I">3</commits>
+    <details t="S">The pull request zerocracy/fbe#39 has been reviewed by @yegor256 with 23 HoC and 5 comments.</details>
+    <event_id t="I">40511106051</event_id>
+    <event_type t="S">PullRequestReviewEvent</event_type>
+    <files t="I">2</files>
+    <hoc t="I">23</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">39</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-reviewed</what>
+    <when t="T">2024-07-27T02:35:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83514</_id>
+    <_time t="T">2024-07-30T08:08:38Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">bugfix/38</branch>
+    <details t="S">The pull request zerocracy/fbe#39 has been opened by @Suban05.</details>
+    <event_id t="I">40506539366</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">39</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-26T20:13:50Z</when>
+    <where t="S">github</where>
+    <who t="I">88084038</who>
+  </f>
+  <f>
+    <_id t="I">83515</_id>
+    <_time t="T">2024-07-30T08:08:45Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#38 has been opened by @yegor256.</details>
+    <event_id t="I">40485053405</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">38</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-26T06:51:40Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83516</_id>
+    <_time t="T">2024-07-30T08:08:46Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#37 has been opened by @yegor256.</details>
+    <event_id t="I">40483493034</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">37</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-26T05:35:33Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83517</_id>
+    <_time t="T">2024-07-30T08:08:48Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">876e4d08989ca2a1c0e28e79f77bc0c93bfdc866</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19489809283 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40483365154</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19489809283</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-26T05:28:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83518</_id>
+    <_time t="T">2024-07-30T08:08:49Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">83ebae5a54a693c288a9b55bdd7d3257bb673099</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19489769959 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40483298983</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19489769959</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-26T05:24:47Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83519</_id>
+    <_time t="T">2024-07-30T08:08:50Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#36 has been closed by @yegor256.</details>
+    <event_id t="I">40363470084</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">36</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T19:20:18Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83520</_id>
+    <_time t="T">2024-07-30T08:08:53Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'fails when GitHub blocks it' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40363339618</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">166576500</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.27</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-22T19:15:10Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83521</_id>
+    <_time t="T">2024-07-30T08:08:54Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.27' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40363333979</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.27</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-22T19:14:58Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83522</_id>
+    <_time t="T">2024-07-30T08:08:57Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">98e53a06103666a38e69ffc71c835f33489c484c</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429930246 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40363013646</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429930246</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T19:02:41Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83523</_id>
+    <_time t="T">2024-07-30T08:08:59Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#36 has been opened by @yegor256.</details>
+    <event_id t="I">40362774848</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">36</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-22T18:53:28Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83524</_id>
+    <_time t="T">2024-07-30T08:09:00Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">ae600685286f492ce99f320b4a1fb89c87dc8f18</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429773344 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40362683890</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429773344</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T18:50:00Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83525</_id>
+    <_time t="T">2024-07-30T08:09:01Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">7eb8c861be44137f92acd50ca33e0f5386dba630</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429747255 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40362629764</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429747255</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T18:47:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83526</_id>
+    <_time t="T">2024-07-30T08:09:03Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">d04900af88a9fc58f3a275e36ea3b303a9181354</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19429741457 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40362617872</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19429741457</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T18:47:25Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83527</_id>
+    <_time t="T">2024-07-30T08:09:04Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#35 has been closed by @yegor256.</details>
+    <event_id t="I">40355572132</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">35</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T14:52:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83528</_id>
+    <_time t="T">2024-07-30T08:09:06Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release '' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40355553143</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">166533802</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.26</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-22T14:52:16Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83529</_id>
+    <_time t="T">2024-07-30T08:09:07Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.26' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40355513012</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.26</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-22T14:51:11Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83530</_id>
+    <_time t="T">2024-07-30T08:09:11Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">26ec6e415bda07425d056b2df2f6a91f7b0c27ce</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19426152919 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40355127931</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19426152919</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T14:40:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83531</_id>
+    <_time t="T">2024-07-30T08:09:12Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#35 has been opened by @yegor256.</details>
+    <event_id t="I">40355108234</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">35</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-22T14:40:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83532</_id>
+    <_time t="T">2024-07-30T08:09:13Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#34 has been closed by @yegor256.</details>
+    <event_id t="I">40355061161</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">34</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T14:39:01Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83533</_id>
+    <_time t="T">2024-07-30T08:09:16Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'more octo fake methods' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40355046116</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">166531031</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.25</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-22T14:38:36Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83534</_id>
+    <_time t="T">2024-07-30T08:09:17Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.25' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40355023458</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.25</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-22T14:37:59Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83535</_id>
+    <_time t="T">2024-07-30T08:09:20Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">97e5eb34e9cabde4fbab4aaaf463b8717271b063</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19425872094 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40354532238</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19425872094</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T14:25:07Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83536</_id>
+    <_time t="T">2024-07-30T08:09:22Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">236c1977f294cead0d3ff40c348e7e59082ed0ab</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19425864761 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40354517887</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19425864761</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T14:24:47Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83537</_id>
+    <_time t="T">2024-07-30T08:09:23Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#34 has been opened by @yegor256.</details>
+    <event_id t="I">40353816474</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">34</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-22T14:06:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83538</_id>
+    <_time t="T">2024-07-30T08:09:24Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#33 has been closed by @yegor256.</details>
+    <event_id t="I">40338536221</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">33</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T05:56:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83539</_id>
+    <_time t="T">2024-07-30T08:09:26Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'retrying doesn't work' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40338532544</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">166449583</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.24</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-22T05:56:42Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83540</_id>
+    <_time t="T">2024-07-30T08:09:27Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.24' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40338519350</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.24</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-22T05:56:01Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83541</_id>
+    <_time t="T">2024-07-30T08:09:31Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">8bd3c8395d6de3eb5d87b95191b604f934fd68d0</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19418062437 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40338314544</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19418062437</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T05:45:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83542</_id>
+    <_time t="T">2024-07-30T08:09:32Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#33 has been opened by @yegor256.</details>
+    <event_id t="I">40338274150</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">33</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-22T05:42:45Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83543</_id>
+    <_time t="T">2024-07-30T08:09:34Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">f2f6256abccf3c612b60496bb638fa4f2e814c13</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19418015508 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40338222867</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19418015508</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T05:39:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83544</_id>
+    <_time t="T">2024-07-30T08:09:35Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#31 has been closed by @yegor256.</details>
+    <event_id t="I">40338212281</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">31</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T05:39:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83545</_id>
+    <_time t="T">2024-07-30T08:09:37Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'coverage reported incorrectly' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40338007251</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">166447649</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.23</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-22T05:28:00Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83546</_id>
+    <_time t="T">2024-07-30T08:09:39Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.23' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40337993426</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.23</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-22T05:27:21Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83547</_id>
+    <_time t="T">2024-07-30T08:09:40Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">9bd279a9b96271fe102829a63b82d9317cc84624</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19417813519 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40337846640</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19417813519</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-22T05:19:57Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83548</_id>
+    <_time t="T">2024-07-30T08:09:46Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">31</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/fbe#32 has been closed by @yegor256, with 49 HoC and 0 comments.</details>
+    <event_id t="I">40337762996</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">49</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">32</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-22T05:15:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83549</_id>
+    <_time t="T">2024-07-30T08:09:49Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">31</branch>
+    <details t="S">The pull request zerocracy/fbe#32 has been opened by @yegor256.</details>
+    <event_id t="I">40337679135</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">32</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-22T05:10:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83550</_id>
+    <_time t="T">2024-07-30T08:09:56Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#31 has been opened by @yegor256.</details>
+    <event_id t="I">40337566236</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">31</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-22T05:03:47Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83551</_id>
+    <_time t="T">2024-07-30T08:09:57Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#30 has been closed by @yegor256.</details>
+    <event_id t="I">40337561272</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">30</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-22T05:03:30Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83552</_id>
+    <_time t="T">2024-07-30T08:09:58Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">b4c12d92dfeea5ee8eb4c99fec8bbe5b19d336be</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19387783293 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40285031776</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19387783293</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-19T06:14:52Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83553</_id>
+    <_time t="T">2024-07-30T08:10:01Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release '`commit_pulls` for `FakeOcto`' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40283797154</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">166176588</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.22</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-19T05:11:03Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83554</_id>
+    <_time t="T">2024-07-30T08:10:02Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.22' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40283794397</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.22</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-19T05:10:53Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83555</_id>
+    <_time t="T">2024-07-30T08:10:06Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">22c5b0ba9789ca208c9234f878f633006e5cc37c</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19387049301 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40283588612</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19387049301</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-19T04:58:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83556</_id>
+    <_time t="T">2024-07-30T08:10:07Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#30 has been opened by @yegor256.</details>
+    <event_id t="I">40283479608</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">30</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-19T04:50:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83557</_id>
+    <_time t="T">2024-07-30T08:10:08Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">16b3ea6b71c6e932ba7666c40ca846ecaa6d6f0d</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19381354894 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40272350843</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19381354894</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T18:16:06Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83558</_id>
+    <_time t="T">2024-07-30T08:10:10Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#29 has been closed by @yegor256.</details>
+    <event_id t="I">40254550049</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">29</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-18T09:10:34Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83559</_id>
+    <_time t="T">2024-07-30T08:10:12Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release '`aka` term for the `Award`' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40253848782</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">166000769</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.21</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-18T08:49:52Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83560</_id>
+    <_time t="T">2024-07-30T08:10:13Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.21' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40253838644</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.21</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-18T08:49:34Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83561</_id>
+    <_time t="T">2024-07-30T08:10:17Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">916e601edeca3aa95b7967bc2a44ae80e8791bbc</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19372026221 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40253144894</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19372026221</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T08:28:21Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83562</_id>
+    <_time t="T">2024-07-30T08:10:18Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">27724a3840939dcebcdfbe788ddb2b1d84f83a72</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19371652284 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40252359502</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19371652284</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T08:03:45Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83563</_id>
+    <_time t="T">2024-07-30T08:10:20Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#29 has been opened by @yegor256.</details>
+    <event_id t="I">40252104179</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">29</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-18T07:55:47Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83564</_id>
+    <_time t="T">2024-07-30T08:10:21Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">2ac8f1e819bef3a10a65fbe964570ebb01fa05e4</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19369734810 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40248402252</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19369734810</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T05:33:38Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83565</_id>
+    <_time t="T">2024-07-30T08:10:23Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">fcc7132de3a7ac48f7298be20dcb3b19b1aad209</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19369542517 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40248017342</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19369542517</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T05:16:10Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83566</_id>
+    <_time t="T">2024-07-30T08:10:24Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#28 has been closed by @yegor256.</details>
+    <event_id t="I">40247219561</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">28</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-18T04:29:23Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83567</_id>
+    <_time t="T">2024-07-30T08:10:26Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'escape for markdown' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40247214278</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">165969831</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.20</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-18T04:29:02Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83568</_id>
+    <_time t="T">2024-07-30T08:10:28Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.20' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40247202581</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.20</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-18T04:28:16Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83569</_id>
+    <_time t="T">2024-07-30T08:10:31Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">2d73ef90a45c88c4fbc0bee1dfb573e1f4d012d5</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19369019891 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40247013640</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19369019891</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T04:15:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83570</_id>
+    <_time t="T">2024-07-30T08:10:33Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">15c79c5d78ec2693c2bdf27b84b630e17db8df1d</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19368244388 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40245579000</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19368244388</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T02:42:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83571</_id>
+    <_time t="T">2024-07-30T08:10:34Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">5ae0a36c9e4949769b477ced87659bdc23f10f34</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19368195041 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40245485810</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19368195041</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-18T02:35:58Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83572</_id>
+    <_time t="T">2024-07-30T08:10:36Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#28 has been opened by @yegor256.</details>
+    <event_id t="I">40245436581</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">28</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-18T02:32:43Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83573</_id>
+    <_time t="T">2024-07-30T08:10:37Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#27 has been closed by @yegor256.</details>
+    <event_id t="I">40234292591</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">27</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-17T17:26:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83574</_id>
+    <_time t="T">2024-07-30T08:10:40Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'Award' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40234178189</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">165897027</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.19</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-17T17:22:24Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83575</_id>
+    <_time t="T">2024-07-30T08:10:41Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.19' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40234147652</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.19</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-17T17:21:22Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83576</_id>
+    <_time t="T">2024-07-30T08:10:44Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">fb269980d27a770963be63638d2bf6324f2879be</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19362388984 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40233807546</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19362388984</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T17:09:57Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83577</_id>
+    <_time t="T">2024-07-30T08:10:46Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">7a2b09d1d64130ba61bf9faa4faa30d1f088a2dd</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19362311568 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40233644224</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19362311568</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T17:04:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83578</_id>
+    <_time t="T">2024-07-30T08:10:47Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">02c8df2509a9662af50bfb018e6d243db9180fe0</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19362284915 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40233589070</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19362284915</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T17:02:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83579</_id>
+    <_time t="T">2024-07-30T08:10:49Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">9c6907e95940bee85c84d3b307f0104572fdc6fb</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19362278685 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40233576302</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19362278685</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T17:01:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83580</_id>
+    <_time t="T">2024-07-30T08:10:50Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">c020ef005d2f140f395c492db085e94319253815</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19362230543 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40233476553</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19362230543</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T16:58:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83581</_id>
+    <_time t="T">2024-07-30T08:10:52Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">7254fd7bcb69137825e71faea23132f0cf854f64</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19362179797 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40233369635</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19362179797</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T16:54:24Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83582</_id>
+    <_time t="T">2024-07-30T08:10:53Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">6c18dff1f180f89eea4ebf6d8e001e96d6de9158</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19362005246 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40232999401</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19362005246</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T16:40:45Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83583</_id>
+    <_time t="T">2024-07-30T08:10:55Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">aa7deb49ac4ffbd03281606f18335910c6bb214c</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19361775907 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40232518313</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19361775907</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-17T16:23:32Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83584</_id>
+    <_time t="T">2024-07-30T08:10:56Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#27 has been opened by @yegor256.</details>
+    <event_id t="I">40232338745</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">27</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-17T16:17:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83585</_id>
+    <_time t="T">2024-07-30T08:10:58Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#23 has been closed by @yegor256.</details>
+    <event_id t="I">40158836726</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">23</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-15T16:06:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83586</_id>
+    <_time t="T">2024-07-30T08:11:00Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release '' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40158793024</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">165486505</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.16</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-15T16:04:51Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83587</_id>
+    <_time t="T">2024-07-30T08:11:02Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.16' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40158765305</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.16</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-15T16:03:56Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83588</_id>
+    <_time t="T">2024-07-30T08:11:05Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">593982094db1c15ab772cbf8ee7edfc513be97c3</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19325348578 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40158303213</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19325348578</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-15T15:49:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83589</_id>
+    <_time t="T">2024-07-30T08:11:09Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#23 has been opened by @yegor256.</details>
+    <event_id t="I">40157984767</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">23</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-15T15:39:52Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83590</_id>
+    <_time t="T">2024-07-30T08:11:13Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">renovate/minitest-reporters-1.x</branch>
+    <comments t="I">1</comments>
+    <details t="S">The pull request zerocracy/fbe#22 has been closed by @yegor256, with 6 HoC and 1 comments.</details>
+    <event_id t="I">40157970367</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">6</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">22</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-07-15T15:39:25Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83591</_id>
+    <_time t="T">2024-07-30T08:11:15Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#21 has been closed by @yegor256.</details>
+    <event_id t="I">40157531342</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">21</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-15T15:26:12Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83592</_id>
+    <_time t="T">2024-07-30T08:11:18Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'logging is not configured right' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40157514020</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">165479528</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.15</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-15T15:25:41Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83593</_id>
+    <_time t="T">2024-07-30T08:11:19Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.15' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40157488388</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.15</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-15T15:24:55Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83594</_id>
+    <_time t="T">2024-07-30T08:11:23Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">renovate/minitest-reporters-1.x</branch>
+    <details t="S">The pull request zerocracy/fbe#22 has been opened by @renovate[bot].</details>
+    <event_id t="I">40156993904</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">22</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-07-15T15:10:51Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">83595</_id>
+    <_time t="T">2024-07-30T08:11:25Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">5072659b54abf4695512c0c1206a330782c01437</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19324710457 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40156954592</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19324710457</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-15T15:09:46Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83596</_id>
+    <_time t="T">2024-07-30T08:11:27Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">22e675829ffd1d6ba77b84fcdd062ea40106e1c0</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19324644044 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40156812591</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19324644044</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-15T15:05:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83597</_id>
+    <_time t="T">2024-07-30T08:11:28Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#21 has been opened by @yegor256.</details>
+    <event_id t="I">40156650362</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">21</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-15T15:01:19Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83598</_id>
+    <_time t="T">2024-07-30T08:11:31Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">renovate/rubocop-1.x</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/fbe#18 has been closed by @renovate[bot], with 8 HoC and 0 comments.</details>
+    <event_id t="I">40139232873</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">8</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">18</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-07-15T05:06:36Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">83599</_id>
+    <_time t="T">2024-07-30T08:11:32Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">361e7ab0efcc9e2e8ae39d03993a1ee591501184</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19316011765 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40139228804</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19316011765</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-15T05:06:20Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83600</_id>
+    <_time t="T">2024-07-30T08:11:37Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">816b6b98b8b17386bb8bf69ac84b2b8f5d9a802d</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19267267604 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40049776706</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19267267604</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-11T04:50:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83601</_id>
+    <_time t="T">2024-07-30T08:11:39Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#19 has been closed by @yegor256.</details>
+    <event_id t="I">40049774473</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">19</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-11T04:49:54Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83602</_id>
+    <_time t="T">2024-07-30T08:11:41Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'faraday fixed versions are a problem' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40049588549</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">164923458</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.14</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-11T04:38:37Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83603</_id>
+    <_time t="T">2024-07-30T08:11:42Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.14' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">40049541301</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.14</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-11T04:35:43Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83604</_id>
+    <_time t="T">2024-07-30T08:11:45Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">95058cf5a111b82d601821778496f1dd17993048</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19267065266 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40049387154</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19267065266</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-11T04:26:02Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83605</_id>
+    <_time t="T">2024-07-30T08:11:48Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">8a4c03edd5d2703ff2409189ed7809b993652533</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19267035627 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40049331550</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19267035627</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-11T04:22:29Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83606</_id>
+    <_time t="T">2024-07-30T08:11:49Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#19 has been opened by @yegor256.</details>
+    <event_id t="I">40049327569</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">19</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-11T04:22:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83607</_id>
+    <_time t="T">2024-07-30T08:11:51Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <branch t="S">renovate/rubocop-1.x</branch>
+    <comments t="I">0</comments>
+    <details t="S">The pull request zerocracy/fbe#18 has been closed by @renovate[bot], with 10 HoC and 0 comments.</details>
+    <event_id t="I">40044147771</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <hoc t="I">10</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">18</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">pull-was-closed</what>
+    <when t="T">2024-07-10T22:35:47Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">83608</_id>
+    <_time t="T">2024-07-30T08:11:53Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#17 has been closed by @yegor256.</details>
+    <event_id t="I">39954637675</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">17</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-08T13:18:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83609</_id>
+    <_time t="T">2024-07-30T08:11:55Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release '`iterate` loops forever if too many seen in one repo' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">39954137263</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">164405323</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.13</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-08T13:05:17Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83610</_id>
+    <_time t="T">2024-07-30T08:11:56Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.13' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">39954130809</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.13</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-08T13:05:06Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83611</_id>
+    <_time t="T">2024-07-30T08:12:00Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">69bc93073f47aa1cf1bab1f085f7643a6236e01e</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19219904824 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">39953667005</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19219904824</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-08T12:52:43Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83612</_id>
+    <_time t="T">2024-07-30T08:12:02Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">b43cbc1d7b44196bfb3c394d54241be5d90f9b50</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19219883329 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">39953622482</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19219883329</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-08T12:51:27Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83613</_id>
+    <_time t="T">2024-07-30T08:12:03Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <commit t="S">534e67f562c8777cd42b1cabcd4f48c5f3f2e82b</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19219306721 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">39952451732</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19219306721</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">820463873</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-07-08T12:18:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83614</_id>
+    <_time t="T">2024-07-30T08:12:05Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#17 has been opened by @yegor256.</details>
+    <event_id t="I">39950429976</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">17</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-07-08T11:13:05Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83615</_id>
+    <_time t="T">2024-07-30T08:12:06Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The issue zerocracy/fbe#16 has been closed by @yegor256.</details>
+    <event_id t="I">39942087645</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">16</issue>
+    <repository t="I">820463873</repository>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-07-08T06:49:55Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83616</_id>
+    <_time t="T">2024-07-30T08:12:09Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new release 'break on all-restarted' has been published in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">39941933008</event_id>
+    <event_type t="S">ReleaseEvent</event_type>
+    <is_human t="I">0</is_human>
+    <release t="I">164345721</release>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.12</tag>
+    <what t="S">release-published</what>
+    <when t="T">2024-07-08T06:43:56Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83617</_id>
+    <_time t="T">2024-07-30T08:12:10Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">A new tag '0.0.12' has been created in zerocracy/fbe by @rultor.</details>
+    <event_id t="I">39941899686</event_id>
+    <event_type t="S">CreateEvent</event_type>
+    <is_human t="I">0</is_human>
+    <repository t="I">820463873</repository>
+    <tag t="S">0.0.12</tag>
+    <what t="S">tag-was-created</what>
+    <when t="T">2024-07-08T06:42:37Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">83685</_id>
+    <_time t="T">2024-07-30T08:13:56Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The '#bug' label was attached by @yegor256 to the issue zerocracy/fbe#37.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">37</issue>
+    <label t="S">bug</label>
+    <repository t="I">820463873</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-26T05:37:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83686</_id>
+    <_time t="T">2024-07-30T08:13:57Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">37</issue>
+    <label t="S">enhancement</label>
+    <repository t="I">820463873</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-26T05:37:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83691</_id>
+    <_time t="T">2024-07-30T08:14:05Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The '#bug' label was attached by @yegor256 to the issue zerocracy/fbe#38.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">38</issue>
+    <label t="S">bug</label>
+    <repository t="I">820463873</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-26T06:51:37Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83712</_id>
+    <_time t="T">2024-07-30T08:14:37Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <details t="S">The '#bug' label was attached by @yegor256 to the issue zerocracy/fbe#46.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">46</issue>
+    <label t="S">bug</label>
+    <repository t="I">820463873</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-07-30T05:08:03Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">83714</_id>
+    <_time t="T">2024-07-30T08:14:41Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
     <latest t="I">40552601430</latest>
     <repository t="I">799113787</repository>
@@ -27374,8 +30308,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83356</_id>
-    <_time t="T">2024-07-30T07:06:58Z</_time>
+    <_id t="I">83715</_id>
+    <_time t="T">2024-07-30T08:14:45Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
     <latest t="I">40573279233</latest>
     <repository t="I">798641472</repository>
@@ -27383,35 +30317,53 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83357</_id>
-    <_time t="T">2024-07-30T07:07:00Z</_time>
+    <_id t="I">83716</_id>
+    <_time t="T">2024-07-30T08:14:48Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
-    <latest t="I">40574503445</latest>
+    <latest t="I">40577340598</latest>
     <repository t="I">799177290</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83358</_id>
-    <_time t="T">2024-07-30T07:07:03Z</_time>
+    <_id t="I">83717</_id>
+    <_time t="T">2024-07-30T08:14:51Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
-    <latest t="I">40574296626</latest>
+    <latest t="I">40576365703</latest>
     <repository t="I">802720676</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83359</_id>
-    <_time t="T">2024-07-30T07:07:05Z</_time>
+    <_id t="I">83718</_id>
+    <_time t="T">2024-07-30T08:14:55Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
-    <latest t="I">40572990827</latest>
+    <latest t="I">40577161773</latest>
     <repository t="I">728758275</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83404</_id>
-    <_time t="T">2024-07-30T07:07:59Z</_time>
+    <_id t="I">83719</_id>
+    <_time t="T">2024-07-30T08:14:59Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <latest t="I">40573264915</latest>
+    <repository t="I">820463873</repository>
+    <what t="S">events-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">83725</_id>
+    <_time t="T">2024-07-30T08:15:08Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <latest t="I">0</latest>
+    <repository t="I">820463873</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">83770</_id>
+    <_time t="T">2024-07-30T08:16:18Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
     <latest t="I">0</latest>
     <repository t="I">728758275</repository>
@@ -27419,8 +30371,8 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83418</_id>
-    <_time t="T">2024-07-30T07:08:16Z</_time>
+    <_id t="I">83780</_id>
+    <_time t="T">2024-07-30T08:16:33Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
     <latest t="I">0</latest>
     <repository t="I">798641472</repository>
@@ -27428,41 +30380,28 @@
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83423</_id>
-    <_time t="T">2024-07-30T07:08:21Z</_time>
+    <_id t="I">83790</_id>
+    <_time t="T">2024-07-30T08:16:48Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
-    <details t="S">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.</details>
-    <issue t="I">65</issue>
-    <label t="S">enhancement</label>
-    <repository t="I">802720676</repository>
-    <what t="S">label-was-attached</what>
-    <when t="T">2024-07-23T06:29:27Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">83440</_id>
-    <_time t="T">2024-07-30T07:08:42Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
-    <latest t="I">98</latest>
-    <repository t="I">799113787</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">83441</_id>
-    <_time t="T">2024-07-30T07:08:43Z</_time>
-    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
-    <latest t="I">91</latest>
+    <latest t="I">0</latest>
     <repository t="I">799177290</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">83442</_id>
-    <_time t="T">2024-07-30T07:08:44Z</_time>
+    <_id t="I">83798</_id>
+    <_time t="T">2024-07-30T08:17:01Z</_time>
     <_version t="S">0.2.1/0.21.0/0.0.39</_version>
-    <latest t="I">73</latest>
+    <latest t="I">67</latest>
+    <repository t="I">799113787</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">83799</_id>
+    <_time t="T">2024-07-30T08:17:02Z</_time>
+    <_version t="S">0.2.1/0.21.0/0.0.39</_version>
+    <latest t="I">31</latest>
     <repository t="I">802720676</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
