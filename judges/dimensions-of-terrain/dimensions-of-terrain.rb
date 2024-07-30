@@ -26,15 +26,10 @@ require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-pmp = Fbe.fb.query('(and (eq what "pmp") (eq area "scope") (exists qod_days))').each.to_a.first
-$DAYS = pmp.nil? ? 28 : pmp.qod_days
-$SINCE = Time.now - ($DAYS * 24 * 60 * 60)
-interval = pmp.nil? ? 7 : pmp.qod_interval
-
 unless Fbe.fb.query(
   "(and
     (eq what '#{$judge}')
-    (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '#{interval} days')))"
+    (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '1 days')))"
 ).each.to_a.empty?
   $loog.debug("#{$judge} statistics have recently been collected, skipping now")
   return
@@ -44,26 +39,30 @@ f = Fbe.fb.insert
 f.what = $judge
 f.when = Time.now
 
-# Number of commits pushed and their hits-of-code:
-commits = 0
-hoc = 0
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.commits_since(repo, $SINCE).each do |json|
-    commits += 1
-    hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
-  end
+# Total number of repositories in the project:
+total = 0
+Fbe.unmask_repos.each do |_|
+  total += 1
 end
-f.total_commits_pushed = commits
-f.total_hoc_committed = hoc
+f.total_repositories = total
 
-# Number of issues and pull requests created:
-issues = 0
-pulls = 0
+# Total number of releases ever made:
+total = 0
 Fbe.unmask_repos.each do |repo|
-  Fbe.octo.list_issues(repo, since: ">#{$SINCE.utc.iso8601[0..10]}").each do |json|
-    issues += 1
-    pulls += 1 unless json[:pull_request].nil?
+  Fbe.octo.releases(repo).each do |_|
+    total += 1
   end
 end
-f.total_issues_created = issues
-f.total_pulls_submitted = pulls
+f.total_releases = total
+
+# Total number of stars and forks for all repos:
+stars = 0
+forks = 0
+Fbe.unmask_repos.each do |repo|
+  Fbe.octo.repository(repo).then do |json|
+    stars += json[:stargazers_count]
+    forks += json[:forks]
+  end
+end
+f.total_stars = stars
+f.total_forks = forks

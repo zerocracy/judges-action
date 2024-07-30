@@ -36,7 +36,7 @@ unless Fbe.fb.query(
     (eq what '#{$judge}')
     (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '#{interval} days')))"
 ).each.to_a.empty?
-  $loog.debug('QoS statistics have recently been collected, skipping now')
+  $loog.debug("#{$judge} statistics have recently been collected, skipping now")
   return
 end
 
