@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 222.924639288
+  seconds: 225.880956405
   version: 0.21.0
   what: judges-summary
-  when: 2024-07-30 03:09:33.079599451 Z
+  when: 2024-07-30 04:09:07.193507378 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -24488,8 +24488,21 @@
   when: 2024-07-30 01:42:35.000000000 Z
   where: github
   who: 29139614
-- _id: 82556
-  _time: 2024-07-30 02:22:19.343896216 Z
+- _id: 82560
+  _time: 2024-07-30 03:06:03.691011879 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  details: The issue zerocracy/pages-action#81 has been closed by @yegor256.
+  event_id: 40570690751
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 81
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-07-30 02:19:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 82714
+  _time: 2024-07-30 03:09:59.099139624 Z
   _version: 0.2.1/0.21.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -24534,24 +24547,104 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 82560
-  _time: 2024-07-30 03:06:03.691011879 Z
+- _id: 82717
+  _time: 2024-07-30 04:05:29.472039844 Z
   _version: 0.2.1/0.21.0/0.0.38
-  details: The issue zerocracy/pages-action#81 has been closed by @yegor256.
-  event_id: 40570690751
-  event_type: IssuesEvent
-  is_human: 1
-  issue: 81
-  repository: 802720676
-  what: issue-was-closed
-  when: 2024-07-30 02:19:57.000000000 Z
+  branch: version-up
+  details: The pull request zerocracy/judges-action#197 has been opened by @github-actions[bot].
+  event_id: 40572024284
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 197
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-07-30 03:49:43.000000000 Z
   where: github
-  who: 526301
-- _id: 82631
-  _time: 2024-07-30 03:07:34.836847966 Z
+  who: 41898282
+- _id: 82718
+  _time: 2024-07-30 04:05:31.415246669 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 2
+  details: The pull request zerocracy/judges-action#196 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 40572019490
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 0
+  issue: 196
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-07-30 03:49:23.000000000 Z
+  where: github
+  who: 8086956
+- _id: 82719
+  _time: 2024-07-30 04:05:35.409785943 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  branch: renovate/zerocracy-pages-action-0.x
+  details: The pull request zerocracy/judges-action#196 has been opened by @renovate[bot].
+  event_id: 40571437289
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 196
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-07-30 03:10:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 82814
+  _time: 2024-07-30 04:07:26.147872404 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 40552601430
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 82815
+  _time: 2024-07-30 04:07:28.136250463 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 40435124696
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 82816
+  _time: 2024-07-30 04:07:30.318538771 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 40572035411
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 82817
+  _time: 2024-07-30 04:07:32.540728385 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 40570690751
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 82818
+  _time: 2024-07-30 04:07:34.699508701 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 40563185662
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 82863
+  _time: 2024-07-30 04:08:24.599275333 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 82877
+  _time: 2024-07-30 04:08:40.697445663 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 82882
+  _time: 2024-07-30 04:08:46.295173156 Z
   _version: 0.2.1/0.21.0/0.0.38
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  is_human: 1
   issue: 65
   label: enhancement
   repository: 802720676
@@ -24559,73 +24652,24 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 82664
-  _time: 2024-07-30 03:08:18.272920143 Z
+- _id: 82899
+  _time: 2024-07-30 04:09:04.963610186 Z
   _version: 0.2.1/0.21.0/0.0.38
-  latest: 40552601430
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 82665
-  _time: 2024-07-30 03:08:21.218814437 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 40435124696
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 82666
-  _time: 2024-07-30 03:08:24.045971020 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 40570725837
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 82667
-  _time: 2024-07-30 03:08:26.813998536 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 40570690751
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 82668
-  _time: 2024-07-30 03:08:29.785154338 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 40563185662
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 82669
-  _time: 2024-07-30 03:08:31.020184152 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 0
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 82704
-  _time: 2024-07-30 03:09:13.559819098 Z
+- _id: 82900
+  _time: 2024-07-30 04:09:06.071089467 Z
   _version: 0.2.1/0.21.0/0.0.38
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 82705
-  _time: 2024-07-30 03:09:14.478627031 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 82712
-  _time: 2024-07-30 03:09:22.932899648 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 82713
-  _time: 2024-07-30 03:09:33.011138987 Z
-  _version: 0.2.1/0.21.0/0.0.38
-  latest: 167
+  latest: 91
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 82901
+  _time: 2024-07-30 04:09:07.129898317 Z
+  _version: 0.2.1/0.21.0/0.0.38
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
