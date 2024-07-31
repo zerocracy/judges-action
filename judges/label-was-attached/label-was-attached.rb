@@ -37,13 +37,14 @@ Fbe.iterate do
       next unless te[:event] == 'labeled'
       badge = te[:label][:name]
       next unless %w[bug enhancement question].include?(badge)
-      nn = Fbe.if_absent do |n|
-        n.where = 'github'
-        n.repository = repository
-        n.issue = issue
-        n.label = te[:label][:name]
-        n.what = $judge
-      end
+      nn =
+        Fbe.if_absent do |n|
+          n.where = 'github'
+          n.repository = repository
+          n.issue = issue
+          n.label = te[:label][:name]
+          n.what = $judge
+        end
       next if nn.nil?
       nn.who = te[:actor][:id]
       nn.when = te[:created_at]

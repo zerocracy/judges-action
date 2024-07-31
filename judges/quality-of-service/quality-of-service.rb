@@ -72,11 +72,12 @@ def lifetime(type)
   ages = []
   Fbe.unmask_repos.each do |repo|
     q = "repo:#{repo} type:#{type} closed:>#{$SINCE.utc.iso8601[0..10]}"
-    ages += Fbe.octo.search_issues(q)[:items].map do |json|
-      next if json[:closed_at].nil?
-      next if json[:created_at].nil?
-      json[:closed_at] - json[:created_at]
-    end
+    ages +=
+      Fbe.octo.search_issues(q)[:items].map do |json|
+        next if json[:closed_at].nil?
+        next if json[:created_at].nil?
+        json[:closed_at] - json[:created_at]
+      end
   end
   ages.compact!
   ages.empty? ? 0 : ages.inject(&:+).to_f / ages.size
