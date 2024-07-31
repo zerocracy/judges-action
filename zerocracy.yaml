@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 326.70882585
+  seconds: 340.68351078
   version: 0.21.0
   what: judges-summary
-  when: 2024-07-30 21:10:34.260100573 Z
+  when: 2024-07-31 05:10:49.636330606 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -28250,8 +28250,36 @@
   when: 2024-07-30 16:17:06.000000000 Z
   where: github
   who: 526301
-- _id: 86172
-  _time: 2024-07-30 20:10:36.100440648 Z
+- _id: 86175
+  _time: 2024-07-30 21:05:21.237517500 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  branch: '156'
+  details: The pull request zerocracy/judges-action#205 has been opened by @Yegorov.
+  event_id: 40598881798
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 205
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-07-30 18:50:19.000000000 Z
+  where: github
+  who: 2566462
+- _id: 86179
+  _time: 2024-07-30 21:05:35.842622513 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  branch: '156'
+  details: The pull request zerocracy/fbe#48 has been opened by @Yegorov.
+  event_id: 40598835968
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 48
+  repository: 820463873
+  what: pull-was-opened
+  when: 2024-07-30 18:48:39.000000000 Z
+  where: github
+  who: 2566462
+- _id: 86358
+  _time: 2024-07-30 21:11:11.433642492 Z
   _version: 0.2.1/0.21.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -28296,48 +28324,93 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 86175
-  _time: 2024-07-30 21:05:21.237517500 Z
+- _id: 86359
+  _time: 2024-07-31 05:05:11.687078624 Z
   _version: 0.2.1/0.21.0/0.0.39
-  branch: '156'
-  details: The pull request zerocracy/judges-action#205 has been opened by @Yegorov.
-  event_id: 40598881798
-  event_type: PullRequestEvent
+  commit: f5f1d1ef6564be9e80d0fd5ece354dfbc37819da
+  default_branch: master
+  details: 'A new Git push #19556477322 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40609878549
+  event_type: PushEvent
   is_human: 1
-  issue: 205
-  repository: 799177290
-  what: pull-was-opened
-  when: 2024-07-30 18:50:19.000000000 Z
-  where: github
-  who: 2566462
-- _id: 86179
-  _time: 2024-07-30 21:05:35.842622513 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  branch: '156'
-  details: The pull request zerocracy/fbe#48 has been opened by @Yegorov.
-  event_id: 40598835968
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 48
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-07-30 18:48:39.000000000 Z
-  where: github
-  who: 2566462
-- _id: 86262
-  _time: 2024-07-30 21:07:46.968820065 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  is_human: 1
-  issue: 65
-  label: enhancement
-  repository: 802720676
-  what: label-was-attached
-  when: 2024-07-23 06:29:27.000000000 Z
+  push_id: 19556477322
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-31 05:03:26.000000000 Z
   where: github
   who: 526301
-- _id: 86265
-  _time: 2024-07-30 21:07:51.586041341 Z
+- _id: 86361
+  _time: 2024-07-31 05:05:15.720217778 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: 57187b6d227732bc52fe57602a8e3bd4d1215881
+  default_branch: master
+  details: 'A new Git push #19556471204 has arrived to yegor256/factbase, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40609866211
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19556471204
+  ref: refs/heads/master
+  repository: 798641472
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-31 05:02:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 86363
+  _time: 2024-07-31 05:05:19.872393646 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: c3a33239184b9b29a61cb5cec3f071ef021c2e44
+  default_branch: master
+  details: 'A new Git push #19556441811 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40609808180
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19556441811
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-31 04:59:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 86365
+  _time: 2024-07-31 05:05:27.513941851 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: 9188754f7323322a5133033687ccf00db95822ec
+  default_branch: master
+  details: 'A new Git push #19556441620 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40609807807
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19556441620
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-07-31 04:59:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 86368
+  _time: 2024-07-31 05:05:38.095323655 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  details: The issue zerocracy/fbe#47 has been closed by @yegor256.
+  event_id: 40609670166
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 47
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-07-31 04:51:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 86453
+  _time: 2024-07-31 05:07:42.903583472 Z
   _version: 0.2.1/0.21.0/0.0.39
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -28348,87 +28421,98 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 86303
-  _time: 2024-07-30 21:08:52.730088889 Z
+- _id: 86487
+  _time: 2024-07-31 05:08:32.669613389 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40552601430
+  latest: 40609878549
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 86304
-  _time: 2024-07-30 21:08:55.682863781 Z
+- _id: 86488
+  _time: 2024-07-31 05:08:35.130225335 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40573279233
+  latest: 40609866211
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 86305
-  _time: 2024-07-30 21:08:58.870271830 Z
+- _id: 86489
+  _time: 2024-07-31 05:08:37.789122683 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40599601000
+  latest: 40609808180
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 86306
-  _time: 2024-07-30 21:09:01.802573364 Z
+- _id: 86490
+  _time: 2024-07-31 05:08:40.176097025 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40576365703
+  latest: 40609807807
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 86307
-  _time: 2024-07-30 21:09:05.022980036 Z
+- _id: 86491
+  _time: 2024-07-31 05:08:42.841844000 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40597855065
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 86308
-  _time: 2024-07-30 21:09:08.398664503 Z
+- _id: 86492
+  _time: 2024-07-31 05:08:45.517243424 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40599063215
+  latest: 40609828974
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 86309
-  _time: 2024-07-30 21:09:09.916972868 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 86319
-  _time: 2024-07-30 21:09:24.743298234 Z
+- _id: 86504
+  _time: 2024-07-31 05:09:02.832890247 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 86350
-  _time: 2024-07-30 21:10:13.293513449 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 86351
-  _time: 2024-07-30 21:10:14.495565845 Z
+- _id: 86544
+  _time: 2024-07-31 05:10:00.948576657 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 86356
-  _time: 2024-07-30 21:10:21.756635393 Z
+- _id: 86554
+  _time: 2024-07-31 05:10:15.112389414 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 86357
-  _time: 2024-07-30 21:10:34.184223693 Z
+- _id: 86559
+  _time: 2024-07-31 05:10:22.204271346 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 167
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 86576
+  _time: 2024-07-31 05:10:46.732969308 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 86577
+  _time: 2024-07-31 05:10:48.172324290 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  latest: 91
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 86578
+  _time: 2024-07-31 05:10:49.562843535 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
