@@ -49,7 +49,7 @@
           <tbody>
             <tr>
               <td>
-                <span style="color:#2471A3">2024-07-31T05:10:49Z</span>
+                <span style="color:#2471A3">2024-07-31T06:11:50Z</span>
               </td>
               <td>
                 <span style="color:#196F3D">judges-summary</span>
@@ -66,7 +66,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">340.68351078</span> version:<span style="color:#196F3D">0.21.0</span>  when:<span style="color:#2471A3">2024-07-31T05:10:49Z</span></td>
+              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">406.684886276</span> version:<span style="color:#196F3D">0.21.0</span>  when:<span style="color:#2471A3">2024-07-31T06:11:50Z</span></td>
             </tr>
             <tr>
               <td>
@@ -39886,35 +39886,6 @@
             </tr>
             <tr>
               <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">pmp</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">86358</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_min comments_max)) (give b5 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let fee5 10) (let comments_needed 5) (set b6 (if (lt comments comments_needed) (times -1 fee5) 0)) (give b6 'for too few (${comments}) comments') 'deduct ${fee5} points if there were less than ${comments_needed} comments made during review') (aka (let fee6 10) (let hoc_needed 20) (set b7 (if (lt hoc hoc_needed) (times -1 fee6) 0)) (give b7 'for too few (${hoc}) hits-of-code') 'deduct ${fee6} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set b8 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b8 'to not go over the cap') (let min_bonus 5) (set b9 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b9 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> code_review_was_rewarded:<span style="color:#196F3D">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee1 10) (let comments_needed 6) (set b3 (if (lt comments comments_needed) (times -1 fee1) 0)) (give b3 'for too few (${comments}) comments') 'deduct ${fee1} points if there were less than ${comments_needed} comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b4 (times comments comments_k)) (set b4 (between b4 comments_min comments_max)) (set b4 (if (eq self 1) 0 b4)) (give b4 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let fee2 10) (let hoc_needed 15) (set b5 (if (lt hoc hoc_needed) (times -1 fee2) 0)) (give b5 'for too few (${hoc}) hits-of-code') 'deduct ${fee2} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> days_of_running_balance:<span style="color:#212F3C">56</span> days_to_reward:<span style="color:#212F3C">7</span> dud_was_punished:<span style="color:#196F3D">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</span> enhancement_suggestion_was_rewarded:<span style="color:#196F3D">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> master_punish_days:<span style="color:#212F3C">4</span> published_release_was_rewarded:<span style="color:#196F3D">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points'))</span> push_to_master_was_punished:<span style="color:#196F3D">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</span> resolved_bug_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</span> </td>
-            </tr>
-            <tr>
-              <td>
                 <span style="color:#2471A3">2024-07-31T05:03:26Z</span>
               </td>
               <td>
@@ -40020,6 +39991,203 @@
             </tr>
             <tr>
               <td>
+                <span style="color:#2471A3">2024-07-30T13:51:42Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">dud-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">47</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">In the repository #820463873, the user #88084038 submitted the issue #47 which was later closed by the user #526301 not becoming a bug or enhancement; this means that the issue was not valid, maybe a duplicate or simply a mistake.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86580</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">85173</span> closer:<span style="color:#212F3C">526301</span>  is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-07-30T13:51:42Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T05:11:25Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">push-to-master-was-punished</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to punish @yegor256 for pushing to the default branch 'master' in yegor256/judges, the penalty amount is -20.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86581</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">-20</span> cause:<span style="color:#212F3C">86359</span> commit:<span style="color:#196F3D">f5f1d1ef6564be9e80d0fd5ece354dfbc37819da</span> default_branch:<span style="color:#196F3D">master</span>  greeting:<span style="color:#196F3D">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-511](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). </span> href:<span style="color:#196F3D">https://github.com/yegor256/judges/commit/f5f1d1ef6564be9e80d0fd5ece354dfbc37819da/#commitcomment-144839002</span> is_human:<span style="color:#212F3C">1</span>   when:<span style="color:#2471A3">2024-07-31T05:11:25Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Pushed f5f1d1ef6 to default branch 'master' in yegor256/judges</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T05:11:56Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">push-to-master-was-punished</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/judges-action, the penalty amount is -20.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86583</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">-20</span> cause:<span style="color:#212F3C">86363</span> commit:<span style="color:#196F3D">c3a33239184b9b29a61cb5cec3f071ef021c2e44</span> default_branch:<span style="color:#196F3D">master</span>  greeting:<span style="color:#196F3D">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-531](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). </span> href:<span style="color:#196F3D">https://github.com/zerocracy/judges-action/commit/c3a33239184b9b29a61cb5cec3f071ef021c2e44/#commitcomment-144839018</span> is_human:<span style="color:#212F3C">1</span>   when:<span style="color:#2471A3">2024-07-31T05:11:56Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Pushed c3a332391 to default branch 'master' in zerocracy/judges-action</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">pmp</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">86584</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_min comments_max)) (give b5 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let fee5 10) (let comments_needed 5) (set b6 (if (lt comments comments_needed) (times -1 fee5) 0)) (give b6 'for too few (${comments}) comments') 'deduct ${fee5} points if there were less than ${comments_needed} comments made during review') (aka (let fee6 10) (let hoc_needed 20) (set b7 (if (lt hoc hoc_needed) (times -1 fee6) 0)) (give b7 'for too few (${hoc}) hits-of-code') 'deduct ${fee6} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set b8 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b8 'to not go over the cap') (let min_bonus 5) (set b9 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b9 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> code_review_was_rewarded:<span style="color:#196F3D">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let fee1 10) (let comments_needed 6) (set b3 (if (lt comments comments_needed) (times -1 fee1) 0)) (give b3 'for too few (${comments}) comments') 'deduct ${fee1} points if there were less than ${comments_needed} comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b4 (times comments comments_k)) (set b4 (between b4 comments_min comments_max)) (set b4 (if (eq self 1) 0 b4)) (give b4 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let fee2 10) (let hoc_needed 15) (set b5 (if (lt hoc hoc_needed) (times -1 fee2) 0)) (give b5 'for too few (${hoc}) hits-of-code') 'deduct ${fee2} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> days_of_running_balance:<span style="color:#212F3C">56</span> days_to_reward:<span style="color:#212F3C">7</span> dud_was_punished:<span style="color:#196F3D">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</span> enhancement_suggestion_was_rewarded:<span style="color:#196F3D">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> master_punish_days:<span style="color:#212F3C">4</span> published_release_was_rewarded:<span style="color:#196F3D">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points'))</span> push_to_master_was_punished:<span style="color:#196F3D">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</span> resolved_bug_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T05:12:26Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">push-to-master-was-punished</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to punish @yegor256 for pushing to the default branch 'master' in zerocracy/pages-action, the penalty amount is -20.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86585</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">-20</span> cause:<span style="color:#212F3C">86365</span> commit:<span style="color:#196F3D">9188754f7323322a5133033687ccf00db95822ec</span> default_branch:<span style="color:#196F3D">master</span>  greeting:<span style="color:#196F3D">It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html) to push directly to the default branch `master`. You've earned -20 points. Next time, create a new branch, push your changes over there, then make a pull request and merge it. Even if you are flying solo, contributing via pull requests is a [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html). Your running balance is [-551](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). </span> is_human:<span style="color:#212F3C">1</span>   when:<span style="color:#2471A3">2024-07-31T05:12:26Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Pushed 9188754f7 to default branch 'master' in zerocracy/pages-action</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T06:00:08Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">86</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/pages-action#86 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86589</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40610948276</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-07-31T06:00:08Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T05:57:55Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19557015774 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86591</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">c5f97954a172128e432b97dcda9cbaff4db92ded</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40610904206</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19557015774</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-07-31T05:57:55Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T05:45:36Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19556895467 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86592</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">f48c42a8293ce2c9491db79c9aa608bfbc7e3836</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40610662792</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19556895467</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-07-31T05:45:36Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T05:37:23Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19556819081 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">86593</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">c1f7db5d220601ba8e347a64e0a79badb018bcf1</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40610511162</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19556819081</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-07-31T05:37:23Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
                 <span style="color:#2471A3">2024-07-26T05:37:03Z</span>
               </td>
               <td>
@@ -40037,7 +40205,49 @@
               <td>
                 <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.</span>
               </td>
-              <td> _id:<span style="color:#212F3C">86453</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+              <td> _id:<span style="color:#212F3C">86663</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T06:07:46Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">quality-of-service</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">86689</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> average_backlog_size:<span style="color:#212F3C">11</span> average_build_success_rate:<span style="color:#E74C3C">0.955565142364107</span> average_forks:<span style="color:#212F3C">1</span> average_issue_lifetime:<span style="color:#E74C3C">184374.2962962963</span> average_pull_lifetime:<span style="color:#E74C3C">34508.2972972973</span> average_release_interval:<span style="color:#E74C3C">24548.44210526316</span> average_stars:<span style="color:#212F3C">4</span>  when:<span style="color:#2471A3">2024-07-31T06:07:46Z</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-31T06:09:32Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">dimensions-of-terrain</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">86690</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> total_forks:<span style="color:#212F3C">10</span> total_releases:<span style="color:#212F3C">230</span> total_repositories:<span style="color:#212F3C">6</span> total_stars:<span style="color:#212F3C">27</span>  when:<span style="color:#2471A3">2024-07-31T06:09:32Z</span></td>
             </tr>
             <tr>
               <td>
@@ -40058,7 +40268,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86487</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40609878549</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86691</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40610030777</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40079,7 +40289,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86488</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40609866211</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86692</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40609866211</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40100,7 +40310,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86489</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40609808180</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86693</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40610039847</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40121,7 +40331,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86490</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40609807807</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86694</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40610948276</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40142,7 +40352,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86491</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40597855065</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86695</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40610904206</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40163,7 +40373,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86492</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40609828974</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86696</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40609828974</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40184,7 +40394,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86504</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86708</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40205,7 +40415,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86544</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86748</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40226,28 +40436,28 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86554</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86758</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
-                <span style="color:#2471A3">2024-07-23T06:29:27Z</span>
+                <span style="color:"/>
               </td>
               <td>
-                <span style="color:#196F3D">label-was-attached</span>
+                <span style="color:#196F3D">labels-were-scanned</span>
               </td>
               <td>
-                <span style="color:#212F3C">526301</span>
+                <span style="color:"/>
               </td>
               <td>
-                <span style="color:#212F3C">802720676</span>
+                <span style="color:#212F3C">799177290</span>
               </td>
               <td>
-                <span style="color:#212F3C">65</span>
+                <span style="color:"/>
               </td>
               <td>
-                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.</span>
+                <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86559</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>   label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-23T06:29:27Z</span> where:<span style="color:#196F3D">github</span> </td>
+              <td> _id:<span style="color:#212F3C">86768</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40268,28 +40478,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86576</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">98</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">799177290</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">86577</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">91</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86776</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">67</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -40310,13 +40499,13 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">86578</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">73</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">86777</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">31</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
           </tbody>
         </table>
       </article>
       <footer class="smaller">
-        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-07-31T05:10:54Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 1917 facts, 714044 bytes, version 0.2.1.</p>
+        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-07-31T06:11:55Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 1926 facts, 719759 bytes, version 0.2.1.</p>
       </footer>
     </section>
   </body>
