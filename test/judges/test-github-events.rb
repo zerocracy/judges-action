@@ -72,5 +72,7 @@ class TestGithubEvents < Minitest::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     $loog = Loog::VERBOSE
     require_relative '../../judges/github-events/github-events'
+    f = $fb.query('(eq what "tag-was-created")').each.to_a.first
+    assert_equal(42, f.who)
   end
 end
