@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 333.965742744
+  seconds: 365.682498374
   version: 0.21.0
   what: judges-summary
-  when: 2024-08-01 15:10:06.317973398 Z
+  when: 2024-08-01 16:11:11.473996496 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -15493,6 +15493,9 @@
   _time: 2024-07-22 15:06:17.297583474 Z
   _version: 0.2.0/0.19.0/
   area: quality
+  qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
+    average_build_success_rate) 10 (below '4 days' average_issue_lifetime) 5 (below
+    '2 days' average_pull_lifetime) 5 (below 16 average_backlog_size))"
   qos_days: 28
   qos_interval: 3
   what: pmp
@@ -15723,6 +15726,7 @@
   average_pull_lifetime: 105094.2012195122
   average_release_interval: 35452.878787878784
   average_workflow_success_rate: 0.985981308411215
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 17:05:35.169474934 Z
 - _id: 55112
@@ -15732,6 +15736,7 @@
   average_pull_lifetime: 105094.2012195122
   average_release_interval: 35452.878787878784
   average_workflow_success_rate: 0.985981308411215
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 17:08:42.171438362 Z
 - _id: 55114
@@ -15806,6 +15811,7 @@
 - _id: 55192
   _time: 2024-07-22 18:06:14.384248489 Z
   _version: 0.2.0/0.19.0/0.0.33
+  composite: 0.0
   what: quality-of-service
   when: 2024-07-22 18:06:14.384375388 Z
 - _id: 55284
@@ -15815,6 +15821,7 @@
   average_pull_lifetime: 105094.2012195122
   average_release_interval: 35452.878787878784
   average_workflow_success_rate: 0.9861111111111112
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 18:08:35.332061051 Z
 - _id: 55286
@@ -15841,6 +15848,7 @@
   average_pull_lifetime: 103834.93373493975
   average_release_interval: 35088.477611940296
   average_workflow_success_rate: 0.985897435897436
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 19:05:18.359152674 Z
 - _id: 55453
@@ -15850,6 +15858,7 @@
   average_pull_lifetime: 103834.93373493975
   average_release_interval: 35088.477611940296
   average_workflow_success_rate: 0.985897435897436
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 19:08:22.547925935 Z
 - _id: 55455
@@ -16074,6 +16083,7 @@
   average_pull_lifetime: 103213.20359281437
   average_release_interval: 35088.477611940296
   average_workflow_success_rate: 0.985418265541059
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 20:05:50.761649448 Z
 - _id: 55634
@@ -16081,6 +16091,7 @@
   _version: 0.2.0/0.19.0/0.0.33
   average_release_interval: 35088.477611940296
   average_workflow_success_rate: 0.985418265541059
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 20:08:47.779561611 Z
 - _id: 55636
@@ -16173,6 +16184,7 @@
   average_pull_lifetime: 103213.20359281437
   average_release_interval: 35088.477611940296
   average_workflow_success_rate: 0.9846821547102375
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 21:05:37.954945754 Z
 - _id: 55808
@@ -16182,6 +16194,7 @@
   average_pull_lifetime: 103213.20359281437
   average_release_interval: 35088.477611940296
   average_workflow_success_rate: 0.9847133757961783
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 21:08:31.927954816 Z
 - _id: 55810
@@ -16293,6 +16306,7 @@
   average_pull_lifetime: 103709.18072289157
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.982111363063744
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 22:05:26.569248726 Z
 - _id: 55983
@@ -16302,6 +16316,7 @@
   average_pull_lifetime: 103709.18072289157
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.982111363063744
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 22:08:36.143719740 Z
 - _id: 55985
@@ -16443,6 +16458,7 @@
   average_pull_lifetime: 103381.92814371258
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.981859410430839
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 23:05:33.076183132 Z
 - _id: 56162
@@ -16452,6 +16468,7 @@
   average_pull_lifetime: 103381.92814371258
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.981859410430839
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-22 23:08:27.379938959 Z
 - _id: 56166
@@ -16520,6 +16537,7 @@
   average_pull_lifetime: 53844.60248447205
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.9815610002525891
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 00:17:54.938650293 Z
 - _id: 56249
@@ -16543,6 +16561,7 @@
   average_pull_lifetime: 53844.60248447205
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.9815610002525891
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 00:21:02.450594738 Z
 - _id: 56339
@@ -16585,6 +16604,7 @@
   average_issue_lifetime: 148107.63095238095
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.9813084112149533
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 01:31:52.011558053 Z
 - _id: 56510
@@ -16594,6 +16614,7 @@
   average_pull_lifetime: 53844.60248447205
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.9813084112149533
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 01:35:03.155185436 Z
 - _id: 56512
@@ -16689,6 +16710,7 @@
   average_pull_lifetime: 53161.35365853659
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.9780247537256883
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 02:19:17.431493548 Z
 - _id: 56686
@@ -16698,6 +16720,7 @@
   average_pull_lifetime: 53161.35365853659
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.9780247537256883
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 02:22:23.744340520 Z
 - _id: 56688
@@ -16913,6 +16936,7 @@
   average_pull_lifetime: 52840.38181818182
   average_release_interval: 34739.25
   average_workflow_success_rate: 0.9766917293233083
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 03:06:58.007733608 Z
 - _id: 56784
@@ -16940,6 +16964,7 @@
   average_pull_lifetime: 52840.38181818182
   average_release_interval: 34539.23188405797
   average_workflow_success_rate: 0.9766917293233083
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-23 03:10:20.187406277 Z
 - _id: 56877
@@ -20078,6 +20103,7 @@
   average_issue_lifetime: 217595.2987012987
   average_pull_lifetime: 45511.434782608696
   average_release_interval: 36131.41935483871
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-28 06:07:08.728659721 Z
 - _id: 75676
@@ -22838,6 +22864,7 @@
 - _id: 81070
   _time: 2024-07-29 16:05:10.517363256 Z
   _version: 0.2.1/0.21.0/0.0.38
+  composite: 0.0
   what: quantity-of-deliverables
   when: 2024-07-29 16:05:10.517517516 Z
 - _id: 81082
@@ -23383,6 +23410,8 @@
   _time: 2024-07-29 19:06:15.832765296 Z
   _version: 0.2.1/0.21.0/
   area: scope
+  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
+    0.1 total_hoc_written)"
   qod_days: 28
   qod_interval: 2
   what: pmp
@@ -28524,6 +28553,7 @@
   average_pull_lifetime: 34508.2972972973
   average_release_interval: 24548.44210526316
   average_stars: 4
+  composite: 1.0
   what: quality-of-service
   when: 2024-07-31 06:07:46.877340169 Z
 - _id: 86690
@@ -29392,6 +29422,7 @@
 - _id: 87923
   _time: 2024-07-31 20:09:07.291086081 Z
   _version: 0.2.1/0.21.0/0.0.39
+  composite: 81.263
   total_commits_pushed: 984
   total_hoc_committed: 24216
   total_issues_created: 65
@@ -30632,8 +30663,36 @@
   what: reconciliation
   when: 2024-08-01 14:11:00.860701150 Z
   who: 1646020
-- _id: 91680
-  _time: 2024-08-01 14:11:29.180169863 Z
+- _id: 91683
+  _time: 2024-08-01 15:04:41.179574894 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: 2d4849007d58f23abbf4020fe0473324d8cf020a
+  default_branch: master
+  details: 'A new Git push #19582818930 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40663649067
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19582818930
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-01 14:14:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 91871
+  _time: 2024-08-01 15:10:19.411664935 Z
+  _version: 0.2.1/0.21.0/
+  awarded: 51
+  balance: 0
+  payout: 51
+  since: 2024-06-06 15:10:17.828799892 Z
+  what: reconciliation
+  when: 2024-08-01 15:10:19.411910914 Z
+  who: 2566462
+- _id: 91872
+  _time: 2024-08-01 15:10:49.076249628 Z
   _version: 0.2.1/0.21.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -30678,38 +30737,8 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 91683
-  _time: 2024-08-01 15:04:41.179574894 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  commit: 2d4849007d58f23abbf4020fe0473324d8cf020a
-  default_branch: master
-  details: 'A new Git push #19582818930 has arrived to zerocracy/judges-action, made
-    by @yegor256 (default branch is ''master''), not associated with any pull request.'
-  event_id: 40663649067
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19582818930
-  ref: refs/heads/master
-  repository: 799177290
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-08-01 14:14:18.000000000 Z
-  where: github
-  who: 526301
-- _id: 91769
-  _time: 2024-08-01 15:07:07.239117350 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  is_human: 1
-  issue: 65
-  label: enhancement
-  repository: 802720676
-  what: label-was-attached
-  when: 2024-07-23 06:29:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 91772
-  _time: 2024-08-01 15:07:12.065077569 Z
+- _id: 91962
+  _time: 2024-08-01 16:07:37.928475611 Z
   _version: 0.2.1/0.21.0/0.0.39
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -30720,87 +30749,98 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 91810
-  _time: 2024-08-01 15:08:14.528065002 Z
+- _id: 91998
+  _time: 2024-08-01 16:08:36.018808612 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40654255279
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 91811
-  _time: 2024-08-01 15:08:17.192402130 Z
+- _id: 91999
+  _time: 2024-08-01 16:08:38.519733793 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40660001082
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 91812
-  _time: 2024-08-01 15:08:19.849146193 Z
+- _id: 92000
+  _time: 2024-08-01 16:08:42.677731748 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40663649067
+  latest: 40665959572
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 91813
-  _time: 2024-08-01 15:08:22.382700286 Z
+- _id: 92001
+  _time: 2024-08-01 16:08:45.396468281 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40659693874
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 91814
-  _time: 2024-08-01 15:08:25.164707648 Z
+- _id: 92002
+  _time: 2024-08-01 16:08:48.225863081 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40661534144
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 91815
-  _time: 2024-08-01 15:08:28.016228756 Z
+- _id: 92003
+  _time: 2024-08-01 16:08:51.006443046 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40658404758
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 91827
-  _time: 2024-08-01 15:08:46.928360922 Z
+- _id: 92015
+  _time: 2024-08-01 16:09:10.120039219 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 91828
-  _time: 2024-08-01 15:08:48.267433562 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 91867
-  _time: 2024-08-01 15:09:50.631306069 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 91868
-  _time: 2024-08-01 15:09:51.988263532 Z
+- _id: 92065
+  _time: 2024-08-01 16:10:30.399412193 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 91869
-  _time: 2024-08-01 15:09:53.350038244 Z
+- _id: 92067
+  _time: 2024-08-01 16:10:33.327513232 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 91870
-  _time: 2024-08-01 15:10:06.238158863 Z
+- _id: 92072
+  _time: 2024-08-01 16:10:41.300153430 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 167
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 92089
+  _time: 2024-08-01 16:11:08.334853937 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 92090
+  _time: 2024-08-01 16:11:09.885673187 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  latest: 91
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 92091
+  _time: 2024-08-01 16:11:11.397665757 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
