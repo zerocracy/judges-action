@@ -85,18 +85,6 @@ end
 f.average_issue_lifetime = lifetime('issue')
 f.average_pull_lifetime = lifetime('pr')
 
-# Average stars and forks for repos
-stars = []
-forks = []
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.repository(repo).then do |json|
-    stars << json[:stargazers_count]
-    forks << json[:forks]
-  end
-end
-f.average_stars = stars.empty? ? 0 : stars.inject(&:+) / stars.size
-f.average_forks = forks.empty? ? 0 : forks.inject(&:+) / forks.size
-
 # Average issues
 issues = []
 Fbe.unmask_repos.each do |repo|
