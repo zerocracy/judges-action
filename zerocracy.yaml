@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 365.682498374
+  seconds: 326.636527141
   version: 0.21.0
   what: judges-summary
-  when: 2024-08-01 16:11:11.473996496 Z
+  when: 2024-08-01 17:10:00.279680894 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -30653,16 +30653,6 @@
   what: reconciliation
   when: 2024-08-01 14:10:59.300590136 Z
   who: 88084038
-- _id: 91679
-  _time: 2024-08-01 14:11:00.860454850 Z
-  _version: 0.2.1/0.21.0/
-  awarded: 79
-  balance: -79
-  payout: 79
-  since: 2024-06-06 14:10:59.330400389 Z
-  what: reconciliation
-  when: 2024-08-01 14:11:00.860701150 Z
-  who: 1646020
 - _id: 91683
   _time: 2024-08-01 15:04:41.179574894 Z
   _version: 0.2.1/0.21.0/0.0.39
@@ -30691,8 +30681,18 @@
   what: reconciliation
   when: 2024-08-01 15:10:19.411910914 Z
   who: 2566462
-- _id: 91872
-  _time: 2024-08-01 15:10:49.076249628 Z
+- _id: 92092
+  _time: 2024-08-01 16:11:21.588575724 Z
+  _version: 0.2.1/0.21.0/
+  awarded: 79
+  balance: 0
+  payout: -79
+  since: 2024-06-06 16:11:19.954603765 Z
+  what: reconciliation
+  when: 2024-08-01 16:11:21.590016407 Z
+  who: 1646020
+- _id: 92093
+  _time: 2024-08-01 16:11:48.261094900 Z
   _version: 0.2.1/0.21.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -30737,8 +30737,26 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 91962
-  _time: 2024-08-01 16:07:37.928475611 Z
+- _id: 92098
+  _time: 2024-08-01 17:04:53.823762856 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: ec46f9d4c452549f5e6ad8986a326f11d86e9c2f
+  default_branch: master
+  details: 'A new Git push #19584342809 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40666857689
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19584342809
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-01 15:44:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 92171
+  _time: 2024-08-01 17:06:50.099949987 Z
   _version: 0.2.1/0.21.0/0.0.39
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -30749,98 +30767,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 91998
-  _time: 2024-08-01 16:08:36.018808612 Z
+- _id: 92197
+  _time: 2024-08-01 17:07:32.171569763 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40654255279
+  latest: 40666438220
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 91999
-  _time: 2024-08-01 16:08:38.519733793 Z
+- _id: 92198
+  _time: 2024-08-01 17:07:34.695547135 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40660001082
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 92000
-  _time: 2024-08-01 16:08:42.677731748 Z
+- _id: 92199
+  _time: 2024-08-01 17:07:37.401165387 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40665959572
+  latest: 40667762163
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 92001
-  _time: 2024-08-01 16:08:45.396468281 Z
+- _id: 92200
+  _time: 2024-08-01 17:07:40.060414477 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40659693874
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 92002
-  _time: 2024-08-01 16:08:48.225863081 Z
+- _id: 92201
+  _time: 2024-08-01 17:07:42.797803795 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40661534144
+  latest: 40666857689
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 92003
-  _time: 2024-08-01 16:08:51.006443046 Z
+- _id: 92202
+  _time: 2024-08-01 17:07:45.563510426 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40658404758
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 92015
-  _time: 2024-08-01 16:09:10.120039219 Z
+- _id: 92214
+  _time: 2024-08-01 17:08:04.107549241 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 92065
-  _time: 2024-08-01 16:10:30.399412193 Z
+- _id: 92264
+  _time: 2024-08-01 17:09:23.947790268 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 92067
-  _time: 2024-08-01 16:10:33.327513232 Z
+- _id: 92266
+  _time: 2024-08-01 17:09:26.864094416 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 92072
-  _time: 2024-08-01 16:10:41.300153430 Z
+- _id: 92282
+  _time: 2024-08-01 17:09:52.138239047 Z
   _version: 0.2.1/0.21.0/0.0.39
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  issue: 65
-  label: enhancement
-  repository: 802720676
-  what: label-was-attached
-  when: 2024-07-23 06:29:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 92089
-  _time: 2024-08-01 16:11:08.334853937 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  latest: 98
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 92090
-  _time: 2024-08-01 16:11:09.885673187 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  latest: 91
+  latest: 0
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 92091
-  _time: 2024-08-01 16:11:11.397665757 Z
+- _id: 92286
+  _time: 2024-08-01 17:09:58.677624946 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 73
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 92287
+  _time: 2024-08-01 17:10:00.200977773 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
