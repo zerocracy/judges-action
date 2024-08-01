@@ -74,5 +74,6 @@ class TestGithubEvents < Minitest::Test
     require_relative '../../judges/github-events/github-events'
     f = $fb.query('(eq what "tag-was-created")').each.to_a.first
     assert_equal(42, f.who)
+    assert_equal('foo', f.tag)
   end
 end
