@@ -93,3 +93,14 @@ Fbe.unmask_repos.each do |repo|
   end
 end
 f.average_backlog_size = issues.empty? ? 0 : issues.inject(&:+) / issues.size
+
+# Rejection PR rate
+pulls = 0
+rejected = 0
+Fbe.unmask_repos.each do |repo|
+  pulls += Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{$SINCE.utc.iso8601[0..10]}")[:total_count]
+  rejected += Fbe.octo.search_issues(
+    "repo:#{repo} type:pr is:unmerged closed:>#{$SINCE.utc.iso8601[0..10]}"
+  )[:total_count]
+end
+f.average_pull_rejection_rate = pulls.zero? ? 0 : rejected.to_f / pulls
