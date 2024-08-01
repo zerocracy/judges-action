@@ -51,12 +51,6 @@ class TestLabelWasAttached < Minitest::Test
         'content-type': 'application/json'
       }
     )
-
-    # stub_request(:get, 'https://api.github.com/user/42').to_return(
-    #   body: { id: 42, login: 'torvalds' }.to_json, headers: {
-    #     'content-type': 'application/json'
-    #   }
-    # )
     $fb = Factbase.new
     $global = {}
     $local = {}
