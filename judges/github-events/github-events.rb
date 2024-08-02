@@ -43,10 +43,6 @@ Fbe.iterate do
     raise Factbase::Rollback
   end
 
-  def self.reviewer?(json)
-    json[:payload][:pull_request][:user][:id] != json[:payload][:review][:user][:id]
-  end
-
   def self.fill_up_event(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
@@ -97,7 +93,7 @@ Fbe.iterate do
       end
 
     when 'PullRequestReviewEvent'
-      if reviewer?(json) && json[:payload][:action] == 'created'
+      if json[:payload][:pull_request][:user][:id].to_i != fact.who && json[:payload][:action] == 'created'
         fact.issue = json[:payload][:pull_request][:number]
         fact.what = 'pull-was-reviewed'
         pull = Fbe.octo.pull_request(json[:repo][:name], fact.issue)
