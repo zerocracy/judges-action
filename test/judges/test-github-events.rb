@@ -36,29 +36,14 @@ require 'judges/options'
 class TestGithubEvents < Minitest::Test
   def test_create_tag_event
     WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
-      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
-      }
-    )
-    stub_request(:get, 'https://api.github.com/repositories/42').to_return(
-      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
-      }
-    )
-    stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
-      body: [
-        {
-          id: 42,
-          created_at: Time.now.to_s,
-          actor: { id: 42 },
-          type: 'CreateEvent',
-          repo: { id: 42 },
-          payload: { ref_type: 'tag', ref: 'foo' }
-        }
-      ].to_json,
-      headers: {
-        'content-type': 'application/json'
+    stub_event(
+      {
+        id: 42,
+        created_at: Time.now.to_s,
+        actor: { id: 42 },
+        type: 'CreateEvent',
+        repo: { id: 42 },
+        payload: { ref_type: 'tag', ref: 'foo' }
       }
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
@@ -71,9 +56,46 @@ class TestGithubEvents < Minitest::Test
     $local = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     $loog = Loog::VERBOSE
-    require_relative '../../judges/github-events/github-events'
+    load(File.join(__dir__, '../../judges/github-events/github-events.rb'))
     f = $fb.query('(eq what "tag-was-created")').each.to_a.first
     assert_equal(42, f.who)
     assert_equal('foo', f.tag)
+  end
+
+  def test_skip_watch_event
+    WebMock.disable_net_connect!
+    stub_event(
+      {
+        id: 42,
+        created_at: Time.now.to_s,
+        action: 'created',
+        type: 'WatchEvent',
+        repo: { id: 42 }
+      }
+    )
+    $fb = Factbase.new
+    load(File.join(__dir__, '../../judges/github-events/github-events.rb'))
+    assert_equal(0, $fb.size)
+  end
+
+  private
+
+  def stub_event(json)
+    stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
+      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repositories/42').to_return(
+      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
+      body: [json].to_json,
+      headers: {
+        'content-type': 'application/json'
+      }
+    )
   end
 end
