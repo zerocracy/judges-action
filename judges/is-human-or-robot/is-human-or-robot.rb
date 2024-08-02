@@ -31,7 +31,7 @@ Fbe.conclude do
   consider do |f|
     json = Fbe.octo.user(f.who)
     type = json[:type]
-    if type == 'Bot' || json[:login] == 'rultor'
+    if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
       f.is_human = 0
       $loog.info("GitHub user ##{f.who} is actually a bot")
     else
