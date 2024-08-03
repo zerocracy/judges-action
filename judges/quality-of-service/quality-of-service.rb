@@ -43,6 +43,7 @@ end
 f = Fbe.fb.insert
 f.what = $judge
 f.when = Time.now
+f.since = $SINCE
 
 # Workflow runs:
 total = 0

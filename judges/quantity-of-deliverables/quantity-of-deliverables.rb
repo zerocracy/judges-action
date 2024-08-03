@@ -43,6 +43,7 @@ end
 f = Fbe.fb.insert
 f.what = $judge
 f.when = Time.now
+f.since = $SINCE
 
 # Number of commits pushed and their hits-of-code:
 commits = 0

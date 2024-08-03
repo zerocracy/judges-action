@@ -36,6 +36,9 @@ input:
     when: 2024-01-01T00:00:00
 expected:
   - /fb[count(f)=3]
+  - /fb/f[what='quality-of-service']
+  - /fb/f[when]
+  - /fb/f[since]
   - /fb/f[average_issue_lifetime = 0]
   - /fb/f[average_pull_lifetime = 0]
   - /fb/f[average_release_interval != 0]
