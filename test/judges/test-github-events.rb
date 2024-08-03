@@ -146,7 +146,7 @@ class TestGithubEvents < Minitest::Test
           }
         },
         {
-          id: '40623323541',
+          id: '40623323542',
           type: 'PullRequestReviewEvent',
           public: true,
           created_at: '2024-07-31 12:45:09 UTC',
@@ -209,6 +209,11 @@ class TestGithubEvents < Minitest::Test
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/526200').to_return(
+      body: { id: 526_200, login: 'test' }.to_json, headers: {
         'content-type': 'application/json'
       }
     )
