@@ -51,18 +51,14 @@ class TestLabelWasAttached < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    $fb = Factbase.new
-    $global = {}
-    $local = {}
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
-    $loog = Loog::VERBOSE
-    $judge = 'label-was-attached'
-    op = $fb.insert
+    fb = Factbase.new
+    op = fb.insert
     op.what = 'issue-was-opened'
     op.repository = 42
     op.issue = 42
-    require_relative '../../judges/label-was-attached/label-was-attached'
-    f = $fb.query('(eq what "label-was-attached")').each.to_a.first
+    load_it('label-was-attached', fb)
+    load(File.join(__dir__, '../../judges/label-was-attached/label-was-attached.rb'))
+    f = fb.query('(eq what "label-was-attached")').each.to_a.first
     assert(!f.nil?)
     assert_equal(42, f.who)
     assert_equal('bug', f.label)
