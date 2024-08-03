@@ -2,7 +2,7 @@
 
 # MIT License
 #
-# Copyright (c) 2024 Zerocracy
+# Copyright (c) 2009-2024 Zerocracy
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -22,17 +22,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-source 'https://rubygems.org'
+ENV['RACK_ENV'] = 'test'
 
-gem 'decoor', '~>0.0'
-gem 'factbase', '~>0.0'
-gem 'fbe', '~>0.0'
-gem 'judges', '~>0.8'
-gem 'minitest', '5.24.1', require: false
-gem 'minitest-reporters', '1.7.1', require: false
-gem 'others', '~>0.0'
-gem 'rake', '13.2.1'
-gem 'rubocop', '1.65.1', require: false
-gem 'simplecov', '0.22.0', require: false
-gem 'simplecov-cobertura', '~> 2.1', require: false
-gem 'webmock', '3.23.1', require: false
+require 'simplecov'
+SimpleCov.start
+
+require 'simplecov-cobertura'
+SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+
+require 'minitest/reporters'
+Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
+
+require 'minitest/autorun'
+
+class Minitest::Test
+  def load_it(judge, fb)
+    $fb = fb
+    $global = {}
+    $local = {}
+    $judge = judge
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
+  end
+end

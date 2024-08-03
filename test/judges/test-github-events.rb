@@ -51,13 +51,9 @@ class TestGithubEvents < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    $fb = Factbase.new
-    $global = {}
-    $local = {}
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
-    $loog = Loog::VERBOSE
-    load(File.join(__dir__, '../../judges/github-events/github-events.rb'))
-    f = $fb.query('(eq what "tag-was-created")').each.to_a.first
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "tag-was-created")').each.to_a.first
     assert_equal(42, f.who)
     assert_equal('foo', f.tag)
   end
@@ -73,9 +69,9 @@ class TestGithubEvents < Minitest::Test
         repo: { id: 42 }
       }
     )
-    $fb = Factbase.new
-    load(File.join(__dir__, '../../judges/github-events/github-events.rb'))
-    assert_equal(0, $fb.size)
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.size)
   end
 
   private
