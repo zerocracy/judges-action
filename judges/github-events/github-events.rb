@@ -95,6 +95,8 @@ Fbe.iterate do
     when 'PullRequestReviewEvent'
       case json[:payload][:action]
       when 'created'
+        skip_event(json) if json[:payload][:pull_request][:user][:id].to_i == fact.who
+
         fact.issue = json[:payload][:pull_request][:number]
         fact.what = 'pull-was-reviewed'
         pull = Fbe.octo.pull_request(json[:repo][:name], fact.issue)

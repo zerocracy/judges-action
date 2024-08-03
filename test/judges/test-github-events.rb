@@ -74,6 +74,330 @@ class TestGithubEvents < Minitest::Test
     assert_equal(1, fb.size)
   end
 
+  def test_skip_event_when_user_equals_pr_author
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
+      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repositories/42').to_return(
+      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
+      body: [
+        {
+          id: '40623323541',
+          type: 'PullRequestReviewEvent',
+          public: true,
+          created_at: '2024-07-31 12:45:09 UTC',
+          actor: {
+            id: 42,
+            login: 'yegor256',
+            display_login: 'yegor256',
+            gravatar_id: '',
+            url: 'https://api.github.com/users/yegor256'
+          },
+          repo: {
+            id: 42,
+            name: 'yegor256/judges',
+            url: 'https://api.github.com/repos/yegor256/judges'
+          },
+          payload: {
+            action: 'created',
+            review: {
+              id: 2_210_067_609,
+              node_id: 'PRR_kwDOL6GCO86DuvSZ',
+              user: {
+                login: 'yegor256',
+                id: 42,
+                node_id: 'MDQ6VXNlcjUyNjMwMQ==',
+                type: 'User'
+              },
+              pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              author_association: 'OWNER',
+              _links: {
+                html: {
+                  href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
+                },
+                pull_request: {
+                  href: 'https://api.github.com/repos/yegor256/judges/pulls/93'
+                }
+              }
+            },
+            pull_request: {
+              url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              id: 1_990_323_142,
+              node_id: 'PR_kwDOL6GCO852oevG',
+              number: 93,
+              state: 'open',
+              locked: false,
+              title: 'allows to push gizpped factbase',
+              user: {
+                login: 'test',
+                id: 526_200,
+                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+                type: 'User',
+                site_admin: false
+              }
+            }
+          }
+        },
+        {
+          id: '40623323542',
+          type: 'PullRequestReviewEvent',
+          public: true,
+          created_at: '2024-07-31 12:45:09 UTC',
+          actor: {
+            id: 526_200,
+            login: 'test',
+            display_login: 'test',
+            gravatar_id: '',
+            url: 'https://api.github.com/users/yegor256'
+          },
+          repo: {
+            id: 42,
+            name: 'yegor256/judges',
+            url: 'https://api.github.com/repos/yegor256/judges'
+          },
+          payload: {
+            action: 'created',
+            review: {
+              id: 2_210_067_609,
+              node_id: 'PRR_kwDOL6GCO86DuvSZ',
+              user: {
+                login: 'test',
+                id: 526_200,
+                node_id: 'MDQ6VXNlcjUyNjMwMQ==',
+                type: 'User'
+              },
+              pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              author_association: 'NONE',
+              _links: {
+                html: {
+                  href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
+                },
+                pull_request: {
+                  href: 'https://api.github.com/repos/yegor256/judges/pulls/93'
+                }
+              }
+            },
+            pull_request: {
+              url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              id: 1_990_323_142,
+              node_id: 'PR_kwDOL6GCO852oevG',
+              number: 93,
+              state: 'open',
+              locked: false,
+              title: 'allows to push gizpped factbase',
+              user: {
+                login: 'test',
+                id: 526_200,
+                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+                type: 'User',
+                site_admin: false
+              }
+            }
+          }
+        }
+      ].to_json,
+      headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/42').to_return(
+      body: { id: 42, login: 'torvalds' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/526200').to_return(
+      body: { id: 526_200, login: 'test' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/yegor256/judges/pulls/93')
+      .to_return(
+        status: 200,
+        body: {
+          default_branch: 'master',
+          additions: 1,
+          deletions: 1,
+          comments: 1,
+          review_comments: 2,
+          commits: 2,
+          changed_files: 3
+        }.to_json,
+        headers: { 'content-type': 'application/json' }
+      )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "pull-was-reviewed")').each.to_a
+    assert_equal(42, f.first.who)
+    assert_nil(f[1])
+  end
+
+  def test_watch_pull_request_review_events
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
+      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repositories/42').to_return(
+      body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
+      body: [
+        {
+          id: '40623323541',
+          type: 'PullRequestReviewEvent',
+          public: true,
+          created_at: '2024-07-31 12:45:09 UTC',
+          actor: {
+            id: 42,
+            login: 'yegor256',
+            display_login: 'yegor256',
+            gravatar_id: '',
+            url: 'https://api.github.com/users/yegor256'
+          },
+          repo: {
+            id: 42,
+            name: 'yegor256/judges',
+            url: 'https://api.github.com/repos/yegor256/judges'
+          },
+          payload: {
+            action: 'created',
+            review: {
+              id: 2_210_067_609,
+              node_id: 'PRR_kwDOL6GCO86DuvSZ',
+              user: {
+                login: 'yegor256',
+                id: 42,
+                node_id: 'MDQ6VXNlcjUyNjMwMQ==',
+                type: 'User'
+              },
+              pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              author_association: 'OWNER',
+              _links: {
+                html: {
+                  href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
+                },
+                pull_request: {
+                  href: 'https://api.github.com/repos/yegor256/judges/pulls/93'
+                }
+              }
+            },
+            pull_request: {
+              url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              id: 1_990_323_142,
+              node_id: 'PR_kwDOL6GCO852oevG',
+              number: 93,
+              state: 'open',
+              locked: false,
+              title: 'allows to push gizpped factbase',
+              user: {
+                login: 'test',
+                id: 526_200,
+                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+                type: 'User',
+                site_admin: false
+              }
+            }
+          }
+        },
+        {
+          id: '40623323542',
+          type: 'PullRequestReviewEvent',
+          public: true,
+          created_at: '2024-07-31 12:46:09 UTC',
+          actor: {
+            id: 42,
+            login: 'yegor256',
+            display_login: 'yegor256',
+            gravatar_id: '',
+            url: 'https://api.github.com/users/yegor256'
+          },
+          repo: {
+            id: 42,
+            name: 'yegor256/judges',
+            url: 'https://api.github.com/repos/yegor256/judges'
+          },
+          payload: {
+            action: 'created',
+            review: {
+              id: 2_210_067_609,
+              node_id: 'PRR_kwDOL6GCO86DuvSZ',
+              user: {
+                login: 'yegor256',
+                id: 42,
+                node_id: 'MDQ6VXNlcjUyNjMwMQ==',
+                type: 'User'
+              },
+              pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              author_association: 'OWNER',
+              _links: {
+                html: {
+                  href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
+                },
+                pull_request: {
+                  href: 'https://api.github.com/repos/yegor256/judges/pulls/93'
+                }
+              }
+            },
+            pull_request: {
+              url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              id: 1_990_323_142,
+              node_id: 'PR_kwDOL6GCO852oevG',
+              number: 93,
+              state: 'open',
+              locked: false,
+              title: 'allows to push gizpped factbase',
+              user: {
+                login: 'test',
+                id: 526_200,
+                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+                type: 'User',
+                site_admin: false
+              }
+            }
+          }
+        }
+      ].to_json,
+      headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/42').to_return(
+      body: { id: 42, login: 'torvalds' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/yegor256/judges/pulls/93')
+      .to_return(
+        status: 200,
+        body: {
+          default_branch: 'master',
+          additions: 1,
+          deletions: 1,
+          comments: 1,
+          review_comments: 2,
+          commits: 2,
+          changed_files: 3
+        }.to_json,
+        headers: { 'content-type': 'application/json' }
+      )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "pull-was-reviewed")').each.to_a
+    assert_equal(2, f.count)
+    assert_equal(42, f.first.who)
+    assert_equal(42, f[1].who)
+  end
+
   private
 
   def stub_event(json)
