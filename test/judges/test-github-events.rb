@@ -226,13 +226,9 @@ class TestGithubEvents < Minitest::Test
         }.to_json,
         headers: { 'content-type': 'application/json' }
       )
-    $fb = Factbase.new
-    $global = {}
-    $local = {}
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
-    $loog = Loog::VERBOSE
-    load(File.join(__dir__, '../../judges/github-events/github-events.rb'))
-    f = $fb.query('(eq what "pull-was-reviewed")').each.to_a
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "pull-was-reviewed")').each.to_a
     assert_equal(42, f.first.who)
     assert_nil(f[1])
   end
@@ -389,13 +385,9 @@ class TestGithubEvents < Minitest::Test
         }.to_json,
         headers: { 'content-type': 'application/json' }
       )
-    $fb = Factbase.new
-    $global = {}
-    $local = {}
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
-    $loog = Loog::VERBOSE
-    load(File.join(__dir__, '../../judges/github-events/github-events.rb'))
-    f = $fb.query('(eq what "pull-was-reviewed")').each.to_a
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "pull-was-reviewed")').each.to_a
     assert_equal(2, f.count)
     assert_equal(42, f.first.who)
     assert_equal(42, f[1].who)
