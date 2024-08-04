@@ -49,7 +49,7 @@
           <tbody>
             <tr>
               <td>
-                <span style="color:#2471A3">2024-08-02T04:11:46Z</span>
+                <span style="color:#2471A3">2024-08-04T04:11:18Z</span>
               </td>
               <td>
                 <span style="color:#196F3D">judges-summary</span>
@@ -66,7 +66,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">379.367726192</span> version:<span style="color:#196F3D">0.21.0</span>  when:<span style="color:#2471A3">2024-08-02T04:11:46Z</span></td>
+              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> error:<span style="color:#196F3D">GET https://api.github.com/repositories/728758275/issues/161/timeline?per_page=100: 404 - Not Found // See: https://docs.github.com/rest/issues/timeline#list-timeline-events-for-an-issue</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">323.106500728</span> version:<span style="color:#196F3D">0.21.0</span>  when:<span style="color:#2471A3">2024-08-04T04:11:18Z</span></td>
             </tr>
             <tr>
               <td>
@@ -43750,35 +43750,6 @@
             </tr>
             <tr>
               <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">pmp</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">93948</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 100) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b1 (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee2 7) (set b2 (if (gte hoc hoc_threshold) (times -1 fee2) 0)) (give b2 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${fee2} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 400) (let fee3 15) (set b3 (if (gte hoc hoc_threshold2) (times -1 fee3) 0)) (give b3 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${fee3} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let fee4 15) (set b4 (if (eq reviews 0) (times -1 fee4) 0)) (give b4 'for the lack of code review') 'deduct ${fee4} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set b5 (times comments (times -1 comments_k))) (set b5 (between b5 comments_min comments_max)) (give b5 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let fee5 10) (let comments_needed 5) (set b6 (if (lt comments comments_needed) (times -1 fee5) 0)) (give b6 'for too few (${comments}) comments') 'deduct ${fee5} points if there were less than ${comments_needed} comments made during review') (aka (let fee6 10) (let hoc_needed 20) (set b7 (if (lt hoc hoc_needed) (times -1 fee6) 0)) (give b7 'for too few (${hoc}) hits-of-code') 'deduct ${fee6} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set b8 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b8 'to not go over the cap') (let min_bonus 5) (set b9 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b9 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> code_review_was_rewarded:<span style="color:#196F3D">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set b1 (if (eq self 1) (times -1 self_fee) 0)) (give b1 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set b2 (times hoc hoc_k)) (set b2 (between b2 hoc_min hoc_max)) (set b2 (if (eq self 1) 0 b2)) (give b2 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let fee1 10) (let comments_needed 6) (set b3 (if (lt comments comments_needed) (times -1 fee1) 0)) (give b3 'for too few (${comments}) comments') 'deduct ${fee1} points if there were less than ${comments_needed} comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set b4 (times comments comments_k)) (set b4 (between b4 comments_min comments_max)) (set b4 (if (eq self 1) 0 b4)) (give b4 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let fee2 10) (let hoc_needed 15) (set b5 (if (lt hoc hoc_needed) (times -1 fee2) 0)) (give b5 'for too few (${hoc}) hits-of-code') 'deduct ${fee2} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set b6 (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give b6 'to not go over the cap') (let min_bonus 5) (set b7 (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give b7 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> days_of_running_balance:<span style="color:#212F3C">56</span> days_to_reward:<span style="color:#212F3C">7</span> dud_was_punished:<span style="color:#196F3D">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</span> enhancement_suggestion_was_rewarded:<span style="color:#196F3D">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> master_punish_days:<span style="color:#212F3C">28</span> published_release_was_rewarded:<span style="color:#196F3D">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points'))</span> push_to_master_was_punished:<span style="color:#196F3D">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</span> resolved_bug_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</span> </td>
-            </tr>
-            <tr>
-              <td>
                 <span style="color:#2471A3">2024-08-02T03:38:49Z</span>
               </td>
               <td>
@@ -43968,216 +43939,6 @@
             </tr>
             <tr>
               <td>
-                <span style="color:#2471A3">2024-07-26T05:37:03Z</span>
-              </td>
-              <td>
-                <span style="color:#196F3D">label-was-attached</span>
-              </td>
-              <td>
-                <span style="color:#212F3C">526301</span>
-              </td>
-              <td>
-                <span style="color:#212F3C">820463873</span>
-              </td>
-              <td>
-                <span style="color:#212F3C">37</span>
-              </td>
-              <td>
-                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.</span>
-              </td>
-              <td> _id:<span style="color:#212F3C">94034</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">799113787</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94060</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40671739437</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">798641472</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94061</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40672612985</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">799177290</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94062</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40682104447</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">802720676</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94063</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40682491710</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">728758275</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94064</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40681988598</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">820463873</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94065</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40681990462</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">820463873</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94083</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">728758275</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94128</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">798641472</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">94130</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
                 <span style="color:#2471A3">2024-08-02T03:38:48Z</span>
               </td>
               <td>
@@ -44195,14 +43956,2149 @@
               <td>
                 <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#214.</span>
               </td>
-              <td> _id:<span style="color:#212F3C">94146</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>   label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-08-02T03:38:48Z</span> where:<span style="color:#196F3D">github</span> </td>
+              <td> _id:<span style="color:#212F3C">94146</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-08-02T03:38:48Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T04:48:34Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-merged</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">90</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/pages-action#90 has been closed by @rultor, with 4 HoC and 2 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94158</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">renovate/fbe-0.x-lockfile</span> comments:<span style="color:#212F3C">2</span>  event_id:<span style="color:#212F3C">40683153931</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> hoc:<span style="color:#212F3C">4</span> is_human:<span style="color:#212F3C">0</span>    when:<span style="color:#2471A3">2024-08-02T04:48:34Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T04:48:34Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-was-contributed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">29139614</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">90</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/pages-action#90 with 4 HoC created by @renovate[bot] was merged by @rultor after 42 minutes of being in review and 2 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94347</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">94158</span> comments:<span style="color:#212F3C">2</span>  hoc:<span style="color:#212F3C">4</span> is_human:<span style="color:#212F3C">0</span>  merger:<span style="color:#212F3C">8086956</span>  seconds:<span style="color:#212F3C">2578</span>  when:<span style="color:#2471A3">2024-08-02T04:48:34Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T07:05:40Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">dimensions-of-terrain</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">94571</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> total_forks:<span style="color:#212F3C">11</span> total_releases:<span style="color:#212F3C">234</span> total_repositories:<span style="color:#212F3C">6</span> total_stars:<span style="color:#212F3C">27</span>  when:<span style="color:#2471A3">2024-08-02T07:05:40Z</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T07:03:15Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">93</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request yegor256/judges#93 has been reviewed by @yegor256 with 82 HoC and 19 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94572</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">19</span> commits:<span style="color:#212F3C">1</span>  event_id:<span style="color:#212F3C">40685823188</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">4</span> hoc:<span style="color:#212F3C">82</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T07:03:15Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T06:52:04Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been reviewed by @yegor256 with 140 HoC and 4 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94576</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">4</span> commits:<span style="color:#212F3C">2</span>  event_id:<span style="color:#212F3C">40685543510</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">2</span> hoc:<span style="color:#212F3C">140</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T06:52:04Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T06:45:10Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been opened by @Suban05.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94578</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">209</span>  event_id:<span style="color:#212F3C">40685379383</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T06:45:10Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T06:52:04Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 with 140 HoC created by @Suban05 was reviewed by @yegor256 after 6 minutes and 4 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94773</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> author:<span style="color:#212F3C">88084038</span> cause:<span style="color:#212F3C">94576</span> comments:<span style="color:#212F3C">4</span>  hoc:<span style="color:#212F3C">140</span> is_human:<span style="color:#212F3C">1</span>   seconds:<span style="color:#212F3C">414</span>  when:<span style="color:#2471A3">2024-08-02T06:52:04Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T08:05:28Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been reviewed by @Suban05 with 140 HoC and 5 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94777</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">5</span> commits:<span style="color:#212F3C">2</span>  event_id:<span style="color:#212F3C">40687485209</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">2</span> hoc:<span style="color:#212F3C">140</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T08:05:28Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T08:30:44Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been reviewed by @Suban05 with 140 HoC and 7 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94969</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">7</span> commits:<span style="color:#212F3C">2</span>  event_id:<span style="color:#212F3C">40688215396</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">2</span> hoc:<span style="color:#212F3C">140</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T08:30:44Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T08:29:42Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been reviewed by @yegor256 with 140 HoC and 7 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">94970</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">7</span> commits:<span style="color:#212F3C">2</span>  event_id:<span style="color:#212F3C">40688184682</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">2</span> hoc:<span style="color:#212F3C">140</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T08:29:42Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T10:05:08Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-merged</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">49</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/fbe#49 has been closed by @yegor256, with 17 HoC and 2 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95392</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">46</span> comments:<span style="color:#212F3C">2</span>  event_id:<span style="color:#212F3C">40691068981</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> hoc:<span style="color:#212F3C">17</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T10:05:08Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T10:03:13Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">2566462</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">49</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/fbe#49 has been reviewed by @Yegorov with 17 HoC and 3 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95393</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">3</span> commits:<span style="color:#212F3C">1</span>  event_id:<span style="color:#212F3C">40691011407</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">3</span> hoc:<span style="color:#212F3C">17</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T10:03:13Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T10:05:08Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-was-contributed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">2566462</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">49</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/fbe#49 with 17 HoC created by @Yegorov was merged by @yegor256 after 1 days of being in review and 2 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95580</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">95392</span> comments:<span style="color:#212F3C">2</span>  hoc:<span style="color:#212F3C">17</span> is_human:<span style="color:#212F3C">1</span>  merger:<span style="color:#212F3C">526301</span>  seconds:<span style="color:#212F3C">136383</span>  when:<span style="color:#2471A3">2024-08-02T10:05:08Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T11:01:26Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">216</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#216 has been opened by @Suban05.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95584</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40692670660</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T11:01:26Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T11:55:13Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">216</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#bug' label was attached by @yegor256 to the issue zerocracy/judges-action#216.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95700</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">bug</span>   when:<span style="color:#2471A3">2024-08-02T11:55:13Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T11:51:58Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19597736609 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95715</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">a1391837d9733e58ab26bacef211fd9a69a5f7e6</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40693975873</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19597736609</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-02T11:51:58Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T11:55:13Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">bug-was-accepted</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">216</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">In the repository #799177290, the user #526301 attached the '#bug' label to the issue #216 reported by the user #88084038; this means that a bug was-accepted as valid, by the project team.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95808</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">95700</span>  is_human:<span style="color:#212F3C">1</span>  reporter:<span style="color:#212F3C">88084038</span>   when:<span style="color:#2471A3">2024-08-02T11:55:13Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T12:14:06Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-contribution-was-rewarded</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">2566462</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">49</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to reward @Yegorov for the code contributed in zerocracy/fbe#49, the reward amount is 15.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95809</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">15</span> cause:<span style="color:#212F3C">95580</span>  greeting:<span style="color:#196F3D">Thanks for the contribution! You've earned +15 points for this: +30 as a basis; -5 for very few (2) comments; -10 for too few (17) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running balance is [+76](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). </span> href:<span style="color:#196F3D">https://github.com/zerocracy/fbe/issues/49/#issuecomment-2265226525</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T12:14:06Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Contributed code in zerocracy/fbe#49</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T12:14:09Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-review-was-rewarded</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">49</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to reward @yegor256 for the code review in zerocracy/fbe#49, the reward amount is 15.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95810</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">15</span> cause:<span style="color:#212F3C">93947</span>  greeting:<span style="color:#196F3D">I've analyzed the work policy document and reviewed the draft message to the programmer. Here's a rewritten version of the message that's more conversational, incorporates relevant points from the policy, and aims to be more motivating:
+
+Hey there! Thanks for jumping in on this review. I've got some good news and some room for improvement for you.
+
+So, here's the scoop: You've earned 15 points for this review. Not bad, but let me break it down for you:
+
+You started with a solid 25-point base - that's automatic for every review. Nice! 
+
+Now, I noticed you only left one comment. The policy encourages more engagement, aiming for at least 6 comments to avoid a 10-point deduction. Unfortunately, we had to apply that deduction here.
+
+But hey, look on the bright side! You didn't review your own code (that would've cost you 40 points), and you showed up to participate. That's great!
+
+Want to boost your points next time? Here are some tips:
+1. Leave more comments - you can earn up to 20 points for that!
+2. If you're reviewing a larger piece of code (15+ hits-of-code), you'll avoid another 10-point deduction.
+3. The more substantial the code review, the more points you can rack up (up to 40 points for the code size alone).
+
+Your current balance is -579, but don't let that discourage you. Every review is a chance to climb up. Remember, you can earn up to 100 points per review!
+
+Keep at it, and let's see those points soar. You've got this!</span> href:<span style="color:#196F3D">https://github.com/zerocracy/fbe/issues/49/#issuecomment-2265226566</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T12:14:09Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Reviewed code in zerocracy/fbe#49</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T11:57:57Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">93</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request yegor256/judges#93 has been reviewed by @Suban05 with 82 HoC and 21 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95812</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">21</span> commits:<span style="color:#212F3C">1</span>  event_id:<span style="color:#212F3C">40694129321</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">4</span> hoc:<span style="color:#212F3C">82</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T11:57:57Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T12:30:09Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19598289688 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95815</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">893bc11615baf5e8a95f3ed57a36bf2b4a45f0a2</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40695049351</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19598289688</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-02T12:30:09Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T12:44:31Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">83453843</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">161</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/baza#161 has been opened by @h1alexbel.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">95818</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40695470368</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T12:44:31Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T13:12:58Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">bug-report-was-rewarded</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">216</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to reward @Suban05 for the bug reported in zerocracy/judges-action#216, the reward amount is 15.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96013</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">15</span> cause:<span style="color:#212F3C">95808</span>  greeting:<span style="color:#196F3D">Hey there, bug hunter! 🐛
+
+Awesome job spotting that glitch! You've just bagged yourself 15 points - way to go! 🎉
+
+Finding bugs is like a treasure hunt that makes our project better. Got an eagle eye for anything else that seems off? Don't be shy, [report away](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)!
+
+Your bug-busting balance is now [+99](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep it up!
+
+Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">https://github.com/zerocracy/judges-action/issues/216/#issuecomment-2265380820</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T13:12:58Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Reported bug in zerocracy/judges-action#216</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T13:51:27Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">83453843</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">217</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#217 has been opened by @h1alexbel.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96017</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40697555881</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T13:51:27Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T14:33:04Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">218</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#218 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96206</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40698898447</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T14:33:04Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T14:28:39Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">216</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#216 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96207</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40698755590</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T14:28:39Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T14:28:06Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19600113981 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96208</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">a30a31e26cddc6d64a9ab1f540d275136e8239bf</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40698737352</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19600113981</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-02T14:28:06Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T13:51:33Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">217</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#217.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96361</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-08-02T13:51:33Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T14:33:03Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">218</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#bug' label was attached by @yegor256 to the issue zerocracy/judges-action#218.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96367</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">bug</span>   when:<span style="color:#2471A3">2024-08-02T14:33:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T13:51:33Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">enhancement-was-accepted</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">217</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">In the repository #799177290, the user #526301 attached the '#enhancement' label to the issue #217 reported by the user #83453843; this means that a feature request was-accepted as valid, by the project team.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96384</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">96361</span>  is_human:<span style="color:#212F3C">1</span>  reporter:<span style="color:#212F3C">83453843</span>   when:<span style="color:#2471A3">2024-08-02T13:51:33Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T16:11:14Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">enhancement-suggestion-was-rewarded</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">83453843</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">217</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to reward @h1alexbel for the enhancement suggested in zerocracy/judges-action#217, the reward amount is 15.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">96563</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">15</span> cause:<span style="color:#212F3C">96384</span>  greeting:<span style="color:#196F3D">Thanks for suggesting an enhancement! You've earned +15 points. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) bugs too. Your running balance is [+15](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). </span> href:<span style="color:#196F3D">https://github.com/zerocracy/judges-action/issues/217/#issuecomment-2265723881</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-02T16:11:14Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Suggested enhancement in zerocracy/judges-action#217</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-02T20:11:03Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">quantity-of-deliverables</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">97281</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> composite:<span style="color:#E74C3C">84.684</span> total_commits_pushed:<span style="color:#212F3C">985</span> total_hoc_committed:<span style="color:#212F3C">24212</span> total_issues_created:<span style="color:#212F3C">73</span> total_pulls_submitted:<span style="color:#212F3C">4</span>  when:<span style="color:#2471A3">2024-08-02T20:11:03Z</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T02:18:44Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been reviewed by @yegor256 with 330 HoC and 11 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">98274</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">11</span> commits:<span style="color:#212F3C">6</span>  event_id:<span style="color:#212F3C">40711720367</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">2</span> hoc:<span style="color:#212F3C">330</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T02:18:44Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T03:50:57Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19607197113 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">98521</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">a13cc9710c39dfe5b9be7d4e97f02510cac5a840</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40712363621</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19607197113</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T03:50:57Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T05:28:12Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-reviewed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been reviewed by @Suban05 with 329 HoC and 13 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">98878</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> comments:<span style="color:#212F3C">13</span> commits:<span style="color:#212F3C">7</span>  event_id:<span style="color:#212F3C">40713041190</span> event_type:<span style="color:#196F3D">PullRequestReviewEvent</span> files:<span style="color:#212F3C">2</span> hoc:<span style="color:#212F3C">329</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T05:28:12Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T06:09:26Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">quality-of-service</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">98973</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> average_backlog_size:<span style="color:#212F3C">12</span> average_build_success_rate:<span style="color:#E74C3C">0.9447513812154696</span> average_forks:<span style="color:#212F3C">1</span> average_issue_lifetime:<span style="color:#E74C3C">178852.6739130435</span> average_pull_lifetime:<span style="color:#E74C3C">33114.51612903226</span> average_release_interval:<span style="color:#E74C3C">26562.620689655174</span> average_stars:<span style="color:#212F3C">4</span> composite:<span style="color:#E74C3C">1.0</span>  when:<span style="color:#2471A3">2024-08-03T06:09:26Z</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T07:00:03Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19608097024 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99047</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">a4ce52bac2416dd34a3b2bef90f1d26376f45337</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40713759929</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19608097024</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T07:00:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T07:07:58Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">dimensions-of-terrain</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">99162</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> total_forks:<span style="color:#212F3C">11</span> total_releases:<span style="color:#212F3C">234</span> total_repositories:<span style="color:#212F3C">6</span> total_stars:<span style="color:#212F3C">27</span>  when:<span style="color:#2471A3">2024-08-03T07:07:58Z</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T08:44:30Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">219</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#219 has been opened by @Suban05.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99405</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40714581632</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T08:44:30Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T10:52:19Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">219</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#219 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99747</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40715639649</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T10:52:19Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T10:52:06Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609361588 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99748</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">06ee88652c92b073db793fb1e104e11609b15049</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40715637679</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609361588</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T10:52:06Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T10:57:10Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">162</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/baza#162 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99751</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40715676094</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T10:57:10Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T10:19:48Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">219</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#bug' label was attached by @yegor256 to the issue zerocracy/judges-action#219.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99932</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">bug</span>   when:<span style="color:#2471A3">2024-08-03T10:19:48Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T10:19:48Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">bug-was-accepted</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">219</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">In the repository #799177290, the user #526301 attached the '#bug' label to the issue #219 reported by the user #88084038; this means that a bug was-accepted as valid, by the project team.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99944</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">99932</span>  is_human:<span style="color:#212F3C">1</span>  reporter:<span style="color:#212F3C">88084038</span>   when:<span style="color:#2471A3">2024-08-03T10:19:48Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T11:50:03Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609678641 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">99948</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">d7628b99f1758e317d40642047eb840b037e2b70</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716097743</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609678641</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T11:50:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:11:10Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">bug-report-was-rewarded</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">219</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to reward @Suban05 for the bug reported in zerocracy/judges-action#219, the reward amount is 15.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100112</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">15</span> cause:<span style="color:#212F3C">99944</span>  greeting:<span style="color:#196F3D">Hey there, bug hunter! 🐛 Great job spotting that new bug - you've just snagged yourself 15 points! Your sharp eye is helping us level up our project quality. Got any more [hidden bugs](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) up your sleeve? [Don't hold back](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html), [report away](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)! Your current score is looking good at [+114](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep those reports coming!</span> href:<span style="color:#196F3D">https://github.com/zerocracy/judges-action/issues/219/#issuecomment-2266693060</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T12:11:10Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Reported bug in zerocracy/judges-action#219</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:25:59Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609902355 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100116</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">d35f78f6943492b5c21e60d6cd2d72324621423e</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716413457</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609902355</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:25:59Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:39:46Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">91</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/pages-action#91 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100118</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40716545040</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T12:39:46Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:39:04Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">release-published</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new release 'fbe up' has been published in zerocracy/pages-action by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100119</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40716538828</span> event_type:<span style="color:#196F3D">ReleaseEvent</span> is_human:<span style="color:#212F3C">0</span> release:<span style="color:#212F3C">168547559</span>  tag:<span style="color:#196F3D">0.0.33</span>  when:<span style="color:#2471A3">2024-08-03T12:39:04Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:38:43Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">tag-was-created</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new tag '0.0.33' has been created in zerocracy/pages-action by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100120</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40716535730</span> event_type:<span style="color:#196F3D">CreateEvent</span> is_human:<span style="color:#212F3C">0</span>  tag:<span style="color:#196F3D">0.0.33</span>  when:<span style="color:#2471A3">2024-08-03T12:38:43Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:24:53Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609895045 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100121</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">290e345fe8652ec199ee9648c71c8eb4d6c0de1b</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716403442</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609895045</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:24:53Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:24:30Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">91</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/pages-action#91 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100122</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40716399473</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T12:24:30Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:39:14Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609993880 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100124</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">a1999f030ce4df2422a59799fa6f0d1a152f50b9</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716540341</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609993880</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:39:14Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:35:32Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">162</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/baza#162 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100125</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40716508010</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T12:35:32Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:33:36Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609957967 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100126</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">145ba16e3298abcb630f92bf14904d1748e6a58a</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716489664</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609957967</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:33:36Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:28:50Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609922649 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100127</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">1f8b9643fb760003200afdff8a2aabcbb13b032d</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716441154</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609922649</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:28:50Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:21:50Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609874132 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100128</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">cdbbb52c1a79f80e48d8abfda09d0a0550e7e143</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716374630</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609874132</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:21:50Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:19:36Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609858368 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100129</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">b07321de8c3b492c8e5913cd259e94ab7c45a78c</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716353107</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609858368</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:19:36Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:18:56Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609853929 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100130</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">3c2b31cbc1cf1a66a4ff5487e2ecddd64ae3da7e</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716346977</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609853929</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:18:56Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T12:17:26Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19609843330 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100131</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">9501bbe5030c1ce0553b4421050421abd7d74e72</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716332581</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19609843330</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T12:17:26Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:45:46Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-merged</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">223</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#223 has been closed by @rultor, with 2 HoC and 2 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100306</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">renovate/zerocracy-pages-action-0.x</span> comments:<span style="color:#212F3C">2</span>  event_id:<span style="color:#212F3C">40717144028</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> hoc:<span style="color:#212F3C">2</span> is_human:<span style="color:#212F3C">0</span>    when:<span style="color:#2471A3">2024-08-03T13:45:46Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:23:04Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">29139614</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">223</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#223 has been opened by @renovate[bot].</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100307</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">renovate/zerocracy-pages-action-0.x</span>  event_id:<span style="color:#212F3C">40716963365</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> is_human:<span style="color:#212F3C">0</span>    when:<span style="color:#2471A3">2024-08-03T13:23:04Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:52Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">41898282</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">222</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#222 has been closed by @github-actions[bot], with 2 HoC and 0 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100308</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">version-up</span> comments:<span style="color:#212F3C">0</span>  event_id:<span style="color:#212F3C">40716961845</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> hoc:<span style="color:#212F3C">2</span> is_human:<span style="color:#212F3C">0</span>    when:<span style="color:#2471A3">2024-08-03T13:22:52Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:47Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">41898282</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">222</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#222 has been opened by @github-actions[bot].</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100309</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">version-up</span>  event_id:<span style="color:#212F3C">40716961209</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> is_human:<span style="color:#212F3C">0</span>    when:<span style="color:#2471A3">2024-08-03T13:22:47Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:36Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-merged</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">221</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#221 has been closed by @yegor256, with 2 HoC and 0 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100310</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">version-up</span> comments:<span style="color:#212F3C">0</span>  event_id:<span style="color:#212F3C">40716959747</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> hoc:<span style="color:#212F3C">2</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T13:22:36Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:32Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">41898282</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">221</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#221 has been opened by @github-actions[bot].</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100311</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">version-up</span>  event_id:<span style="color:#212F3C">40716959228</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> is_human:<span style="color:#212F3C">0</span>    when:<span style="color:#2471A3">2024-08-03T13:22:32Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:25Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">pull-was-merged</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 has been closed by @yegor256, with 326 HoC and 15 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100312</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> branch:<span style="color:#196F3D">209</span> comments:<span style="color:#212F3C">15</span>  event_id:<span style="color:#212F3C">40716958375</span> event_type:<span style="color:#196F3D">PullRequestEvent</span> hoc:<span style="color:#212F3C">326</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T13:22:25Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:17Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19610294110 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100313</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">b8420a7a7bdf13576a23ee16ea34b8dca44f5f8d</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40716957384</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19610294110</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T13:22:17Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:19:46Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">220</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#220 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100314</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40716934898</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T13:19:46Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T14:11:56Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-review-was-rewarded</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to reward @yegor256 for the code review in zerocracy/judges-action#215, the reward amount is 29.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100497</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">29</span> cause:<span style="color:#212F3C">94773</span>  greeting:<span style="color:#196F3D">Thank you for your code review! You've earned +39 points: +25 as a base reward, +14 for reviewing 140 hits-of-code, but -10 for having only 4 comments. According to our policy, we encourage more detailed feedback, aiming for at least 6 comments per review. Your current balance is [-564](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep up the good work, and remember that more comprehensive comments can lead to higher rewards in future reviews!</span> href:<span style="color:#196F3D">https://github.com/zerocracy/judges-action/issues/215/#issuecomment-2266724702</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T14:11:56Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Reviewed code in zerocracy/judges-action#215</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:45:46Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-was-contributed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">29139614</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">223</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#223 with 2 HoC created by @renovate[bot] was merged by @rultor after 22 minutes of being in review and 2 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100498</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">100306</span> comments:<span style="color:#212F3C">2</span>  hoc:<span style="color:#212F3C">2</span> is_human:<span style="color:#212F3C">0</span>  merger:<span style="color:#212F3C">8086956</span>  seconds:<span style="color:#212F3C">1362</span>  when:<span style="color:#2471A3">2024-08-03T13:45:46Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:36Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-was-contributed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">41898282</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">221</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#221 with 2 HoC created by @github-actions[bot] was merged by @yegor256 after 4 seconds of being in review and 0 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100500</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">100310</span> comments:<span style="color:#212F3C">0</span>  hoc:<span style="color:#212F3C">2</span> is_human:<span style="color:#212F3C">0</span>  merger:<span style="color:#212F3C">526301</span>  seconds:<span style="color:#212F3C">4</span>  when:<span style="color:#2471A3">2024-08-03T13:22:36Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:22:25Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-was-contributed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The pull request zerocracy/judges-action#215 with 326 HoC created by @Suban05 was merged by @yegor256 after 1 days of being in review and 15 comments.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100502</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> cause:<span style="color:#212F3C">100312</span> comments:<span style="color:#212F3C">15</span>  hoc:<span style="color:#212F3C">326</span> is_human:<span style="color:#212F3C">1</span>  merger:<span style="color:#212F3C">526301</span>  seconds:<span style="color:#212F3C">110235</span>  when:<span style="color:#2471A3">2024-08-03T13:22:25Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T13:19:45Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">220</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#220.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100673</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-08-03T13:19:45Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T15:10:36Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">code-contribution-was-rewarded</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">88084038</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">215</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">It's time to reward @Suban05 for the code contributed in zerocracy/judges-action#215, the reward amount is 23.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100682</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> award:<span style="color:#212F3C">23</span> cause:<span style="color:#212F3C">100502</span>  greeting:<span style="color:#196F3D">Hey there, great work on your contribution! 🎉 You've racked up +23 points for this one: +30 as the base, with a small deduction of -7 for exceeding 200 [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html) (you hit 326). Don't worry though, it's still a solid score! Remember, [keeping it concise](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) can boost your points next time. Your total balance is now [+129](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep the contributions coming - we love seeing your code!</span> href:<span style="color:#196F3D">https://github.com/zerocracy/judges-action/issues/215/#issuecomment-2266777500</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T15:10:36Z</span> where:<span style="color:#196F3D">github</span>  why:<span style="color:#196F3D">Contributed code in zerocracy/judges-action#215</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:06:56Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19611259436 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100795</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">6fa501356c273e8696e491ca9514b1d320c5ad98</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40718377985</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19611259436</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T16:06:56Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:58:20Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">224</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/judges-action#224 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100852</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40718845693</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T16:58:20Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:52:24Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">92</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/pages-action#92 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100854</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40718795233</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T16:52:24Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T17:00:21Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19611556617 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100856</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">e8ad3e1fb5d52172637098963ce9e39b4aaf5223</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40718861608</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19611556617</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T17:00:21Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:34:14Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19611413403 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100857</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">8e9cbefae7c3f5044852c38c9e9e6af65863df87</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40718617075</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19611413403</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T16:34:14Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:23:43Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">163</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/baza#163 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100858</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40718519045</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-03T16:23:43Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:20:30Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19611335286 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100859</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">81431ae1ca087e2b49071b1bf34a3245c2b02ed4</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40718492000</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19611335286</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T16:20:30Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T17:06:50Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19611593524 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">100985</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">5f3dc24c3e5dc1b51e3fc588e44f40972acdee1e</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40718916175</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19611593524</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T17:06:50Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:58:25Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">224</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#224.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">101050</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-08-03T16:58:25Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T17:48:12Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19611836732 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">101059</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">08e3d34c7c2da04d0d853e8509ebbac30f33429d</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40719265327</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19611836732</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T17:48:12Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T17:12:42Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19611627291 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">101060</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">e055674b7a9b8e709ae61e9f2e6aa650e6b2dce4</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40718965030</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19611627291</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-03T17:12:42Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-03T16:52:22Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">92</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#92.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">101097</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-08-03T16:52:22Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T02:56:23Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19614395961 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102599</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">6c46e2f94b9dfd61a830e98543ae6e1472d1fe77</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40722995453</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19614395961</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-04T02:56:23Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T02:43:35Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19614347607 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102600</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">98633b0992042ebde932b0e4a5d88ce44715c4a7</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40722917612</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19614347607</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-04T02:43:35Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T02:41:45Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19614341197 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102601</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">c3e4a8f3107f567aaef891766eb0d23eed0f48f8</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40722907849</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19614341197</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-04T02:41:45Z</span> where:<span style="color:#196F3D">github</span> </td>
             </tr>
             <tr>
               <td>
                 <span style="color:"/>
               </td>
               <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
+                <span style="color:#196F3D">pmp</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102775</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 200) (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let many_hoc_fee 7) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 800) (let man_hoc_fee2 15) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 man_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${man_hoc_fee2} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let no_review_fee 15) (set penalty_for_no_review (if (eq reviews 0) (times -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review') 'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set bonus_for_comments (times comments (times -1 comments_k))) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (give bonus_for_comments 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let few_comments_fee 5) (let comments_needed 5) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 10) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted by reviewers') 'deduct ${silence_fee} points if there were absolutey no comments made by reviewers during the review') (aka (let few_hoc_fee 10) (let hoc_needed 20) (set penalty_for_few_hoc (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> code_review_was_rewarded:<span style="color:#196F3D">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.1) (let hoc_max 40) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 20) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutey no comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 10) (let hoc_needed 15) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 100) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> days_of_running_balance:<span style="color:#212F3C">56</span> days_to_reward:<span style="color:#212F3C">7</span> dud_was_punished:<span style="color:#196F3D">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</span> enhancement_suggestion_was_rewarded:<span style="color:#196F3D">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> master_punish_days:<span style="color:#212F3C">28</span> published_release_was_rewarded:<span style="color:#196F3D">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points'))</span> push_to_master_was_punished:<span style="color:#196F3D">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</span> resolved_bug_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T03:40:29Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">103</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue yegor256/judges#103 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102776</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40723271286</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-04T03:40:29Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T03:40:00Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19614578417 has arrived to yegor256/judges, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102777</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">d503348017df9e4ca30e1fb25dd163489bcfe78f</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40723268313</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19614578417</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-04T03:40:00Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T03:39:48Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">103</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue yegor256/judges#103 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102778</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40723267133</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-04T03:39:48Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T03:53:29Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19614628731 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102781</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">6938b39381d545709ed770030aa60f738955f3fa</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40723347774</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19614628731</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-04T03:53:29Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T04:01:02Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19614657003 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102784</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">8a16babd1ad7cddd22231513fb663834f947bdcd</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40723389510</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19614657003</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-04T04:01:02Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-04T03:55:51Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19614636790 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102785</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">c7407269175b996eb5693cd8c13015be21e219d1</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40723359722</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19614636790</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-04T03:55:51Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-07-26T05:37:03Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">label-was-attached</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">37</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">102852</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102872</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40723271286</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">798641472</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102873</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40672612985</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
               </td>
               <td>
                 <span style="color:"/>
@@ -44216,7 +46112,112 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">94150</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">102874</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40723347774</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102875</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40718795233</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102876</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40723389510</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102877</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40719265327</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">798641472</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102879</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102893</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -44237,7 +46238,28 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">94152</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">67</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">102926</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">56</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">102927</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">71</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -44258,13 +46280,13 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">94153</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">31</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">102928</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">12</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
           </tbody>
         </table>
       </article>
       <footer class="smaller">
-        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-08-02T04:11:52Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 2105 facts, 792601 bytes, version 0.2.1.</p>
+        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-08-04T04:11:24Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 2200 facts, 835628 bytes, version 0.2.1.</p>
       </footer>
     </section>
   </body>
