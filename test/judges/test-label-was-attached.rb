@@ -142,12 +142,10 @@ class TestLabelWasAttached < Minitest::Test
     op.what = 'issue-was-opened'
     op.repository = 44
     op.issue = 44
-
     op = fb.insert
     op.what = 'issue-was-opened'
     op.repository = 44
     op.issue = 45
-
     load_it('label-was-attached', fb)
     f = fb.query('(eq what "issue-was-opened")').each.to_a
     assert_equal(1, f.count)
