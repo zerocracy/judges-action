@@ -34,7 +34,9 @@ Fbe.iterate do
   repeats 20
   over do |repository, issue|
     Fbe.octo.issue_timeline(repository, issue).each do |te|
-      Fbe.fb.query("(eq issue #{issue})").delete! if te[:status] == '404'
+      if te[:status] == '404'
+        Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq issue #{issue}))").delete!
+      end
       next unless te[:event] == 'labeled'
       badge = te[:label][:name]
       next unless %w[bug enhancement question].include?(badge)
