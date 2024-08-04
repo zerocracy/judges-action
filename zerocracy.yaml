@@ -4,10 +4,10 @@
   error: 'GET https://api.github.com/repositories/728758275/issues/161/timeline?per_page=100:
     404 - Not Found // See: https://docs.github.com/rest/issues/timeline#list-timeline-events-for-an-issue'
   removed: 8
-  seconds: 369.245454099
+  seconds: 338.4311267
   version: 0.21.0
   what: judges-summary
-  when: 2024-08-04 05:10:32.645721497 Z
+  when: 2024-08-04 06:11:18.126322706 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -33056,8 +33056,21 @@
   when: 2024-08-04 03:55:51.000000000 Z
   where: github
   who: 526301
-- _id: 102929
-  _time: 2024-08-04 04:11:55.374702688 Z
+- _id: 102934
+  _time: 2024-08-04 05:04:39.663968909 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  details: The issue zerocracy/baza#164 has been opened by @yegor256.
+  event_id: 40723463785
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 164
+  repository: 728758275
+  what: issue-was-opened
+  when: 2024-08-04 04:13:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 103127
+  _time: 2024-08-04 05:11:09.497004882 Z
   _version: 0.2.1/0.21.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -33102,21 +33115,98 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 102934
-  _time: 2024-08-04 05:04:39.663968909 Z
+- _id: 103132
+  _time: 2024-08-04 06:06:00.674067716 Z
   _version: 0.2.1/0.21.0/0.0.39
-  details: The issue zerocracy/baza#164 has been opened by @yegor256.
-  event_id: 40723463785
-  event_type: IssuesEvent
+  commit: 86713de3d7eec42f21cb427fd01fd73a1237f505
+  default_branch: master
+  details: 'A new Git push #19615117946 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40724087221
+  event_type: PushEvent
   is_human: 1
-  issue: 164
+  push_id: 19615117946
+  ref: refs/heads/master
   repository: 728758275
-  what: issue-was-opened
-  when: 2024-08-04 04:13:01.000000000 Z
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-04 05:45:08.000000000 Z
   where: github
   who: 526301
-- _id: 103020
-  _time: 2024-08-04 05:07:14.384438002 Z
+- _id: 103133
+  _time: 2024-08-04 06:06:02.850220386 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: 538b95a5a54761dab5957d60e6708bc2746ffd23
+  default_branch: master
+  details: 'A new Git push #19615114544 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40724082036
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19615114544
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-04 05:44:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 103134
+  _time: 2024-08-04 06:06:04.767244867 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: 234dcc010eb302dd1a3636bb2439637a54b48b32
+  default_branch: master
+  details: 'A new Git push #19615112639 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40724079039
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19615112639
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-04 05:43:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 103135
+  _time: 2024-08-04 06:06:06.693990074 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: 286aa0f75d7711af07953ce57ca539eff8619c06
+  default_branch: master
+  details: 'A new Git push #19615103552 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40724064926
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19615103552
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-04 05:41:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 103136
+  _time: 2024-08-04 06:06:08.671627049 Z
+  _version: 0.2.1/0.21.0/0.0.39
+  commit: 1b2bc60cd58b34c3dfaa2eb686848a06e28d0ed9
+  default_branch: master
+  details: 'A new Git push #19615089006 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40724042627
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19615089006
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-04 05:38:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 103205
+  _time: 2024-08-04 06:08:25.466849993 Z
   _version: 0.2.1/0.21.0/0.0.39
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -33127,91 +33217,80 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 103058
-  _time: 2024-08-04 05:08:23.499949696 Z
+- _id: 103231
+  _time: 2024-08-04 06:09:18.245438589 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40723271286
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 103059
-  _time: 2024-08-04 05:08:26.209693150 Z
+- _id: 103232
+  _time: 2024-08-04 06:09:21.920332939 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40672612985
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 103060
-  _time: 2024-08-04 05:08:29.550598835 Z
+- _id: 103233
+  _time: 2024-08-04 06:09:26.237588855 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40723454798
+  latest: 40723836717
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 103061
-  _time: 2024-08-04 05:08:32.297165167 Z
+- _id: 103234
+  _time: 2024-08-04 06:09:29.939373904 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40718795233
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 103062
-  _time: 2024-08-04 05:08:35.283040608 Z
+- _id: 103235
+  _time: 2024-08-04 06:09:33.952618580 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 40723463785
+  latest: 40724087221
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 103063
-  _time: 2024-08-04 05:08:38.987391155 Z
+- _id: 103236
+  _time: 2024-08-04 06:09:38.086477352 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 40719265327
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 103073
-  _time: 2024-08-04 05:08:57.486449415 Z
+- _id: 103239
+  _time: 2024-08-04 06:09:43.891595240 Z
   _version: 0.2.1/0.21.0/0.0.39
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  issue: 65
-  label: enhancement
-  repository: 802720676
-  what: label-was-attached
-  when: 2024-07-23 06:29:27.000000000 Z
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
   where: github
-  who: 526301
-- _id: 103082
-  _time: 2024-08-04 05:09:13.414395204 Z
+- _id: 103252
+  _time: 2024-08-04 06:10:08.967969623 Z
   _version: 0.2.1/0.21.0/0.0.39
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 103123
-  _time: 2024-08-04 05:10:26.726914385 Z
+- _id: 103285
+  _time: 2024-08-04 06:11:14.005702044 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 0
+  latest: 83
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 103124
-  _time: 2024-08-04 05:10:28.734648970 Z
+- _id: 103286
+  _time: 2024-08-04 06:11:15.856909676 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 106
+  latest: 74
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 103125
-  _time: 2024-08-04 05:10:30.647131210 Z
+- _id: 103287
+  _time: 2024-08-04 06:11:17.769701714 Z
   _version: 0.2.1/0.21.0/0.0.39
-  latest: 189
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 103126
-  _time: 2024-08-04 05:10:32.424235078 Z
-  _version: 0.2.1/0.21.0/0.0.39
-  latest: 79
+  latest: 12
   repository: 802720676
   what: labels-were-scanned
   where: github
