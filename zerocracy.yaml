@@ -4,10 +4,10 @@
   error: 'GET https://api.github.com/repositories/728758275/issues/161/timeline?per_page=100:
     404 - Not Found // See: https://docs.github.com/rest/issues/timeline#list-timeline-events-for-an-issue'
   removed: 8
-  seconds: 342.75451827
+  seconds: 333.597038395
   version: 0.21.0
   what: judges-summary
-  when: 2024-08-05 11:10:01.500228644 Z
+  when: 2024-08-05 12:12:28.257799738 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -34070,8 +34070,25 @@
   when: 2024-08-04 08:43:56.000000000 Z
   where: github
   who: 88084038
-- _id: 104747
-  _time: 2024-08-05 10:11:32.096899772 Z
+- _id: 104748
+  _time: 2024-08-05 10:11:50.462072762 Z
+  _version: 0.2.1/0.22.0/
+  author: 88084038
+  cause: 103823
+  comments: 11
+  details: The pull request zerocracy/judges-action#225 with 167 HoC created by @Suban05
+    was reviewed by @Yegorov after 3 hours and 11 comments.
+  hoc: 167
+  is_human: 1
+  issue: 225
+  repository: 799177290
+  seconds: 12468
+  what: code-was-reviewed
+  when: 2024-08-04 09:44:59.000000000 Z
+  where: github
+  who: 2566462
+- _id: 104908
+  _time: 2024-08-05 11:10:45.958557635 Z
   _version: 0.2.1/0.22.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -34116,25 +34133,22 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 104748
-  _time: 2024-08-05 10:11:50.462072762 Z
-  _version: 0.2.1/0.22.0/
-  author: 88084038
-  cause: 103823
-  comments: 11
-  details: The pull request zerocracy/judges-action#225 with 167 HoC created by @Suban05
-    was reviewed by @Yegorov after 3 hours and 11 comments.
-  hoc: 167
+- _id: 104911
+  _time: 2024-08-05 12:07:07.738527458 Z
+  _version: 0.2.1/0.21.0/0.0.40
+  branch: '229'
+  details: The pull request zerocracy/judges-action#230 has been opened by @Suban05.
+  event_id: 40746804931
+  event_type: PullRequestEvent
   is_human: 1
-  issue: 225
+  issue: 230
   repository: 799177290
-  seconds: 12468
-  what: code-was-reviewed
-  when: 2024-08-04 09:44:59.000000000 Z
+  what: pull-was-opened
+  when: 2024-08-05 10:42:58.000000000 Z
   where: github
-  who: 2566462
-- _id: 104813
-  _time: 2024-08-05 11:06:41.055360317 Z
+  who: 88084038
+- _id: 104995
+  _time: 2024-08-05 12:09:50.081644417 Z
   _version: 0.2.1/0.21.0/0.0.40
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -34145,91 +34159,80 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 104839
-  _time: 2024-08-05 11:07:35.928808695 Z
+- _id: 105027
+  _time: 2024-08-05 12:10:52.490648137 Z
   _version: 0.2.1/0.21.0/0.0.40
   latest: 40741958878
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 104840
-  _time: 2024-08-05 11:07:39.608757749 Z
+- _id: 105028
+  _time: 2024-08-05 12:10:55.449556126 Z
   _version: 0.2.1/0.21.0/0.0.40
   latest: 40672612985
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 104841
-  _time: 2024-08-05 11:07:43.434147358 Z
+- _id: 105029
+  _time: 2024-08-05 12:10:58.686849143 Z
   _version: 0.2.1/0.21.0/0.0.40
-  latest: 40745788659
+  latest: 40747625073
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 104842
-  _time: 2024-08-05 11:07:46.838924172 Z
+- _id: 105030
+  _time: 2024-08-05 12:11:01.625458870 Z
   _version: 0.2.1/0.21.0/0.0.40
   latest: 40742947096
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 104843
-  _time: 2024-08-05 11:07:50.436989929 Z
+- _id: 105031
+  _time: 2024-08-05 12:11:04.772787950 Z
   _version: 0.2.1/0.21.0/0.0.40
   latest: 40742627821
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 104844
-  _time: 2024-08-05 11:07:54.041334080 Z
+- _id: 105032
+  _time: 2024-08-05 12:11:07.920641898 Z
   _version: 0.2.1/0.21.0/0.0.40
   latest: 40719265327
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 104854
-  _time: 2024-08-05 11:08:14.370353571 Z
+- _id: 105034
+  _time: 2024-08-05 12:11:11.760944944 Z
   _version: 0.2.1/0.21.0/0.0.40
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  issue: 65
-  label: enhancement
-  repository: 802720676
-  what: label-was-attached
-  when: 2024-07-23 06:29:27.000000000 Z
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
   where: github
-  who: 526301
-- _id: 104863
-  _time: 2024-08-05 11:08:31.410984078 Z
+- _id: 105045
+  _time: 2024-08-05 12:11:32.223883430 Z
+  _version: 0.2.1/0.21.0/0.0.40
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 105048
+  _time: 2024-08-05 12:11:38.074709072 Z
   _version: 0.2.1/0.21.0/0.0.40
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 104904
-  _time: 2024-08-05 11:09:55.344317108 Z
+- _id: 105073
+  _time: 2024-08-05 12:12:26.137921439 Z
   _version: 0.2.1/0.21.0/0.0.40
-  latest: 56
+  latest: 104
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 104905
-  _time: 2024-08-05 11:09:57.272812160 Z
+- _id: 105074
+  _time: 2024-08-05 12:12:28.031511383 Z
   _version: 0.2.1/0.21.0/0.0.40
-  latest: 74
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 104906
-  _time: 2024-08-05 11:09:59.227956284 Z
-  _version: 0.2.1/0.21.0/0.0.40
-  latest: 189
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 104907
-  _time: 2024-08-05 11:10:01.158953372 Z
-  _version: 0.2.1/0.21.0/0.0.40
-  latest: 79
+  latest: 12
   repository: 802720676
   what: labels-were-scanned
   where: github
