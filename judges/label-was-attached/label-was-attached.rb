@@ -33,27 +33,28 @@ Fbe.iterate do
   quota_aware
   repeats 20
   over do |repository, issue|
-    Fbe.octo.issue_timeline(repository, issue).each do |te|
-      if te[:status] == '404'
-        Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq issue #{issue}))").delete!
+    begin
+      Fbe.octo.issue_timeline(repository, issue).each do |te|
+        next unless te[:event] == 'labeled'
+        badge = te[:label][:name]
+        next unless %w[bug enhancement question].include?(badge)
+        nn =
+          Fbe.if_absent do |n|
+            n.where = 'github'
+            n.repository = repository
+            n.issue = issue
+            n.label = te[:label][:name]
+            n.what = $judge
+          end
+        next if nn.nil?
+        nn.who = te[:actor][:id]
+        nn.when = te[:created_at]
+        nn.details =
+          "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
+          "to the issue #{Fbe.issue(nn)}."
       end
-      next unless te[:event] == 'labeled'
-      badge = te[:label][:name]
-      next unless %w[bug enhancement question].include?(badge)
-      nn =
-        Fbe.if_absent do |n|
-          n.where = 'github'
-          n.repository = repository
-          n.issue = issue
-          n.label = te[:label][:name]
-          n.what = $judge
-        end
-      next if nn.nil?
-      nn.who = te[:actor][:id]
-      nn.when = te[:created_at]
-      nn.details =
-        "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{Fbe.issue(nn)}."
+    rescue Octokit::NotFound
+      Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq issue #{issue}))").delete!
     end
     issue
   end
