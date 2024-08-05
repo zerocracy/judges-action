@@ -30,7 +30,7 @@ jobs:
   zerocracy:
     runs-on: ubuntu-22.04
     steps:
-      - uses: zerocracy/judges-action@0.0.40
+      - uses: zerocracy/judges-action@0.0.41
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           options: |
