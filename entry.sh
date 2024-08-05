@@ -110,6 +110,14 @@ ${JUDGES} "${gopts[@]}" update \
     "${SELF}/judges" \
     "${fb}"
 
+action_version=$(curl -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest |
+                 jq -r ".tag_name")
+if [ "$action_version" = "$VERSION" ]; then
+    action_version=$VERSION
+else
+    action_version="${VERSION}!${action_version}"
+fi
+
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" push \
         --no-zip \
@@ -117,7 +125,7 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "--meta=workflow_url:${owner}" \
         "--meta=vitals_url:${VITALS_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
-        "--meta=action_version:${VERSION}" \
+        "--meta=action_version:${action_version}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
