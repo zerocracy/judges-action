@@ -77,6 +77,7 @@ class TestLabelWasAttached < Minitest::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44/issues/44/timeline?per_page=100').to_return(
+      status: 404,
       body: [
         {
           message: 'Not Found',
@@ -87,6 +88,9 @@ class TestLabelWasAttached < Minitest::Test
       headers: {
         'content-type': 'application/json'
       }
+    )
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      status: 200, body: '', headers: {}
     )
     fb = Factbase.new
     op = fb.insert
@@ -114,6 +118,7 @@ class TestLabelWasAttached < Minitest::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44/issues/44/timeline?per_page=100').to_return(
+      status: 404,
       body: [
         {
           message: 'Not Found',
@@ -126,6 +131,7 @@ class TestLabelWasAttached < Minitest::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44/issues/45/timeline?per_page=100').to_return(
+      status: 404,
       body: [
         {
           event: 'labeled',
@@ -137,6 +143,9 @@ class TestLabelWasAttached < Minitest::Test
       headers: {
         'content-type': 'application/json'
       }
+    )
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      status: 200, body: '', headers: {}
     )
     fb = Factbase.new
     op = fb.insert
@@ -182,6 +191,7 @@ class TestLabelWasAttached < Minitest::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/50/issues/46/timeline?per_page=100').to_return(
+      status: 404,
       body: [
         {
           message: 'Not Found',
@@ -205,6 +215,9 @@ class TestLabelWasAttached < Minitest::Test
       headers: {
         'content-type': 'application/json'
       }
+    )
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      status: 200, body: '', headers: {}
     )
     fb = Factbase.new
     op = fb.insert
