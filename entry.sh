@@ -112,6 +112,7 @@ ${JUDGES} "${gopts[@]}" update \
 
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" push \
+        --no-zip \
         "--owner=${owner}" \
         "--meta=workflow_url:${owner}" \
         "--meta=vitals_url:${VITALS_URL}" \
