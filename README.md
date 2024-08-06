@@ -28,7 +28,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   zerocracy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: zerocracy/judges-action@0.0.42
         with:
