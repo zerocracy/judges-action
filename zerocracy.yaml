@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 434.65808639
+  seconds: 503.249394707
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-06 16:12:17.214767827 Z
+  when: 2024-08-06 17:13:56.735817675 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -35379,8 +35379,55 @@
   where: github
   who: 88084038
   why: Reported bug in zerocracy/baza#170
-- _id: 110332
-  _time: 2024-08-06 15:14:14.385904357 Z
+- _id: 110337
+  _time: 2024-08-06 16:05:24.436461129 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The issue zerocracy/baza#167 has been closed by @rultor.
+  event_id: 40790497046
+  event_type: IssuesEvent
+  is_human: 0
+  issue: 167
+  repository: 728758275
+  what: issue-was-closed
+  when: 2024-08-06 14:27:21.000000000 Z
+  where: github
+  who: 8086956
+- _id: 110338
+  _time: 2024-08-06 16:05:26.323529350 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  branch: '167'
+  comments: 5
+  details: The pull request zerocracy/baza#169 has been closed by @rultor, with 35
+    HoC and 5 comments.
+  event_id: 40790496374
+  event_type: PullRequestEvent
+  hoc: 35
+  is_human: 0
+  issue: 169
+  repository: 728758275
+  what: pull-was-merged
+  when: 2024-08-06 14:27:20.000000000 Z
+  where: github
+  who: 8086956
+- _id: 110531
+  _time: 2024-08-06 16:12:57.940760806 Z
+  _version: 0.2.1/0.22.1/
+  cause: 110338
+  comments: 5
+  details: The pull request zerocracy/baza#169 with 35 HoC created by @Suban05 was
+    merged by @rultor after 3 hours of being in review and 5 comments.
+  hoc: 35
+  is_human: 1
+  issue: 169
+  merger: 8086956
+  repository: 728758275
+  seconds: 13391
+  what: code-was-contributed
+  when: 2024-08-06 14:27:20.000000000 Z
+  where: github
+  who: 88084038
+- _id: 110532
+  _time: 2024-08-06 16:13:13.917570153 Z
   _version: 0.2.1/0.22.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -35429,38 +35476,20 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 110337
-  _time: 2024-08-06 16:05:24.436461129 Z
+- _id: 110620
+  _time: 2024-08-06 17:08:55.767345927 Z
   _version: 0.2.1/0.22.1/0.0.42
-  details: The issue zerocracy/baza#167 has been closed by @rultor.
-  event_id: 40790497046
-  event_type: IssuesEvent
-  is_human: 0
-  issue: 167
-  repository: 728758275
-  what: issue-was-closed
-  when: 2024-08-06 14:27:21.000000000 Z
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
   where: github
-  who: 8086956
-- _id: 110338
-  _time: 2024-08-06 16:05:26.323529350 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  branch: '167'
-  comments: 5
-  details: The pull request zerocracy/baza#169 has been closed by @rultor, with 35
-    HoC and 5 comments.
-  event_id: 40790496374
-  event_type: PullRequestEvent
-  hoc: 35
-  is_human: 0
-  issue: 169
-  repository: 728758275
-  what: pull-was-merged
-  when: 2024-08-06 14:27:20.000000000 Z
-  where: github
-  who: 8086956
-- _id: 110424
-  _time: 2024-08-06 16:08:31.565003560 Z
+  who: 526301
+- _id: 110623
+  _time: 2024-08-06 17:09:02.194310180 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -35471,87 +35500,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 110456
-  _time: 2024-08-06 16:09:39.030144417 Z
+- _id: 110661
+  _time: 2024-08-06 17:10:27.571222481 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40785695708
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 110457
-  _time: 2024-08-06 16:09:42.051812300 Z
+- _id: 110662
+  _time: 2024-08-06 17:10:31.239326877 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40757185366
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 110458
-  _time: 2024-08-06 16:09:45.394370921 Z
+- _id: 110663
+  _time: 2024-08-06 17:10:35.296967182 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40792227329
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 110459
-  _time: 2024-08-06 16:09:48.306647741 Z
+- _id: 110664
+  _time: 2024-08-06 17:10:38.940457414 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40785804196
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 110460
-  _time: 2024-08-06 16:09:51.578709631 Z
+- _id: 110665
+  _time: 2024-08-06 17:10:42.653786235 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40790534137
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 110461
-  _time: 2024-08-06 16:09:54.955335603 Z
+- _id: 110666
+  _time: 2024-08-06 17:10:46.604404271 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40770387746
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 110479
-  _time: 2024-08-06 16:10:32.707392215 Z
+- _id: 110684
+  _time: 2024-08-06 17:11:25.057673968 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 110495
-  _time: 2024-08-06 16:11:06.353754061 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 110501
-  _time: 2024-08-06 16:11:18.503327722 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 110516
-  _time: 2024-08-06 16:11:48.599237356 Z
+- _id: 110731
+  _time: 2024-08-06 17:13:07.962698403 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 110528
-  _time: 2024-08-06 16:12:13.054245541 Z
+- _id: 110737
+  _time: 2024-08-06 17:13:20.282592151 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 110750
+  _time: 2024-08-06 17:13:47.970248468 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 110529
-  _time: 2024-08-06 16:12:17.126874613 Z
+- _id: 110753
+  _time: 2024-08-06 17:13:54.577372848 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 31
-  repository: 802720676
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 110754
+  _time: 2024-08-06 17:13:56.648662375 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
