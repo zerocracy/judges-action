@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 416.052030269
+  seconds: 488.518747704
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-06 10:12:11.221813080 Z
+  when: 2024-08-06 11:12:58.537022504 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -35048,8 +35048,75 @@
   where: github
   who: 2566462
   why: Contributed code in zerocracy/judges-action#236
-- _id: 109051
-  _time: 2024-08-06 09:13:39.248043237 Z
+- _id: 109056
+  _time: 2024-08-06 10:05:40.128460609 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The issue zerocracy/baza#168 has been opened by @Suban05.
+  event_id: 40779571451
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 168
+  repository: 728758275
+  what: issue-was-opened
+  when: 2024-08-06 09:09:19.000000000 Z
+  where: github
+  who: 88084038
+- _id: 109240
+  _time: 2024-08-06 10:11:54.098123519 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#167.
+  is_human: 1
+  issue: 167
+  label: bug
+  repository: 728758275
+  what: label-was-attached
+  when: 2024-08-06 09:54:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 109243
+  _time: 2024-08-06 10:11:59.898107602 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#168.
+  is_human: 1
+  issue: 168
+  label: bug
+  repository: 728758275
+  what: label-was-attached
+  when: 2024-08-06 09:54:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 109249
+  _time: 2024-08-06 10:12:29.553254925 Z
+  _version: 0.2.1/0.22.1/
+  cause: 109240
+  details: 'In the repository #728758275, the user #526301 attached the ''#bug'' label
+    to the issue #167 reported by the user #88084038; this means that a bug was-accepted
+    as valid, by the project team.'
+  is_human: 1
+  issue: 167
+  reporter: 88084038
+  repository: 728758275
+  what: bug-was-accepted
+  when: 2024-08-06 09:54:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 109251
+  _time: 2024-08-06 10:13:03.751248044 Z
+  _version: 0.2.1/0.22.1/
+  cause: 109243
+  details: 'In the repository #728758275, the user #526301 attached the ''#bug'' label
+    to the issue #168 reported by the user #88084038; this means that a bug was-accepted
+    as valid, by the project team.'
+  is_human: 1
+  issue: 168
+  reporter: 88084038
+  repository: 728758275
+  what: bug-was-accepted
+  when: 2024-08-06 09:54:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 109252
+  _time: 2024-08-06 10:13:32.664600707 Z
   _version: 0.2.1/0.22.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -35094,21 +35161,52 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 109056
-  _time: 2024-08-06 10:05:40.128460609 Z
+- _id: 109257
+  _time: 2024-08-06 11:05:09.690059454 Z
   _version: 0.2.1/0.22.1/0.0.42
-  details: The issue zerocracy/baza#168 has been opened by @Suban05.
-  event_id: 40779571451
-  event_type: IssuesEvent
+  branch: '167'
+  details: The pull request zerocracy/baza#169 has been opened by @Suban05.
+  event_id: 40782745018
+  event_type: PullRequestEvent
   is_human: 1
-  issue: 168
+  issue: 169
   repository: 728758275
-  what: issue-was-opened
-  when: 2024-08-06 09:09:19.000000000 Z
+  what: pull-was-opened
+  when: 2024-08-06 10:44:09.000000000 Z
   where: github
   who: 88084038
-- _id: 109142
-  _time: 2024-08-06 10:08:31.050672677 Z
+- _id: 109258
+  _time: 2024-08-06 11:05:11.693858253 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 91dc57190fc5a8e63264f719fd5a8905fc1dc50c
+  default_branch: master
+  details: 'A new Git push #19645445520 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40782215144
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19645445520
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-06 10:27:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 109342
+  _time: 2024-08-06 11:08:08.614768653 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 109345
+  _time: 2024-08-06 11:08:14.744297154 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -35119,109 +35217,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 109174
-  _time: 2024-08-06 10:09:36.246951399 Z
+- _id: 109383
+  _time: 2024-08-06 11:09:36.324267397 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40774456873
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 109175
-  _time: 2024-08-06 10:09:39.175026040 Z
+- _id: 109384
+  _time: 2024-08-06 11:09:39.680370425 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40757185366
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 109176
-  _time: 2024-08-06 10:09:42.353043296 Z
+- _id: 109385
+  _time: 2024-08-06 11:09:43.557962978 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40779701793
+  latest: 40781731931
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 109177
-  _time: 2024-08-06 10:09:45.437250361 Z
+- _id: 109386
+  _time: 2024-08-06 11:09:46.852333819 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40769738060
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 109178
-  _time: 2024-08-06 10:09:50.590186522 Z
+- _id: 109387
+  _time: 2024-08-06 11:09:52.529133960 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40781136151
+  latest: 40782808634
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 109179
-  _time: 2024-08-06 10:09:53.983439279 Z
+- _id: 109388
+  _time: 2024-08-06 11:09:56.322779018 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40770387746
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 109197
-  _time: 2024-08-06 10:10:29.532679607 Z
+- _id: 109406
+  _time: 2024-08-06 11:10:33.200011260 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 109213
-  _time: 2024-08-06 10:11:01.439914988 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 109219
-  _time: 2024-08-06 10:11:13.132008160 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 109234
-  _time: 2024-08-06 10:11:42.136133599 Z
+- _id: 109453
+  _time: 2024-08-06 11:12:13.018089786 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 109240
-  _time: 2024-08-06 10:11:54.098123519 Z
+- _id: 109459
+  _time: 2024-08-06 11:12:25.139193003 Z
   _version: 0.2.1/0.22.1/0.0.42
-  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#167.
-  issue: 167
-  label: bug
-  repository: 728758275
-  what: label-was-attached
-  when: 2024-08-06 09:54:05.000000000 Z
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
   where: github
-  who: 526301
-- _id: 109243
-  _time: 2024-08-06 10:11:59.898107602 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#168.
-  issue: 168
-  label: bug
-  repository: 728758275
-  what: label-was-attached
-  when: 2024-08-06 09:54:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 109246
-  _time: 2024-08-06 10:12:05.227894629 Z
+- _id: 109469
+  _time: 2024-08-06 11:12:45.928364253 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 109247
-  _time: 2024-08-06 10:12:11.135141330 Z
+- _id: 109474
+  _time: 2024-08-06 11:12:56.423025087 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 31
-  repository: 802720676
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 109475
+  _time: 2024-08-06 11:12:58.440887450 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
