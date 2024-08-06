@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 434.710212492
+  seconds: 480.173957974
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-06 22:11:53.136686223 Z
+  when: 2024-08-06 23:13:18.093154988 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -35691,8 +35691,71 @@
   when: 2024-08-06 18:33:36.000000000 Z
   where: github
   who: 29139614
-- _id: 111615
-  _time: 2024-08-06 21:14:16.341653778 Z
+- _id: 111616
+  _time: 2024-08-06 21:14:37.229761220 Z
+  _version: 0.2.1/0.22.1/
+  cause: 111396
+  comments: 4
+  details: The pull request zerocracy/baza#171 with 197 HoC created by @Suban05 was
+    merged by @rultor after 1 hours of being in review and 4 comments.
+  hoc: 197
+  is_human: 1
+  issue: 171
+  merger: 8086956
+  repository: 728758275
+  seconds: 3621
+  what: code-was-contributed
+  when: 2024-08-06 18:36:46.000000000 Z
+  where: github
+  who: 88084038
+- _id: 111814
+  _time: 2024-08-06 22:12:25.858031825 Z
+  _version: 0.2.1/0.22.1/
+  award: 29
+  cause: 111616
+  details: It's time to reward @Suban05 for the code contributed in zerocracy/baza#171,
+    the reward amount is 29.
+  greeting: "Hey there, awesome job on your contribution! \U0001F389 You've racked
+    up +29 points: 25 for the base, and a sweet 9 points for your 197 [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html).
+    We did have to deduct 5 points due to the low comment count (only 4), but don't
+    sweat it! Remember, more comments can boost your score next time. Keep the code
+    coming and aim for that 80-point max! Your current balance is [+268](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Let's see you hit that 800 [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)
+    milestone soon – just watch out for that 15-point deduction! \U0001F609 [Keep
+    up](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) the great work!"
+  href: https://github.com/zerocracy/baza/issues/171/#issuecomment-2272238747
+  is_human: 1
+  issue: 171
+  repository: 728758275
+  what: code-contribution-was-rewarded
+  when: 2024-08-06 22:12:25.875421648 Z
+  where: github
+  who: 88084038
+  why: Contributed code in zerocracy/baza#171
+- _id: 111815
+  _time: 2024-08-06 22:12:35.497491318 Z
+  _version: 0.2.1/0.22.1/
+  award: 20
+  cause: 111612
+  details: It's time to reward @Yegorov for the code review in zerocracy/baza#171,
+    the reward amount is 20.
+  greeting: "Hey there! \U0001F44B Great job on the review! You've snagged +20 points
+    for this one. Here's the breakdown: +25 as the base reward, -10 because there
+    were fewer than 6 comments, but you got +5 back for the 5 comments you did make.
+    Every comment counts! \U0001F4AA Remember, more comments could boost your points
+    even higher next time. Your current balance is sitting pretty at [+111](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the awesome work!"
+  href: https://github.com/zerocracy/baza/issues/171/#issuecomment-2272238766
+  is_human: 1
+  issue: 171
+  repository: 728758275
+  what: code-review-was-rewarded
+  when: 2024-08-06 22:12:35.513706140 Z
+  where: github
+  who: 2566462
+  why: Reviewed code in zerocracy/baza#171
+- _id: 111816
+  _time: 2024-08-06 22:13:09.676753030 Z
   _version: 0.2.1/0.22.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -35741,25 +35804,20 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 111616
-  _time: 2024-08-06 21:14:37.229761220 Z
-  _version: 0.2.1/0.22.1/
-  cause: 111396
-  comments: 4
-  details: The pull request zerocracy/baza#171 with 197 HoC created by @Suban05 was
-    merged by @rultor after 1 hours of being in review and 4 comments.
-  hoc: 197
+- _id: 111904
+  _time: 2024-08-06 23:08:30.208505558 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
   is_human: 1
-  issue: 171
-  merger: 8086956
-  repository: 728758275
-  seconds: 3621
-  what: code-was-contributed
-  when: 2024-08-06 18:36:46.000000000 Z
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
   where: github
-  who: 88084038
-- _id: 111706
-  _time: 2024-08-06 22:08:00.323320191 Z
+  who: 526301
+- _id: 111907
+  _time: 2024-08-06 23:08:36.372654623 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -35770,87 +35828,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 111739
-  _time: 2024-08-06 22:09:11.561473498 Z
+- _id: 111945
+  _time: 2024-08-06 23:09:57.817250233 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40785695708
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 111740
-  _time: 2024-08-06 22:09:14.758245631 Z
+- _id: 111946
+  _time: 2024-08-06 23:10:01.020808326 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40757185366
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 111741
-  _time: 2024-08-06 22:09:18.280577397 Z
+- _id: 111947
+  _time: 2024-08-06 23:10:04.685420991 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40800595046
+  latest: 40802042650
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 111742
-  _time: 2024-08-06 22:09:21.532999975 Z
+- _id: 111948
+  _time: 2024-08-06 23:10:07.989765117 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40798128164
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 111743
-  _time: 2024-08-06 22:09:24.972473083 Z
+- _id: 111949
+  _time: 2024-08-06 23:10:11.521283606 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40798175535
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 111744
-  _time: 2024-08-06 22:09:28.599581331 Z
+- _id: 111950
+  _time: 2024-08-06 23:10:15.223661314 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40770387746
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 111762
-  _time: 2024-08-06 22:10:06.286954250 Z
+- _id: 111968
+  _time: 2024-08-06 23:10:51.714283623 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 111778
-  _time: 2024-08-06 22:10:40.301160821 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 111784
-  _time: 2024-08-06 22:10:52.683088606 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 111799
-  _time: 2024-08-06 22:11:23.678013524 Z
+- _id: 112015
+  _time: 2024-08-06 23:12:29.004444708 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 111811
-  _time: 2024-08-06 22:11:48.913214173 Z
+- _id: 112025
+  _time: 2024-08-06 23:12:48.946360783 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 112035
+  _time: 2024-08-06 23:13:09.335731827 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 111812
-  _time: 2024-08-06 22:11:53.047106238 Z
+- _id: 112038
+  _time: 2024-08-06 23:13:16.010858470 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 31
-  repository: 802720676
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 112039
+  _time: 2024-08-06 23:13:18.007031784 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
