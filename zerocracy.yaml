@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 404.303709161
+  seconds: 429.798475662
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-06 00:23:43.737652272 Z
+  when: 2024-08-06 01:38:14.384086046 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -34701,8 +34701,26 @@
   when: 2024-08-05 20:38:02.000000000 Z
   where: github
   who: 29139614
-- _id: 106962
-  _time: 2024-08-05 23:12:59.095821854 Z
+- _id: 106963
+  _time: 2024-08-06 00:17:02.810842136 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 04be3c78249362fa08e8d53e4bbf9963b1d7c77c
+  default_branch: master
+  details: 'A new Git push #19638450093 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40768344760
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19638450093
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-06 00:11:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 107164
+  _time: 2024-08-06 00:24:35.458733341 Z
   _version: 0.2.1/0.22.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -34747,26 +34765,53 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 106963
-  _time: 2024-08-06 00:17:02.810842136 Z
+- _id: 107170
+  _time: 2024-08-06 01:31:29.852630501 Z
   _version: 0.2.1/0.22.1/0.0.42
-  commit: 04be3c78249362fa08e8d53e4bbf9963b1d7c77c
-  default_branch: master
-  details: 'A new Git push #19638450093 has arrived to yegor256/judges, made by @yegor256
-    (default branch is ''master''), not associated with any pull request.'
-  event_id: 40768344760
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19638450093
-  ref: refs/heads/master
-  repository: 799113787
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-08-06 00:11:21.000000000 Z
+  details: 'A new release ''judges-action#155: add workflow_run_usage to Fbe::FakeOctokit''
+    has been published in zerocracy/fbe by @rultor.'
+  event_id: 40768937653
+  event_type: ReleaseEvent
+  is_human: 0
+  release: 168806534
+  repository: 820463873
+  tag: 0.0.37
+  what: release-published
+  when: 2024-08-06 00:52:08.000000000 Z
   where: github
-  who: 526301
-- _id: 107046
-  _time: 2024-08-06 00:19:51.316080838 Z
+  who: 8086956
+- _id: 107171
+  _time: 2024-08-06 01:31:31.650777306 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: A new tag '0.0.37' has been created in zerocracy/fbe by @rultor.
+  event_id: 40768931152
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.0.37
+  what: tag-was-created
+  when: 2024-08-06 00:51:40.000000000 Z
+  where: github
+  who: 8086956
+- _id: 107172
+  _time: 2024-08-06 01:31:38.710551418 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  branch: '155'
+  comments: 2
+  details: The pull request zerocracy/fbe#53 has been closed by @rultor, with 24 HoC
+    and 2 comments.
+  event_id: 40768749262
+  event_type: PullRequestEvent
+  hoc: 24
+  is_human: 0
+  issue: 53
+  repository: 820463873
+  what: pull-was-merged
+  when: 2024-08-06 00:39:18.000000000 Z
+  where: github
+  who: 8086956
+- _id: 107257
+  _time: 2024-08-06 01:34:26.538984753 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -34777,98 +34822,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 107078
-  _time: 2024-08-06 00:20:54.673405837 Z
+- _id: 107289
+  _time: 2024-08-06 01:35:29.255054758 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40768344760
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 107079
-  _time: 2024-08-06 00:20:57.609712717 Z
+- _id: 107290
+  _time: 2024-08-06 01:35:32.142741723 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40757185366
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 107080
-  _time: 2024-08-06 00:21:01.042077609 Z
+- _id: 107291
+  _time: 2024-08-06 01:35:35.382877738 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40767483590
+  latest: 40768584841
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 107081
-  _time: 2024-08-06 00:21:04.123160412 Z
+- _id: 107292
+  _time: 2024-08-06 01:35:38.247569060 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40757748093
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 107082
-  _time: 2024-08-06 00:21:07.188855206 Z
+- _id: 107293
+  _time: 2024-08-06 01:35:41.255655076 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40764634445
+  latest: 40768569760
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 107083
-  _time: 2024-08-06 00:21:10.443478019 Z
+- _id: 107294
+  _time: 2024-08-06 01:35:44.511498726 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40763576187
+  latest: 40768938904
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 107101
-  _time: 2024-08-06 00:21:44.729239146 Z
+- _id: 107312
+  _time: 2024-08-06 01:36:18.830421672 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 107124
-  _time: 2024-08-06 00:22:29.313758155 Z
+- _id: 107328
+  _time: 2024-08-06 01:36:50.048163940 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
-  repository: 799177290
+  repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 107144
-  _time: 2024-08-06 00:23:07.542626837 Z
+- _id: 107353
+  _time: 2024-08-06 01:37:37.586776680 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 107148
-  _time: 2024-08-06 00:23:15.177607081 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  issue: 65
-  label: enhancement
-  repository: 802720676
-  what: label-was-attached
-  when: 2024-07-23 06:29:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 107153
-  _time: 2024-08-06 00:23:24.643515596 Z
+- _id: 107362
+  _time: 2024-08-06 01:37:54.965742915 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 107162
-  _time: 2024-08-06 00:23:41.807684930 Z
+- _id: 107371
+  _time: 2024-08-06 01:38:12.399589445 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 67
-  repository: 799113787
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 107163
-  _time: 2024-08-06 00:23:43.651428876 Z
+- _id: 107372
+  _time: 2024-08-06 01:38:14.293046184 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 73
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
