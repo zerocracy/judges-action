@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.2.1" size="891055">
+<fb version="0.2.1" size="894713">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
     <removed t="I">8</removed>
-    <seconds t="F">454.412386995</seconds>
+    <seconds t="F">476.361278899</seconds>
     <version t="S">0.22.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-08-06T12:14:34Z</when>
+    <when t="T">2024-08-06T13:14:47Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -38174,8 +38174,52 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <why t="S">Reported bug in zerocracy/baza#168</why>
   </f>
   <f>
-    <_id t="I">109480</_id>
-    <_time t="T">2024-08-06T11:14:53Z</_time>
+    <_id t="I">109485</_id>
+    <_time t="T">2024-08-06T12:07:21Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <details t="S">The issue zerocracy/baza#170 has been opened by @Suban05.</details>
+    <event_id t="I">40784208899</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">170</issue>
+    <repository t="I">728758275</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2024-08-06T11:32:06Z</when>
+    <where t="S">github</where>
+    <who t="I">88084038</who>
+  </f>
+  <f>
+    <_id t="I">109677</_id>
+    <_time t="T">2024-08-06T12:14:18Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <details t="S">The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#170.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">170</issue>
+    <label t="S">bug</label>
+    <repository t="I">728758275</repository>
+    <what t="S">label-was-attached</what>
+    <when t="T">2024-08-06T12:08:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109687</_id>
+    <_time t="T">2024-08-06T12:14:47Z</_time>
+    <_version t="S">0.2.1/0.22.1/</_version>
+    <cause t="I">109677</cause>
+    <details t="S">In the repository #728758275, the user #526301 attached the '#bug' label to the issue #170 reported by the user #88084038; this means that a bug was-accepted as valid, by the project team.</details>
+    <is_human t="I">1</is_human>
+    <issue t="I">170</issue>
+    <reporter t="I">88084038</reporter>
+    <repository t="I">728758275</repository>
+    <what t="S">bug-was-accepted</what>
+    <when t="T">2024-08-06T12:08:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109688</_id>
+    <_time t="T">2024-08-06T12:15:16Z</_time>
     <_version t="S">0.2.1/0.22.1/</_version>
     <area t="S">hr</area>
     <bad_branch_name_was_punished t="S">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</bad_branch_name_was_punished>
@@ -38197,27 +38241,141 @@ Happy hunting! 🕵️‍♂️💻</greeting>
           [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
           but not more than ${hoc_max} points'))</published_release_was_rewarded>
     <push_to_master_was_punished t="S">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</push_to_master_was_punished>
-    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
+    <resolved_bug_was_rewarded t="S">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (in self '1 if the bug was reported and resolved by the same person, otherwise zero') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let self_fee 15) (set penalty_for_self (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug reported by you earlier') 'deduct ${self_fee} points if they resolved the bug earlier reported by themselves') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</resolved_bug_was_rewarded>
     <what t="S">pmp</what>
   </f>
   <f>
-    <_id t="I">109485</_id>
-    <_time t="T">2024-08-06T12:07:21Z</_time>
+    <_id t="I">109689</_id>
+    <_time t="T">2024-08-06T13:06:54Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <details t="S">The issue zerocracy/baza#170 has been opened by @Suban05.</details>
-    <event_id t="I">40784208899</event_id>
+    <commit t="S">2f3350a5a680e58b49e1b455e4c8430631e1a8f0</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19647145645 has arrived to yegor256/judges, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40785695708</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19647145645</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799113787</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-08-06T12:18:52Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109692</_id>
+    <_time t="T">2024-08-06T13:07:03Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <commit t="S">13829bc417e2a4f09d4e4cc653c717944156aad2</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19647190030 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40785782372</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19647190030</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">799177290</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-08-06T12:21:22Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109694</_id>
+    <_time t="T">2024-08-06T13:07:11Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <commit t="S">6b253be12fb7b75de50c43d293baa5c216d082a0</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19647201107 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40785804196</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19647201107</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">802720676</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-08-06T12:21:59Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109696</_id>
+    <_time t="T">2024-08-06T13:07:18Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <details t="S">The issue zerocracy/baza#170 has been closed by @yegor256.</details>
+    <event_id t="I">40785652815</event_id>
     <event_type t="S">IssuesEvent</event_type>
     <is_human t="I">1</is_human>
     <issue t="I">170</issue>
     <repository t="I">728758275</repository>
-    <what t="S">issue-was-opened</what>
-    <when t="T">2024-08-06T11:32:06Z</when>
+    <what t="S">issue-was-closed</what>
+    <when t="T">2024-08-06T12:17:36Z</when>
     <where t="S">github</where>
-    <who t="I">88084038</who>
+    <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">109564</_id>
-    <_time t="T">2024-08-06T12:10:11Z</_time>
+    <_id t="I">109697</_id>
+    <_time t="T">2024-08-06T13:07:20Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <commit t="S">99469432999d3b9fbf49f222f1aa0ea618457d0c</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19647046333 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40785501120</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19647046333</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-08-06T12:13:15Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109698</_id>
+    <_time t="T">2024-08-06T13:07:23Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <commit t="S">8d4cf877113f9ac8cdf2916f4c7bbf0650670e0d</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19647028520 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40785466500</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19647028520</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-08-06T12:12:13Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109699</_id>
+    <_time t="T">2024-08-06T13:07:25Z</_time>
+    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
+    <commit t="S">b028a6401bab56e03ad27efb748163f872122fd6</commit>
+    <default_branch t="S">master</default_branch>
+    <details t="S">A new Git push #19646995395 has arrived to zerocracy/baza, made by @yegor256 (default branch is 'master'), not associated with any pull request.</details>
+    <event_id t="I">40785401605</event_id>
+    <event_type t="S">PushEvent</event_type>
+    <is_human t="I">1</is_human>
+    <push_id t="I">19646995395</push_id>
+    <ref t="S">refs/heads/master</ref>
+    <repository t="I">728758275</repository>
+    <to_master t="I">1</to_master>
+    <what t="S">git-was-pushed</what>
+    <when t="T">2024-08-06T12:10:16Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+  </f>
+  <f>
+    <_id t="I">109785</_id>
+    <_time t="T">2024-08-06T13:10:30Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
     <details t="S">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.</details>
     <is_human t="I">1</is_human>
@@ -38230,17 +38388,17 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <who t="I">526301</who>
   </f>
   <f>
-    <_id t="I">109596</_id>
-    <_time t="T">2024-08-06T12:11:20Z</_time>
+    <_id t="I">109817</_id>
+    <_time t="T">2024-08-06T13:11:39Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <latest t="I">40774456873</latest>
+    <latest t="I">40785695708</latest>
     <repository t="I">799113787</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109597</_id>
-    <_time t="T">2024-08-06T12:11:23Z</_time>
+    <_id t="I">109818</_id>
+    <_time t="T">2024-08-06T13:11:42Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
     <latest t="I">40757185366</latest>
     <repository t="I">798641472</repository>
@@ -38248,35 +38406,35 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109598</_id>
-    <_time t="T">2024-08-06T12:11:27Z</_time>
+    <_id t="I">109819</_id>
+    <_time t="T">2024-08-06T13:11:46Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <latest t="I">40783634780</latest>
+    <latest t="I">40785782372</latest>
     <repository t="I">799177290</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109599</_id>
-    <_time t="T">2024-08-06T12:11:31Z</_time>
+    <_id t="I">109820</_id>
+    <_time t="T">2024-08-06T13:11:50Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <latest t="I">40769738060</latest>
+    <latest t="I">40785804196</latest>
     <repository t="I">802720676</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109600</_id>
-    <_time t="T">2024-08-06T12:11:34Z</_time>
+    <_id t="I">109821</_id>
+    <_time t="T">2024-08-06T13:11:53Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <latest t="I">40784253368</latest>
+    <latest t="I">40785653272</latest>
     <repository t="I">728758275</repository>
     <what t="S">events-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109601</_id>
-    <_time t="T">2024-08-06T12:11:38Z</_time>
+    <_id t="I">109822</_id>
+    <_time t="T">2024-08-06T13:11:57Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
     <latest t="I">40770387746</latest>
     <repository t="I">820463873</repository>
@@ -38284,8 +38442,8 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109619</_id>
-    <_time t="T">2024-08-06T12:12:17Z</_time>
+    <_id t="I">109840</_id>
+    <_time t="T">2024-08-06T13:12:34Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
     <latest t="I">0</latest>
     <repository t="I">820463873</repository>
@@ -38293,17 +38451,17 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109642</_id>
-    <_time t="T">2024-08-06T12:13:06Z</_time>
+    <_id t="I">109856</_id>
+    <_time t="T">2024-08-06T13:13:09Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
     <latest t="I">0</latest>
-    <repository t="I">799177290</repository>
+    <repository t="I">799113787</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109662</_id>
-    <_time t="T">2024-08-06T12:13:48Z</_time>
+    <_id t="I">109881</_id>
+    <_time t="T">2024-08-06T13:14:01Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
     <latest t="I">0</latest>
     <repository t="I">798641472</repository>
@@ -38311,34 +38469,8 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109666</_id>
-    <_time t="T">2024-08-06T12:13:56Z</_time>
-    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <details t="S">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.</details>
-    <issue t="I">65</issue>
-    <label t="S">enhancement</label>
-    <repository t="I">802720676</repository>
-    <what t="S">label-was-attached</what>
-    <when t="T">2024-07-23T06:29:27Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">109677</_id>
-    <_time t="T">2024-08-06T12:14:18Z</_time>
-    <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <details t="S">The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#170.</details>
-    <issue t="I">170</issue>
-    <label t="S">bug</label>
-    <repository t="I">728758275</repository>
-    <what t="S">label-was-attached</what>
-    <when t="T">2024-08-06T12:08:59Z</when>
-    <where t="S">github</where>
-    <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">109681</_id>
-    <_time t="T">2024-08-06T12:14:26Z</_time>
+    <_id t="I">109899</_id>
+    <_time t="T">2024-08-06T13:14:38Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
     <latest t="I">0</latest>
     <repository t="I">728758275</repository>
@@ -38346,19 +38478,19 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109684</_id>
-    <_time t="T">2024-08-06T12:14:32Z</_time>
+    <_id t="I">109902</_id>
+    <_time t="T">2024-08-06T13:14:44Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <latest t="I">67</latest>
-    <repository t="I">799113787</repository>
+    <latest t="I">167</latest>
+    <repository t="I">799177290</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
   </f>
   <f>
-    <_id t="I">109685</_id>
-    <_time t="T">2024-08-06T12:14:34Z</_time>
+    <_id t="I">109903</_id>
+    <_time t="T">2024-08-06T13:14:46Z</_time>
     <_version t="S">0.2.1/0.22.1/0.0.42</_version>
-    <latest t="I">73</latest>
+    <latest t="I">31</latest>
     <repository t="I">802720676</repository>
     <what t="S">labels-were-scanned</what>
     <where t="S">github</where>
