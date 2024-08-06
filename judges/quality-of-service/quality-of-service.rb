@@ -48,13 +48,16 @@ f.since = $SINCE
 # Workflow runs:
 total = 0
 success = 0
+duration = 0
 Fbe.unmask_repos.each do |repo|
   Fbe.octo.repository_workflow_runs(repo, created: ">#{$SINCE.utc.iso8601[0..10]}")[:workflow_runs].each do |json|
     total += 1
     success += json[:conclusion] == 'success' ? 1 : 0
+    duration += Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] / 1000
   end
 end
 f.average_build_success_rate = total.zero? ? 0 : success.to_f / total
+f.average_build_duration = total.zero? ? 0 : duration.to_f / total
 
 # Release intervals:
 dates = []
