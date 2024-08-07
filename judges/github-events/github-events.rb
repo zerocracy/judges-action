@@ -43,6 +43,21 @@ Fbe.iterate do
     raise Factbase::Rollback
   end
 
+  def self.fetch_contributors(fact, repo)
+    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
+    contributors = Set.new
+    if last
+      Fbe.octo.compare(repo, last.tag, fact.tag)[:commits].each do |commit|
+        contributors << commit[:author][:id]
+      end
+    else
+      Fbe.octo.contributors(repo).each do |contributor|
+        contributors << contributor[:id]
+      end
+    end
+    contributors.to_a
+  end
+
   def self.fill_up_event(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
@@ -146,6 +161,7 @@ Fbe.iterate do
       when 'published'
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
+        fetch_contributors(fact, json[:repo][:name]).each { |c| fact.contributors = c }
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
           "in #{json[:repo][:name]} by #{Fbe.who(fact)}."
