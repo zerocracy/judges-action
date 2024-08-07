@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 503.460325688
+  seconds: 520.481493901
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-07 13:15:49.981395391 Z
+  when: 2024-08-07 14:13:34.278394859 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -36044,8 +36044,42 @@
   when: 2024-08-07 09:57:26.000000000 Z
   where: github
   who: 526301
-- _id: 114817
-  _time: 2024-08-07 12:17:10.044745170 Z
+- _id: 114820
+  _time: 2024-08-07 13:07:43.845532145 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  details: The pull request zerocracy/judges-action#241 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 40821258743
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 0
+  issue: 241
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-08-07 11:49:39.000000000 Z
+  where: github
+  who: 8086956
+- _id: 115033
+  _time: 2024-08-07 13:16:31.194459678 Z
+  _version: 0.2.1/0.22.1/
+  cause: 114820
+  comments: 2
+  details: The pull request zerocracy/judges-action#241 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 35 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 241
+  merger: 8086956
+  repository: 799177290
+  seconds: 2123
+  what: code-was-contributed
+  when: 2024-08-07 11:49:39.000000000 Z
+  where: github
+  who: 29139614
+- _id: 115034
+  _time: 2024-08-07 13:16:46.809571948 Z
   _version: 0.2.1/0.22.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -36094,25 +36128,110 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 114820
-  _time: 2024-08-07 13:07:43.845532145 Z
+- _id: 115040
+  _time: 2024-08-07 14:05:17.285315231 Z
   _version: 0.2.1/0.22.1/0.0.42
-  branch: renovate/fbe-0.x-lockfile
-  comments: 2
-  details: The pull request zerocracy/judges-action#241 has been closed by @rultor,
-    with 2 HoC and 2 comments.
-  event_id: 40821258743
-  event_type: PullRequestEvent
-  hoc: 2
+  details: The issue zerocracy/fbe#58 has been closed by @yegor256.
+  event_id: 40823395233
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 58
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-07 12:53:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 115041
+  _time: 2024-08-07 14:05:21.379707463 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: A new release '`Fbe.overwrite` must deal with `_id`' has been published
+    in zerocracy/fbe by @rultor.
+  event_id: 40823380011
+  event_type: ReleaseEvent
   is_human: 0
-  issue: 241
-  repository: 799177290
-  what: pull-was-merged
-  when: 2024-08-07 11:49:39.000000000 Z
+  release: 169097195
+  repository: 820463873
+  tag: 0.0.42
+  what: release-published
+  when: 2024-08-07 12:52:54.000000000 Z
   where: github
   who: 8086956
-- _id: 114908
-  _time: 2024-08-07 13:11:08.719425515 Z
+- _id: 115042
+  _time: 2024-08-07 14:05:23.404576116 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: A new tag '0.0.42' has been created in zerocracy/fbe by @rultor.
+  event_id: 40823368529
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.0.42
+  what: tag-was-created
+  when: 2024-08-07 12:52:35.000000000 Z
+  where: github
+  who: 8086956
+- _id: 115043
+  _time: 2024-08-07 14:05:29.142769467 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 9c81a2bda903ca86dda2ed20337c7119dbdfa61b
+  default_branch: master
+  details: 'A new Git push #19665679392 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40822934450
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19665679392
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-07 12:40:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 115044
+  _time: 2024-08-07 14:05:31.263853502 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 3b71125c514dc13f2fcb6026f8c58feaf7a07937
+  default_branch: master
+  details: 'A new Git push #19665608191 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40822795012
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19665608191
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-07 12:36:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 115045
+  _time: 2024-08-07 14:05:33.443539591 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The issue zerocracy/fbe#58 has been opened by @yegor256.
+  event_id: 40822788063
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 58
+  repository: 820463873
+  what: issue-was-opened
+  when: 2024-08-07 12:36:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 115128
+  _time: 2024-08-07 14:08:35.148803447 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 115131
+  _time: 2024-08-07 14:08:41.613731492 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -36123,87 +36242,101 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 114941
-  _time: 2024-08-07 13:12:23.481023457 Z
+- _id: 115169
+  _time: 2024-08-07 14:10:06.321427616 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40813505984
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 114942
-  _time: 2024-08-07 13:12:27.074629172 Z
+- _id: 115170
+  _time: 2024-08-07 14:10:09.869961016 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40815383745
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 114943
-  _time: 2024-08-07 13:12:31.026817046 Z
+- _id: 115171
+  _time: 2024-08-07 14:10:13.678958863 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40822120362
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/judges-action#242 has been opened by @renovate[bot].
+  event_id: 40824276512
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 242
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-07 13:17:04.000000000 Z
+  where: github
+  who: 29139614
+- _id: 115172
+  _time: 2024-08-07 14:10:17.590311422 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40824276512
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 114944
-  _time: 2024-08-07 13:12:34.548075182 Z
+- _id: 115173
+  _time: 2024-08-07 14:10:21.234187293 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40798128164
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 114945
-  _time: 2024-08-07 13:12:38.473072976 Z
+- _id: 115174
+  _time: 2024-08-07 14:10:24.878507435 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40812487728
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 114946
-  _time: 2024-08-07 13:12:42.514809867 Z
+- _id: 115175
+  _time: 2024-08-07 14:10:28.727444010 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40820343177
+  latest: 40823395233
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 114983
-  _time: 2024-08-07 13:14:04.642388048 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 114988
-  _time: 2024-08-07 13:14:15.392816290 Z
+- _id: 115223
+  _time: 2024-08-07 14:12:15.027332816 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 115009
-  _time: 2024-08-07 13:15:01.492118946 Z
+- _id: 115236
+  _time: 2024-08-07 14:12:43.202379444 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 115244
+  _time: 2024-08-07 14:13:00.312242796 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 115027
-  _time: 2024-08-07 13:15:40.733587726 Z
+- _id: 115251
+  _time: 2024-08-07 14:13:14.849354470 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 115258
+  _time: 2024-08-07 14:13:29.841769309 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 115030
-  _time: 2024-08-07 13:15:47.522952915 Z
+- _id: 115259
+  _time: 2024-08-07 14:13:34.182356763 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 167
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 115031
-  _time: 2024-08-07 13:15:49.887388455 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 31
-  repository: 802720676
+  latest: 98
+  repository: 799113787
   what: labels-were-scanned
   where: github
