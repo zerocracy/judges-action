@@ -25,86 +25,68 @@
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'fbe/regularly'
 
-pmp = Fbe.fb.query('(and (eq what "pmp") (eq area "quality") (exists qos_days))').each.to_a.first
-$DAYS = pmp.nil? ? 28 : pmp.qos_days
-$SINCE = Time.now - ($DAYS * 24 * 60 * 60)
-interval = pmp.nil? ? 7 : pmp.qos_interval
-
-unless Fbe.fb.query(
-  "(and
-    (eq what '#{$judge}')
-    (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '#{interval} days')))"
-).each.to_a.empty?
-  $loog.debug("#{$judge} statistics have recently been collected, skipping now")
-  return
-end
-
-f = Fbe.fb.insert
-f.what = $judge
-f.when = Time.now
-f.since = $SINCE
-
-# Workflow runs:
-total = 0
-success = 0
-duration = 0
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.repository_workflow_runs(repo, created: ">#{$SINCE.utc.iso8601[0..10]}")[:workflow_runs].each do |json|
-    total += 1
-    success += json[:conclusion] == 'success' ? 1 : 0
-    duration += Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] / 1000
-  end
-end
-f.average_build_success_rate = total.zero? ? 0 : success.to_f / total
-f.average_build_duration = total.zero? ? 0 : duration.to_f / total
-
-# Release intervals:
-dates = []
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.releases(repo).each do |json|
-    break if json[:published_at] < $SINCE
-    dates << json[:published_at]
-  end
-end
-dates.sort!
-diffs = (1..dates.size - 1).map { |i| dates[i] - dates[i - 1] }
-f.average_release_interval = diffs.empty? ? 0 : diffs.inject(&:+) / diffs.size
-
-# Issue and PR lifetimes:
-def lifetime(type)
-  ages = []
+Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
+  # Workflow runs:
+  total = 0
+  success = 0
+  duration = 0
   Fbe.unmask_repos.each do |repo|
-    q = "repo:#{repo} type:#{type} closed:>#{$SINCE.utc.iso8601[0..10]}"
-    ages +=
-      Fbe.octo.search_issues(q)[:items].map do |json|
-        next if json[:closed_at].nil?
-        next if json[:created_at].nil?
-        json[:closed_at] - json[:created_at]
-      end
+    Fbe.octo.repository_workflow_runs(repo, created: ">#{f.since.utc.iso8601[0..10]}")[:workflow_runs].each do |json|
+      total += 1
+      success += json[:conclusion] == 'success' ? 1 : 0
+      duration += Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] / 1000
+    end
   end
-  ages.compact!
-  ages.empty? ? 0 : ages.inject(&:+).to_f / ages.size
-end
-f.average_issue_lifetime = lifetime('issue')
-f.average_pull_lifetime = lifetime('pr')
+  f.average_build_success_rate = total.zero? ? 0 : success.to_f / total
+  f.average_build_duration = total.zero? ? 0 : duration.to_f / total
 
-# Average issues
-issues = []
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.repository(repo).then do |json|
-    issues << json[:open_issues]
+  # Release intervals:
+  dates = []
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.releases(repo).each do |json|
+      break if json[:published_at] < f.since
+      dates << json[:published_at]
+    end
   end
-end
-f.average_backlog_size = issues.empty? ? 0 : issues.inject(&:+) / issues.size
+  dates.sort!
+  diffs = (1..dates.size - 1).map { |i| dates[i] - dates[i - 1] }
+  f.average_release_interval = diffs.empty? ? 0 : diffs.inject(&:+) / diffs.size
 
-# Rejection PR rate
-pulls = 0
-rejected = 0
-Fbe.unmask_repos.each do |repo|
-  pulls += Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{$SINCE.utc.iso8601[0..10]}")[:total_count]
-  rejected += Fbe.octo.search_issues(
-    "repo:#{repo} type:pr is:unmerged closed:>#{$SINCE.utc.iso8601[0..10]}"
-  )[:total_count]
+  # Issue and PR lifetimes:
+  { issue: 'average_issue_lifetime', pr: 'average_pull_lifetime' }.each do |type, prop|
+    ages = []
+    Fbe.unmask_repos.each do |repo|
+      q = "repo:#{repo} type:#{type} closed:>#{f.since.utc.iso8601[0..10]}"
+      ages +=
+        Fbe.octo.search_issues(q)[:items].map do |json|
+          next if json[:closed_at].nil?
+          next if json[:created_at].nil?
+          json[:closed_at] - json[:created_at]
+        end
+    end
+    ages.compact!
+    f.send("#{prop}=", ages.empty? ? 0 : ages.inject(&:+).to_f / ages.size)
+  end
+
+  # Average issues
+  issues = []
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.repository(repo).then do |json|
+      issues << json[:open_issues]
+    end
+  end
+  f.average_backlog_size = issues.empty? ? 0 : issues.inject(&:+) / issues.size
+
+  # Rejection PR rate
+  pulls = 0
+  rejected = 0
+  Fbe.unmask_repos.each do |repo|
+    pulls += Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{f.since.utc.iso8601[0..10]}")[:total_count]
+    rejected += Fbe.octo.search_issues(
+      "repo:#{repo} type:pr is:unmerged closed:>#{f.since.utc.iso8601[0..10]}"
+    )[:total_count]
+  end
+  f.average_pull_rejection_rate = pulls.zero? ? 0 : rejected.to_f / pulls
 end
-f.average_pull_rejection_rate = pulls.zero? ? 0 : rejected.to_f / pulls

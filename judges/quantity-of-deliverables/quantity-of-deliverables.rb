@@ -25,46 +25,30 @@
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'fbe/regularly'
 
-pmp = Fbe.fb.query('(and (eq what "pmp") (eq area "scope") (exists qod_days))').each.to_a.first
-$DAYS = pmp.nil? ? 28 : pmp.qod_days
-$SINCE = Time.now - ($DAYS * 24 * 60 * 60)
-interval = pmp.nil? ? 7 : pmp.qod_interval
-
-unless Fbe.fb.query(
-  "(and
-    (eq what '#{$judge}')
-    (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '#{interval} days')))"
-).each.to_a.empty?
-  $loog.debug("#{$judge} statistics have recently been collected, skipping now")
-  return
-end
-
-f = Fbe.fb.insert
-f.what = $judge
-f.when = Time.now
-f.since = $SINCE
-
-# Number of commits pushed and their hits-of-code:
-commits = 0
-hoc = 0
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.commits_since(repo, $SINCE).each do |json|
-    commits += 1
-    hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
+Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
+  # Number of commits pushed and their hits-of-code:
+  commits = 0
+  hoc = 0
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.commits_since(repo, f.since).each do |json|
+      commits += 1
+      hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
+    end
   end
-end
-f.total_commits_pushed = commits
-f.total_hoc_committed = hoc
+  f.total_commits_pushed = commits
+  f.total_hoc_committed = hoc
 
-# Number of issues and pull requests created:
-issues = 0
-pulls = 0
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.list_issues(repo, since: ">#{$SINCE.utc.iso8601[0..10]}").each do |json|
-    issues += 1
-    pulls += 1 unless json[:pull_request].nil?
+  # Number of issues and pull requests created:
+  issues = 0
+  pulls = 0
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.list_issues(repo, since: ">#{f.since.utc.iso8601[0..10]}").each do |json|
+      issues += 1
+      pulls += 1 unless json[:pull_request].nil?
+    end
   end
+  f.total_issues_created = issues
+  f.total_pulls_submitted = pulls
 end
-f.total_issues_created = issues
-f.total_pulls_submitted = pulls
