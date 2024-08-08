@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 497.515673517
+  seconds: 501.89000082
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-08 04:14:32.396256736 Z
+  when: 2024-08-08 05:13:07.192897817 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -36327,8 +36327,35 @@
   when: 2024-08-07 20:29:36.000000000 Z
   where: github
   who: 2566462
-- _id: 118096
-  _time: 2024-08-08 03:14:03.141627456 Z
+- _id: 118281
+  _time: 2024-08-08 04:13:44.327821037 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/judges-action#244.
+  is_human: 1
+  issue: 244
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-08-08 03:48:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 118304
+  _time: 2024-08-08 04:14:49.272860581 Z
+  _version: 0.2.1/0.22.1/
+  cause: 118281
+  details: 'In the repository #799177290, the user #526301 attached the ''#bug'' label
+    to the issue #244 reported by the user #2566462; this means that a bug was-accepted
+    as valid, by the project team.'
+  is_human: 1
+  issue: 244
+  reporter: 2566462
+  repository: 799177290
+  what: bug-was-accepted
+  when: 2024-08-08 03:48:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 118305
+  _time: 2024-08-08 04:15:21.203555986 Z
   _version: 0.2.1/0.22.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -36377,8 +36404,74 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 118186
-  _time: 2024-08-08 04:09:56.155493143 Z
+- _id: 118306
+  _time: 2024-08-08 05:04:48.648290143 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 83c24e570093a9e45fb391bb984515803cc24ef2
+  default_branch: master
+  details: 'A new Git push #19676842946 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40845300356
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19676842946
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-08 04:26:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 118309
+  _time: 2024-08-08 05:04:57.020075693 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  comments: 1
+  commits: 1
+  details: The pull request zerocracy/judges-action#243 has been reviewed by @Suban05
+    with 161 HoC and 1 comments.
+  event_id: 40845599918
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 161
+  is_human: 1
+  issue: 243
+  repository: 799177290
+  what: pull-was-reviewed
+  when: 2024-08-08 04:46:23.000000000 Z
+  where: github
+  who: 88084038
+- _id: 118312
+  _time: 2024-08-08 05:05:07.652952276 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 02bea3a52358de71f631ddbc7938707983769242
+  default_branch: master
+  details: 'A new Git push #19676723691 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40845080463
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19676723691
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-08 04:12:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 118396
+  _time: 2024-08-08 05:08:05.564032416 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 118399
+  _time: 2024-08-08 05:08:11.784506738 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -36389,98 +36482,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 118219
-  _time: 2024-08-08 04:11:13.132886145 Z
+- _id: 118437
+  _time: 2024-08-08 05:09:33.276286541 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40813505984
+  latest: 40845300356
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 118220
-  _time: 2024-08-08 04:11:16.974187667 Z
+- _id: 118438
+  _time: 2024-08-08 05:09:36.317227424 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40815383745
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 118221
-  _time: 2024-08-08 04:11:21.309851045 Z
+- _id: 118439
+  _time: 2024-08-08 05:09:39.609983327 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40844742275
+  latest: 40845599918
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 118222
-  _time: 2024-08-08 04:11:25.217184699 Z
+- _id: 118440
+  _time: 2024-08-08 05:09:42.872250294 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40825738642
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 118223
-  _time: 2024-08-08 04:11:29.593885131 Z
+- _id: 118441
+  _time: 2024-08-08 05:09:46.225215339 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40812487728
+  latest: 40845080463
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 118224
-  _time: 2024-08-08 04:11:34.177768323 Z
+- _id: 118442
+  _time: 2024-08-08 05:09:49.628186317 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40834980524
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 118261
-  _time: 2024-08-08 04:12:59.211450473 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 118271
-  _time: 2024-08-08 04:13:21.268425518 Z
+- _id: 118490
+  _time: 2024-08-08 05:11:30.543148061 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 118281
-  _time: 2024-08-08 04:13:44.327821037 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/judges-action#244.
-  issue: 244
-  label: bug
-  repository: 799177290
-  what: label-was-attached
-  when: 2024-08-08 03:48:43.000000000 Z
-  where: github
-  who: 526301
-- _id: 118286
-  _time: 2024-08-08 04:13:54.955309726 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 118289
-  _time: 2024-08-08 04:14:01.169517172 Z
+- _id: 118512
+  _time: 2024-08-08 05:12:17.276063825 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 118301
-  _time: 2024-08-08 04:14:27.677905270 Z
+- _id: 118522
+  _time: 2024-08-08 05:12:37.594373286 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 118532
+  _time: 2024-08-08 05:12:58.801216057 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 118302
-  _time: 2024-08-08 04:14:32.302717918 Z
+- _id: 118535
+  _time: 2024-08-08 05:13:05.073875962 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 31
-  repository: 802720676
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 118536
+  _time: 2024-08-08 05:13:07.102613816 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
