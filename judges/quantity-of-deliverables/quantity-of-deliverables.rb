@@ -44,7 +44,7 @@ Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
   issues = 0
   pulls = 0
   Fbe.unmask_repos.each do |repo|
-    Fbe.octo.list_issues(repo, since: ">#{f.since.utc.iso8601[0..10]}").each do |json|
+    Fbe.octo.list_issues(repo, since: ">#{f.since.utc.iso8601[0..9]}").each do |json|
       issues += 1
       pulls += 1 unless json[:pull_request].nil?
     end
