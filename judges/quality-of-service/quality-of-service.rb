@@ -33,7 +33,7 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   success = 0
   duration = 0
   Fbe.unmask_repos.each do |repo|
-    Fbe.octo.repository_workflow_runs(repo, created: ">#{f.since.utc.iso8601[0..10]}")[:workflow_runs].each do |json|
+    Fbe.octo.repository_workflow_runs(repo, created: ">#{f.since.utc.iso8601[0..9]}")[:workflow_runs].each do |json|
       total += 1
       success += json[:conclusion] == 'success' ? 1 : 0
       duration += Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] / 1000
@@ -58,7 +58,7 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   { issue: 'average_issue_lifetime', pr: 'average_pull_lifetime' }.each do |type, prop|
     ages = []
     Fbe.unmask_repos.each do |repo|
-      q = "repo:#{repo} type:#{type} closed:>#{f.since.utc.iso8601[0..10]}"
+      q = "repo:#{repo} type:#{type} closed:>#{f.since.utc.iso8601[0..9]}"
       ages +=
         Fbe.octo.search_issues(q)[:items].map do |json|
           next if json[:closed_at].nil?
@@ -83,9 +83,9 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   pulls = 0
   rejected = 0
   Fbe.unmask_repos.each do |repo|
-    pulls += Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{f.since.utc.iso8601[0..10]}")[:total_count]
+    pulls += Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{f.since.utc.iso8601[0..9]}")[:total_count]
     rejected += Fbe.octo.search_issues(
-      "repo:#{repo} type:pr is:unmerged closed:>#{f.since.utc.iso8601[0..10]}"
+      "repo:#{repo} type:pr is:unmerged closed:>#{f.since.utc.iso8601[0..9]}"
     )[:total_count]
   end
   f.average_pull_rejection_rate = pulls.zero? ? 0 : rejected.to_f / pulls
