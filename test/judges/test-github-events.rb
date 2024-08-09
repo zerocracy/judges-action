@@ -398,9 +398,150 @@ class TestGithubEvents < Minitest::Test
     assert_equal(42, f[1].who)
   end
 
+  def test_release_event_contributors
+    WebMock.disable_net_connect!
+    stub_event(
+      {
+        id: '1',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 820_463_873,
+          name: 'zerocracy/fbe',
+          url: 'https://api.github.com/repos/zerocracy/fbe'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 123,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '0.0.1',
+            created_at: '2024-08-05T00:51:39Z',
+            published_at: '2024-08-05T00:52:07Z'
+          }
+        },
+        public: true,
+        created_at: '2024-08-05T00:52:08Z',
+        org: {
+          id: 24_234_201,
+          login: 'zerocracy'
+        }
+      },
+      {
+        id: '5',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 820_463_873,
+          name: 'zerocracy/fbe',
+          url: 'https://api.github.com/repos/zerocracy/fbe'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 124,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '0.0.5',
+            created_at: '2024-08-01T00:51:39Z',
+            published_at: '2024-08-01T00:52:07Z'
+          }
+        },
+        public: true,
+        created_at: '2024-08-01T00:52:08Z',
+        org: {
+          id: 24_234_201,
+          login: 'zerocracy'
+        }
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/contributors?per_page=100').to_return(
+      body: [
+        {
+          login: 'yegor256',
+          id: 526_301
+        },
+        {
+          login: 'yegor512',
+          id: 526_302
+        }
+      ].to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/8086956').to_return(
+      body: {
+        login: 'rultor',
+        id: 8_086_956
+      }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/compare/0.0.1...0.0.5?per_page=100').to_return(
+      body: {
+        commits: [
+          {
+            sha: 'a50...',
+            author: {
+              login: 'Yegorov',
+              id: 2_566_462
+            }
+          },
+          {
+            sha: 'b50...',
+            author: {
+              login: 'Yegorov64',
+              id: 2_566_463
+            }
+          },
+          {
+            sha: 'c50...',
+            author: {
+              login: 'Yegorov128',
+              id: 2_566_464
+            }
+          },
+          {
+            sha: 'd50...',
+            author: {
+              login: 'Yegorov',
+              id: 2_566_462
+            }
+          }
+        ]
+      }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 820463873) (eq what "release-published"))').each.to_a
+    assert_equal(2, f.count)
+    assert_equal([526_301, 526_302], f.first[:contributors])
+    assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
+  end
+
   private
 
-  def stub_event(json)
+  def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
         'content-type': 'application/json'
@@ -412,7 +553,7 @@ class TestGithubEvents < Minitest::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
-      body: [json].to_json,
+      body: json.to_json,
       headers: {
         'content-type': 'application/json'
       }
