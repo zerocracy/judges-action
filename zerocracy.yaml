@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 802.585646049
+  seconds: 485.864114103
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-09 07:18:11.196404401 Z
+  when: 2024-08-09 08:14:10.396910711 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -37126,8 +37126,53 @@
   since: 2024-07-12 06:10:51.318850624 Z
   what: quality-of-service
   when: 2024-08-09 06:10:53.229687656 Z
-- _id: 123926
-  _time: 2024-08-09 06:16:36.298186175 Z
+- _id: 124051
+  _time: 2024-08-09 07:10:05.137433293 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  branch: '244'
+  comments: 0
+  details: The pull request zerocracy/judges-action#245 has been closed by @yegor256,
+    with 10 HoC and 0 comments.
+  event_id: 40883970407
+  event_type: PullRequestEvent
+  hoc: 10
+  is_human: 1
+  issue: 245
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-08-09 07:05:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 124145
+  _time: 2024-08-09 07:13:53.099113908 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  composite: 83.632
+  since: 2024-07-12 07:13:51.155802114 Z
+  total_commits_pushed: 929
+  total_hoc_committed: 25165
+  total_issues_created: 80
+  total_pulls_submitted: 2
+  what: quantity-of-deliverables
+  when: 2024-08-09 07:13:53.099243460 Z
+- _id: 124147
+  _time: 2024-08-09 07:18:49.720377856 Z
+  _version: 0.2.1/0.22.1/
+  cause: 124051
+  comments: 0
+  details: The pull request zerocracy/judges-action#245 with 10 HoC created by @Yegorov
+    was merged by @yegor256 after 19 hours of being in review and 0 comments.
+  hoc: 10
+  is_human: 1
+  issue: 245
+  merger: 526301
+  repository: 799177290
+  seconds: 70664
+  what: code-was-contributed
+  when: 2024-08-09 07:05:24.000000000 Z
+  where: github
+  who: 2566462
+- _id: 124148
+  _time: 2024-08-09 07:19:05.009854481 Z
   _version: 0.2.1/0.22.1/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -37176,8 +37221,37 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 124016
-  _time: 2024-08-09 07:08:32.228450413 Z
+- _id: 124151
+  _time: 2024-08-09 08:06:18.246591099 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  branch: '166'
+  comments: 3
+  details: The pull request zerocracy/judges-action#243 has been closed by @rultor,
+    with 161 HoC and 3 comments.
+  event_id: 40884360399
+  event_type: PullRequestEvent
+  hoc: 161
+  is_human: 0
+  issue: 243
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-08-09 07:20:26.000000000 Z
+  where: github
+  who: 8086956
+- _id: 124225
+  _time: 2024-08-09 08:09:15.299228037 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 124227
+  _time: 2024-08-09 08:09:19.730771184 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -37188,114 +37262,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 124049
-  _time: 2024-08-09 07:09:50.883947975 Z
+- _id: 124259
+  _time: 2024-08-09 08:10:33.384034694 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40845300356
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 124050
-  _time: 2024-08-09 07:09:54.589609954 Z
+- _id: 124260
+  _time: 2024-08-09 08:10:37.021532626 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40865865688
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 124051
-  _time: 2024-08-09 07:10:05.137433293 Z
+- _id: 124261
+  _time: 2024-08-09 08:10:40.739158752 Z
   _version: 0.2.1/0.22.1/0.0.42
-  branch: '244'
-  comments: 0
-  details: The pull request zerocracy/judges-action#245 has been closed by @yegor256,
-    with 10 HoC and 0 comments.
-  event_id: 40883970407
-  event_type: PullRequestEvent
-  hoc: 10
-  is_human: 1
-  issue: 245
-  repository: 799177290
-  what: pull-was-merged
-  when: 2024-08-09 07:05:24.000000000 Z
-  where: github
-  who: 526301
-- _id: 124052
-  _time: 2024-08-09 07:10:09.207021907 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40884066054
+  latest: 40884375816
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 124053
-  _time: 2024-08-09 07:10:13.016823877 Z
+- _id: 124262
+  _time: 2024-08-09 08:10:44.158579478 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40825738642
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 124054
-  _time: 2024-08-09 07:10:17.083990447 Z
+- _id: 124263
+  _time: 2024-08-09 08:10:47.919045176 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40873874213
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 124055
-  _time: 2024-08-09 07:10:21.195915408 Z
+- _id: 124264
+  _time: 2024-08-09 08:10:51.806435296 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40834980524
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 124092
-  _time: 2024-08-09 07:11:49.543911456 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 124102
-  _time: 2024-08-09 07:12:13.093525302 Z
+- _id: 124312
+  _time: 2024-08-09 08:12:38.836945012 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 124123
-  _time: 2024-08-09 07:13:01.562943001 Z
+- _id: 124330
+  _time: 2024-08-09 08:13:19.650611115 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 124338
+  _time: 2024-08-09 08:13:36.995945703 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 124142
-  _time: 2024-08-09 07:13:46.601376466 Z
+- _id: 124342
+  _time: 2024-08-09 08:13:45.617454792 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 167
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 124143
-  _time: 2024-08-09 07:13:48.844719341 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 31
+  latest: 0
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 124144
-  _time: 2024-08-09 07:13:51.107726660 Z
+- _id: 124352
+  _time: 2024-08-09 08:14:07.840823160 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 177
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 124353
+  _time: 2024-08-09 08:14:10.292348331 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 124145
-  _time: 2024-08-09 07:13:53.099113908 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  since: 2024-07-12 07:13:51.155802114 Z
-  total_commits_pushed: 929
-  total_hoc_committed: 25165
-  total_issues_created: 80
-  total_pulls_submitted: 2
-  what: quantity-of-deliverables
-  when: 2024-08-09 07:13:53.099243460 Z
