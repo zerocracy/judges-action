@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 559.568288642
+  seconds: 555.603025714
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-10 15:13:56.018076996 Z
+  when: 2024-08-10 16:14:55.558918876 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -38507,8 +38507,91 @@
   where: github
   who: 526301
   why: Pushed 6b253be12 to default branch 'master' in zerocracy/pages-action
-- _id: 131178
-  _time: 2024-08-10 14:18:55.624230803 Z
+- _id: 131182
+  _time: 2024-08-10 14:19:20.985773431 Z
+  _version: 0.3.0/0.23.0/
+  award: 37
+  cause: 104569
+  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#205,
+    the reward amount is 37.
+  greeting: "**Great job on the review!** \U0001F31F You've earned **37 points** (25
+    base + 12 for your insightful comments). Your dedication is impressive! Current
+    balance: [-545](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the excellent work!"
+  is_human: 1
+  issue: 205
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:19:21.004095821 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/judges-action#205
+- _id: 131183
+  _time: 2024-08-10 14:20:24.998955251 Z
+  _version: 0.3.0/0.23.0/
+  award: -20
+  cause: 120951
+  commit: 7d17437b10f025017042d6e4edfe380ac08e88b4
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/factbase, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-508](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/yegor256/factbase/commit/7d17437b10f025017042d6e4edfe380ac08e88b4/#commitcomment-145247597
+  is_human: 1
+  repository: 798641472
+  what: push-to-master-was-punished
+  when: 2024-08-10 14:20:25.016268516 Z
+  where: github
+  who: 526301
+  why: Pushed 7d17437b1 to default branch 'master' in yegor256/factbase
+- _id: 131408
+  _time: 2024-08-10 15:14:43.591340414 Z
+  _version: 0.3.0/0.23.0/
+  award: 5
+  cause: 104571
+  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#215,
+    the reward amount is 5.
+  greeting: "Hey there! \U0001F44B Thanks for the review, but reviewing your own code
+    isn't ideal. You've earned +5 points: +25 base, -40 for self-review, -10 for only
+    5 comments, and +30 to keep you motivated. Remember, more comments (up to 20)
+    can boost your score, and aim for at least 15 hits-of-code next time. Your current
+    balance is [+302](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work, and let's aim for that max 80-point reward! \U0001F4AA"
+  is_human: 1
+  issue: 215
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 15:14:43.615909725 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/judges-action#215
+- _id: 131413
+  _time: 2024-08-10 15:16:24.777380585 Z
+  _version: 0.3.0/0.23.0/
+  award: 5
+  cause: 104573
+  details: It's time to reward @Yegorov for the code review in zerocracy/fbe#49, the
+    reward amount is 5.
+  greeting: "Thanks for your review! Here's the breakdown of your +5 points: +25 base,
+    -40 for self-review (not recommended), +0.6 for 30 hits-of-code (capped at 30),
+    -10 for <6 comments, +3 for 3 comments. We adjusted to the minimum 5 points. Remember,
+    more detailed reviews earn higher rewards! Your balance is now [+194](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work! \U0001F4BB"
+  is_human: 1
+  issue: 49
+  repository: 820463873
+  what: code-review-was-rewarded
+  when: 2024-08-10 15:16:24.796600654 Z
+  where: github
+  who: 2566462
+  why: Reviewed code in zerocracy/fbe#49
+- _id: 131414
+  _time: 2024-08-10 15:17:30.872636793 Z
   _version: 0.3.0/0.23.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -38557,14 +38640,14 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 131179
-  _time: 2024-08-10 14:18:57.974097027 Z
+- _id: 131415
+  _time: 2024-08-10 15:17:33.741590986 Z
   _version: 0.3.0/0.23.0/
   area: integration
   eva_interval: 10
   what: pmp
-- _id: 131180
-  _time: 2024-08-10 14:19:02.792067210 Z
+- _id: 131416
+  _time: 2024-08-10 15:17:39.351307741 Z
   _version: 0.3.0/0.23.0/
   area: quality
   qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
@@ -38573,8 +38656,8 @@
   qos_days: 7
   qos_interval: 2
   what: pmp
-- _id: 131181
-  _time: 2024-08-10 14:19:07.557087903 Z
+- _id: 131417
+  _time: 2024-08-10 15:17:44.494359975 Z
   _version: 0.3.0/0.23.0/
   area: scope
   qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
@@ -38582,149 +38665,70 @@
   qod_days: 7
   qod_interval: 2
   what: pmp
-- _id: 131182
-  _time: 2024-08-10 14:19:20.985773431 Z
-  _version: 0.3.0/0.23.0/
-  award: 37
-  cause: 104569
-  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#205,
-    the reward amount is 37.
-  greeting: "**Great job on the review!** \U0001F31F You've earned **37 points** (25
-    base + 12 for your insightful comments). Your dedication is impressive! Current
-    balance: [-545](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!"
-  is_human: 1
-  issue: 205
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 14:19:21.004095821 Z
-  where: github
-  who: 526301
-  why: Reviewed code in zerocracy/judges-action#205
-- _id: 131182
-  _time: 2024-08-10 14:19:26.269721256 Z
-  _version: 0.3.0/0.23.0/
-  award: 5
-  cause: 104571
-  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#215,
-    the reward amount is 5.
-  greeting: "Great job on the review! \U0001F31F You've earned +5 points: +25 base,
-    -40 for self-review (let's avoid that), -10 for limited comments, +30 bonus. Keep
-    up the good work and aim for more detailed reviews next time. Your current balance:
-    [+302](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)."
-  is_human: 1
-  issue: 215
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 14:19:26.285444771 Z
-  where: github
-  who: 88084038
-  why: Reviewed code in zerocracy/judges-action#215
-- _id: 131182
-  _time: 2024-08-10 14:19:31.419042456 Z
-  _version: 0.3.0/0.23.0/
-  award: 5
-  cause: 104573
-  details: It's time to reward @Yegorov for the code review in zerocracy/fbe#49, the
-    reward amount is 5.
-  greeting: 'Thank you for your review. While we appreciate your effort, reviewing
-    your own contribution is not recommended. Your reward calculation: +25 base points,
-    -40 for self-review, +30 for hits-of-code, and -10 for few comments (3). This
-    results in a total of +5 points. Remember, more detailed reviews with constructive
-    comments are highly valued. Your current balance is [+194](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the good work and aim for more comprehensive reviews in the future!'
-  is_human: 1
-  issue: 49
-  repository: 820463873
-  what: code-review-was-rewarded
-  when: 2024-08-10 14:19:31.438238253 Z
-  where: github
-  who: 2566462
-  why: Reviewed code in zerocracy/fbe#49
-- _id: 131182
-  _time: 2024-08-10 14:19:37.350849716 Z
+- _id: 131418
+  _time: 2024-08-10 15:17:59.694064857 Z
   _version: 0.3.0/0.23.0/
   award: 45
   cause: 104744
   details: It's time to reward @Suban05 for the code review in yegor256/judges#93,
     the reward amount is 45.
-  greeting: "\U0001F31F Great job on your review! You've earned **45 points**: 25
-    base + 20 for your 21 insightful comments. Your dedication is impressive! Your
-    current balance is now [**302 points**](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+  greeting: "Great work on the review! \U0001F389 You've earned +45 points: +25 base
+    points, plus the maximum +20 for your 21 insightful comments. We didn't deduct
+    points for self-review or low hit count, which is fantastic. Your running balance
+    is now [+307](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
     Keep up the excellent work!"
   is_human: 1
   issue: 93
   repository: 799113787
   what: code-review-was-rewarded
-  when: 2024-08-10 14:19:37.366591640 Z
+  when: 2024-08-10 15:17:59.716493576 Z
   where: github
   who: 88084038
   why: Reviewed code in yegor256/judges#93
-- _id: 131182
-  _time: 2024-08-10 14:19:42.002935707 Z
+- _id: 131418
+  _time: 2024-08-10 15:18:05.360355508 Z
   _version: 0.3.0/0.23.0/
   award: 5
   cause: 104746
   details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#225,
     the reward amount is 5.
-  greeting: "Thanks for your code review! Here's the breakdown of your +5 points:
-    +25 base, -40 for self-review (not recommended), +20 to ensure a minimum reward.
-    While self-reviews aren't ideal, we appreciate your effort. Your balance is now
-    [+302](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep
-    up the good work and consider reviewing others' code for better rewards next time!
-    \U0001F680"
+  greeting: 'Hello! Thank you for completing the code review. As per our policy, you''ve
+    earned +5 points for this review: +25 as a base reward, -40 for reviewing your
+    own contribution (which we generally discourage), and +20 to ensure a minimum
+    reward. While self-reviews can be insightful, we encourage seeking external perspectives
+    for more diverse feedback. Your current balance stands at [+307](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work, and consider reviewing others'' contributions for potentially
+    higher rewards in the future!'
   is_human: 1
   issue: 225
   repository: 799177290
   what: code-review-was-rewarded
-  when: 2024-08-10 14:19:42.018800757 Z
+  when: 2024-08-10 15:18:05.382305469 Z
   where: github
   who: 88084038
   why: Reviewed code in zerocracy/judges-action#225
-- _id: 131182
-  _time: 2024-08-10 14:19:48.153634313 Z
+- _id: 131418
+  _time: 2024-08-10 15:18:12.013182380 Z
   _version: 0.3.0/0.23.0/
   award: 36
   cause: 104748
   details: It's time to reward @Yegorov for the code review in zerocracy/judges-action#225,
     the reward amount is 36.
-  greeting: "Thank you for your code review contribution! According to our team policy,
-    you've earned +36 points: +25 as a base reward, and +11 for the 11 comments you
-    provided. This aligns with our goal of encouraging thorough reviews and active
-    participation. Your running balance is now [+194](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work in fostering collaborative code improvement! \U0001F680"
+  greeting: "Hello! Thank you for your code review contribution. Based on our team's
+    policy, you've earned +36 points: +25 as the base reward, and +11 for the 11 comments
+    you made during the review. This aligns with our goal of encouraging thorough
+    and constructive feedback. Your current balance stands at [+199](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the great work in fostering collaborative code reviews! \U0001F44D"
   is_human: 1
   issue: 225
   repository: 799177290
   what: code-review-was-rewarded
-  when: 2024-08-10 14:19:48.169930389 Z
+  when: 2024-08-10 15:18:12.041489384 Z
   where: github
   who: 2566462
   why: Reviewed code in zerocracy/judges-action#225
-- _id: 131183
-  _time: 2024-08-10 14:20:24.998955251 Z
-  _version: 0.3.0/0.23.0/
-  award: -20
-  cause: 120951
-  commit: 7d17437b10f025017042d6e4edfe380ac08e88b4
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/factbase, the penalty amount is -20.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -20 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-508](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  is_human: 1
-  repository: 798641472
-  what: push-to-master-was-punished
-  when: 2024-08-10 14:20:25.016268516 Z
-  where: github
-  who: 526301
-  why: Pushed 7d17437b1 to default branch 'master' in yegor256/factbase
-- _id: 131272
-  _time: 2024-08-10 15:08:33.132129560 Z
+- _id: 131513
+  _time: 2024-08-10 16:09:32.016122552 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -38735,126 +38739,115 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 131306
-  _time: 2024-08-10 15:09:56.901904125 Z
+- _id: 131548
+  _time: 2024-08-10 16:10:54.534810059 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915482059
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 131307
-  _time: 2024-08-10 15:10:00.388895927 Z
+- _id: 131549
+  _time: 2024-08-10 16:10:57.753311351 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40865865688
+  latest: 40915979556
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 131308
-  _time: 2024-08-10 15:10:04.322624409 Z
+- _id: 131550
+  _time: 2024-08-10 16:11:01.119617660 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915464457
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 131309
-  _time: 2024-08-10 15:10:07.023073057 Z
+- _id: 131551
+  _time: 2024-08-10 16:11:03.669980310 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915188624
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 131310
-  _time: 2024-08-10 15:10:09.691998421 Z
+- _id: 131552
+  _time: 2024-08-10 16:11:06.144328030 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 38343193787
   repository: 75261597
   what: events-were-scanned
   where: github
-- _id: 131311
-  _time: 2024-08-10 15:10:13.737508165 Z
+- _id: 131553
+  _time: 2024-08-10 16:11:09.792171285 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915033544
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 131312
-  _time: 2024-08-10 15:10:17.492265750 Z
+- _id: 131554
+  _time: 2024-08-10 16:11:13.288148109 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915464799
+  latest: 40915967540
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 131313
-  _time: 2024-08-10 15:10:21.007125328 Z
+- _id: 131555
+  _time: 2024-08-10 16:11:16.630497217 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915499795
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 131316
-  _time: 2024-08-10 15:10:28.049020344 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 131318
-  _time: 2024-08-10 15:10:32.534695463 Z
+- _id: 131560
+  _time: 2024-08-10 16:11:28.052929660 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 75261597
   what: labels-were-scanned
   where: github
-- _id: 131336
-  _time: 2024-08-10 15:11:15.239981276 Z
+- _id: 131581
+  _time: 2024-08-10 16:12:17.147313156 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 131362
-  _time: 2024-08-10 15:12:17.843893200 Z
+- _id: 131603
+  _time: 2024-08-10 16:13:08.658909025 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 131611
+  _time: 2024-08-10 16:13:28.404111014 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 131382
-  _time: 2024-08-10 15:13:05.563129124 Z
+- _id: 131630
+  _time: 2024-08-10 16:14:11.704913157 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 131384
-  _time: 2024-08-10 15:13:10.290434456 Z
+- _id: 131644
+  _time: 2024-08-10 16:14:44.091205777 Z
   _version: 0.2.1/0.22.1/0.0.42
-  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  issue: 65
-  label: enhancement
-  repository: 802720676
-  what: label-was-attached
-  when: 2024-07-23 06:29:27.000000000 Z
-  where: github
-  who: 526301
-- _id: 131401
-  _time: 2024-08-10 15:13:51.239658611 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 67
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 131402
-  _time: 2024-08-10 15:13:53.594043882 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 167
+  latest: 0
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 131403
-  _time: 2024-08-10 15:13:55.921823359 Z
+- _id: 131648
+  _time: 2024-08-10 16:14:53.210372577 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 73
+  latest: 177
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 131649
+  _time: 2024-08-10 16:14:55.459018732 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
