@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 555.603025714
+  seconds: 510.969934019
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-10 16:14:55.558918876 Z
+  when: 2024-08-10 17:12:46.419933131 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -38590,8 +38590,67 @@
   where: github
   who: 2566462
   why: Reviewed code in zerocracy/fbe#49
-- _id: 131414
-  _time: 2024-08-10 15:17:30.872636793 Z
+- _id: 131418
+  _time: 2024-08-10 15:17:59.694064857 Z
+  _version: 0.3.0/0.23.0/
+  award: 45
+  cause: 104744
+  details: It's time to reward @Suban05 for the code review in yegor256/judges#93,
+    the reward amount is 45.
+  greeting: "Great work on the review! \U0001F389 You've earned +45 points: +25 base
+    points, plus the maximum +20 for your 21 insightful comments. We didn't deduct
+    points for self-review or low hit count, which is fantastic. Your running balance
+    is now [+307](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the excellent work!"
+  is_human: 1
+  issue: 93
+  repository: 799113787
+  what: code-review-was-rewarded
+  when: 2024-08-10 15:17:59.716493576 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in yegor256/judges#93
+- _id: 131654
+  _time: 2024-08-10 16:15:36.805804570 Z
+  _version: 0.3.0/0.23.0/
+  award: 5
+  cause: 104746
+  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#225,
+    the reward amount is 5.
+  greeting: "Thanks for your review! Here's the breakdown of your +5 points: +25 base,
+    -40 for self-review (not recommended), +20 for hits-of-code (capped at 30), and
+    adjusted to the minimum 5 points. Remember, external reviews and more comments
+    can boost your score next time! Your current balance is [+352](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work! \U0001F4BB"
+  is_human: 1
+  issue: 225
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 16:15:36.828270551 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/judges-action#225
+- _id: 131659
+  _time: 2024-08-10 16:16:58.132504175 Z
+  _version: 0.3.0/0.23.0/
+  award: 36
+  cause: 104748
+  details: It's time to reward @Yegorov for the code review in zerocracy/judges-action#225,
+    the reward amount is 36.
+  greeting: "\U0001F31F Fantastic work on your review! You've earned a whopping **36
+    points**: 25 base points + 11 bonus points for your insightful comments. Your
+    dedication is paying off – your current balance now stands at [199 points](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the great contributions!"
+  is_human: 1
+  issue: 225
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 16:16:58.150642372 Z
+  where: github
+  who: 2566462
+  why: Reviewed code in zerocracy/judges-action#225
+- _id: 131660
+  _time: 2024-08-10 16:17:43.683291661 Z
   _version: 0.3.0/0.23.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -38640,14 +38699,14 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 131415
-  _time: 2024-08-10 15:17:33.741590986 Z
+- _id: 131661
+  _time: 2024-08-10 16:17:46.194276444 Z
   _version: 0.3.0/0.23.0/
   area: integration
   eva_interval: 10
   what: pmp
-- _id: 131416
-  _time: 2024-08-10 15:17:39.351307741 Z
+- _id: 131662
+  _time: 2024-08-10 16:17:51.378111646 Z
   _version: 0.3.0/0.23.0/
   area: quality
   qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
@@ -38656,8 +38715,8 @@
   qos_days: 7
   qos_interval: 2
   what: pmp
-- _id: 131417
-  _time: 2024-08-10 15:17:44.494359975 Z
+- _id: 131663
+  _time: 2024-08-10 16:17:56.956122991 Z
   _version: 0.3.0/0.23.0/
   area: scope
   qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
@@ -38665,70 +38724,8 @@
   qod_days: 7
   qod_interval: 2
   what: pmp
-- _id: 131418
-  _time: 2024-08-10 15:17:59.694064857 Z
-  _version: 0.3.0/0.23.0/
-  award: 45
-  cause: 104744
-  details: It's time to reward @Suban05 for the code review in yegor256/judges#93,
-    the reward amount is 45.
-  greeting: "Great work on the review! \U0001F389 You've earned +45 points: +25 base
-    points, plus the maximum +20 for your 21 insightful comments. We didn't deduct
-    points for self-review or low hit count, which is fantastic. Your running balance
-    is now [+307](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!"
-  is_human: 1
-  issue: 93
-  repository: 799113787
-  what: code-review-was-rewarded
-  when: 2024-08-10 15:17:59.716493576 Z
-  where: github
-  who: 88084038
-  why: Reviewed code in yegor256/judges#93
-- _id: 131418
-  _time: 2024-08-10 15:18:05.360355508 Z
-  _version: 0.3.0/0.23.0/
-  award: 5
-  cause: 104746
-  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#225,
-    the reward amount is 5.
-  greeting: 'Hello! Thank you for completing the code review. As per our policy, you''ve
-    earned +5 points for this review: +25 as a base reward, -40 for reviewing your
-    own contribution (which we generally discourage), and +20 to ensure a minimum
-    reward. While self-reviews can be insightful, we encourage seeking external perspectives
-    for more diverse feedback. Your current balance stands at [+307](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the good work, and consider reviewing others'' contributions for potentially
-    higher rewards in the future!'
-  is_human: 1
-  issue: 225
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 15:18:05.382305469 Z
-  where: github
-  who: 88084038
-  why: Reviewed code in zerocracy/judges-action#225
-- _id: 131418
-  _time: 2024-08-10 15:18:12.013182380 Z
-  _version: 0.3.0/0.23.0/
-  award: 36
-  cause: 104748
-  details: It's time to reward @Yegorov for the code review in zerocracy/judges-action#225,
-    the reward amount is 36.
-  greeting: "Hello! Thank you for your code review contribution. Based on our team's
-    policy, you've earned +36 points: +25 as the base reward, and +11 for the 11 comments
-    you made during the review. This aligns with our goal of encouraging thorough
-    and constructive feedback. Your current balance stands at [+199](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work in fostering collaborative code reviews! \U0001F44D"
-  is_human: 1
-  issue: 225
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 15:18:12.041489384 Z
-  where: github
-  who: 2566462
-  why: Reviewed code in zerocracy/judges-action#225
-- _id: 131513
-  _time: 2024-08-10 16:09:32.016122552 Z
+- _id: 131745
+  _time: 2024-08-10 17:07:22.365308650 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -38739,115 +38736,145 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 131548
-  _time: 2024-08-10 16:10:54.534810059 Z
+- _id: 131748
+  _time: 2024-08-10 17:07:28.751450670 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 131780
+  _time: 2024-08-10 17:08:39.689285876 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915482059
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 131549
-  _time: 2024-08-10 16:10:57.753311351 Z
+- _id: 131781
+  _time: 2024-08-10 17:08:42.755564334 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915979556
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 131550
-  _time: 2024-08-10 16:11:01.119617660 Z
+- _id: 131782
+  _time: 2024-08-10 17:08:45.931019344 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915464457
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 131551
-  _time: 2024-08-10 16:11:03.669980310 Z
+- _id: 131783
+  _time: 2024-08-10 17:08:48.341196872 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915188624
+  commit: b93d5f284d4cd24ccbc283f455d90ef79f1ad596
+  default_branch: master
+  details: 'A new Git push #19713898466 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40916889764
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19713898466
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-10 17:07:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 131784
+  _time: 2024-08-10 17:08:50.591840281 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40916889764
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 131552
-  _time: 2024-08-10 16:11:06.144328030 Z
+- _id: 131785
+  _time: 2024-08-10 17:08:52.876650961 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 38343193787
   repository: 75261597
   what: events-were-scanned
   where: github
-- _id: 131553
-  _time: 2024-08-10 16:11:09.792171285 Z
+- _id: 131786
+  _time: 2024-08-10 17:08:56.051398702 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915033544
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 131554
-  _time: 2024-08-10 16:11:13.288148109 Z
+- _id: 131787
+  _time: 2024-08-10 17:08:59.134563246 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915967540
+  latest: 40916462429
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 131555
-  _time: 2024-08-10 16:11:16.630497217 Z
+- _id: 131788
+  _time: 2024-08-10 17:09:02.235790338 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915499795
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 131560
-  _time: 2024-08-10 16:11:28.052929660 Z
+- _id: 131793
+  _time: 2024-08-10 17:09:13.174058085 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 75261597
   what: labels-were-scanned
   where: github
-- _id: 131581
-  _time: 2024-08-10 16:12:17.147313156 Z
+- _id: 131814
+  _time: 2024-08-10 17:09:58.206325350 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 131603
-  _time: 2024-08-10 16:13:08.658909025 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 131611
-  _time: 2024-08-10 16:13:28.404111014 Z
+- _id: 131845
+  _time: 2024-08-10 17:11:06.229189005 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 131630
-  _time: 2024-08-10 16:14:11.704913157 Z
+- _id: 131869
+  _time: 2024-08-10 17:11:58.383819242 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 131644
-  _time: 2024-08-10 16:14:44.091205777 Z
+- _id: 131876
+  _time: 2024-08-10 17:12:14.005911371 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
-  repository: 799177290
+  repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 131648
-  _time: 2024-08-10 16:14:53.210372577 Z
+- _id: 131889
+  _time: 2024-08-10 17:12:41.962850039 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 177
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 131890
+  _time: 2024-08-10 17:12:44.260028547 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 131649
-  _time: 2024-08-10 16:14:55.459018732 Z
+- _id: 131891
+  _time: 2024-08-10 17:12:46.329253661 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 31
-  repository: 802720676
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
