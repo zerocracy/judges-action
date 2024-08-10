@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 510.969934019
+  seconds: 543.693771726
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-10 17:12:46.419933131 Z
+  when: 2024-08-10 18:14:09.633080178 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -38649,8 +38649,26 @@
   where: github
   who: 2566462
   why: Reviewed code in zerocracy/judges-action#225
-- _id: 131660
-  _time: 2024-08-10 16:17:43.683291661 Z
+- _id: 131783
+  _time: 2024-08-10 17:08:48.341196872 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: b93d5f284d4cd24ccbc283f455d90ef79f1ad596
+  default_branch: master
+  details: 'A new Git push #19713898466 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40916889764
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19713898466
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-10 17:07:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 131896
+  _time: 2024-08-10 17:14:19.405518439 Z
   _version: 0.3.0/0.23.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -38699,14 +38717,14 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 131661
-  _time: 2024-08-10 16:17:46.194276444 Z
+- _id: 131897
+  _time: 2024-08-10 17:14:21.955911276 Z
   _version: 0.3.0/0.23.0/
   area: integration
   eva_interval: 10
   what: pmp
-- _id: 131662
-  _time: 2024-08-10 16:17:51.378111646 Z
+- _id: 131898
+  _time: 2024-08-10 17:14:27.622919032 Z
   _version: 0.3.0/0.23.0/
   area: quality
   qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
@@ -38715,8 +38733,8 @@
   qos_days: 7
   qos_interval: 2
   what: pmp
-- _id: 131663
-  _time: 2024-08-10 16:17:56.956122991 Z
+- _id: 131899
+  _time: 2024-08-10 17:14:32.714128996 Z
   _version: 0.3.0/0.23.0/
   area: scope
   qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
@@ -38724,8 +38742,26 @@
   qod_days: 7
   qod_interval: 2
   what: pmp
-- _id: 131745
-  _time: 2024-08-10 17:07:22.365308650 Z
+- _id: 131902
+  _time: 2024-08-10 18:05:17.489690612 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 839a5f39095578c993410a7557dbc4520272c724
+  default_branch: master
+  details: 'A new Git push #19714014141 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40917047644
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19714014141
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-10 17:24:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 131989
+  _time: 2024-08-10 18:08:51.430245015 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -38736,11 +38772,119 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 131748
-  _time: 2024-08-10 17:07:28.751450670 Z
+- _id: 132023
+  _time: 2024-08-10 18:10:15.187111010 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915482059
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 132024
+  _time: 2024-08-10 18:10:18.701765367 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915979556
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 132025
+  _time: 2024-08-10 18:10:22.500014115 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 7f105f42cf08e20b8959cfd9c85dd979886e3a9c
+  default_branch: master
+  details: 'A new Git push #19714234383 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40917371283
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19714234383
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-10 18:05:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 132026
+  _time: 2024-08-10 18:10:25.024285725 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40917371283
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 132027
+  _time: 2024-08-10 18:10:27.717569693 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40916889764
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 132028
+  _time: 2024-08-10 18:10:30.370719762 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 38343193787
+  repository: 75261597
+  what: events-were-scanned
+  where: github
+- _id: 132029
+  _time: 2024-08-10 18:10:34.271746174 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915033544
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 132030
+  _time: 2024-08-10 18:10:37.898459029 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40916931469
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 132031
+  _time: 2024-08-10 18:10:41.432927859 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915499795
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 132034
+  _time: 2024-08-10 18:10:48.321387969 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 132036
+  _time: 2024-08-10 18:10:52.780249206 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 75261597
+  what: labels-were-scanned
+  where: github
+- _id: 132054
+  _time: 2024-08-10 18:11:35.684337887 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 132080
+  _time: 2024-08-10 18:12:37.801102694 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 132100
+  _time: 2024-08-10 18:13:25.111657313 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 132102
+  _time: 2024-08-10 18:13:29.748425549 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  is_human: 1
   issue: 65
   label: enhancement
   repository: 802720676
@@ -38748,133 +38892,24 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 131780
-  _time: 2024-08-10 17:08:39.689285876 Z
+- _id: 132114
+  _time: 2024-08-10 18:13:57.790887955 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915482059
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 131781
-  _time: 2024-08-10 17:08:42.755564334 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915979556
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 131782
-  _time: 2024-08-10 17:08:45.931019344 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915464457
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 131783
-  _time: 2024-08-10 17:08:48.341196872 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  commit: b93d5f284d4cd24ccbc283f455d90ef79f1ad596
-  default_branch: master
-  details: 'A new Git push #19713898466 has arrived to zerocracy/baza.rb, made by
-    @yegor256 (default branch is ''master''), not associated with any pull request.'
-  event_id: 40916889764
-  event_type: PushEvent
-  is_human: 1
-  push_id: 19713898466
-  ref: refs/heads/master
-  repository: 840215648
-  to_master: 1
-  what: git-was-pushed
-  when: 2024-08-10 17:07:52.000000000 Z
-  where: github
-  who: 526301
-- _id: 131784
-  _time: 2024-08-10 17:08:50.591840281 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40916889764
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 131785
-  _time: 2024-08-10 17:08:52.876650961 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 38343193787
-  repository: 75261597
-  what: events-were-scanned
-  where: github
-- _id: 131786
-  _time: 2024-08-10 17:08:56.051398702 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915033544
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 131787
-  _time: 2024-08-10 17:08:59.134563246 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40916462429
+  latest: 0
   repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 131788
-  _time: 2024-08-10 17:09:02.235790338 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915499795
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 131793
-  _time: 2024-08-10 17:09:13.174058085 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 75261597
   what: labels-were-scanned
   where: github
-- _id: 131814
-  _time: 2024-08-10 17:09:58.206325350 Z
+- _id: 132118
+  _time: 2024-08-10 18:14:07.222486798 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 131845
-  _time: 2024-08-10 17:11:06.229189005 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 131869
-  _time: 2024-08-10 17:11:58.383819242 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 131876
-  _time: 2024-08-10 17:12:14.005911371 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 131889
-  _time: 2024-08-10 17:12:41.962850039 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 98
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 131890
-  _time: 2024-08-10 17:12:44.260028547 Z
+- _id: 132119
+  _time: 2024-08-10 18:14:09.539054040 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 135
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 131891
-  _time: 2024-08-10 17:12:46.329253661 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 167
-  repository: 799177290
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
