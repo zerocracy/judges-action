@@ -49,7 +49,7 @@
           <tbody>
             <tr>
               <td>
-                <span style="color:#2471A3">2024-08-10T05:14:16Z</span>
+                <span style="color:#2471A3">2024-08-10T06:13:58Z</span>
               </td>
               <td>
                 <span style="color:#196F3D">judges-summary</span>
@@ -66,7 +66,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">570.4239439</span> version:<span style="color:#196F3D">0.22.1</span>  when:<span style="color:#2471A3">2024-08-10T05:14:16Z</span></td>
+              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">512.590825335</span> version:<span style="color:#196F3D">0.22.1</span>  when:<span style="color:#2471A3">2024-08-10T06:13:58Z</span></td>
             </tr>
             <tr>
               <td>
@@ -51984,7 +51984,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">128843</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 200) (let hoc_k 0.05) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+              <td> _id:<span style="color:#212F3C">129070</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -10) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 200) (let hoc_k 0.05) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
           [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
           but not more than ${hoc_max} points') (aka (let many_hoc_fee 7) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
           [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 800) (let man_hoc_fee2 15) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 man_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${man_hoc_fee2} points if more than ${hoc_threshold2}
@@ -51993,6 +51993,153 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
           but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 20) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 10) (let hoc_needed 15) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> days_of_running_balance:<span style="color:#212F3C">56</span> days_to_reward:<span style="color:#212F3C">7</span> dud_was_punished:<span style="color:#196F3D">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a basis') 'deduct ${fee} points'))</span> enhancement_suggestion_was_rewarded:<span style="color:#196F3D">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis') 'award ${bonus} points'))</span> master_punish_days:<span style="color:#212F3C">28</span> published_release_was_rewarded:<span style="color:#196F3D">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
           [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
           but not more than ${hoc_max} points'))</span> push_to_master_was_punished:<span style="color:#196F3D">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</span> resolved_bug_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (in self '1 if the bug was reported and resolved by the same person, otherwise zero') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let self_fee 15) (set penalty_for_self (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug reported by you earlier') 'deduct ${self_fee} points if they resolved the bug earlier reported by themselves') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-10T05:57:30Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">59</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/fbe#59 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">129076</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40911475351</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-10T05:57:30Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-10T05:53:04Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">release-published</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new release 'default pause is not set' has been published in zerocracy/fbe by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">129077</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40911446140</span> event_type:<span style="color:#196F3D">ReleaseEvent</span> is_human:<span style="color:#212F3C">0</span> release:<span style="color:#212F3C">169613425</span>  tag:<span style="color:#196F3D">0.0.43</span>  when:<span style="color:#2471A3">2024-08-10T05:53:04Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-10T05:52:29Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">tag-was-created</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new tag '0.0.43' has been created in zerocracy/fbe by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">129078</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40911441767</span> event_type:<span style="color:#196F3D">CreateEvent</span> is_human:<span style="color:#212F3C">0</span>  tag:<span style="color:#196F3D">0.0.43</span>  when:<span style="color:#2471A3">2024-08-10T05:52:29Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-10T05:41:51Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19710100908 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">129079</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">cc624bc6a4a5bb8aead03ff7a6a7c9354a8d810d</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40911367569</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19710100908</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-10T05:41:51Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-10T05:39:40Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19710090457 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">129080</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">e2d33b4fbb68ec3d7863f5ada774679bf38fa301</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40911352076</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19710090457</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-10T05:39:40Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-10T05:38:17Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19710084243 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">129081</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">4a9bd8676d20ce65b7cb09934d4fc1e5a1d85e8f</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40911342377</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19710084243</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-10T05:38:17Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-10T05:36:58Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">59</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/fbe#59 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">129082</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40911333237</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-10T05:36:58Z</span> where:<span style="color:#196F3D">github</span> </td>
             </tr>
             <tr>
               <td>
@@ -52013,7 +52160,301 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.</span>
               </td>
-              <td> _id:<span style="color:#212F3C">128925</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+              <td> _id:<span style="color:#212F3C">129166</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129200</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40888347841</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">798641472</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129201</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40865865688</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129202</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40890329110</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">840215648</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129203</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40887679251</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">75261597</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129204</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">38343193787</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129205</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40911475351</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129206</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40911157127</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">events-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129207</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40890293911</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129210</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">75261597</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129212</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">840215648</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129230</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129256</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129269</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">798641472</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">129275</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -52034,280 +52475,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.</span>
               </td>
-              <td> _id:<span style="color:#212F3C">128928</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-23T06:29:27Z</span> where:<span style="color:#196F3D">github</span> </td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">799113787</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128960</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40888347841</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">798641472</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128961</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40865865688</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">728758275</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128962</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40890329110</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">840215648</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128963</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40887679251</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">75261597</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128964</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">38343193787</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">820463873</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128965</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40834980524</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">799177290</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128966</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40910733518</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">events-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">802720676</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128967</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40890293911</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">75261597</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128972</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">840215648</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">128993</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">820463873</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">129018</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">798641472</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">129047</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">802720676</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">129054</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">129276</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>   label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-23T06:29:27Z</span> where:<span style="color:#196F3D">github</span> </td>
             </tr>
             <tr>
               <td>
@@ -52328,7 +52496,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">129067</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">98</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">129288</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">67</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -52341,7 +52509,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
                 <span style="color:"/>
               </td>
               <td>
-                <span style="color:#212F3C">728758275</span>
+                <span style="color:#212F3C">802720676</span>
               </td>
               <td>
                 <span style="color:"/>
@@ -52349,34 +52517,13 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">129068</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">135</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">799177290</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">129069</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">167</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">129289</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">73</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
           </tbody>
         </table>
       </article>
       <footer class="smaller">
-        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-08-10T05:14:22Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 2490 facts, 956375 bytes, version 0.2.1.</p>
+        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-08-10T06:14:04Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 2497 facts, 959023 bytes, version 0.2.1.</p>
       </footer>
     </section>
   </body>
