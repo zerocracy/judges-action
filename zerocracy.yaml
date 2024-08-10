@@ -1,11 +1,14 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 3
+  error: |-
+    Baza is not a class
+    /app/objects/baza.rb:29: previous definition of Baza was here
   removed: 8
-  seconds: 543.693771726
-  version: 0.22.1
+  seconds: 0.311086898
+  version: 0.23.0
   what: judges-summary
-  when: 2024-08-10 18:14:09.633080178 Z
+  when: 2024-08-10 18:14:26.237033573 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -38772,20 +38775,6 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 132023
-  _time: 2024-08-10 18:10:15.187111010 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915482059
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 132024
-  _time: 2024-08-10 18:10:18.701765367 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915979556
-  repository: 798641472
-  what: events-were-scanned
-  where: github
 - _id: 132025
   _time: 2024-08-10 18:10:22.500014115 Z
   _version: 0.2.1/0.22.1/0.0.42
@@ -38804,87 +38793,11 @@
   when: 2024-08-10 18:05:36.000000000 Z
   where: github
   who: 526301
-- _id: 132026
-  _time: 2024-08-10 18:10:25.024285725 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40917371283
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 132027
-  _time: 2024-08-10 18:10:27.717569693 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40916889764
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 132028
-  _time: 2024-08-10 18:10:30.370719762 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 38343193787
-  repository: 75261597
-  what: events-were-scanned
-  where: github
-- _id: 132029
-  _time: 2024-08-10 18:10:34.271746174 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915033544
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 132030
-  _time: 2024-08-10 18:10:37.898459029 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40916931469
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 132031
-  _time: 2024-08-10 18:10:41.432927859 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915499795
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 132034
-  _time: 2024-08-10 18:10:48.321387969 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 132036
-  _time: 2024-08-10 18:10:52.780249206 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 75261597
-  what: labels-were-scanned
-  where: github
-- _id: 132054
-  _time: 2024-08-10 18:11:35.684337887 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 132080
-  _time: 2024-08-10 18:12:37.801102694 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 132100
-  _time: 2024-08-10 18:13:25.111657313 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
 - _id: 132102
   _time: 2024-08-10 18:13:29.748425549 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
   issue: 65
   label: enhancement
   repository: 802720676
@@ -38892,24 +38805,115 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 132114
-  _time: 2024-08-10 18:13:57.790887955 Z
+- _id: 132120
+  _time: 2024-08-10 19:04:22.153357774 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915482059
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 132121
+  _time: 2024-08-10 19:04:26.012790102 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915979556
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 132122
+  _time: 2024-08-10 19:04:30.141936109 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40917371283
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 132123
+  _time: 2024-08-10 19:04:33.056640276 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40916889764
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 132124
+  _time: 2024-08-10 19:04:35.913743685 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 38343193787
+  repository: 75261597
+  what: events-were-scanned
+  where: github
+- _id: 132125
+  _time: 2024-08-10 19:04:40.201946436 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915033544
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 132126
+  _time: 2024-08-10 19:04:46.268939144 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40917449313
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 132127
+  _time: 2024-08-10 19:04:50.222632315 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915499795
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 132132
+  _time: 2024-08-10 19:05:02.645029127 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
-  repository: 799177290
+  repository: 75261597
   what: labels-were-scanned
   where: github
-- _id: 132118
-  _time: 2024-08-10 18:14:07.222486798 Z
+- _id: 132153
+  _time: 2024-08-10 19:05:55.439975119 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 67
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 132222
+  _time: 2024-08-10 19:08:45.014924817 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 132243
+  _time: 2024-08-10 19:09:37.000439952 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 132119
-  _time: 2024-08-10 18:14:09.539054040 Z
+- _id: 132244
+  _time: 2024-08-10 19:09:39.389084644 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 73
-  repository: 802720676
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 132245
+  _time: 2024-08-10 19:09:42.026479428 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 135
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 132246
+  _time: 2024-08-10 19:09:44.476480585 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 46
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 132247
+  _time: 2024-08-10 19:09:46.879264220 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 91
+  repository: 799177290
   what: labels-were-scanned
   where: github
