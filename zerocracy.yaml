@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 609.928027433
+  seconds: 559.568288642
   version: 0.22.1
   what: judges-summary
-  when: 2024-08-10 14:14:39.811620016 Z
+  when: 2024-08-10 15:13:56.018076996 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -38228,81 +38228,6 @@
   where: github
   who: 526301
   why: Pushed 6c46e2f94 to default branch 'master' in zerocracy/baza
-- _id: 130926
-  _time: 2024-08-10 13:23:33.551787571 Z
-  _version: 0.3.0/0.23.0/
-  area: hr
-  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
-    obey the convention, a penalty is given to the author') (aka (let fee -10) (give
-    fee 'as a basis') 'deduct ${fee} points'))"
-  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
-    the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis')
-    'award ${bonus} points'))"
-  code_contribution_was_rewarded: |-
-    (award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 200) (let hoc_k 0.05) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
-              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-              but not more than ${hoc_max} points') (aka (let many_hoc_fee 7) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
-              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 800) (let man_hoc_fee2 15) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 man_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${man_hoc_fee2} points if more than ${hoc_threshold2}
-              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let no_review_fee 15) (set penalty_for_no_review (if (eq reviews 0) (times -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review') 'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set bonus_for_comments (times comments (times -1 comments_k))) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (give bonus_for_comments 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let few_comments_fee 5) (let comments_needed 5) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 10) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted by reviewers') 'deduct ${silence_fee} points if there were absolutely no comments made by reviewers during the review') (aka (let few_hoc_fee 10) (let hoc_needed 20) (set penalty_for_few_hoc (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
-  code_review_was_rewarded: |-
-    (award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.02) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-              but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 20) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 10) (let hoc_needed 15) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
-  days_of_running_balance: 56
-  days_to_reward: 14
-  dud_was_punished: "(award (explain 'When an issue is submitted but then rejected
-    by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a
-    basis') 'deduct ${fee} points'))"
-  enhancement_suggestion_was_rewarded: "(award (explain 'When an enhancement is suggested
-    and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give
-    bonus 'as a basis') 'award ${bonus} points'))"
-  master_punish_days: 4
-  published_release_was_rewarded: |-
-    (award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-              but not more than ${hoc_max} points'))
-  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
-    default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis')
-    '${fee} points'))"
-  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
-    who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve
-    the bug') (in self '1 if the bug was reported and resolved by the same person,
-    otherwise zero') (set days (div hours 24)) (aka (let basis 30) (give basis 'as
-    a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set
-    b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than
-    ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold}
-    hours') (aka (let self_fee 15) (set penalty_for_self (if (eq self 1) (times -1
-    self_fee) 0)) (give penalty_for_self 'for resolving the bug reported by you earlier')
-    'deduct ${self_fee} points if they resolved the bug earlier reported by themselves')
-    (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max
-    -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
-    ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
-  what: pmp
-- _id: 130927
-  _time: 2024-08-10 13:23:35.896101678 Z
-  _version: 0.3.0/0.23.0/
-  area: integration
-  eva_interval: 10
-  what: pmp
-- _id: 130928
-  _time: 2024-08-10 13:23:40.381410721 Z
-  _version: 0.3.0/0.23.0/
-  area: quality
-  qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
-    average_build_success_rate) 10 (below '4 days' average_issue_lifetime) 5 (below
-    '2 days' average_pull_lifetime) 5 (below 16 average_backlog_size))"
-  qos_days: 7
-  qos_interval: 2
-  what: pmp
-- _id: 130929
-  _time: 2024-08-10 13:23:44.829279847 Z
-  _version: 0.3.0/0.23.0/
-  area: scope
-  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
-    0.1 total_hoc_written)"
-  qod_days: 7
-  qod_interval: 2
-  what: pmp
 - _id: 130930
   _time: 2024-08-10 13:23:57.551153476 Z
   _version: 0.3.0/0.23.0/
@@ -38324,168 +38249,6 @@
   where: github
   who: 526301
   why: Reviewed code in zerocracy/fbe#43
-- _id: 130930
-  _time: 2024-08-10 13:24:02.975713848 Z
-  _version: 0.3.0/0.23.0/
-  award: 39
-  cause: 104378
-  details: It's time to reward @yegor256 for the code review in yegor256/judges#93,
-    the reward amount is 39.
-  greeting: 'Thank you for your review! We appreciate your contribution. According
-    to our team policy, you''ve earned +39 points: +25 as a base reward, and +14 for
-    the 14 comments you provided during the review. This aligns with our goal of encouraging
-    thorough code reviews. Your current balance stands at [-606](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work and continue providing valuable feedback to improve our
-    codebase!'
-  is_human: 1
-  issue: 93
-  repository: 799113787
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:02.991937166 Z
-  where: github
-  who: 526301
-  why: Reviewed code in yegor256/judges#93
-- _id: 130930
-  _time: 2024-08-10 13:24:08.361090346 Z
-  _version: 0.3.0/0.23.0/
-  award: 32
-  cause: 104380
-  details: It's time to reward @yegor256 for the code review in zerocracy/baza#154,
-    the reward amount is 32.
-  greeting: "Hey there, coding superstar! \U0001F468‍\U0001F4BB Great job on that
-    review – you've racked up 32 points! That's 25 for showing up, plus 7 for those
-    insightful comments you made. Every comment counts, and you're making a real difference.
-    Your current balance sits at [-606](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
-    but keep up the awesome work and you'll see that number climb. Remember, more
-    [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html) and comments
-    can boost your points even higher. Let's keep this momentum going!"
-  is_human: 1
-  issue: 154
-  repository: 728758275
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:08.378025187 Z
-  where: github
-  who: 526301
-  why: Reviewed code in zerocracy/baza#154
-- _id: 130930
-  _time: 2024-08-10 13:24:15.118050433 Z
-  _version: 0.3.0/0.23.0/
-  award: 37
-  cause: 104569
-  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#205,
-    the reward amount is 37.
-  greeting: "Thank you for your code review contribution! As per our team policy,
-    you've earned +37 points: +25 as the base reward, and +12 for the 12 comments
-    you provided during the review. This aligns with our goal of encouraging thorough
-    and constructive feedback. Your current balance stands at [-606](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work in fostering collaborative code improvement! \U0001F44D"
-  is_human: 1
-  issue: 205
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:15.136444973 Z
-  where: github
-  who: 526301
-  why: Reviewed code in zerocracy/judges-action#205
-- _id: 130930
-  _time: 2024-08-10 13:24:20.435530953 Z
-  _version: 0.3.0/0.23.0/
-  award: 5
-  cause: 104571
-  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#215,
-    the reward amount is 5.
-  greeting: "Thanks for your code review! Here's how your +5 points were calculated:
-    +25 base, -40 for self-review (not recommended), -10 for few comments (5), +30
-    for hits-of-code (capped at 30). We didn't deduct for low hits-of-code or no comments,
-    and added 1 point per comment (max 20). Remember, reviews earn 0.02 points per
-    hit-of-code, capped at 80 and minimum 5 points. Your balance is now [+302](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the good work! \U0001F4BB"
-  is_human: 1
-  issue: 215
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:20.453344462 Z
-  where: github
-  who: 88084038
-  why: Reviewed code in zerocracy/judges-action#215
-- _id: 130930
-  _time: 2024-08-10 13:24:26.838132818 Z
-  _version: 0.3.0/0.23.0/
-  award: 5
-  cause: 104573
-  details: It's time to reward @Yegorov for the code review in zerocracy/fbe#49, the
-    reward amount is 5.
-  greeting: "Great job on the review! \U0001F31F You've earned +5 points: +25 base,
-    -40 for self-review (let's avoid that next time), -10 for limited comments, +30
-    bonus. Your dedication is appreciated! Your current balance is [+194](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the good work!"
-  is_human: 1
-  issue: 49
-  repository: 820463873
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:26.852992252 Z
-  where: github
-  who: 2566462
-  why: Reviewed code in zerocracy/fbe#49
-- _id: 130930
-  _time: 2024-08-10 13:24:31.747823195 Z
-  _version: 0.3.0/0.23.0/
-  award: 45
-  cause: 104744
-  details: It's time to reward @Suban05 for the code review in yegor256/judges#93,
-    the reward amount is 45.
-  greeting: "Thanks for your diligent review! \U0001F389 You've earned +45 points:
-    +25 base points and +20 for your 21 insightful comments (max bonus reached). We
-    appreciate your thorough feedback, which aligns perfectly with our policy. Your
-    running balance is now [+302](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work in fostering code quality!"
-  is_human: 1
-  issue: 93
-  repository: 799113787
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:31.765544656 Z
-  where: github
-  who: 88084038
-  why: Reviewed code in yegor256/judges#93
-- _id: 130930
-  _time: 2024-08-10 13:24:36.858147737 Z
-  _version: 0.3.0/0.23.0/
-  award: 5
-  cause: 104746
-  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#225,
-    the reward amount is 5.
-  greeting: "Great job on the review! \U0001F31F While self-reviews aren't recommended
-    (-40 points), we appreciate your effort. You've earned +5 points: 25 base + 20
-    bonus. Your current balance is [302 points](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the good work and consider reviewing others' contributions next time!"
-  is_human: 1
-  issue: 225
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:36.876272703 Z
-  where: github
-  who: 88084038
-  why: Reviewed code in zerocracy/judges-action#225
-- _id: 130930
-  _time: 2024-08-10 13:24:41.653201822 Z
-  _version: 0.3.0/0.23.0/
-  award: 36
-  cause: 104748
-  details: It's time to reward @Yegorov for the code review in zerocracy/judges-action#225,
-    the reward amount is 36.
-  greeting: "Hello! Thank you for your code review contribution. Based on our team
-    policy, you've earned +36 points: +25 as a base reward, and +11 for the 11 comments
-    you made during the review. This aligns with our goal of encouraging thorough
-    and constructive feedback. Your current balance stands at [+194](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work in fostering collaboration and code quality! \U0001F44D"
-  is_human: 1
-  issue: 225
-  repository: 799177290
-  what: code-review-was-rewarded
-  when: 2024-08-10 13:24:41.668644940 Z
-  where: github
-  who: 2566462
-  why: Reviewed code in zerocracy/judges-action#225
 - _id: 130931
   _time: 2024-08-10 13:25:17.948970757 Z
   _version: 0.3.0/0.23.0/
@@ -38501,6 +38264,7 @@
     and merge it. Even if you are flying solo, contributing via pull requests is a
     [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
     Your running balance is [-453](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/zerocracy/judges-action/commit/3fb61a77ed818e38319b0e14e083612b211f2d4f/#commitcomment-145247082
   is_human: 1
   repository: 799177290
   what: push-to-master-was-punished
@@ -38508,72 +38272,6 @@
   where: github
   who: 526301
   why: Pushed 3fb61a77e to default branch 'master' in zerocracy/judges-action
-- _id: 130931
-  _time: 2024-08-10 13:25:20.415034354 Z
-  _version: 0.3.0/0.23.0/
-  award: -20
-  cause: 104202
-  commit: 4c0ec6b9ae09e93497afb06d0f49a3b35a556340
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/judges, the penalty amount is -20.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -20 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-453](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  is_human: 1
-  repository: 799113787
-  what: push-to-master-was-punished
-  when: 2024-08-10 13:25:20.429778465 Z
-  where: github
-  who: 526301
-  why: Pushed 4c0ec6b9a to default branch 'master' in yegor256/judges
-- _id: 130931
-  _time: 2024-08-10 13:25:22.990812864 Z
-  _version: 0.3.0/0.23.0/
-  award: -20
-  cause: 109694
-  commit: 6b253be12fb7b75de50c43d293baa5c216d082a0
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/pages-action, the penalty amount is -20.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -20 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-453](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  is_human: 1
-  repository: 802720676
-  what: push-to-master-was-punished
-  when: 2024-08-10 13:25:23.011170319 Z
-  where: github
-  who: 526301
-  why: Pushed 6b253be12 to default branch 'master' in zerocracy/pages-action
-- _id: 130931
-  _time: 2024-08-10 13:25:25.775268386 Z
-  _version: 0.3.0/0.23.0/
-  award: -20
-  cause: 120951
-  commit: 7d17437b10f025017042d6e4edfe380ac08e88b4
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/factbase, the penalty amount is -20.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -20 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-453](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  is_human: 1
-  repository: 798641472
-  what: push-to-master-was-punished
-  when: 2024-08-10 13:25:25.793727927 Z
-  where: github
-  who: 526301
-  why: Pushed 7d17437b1 to default branch 'master' in yegor256/factbase
 - _id: 130934
   _time: 2024-08-10 14:04:49.460039746 Z
   _version: 0.2.1/0.22.1/0.0.42
@@ -38685,8 +38383,348 @@
   when: 2024-08-10 13:29:52.000000000 Z
   where: github
   who: 526301
-- _id: 131020
-  _time: 2024-08-10 14:08:54.644355713 Z
+- _id: 131168
+  _time: 2024-08-10 14:15:27.844669929 Z
+  _version: 0.3.0/0.23.0/
+  award: 5
+  cause: 130917
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/baza#180,
+    the reward amount is 5.
+  greeting: "Hey there! \U0001F44B Nice work on your contribution, but there's room
+    for improvement. You've earned +5 points: +25 base, -7 for 743 hits-of-code (over
+    200), -15 for no code review, and -10 for no reviewer comments. Remember, [quality
+    and speed](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) matter!
+    Next time, aim for fewer [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)
+    and get some reviews. Your balance is now [-581](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep pushing those contributions, and let's boost that score! \U0001F4AA"
+  href: https://github.com/zerocracy/baza/issues/180/#issuecomment-2282016093
+  is_human: 1
+  issue: 180
+  repository: 728758275
+  what: code-contribution-was-rewarded
+  when: 2024-08-10 14:15:27.867924068 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/baza#180
+- _id: 131169
+  _time: 2024-08-10 14:15:35.503108640 Z
+  _version: 0.3.0/0.23.0/
+  award: 39
+  cause: 104378
+  details: It's time to reward @yegor256 for the code review in yegor256/judges#93,
+    the reward amount is 39.
+  greeting: "Great job on the review! \U0001F389 You've earned +39 points: +25 base,
+    +14 for your 14 insightful comments. We didn't deduct points for self-review or
+    low hit-of-code count, which is fantastic! Your running balance is now [-576](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the excellent work, and remember, more detailed reviews can earn you up
+    to 80 points!"
+  is_human: 1
+  issue: 93
+  repository: 799113787
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:15:35.528402691 Z
+  where: github
+  who: 526301
+  why: Reviewed code in yegor256/judges#93
+- _id: 131170
+  _time: 2024-08-10 14:16:30.022302952 Z
+  _version: 0.3.0/0.23.0/
+  cause: 130934
+  comments: 2
+  details: The pull request zerocracy/baza#181 with 6 HoC created by @renovate[bot]
+    was merged by @rultor after 1 hours of being in review and 2 comments.
+  hoc: 6
+  is_human: 0
+  issue: 181
+  merger: 8086956
+  repository: 728758275
+  seconds: 4256
+  what: code-was-contributed
+  when: 2024-08-10 13:51:14.000000000 Z
+  where: github
+  who: 29139614
+- _id: 131171
+  _time: 2024-08-10 14:16:53.437093764 Z
+  _version: 0.3.0/0.23.0/
+  award: -20
+  cause: 104202
+  commit: 4c0ec6b9ae09e93497afb06d0f49a3b35a556340
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/judges, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-468](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/yegor256/judges/commit/4c0ec6b9ae09e93497afb06d0f49a3b35a556340/#commitcomment-145247094
+  is_human: 1
+  repository: 799113787
+  what: push-to-master-was-punished
+  when: 2024-08-10 14:16:53.457231346 Z
+  where: github
+  who: 526301
+  why: Pushed 4c0ec6b9a to default branch 'master' in yegor256/judges
+- _id: 131176
+  _time: 2024-08-10 14:17:33.174220518 Z
+  _version: 0.3.0/0.23.0/
+  award: 32
+  cause: 104380
+  details: It's time to reward @yegor256 for the code review in zerocracy/baza#154,
+    the reward amount is 32.
+  greeting: "\U0001F31F Great job on the review! You've earned **32 points**: 25 base
+    + 7 for your insightful comments. Your current balance is now [-557](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the excellent work!"
+  is_human: 1
+  issue: 154
+  repository: 728758275
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:17:33.190252833 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/baza#154
+- _id: 131177
+  _time: 2024-08-10 14:18:43.800850043 Z
+  _version: 0.3.0/0.23.0/
+  award: -20
+  cause: 109694
+  commit: 6b253be12fb7b75de50c43d293baa5c216d082a0
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/pages-action, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-488](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/zerocracy/pages-action/commit/6b253be12fb7b75de50c43d293baa5c216d082a0/#commitcomment-145247105
+  is_human: 1
+  repository: 802720676
+  what: push-to-master-was-punished
+  when: 2024-08-10 14:18:43.824299882 Z
+  where: github
+  who: 526301
+  why: Pushed 6b253be12 to default branch 'master' in zerocracy/pages-action
+- _id: 131178
+  _time: 2024-08-10 14:18:55.624230803 Z
+  _version: 0.3.0/0.23.0/
+  area: hr
+  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
+    obey the convention, a penalty is given to the author') (aka (let fee -10) (give
+    fee 'as a basis') 'deduct ${fee} points'))"
+  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
+    the team, the reporter gets a bonus') (aka (let bonus 15) (give bonus 'as a basis')
+    'award ${bonus} points'))"
+  code_contribution_was_rewarded: |-
+    (award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 200) (let hoc_k 0.05) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+              but not more than ${hoc_max} points') (aka (let many_hoc_fee 7) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
+              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 800) (let man_hoc_fee2 15) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 man_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${man_hoc_fee2} points if more than ${hoc_threshold2}
+              [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let no_review_fee 15) (set penalty_for_no_review (if (eq reviews 0) (times -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review') 'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set bonus_for_comments (times comments (times -1 comments_k))) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (give bonus_for_comments 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let few_comments_fee 5) (let comments_needed 5) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 10) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted by reviewers') 'deduct ${silence_fee} points if there were absolutely no comments made by reviewers during the review') (aka (let few_hoc_fee 10) (let hoc_needed 20) (set penalty_for_few_hoc (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
+  code_review_was_rewarded: |-
+    (award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 25) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 40) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.02) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+              but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 20) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 10) (let hoc_needed 15) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))
+  days_of_running_balance: 56
+  days_to_reward: 14
+  dud_was_punished: "(award (explain 'When an issue is submitted but then rejected
+    by the team, the reporter gets a penalty') (aka (let fee -20) (give fee 'as a
+    basis') 'deduct ${fee} points'))"
+  enhancement_suggestion_was_rewarded: "(award (explain 'When an enhancement is suggested
+    and accepted by the team, the reporter gets a bonus') (aka (let bonus 15) (give
+    bonus 'as a basis') 'award ${bonus} points'))"
+  master_punish_days: 4
+  published_release_was_rewarded: |-
+    (award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+              [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+              but not more than ${hoc_max} points'))
+  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
+    default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis')
+    '${fee} points'))"
+  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
+    who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve
+    the bug') (in self '1 if the bug was reported and resolved by the same person,
+    otherwise zero') (set days (div hours 24)) (aka (let basis 30) (give basis 'as
+    a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set
+    b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than
+    ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold}
+    hours') (aka (let self_fee 15) (set penalty_for_self (if (eq self 1) (times -1
+    self_fee) 0)) (give penalty_for_self 'for resolving the bug reported by you earlier')
+    'deduct ${self_fee} points if they resolved the bug earlier reported by themselves')
+    (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max
+    -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
+    ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
+  what: pmp
+- _id: 131179
+  _time: 2024-08-10 14:18:57.974097027 Z
+  _version: 0.3.0/0.23.0/
+  area: integration
+  eva_interval: 10
+  what: pmp
+- _id: 131180
+  _time: 2024-08-10 14:19:02.792067210 Z
+  _version: 0.3.0/0.23.0/
+  area: quality
+  qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
+    average_build_success_rate) 10 (below '4 days' average_issue_lifetime) 5 (below
+    '2 days' average_pull_lifetime) 5 (below 16 average_backlog_size))"
+  qos_days: 7
+  qos_interval: 2
+  what: pmp
+- _id: 131181
+  _time: 2024-08-10 14:19:07.557087903 Z
+  _version: 0.3.0/0.23.0/
+  area: scope
+  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
+    0.1 total_hoc_written)"
+  qod_days: 7
+  qod_interval: 2
+  what: pmp
+- _id: 131182
+  _time: 2024-08-10 14:19:20.985773431 Z
+  _version: 0.3.0/0.23.0/
+  award: 37
+  cause: 104569
+  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#205,
+    the reward amount is 37.
+  greeting: "**Great job on the review!** \U0001F31F You've earned **37 points** (25
+    base + 12 for your insightful comments). Your dedication is impressive! Current
+    balance: [-545](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the excellent work!"
+  is_human: 1
+  issue: 205
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:19:21.004095821 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/judges-action#205
+- _id: 131182
+  _time: 2024-08-10 14:19:26.269721256 Z
+  _version: 0.3.0/0.23.0/
+  award: 5
+  cause: 104571
+  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#215,
+    the reward amount is 5.
+  greeting: "Great job on the review! \U0001F31F You've earned +5 points: +25 base,
+    -40 for self-review (let's avoid that), -10 for limited comments, +30 bonus. Keep
+    up the good work and aim for more detailed reviews next time. Your current balance:
+    [+302](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)."
+  is_human: 1
+  issue: 215
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:19:26.285444771 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/judges-action#215
+- _id: 131182
+  _time: 2024-08-10 14:19:31.419042456 Z
+  _version: 0.3.0/0.23.0/
+  award: 5
+  cause: 104573
+  details: It's time to reward @Yegorov for the code review in zerocracy/fbe#49, the
+    reward amount is 5.
+  greeting: 'Thank you for your review. While we appreciate your effort, reviewing
+    your own contribution is not recommended. Your reward calculation: +25 base points,
+    -40 for self-review, +30 for hits-of-code, and -10 for few comments (3). This
+    results in a total of +5 points. Remember, more detailed reviews with constructive
+    comments are highly valued. Your current balance is [+194](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work and aim for more comprehensive reviews in the future!'
+  is_human: 1
+  issue: 49
+  repository: 820463873
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:19:31.438238253 Z
+  where: github
+  who: 2566462
+  why: Reviewed code in zerocracy/fbe#49
+- _id: 131182
+  _time: 2024-08-10 14:19:37.350849716 Z
+  _version: 0.3.0/0.23.0/
+  award: 45
+  cause: 104744
+  details: It's time to reward @Suban05 for the code review in yegor256/judges#93,
+    the reward amount is 45.
+  greeting: "\U0001F31F Great job on your review! You've earned **45 points**: 25
+    base + 20 for your 21 insightful comments. Your dedication is impressive! Your
+    current balance is now [**302 points**](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the excellent work!"
+  is_human: 1
+  issue: 93
+  repository: 799113787
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:19:37.366591640 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in yegor256/judges#93
+- _id: 131182
+  _time: 2024-08-10 14:19:42.002935707 Z
+  _version: 0.3.0/0.23.0/
+  award: 5
+  cause: 104746
+  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#225,
+    the reward amount is 5.
+  greeting: "Thanks for your code review! Here's the breakdown of your +5 points:
+    +25 base, -40 for self-review (not recommended), +20 to ensure a minimum reward.
+    While self-reviews aren't ideal, we appreciate your effort. Your balance is now
+    [+302](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep
+    up the good work and consider reviewing others' code for better rewards next time!
+    \U0001F680"
+  is_human: 1
+  issue: 225
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:19:42.018800757 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/judges-action#225
+- _id: 131182
+  _time: 2024-08-10 14:19:48.153634313 Z
+  _version: 0.3.0/0.23.0/
+  award: 36
+  cause: 104748
+  details: It's time to reward @Yegorov for the code review in zerocracy/judges-action#225,
+    the reward amount is 36.
+  greeting: "Thank you for your code review contribution! According to our team policy,
+    you've earned +36 points: +25 as a base reward, and +11 for the 11 comments you
+    provided. This aligns with our goal of encouraging thorough reviews and active
+    participation. Your running balance is now [+194](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the great work in fostering collaborative code improvement! \U0001F680"
+  is_human: 1
+  issue: 225
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-08-10 14:19:48.169930389 Z
+  where: github
+  who: 2566462
+  why: Reviewed code in zerocracy/judges-action#225
+- _id: 131183
+  _time: 2024-08-10 14:20:24.998955251 Z
+  _version: 0.3.0/0.23.0/
+  award: -20
+  cause: 120951
+  commit: 7d17437b10f025017042d6e4edfe380ac08e88b4
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/factbase, the penalty amount is -20.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -20 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-508](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  is_human: 1
+  repository: 798641472
+  what: push-to-master-was-punished
+  when: 2024-08-10 14:20:25.016268516 Z
+  where: github
+  who: 526301
+  why: Pushed 7d17437b1 to default branch 'master' in yegor256/factbase
+- _id: 131272
+  _time: 2024-08-10 15:08:33.132129560 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -38697,11 +38735,101 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 131023
-  _time: 2024-08-10 14:09:01.741741634 Z
+- _id: 131306
+  _time: 2024-08-10 15:09:56.901904125 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915482059
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 131307
+  _time: 2024-08-10 15:10:00.388895927 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40865865688
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 131308
+  _time: 2024-08-10 15:10:04.322624409 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915464457
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 131309
+  _time: 2024-08-10 15:10:07.023073057 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915188624
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 131310
+  _time: 2024-08-10 15:10:09.691998421 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 38343193787
+  repository: 75261597
+  what: events-were-scanned
+  where: github
+- _id: 131311
+  _time: 2024-08-10 15:10:13.737508165 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915033544
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 131312
+  _time: 2024-08-10 15:10:17.492265750 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915464799
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 131313
+  _time: 2024-08-10 15:10:21.007125328 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40915499795
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 131316
+  _time: 2024-08-10 15:10:28.049020344 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 131318
+  _time: 2024-08-10 15:10:32.534695463 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 75261597
+  what: labels-were-scanned
+  where: github
+- _id: 131336
+  _time: 2024-08-10 15:11:15.239981276 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 131362
+  _time: 2024-08-10 15:12:17.843893200 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 131382
+  _time: 2024-08-10 15:13:05.563129124 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 131384
+  _time: 2024-08-10 15:13:10.290434456 Z
   _version: 0.2.1/0.22.1/0.0.42
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  is_human: 1
   issue: 65
   label: enhancement
   repository: 802720676
@@ -38709,115 +38837,24 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 131055
-  _time: 2024-08-10 14:10:18.704647256 Z
+- _id: 131401
+  _time: 2024-08-10 15:13:51.239658611 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915014279
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 131056
-  _time: 2024-08-10 14:10:22.245465074 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40865865688
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 131057
-  _time: 2024-08-10 14:10:25.986729539 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915265274
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 131058
-  _time: 2024-08-10 14:10:28.655054125 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915188624
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 131059
-  _time: 2024-08-10 14:10:31.268610637 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 38343193787
-  repository: 75261597
-  what: events-were-scanned
-  where: github
-- _id: 131060
-  _time: 2024-08-10 14:10:35.243636802 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915033544
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 131061
-  _time: 2024-08-10 14:10:38.919352417 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915014593
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 131062
-  _time: 2024-08-10 14:10:42.384672448 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 40912330178
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 131067
-  _time: 2024-08-10 14:10:53.979792313 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 75261597
-  what: labels-were-scanned
-  where: github
-- _id: 131088
-  _time: 2024-08-10 14:11:43.403353371 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 131119
-  _time: 2024-08-10 14:12:56.147108957 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 131143
-  _time: 2024-08-10 14:13:52.899023884 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 131150
-  _time: 2024-08-10 14:14:09.036138388 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 131159
-  _time: 2024-08-10 14:14:29.803344121 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 131162
-  _time: 2024-08-10 14:14:37.200786878 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 98
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 131163
-  _time: 2024-08-10 14:14:39.716319277 Z
+- _id: 131402
+  _time: 2024-08-10 15:13:53.594043882 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 135
-  repository: 728758275
+  latest: 167
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 131403
+  _time: 2024-08-10 15:13:55.921823359 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
