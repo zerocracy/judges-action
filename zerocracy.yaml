@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 576.928825505
+  seconds: 541.878312814
   version: 0.24.0
   what: judges-summary
-  when: 2024-08-11 22:14:43.854157550 Z
+  when: 2024-08-11 23:13:54.789856733 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -39716,8 +39716,8 @@
   when: 2024-08-11 18:03:32.000000000 Z
   where: github
   who: 526301
-- _id: 137238
-  _time: 2024-08-11 21:16:10.131567155 Z
+- _id: 137473
+  _time: 2024-08-11 22:16:03.239840790 Z
   _version: 0.3.0/0.24.0/
   area: hr
   bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\'t
@@ -39766,14 +39766,14 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 137239
-  _time: 2024-08-11 21:16:12.860609484 Z
+- _id: 137474
+  _time: 2024-08-11 22:16:05.765279886 Z
   _version: 0.3.0/0.24.0/
   area: integration
   eva_interval: 10
   what: pmp
-- _id: 137240
-  _time: 2024-08-11 21:16:18.255847397 Z
+- _id: 137475
+  _time: 2024-08-11 22:16:10.865115190 Z
   _version: 0.3.0/0.24.0/
   area: quality
   qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
@@ -39782,8 +39782,8 @@
   qos_days: 7
   qos_interval: 2
   what: pmp
-- _id: 137241
-  _time: 2024-08-11 21:16:23.507557606 Z
+- _id: 137476
+  _time: 2024-08-11 22:16:15.887840033 Z
   _version: 0.3.0/0.24.0/
   area: scope
   qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
@@ -39791,8 +39791,8 @@
   qod_days: 7
   qod_interval: 2
   what: pmp
-- _id: 137323
-  _time: 2024-08-11 22:08:39.396013836 Z
+- _id: 137566
+  _time: 2024-08-11 23:08:38.665987875 Z
   _version: 0.3.0/0.24.0/0.0.43
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
   is_human: 1
@@ -39803,11 +39803,87 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 137326
-  _time: 2024-08-11 22:08:46.690772358 Z
+- _id: 137600
+  _time: 2024-08-11 23:10:02.650994200 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40922854626
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 137601
+  _time: 2024-08-11 23:10:05.748793117 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40915979556
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 137602
+  _time: 2024-08-11 23:10:09.131057672 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40928007944
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 137603
+  _time: 2024-08-11 23:10:11.523433622 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40928001203
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 137604
+  _time: 2024-08-11 23:10:14.886838408 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40925590073
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 137605
+  _time: 2024-08-11 23:10:18.152412363 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40930094092
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 137606
+  _time: 2024-08-11 23:10:21.601195299 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40926408198
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 137609
+  _time: 2024-08-11 23:10:28.684787820 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 137640
+  _time: 2024-08-11 23:11:42.238700661 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 137656
+  _time: 2024-08-11 23:12:20.630853937 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 137676
+  _time: 2024-08-11 23:13:07.498886000 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 137678
+  _time: 2024-08-11 23:13:12.146923983 Z
   _version: 0.3.0/0.24.0/0.0.43
   details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
-  is_human: 1
   issue: 65
   label: enhancement
   repository: 802720676
@@ -39815,101 +39891,24 @@
   when: 2024-07-23 06:29:27.000000000 Z
   where: github
   who: 526301
-- _id: 137358
-  _time: 2024-08-11 22:10:07.804597766 Z
+- _id: 137693
+  _time: 2024-08-11 23:13:47.595427075 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 40922854626
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 137359
-  _time: 2024-08-11 22:10:11.115157033 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40915979556
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 137360
-  _time: 2024-08-11 22:10:14.637900349 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40928007944
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 137361
-  _time: 2024-08-11 22:10:17.235120961 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40928001203
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 137362
-  _time: 2024-08-11 22:10:20.907699722 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40925590073
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 137363
-  _time: 2024-08-11 22:10:24.261668097 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40929647950
+  latest: 0
   repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 137364
-  _time: 2024-08-11 22:10:27.479925873 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40926408198
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 137403
-  _time: 2024-08-11 22:12:03.456447496 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 0
-  repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 137422
-  _time: 2024-08-11 22:12:50.508621758 Z
+- _id: 137695
+  _time: 2024-08-11 23:13:52.347423991 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 137446
-  _time: 2024-08-11 22:13:49.539537544 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 137453
-  _time: 2024-08-11 22:14:06.275482265 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 137466
-  _time: 2024-08-11 22:14:38.734834834 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 98
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 137467
-  _time: 2024-08-11 22:14:41.321502191 Z
+- _id: 137696
+  _time: 2024-08-11 23:13:54.694221172 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 135
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 137468
-  _time: 2024-08-11 22:14:43.758337331 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 167
-  repository: 799177290
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
