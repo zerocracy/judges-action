@@ -26,13 +26,13 @@
 class Judges::Comments
   def initialize(octo:, pull_request:)
     @octo = octo
-    @pull_request = pull_request
-    @code_comments = @octo.pull_request_comments(@pull_request[:base][:repo][:full_name], @pull_request[:number])
-    @issue_comments = @octo.issue_comments(@pull_request[:base][:repo][:full_name], @pull_request[:number])
+    @pr = pull_request
+    @code_comments = @octo.pull_request_comments(@pr[:base][:repo][:full_name], @pr[:number])
+    @issue_comments = @octo.issue_comments(@pr[:base][:repo][:full_name], @pr[:number])
   end
 
   def total
-    @pull_request[:comments] + @pull_request[:review_comments]
+    @pr[:comments] + @pr[:review_comments]
   end
 
   def to_code
@@ -40,17 +40,17 @@ class Judges::Comments
   end
 
   def by_author
-    @issue_comments.count { |comment| comment[:user][:id] == @pull_request[:user][:id] }
+    @issue_comments.count { |comment| comment[:user][:id] == @pr[:user][:id] }
   end
 
   def by_reviewers
-    @code_comments.count { |comment| comment[:user][:id] != @pull_request[:user][:id] }
+    @code_comments.count { |comment| comment[:user][:id] != @pr[:user][:id] }
   end
 
   def appreciated
     appreciated = 0
     @issue_comments.each do |comment|
-      appreciated += Fbe.octo.issue_comment_reactions(@pull_request[:base][:repo][:full_name], comment[:id])
+      appreciated += Fbe.octo.issue_comment_reactions(@pr[:base][:repo][:full_name], comment[:id])
         .count { |reaction| comment[:user][:id] != reaction[:user][:id] }
     end
     appreciated
