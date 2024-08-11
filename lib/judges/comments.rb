@@ -22,31 +22,37 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-ENV['RACK_ENV'] = 'test'
-
-require 'simplecov'
-SimpleCov.start
-
-require 'simplecov-cobertura'
-SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
-
-require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
-
-require 'minitest/autorun'
-
-class Minitest::Test
-  def load_it(judge, fb)
-    init_fb(fb)
-    $judge = judge
-    load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
+# Counts comments
+class Judges::Comments
+  def initialize(octo:, pull_request:)
+    @octo = octo
+    @pull_request = pull_request
+    @code_comments = @octo.pull_request_comments(@pull_request[:base][:repo][:full_name], @pull_request[:number])
+    @issue_comments = @octo.issue_comments(@pull_request[:base][:repo][:full_name], @pull_request[:number])
   end
 
-  def init_fb(fb)
-    $fb = fb
-    $global = {}
-    $local = {}
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
-    $loog = Loog::NULL
+  def total
+    @pull_request[:comments] + @pull_request[:review_comments]
+  end
+
+  def to_code
+    @code_comments.count
+  end
+
+  def by_author
+    @issue_comments.count { |comment| comment[:user][:id] == @pull_request[:user][:id] }
+  end
+
+  def by_reviewers
+    @code_comments.count { |comment| comment[:user][:id] != @pull_request[:user][:id] }
+  end
+
+  def appreciated
+    appreciated = 0
+    @issue_comments.each do |comment|
+      appreciated += Fbe.octo.issue_comment_reactions(@pull_request[:base][:repo][:full_name], comment[:id])
+        .count { |reaction| comment[:user][:id] != reaction[:user][:id] }
+    end
+    appreciated
   end
 end
