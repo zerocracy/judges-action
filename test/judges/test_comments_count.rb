@@ -31,7 +31,7 @@ require 'webmock/minitest'
 require 'judges/options'
 require_relative '../../lib/judges/comments'
 
-class TestGithubEvents < Minitest::Test
+class TestJudgesComments < Minitest::Test
   def test_counts_comments
     WebMock.disable_net_connect!
     init_fb(Factbase.new)
