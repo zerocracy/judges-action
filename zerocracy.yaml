@@ -1,14 +1,11 @@
 ---
 - added: 8
-  cycles: 3
-  error: |-
-    Baza is not a class
-    /app/objects/baza.rb:29: previous definition of Baza was here
+  cycles: 2
   removed: 8
-  seconds: 0.30366486
-  version: 0.23.0
+  seconds: 730.95668752
+  version: 0.22.1
   what: judges-summary
-  when: 2024-08-11 04:10:51.408106757 Z
+  when: 2024-08-11 06:18:51.242903744 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -38823,115 +38820,257 @@
   when: 2024-08-10 19:23:13.000000000 Z
   where: github
   who: 526301
-- _id: 133370
-  _time: 2024-08-11 05:04:48.916594609 Z
+- _id: 133465
+  _time: 2024-08-11 06:06:49.180203019 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40915482059
+  commit: 24184cf37a05ff35ef8451aa4b1384c7ff4320a3
+  default_branch: master
+  details: 'A new Git push #19717390386 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40921969833
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19717390386
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-11 05:57:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 133466
+  _time: 2024-08-11 06:06:51.627114875 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The issue yegor256/judges#109 has been opened by @yegor256.
+  event_id: 40921963227
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 109
+  repository: 799113787
+  what: issue-was-opened
+  when: 2024-08-11 05:56:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 133470
+  _time: 2024-08-11 06:07:03.995598670 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The issue zerocracy/baza.rb#4 has been closed by @yegor256.
+  event_id: 40921953790
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 4
+  repository: 840215648
+  what: issue-was-closed
+  when: 2024-08-11 05:54:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 133471
+  _time: 2024-08-11 06:07:08.318078641 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: A new release '' has been published in zerocracy/baza.rb by @rultor.
+  event_id: 40921945747
+  event_type: ReleaseEvent
+  is_human: 0
+  release: 169658328
+  repository: 840215648
+  tag: 0.0.3
+  what: release-published
+  when: 2024-08-11 05:53:08.000000000 Z
+  where: github
+  who: 8086956
+- _id: 133472
+  _time: 2024-08-11 06:07:10.498557559 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: A new tag '0.0.3' has been created in zerocracy/baza.rb by @rultor.
+  event_id: 40921939303
+  event_type: CreateEvent
+  is_human: 0
+  repository: 840215648
+  tag: 0.0.3
+  what: tag-was-created
+  when: 2024-08-11 05:52:03.000000000 Z
+  where: github
+  who: 8086956
+- _id: 133473
+  _time: 2024-08-11 06:07:16.875917187 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  commit: 95ea9bb8459adc6e7c241203dc4a6dba6e7ea915
+  default_branch: master
+  details: 'A new Git push #19717327600 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40921875743
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19717327600
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-11 05:41:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 133474
+  _time: 2024-08-11 06:07:19.258990145 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: The issue zerocracy/baza.rb#4 has been opened by @yegor256.
+  event_id: 40921786593
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 4
+  repository: 840215648
+  what: issue-was-opened
+  when: 2024-08-11 05:27:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 133601
+  _time: 2024-08-11 06:12:30.927074863 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  average_backlog_size: 15
+  average_build_success_rate: 0.9560025141420491
+  average_issue_lifetime: 131477.96153846153
+  average_pull_lifetime: 65477.89189189189
+  average_pull_rejection_rate: 0.02702702702702703
+  average_release_interval: 34676.470588235294
+  since: 2024-08-04 06:12:28.836930382 Z
+  what: quality-of-service
+  when: 2024-08-11 06:12:30.927228410 Z
+- _id: 133602
+  _time: 2024-08-11 06:14:26.399285245 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: A new release 'baza.rb 0.0.3' has been published in yegor256/judges by
+    @rultor.
+  event_id: 40922046082
+  event_type: ReleaseEvent
+  is_human: 0
+  release: 169658758
+  repository: 799113787
+  tag: 0.24.0
+  what: release-published
+  when: 2024-08-11 06:09:00.000000000 Z
+  where: github
+  who: 8086956
+- _id: 133603
+  _time: 2024-08-11 06:14:28.621441055 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  details: A new tag '0.24.0' has been created in yegor256/judges by @rultor.
+  event_id: 40922042756
+  event_type: CreateEvent
+  is_human: 0
+  repository: 799113787
+  tag: 0.24.0
+  what: tag-was-created
+  when: 2024-08-11 06:08:29.000000000 Z
+  where: github
+  who: 8086956
+- _id: 133604
+  _time: 2024-08-11 06:14:30.794781259 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 40922046442
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 133371
-  _time: 2024-08-11 05:04:52.756405360 Z
+- _id: 133605
+  _time: 2024-08-11 06:14:34.425897495 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915979556
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 133372
-  _time: 2024-08-11 05:04:56.751756530 Z
+- _id: 133606
+  _time: 2024-08-11 06:14:38.288981860 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40918409537
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 133373
-  _time: 2024-08-11 05:04:59.626865230 Z
+- _id: 133607
+  _time: 2024-08-11 06:14:41.069376515 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40916889764
+  latest: 40921953790
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 133374
-  _time: 2024-08-11 05:05:02.522004709 Z
+- _id: 133608
+  _time: 2024-08-11 06:14:43.671265108 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 38343193787
   repository: 75261597
   what: events-were-scanned
   where: github
-- _id: 133375
-  _time: 2024-08-11 05:05:06.830318880 Z
+- _id: 133609
+  _time: 2024-08-11 06:14:47.640704310 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915033544
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 133376
-  _time: 2024-08-11 05:05:12.800333238 Z
+- _id: 133610
+  _time: 2024-08-11 06:14:51.420801614 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 40921298669
+  latest: 40921654083
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 133377
-  _time: 2024-08-11 05:05:16.678726010 Z
+- _id: 133611
+  _time: 2024-08-11 06:14:55.140288434 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 40915499795
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 133380
-  _time: 2024-08-11 05:05:23.645194819 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 133382
-  _time: 2024-08-11 05:05:28.125677907 Z
+- _id: 133616
+  _time: 2024-08-11 06:15:06.942010242 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 75261597
   what: labels-were-scanned
   where: github
-- _id: 133400
-  _time: 2024-08-11 05:06:11.764445598 Z
+- _id: 133644
+  _time: 2024-08-11 06:16:14.914979954 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 133426
-  _time: 2024-08-11 05:07:15.983754234 Z
+- _id: 133666
+  _time: 2024-08-11 06:17:08.602511453 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 133669
+  _time: 2024-08-11 06:17:15.438642917 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 133446
-  _time: 2024-08-11 05:08:04.720243717 Z
+- _id: 133688
+  _time: 2024-08-11 06:18:00.580367870 Z
   _version: 0.2.1/0.22.1/0.0.42
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 133459
-  _time: 2024-08-11 05:08:35.780837525 Z
+- _id: 133707
+  _time: 2024-08-11 06:18:46.521493342 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 0
+  latest: 177
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 133708
+  _time: 2024-08-11 06:18:48.833563335 Z
+  _version: 0.2.1/0.22.1/0.0.42
+  latest: 167
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 133463
-  _time: 2024-08-11 05:08:45.346923618 Z
+- _id: 133709
+  _time: 2024-08-11 06:18:51.147713949 Z
   _version: 0.2.1/0.22.1/0.0.42
-  latest: 67
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 133464
-  _time: 2024-08-11 05:08:47.697264819 Z
-  _version: 0.2.1/0.22.1/0.0.42
-  latest: 73
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
