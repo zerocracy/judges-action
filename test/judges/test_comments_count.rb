@@ -35,6 +35,150 @@ class TestJudgesComments < Minitest::Test
   def test_counts_comments
     WebMock.disable_net_connect!
     init_fb(Factbase.new)
+    stub_comments
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082320/reactions')
+      .to_return(
+        status: 200,
+        body: [
+          {
+            id: 248_923_574,
+            user: {
+              login: 'rultor',
+              id: 8_086_956
+            },
+            content: 'heart'
+          }
+        ]
+      )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082321/reactions')
+      .to_return(
+        status: 200,
+        body: [
+          {
+            id: 248_923_574,
+            user: {
+              login: 'rultor',
+              id: 8_086_956
+            },
+            content: 'heart'
+          },
+          {
+            id: 248_923_575,
+            user: {
+              login: 'test',
+              id: 88_084_038
+            },
+            content: 'heart'
+          }
+        ]
+      )
+    pull_request = {
+      url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+      id: 1_990_323_142,
+      node_id: 'PR_kwDOL6GCO852oevG',
+      number: 172,
+      state: 'closed',
+      locked: false,
+      title: '#999 new feature',
+      user: {
+        login: 'test',
+        id: 88_084_038,
+        node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+        type: 'User',
+        site_admin: false
+      },
+      base: {
+        label: 'zerocracy:master',
+        ref: 'master',
+        user: {
+          login: 'zerocracy',
+          id: 24_234_201
+        },
+        repo: {
+          id: 728_758_275,
+          node_id: 'R_kgDOK2_4Aw',
+          name: 'baza',
+          full_name: 'zerocracy/baza',
+          private: false
+        }
+      },
+      comments: 2,
+      review_comments: 2,
+      commits: 1,
+      additions: 3,
+      deletions: 3,
+      changed_files: 2
+    }
+    comments = Judges::Comments.new(octo: Fbe.octo, pull_request:)
+    assert_equal(4, comments.total)
+    assert_equal(2, comments.to_code)
+    assert_equal(1, comments.by_author)
+    assert_equal(1, comments.by_reviewers)
+    assert_equal(2, comments.appreciated)
+  end
+
+  def test_counts_comments_without_reactions
+    WebMock.disable_net_connect!
+    init_fb(Factbase.new)
+    stub_comments
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082320/reactions')
+      .to_return(
+        status: 200,
+        body: []
+      )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082321/reactions')
+      .to_return(
+        status: 200,
+        body: []
+      )
+    pull_request = {
+      url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+      id: 1_990_323_142,
+      node_id: 'PR_kwDOL6GCO852oevG',
+      number: 172,
+      state: 'closed',
+      locked: false,
+      title: '#999 new feature',
+      user: {
+        login: 'test',
+        id: 88_084_038,
+        node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+        type: 'User',
+        site_admin: false
+      },
+      base: {
+        label: 'zerocracy:master',
+        ref: 'master',
+        user: {
+          login: 'zerocracy',
+          id: 24_234_201
+        },
+        repo: {
+          id: 728_758_275,
+          node_id: 'R_kgDOK2_4Aw',
+          name: 'baza',
+          full_name: 'zerocracy/baza',
+          private: false
+        }
+      },
+      comments: 2,
+      review_comments: 2,
+      commits: 1,
+      additions: 3,
+      deletions: 3,
+      changed_files: 2
+    }
+    comments = Judges::Comments.new(octo: Fbe.octo, pull_request:)
+    assert_equal(4, comments.total)
+    assert_equal(2, comments.to_code)
+    assert_equal(1, comments.by_author)
+    assert_equal(1, comments.by_reviewers)
+    assert_equal(0, comments.appreciated)
+  end
+
+  private
+
+  def stub_comments
     stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/pulls/172/comments?per_page=100')
       .to_return(
         status: 200,
@@ -157,84 +301,5 @@ class TestJudgesComments < Minitest::Test
           }
         ]
       )
-    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082320/reactions')
-      .to_return(
-        status: 200,
-        body: [
-          {
-            id: 248_923_574,
-            user: {
-              login: 'rultor',
-              id: 8_086_956
-            },
-            content: 'heart'
-          }
-        ]
-      )
-    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082321/reactions')
-      .to_return(
-        status: 200,
-        body: [
-          {
-            id: 248_923_574,
-            user: {
-              login: 'rultor',
-              id: 8_086_956
-            },
-            content: 'heart'
-          },
-          {
-            id: 248_923_575,
-            user: {
-              login: 'test',
-              id: 88_084_038
-            },
-            content: 'heart'
-          }
-        ]
-      )
-    pull_request = {
-      url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
-      id: 1_990_323_142,
-      node_id: 'PR_kwDOL6GCO852oevG',
-      number: 172,
-      state: 'closed',
-      locked: false,
-      title: '#999 new feature',
-      user: {
-        login: 'test',
-        id: 88_084_038,
-        node_id: 'MDQ6VXNlcjE2NDYwMjA=',
-        type: 'User',
-        site_admin: false
-      },
-      base: {
-        label: 'zerocracy:master',
-        ref: 'master',
-        user: {
-          login: 'zerocracy',
-          id: 24_234_201
-        },
-        repo: {
-          id: 728_758_275,
-          node_id: 'R_kgDOK2_4Aw',
-          name: 'baza',
-          full_name: 'zerocracy/baza',
-          private: false
-        }
-      },
-      comments: 2,
-      review_comments: 2,
-      commits: 1,
-      additions: 3,
-      deletions: 3,
-      changed_files: 2
-    }
-    comments = Judges::Comments.new(octo: Fbe.octo, pull_request:)
-    assert_equal(4, comments.total)
-    assert_equal(2, comments.to_code)
-    assert_equal(1, comments.by_author)
-    assert_equal(1, comments.by_reviewers)
-    assert_equal(2, comments.appreciated)
   end
 end
