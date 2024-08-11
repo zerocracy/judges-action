@@ -539,6 +539,238 @@ class TestGithubEvents < Minitest::Test
     assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
   end
 
+  def test_counts_comments
+    WebMock.disable_net_connect!
+    init_fb(Factbase.new)
+    stub_request(:get, 'https://api.github.com/user/42').to_return(
+      body: { id: 42, login: 'torvalds' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/pulls/172/comments?per_page=100')
+      .to_return(
+        status: 200,
+        body: [
+          {
+            pull_request_review_id: 2_227_372_510,
+            id: 1_709_082_318,
+            path: 'test/baza/test_locks.rb',
+            commit_id: 'a9f5f94cf28f29a64d5dd96d0ee23b4174572847',
+            original_commit_id: 'e8c6f94274d14ed3cb26fe71467a9c3f229df59c',
+            user: {
+              login: 'Reviewer',
+              id: 2_566_462
+            },
+            body: 'Most likely, parentheses were missed here.',
+            created_at: '2024-08-08T09:41:46Z',
+            updated_at: '2024-08-08T09:42:46Z',
+            reactions: {
+              url: 'https://api.github.com/repos/zerocracy/baza/pulls/comments/1709082318/reactions',
+              total_count: 0
+            },
+            start_line: 'null',
+            original_start_line: 'null',
+            start_side: 'null',
+            line: 'null',
+            original_line: 62,
+            side: 'RIGHT',
+            original_position: 25,
+            position: 'null',
+            subject_type: 'line'
+          },
+          {
+            pull_request_review_id: 2_227_372_510,
+            id: 1_709_082_319,
+            path: 'test/baza/test_locks.rb',
+            commit_id: 'a9f5f94cf28f29a64d5dd96d0ee23b4174572847',
+            original_commit_id: 'e8c6f94274d14ed3cb26fe71467a9c3f229df59c',
+            user: {
+              login: 'test',
+              id: 88_084_038
+            },
+            body: 'definitely a typo',
+            created_at: '2024-08-08T09:42:46Z',
+            updated_at: '2024-08-08T09:42:46Z',
+            reactions: {
+              url: 'https://api.github.com/repos/zerocracy/baza/pulls/comments/1709082319/reactions',
+              total_count: 0
+            },
+            start_line: 'null',
+            original_start_line: 'null',
+            start_side: 'null',
+            line: 'null',
+            original_line: 62,
+            side: 'RIGHT',
+            original_position: 25,
+            in_reply_to_id: 1_709_082_318,
+            position: 'null',
+            subject_type: 'line'
+          }
+        ]
+      )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/172/comments?per_page=100')
+      .to_return(
+        status: 200,
+        body: [
+          {
+            pull_request_review_id: 2_227_372_510,
+            id: 1_709_082_320,
+            path: 'test/baza/test_locks.rb',
+            commit_id: 'a9f5f94cf28f29a64d5dd96d0ee23b4174572847',
+            original_commit_id: 'e8c6f94274d14ed3cb26fe71467a9c3f229df59c',
+            user: {
+              login: 'Reviewer',
+              id: 2_566_462
+            },
+            body: 'reviewer comment',
+            created_at: '2024-08-08T09:41:46Z',
+            updated_at: '2024-08-08T09:42:46Z',
+            reactions: {
+              url: 'https://api.github.com/repos/zerocracy/baza/pulls/comments/1709082320/reactions',
+              total_count: 1
+            },
+            start_line: 'null',
+            original_start_line: 'null',
+            start_side: 'null',
+            line: 'null',
+            original_line: 62,
+            side: 'RIGHT',
+            original_position: 25,
+            position: 'null',
+            subject_type: 'line'
+          },
+          {
+            pull_request_review_id: 2_227_372_510,
+            id: 1_709_082_321,
+            path: 'test/baza/test_locks.rb',
+            commit_id: 'a9f5f94cf28f29a64d5dd96d0ee23b4174572847',
+            original_commit_id: 'e8c6f94274d14ed3cb26fe71467a9c3f229df59c',
+            user: {
+              login: 'test',
+              id: 88_084_038
+            },
+            body: 'author comment',
+            created_at: '2024-08-08T09:42:46Z',
+            updated_at: '2024-08-08T09:42:46Z',
+            reactions: {
+              url: 'https://api.github.com/repos/zerocracy/baza/pulls/comments/1709082321/reactions',
+              total_count: 1
+            },
+            start_line: 'null',
+            original_start_line: 'null',
+            start_side: 'null',
+            line: 'null',
+            original_line: 62,
+            side: 'RIGHT',
+            original_position: 25,
+            in_reply_to_id: 1_709_082_318,
+            position: 'null',
+            subject_type: 'line'
+          }
+        ]
+      )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082320/reactions')
+      .to_return(
+        status: 200,
+        body: [
+          {
+            id: 248_923_574,
+            user: {
+              login: 'rultor',
+              id: 8_086_956
+            },
+            content: 'heart'
+          }
+        ]
+      )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082321/reactions')
+      .to_return(
+        status: 200,
+        body: [
+          {
+            id: 248_923_574,
+            user: {
+              login: 'rultor',
+              id: 8_086_956
+            },
+            content: 'heart'
+          },
+          {
+            id: 248_923_575,
+            user: {
+              login: 'test',
+              id: 88_084_038
+            },
+            content: 'heart'
+          }
+        ]
+      )
+    stub_event(
+      {
+        id: 42,
+        created_at: Time.now.to_s,
+        actor: { id: 42 },
+        type: 'PullRequestEvent',
+        repo: { id: 42 },
+        payload: {
+          action: 'closed',
+          number: 172,
+          ref_type: 'tag',
+          ref: 'foo',
+          pull_request: {
+            url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+            id: 1_990_323_142,
+            node_id: 'PR_kwDOL6GCO852oevG',
+            number: 172,
+            state: 'closed',
+            locked: false,
+            title: '#999 new feature',
+            user: {
+              login: 'test',
+              id: 88_084_038,
+              node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+              type: 'User',
+              site_admin: false
+            },
+            base: {
+              label: 'zerocracy:master',
+              ref: 'master',
+              user: {
+                login: 'zerocracy',
+                id: 24_234_201
+              },
+              repo: {
+                id: 728_758_275,
+                node_id: 'R_kgDOK2_4Aw',
+                name: 'baza',
+                full_name: 'zerocracy/baza',
+                private: false
+              }
+            },
+            head: {
+              ref: 'zerocracy/baza'
+            },
+            merged_at: Time.now.to_s,
+            comments: 2,
+            review_comments: 2,
+            commits: 1,
+            additions: 3,
+            deletions: 3,
+            changed_files: 2
+          }
+        }
+      }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    assert_equal(4, f.comments)
+    assert_equal(2, f.comments_to_code)
+    assert_equal(1, f.comments_by_author)
+    assert_equal(1, f.comments_by_reviewers)
+    assert_equal(2, f.comments_appreciated)
+  end
+
   private
 
   def stub_event(*json)
