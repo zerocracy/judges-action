@@ -36,7 +36,7 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
     Fbe.octo.repository_workflow_runs(repo, created: ">#{f.since.utc.iso8601[0..9]}")[:workflow_runs].each do |json|
       total += 1
       success += json[:conclusion] == 'success' ? 1 : 0
-      duration += Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] / 1000
+      duration += (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
     end
   end
   f.average_build_success_rate = total.zero? ? 0 : success.to_f / total
