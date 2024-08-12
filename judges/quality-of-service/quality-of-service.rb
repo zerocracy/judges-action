@@ -73,11 +73,17 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   # Average issues
   issues = []
   Fbe.unmask_repos.each do |repo|
-    Fbe.octo.repository(repo).then do |json|
-      issues << json[:open_issues]
+    (f.since.utc.to_date..Time.now.utc.to_date).each do |date|
+      count = 0
+      Fbe.octo.search_issues(
+        "repo:#{repo} type:issue created:#{f.since.utc.to_date.iso8601[0..9]}..#{date.iso8601[0..9]}"
+      )[:items].each do |item|
+        count += 1 if item[:closed_at].nil? || item[:closed_at].utc.to_date >= date
+      end
+      issues << count
     end
   end
-  f.average_backlog_size = issues.empty? ? 0 : issues.inject(&:+) / issues.size
+  f.average_backlog_size = issues.empty? ? 0 : issues.inject(&:+).to_f / issues.size
 
   # Rejection PR rate
   pulls = 0
