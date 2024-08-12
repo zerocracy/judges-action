@@ -49,7 +49,7 @@ jobs:
           clean: false
 ```
 
-In the file, there are two places that you should configure. First,
+In the file, there is only one place that you should configure:
 the `repositories=...` should have a comma-separated list
 of repositories where your team works (instead of `...`).
 
