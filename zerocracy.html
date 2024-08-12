@@ -49,7 +49,7 @@
           <tbody>
             <tr>
               <td>
-                <span style="color:#2471A3">2024-08-12T05:14:34Z</span>
+                <span style="color:#2471A3">2024-08-12T06:17:45Z</span>
               </td>
               <td>
                 <span style="color:#196F3D">judges-summary</span>
@@ -66,7 +66,7 @@
               <td>
                 <span style="color:"/>
               </td>
-              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">582.847198408</span> version:<span style="color:#196F3D">0.24.0</span>  when:<span style="color:#2471A3">2024-08-12T05:14:34Z</span></td>
+              <td> added:<span style="color:#212F3C">8</span> cycles:<span style="color:#212F3C">2</span> removed:<span style="color:#212F3C">8</span> seconds:<span style="color:#E74C3C">690.372677866</span> version:<span style="color:#196F3D">0.24.0</span>  when:<span style="color:#2471A3">2024-08-12T06:17:45Z</span></td>
             </tr>
             <tr>
               <td>
@@ -54739,98 +54739,6 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
             </tr>
             <tr>
               <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">pmp</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">138890</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -12) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 10) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 200) (let hoc_k 0.05) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let many_hoc_fee 7) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 800) (let man_hoc_fee2 15) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 man_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${man_hoc_fee2} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let no_review_fee 15) (set penalty_for_no_review (if (eq reviews 0) (times -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review') 'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set bonus_for_comments (times comments (times -1 comments_k))) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (give bonus_for_comments 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let few_comments_fee 5) (let comments_needed 5) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 10) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted by reviewers') 'deduct ${silence_fee} points if there were absolutely no comments made by reviewers during the review') (aka (let few_hoc_fee 10) (let hoc_needed 20) (set penalty_for_few_hoc (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> code_review_was_rewarded:<span style="color:#196F3D">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 15) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 30) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.02) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 15) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 10) (let hoc_needed 15) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> days_of_running_balance:<span style="color:#212F3C">56</span> days_to_reward:<span style="color:#212F3C">14</span> dud_was_punished:<span style="color:#196F3D">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -16) (give fee 'as a basis') 'deduct ${fee} points'))</span> enhancement_suggestion_was_rewarded:<span style="color:#196F3D">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 10) (give bonus 'as a basis') 'award ${bonus} points'))</span> master_punish_days:<span style="color:#212F3C">4</span> published_release_was_rewarded:<span style="color:#196F3D">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points'))</span> push_to_master_was_punished:<span style="color:#196F3D">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</span> resolved_bug_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (in self '1 if the bug was reported and resolved by the same person, otherwise zero') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let self_fee 15) (set penalty_for_self (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug reported by you earlier') 'deduct ${self_fee} points if they resolved the bug earlier reported by themselves') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</span> </td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">pmp</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">138891</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">integration</span> eva_interval:<span style="color:#212F3C">10</span> </td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">pmp</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">138892</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">quality</span> qos_composite:<span style="color:#196F3D">(join 15 (below '7 days' average_release_interval) 10 (above 0.9 average_build_success_rate) 10 (below '4 days' average_issue_lifetime) 5 (below '2 days' average_pull_lifetime) 5 (below 16 average_backlog_size))</span> qos_days:<span style="color:#212F3C">7</span> qos_interval:<span style="color:#212F3C">2</span> </td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">pmp</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">138893</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">scope</span> qod_composite:<span style="color:#196F3D">(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted 0.1 total_hoc_written)</span> qod_days:<span style="color:#212F3C">7</span> qod_interval:<span style="color:#212F3C">2</span> </td>
-            </tr>
-            <tr>
-              <td>
                 <span style="color:#2471A3">2024-08-12T04:57:08Z</span>
               </td>
               <td>
@@ -54894,6 +54802,392 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
             </tr>
             <tr>
               <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">pmp</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139123</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">hr</span> bad_branch_name_was_punished:<span style="color:#196F3D">(award (explain 'If a branch has a name that doesn\'t obey the convention, a penalty is given to the author') (aka (let fee -12) (give fee 'as a basis') 'deduct ${fee} points'))</span> bug_report_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is reported and accepted by the team, the reporter gets a bonus') (aka (let bonus 10) (give bonus 'as a basis') 'award ${bonus} points'))</span> code_contribution_was_rewarded:<span style="color:#196F3D">(award (explain 'When a code contribution is made, the author gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 20) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_threshold 200) (let hoc_k 0.05) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let many_hoc_fee 7) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} &gt;= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let hoc_threshold2 800) (let man_hoc_fee2 15) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 man_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} &gt;= ${hoc_threshold2})') 'deduct ${man_hoc_fee2} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let no_review_fee 15) (set penalty_for_no_review (if (eq reviews 0) (times -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review') 'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k 0.25) (let comments_max -20) (let comments_min -5) (set bonus_for_comments (times comments (times -1 comments_k))) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (give bonus_for_comments 'for too many (${comments}) comments that were made during review') 'deduct ${comments_k} points for every comment made during review, but not more than ${comments_max} points') (aka (let few_comments_fee 5) (let comments_needed 5) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 10) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted by reviewers') 'deduct ${silence_fee} points if there were absolutely no comments made by reviewers during the review') (aka (let few_hoc_fee 10) (let hoc_needed 20) (set penalty_for_few_hoc (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> code_review_was_rewarded:<span style="color:#196F3D">(award (explain 'An author of every code review gets a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 15) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 30) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.02) (let hoc_max 30) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 15) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 1) (let comments_max 20) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 10) (let hoc_needed 15) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max_bonus 80) (set over (if (gt (total) max_bonus) (minus max_bonus (total)) 0)) (give over 'to not go over the cap') (let min_bonus 5) (set least (if (lt (total) min_bonus) (minus min_bonus (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max_bonus} points and not smaller than ${min_bonus} points'))</span> days_of_running_balance:<span style="color:#212F3C">56</span> days_to_reward:<span style="color:#212F3C">14</span> dud_was_punished:<span style="color:#196F3D">(award (explain 'When an issue is submitted but then rejected by the team, the reporter gets a penalty') (aka (let fee -16) (give fee 'as a basis') 'deduct ${fee} points'))</span> enhancement_suggestion_was_rewarded:<span style="color:#196F3D">(award (explain 'When an enhancement is suggested and accepted by the team, the reporter gets a bonus') (aka (let bonus 10) (give bonus 'as a basis') 'award ${bonus} points'))</span> master_punish_days:<span style="color:#212F3C">4</span> published_release_was_rewarded:<span style="color:#196F3D">(award (explain 'When a new release is published, everybody who contributed gets a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 45) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 40) (let hoc_min 5) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points'))</span> push_to_master_was_punished:<span style="color:#196F3D">(award (explain 'When someone pushes directly to the default branch, they get a penalty') (aka (let fee -20) (give fee 'as a basis') '${fee} points'))</span> resolved_bug_was_rewarded:<span style="color:#196F3D">(award (explain 'When a bug is resolved, the person who was assigned to it gets a bonus') (in hours 'how many hours it took to resolve the bug') (in self '1 if the bug was reported and resolved by the same person, otherwise zero') (set days (div hours 24)) (aka (let basis 30) (give basis 'as a basis') 'award ${basis} points') (aka (let hours_threshold 24) (let b1 10) (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than ${hours_threshold} hours') (aka (let self_fee 15) (set penalty_for_self (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug reported by you earlier') 'deduct ${self_fee} points if they resolved the bug earlier reported by themselves') (aka (let day_fee 1) (set b2 (times -1 (times days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">pmp</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139124</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">integration</span> eva_interval:<span style="color:#212F3C">10</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">pmp</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139125</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">quality</span> qos_composite:<span style="color:#196F3D">(join 15 (below '7 days' average_release_interval) 10 (above 0.9 average_build_success_rate) 10 (below '4 days' average_issue_lifetime) 5 (below '2 days' average_pull_lifetime) 5 (below 16 average_backlog_size))</span> qos_days:<span style="color:#212F3C">7</span> qos_interval:<span style="color:#212F3C">2</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">pmp</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139126</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> area:<span style="color:#196F3D">scope</span> qod_composite:<span style="color:#196F3D">(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted 0.1 total_hoc_written)</span> qod_days:<span style="color:#212F3C">7</span> qod_interval:<span style="color:#212F3C">2</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:40:03Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19725743174 has arrived to yegor256/judges, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139127</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">1a2b4a32d6d57bbe9548ab6651c535078c827223</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40935109037</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19725743174</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-12T05:40:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:39:51Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">110</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue yegor256/judges#110 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139128</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40935105731</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-12T05:39:51Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:39:02Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">release-published</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new release '' has been published in yegor256/judges by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139129</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> contributors:[<span style="color:#212F3C">526301</span>, <span style="color:#212F3C">8086956</span>]  event_id:<span style="color:#212F3C">40935092482</span> event_type:<span style="color:#196F3D">ReleaseEvent</span> is_human:<span style="color:#212F3C">0</span> release:<span style="color:#212F3C">169710483</span>  tag:<span style="color:#196F3D">0.25.0</span>  when:<span style="color:#2471A3">2024-08-12T05:39:02Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:38:21Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">tag-was-created</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new tag '0.25.0' has been created in yegor256/judges by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139130</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40935081532</span> event_type:<span style="color:#196F3D">CreateEvent</span> is_human:<span style="color:#212F3C">0</span>  tag:<span style="color:#196F3D">0.25.0</span>  when:<span style="color:#2471A3">2024-08-12T05:38:21Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:31:04Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">111</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue yegor256/judges#111 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139131</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40934963145</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-12T05:31:04Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:28:16Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799113787</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19725640911 has arrived to yegor256/judges, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139132</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">99528637d4a36579e30f9f149d232a048361df44</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40934917741</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19725640911</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-12T05:28:16Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T06:03:27Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-closed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">62</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/fbe#62 has been closed by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139137</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40935524571</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-12T06:03:27Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T06:00:57Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">release-published</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new release '`Fbe.overwrite` must not modify the same value is there' has been published in zerocracy/fbe by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139138</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> contributors:[<span style="color:#212F3C">526301</span>, <span style="color:#212F3C">8086956</span>]  event_id:<span style="color:#212F3C">40935475155</span> event_type:<span style="color:#196F3D">ReleaseEvent</span> is_human:<span style="color:#212F3C">0</span> release:<span style="color:#212F3C">169711809</span>  tag:<span style="color:#196F3D">0.0.45</span>  when:<span style="color:#2471A3">2024-08-12T06:00:57Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T06:00:27Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">tag-was-created</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">8086956</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new tag '0.0.45' has been created in zerocracy/fbe by @rultor.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139139</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40935464862</span> event_type:<span style="color:#196F3D">CreateEvent</span> is_human:<span style="color:#212F3C">0</span>  tag:<span style="color:#196F3D">0.0.45</span>  when:<span style="color:#2471A3">2024-08-12T06:00:27Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:49:26Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19725827443 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139140</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">fd2ab17e7c688bc0ddb44abd8713ceef9e8afa23</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40935271609</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19725827443</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-12T05:49:26Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:48:27Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19725818379 has arrived to zerocracy/fbe, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139141</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">c126450ce1fea16b3fa33eac9a25e967a38cc373</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40935253675</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19725818379</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-12T05:48:27Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:45:06Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">issue-was-opened</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">62</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">The issue zerocracy/fbe#62 has been opened by @yegor256.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139142</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  event_id:<span style="color:#212F3C">40935194590</span> event_type:<span style="color:#196F3D">IssuesEvent</span> is_human:<span style="color:#212F3C">1</span>    when:<span style="color:#2471A3">2024-08-12T05:45:06Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:57:55Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19725904543 has arrived to zerocracy/judges-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139144</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">293e887e91024af8cbdbac1df48f32d6893e7232</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40935419825</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19725904543</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-12T05:57:55Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:#2471A3">2024-08-12T05:58:18Z</span>
+              </td>
+              <td>
+                <span style="color:#196F3D">git-was-pushed</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">526301</span>
+              </td>
+              <td>
+                <span style="color:#212F3C">802720676</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">A new Git push #19725908053 has arrived to zerocracy/pages-action, made by @yegor256 (default branch is 'master'), not associated with any pull request.</span>
+              </td>
+              <td> _id:<span style="color:#212F3C">139146</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> commit:<span style="color:#196F3D">a3cc62e839fbaccf595995a7e96f6b735f966e4f</span> default_branch:<span style="color:#196F3D">master</span>  event_id:<span style="color:#212F3C">40935426564</span> event_type:<span style="color:#196F3D">PushEvent</span> is_human:<span style="color:#212F3C">1</span> push_id:<span style="color:#212F3C">19725908053</span> ref:<span style="color:#196F3D">refs/heads/master</span>  to_master:<span style="color:#212F3C">1</span>  when:<span style="color:#2471A3">2024-08-12T05:58:18Z</span> where:<span style="color:#196F3D">github</span> </td>
+            </tr>
+            <tr>
+              <td>
                 <span style="color:#2471A3">2024-07-26T05:37:03Z</span>
               </td>
               <td>
@@ -54911,7 +55205,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.</span>
               </td>
-              <td> _id:<span style="color:#212F3C">138987</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
+              <td> _id:<span style="color:#212F3C">139235</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>  is_human:<span style="color:#212F3C">1</span>  label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-26T05:37:03Z</span> where:<span style="color:#196F3D">github</span> </td>
             </tr>
             <tr>
               <td>
@@ -54932,7 +55226,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139021</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40934416465</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139270</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40935109037</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -54953,7 +55247,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139022</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40933853887</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139271</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40933853887</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -54974,7 +55268,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139023</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40932834047</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139272</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40932834047</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -54995,7 +55289,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139024</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40928001203</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139273</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40928001203</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -55016,7 +55310,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139025</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40934147895</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139274</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40935524571</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -55037,7 +55331,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139026</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40933845887</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139275</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40935419825</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -55058,28 +55352,7 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139027</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40933026668</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">728758275</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">139030</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139276</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">40935426564</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -55100,53 +55373,11 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139061</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139315</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">820463873</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">139082</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">798641472</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">139098</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:#2471A3">2024-07-23T06:29:27Z</span>
+                <span style="color:#2471A3">2024-08-12T05:31:03Z</span>
               </td>
               <td>
                 <span style="color:#196F3D">label-was-attached</span>
@@ -55155,36 +55386,15 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
                 <span style="color:#212F3C">526301</span>
               </td>
               <td>
-                <span style="color:#212F3C">802720676</span>
+                <span style="color:#212F3C">799113787</span>
               </td>
               <td>
-                <span style="color:#212F3C">65</span>
+                <span style="color:#212F3C">111</span>
               </td>
               <td>
-                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.</span>
+                <span style="color:#196F3D">The '#enhancement' label was attached by @yegor256 to the issue yegor256/judges#111.</span>
               </td>
-              <td> _id:<span style="color:#212F3C">139100</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>   label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-07-23T06:29:27Z</span> where:<span style="color:#196F3D">github</span> </td>
-            </tr>
-            <tr>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#196F3D">labels-were-scanned</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:#212F3C">799177290</span>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td>
-                <span style="color:"/>
-              </td>
-              <td> _id:<span style="color:#212F3C">139115</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139337</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span>   label:<span style="color:#196F3D">enhancement</span>   when:<span style="color:#2471A3">2024-08-12T05:31:03Z</span> where:<span style="color:#196F3D">github</span> </td>
             </tr>
             <tr>
               <td>
@@ -55205,7 +55415,91 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139117</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">67</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139344</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">820463873</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139347</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">798641472</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139358</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">0</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">728758275</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139377</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">177</span>   where:<span style="color:#196F3D">github</span></td>
+            </tr>
+            <tr>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#196F3D">labels-were-scanned</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:#212F3C">799177290</span>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td>
+                <span style="color:"/>
+              </td>
+              <td> _id:<span style="color:#212F3C">139378</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">167</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
             <tr>
               <td>
@@ -55226,13 +55520,13 @@ Happy hunting! 🕵️‍♂️💻</span> href:<span style="color:#196F3D">http
               <td>
                 <span style="color:"/>
               </td>
-              <td> _id:<span style="color:#212F3C">139118</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">73</span>   where:<span style="color:#196F3D">github</span></td>
+              <td> _id:<span style="color:#212F3C">139379</span> <span style="color:gray;">_time</span> <span style="color:gray;">_version</span> latest:<span style="color:#212F3C">31</span>   where:<span style="color:#196F3D">github</span></td>
             </tr>
           </tbody>
         </table>
       </article>
       <footer class="smaller">
-        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-08-12T05:14:40Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 2626 facts, 1016581 bytes, version 0.2.1.</p>
+        <p>The page was generated by the <a href="https://github.com/yegor256/judges">judges</a> tool (0.21.0) on 2024-08-12T06:17:52Z.<br/><a href="https://github.com/yegor256/factbase">Factbase</a>: 2640 facts, 1021902 bytes, version 0.2.1.</p>
       </footer>
     </section>
   </body>
