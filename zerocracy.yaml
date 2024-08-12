@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 690.372677866
+  seconds: 666.246152384
   version: 0.24.0
   what: judges-summary
-  when: 2024-08-12 06:17:45.545376680 Z
+  when: 2024-08-12 07:15:58.521619277 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -39970,16 +39970,6 @@
   area: integration
   eva_interval: 10
   what: pmp
-- _id: 139125
-  _time: 2024-08-12 05:15:59.209125510 Z
-  _version: 0.3.0/0.24.0/
-  area: quality
-  qos_composite: "(join 15 (below '7 days' average_release_interval) 10 (above 0.9
-    average_build_success_rate) 10 (below '4 days' average_issue_lifetime) 5 (below
-    '2 days' average_pull_lifetime) 5 (below 16 average_backlog_size))"
-  qos_days: 7
-  qos_interval: 2
-  what: pmp
 - _id: 139126
   _time: 2024-08-12 05:16:04.521248255 Z
   _version: 0.3.0/0.24.0/
@@ -40222,66 +40212,11 @@
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
   who: 526301
-- _id: 139270
-  _time: 2024-08-12 06:12:58.422011512 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40935109037
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 139271
-  _time: 2024-08-12 06:13:02.121559791 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40933853887
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 139272
-  _time: 2024-08-12 06:13:05.864446516 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40932834047
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 139273
-  _time: 2024-08-12 06:13:08.556592005 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40928001203
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 139274
-  _time: 2024-08-12 06:13:12.671873138 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40935524571
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 139275
-  _time: 2024-08-12 06:13:16.315103919 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40935419825
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 139276
-  _time: 2024-08-12 06:13:19.987519597 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40935426564
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 139315
-  _time: 2024-08-12 06:15:00.333219630 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
 - _id: 139337
   _time: 2024-08-12 06:15:57.747859371 Z
   _version: 0.3.0/0.24.0/0.0.43
   details: The '#enhancement' label was attached by @yegor256 to the issue yegor256/judges#111.
+  is_human: 1
   issue: 111
   label: enhancement
   repository: 799113787
@@ -40289,45 +40224,259 @@
   when: 2024-08-12 05:31:03.000000000 Z
   where: github
   who: 526301
-- _id: 139344
-  _time: 2024-08-12 06:16:15.075785650 Z
+- _id: 139380
+  _time: 2024-08-12 06:17:57.022131866 Z
+  _version: 0.3.0/0.25.0/
+  area: quality
+  qos_composite: "(join 15 (below '3 days' average_release_interval) 10 (above 0.95
+    average_build_success_rate) 10 (below '2 days' average_issue_lifetime) 5 (below
+    '12 hours' average_pull_lifetime) 5 (below 8 average_backlog_size))"
+  qos_days: 7
+  qos_interval: 2
+  what: pmp
+- _id: 139383
+  _time: 2024-08-12 07:05:06.543033157 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  branch: renovate/judges-0.x-lockfile
+  details: The pull request zerocracy/baza#183 has been opened by @renovate[bot].
+  event_id: 40936652185
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 183
+  repository: 728758275
+  what: pull-was-opened
+  when: 2024-08-12 06:54:29.000000000 Z
+  where: github
+  who: 29139614
+- _id: 139386
+  _time: 2024-08-12 07:05:18.419470255 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  details: The issue zerocracy/fbe#63 has been opened by @yegor256.
+  event_id: 40936682074
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 63
+  repository: 820463873
+  what: issue-was-opened
+  when: 2024-08-12 06:55:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 139388
+  _time: 2024-08-12 07:05:29.515175038 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  details: The pull request zerocracy/judges-action#260 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 40936586656
+  event_type: PullRequestEvent
+  hoc: 2
+  is_human: 0
+  issue: 260
+  repository: 799177290
+  what: pull-was-merged
+  when: 2024-08-12 06:51:47.000000000 Z
+  where: github
+  who: 8086956
+- _id: 139389
+  _time: 2024-08-12 07:05:34.415779626 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  details: The issue zerocracy/judges-action#261 has been opened by @yegor256.
+  event_id: 40936398712
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 261
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-12 06:43:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 139390
+  _time: 2024-08-12 07:05:41.259688925 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/judges-action#260 has been opened by @renovate[bot].
+  event_id: 40935833278
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 260
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-12 06:18:17.000000000 Z
+  where: github
+  who: 29139614
+- _id: 139469
+  _time: 2024-08-12 07:09:12.948426181 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  details: The '#enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#65.
+  is_human: 1
+  issue: 65
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-07-23 06:29:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 139501
+  _time: 2024-08-12 07:10:41.206734375 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40935109037
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 139502
+  _time: 2024-08-12 07:10:45.067048637 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40933853887
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 139503
+  _time: 2024-08-12 07:10:49.037995208 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40936652185
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 139504
+  _time: 2024-08-12 07:10:51.872541802 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40928001203
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 139505
+  _time: 2024-08-12 07:11:01.404882105 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  commit: e658cc172db2ec8a600973ce48a40888a5a0ed7e
+  default_branch: master
+  details: 'A new Git push #19726698660 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40936987830
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19726698660
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-12 07:07:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 139506
+  _time: 2024-08-12 07:11:04.022557682 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40937051926
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 139507
+  _time: 2024-08-12 07:11:08.276810015 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  commit: 662a1fc180a81d81694fd61552768143553d5938
+  default_branch: master
+  details: 'A new Git push #19726741777 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40937076189
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19726741777
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-12 07:10:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 139508
+  _time: 2024-08-12 07:11:10.928031317 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  commit: 46df32a418d144aa35123e44346bc0649ddd15b3
+  default_branch: master
+  details: 'A new Git push #19726717434 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 40937025544
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19726717434
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-12 07:08:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 139509
+  _time: 2024-08-12 07:11:13.523249817 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40937076189
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 139510
+  _time: 2024-08-12 07:11:17.451532941 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40935426564
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 139549
+  _time: 2024-08-12 07:12:59.833530792 Z
   _version: 0.3.0/0.24.0/0.0.43
   latest: 0
-  repository: 799113787
+  repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 139347
-  _time: 2024-08-12 06:16:22.956663746 Z
+- _id: 139586
+  _time: 2024-08-12 07:14:36.693505719 Z
   _version: 0.3.0/0.24.0/0.0.43
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 139358
-  _time: 2024-08-12 06:16:50.841972471 Z
+- _id: 139595
+  _time: 2024-08-12 07:14:59.723419357 Z
   _version: 0.3.0/0.24.0/0.0.43
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 139377
-  _time: 2024-08-12 06:17:40.411373119 Z
+- _id: 139602
+  _time: 2024-08-12 07:15:17.763391569 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 177
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 139614
+  _time: 2024-08-12 07:15:48.605339793 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/judges-action#261.
+  issue: 261
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-08-12 06:43:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 139616
+  _time: 2024-08-12 07:15:53.490144102 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 139617
+  _time: 2024-08-12 07:15:56.188935491 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 139378
-  _time: 2024-08-12 06:17:42.947628110 Z
+- _id: 139618
+  _time: 2024-08-12 07:15:58.420321396 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 167
+  latest: 0
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 139379
-  _time: 2024-08-12 06:17:45.448710312 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
