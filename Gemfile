@@ -24,13 +24,13 @@
 
 source 'https://rubygems.org'
 
-gem 'decoor', '~>0.0'
-gem 'factbase', '~>0.0'
-gem 'fbe', '~>0.0'
-gem 'judges', '~>0.8'
+gem 'decoor', '>0'
+gem 'factbase', '>0'
+gem 'fbe', '>0'
+gem 'judges', '>0'
 gem 'minitest', '5.24.1', require: false
 gem 'minitest-reporters', '1.7.1', require: false
-gem 'others', '~>0.0'
+gem 'others', '>0'
 gem 'rake', '13.2.1'
 gem 'rubocop', '1.65.1', require: false
 gem 'simplecov', '0.22.0', require: false
