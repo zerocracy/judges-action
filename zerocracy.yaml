@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 700.319366043
+  seconds: 613.96519984
   version: 0.24.0
   what: judges-summary
-  when: 2024-08-12 09:16:49.006879426 Z
+  when: 2024-08-12 10:15:17.124176129 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -39964,12 +39964,6 @@
     -20) (set b2 (max b2 days_fee_max)) (give b2 'for ${days} days of delay') 'deduct
     ${day_fee} points for each day of delay, but no more than ${days_fee_max} points'))"
   what: pmp
-- _id: 139124
-  _time: 2024-08-12 05:15:54.046037278 Z
-  _version: 0.3.0/0.24.0/
-  area: integration
-  eva_interval: 10
-  what: pmp
 - _id: 139126
   _time: 2024-08-12 05:16:04.521248255 Z
   _version: 0.3.0/0.24.0/
@@ -40798,34 +40792,6 @@
   total_stars: 29
   what: dimensions-of-terrain
   when: 2024-08-12 09:11:49.967519942 Z
-- _id: 139996
-  _time: 2024-08-12 09:11:58.268850160 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40935109037
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 139997
-  _time: 2024-08-12 09:12:01.751454409 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40933853887
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 139998
-  _time: 2024-08-12 09:12:05.366384276 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40940117402
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 139999
-  _time: 2024-08-12 09:12:08.003177746 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 40928001203
-  repository: 840215648
-  what: events-were-scanned
-  where: github
 - _id: 140000
   _time: 2024-08-12 09:12:11.895429431 Z
   _version: 0.3.0/0.24.0/0.0.43
@@ -40839,73 +40805,183 @@
   when: 2024-08-12 09:07:36.000000000 Z
   where: github
   who: 526301
-- _id: 140001
-  _time: 2024-08-12 09:12:14.467943999 Z
+- _id: 140108
+  _time: 2024-08-12 09:16:59.881943696 Z
+  _version: 0.3.0/0.25.0/
+  area: integration
+  eva_interval: 10
+  eva_learn_hours: 8
+  what: pmp
+- _id: 140109
+  _time: 2024-08-12 09:17:29.413550925 Z
+  _version: 0.3.0/0.25.0/
+  cause: 139868
+  comments: 1
+  details: The pull request zerocracy/judges-action#263 with 114 HoC created by @Suban05
+    was merged by @yegor256 after 27 minutes of being in review and 1 comments.
+  hoc: 114
+  is_human: 1
+  issue: 263
+  merger: 526301
+  repository: 799177290
+  seconds: 1638
+  what: code-was-contributed
+  when: 2024-08-12 08:55:32.000000000 Z
+  where: github
+  who: 88084038
+- _id: 140109
+  _time: 2024-08-12 09:17:32.762177015 Z
+  _version: 0.3.0/0.25.0/
+  cause: 139869
+  comments: 2
+  details: The pull request zerocracy/judges-action#262 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 33 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 262
+  merger: 8086956
+  repository: 799177290
+  seconds: 1983
+  what: code-was-contributed
+  when: 2024-08-12 08:51:55.000000000 Z
+  where: github
+  who: 29139614
+- _id: 140110
+  _time: 2024-08-12 09:17:52.493470216 Z
+  _version: 0.3.0/0.25.0/
+  what: learn-eva
+  when: 2024-08-12 09:17:49.215187966 Z
+- _id: 140115
+  _time: 2024-08-12 10:05:22.602137611 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 40940520299
+  commit: c6ff23d32bed81981a6fb3f2b22d9ae5335e07d3
+  default_branch: master
+  details: 'A new Git push #19728785987 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40941336052
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19728785987
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-12 09:33:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 140116
+  _time: 2024-08-12 10:05:25.259674110 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  commit: c6e974f712e32591721688f9014abe5311874882
+  default_branch: master
+  details: 'A new Git push #19728767359 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 40941297093
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19728767359
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-12 09:32:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 140227
+  _time: 2024-08-12 10:10:17.390366412 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40935109037
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 140228
+  _time: 2024-08-12 10:10:20.859674069 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40933853887
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 140229
+  _time: 2024-08-12 10:10:24.476523441 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40940117402
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 140230
+  _time: 2024-08-12 10:10:27.124585305 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40928001203
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 140231
+  _time: 2024-08-12 10:10:30.893348019 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 40941336052
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 140002
-  _time: 2024-08-12 09:12:18.030698995 Z
+- _id: 140232
+  _time: 2024-08-12 10:10:34.370642568 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 40940136746
+  latest: 40940827351
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 140003
-  _time: 2024-08-12 09:12:21.523143291 Z
+- _id: 140233
+  _time: 2024-08-12 10:10:37.746285566 Z
   _version: 0.3.0/0.24.0/0.0.43
   latest: 40938159797
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 140042
-  _time: 2024-08-12 09:14:02.530865613 Z
+- _id: 140272
+  _time: 2024-08-12 10:12:18.927450611 Z
   _version: 0.3.0/0.24.0/0.0.43
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 140070
-  _time: 2024-08-12 09:15:15.176518987 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 140083
-  _time: 2024-08-12 09:15:48.201501795 Z
+- _id: 140315
+  _time: 2024-08-12 10:14:09.952802916 Z
   _version: 0.3.0/0.24.0/0.0.43
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 140086
-  _time: 2024-08-12 09:15:55.500658937 Z
+- _id: 140319
+  _time: 2024-08-12 10:14:19.757417363 Z
   _version: 0.3.0/0.24.0/0.0.43
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 140105
-  _time: 2024-08-12 09:16:44.088465744 Z
+- _id: 140326
+  _time: 2024-08-12 10:14:37.237441788 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 177
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 140339
+  _time: 2024-08-12 10:15:11.601512966 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 140340
+  _time: 2024-08-12 10:15:14.393378304 Z
+  _version: 0.3.0/0.24.0/0.0.43
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 140106
-  _time: 2024-08-12 09:16:46.404175311 Z
+- _id: 140341
+  _time: 2024-08-12 10:15:17.022489149 Z
   _version: 0.3.0/0.24.0/0.0.43
-  latest: 0
+  latest: 167
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 140107
-  _time: 2024-08-12 09:16:48.907355538 Z
-  _version: 0.3.0/0.24.0/0.0.43
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
