@@ -36,6 +36,8 @@ Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
       commits += 1
       hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
     end
+  rescue Octokit::Conflict
+    next
   end
   f.total_commits_pushed = commits
   f.total_hoc_committed = hoc
