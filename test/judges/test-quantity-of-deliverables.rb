@@ -42,7 +42,7 @@ class TestQuantityOfDeliverables < Minitest::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0 }.to_json, headers: {
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }.to_json, headers: {
         'content-type': 'application/json'
       }
     )
@@ -106,7 +106,7 @@ class TestQuantityOfDeliverables < Minitest::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0 }.to_json, headers: {
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }.to_json, headers: {
         'content-type': 'application/json'
       }
     )
@@ -117,7 +117,7 @@ class TestQuantityOfDeliverables < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E=#{test_date}").to_return(
+    stub_request(:get, "https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E#{test_date}").to_return(
       body: [
         {
           pull_request: {}
