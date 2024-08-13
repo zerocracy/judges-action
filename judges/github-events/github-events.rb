@@ -58,6 +58,28 @@ Fbe.iterate do
     contributors.to_a
   end
 
+  def self.fetch_release_info(fact, repo)
+    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last&.tag
+    last ||= find_first_commit(repo)[:sha]
+    info = {}
+    Fbe.octo.compare(repo, last, fact.tag).then do |json|
+      info[:commits] = json[:total_commits]
+      info[:hoc] = json[:files].map { |f| f[:changes] }.sum
+      info[:last_commit] = json[:commits].first[:sha]
+    end
+    info
+  end
+
+  def self.find_first_commit(repo)
+    commits = Fbe.octo.commits(repo)
+    last = commits.last
+    while commits.size != 1
+      commits = Fbe.octo.commits(repo, sha: last[:sha])
+      last = commits.last
+    end
+    last
+  end
+
   def self.fill_up_event(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
@@ -162,6 +184,7 @@ Fbe.iterate do
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
         fetch_contributors(fact, json[:repo][:name]).each { |c| fact.contributors = c }
+        fetch_release_info(fact, json[:repo][:name]).each { |prop, val| fact.send(:"#{prop}=", val) }
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
           "in #{json[:repo][:name]} by #{Fbe.who(fact)}."
