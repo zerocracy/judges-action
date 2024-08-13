@@ -32,12 +32,13 @@ Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
   commits = 0
   hoc = 0
   Fbe.unmask_repos.each do |repo|
-    Fbe.octo.commits_since(repo, f.since).each do |json|
-      commits += 1
-      hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
+    size = Fbe.octo.repository(repo)[:size]
+    if size.positive?
+      Fbe.octo.commits_since(repo, f.since).each do |json|
+        commits += 1
+        hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
+      end
     end
-  rescue Octokit::Conflict
-    next
   end
   f.total_commits_pushed = commits
   f.total_hoc_committed = hoc
