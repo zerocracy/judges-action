@@ -46,7 +46,7 @@ class TestQuantityOfDeliverables < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00").to_return(
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00').to_return(
       body: [
         {
           sha: 'bcb3cd5c2a6f3daebe1a2ab16a195a0bf2609943'
@@ -112,7 +112,7 @@ class TestQuantityOfDeliverables < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00").to_return(
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00').to_return(
       status: 409,
       body: [].to_json,
       headers: {
