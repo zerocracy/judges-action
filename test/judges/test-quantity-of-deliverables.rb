@@ -110,7 +110,7 @@ class TestQuantityOfDeliverables < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=#{test_time}%2B00:00").to_return(
+    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=#{time_iso8601}%2B00:00").to_return(
       status: 409,
       body: [].to_json,
       headers: {
