@@ -46,7 +46,7 @@ class TestQuantityOfDeliverables < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=#{time_iso8601}%2B00:00").to_return(
+    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00").to_return(
       body: [
         {
           sha: 'bcb3cd5c2a6f3daebe1a2ab16a195a0bf2609943'
@@ -79,7 +79,7 @@ class TestQuantityOfDeliverables < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E#{test_date}").to_return(
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15').to_return(
       body: [
         {
           pull_request: {}
@@ -90,12 +90,14 @@ class TestQuantityOfDeliverables < Minitest::Test
       }
     )
     fb = Factbase.new
-    load_it('quantity-of-deliverables', fb)
-    f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
-    assert_equal(2, f.first.total_commits_pushed)
-    assert_equal(20, f.first.total_hoc_committed)
-    assert_equal(1, f.first.total_issues_created)
-    assert_equal(1, f.first.total_pulls_submitted)
+    Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
+      load_it('quantity-of-deliverables', fb)
+      f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
+      assert_equal(2, f.first.total_commits_pushed)
+      assert_equal(20, f.first.total_hoc_committed)
+      assert_equal(1, f.first.total_issues_created)
+      assert_equal(1, f.first.total_pulls_submitted)
+    end
   end
 
   def test_processes_empty_repository
@@ -110,14 +112,14 @@ class TestQuantityOfDeliverables < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=#{time_iso8601}%2B00:00").to_return(
+    stub_request(:get, "https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00").to_return(
       status: 409,
       body: [].to_json,
       headers: {
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, "https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E#{test_date}").to_return(
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15').to_return(
       body: [
         {
           pull_request: {}
@@ -128,11 +130,13 @@ class TestQuantityOfDeliverables < Minitest::Test
       }
     )
     fb = Factbase.new
-    load_it('quantity-of-deliverables', fb)
-    f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
-    assert_equal(0, f.first.total_commits_pushed)
-    assert_equal(0, f.first.total_hoc_committed)
-    assert_equal(1, f.first.total_issues_created)
-    assert_equal(1, f.first.total_pulls_submitted)
+    Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
+      load_it('quantity-of-deliverables', fb)
+      f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
+      assert_equal(0, f.first.total_commits_pushed)
+      assert_equal(0, f.first.total_hoc_committed)
+      assert_equal(1, f.first.total_issues_created)
+      assert_equal(1, f.first.total_pulls_submitted)
+    end
   end
 end
