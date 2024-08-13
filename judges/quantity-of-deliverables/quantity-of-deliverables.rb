@@ -32,12 +32,11 @@ Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
   commits = 0
   hoc = 0
   Fbe.unmask_repos.each do |repo|
-    size = Fbe.octo.repository(repo)[:size]
-    if size.positive?
-      Fbe.octo.commits_since(repo, f.since).each do |json|
-        commits += 1
-        hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
-      end
+    next if Fbe.octo.repository(repo)[:size].zero?
+
+    Fbe.octo.commits_since(repo, f.since).each do |json|
+      commits += 1
+      hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
     end
   end
   f.total_commits_pushed = commits
