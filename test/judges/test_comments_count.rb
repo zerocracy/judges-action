@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 require 'fbe/octo'
+require 'fbe/github_graph'
 require 'factbase'
 require 'loog'
 require 'json'
@@ -109,7 +110,7 @@ class TestJudgesComments < Minitest::Test
       deletions: 3,
       changed_files: 2
     }
-    comments = Judges::Comments.new(octo: Fbe.octo, pull_request:)
+    comments = Judges::Comments.new(octo: Fbe.octo, github_graph: Fbe.github_graph, pull_request:)
     assert_equal(4, comments.total)
     assert_equal(2, comments.to_code)
     assert_equal(1, comments.by_author)
@@ -168,7 +169,7 @@ class TestJudgesComments < Minitest::Test
       deletions: 3,
       changed_files: 2
     }
-    comments = Judges::Comments.new(octo: Fbe.octo, pull_request:)
+    comments = Judges::Comments.new(octo: Fbe.octo, github_graph: Fbe.github_graph, pull_request:)
     assert_equal(4, comments.total)
     assert_equal(2, comments.to_code)
     assert_equal(1, comments.by_author)

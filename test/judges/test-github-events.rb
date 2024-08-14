@@ -852,6 +852,7 @@ class TestGithubEvents < Minitest::Test
     assert_equal(1, f.comments_by_author)
     assert_equal(1, f.comments_by_reviewers)
     assert_equal(2, f.comments_appreciated)
+    assert_equal(1, f.comments_resolved)
   end
 
   def test_pull_request_event_without_code_comments
@@ -1028,6 +1029,7 @@ class TestGithubEvents < Minitest::Test
     assert_equal(1, f.comments_by_author)
     assert_equal(0, f.comments_by_reviewers)
     assert_equal(2, f.comments_appreciated)
+    assert_equal(1, f.comments_resolved)
   end
 
   private

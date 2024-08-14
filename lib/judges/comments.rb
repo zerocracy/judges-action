@@ -24,8 +24,9 @@
 
 # Counts comments
 class Judges::Comments
-  def initialize(octo:, pull_request:)
+  def initialize(octo:, github_graph:, pull_request:)
     @octo = octo
+    @github_graph = github_graph
     @pr = pull_request
     @code_comments = @octo.pull_request_comments(@pr[:base][:repo][:full_name], @pr[:number])
     @issue_comments = @octo.issue_comments(@pr[:base][:repo][:full_name], @pr[:number])
@@ -54,5 +55,9 @@ class Judges::Comments
         .count { |reaction| comment[:user][:id] != reaction[:user][:id] }
     end
     appreciated
+  end
+
+  def resolved
+    @github_graph.resolved_conversations(@pr[:owner][:login], @pr[:base][:repo][:name], @pr[:number])
   end
 end

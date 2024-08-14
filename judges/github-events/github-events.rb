@@ -24,6 +24,7 @@
 
 require 'tago'
 require 'fbe/octo'
+require 'fbe/github_graph'
 require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/who'
@@ -120,12 +121,13 @@ Fbe.iterate do
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
-        comments = Judges::Comments.new(octo: Fbe.octo, pull_request: pl)
+        comments = Judges::Comments.new(octo: Fbe.octo, github_graph: Fbe.github_graph, pull_request: pl)
         fact.comments = comments.total
         fact.comments_to_code = comments.to_code
         fact.comments_by_author = comments.by_author
         fact.comments_by_reviewers = comments.by_reviewers
         fact.comments_appreciated = comments.appreciated
+        fact.comments_resolved = comments.resolved
         fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
