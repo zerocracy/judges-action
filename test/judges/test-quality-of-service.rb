@@ -46,7 +46,7 @@ class TestQualityOfService < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100').to_return(
+    stub_request(:get, "https://api.github.com/repos/foo/foo/actions/runs?created=%3E#{test_date}&per_page=100").to_return(
       status: 200,
       body: {
         workflow_runs: [
@@ -76,7 +76,7 @@ class TestQualityOfService < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-07-15').to_return(
+    stub_request(:get, "https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E#{test_date}").to_return(
       status: 200,
       body: {
         total_count: 1,
@@ -86,14 +86,14 @@ class TestQualityOfService < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    (Date.parse('2024-07-15')..Date.parse('2024-08-12')).each do |date|
+    (Date.parse(test_date)..Date.today).each do |date|
       stub_github(
         'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:2024-07-15..#{date}",
+        "q=repo:foo/foo%20type:issue%20created:#{test_date}..#{date}",
         body: { total_count: 0, items: [] }
       )
     end
-    stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-15').to_return(
+    stub_request(:get, "https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E#{test_date}").to_return(
       status: 200,
       body: {
         total_count: 1,
@@ -103,7 +103,7 @@ class TestQualityOfService < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-15').to_return(
+    stub_request(:get, "https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E#{test_date}").to_return(
       status: 200,
       body: {
         total_count: 1,
