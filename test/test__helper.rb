@@ -45,12 +45,4 @@ class Minitest::Test
     $loog = Loog::NULL
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
-
-  def test_date
-    test_time.to_date.to_s
-  end
-
-  def test_time
-    Time.now - (28 * 24 * 60 * 60)
-  end
 end
