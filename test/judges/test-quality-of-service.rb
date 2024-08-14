@@ -114,7 +114,9 @@ class TestQualityOfService < Minitest::Test
       }
     )
     fb = Factbase.new
-    load_it('quality-of-service', fb)
+    Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+    end
   end
 
   def test_quality_of_service_average_issues
