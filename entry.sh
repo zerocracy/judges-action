@@ -72,6 +72,7 @@ cd "${GITHUB_WORKSPACE}"
 
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" pull \
+        --timeout=0 \
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${fb}"
@@ -121,6 +122,7 @@ fi
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" push \
         --no-zip \
+        --timeout=0 \
         "--owner=${owner}" \
         "--meta=workflow_url:${owner}" \
         "--meta=vitals_url:${VITALS_URL}" \

@@ -30,7 +30,8 @@ jobs:
   zerocracy:
     runs-on: ubuntu-24.04
     steps:
-      - uses: zerocracy/judges-action@0.0.42
+      - uses: actions/checkout@v4
+      - uses: zerocracy/judges-action@0.0.47
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           options: |
@@ -48,7 +49,7 @@ jobs:
           clean: false
 ```
 
-In the file, there are two places that you should configure. First,
+In the file, there is only one place that you should configure:
 the `repositories=...` should have a comma-separated list
 of repositories where your team works (instead of `...`).
 
@@ -63,7 +64,9 @@ be automatically deployed to the `gh-pages` branch. You can configure
 your GitHub repository to render the branch as a static website via
 [GitHub Pages](https://pages.github.com/). Thus,
 the summary page will be updated every ten minutes and you will see
-who is the best performer in your team.
+who is the best performer in your team, similar to
+[what we see](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+in our team.
 
 ## Configuration
 

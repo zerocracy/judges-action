@@ -365,6 +365,63 @@ class TestGithubEvents < Minitest::Test
               }
             }
           }
+        },
+        {
+          id: '40623323550',
+          type: 'PullRequestReviewEvent',
+          public: true,
+          created_at: '2024-07-31 12:45:09 UTC',
+          actor: {
+            id: 55,
+            login: 'Yegorov',
+            display_login: 'yegorov',
+            gravatar_id: '',
+            url: 'https://api.github.com/users/yegorov'
+          },
+          repo: {
+            id: 42,
+            name: 'yegor256/judges',
+            url: 'https://api.github.com/repos/yegor256/judges'
+          },
+          payload: {
+            action: 'created',
+            review: {
+              id: 2_210_067_609,
+              node_id: 'PRR_kwDOL6GCO86DuvSZ',
+              user: {
+                login: 'yegorov',
+                id: 42,
+                node_id: 'MDQ6VXNlcjUyNjMwMQ==',
+                type: 'User'
+              },
+              pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              author_association: 'OWNER',
+              _links: {
+                html: {
+                  href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
+                },
+                pull_request: {
+                  href: 'https://api.github.com/repos/yegor256/judges/pulls/93'
+                }
+              }
+            },
+            pull_request: {
+              url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              id: 1_990_323_155,
+              node_id: 'PR_kwDOL6GCO852oevG',
+              number: 93,
+              state: 'open',
+              locked: false,
+              title: 'allows to push gizpped factbase',
+              user: {
+                login: 'test',
+                id: 526_200,
+                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+                type: 'User',
+                site_admin: false
+              }
+            }
+          }
         }
       ].to_json,
       headers: {
@@ -373,6 +430,11 @@ class TestGithubEvents < Minitest::Test
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
+        'content-type': 'application/json'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/55').to_return(
+      body: { id: 55, login: 'torvalds' }.to_json, headers: {
         'content-type': 'application/json'
       }
     )
@@ -395,7 +457,7 @@ class TestGithubEvents < Minitest::Test
     f = fb.query('(eq what "pull-was-reviewed")').each.to_a
     assert_equal(2, f.count)
     assert_equal(42, f.first.who)
-    assert_equal(42, f[1].who)
+    assert_equal(55, f.last.who)
   end
 
   def test_release_event_contributors
@@ -494,49 +556,70 @@ class TestGithubEvents < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/compare/0.0.1...0.0.5?per_page=100').to_return(
-      body: {
-        commits: [
-          {
-            sha: 'a50...',
-            author: {
-              login: 'Yegorov',
-              id: 2_566_462
-            }
-          },
-          {
-            sha: 'b50...',
-            author: {
-              login: 'Yegorov64',
-              id: 2_566_463
-            }
-          },
-          {
-            sha: 'c50...',
-            author: {
-              login: 'Yegorov128',
-              id: 2_566_464
-            }
-          },
-          {
-            sha: 'd50...',
-            author: {
-              login: 'Yegorov',
-              id: 2_566_462
-            }
-          }
-        ]
-      }.to_json, headers: {
-        'content-type': 'application/json'
-      }
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?per_page=100').to_return(
+      body: [
+        { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
+        { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
+      ].to_json,
+      headers: { 'content-type': 'application/json' }
+    )
+    stub_request(
+      :get,
+      'https://api.github.com/repos/zerocracy/fbe/commits?' \
+      'per_page=100&sha=69a28ba1122af281936371bbb36f67e5b97246b1'
+    ).to_return(
+      body: [{ sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }].to_json,
+      headers: { 'content-type': 'application/json' }
     )
 
+    stub_request(
+      :get,
+      'https://api.github.com/repos/zerocracy/fbe/compare/' \
+      '69a28ba1122af281936371bbb36f67e5b97246b1...0.0.1?per_page=100'
+    ).to_return(
+      body: {
+        total_commits: 2,
+        commits: [
+          { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
+          { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
+        ],
+        files: [
+          { additions: 5, deletions: 0, changes: 5 },
+          { additions: 5, deletions: 5, changes: 10 },
+          { additions: 0, deletions: 7, changes: 7 }
+        ]
+      }.to_json,
+      headers: { 'content-type': 'application/json' }
+    )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/compare/0.0.1...0.0.5?per_page=100').to_return(
+      body: {
+        total_commits: 4,
+        commits: [
+          { sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } },
+          { sha: 'b50489ead5e8aa7', author: { login: 'Yegorov64', id: 2_566_463 } },
+          { sha: 'c50489ead5e8aa8', author: { login: 'Yegorov128', id: 2_566_464 } },
+          { sha: 'd50489ead5e8aa9', author: { login: 'Yegorov', id: 2_566_462 } }
+        ],
+        files: [
+          { additions: 15, deletions: 40, changes: 55 },
+          { additions: 20, deletions: 5, changes: 25 },
+          { additions: 0, deletions: 10, changes: 10 }
+        ]
+      }.to_json,
+      headers: { 'content-type': 'application/json' }
+    )
     fb = Factbase.new
     load_it('github-events', fb)
     f = fb.query('(and (eq repository 820463873) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_equal([526_301, 526_302], f.first[:contributors])
     assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
+    assert_equal(2, f.first.commits)
+    assert_equal(22, f.first.hoc)
+    assert_equal('4683257342e98cd94becc2aa49900e720bd792e9', f.first.last_commit)
+    assert_equal(4, f.last.commits)
+    assert_equal(90, f.last.hoc)
+    assert_equal('a50489ead5e8aa6', f.last.last_commit)
   end
 
   def test_pull_request_event_with_comments
