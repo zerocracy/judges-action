@@ -133,6 +133,14 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'created'
         skip_event(json) if json[:payload][:pull_request][:user][:id].to_i == fact.who
+        if Fbe.fb.query(
+          "(and (eq repository #{fact.repository}) " \
+          '(eq what "pull-was-reviewed") ' \
+          "(eq who #{fact.who}) " \
+          "(eq issue #{json[:payload][:pull_request][:number]}))"
+        ).each.last
+          skip_event(json)
+        end
 
         fact.issue = json[:payload][:pull_request][:number]
         fact.what = 'pull-was-reviewed'
