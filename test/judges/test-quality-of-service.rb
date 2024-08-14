@@ -281,13 +281,9 @@ class TestQualityOfService < Minitest::Test
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.to_a.first
-      assert(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
-      assert(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(2.125, f.average_backlog_size)
     end
-  end
-
-  def stub_github(url, method = :get, body:, headers: { 'content-type': 'application/json' })
-    stub_request(method, url).to_return(body: body.to_json, headers:)
   end
 end
