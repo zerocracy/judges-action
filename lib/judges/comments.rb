@@ -58,6 +58,6 @@ class Judges::Comments
   end
 
   def resolved
-    @github_graph.resolved_conversations(@pr[:owner][:login], @pr[:base][:repo][:name], @pr[:number])
+    @github_graph.resolved_conversations(@pr[:base][:login], @pr[:base][:repo][:name], @pr[:number]).count
   end
 end
