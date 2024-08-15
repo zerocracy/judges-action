@@ -1079,10 +1079,8 @@ class Fbe::Graph::Fake
       {
         'id' => 'PRRT_kwDOK2_4A85BHZAR',
         'isResolved' => true,
-        'comments' =>
-        {
-          'nodes' =>
-          [
+        'comments' => {
+          'nodes' => [
             {
               'id' => 'PRRC_kwDOK2_4A85l3obO',
               'body' => 'first message',
