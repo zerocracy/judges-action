@@ -37,17 +37,13 @@ require 'minitest/autorun'
 
 class Minitest::Test
   def load_it(judge, fb)
-    init_fb(fb)
-    $judge = judge
-    load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
-  end
-
-  def init_fb(fb)
     $fb = fb
     $global = {}
     $local = {}
+    $judge = judge
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     $loog = Loog::NULL
     Fbe.github_graph(options: Judges::Options.new('testing' => true))
+    load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
 end

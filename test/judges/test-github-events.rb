@@ -626,7 +626,6 @@ class TestGithubEvents < Minitest::Test
 
   def test_pull_request_event_with_comments
     WebMock.disable_net_connect!
-    init_fb(Factbase.new)
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
         'content-type': 'application/json'
@@ -878,7 +877,6 @@ class TestGithubEvents < Minitest::Test
 
   def test_pull_request_event_without_code_comments
     WebMock.disable_net_connect!
-    init_fb(Factbase.new)
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
         'content-type': 'application/json'
