@@ -81,18 +81,18 @@ Fbe.iterate do
     last
   end
 
-  def self.count_comments(pr)
+  def self.comments_info(pr)
     code_comments = Fbe.octo.pull_request_comments(pr[:base][:repo][:full_name], pr[:number])
     issue_comments = Fbe.octo.issue_comments(pr[:base][:repo][:full_name], pr[:number])
     {
-      total: pr[:comments] + pr[:review_comments],
-      to_code: code_comments.count,
-      by_author: code_comments.count { |comment| comment[:user][:id] == pr[:user][:id] } +
+      comments: pr[:comments] + pr[:review_comments],
+      comments_to_code: code_comments.count,
+      comments_by_author: code_comments.count { |comment| comment[:user][:id] == pr[:user][:id] } +
         issue_comments.count { |comment| comment[:user][:id] == pr[:user][:id] },
-      by_reviewers: code_comments.count { |comment| comment[:user][:id] != pr[:user][:id] } +
+      comments_by_reviewers: code_comments.count { |comment| comment[:user][:id] != pr[:user][:id] } +
         issue_comments.count { |comment| comment[:user][:id] != pr[:user][:id] },
-      appreciated: count_appreciated_comments(pr, issue_comments, code_comments),
-      resolved: Fbe.github_graph.resolved_conversations(
+      comments_appreciated: count_appreciated_comments(pr, issue_comments, code_comments),
+      comments_resolved: Fbe.github_graph.resolved_conversations(
         pr[:base][:login], pr[:base][:repo][:name], pr[:number]
       ).count
     }
@@ -151,13 +151,11 @@ Fbe.iterate do
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
-        comments = count_comments(pl)
-        fact.comments = comments[:total]
-        fact.comments_to_code = comments[:to_code]
-        fact.comments_by_author = comments[:by_author]
-        fact.comments_by_reviewers = comments[:by_reviewers]
-        fact.comments_appreciated = comments[:appreciated]
-        fact.comments_resolved = comments[:resolved]
+        comments_info(pl).then do |info|
+          info.each do |prop, value|
+            fact.send(:"#{prop}=", value)
+          end
+        end
         fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
