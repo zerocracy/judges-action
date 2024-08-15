@@ -29,7 +29,6 @@ require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/who'
 require 'fbe/issue'
-require_relative '../../lib/judges/comments'
 
 Fbe.iterate do
   as 'events-were-scanned'
@@ -82,6 +81,36 @@ Fbe.iterate do
     last
   end
 
+  def self.count_comments(pr)
+    code_comments = Fbe.octo.pull_request_comments(pr[:base][:repo][:full_name], pr[:number])
+    issue_comments = Fbe.octo.issue_comments(pr[:base][:repo][:full_name], pr[:number])
+    {
+      total: pr[:comments] + pr[:review_comments],
+      to_code: code_comments.count,
+      by_author: code_comments.count { |comment| comment[:user][:id] == pr[:user][:id] } +
+        issue_comments.count { |comment| comment[:user][:id] == pr[:user][:id] },
+      by_reviewers: code_comments.count { |comment| comment[:user][:id] != pr[:user][:id] } +
+        issue_comments.count { |comment| comment[:user][:id] != pr[:user][:id] },
+      appreciated: count_appreciated_comments(pr, issue_comments, code_comments),
+      resolved: Fbe.github_graph.resolved_conversations(
+        pr[:base][:login], pr[:base][:repo][:name], pr[:number]
+      ).count
+    }
+  end
+
+  def self.count_appreciated_comments(pr, issue_comments, code_comments)
+    appreciated = 0
+    issue_comments.each do |comment|
+      appreciated += Fbe.octo.issue_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
+        .count { |reaction| comment[:user][:id] != reaction[:user][:id] }
+    end
+    code_comments.each do |comment|
+      appreciated += Fbe.octo.pull_request_review_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
+        .count { |reaction| comment[:user][:id] != reaction[:user][:id] }
+    end
+    appreciated
+  end
+
   def self.fill_up_event(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
@@ -121,13 +150,13 @@ Fbe.iterate do
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
-        comments = Judges::Comments.new(octo: Fbe.octo, github_graph: Fbe.github_graph, pull_request: pl)
-        fact.comments = comments.total
-        fact.comments_to_code = comments.to_code
-        fact.comments_by_author = comments.by_author
-        fact.comments_by_reviewers = comments.by_reviewers
-        fact.comments_appreciated = comments.appreciated
-        fact.comments_resolved = comments.resolved
+        comments = count_comments(pl)
+        fact.comments = comments[:total]
+        fact.comments_to_code = comments[:to_code]
+        fact.comments_by_author = comments[:by_author]
+        fact.comments_by_reviewers = comments[:by_reviewers]
+        fact.comments_appreciated = comments[:appreciated]
+        fact.comments_resolved = comments[:resolved]
         fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \

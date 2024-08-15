@@ -31,7 +31,6 @@ require 'judges/options'
 require 'fbe'
 require 'fbe/github_graph'
 
-
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
@@ -769,6 +768,25 @@ class TestGithubEvents < Minitest::Test
           }
         ]
       )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/pulls/comments/1709082318/reactions')
+      .to_return(
+        status: 200,
+        body: []
+      )
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/pulls/comments/1709082319/reactions')
+      .to_return(
+        status: 200,
+        body: [
+          {
+            id: 248_923_574,
+            user: {
+              login: 'rultor',
+              id: 8_086_956
+            },
+            content: 'heart'
+          }
+        ]
+      )
     stub_request(:get, 'https://api.github.com/repos/zerocracy/baza/issues/comments/1709082321/reactions')
       .to_return(
         status: 200,
@@ -854,7 +872,7 @@ class TestGithubEvents < Minitest::Test
     assert_equal(2, f.comments_to_code)
     assert_equal(2, f.comments_by_author)
     assert_equal(2, f.comments_by_reviewers)
-    assert_equal(2, f.comments_appreciated)
+    assert_equal(3, f.comments_appreciated)
     assert_equal(1, f.comments_resolved)
   end
 
