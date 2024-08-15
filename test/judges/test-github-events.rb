@@ -28,6 +28,9 @@ require 'json'
 require 'minitest/autorun'
 require 'webmock/minitest'
 require 'judges/options'
+require 'fbe'
+require 'fbe/github_graph'
+
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
@@ -1051,5 +1054,34 @@ class TestGithubEvents < Minitest::Test
         'content-type': 'application/json'
       }
     )
+  end
+end
+
+class Fbe::Graph::Fake
+  def resolved_conversations(_owner, _name, _number)
+    [
+      {
+        'id' => 'PRRT_kwDOK2_4A85BHZAR',
+        'isResolved' => true,
+        'comments' =>
+        {
+          'nodes' =>
+          [
+            {
+              'id' => 'PRRC_kwDOK2_4A85l3obO',
+              'body' => 'first message',
+              'author' => { '__typename' => 'User', 'login' => 'reviewer' },
+              'createdAt' => '2024-08-08T09:41:46Z'
+            },
+            {
+              'id' => 'PRRC_kwDOK2_4A85l3yTp',
+              'body' => 'second message',
+              'author' => { '__typename' => 'User', 'login' => 'programmer' },
+              'createdAt' => '2024-08-08T10:01:55Z'
+            }
+          ]
+        }
+      }
+    ]
   end
 end
