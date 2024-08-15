@@ -45,7 +45,8 @@ class Judges::Comments
   end
 
   def by_reviewers
-    @code_comments.count { |comment| comment[:user][:id] != @pr[:user][:id] }
+    @code_comments.count { |comment| comment[:user][:id] != @pr[:user][:id] } +
+      @issue_comments.count { |comment| comment[:user][:id] != @pr[:user][:id] }
   end
 
   def appreciated

@@ -114,8 +114,9 @@ class TestJudgesComments < Minitest::Test
     assert_equal(4, comments.total)
     assert_equal(2, comments.to_code)
     assert_equal(1, comments.by_author)
-    assert_equal(1, comments.by_reviewers)
+    assert_equal(2, comments.by_reviewers)
     assert_equal(2, comments.appreciated)
+    assert_equal(1, comments.resolved)
   end
 
   def test_counts_comments_without_reactions
@@ -173,8 +174,9 @@ class TestJudgesComments < Minitest::Test
     assert_equal(4, comments.total)
     assert_equal(2, comments.to_code)
     assert_equal(1, comments.by_author)
-    assert_equal(1, comments.by_reviewers)
+    assert_equal(2, comments.by_reviewers)
     assert_equal(0, comments.appreciated)
+    assert_equal(1, comments.resolved)
   end
 
   private
