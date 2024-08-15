@@ -95,4 +95,20 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
     )[:total_count]
   end
   f.average_pull_rejection_rate = pulls.zero? ? 0 : rejected.to_f / pulls
+
+  # Average HOC and number of files changed in recent merged PRs
+  hocs = []
+  files = []
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.search_issues(
+      "repo:#{repo} type:pr is:merged closed:>#{f.since.utc.iso8601[0..9]}"
+    )[:items].each do |json|
+      Fbe.octo.pull_request(repo, json[:number]).then do |pull|
+        hocs << (pull[:additions] + pull[:deletions])
+        files << pull[:changed_files]
+      end
+    end
+  end
+  f.average_pull_hoc_size = hocs.empty? ? 0 : hocs.sum.to_f / hocs.size
+  f.average_pull_files_size = files.empty? ? 0 : files.sum.to_f / files.size
 end

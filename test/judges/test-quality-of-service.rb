@@ -113,6 +113,17 @@ class TestQualityOfService < Minitest::Test
         'content-type': 'application/json'
       }
     )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-07-15',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ id: 50, number: 12, title: 'Awesome 12' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12',
+      body: { id: 50, number: 12, additions: 12, deletions: 5, changed_files: 3 }
+    )
     fb = Factbase.new
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
@@ -272,6 +283,18 @@ class TestQualityOfService < Minitest::Test
         total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
       }
     )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ id: 50, number: 12, title: 'Awesome 12' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12',
+      body: { id: 50, number: 12, additions: 12, deletions: 5, changed_files: 3 }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -284,6 +307,124 @@ class TestQualityOfService < Minitest::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(2.125, f.average_backlog_size)
+    end
+  end
+
+  def test_quality_of_service_average_hocs_and_files
+    WebMock.disable_net_connect!
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ number: 42, labels: [{ name: 'bug' }] }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          { id: 50, number: 12, title: 'Awesome 12' },
+          { id: 52, number: 14, title: 'Awesome 14' },
+          { id: 54, number: 16, title: 'Awesome 16' },
+          { id: 56, number: 18, title: 'Awesome 18' },
+          { id: 58, number: 20, title: 'Awesome 20' }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12',
+      body: {
+        id: 50,
+        number: 12,
+        additions: 10,
+        deletions: 5,
+        changed_files: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/14',
+      body: {
+        id: 52,
+        number: 14,
+        additions: 0,
+        deletions: 3,
+        changed_files: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/16',
+      body: {
+        id: 54,
+        number: 16,
+        additions: 8,
+        deletions: 9,
+        changed_files: 3
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/18',
+      body: {
+        id: 56,
+        number: 18,
+        additions: 30,
+        deletions: 7,
+        changed_files: 4
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/20',
+      body: {
+        id: 58,
+        number: 20,
+        additions: 20,
+        deletions: 0,
+        changed_files: 4
+      }
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
+    f.qos_interval = 3
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_in_delta(18.4, f.average_pull_hoc_size)
+      assert_in_delta(2.8, f.average_pull_files_size)
     end
   end
 end
