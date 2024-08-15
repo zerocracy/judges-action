@@ -41,7 +41,8 @@ class Judges::Comments
   end
 
   def by_author
-    @issue_comments.count { |comment| comment[:user][:id] == @pr[:user][:id] }
+    @code_comments.count { |comment| comment[:user][:id] == @pr[:user][:id] } +
+      @issue_comments.count { |comment| comment[:user][:id] == @pr[:user][:id] }
   end
 
   def by_reviewers

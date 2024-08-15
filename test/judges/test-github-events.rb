@@ -849,7 +849,7 @@ class TestGithubEvents < Minitest::Test
     f = fb.query('(eq what "pull-was-merged")').each.to_a.first
     assert_equal(4, f.comments)
     assert_equal(2, f.comments_to_code)
-    assert_equal(1, f.comments_by_author)
+    assert_equal(2, f.comments_by_author)
     assert_equal(2, f.comments_by_reviewers)
     assert_equal(2, f.comments_appreciated)
     assert_equal(1, f.comments_resolved)
