@@ -99,16 +99,17 @@ Fbe.iterate do
   end
 
   def self.count_appreciated_comments(pr, issue_comments, code_comments)
-    appreciated = 0
-    issue_comments.each do |comment|
-      appreciated += Fbe.octo.issue_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
-        .count { |reaction| comment[:user][:id] != reaction[:user][:id] }
-    end
-    code_comments.each do |comment|
-      appreciated += Fbe.octo.pull_request_review_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
-        .count { |reaction| comment[:user][:id] != reaction[:user][:id] }
-    end
-    appreciated
+    issue_appreciations =
+      issue_comments.sum do |comment|
+        Fbe.octo.issue_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
+           .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
+      end
+    code_appreciations =
+      code_comments.sum do |comment|
+        Fbe.octo.pull_request_review_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
+           .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
+      end
+    issue_appreciations + code_appreciations
   end
 
   def self.fill_up_event(fact, json)
