@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 864.63482318
+  seconds: 878.574403523
   version: 0.25.2
   what: judges-summary
-  when: 2024-08-16 13:21:31.298710126 Z
+  when: 2024-08-16 14:19:40.504891252 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -46352,101 +46352,215 @@
   when: 2024-08-16 12:59:30.000000000 Z
   where: github
   who: 526301
-- _id: 156005
-  _time: 2024-08-16 13:14:38.818330858 Z
+- _id: 156135
+  _job: 4582
+  _time: 2024-08-16 13:22:10.628951135 Z
+  _version: 0.4.0/0.25.2/0.0.47
+  cause: 155880
+  comments: 3
+  details: The pull request zerocracy/baza#189 with 7 HoC created by @renovate[bot]
+    was merged by @yegor256 after 1 days of being in review and 3 comments.
+  hoc: 7
+  is_human: 0
+  issue: 189
+  merger: 526301
+  repository: 728758275
+  seconds: 161442
+  what: code-was-contributed
+  when: 2024-08-16 12:00:43.000000000 Z
+  where: github
+  who: 29139614
+- _id: 156140
+  _time: 2024-08-16 14:05:25.149082103 Z
+  _version: 0.4.0/0.25.2/
+  details: The issue zerocracy/fbe#46 has been closed by @yegor256.
+  event_id: 41084770587
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 46
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-16 13:41:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 156141
+  _time: 2024-08-16 14:05:28.507584260 Z
+  _version: 0.4.0/0.25.2/
+  commit: fe6ab5c898e4d632f71e31016f267d7bcdcc14a5
+  default_branch: master
+  details: 'A new Git push #19800174993 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41084761833
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19800174993
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-16 13:41:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 156143
+  _time: 2024-08-16 14:05:42.608435318 Z
+  _version: 0.4.0/0.25.2/
+  details: The issue zerocracy/judges-action#167 has been closed by @yegor256.
+  event_id: 41084794843
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 167
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 156144
+  _time: 2024-08-16 14:05:45.665987322 Z
+  _version: 0.4.0/0.25.2/
+  details: The issue zerocracy/judges-action#224 has been closed by @yegor256.
+  event_id: 41084791922
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 224
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 156145
+  _time: 2024-08-16 14:05:48.700113006 Z
+  _version: 0.4.0/0.25.2/
+  details: The issue zerocracy/judges-action#240 has been closed by @yegor256.
+  event_id: 41084785547
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 240
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 156146
+  _time: 2024-08-16 14:05:51.738094074 Z
+  _version: 0.4.0/0.25.2/
+  details: The issue zerocracy/judges-action#276 has been closed by @yegor256.
+  event_id: 41084779709
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 276
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 156147
+  _time: 2024-08-16 14:05:54.709932021 Z
+  _version: 0.4.0/0.25.2/
+  details: The issue zerocracy/judges-action#209 has been closed by @yegor256.
+  event_id: 41084776759
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 209
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 156250
+  _time: 2024-08-16 14:12:08.841745863 Z
   _version: 0.4.0/0.25.2/
   latest: 41073395221
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 156006
-  _time: 2024-08-16 13:14:42.934380820 Z
+- _id: 156251
+  _time: 2024-08-16 14:12:13.031291572 Z
   _version: 0.4.0/0.25.2/
   latest: 41056852342
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 156007
-  _time: 2024-08-16 13:14:47.274031566 Z
+- _id: 156252
+  _time: 2024-08-16 14:12:17.462592959 Z
   _version: 0.4.0/0.25.2/
   latest: 41082696460
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 156008
-  _time: 2024-08-16 13:14:50.546719822 Z
+- _id: 156253
+  _time: 2024-08-16 14:12:21.227097361 Z
   _version: 0.4.0/0.25.2/
   latest: 41061934834
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 156009
-  _time: 2024-08-16 13:14:54.990322733 Z
+- _id: 156254
+  _time: 2024-08-16 14:12:25.882540298 Z
   _version: 0.4.0/0.25.2/
-  latest: 41072573319
+  latest: 41084770587
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 156010
-  _time: 2024-08-16 13:14:59.597318140 Z
+- _id: 156255
+  _time: 2024-08-16 14:12:30.637069460 Z
   _version: 0.4.0/0.25.2/
-  latest: 41083571281
+  latest: 41084807744
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 156011
-  _time: 2024-08-16 13:15:03.826719153 Z
+- _id: 156256
+  _time: 2024-08-16 14:12:35.260250482 Z
   _version: 0.4.0/0.25.2/
   latest: 41074940560
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 156064
-  _time: 2024-08-16 13:17:50.847974483 Z
+- _id: 156309
+  _time: 2024-08-16 14:15:37.135373726 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 156104
-  _time: 2024-08-16 13:19:56.285768009 Z
+- _id: 156360
+  _time: 2024-08-16 14:18:31.482725159 Z
   _version: 0.4.0/0.25.2/
   latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 156376
+  _time: 2024-08-16 14:19:26.444948282 Z
+  _version: 0.4.0/0.25.2/
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 156130
-  _time: 2024-08-16 13:21:18.267909801 Z
+- _id: 156377
+  _time: 2024-08-16 14:19:29.932087735 Z
   _version: 0.4.0/0.25.2/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 156131
-  _time: 2024-08-16 13:21:21.311682422 Z
+- _id: 156378
+  _time: 2024-08-16 14:19:33.541478265 Z
   _version: 0.4.0/0.25.2/
-  latest: 177
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 156132
-  _time: 2024-08-16 13:21:24.631873547 Z
+- _id: 156379
+  _time: 2024-08-16 14:19:37.081911012 Z
   _version: 0.4.0/0.25.2/
   latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 156133
-  _time: 2024-08-16 13:21:27.930726436 Z
+- _id: 156380
+  _time: 2024-08-16 14:19:40.390446815 Z
   _version: 0.4.0/0.25.2/
-  latest: 167
+  latest: 267
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 156134
-  _time: 2024-08-16 13:21:31.182292267 Z
-  _version: 0.4.0/0.25.2/
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
