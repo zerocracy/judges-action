@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   removed: 8
-  seconds: 392.896743677
+  seconds: 844.02467396
   version: 0.25.2
   what: judges-summary
-  when: 2024-08-16 03:12:55.266814558 Z
+  when: 2024-08-16 04:19:42.844655335 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -45725,101 +45725,206 @@
   - 3.037571429051574
   what: learn-eva
   when: 2024-08-16 01:37:29.444209389 Z
-- _id: 154208
-  _time: 2024-08-16 03:06:29.295453209 Z
+- _id: 154331
+  _time: 2024-08-16 04:06:05.563285738 Z
+  _version: 0.4.0/0.25.2/
+  details: A new tag '0.0.52' has been created in zerocracy/fbe by @rultor.
+  event_id: 41071489690
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.0.52
+  what: tag-was-created
+  when: 2024-08-16 04:04:50.000000000 Z
+  where: github
+  who: 8086956
+- _id: 154332
+  _time: 2024-08-16 04:06:17.929601795 Z
+  _version: 0.4.0/0.25.2/
+  branch: '188'
+  comments: 0
+  details: The pull request zerocracy/fbe#70 has been closed by @yegor256, with 5
+    HoC and 0 comments.
+  event_id: 41071330971
+  event_type: PullRequestEvent
+  hoc: 5
+  is_human: 1
+  issue: 70
+  repository: 820463873
+  what: pull-was-merged
+  when: 2024-08-16 03:53:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 154333
+  _time: 2024-08-16 04:06:23.718104156 Z
+  _version: 0.4.0/0.25.2/
+  commits: 4
+  contributors:
+  - 29139614
+  - 88084038
+  - 526301
+  - 8086956
+  details: A new release 'define the fake method `resolved_conversations` in `Fbe::Graph::Fake`'
+    has been published in zerocracy/fbe by @rultor.
+  event_id: 41071239124
+  event_type: ReleaseEvent
+  hoc: 33
+  is_human: 0
+  last_commit: da9df29e75a3d8de21083b793956d5ea07b7c858
+  release: 170469942
+  repository: 820463873
+  tag: 0.0.51
+  what: release-published
+  when: 2024-08-16 03:47:13.000000000 Z
+  where: github
+  who: 8086956
+- _id: 154334
+  _time: 2024-08-16 04:06:27.226804530 Z
+  _version: 0.4.0/0.25.2/
+  details: A new tag '0.0.51' has been created in zerocracy/fbe by @rultor.
+  event_id: 41071233655
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.0.51
+  what: tag-was-created
+  when: 2024-08-16 03:46:51.000000000 Z
+  where: github
+  who: 8086956
+- _id: 154335
+  _time: 2024-08-16 04:06:39.173109207 Z
+  _version: 0.4.0/0.25.2/
+  branch: 211_judges_action
+  comments: 0
+  details: The pull request zerocracy/fbe#71 has been closed by @yegor256, with 25
+    HoC and 0 comments.
+  event_id: 41071058258
+  event_type: PullRequestEvent
+  hoc: 25
+  is_human: 1
+  issue: 71
+  repository: 820463873
+  what: pull-was-merged
+  when: 2024-08-16 03:35:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 154449
+  _time: 2024-08-16 04:13:05.007510630 Z
   _version: 0.4.0/0.25.2/
   latest: 41061669288
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 154209
-  _time: 2024-08-16 03:06:33.648815271 Z
+- _id: 154450
+  _time: 2024-08-16 04:13:09.741116146 Z
   _version: 0.4.0/0.25.2/
   latest: 41056852342
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 154210
-  _time: 2024-08-16 03:06:38.219576623 Z
+- _id: 154451
+  _time: 2024-08-16 04:13:14.803008607 Z
   _version: 0.4.0/0.25.2/
   latest: 41068131210
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 154211
-  _time: 2024-08-16 03:06:41.676969650 Z
+- _id: 154452
+  _time: 2024-08-16 04:13:18.328848723 Z
   _version: 0.4.0/0.25.2/
   latest: 41061934834
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 154212
-  _time: 2024-08-16 03:06:46.247067702 Z
+- _id: 154453
+  _time: 2024-08-16 04:13:26.554390879 Z
   _version: 0.4.0/0.25.2/
-  latest: 41064524222
+  commits: 3
+  contributors:
+  - 2566462
+  - 526301
+  - 8086956
+  details: 'A new release ''judges-action#188: fix search_issues in Fbe::FakeOctokit''
+    has been published in zerocracy/fbe by @rultor.'
+  event_id: 41071508733
+  event_type: ReleaseEvent
+  hoc: 7
+  is_human: 0
+  last_commit: 6e0e4f8187d8d022113c64e9100920091116a9aa
+  release: 170471632
+  repository: 820463873
+  tag: 0.0.52
+  what: release-published
+  when: 2024-08-16 04:06:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 154454
+  _time: 2024-08-16 04:13:29.908935080 Z
+  _version: 0.4.0/0.25.2/
+  latest: 41071509796
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 154213
-  _time: 2024-08-16 03:06:54.111915944 Z
+- _id: 154455
+  _time: 2024-08-16 04:13:35.127385069 Z
   _version: 0.4.0/0.25.2/
-  latest: 41070083946
+  latest: 41071256240
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 154214
-  _time: 2024-08-16 03:06:58.616846815 Z
+- _id: 154456
+  _time: 2024-08-16 04:13:40.160965720 Z
   _version: 0.4.0/0.25.2/
   latest: 41033536128
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 154267
-  _time: 2024-08-16 03:09:48.456581448 Z
+- _id: 154509
+  _time: 2024-08-16 04:16:33.062997883 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 154304
-  _time: 2024-08-16 03:11:45.560999220 Z
+- _id: 154546
+  _time: 2024-08-16 04:18:32.475307474 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 154307
-  _time: 2024-08-16 03:11:54.675268333 Z
-  _version: 0.4.0/0.25.2/
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 154308
-  _time: 2024-08-16 03:11:57.696391526 Z
+- _id: 154550
+  _time: 2024-08-16 04:18:45.085023303 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 154324
-  _time: 2024-08-16 03:12:48.888536028 Z
+- _id: 154553
+  _time: 2024-08-16 04:18:54.397246119 Z
   _version: 0.4.0/0.25.2/
-  latest: 177
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 154566
+  _time: 2024-08-16 04:19:36.302414215 Z
+  _version: 0.4.0/0.25.2/
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 154567
+  _time: 2024-08-16 04:19:39.572488238 Z
+  _version: 0.4.0/0.25.2/
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 154325
-  _time: 2024-08-16 03:12:52.041369287 Z
+- _id: 154568
+  _time: 2024-08-16 04:19:42.732085202 Z
   _version: 0.4.0/0.25.2/
-  latest: 167
+  latest: 267
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 154326
-  _time: 2024-08-16 03:12:55.147386480 Z
-  _version: 0.4.0/0.25.2/
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
