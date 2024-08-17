@@ -43,7 +43,6 @@ class Minitest::Test
     $judge = judge
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     $loog = Loog::NULL
-    Fbe.github_graph(options: Judges::Options.new('testing' => true))
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
 end
