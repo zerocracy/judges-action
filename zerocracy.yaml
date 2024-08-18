@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   removed: 8
-  seconds: 879.856588248
+  seconds: 468.678252641
   version: 0.25.2
   what: judges-summary
-  when: 2024-08-18 06:19:57.968018608 Z
+  when: 2024-08-18 07:12:42.130642797 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -39827,15 +39827,6 @@
   when: 2024-08-12 04:37:29.000000000 Z
   where: github
   who: 88084038
-- _id: 139126
-  _time: 2024-08-12 05:16:04.521248255 Z
-  _version: 0.3.0/0.24.0/
-  area: scope
-  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
-    0.1 total_hoc_written)"
-  qod_days: 7
-  qod_interval: 2
-  what: pmp
 - _id: 139127
   _time: 2024-08-12 06:06:20.959627680 Z
   _version: 0.3.0/0.24.0/0.0.43
@@ -47425,6 +47416,7 @@
 - _id: 160923
   _time: 2024-08-17 17:10:59.772846466 Z
   _version: 0.4.0/0.25.2/
+  composite: 55.921
   since: 2024-08-10 17:10:59.773082628 Z
   total_commits_pushed: 236
   total_hoc_committed: 6601
@@ -47808,6 +47800,7 @@
     by reviewers; -10 for too few (3) hits-of-code; +25 to give you at least something.
     Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them
     coming. Your running balance is [+96](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/zerocracy/baza.rb/pull/13#issuecomment-2295106363
   is_human: 1
   issue: 13
   repository: 840215648
@@ -47834,6 +47827,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:06.852363760 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 207.623
   total_commits_pushed: 984
   total_hoc_committed: 24216
   total_issues_created: 65
@@ -47844,6 +47838,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:10.150115869 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 211.005
   total_commits_pushed: 985
   total_hoc_committed: 24212
   total_issues_created: 73
@@ -47854,6 +47849,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:13.668426976 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 219.832
   since: 2024-07-08 07:10:15.961266154 Z
   total_commits_pushed: 986
   total_hoc_committed: 26088
@@ -47865,6 +47861,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:17.738021967 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 222.775
   since: 2024-07-10 07:12:50.393446380 Z
   total_commits_pushed: 982
   total_hoc_committed: 26530
@@ -47876,6 +47873,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:21.577962082 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 214.948
   since: 2024-07-12 07:13:51.155802114 Z
   total_commits_pushed: 929
   total_hoc_committed: 25165
@@ -47887,6 +47885,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:25.326312420 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 58.864
   since: 2024-08-04 08:10:47.013331249 Z
   total_commits_pushed: 147
   total_hoc_committed: 7853
@@ -47898,6 +47897,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:29.079817029 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 67.136
   since: 2024-08-06 16:13:37.039001762 Z
   total_commits_pushed: 187
   total_hoc_committed: 8933
@@ -47909,6 +47909,7 @@
   _job: 4753
   _time: 2024-08-18 04:37:32.432153519 Z
   _version: 0.4.0/0.25.2/0.0.47
+  composite: 72.89
   since: 2024-08-08 16:19:21.733152047 Z
   total_commits_pushed: 224
   total_hoc_committed: 9882
@@ -48145,101 +48146,160 @@
   when: 2024-08-18 06:01:22.000000000 Z
   where: github
   who: 526301
-- _id: 163380
-  _time: 2024-08-18 06:13:51.349944384 Z
+- _id: 163490
+  _job: 4759
+  _time: 2024-08-18 06:21:21.218738268 Z
+  _version: 0.4.0/0.25.2/0.0.47
+  area: scope
+  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
+    0.1 total_hoc_committed)"
+  qod_days: 7
+  qod_interval: 2
+  what: pmp
+- _id: 163491
+  _job: 4759
+  _time: 2024-08-18 06:21:28.421897153 Z
+  _version: 0.4.0/0.25.2/0.0.47
+  details: 'In the repository #840215648, the user #526301 attached the ''#bug'' label
+    to the issue #12 reported by the user #1646020; this means that a bug was-accepted
+    as valid, by the project team.'
+  is_human: 1
+  issue: 12
+  reporter: 1646020
+  repository: 840215648
+  what: bug-was-accepted
+  when: 2024-08-18 06:01:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 163492
+  _job: 4759
+  _time: 2024-08-18 06:22:00.523346229 Z
+  _version: 0.4.0/0.25.2/0.0.47
+  comments: 3
+  details: The pull request zerocracy/baza#195 with 29 HoC created by @tank-bohr was
+    merged by @yegor256 after 9 hours of being in review and 3 comments.
+  hoc: 29
+  is_human: 1
+  issue: 195
+  merger: 526301
+  repository: 728758275
+  seconds: 35923
+  what: code-was-contributed
+  when: 2024-08-18 05:52:55.000000000 Z
+  where: github
+  who: 1646020
+- _id: 163493
+  _job: 4759
+  _time: 2024-08-18 06:22:04.494250175 Z
+  _version: 0.4.0/0.25.2/0.0.47
+  comments: 2
+  details: The pull request zerocracy/pages-action#112 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 40 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 112
+  merger: 8086956
+  repository: 802720676
+  seconds: 2411
+  what: code-was-contributed
+  when: 2024-08-18 05:48:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 163494
+  _time: 2024-08-18 07:04:59.154980476 Z
   _version: 0.4.0/0.25.2/
   latest: 41111052733
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 163381
-  _time: 2024-08-18 06:13:55.427025954 Z
+- _id: 163495
+  _time: 2024-08-18 07:05:03.228016536 Z
   _version: 0.4.0/0.25.2/
   latest: 41056852342
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 163382
-  _time: 2024-08-18 06:13:59.628363707 Z
+- _id: 163496
+  _time: 2024-08-18 07:05:07.507937834 Z
   _version: 0.4.0/0.25.2/
   latest: 41111457963
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 163383
-  _time: 2024-08-18 06:14:03.242838650 Z
+- _id: 163497
+  _time: 2024-08-18 07:05:11.183345611 Z
   _version: 0.4.0/0.25.2/
   latest: 41111492431
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 163384
-  _time: 2024-08-18 06:14:07.588752914 Z
+- _id: 163498
+  _time: 2024-08-18 07:05:15.345889999 Z
   _version: 0.4.0/0.25.2/
   latest: 41110537984
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 163385
-  _time: 2024-08-18 06:14:12.020473063 Z
+- _id: 163499
+  _time: 2024-08-18 07:05:39.607430783 Z
   _version: 0.4.0/0.25.2/
-  latest: 41111199450
+  latest: 41111960212
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 163386
-  _time: 2024-08-18 06:14:16.263599267 Z
+- _id: 163500
+  _time: 2024-08-18 07:05:43.980278710 Z
   _version: 0.4.0/0.25.2/
   latest: 41111414154
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 163403
-  _time: 2024-08-18 06:15:12.843867611 Z
-  _version: 0.4.0/0.25.2/
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 163440
-  _time: 2024-08-18 06:17:15.519581790 Z
+- _id: 163560
+  _time: 2024-08-18 07:09:02.843968963 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 163470
-  _time: 2024-08-18 06:18:54.689770656 Z
+- _id: 163611
+  _time: 2024-08-18 07:11:52.256450261 Z
   _version: 0.4.0/0.25.2/
   latest: 0
-  repository: 798641472
+  repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 163475
-  _time: 2024-08-18 06:19:11.111972448 Z
+- _id: 163622
+  _time: 2024-08-18 07:12:28.651594122 Z
   _version: 0.4.0/0.25.2/
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 163487
-  _time: 2024-08-18 06:19:51.310659302 Z
-  _version: 0.4.0/0.25.2/
-  latest: 67
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 163488
-  _time: 2024-08-18 06:19:54.598230928 Z
+- _id: 163623
+  _time: 2024-08-18 07:12:31.881770969 Z
   _version: 0.4.0/0.25.2/
-  latest: 217
-  repository: 799177290
+  latest: 87
+  repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 163489
-  _time: 2024-08-18 06:19:57.853957715 Z
+- _id: 163624
+  _time: 2024-08-18 07:12:35.306418098 Z
   _version: 0.4.0/0.25.2/
-  latest: 73
-  repository: 802720676
+  latest: 135
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 163625
+  _time: 2024-08-18 07:12:38.748700780 Z
+  _version: 0.4.0/0.25.2/
+  latest: 46
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 163626
+  _time: 2024-08-18 07:12:42.012728344 Z
+  _version: 0.4.0/0.25.2/
+  latest: 267
+  repository: 799177290
   what: labels-were-scanned
   where: github
