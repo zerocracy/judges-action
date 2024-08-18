@@ -98,6 +98,14 @@ Fbe.iterate do
     }
   end
 
+  def self.issue_event_exists?(fact, what)
+    Fbe.fb.query(
+      "(and (eq repository #{fact.repository}) " \
+      "(eq what \"#{what}\") " \
+      "(eq issue #{fact.issue}))"
+    ).each.any?
+  end
+
   def self.count_appreciated_comments(pr, issue_comments, code_comments)
     issue_appreciations =
       issue_comments.sum do |comment|
@@ -197,9 +205,11 @@ Fbe.iterate do
       fact.issue = json[:payload][:issue][:number]
       case json[:payload][:action]
       when 'closed'
+        skip_event(json) if issue_event_exists?(fact, 'issue-was-closed')
         fact.what = 'issue-was-closed'
         fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
       when 'opened'
+        skip_event(json) if issue_event_exists?(fact, 'issue-was-opened')
         fact.what = 'issue-was-opened'
         fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
       else
