@@ -53,4 +53,12 @@ Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
   end
   f.total_issues_created = issues
   f.total_pulls_submitted = pulls
+
+  # Total number of releases published in all repositories from since
+  f.total_releases_published =
+    Fbe.unmask_repos.sum do |repo|
+      Fbe.octo.releases(repo).count do |json|
+        !json[:draft] && json[:published_at] && json[:published_at] > f.since
+      end
+    end
 end
