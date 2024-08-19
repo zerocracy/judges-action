@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 903.031901652
+  seconds: 898.022512433
   version: 0.25.2
   what: judges-summary
-  when: 2024-08-19 16:20:19.880305707 Z
+  when: 2024-08-19 17:19:29.275776784 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -49618,101 +49618,162 @@
   when: 2024-08-19 14:27:08.000000000 Z
   where: github
   who: 29793349
-- _id: 168311
-  _time: 2024-08-19 16:12:47.547956232 Z
+- _id: 168437
+  _job: 4869
+  _time: 2024-08-19 16:21:47.362262850 Z
+  _version: 0.4.0/0.26.0/0.0.47
+  award: -12
+  branch: add-current-time
+  details: It's time to punish @uchitsa for the branch named as 'add-current-time',
+    which is wrong in yegor256/judges#122, the penalty amount is -12.
+  greeting: "It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html)
+    to name Git branches like \\\"`add-current-time`\\\". As per our policy, this
+    violation incurs a **-12 point** penalty. Please name your branches after the
+    ticket number you're working on, e.g., \\\"`121`\\\". This helps maintain consistency
+    and clarity in our workflow. Your current balance is now [-7](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Let's adhere to our conventions for smoother collaboration. \U0001F680"
+  href: https://github.com/yegor256/judges/issues/122/#issuecomment-2296961785
+  is_human: 1
+  issue: 122
+  repository: 799113787
+  what: bad-branch-name-was-punished
+  when: 2024-08-19 16:21:47.382111546 Z
+  where: github
+  who: 29793349
+  why: Wrongly named a branch in yegor256/judges#122
+- _id: 168442
+  _time: 2024-08-19 17:04:55.137949243 Z
+  _version: 0.4.0/0.25.2/
+  branch: 214_update_fake_octokit
+  details: The pull request zerocracy/fbe#77 has been opened by @Suban05.
+  event_id: 41143252781
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 77
+  repository: 820463873
+  what: pull-was-opened
+  when: 2024-08-19 15:17:24.000000000 Z
+  where: github
+  who: 88084038
+- _id: 168444
+  _time: 2024-08-19 17:05:03.481213375 Z
+  _version: 0.4.0/0.25.2/
+  branch: '214'
+  details: The pull request zerocracy/judges-action#296 has been opened by @Suban05.
+  event_id: 41143350692
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 296
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-19 15:20:17.000000000 Z
+  where: github
+  who: 88084038
+- _id: 168572
+  _time: 2024-08-19 17:12:44.201307727 Z
+  _version: 0.4.0/0.25.2/
+  since: 2024-08-12 17:12:44.201506146 Z
+  total_commits_pushed: 223
+  total_hoc_committed: 8331
+  total_issues_created: 22
+  total_pulls_submitted: 5
+  what: quantity-of-deliverables
+  when: 2024-08-19 17:12:44.201452877 Z
+- _id: 168573
+  _time: 2024-08-19 17:13:43.091545120 Z
   _version: 0.4.0/0.25.2/
   latest: 41141825985
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 168312
-  _time: 2024-08-19 16:12:51.899023535 Z
+- _id: 168574
+  _time: 2024-08-19 17:13:47.597499169 Z
   _version: 0.4.0/0.25.2/
   latest: 41118283793
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 168313
-  _time: 2024-08-19 16:12:56.567609473 Z
+- _id: 168575
+  _time: 2024-08-19 17:13:52.305265337 Z
   _version: 0.4.0/0.25.2/
   latest: 41116309761
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 168314
-  _time: 2024-08-19 16:13:00.526509516 Z
+- _id: 168576
+  _time: 2024-08-19 17:13:56.229869111 Z
   _version: 0.4.0/0.25.2/
   latest: 41113362700
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 168315
-  _time: 2024-08-19 16:13:05.173539189 Z
+- _id: 168577
+  _time: 2024-08-19 17:14:00.946200563 Z
   _version: 0.4.0/0.25.2/
-  latest: 41126489814
+  latest: 41143252781
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 168316
-  _time: 2024-08-19 16:13:10.148862169 Z
+- _id: 168578
+  _time: 2024-08-19 17:14:05.913522324 Z
   _version: 0.4.0/0.25.2/
-  latest: 41140916239
+  latest: 41143350692
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 168317
-  _time: 2024-08-19 16:13:14.812623252 Z
+- _id: 168579
+  _time: 2024-08-19 17:14:10.508966148 Z
   _version: 0.4.0/0.25.2/
   latest: 41133456911
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 168377
-  _time: 2024-08-19 16:16:48.444947497 Z
+- _id: 168596
+  _time: 2024-08-19 17:15:11.302204301 Z
+  _version: 0.4.0/0.25.2/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 168611
+  _time: 2024-08-19 17:16:04.596012971 Z
+  _version: 0.4.0/0.25.2/
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 168630
+  _time: 2024-08-19 17:17:11.781235730 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 168412
-  _time: 2024-08-19 16:18:53.694551151 Z
+- _id: 168654
+  _time: 2024-08-19 17:18:36.773130222 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 168426
-  _time: 2024-08-19 16:19:44.032160959 Z
-  _version: 0.4.0/0.25.2/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 168429
-  _time: 2024-08-19 16:19:54.618309839 Z
+- _id: 168664
+  _time: 2024-08-19 17:19:11.695834304 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 168434
-  _time: 2024-08-19 16:20:12.564585399 Z
+- _id: 168668
+  _time: 2024-08-19 17:19:25.694552719 Z
   _version: 0.4.0/0.25.2/
-  latest: 98
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 168435
-  _time: 2024-08-19 16:20:16.214255862 Z
+- _id: 168669
+  _time: 2024-08-19 17:19:29.152339275 Z
   _version: 0.4.0/0.25.2/
-  latest: 135
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 168436
-  _time: 2024-08-19 16:20:19.760314641 Z
-  _version: 0.4.0/0.25.2/
-  latest: 217
-  repository: 799177290
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
