@@ -1,15 +1,11 @@
 ---
 - added: 8
   cycles: 2
-  error: 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Azerocracy%2Fjudges-action+type%3Aissue+created%3A2024-08-12..2024-08-18:
-    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
-    you try again. If you reach out to GitHub Support for help, please include the
-    request ID 3008:327B1B:EE9D34:1C5324A:66C2F25C. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
   removed: 8
-  seconds: 1380.813112728
+  seconds: 946.432910052
   version: 0.25.2
   what: judges-summary
-  when: 2024-08-19 07:28:29.504544533 Z
+  when: 2024-08-19 08:22:21.592761905 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -49542,101 +49538,136 @@
   since: 2024-08-12 07:12:34.183204627 Z
   what: quality-of-service
   when: 2024-08-19 07:12:34.183123837 Z
-- _id: 166841
-  _time: 2024-08-19 07:21:06.929320779 Z
+- _id: 166967
+  _job: 4837
+  _time: 2024-08-19 07:29:13.510700527 Z
+  _version: 0.4.0/0.26.0/0.0.47
+  comments: 2
+  details: The pull request zerocracy/judges-action#295 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 23 minutes of being in review and 2 comments.
+  hoc: 4
+  is_human: 0
+  issue: 295
+  merger: 8086956
+  repository: 799177290
+  seconds: 1429
+  what: code-was-contributed
+  when: 2024-08-19 06:48:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 166973
+  _time: 2024-08-19 08:07:10.987289174 Z
+  _version: 0.4.0/0.25.2/
+  comments: 8
+  commits: 1
+  details: The pull request zerocracy/judges-action#294 has been reviewed by @yegor256
+    with 142 HoC and 8 comments.
+  event_id: 41128553467
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 142
+  is_human: 1
+  issue: 294
+  repository: 799177290
+  what: pull-was-reviewed
+  when: 2024-08-19 07:46:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 167101
+  _time: 2024-08-19 08:15:23.077913966 Z
   _version: 0.4.0/0.25.2/
   latest: 41115325156
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 166842
-  _time: 2024-08-19 07:21:11.250649515 Z
+- _id: 167102
+  _time: 2024-08-19 08:15:27.936704513 Z
   _version: 0.4.0/0.25.2/
   latest: 41118283793
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 166843
-  _time: 2024-08-19 07:21:15.908448467 Z
+- _id: 167103
+  _time: 2024-08-19 08:15:33.124521026 Z
   _version: 0.4.0/0.25.2/
   latest: 41116309761
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 166844
-  _time: 2024-08-19 07:21:19.829506904 Z
+- _id: 167104
+  _time: 2024-08-19 08:15:37.370988944 Z
   _version: 0.4.0/0.25.2/
   latest: 41113362700
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 166845
-  _time: 2024-08-19 07:21:24.374835194 Z
+- _id: 167105
+  _time: 2024-08-19 08:15:42.525785569 Z
   _version: 0.4.0/0.25.2/
   latest: 41126489814
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 166846
-  _time: 2024-08-19 07:21:29.063183832 Z
+- _id: 167106
+  _time: 2024-08-19 08:15:47.890261422 Z
   _version: 0.4.0/0.25.2/
-  latest: 41127041134
+  latest: 41128553594
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 166847
-  _time: 2024-08-19 07:21:33.554194327 Z
+- _id: 167107
+  _time: 2024-08-19 08:15:52.948903199 Z
   _version: 0.4.0/0.25.2/
   latest: 41115760075
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 166907
-  _time: 2024-08-19 07:25:02.970915758 Z
+- _id: 167124
+  _time: 2024-08-19 08:16:57.152640560 Z
+  _version: 0.4.0/0.25.2/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 167161
+  _time: 2024-08-19 08:19:13.707290554 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 166942
-  _time: 2024-08-19 07:27:05.733944236 Z
+- _id: 167191
+  _time: 2024-08-19 08:21:03.796161851 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 166956
-  _time: 2024-08-19 07:27:54.088942740 Z
-  _version: 0.4.0/0.25.2/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 166959
-  _time: 2024-08-19 07:28:04.600432154 Z
+- _id: 167204
+  _time: 2024-08-19 08:21:52.194038885 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 166964
-  _time: 2024-08-19 07:28:22.231140368 Z
+- _id: 167210
+  _time: 2024-08-19 08:22:14.245341682 Z
   _version: 0.4.0/0.25.2/
-  latest: 98
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 166965
-  _time: 2024-08-19 07:28:25.950939249 Z
+- _id: 167211
+  _time: 2024-08-19 08:22:17.864090309 Z
   _version: 0.4.0/0.25.2/
-  latest: 135
-  repository: 728758275
+  latest: 217
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 166966
-  _time: 2024-08-19 07:28:29.380601021 Z
+- _id: 167212
+  _time: 2024-08-19 08:22:21.466853240 Z
   _version: 0.4.0/0.25.2/
-  latest: 91
-  repository: 799177290
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
