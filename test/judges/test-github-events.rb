@@ -255,7 +255,7 @@ class TestGithubEvents < Minitest::Test
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
       body: [
         {
-          id: '40623323541',
+          id: 40_623_323_541,
           type: 'IssuesEvent',
           public: true,
           created_at: '2024-07-31 12:45:09 UTC',
@@ -298,7 +298,9 @@ class TestGithubEvents < Minitest::Test
     )
     fb = Factbase.new
     op = fb.insert
+    op.event_id = 100_500
     op.what = 'issue-was-opened'
+    op.where = 'github'
     op.repository = 42
     op.issue = 1347
     load_it('github-events', fb)
@@ -321,7 +323,7 @@ class TestGithubEvents < Minitest::Test
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
       body: [
         {
-          id: '40623323541',
+          id: 40_623_323_541,
           type: 'IssuesEvent',
           public: true,
           created_at: '2024-07-31 12:45:09 UTC',
@@ -364,7 +366,9 @@ class TestGithubEvents < Minitest::Test
     )
     fb = Factbase.new
     op = fb.insert
+    op.event_id = 100_500
     op.what = 'issue-was-closed'
+    op.where = 'github'
     op.repository = 42
     op.issue = 1347
     load_it('github-events', fb)
