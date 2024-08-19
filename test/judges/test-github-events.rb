@@ -626,12 +626,7 @@ class TestGithubEvents < Minitest::Test
 
   def test_pull_request_event_with_comments
     fb = Factbase.new
-    $fb = fb
-    $global = {}
-    $local = {}
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true })
-    $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/github-events/github-events.rb'))
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
     f = fb.query('(eq what "pull-was-merged")').each.to_a.first
     assert_equal(4, f.comments)
     assert_equal(2, f.comments_to_code)
@@ -639,6 +634,14 @@ class TestGithubEvents < Minitest::Test
     assert_equal(2, f.comments_by_reviewers)
     assert_equal(4, f.comments_appreciated)
     assert_equal(1, f.comments_resolved)
+  end
+
+  def test_count_numbers_of_workflow_builds
+    fb = Factbase.new
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
+    f = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    assert_equal(4, f.succeeded_builds)
+    assert_equal(2, f.failed_builds)
   end
 
   private
