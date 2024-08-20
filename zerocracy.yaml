@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 980.297610457
+  seconds: 912.863795129
   version: 0.25.2
   what: judges-summary
-  when: 2024-08-20 04:21:43.491283970 Z
+  when: 2024-08-20 05:19:46.504583527 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -50055,20 +50055,6 @@
   when: 2024-08-20 03:54:55.000000000 Z
   where: github
   who: 2566462
-- _id: 170661
-  _time: 2024-08-20 04:13:39.157875282 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41157627630
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 170662
-  _time: 2024-08-20 04:13:43.630589871 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41118283793
-  repository: 798641472
-  what: events-were-scanned
-  where: github
 - _id: 170663
   _time: 2024-08-20 04:13:48.347188270 Z
   _version: 0.4.0/0.25.2/
@@ -50087,27 +50073,6 @@
   when: 2024-08-20 01:21:45.000000000 Z
   where: github
   who: 526301
-- _id: 170664
-  _time: 2024-08-20 04:13:51.963134255 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41157231279
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 170665
-  _time: 2024-08-20 04:13:55.828348241 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41113362700
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 170666
-  _time: 2024-08-20 04:14:00.358765526 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41159450274
-  repository: 820463873
-  what: events-were-scanned
-  where: github
 - _id: 170667
   _time: 2024-08-20 04:14:05.566466801 Z
   _version: 0.4.0/0.25.2/
@@ -50126,66 +50091,189 @@
   when: 2024-08-20 04:13:29.000000000 Z
   where: github
   who: 1646020
-- _id: 170668
-  _time: 2024-08-20 04:14:09.398563288 Z
+- _id: 170795
+  _job: 4911
+  _time: 2024-08-20 04:22:35.231171164 Z
+  _version: 0.4.0/0.26.0/0.0.47
+  author: 88084038
+  comments: 2
+  details: The pull request zerocracy/judges-action#296 with 54 HoC created by @Suban05
+    was reviewed by @Yegorov after 12 hours and 2 comments.
+  hoc: 54
+  is_human: 1
+  issue: 296
+  repository: 799177290
+  seconds: 45278
+  what: code-was-reviewed
+  when: 2024-08-20 03:54:55.000000000 Z
+  where: github
+  who: 2566462
+- _id: 170796
+  _job: 4911
+  _time: 2024-08-20 04:22:39.772396626 Z
+  _version: 0.4.0/0.26.0/0.0.47
+  author: 88084038
+  comments: 2
+  details: The pull request zerocracy/judges-action#296 with 54 HoC created by @Suban05
+    was reviewed by @tank-bohr after 12 hours and 2 comments.
+  hoc: 54
+  is_human: 1
+  issue: 296
+  repository: 799177290
+  seconds: 46392
+  what: code-was-reviewed
+  when: 2024-08-20 04:13:29.000000000 Z
+  where: github
+  who: 1646020
+- _id: 170799
+  _time: 2024-08-20 05:04:48.518700008 Z
   _version: 0.4.0/0.25.2/
-  latest: 41159818971
+  commit: ba464ff6f82b3cec1bca5ef2dcbe2769dda25b08
+  default_branch: master
+  details: 'A new Git push #19841119425 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41158471260
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19841119425
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-20 02:42:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 170800
+  _time: 2024-08-20 05:04:52.249876585 Z
+  _version: 0.4.0/0.25.2/
+  commit: 1bd6d5fda86dfc45bd9875cbbd9a2d6ba6ccdac5
+  default_branch: master
+  details: 'A new Git push #19840627677 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41157547542
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19840627677
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-20 01:43:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 170801
+  _time: 2024-08-20 05:04:55.810619325 Z
+  _version: 0.4.0/0.25.2/
+  commit: b63b107db792bdc375d417ed1ad6807502b112ed
+  default_branch: master
+  details: 'A new Git push #19840559288 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41157416224
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19840559288
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-20 01:34:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 170912
+  _time: 2024-08-20 05:11:52.397170396 Z
+  _version: 0.4.0/0.25.2/
+  latest: 41157627630
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 170913
+  _time: 2024-08-20 05:11:56.670347426 Z
+  _version: 0.4.0/0.25.2/
+  latest: 41118283793
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 170914
+  _time: 2024-08-20 05:12:01.185538087 Z
+  _version: 0.4.0/0.25.2/
+  latest: 41158471260
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 170915
+  _time: 2024-08-20 05:12:04.984033209 Z
+  _version: 0.4.0/0.25.2/
+  latest: 41113362700
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 170916
+  _time: 2024-08-20 05:12:09.675634348 Z
+  _version: 0.4.0/0.25.2/
+  latest: 41159450274
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 170917
+  _time: 2024-08-20 05:12:14.453134208 Z
+  _version: 0.4.0/0.25.2/
+  latest: 41160504798
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 170669
-  _time: 2024-08-20 04:14:13.799723097 Z
+- _id: 170918
+  _time: 2024-08-20 05:12:18.859799224 Z
   _version: 0.4.0/0.25.2/
   latest: 41153844063
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 170729
-  _time: 2024-08-20 04:17:49.759875912 Z
+- _id: 170978
+  _time: 2024-08-20 05:15:51.674109514 Z
   _version: 0.4.0/0.25.2/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 170769
-  _time: 2024-08-20 04:20:13.259630455 Z
+- _id: 171029
+  _time: 2024-08-20 05:18:53.477286794 Z
   _version: 0.4.0/0.25.2/
   latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 171040
+  _time: 2024-08-20 05:19:32.211652504 Z
+  _version: 0.4.0/0.25.2/
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 170790
-  _time: 2024-08-20 04:21:29.011682063 Z
+- _id: 171041
+  _time: 2024-08-20 05:19:35.681790492 Z
   _version: 0.4.0/0.25.2/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 170791
-  _time: 2024-08-20 04:21:32.524616625 Z
+- _id: 171042
+  _time: 2024-08-20 05:19:39.358062303 Z
   _version: 0.4.0/0.25.2/
-  latest: 177
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 170792
-  _time: 2024-08-20 04:21:36.089600551 Z
+- _id: 171043
+  _time: 2024-08-20 05:19:42.878385248 Z
   _version: 0.4.0/0.25.2/
   latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 170793
-  _time: 2024-08-20 04:21:39.720402580 Z
+- _id: 171044
+  _time: 2024-08-20 05:19:46.371150947 Z
   _version: 0.4.0/0.25.2/
-  latest: 167
+  latest: 267
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 170794
-  _time: 2024-08-20 04:21:43.366871068 Z
-  _version: 0.4.0/0.25.2/
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
