@@ -98,6 +98,16 @@ Fbe.iterate do
     }
   end
 
+  def self.issue_seen_already?(fact)
+    Fbe.fb.query(
+      "(and (eq repository #{fact.repository}) " \
+      '(eq where "github") ' \
+      "(not (eq event_id #{fact.event_id}))" \
+      "(eq what \"#{fact.what}\") " \
+      "(eq issue #{fact.issue}))"
+    ).each.any?
+  end
+
   def self.count_appreciated_comments(pr, issue_comments, code_comments)
     issue_appreciations =
       issue_comments.sum do |comment|
@@ -205,6 +215,7 @@ Fbe.iterate do
       else
         skip_event(json)
       end
+      skip_event(json) if issue_seen_already?(fact)
 
     when 'IssueCommentEvent'
       fact.issue = json[:payload][:issue][:number]
