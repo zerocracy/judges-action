@@ -265,11 +265,11 @@ class TestGithubEvents < Minitest::Test
             id: 42,
             login: 'torvalds',
             display_login: 'torvalds',
-            gravatar_id: '',
+            gravatar_id: ''
           },
           repo: {
             id: 42,
-            name: 'yegor256/judges',
+            name: 'yegor256/judges'
           },
           payload: {
             action: 'created',
@@ -306,11 +306,11 @@ class TestGithubEvents < Minitest::Test
           actor: {
             id: 43,
             login: 'yegor256',
-            display_login: 'yegor256',
+            display_login: 'yegor256'
           },
           repo: {
             id: 42,
-            name: 'yegor256/judges',
+            name: 'yegor256/judges'
           },
           payload: {
             action: 'created',
@@ -322,7 +322,7 @@ class TestGithubEvents < Minitest::Test
                 type: 'User'
               },
               state: 'commented',
-              author_association: 'NONE',
+              author_association: 'NONE'
             },
             pull_request: {
               id: 1_990_323_142,
