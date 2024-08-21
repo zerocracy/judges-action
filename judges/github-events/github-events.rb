@@ -122,6 +122,31 @@ Fbe.iterate do
     issue_appreciations + code_appreciations
   end
 
+  def self.fetch_workflows(pr)
+    succeeded_builds = 0
+    failed_builds = 0
+    Fbe.octo.check_runs_for_ref(pr[:base][:repo][:full_name], pr[:head][:sha])[:check_runs].each do |run|
+      workflow = Fbe.octo.workflow_run(
+        pr[:base][:repo][:full_name],
+        Fbe.octo.workflow_run_job(pr[:base][:repo][:full_name], run[:id])[:run_id]
+      )
+      next unless workflow[:event] == 'pull_request'
+      case workflow[:conclusion]
+      when 'success'
+        succeeded_builds += 1
+      when 'failure'
+        failed_builds += 1
+      end
+    end
+    { succeeded_builds:, failed_builds: }
+  end
+
+  def self.fill_fact_by_hash(fact, hash)
+    hash.each do |prop, value|
+      fact.send(:"#{prop}=", value)
+    end
+  end
+
   def self.fill_up_event(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
@@ -161,11 +186,8 @@ Fbe.iterate do
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
-        comments_info(pl).then do |info|
-          info.each do |prop, value|
-            fact.send(:"#{prop}=", value)
-          end
-        end
+        fill_fact_by_hash(fact, comments_info(pl))
+        fill_fact_by_hash(fact, fetch_workflows(pl))
         fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
@@ -240,7 +262,7 @@ Fbe.iterate do
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
         fetch_contributors(fact, json[:repo][:name]).each { |c| fact.contributors = c }
-        fetch_release_info(fact, json[:repo][:name]).each { |prop, val| fact.send(:"#{prop}=", val) }
+        fill_fact_by_hash(fact, fetch_release_info(fact, json[:repo][:name]))
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
           "in #{json[:repo][:name]} by #{Fbe.who(fact)}."

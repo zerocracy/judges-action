@@ -36,12 +36,12 @@ Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
 require 'minitest/autorun'
 
 class Minitest::Test
-  def load_it(judge, fb)
+  def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }))
     $fb = fb
     $global = {}
     $local = {}
     $judge = judge
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $options = options
     $loog = Loog::NULL
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
