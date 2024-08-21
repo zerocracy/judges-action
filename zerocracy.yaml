@@ -1,11 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
+  error: undefined method `pull_request' for nil
   removed: 8
-  seconds: 526.71680115
-  version: 0.25.2
+  seconds: 1026.035932885
+  version: 0.26.0
   what: judges-summary
-  when: 2024-08-21 16:14:40.333986254 Z
+  when: 2024-08-21 17:21:57.007440840 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -50670,24 +50671,6 @@
   since: 2024-08-14 07:12:40.759700116 Z
   what: quality-of-service
   when: 2024-08-21 07:12:40.759647748 Z
-- _id: 175620
-  _job: 4997
-  _time: 2024-08-21 07:29:57.568046533 Z
-  _version: 0.4.0/0.26.0/0.0.47
-  cost_of_qod:
-  - 26.17419571796884
-  - 16.11800332128553
-  - 19.329351455580113
-  - 3.630121063643354
-  - 3.48598158686649
-  qod_per_day:
-  - 2.5488488282701915
-  - 2.924857143293144
-  - 3.037571429051574
-  - 7.988714286790978
-  - 9.58942857227318
-  what: learn-eva
-  when: 2024-08-21 07:29:53.625802081 Z
 - _id: 176010
   _time: 2024-08-21 11:05:14.040326384 Z
   _version: 0.4.0/0.25.2/
@@ -50785,48 +50768,6 @@
   when: 2024-08-21 11:10:27.000000000 Z
   where: github
   who: 2566462
-- _id: 176860
-  _time: 2024-08-21 16:06:00.569355024 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41157627630
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 176861
-  _time: 2024-08-21 16:06:05.286041684 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41210910412
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 176862
-  _time: 2024-08-21 16:06:10.650451867 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41207447807
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 176863
-  _time: 2024-08-21 16:06:14.896261519 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41113362700
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 176864
-  _time: 2024-08-21 16:06:19.873962109 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41159450274
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 176865
-  _time: 2024-08-21 16:06:28.708686514 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41212844991
-  repository: 799177290
-  what: events-were-scanned
-  where: github
 - _id: 176866
   _time: 2024-08-21 16:06:33.516280069 Z
   _version: 0.4.0/0.25.2/
@@ -50841,59 +50782,150 @@
   repository: 845143602
   what: events-were-scanned
   where: github
-- _id: 176875
-  _time: 2024-08-21 16:07:07.553774016 Z
-  _version: 0.4.0/0.25.2/
+- _id: 176996
+  _job: 5032
+  _time: 2024-08-21 16:15:39.632935877 Z
+  _version: 0.4.0/0.26.0/0.0.47!0.0.48
+  cost_of_qod:
+  - 26.17419571796884
+  - 16.11800332128553
+  - 19.329351455580113
+  - 3.630121063643354
+  - 3.48598158686649
+  qod_per_day:
+  - 2.5488488282701915
+  - 2.924857143293144
+  - 3.037571429051574
+  - 7.988714286790978
+  - 9.58942857227318
+  what: learn-eva
+  when: 2024-08-21 16:15:35.695348723 Z
+- _id: 177002
+  _time: 2024-08-21 17:05:36.307461852 Z
+  _version: 0.4.0/0.26.0/
+  details: The issue zerocracy/judges-action#298 has been closed by @yegor256.
+  event_id: 41215623383
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 298
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-21 14:37:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 177122
+  _time: 2024-08-21 17:13:20.132201882 Z
+  _version: 0.4.0/0.26.0/
+  since: 2024-08-14 17:13:20.132424446 Z
+  total_commits_pushed: 167
+  total_hoc_committed: 6507
+  total_issues_created: 16
+  total_pulls_submitted: 2
+  total_releases_published: 12
+  what: quantity-of-deliverables
+  when: 2024-08-21 17:13:20.132353163 Z
+- _id: 177123
+  _time: 2024-08-21 17:14:05.550794367 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41157627630
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 177124
+  _time: 2024-08-21 17:14:10.372670400 Z
+  _version: 0.4.0/0.26.0/
+  branch: '98'
+  details: The pull request yegor256/factbase#114 has been opened by @Suban05.
+  event_id: 41216053010
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 114
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-08-21 14:49:11.000000000 Z
+  where: github
+  who: 88084038
+- _id: 177125
+  _time: 2024-08-21 17:14:14.033533878 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41216053010
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 177126
+  _time: 2024-08-21 17:14:18.895253037 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41207447807
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 177127
+  _time: 2024-08-21 17:14:23.000691460 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41113362700
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 177128
+  _time: 2024-08-21 17:14:27.687743040 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41159450274
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 177136
+  _time: 2024-08-21 17:15:19.241356913 Z
+  _version: 0.4.0/0.26.0/
   latest: 0
   repository: 845143602
   what: labels-were-scanned
   where: github
-- _id: 176928
-  _time: 2024-08-21 16:10:27.425131702 Z
-  _version: 0.4.0/0.25.2/
+- _id: 177153
+  _time: 2024-08-21 17:16:22.480277294 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 177184
+  _time: 2024-08-21 17:18:20.458919113 Z
+  _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 176985
-  _time: 2024-08-21 16:14:02.311255983 Z
-  _version: 0.4.0/0.25.2/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 176991
-  _time: 2024-08-21 16:14:24.710243277 Z
-  _version: 0.4.0/0.25.2/
-  latest: 98
+- _id: 177238
+  _time: 2024-08-21 17:21:42.117553398 Z
+  _version: 0.4.0/0.26.0/
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 176992
-  _time: 2024-08-21 16:14:28.572075937 Z
-  _version: 0.4.0/0.25.2/
+- _id: 177239
+  _time: 2024-08-21 17:21:45.822341306 Z
+  _version: 0.4.0/0.26.0/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 176993
-  _time: 2024-08-21 16:14:32.503223252 Z
-  _version: 0.4.0/0.25.2/
-  latest: 135
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 176994
-  _time: 2024-08-21 16:14:36.464148553 Z
-  _version: 0.4.0/0.25.2/
+- _id: 177240
+  _time: 2024-08-21 17:21:49.567699137 Z
+  _version: 0.4.0/0.26.0/
   latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 176995
-  _time: 2024-08-21 16:14:40.206181572 Z
-  _version: 0.4.0/0.25.2/
-  latest: 167
+- _id: 177241
+  _time: 2024-08-21 17:21:53.215480344 Z
+  _version: 0.4.0/0.26.0/
+  latest: 267
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 177242
+  _time: 2024-08-21 17:21:56.885583864 Z
+  _version: 0.4.0/0.26.0/
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
