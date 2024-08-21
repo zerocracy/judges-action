@@ -187,6 +187,7 @@ Fbe.iterate do
         ).each.last
           skip_event(json)
         end
+        skip_event(json) unless json[:payload][:review][:state] == 'approved'
 
         fact.issue = json[:payload][:pull_request][:number]
         fact.what = 'pull-was-reviewed'
