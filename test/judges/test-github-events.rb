@@ -905,7 +905,7 @@ class TestGithubEvents < Minitest::Test
 
   def test_pull_request_event_with_comments
     fb = Factbase.new
-    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
     f = fb.query('(eq what "pull-was-merged")').each.to_a.first
     assert_equal(4, f.comments)
     assert_equal(2, f.comments_to_code)
