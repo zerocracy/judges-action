@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 1161.840714364
+  seconds: 1315.666652234
   version: 0.26.0
   what: judges-summary
-  when: 2024-08-22 17:24:10.742572505 Z
+  when: 2024-08-22 19:27:18.553025989 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -52061,8 +52061,208 @@
   when: 2024-08-22 14:25:18.000000000 Z
   where: github
   who: 1646020
+- _id: 182472
+  _time: 2024-08-22 19:05:26.761432244 Z
+  _version: 0.4.0/0.26.0/
+  total_forks: 14
+  total_releases: 287
+  total_repositories: 8
+  total_stars: 31
+  what: dimensions-of-terrain
+  when: 2024-08-22 19:05:26.761673436 Z
+- _id: 182474
+  _time: 2024-08-22 19:05:51.906859223 Z
+  _version: 0.4.0/0.26.0/
+  details: The issue yegor256/factbase#117 has been opened by @0pdd.
+  event_id: 41256731533
+  event_type: IssuesEvent
+  is_human: 0
+  issue: 117
+  repository: 798641472
+  what: issue-was-opened
+  when: 2024-08-22 16:31:20.000000000 Z
+  where: github
+  who: 24456188
+- _id: 182475
+  _time: 2024-08-22 19:05:59.356513329 Z
+  _version: 0.4.0/0.26.0/
+  details: The issue yegor256/factbase#116 has been opened by @0pdd.
+  event_id: 41256731017
+  event_type: IssuesEvent
+  is_human: 0
+  issue: 116
+  repository: 798641472
+  what: issue-was-opened
+  when: 2024-08-22 16:31:19.000000000 Z
+  where: github
+  who: 24456188
 - _id: 182476
-  _time: 2024-08-22 17:05:37.814968128 Z
+  _time: 2024-08-22 19:06:07.036967540 Z
+  _version: 0.4.0/0.26.0/
+  details: The issue yegor256/factbase#115 has been opened by @0pdd.
+  event_id: 41256730272
+  event_type: IssuesEvent
+  is_human: 0
+  issue: 115
+  repository: 798641472
+  what: issue-was-opened
+  when: 2024-08-22 16:31:18.000000000 Z
+  where: github
+  who: 24456188
+- _id: 182477
+  _time: 2024-08-22 19:06:22.128180735 Z
+  _version: 0.4.0/0.26.0/
+  details: The issue yegor256/factbase#98 has been closed by @yegor256.
+  event_id: 41256655674
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 98
+  repository: 798641472
+  what: issue-was-closed
+  when: 2024-08-22 16:28:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 182478
+  _time: 2024-08-22 19:06:29.948852949 Z
+  _version: 0.4.0/0.26.0/
+  branch: '98'
+  comments: 14
+  comments_appreciated: 1
+  comments_by_author: 7
+  comments_by_reviewers: 8
+  comments_resolved: 6
+  comments_to_code: 7
+  details: The pull request yegor256/factbase#114 has been closed by @yegor256, with
+    176 HoC and 14 comments.
+  event_id: 41256655346
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 176
+  is_human: 1
+  issue: 114
+  repository: 798641472
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2024-08-22 16:28:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 182482
+  _time: 2024-08-22 19:07:25.406988827 Z
+  _version: 0.4.0/0.26.0/
+  commits: 5
+  contributors:
+  - 88084038
+  - 526301
+  - 8086956
+  details: A new release '' has been published in zerocracy/fbe by @rultor.
+  event_id: 41258138700
+  event_type: ReleaseEvent
+  hoc: 43
+  is_human: 0
+  last_commit: 8473bbcd5b26cb8c8aa822a965595923d01e8166
+  release: 171523267
+  repository: 820463873
+  tag: 0.0.60
+  what: release-published
+  when: 2024-08-22 17:21:09.000000000 Z
+  where: github
+  who: 8086956
+- _id: 182483
+  _time: 2024-08-22 19:07:29.651311293 Z
+  _version: 0.4.0/0.26.0/
+  details: A new tag '0.0.60' has been created in zerocracy/fbe by @rultor.
+  event_id: 41258126778
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.0.60
+  what: tag-was-created
+  when: 2024-08-22 17:20:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 182484
+  _time: 2024-08-22 19:07:40.893329330 Z
+  _version: 0.4.0/0.26.0/
+  commit: 37e633726b13491e6271a55e415dce9bb21c2617
+  default_branch: master
+  details: 'A new Git push #19889925245 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41257389023
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19889925245
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-22 16:54:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 182485
+  _time: 2024-08-22 19:07:44.728244074 Z
+  _version: 0.4.0/0.26.0/
+  commit: ba8bdab81bab7d321a7a667430033dbf33dae1f2
+  default_branch: master
+  details: 'A new Git push #19889897568 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41257332032
+  event_type: PushEvent
+  is_human: 1
+  push_id: 19889897568
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-22 16:52:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 182486
+  _time: 2024-08-22 19:07:48.607283792 Z
+  _version: 0.4.0/0.26.0/
+  details: The issue zerocracy/fbe#81 has been opened by @yegor256.
+  event_id: 41257089695
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 81
+  repository: 820463873
+  what: issue-was-opened
+  when: 2024-08-22 16:44:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 182487
+  _time: 2024-08-22 19:07:56.216271624 Z
+  _version: 0.4.0/0.26.0/
+  commits: 1
+  contributors: 8086956
+  details: A new release 'select only resolved comments' has been published in zerocracy/fbe
+    by @rultor.
+  event_id: 41255292196
+  event_type: ReleaseEvent
+  hoc: 2
+  is_human: 0
+  last_commit: 2fd32538df190005b777f923570e860d2d61b95a
+  release: 171507803
+  repository: 820463873
+  tag: 0.0.59
+  what: release-published
+  when: 2024-08-22 15:44:56.000000000 Z
+  where: github
+  who: 8086956
+- _id: 182488
+  _time: 2024-08-22 19:08:00.239921670 Z
+  _version: 0.4.0/0.26.0/
+  details: A new tag '0.0.59' has been created in zerocracy/fbe by @rultor.
+  event_id: 41255250990
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.0.59
+  what: tag-was-created
+  when: 2024-08-22 15:43:40.000000000 Z
+  where: github
+  who: 8086956
+- _id: 182489
+  _time: 2024-08-22 19:08:15.045068901 Z
   _version: 0.4.0/0.26.0/
   branch: 308_from_judges_action
   comments: 0
@@ -52085,8 +52285,22 @@
   when: 2024-08-22 15:16:25.000000000 Z
   where: github
   who: 526301
-- _id: 182478
-  _time: 2024-08-22 17:06:04.386015742 Z
+- _id: 182491
+  _time: 2024-08-22 19:08:40.134142579 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/judges-action#309 has been opened by @renovate[bot].
+  event_id: 41256500947
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 309
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-22 16:23:32.000000000 Z
+  where: github
+  who: 29139614
+- _id: 182492
+  _time: 2024-08-22 19:08:51.375395924 Z
   _version: 0.4.0/0.26.0/
   details: The issue zerocracy/judges-action#308 has been closed by @yegor256.
   event_id: 41254284011
@@ -52098,113 +52312,164 @@
   when: 2024-08-22 15:16:26.000000000 Z
   where: github
   who: 526301
-- _id: 182604
-  _time: 2024-08-22 17:14:56.500043490 Z
+- _id: 182494
+  _time: 2024-08-22 19:09:12.305639077 Z
   _version: 0.4.0/0.26.0/
-  latest: 41157627630
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/pages-action#118 has been opened by @renovate[bot].
+  event_id: 41255409132
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 118
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-08-22 15:48:26.000000000 Z
+  where: github
+  who: 29139614
+- _id: 182623
+  _time: 2024-08-22 19:17:48.714929831 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41256676866
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 182605
-  _time: 2024-08-22 17:15:02.261581549 Z
+- _id: 182624
+  _time: 2024-08-22 19:17:53.600861625 Z
   _version: 0.4.0/0.26.0/
-  latest: 41254175935
+  latest: 41256732132
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 182606
-  _time: 2024-08-22 17:15:08.286847214 Z
+- _id: 182625
+  _time: 2024-08-22 19:17:58.589004814 Z
   _version: 0.4.0/0.26.0/
   latest: 41241692561
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 182607
-  _time: 2024-08-22 17:15:13.122459577 Z
+- _id: 182626
+  _time: 2024-08-22 19:18:02.865778247 Z
   _version: 0.4.0/0.26.0/
   latest: 41113362700
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 182608
-  _time: 2024-08-22 17:15:19.179426802 Z
+- _id: 182627
+  _time: 2024-08-22 19:18:07.966999177 Z
   _version: 0.4.0/0.26.0/
-  latest: 41254374554
+  details: The issue zerocracy/fbe#81 has been closed by @yegor256.
+  event_id: 41258174432
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 81
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-22 17:22:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 182628
+  _time: 2024-08-22 19:18:15.595671069 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41258174432
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 182609
-  _time: 2024-08-22 17:15:25.258992604 Z
+- _id: 182629
+  _time: 2024-08-22 19:18:28.546871881 Z
   _version: 0.4.0/0.26.0/
-  latest: 41254284011
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#309 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 41257748435
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 309
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-08-22 17:07:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 182630
+  _time: 2024-08-22 19:18:49.770013194 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41257782349
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 182610
-  _time: 2024-08-22 17:15:31.034764349 Z
+- _id: 182631
+  _time: 2024-08-22 19:18:54.994338772 Z
   _version: 0.4.0/0.26.0/
-  latest: 41242211537
+  latest: 41256965056
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 182611
-  _time: 2024-08-22 17:15:35.279562505 Z
+- _id: 182632
+  _time: 2024-08-22 19:18:59.160416295 Z
   _version: 0.4.0/0.26.0/
   latest: 41186366899
   repository: 845143602
   what: events-were-scanned
   where: github
-- _id: 182619
-  _time: 2024-08-22 17:16:08.541942749 Z
+- _id: 182640
+  _time: 2024-08-22 19:19:31.475300965 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 845143602
   what: labels-were-scanned
   where: github
-- _id: 182672
-  _time: 2024-08-22 17:19:44.853614273 Z
+- _id: 182693
+  _time: 2024-08-22 19:23:00.249132042 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 182712
-  _time: 2024-08-22 17:22:27.960757613 Z
+- _id: 182733
+  _time: 2024-08-22 19:25:38.401676532 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 182733
-  _time: 2024-08-22 17:23:54.391192259 Z
+- _id: 182754
+  _time: 2024-08-22 19:27:02.549840100 Z
   _version: 0.4.0/0.26.0/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 182734
-  _time: 2024-08-22 17:23:58.664141340 Z
+- _id: 182755
+  _time: 2024-08-22 19:27:06.424848987 Z
   _version: 0.4.0/0.26.0/
   latest: 177
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 182735
-  _time: 2024-08-22 17:24:02.700090131 Z
+- _id: 182756
+  _time: 2024-08-22 19:27:10.335245117 Z
   _version: 0.4.0/0.26.0/
   latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 182736
-  _time: 2024-08-22 17:24:06.705264135 Z
+- _id: 182757
+  _time: 2024-08-22 19:27:14.425516555 Z
   _version: 0.4.0/0.26.0/
   latest: 217
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 182737
-  _time: 2024-08-22 17:24:10.609436965 Z
+- _id: 182758
+  _time: 2024-08-22 19:27:18.424105567 Z
   _version: 0.4.0/0.26.0/
   latest: 31
   repository: 802720676
