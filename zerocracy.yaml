@@ -1,12 +1,11 @@
 ---
 - added: 8
   cycles: 2
-  error: undefined method `pull_request' for nil
   removed: 8
-  seconds: 1003.861896151
+  seconds: 2673.428091468
   version: 0.26.0
   what: judges-summary
-  when: 2024-08-22 06:22:45.006608653 Z
+  when: 2024-08-22 07:50:06.299251724 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -50755,20 +50754,6 @@
   when: 2024-08-21 11:10:27.000000000 Z
   where: github
   who: 2566462
-- _id: 176866
-  _time: 2024-08-21 16:06:33.516280069 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41187179685
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 176867
-  _time: 2024-08-21 16:06:37.283117302 Z
-  _version: 0.4.0/0.25.2/
-  latest: 41186366899
-  repository: 845143602
-  what: events-were-scanned
-  where: github
 - _id: 177002
   _time: 2024-08-21 17:05:36.307461852 Z
   _version: 0.4.0/0.26.0/
@@ -51022,34 +51007,6 @@
   when: 2024-08-22 05:28:53.000000000 Z
   where: github
   who: 526301
-- _id: 180303
-  _time: 2024-08-22 06:14:49.472552190 Z
-  _version: 0.4.0/0.26.0/
-  latest: 41157627630
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 180304
-  _time: 2024-08-22 06:14:54.036231239 Z
-  _version: 0.4.0/0.26.0/
-  latest: 41236131924
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 180305
-  _time: 2024-08-22 06:14:58.776979766 Z
-  _version: 0.4.0/0.26.0/
-  latest: 41207447807
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 180306
-  _time: 2024-08-22 06:15:02.918697206 Z
-  _version: 0.4.0/0.26.0/
-  latest: 41113362700
-  repository: 840215648
-  what: events-were-scanned
-  where: github
 - _id: 180307
   _time: 2024-08-22 06:15:11.938955902 Z
   _version: 0.4.0/0.26.0/
@@ -51084,59 +51041,546 @@
   when: 2024-08-22 06:11:04.000000000 Z
   where: github
   who: 8086956
-- _id: 180316
-  _time: 2024-08-22 06:16:11.095038045 Z
+- _id: 180425
+  _time: 2024-08-22 07:06:20.908531314 Z
+  _version: 0.4.0/0.26.0/
+  branch: '78'
+  comments: 11
+  comments_appreciated: 4
+  comments_by_author: 6
+  comments_by_reviewers: 6
+  comments_resolved: 4
+  comments_to_code: 7
+  details: The pull request zerocracy/fbe#79 has been closed by @yegor256, with 83
+    HoC and 11 comments.
+  event_id: 41235444258
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 83
+  is_human: 1
+  issue: 79
+  repository: 820463873
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2024-08-22 05:28:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 180427
+  _time: 2024-08-22 07:16:45.264958190 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#307 has been closed by @github-actions[bot],
+    with 2 HoC and 0 comments.
+  event_id: 41237608740
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 307
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2024-08-22 07:04:00.000000000 Z
+  where: github
+  who: 41898282
+- _id: 180428
+  _time: 2024-08-22 07:16:57.266590180 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  details: The pull request zerocracy/judges-action#307 has been opened by @github-actions[bot].
+  event_id: 41237603939
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 307
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-22 07:03:49.000000000 Z
+  where: github
+  who: 41898282
+- _id: 180429
+  _time: 2024-08-22 07:17:08.740771880 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#305 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 41237598074
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 305
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-08-22 07:03:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 180430
+  _time: 2024-08-22 07:17:17.218361777 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#306 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 41237594431
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 306
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-08-22 07:03:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 180431
+  _time: 2024-08-22 07:17:29.351122111 Z
+  _version: 0.4.0/0.26.0/
+  commits: 67
+  contributors:
+  - 88084038
+  - 8086956
+  - 526301
+  - 29139614
+  - 2566462
+  - 1646020
+  details: A new release '' has been published in zerocracy/judges-action by @rultor.
+  event_id: 41237538923
+  event_type: ReleaseEvent
+  hoc: 699
+  is_human: 0
+  last_commit: 23b834726c0d8929247692f2f29fcda58cef86e2
+  release: 171410561
+  repository: 799177290
+  tag: 0.0.49
+  what: release-published
+  when: 2024-08-22 07:01:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 180432
+  _time: 2024-08-22 07:17:33.868561736 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The pull request zerocracy/judges-action#306 has been opened by @renovate[bot].
+  event_id: 41237528023
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 306
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-22 07:01:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 180433
+  _time: 2024-08-22 07:17:41.755074875 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  details: The pull request zerocracy/judges-action#305 has been opened by @github-actions[bot].
+  event_id: 41237511494
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 305
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-22 07:00:33.000000000 Z
+  where: github
+  who: 41898282
+- _id: 180434
+  _time: 2024-08-22 07:17:49.634440544 Z
+  _version: 0.4.0/0.26.0/
+  details: A new tag '0.0.49' has been created in zerocracy/judges-action by @rultor.
+  event_id: 41237499647
+  event_type: CreateEvent
+  is_human: 0
+  repository: 799177290
+  tag: 0.0.49
+  what: tag-was-created
+  when: 2024-08-22 07:00:10.000000000 Z
+  where: github
+  who: 8086956
+- _id: 180435
+  _time: 2024-08-22 07:18:09.084091545 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/fbe-0.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#304 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 41236647268
+  event_type: PullRequestEvent
+  failed_builds: 1
+  hoc: 2
+  is_human: 1
+  issue: 304
+  repository: 799177290
+  succeeded_builds: 7
+  what: pull-was-merged
+  when: 2024-08-22 06:26:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 180436
+  _time: 2024-08-22 07:18:25.480692209 Z
+  _version: 0.4.0/0.26.0/
+  branch: 78_from_fbe
+  comments: 3
+  comments_appreciated: 2
+  comments_by_author: 2
+  comments_by_reviewers: 5
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#303 has been closed by @yegor256,
+    with 6 HoC and 3 comments.
+  event_id: 41236641513
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  is_human: 1
+  issue: 303
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-08-22 06:26:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 180437
+  _time: 2024-08-22 07:18:33.183029017 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/judges-action#304 has been opened by @renovate[bot].
+  event_id: 41236597416
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 304
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-22 06:24:16.000000000 Z
+  where: github
+  who: 29139614
+- _id: 180438
+  _time: 2024-08-22 07:19:50.657553431 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#302 has been closed by @github-actions[bot],
+    with 2 HoC and 0 comments.
+  event_id: 41219634078
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 302
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2024-08-21 16:33:31.000000000 Z
+  where: github
+  who: 41898282
+- _id: 180439
+  _time: 2024-08-22 07:20:03.165554476 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  details: The pull request zerocracy/judges-action#302 has been opened by @github-actions[bot].
+  event_id: 41219627941
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 302
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-21 16:33:19.000000000 Z
+  where: github
+  who: 41898282
+- _id: 180440
+  _time: 2024-08-22 07:20:15.131501482 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#300 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 41219621615
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 300
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-08-21 16:33:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 180441
+  _time: 2024-08-22 07:20:23.754453263 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#301 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 41219617223
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 301
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-08-21 16:32:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 180442
+  _time: 2024-08-22 07:20:40.181204629 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The pull request zerocracy/judges-action#301 has been opened by @renovate[bot].
+  event_id: 41218903488
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 301
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-21 16:09:20.000000000 Z
+  where: github
+  who: 29139614
+- _id: 180443
+  _time: 2024-08-22 07:20:47.961728841 Z
+  _version: 0.4.0/0.26.0/
+  commits: 1
+  contributors: 8086956
+  details: A new release 'code review comments are not the same as formal code review'
+    has been published in zerocracy/judges-action by @rultor.
+  event_id: 41218898236
+  event_type: ReleaseEvent
+  hoc: 6
+  is_human: 0
+  last_commit: 0c4d83f934d0239c01760f6ad5a1e1e65bba3a46
+  release: 171309213
+  repository: 799177290
+  tag: 0.0.48
+  what: release-published
+  when: 2024-08-21 16:09:10.000000000 Z
+  where: github
+  who: 8086956
+- _id: 180444
+  _time: 2024-08-22 07:20:52.205811898 Z
+  _version: 0.4.0/0.26.0/
+  branch: version-up
+  details: The pull request zerocracy/judges-action#300 has been opened by @github-actions[bot].
+  event_id: 41218883435
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 300
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-21 16:08:40.000000000 Z
+  where: github
+  who: 41898282
+- _id: 180445
+  _time: 2024-08-22 07:21:00.244615365 Z
+  _version: 0.4.0/0.26.0/
+  details: A new tag '0.0.48' has been created in zerocracy/judges-action by @rultor.
+  event_id: 41218870781
+  event_type: CreateEvent
+  is_human: 0
+  repository: 799177290
+  tag: 0.0.48
+  what: tag-was-created
+  when: 2024-08-21 16:08:14.000000000 Z
+  where: github
+  who: 8086956
+- _id: 180446
+  _time: 2024-08-22 07:21:20.031389446 Z
+  _version: 0.4.0/0.26.0/
+  branch: '214'
+  comments: 6
+  comments_appreciated: 0
+  comments_by_author: 4
+  comments_by_reviewers: 3
+  comments_resolved: 1
+  comments_to_code: 2
+  details: The pull request zerocracy/judges-action#296 has been closed by @yegor256,
+    with 53 HoC and 6 comments.
+  event_id: 41217795795
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 53
+  is_human: 1
+  issue: 296
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-08-21 15:35:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 180447
+  _time: 2024-08-22 07:21:47.706527838 Z
+  _version: 0.4.0/0.26.0/
+  branch: '298'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#299 has been closed by @yegor256,
+    with 144 HoC and 2 comments.
+  event_id: 41215623155
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 144
+  is_human: 1
+  issue: 299
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-08-21 14:37:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 180559
+  _time: 2024-08-22 07:41:34.042967776 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41157627630
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 180560
+  _time: 2024-08-22 07:41:38.631017142 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41237562198
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 180561
+  _time: 2024-08-22 07:41:43.279616155 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41207447807
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 180562
+  _time: 2024-08-22 07:41:47.466194190 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41113362700
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 180563
+  _time: 2024-08-22 07:41:52.405734544 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41236350155
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 180564
+  _time: 2024-08-22 07:41:57.204321229 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41237620569
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 180565
+  _time: 2024-08-22 07:42:01.853712984 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41187179685
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 180566
+  _time: 2024-08-22 07:42:05.552667468 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41186366899
+  repository: 845143602
+  what: events-were-scanned
+  where: github
+- _id: 180574
+  _time: 2024-08-22 07:42:35.172344120 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 845143602
   what: labels-were-scanned
   where: github
-- _id: 180350
-  _time: 2024-08-22 06:18:19.412777247 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 180367
-  _time: 2024-08-22 06:19:24.219593475 Z
+- _id: 180627
+  _time: 2024-08-22 07:45:54.143847247 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 180400
-  _time: 2024-08-22 06:21:28.983687749 Z
+- _id: 180684
+  _time: 2024-08-22 07:49:28.222974143 Z
   _version: 0.4.0/0.26.0/
   latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 180690
+  _time: 2024-08-22 07:49:50.576967687 Z
+  _version: 0.4.0/0.26.0/
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 180417
-  _time: 2024-08-22 06:22:33.786174661 Z
+- _id: 180691
+  _time: 2024-08-22 07:49:54.347001075 Z
   _version: 0.4.0/0.26.0/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 180418
-  _time: 2024-08-22 06:22:37.450495411 Z
+- _id: 180692
+  _time: 2024-08-22 07:49:58.380145401 Z
   _version: 0.4.0/0.26.0/
-  latest: 177
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 180419
-  _time: 2024-08-22 06:22:41.208334375 Z
+- _id: 180693
+  _time: 2024-08-22 07:50:02.281737786 Z
   _version: 0.4.0/0.26.0/
   latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 180420
-  _time: 2024-08-22 06:22:44.884848911 Z
+- _id: 180694
+  _time: 2024-08-22 07:50:06.170091637 Z
   _version: 0.4.0/0.26.0/
-  latest: 31
-  repository: 802720676
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
