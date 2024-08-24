@@ -126,6 +126,7 @@ Fbe.iterate do
     succeeded_builds = 0
     failed_builds = 0
     Fbe.octo.check_runs_for_ref(pr[:base][:repo][:full_name], pr[:head][:sha])[:check_runs].each do |run|
+      next unless run[:app][:slug] == 'github-actions'
       workflow = Fbe.octo.workflow_run(
         pr[:base][:repo][:full_name],
         Fbe.octo.workflow_run_job(pr[:base][:repo][:full_name], run[:id])[:run_id]
