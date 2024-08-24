@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   removed: 8
-  seconds: 488.783432028
+  seconds: 996.971461554
   version: 0.26.0
   what: judges-summary
-  when: 2024-08-24 19:12:32.386969873 Z
+  when: 2024-08-24 20:21:06.695823884 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -44581,7 +44581,7 @@
   _time: 2024-08-14 18:18:51.997144556 Z
   _version: 0.4.0/0.25.2/0.0.47
   ac: 854
-  start: 2024-07-31 20:09:06.291243736 Z
+  start: &1 2024-07-31 20:09:06.291243736 Z
   what: earned-value
   when: 2024-08-14 18:18:51.997745099 Z
 - _id: 148767
@@ -53030,115 +53030,157 @@
   when: 2024-08-24 14:20:55.000000000 Z
   where: github
   who: 526301
-- _id: 189940
-  _time: 2024-08-24 19:04:31.182743485 Z
+- _id: 190060
+  _job: 5254
+  _time: 2024-08-24 19:13:38.956546796 Z
+  _version: 0.4.0/0.26.0/0.0.49
+  ac: 1124
+  start: *1
+  what: earned-value
+  when: &2 2024-08-24 19:13:38.956833754 Z
+- _id: 190061
+  _job: 5254
+  _time: 2024-08-24 19:14:51.488310086 Z
+  _version: 0.4.0/0.26.0/0.0.49
+  what: earned-value-prev
+  when: *2
+- _id: 190066
+  _time: 2024-08-24 20:04:58.415133990 Z
+  _version: 0.4.0/0.26.0/
+  branch: 311_judges_action
+  details: The pull request zerocracy/fbe#82 has been opened by @Suban05.
+  event_id: 41309718272
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 82
+  repository: 820463873
+  what: pull-was-opened
+  when: 2024-08-24 19:53:59.000000000 Z
+  where: github
+  who: 88084038
+- _id: 190068
+  _time: 2024-08-24 20:05:07.012401159 Z
+  _version: 0.4.0/0.26.0/
+  branch: '311'
+  details: The pull request zerocracy/judges-action#312 has been opened by @Suban05.
+  event_id: 41309532856
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 312
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-24 19:29:57.000000000 Z
+  where: github
+  who: 88084038
+- _id: 190187
+  _time: 2024-08-24 20:12:38.904798705 Z
   _version: 0.4.0/0.26.0/
   latest: 41256676866
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 189941
-  _time: 2024-08-24 19:04:36.062970018 Z
+- _id: 190188
+  _time: 2024-08-24 20:12:43.435738250 Z
   _version: 0.4.0/0.26.0/
   latest: 41264479407
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 189942
-  _time: 2024-08-24 19:04:40.879224738 Z
+- _id: 190189
+  _time: 2024-08-24 20:12:48.140084776 Z
   _version: 0.4.0/0.26.0/
   latest: 41308440197
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 189943
-  _time: 2024-08-24 19:04:45.145014526 Z
+- _id: 190190
+  _time: 2024-08-24 20:12:52.259601760 Z
   _version: 0.4.0/0.26.0/
   latest: 41113362700
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 189944
-  _time: 2024-08-24 19:04:50.233898767 Z
+- _id: 190191
+  _time: 2024-08-24 20:12:57.136993684 Z
   _version: 0.4.0/0.26.0/
-  latest: 41264480196
+  latest: 41309749955
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 189945
-  _time: 2024-08-24 19:04:59.334658395 Z
+- _id: 190192
+  _time: 2024-08-24 20:13:01.920520341 Z
   _version: 0.4.0/0.26.0/
-  latest: 41308922291
+  latest: 41309532856
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 189946
-  _time: 2024-08-24 19:05:04.342508189 Z
+- _id: 190193
+  _time: 2024-08-24 20:13:06.683297478 Z
   _version: 0.4.0/0.26.0/
   latest: 41263720822
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 189947
-  _time: 2024-08-24 19:05:08.353019120 Z
+- _id: 190194
+  _time: 2024-08-24 20:13:10.504491197 Z
   _version: 0.4.0/0.26.0/
   latest: 41272898311
   repository: 845143602
   what: events-were-scanned
   where: github
-- _id: 189955
-  _time: 2024-08-24 19:05:40.981823835 Z
+- _id: 190202
+  _time: 2024-08-24 20:13:40.738379403 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 845143602
   what: labels-were-scanned
   where: github
-- _id: 190003
-  _time: 2024-08-24 19:08:52.327560340 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 190008
-  _time: 2024-08-24 19:09:11.734235557 Z
+- _id: 190255
+  _time: 2024-08-24 20:17:03.058780956 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 190041
-  _time: 2024-08-24 19:11:21.808021213 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 190050
-  _time: 2024-08-24 19:11:56.719897089 Z
+- _id: 190308
+  _time: 2024-08-24 20:20:22.274061532 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 190057
-  _time: 2024-08-24 19:12:24.748612548 Z
+- _id: 190312
+  _time: 2024-08-24 20:20:36.985571231 Z
   _version: 0.4.0/0.26.0/
-  latest: 177
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 190317
+  _time: 2024-08-24 20:20:55.584987623 Z
+  _version: 0.4.0/0.26.0/
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 190318
+  _time: 2024-08-24 20:20:59.391003826 Z
+  _version: 0.4.0/0.26.0/
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 190058
-  _time: 2024-08-24 19:12:28.409580847 Z
+- _id: 190319
+  _time: 2024-08-24 20:21:02.859175148 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 190059
-  _time: 2024-08-24 19:12:32.258598092 Z
+- _id: 190320
+  _time: 2024-08-24 20:21:06.575273288 Z
   _version: 0.4.0/0.26.0/
-  latest: 31
-  repository: 802720676
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
