@@ -917,18 +917,18 @@ class TestGithubEvents < Minitest::Test
 
   def test_count_numbers_of_workflow_builds
     fb = Factbase.new
-    repo = 'zerocracy/baza'
-    load_it('github-events', fb, Judges::Options.new({ 'repositories' => repo, 'testing' => true }))
-    f = fb.query("(and (eq what \"pull-was-merged\") (eq branch \"#{repo}\"))").each.to_a.first
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
+    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 42))').each.to_a.first
     assert_equal(4, f.succeeded_builds)
     assert_equal(2, f.failed_builds)
   end
 
   def test_count_numbers_of_workflow_builds_only_from_github
     fb = Factbase.new
-    repo = 'zerocracy/judges-action'
-    load_it('github-events', fb, Judges::Options.new({ 'repositories' => repo, 'testing' => true }))
-    f = fb.query("(and (eq what \"pull-was-merged\") (eq branch \"#{repo}\"))").each.to_a.first
+    load_it(
+      'github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true })
+    )
+    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.to_a.first
     assert_equal(3, f.succeeded_builds)
     assert_equal(2, f.failed_builds)
   end
