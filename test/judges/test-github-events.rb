@@ -926,7 +926,9 @@ class TestGithubEvents < Minitest::Test
   def test_count_numbers_of_workflow_builds_only_from_github
     fb = Factbase.new
     load_it(
-      'github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true })
+      'github-events',
+      fb,
+      Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true })
     )
     f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.to_a.first
     assert_equal(3, f.succeeded_builds)
