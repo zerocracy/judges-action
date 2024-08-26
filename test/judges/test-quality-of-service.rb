@@ -245,6 +245,91 @@ class TestQualityOfService < Minitest::Test
     end
   end
 
+  def test_quality_of_service_average_build_mttr_when_failure_several_times_in_a_row
+    WebMock.disable_net_connect!
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_workflow_runs(
+      [
+        {
+          id: 42,
+          name: 'build',
+          head_branch: 'master',
+          head_sha: 'abc123',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 101,
+          created_at: '2024-08-07T10:00:00Z',
+          updated_at: '2024-08-07T10:10:00Z',
+          repository: { full_name: 'foo/foo' }
+        },
+        {
+          id: 43,
+          name: 'build',
+          head_branch: 'master',
+          head_sha: 'abc124',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'failure',
+          workflow_id: 101,
+          created_at: '2024-08-07T11:00:00Z',
+          updated_at: '2024-08-07T11:15:00Z',
+          repository: { full_name: 'foo/foo' }
+        },
+        {
+          id: 44,
+          name: 'test',
+          head_branch: 'master',
+          head_sha: 'abc125',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'failure',
+          workflow_id: 101,
+          created_at: '2024-08-08T12:00:00Z',
+          updated_at: '2024-08-08T12:10:00Z',
+          repository: { full_name: 'foo/foo' }
+        },
+        {
+          id: 45,
+          name: 'test',
+          head_branch: 'master',
+          head_sha: 'abc126',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'failure',
+          workflow_id: 101,
+          created_at: '2024-08-08T13:00:00Z',
+          updated_at: '2024-08-08T13:20:00Z',
+          repository: { full_name: 'foo/foo' }
+        },
+        {
+          id: 46,
+          name: 'test',
+          head_branch: 'master',
+          head_sha: 'abc127',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 101,
+          created_at: '2024-08-08T14:00:00Z',
+          updated_at: '2024-08-08T14:20:00Z',
+          repository: { full_name: 'foo/foo' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
+    f.qos_interval = 3
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      assert_in_delta(3600, f.average_build_mttr)
+    end
+  end
+
   def test_quality_of_service_average_hocs_and_files
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
