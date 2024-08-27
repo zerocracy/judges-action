@@ -117,12 +117,29 @@ class TestQualityOfService < Minitest::Test
       'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-07-15',
       body: {
-        total_count: 1, incomplete_results: false, items: [{ id: 50, number: 12, title: 'Awesome 12' }]
+        total_count: 1, incomplete_results: false, items: [
+          { id: 50, number: 12, title: 'Awesome 12', merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+        ]
       }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/12',
       body: { id: 50, number: 12, additions: 12, deletions: 5, changed_files: 3 }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC') }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [{ id: 22_449_326, submitted_at: Time.parse('2024-07-21 22:00:00 UTC') }]
     )
     fb = Factbase.new
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
@@ -237,6 +254,17 @@ class TestQualityOfService < Minitest::Test
         }
       ]
     )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC') }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -327,6 +355,17 @@ class TestQualityOfService < Minitest::Test
         }
       ]
     )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC') }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -384,11 +423,11 @@ class TestQualityOfService < Minitest::Test
       body: {
         total_count: 1, incomplete_results: false,
         items: [
-          { id: 50, number: 12, title: 'Awesome 12' },
-          { id: 52, number: 14, title: 'Awesome 14' },
-          { id: 54, number: 16, title: 'Awesome 16' },
-          { id: 56, number: 18, title: 'Awesome 18' },
-          { id: 58, number: 20, title: 'Awesome 20' }
+          { id: 50, number: 12, title: 'Awesome 12', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
+          { id: 52, number: 14, title: 'Awesome 14', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
+          { id: 54, number: 16, title: 'Awesome 16', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
+          { id: 56, number: 18, title: 'Awesome 18', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
+          { id: 58, number: 20, title: 'Awesome 20', merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
         ]
       }
     )
@@ -442,6 +481,22 @@ class TestQualityOfService < Minitest::Test
         changed_files: 4
       }
     )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC') }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/14/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/16/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/18/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/20/reviews?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -455,6 +510,113 @@ class TestQualityOfService < Minitest::Test
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(18.4, f.average_pull_hoc_size)
       assert_in_delta(2.8, f.average_pull_files_size)
+    end
+  end
+
+  def test_quality_of_service_average_review_time
+    WebMock.disable_net_connect!
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ number: 42, labels: [{ name: 'bug' }] }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          { id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC'),
+            merged_at: Time.parse('2024-08-27 18:30:00 UTC') },
+          { id: 51, number: 14, title: 'Awesome 14', created_at: Time.parse('2024-08-23 12:00:00 UTC'),
+            merged_at: Time.parse('2024-08-27 18:30:00 UTC') },
+          { id: 52, number: 16, title: 'Awesome 16', created_at: Time.parse('2024-08-25 12:00:00 UTC'),
+            merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12',
+      body: { id: 50, number: 12, additions: 10, deletions: 5, changed_files: 1 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/14',
+      body: { id: 51, number: 14, additions: 10, deletions: 5, changed_files: 1 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/16',
+      body: { id: 52, number: 16, additions: 10, deletions: 5, changed_files: 1 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [
+        {
+          id: 22_449_328, body: 'Some text 3', state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-23 10:00:00 UTC')
+        },
+        {
+          id: 22_449_327, body: 'Some text 2', state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-22 10:00:00 UTC')
+        },
+        {
+          id: 22_449_326, body: 'Some text 1', state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-21 22:00:00 UTC')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/14/reviews?per_page=100',
+      body: [
+        {
+          id: 22_449_329, body: 'Some text 1', state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-23 15:30:00 UTC')
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/16/reviews?per_page=100', body: [])
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
+    f.qos_interval = 3
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_in_delta(431_100, f.average_review_time)
     end
   end
 
@@ -594,12 +756,21 @@ class TestQualityOfService < Minitest::Test
       'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
       body: {
         total_count: 1, incomplete_results: false,
-        items: [{ id: 50, number: 12, title: 'Awesome 12' }]
+        items: [{ id: 50, number: 12, title: 'Awesome 12', merged_at: Time.parse('2024-08-23 18:30:00 UTC') }]
       }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/12',
       body: { id: 50, number: 12, additions: 12, deletions: 5, changed_files: 3 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [
+        {
+          id: 22_449_329, body: 'Some text 1', state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-23 15:30:00 UTC')
+        }
+      ]
     )
   end
 end
