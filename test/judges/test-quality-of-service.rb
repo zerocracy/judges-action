@@ -50,7 +50,7 @@ class TestQualityOfService < Minitest::Test
       status: 200,
       body: {
         workflow_runs: [
-          { id: 1 }
+          { id: 1, run_started_at: Time.now - rand(10_000) }
         ]
       }.to_json,
       headers: {
@@ -145,6 +145,7 @@ class TestQualityOfService < Minitest::Test
         workflow_id: 42,
         created_at: Time.now - rand(10_000),
         updated_at: Time.now - rand(10_000) + 100,
+        run_started_at: Time.now - rand(10_000),
         repository: {
           id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
           owner: { login: 'foo', id: 526_301, site_admin: false },
@@ -189,6 +190,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 101,
           created_at: '2024-08-07T10:00:00Z',
           updated_at: '2024-08-07T10:10:00Z',
+          run_started_at: '2024-08-07T10:00:00Z',
           repository: { full_name: 'foo/foo' }
         },
         {
@@ -202,6 +204,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 101,
           created_at: '2024-08-07T11:00:00Z',
           updated_at: '2024-08-07T11:15:00Z',
+          run_started_at: '2024-08-07T11:00:00Z',
           repository: { full_name: 'foo/foo' }
         },
         {
@@ -215,6 +218,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 102,
           created_at: '2024-08-08T12:00:00Z',
           updated_at: '2024-08-08T12:10:00Z',
+          run_started_at: '2024-08-08T12:00:00Z',
           repository: { full_name: 'foo/foo' }
         },
         {
@@ -228,6 +232,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 102,
           created_at: '2024-08-08T13:00:00Z',
           updated_at: '2024-08-08T13:20:00Z',
+          run_started_at: '2024-08-08T13:00:00Z',
           repository: { full_name: 'foo/foo' }
         }
       ]
@@ -241,7 +246,7 @@ class TestQualityOfService < Minitest::Test
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.to_a.first
-      assert_in_delta((3900 + 4200) / 2.0, f.average_build_mttr)
+      assert_in_delta(3600, f.average_build_mttr)
     end
   end
 
@@ -261,6 +266,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 101,
           created_at: '2024-08-07T10:00:00Z',
           updated_at: '2024-08-07T10:10:00Z',
+          run_started_at: '2024-08-07T10:00:00Z',
           repository: { full_name: 'foo/foo' }
         },
         {
@@ -274,6 +280,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 101,
           created_at: '2024-08-07T11:00:00Z',
           updated_at: '2024-08-07T11:15:00Z',
+          run_started_at: '2024-08-07T11:00:00Z',
           repository: { full_name: 'foo/foo' }
         },
         {
@@ -287,6 +294,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 101,
           created_at: '2024-08-08T12:00:00Z',
           updated_at: '2024-08-08T12:10:00Z',
+          run_started_at: '2024-08-08T12:00:00Z',
           repository: { full_name: 'foo/foo' }
         },
         {
@@ -300,6 +308,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 101,
           created_at: '2024-08-08T13:00:00Z',
           updated_at: '2024-08-08T13:20:00Z',
+          run_started_at: '2024-08-08T13:00:00Z',
           repository: { full_name: 'foo/foo' }
         },
         {
@@ -313,6 +322,7 @@ class TestQualityOfService < Minitest::Test
           workflow_id: 101,
           created_at: '2024-08-08T14:00:00Z',
           updated_at: '2024-08-08T14:20:00Z',
+          run_started_at: '2024-08-08T14:00:00Z',
           repository: { full_name: 'foo/foo' }
         }
       ]
@@ -326,7 +336,7 @@ class TestQualityOfService < Minitest::Test
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.to_a.first
-      assert_in_delta(97_500, f.average_build_mttr)
+      assert_in_delta(97_200, f.average_build_mttr)
     end
   end
 
