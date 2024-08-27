@@ -32,16 +32,16 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   total = 0
   success = 0
   duration = 0
-  mttrs = []
-  mttr = {}
+  ttrs = []
+  last_failed = {}
   Fbe.unmask_repos.each do |repo|
     Fbe.octo.repository_workflow_runs(repo, created: ">#{f.since.utc.iso8601[0..9]}")[:workflow_runs].each do |json|
       workflow_id = json[:workflow_id]
-      if json[:conclusion] == 'failure'
-        mttr[workflow_id] = json[:updated_at]
-      elsif json[:conclusion] == 'success' && mttr[workflow_id]
-        mttrs << (json[:updated_at] - mttr[workflow_id]).to_i
-        mttr.delete(workflow_id)
+      if json[:conclusion] == 'failure' && last_failed[workflow_id].nil?
+        last_failed[workflow_id] = json[:updated_at]
+      elsif json[:conclusion] == 'success' && last_failed[workflow_id]
+        ttrs << (json[:updated_at] - last_failed[workflow_id]).to_i
+        last_failed.delete(workflow_id)
       end
       total += 1
       success += json[:conclusion] == 'success' ? 1 : 0
@@ -50,7 +50,7 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   end
   f.average_build_success_rate = total.zero? ? 0 : success.to_f / total
   f.average_build_duration = total.zero? ? 0 : duration.to_f / total
-  f.average_build_mttr = mttrs.any? ? mttrs.sum / mttrs.size : 0
+  f.average_build_mttr = ttrs.any? ? ttrs.sum / ttrs.size : 0
 
   # Release intervals:
   dates = []

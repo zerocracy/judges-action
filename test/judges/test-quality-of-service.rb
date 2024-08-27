@@ -326,7 +326,7 @@ class TestQualityOfService < Minitest::Test
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.to_a.first
-      assert_in_delta(3600, f.average_build_mttr)
+      assert_in_delta(97_500, f.average_build_mttr)
     end
   end
 
