@@ -33,15 +33,15 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   success = 0
   duration = 0
   ttrs = []
-  last_failed = {}
+  failed = {}
   Fbe.unmask_repos.each do |repo|
     Fbe.octo.repository_workflow_runs(repo, created: ">#{f.since.utc.iso8601[0..9]}")[:workflow_runs].each do |json|
       workflow_id = json[:workflow_id]
-      if json[:conclusion] == 'failure' && last_failed[workflow_id].nil?
-        last_failed[workflow_id] = json[:updated_at]
-      elsif json[:conclusion] == 'success' && last_failed[workflow_id]
-        ttrs << (json[:updated_at] - last_failed[workflow_id]).to_i
-        last_failed.delete(workflow_id)
+      if json[:conclusion] == 'failure' && failed[workflow_id].nil?
+        failed[workflow_id] = json[:updated_at]
+      elsif json[:conclusion] == 'success' && failed[workflow_id]
+        ttrs << (json[:updated_at] - failed[workflow_id]).to_i
+        failed.delete(workflow_id)
       end
       total += 1
       success += json[:conclusion] == 'success' ? 1 : 0
