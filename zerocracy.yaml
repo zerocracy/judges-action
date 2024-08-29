@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   removed: 8
-  seconds: 1210.955613959
+  seconds: 582.195661912
   version: 0.26.0
   what: judges-summary
-  when: 2024-08-29 21:24:47.020869872 Z
+  when: 2024-08-29 22:14:29.913980674 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -55356,32 +55356,6 @@
   when: 2024-08-29 10:13:59.000000000 Z
   where: github
   who: 29139614
-- _id: 208906
-  _job: 5576
-  _time: 2024-08-29 13:17:20.759817214 Z
-  _version: 0.4.0/0.26.0/0.0.50
-  cost_of_qod:
-  - 26.17419571796884
-  - 16.11800332128553
-  - 19.329351455580113
-  - 3.630121063643354
-  - 3.48598158686649
-  - 2.1162974683544302
-  - 5.421069231982337
-  - 6.813358650731598
-  - 7.799424248510411
-  qod_per_day:
-  - 2.5488488282701915
-  - 2.924857143293144
-  - 3.037571429051574
-  - 7.988714286790978
-  - 9.58942857227318
-  - 7.222857143708444
-  - 7.2468571441813845
-  - 5.1160000008284054
-  - 4.267714286277028
-  what: learn-eva
-  when: 2024-08-29 13:17:16.124158684 Z
 - _id: 208912
   _time: 2024-08-29 14:06:40.834434953 Z
   _version: 0.4.0/0.26.0/
@@ -55628,20 +55602,6 @@
   when: 2024-08-29 20:18:07.000000000 Z
   where: github
   who: 526301
-- _id: 210383
-  _time: 2024-08-29 21:13:52.397873866 Z
-  _version: 0.4.0/0.26.0/
-  latest: 41256676866
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 210384
-  _time: 2024-08-29 21:13:58.314351047 Z
-  _version: 0.4.0/0.26.0/
-  latest: 41432648207
-  repository: 798641472
-  what: events-were-scanned
-  where: github
 - _id: 210385
   _time: 2024-08-29 21:14:17.761425834 Z
   _version: 0.4.0/0.26.0/
@@ -55666,101 +55626,197 @@
   when: 2024-08-29 21:05:57.000000000 Z
   where: github
   who: 8086956
-- _id: 210386
-  _time: 2024-08-29 21:14:35.996735733 Z
+- _id: 210518
+  _job: 5603
+  _time: 2024-08-29 21:25:16.271319115 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  award: 4
+  details: It's time to reward @Yegorov for the code review in zerocracy/baza#214,
+    the reward amount is 4.
+  greeting: "Great job on the review! \U0001F31F You've earned +4 points: +4 base,
+    -10 for minimal comments, but +10 to recognize your effort. Your balance now stands
+    at [+435](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep
+    up the good work and aim for more detailed feedback next time!"
+  href: https://github.com/zerocracy/baza/issues/214/#issuecomment-2319049414
+  is_human: 1
+  issue: 214
+  repository: 728758275
+  what: code-review-was-rewarded
+  when: 2024-08-29 21:25:16.293331732 Z
+  where: github
+  who: 2566462
+  why: Reviewed code in zerocracy/baza#214
+- _id: 210519
+  _job: 5603
+  _time: 2024-08-29 21:25:44.437038795 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  comments: 1
+  details: The pull request zerocracy/baza#214 with 86 HoC created by @Suban05 was
+    merged by @yegor256 after 5 hours of being in review and 1 comments.
+  hoc: 86
+  is_human: 1
+  issue: 214
+  merger: 526301
+  repository: 728758275
+  seconds: 19000
+  what: code-was-contributed
+  when: 2024-08-29 20:18:07.000000000 Z
+  where: github
+  who: 88084038
+- _id: 210520
+  _job: 5603
+  _time: 2024-08-29 21:25:48.907704270 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  comments: 2
+  details: The pull request zerocracy/baza#215 with 6 HoC created by @renovate[bot]
+    was merged by @rultor after 45 minutes of being in review and 2 comments.
+  hoc: 6
+  is_human: 0
+  issue: 215
+  merger: 8086956
+  repository: 728758275
+  seconds: 2758
+  what: code-was-contributed
+  when: 2024-08-29 21:05:57.000000000 Z
+  where: github
+  who: 29139614
+- _id: 210521
+  _job: 5603
+  _time: 2024-08-29 21:26:12.466701817 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  cost_of_qod:
+  - 26.17419571796884
+  - 16.11800332128553
+  - 19.329351455580113
+  - 3.630121063643354
+  - 3.48598158686649
+  - 2.1162974683544302
+  - 5.421069231982337
+  - 6.813358650731598
+  - 7.799424248510411
+  - 5.338809034907598
+  qod_per_day:
+  - 2.5488488282701915
+  - 2.924857143293144
+  - 3.037571429051574
+  - 7.988714286790978
+  - 9.58942857227318
+  - 7.222857143708444
+  - 7.2468571441813845
+  - 5.1160000008284054
+  - 4.267714286277028
+  - 4.174285714859865
+  what: learn-eva
+  when: 2024-08-29 21:26:07.800160328 Z
+- _id: 210522
+  _time: 2024-08-29 22:04:57.079643440 Z
   _version: 0.4.0/0.26.0/
-  latest: 41469852245
+  latest: 41256676866
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 210523
+  _time: 2024-08-29 22:05:03.056883090 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41432648207
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 210524
+  _time: 2024-08-29 22:05:13.334978241 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41470331878
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 210387
-  _time: 2024-08-29 21:14:41.056028144 Z
+- _id: 210525
+  _time: 2024-08-29 22:05:18.434672107 Z
   _version: 0.4.0/0.26.0/
   latest: 41113362700
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 210388
-  _time: 2024-08-29 21:14:47.380435272 Z
+- _id: 210526
+  _time: 2024-08-29 22:05:24.531403693 Z
   _version: 0.4.0/0.26.0/
   latest: 41466219495
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 210389
-  _time: 2024-08-29 21:14:53.603973170 Z
+- _id: 210527
+  _time: 2024-08-29 22:05:34.927595110 Z
   _version: 0.4.0/0.26.0/
-  latest: 41468864759
+  latest: 41470241172
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 210390
-  _time: 2024-08-29 21:14:59.856724825 Z
+- _id: 210528
+  _time: 2024-08-29 22:05:41.048087510 Z
   _version: 0.4.0/0.26.0/
   latest: 41449195794
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 210391
-  _time: 2024-08-29 21:15:04.581260006 Z
+- _id: 210529
+  _time: 2024-08-29 22:05:45.620922255 Z
   _version: 0.4.0/0.26.0/
   latest: 41272898311
   repository: 845143602
   what: events-were-scanned
   where: github
-- _id: 210399
-  _time: 2024-08-29 21:15:41.740072724 Z
+- _id: 210537
+  _time: 2024-08-29 22:06:24.174949659 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 845143602
   what: labels-were-scanned
   where: github
-- _id: 210452
-  _time: 2024-08-29 21:19:46.032574342 Z
+- _id: 210590
+  _time: 2024-08-29 22:10:25.481503252 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 210505
-  _time: 2024-08-29 21:23:52.961038999 Z
+- _id: 210592
+  _time: 2024-08-29 22:10:34.664782969 Z
   _version: 0.4.0/0.26.0/
   latest: 0
-  repository: 798641472
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 210509
-  _time: 2024-08-29 21:24:10.540086890 Z
+- _id: 210624
+  _time: 2024-08-29 22:12:59.127413430 Z
   _version: 0.4.0/0.26.0/
   latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 210514
-  _time: 2024-08-29 21:24:32.917936320 Z
-  _version: 0.4.0/0.26.0/
-  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 210515
-  _time: 2024-08-29 21:24:37.760463133 Z
+- _id: 210641
+  _time: 2024-08-29 22:14:16.469725561 Z
   _version: 0.4.0/0.26.0/
-  latest: 135
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 210642
+  _time: 2024-08-29 22:14:20.892457275 Z
+  _version: 0.4.0/0.26.0/
+  latest: 177
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 210516
-  _time: 2024-08-29 21:24:42.488973066 Z
+- _id: 210643
+  _time: 2024-08-29 22:14:25.355689966 Z
   _version: 0.4.0/0.26.0/
-  latest: 46
+  latest: 83
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 210517
-  _time: 2024-08-29 21:24:46.877289686 Z
+- _id: 210644
+  _time: 2024-08-29 22:14:29.777179688 Z
   _version: 0.4.0/0.26.0/
-  latest: 267
-  repository: 799177290
+  latest: 31
+  repository: 802720676
   what: labels-were-scanned
   where: github
