@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 1222.355328652
+  seconds: 1098.970484377
   version: 0.26.0
   what: judges-summary
-  when: 2024-08-30 05:25:07.442560003 Z
+  when: 2024-08-30 06:24:17.097347597 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -55680,34 +55680,6 @@
   when: 2024-08-29 21:05:57.000000000 Z
   where: github
   who: 29139614
-- _id: 210521
-  _job: 5603
-  _time: 2024-08-29 21:26:12.466701817 Z
-  _version: 0.4.0/0.26.0/0.0.50
-  cost_of_qod:
-  - 26.17419571796884
-  - 16.11800332128553
-  - 19.329351455580113
-  - 3.630121063643354
-  - 3.48598158686649
-  - 2.1162974683544302
-  - 5.421069231982337
-  - 6.813358650731598
-  - 7.799424248510411
-  - 5.338809034907598
-  qod_per_day:
-  - 2.5488488282701915
-  - 2.924857143293144
-  - 3.037571429051574
-  - 7.988714286790978
-  - 9.58942857227318
-  - 7.222857143708444
-  - 7.2468571441813845
-  - 5.1160000008284054
-  - 4.267714286277028
-  - 4.174285714859865
-  what: learn-eva
-  when: 2024-08-29 21:26:07.800160328 Z
 - _id: 210645
   _job: 5605
   _time: 2024-08-29 22:14:58.856820278 Z
@@ -55797,115 +55769,287 @@
   when: 2024-08-30 04:42:37.000000000 Z
   where: github
   who: 526301
-- _id: 211619
-  _time: 2024-08-30 05:15:40.301275551 Z
+- _id: 211751
+  _job: 5625
+  _time: 2024-08-30 05:25:54.877529308 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  comments: 1
+  details: The pull request zerocracy/fbe#86 with 14 HoC created by @Yegorov was merged
+    by @yegor256 after 13 hours of being in review and 1 comments.
+  hoc: 14
+  is_human: 1
+  issue: 86
+  merger: 526301
+  repository: 820463873
+  seconds: 49493
+  what: code-was-contributed
+  when: 2024-08-30 04:42:37.000000000 Z
+  where: github
+  who: 2566462
+- _id: 211752
+  _job: 5625
+  _time: 2024-08-30 05:26:18.463314869 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  cost_of_qod:
+  - 26.17419571796884
+  - 16.11800332128553
+  - 19.329351455580113
+  - 3.630121063643354
+  - 3.48598158686649
+  - 2.1162974683544302
+  - 5.421069231982337
+  - 6.813358650731598
+  - 7.799424248510411
+  - 5.338809034907598
+  qod_per_day:
+  - 2.5488488282701915
+  - 2.924857143293144
+  - 3.037571429051574
+  - 7.988714286790978
+  - 9.58942857227318
+  - 7.222857143708444
+  - 7.2468571441813845
+  - 5.1160000008284054
+  - 4.267714286277028
+  - 4.174285714859865
+  what: learn-eva
+  when: 2024-08-30 05:26:13.834850765 Z
+- _id: 211756
+  _time: 2024-08-30 06:06:34.546577633 Z
+  _version: 0.4.0/0.26.0/
+  commit: 9c144e6dcea937be7d6cebbc9753147890295b70
+  default_branch: master
+  details: 'A new Git push #20003868325 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 41478518058
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20003868325
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-30 06:02:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 211757
+  _time: 2024-08-30 06:06:38.939927305 Z
+  _version: 0.4.0/0.26.0/
+  commit: 000ab0d78d856f9c4cca94e388d3d1caf6b0728d
+  default_branch: master
+  details: 'A new Git push #20003846480 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 41478476731
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20003846480
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-30 06:00:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 211758
+  _time: 2024-08-30 06:06:43.300986426 Z
+  _version: 0.4.0/0.26.0/
+  commit: ce89c0f3fd996931b2e0a93651e82bd72a0cf17b
+  default_branch: master
+  details: 'A new Git push #20003830875 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 41478445333
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20003830875
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-30 05:58:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 211759
+  _time: 2024-08-30 06:06:47.643225215 Z
+  _version: 0.4.0/0.26.0/
+  commit: 0accbf0a76f42d9cc562118b52191683bb4bf2a8
+  default_branch: master
+  details: 'A new Git push #20003781021 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 41478345701
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20003781021
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-08-30 05:53:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 211760
+  _time: 2024-08-30 06:06:52.191610965 Z
+  _version: 0.4.0/0.26.0/
+  details: The issue zerocracy/baza.rb#14 has been opened by @yegor256.
+  event_id: 41478029292
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 14
+  repository: 840215648
+  what: issue-was-opened
+  when: 2024-08-30 05:36:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 211763
+  _time: 2024-08-30 06:07:07.804628220 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/judges-action#320 has been opened by @renovate[bot].
+  event_id: 41477859194
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 320
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-08-30 05:26:34.000000000 Z
+  where: github
+  who: 29139614
+- _id: 211854
+  _time: 2024-08-30 06:13:59.714651458 Z
   _version: 0.4.0/0.26.0/
   latest: 41256676866
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 211620
-  _time: 2024-08-30 05:15:45.666698807 Z
+- _id: 211855
+  _time: 2024-08-30 06:14:05.143337414 Z
   _version: 0.4.0/0.26.0/
   latest: 41432648207
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 211621
-  _time: 2024-08-30 05:15:50.948458717 Z
+- _id: 211856
+  _time: 2024-08-30 06:14:10.884524910 Z
   _version: 0.4.0/0.26.0/
-  latest: 41477247721
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/baza#216 has been opened by @renovate[bot].
+  event_id: 41478731783
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 216
+  repository: 728758275
+  what: pull-was-opened
+  when: 2024-08-30 06:12:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 211857
+  _time: 2024-08-30 06:14:19.297939338 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41478731783
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 211622
-  _time: 2024-08-30 05:15:55.528829485 Z
+- _id: 211858
+  _time: 2024-08-30 06:14:24.306819941 Z
   _version: 0.4.0/0.26.0/
-  latest: 41113362700
+  latest: 41478556216
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 211623
-  _time: 2024-08-30 05:16:01.097481782 Z
+- _id: 211859
+  _time: 2024-08-30 06:14:29.987780411 Z
   _version: 0.4.0/0.26.0/
   latest: 41477273478
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 211624
-  _time: 2024-08-30 05:16:06.539667766 Z
+- _id: 211860
+  _time: 2024-08-30 06:14:35.480263336 Z
   _version: 0.4.0/0.26.0/
-  latest: 41476686751
+  latest: 41477859194
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 211625
-  _time: 2024-08-30 05:16:11.944424263 Z
+- _id: 211861
+  _time: 2024-08-30 06:14:41.153182325 Z
   _version: 0.4.0/0.26.0/
   latest: 41449195794
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 211626
-  _time: 2024-08-30 05:16:16.279808101 Z
+- _id: 211862
+  _time: 2024-08-30 06:14:45.551790588 Z
   _version: 0.4.0/0.26.0/
   latest: 41272898311
   repository: 845143602
   what: events-were-scanned
   where: github
-- _id: 211634
-  _time: 2024-08-30 05:16:50.421175930 Z
+- _id: 211863
+  _time: 2024-08-30 06:14:54.223037331 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41478604134
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 211871
+  _time: 2024-08-30 06:15:30.290958895 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 845143602
   what: labels-were-scanned
   where: github
-- _id: 211687
-  _time: 2024-08-30 05:20:37.779125398 Z
+- _id: 211872
+  _time: 2024-08-30 06:15:34.424930800 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 211932
+  _time: 2024-08-30 06:19:57.954813858 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 211727
-  _time: 2024-08-30 05:23:28.939233780 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 211738
-  _time: 2024-08-30 05:24:15.778095847 Z
+- _id: 211979
+  _time: 2024-08-30 06:23:24.359025055 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 211747
-  _time: 2024-08-30 05:24:54.600951728 Z
+- _id: 211983
+  _time: 2024-08-30 06:23:41.730203012 Z
   _version: 0.4.0/0.26.0/
-  latest: 177
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 211988
+  _time: 2024-08-30 06:24:03.594440754 Z
+  _version: 0.4.0/0.26.0/
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 211989
+  _time: 2024-08-30 06:24:08.242028117 Z
+  _version: 0.4.0/0.26.0/
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 211748
-  _time: 2024-08-30 05:24:58.843498516 Z
+- _id: 211990
+  _time: 2024-08-30 06:24:12.614270422 Z
   _version: 0.4.0/0.26.0/
-  latest: 83
+  latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 211749
-  _time: 2024-08-30 05:25:03.119147749 Z
+- _id: 211991
+  _time: 2024-08-30 06:24:16.962099880 Z
   _version: 0.4.0/0.26.0/
-  latest: 267
+  latest: 91
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 211750
-  _time: 2024-08-30 05:25:07.305690491 Z
-  _version: 0.4.0/0.26.0/
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
