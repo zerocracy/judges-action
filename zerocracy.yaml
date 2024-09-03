@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 1158.74058668
+  seconds: 1216.046751264
   version: 0.26.0
   what: judges-summary
-  when: 2024-09-03 08:25:26.746140533 Z
+  when: 2024-09-03 09:25:31.851537420 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -58328,115 +58328,218 @@
   when: 2024-09-03 07:59:16.000000000 Z
   where: github
   who: 526301
-- _id: 228022
-  _time: 2024-09-03 08:15:22.213097596 Z
+- _id: 228149
+  _job: 5955
+  _time: 2024-09-03 08:26:49.418658932 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  award: -16
+  commit: f9a1e207261922903ff8700698fc963ddbbbdf23
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/swarm-template, the penalty amount is -16.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -16 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-123](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/zerocracy/swarm-template/commit/f9a1e207261922903ff8700698fc963ddbbbdf23/#commitcomment-146173741
+  is_human: 1
+  repository: 849726475
+  what: push-to-master-was-punished
+  when: 2024-09-03 08:26:49.439336672 Z
+  where: github
+  who: 526301
+  why: Pushed f9a1e2072 to the default branch 'master' in zerocracy/swarm-template
+- _id: 228152
+  _time: 2024-09-03 09:05:40.425973446 Z
   _version: 0.4.0/0.26.0/
-  latest: 41558692768
+  commit: 1867c8ffbb09d69f160da8d45f4e9384a6dd237e
+  default_branch: master
+  details: 'A new Git push #20054480906 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41571220041
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20054480906
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-03 08:55:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 228153
+  _time: 2024-09-03 09:05:45.155378155 Z
+  _version: 0.4.0/0.26.0/
+  commit: 3ba2ae67e87dbad0fb46a0cf8c28d369a533e36d
+  default_branch: master
+  details: 'A new Git push #20053874311 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41569934484
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20053874311
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-03 08:17:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 228157
+  _time: 2024-09-03 09:06:06.865757421 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/peter-evans-create-pull-request-7.x
+  details: The pull request zerocracy/judges-action#323 has been opened by @renovate[bot].
+  event_id: 41570229291
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 323
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-09-03 08:26:29.000000000 Z
+  where: github
+  who: 29139614
+- _id: 228160
+  _time: 2024-09-03 09:06:31.950684987 Z
+  _version: 0.4.0/0.26.0/
+  commit: d0e73f3523ab701e921db9cbcb449fece51bf63f
+  default_branch: master
+  details: 'A new Git push #20054528669 has arrived to zerocracy/swarm-template, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 41571321057
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20054528669
+  ref: refs/heads/master
+  repository: 849726475
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-03 08:58:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 228264
+  _time: 2024-09-03 09:14:54.787115981 Z
+  _version: 0.4.0/0.26.0/
+  details: The '#bug' label was attached by @yegor256 to the issue yegor256/judges#127.
+  is_human: 1
+  issue: 127
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: 2024-09-03 08:52:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 228290
+  _time: 2024-09-03 09:16:59.882211055 Z
+  _version: 0.4.0/0.26.0/
+  latest: 41571126212
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 228023
-  _time: 2024-09-03 08:15:27.974134835 Z
+- _id: 228291
+  _time: 2024-09-03 09:17:05.669672039 Z
   _version: 0.4.0/0.26.0/
   latest: 41558677526
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 228024
-  _time: 2024-09-03 08:15:34.027542888 Z
+- _id: 228292
+  _time: 2024-09-03 09:17:11.633316056 Z
   _version: 0.4.0/0.26.0/
-  latest: 41568836730
+  latest: 41571220041
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 228025
-  _time: 2024-09-03 08:15:39.263998779 Z
+- _id: 228293
+  _time: 2024-09-03 09:17:16.813769210 Z
   _version: 0.4.0/0.26.0/
   latest: 41555995484
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 228026
-  _time: 2024-09-03 08:15:45.189545133 Z
+- _id: 228294
+  _time: 2024-09-03 09:17:22.785962220 Z
   _version: 0.4.0/0.26.0/
   latest: 41557886892
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 228027
-  _time: 2024-09-03 08:15:51.061864587 Z
+- _id: 228295
+  _time: 2024-09-03 09:17:28.695021637 Z
   _version: 0.4.0/0.26.0/
-  latest: 41568376168
+  latest: 41570229291
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 228028
-  _time: 2024-09-03 08:15:57.028854747 Z
+- _id: 228296
+  _time: 2024-09-03 09:17:34.548926762 Z
   _version: 0.4.0/0.26.0/
   latest: 41513272327
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 228029
-  _time: 2024-09-03 08:16:01.851385918 Z
+- _id: 228297
+  _time: 2024-09-03 09:17:39.285509002 Z
   _version: 0.4.0/0.26.0/
-  latest: 41569316546
+  latest: 41571321057
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 228045
-  _time: 2024-09-03 08:17:17.555946629 Z
+- _id: 228302
+  _time: 2024-09-03 09:18:03.038711187 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 228312
+  _time: 2024-09-03 09:18:50.351015259 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 228093
-  _time: 2024-09-03 08:21:05.895816868 Z
+- _id: 228339
+  _time: 2024-09-03 09:20:59.181280213 Z
   _version: 0.4.0/0.26.0/
   latest: 0
-  repository: 799177290
+  repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 228098
-  _time: 2024-09-03 08:21:29.635895422 Z
+- _id: 228355
+  _time: 2024-09-03 09:22:14.495800853 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 228140
-  _time: 2024-09-03 08:24:48.361404732 Z
+- _id: 228394
+  _time: 2024-09-03 09:25:17.332251287 Z
   _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 228145
-  _time: 2024-09-03 08:25:12.299224770 Z
-  _version: 0.4.0/0.26.0/
-  latest: 98
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 228146
-  _time: 2024-09-03 08:25:16.878959706 Z
+- _id: 228395
+  _time: 2024-09-03 09:25:21.979571238 Z
   _version: 0.4.0/0.26.0/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 228147
-  _time: 2024-09-03 08:25:21.859693332 Z
+- _id: 228396
+  _time: 2024-09-03 09:25:26.861800795 Z
   _version: 0.4.0/0.26.0/
-  latest: 135
-  repository: 728758275
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 228148
-  _time: 2024-09-03 08:25:26.603329806 Z
+- _id: 228397
+  _time: 2024-09-03 09:25:31.701320332 Z
   _version: 0.4.0/0.26.0/
-  latest: 46
-  repository: 820463873
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
