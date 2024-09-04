@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.4.0" size="1519560">
+<fb version="0.4.0" size="1520190">
   <f>
     <added t="I">8</added>
     <cycles t="I">2</cycles>
-    <error>
-      <v t="S">undefined method `[]' for nil</v>
-      <v t="S">GET https://api.github.com/search/issues?per_page=100&amp;q=repo%3Azerocracy%2Fjudges-action+type%3Apr+closed%3A%3E2024-08-28: 403 - You have exceeded a secondary rate limit. Please wait a few minutes before you try again. If you reach out to GitHub Support for help, please include the request ID 0400:ECB7C:10E6BF4D:20666FAE:66D83773. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits</v>
-    </error>
+    <error t="S">undefined method `[]' for nil</error>
     <removed t="I">8</removed>
-    <seconds t="F">1694.308995451</seconds>
+    <seconds t="F">1196.262351156</seconds>
     <version t="S">0.26.0</version>
     <what t="S">judges-summary</what>
-    <when t="T">2024-09-04T10:33:24Z</when>
+    <when t="T">2024-09-04T11:24:28Z</when>
   </f>
   <f>
     <_id t="I">1</_id>
@@ -64420,78 +64417,6 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <why t="S">Contributed code in yegor256/judges#128</why>
   </f>
   <f>
-    <_id t="I">234082</_id>
-    <_time t="T">2024-09-04T10:15:02Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">0</latest>
-    <repository t="I">849726475</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">234135</_id>
-    <_time t="T">2024-09-04T10:19:22Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">0</latest>
-    <repository t="I">840215648</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">234186</_id>
-    <_time t="T">2024-09-04T10:23:33Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">0</latest>
-    <repository t="I">802720676</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">234192</_id>
-    <_time t="T">2024-09-04T10:24:03Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">98</latest>
-    <repository t="I">799113787</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">234193</_id>
-    <_time t="T">2024-09-04T10:24:07Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">87</latest>
-    <repository t="I">798641472</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">234194</_id>
-    <_time t="T">2024-09-04T10:24:12Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">135</latest>
-    <repository t="I">728758275</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">234195</_id>
-    <_time t="T">2024-09-04T10:24:17Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">46</latest>
-    <repository t="I">820463873</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
-    <_id t="I">234196</_id>
-    <_time t="T">2024-09-04T10:24:22Z</_time>
-    <_version t="S">0.4.0/0.26.0/</_version>
-    <latest t="I">217</latest>
-    <repository t="I">799177290</repository>
-    <what t="S">labels-were-scanned</what>
-    <where t="S">github</where>
-  </f>
-  <f>
     <_id t="I">234197</_id>
     <_time t="T">2024-09-04T10:24:27Z</_time>
     <_version t="S">0.4.0/0.26.0/</_version>
@@ -64501,8 +64426,139 @@ Happy hunting! 🕵️‍♂️💻</greeting>
     <average_issue_lifetime t="F">1883086.4545454546</average_issue_lifetime>
     <average_pull_lifetime t="F">63093.6</average_pull_lifetime>
     <average_release_interval t="F">176354.0</average_release_interval>
+    <composite t="F">0.763</composite>
+    <ffact t="I">139380</ffact>
     <since t="T">2024-08-28T10:24:27Z</since>
     <what t="S">quality-of-service</what>
     <when t="T">2024-09-04T10:24:27Z</when>
+  </f>
+  <f>
+    <_id t="I">234198</_id>
+    <_time t="T">2024-09-04T11:04:55Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <branch t="S">renovate/yard-0.x</branch>
+    <details t="S">The pull request yegor256/judges#131 has been opened by @renovate[bot].</details>
+    <event_id t="I">41612438478</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">131</issue>
+    <repository t="I">799113787</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-09-04T10:17:40Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">234199</_id>
+    <_time t="T">2024-09-04T11:05:05Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <branch t="S">renovate/rubocop-1.x</branch>
+    <details t="S">The pull request yegor256/judges#130 has been opened by @renovate[bot].</details>
+    <event_id t="I">41612433434</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <is_human t="I">0</is_human>
+    <issue t="I">130</issue>
+    <repository t="I">799113787</repository>
+    <what t="S">pull-was-opened</what>
+    <when t="T">2024-09-04T10:17:30Z</when>
+    <where t="S">github</where>
+    <who t="I">29139614</who>
+  </f>
+  <f>
+    <_id t="I">234327</_id>
+    <_time t="T">2024-09-04T11:16:10Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <branch t="S">renovate/yard-0.x</branch>
+    <comments t="I">2</comments>
+    <comments_appreciated t="I">1</comments_appreciated>
+    <comments_by_author t="I">0</comments_by_author>
+    <comments_by_reviewers t="I">3</comments_by_reviewers>
+    <comments_resolved t="I">0</comments_resolved>
+    <comments_to_code t="I">0</comments_to_code>
+    <details t="S">The pull request yegor256/judges#131 has been closed by @rultor, with 6 HoC and 2 comments.</details>
+    <event_id t="I">41613720926</event_id>
+    <event_type t="S">PullRequestEvent</event_type>
+    <failed_builds t="I">0</failed_builds>
+    <hoc t="I">6</hoc>
+    <is_human t="I">0</is_human>
+    <issue t="I">131</issue>
+    <repository t="I">799113787</repository>
+    <succeeded_builds t="I">8</succeeded_builds>
+    <what t="S">pull-was-merged</what>
+    <when t="T">2024-09-04T10:56:45Z</when>
+    <where t="S">github</where>
+    <who t="I">8086956</who>
+  </f>
+  <f>
+    <_id t="I">234332</_id>
+    <_time t="T">2024-09-04T11:17:32Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">0</latest>
+    <repository t="I">820463873</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">234342</_id>
+    <_time t="T">2024-09-04T11:18:21Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">0</latest>
+    <repository t="I">849726475</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">234369</_id>
+    <_time t="T">2024-09-04T11:20:37Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">0</latest>
+    <repository t="I">728758275</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">234381</_id>
+    <_time t="T">2024-09-04T11:21:36Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">0</latest>
+    <repository t="I">799177290</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">234385</_id>
+    <_time t="T">2024-09-04T11:21:56Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">0</latest>
+    <repository t="I">840215648</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">234414</_id>
+    <_time t="T">2024-09-04T11:24:18Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">67</latest>
+    <repository t="I">799113787</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">234415</_id>
+    <_time t="T">2024-09-04T11:24:23Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">87</latest>
+    <repository t="I">798641472</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
+  </f>
+  <f>
+    <_id t="I">234416</_id>
+    <_time t="T">2024-09-04T11:24:28Z</_time>
+    <_version t="S">0.4.0/0.26.0/</_version>
+    <latest t="I">73</latest>
+    <repository t="I">802720676</repository>
+    <what t="S">labels-were-scanned</what>
+    <where t="S">github</where>
   </f>
 </fb>

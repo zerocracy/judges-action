@@ -1,17 +1,12 @@
 ---
 - added: 8
   cycles: 2
-  error:
-  - undefined method `[]' for nil
-  - 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Azerocracy%2Fjudges-action+type%3Apr+closed%3A%3E2024-08-28:
-    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
-    you try again. If you reach out to GitHub Support for help, please include the
-    request ID 0400:ECB7C:10E6BF4D:20666FAE:66D83773. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
+  error: undefined method `[]' for nil
   removed: 8
-  seconds: 1694.308995451
+  seconds: 1196.262351156
   version: 0.26.0
   what: judges-summary
-  when: 2024-09-04 10:33:24.113207007 Z
+  when: 2024-09-04 11:24:28.857548699 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -60114,62 +60109,6 @@
   where: github
   who: 2566462
   why: Contributed code in yegor256/judges#128
-- _id: 234082
-  _time: 2024-09-04 10:15:02.396726025 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 234135
-  _time: 2024-09-04 10:19:22.583398695 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 234186
-  _time: 2024-09-04 10:23:33.416462656 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 234192
-  _time: 2024-09-04 10:24:03.023212502 Z
-  _version: 0.4.0/0.26.0/
-  latest: 98
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 234193
-  _time: 2024-09-04 10:24:07.806431228 Z
-  _version: 0.4.0/0.26.0/
-  latest: 87
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 234194
-  _time: 2024-09-04 10:24:12.789369092 Z
-  _version: 0.4.0/0.26.0/
-  latest: 135
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 234195
-  _time: 2024-09-04 10:24:17.688817010 Z
-  _version: 0.4.0/0.26.0/
-  latest: 46
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 234196
-  _time: 2024-09-04 10:24:22.529777418 Z
-  _version: 0.4.0/0.26.0/
-  latest: 217
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
 - _id: 234197
   _time: 2024-09-04 10:24:27.102124426 Z
   _version: 0.4.0/0.26.0/
@@ -60179,6 +60118,116 @@
   average_issue_lifetime: 1883086.4545454546
   average_pull_lifetime: 63093.6
   average_release_interval: 176354.0
+  composite: 0.763
+  ffact: 139380
   since: 2024-08-28 10:24:27.102338424 Z
   what: quality-of-service
   when: 2024-09-04 10:24:27.102265368 Z
+- _id: 234198
+  _time: 2024-09-04 11:04:55.500645504 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/yard-0.x
+  details: The pull request yegor256/judges#131 has been opened by @renovate[bot].
+  event_id: 41612438478
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 131
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-09-04 10:17:40.000000000 Z
+  where: github
+  who: 29139614
+- _id: 234199
+  _time: 2024-09-04 11:05:05.096062137 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/rubocop-1.x
+  details: The pull request yegor256/judges#130 has been opened by @renovate[bot].
+  event_id: 41612433434
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 130
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-09-04 10:17:30.000000000 Z
+  where: github
+  who: 29139614
+- _id: 234327
+  _time: 2024-09-04 11:16:10.996035265 Z
+  _version: 0.4.0/0.26.0/
+  branch: renovate/yard-0.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/judges#131 has been closed by @rultor, with 6
+    HoC and 2 comments.
+  event_id: 41613720926
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  is_human: 0
+  issue: 131
+  repository: 799113787
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-09-04 10:56:45.000000000 Z
+  where: github
+  who: 8086956
+- _id: 234332
+  _time: 2024-09-04 11:17:32.159209076 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 234342
+  _time: 2024-09-04 11:18:21.404753507 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 234369
+  _time: 2024-09-04 11:20:37.703280163 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 234381
+  _time: 2024-09-04 11:21:36.565891728 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 234385
+  _time: 2024-09-04 11:21:56.490702179 Z
+  _version: 0.4.0/0.26.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 234414
+  _time: 2024-09-04 11:24:18.978081157 Z
+  _version: 0.4.0/0.26.0/
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 234415
+  _time: 2024-09-04 11:24:23.879106083 Z
+  _version: 0.4.0/0.26.0/
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 234416
+  _time: 2024-09-04 11:24:28.715184189 Z
+  _version: 0.4.0/0.26.0/
+  latest: 73
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
