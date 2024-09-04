@@ -1,12 +1,17 @@
 ---
 - added: 8
   cycles: 2
-  error: undefined method `[]' for nil
+  error:
+  - undefined method `[]' for nil
+  - 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Azerocracy%2Fjudges-action+type%3Apr+closed%3A%3E2024-08-28:
+    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
+    you try again. If you reach out to GitHub Support for help, please include the
+    request ID 0400:ECB7C:10E6BF4D:20666FAE:66D83773. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
   removed: 8
-  seconds: 1243.51352087
+  seconds: 1694.308995451
   version: 0.26.0
   what: judges-summary
-  when: 2024-09-04 09:25:45.773505917 Z
+  when: 2024-09-04 10:33:24.113207007 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -60089,59 +60094,91 @@
   when: 2024-09-04 08:08:50.000000000 Z
   where: github
   who: 2566462
-- _id: 233854
-  _time: 2024-09-04 09:16:30.340344770 Z
+- _id: 233968
+  _job: 6038
+  _time: 2024-09-04 09:26:17.522035779 Z
+  _version: 0.4.0/0.26.1/0.0.50
+  award: 4
+  details: It's time to reward @Yegorov for the code contributed in yegor256/judges#128,
+    the reward amount is 4.
+  greeting: 'Thanks for the contribution! You''ve earned +4 points for this: +4 as
+    a basis; -4 for very few (2) comments; +4 to give you at least something. Please,
+    [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming.
+    Your running balance is [+404](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/yegor256/judges/issues/128/#issuecomment-2328363865
+  is_human: 1
+  issue: 128
+  repository: 799113787
+  what: code-contribution-was-rewarded
+  when: 2024-09-04 09:26:17.547810806 Z
+  where: github
+  who: 2566462
+  why: Contributed code in yegor256/judges#128
+- _id: 234082
+  _time: 2024-09-04 10:15:02.396726025 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 233907
-  _time: 2024-09-04 09:20:52.338828454 Z
+- _id: 234135
+  _time: 2024-09-04 10:19:22.583398695 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 233947
-  _time: 2024-09-04 09:24:07.764434793 Z
+- _id: 234186
+  _time: 2024-09-04 10:23:33.416462656 Z
   _version: 0.4.0/0.26.0/
   latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 234192
+  _time: 2024-09-04 10:24:03.023212502 Z
+  _version: 0.4.0/0.26.0/
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 233963
-  _time: 2024-09-04 09:25:26.334441581 Z
+- _id: 234193
+  _time: 2024-09-04 10:24:07.806431228 Z
   _version: 0.4.0/0.26.0/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 233964
-  _time: 2024-09-04 09:25:31.114861489 Z
+- _id: 234194
+  _time: 2024-09-04 10:24:12.789369092 Z
   _version: 0.4.0/0.26.0/
-  latest: 177
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 233965
-  _time: 2024-09-04 09:25:36.056733267 Z
+- _id: 234195
+  _time: 2024-09-04 10:24:17.688817010 Z
   _version: 0.4.0/0.26.0/
-  latest: 83
+  latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 233966
-  _time: 2024-09-04 09:25:40.884082908 Z
+- _id: 234196
+  _time: 2024-09-04 10:24:22.529777418 Z
   _version: 0.4.0/0.26.0/
-  latest: 91
+  latest: 217
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 233967
-  _time: 2024-09-04 09:25:45.623482003 Z
+- _id: 234197
+  _time: 2024-09-04 10:24:27.102124426 Z
   _version: 0.4.0/0.26.0/
-  latest: 31
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
+  average_backlog_size: 0.34375
+  average_build_duration: 104.1822966507177
+  average_build_success_rate: 0.9607655502392345
+  average_issue_lifetime: 1883086.4545454546
+  average_pull_lifetime: 63093.6
+  average_release_interval: 176354.0
+  since: 2024-08-28 10:24:27.102338424 Z
+  what: quality-of-service
+  when: 2024-09-04 10:24:27.102265368 Z
