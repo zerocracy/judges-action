@@ -1,11 +1,12 @@
 ---
 - added: 8
   cycles: 2
+  error: undefined method `[]' for nil
   removed: 8
-  seconds: 1295.77225891
+  seconds: 1243.51352087
   version: 0.26.0
   what: judges-summary
-  when: 2024-09-04 08:27:13.614943528 Z
+  when: 2024-09-04 09:25:45.773505917 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -59964,13 +59965,6 @@
   when: 2024-09-04 08:08:50.000000000 Z
   where: github
   who: 526301
-- _id: 233610
-  _time: 2024-09-04 08:18:01.802991642 Z
-  _version: 0.4.0/0.26.0/
-  latest: 41607983915
-  repository: 799113787
-  what: events-were-scanned
-  where: github
 - _id: 233611
   _time: 2024-09-04 08:18:08.030998108 Z
   _version: 0.4.0/0.26.0/
@@ -60056,59 +60050,98 @@
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 233624
-  _time: 2024-09-04 08:19:20.059929322 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
+- _id: 233720
+  _job: 6032
+  _time: 2024-09-04 08:27:43.774549075 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  award: 4
+  details: It's time to reward @Suban05 for the code review in yegor256/judges#128,
+    the reward amount is 4.
+  greeting: "Hey there! \U0001F44B Thanks for your review! You've earned +4 points,
+    which breaks down like this: +4 base points, -10 for having only 2 comments (policy
+    suggests at least 6), and +10 to keep you motivated. While more comments could've
+    boosted your score (up to 8 points!), we appreciate your effort. Remember, even
+    reviewing your own code can earn points! Your current balance is [+387](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work and aim for more detailed reviews next time! \U0001F4AA"
+  href: https://github.com/yegor256/judges/issues/128/#issuecomment-2328237540
+  is_human: 1
+  issue: 128
+  repository: 799113787
+  what: code-review-was-rewarded
+  when: 2024-09-04 08:27:43.798976439 Z
   where: github
-- _id: 233634
-  _time: 2024-09-04 08:20:09.734267794 Z
+  who: 88084038
+  why: Reviewed code in yegor256/judges#128
+- _id: 233721
+  _job: 6032
+  _time: 2024-09-04 08:28:18.837578359 Z
+  _version: 0.4.0/0.26.0/0.0.50
+  comments: 2
+  details: The pull request yegor256/judges#128 with 24 HoC created by @Yegorov was
+    merged by @yegor256 after 18 hours of being in review and 2 comments.
+  hoc: 24
+  is_human: 1
+  issue: 128
+  merger: 526301
+  repository: 799113787
+  seconds: 66531
+  what: code-was-contributed
+  when: 2024-09-04 08:08:50.000000000 Z
+  where: github
+  who: 2566462
+- _id: 233854
+  _time: 2024-09-04 09:16:30.340344770 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 233661
-  _time: 2024-09-04 08:22:25.803249284 Z
-  _version: 0.4.0/0.26.0/
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 233677
-  _time: 2024-09-04 08:23:46.908833882 Z
+- _id: 233907
+  _time: 2024-09-04 09:20:52.338828454 Z
   _version: 0.4.0/0.26.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 233716
-  _time: 2024-09-04 08:26:58.489755581 Z
+- _id: 233947
+  _time: 2024-09-04 09:24:07.764434793 Z
   _version: 0.4.0/0.26.0/
-  latest: 67
+  latest: 0
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 233717
-  _time: 2024-09-04 08:27:03.468474484 Z
+- _id: 233963
+  _time: 2024-09-04 09:25:26.334441581 Z
   _version: 0.4.0/0.26.0/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 233718
-  _time: 2024-09-04 08:27:08.592941793 Z
+- _id: 233964
+  _time: 2024-09-04 09:25:31.114861489 Z
   _version: 0.4.0/0.26.0/
-  latest: 267
+  latest: 177
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 233965
+  _time: 2024-09-04 09:25:36.056733267 Z
+  _version: 0.4.0/0.26.0/
+  latest: 83
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 233966
+  _time: 2024-09-04 09:25:40.884082908 Z
+  _version: 0.4.0/0.26.0/
+  latest: 91
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 233719
-  _time: 2024-09-04 08:27:13.474919272 Z
+- _id: 233967
+  _time: 2024-09-04 09:25:45.623482003 Z
   _version: 0.4.0/0.26.0/
-  latest: 73
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
