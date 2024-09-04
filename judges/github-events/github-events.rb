@@ -49,7 +49,8 @@ Fbe.iterate do
     contributors = Set.new
     if last
       Fbe.octo.compare(repo, last.tag, fact.tag)[:commits].each do |commit|
-        contributors << commit[:author][:id]
+        author_id = commit.dig(:author, :id)
+        contributors << author_id if author_id
       end
     else
       Fbe.octo.contributors(repo).each do |contributor|

@@ -879,7 +879,10 @@ class TestGithubEvents < Minitest::Test
           { sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } },
           { sha: 'b50489ead5e8aa7', author: { login: 'Yegorov64', id: 2_566_463 } },
           { sha: 'c50489ead5e8aa8', author: { login: 'Yegorov128', id: 2_566_464 } },
-          { sha: 'd50489ead5e8aa9', author: { login: 'Yegorov', id: 2_566_462 } }
+          { sha: 'd50489ead5e8aa9', author: { login: 'Yegorov', id: 2_566_462 } },
+          { sha: 'e50489ead5e8aa9', author: nil },
+          { sha: 'e60489ead5e8aa9' },
+          { sha: 'e70489ead5e8aa9', author: { login: 'NoUser' } }
         ],
         files: [
           { additions: 15, deletions: 40, changes: 55 },
