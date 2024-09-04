@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 .ONESHELL:
-.PHONY: clean test all entry entry rmi verify rubocop
+.PHONY: clean test all entry rmi verify rubocop
 .SHELLFLAGS := -e -o pipefail -c
 SHELL := /bin/bash
 
@@ -37,7 +37,7 @@ test: target/docker-image.txt
 	echo "$$?" > target/test.exit
 
 entry: target/docker-image.txt
-	img=$$(cat target/docker-image.txt)
+	img=$$(cat $<)
 	(
 		echo 'testing=yes'
 		echo 'repositories=yegor256/judges'
@@ -71,8 +71,8 @@ verify:
 
 target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock
 	mkdir -p "$$(dirname $@)"
-	sudo docker build -t judges-action "$$(pwd)"
-	sudo docker build -t judges-action -q "$$(pwd)" > "$@"
+	docker build -t judges-action "$$(pwd)"
+	docker build -t judges-action -q "$$(pwd)" > "$@"
 
 clean:
 	rm -f target
