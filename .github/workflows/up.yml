@@ -43,7 +43,7 @@ jobs:
           cd ..
           rm -rf pages-action
           sed -E -i "s/pages-action@.+$/pages-action@${latest}/g" README.md
-      - uses: peter-evans/create-pull-request@v6
+      - uses: peter-evans/create-pull-request@v7
         with:
           branch: version-up
           commit-message: 'new version in README'
