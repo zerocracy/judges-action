@@ -141,6 +141,7 @@ class TestQualityOfService < Minitest::Test
       'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
       body: [{ id: 22_449_326, submitted_at: Time.parse('2024-07-21 22:00:00 UTC') }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     fb = Factbase.new
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
@@ -176,6 +177,7 @@ class TestQualityOfService < Minitest::Test
         }
       }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -265,6 +267,7 @@ class TestQualityOfService < Minitest::Test
       'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
       body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -366,6 +369,7 @@ class TestQualityOfService < Minitest::Test
       'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
       body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -497,6 +501,11 @@ class TestQualityOfService < Minitest::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/16/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/18/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/20/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/14/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/16/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/18/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/20/comments?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -513,7 +522,7 @@ class TestQualityOfService < Minitest::Test
     end
   end
 
-  def test_quality_of_service_average_review_time
+  def test_quality_of_service_average_review_time_and_comments
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
@@ -605,6 +614,137 @@ class TestQualityOfService < Minitest::Test
       ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/16/reviews?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100',
+      body: [
+        {
+          pull_request_review_id: 22_687_249,
+          id: 17_361_949,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          body: 'Some comment 1',
+          created_at: Time.parse('2024-09-05 10:31:06 UTC'),
+          updated_at: Time.parse('2024-09-05 10:33:04 UTC'),
+          author_association: 'MEMBER'
+        },
+        {
+          pull_request_review_id: 22_687_503,
+          id: 17_361_950,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 2',
+          created_at: Time.parse('2024-09-05 11:40:00 UTC'),
+          updated_at: Time.parse('2024-09-05 11:41:05 UTC'),
+          author_association: 'CONTRIBUTOR'
+        },
+        {
+          pull_request_review_id: 22_687_543,
+          id: 17_361_955,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 3',
+          created_at: Time.parse('2024-09-05 15:55:07 UTC'),
+          updated_at: Time.parse('2024-09-05 15:55:07 UTC'),
+          author_association: 'CONTRIBUTOR'
+        },
+        {
+          pull_request_review_id: 22_687_563,
+          id: 17_361_960,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 4',
+          created_at: Time.parse('2024-09-05 16:40:00 UTC'),
+          updated_at: Time.parse('2024-09-05 16:41:05 UTC'),
+          author_association: 'CONTRIBUTOR'
+        },
+        {
+          pull_request_review_id: 22_687_573,
+          id: 17_361_970,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 5',
+          created_at: Time.parse('2024-09-05 17:55:07 UTC'),
+          updated_at: Time.parse('2024-09-05 17:55:07 UTC'),
+          author_association: 'CONTRIBUTOR'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/14/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/16/comments?per_page=100',
+      body: [
+        {
+          pull_request_review_id: 22_687_505,
+          id: 17_371_800,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          body: 'Some comment 1',
+          created_at: Time.parse('2024-09-05 10:31:06 UTC'),
+          updated_at: Time.parse('2024-09-05 10:33:04 UTC'),
+          author_association: 'MEMBER'
+        },
+        {
+          pull_request_review_id: 22_687_607,
+          id: 17_371_810,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 2',
+          created_at: Time.parse('2024-09-05 11:40:00 UTC'),
+          updated_at: Time.parse('2024-09-05 11:41:05 UTC'),
+          author_association: 'CONTRIBUTOR'
+        },
+        {
+          pull_request_review_id: 22_687_617,
+          id: 17_371_820,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 3',
+          created_at: Time.parse('2024-09-05 12:40:00 UTC'),
+          updated_at: Time.parse('2024-09-05 12:41:05 UTC'),
+          author_association: 'CONTRIBUTOR'
+        },
+        {
+          pull_request_review_id: 22_687_627,
+          id: 17_371_820,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 4',
+          created_at: Time.parse('2024-09-05 13:40:00 UTC'),
+          updated_at: Time.parse('2024-09-05 13:41:05 UTC'),
+          author_association: 'CONTRIBUTOR'
+        },
+        {
+          pull_request_review_id: 22_687_637,
+          id: 17_371_830,
+          diff_hunk: "@@ -427,4 +481,107 @@ def example\n",
+          path: 'test/example.rb',
+          commit_id: '11e3a0dd2d1',
+          user: { login: 'Yegorov', id: 123_234_123, type: 'User' },
+          body: 'Some comment 5',
+          created_at: Time.parse('2024-09-05 14:40:00 UTC'),
+          updated_at: Time.parse('2024-09-05 14:41:05 UTC'),
+          author_association: 'CONTRIBUTOR'
+        }
+      ]
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -617,6 +757,7 @@ class TestQualityOfService < Minitest::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(431_100, f.average_review_time)
+      assert_in_delta(3.333, f.average_review_size)
     end
   end
 
