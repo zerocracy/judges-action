@@ -522,7 +522,7 @@ class TestQualityOfService < Minitest::Test
     end
   end
 
-  def test_quality_of_service_average_review_time_and_comments
+  def test_quality_of_service_average_review_time_comments_and_reviewers
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
@@ -591,16 +591,28 @@ class TestQualityOfService < Minitest::Test
       'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
       body: [
         {
-          id: 22_449_328, body: 'Some text 3', state: 'CHANGES_REQUESTED',
-          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-23 10:00:00 UTC')
+          id: 22_449_328,
+          body: 'Some text 3',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 10:00:00 UTC')
         },
         {
-          id: 22_449_327, body: 'Some text 2', state: 'CHANGES_REQUESTED',
-          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-22 10:00:00 UTC')
+          id: 22_449_327,
+          body: 'Some text 2',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-22 10:00:00 UTC')
         },
         {
-          id: 22_449_326, body: 'Some text 1', state: 'CHANGES_REQUESTED',
-          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-21 22:00:00 UTC')
+          id: 22_449_326,
+          body: 'Some text 1',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-21 22:00:00 UTC')
         }
       ]
     )
@@ -608,8 +620,68 @@ class TestQualityOfService < Minitest::Test
       'https://api.github.com/repos/foo/foo/pulls/14/reviews?per_page=100',
       body: [
         {
-          id: 22_449_329, body: 'Some text 1', state: 'CHANGES_REQUESTED',
-          author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-23 15:30:00 UTC')
+          id: 22_449_329,
+          body: 'Some text 1',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 15:30:00 UTC')
+        },
+        {
+          id: 22_449_330,
+          body: 'Some text 2',
+          user: { login: 'rultor', id: 526_303, type: 'Bot' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 16:30:00 UTC')
+        },
+        {
+          id: 22_449_331,
+          body: 'Some text 3',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 17:30:00 UTC')
+        },
+        {
+          id: 22_449_335,
+          body: 'Some text 4',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 18:30:00 UTC')
+        },
+        {
+          id: 22_449_336,
+          body: 'Some text 5',
+          user: { login: 'rultor', id: 526_303, type: 'Bot' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 19:30:00 UTC')
+        },
+        {
+          id: 22_449_337,
+          body: 'Some text 6',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 20:30:00 UTC')
+        },
+        {
+          id: 22_449_338,
+          body: 'Some text 7',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 21:30:00 UTC')
+        },
+        {
+          id: 22_449_339,
+          body: 'Some text 8',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-23 22:30:00 UTC')
         }
       ]
     )
@@ -758,6 +830,7 @@ class TestQualityOfService < Minitest::Test
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(431_100, f.average_review_time)
       assert_in_delta(3.333, f.average_review_size)
+      assert_in_delta(1.666, f.average_reviewers_per_pull)
     end
   end
 
