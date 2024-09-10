@@ -124,18 +124,22 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   f.average_pull_hoc_size = hocs.empty? ? 0 : hocs.sum.to_f / hocs.size
   f.average_pull_files_size = files.empty? ? 0 : files.sum.to_f / files.size
 
-  # Average review time and comments
+  # Average review time, comments and reviewers
   review_times = []
   review_comments = []
+  reviewers = []
   Fbe.unmask_repos.each do |repo|
     Fbe.octo.search_issues(
       "repo:#{repo} type:pr is:merged closed:>#{f.since.utc.iso8601[0..9]}"
     )[:items].each do |pr|
-      review = Fbe.octo.pull_request_reviews(repo, pr[:number]).min_by { |r| r[:submitted_at] }
+      reviews = Fbe.octo.pull_request_reviews(repo, pr[:number])
+      review = reviews.min_by { |r| r[:submitted_at] }
       review_times << (pr[:merged_at] - review[:submitted_at]).to_i if review
       review_comments << Fbe.octo.review_comments(repo, pr[:number]).size
+      reviewers << reviews.map { |r| r.dig(:user, :id) }.uniq.size
     end
   end
   f.average_review_time = review_times.empty? ? 0 : review_times.sum.to_f / review_times.size
   f.average_review_size = review_comments.empty? ? 0 : review_comments.sum.to_f / review_comments.size
+  f.average_reviewers_per_pull = reviewers.empty? ? 0 : reviewers.sum.to_f / reviewers.size
 end
