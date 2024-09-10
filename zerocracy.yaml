@@ -1,11 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
+  error: undefined method `-' for nil
   removed: 8
-  seconds: 768.06705307
+  seconds: 2158.813583721
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-09 15:17:36.600109032 Z
+  when: 2024-09-10 12:44:12.201175702 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -64388,44 +64389,6 @@
   when: 2024-09-09 08:59:37.000000000 Z
   where: github
   who: 526301
-- _id: 254814
-  _job: 6438
-  _time: 2024-09-09 12:21:16.277299296 Z
-  _version: 0.4.0/0.26.1/0.0.51
-  cost_of_qod:
-  - 26.17419571796884
-  - 16.11800332128553
-  - 19.329351455580113
-  - 3.630121063643354
-  - 3.48598158686649
-  - 2.1162974683544302
-  - 5.421069231982337
-  - 6.813358650731598
-  - 7.799424248510411
-  - 5.338809034907598
-  - 1.320841652587928
-  - 0.10220115742810787
-  - 0.5296817985639738
-  - 0.3300641267446247
-  - 0.17081947797567532
-  qod_per_day:
-  - 2.5488488282701915
-  - 2.924857143293144
-  - 3.037571429051574
-  - 7.988714286790978
-  - 9.58942857227318
-  - 7.222857143708444
-  - 7.2468571441813845
-  - 5.1160000008284054
-  - 4.267714286277028
-  - 4.174285714859865
-  - 9.301428572500205
-  - 11.182428573670734
-  - 14.564000002692676
-  - 12.1188571441293
-  - 12.544571429990324
-  what: learn-eva
-  when: 2024-09-09 12:21:10.588558899 Z
 - _id: 254817
   _time: 2024-09-09 13:09:54.002480497 Z
   _version: 0.4.0/0.26.1/
@@ -64462,115 +64425,543 @@
   when: 2024-09-09 11:45:33.000000000 Z
   where: github
   who: 526301
-- _id: 255325
-  _time: 2024-09-09 15:04:57.673807149 Z
+- _id: 255707
+  _time: 2024-09-09 18:06:11.624113816 Z
+  _version: 0.4.0/0.26.1/
+  commit: 73e0696c678aa777871f89087c820c0f2ce9302c
+  default_branch: master
+  details: 'A new Git push #20150174579 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41756543319
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150174579
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:03:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 255708
+  _time: 2024-09-09 18:06:17.505623037 Z
+  _version: 0.4.0/0.26.1/
+  commit: 93e5cde115951151cb4801ac5b4a144d43c411c3
+  default_branch: master
+  details: 'A new Git push #20149932183 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41756026739
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20149932183
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 14:50:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 255709
+  _time: 2024-09-09 18:06:23.131574834 Z
+  _version: 0.4.0/0.26.1/
+  commit: 63293c6d771c55e8e62a50a378b7f657930290ae
+  default_branch: master
+  details: 'A new Git push #20149693227 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41755516408
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20149693227
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 14:37:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 255837
+  _time: 2024-09-09 18:18:56.493056211 Z
+  _version: 0.4.0/0.26.1/
+  commit: 15290e4321936fad61b22fe277a24f0ea63705ac
+  default_branch: master
+  details: 'A new Git push #20150510297 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41757249830
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150510297
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:21:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 255838
+  _time: 2024-09-09 18:19:02.491386759 Z
+  _version: 0.4.0/0.26.1/
+  commit: 290e341edfe770106a783b6b697a48ef2f1e0510
+  default_branch: master
+  details: 'A new Git push #20150492652 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41757211472
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150492652
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:20:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 255839
+  _time: 2024-09-09 18:19:08.115468900 Z
+  _version: 0.4.0/0.26.1/
+  commit: 88deab72cb72585dc2f08d32bf94a7431772551b
+  default_branch: master
+  details: 'A new Git push #20150468138 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41757159550
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150468138
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:19:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 255947
+  _time: 2024-09-09 19:04:54.508617633 Z
+  _version: 0.4.0/0.26.1/
+  commit: 4884db19cde834282c6586ba0fb1879b5c8facef
+  default_branch: master
+  details: 'A new Git push #20151191781 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41758685650
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20151191781
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 16:02:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 255948
+  _time: 2024-09-09 19:05:00.303450108 Z
+  _version: 0.4.0/0.26.1/
+  commit: dea38c8003c73ea1f128792080299f37c933a4a9
+  default_branch: master
+  details: 'A new Git push #20150994528 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41758271274
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150994528
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:50:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 255949
+  _time: 2024-09-09 19:05:05.731244263 Z
+  _version: 0.4.0/0.26.1/
+  commit: 6c9efc1f8580fb763ecf5b25a9004ca95a89dcf4
+  default_branch: master
+  details: 'A new Git push #20150969450 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41758217985
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150969450
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:49:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 255950
+  _time: 2024-09-09 19:05:11.298326646 Z
+  _version: 0.4.0/0.26.1/
+  commit: 9296cd080cdfa7b705f5959b5fdf23862e92210f
+  default_branch: master
+  details: 'A new Git push #20150891968 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41758053859
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150891968
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:44:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 255951
+  _time: 2024-09-09 19:05:16.968756874 Z
+  _version: 0.4.0/0.26.1/
+  commit: 1a1a892d140237551979f78e389c03184a56b51c
+  default_branch: master
+  details: 'A new Git push #20150812218 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41757885527
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150812218
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:39:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 255952
+  _time: 2024-09-09 19:05:22.607162501 Z
+  _version: 0.4.0/0.26.1/
+  commit: 69e2b03d448f8fdeeaea91886706bea9acc5effd
+  default_branch: master
+  details: 'A new Git push #20150791843 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41757842407
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20150791843
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 15:38:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 256335
+  _time: 2024-09-09 21:04:58.873601466 Z
+  _version: 0.4.0/0.26.1/
+  commit: 2f2a545113e2e7df1e385bf1fda6c3e9c9fe0488
+  default_branch: master
+  details: 'A new Git push #20152656727 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41761704758
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20152656727
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-09 17:40:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 256603
+  _time: 2024-09-09 22:05:39.820772853 Z
+  _version: 0.4.0/0.26.1/
+  comments: 3
+  commits: 1
+  details: The pull request zerocracy/judges-action#331 has been reviewed by @Suban05
+    with 100 HoC and 3 comments.
+  event_id: 41764391136
+  event_type: PullRequestReviewEvent
+  files: 3
+  hoc: 100
+  is_human: 1
+  issue: 331
+  repository: 799177290
+  what: pull-was-reviewed
+  when: 2024-09-09 19:13:08.000000000 Z
+  where: github
+  who: 88084038
+- _id: 256604
+  _time: 2024-09-09 22:05:56.491401276 Z
+  _version: 0.4.0/0.26.1/
+  branch: '192'
+  details: The pull request zerocracy/judges-action#331 has been opened by @Yegorov.
+  event_id: 41763856581
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 331
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-09-09 18:54:11.000000000 Z
+  where: github
+  who: 2566462
+- _id: 256845
+  _job: 6476
+  _time: 2024-09-09 22:29:56.737087583 Z
+  _version: 0.4.0/0.26.1/0.0.51
+  author: 2566462
+  comments: 3
+  details: The pull request zerocracy/judges-action#331 with 100 HoC created by @Yegorov
+    was reviewed by @Suban05 after 18 minutes and 3 comments.
+  hoc: 100
+  is_human: 1
+  issue: 331
+  repository: 799177290
+  seconds: 1137
+  what: code-was-reviewed
+  when: 2024-09-09 19:13:08.000000000 Z
+  where: github
+  who: 88084038
+- _id: 256983
+  _time: 2024-09-10 00:18:33.213665655 Z
+  _version: 0.4.0/0.26.1/
+  details: The issue zerocracy/baza#244 has been opened by @Yegorov.
+  event_id: 41766706872
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 244
+  repository: 728758275
+  what: issue-was-opened
+  when: 2024-09-09 20:35:27.000000000 Z
+  where: github
+  who: 2566462
+- _id: 257972
+  _job: 6499
+  _time: 2024-09-10 06:20:34.143624972 Z
+  _version: 0.4.0/0.26.1/0.0.51
+  cost_of_qod:
+  - 26.17419571796884
+  - 16.11800332128553
+  - 19.329351455580113
+  - 3.630121063643354
+  - 3.48598158686649
+  - 2.1162974683544302
+  - 5.421069231982337
+  - 6.813358650731598
+  - 7.799424248510411
+  - 5.338809034907598
+  - 1.320841652587928
+  - 0.10220115742810787
+  - 0.5296817985639738
+  - 0.3300641267446247
+  - 0.17081947797567532
+  qod_per_day:
+  - 2.5488488282701915
+  - 2.924857143293144
+  - 3.037571429051574
+  - 7.988714286790978
+  - 9.58942857227318
+  - 7.222857143708444
+  - 7.2468571441813845
+  - 5.1160000008284054
+  - 4.267714286277028
+  - 4.174285714859865
+  - 9.301428572500205
+  - 11.182428573670734
+  - 14.564000002692676
+  - 12.1188571441293
+  - 12.544571429990324
+  what: learn-eva
+  when: 2024-09-10 06:20:27.559991290 Z
+- _id: 258165
+  _time: 2024-09-10 08:11:34.828348547 Z
+  _version: 0.4.0/0.26.1/
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza#244.
+  is_human: 1
+  issue: 244
+  label: bug
+  repository: 728758275
+  what: label-was-attached
+  when: 2024-09-10 07:09:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 258221
+  _time: 2024-09-10 08:16:49.018746418 Z
+  _version: 0.4.0/0.26.1/
+  commit: c8853ed000994573a101ccc8e7f3f311016d210f
+  default_branch: master
+  details: 'A new Git push #20162431770 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41781046709
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20162431770
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-10 08:16:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 258348
+  _job: 6506
+  _time: 2024-09-10 08:30:13.756501182 Z
+  _version: 0.4.0/0.26.1/0.0.51
+  details: 'In the repository #728758275, the user #526301 attached the ''#bug'' label
+    to the issue #244 reported by the user #2566462; this means that a bug was-accepted
+    as valid, by the project team.'
+  is_human: 1
+  issue: 244
+  reporter: 2566462
+  repository: 728758275
+  what: bug-was-accepted
+  when: 2024-09-10 07:09:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 258484
+  _job: 6508
+  _time: 2024-09-10 09:17:42.793833104 Z
+  _version: 0.4.0/0.26.1/0.0.51
+  award: 8
+  details: It's time to reward @Yegorov for the bug reported in zerocracy/baza#244,
+    the reward amount is 8.
+  greeting: "Hey there, bug hunter! \U0001F41B Thanks for spotting that new bug –
+    you've just bagged yourself 8 points! That's exactly what our policy awards for
+    accepted bug reports. Nice work on helping us boost our project quality! Keep
+    your eyes peeled for anything else that [doesn't look quite right](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    in the repo. Remember, we're always keen to [hear about issues](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html),
+    so [report away](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)!
+    Your current score is looking good at [+307](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the great work!"
+  href: https://github.com/zerocracy/baza/issues/244/#issuecomment-2340123232
+  is_human: 1
+  issue: 244
+  repository: 728758275
+  what: bug-report-was-rewarded
+  when: 2024-09-10 09:17:42.818113614 Z
+  where: github
+  who: 2566462
+  why: Reported bug in zerocracy/baza#244
+- _id: 258485
+  _time: 2024-09-10 10:05:00.597587514 Z
+  _version: 0.4.0/0.26.1/
+  total_forks: 15
+  total_releases: 296
+  total_repositories: 8
+  total_stars: 33
+  what: dimensions-of-terrain
+  when: 2024-09-10 10:05:00.597773993 Z
+- _id: 258967
+  _time: 2024-09-10 12:17:52.275183038 Z
+  _version: 0.4.0/0.26.1/
+  average_backlog_size: 0.109375
+  average_build_duration: 132.5934914506343
+  average_build_mttr: -51246
+  average_build_success_rate: 0.8119139547710976
+  average_issue_lifetime: 1492187.857142857
+  average_pull_files_size: 1.8571428571428572
+  average_pull_hoc_size: 25.714285714285715
+  average_pull_lifetime: 88336.86486486487
+  average_pull_rejection_rate: 0.05405405405405406
+  average_release_interval: 79915.0
+  since: 2024-09-03 12:17:52.275465535 Z
+  what: quality-of-service
+  when: 2024-09-10 12:17:52.275365258 Z
+- _id: 258968
+  _time: 2024-09-10 12:30:54.232040392 Z
   _version: 0.4.0/0.26.1/
   latest: 41715394433
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 255326
-  _time: 2024-09-09 15:05:04.454572340 Z
+- _id: 258969
+  _time: 2024-09-10 12:31:01.386302753 Z
   _version: 0.4.0/0.26.1/
   latest: 41715395779
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 255327
-  _time: 2024-09-09 15:05:11.451145674 Z
+- _id: 258970
+  _time: 2024-09-10 12:31:08.748246814 Z
   _version: 0.4.0/0.26.1/
-  latest: 41748915924
+  latest: 41783316369
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 255328
-  _time: 2024-09-09 15:05:17.698873071 Z
+- _id: 258971
+  _time: 2024-09-10 12:31:15.233559491 Z
   _version: 0.4.0/0.26.1/
   latest: 41727961345
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 255329
-  _time: 2024-09-09 15:05:24.562607893 Z
+- _id: 258972
+  _time: 2024-09-10 12:31:22.763992525 Z
   _version: 0.4.0/0.26.1/
   latest: 41716109159
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 255330
-  _time: 2024-09-09 15:05:30.915506352 Z
+- _id: 258973
+  _time: 2024-09-10 12:31:29.713710005 Z
   _version: 0.4.0/0.26.1/
-  latest: 41750059986
+  latest: 41764462519
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 255331
-  _time: 2024-09-09 15:05:37.579331079 Z
+- _id: 258974
+  _time: 2024-09-10 12:31:37.143206918 Z
   _version: 0.4.0/0.26.1/
   latest: 41684137883
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 255332
-  _time: 2024-09-09 15:05:43.362421751 Z
+- _id: 258975
+  _time: 2024-09-10 12:31:43.183077516 Z
   _version: 0.4.0/0.26.1/
   latest: 41690448208
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 255348
-  _time: 2024-09-09 15:07:12.526179958 Z
+- _id: 258991
+  _time: 2024-09-10 12:33:17.590690293 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 255401
-  _time: 2024-09-09 15:12:10.836447109 Z
+- _id: 259044
+  _time: 2024-09-10 12:38:19.816140079 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 255441
-  _time: 2024-09-09 15:15:54.696085535 Z
+- _id: 259095
+  _time: 2024-09-10 12:43:13.822992643 Z
   _version: 0.4.0/0.26.1/
   latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 259101
+  _time: 2024-09-10 12:43:49.205774416 Z
+  _version: 0.4.0/0.26.1/
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 255447
-  _time: 2024-09-09 15:16:28.903135016 Z
+- _id: 259102
+  _time: 2024-09-10 12:43:54.781508967 Z
   _version: 0.4.0/0.26.1/
-  latest: 0
+  latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 255456
-  _time: 2024-09-09 15:17:19.065439203 Z
+- _id: 259103
+  _time: 2024-09-10 12:44:00.611318843 Z
   _version: 0.4.0/0.26.1/
-  latest: 177
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 255457
-  _time: 2024-09-09 15:17:25.023502537 Z
+- _id: 259104
+  _time: 2024-09-10 12:44:06.381646442 Z
   _version: 0.4.0/0.26.1/
-  latest: 83
+  latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 255458
-  _time: 2024-09-09 15:17:30.760023454 Z
+- _id: 259105
+  _time: 2024-09-10 12:44:12.033945889 Z
   _version: 0.4.0/0.26.1/
-  latest: 167
+  latest: 91
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 255459
-  _time: 2024-09-09 15:17:36.441370856 Z
-  _version: 0.4.0/0.26.1/
-  latest: 31
-  repository: 802720676
   what: labels-were-scanned
   where: github
