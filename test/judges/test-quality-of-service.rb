@@ -148,6 +148,179 @@ class TestQualityOfService < Minitest::Test
     end
   end
 
+  def test_quality_of_service_average_release_hocs_size_and_commits_size
+    WebMock.disable_net_connect!
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: [
+        {
+          id: 173_470,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.5', target_commitish: 'master',
+          name: 'Release 5', draft: false, prerelease: false,
+          created_at: Time.parse('2024-08-06 07:30:14 UTC'),
+          published_at: Time.parse('2024-08-06 07:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
+          id: 173_460,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.4', target_commitish: 'master',
+          name: 'Release 4', draft: false, prerelease: false,
+          created_at: Time.parse('2024-08-05 21:30:14 UTC'),
+          published_at: Time.parse('2024-08-05 21:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
+          id: 173_457,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.3', target_commitish: 'master',
+          name: 'Release 3', draft: false, prerelease: false,
+          created_at: Time.parse('2024-08-05 15:30:14 UTC'),
+          published_at: Time.parse('2024-08-05 15:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
+          id: 173_450,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.2', target_commitish: 'master',
+          name: 'Release 2', draft: false, prerelease: false,
+          created_at: Time.parse('2024-08-04 21:30:14 UTC'),
+          published_at: Time.parse('2024-08-04 21:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
+          id: 173_440,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.1', target_commitish: 'master',
+          name: 'Release 1', draft: false, prerelease: false,
+          created_at: Time.parse('2024-08-01 16:30:14 UTC'),
+          published_at: Time.parse('2024-08-01 16:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.0.2...0.0.3?per_page=100',
+      body: {
+        total_commits: 1, commits: [{ sha: 'ee04386901692ab0' }],
+        files: [
+          {
+            sha: '9e100c7246c0cc9',
+            filename: 'file.txt',
+            status: 'modified',
+            additions: 10,
+            deletions: 10,
+            changes: 20,
+            patch: '@@ -24,7 +24,7 @@ text ...'
+          },
+          {
+            sha: 'f97818271059e5455',
+            filename: 'file2.txt',
+            status: 'modified',
+            additions: 15,
+            deletions: 17,
+            changes: 32,
+            patch: '@@ -25,7 +25,7 @@ text ...'
+          }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.0.3...0.0.4?per_page=100',
+      body: {
+        total_commits: 2, commits: [{ sha: 'ee04386901692ab1' }, { sha: 'ee04386901692ab2' }],
+        files: [
+          {
+            sha: '9e100c7246c0cc9',
+            filename: 'file.txt',
+            status: 'modified',
+            additions: 7,
+            deletions: 1,
+            changes: 8,
+            patch: '@@ -24,7 +24,7 @@ text ...'
+          },
+          {
+            sha: 'f97818271059e5455',
+            filename: 'file2.txt',
+            status: 'modified',
+            additions: 6,
+            deletions: 10,
+            changes: 16,
+            patch: '@@ -25,7 +25,7 @@ text ...'
+          }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.0.4...0.0.5?per_page=100',
+      body: {
+        total_commits: 4,
+        commits: [
+          { sha: 'ea04386901692ab1' },
+          { sha: 'eb04386901692ab2' },
+          { sha: 'ec04386901692ab1' },
+          { sha: 'ed04386901692ab2' }
+        ],
+        files: [
+          {
+            sha: '9e100c7246c0cc9',
+            filename: 'file.txt',
+            status: 'modified',
+            additions: 50,
+            deletions: 49,
+            changes: 99,
+            patch: '@@ -24,7 +24,7 @@ text ...'
+          }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
+    f.qos_interval = 3
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_in_delta(58.333, f.average_release_hoc_size)
+      assert_in_delta(2.333, f.average_release_commits_size)
+    end
+  end
+
   def test_quality_of_service_average_issues
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
