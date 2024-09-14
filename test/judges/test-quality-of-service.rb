@@ -522,7 +522,7 @@ class TestQualityOfService < Minitest::Test
     end
   end
 
-  def test_quality_of_service_average_review_time_comments_and_reviewers
+  def test_quality_of_service_average_review_time_comments_reviewers_and_reviews
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
@@ -831,6 +831,7 @@ class TestQualityOfService < Minitest::Test
       assert_in_delta(431_100, f.average_review_time)
       assert_in_delta(3.333, f.average_review_size)
       assert_in_delta(1.666, f.average_reviewers_per_pull)
+      assert_in_delta(3.666, f.average_reviews_per_pull)
     end
   end
 
