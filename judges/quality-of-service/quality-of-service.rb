@@ -66,6 +66,27 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   diffs = (1..dates.size - 1).map { |i| dates[i] - dates[i - 1] }
   f.average_release_interval = diffs.empty? ? 0 : diffs.inject(&:+) / diffs.size
 
+  # Release hoc and commit size
+  repo_releases = {}
+  hocs = []
+  commits = []
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.releases(repo).each do |json|
+      break if json[:published_at] < f.since
+      (repo_releases[repo] ||= []) << json
+    end
+  end
+  repo_releases.each do |repo, releases|
+    releases.reverse.each_cons(2) do |first, last|
+      Fbe.octo.compare(repo, first[:tag_name], last[:tag_name]).then do |json|
+        hocs << json[:files].map { |file| file[:changes] }.sum
+        commits << json[:total_commits]
+      end
+    end
+  end
+  f.average_release_hoc_size = hocs.empty? ? 0 : hocs.sum.to_f / hocs.size
+  f.average_release_commits_size = commits.empty? ? 0 : commits.sum.to_f / commits.size
+
   # Issue and PR lifetimes:
   { issue: 'average_issue_lifetime', pr: 'average_pull_lifetime' }.each do |type, prop|
     ages = []
