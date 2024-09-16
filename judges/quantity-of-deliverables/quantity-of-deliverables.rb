@@ -61,4 +61,14 @@ Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
         !json[:draft] && json[:published_at] && json[:published_at] > f.since
       end
     end
+
+  # Total number of code reviews in all repositories from since
+  f.total_reviews_submitted =
+    Fbe.unmask_repos.sum do |repo|
+      Fbe.octo.pull_requests(repo, state: 'all').sum do |pr|
+        Fbe.octo.pull_request_reviews(repo, pr[:number]).count do |review|
+          review[:submitted_at] && review[:submitted_at] > f.since
+        end
+      end
+    end
 end
