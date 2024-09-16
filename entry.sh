@@ -111,8 +111,7 @@ ${JUDGES} "${gopts[@]}" update \
     "${SELF}/judges" \
     "${fb}"
 
-action_version=$(curl -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest |
-                 jq -r ".tag_name")
+action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
 if [ "$action_version" = "$VERSION" ]; then
     action_version=$VERSION
 else
