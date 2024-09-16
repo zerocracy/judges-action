@@ -1,11 +1,12 @@
 ---
 - added: 8
   cycles: 2
+  error: undefined method `-' for nil
   removed: 8
-  seconds: 1789.714639809
+  seconds: 2344.279877675
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-16 12:37:57.609973875 Z
+  when: 2024-09-16 13:48:39.082589529 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -68066,34 +68067,6 @@
   when: 2024-09-16 10:28:02.000000000 Z
   where: github
   who: 526301
-- _id: 282299
-  _time: 2024-09-16 12:24:03.093795388 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41959873603
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 282300
-  _time: 2024-09-16 12:24:24.209375300 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41960832600
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 282301
-  _time: 2024-09-16 12:24:32.008109702 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41959045669
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 282302
-  _time: 2024-09-16 12:24:39.048601601 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41790810918
-  repository: 840215648
-  what: events-were-scanned
-  where: github
 - _id: 282303
   _time: 2024-09-16 12:24:47.542848731 Z
   _version: 0.4.0/0.26.1/
@@ -68108,87 +68081,288 @@
   when: 2024-09-16 11:18:39.000000000 Z
   where: github
   who: 29139614
-- _id: 282304
-  _time: 2024-09-16 12:25:00.006623328 Z
+- _id: 282427
+  _job: 7136
+  _time: 2024-09-16 12:39:08.148013842 Z
+  _version: 0.4.0/0.26.1/0.0.52
+  comments: 0
+  details: The pull request zerocracy/baza#251 with 4 HoC created by @renovate[bot]
+    was merged by @yegor256 after 1 days of being in review and 0 comments.
+  hoc: 4
+  is_human: 0
+  issue: 251
+  merger: 526301
+  repository: 728758275
+  seconds: 88292
+  what: code-was-contributed
+  when: 2024-09-16 10:28:02.000000000 Z
+  where: github
+  who: 29139614
+- _id: 282428
+  _job: 7136
+  _time: 2024-09-16 12:39:48.482947071 Z
+  _version: 0.4.0/0.26.1/0.0.52
+  award: -16
+  commit: e5bd441635c2154334b9cda41f8072c20faf1208
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/judges, the penalty amount is -16.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -16 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-240](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/yegor256/judges/commit/e5bd441635c2154334b9cda41f8072c20faf1208/#commitcomment-146765092
+  is_human: 1
+  repository: 799113787
+  what: push-to-master-was-punished
+  when: 2024-09-16 12:39:48.513549088 Z
+  where: github
+  who: 526301
+  why: Pushed e5bd44163 to the default branch 'master' in yegor256/judges
+- _id: 282429
+  _job: 7136
+  _time: 2024-09-16 12:39:55.835390800 Z
+  _version: 0.4.0/0.26.1/0.0.52
+  award: -16
+  commit: 004acc0c6ed1a803deaff12272060632f4346886
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/factbase, the penalty amount is -16.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -16 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-240](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/yegor256/factbase/commit/004acc0c6ed1a803deaff12272060632f4346886/#commitcomment-146765093
+  is_human: 1
+  repository: 798641472
+  what: push-to-master-was-punished
+  when: 2024-09-16 12:39:55.860405430 Z
+  where: github
+  who: 526301
+  why: Pushed 004acc0c6 to the default branch 'master' in yegor256/factbase
+- _id: 282430
+  _time: 2024-09-16 13:09:45.698085333 Z
   _version: 0.4.0/0.26.1/
-  latest: 41960573580
+  branch: renovate/rubocop-performance-1.x
+  details: The pull request yegor256/judges#133 has been opened by @renovate[bot].
+  event_id: 41961082514
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 133
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-09-16 11:35:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 282433
+  _time: 2024-09-16 13:10:19.973649368 Z
+  _version: 0.4.0/0.26.1/
+  commit: 9522ee9b2dde81dda67ecb94c2551d436c7cfebe
+  default_branch: master
+  details: 'A new Git push #20256137843 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 41961564317
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20256137843
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-16 11:50:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 282435
+  _time: 2024-09-16 13:10:46.391609594 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/rubocop-performance-1.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/baza.rb#22 has been closed by @rultor, with
+    8 HoC and 2 comments.
+  event_id: 41961864923
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 8
+  is_human: 0
+  issue: 22
+  repository: 840215648
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-09-16 12:00:01.000000000 Z
+  where: github
+  who: 8086956
+- _id: 282436
+  _time: 2024-09-16 13:11:26.744372454 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/rubocop-performance-1.x
+  details: The pull request zerocracy/baza.rb#22 has been opened by @renovate[bot].
+  event_id: 41960611829
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 22
+  repository: 840215648
+  what: pull-was-opened
+  when: 2024-09-16 11:19:53.000000000 Z
+  where: github
+  who: 29139614
+- _id: 282438
+  _time: 2024-09-16 13:12:02.023286045 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/rubocop-performance-1.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/fbe#96 has been closed by @rultor, with 8 HoC
+    and 2 comments.
+  event_id: 41961864309
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 8
+  is_human: 0
+  issue: 96
+  repository: 820463873
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2024-09-16 12:00:00.000000000 Z
+  where: github
+  who: 8086956
+- _id: 282544
+  _time: 2024-09-16 13:24:03.373266912 Z
+  _version: 0.4.0/0.26.1/
+  average_backlog_size: 0.140625
+  average_build_duration: 165.24365482233503
+  average_build_mttr: -35454
+  average_build_success_rate: 0.7988578680203046
+  average_issue_lifetime: 3006126.2
+  average_pull_files_size: 1.7647058823529411
+  average_pull_hoc_size: 30.941176470588236
+  average_pull_lifetime: 88135.83333333333
+  average_pull_rejection_rate: 0.05555555555555555
+  average_release_interval: 97043.0
+  since: 2024-09-09 13:24:03.373484569 Z
+  what: quality-of-service
+  when: 2024-09-16 13:24:03.373422824 Z
+- _id: 282545
+  _time: 2024-09-16 13:33:53.641039580 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41961082514
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 282546
+  _time: 2024-09-16 13:34:01.273463787 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41961049818
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 282547
+  _time: 2024-09-16 13:34:08.901215085 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41961564317
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 282548
+  _time: 2024-09-16 13:34:16.272590700 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41961915620
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 282549
+  _time: 2024-09-16 13:34:24.175116515 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41961875812
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 282305
-  _time: 2024-09-16 12:25:14.242687221 Z
+- _id: 282550
+  _time: 2024-09-16 13:34:31.585059222 Z
   _version: 0.4.0/0.26.1/
   latest: 41960543240
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 282306
-  _time: 2024-09-16 12:25:22.559375142 Z
+- _id: 282551
+  _time: 2024-09-16 13:34:39.486034261 Z
   _version: 0.4.0/0.26.1/
   latest: 41941518708
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 282307
-  _time: 2024-09-16 12:25:29.234147240 Z
+- _id: 282552
+  _time: 2024-09-16 13:34:45.793369420 Z
   _version: 0.4.0/0.26.1/
   latest: 41940441450
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 282323
-  _time: 2024-09-16 12:27:10.371052297 Z
+- _id: 282568
+  _time: 2024-09-16 13:36:29.510483707 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 282376
-  _time: 2024-09-16 12:32:44.476401354 Z
+- _id: 282621
+  _time: 2024-09-16 13:42:09.278449335 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 282378
-  _time: 2024-09-16 12:32:56.590283933 Z
+- _id: 282672
+  _time: 2024-09-16 13:47:35.337149179 Z
   _version: 0.4.0/0.26.1/
   latest: 0
-  repository: 799177290
+  repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 282410
-  _time: 2024-09-16 12:36:17.494861416 Z
+- _id: 282678
+  _time: 2024-09-16 13:48:13.375471949 Z
   _version: 0.4.0/0.26.1/
-  latest: 0
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 282423
-  _time: 2024-09-16 12:37:39.074228896 Z
+- _id: 282679
+  _time: 2024-09-16 13:48:19.467523824 Z
   _version: 0.4.0/0.26.1/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 282424
-  _time: 2024-09-16 12:37:45.234592558 Z
+- _id: 282680
+  _time: 2024-09-16 13:48:26.008757431 Z
   _version: 0.4.0/0.26.1/
-  latest: 177
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 282425
-  _time: 2024-09-16 12:37:51.358842099 Z
+- _id: 282681
+  _time: 2024-09-16 13:48:32.387157431 Z
   _version: 0.4.0/0.26.1/
-  latest: 83
+  latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 282426
-  _time: 2024-09-16 12:37:57.449223142 Z
+- _id: 282682
+  _time: 2024-09-16 13:48:38.914680859 Z
   _version: 0.4.0/0.26.1/
-  latest: 31
-  repository: 802720676
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
