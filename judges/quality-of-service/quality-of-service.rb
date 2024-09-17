@@ -155,8 +155,8 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
       "repo:#{repo} type:pr is:merged closed:>#{f.since.utc.iso8601[0..9]}"
     )[:items].each do |pr|
       pr_reviews = Fbe.octo.pull_request_reviews(repo, pr[:number])
-      pr_review = pr_reviews.min_by { |r| r[:submitted_at] }
-      review_times << (pr[:merged_at] - pr_review[:submitted_at]).to_i if pr_review
+      pr_review = pr_reviews.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
+      review_times << (pr[:pull_request][:merged_at] - pr_review[:submitted_at]).to_i if pr_review
       review_comments << Fbe.octo.review_comments(repo, pr[:number]).size
       reviewers << pr_reviews.map { |r| r.dig(:user, :id) }.uniq.size
       reviews << pr_reviews.size

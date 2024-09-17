@@ -118,7 +118,10 @@ class TestQualityOfService < Minitest::Test
       'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-07-15',
       body: {
         total_count: 1, incomplete_results: false, items: [
-          { id: 50, number: 12, title: 'Awesome 12', merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          }
         ]
       }
     )
@@ -600,11 +603,26 @@ class TestQualityOfService < Minitest::Test
       body: {
         total_count: 1, incomplete_results: false,
         items: [
-          { id: 50, number: 12, title: 'Awesome 12', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
-          { id: 52, number: 14, title: 'Awesome 14', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
-          { id: 54, number: 16, title: 'Awesome 16', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
-          { id: 56, number: 18, title: 'Awesome 18', merged_at: Time.parse('2024-08-23 18:30:00 UTC') },
-          { id: 58, number: 20, title: 'Awesome 20', merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          },
+          {
+            id: 52, number: 14, title: 'Awesome 14',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          },
+          {
+            id: 54, number: 16, title: 'Awesome 16',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          },
+          {
+            id: 56, number: 18, title: 'Awesome 18',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          },
+          {
+            id: 58, number: 20, title: 'Awesome 20',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          }
         ]
       }
     )
@@ -739,12 +757,21 @@ class TestQualityOfService < Minitest::Test
       body: {
         total_count: 1, incomplete_results: false,
         items: [
-          { id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC'),
-            merged_at: Time.parse('2024-08-27 18:30:00 UTC') },
-          { id: 51, number: 14, title: 'Awesome 14', created_at: Time.parse('2024-08-23 12:00:00 UTC'),
-            merged_at: Time.parse('2024-08-27 18:30:00 UTC') },
-          { id: 52, number: 16, title: 'Awesome 16', created_at: Time.parse('2024-08-25 12:00:00 UTC'),
-            merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            created_at: Time.parse('2024-08-20 22:00:00 UTC'),
+            pull_request: { merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+          },
+          {
+            id: 51, number: 14, title: 'Awesome 14',
+            created_at: Time.parse('2024-08-23 12:00:00 UTC'),
+            pull_request: { merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+          },
+          {
+            id: 52, number: 16, title: 'Awesome 16',
+            created_at: Time.parse('2024-08-25 12:00:00 UTC'),
+            pull_request: { merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+          }
         ]
       }
     )
@@ -769,7 +796,7 @@ class TestQualityOfService < Minitest::Test
           user: { login: 'yegor256', id: 526_301, type: 'User' },
           state: 'CHANGES_REQUESTED',
           author_association: 'CONTRIBUTOR',
-          submitted_at: Time.parse('2024-08-23 10:00:00 UTC')
+          submitted_at: nil
         },
         {
           id: 22_449_327,
@@ -805,8 +832,7 @@ class TestQualityOfService < Minitest::Test
           body: 'Some text 2',
           user: { login: 'rultor', id: 526_303, type: 'Bot' },
           state: 'CHANGES_REQUESTED',
-          author_association: 'CONTRIBUTOR',
-          submitted_at: Time.parse('2024-08-23 16:30:00 UTC')
+          author_association: 'CONTRIBUTOR'
         },
         {
           id: 22_449_331,
@@ -1144,7 +1170,12 @@ class TestQualityOfService < Minitest::Test
       'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
       body: {
         total_count: 1, incomplete_results: false,
-        items: [{ id: 50, number: 12, title: 'Awesome 12', merged_at: Time.parse('2024-08-23 18:30:00 UTC') }]
+        items: [
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          }
+        ]
       }
     )
     stub_github(
