@@ -93,6 +93,7 @@ class TestQuantityOfDeliverables < Minitest::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
     fb = Factbase.new
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
@@ -137,6 +138,7 @@ class TestQuantityOfDeliverables < Minitest::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
     fb = Factbase.new
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
@@ -188,6 +190,7 @@ class TestQuantityOfDeliverables < Minitest::Test
         { id: 55, draft: false, published_at: Time.parse('2024-08-11 21:00:00 UTC') }
       ]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -200,6 +203,185 @@ class TestQuantityOfDeliverables < Minitest::Test
       assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal(7, f.total_releases_published)
+    end
+  end
+
+  def test_quantity_of_deliverables_total_reviews_submitted
+    WebMock.disable_net_connect!
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-08-02T21:00:00%2B00:00',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-08-02',
+      body: [{ pull_request: {} }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all',
+      body: [
+        {
+          id: 2_072_543_249,
+          number: 100,
+          state: 'closed',
+          locked: false,
+          title: '#50: something title',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          body: 'Closes #50',
+          created_at: Time.parse('2024-08-07 09:32:49 UTC'),
+          updated_at: Time.parse('2024-08-07 21:06:23 UTC'),
+          closed_at: Time.parse('2024-08-07 21:05:34 UTC'),
+          merged_at: Time.parse('2024-08-07 21:05:34 UTC'),
+          merge_commit_sha: '0527cc188b0495e',
+          draft: false,
+          head: {
+            label: 'yegor256:50', ref: '50', sha: '0527cc188b049',
+            user: { login: 'yegor256', id: 526_301, type: 'User' },
+            repo: { id: 100_010, full_name: 'yegor256/repo' }
+          },
+          base: {
+            label: 'zerocracy:master', ref: 'master', sha: '4643eb3c7a0ccb3c',
+            user: { login: 'zerocracy', id: 24_234_201, type: 'Organization' },
+            repo: { id: 99_999, full_name: 'zerocracy/repo' }
+          }
+        },
+        {
+          id: 2_072_543_245,
+          number: 90,
+          state: 'open',
+          locked: false,
+          title: '#45: something title',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          body: 'Closes #45',
+          created_at: Time.parse('2024-08-02 09:32:49 UTC'),
+          updated_at: Time.parse('2024-08-02 10:06:23 UTC'),
+          closed_at: nil,
+          merged_at: nil,
+          merge_commit_sha: '0627cc188b0497e',
+          draft: false,
+          head: {
+            label: 'yegor256:45', ref: '45', sha: '1527cc188b040',
+            user: { login: 'yegor256', id: 526_301, type: 'User' },
+            repo: { id: 100_010, full_name: 'yegor256/repo' }
+          },
+          base: {
+            label: 'zerocracy:master', ref: 'master', sha: '5643eb3c7a0ccb3b',
+            user: { login: 'zerocracy', id: 24_234_201, type: 'Organization' },
+            repo: { id: 99_999, full_name: 'zerocracy/repo' }
+          }
+        },
+        {
+          id: 2_072_543_240,
+          number: 85,
+          state: 'closed',
+          locked: false,
+          title: '#30: something title',
+          user: { login: 'yegor256', id: 526_301, type: 'User' },
+          body: 'Closes #30',
+          created_at: Time.parse('2024-08-01 09:32:49 UTC'),
+          updated_at: Time.parse('2024-08-01 10:06:23 UTC'),
+          closed_at: Time.parse('2024-08-02 10:06:23 UTC'),
+          merged_at: nil,
+          merge_commit_sha: '0627cc188b0497e',
+          draft: false,
+          head: {
+            label: 'yegor256:30', ref: '30', sha: '1527cc188b085',
+            user: { login: 'yegor256', id: 526_301, type: 'User' },
+            repo: { id: 100_010, full_name: 'yegor256/repo' }
+          },
+          base: {
+            label: 'zerocracy:master', ref: 'master', sha: '5643eb3c7a0ccb3b',
+            user: { login: 'zerocracy', id: 24_234_201, type: 'Organization' },
+            repo: { id: 99_999, full_name: 'zerocracy/repo' }
+          }
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/100/reviews?per_page=100',
+      body: [
+        {
+          id: 22_449_300, body: 'Some text 1',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-07 12:00:10 UTC')
+        },
+        {
+          id: 22_449_250, body: 'Some text 2',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-07 14:30:20 UTC')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/90/reviews?per_page=100',
+      body: [
+        {
+          id: 22_449_210, body: 'Some text 1',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-02 16:00:20 UTC')
+        },
+        {
+          id: 22_449_215, body: 'Some text 2',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-05 15:30:00 UTC')
+        },
+        {
+          id: 22_449_220, body: 'Some text 3',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-06 13:25:00 UTC')
+        },
+        {
+          id: 22_449_225, body: 'Some text 4',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-07 12:30:00 UTC')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/85/reviews?per_page=100',
+      body: [
+        {
+          id: 22_449_100, body: 'Some text 1',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-01 10:00:00 UTC')
+        },
+        {
+          id: 22_449_110, body: 'Some text 2',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-02 11:00:00 UTC')
+        },
+        {
+          id: 22_449_115, body: 'Some text 3',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED', author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-02 20:00:00 UTC')
+        }
+      ]
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'scope'
+    f.qod_days = 7
+    f.qod_interval = 3
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quantity-of-deliverables', fb)
+      f = fb.query('(eq what "quantity-of-deliverables")').each.to_a.first
+      assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_equal(5, f.total_reviews_submitted)
     end
   end
 end
