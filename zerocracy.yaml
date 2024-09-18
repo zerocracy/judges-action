@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 1664.443530512
+  seconds: 1767.226489193
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-17 23:33:33.704196606 Z
+  when: 2024-09-18 00:48:04.967197556 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -69448,20 +69448,6 @@
   when: 2024-09-17 20:53:53.000000000 Z
   where: github
   who: 526301
-- _id: 288595
-  _time: 2024-09-17 23:19:33.253750673 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41991414655
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 288596
-  _time: 2024-09-17 23:19:40.637090607 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41989509099
-  repository: 798641472
-  what: events-were-scanned
-  where: github
 - _id: 288597
   _time: 2024-09-17 23:19:54.517981508 Z
   _version: 0.4.0/0.26.1/
@@ -69480,73 +69466,11 @@
   when: 2024-09-17 21:02:52.000000000 Z
   where: github
   who: 526301
-- _id: 288598
-  _time: 2024-09-17 23:20:00.953021547 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42018051043
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 288599
-  _time: 2024-09-17 23:20:08.055270358 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41994120387
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 288600
-  _time: 2024-09-17 23:20:15.607647424 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42017878985
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 288601
-  _time: 2024-09-17 23:20:22.646279356 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42018261888
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 288602
-  _time: 2024-09-17 23:20:30.153908499 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42017587644
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 288603
-  _time: 2024-09-17 23:20:36.866075452 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41994121232
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 288619
-  _time: 2024-09-17 23:22:17.447103340 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 288672
-  _time: 2024-09-17 23:27:49.160120941 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 288686
-  _time: 2024-09-17 23:29:16.375991457 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
 - _id: 288717
   _time: 2024-09-17 23:32:31.205998814 Z
   _version: 0.4.0/0.26.1/
   details: The '#bug' label was attached by @yegor256 to the issue zerocracy/pages-action#131.
+  is_human: 1
   issue: 131
   label: bug
   repository: 802720676
@@ -69554,38 +69478,202 @@
   when: 2024-09-17 10:44:10.000000000 Z
   where: github
   who: 526301
-- _id: 288723
-  _time: 2024-09-17 23:33:08.131864433 Z
+- _id: 288728
+  _job: 7283
+  _time: 2024-09-17 23:34:45.986335397 Z
+  _version: 0.4.0/0.26.1/0.0.52
+  comments: 1
+  details: The pull request zerocracy/fbe#99 with 2 HoC created by @Yegorov was merged
+    by @yegor256 after 1 hours of being in review and 1 comments.
+  hoc: 2
+  is_human: 1
+  issue: 99
+  merger: 526301
+  repository: 820463873
+  seconds: 6177
+  what: code-was-contributed
+  when: 2024-09-17 20:55:41.000000000 Z
+  where: github
+  who: 2566462
+- _id: 288731
+  _time: 2024-09-18 00:19:03.614792135 Z
+  _version: 0.4.0/0.26.1/
+  commit: 6cf9e0a2ee90a9b77527e80f5eab39f1aa65b917
+  default_branch: master
+  details: 'A new Git push #20283721922 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42018338774
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20283721922
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-17 21:26:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 288737
+  _time: 2024-09-18 00:20:09.537654234 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/swarm-template#9 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 42020164026
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 9
+  repository: 849726475
+  succeeded_builds: 4
+  what: pull-was-merged
+  when: 2024-09-17 23:00:12.000000000 Z
+  where: github
+  who: 8086956
+- _id: 288738
+  _time: 2024-09-18 00:20:46.555886712 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/swarm-template#9 has been opened by @renovate[bot].
+  event_id: 42019470108
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 9
+  repository: 849726475
+  what: pull-was-opened
+  when: 2024-09-17 22:20:58.000000000 Z
+  where: github
+  who: 29139614
+- _id: 288867
+  _time: 2024-09-18 00:35:25.721055126 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41991414655
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 288868
+  _time: 2024-09-18 00:35:33.531122729 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41989509099
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 288869
+  _time: 2024-09-18 00:35:41.174041993 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42018338774
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 288870
+  _time: 2024-09-18 00:35:48.566918992 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41994120387
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 288871
+  _time: 2024-09-18 00:35:56.740975258 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42017878985
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 288872
+  _time: 2024-09-18 00:36:11.307853075 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42020725511
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 288873
+  _time: 2024-09-18 00:36:19.934387037 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/pages-action#132 has been opened by @renovate[bot].
+  event_id: 42020357308
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 132
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-09-17 23:11:22.000000000 Z
+  where: github
+  who: 29139614
+- _id: 288874
+  _time: 2024-09-18 00:36:33.201313035 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42020357308
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 288875
+  _time: 2024-09-18 00:36:40.201917670 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42020173580
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 288880
+  _time: 2024-09-18 00:37:14.230185289 Z
   _version: 0.4.0/0.26.1/
   latest: 0
-  repository: 802720676
+  repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 288724
-  _time: 2024-09-17 23:33:14.284388358 Z
+- _id: 288890
+  _time: 2024-09-18 00:38:20.728507105 Z
   _version: 0.4.0/0.26.1/
-  latest: 98
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 288935
+  _time: 2024-09-18 00:43:19.758281943 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 288936
+  _time: 2024-09-18 00:43:26.375392072 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 288975
+  _time: 2024-09-18 00:47:45.253228599 Z
+  _version: 0.4.0/0.26.1/
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 288725
-  _time: 2024-09-17 23:33:20.437875035 Z
+- _id: 288976
+  _time: 2024-09-18 00:47:51.779143711 Z
   _version: 0.4.0/0.26.1/
   latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 288726
-  _time: 2024-09-17 23:33:27.064793749 Z
+- _id: 288977
+  _time: 2024-09-18 00:47:58.374409205 Z
   _version: 0.4.0/0.26.1/
-  latest: 135
-  repository: 728758275
+  latest: 167
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 288727
-  _time: 2024-09-17 23:33:33.536652342 Z
+- _id: 288978
+  _time: 2024-09-18 00:48:04.795509488 Z
   _version: 0.4.0/0.26.1/
-  latest: 46
-  repository: 820463873
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
