@@ -2,10 +2,10 @@
 - added: 8
   cycles: 2
   removed: 8
-  seconds: 1746.391799761
+  seconds: 1708.200648531
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-19 12:36:31.466816424 Z
+  when: 2024-09-19 13:37:17.437483181 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -70118,50 +70118,6 @@
   total_stars: 33
   what: dimensions-of-terrain
   when: 2024-09-18 16:05:47.354168005 Z
-- _id: 291663
-  _job: 7347
-  _time: 2024-09-18 17:17:33.856432317 Z
-  _version: 0.4.0/0.26.1/0.0.52
-  cost_of_qod:
-  - 26.17419571796884
-  - 16.11800332128553
-  - 19.329351455580113
-  - 3.630121063643354
-  - 3.48598158686649
-  - 2.1162974683544302
-  - 5.421069231982337
-  - 6.813358650731598
-  - 7.799424248510411
-  - 5.338809034907598
-  - 1.320841652587928
-  - 0.10220115742810787
-  - 0.5296817985639738
-  - 0.3300641267446247
-  - 0.17081947797567532
-  - 1.016053647632595
-  - -0.3742865163282493
-  - 0.0808472794890452
-  qod_per_day:
-  - 2.5488488282701915
-  - 2.924857143293144
-  - 3.037571429051574
-  - 7.988714286790978
-  - 9.58942857227318
-  - 7.222857143708444
-  - 7.2468571441813845
-  - 5.1160000008284054
-  - 4.267714286277028
-  - 4.174285714859865
-  - 9.301428572500205
-  - 11.182428573670734
-  - 14.564000002692676
-  - 12.1188571441293
-  - 12.544571429990324
-  - 8.436000001253376
-  - 7.633571429692055
-  - 7.068000001010452
-  what: learn-eva
-  when: 2024-09-18 17:17:25.810016245 Z
 - _id: 291931
   _time: 2024-09-19 12:07:50.950295942 Z
   _version: 0.4.0/0.26.1/
@@ -70251,6 +70207,8 @@
 - _id: 292045
   _time: 2024-09-19 12:20:50.183605886 Z
   _version: 0.4.0/0.26.1/
+  composite: 41.414
+  ffact: 163490
   since: 2024-09-12 12:20:50.183834834 Z
   total_commits_pushed: 118
   total_hoc_committed: 4850
@@ -70259,20 +70217,6 @@
   total_releases_published: 4
   what: quantity-of-deliverables
   when: 2024-09-19 12:20:50.183757299 Z
-- _id: 292046
-  _time: 2024-09-19 12:21:33.723276914 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41991414655
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 292047
-  _time: 2024-09-19 12:21:41.278886497 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41989509099
-  repository: 798641472
-  what: events-were-scanned
-  where: github
 - _id: 292048
   _time: 2024-09-19 12:21:48.966808145 Z
   _version: 0.4.0/0.26.1/
@@ -70309,101 +70253,215 @@
   when: 2024-09-19 11:16:42.000000000 Z
   where: github
   who: 526301
-- _id: 292050
-  _time: 2024-09-19 12:22:02.363173153 Z
+- _id: 292185
+  _job: 7386
+  _time: 2024-09-19 12:40:49.263163569 Z
+  _version: 0.4.0/0.26.1/0.0.52
+  cost_of_qod:
+  - 26.17419571796884
+  - 16.11800332128553
+  - 19.329351455580113
+  - 3.630121063643354
+  - 3.48598158686649
+  - 2.1162974683544302
+  - 5.421069231982337
+  - 6.813358650731598
+  - 7.799424248510411
+  - 5.338809034907598
+  - 1.320841652587928
+  - 0.10220115742810787
+  - 0.5296817985639738
+  - 0.3300641267446247
+  - 0.17081947797567532
+  - 1.016053647632595
+  - -0.3742865163282493
+  - 0.0808472794890452
+  - -0.19317139131694594
+  qod_per_day:
+  - 2.5488488282701915
+  - 2.924857143293144
+  - 3.037571429051574
+  - 7.988714286790978
+  - 9.58942857227318
+  - 7.222857143708444
+  - 7.2468571441813845
+  - 5.1160000008284054
+  - 4.267714286277028
+  - 4.174285714859865
+  - 9.301428572500205
+  - 11.182428573670734
+  - 14.564000002692676
+  - 12.1188571441293
+  - 12.544571429990324
+  - 8.436000001253376
+  - 7.633571429692055
+  - 7.068000001010452
+  - 5.91628571504418
+  what: learn-eva
+  when: 2024-09-19 12:40:41.782810778 Z
+- _id: 292188
+  _time: 2024-09-19 13:09:15.353662214 Z
   _version: 0.4.0/0.26.1/
-  latest: 42076992661
+  commit: 5299da3f2a7f05a5276bf2feb4dfec60e4169a6f
+  default_branch: master
+  details: 'A new Git push #20313809545 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42078220289
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20313809545
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-19 11:57:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 292189
+  _time: 2024-09-19 13:09:22.494060545 Z
+  _version: 0.4.0/0.26.1/
+  commit: 2b2d341e2faf77d24b6e2c82832694cc2e4d1f37
+  default_branch: master
+  details: 'A new Git push #20313676712 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42077945375
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20313676712
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-19 11:49:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 292325
+  _time: 2024-09-19 13:24:59.651281286 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41991414655
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 292326
+  _time: 2024-09-19 13:25:07.332347986 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41989509099
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 292327
+  _time: 2024-09-19 13:25:15.327424692 Z
+  _version: 0.4.0/0.26.1/
+  commit: 61dc8b4f0d320be8010659c093aaf19271e42119
+  default_branch: master
+  details: 'A new Git push #20314142068 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42078897568
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20314142068
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-19 12:16:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 292328
+  _time: 2024-09-19 13:25:22.143380228 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42078897568
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 292051
-  _time: 2024-09-19 12:22:09.581365301 Z
+- _id: 292329
+  _time: 2024-09-19 13:25:29.578495062 Z
   _version: 0.4.0/0.26.1/
   latest: 41994120387
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 292052
-  _time: 2024-09-19 12:22:17.441021801 Z
+- _id: 292330
+  _time: 2024-09-19 13:25:37.474315020 Z
   _version: 0.4.0/0.26.1/
   latest: 42021855923
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 292053
-  _time: 2024-09-19 12:22:24.941416968 Z
+- _id: 292331
+  _time: 2024-09-19 13:25:44.995813958 Z
   _version: 0.4.0/0.26.1/
-  latest: 42058799711
+  latest: 42079651965
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 292054
-  _time: 2024-09-19 12:22:32.563710768 Z
+- _id: 292332
+  _time: 2024-09-19 13:25:52.830819946 Z
   _version: 0.4.0/0.26.1/
   latest: 42062785991
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 292055
-  _time: 2024-09-19 12:22:39.459876939 Z
+- _id: 292333
+  _time: 2024-09-19 13:25:59.834441402 Z
   _version: 0.4.0/0.26.1/
   latest: 42020173580
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 292071
-  _time: 2024-09-19 12:24:22.633370441 Z
+- _id: 292338
+  _time: 2024-09-19 13:26:34.294431707 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 292348
+  _time: 2024-09-19 13:27:41.765922750 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 292124
-  _time: 2024-09-19 12:30:02.687612500 Z
+- _id: 292393
+  _time: 2024-09-19 13:32:44.290601215 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 292394
+  _time: 2024-09-19 13:32:50.785919891 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 292171
-  _time: 2024-09-19 12:35:07.287150280 Z
+- _id: 292426
+  _time: 2024-09-19 13:36:24.145838509 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 292180
-  _time: 2024-09-19 12:36:05.052738747 Z
+- _id: 292432
+  _time: 2024-09-19 13:37:04.223655860 Z
   _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 292181
-  _time: 2024-09-19 12:36:11.341684521 Z
-  _version: 0.4.0/0.26.1/
-  latest: 98
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 292182
-  _time: 2024-09-19 12:36:18.075828082 Z
+- _id: 292433
+  _time: 2024-09-19 13:37:10.821655630 Z
   _version: 0.4.0/0.26.1/
-  latest: 135
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 292183
-  _time: 2024-09-19 12:36:24.700805193 Z
-  _version: 0.4.0/0.26.1/
-  latest: 46
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 292184
-  _time: 2024-09-19 12:36:31.288541672 Z
-  _version: 0.4.0/0.26.1/
-  latest: 167
+  latest: 267
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 292434
+  _time: 2024-09-19 13:37:17.278319611 Z
+  _version: 0.4.0/0.26.1/
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
