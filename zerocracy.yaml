@@ -1,11 +1,15 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
+  error: 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Ayegor256%2Ffactbase+type%3Aissue+created%3A2024-09-13..2024-09-19:
+    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
+    you try again. If you reach out to GitHub Support for help, please include the
+    request ID 2808:17FF:2553036:4829CBA:66ED872A. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
   removed: 8
-  seconds: 733.944887281
+  seconds: 2503.39047853
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-20 13:20:52.408205291 Z
+  when: 2024-09-20 14:46:49.839881414 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -70956,115 +70960,141 @@
   where: github
   who: 88084038
   why: Contributed code in zerocracy/baza#257
-- _id: 296146
-  _time: 2024-09-20 13:08:48.572614995 Z
+- _id: 296385
+  _time: 2024-09-20 14:20:14.801772935 Z
+  _version: 0.4.0/0.26.1/
+  average_build_duration: 144.57151442307693
+  average_build_mttr: -68348
+  average_build_success_rate: 0.8112980769230769
+  average_issue_lifetime: 3425697.0
+  average_pull_lifetime: 37307.10344827586
+  average_release_interval: 105105.66666666667
+  since: 2024-09-13 14:20:14.802145861 Z
+  what: quality-of-service
+  when: 2024-09-20 14:20:14.801946309 Z
+- _id: 296386
+  _time: 2024-09-20 14:31:17.987004064 Z
   _version: 0.4.0/0.26.1/
   latest: 41991414655
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 296147
-  _time: 2024-09-20 13:08:56.243730574 Z
+- _id: 296387
+  _time: 2024-09-20 14:31:26.441534199 Z
   _version: 0.4.0/0.26.1/
   latest: 41989509099
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 296148
-  _time: 2024-09-20 13:09:03.856867989 Z
+- _id: 296388
+  _time: 2024-09-20 14:31:34.609097093 Z
   _version: 0.4.0/0.26.1/
   latest: 42112939474
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 296149
-  _time: 2024-09-20 13:09:11.185594980 Z
+- _id: 296389
+  _time: 2024-09-20 14:31:42.630714434 Z
   _version: 0.4.0/0.26.1/
   latest: 41994120387
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 296150
-  _time: 2024-09-20 13:09:18.964586644 Z
+- _id: 296390
+  _time: 2024-09-20 14:31:57.918805499 Z
   _version: 0.4.0/0.26.1/
-  latest: 42021855923
+  branch: '131'
+  details: The pull request zerocracy/fbe#100 has been opened by @Yegorov.
+  event_id: 42119998636
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 100
+  repository: 820463873
+  what: pull-was-opened
+  when: 2024-09-20 14:01:39.000000000 Z
+  where: github
+  who: 2566462
+- _id: 296391
+  _time: 2024-09-20 14:32:04.183674606 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42120074146
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 296151
-  _time: 2024-09-20 13:09:33.277182822 Z
+- _id: 296392
+  _time: 2024-09-20 14:32:12.362458195 Z
   _version: 0.4.0/0.26.1/
-  latest: 42116569328
+  latest: 42118573714
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 296152
-  _time: 2024-09-20 13:09:40.938242798 Z
+- _id: 296393
+  _time: 2024-09-20 14:32:21.251799890 Z
   _version: 0.4.0/0.26.1/
   latest: 42062785991
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 296153
-  _time: 2024-09-20 13:09:47.783017925 Z
+- _id: 296394
+  _time: 2024-09-20 14:32:28.762321735 Z
   _version: 0.4.0/0.26.1/
   latest: 42020173580
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 296158
-  _time: 2024-09-20 13:10:21.174490585 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 296168
-  _time: 2024-09-20 13:11:26.231644528 Z
+- _id: 296410
+  _time: 2024-09-20 14:34:17.582486129 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 296213
-  _time: 2024-09-20 13:16:22.155975498 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 296214
-  _time: 2024-09-20 13:16:28.438602319 Z
+- _id: 296463
+  _time: 2024-09-20 14:40:18.606087217 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 296246
-  _time: 2024-09-20 13:20:00.177576120 Z
+- _id: 296503
+  _time: 2024-09-20 14:44:49.256932253 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 296509
+  _time: 2024-09-20 14:45:28.704498564 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 296252
-  _time: 2024-09-20 13:20:39.447897958 Z
+- _id: 296518
+  _time: 2024-09-20 14:46:29.887979273 Z
   _version: 0.4.0/0.26.1/
-  latest: 67
-  repository: 799113787
+  latest: 177
+  repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 296253
-  _time: 2024-09-20 13:20:45.872799356 Z
+- _id: 296519
+  _time: 2024-09-20 14:46:36.493449191 Z
   _version: 0.4.0/0.26.1/
-  latest: 267
+  latest: 83
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 296520
+  _time: 2024-09-20 14:46:43.089349099 Z
+  _version: 0.4.0/0.26.1/
+  latest: 91
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 296254
-  _time: 2024-09-20 13:20:52.227788633 Z
+- _id: 296521
+  _time: 2024-09-20 14:46:49.665043010 Z
   _version: 0.4.0/0.26.1/
-  latest: 73
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
