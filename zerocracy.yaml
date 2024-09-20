@@ -1,15 +1,11 @@
 ---
 - added: 8
-  cycles: 2
-  error: 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Ayegor256%2Ffactbase+type%3Aissue+created%3A2024-09-13..2024-09-19:
-    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
-    you try again. If you reach out to GitHub Support for help, please include the
-    request ID 2808:17FF:2553036:4829CBA:66ED872A. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
+  cycles: 1
   removed: 8
-  seconds: 2503.39047853
+  seconds: 735.893892839
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-20 14:46:49.839881414 Z
+  when: 2024-09-20 15:17:15.767803500 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -70972,34 +70968,6 @@
   since: 2024-09-13 14:20:14.802145861 Z
   what: quality-of-service
   when: 2024-09-20 14:20:14.801946309 Z
-- _id: 296386
-  _time: 2024-09-20 14:31:17.987004064 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41991414655
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 296387
-  _time: 2024-09-20 14:31:26.441534199 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41989509099
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 296388
-  _time: 2024-09-20 14:31:34.609097093 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42112939474
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 296389
-  _time: 2024-09-20 14:31:42.630714434 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41994120387
-  repository: 840215648
-  what: events-were-scanned
-  where: github
 - _id: 296390
   _time: 2024-09-20 14:31:57.918805499 Z
   _version: 0.4.0/0.26.1/
@@ -71014,87 +70982,115 @@
   when: 2024-09-20 14:01:39.000000000 Z
   where: github
   who: 2566462
-- _id: 296391
-  _time: 2024-09-20 14:32:04.183674606 Z
+- _id: 296522
+  _time: 2024-09-20 15:05:10.142526067 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41991414655
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 296523
+  _time: 2024-09-20 15:05:17.938578754 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41989509099
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 296524
+  _time: 2024-09-20 15:05:25.336707706 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42112939474
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 296525
+  _time: 2024-09-20 15:05:32.548767313 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41994120387
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 296526
+  _time: 2024-09-20 15:05:40.735043275 Z
   _version: 0.4.0/0.26.1/
   latest: 42120074146
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 296392
-  _time: 2024-09-20 14:32:12.362458195 Z
+- _id: 296527
+  _time: 2024-09-20 15:05:55.115349118 Z
   _version: 0.4.0/0.26.1/
-  latest: 42118573714
+  latest: 42120167317
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 296393
-  _time: 2024-09-20 14:32:21.251799890 Z
+- _id: 296528
+  _time: 2024-09-20 15:06:03.016110253 Z
   _version: 0.4.0/0.26.1/
   latest: 42062785991
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 296394
-  _time: 2024-09-20 14:32:28.762321735 Z
+- _id: 296529
+  _time: 2024-09-20 15:06:09.754747134 Z
   _version: 0.4.0/0.26.1/
   latest: 42020173580
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 296410
-  _time: 2024-09-20 14:34:17.582486129 Z
+- _id: 296534
+  _time: 2024-09-20 15:06:43.283583653 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 296544
+  _time: 2024-09-20 15:07:48.047158132 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 296463
-  _time: 2024-09-20 14:40:18.606087217 Z
+- _id: 296589
+  _time: 2024-09-20 15:12:39.591446751 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 296590
+  _time: 2024-09-20 15:12:45.876334290 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 296503
-  _time: 2024-09-20 14:44:49.256932253 Z
+- _id: 296629
+  _time: 2024-09-20 15:16:56.308601929 Z
   _version: 0.4.0/0.26.1/
-  latest: 0
+  latest: 67
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 296509
-  _time: 2024-09-20 14:45:28.704498564 Z
+- _id: 296630
+  _time: 2024-09-20 15:17:02.803316769 Z
   _version: 0.4.0/0.26.1/
-  latest: 0
+  latest: 87
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 296518
-  _time: 2024-09-20 14:46:29.887979273 Z
+- _id: 296631
+  _time: 2024-09-20 15:17:09.253897809 Z
   _version: 0.4.0/0.26.1/
-  latest: 177
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 296519
-  _time: 2024-09-20 14:46:36.493449191 Z
-  _version: 0.4.0/0.26.1/
-  latest: 83
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 296520
-  _time: 2024-09-20 14:46:43.089349099 Z
-  _version: 0.4.0/0.26.1/
-  latest: 91
+  latest: 167
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 296521
-  _time: 2024-09-20 14:46:49.665043010 Z
+- _id: 296632
+  _time: 2024-09-20 15:17:15.589296194 Z
   _version: 0.4.0/0.26.1/
-  latest: 31
+  latest: 73
   repository: 802720676
   what: labels-were-scanned
   where: github
