@@ -24,6 +24,7 @@
 
 require 'fbe/fb'
 require 'fbe/octo'
+require 'fbe/github_graph'
 require 'fbe/unmask_repos'
 
 unless Fbe.fb.query(
@@ -66,3 +67,14 @@ Fbe.unmask_repos.each do |repo|
 end
 f.total_stars = stars
 f.total_forks = forks
+
+# Total number of issues and pull requests for all repos
+issues = 0
+pulls = 0
+Fbe.unmask_repos.each do |repo|
+  json = Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
+  issues += json['issues']
+  pulls += json['pulls']
+end
+f.total_issues = issues
+f.total_pulls = pulls

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,21 +21,22 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-runs: 3
-options:
-  TODAY: 2024-03-03T00:00:00
-  repositories: yegor256/judges
-  testing: true
-input:
-  -
-    what: dimensions-of-terrain
-    when: 2024-01-01T00:00:00
-expected:
-  - /fb[count(f)=2]
-  - /fb/f[total_repositories]
-  - /fb/f[total_releases]
-  - /fb/f[total_stars]
-  - /fb/f[total_forks]
-  - /fb/f[total_issues]
-  - /fb/f[total_pulls]
+
+require 'factbase'
+require 'loog'
+require 'json'
+require 'minitest/autorun'
+require 'webmock/minitest'
+require 'judges/options'
+
+# Test.
+class TestDimensionsOfTerrain < Minitest::Test
+  def test_total_issues_and_pull_requests
+    WebMock.disable_net_connect!
+    fb = Factbase.new
+    load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
+    f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+    assert_equal(23, f.total_issues)
+    assert_equal(19, f.total_pulls)
+  end
+end
