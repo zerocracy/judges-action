@@ -71,4 +71,10 @@ Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
         end
       end
     end
+
+  # Total number of CI builds executed in all repositories from since
+  f.total_builds_ran =
+    Fbe.unmask_repos.sum do |repo|
+      Fbe.octo.repository_workflow_runs(repo, created: ">#{f.since.utc.iso8601[0..9]}")[:total_count]
+    end
 end
