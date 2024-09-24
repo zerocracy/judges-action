@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   removed: 8
-  seconds: 6599.561507526
+  seconds: 794.381136038
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-24 16:55:10.362302025 Z
+  when: 2024-09-24 17:18:06.065452124 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -72887,44 +72887,11 @@
   average_review_time: 52532.0
   average_reviewers_per_pull: 0.32
   average_reviews_per_pull: 0.8
+  composite: 0.675
+  ffact: 139380
   since: 2024-09-17 16:22:08.919306831 Z
   what: quality-of-service
   when: 2024-09-24 16:22:08.919214308 Z
-- _id: 313111
-  _time: 2024-09-24 16:38:33.423376508 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41991414655
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 313112
-  _time: 2024-09-24 16:38:42.251674713 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41989509099
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 313113
-  _time: 2024-09-24 16:38:51.026196299 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42204823256
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 313114
-  _time: 2024-09-24 16:38:59.579662768 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41994120387
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 313115
-  _time: 2024-09-24 16:39:08.941424005 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42203795030
-  repository: 820463873
-  what: events-were-scanned
-  where: github
 - _id: 313116
   _time: 2024-09-24 16:39:18.135166954 Z
   _version: 0.4.0/0.26.1/
@@ -72957,80 +72924,326 @@
   when: 2024-09-24 15:00:27.000000000 Z
   where: github
   who: 88084038
-- _id: 313118
-  _time: 2024-09-24 16:39:47.036696049 Z
+- _id: 313248
+  _job: 7884
+  _time: 2024-09-24 16:55:47.177275118 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: 4
+  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#348,
+    the reward amount is 4.
+  greeting: "Hey there! \U0001F44B Great job on the review, but we've got some room
+    for improvement. You snagged +4 points as a base, but lost 10 due to the low comment
+    count (only 1). We bumped you up 10 points to keep things positive. Remember,
+    more comments can earn you up to 8 extra points! Your current balance is [+119](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work and aim for those bonus points next time! \U0001F4AA\n\n<!--
+    Thanks for the review! You've earned +4 points for this: +4 as a basis; -10 for
+    very few (1) comments; +10 to give you at least something.  Your running balance
+    is [+119](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).  -->"
+  href: https://github.com/zerocracy/judges-action/issues/348/#issuecomment-2371837884
+  is_human: 1
+  issue: 348
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-09-24 16:55:47.204607856 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/judges-action#348
+- _id: 313249
+  _job: 7884
+  _time: 2024-09-24 16:56:33.396203185 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 1
+  details: The pull request zerocracy/fbe#102 with 10 HoC created by @Suban05 was
+    merged by @yegor256 after 17 minutes of being in review and 1 comments.
+  hoc: 10
+  is_human: 1
+  issue: 102
+  merger: 526301
+  repository: 820463873
+  seconds: 1038
+  what: code-was-contributed
+  when: 2024-09-24 06:07:52.000000000 Z
+  where: github
+  who: 88084038
+- _id: 313250
+  _job: 7884
+  _time: 2024-09-24 16:56:40.635710342 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/judges-action#354 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1 hours of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 354
+  merger: 8086956
+  repository: 799177290
+  seconds: 4264
+  what: code-was-contributed
+  when: 2024-09-24 14:13:01.000000000 Z
+  where: github
+  who: 29139614
+- _id: 313251
+  _job: 7884
+  _time: 2024-09-24 16:56:48.058639900 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 0
+  details: The pull request zerocracy/judges-action#353 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 32 minutes of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 353
+  merger: 526301
+  repository: 799177290
+  seconds: 1939
+  what: code-was-contributed
+  when: 2024-09-24 13:01:09.000000000 Z
+  where: github
+  who: 41898282
+- _id: 313252
+  _job: 7884
+  _time: 2024-09-24 16:56:55.523082013 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 3
+  details: The pull request zerocracy/judges-action#348 with 63 HoC created by @Yegorov
+    was merged by @yegor256 after 14 hours of being in review and 3 comments.
+  hoc: 63
+  is_human: 1
+  issue: 348
+  merger: 526301
+  repository: 799177290
+  seconds: 53772
+  what: code-was-contributed
+  when: 2024-09-24 09:14:59.000000000 Z
+  where: github
+  who: 2566462
+- _id: 313253
+  _job: 7884
+  _time: 2024-09-24 16:57:02.615543788 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/judges-action#351 with 4 HoC created by @Suban05
+    was merged by @yegor256 after 3 hours of being in review and 2 comments.
+  hoc: 4
+  is_human: 1
+  issue: 351
+  merger: 526301
+  repository: 799177290
+  seconds: 12123
+  what: code-was-contributed
+  when: 2024-09-24 09:13:52.000000000 Z
+  where: github
+  who: 88084038
+- _id: 313254
+  _job: 7884
+  _time: 2024-09-24 16:57:09.979891654 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/judges-action#349 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1 hours of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 349
+  merger: 8086956
+  repository: 799177290
+  seconds: 3646
+  what: code-was-contributed
+  when: 2024-09-23 21:23:38.000000000 Z
+  where: github
+  who: 29139614
+- _id: 313255
+  _job: 7884
+  _time: 2024-09-24 16:57:16.933748429 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/pages-action#136 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1 hours of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 136
+  merger: 8086956
+  repository: 802720676
+  seconds: 4687
+  what: code-was-contributed
+  when: 2024-09-24 08:10:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 313256
+  _job: 7884
+  _time: 2024-09-24 16:57:24.091272486 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/pages-action#135 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 54 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 135
+  merger: 8086956
+  repository: 802720676
+  seconds: 3294
+  what: code-was-contributed
+  when: 2024-09-23 23:09:32.000000000 Z
+  where: github
+  who: 29139614
+- _id: 313257
+  _job: 7884
+  _time: 2024-09-24 16:57:31.517467669 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/swarm-template#11 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 55 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 11
+  merger: 8086956
+  repository: 849726475
+  seconds: 3314
+  what: code-was-contributed
+  when: 2024-09-24 08:03:06.000000000 Z
+  where: github
+  who: 29139614
+- _id: 313258
+  _job: 7884
+  _time: 2024-09-24 16:57:48.484619057 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  author: 88084038
+  comments: 3
+  details: The pull request zerocracy/judges-action#351 with 4 HoC created by @Suban05
+    was reviewed by @Yegorov after 1 hours and 3 comments.
+  hoc: 4
+  is_human: 1
+  issue: 351
+  repository: 799177290
+  seconds: 4209
+  what: code-was-reviewed
+  when: 2024-09-24 07:01:58.000000000 Z
+  where: github
+  who: 2566462
+- _id: 313259
+  _job: 7884
+  _time: 2024-09-24 16:57:56.252886152 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  author: 88084038
+  comments: 1
+  details: The pull request zerocracy/judges-action#355 with 16 HoC created by @Suban05
+    was reviewed by @Yegorov after 7 minutes and 1 comments.
+  hoc: 16
+  is_human: 1
+  issue: 355
+  repository: 799177290
+  seconds: 434
+  what: code-was-reviewed
+  when: 2024-09-24 15:07:41.000000000 Z
+  where: github
+  who: 2566462
+- _id: 313260
+  _time: 2024-09-24 17:05:02.686076813 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41991414655
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 313261
+  _time: 2024-09-24 17:05:11.058553409 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41989509099
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 313262
+  _time: 2024-09-24 17:05:19.331702497 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42204823256
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 313263
+  _time: 2024-09-24 17:05:27.334292978 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41994120387
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 313264
+  _time: 2024-09-24 17:05:35.838903476 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42203795030
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 313265
+  _time: 2024-09-24 17:05:43.944872427 Z
   _version: 0.4.0/0.26.1/
   latest: 42223034728
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 313119
-  _time: 2024-09-24 16:39:56.730865639 Z
+- _id: 313266
+  _time: 2024-09-24 17:05:52.463040391 Z
   _version: 0.4.0/0.26.1/
   latest: 42207393234
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 313120
-  _time: 2024-09-24 16:40:04.582097771 Z
+- _id: 313267
+  _time: 2024-09-24 17:05:59.649310096 Z
   _version: 0.4.0/0.26.1/
   latest: 42207119980
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 313136
-  _time: 2024-09-24 16:41:59.775725592 Z
+- _id: 313272
+  _time: 2024-09-24 17:06:36.700542110 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 313282
+  _time: 2024-09-24 17:07:46.573402137 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 313189
-  _time: 2024-09-24 16:48:18.664494441 Z
+- _id: 313328
+  _time: 2024-09-24 17:13:08.632973677 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 313229
-  _time: 2024-09-24 16:53:02.867775374 Z
+- _id: 313333
+  _time: 2024-09-24 17:13:43.701292831 Z
   _version: 0.4.0/0.26.1/
   latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 313235
-  _time: 2024-09-24 16:53:44.926643655 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 313244
-  _time: 2024-09-24 16:54:49.412758750 Z
-  _version: 0.4.0/0.26.1/
-  latest: 177
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 313245
-  _time: 2024-09-24 16:54:56.439760707 Z
+- _id: 313368
+  _time: 2024-09-24 17:17:45.443780832 Z
   _version: 0.4.0/0.26.1/
-  latest: 83
-  repository: 820463873
+  latest: 67
+  repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 313246
-  _time: 2024-09-24 16:55:03.367275484 Z
+- _id: 313369
+  _time: 2024-09-24 17:17:52.222208626 Z
   _version: 0.4.0/0.26.1/
-  latest: 217
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 313370
+  _time: 2024-09-24 17:17:59.100817654 Z
+  _version: 0.4.0/0.26.1/
+  latest: 267
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 313247
-  _time: 2024-09-24 16:55:10.188638833 Z
+- _id: 313371
+  _time: 2024-09-24 17:18:05.894885180 Z
   _version: 0.4.0/0.26.1/
-  latest: 31
+  latest: 73
   repository: 802720676
   what: labels-were-scanned
   where: github
