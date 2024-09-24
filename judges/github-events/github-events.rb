@@ -94,7 +94,7 @@ Fbe.iterate do
         issue_comments.count { |comment| comment[:user][:id] != pr[:user][:id] },
       comments_appreciated: count_appreciated_comments(pr, issue_comments, code_comments),
       comments_resolved: Fbe.github_graph.resolved_conversations(
-        pr[:base][:repo][:owner][:login], pr[:base][:repo][:name], pr[:number]
+        pr[:base][:repo][:full_name].split('/').first, pr[:base][:repo][:name], pr[:number]
       ).count
     }
   end
