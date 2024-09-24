@@ -1,11 +1,12 @@
 ---
 - added: 8
   cycles: 2
+  error: undefined method `[]' for nil
   removed: 8
-  seconds: 2226.527238617
+  seconds: 1675.989872299
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-24 00:56:27.896645819 Z
+  when: 2024-09-24 02:00:11.146278245 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -72202,48 +72203,6 @@
   when: 2024-09-23 20:13:32.000000000 Z
   where: github
   who: 29139614
-- _id: 309357
-  _time: 2024-09-24 00:39:10.471893289 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41991414655
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 309358
-  _time: 2024-09-24 00:39:19.062615741 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41989509099
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 309359
-  _time: 2024-09-24 00:39:27.580470326 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42191056092
-  repository: 728758275
-  what: events-were-scanned
-  where: github
-- _id: 309360
-  _time: 2024-09-24 00:39:35.799663234 Z
-  _version: 0.4.0/0.26.1/
-  latest: 41994120387
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 309361
-  _time: 2024-09-24 00:39:45.006600131 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42191040899
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 309362
-  _time: 2024-09-24 00:39:53.347969885 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42192782375
-  repository: 799177290
-  what: events-were-scanned
-  where: github
 - _id: 309363
   _time: 2024-09-24 00:40:01.816453660 Z
   _version: 0.4.0/0.26.1/
@@ -72282,59 +72241,128 @@
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 309381
-  _time: 2024-09-24 00:42:50.773170426 Z
+- _id: 309493
+  _job: 7818
+  _time: 2024-09-24 00:57:51.147089711 Z
+  _version: 0.4.0/0.26.1/0.0.52
+  comments: 1
+  details: The pull request zerocracy/fbe#101 with 37 HoC created by @Yegorov was
+    merged by @yegor256 after 1 hours of being in review and 1 comments.
+  hoc: 37
+  is_human: 1
+  issue: 101
+  merger: 526301
+  repository: 820463873
+  seconds: 3893
+  what: code-was-contributed
+  when: 2024-09-23 19:23:05.000000000 Z
+  where: github
+  who: 2566462
+- _id: 309494
+  _job: 7818
+  _time: 2024-09-24 00:57:59.376176006 Z
+  _version: 0.4.0/0.26.1/0.0.52
+  comments: 2
+  details: The pull request zerocracy/swarm-template#10 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 50 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 10
+  merger: 8086956
+  repository: 849726475
+  seconds: 3051
+  what: code-was-contributed
+  when: 2024-09-23 21:04:23.000000000 Z
+  where: github
+  who: 29139614
+- _id: 309604
+  _time: 2024-09-24 01:45:18.281573534 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41991414655
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 309605
+  _time: 2024-09-24 01:45:26.149406744 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41989509099
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 309606
+  _time: 2024-09-24 01:45:34.426113728 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42191056092
+  repository: 728758275
+  what: events-were-scanned
+  where: github
+- _id: 309607
+  _time: 2024-09-24 01:45:41.883870956 Z
+  _version: 0.4.0/0.26.1/
+  latest: 41994120387
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 309608
+  _time: 2024-09-24 01:45:49.983372908 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42191040899
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 309624
+  _time: 2024-09-24 01:48:07.836569741 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 309434
-  _time: 2024-09-24 00:49:19.798566273 Z
+- _id: 309677
+  _time: 2024-09-24 01:54:09.324827392 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 309474
-  _time: 2024-09-24 00:54:17.000520072 Z
+- _id: 309691
+  _time: 2024-09-24 01:55:44.070287557 Z
   _version: 0.4.0/0.26.1/
   latest: 0
-  repository: 799113787
+  repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 309480
-  _time: 2024-09-24 00:55:00.318485499 Z
+- _id: 309719
+  _time: 2024-09-24 01:58:56.666650531 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 309489
-  _time: 2024-09-24 00:56:06.179706121 Z
+- _id: 309727
+  _time: 2024-09-24 01:59:50.967649653 Z
   _version: 0.4.0/0.26.1/
-  latest: 177
+  latest: 98
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 309728
+  _time: 2024-09-24 01:59:57.795720795 Z
+  _version: 0.4.0/0.26.1/
+  latest: 135
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 309490
-  _time: 2024-09-24 00:56:13.360159765 Z
+- _id: 309729
+  _time: 2024-09-24 02:00:04.548127606 Z
   _version: 0.4.0/0.26.1/
-  latest: 83
+  latest: 46
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 309491
-  _time: 2024-09-24 00:56:20.576258142 Z
+- _id: 309730
+  _time: 2024-09-24 02:00:10.975265268 Z
   _version: 0.4.0/0.26.1/
-  latest: 217
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 309492
-  _time: 2024-09-24 00:56:27.729460288 Z
-  _version: 0.4.0/0.26.1/
-  latest: 31
+  latest: 0
   repository: 802720676
   what: labels-were-scanned
   where: github
