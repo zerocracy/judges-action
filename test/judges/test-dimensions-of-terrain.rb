@@ -47,4 +47,103 @@ class TestDimensionsOfTerrain < Minitest::Test
     f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
     assert_equal(1484, f.total_commits)
   end
+
+  def test_total_files
+    WebMock.disable_net_connect!
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo',
+        full_name: 'foo/foo',
+        private: false,
+        created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+        size: 19_366,
+        stargazers_count: 1,
+        forks: 1,
+        default_branch: 'master'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: {
+        sha: '492072971ad3c8644a191f',
+        tree: [
+          {
+            path: '.github',
+            mode: '040000',
+            type: 'tree',
+            sha: '438682e07e45ccbf9ca58f294a'
+          },
+          {
+            path: '.github/workflows',
+            mode: '040000',
+            type: 'tree',
+            sha: 'dea8a01c236530cc92a63c5774'
+          },
+          {
+            path: '.github/workflows/actionlint.yml',
+            mode: '100644',
+            type: 'blob',
+            sha: 'ffed2deef2383d6f685489b289',
+            size: 1671
+          },
+          {
+            path: '.github/workflows/copyrights.yml',
+            mode: '100644',
+            type: 'blob',
+            sha: 'ab8357cfd94e0628676aff34cd',
+            size: 1293
+          },
+          {
+            path: '.github/workflows/zerocracy.yml',
+            mode: '100644',
+            type: 'blob',
+            sha: '5c224c7742e5ebeeb176b90605',
+            size: 2005
+          },
+          {
+            path: '.gitignore',
+            mode: '100644',
+            type: 'blob',
+            sha: '9383e7111a173b44baa0692775',
+            size: 27
+          },
+          {
+            path: '.rubocop.yml',
+            mode: '100644',
+            type: 'blob',
+            sha: 'cb9b62eb1979589daa18142008',
+            size: 1963
+          },
+          {
+            path: 'README.md',
+            mode: '100644',
+            type: 'blob',
+            sha: '8011ad43c37edbaf1969417b94',
+            size: 4877
+          },
+          {
+            path: 'Rakefile',
+            mode: '100644',
+            type: 'blob',
+            sha: 'a0ac9bf2643d9f5392e1119301',
+            size: 1805
+          }
+        ],
+        truncated: false
+      }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('dimensions-of-terrain', fb)
+      f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+      assert_equal(7, f.total_files)
+    end
+  end
 end
