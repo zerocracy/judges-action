@@ -39,4 +39,12 @@ class TestDimensionsOfTerrain < Minitest::Test
     assert_equal(23, f.total_issues)
     assert_equal(19, f.total_pulls)
   end
+
+  def test_total_commits
+    WebMock.disable_net_connect!
+    fb = Factbase.new
+    load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
+    f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+    assert_equal(1484, f.total_commits)
+  end
 end

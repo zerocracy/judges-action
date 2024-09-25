@@ -78,3 +78,10 @@ Fbe.unmask_repos.each do |repo|
 end
 f.total_issues = issues
 f.total_pulls = pulls
+
+# Total number of commits for all repos
+commits = 0
+Fbe.unmask_repos.each do |repo|
+  commits += Fbe.github_graph.total_commits(*repo.split('/'), Fbe.octo.repository(repo)[:default_branch])
+end
+f.total_commits = commits
