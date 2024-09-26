@@ -85,3 +85,12 @@ Fbe.unmask_repos.each do |repo|
   commits += Fbe.github_graph.total_commits(*repo.split('/'), Fbe.octo.repository(repo)[:default_branch])
 end
 f.total_commits = commits
+
+# Total number of files for all repos
+files = 0
+Fbe.unmask_repos.each do |repo|
+  Fbe.octo.tree(repo, Fbe.octo.repository(repo)[:default_branch], recursive: true).then do |json|
+    files += json[:tree].count { |item| item[:type] == 'blob' }
+  end
+end
+f.total_files = files
