@@ -94,3 +94,12 @@ Fbe.unmask_repos.each do |repo|
   end
 end
 f.total_files = files
+
+# Total number of unique contributors in all repos
+contributors = Set.new
+Fbe.unmask_repos.each do |repo|
+  Fbe.octo.contributors(repo).each do |contributor|
+    contributors << contributor[:id]
+  end
+end
+f.total_contributors = contributors.count

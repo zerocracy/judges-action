@@ -139,11 +139,62 @@ class TestDimensionsOfTerrain < Minitest::Test
         truncated: false
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       load_it('dimensions-of-terrain', fb)
       f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
       assert_equal(7, f.total_files)
+    end
+  end
+
+  def test_total_contributors
+    WebMock.disable_net_connect!
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo',
+        full_name: 'foo/foo',
+        private: false,
+        created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+        size: 19_366,
+        stargazers_count: 1,
+        forks: 1,
+        default_branch: 'master'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [
+        { login: 'yegor256', id: 526_301, type: 'User', contributions: 500 },
+        { login: 'renovate[bot]', id: 29_139_614, type: 'Bot', contributions: 320 },
+        { login: 'user1', id: 2_476_362, type: 'User', contributions: 120 },
+        { login: 'rultor', id: 8_086_956, type: 'Bot', contributions: 87 },
+        { login: 'user2', id: 1_455_229, type: 'User', contributions: 65 },
+        { login: 'user3', id: 3_411_938, type: 'User', contributions: 45 },
+        { login: 'bot1', id: 4_122_600, type: 'Bot', contributions: 40 },
+        { login: 'user4', id: 2_117_778, type: 'User', contributions: 32 },
+        { login: 'user5', id: 5_427_638, type: 'User', contributions: 25 },
+        { login: 'user6', id: 2_648_875, type: 'User', contributions: 10 },
+        { login: 'user7', id: 7_125_293, type: 'User', contributions: 1 },
+        { login: 'bot2', id: 4_199_655, type: 'Bot', contributions: 1 }
+      ]
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('dimensions-of-terrain', fb)
+      f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+      assert_equal(12, f.total_contributors)
     end
   end
 end
