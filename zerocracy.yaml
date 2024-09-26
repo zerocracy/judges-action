@@ -2,10 +2,10 @@
 - added: 8
   cycles: 1
   removed: 8
-  seconds: 815.731013924
+  seconds: 1189.232278277
   version: 0.26.1
   what: judges-summary
-  when: 2024-09-26 04:19:29.217446171 Z
+  when: 2024-09-26 15:24:55.473189221 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -74163,115 +74163,1274 @@
   when: 2024-09-25 19:03:03.000000000 Z
   where: github
   who: 88084038
-- _id: 318944
-  _time: 2024-09-26 04:06:04.416357900 Z
+- _id: 319187
+  _time: 2024-09-26 05:21:37.451457195 Z
+  _version: 0.4.0/0.26.1/
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/pages-action#138.
+  is_human: 1
+  issue: 138
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-09-26 01:48:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 319305
+  _job: 8034
+  _time: 2024-09-26 05:35:46.440995600 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  details: 'In the repository #802720676, the user #526301 attached the ''#bug'' label
+    to the issue #138 reported by the user #88084038; this means that a bug was-accepted
+    as valid, by the project team.'
+  is_human: 1
+  issue: 138
+  reporter: 88084038
+  repository: 802720676
+  what: bug-was-accepted
+  when: 2024-09-26 01:48:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 319310
+  _time: 2024-09-26 06:08:00.972840821 Z
+  _version: 0.4.0/0.26.1/
+  commits: 4
+  contributors:
+  - 526301
+  - 2566462
+  - 8086956
+  details: A new release '' has been published in zerocracy/fbe by @rultor.
+  event_id: 42277946767
+  event_type: ReleaseEvent
+  hoc: 102
+  is_human: 0
+  last_commit: 467ef56e76394c8c98ffb250038e6edf0d4550d1
+  release: 176957496
+  repository: 820463873
+  tag: 0.0.72
+  what: release-published
+  when: 2024-09-26 00:59:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 319311
+  _time: 2024-09-26 06:08:08.967002638 Z
+  _version: 0.4.0/0.26.1/
+  details: A new tag '0.0.72' has been created in zerocracy/fbe by @rultor.
+  event_id: 42277924581
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.0.72
+  what: tag-was-created
+  when: 2024-09-26 00:57:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 319312
+  _time: 2024-09-26 06:08:37.438608939 Z
+  _version: 0.4.0/0.26.1/
+  branch: '202'
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 2
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/fbe#105 has been closed by @yegor256, with 70
+    HoC and 2 comments.
+  event_id: 42277760607
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 70
+  is_human: 1
+  issue: 105
+  repository: 820463873
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2024-09-26 00:46:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 319314
+  _time: 2024-09-26 06:09:18.529761669 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#358 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 42279506519
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 358
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-09-26 02:34:20.000000000 Z
+  where: github
+  who: 8086956
+- _id: 319315
+  _time: 2024-09-26 06:09:58.330349791 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/judges-action#358 has been opened by @renovate[bot].
+  event_id: 42278948845
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 358
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-09-26 02:01:22.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319317
+  _time: 2024-09-26 06:10:51.709179859 Z
+  _version: 0.4.0/0.26.1/
+  commit: 89481297e5642591903d9e2c055be98a64863a0e
+  default_branch: master
+  details: 'A new Git push #20417093649 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278834285
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20417093649
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:54:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 319318
+  _time: 2024-09-26 06:11:14.228369398 Z
+  _version: 0.4.0/0.26.1/
+  commit: 5096179c0b6998e6cd51865a61d701841cf5dd4a
+  default_branch: master
+  details: 'A new Git push #20417001797 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278658251
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20417001797
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:43:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 319319
+  _time: 2024-09-26 06:11:21.814712457 Z
+  _version: 0.4.0/0.26.1/
+  commit: 8c0aefe9ee50509ef974bd088285b4d4df31e029
+  default_branch: master
+  details: 'A new Git push #20416986390 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278627016
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20416986390
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:41:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 319320
+  _time: 2024-09-26 06:11:29.704586876 Z
+  _version: 0.4.0/0.26.1/
+  commit: 6e036f2f2cc0bda7daf0d67b18a515271373f36b
+  default_branch: master
+  details: 'A new Git push #20416893914 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278458977
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20416893914
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:31:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 319321
+  _time: 2024-09-26 06:11:37.457711251 Z
+  _version: 0.4.0/0.26.1/
+  commit: d275031f1250f61ee50f3a7e39bf3c62d2ac464f
+  default_branch: master
+  details: 'A new Git push #20416873663 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278420344
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20416873663
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:28:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 319322
+  _time: 2024-09-26 06:11:45.168767711 Z
+  _version: 0.4.0/0.26.1/
+  commit: b1cf07549768e9ed4ce4b700a5ba01f458fb5d91
+  default_branch: master
+  details: 'A new Git push #20416844259 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278366042
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20416844259
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:25:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 319323
+  _time: 2024-09-26 06:11:52.949054288 Z
+  _version: 0.4.0/0.26.1/
+  commit: 9fcf70abeabedef95bb8447d1625390d22127ee5
+  default_branch: master
+  details: 'A new Git push #20416795418 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278279085
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20416795418
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:19:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 319324
+  _time: 2024-09-26 06:12:00.482036172 Z
+  _version: 0.4.0/0.26.1/
+  commit: 27e908ff2a00d1637bb12bc8f592c577f135f137
+  default_branch: master
+  details: 'A new Git push #20416711385 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42278128540
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20416711385
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 01:10:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 319326
+  _time: 2024-09-26 06:12:23.957453250 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/swarm-template#13 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 42279437736
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 13
+  repository: 849726475
+  succeeded_builds: 4
+  what: pull-was-merged
+  when: 2024-09-26 02:30:05.000000000 Z
+  where: github
+  who: 8086956
+- _id: 319327
+  _time: 2024-09-26 06:12:59.596640634 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/swarm-template#13 has been opened by @renovate[bot].
+  event_id: 42278516923
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 13
+  repository: 849726475
+  what: pull-was-opened
+  when: 2024-09-26 01:34:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319572
+  _job: 8038
+  _time: 2024-09-26 06:43:42.666256603 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: 8
+  details: It's time to reward @Suban05 for the bug reported in zerocracy/pages-action#138,
+    the reward amount is 8.
+  greeting: |-
+    Hello! Thank you for reporting a new bug. As per our team's policy, you've earned **8** points for this contribution. Your diligence in identifying issues helps improve our project's quality. Your current balance is now [+126](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Please continue to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) any other issues you may find in the repository that [don't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) up to standard. Your efforts are greatly appreciated!
+
+    <!-- Thanks for reporting a new bug! You've earned +8 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running balance is [+126](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).  -->
+  href: https://github.com/zerocracy/pages-action/issues/138/#issuecomment-2376070419
+  is_human: 1
+  issue: 138
+  repository: 802720676
+  what: bug-report-was-rewarded
+  when: 2024-09-26 06:43:42.699444087 Z
+  where: github
+  who: 88084038
+  why: Reported bug in zerocracy/pages-action#138
+- _id: 319573
+  _job: 8038
+  _time: 2024-09-26 06:44:19.143406441 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: 4
+  details: It's time to reward @Suban05 for the code review in zerocracy/fbe#105,
+    the reward amount is 4.
+  greeting: "Hey there, code review superstar! \U0001F44D You've just bagged +4 points
+    for this review. Here's the breakdown: +4 base points, -24 for self-review (oops!),
+    +1.25 for those 5 comments (keep 'em coming!), and +22.75 to hit our minimum reward.
+    Remember, more comments and hits-of-code could boost your score next time! Your
+    running balance is now [+134](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the great work!\n\n<!-- Thanks for the review! You've earned +4 points
+    for this: +4 as a basis; -10 for very few (5) comments; +10 to give you at least
+    something.  Your running balance is [+134](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/zerocracy/fbe/issues/105/#issuecomment-2376070467
+  is_human: 1
+  issue: 105
+  repository: 820463873
+  what: code-review-was-rewarded
+  when: 2024-09-26 06:44:19.173082716 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/fbe#105
+- _id: 319574
+  _job: 8038
+  _time: 2024-09-26 06:45:19.521760075 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/fbe#105 with 70 HoC created by @Yegorov was
+    merged by @yegor256 after 6 hours of being in review and 2 comments.
+  hoc: 70
+  is_human: 1
+  issue: 105
+  merger: 526301
+  repository: 820463873
+  seconds: 21928
+  what: code-was-contributed
+  when: 2024-09-26 00:46:55.000000000 Z
+  where: github
+  who: 2566462
+- _id: 319575
+  _job: 8038
+  _time: 2024-09-26 06:45:27.482012762 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/judges-action#358 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 32 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 358
+  merger: 8086956
+  repository: 799177290
+  seconds: 1978
+  what: code-was-contributed
+  when: 2024-09-26 02:34:20.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319576
+  _job: 8038
+  _time: 2024-09-26 06:45:35.741771258 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/swarm-template#13 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 55 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 13
+  merger: 8086956
+  repository: 849726475
+  seconds: 3314
+  what: code-was-contributed
+  when: 2024-09-26 02:30:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319583
+  _time: 2024-09-26 07:06:28.238646326 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#140 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 42279929375
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 140
+  repository: 802720676
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-09-26 03:00:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 319584
+  _time: 2024-09-26 07:06:39.969992775 Z
+  _version: 0.4.0/0.26.1/
+  details: The issue zerocracy/pages-action#138 has been closed by @yegor256.
+  event_id: 42279925512
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 138
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-09-26 03:00:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 319585
+  _time: 2024-09-26 07:06:54.498415020 Z
+  _version: 0.4.0/0.26.1/
+  commits: 17
+  contributors:
+  - 526301
+  - 29139614
+  - 8086956
+  details: A new release '' has been published in zerocracy/pages-action by @rultor.
+  event_id: 42279907111
+  event_type: ReleaseEvent
+  hoc: 358
+  is_human: 0
+  last_commit: 3403180847d6dcbb1295760b83da05e07761654d
+  release: 176965924
+  repository: 802720676
+  tag: 0.0.36
+  what: release-published
+  when: 2024-09-26 02:59:17.000000000 Z
+  where: github
+  who: 8086956
+- _id: 319586
+  _time: 2024-09-26 07:07:02.201543810 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  details: The pull request zerocracy/pages-action#140 has been opened by @github-actions[bot].
+  event_id: 42279900285
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 140
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-09-26 02:58:54.000000000 Z
+  where: github
+  who: 41898282
+- _id: 319587
+  _time: 2024-09-26 07:07:16.824343745 Z
+  _version: 0.4.0/0.26.1/
+  details: A new tag '0.0.36' has been created in zerocracy/pages-action by @rultor.
+  event_id: 42279896424
+  event_type: CreateEvent
+  is_human: 0
+  repository: 802720676
+  tag: 0.0.36
+  what: tag-was-created
+  when: 2024-09-26 02:58:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 319724
+  _time: 2024-09-26 07:24:39.937600671 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#361 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 42281218015
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 361
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-09-26 04:21:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 319725
+  _time: 2024-09-26 07:24:53.197312017 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  details: The pull request zerocracy/judges-action#361 has been opened by @github-actions[bot].
+  event_id: 42281215988
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 361
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-09-26 04:21:31.000000000 Z
+  where: github
+  who: 41898282
+- _id: 319726
+  _time: 2024-09-26 07:25:15.628488410 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#360 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 42281210088
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 360
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-09-26 04:21:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 319727
+  _time: 2024-09-26 07:25:31.073977161 Z
+  _version: 0.4.0/0.26.1/
+  details: The issue zerocracy/judges-action#202 has been closed by @yegor256.
+  event_id: 42281206345
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 202
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-26 04:20:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 319728
+  _time: 2024-09-26 07:25:38.529316618 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  details: The pull request zerocracy/judges-action#360 has been opened by @github-actions[bot].
+  event_id: 42281206356
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 360
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-09-26 04:20:56.000000000 Z
+  where: github
+  who: 41898282
+- _id: 319729
+  _time: 2024-09-26 07:25:53.793584706 Z
+  _version: 0.4.0/0.26.1/
+  branch: '202'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#357 has been closed by @yegor256,
+    with 109 HoC and 2 comments.
+  event_id: 42281206147
+  event_type: PullRequestEvent
+  failed_builds: 2
+  hoc: 109
+  is_human: 1
+  issue: 357
+  repository: 799177290
+  succeeded_builds: 6
+  what: pull-was-merged
+  when: 2024-09-26 04:20:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 319730
+  _time: 2024-09-26 07:26:27.416261590 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/zerocracy-pages-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#359 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 42281197817
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 359
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-09-26 04:20:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 319731
+  _time: 2024-09-26 07:26:47.903881787 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/zerocracy-pages-action-0.x
+  details: The pull request zerocracy/judges-action#359 has been opened by @renovate[bot].
+  event_id: 42281050603
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 359
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-09-26 04:11:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319733
+  _time: 2024-09-26 07:27:11.300115658 Z
+  _version: 0.4.0/0.26.1/
+  commit: 927bafb59d11c0af09734c9ef5c22fb60b46ffd9
+  default_branch: master
+  details: 'A new Git push #20418318723 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42281119743
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20418318723
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 04:15:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 319812
+  _job: 8042
+  _time: 2024-09-26 07:37:44.447416495 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: 4
+  details: It's time to reward @Yegorov for the code contributed in zerocracy/fbe#105,
+    the reward amount is 4.
+  greeting: "Hey there! \U0001F44B Nice work on your contribution! You've earned +4
+    points this time. Here's the breakdown: +4 base points, -4 because there were
+    only 2 comments (we like to see more interaction!), and +4 to keep you motivated.
+    Remember, more [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)
+    and active code reviews can boost your points next time. [Keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    the contributions coming! Your current balance is [+178](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Let's aim higher next time! \U0001F4AA\n\n<!-- Thanks for the contribution! You've
+    earned +4 points for this: +4 as a basis; -4 for very few (2) comments; +4 to
+    give you at least something. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running balance is [+178](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/zerocracy/fbe/issues/105/#issuecomment-2376165335
+  is_human: 1
+  issue: 105
+  repository: 820463873
+  what: code-contribution-was-rewarded
+  when: 2024-09-26 07:37:44.483987302 Z
+  where: github
+  who: 2566462
+  why: Contributed code in zerocracy/fbe#105
+- _id: 319813
+  _job: 8042
+  _time: 2024-09-26 07:37:58.694445032 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: 4
+  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#357,
+    the reward amount is 4.
+  greeting: "Thanks for your code review! Here's how your points were calculated:
+    +4 base points, -10 for having only 2 comments (policy requires 6+), and +10 to
+    meet the minimum 4-point reward. Your total for this review is +4 points, bringing
+    your running balance to [+134](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work, and remember that more detailed reviews with 6+ comments
+    can earn you higher rewards! \U0001F4BB\U0001F44D\n\n<!-- Thanks for the review!
+    You've earned +4 points for this: +4 as a basis; -10 for very few (2) comments;
+    +10 to give you at least something.  Your running balance is [+134](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/zerocracy/judges-action/issues/357/#issuecomment-2376165396
+  is_human: 1
+  issue: 357
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-09-26 07:37:58.732303844 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/judges-action#357
+- _id: 319814
+  _job: 8042
+  _time: 2024-09-26 07:38:56.046586142 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 0
+  details: The pull request zerocracy/pages-action#140 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 1 minutes of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 140
+  merger: 526301
+  repository: 802720676
+  seconds: 101
+  what: code-was-contributed
+  when: 2024-09-26 03:00:35.000000000 Z
+  where: github
+  who: 41898282
+- _id: 319815
+  _job: 8042
+  _time: 2024-09-26 07:39:05.206744574 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 0
+  details: The pull request zerocracy/judges-action#361 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 7 seconds of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 361
+  merger: 526301
+  repository: 799177290
+  seconds: 7
+  what: code-was-contributed
+  when: 2024-09-26 04:21:38.000000000 Z
+  where: github
+  who: 41898282
+- _id: 319816
+  _job: 8042
+  _time: 2024-09-26 07:39:14.549852222 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 0
+  details: The pull request zerocracy/judges-action#360 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 14 seconds of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 360
+  merger: 526301
+  repository: 799177290
+  seconds: 14
+  what: code-was-contributed
+  when: 2024-09-26 04:21:10.000000000 Z
+  where: github
+  who: 41898282
+- _id: 319817
+  _job: 8042
+  _time: 2024-09-26 07:39:23.195084002 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/judges-action#357 with 109 HoC created by @Yegorov
+    was merged by @yegor256 after 9 hours of being in review and 2 comments.
+  hoc: 109
+  is_human: 1
+  issue: 357
+  merger: 526301
+  repository: 799177290
+  seconds: 34623
+  what: code-was-contributed
+  when: 2024-09-26 04:20:55.000000000 Z
+  where: github
+  who: 2566462
+- _id: 319818
+  _job: 8042
+  _time: 2024-09-26 07:39:32.554829630 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 0
+  details: The pull request zerocracy/judges-action#359 with 2 HoC created by @renovate[bot]
+    was merged by @yegor256 after 9 minutes of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 359
+  merger: 526301
+  repository: 799177290
+  seconds: 552
+  what: code-was-contributed
+  when: 2024-09-26 04:20:24.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319959
+  _job: 8046
+  _time: 2024-09-26 08:24:15.379270468 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: 5
+  details: It's time to reward @Yegorov for the code contributed in zerocracy/judges-action#357,
+    the reward amount is 5.
+  greeting: "\U0001F389 Great work! You've earned +5 points for your contribution:
+    +4 base, +5 for 109 hits-of-code, -4 for minimal comments. [Keep up](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    the momentum! Your current balance: [+182](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Looking forward to more quality submissions!\n\n<!-- Thanks for the contribution!
+    You've earned +5 points for this: +4 as a basis; +5 for the 109 hits-of-code that
+    you wrote; -4 for very few (2) comments. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running balance is [+182](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/zerocracy/judges-action/issues/357/#issuecomment-2376283931
+  is_human: 1
+  issue: 357
+  repository: 799177290
+  what: code-contribution-was-rewarded
+  when: 2024-09-26 08:24:15.416873844 Z
+  where: github
+  who: 2566462
+  why: Contributed code in zerocracy/judges-action#357
+- _id: 319962
+  _time: 2024-09-26 09:06:17.852476367 Z
+  _version: 0.4.0/0.26.1/
+  commit: d8784be11fb334d584f7657167c5219ba4d9a9e9
+  default_branch: master
+  details: 'A new Git push #20417872464 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42280299014
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20417872464
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 03:23:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 319963
+  _time: 2024-09-26 09:06:32.906799293 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/faraday-2.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/baza#255 has been closed by @renovate[bot],
+    with 2 HoC and 0 comments.
+  event_id: 42280000790
+  event_type: PullRequestEvent
+  failed_builds: 1
+  hoc: 2
+  is_human: 0
+  issue: 255
+  repository: 728758275
+  succeeded_builds: 7
+  what: pull-was-closed
+  when: 2024-09-26 03:04:45.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319964
+  _time: 2024-09-26 09:06:59.798747705 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/aws-sdk-ec2-1.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/baza#263 has been closed by @renovate[bot],
+    with 6 HoC and 3 comments.
+  event_id: 42280000366
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  is_human: 0
+  issue: 263
+  repository: 728758275
+  succeeded_builds: 8
+  what: pull-was-closed
+  when: 2024-09-26 03:04:43.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319965
+  _time: 2024-09-26 09:07:22.631474504 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/aws-sdk-core-3.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/baza#262 has been closed by @renovate[bot],
+    with 2 HoC and 3 comments.
+  event_id: 42280000003
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 262
+  repository: 728758275
+  succeeded_builds: 8
+  what: pull-was-closed
+  when: 2024-09-26 03:04:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 319966
+  _time: 2024-09-26 09:07:46.249479486 Z
+  _version: 0.4.0/0.26.1/
+  commit: 9baa892cec6cf421d5bd2e54c21abff98e696ee0
+  default_branch: master
+  details: 'A new Git push #20417699941 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42279983718
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20417699941
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 03:03:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 320102
+  _time: 2024-09-26 09:25:58.043402276 Z
+  _version: 0.4.0/0.26.1/
+  commit: 1cb3fae502f1426a8135badb59816c9dd38f1bbd
+  default_branch: master
+  details: 'A new Git push #20418386424 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42281242913
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20418386424
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 04:23:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 320103
+  _time: 2024-09-26 09:26:06.032527455 Z
+  _version: 0.4.0/0.26.1/
+  commit: 21033bac881272d99dc3040e78f8f1de393f4bbd
+  default_branch: master
+  details: 'A new Git push #20418342780 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42281163237
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20418342780
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 04:18:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 320217
+  _time: 2024-09-26 10:05:38.554780781 Z
+  _version: 0.4.0/0.26.1/
+  commit: 9fab5cd33ef95b940f4ec6554408f059907b30d5
+  default_branch: master
+  details: 'A new Git push #20418910599 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42282238145
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20418910599
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 05:19:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 320582
+  _time: 2024-09-26 12:09:05.017409151 Z
+  _version: 0.4.0/0.26.1/
+  commit: 1061273d7f34aa711898adbaa7e767a899304231
+  default_branch: master
+  details: 'A new Git push #20422170931 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42288932770
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20422170931
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 09:05:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 320583
+  _time: 2024-09-26 12:09:12.426136812 Z
+  _version: 0.4.0/0.26.1/
+  commit: fc25c6bc7a1c08c2775fc1efd747cda812e53667
+  default_branch: master
+  details: 'A new Git push #20422106486 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42288795031
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20422106486
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 09:01:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 320584
+  _time: 2024-09-26 12:09:19.976732093 Z
+  _version: 0.4.0/0.26.1/
+  details: The issue zerocracy/pages-action#141 has been opened by @yegor256.
+  event_id: 42288590608
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 141
+  repository: 802720676
+  what: issue-was-opened
+  when: 2024-09-26 08:56:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 320733
+  _time: 2024-09-26 12:27:19.144431836 Z
+  _version: 0.4.0/0.26.1/
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/pages-action#141.
+  is_human: 1
+  issue: 141
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-09-26 08:56:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 320843
+  _time: 2024-09-26 13:11:10.285363065 Z
+  _version: 0.4.0/0.26.1/
+  commit: 04a70ef81f254c71ac42ef2caba951693fa3eeeb
+  default_branch: master
+  details: 'A new Git push #20423143710 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 42290949092
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20423143710
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-09-26 10:00:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 321088
+  _time: 2024-09-26 14:06:15.676644569 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#142 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 42292295750
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 142
+  repository: 802720676
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-09-26 10:38:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 321089
+  _time: 2024-09-26 14:06:28.286303376 Z
+  _version: 0.4.0/0.26.1/
+  details: The issue zerocracy/pages-action#141 has been closed by @yegor256.
+  event_id: 42292289580
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 141
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-09-26 10:38:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 321090
+  _time: 2024-09-26 14:06:42.590667068 Z
+  _version: 0.4.0/0.26.1/
+  commits: 7
+  contributors:
+  - 8086956
+  - 526301
+  details: A new release 'An empty sequence is not allowed as the first argument of
+    z:index()' has been published in zerocracy/pages-action by @rultor.
+  event_id: 42292262530
+  event_type: ReleaseEvent
+  hoc: 261
+  is_human: 0
+  last_commit: f04f5c9c45789a652a4cf87b70181ee71f9e65c8
+  release: 177034313
+  repository: 802720676
+  tag: 0.0.37
+  what: release-published
+  when: 2024-09-26 10:37:56.000000000 Z
+  where: github
+  who: 8086956
+- _id: 321091
+  _time: 2024-09-26 14:06:50.188516439 Z
+  _version: 0.4.0/0.26.1/
+  branch: version-up
+  details: The pull request zerocracy/pages-action#142 has been opened by @github-actions[bot].
+  event_id: 42292251713
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 142
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-09-26 10:37:36.000000000 Z
+  where: github
+  who: 41898282
+- _id: 321092
+  _time: 2024-09-26 14:07:04.941935228 Z
+  _version: 0.4.0/0.26.1/
+  details: A new tag '0.0.37' has been created in zerocracy/pages-action by @rultor.
+  event_id: 42292242478
+  event_type: CreateEvent
+  is_human: 0
+  repository: 802720676
+  tag: 0.0.37
+  what: tag-was-created
+  when: 2024-09-26 10:37:19.000000000 Z
+  where: github
+  who: 8086956
+- _id: 321317
+  _job: 8074
+  _time: 2024-09-26 14:36:30.987651057 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 0
+  details: The pull request zerocracy/pages-action#142 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 1 minutes of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 142
+  merger: 526301
+  repository: 802720676
+  seconds: 81
+  what: code-was-contributed
+  when: 2024-09-26 10:38:57.000000000 Z
+  where: github
+  who: 41898282
+- _id: 321318
+  _time: 2024-09-26 15:05:20.311525765 Z
   _version: 0.4.0/0.26.1/
   latest: 41991414655
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 318945
-  _time: 2024-09-26 04:06:12.830287644 Z
+- _id: 321319
+  _time: 2024-09-26 15:05:29.901455879 Z
   _version: 0.4.0/0.26.1/
   latest: 41989509099
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 318946
-  _time: 2024-09-26 04:06:21.251279838 Z
+- _id: 321320
+  _time: 2024-09-26 15:05:39.820476456 Z
   _version: 0.4.0/0.26.1/
-  latest: 42253842016
+  latest: 42282238145
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 318947
-  _time: 2024-09-26 04:06:29.394772142 Z
+- _id: 321321
+  _time: 2024-09-26 15:05:49.715679327 Z
   _version: 0.4.0/0.26.1/
   latest: 41994120387
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 318948
-  _time: 2024-09-26 04:06:37.997034982 Z
+- _id: 321322
+  _time: 2024-09-26 15:05:59.818636003 Z
   _version: 0.4.0/0.26.1/
-  latest: 42270597080
+  latest: 42285913610
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 318949
-  _time: 2024-09-26 04:07:00.532007749 Z
+- _id: 321323
+  _time: 2024-09-26 15:06:09.097148995 Z
   _version: 0.4.0/0.26.1/
-  latest: 42275467424
+  latest: 42287478428
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 318950
-  _time: 2024-09-26 04:07:08.961523032 Z
+- _id: 321324
+  _time: 2024-09-26 15:06:19.189379406 Z
   _version: 0.4.0/0.26.1/
-  latest: 42255719016
+  latest: 42292304891
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 318951
-  _time: 2024-09-26 04:07:16.468423495 Z
+- _id: 321325
+  _time: 2024-09-26 15:06:28.470054188 Z
   _version: 0.4.0/0.26.1/
-  latest: 42233919937
+  latest: 42281402496
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 318964
-  _time: 2024-09-26 04:08:49.649586943 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 318967
-  _time: 2024-09-26 04:09:10.890594394 Z
+- _id: 321341
+  _time: 2024-09-26 15:08:43.548157230 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 319013
-  _time: 2024-09-26 04:14:40.092993276 Z
+- _id: 321394
+  _time: 2024-09-26 15:16:17.239429027 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 319018
-  _time: 2024-09-26 04:15:15.446495853 Z
+- _id: 321452
+  _time: 2024-09-26 15:24:18.575121894 Z
   _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 319046
-  _time: 2024-09-26 04:18:32.441042046 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 319052
-  _time: 2024-09-26 04:19:14.970672978 Z
-  _version: 0.4.0/0.26.1/
-  latest: 67
+  latest: 98
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 319053
-  _time: 2024-09-26 04:19:21.905374495 Z
+- _id: 321453
+  _time: 2024-09-26 15:24:25.660927419 Z
   _version: 0.4.0/0.26.1/
-  latest: 267
+  latest: 87
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 321454
+  _time: 2024-09-26 15:24:32.952059234 Z
+  _version: 0.4.0/0.26.1/
+  latest: 135
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 321455
+  _time: 2024-09-26 15:24:40.435116322 Z
+  _version: 0.4.0/0.26.1/
+  latest: 46
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 321456
+  _time: 2024-09-26 15:24:47.881335253 Z
+  _version: 0.4.0/0.26.1/
+  latest: 217
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 319054
-  _time: 2024-09-26 04:19:29.039789389 Z
+- _id: 321457
+  _time: 2024-09-26 15:24:55.285213788 Z
   _version: 0.4.0/0.26.1/
-  latest: 73
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
