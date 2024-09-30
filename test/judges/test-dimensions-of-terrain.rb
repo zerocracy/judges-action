@@ -140,11 +140,17 @@ class TestDimensionsOfTerrain < Minitest::Test
       }
     )
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
-      load_it('dimensions-of-terrain', fb)
-      f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
-      assert_equal(7, f.total_files)
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        assert_equal(7, f.total_files)
+      end
     end
   end
 
@@ -190,11 +196,176 @@ class TestDimensionsOfTerrain < Minitest::Test
         { login: 'bot2', id: 4_199_655, type: 'Bot', contributions: 1 }
       ]
     )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
-      load_it('dimensions-of-terrain', fb)
-      f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
-      assert_equal(12, f.total_contributors)
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        assert_equal(12, f.total_contributors)
+      end
+    end
+  end
+
+  def test_total_active_contributors
+    WebMock.disable_net_connect!
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo',
+        full_name: 'foo/foo',
+        private: false,
+        created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+        size: 19_366,
+        stargazers_count: 1,
+        forks: 1,
+        default_branch: 'master'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: {
+        total_count: 7,
+        incomplete_results: false,
+        items: [
+          {
+            commit: {
+              author: { name: 'Yegor', email: 'yegor@gmail.com', date: Time.parse('2024-09-15 12:23:25 UTC') },
+              committer: { name: 'Yegor', email: 'yegor@gmail.com', date: Time.parse('2024-09-15 12:23:25 UTC') },
+              message: 'Some text',
+              tree: { sha: '6e04579960bf67610d' },
+              comment_count: 0
+            },
+            author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            committer: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            parents: [{ sha: '60cff20bdb66' }],
+            repository: {
+              id: 799_177_290, name: 'judges-action', full_name: 'zerocracy/judges-action',
+              owner: { login: 'zerocracy', id: 24_234_201, type: 'Organization', site_admin: false }
+            }
+          },
+          {
+            commit: {
+              author: { name: 'Yegor', email: 'yegor2@gmail.com', date: Time.parse('2024-09-14 12:23:25 UTC') },
+              committer: { name: 'Yegor', email: 'yegor2@gmail.com', date: Time.parse('2024-09-14 12:23:25 UTC') },
+              message: 'Some text 2',
+              tree: { sha: 'defa18e4e2250987' },
+              comment_count: 0
+            },
+            author: { login: 'yegor257', id: 526_302, type: 'User', site_admin: false },
+            committer: { login: 'yegor257', id: 526_302, type: 'User', site_admin: false },
+            parents: [{ sha: 'a04c15bb34fddbba' }],
+            repository: {
+              id: 799_177_290, name: 'judges-action', full_name: 'zerocracy/judges-action',
+              owner: { login: 'zerocracy', id: 24_234_201, type: 'Organization', site_admin: false }
+            }
+          },
+          {
+            commit: {
+              author: { name: 'Yegor', email: 'yegor3@gmail.com', date: Time.parse('2024-09-13 12:23:25 UTC') },
+              committer: { name: 'Yegor', email: 'yegor3@gmail.com', date: Time.parse('2024-09-13 12:23:25 UTC') },
+              message: 'Some text 3',
+              tree: { sha: 'bb7277441139739b902a' },
+              comment_count: 0
+            },
+            author: { login: 'yegor258', id: 526_303, type: 'User', site_admin: false },
+            committer: { login: 'yegor258', id: 526_303, type: 'User', site_admin: false },
+            parents: [{ sha: '18db84d469bb727' }],
+            repository: {
+              id: 799_177_290, name: 'judges-action', full_name: 'zerocracy/judges-action',
+              owner: { login: 'zerocracy', id: 24_234_201, type: 'Organization', site_admin: false }
+            }
+          },
+          {
+            commit: {
+              author: { name: 'Yegor', email: 'yegor4@gmail.com', date: Time.parse('2024-09-12 12:23:25 UTC') },
+              committer: { name: 'Yegor', email: 'yegor4@gmail.com', date: Time.parse('2024-09-12 12:23:25 UTC') },
+              message: 'Some text 4',
+              tree: { sha: '139739b902abb7277441' },
+              comment_count: 0
+            },
+            author: { login: 'yegor259', id: 526_304, type: 'User', site_admin: false },
+            committer: { login: 'yegor259', id: 526_304, type: 'User', site_admin: false },
+            parents: [{ sha: '469bb72718db84d' }],
+            repository: {
+              id: 799_177_290, name: 'judges-action', full_name: 'zerocracy/judges-action',
+              owner: { login: 'zerocracy', id: 24_234_201, type: 'Organization', site_admin: false }
+            }
+          },
+          {
+            commit: {
+              author: { name: 'Yegor', email: 'yegor4@gmail.com', date: Time.parse('2024-09-11 12:23:25 UTC') },
+              committer: { name: 'Yegor', email: 'yegor4@gmail.com', date: Time.parse('2024-09-11 12:23:25 UTC') },
+              message: 'Some text 5',
+              tree: { sha: '739b902abb7277441139' },
+              comment_count: 0
+            },
+            author: { login: 'yegor259', id: 526_304, type: 'User', site_admin: false },
+            committer: { login: 'yegor259', id: 526_304, type: 'User', site_admin: false },
+            parents: [{ sha: 'bb72718db84d469' }],
+            repository: {
+              id: 799_177_290, name: 'judges-action', full_name: 'zerocracy/judges-action',
+              owner: { login: 'zerocracy', id: 24_234_201, type: 'Organization', site_admin: false }
+            }
+          },
+          {
+            commit: {
+              author: { name: 'Yegor', email: 'yegor4@gmail.com', date: Time.parse('2024-09-10 12:23:25 UTC') },
+              committer: { name: 'Yegor', email: 'yegor4@gmail.com', date: Time.parse('2024-09-10 12:23:25 UTC') },
+              message: 'Some text 6',
+              tree: { sha: '02abb7277441139739b9' },
+              comment_count: 0
+            },
+            committer: { login: 'yegor259', id: 526_304, type: 'User', site_admin: false },
+            parents: [{ sha: '718db84d469bb72' }],
+            repository: {
+              id: 799_177_290, name: 'judges-action', full_name: 'zerocracy/judges-action',
+              owner: { login: 'zerocracy', id: 24_234_201, type: 'Organization', site_admin: false }
+            }
+          },
+          {
+            commit: {
+              author: { name: 'Yegor', email: 'yegor5@gmail.com', date: Time.parse('2024-09-09 12:23:25 UTC') },
+              committer: { name: 'Yegor', email: 'yegor5@gmail.com', date: Time.parse('2024-09-09 12:23:25 UTC') },
+              message: 'Some text 7',
+              tree: { sha: '11384739b902abb727744' },
+              comment_count: 0
+            },
+            author: { login: 'yegor260', id: 526_305, type: 'User', site_admin: false },
+            committer: { login: 'yegor260', id: 526_305, type: 'User', site_admin: false },
+            parents: [{ sha: '69bb72718db8' }],
+            repository: {
+              id: 799_177_290, name: 'judges-action', full_name: 'zerocracy/judges-action',
+              owner: { login: 'zerocracy', id: 24_234_201, type: 'Organization', site_admin: false }
+            }
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        assert_equal(5, f.total_active_contributors)
+      end
     end
   end
 end
