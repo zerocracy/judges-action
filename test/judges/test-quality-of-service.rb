@@ -145,6 +145,14 @@ class TestQualityOfService < Minitest::Test
       body: [{ id: 22_449_326, submitted_at: Time.parse('2024-07-21 22:00:00 UTC') }]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-07-15',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
@@ -308,6 +316,10 @@ class TestQualityOfService < Minitest::Test
       'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -354,6 +366,10 @@ class TestQualityOfService < Minitest::Test
       }]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -444,6 +460,10 @@ class TestQualityOfService < Minitest::Test
       body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -546,6 +566,10 @@ class TestQualityOfService < Minitest::Test
       body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -697,6 +721,10 @@ class TestQualityOfService < Minitest::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/16/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/18/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/20/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -1016,6 +1044,10 @@ class TestQualityOfService < Minitest::Test
         }
       ]
     )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -1031,6 +1063,137 @@ class TestQualityOfService < Minitest::Test
       assert_in_delta(3.333, f.average_review_size)
       assert_in_delta(1.666, f.average_reviewers_per_pull)
       assert_in_delta(3.666, f.average_reviews_per_pull)
+    end
+  end
+
+  def test_quality_of_service_average_triage_time
+    WebMock.disable_net_connect!
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: {
+        total_count: 4, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_673,
+            number: 40,
+            title: 'Issue 40',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" },
+              { id: 6_937_082_658, name: 'help wanted', description: 'Extra attention is needed' }
+            ],
+            created_at: Time.parse('2024-08-03 12:00:00 UTC')
+          },
+          {
+            id: 2_544_140_680,
+            number: 42,
+            title: 'Issue 42',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_651, name: 'enhancement', description: 'New feature or request' },
+              { id: 6_937_082_658, name: 'help wanted', description: 'Extra attention is needed' }
+            ],
+            created_at: Time.parse('2024-08-04 17:00:00 UTC')
+          },
+          {
+            id: 2_544_140_685,
+            number: 45,
+            title: 'Issue 45',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_651, name: 'enhancement', description: 'New feature or request' },
+              { id: 6_937_082_658, name: 'help wanted', description: 'Extra attention is needed' }
+            ],
+            created_at: Time.parse('2024-08-04 18:00:00 UTC')
+          },
+          {
+            id: 2_544_140_688,
+            number: 47,
+            title: 'Issue 47',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" },
+              { id: 6_937_082_658, name: 'help wanted', description: 'Extra attention is needed' }
+            ],
+            created_at: Time.parse('2024-08-04 19:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'gitlab', repository: 42, issue: 40, when: Time.parse('2024-08-04 11:10:00 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 40, issue: 40, when: Time.parse('2024-08-04 11:10:00 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 39, when: Time.parse('2024-08-04 11:10:00 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 40, when: Time.parse('2024-08-04 11:10:00 UTC'), label: 'help wanted'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 40, when: Time.parse('2024-08-04 13:10:00 UTC'), label: 'enhancement'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 40, when: Time.parse('2024-08-04 12:30:00 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 42, label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 42, label: 'enhancement'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 42, when: Time.parse('2024-08-04 19:00:00 UTC'), label: 'enhancement'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 45, when: Time.parse('2024-08-06 11:00:00 UTC'), label: 'enhancement'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_in_delta(81_000, f.average_triage_time)
     end
   end
 
@@ -1191,5 +1354,14 @@ class TestQualityOfService < Minitest::Test
         }
       ]
     )
+  end
+
+  def insert_label_was_attached_fact(fb, **kwargs)
+    fb.insert.then do |f|
+      f.what = 'label-was-attached'
+      %i[where repository issue when label].each do |prop|
+        f.send(:"#{prop}=", kwargs[prop]) unless kwargs[prop].nil?
+      end
+    end
   end
 end
