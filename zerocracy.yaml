@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   removed: 8
-  seconds: 2013.778005078
+  seconds: 1076.100519003
   version: 0.26.1
   what: judges-summary
-  when: 2024-10-04 11:38:24.045063379 Z
+  when: 2024-10-04 12:25:19.235717908 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -78086,20 +78086,6 @@
   when: 2024-10-04 10:14:03.000000000 Z
   where: github
   who: 526301
-- _id: 351532
-  _time: 2024-10-04 11:20:01.293798952 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42443209163
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 351533
-  _time: 2024-10-04 11:20:11.047787926 Z
-  _version: 0.4.0/0.26.1/
-  latest: 42442926181
-  repository: 798641472
-  what: events-were-scanned
-  where: github
 - _id: 351534
   _time: 2024-10-04 11:20:21.075119090 Z
   _version: 0.4.0/0.26.1/
@@ -78118,101 +78104,181 @@
   when: 2024-10-04 10:24:48.000000000 Z
   where: github
   who: 526301
-- _id: 351535
-  _time: 2024-10-04 11:20:29.215920747 Z
+- _id: 351670
+  _job: 8842
+  _time: 2024-10-04 11:39:12.538588433 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: 4
+  details: It's time to reward @Suban05 for the code review in zerocracy/judges-action#371,
+    the reward amount is 4.
+  greeting: "Hey there! \U0001F44B Thanks for your review! You've earned +4 points,
+    which is the minimum reward we give. Here's the breakdown: +4 base points, -24
+    for self-review, -10 for having less than 6 comments, and +0.25 for the single
+    comment you made. We aim to encourage more detailed reviews, so try to leave at
+    least 6 comments next time to avoid deductions. Your [running balance is +108](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work and remember, more comments can earn you up to 8 extra points!
+    \U0001F4AA\n\n<!-- Thanks for the review! You've earned +4 points for this: +4
+    as a basis; -10 for very few (1) comments; +10 to give you at least something.
+    \ Your running balance is [+108](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/zerocracy/judges-action/issues/371/#issuecomment-2393509966
+  is_human: 1
+  issue: 371
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2024-10-04 11:39:12.576983269 Z
+  where: github
+  who: 88084038
+  why: Reviewed code in zerocracy/judges-action#371
+- _id: 351671
+  _job: 8842
+  _time: 2024-10-04 11:40:19.308525047 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  comments: 2
+  details: The pull request zerocracy/judges-action#371 with 123 HoC created by @Yegorov
+    was merged by @yegor256 after 14 hours of being in review and 2 comments.
+  hoc: 123
+  is_human: 1
+  issue: 371
+  merger: 526301
+  repository: 799177290
+  seconds: 53565
+  what: code-was-contributed
+  when: 2024-10-04 10:14:03.000000000 Z
+  where: github
+  who: 2566462
+- _id: 351672
+  _job: 8842
+  _time: 2024-10-04 11:41:15.933051516 Z
+  _version: 0.4.0/0.26.1/0.0.53
+  award: -16
+  commit: 625a845d21220a84d55cdd285e9370d7d6094187
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/baza, the penalty amount is -16.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -16 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-224](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/zerocracy/baza/commit/625a845d21220a84d55cdd285e9370d7d6094187/#commitcomment-147573532
+  is_human: 1
+  repository: 728758275
+  what: push-to-master-was-punished
+  when: 2024-10-04 11:41:15.963975335 Z
+  where: github
+  who: 526301
+  why: Pushed 625a845d2 to the default branch 'master' in zerocracy/baza
+- _id: 351673
+  _time: 2024-10-04 12:07:34.660618903 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42443209163
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 351674
+  _time: 2024-10-04 12:07:43.792846834 Z
+  _version: 0.4.0/0.26.1/
+  latest: 42442926181
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 351675
+  _time: 2024-10-04 12:07:52.842726797 Z
   _version: 0.4.0/0.26.1/
   latest: 42541601862
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 351536
-  _time: 2024-10-04 11:20:38.524925765 Z
+- _id: 351676
+  _time: 2024-10-04 12:08:01.765501249 Z
   _version: 0.4.0/0.26.1/
   latest: 42445624421
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 351537
-  _time: 2024-10-04 11:20:48.478987512 Z
+- _id: 351677
+  _time: 2024-10-04 12:08:11.095504019 Z
   _version: 0.4.0/0.26.1/
   latest: 42447004630
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 351538
-  _time: 2024-10-04 11:20:57.473729228 Z
+- _id: 351678
+  _time: 2024-10-04 12:08:44.605398612 Z
   _version: 0.4.0/0.26.1/
-  latest: 42542102042
+  latest: 42543821641
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 351539
-  _time: 2024-10-04 11:21:07.409442309 Z
+- _id: 351679
+  _time: 2024-10-04 12:08:53.902418764 Z
   _version: 0.4.0/0.26.1/
   latest: 42534804219
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 351540
-  _time: 2024-10-04 11:21:16.330680880 Z
+- _id: 351680
+  _time: 2024-10-04 12:09:02.449852636 Z
   _version: 0.4.0/0.26.1/
   latest: 42394385261
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 351556
-  _time: 2024-10-04 11:23:25.422169560 Z
+- _id: 351696
+  _time: 2024-10-04 12:11:12.093781515 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 351609
-  _time: 2024-10-04 11:30:28.699462245 Z
+- _id: 351749
+  _time: 2024-10-04 12:18:22.378791254 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 351649
-  _time: 2024-10-04 11:35:45.275812784 Z
+- _id: 351755
+  _time: 2024-10-04 12:19:10.278273496 Z
   _version: 0.4.0/0.26.1/
   latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 351665
-  _time: 2024-10-04 11:37:52.799989916 Z
-  _version: 0.4.0/0.26.1/
-  latest: 87
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 351666
-  _time: 2024-10-04 11:38:00.586226219 Z
-  _version: 0.4.0/0.26.1/
-  latest: 177
   repository: 728758275
   what: labels-were-scanned
   where: github
-- _id: 351667
-  _time: 2024-10-04 11:38:08.347395822 Z
+- _id: 351790
+  _time: 2024-10-04 12:23:50.593711620 Z
   _version: 0.4.0/0.26.1/
-  latest: 46
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 351798
+  _time: 2024-10-04 12:24:55.122005378 Z
+  _version: 0.4.0/0.26.1/
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 351799
+  _time: 2024-10-04 12:25:03.196969231 Z
+  _version: 0.4.0/0.26.1/
+  latest: 83
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 351668
-  _time: 2024-10-04 11:38:16.169795124 Z
+- _id: 351800
+  _time: 2024-10-04 12:25:11.151283605 Z
   _version: 0.4.0/0.26.1/
-  latest: 167
+  latest: 217
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 351669
-  _time: 2024-10-04 11:38:23.864540847 Z
+- _id: 351801
+  _time: 2024-10-04 12:25:19.042895622 Z
   _version: 0.4.0/0.26.1/
-  latest: 31
+  latest: 73
   repository: 802720676
   what: labels-were-scanned
   where: github
