@@ -906,6 +906,180 @@ class TestGithubEvents < Minitest::Test
     assert_equal('a50489ead5e8aa6', f.last.last_commit)
   end
 
+  def test_release_event_contributors_without_last_release_tag_and_with_release_id
+    WebMock.disable_net_connect!
+    stub_event(
+      {
+        id: '10',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 471_000,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '0.0.3',
+            name: 'v0.0.3',
+            created_at: Time.parse('2024-08-05T00:51:39Z'),
+            published_at: Time.parse('2024-08-05T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-08-06T00:52:08Z'),
+        org: {
+          id: 24_234_201,
+          login: 'foo'
+        }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases/470000',
+      body: {
+        id: 470_000,
+        tag_name: '0.0.2',
+        target_commitish: 'master',
+        name: 'v0.0.2',
+        draft: false,
+        prerelease: false,
+        created_at: Time.parse('2024-08-02 21:45:00 UTC'),
+        published_at: Time.parse('2024-08-02 21:45:00 UTC'),
+        body: '0.0.2 release'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.0.2...0.0.3?per_page=100',
+      body: {
+        total_commits: 3,
+        commits: [
+          { sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } },
+          { sha: 'b50489ead5e8aa7', author: { login: 'Yegorov64', id: 2_566_463 } },
+          { sha: '89ead5eb5048aa7', author: { login: 'Yegorov128', id: 2_566_464 } }
+        ],
+        files: [{ additions: 15, deletions: 40, changes: 55 }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/user/8086956',
+      body: { login: 'rultor', id: 8_086_956 }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.details = 'v0.0.2'
+      f.event_id = 30_406
+      f.event_type = 'ReleaseEvent'
+      f.is_human = 1
+      f.release_id = 470_000
+      f.repository = 42
+      f.what = 'release-published'
+      f.when = Time.parse('2024-08-02 21:45:00 UTC')
+      f.where = 'github'
+      f.who = 526_301
+    end
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(2, f.count)
+    assert_nil(f.first[:tag])
+    refute_nil(f.first[:release_id])
+    assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
+  end
+
+  def test_release_event_contributors_without_last_release_tag_and_without_release_id
+    WebMock.disable_net_connect!
+    stub_event(
+      {
+        id: '10',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 471_000,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '0.0.3',
+            name: 'v0.0.3',
+            created_at: Time.parse('2024-08-05T00:51:39Z'),
+            published_at: Time.parse('2024-08-05T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-08-06T00:52:08Z'),
+        org: {
+          id: 24_234_201,
+          login: 'foo'
+        }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [
+        { login: 'yegor256', id: 526_301 },
+        { login: 'yegor512', id: 526_302 }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?per_page=100',
+      body: [{ sha: '4683257342e98cd94' }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/4683257342e98cd94...0.0.3?per_page=100',
+      body: {
+        total_commits: 1,
+        commits: [{ sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } }],
+        files: [{ additions: 15, deletions: 40, changes: 55 }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/user/8086956',
+      body: { login: 'rultor', id: 8_086_956 }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.details = 'v0.0.2'
+      f.event_id = 30_407
+      f.event_type = 'ReleaseEvent'
+      f.is_human = 1
+      f.repository = 42
+      f.what = 'release-published'
+      f.when = Time.parse('2024-08-02 21:45:00 UTC')
+      f.where = 'github'
+      f.who = 526_301
+    end
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(2, f.count)
+    assert_nil(f.first[:tag])
+    assert_nil(f.first[:release_id])
+    assert_equal([526_301, 526_302], f.last[:contributors])
+  end
+
   def test_pull_request_event_with_comments
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
