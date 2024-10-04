@@ -42,8 +42,8 @@ f.when = Time.now
 
 # Total number of repositories in the project:
 total = 0
-Fbe.unmask_repos.each do |_|
-  total += 1
+Fbe.unmask_repos.each do |repo|
+  total += 1 unless Fbe.octo.repository(repo)[:archived]
 end
 f.total_repositories = total
 
