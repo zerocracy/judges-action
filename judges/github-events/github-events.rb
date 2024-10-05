@@ -44,11 +44,22 @@ Fbe.iterate do
     raise Factbase::Rollback
   end
 
+  def self.fetch_tag(fact, repo)
+    tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
+    if tag.nil? && fact&.all_properties&.include?('release_id')
+      tag = Fbe.octo.release(
+        "https://api.github.com/repos/#{repo}/releases/#{fact.release_id}"
+      ).fetch(:tag_name, nil)
+    end
+    tag
+  end
+
   def self.fetch_contributors(fact, repo)
     last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
+    tag = fetch_tag(last, repo)
     contributors = Set.new
-    if last
-      Fbe.octo.compare(repo, last.tag, fact.tag)[:commits].each do |commit|
+    if tag
+      Fbe.octo.compare(repo, tag, fact.tag)[:commits].each do |commit|
         author_id = commit.dig(:author, :id)
         contributors << author_id if author_id
       end
@@ -61,10 +72,11 @@ Fbe.iterate do
   end
 
   def self.fetch_release_info(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last&.tag
-    last ||= find_first_commit(repo)[:sha]
+    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
+    tag = fetch_tag(last, repo)
+    tag ||= find_first_commit(repo)[:sha]
     info = {}
-    Fbe.octo.compare(repo, last, fact.tag).then do |json|
+    Fbe.octo.compare(repo, tag, fact.tag).then do |json|
       info[:commits] = json[:total_commits]
       info[:hoc] = json[:files].map { |f| f[:changes] }.sum
       info[:last_commit] = json[:commits].first[:sha]
