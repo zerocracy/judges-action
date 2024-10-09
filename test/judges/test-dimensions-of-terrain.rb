@@ -150,6 +150,127 @@ class TestDimensionsOfTerrain < Minitest::Test
     end
   end
 
+  def test_total_releases
+    WebMock.disable_net_connect!
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo',
+        full_name: 'foo/foo',
+        private: false,
+        created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+        size: 19_366,
+        stargazers_count: 1,
+        forks: 1,
+        default_branch: 'master'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: [
+        { id: 50, tag_name: '0.0.9', draft: false, published_at: Time.parse('2024-08-22 21:00:00 UTC') },
+        { id: 44, tag_name: '0.0.8', draft: false, published_at: Time.parse('2024-08-19 21:00:00 UTC') },
+        { id: 32, tag_name: '0.0.7', draft: false, published_at: Time.parse('2024-08-15 21:00:00 UTC') },
+        { id: 25, tag_name: '0.0.6', draft: false, published_at: Time.parse('2024-08-14 21:00:00 UTC') },
+        { id: 18, tag_name: '0.0.5', draft: false, published_at: Time.parse('2024-08-12 21:00:00 UTC') },
+        { id: 12, tag_name: '0.0.4', draft: true, published_at: Time.parse('2024-08-10 21:00:00 UTC') },
+        { id: 5, tag_name: '0.0.3', draft: false, published_at: nil },
+        { id: 3, tag_name: '0.0.2', draft: false, published_at: Time.parse('2024-08-03 21:00:00 UTC') },
+        { id: 1, tag_name: '0.0.1', draft: false, published_at: Time.parse('2024-07-25 21:00:00 UTC') }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
+        assert_equal(9, f.total_releases)
+      end
+    end
+  end
+
+  def test_total_stars_and_forks
+    WebMock.disable_net_connect!
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo',
+        full_name: 'foo/foo',
+        private: false,
+        created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+        size: 19_366,
+        stargazers_count: 12,
+        forks: 8,
+        default_branch: 'master'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/bar',
+      body: {
+        name: 'bar',
+        full_name: 'foo/bar',
+        private: false,
+        created_at: Time.parse('2024-07-08 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-22 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-22 20:22:51 UTC'),
+        size: 20_065,
+        stargazers_count: 8,
+        forks: 7,
+        default_branch: 'master'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/bar/releases?per_page=100',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/bar/git/trees/master?recursive=true',
+      body: { sha: 'abc012346f', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/bar/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bar%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar' }))
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
+        assert_equal(20, f.total_stars)
+        assert_equal(15, f.total_forks)
+      end
+    end
+  end
+
   def test_total_issues_and_pull_requests
     WebMock.disable_net_connect!
     fb = Factbase.new
