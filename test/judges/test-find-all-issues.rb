@@ -87,14 +87,14 @@ class TestFindAllIssues < Minitest::Test
     end
     load_it('find-all-issues', fb)
     fs = fb.query('(always)').each.to_a
-    assert_equal(1, fs.count)
-    fs.first.then do |f|
+    assert_equal(2, fs.count)
+    fs.last.then do |f|
       assert_equal('min-issue-was-found', f.what)
       assert_equal('github', f.where)
       assert_equal(695, f.repository)
       assert_equal(0, f.latest)
     end
-    assert_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
+    refute_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
   end
 
   def test_find_all_issues

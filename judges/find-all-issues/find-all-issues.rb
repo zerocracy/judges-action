@@ -38,7 +38,6 @@ Fbe.iterate do
     begin
       after = Fbe.octo.issue(repo, issue)[:created_at]
     rescue Octokit::NotFound
-      Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq issue #{issue}))").delete!
       next 0
     end
     Fbe.octo.search_issues("repo:#{repo} type:issue created:<=#{after.iso8601[0..9]}")[:items].each do |json|
