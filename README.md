@@ -38,7 +38,7 @@ jobs:
             github_token=${{ secrets.GITHUB_TOKEN }}
             repositories=...
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.0.37
+      - uses: zerocracy/pages-action@0.0.38
         with:
           factbase: foo.fb
           options: |
