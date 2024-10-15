@@ -1,11 +1,11 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   removed: 8
-  seconds: 1108.136398889
+  seconds: 2909.614360209
   version: 0.26.1
   what: judges-summary
-  when: 2024-10-15 06:25:08.174121861 Z
+  when: 2024-10-15 10:54:04.725261156 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -84946,171 +84946,286 @@
   when: 2024-10-14 18:52:46.000000000 Z
   where: github
   who: 29139614
-- _id: 390387
-  _time: 2024-10-15 06:06:51.976383516 Z
+- _id: 390506
+  _job: 9811
+  _time: 2024-10-15 06:25:58.252621966 Z
+  _version: 0.4.0/0.27.0/0.0.55
+  award: 4
+  details: It's time to reward @Yegorov for the code contributed in zerocracy/fbe#115,
+    the reward amount is 4.
+  greeting: "Hey there! \U0001F44B Thanks for your contribution! While you've earned
+    some points, there's room for improvement. You got +4 as a base, but lost points
+    due to no code review (-16), only 1 comment (-4), and just 2 hits-of-code (-8).
+    We bumped you up +28 to keep you motivated. Remember, more [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)
+    (aim for 20+) and getting code reviews with 6+ comments can really boost your
+    points next time. [Keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    the contributions coming – we appreciate your work! Your current balance is [+150](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).\n\n<!--
+    Thanks for the contribution! You've earned +4 points for this: +4 as a basis;
+    -16 for the lack of code review; -4 for very few (1) comments; -8 for too few
+    (2) hits-of-code; +28 to give you at least something. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running balance is [+150](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/zerocracy/fbe/issues/115/#issuecomment-2413001881
+  is_human: 1
+  issue: 115
+  repository: 820463873
+  what: code-contribution-was-rewarded
+  when: 2024-10-15 06:25:58.284373645 Z
+  where: github
+  who: 2566462
+  why: Contributed code in zerocracy/fbe#115
+- _id: 390507
+  _time: 2024-10-15 10:05:44.661276703 Z
+  _version: 0.4.0/0.26.1/
+  total_active_contributors: 5
+  total_commits: 4088
+  total_contributors: 8
+  total_files: 666
+  total_forks: 15
+  total_issues: 484
+  total_pulls: 777
+  total_releases: 320
+  total_repositories: 8
+  total_stars: 34
+  what: dimensions-of-terrain
+  when: 2024-10-15 10:05:44.661499445 Z
+- _id: 390518
+  _time: 2024-10-15 10:08:59.295714533 Z
+  _version: 0.4.0/0.26.1/
+  commit: 8b5ee5cd774a7c5016ff1f84cbf4225be763cdb1
+  default_branch: master
+  details: 'A new Git push #20715855732 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42852820498
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20715855732
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-10-15 08:36:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 390519
+  _time: 2024-10-15 10:09:08.733904690 Z
+  _version: 0.4.0/0.26.1/
+  commit: '09651ed3237720a72acb2c1266455b76d8248696'
+  default_branch: master
+  details: 'A new Git push #20715757569 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42852611629
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20715757569
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-10-15 08:30:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 390520
+  _time: 2024-10-15 10:09:18.186901677 Z
+  _version: 0.4.0/0.26.1/
+  commit: '0893943970762dd5e0966207286cef83d3b1e69c'
+  default_branch: master
+  details: 'A new Git push #20715587755 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 42852252536
+  event_type: PushEvent
+  is_human: 1
+  push_id: 20715587755
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2024-10-15 08:20:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 390524
+  _time: 2024-10-15 10:10:08.170606740 Z
+  _version: 0.4.0/0.26.1/
+  comments: 1
+  commits: 1
+  details: The pull request zerocracy/judges-action#389 has been reviewed by @Suban05
+    with 66 HoC and 1 comments.
+  event_id: 42853175058
+  event_type: PullRequestReviewEvent
+  files: 3
+  hoc: 66
+  is_human: 1
+  issue: 389
+  repository: 799177290
+  what: pull-was-reviewed
+  when: 2024-10-15 08:45:41.000000000 Z
+  where: github
+  who: 88084038
+- _id: 390659
+  _time: 2024-10-15 10:30:53.607367485 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 799113787
   what: min-issue-was-found
   where: github
-- _id: 390388
-  _time: 2024-10-15 06:07:01.440145300 Z
+- _id: 390660
+  _time: 2024-10-15 10:31:03.325307247 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 798641472
   what: min-issue-was-found
   where: github
-- _id: 390389
-  _time: 2024-10-15 06:07:10.743149139 Z
+- _id: 390661
+  _time: 2024-10-15 10:31:12.654076101 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 728758275
   what: min-issue-was-found
   where: github
-- _id: 390390
-  _time: 2024-10-15 06:07:20.068820360 Z
+- _id: 390662
+  _time: 2024-10-15 10:32:22.354510501 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 390391
-  _time: 2024-10-15 06:07:45.754107085 Z
+- _id: 390663
+  _time: 2024-10-15 10:33:00.340653410 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 390392
-  _time: 2024-10-15 06:07:55.257326467 Z
+- _id: 390664
+  _time: 2024-10-15 10:33:09.848575202 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 799177290
   what: min-issue-was-found
   where: github
-- _id: 390393
-  _time: 2024-10-15 06:08:04.685621883 Z
+- _id: 390665
+  _time: 2024-10-15 10:33:20.562860352 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 390394
-  _time: 2024-10-15 06:08:14.076418516 Z
+- _id: 390666
+  _time: 2024-10-15 10:33:29.975129564 Z
   _version: 0.4.0/0.26.1/
   latest: 3
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 390395
-  _time: 2024-10-15 06:08:25.134478501 Z
+- _id: 390667
+  _time: 2024-10-15 10:33:40.961430600 Z
   _version: 0.4.0/0.26.1/
   latest: 42823967060
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 390396
-  _time: 2024-10-15 06:08:35.230284070 Z
+- _id: 390668
+  _time: 2024-10-15 10:33:51.307066510 Z
   _version: 0.4.0/0.26.1/
   latest: 42442926181
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 390397
-  _time: 2024-10-15 06:08:45.116739863 Z
+- _id: 390669
+  _time: 2024-10-15 10:34:01.227700567 Z
   _version: 0.4.0/0.26.1/
-  latest: 42838727380
+  latest: 42852820498
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 390398
-  _time: 2024-10-15 06:08:54.976260414 Z
+- _id: 390670
+  _time: 2024-10-15 10:34:11.161356611 Z
   _version: 0.4.0/0.26.1/
   latest: 42815503964
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 390399
-  _time: 2024-10-15 06:09:05.128462243 Z
+- _id: 390671
+  _time: 2024-10-15 10:34:21.419252218 Z
   _version: 0.4.0/0.26.1/
-  latest: 42836433262
+  latest: 42848716480
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 390400
-  _time: 2024-10-15 06:09:24.307399611 Z
+- _id: 390672
+  _time: 2024-10-15 10:34:31.708889571 Z
   _version: 0.4.0/0.26.1/
-  latest: 42845290836
+  latest: 42853175058
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 390401
-  _time: 2024-10-15 06:09:34.611636244 Z
+- _id: 390673
+  _time: 2024-10-15 10:34:42.090325114 Z
   _version: 0.4.0/0.26.1/
   latest: 42838768971
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 390402
-  _time: 2024-10-15 06:09:44.601370184 Z
+- _id: 390674
+  _time: 2024-10-15 10:34:51.963574618 Z
   _version: 0.4.0/0.26.1/
   latest: 42840960354
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 390418
-  _time: 2024-10-15 06:12:08.970186201 Z
+- _id: 390690
+  _time: 2024-10-15 10:37:18.706065058 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 390428
-  _time: 2024-10-15 06:13:39.661238047 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 390444
-  _time: 2024-10-15 06:16:02.900051078 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 390467
-  _time: 2024-10-15 06:19:28.850620462 Z
+- _id: 390750
+  _time: 2024-10-15 10:46:30.333396458 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 390502
-  _time: 2024-10-15 06:24:40.749620099 Z
+- _id: 390760
+  _time: 2024-10-15 10:48:01.003327300 Z
   _version: 0.4.0/0.26.1/
-  latest: 73
+  latest: 0
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 390503
-  _time: 2024-10-15 06:24:49.599028550 Z
+- _id: 390796
+  _time: 2024-10-15 10:53:28.332280881 Z
   _version: 0.4.0/0.26.1/
-  latest: 48
+  latest: 106
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 390504
-  _time: 2024-10-15 06:24:58.676265345 Z
+- _id: 390797
+  _time: 2024-10-15 10:53:37.560913222 Z
   _version: 0.4.0/0.26.1/
-  latest: 57
+  latest: 157
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 390798
+  _time: 2024-10-15 10:53:46.506631970 Z
+  _version: 0.4.0/0.26.1/
+  latest: 28
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 390505
-  _time: 2024-10-15 06:25:07.960309879 Z
+- _id: 390799
+  _time: 2024-10-15 10:53:55.650154225 Z
   _version: 0.4.0/0.26.1/
-  latest: 194
+  latest: 325
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 390800
+  _time: 2024-10-15 10:54:04.517602348 Z
+  _version: 0.4.0/0.26.1/
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
