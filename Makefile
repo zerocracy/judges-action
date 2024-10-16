@@ -54,6 +54,7 @@ entry: target/docker-image.txt
 		-e "INPUT_VERBOSE=true" \
 		-e "INPUT_PAGES=pages" \
 		-e "INPUT_TOKEN=00000000-0000-0000-0000-000000000000" \
+		-e "INPUT_GITHUB_TOKEN=00000000-0000-0000-0000-000000000000" \
 		-e "INPUT_OPTIONS=$$(cat target/opts.txt)" \
 		"$${img}"
 	echo "$$?" > target/entry.exit
