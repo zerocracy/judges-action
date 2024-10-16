@@ -1,15 +1,11 @@
 ---
 - added: 8
   cycles: 2
-  error: 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Ayegor256%2Fjudges+type%3Aissue+created%3A%3C%3D2024-05-11:
-    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
-    you try again. If you reach out to GitHub Support for help, please include the
-    request ID 1C00:24CB1A:6CEF7AC:D0C9057:670F2B96. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
   removed: 8
-  seconds: 3121.546994572
+  seconds: 2508.617075569
   version: 0.26.1
   what: judges-summary
-  when: 2024-10-16 03:20:42.977589004 Z
+  when: 2024-10-16 06:48:16.413170314 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -86226,55 +86222,6 @@
   when: 2024-10-15 17:32:47.000000000 Z
   where: github
   who: 41898282
-- _id: 391108
-  _time: 2024-10-16 02:29:05.480898439 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 391109
-  _time: 2024-10-16 02:29:15.425165809 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 728758275
-  what: min-issue-was-found
-  where: github
-- _id: 391110
-  _time: 2024-10-16 02:29:37.728618516 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 391111
-  _time: 2024-10-16 02:29:47.785846376 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 391112
-  _time: 2024-10-16 02:29:57.918683109 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 391113
-  _time: 2024-10-16 02:30:08.189248942 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 391114
-  _time: 2024-10-16 02:30:18.388842788 Z
-  _version: 0.4.0/0.26.1/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
 - _id: 391118
   _time: 2024-10-16 02:31:33.810442134 Z
   _version: 0.4.0/0.26.1/
@@ -86341,115 +86288,188 @@
   when: 2024-10-15 18:49:59.000000000 Z
   where: github
   who: 29139614
-- _id: 391260
-  _time: 2024-10-16 02:57:40.449395260 Z
+- _id: 391401
+  _job: 9863
+  _time: 2024-10-16 03:22:29.704218199 Z
+  _version: 0.4.0/0.27.0/0.0.55
+  comments: 2
+  details: The pull request zerocracy/judges-action#394 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 53 minutes of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 394
+  merger: 8086956
+  repository: 799177290
+  seconds: 3238
+  what: code-was-contributed
+  when: 2024-10-15 19:43:57.000000000 Z
+  where: github
+  who: 29139614
+- _id: 391542
+  _time: 2024-10-16 06:30:02.941691498 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 391543
+  _time: 2024-10-16 06:30:41.030609088 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 391544
+  _time: 2024-10-16 06:30:50.942772685 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 728758275
+  what: min-issue-was-found
+  where: github
+- _id: 391545
+  _time: 2024-10-16 06:31:00.416058344 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 391546
+  _time: 2024-10-16 06:31:39.025669643 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 391547
+  _time: 2024-10-16 06:31:49.092113202 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 391548
+  _time: 2024-10-16 06:31:58.871234300 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 391549
+  _time: 2024-10-16 06:32:08.893598918 Z
+  _version: 0.4.0/0.26.1/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 391550
+  _time: 2024-10-16 06:32:20.566750508 Z
   _version: 0.4.0/0.26.1/
   latest: 42861463088
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 391261
-  _time: 2024-10-16 02:57:51.564249295 Z
+- _id: 391551
+  _time: 2024-10-16 06:32:31.338506152 Z
   _version: 0.4.0/0.26.1/
   latest: 42865054023
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 391262
-  _time: 2024-10-16 02:58:02.761460586 Z
+- _id: 391552
+  _time: 2024-10-16 06:32:41.993254716 Z
   _version: 0.4.0/0.26.1/
   latest: 42871392187
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 391263
-  _time: 2024-10-16 02:58:13.852791184 Z
+- _id: 391553
+  _time: 2024-10-16 06:32:52.560690641 Z
   _version: 0.4.0/0.26.1/
   latest: 42875152417
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 391264
-  _time: 2024-10-16 02:58:25.250093909 Z
+- _id: 391554
+  _time: 2024-10-16 06:33:03.322552910 Z
   _version: 0.4.0/0.26.1/
   latest: 42859428529
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 391265
-  _time: 2024-10-16 02:59:05.995459393 Z
+- _id: 391555
+  _time: 2024-10-16 06:33:14.213239162 Z
   _version: 0.4.0/0.26.1/
-  latest: 42881805631
+  latest: 42887160159
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 391266
-  _time: 2024-10-16 02:59:17.410896845 Z
+- _id: 391556
+  _time: 2024-10-16 06:33:25.362792362 Z
   _version: 0.4.0/0.26.1/
   latest: 42872967751
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 391267
-  _time: 2024-10-16 02:59:28.049737286 Z
+- _id: 391557
+  _time: 2024-10-16 06:33:35.909088973 Z
   _version: 0.4.0/0.26.1/
   latest: 42857583580
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 391283
-  _time: 2024-10-16 03:02:03.324417845 Z
+- _id: 391573
+  _time: 2024-10-16 06:36:13.057604665 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 391343
-  _time: 2024-10-16 03:11:44.683907537 Z
+- _id: 391583
+  _time: 2024-10-16 06:37:51.436373051 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 391595
+  _time: 2024-10-16 06:39:48.352899652 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 391604
+  _time: 2024-10-16 06:41:17.037015000 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 391618
+  _time: 2024-10-16 06:43:33.794905499 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 391395
-  _time: 2024-10-16 03:19:55.516375362 Z
+- _id: 391645
+  _time: 2024-10-16 06:47:56.726480316 Z
   _version: 0.4.0/0.26.1/
-  latest: 105
+  latest: 21
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 391396
-  _time: 2024-10-16 03:20:04.950423869 Z
+- _id: 391646
+  _time: 2024-10-16 06:48:06.326825097 Z
   _version: 0.4.0/0.26.1/
-  latest: 74
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 391397
-  _time: 2024-10-16 03:20:14.637415684 Z
-  _version: 0.4.0/0.26.1/
-  latest: 157
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 391398
-  _time: 2024-10-16 03:20:23.870270008 Z
-  _version: 0.4.0/0.26.1/
-  latest: 57
+  latest: 28
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 391399
-  _time: 2024-10-16 03:20:33.455543394 Z
+- _id: 391647
+  _time: 2024-10-16 06:48:16.199628156 Z
   _version: 0.4.0/0.26.1/
-  latest: 194
+  latest: 325
   repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 391400
-  _time: 2024-10-16 03:20:42.769863462 Z
-  _version: 0.4.0/0.26.1/
-  latest: 73
-  repository: 802720676
   what: labels-were-scanned
   where: github
