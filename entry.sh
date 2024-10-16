@@ -83,6 +83,10 @@ GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
 VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html"
 
 # Add new facts, using the judges (Ruby scripts) in the /judges directory
+declare -A optionmap=(
+    ["repositories"]="${INPUT_REPOSITORIES}"
+    ["github_token"]="${INPUT_GITHUB_TOKEN}"
+)
 declare -a options=()
 while IFS= read -r o; do
     s=$(echo "${o}" | xargs)
@@ -93,8 +97,13 @@ while IFS= read -r o; do
         VITALS_URL="${v}"
         continue
     fi
-    options+=("--option=${k}=${v}")
+    optionmap[$k]=$v
 done <<< "${INPUT_OPTIONS}"
+for k in "${!optionmap[@]}"; do
+    if [ -n "${optionmap[$k]}" ]; then
+        options+=("--option=${k}=${optionmap[$k]}");
+    fi
+done
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
 

@@ -34,9 +34,8 @@ jobs:
       - uses: zerocracy/judges-action@0.0.55
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
-          options: |
-            github_token=${{ secrets.GITHUB_TOKEN }}
-            repositories=...
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repositories: yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.0.40
         with:
@@ -78,6 +77,13 @@ The following options are expected by the plugin
 * `options` (mandatory) is a list of `k=v` pairs, which are explained below
 * `factbase` (mandatory) is the path of the [Factbase][factbase] file
   (where everything is kept)
+* `repositories` (optional) is a comma-separated list of masks that
+  determine the repositories to manage, where
+  `yegor256/*` means all repos of the user,
+  `yegor256/judges` means a specific repo,
+  and
+  `-yegor256/judges` means an exclusion of the repo from the list.
+* `github_token` (optional) is an authentication GitHub access token
 * `verbose` (optional) makes it print debugging info if set to `true`
 * `cycles` (optional) is a number of update cycles to run
 
