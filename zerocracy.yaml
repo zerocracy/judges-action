@@ -1,11 +1,15 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
+  error: 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Ayegor256%2Ffactbase+type%3Aissue+created%3A%3C%3D2024-05-10:
+    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
+    you try again. If you reach out to GitHub Support for help, please include the
+    request ID 4400:178E40:466307:8849EA:671B3BE5. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
   removed: 8
-  seconds: 1334.919344302
+  seconds: 3012.32585925
   version: 0.26.1
   what: judges-summary
-  when: 2024-10-25 02:50:35.550842775 Z
+  when: 2024-10-25 06:57:02.207538219 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -87557,171 +87561,201 @@
   when: 2024-10-24 09:53:47.000000000 Z
   where: github
   who: 29139614
-- _id: 401719
-  _time: 2024-10-25 02:28:33.695142656 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 401720
-  _time: 2024-10-25 02:28:44.095877251 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 401721
-  _time: 2024-10-25 02:28:54.178994504 Z
+- _id: 401856
+  _time: 2024-10-25 06:07:24.122347108 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 728758275
   what: min-issue-was-found
   where: github
-- _id: 401722
-  _time: 2024-10-25 02:29:08.375237125 Z
+- _id: 401857
+  _time: 2024-10-25 06:07:34.352023083 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 401723
-  _time: 2024-10-25 02:29:18.543066104 Z
+- _id: 401858
+  _time: 2024-10-25 06:07:44.726644525 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 401724
-  _time: 2024-10-25 02:29:28.665399049 Z
+- _id: 401859
+  _time: 2024-10-25 06:07:55.009666839 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 799177290
   what: min-issue-was-found
   where: github
-- _id: 401725
-  _time: 2024-10-25 02:29:38.991842428 Z
+- _id: 401860
+  _time: 2024-10-25 06:08:05.622074468 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 401726
-  _time: 2024-10-25 02:29:49.220821687 Z
+- _id: 401861
+  _time: 2024-10-25 06:08:15.808050338 Z
   _version: 0.4.0/0.26.1/
   latest: 3
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 401727
-  _time: 2024-10-25 02:30:01.808729135 Z
+- _id: 401864
+  _time: 2024-10-25 06:09:08.288958590 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/aws-sdk-ec2-1.x-lockfile
+  details: The pull request zerocracy/baza#302 has been opened by @renovate[bot].
+  event_id: 43184970470
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 302
+  repository: 728758275
+  what: pull-was-opened
+  when: 2024-10-24 20:25:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 401975
+  _time: 2024-10-25 06:27:12.111161679 Z
+  _version: 0.4.0/0.26.1/
+  average_backlog_size: 0.109375
+  average_build_duration: 421.4824120603015
+  average_build_mttr: -15542
+  average_build_success_rate: 0.9899497487437185
+  average_issue_lifetime: 4482293.5
+  average_pull_files_size: 1.8
+  average_pull_hoc_size: 9.6
+  average_pull_lifetime: 1126987.142857143
+  average_pull_rejection_rate: 0.2857142857142857
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 640021.0
+  average_reviewers_per_pull: 0.2
+  average_reviews_per_pull: 0.2
+  average_triage_time: 3.0
+  since: 2024-10-18 06:27:12.111374388 Z
+  what: quality-of-service
+  when: 2024-10-25 06:27:12.111315277 Z
+- _id: 401976
+  _time: 2024-10-25 06:33:12.614606697 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 401977
+  _time: 2024-10-25 06:34:26.066368344 Z
   _version: 0.4.0/0.26.1/
   latest: 43155201149
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 401728
-  _time: 2024-10-25 02:30:12.641898928 Z
+- _id: 401978
+  _time: 2024-10-25 06:34:36.819151457 Z
   _version: 0.4.0/0.26.1/
   latest: 43075784070
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 401729
-  _time: 2024-10-25 02:30:23.501488823 Z
+- _id: 401979
+  _time: 2024-10-25 06:34:57.525694432 Z
   _version: 0.4.0/0.26.1/
-  latest: 43163464155
+  latest: 43185444370
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 401730
-  _time: 2024-10-25 02:30:34.593133157 Z
+- _id: 401980
+  _time: 2024-10-25 06:35:08.221178233 Z
   _version: 0.4.0/0.26.1/
   latest: 42875152417
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 401731
-  _time: 2024-10-25 02:30:45.720490174 Z
+- _id: 401981
+  _time: 2024-10-25 06:35:19.330706370 Z
   _version: 0.4.0/0.26.1/
   latest: 42859428529
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 401732
-  _time: 2024-10-25 02:31:06.319146853 Z
+- _id: 401982
+  _time: 2024-10-25 06:35:30.314054100 Z
   _version: 0.4.0/0.26.1/
-  latest: 43181823562
+  latest: 43187791799
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 401733
-  _time: 2024-10-25 02:31:17.545371813 Z
+- _id: 401983
+  _time: 2024-10-25 06:35:41.059770483 Z
   _version: 0.4.0/0.26.1/
   latest: 42872967751
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 401734
-  _time: 2024-10-25 02:31:28.332218986 Z
+- _id: 401984
+  _time: 2024-10-25 06:35:51.271790560 Z
   _version: 0.4.0/0.26.1/
   latest: 42857583580
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 401750
-  _time: 2024-10-25 02:34:03.999257389 Z
+- _id: 402000
+  _time: 2024-10-25 06:38:26.441642430 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 401773
-  _time: 2024-10-25 02:37:47.928016600 Z
-  _version: 0.4.0/0.26.1/
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 401805
-  _time: 2024-10-25 02:42:54.490021732 Z
+- _id: 402060
+  _time: 2024-10-25 06:48:09.423749433 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 401849
-  _time: 2024-10-25 02:49:56.425702003 Z
+- _id: 402103
+  _time: 2024-10-25 06:55:06.187651120 Z
   _version: 0.4.0/0.26.1/
-  latest: 21
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 401850
-  _time: 2024-10-25 02:50:06.025239190 Z
-  _version: 0.4.0/0.26.1/
-  latest: 279
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 401851
-  _time: 2024-10-25 02:50:15.714271279 Z
-  _version: 0.4.0/0.26.1/
-  latest: 28
+  latest: 0
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 401852
-  _time: 2024-10-25 02:50:25.400890698 Z
+- _id: 402111
+  _time: 2024-10-25 06:56:23.500913229 Z
   _version: 0.4.0/0.26.1/
-  latest: 135
+  latest: 73
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 402112
+  _time: 2024-10-25 06:56:33.186082920 Z
+  _version: 0.4.0/0.26.1/
+  latest: 48
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 402113
+  _time: 2024-10-25 06:56:42.941004633 Z
+  _version: 0.4.0/0.26.1/
+  latest: 103
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 402114
+  _time: 2024-10-25 06:56:52.617594589 Z
+  _version: 0.4.0/0.26.1/
+  latest: 239
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 401853
-  _time: 2024-10-25 02:50:35.334038172 Z
+- _id: 402115
+  _time: 2024-10-25 06:57:01.981153025 Z
   _version: 0.4.0/0.26.1/
-  latest: 138
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
