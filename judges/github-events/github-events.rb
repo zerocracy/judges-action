@@ -166,6 +166,7 @@ Fbe.iterate do
     fact.event_type = json[:type]
     fact.repository = json[:repo][:id].to_i
     fact.who = json[:actor][:id].to_i if json[:actor]
+    rname = Fbe.octo.repo_name_by_id(fact.repository)
 
     case json[:type]
     when 'PushEvent'
@@ -173,19 +174,19 @@ Fbe.iterate do
       fact.push_id = json[:payload][:push_id]
       fact.ref = json[:payload][:ref]
       fact.commit = json[:payload][:head]
-      fact.default_branch = Fbe.octo.repository(json[:repo][:name])[:default_branch]
+      fact.default_branch = Fbe.octo.repository(rname)[:default_branch]
       fact.to_master = fact.default_branch == fact.ref.split('/')[2] ? 1 : 0
       if fact.to_master.zero?
         $loog.debug("Push #{fact.commit} has been made to non-default branch '#{fact.default_branch}', ignoring it")
         skip_event(json)
       end
-      pulls = Fbe.octo.commit_pulls(json[:repo][:name], fact.commit)
+      pulls = Fbe.octo.commit_pulls(rname, fact.commit)
       unless pulls.empty?
         $loog.debug("Push #{fact.commit} has been made inside #{pulls.size} pull request(s), ignoring it")
         skip_event(json)
       end
       fact.details =
-        "A new Git push ##{json[:payload][:push_id]} has arrived to #{json[:repo][:name]}, " \
+        "A new Git push ##{json[:payload][:push_id]} has arrived to #{rname}, " \
         "made by #{Fbe.who(fact)} (default branch is '#{fact.default_branch}'), " \
         'not associated with any pull request.'
 
@@ -227,7 +228,7 @@ Fbe.iterate do
 
         fact.issue = json[:payload][:pull_request][:number]
         fact.what = 'pull-was-reviewed'
-        pull = Fbe.octo.pull_request(json[:repo][:name], fact.issue)
+        pull = Fbe.octo.pull_request(rname, fact.issue)
         fact.hoc = pull[:additions] + pull[:deletions]
         fact.comments = pull[:comments] + pull[:review_comments]
         fact.commits = pull[:commits]
@@ -275,11 +276,11 @@ Fbe.iterate do
       when 'published'
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
-        fetch_contributors(fact, json[:repo][:name]).each { |c| fact.contributors = c }
-        fill_fact_by_hash(fact, fetch_release_info(fact, json[:repo][:name]))
+        fetch_contributors(fact, rname).each { |c| fact.contributors = c }
+        fill_fact_by_hash(fact, fetch_release_info(fact, rname))
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
-          "in #{json[:repo][:name]} by #{Fbe.who(fact)}."
+          "in #{rname} by #{Fbe.who(fact)}."
       else
         skip_event(json)
       end
@@ -291,7 +292,7 @@ Fbe.iterate do
         fact.tag = json[:payload][:ref]
         fact.details =
           "A new tag '#{fact.tag}' has been created " \
-          "in #{json[:repo][:name]} by #{Fbe.who(fact)}."
+          "in #{rname} by #{Fbe.who(fact)}."
       else
         skip_event(json)
       end

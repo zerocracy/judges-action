@@ -221,7 +221,7 @@ class TestGithubEvents < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/yegor256/judges/pulls/93')
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/93')
       .to_return(
         status: 200,
         body: {
@@ -359,7 +359,7 @@ class TestGithubEvents < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/yegor256/judges/pulls/93')
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/93')
       .to_return(
         status: 200,
         body: {
@@ -719,7 +719,7 @@ class TestGithubEvents < Minitest::Test
         'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/yegor256/judges/pulls/93')
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/93')
       .to_return(
         status: 200,
         body: {
@@ -814,6 +814,10 @@ class TestGithubEvents < Minitest::Test
           login: 'zerocracy'
         }
       }
+    )
+    stub_github(
+      'https://api.github.com/repositories/820463873',
+      body: { id: 820_463_873, name: 'fbe', full_name: 'zerocracy/fbe' }
     )
     stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/contributors?per_page=100').to_return(
       body: [
@@ -1078,6 +1082,112 @@ class TestGithubEvents < Minitest::Test
     assert_nil(f.first[:tag])
     assert_nil(f.first[:release_id])
     assert_equal([526_301, 526_302], f.last[:contributors])
+  end
+
+  def test_event_for_renamed_repository
+    WebMock.disable_net_connect!
+    stub_github(
+      'https://api.github.com/repositories/111/events?per_page=100',
+      body: [
+        {
+          id: '4321000',
+          type: 'ReleaseEvent',
+          actor: {
+            id: 29_139_614,
+            login: 'renovate[bot]'
+          },
+          repo: {
+            id: 111,
+            name: 'foo/old_baz'
+          },
+          payload: {
+            action: 'published',
+            release: {
+              id: 178_368,
+              tag_name: 'v1.2.3',
+              name: 'Release v1.2.3',
+              author: {
+                id: 29_139_614,
+                login: 'renovate[bot]'
+              }
+            }
+          },
+          created_at: Time.parse('2024-11-01 12:30:15 UTC')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/new_baz',
+      body: { id: 111, name: 'new_baz', full_name: 'foo/new_baz' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/111',
+      body: { id: 111, name: 'new_baz', full_name: 'foo/new_baz' }
+    )
+    stub_github(
+      'https://api.github.com/user/29139614',
+      body: {
+        login: 'renovate[bot]',
+        id: 29_139_614,
+        type: 'Bot'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/new_baz/contributors?per_page=100',
+      body: [
+        {
+          login: 'yegor256',
+          id: 526_301
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/new_baz/releases/20000',
+      body: {
+        id: 20_000,
+        tag_name: 'v1.2.2',
+        target_commitish: 'master',
+        name: 'Release v1.2.2',
+        draft: false,
+        prerelease: false,
+        created_at: Time.parse('2024-10-31 21:45:00 UTC'),
+        published_at: Time.parse('2024-10-31 21:45:00 UTC'),
+        body: 'Release v1.2.2'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/new_baz/compare/v1.2.2...v1.2.3?per_page=100',
+      body: {
+        total_commits: 2,
+        commits: [
+          { sha: '2aa49900e720bd792e9' },
+          { sha: '1bbb36f67e5b97246b1' }
+        ],
+        files: [
+          { additions: 7, deletions: 4, changes: 11 },
+          { additions: 2, deletions: 0, changes: 2 },
+          { additions: 0, deletions: 7, changes: 7 }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.details = 'Release v1.2.2'
+      f.event_id = 35_207
+      f.event_type = 'ReleaseEvent'
+      f.is_human = 1
+      f.release_id = 20_000
+      f.repository = 111
+      f.what = 'release-published'
+      f.when = Time.parse('2024-10-31 21:45:00 UTC')
+      f.where = 'github'
+      f.who = 526_301
+    end
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/new_baz' }))
+    f = fb.query('(eq what "release-published")').each.to_a.last
+    assert_equal(111, f.repository)
+    assert_equal('v1.2.3', f.tag)
+    refute_match(/old_baz/, f.details)
   end
 
   def test_pull_request_event_with_comments
