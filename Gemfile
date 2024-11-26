@@ -32,7 +32,7 @@ gem 'minitest', '5.25.2', require: false
 gem 'minitest-reporters', '1.7.1', require: false
 gem 'others', '>0'
 gem 'rake', '13.2.1'
-gem 'rubocop', '1.68.0', require: false
+gem 'rubocop', '1.69.0', require: false
 gem 'simplecov', '0.22.0', require: false
 gem 'simplecov-cobertura', '~> 2.1', require: false
 gem 'webmock', '3.24.0', require: false
