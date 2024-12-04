@@ -71,18 +71,22 @@ Fbe.iterate do
     contributors.to_a
   end
 
-  def self.fetch_release_info(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
-    tag = fetch_tag(last, repo)
-    tag ||= find_first_commit(repo)[:sha]
-    info = {}
-    Fbe.octo.compare(repo, tag, fact.tag).then do |json|
-      info[:commits] = json[:total_commits]
-      info[:hoc] = json[:files].map { |f| f[:changes] }.sum
-      info[:last_commit] = json[:commits].first[:sha]
-    end
-    info
+def self.fetch_release_info(fact, repo)
+  last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
+  tag = fetch_tag(last, repo)
+  tag ||= find_first_commit(repo)[:sha]
+  info = {}
+  comparison = Fbe.octo.compare(repo, tag, fact.tag)
+  if comparison
+    info[:commits] = comparison[:total_commits]
+    info[:hoc] = comparison[:files].map { |f| f[:changes] }.sum
+    first_commit = comparison[:commits].first
+    info[:last_commit] = first_commit[:sha] if first_commit
+  else
+    $loog.warn("Comparison result is nil for repo #{repo}, tag #{tag}, fact.tag #{fact.tag}")
   end
+  info
+end
 
   def self.find_first_commit(repo)
     commits = Fbe.octo.commits(repo)
