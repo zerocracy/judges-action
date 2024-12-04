@@ -1,11 +1,15 @@
 ---
 - added: 8
   cycles: 2
+  error: 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Azerocracy%2Fbaza+type%3Aissue+created%3A%3C%3D2023-12-07:
+    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
+    you try again. If you reach out to GitHub Support for help, please include the
+    request ID 8880:2C147C:7DF9815:F902CF7:674FC54A. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
   removed: 8
-  seconds: 3337.215324928
+  seconds: 3081.924622396
   version: 0.26.1
   what: judges-summary
-  when: 2024-12-03 23:00:56.218281462 Z
+  when: 2024-12-04 03:23:29.809120952 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -92669,171 +92673,314 @@
   when: 2024-12-03 16:00:44.000000000 Z
   where: github
   who: 526301
-- _id: 445824
-  _time: 2024-12-03 22:35:03.339849485 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 445825
-  _time: 2024-12-03 22:35:14.801269007 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
+- _id: 445967
+  _job: 11474
+  _time: 2024-12-03 23:01:15.831841668 Z
+  _version: 0.4.0/0.27.0/0.0.55
+  award: -12
+  branch: vb/fix-benchmark-path
+  details: It's time to punish @vardbabayan for the branch named as 'vb/fix-benchmark-path',
+    which is wrong in yegor256/factbase#137, the penalty amount is -12.
+  greeting: "Hey there! \U0001F44B We appreciate your effort, but naming Git branches
+    like \"`vb/fix-benchmark-path`\" [isn't recommended](https://www.yegor256.com/2014/04/15/github-guidelines.html).
+    For better practice, use the ticket number you're working on (e.g., \"`136`\").
+    This aligns with our guidelines and helps streamline our workflow. Your current
+    balance is [-12 points](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Let's work together to improve and make our collaboration even smoother!\n\n<!--
+    It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html)
+    to name Git branches the way you named this one: \"`vb/fix-benchmark-path`\".
+    You've earned -12 points. Next time, better give your branch the same name as
+    the number of the ticket that you are solving. In this case, a perfect name, for
+    example, would be \"`136`\". Your running balance is [-12](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/yegor256/factbase/issues/137/#issuecomment-2515737803
+  is_human: 1
+  issue: 137
   repository: 798641472
-  what: min-issue-was-found
+  what: bad-branch-name-was-punished
+  when: 2024-12-03 23:01:15.865273860 Z
   where: github
-- _id: 445826
-  _time: 2024-12-03 22:35:26.017056307 Z
-  _version: 0.4.0/0.26.1/
-  latest: 1
-  repository: 728758275
-  what: min-issue-was-found
+  who: 69600066
+  why: Wrongly named a branch in yegor256/factbase#137
+- _id: 445968
+  _job: 11474
+  _time: 2024-12-03 23:03:10.149223106 Z
+  _version: 0.4.0/0.27.0/0.0.55
+  comments: 15
+  details: The pull request yegor256/factbase#132 with 221 HoC created by @vardbabayan
+    was merged by @yegor256 after 3 weeks of being in review and 15 comments.
+  hoc: 221
+  is_human: 1
+  issue: 132
+  merger: 526301
+  repository: 798641472
+  seconds: 1879760
+  what: code-was-contributed
+  when: 2024-12-03 16:00:44.000000000 Z
   where: github
-- _id: 445827
-  _time: 2024-12-03 22:35:37.324446903 Z
+  who: 69600066
+- _id: 445972
+  _time: 2024-12-04 02:33:36.044094837 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 445828
-  _time: 2024-12-03 22:35:48.700175601 Z
+- _id: 445973
+  _time: 2024-12-04 02:33:47.305891373 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 445829
-  _time: 2024-12-03 22:35:59.970947397 Z
+- _id: 445974
+  _time: 2024-12-04 02:33:58.545550085 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 799177290
   what: min-issue-was-found
   where: github
-- _id: 445830
-  _time: 2024-12-03 22:36:11.485347530 Z
+- _id: 445975
+  _time: 2024-12-04 02:34:09.909150070 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 445831
-  _time: 2024-12-03 22:36:22.819138667 Z
+- _id: 445976
+  _time: 2024-12-04 02:34:21.077082403 Z
   _version: 0.4.0/0.26.1/
   latest: 3
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 445832
-  _time: 2024-12-03 22:36:35.429704648 Z
+- _id: 445978
+  _time: 2024-12-04 02:34:44.186112319 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/minitest-5.x
+  details: The pull request yegor256/factbase#138 has been opened by @renovate[bot].
+  event_id: 44437283377
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 138
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-12-03 20:28:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 445982
+  _time: 2024-12-04 02:35:38.874111930 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/minitest-5.x
+  details: The pull request zerocracy/fbe#124 has been opened by @renovate[bot].
+  event_id: 44436830377
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 124
+  repository: 820463873
+  what: pull-was-opened
+  when: 2024-12-03 20:13:21.000000000 Z
+  where: github
+  who: 29139614
+- _id: 445984
+  _time: 2024-12-04 02:36:32.808029994 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/minitest-5.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#408 has been closed by @rultor,
+    with 6 HoC and 2 comments.
+  event_id: 44439722101
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  is_human: 0
+  issue: 408
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-03 21:55:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 445985
+  _time: 2024-12-04 02:37:31.758613594 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/minitest-5.x
+  details: The pull request zerocracy/judges-action#408 has been opened by @renovate[bot].
+  event_id: 44438142869
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 408
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-12-03 21:00:26.000000000 Z
+  where: github
+  who: 29139614
+- _id: 445986
+  _time: 2024-12-04 02:38:13.209537690 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#407 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 44438117515
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 407
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-03 20:59:31.000000000 Z
+  where: github
+  who: 8086956
+- _id: 445987
+  _time: 2024-12-04 02:39:06.755482100 Z
+  _version: 0.4.0/0.26.1/
+  branch: renovate/jamesives-github-pages-deploy-action-4.x
+  details: The pull request zerocracy/judges-action#407 has been opened by @renovate[bot].
+  event_id: 44434847441
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 407
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-12-03 18:56:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 446082
+  _time: 2024-12-04 02:57:05.460898961 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 446083
+  _time: 2024-12-04 02:57:17.023634301 Z
+  _version: 0.4.0/0.26.1/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 446084
+  _time: 2024-12-04 02:58:30.788419910 Z
   _version: 0.4.0/0.26.1/
   latest: 44416415358
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 445833
-  _time: 2024-12-03 22:36:46.414088195 Z
+- _id: 446085
+  _time: 2024-12-04 02:58:42.046425139 Z
   _version: 0.4.0/0.26.1/
-  latest: 44430007242
+  latest: 44437283377
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 445834
-  _time: 2024-12-03 22:36:58.204516541 Z
+- _id: 446086
+  _time: 2024-12-04 02:58:53.615766283 Z
   _version: 0.4.0/0.26.1/
   latest: 44414498755
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 445835
-  _time: 2024-12-03 22:37:09.006007798 Z
+- _id: 446087
+  _time: 2024-12-04 02:59:04.469825833 Z
   _version: 0.4.0/0.26.1/
   latest: 44415589586
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 445836
-  _time: 2024-12-03 22:37:20.013152683 Z
+- _id: 446088
+  _time: 2024-12-04 02:59:15.558063888 Z
   _version: 0.4.0/0.26.1/
-  latest: 44413441950
+  latest: 44436830377
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 445837
-  _time: 2024-12-03 22:37:31.766703978 Z
+- _id: 446089
+  _time: 2024-12-04 02:59:27.338180150 Z
   _version: 0.4.0/0.26.1/
-  latest: 44427008859
+  latest: 44439747405
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 445838
-  _time: 2024-12-03 22:37:43.046287436 Z
+- _id: 446090
+  _time: 2024-12-04 02:59:38.596327977 Z
   _version: 0.4.0/0.26.1/
   latest: 44422279038
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 445839
-  _time: 2024-12-03 22:37:54.181974558 Z
+- _id: 446091
+  _time: 2024-12-04 02:59:49.668084198 Z
   _version: 0.4.0/0.26.1/
-  latest: 44417035164
+  latest: 44436253781
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 445855
-  _time: 2024-12-03 22:40:48.699499090 Z
+- _id: 446107
+  _time: 2024-12-04 03:02:43.815849999 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 445915
-  _time: 2024-12-03 22:51:43.459242294 Z
+- _id: 446167
+  _time: 2024-12-04 03:13:35.798840083 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 445931
-  _time: 2024-12-03 22:54:37.420119400 Z
+- _id: 446210
+  _time: 2024-12-04 03:21:20.527818545 Z
   _version: 0.4.0/0.26.1/
   latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 445962
-  _time: 2024-12-03 23:00:11.603327200 Z
-  _version: 0.4.0/0.26.1/
-  latest: 106
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 445963
-  _time: 2024-12-03 23:00:22.533084348 Z
-  _version: 0.4.0/0.26.1/
-  latest: 279
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 445964
-  _time: 2024-12-03 23:00:33.528527755 Z
-  _version: 0.4.0/0.26.1/
-  latest: 28
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 445965
-  _time: 2024-12-03 23:00:44.474717087 Z
+- _id: 446218
+  _time: 2024-12-04 03:22:46.501721545 Z
   _version: 0.4.0/0.26.1/
-  latest: 135
+  latest: 47
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 446219
+  _time: 2024-12-04 03:22:57.184100736 Z
+  _version: 0.4.0/0.26.1/
+  latest: 25
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 446220
+  _time: 2024-12-04 03:23:07.762143327 Z
+  _version: 0.4.0/0.26.1/
+  latest: 103
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 446221
+  _time: 2024-12-04 03:23:18.735093433 Z
+  _version: 0.4.0/0.26.1/
+  latest: 239
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 445966
-  _time: 2024-12-03 23:00:55.974816286 Z
+- _id: 446222
+  _time: 2024-12-04 03:23:29.581684656 Z
   _version: 0.4.0/0.26.1/
-  latest: 138
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
