@@ -1,11 +1,15 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
+  error: 'GET https://api.github.com/search/issues?per_page=100&q=repo%3Azerocracy%2Fjudges-action+type%3Aissue+created%3A2024-11-28..2024-12-02:
+    403 - You have exceeded a secondary rate limit. Please wait a few minutes before
+    you try again. If you reach out to GitHub Support for help, please include the
+    request ID BBC0:1BEC0F:2D18959:581BE22:6751F23A. // See: https://docs.github.com/free-pro-team@latest/rest/overview/rate-limits-for-the-rest-api#about-secondary-rate-limits'
   removed: 8
-  seconds: 1729.876281534
+  seconds: 3302.528754326
   version: 0.26.1
   what: judges-summary
-  when: 2024-12-05 14:34:12.030209649 Z
+  when: 2024-12-05 19:01:23.397650258 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -93686,171 +93690,213 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-12-04 18:07:00.172296279 Z
-- _id: 447906
-  _time: 2024-12-05 14:05:35.930239084 Z
+- _id: 448174
+  _time: 2024-12-05 18:29:43.973591736 Z
+  _version: 0.4.0/0.26.1/
+  average_build_duration: 182.03724928366762
+  average_build_mttr: -4888
+  average_build_success_rate: 0.9412607449856734
+  average_issue_lifetime: 3194702.0
+  average_pull_lifetime: 185332.04347826086
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  since: 2024-11-28 18:29:43.973802800 Z
+  what: quality-of-service
+  when: 2024-12-05 18:29:43.973738250 Z
+- _id: 448175
+  _time: 2024-12-05 18:34:44.896598005 Z
+  _version: 0.4.0/0.26.1/
+  since: 2024-11-28 18:34:44.898149461 Z
+  total_builds_ran: 698
+  total_commits_pushed: 37
+  total_hoc_committed: 1514
+  total_issues_created: 23
+  total_pulls_submitted: 12
+  total_releases_published: 0
+  total_reviews_submitted: 2
+  what: quantity-of-deliverables
+  when: 2024-12-05 18:34:44.898058321 Z
+- _id: 448176
+  _time: 2024-12-05 18:39:16.683664608 Z
+  _version: 0.4.0/0.26.1/
+  total_active_contributors: 4
+  total_commits: 4252
+  total_contributors: 10
+  total_files: 669
+  total_forks: 19
+  total_issues: 490
+  total_pulls: 892
+  total_releases: 322
+  total_repositories: 8
+  total_stars: 34
+  what: dimensions-of-terrain
+  when: 2024-12-05 18:39:16.685181673 Z
+- _id: 448177
+  _time: 2024-12-05 18:39:47.438515054 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 799113787
   what: min-issue-was-found
   where: github
-- _id: 447907
-  _time: 2024-12-05 14:05:47.510044175 Z
+- _id: 448178
+  _time: 2024-12-05 18:39:58.958412933 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 798641472
   what: min-issue-was-found
   where: github
-- _id: 447908
-  _time: 2024-12-05 14:05:58.775880464 Z
+- _id: 448179
+  _time: 2024-12-05 18:40:10.051097468 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 728758275
   what: min-issue-was-found
   where: github
-- _id: 447909
-  _time: 2024-12-05 14:06:38.390390613 Z
+- _id: 448180
+  _time: 2024-12-05 18:40:21.259599633 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 447910
-  _time: 2024-12-05 14:06:49.947226109 Z
+- _id: 448181
+  _time: 2024-12-05 18:40:32.635565531 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 447911
-  _time: 2024-12-05 14:08:01.655252659 Z
+- _id: 448182
+  _time: 2024-12-05 18:40:44.036298478 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 799177290
   what: min-issue-was-found
   where: github
-- _id: 447912
-  _time: 2024-12-05 14:08:41.249294483 Z
+- _id: 448183
+  _time: 2024-12-05 18:40:55.323014518 Z
   _version: 0.4.0/0.26.1/
   latest: 1
   repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 447913
-  _time: 2024-12-05 14:08:52.658231157 Z
+- _id: 448184
+  _time: 2024-12-05 18:41:06.557545128 Z
   _version: 0.4.0/0.26.1/
   latest: 3
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 447914
-  _time: 2024-12-05 14:09:05.164214543 Z
+- _id: 448185
+  _time: 2024-12-05 18:41:18.942046244 Z
   _version: 0.4.0/0.26.1/
   latest: 44447884469
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 447915
-  _time: 2024-12-05 14:09:17.228633865 Z
+- _id: 448186
+  _time: 2024-12-05 18:41:30.301080189 Z
   _version: 0.4.0/0.26.1/
   latest: 44468433806
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 447916
-  _time: 2024-12-05 14:09:29.124514971 Z
+- _id: 448187
+  _time: 2024-12-05 18:41:42.665499405 Z
   _version: 0.4.0/0.26.1/
   latest: 44449171008
   repository: 728758275
   what: events-were-scanned
   where: github
-- _id: 447917
-  _time: 2024-12-05 14:09:40.131446967 Z
+- _id: 448188
+  _time: 2024-12-05 18:41:53.612628948 Z
   _version: 0.4.0/0.26.1/
   latest: 44452511063
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 447918
-  _time: 2024-12-05 14:09:52.328800400 Z
+- _id: 448189
+  _time: 2024-12-05 18:42:06.098815451 Z
   _version: 0.4.0/0.26.1/
   latest: 44446899422
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 447919
-  _time: 2024-12-05 14:10:26.655796097 Z
+- _id: 448190
+  _time: 2024-12-05 18:42:18.326390568 Z
   _version: 0.4.0/0.26.1/
-  latest: 44491324242
+  latest: 44498931831
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 447920
-  _time: 2024-12-05 14:10:39.081618870 Z
+- _id: 448191
+  _time: 2024-12-05 18:42:30.675129237 Z
   _version: 0.4.0/0.26.1/
   latest: 44450523842
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 447921
-  _time: 2024-12-05 14:10:51.040360041 Z
+- _id: 448192
+  _time: 2024-12-05 18:42:42.867281648 Z
   _version: 0.4.0/0.26.1/
   latest: 44447781374
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 447937
-  _time: 2024-12-05 14:13:46.885317602 Z
+- _id: 448208
+  _time: 2024-12-05 18:45:37.595539658 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 447997
-  _time: 2024-12-05 14:24:48.851153614 Z
+- _id: 448218
+  _time: 2024-12-05 18:47:27.084032107 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 728758275
+  what: labels-were-scanned
+  where: github
+- _id: 448246
+  _time: 2024-12-05 18:52:33.866542264 Z
+  _version: 0.4.0/0.26.1/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 448259
+  _time: 2024-12-05 18:54:54.606516913 Z
   _version: 0.4.0/0.26.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 448013
-  _time: 2024-12-05 14:27:45.374141450 Z
+- _id: 448288
+  _time: 2024-12-05 19:00:07.759603850 Z
   _version: 0.4.0/0.26.1/
   latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 448044
-  _time: 2024-12-05 14:33:27.018019049 Z
-  _version: 0.4.0/0.26.1/
-  latest: 106
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 448045
-  _time: 2024-12-05 14:33:38.507012987 Z
-  _version: 0.4.0/0.26.1/
-  latest: 157
-  repository: 728758275
-  what: labels-were-scanned
-  where: github
-- _id: 448046
-  _time: 2024-12-05 14:33:49.464087562 Z
-  _version: 0.4.0/0.26.1/
-  latest: 28
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 448047
-  _time: 2024-12-05 14:34:00.718708499 Z
+- _id: 448293
+  _time: 2024-12-05 19:01:01.776535507 Z
   _version: 0.4.0/0.26.1/
-  latest: 325
-  repository: 799177290
+  latest: 47
+  repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 448048
-  _time: 2024-12-05 14:34:11.788874899 Z
+- _id: 448294
+  _time: 2024-12-05 19:01:12.461942830 Z
   _version: 0.4.0/0.26.1/
-  latest: 73
-  repository: 802720676
+  latest: 25
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 448295
+  _time: 2024-12-05 19:01:23.175697911 Z
+  _version: 0.4.0/0.26.1/
+  latest: 62
+  repository: 799177290
   what: labels-were-scanned
   where: github
