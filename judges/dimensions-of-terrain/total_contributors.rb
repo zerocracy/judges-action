@@ -25,19 +25,18 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Total number of stars and forks for all repos:
+# Total number of unique contributors in all repos
 #
 # This function is called from the "dimensions-of-terrain.rb".
 #
 # @return [Hash] Map with keys as fact attributes and values as integers
-def total_stars
-  stars = 0
-  forks = 0
+def total_contributors
+  contributors = Set.new
   Fbe.unmask_repos.each do |repo|
-    Fbe.octo.repository(repo).then do |json|
-      stars += json[:stargazers_count]
-      forks += json[:forks]
+    next if Fbe.octo.repository(repo)[:size].zero?
+    Fbe.octo.contributors(repo).each do |contributor|
+      contributors << contributor[:id]
     end
   end
-  { total_stars: stars, total_forks: forks }
+  { total_contributors: contributors.count }
 end

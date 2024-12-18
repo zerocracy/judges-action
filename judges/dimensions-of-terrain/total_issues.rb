@@ -29,7 +29,7 @@ require 'fbe/unmask_repos'
 #
 # This function is called from the "dimensions-of-terrain.rb".
 #
-# @return Hash Map with keys as fact attributes and values as integers
+# @return [Hash] Map with keys as fact attributes and values as integers
 def total_issues
   issues = 0
   pulls = 0

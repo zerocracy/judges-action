@@ -51,16 +51,6 @@ Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
   send(n).each { |k, v| f.send("#{k}=", v) }
 end
 
-# Total number of unique contributors in all repos
-contributors = Set.new
-Fbe.unmask_repos.each do |repo|
-  next if Fbe.octo.repository(repo)[:size].zero?
-  Fbe.octo.contributors(repo).each do |contributor|
-    contributors << contributor[:id]
-  end
-end
-f.total_contributors = contributors.count
-
 # Total number of unique active contributors to all repos
 active_contributors = Set.new
 Fbe.unmask_repos.each do |repo|
