@@ -71,18 +71,6 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   f.average_build_duration = total.zero? ? 0 : duration.to_f / total
   f.average_build_mttr = ttrs.any? ? ttrs.sum / ttrs.size : 0
 
-  # Release intervals:
-  dates = []
-  Fbe.unmask_repos.each do |repo|
-    Fbe.octo.releases(repo).each do |json|
-      break if json[:published_at] < f.since
-      dates << json[:published_at]
-    end
-  end
-  dates.sort!
-  diffs = (1..dates.size - 1).map { |i| dates[i] - dates[i - 1] }
-  f.average_release_interval = diffs.empty? ? 0 : diffs.inject(&:+) / diffs.size
-
   # Release hoc and commit size
   repo_releases = {}
   hocs = []
