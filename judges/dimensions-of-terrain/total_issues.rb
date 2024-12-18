@@ -29,8 +29,9 @@ require 'fbe/unmask_repos'
 #
 # This function is called from the "dimensions-of-terrain.rb".
 #
+# @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def total_issues
+def total_issues(_fact)
   issues = 0
   pulls = 0
   Fbe.unmask_repos.each do |repo|

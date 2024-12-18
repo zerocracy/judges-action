@@ -30,8 +30,9 @@ require 'fbe/unmask_repos'
 #
 # This function is called from the "dimensions-of-terrain.rb".
 #
+# @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def total_commits
+def total_commits(_fact)
   commits = 0
   Fbe.unmask_repos.each do |repo|
     repo_info = Fbe.octo.repository(repo)

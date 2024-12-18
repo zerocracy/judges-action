@@ -29,8 +29,9 @@ require 'fbe/unmask_repos'
 #
 # This function is called from the "dimensions-of-terrain.rb".
 #
-# @return Hash Map with keys as fact attributes and values as integers
-def total_repositories
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def total_repositories(_fact)
   total = 0
   Fbe.unmask_repos.each do |repo|
     total += 1 unless Fbe.octo.repository(repo)[:archived]
