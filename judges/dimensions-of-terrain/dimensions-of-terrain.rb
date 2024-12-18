@@ -51,17 +51,6 @@ Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
   send(n).each { |k, v| f.send("#{k}=", v) }
 end
 
-# Total number of files for all repos
-files = 0
-Fbe.unmask_repos.each do |repo|
-  repo_info = Fbe.octo.repository(repo)
-  next if repo_info[:size].zero?
-  Fbe.octo.tree(repo, repo_info[:default_branch], recursive: true).then do |json|
-    files += json[:tree].count { |item| item[:type] == 'blob' }
-  end
-end
-f.total_files = files
-
 # Total number of unique contributors in all repos
 contributors = Set.new
 Fbe.unmask_repos.each do |repo|
