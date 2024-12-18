@@ -22,26 +22,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/fb'
 require 'fbe/octo'
-require 'fbe/overwrite'
 require 'fbe/unmask_repos'
-require 'fbe/regularly'
 
-start = Time.now
-Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
-  Dir[File.join(__dir__, 'average_*.rb')].each do |rb|
-    n = File.basename(rb).gsub(/\.rb$/, '')
-    next unless f[n].nil?
-    if Fbe.octo.off_quota
-      $loog.info('No GitHub quota left, it is time to stop')
-      break
+# Issue and PR lifetimes:
+#
+# This function is called from the "quality-of-service.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def average_issue_lifetime(fact)
+  ret = {}
+  { issue: 'average_issue_lifetime', pr: 'average_pull_lifetime' }.each do |type, prop|
+    ages = []
+    Fbe.unmask_repos.each do |repo|
+      q = "repo:#{repo} type:#{type} closed:>#{fact.since.utc.iso8601[0..9]}"
+      ages +=
+        Fbe.octo.search_issues(q)[:items].map do |json|
+          next if json[:closed_at].nil?
+          next if json[:created_at].nil?
+          json[:closed_at] - json[:created_at]
+        end
     end
-    if Time.now - start > 5 * 60
-      $loog.info('We are doing this for too long, time to stop')
-      break
-    end
-    require_relative rb
-    send(n, f).each { |k, v| f = Fbe.overwrite(f, k.to_s, v) }
+    ages.compact!
+    ret[prop] = ages.empty? ? 0 : ages.inject(&:+).to_f / ages.size
   end
+  ret
 end
