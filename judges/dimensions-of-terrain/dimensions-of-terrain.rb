@@ -37,11 +37,16 @@ if f.nil?
   f.when = Time.now
 end
 
+start = Time.now
 Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
   n = File.basename(rb).gsub(/\.rb$/, '')
   next unless f[n].nil?
   if Fbe.octo.off_quota
     $loog.info('No GitHub quota left, it is time to stop')
+    break
+  end
+  if Time.now - start > 5 * 60
+    $loog.info('We are doing this for too long, time to stop')
     break
   end
   require_relative rb

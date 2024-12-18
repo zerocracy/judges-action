@@ -42,7 +42,7 @@ class Minitest::Test
     $local = {}
     $judge = judge
     $options = options
-    $loog = Loog::VERBOSE
+    $loog = Loog::NULL
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
 
