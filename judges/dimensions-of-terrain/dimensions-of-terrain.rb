@@ -51,15 +51,6 @@ Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
   send(n).each { |k, v| f.send("#{k}=", v) }
 end
 
-# Total number of commits for all repos
-commits = 0
-Fbe.unmask_repos.each do |repo|
-  repo_info = Fbe.octo.repository(repo)
-  next if repo_info[:size].zero?
-  commits += Fbe.github_graph.total_commits(*repo.split('/'), repo_info[:default_branch])
-end
-f.total_commits = commits
-
 # Total number of files for all repos
 files = 0
 Fbe.unmask_repos.each do |repo|
