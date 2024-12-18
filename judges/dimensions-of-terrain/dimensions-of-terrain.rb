@@ -25,8 +25,6 @@
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
-require 'fbe/github_graph'
-require 'fbe/unmask_repos'
 
 f = Fbe.fb.query(
   "(and
