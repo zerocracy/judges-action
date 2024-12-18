@@ -51,17 +51,6 @@ Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
   send(n).each { |k, v| f.send("#{k}=", v) }
 end
 
-# Total number of issues and pull requests for all repos
-issues = 0
-pulls = 0
-Fbe.unmask_repos.each do |repo|
-  json = Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
-  issues += json['issues']
-  pulls += json['pulls']
-end
-f.total_issues = issues
-f.total_pulls = pulls
-
 # Total number of commits for all repos
 commits = 0
 Fbe.unmask_repos.each do |repo|
