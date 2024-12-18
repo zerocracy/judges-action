@@ -36,6 +36,7 @@ require 'judges/options'
 class TestQualityOfService < Minitest::Test
   def test_runs_when_run_duration_ms_is_nil
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
         'content-type': 'application/json'
@@ -161,6 +162,7 @@ class TestQualityOfService < Minitest::Test
 
   def test_quality_of_service_average_release_hocs_size_and_commits_size
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
@@ -338,6 +340,7 @@ class TestQualityOfService < Minitest::Test
 
   def test_quality_of_service_average_issues
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [{
@@ -387,6 +390,7 @@ class TestQualityOfService < Minitest::Test
 
   def test_quality_of_service_average_build_mttr
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [
@@ -479,6 +483,7 @@ class TestQualityOfService < Minitest::Test
 
   def test_quality_of_service_average_build_mttr_when_failure_several_times_in_a_row
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [
@@ -585,6 +590,7 @@ class TestQualityOfService < Minitest::Test
 
   def test_quality_of_service_average_hocs_and_files
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
@@ -743,6 +749,7 @@ class TestQualityOfService < Minitest::Test
 
   def test_quality_of_service_average_review_time_comments_reviewers_and_reviews
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
@@ -1068,6 +1075,7 @@ class TestQualityOfService < Minitest::Test
 
   def test_quality_of_service_average_triage_time
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',

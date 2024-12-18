@@ -24,10 +24,27 @@
 
 require 'fbe/fb'
 require 'fbe/octo'
+require 'fbe/overwrite'
 require 'fbe/unmask_repos'
 require 'fbe/regularly'
 
+start = Time.now
 Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
+  Dir[File.join(__dir__, 'average_*.rb')].each do |rb|
+    n = File.basename(rb).gsub(/\.rb$/, '')
+    next unless f[n].nil?
+    if Fbe.octo.off_quota
+      $loog.info('No GitHub quota left, it is time to stop')
+      break
+    end
+    if Time.now - start > 5 * 60
+      $loog.info('We are doing this for too long, time to stop')
+      break
+    end
+    require_relative rb
+    send(n, f).each { |k, v| f = Fbe.overwrite(f, k.to_s, v) }
+  end
+
   # Workflow runs:
   total = 0
   success = 0
@@ -166,28 +183,4 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
   f.average_review_size = review_comments.empty? ? 0 : review_comments.sum.to_f / review_comments.size
   f.average_reviewers_per_pull = reviewers.empty? ? 0 : reviewers.sum.to_f / reviewers.size
   f.average_reviews_per_pull = reviews.empty? ? 0 : reviews.sum.to_f / reviews.size
-
-  # Average triage time for issues
-  triage_times = []
-  Fbe.unmask_repos.each do |repo|
-    Fbe.octo.search_issues("repo:#{repo} type:issue created:>#{f.since.utc.iso8601[0..9]}")[:items].each do |issue|
-      ff = Fbe.fb.query(
-        <<~QUERY
-          (and
-            (eq where 'github')
-            (eq repository #{Fbe.octo.repo_id_by_name(repo)})
-            (eq issue #{issue[:number]})
-            (eq what 'label-was-attached')
-            (exists when)
-            (or
-              (eq label 'bug')
-              (eq label 'enhancement')
-            )
-          )
-        QUERY
-      ).each.min_by(&:when)
-      triage_times << (ff.when - issue[:created_at]) if ff
-    end
-  end
-  f.average_triage_time = triage_times.empty? ? 0 : triage_times.sum.to_f / triage_times.size
 end
