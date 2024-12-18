@@ -24,6 +24,7 @@
 
 require 'fbe/fb'
 require 'fbe/octo'
+require 'fbe/overwrite'
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
 
@@ -48,5 +49,5 @@ Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
     break
   end
   require_relative rb
-  send(n, f).each { |k, v| f.send("#{k}=", v) }
+  send(n, f).each { |k, v| f = Fbe.overwrite(f, k.to_s, v) }
 end
