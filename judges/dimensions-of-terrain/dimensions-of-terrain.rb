@@ -28,18 +28,16 @@ require 'fbe/overwrite'
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
 
-unless Fbe.fb.query(
+f = Fbe.fb.query(
   "(and
     (eq what '#{$judge}')
     (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '1 days')))"
-).each.to_a.empty?
-  $loog.debug("#{$judge} statistics have recently been collected, skipping now")
-  return
+).each.to_a.first
+if f.nil?
+  f = Fbe.fb.insert
+  f.what = $judge
+  f.when = Time.now
 end
-
-f = Fbe.fb.insert
-f.what = $judge
-f.when = Time.now
 
 Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
   n = File.basename(rb).gsub(/\.rb$/, '')
