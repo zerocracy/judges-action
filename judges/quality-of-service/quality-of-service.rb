@@ -134,15 +134,4 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
     end
   end
   f.average_backlog_size = issues.empty? ? 0 : issues.inject(&:+).to_f / issues.size
-
-  # Rejection PR rate
-  pulls = 0
-  rejected = 0
-  Fbe.unmask_repos.each do |repo|
-    pulls += Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{f.since.utc.iso8601[0..9]}")[:total_count]
-    rejected += Fbe.octo.search_issues(
-      "repo:#{repo} type:pr is:unmerged closed:>#{f.since.utc.iso8601[0..9]}"
-    )[:total_count]
-  end
-  f.average_pull_rejection_rate = pulls.zero? ? 0 : rejected.to_f / pulls
 end
