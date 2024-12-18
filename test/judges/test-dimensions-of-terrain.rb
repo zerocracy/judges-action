@@ -23,16 +23,20 @@
 # SOFTWARE.
 
 require 'factbase'
+require 'fbe/octo'
+require 'fbe/github_graph'
 require 'loog'
 require 'json'
 require 'minitest/autorun'
 require 'webmock/minitest'
 require 'judges/options'
+require_relative '../test__helper'
 
 # Test.
 class TestDimensionsOfTerrain < Minitest::Test
   def test_total_repositories
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -152,6 +156,7 @@ class TestDimensionsOfTerrain < Minitest::Test
 
   def test_total_releases
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -203,6 +208,7 @@ class TestDimensionsOfTerrain < Minitest::Test
 
   def test_total_stars_and_forks
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -291,6 +297,7 @@ class TestDimensionsOfTerrain < Minitest::Test
 
   def test_total_files
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -421,6 +428,7 @@ class TestDimensionsOfTerrain < Minitest::Test
 
   def test_total_contributors
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -501,6 +509,7 @@ class TestDimensionsOfTerrain < Minitest::Test
 
   def test_total_active_contributors
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {

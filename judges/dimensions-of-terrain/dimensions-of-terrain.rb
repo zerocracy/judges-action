@@ -40,33 +40,16 @@ f = Fbe.fb.insert
 f.what = $judge
 f.when = Time.now
 
-# Total number of repositories in the project:
-total = 0
-Fbe.unmask_repos.each do |repo|
-  total += 1 unless Fbe.octo.repository(repo)[:archived]
-end
-f.total_repositories = total
-
-# Total number of releases ever made:
-total = 0
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.releases(repo).each do |_|
-    total += 1
+Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
+  n = File.basename(rb).gsub(/\.rb$/, '')
+  next unless f[n].nil?
+  if Fbe.octo.off_quota
+    $loog.info('No GitHub quota left, it is time to stop')
+    break
   end
+  require_relative rb
+  send(n).each { |k, v| f.send("#{k}=", v) }
 end
-f.total_releases = total
-
-# Total number of stars and forks for all repos:
-stars = 0
-forks = 0
-Fbe.unmask_repos.each do |repo|
-  Fbe.octo.repository(repo).then do |json|
-    stars += json[:stargazers_count]
-    forks += json[:forks]
-  end
-end
-f.total_stars = stars
-f.total_forks = forks
 
 # Total number of issues and pull requests for all repos
 issues = 0

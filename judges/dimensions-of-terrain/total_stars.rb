@@ -22,32 +22,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-ENV['RACK_ENV'] = 'test'
+require 'fbe/octo'
+require 'fbe/unmask_repos'
 
-require 'simplecov'
-SimpleCov.start
-
-require 'simplecov-cobertura'
-SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
-
-require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
-
-require 'minitest/autorun'
-
-class Minitest::Test
-  def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }))
-    $fb = fb
-    $global = {}
-    $local = {}
-    $judge = judge
-    $options = options
-    $loog = Loog::VERBOSE
-    load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
+# Total number of stars and forks for all repos:
+#
+# This function is called from the "dimensions-of-terrain.rb".
+#
+# @return Hash Map with keys as fact attributes and values as integers
+def total_stars
+  stars = 0
+  forks = 0
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.repository(repo).then do |json|
+      stars += json[:stargazers_count]
+      forks += json[:forks]
+    end
   end
-
-  def stub_github(url, body:, method: :get, status: 200, headers:
-    { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '1000' })
-    stub_request(method, url).to_return(status:, body: body.to_json, headers:)
-  end
+  { total_stars: stars, total_forks: forks }
 end
