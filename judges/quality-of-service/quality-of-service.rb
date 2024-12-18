@@ -22,10 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
-require 'fbe/unmask_repos'
 require 'fbe/regularly'
 
 start = Time.now
