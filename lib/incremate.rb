@@ -30,6 +30,11 @@ require_relative 'jp'
 
 # Incrementaly accumulates data into a fact, using Ruby scripts
 # found in the directory provided, by the prefix.
+#
+# @param [Factbase::Fact] fact The fact to put data into (some data already there)
+# @param [String] dir Where to find Ruby scripts
+# @param [String] prefix The prefix to use for scripts (e.g. "total")
+# @return nil
 def Jp.incremate(fact, dir, prefix)
   if Time.now - $start > 15 * 60
     $loog.info('We are busy for too long already, won\'t run incremate')
