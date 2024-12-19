@@ -30,7 +30,6 @@ require 'fbe/if_absent'
 require 'fbe/who'
 require 'fbe/issue'
 
-start = Time.now
 Fbe.iterate do
   as 'min-issue-was-found'
   by "(agg (and (eq where 'github') (eq repository $repository) (eq what 'issue-was-opened')) (min issue))"
@@ -41,10 +40,6 @@ Fbe.iterate do
       after = Fbe.octo.issue(repo, issue)[:created_at]
     rescue Octokit::NotFound
       next 0
-    end
-    if Time.now - start > 2 * 60
-      $loog.info("We are doing this for #{start.ago} already, won't check #{repo}")
-      next issue
     end
     total = 0
     before = Time.now
