@@ -62,8 +62,8 @@ export GLI_DEBUG=true
 fb=$(realpath "${INPUT_FACTBASE}")
 
 declare -a gopts=()
-if [ -n "${INPUT_VERBOSE}" ]; then
-    gopts+=("--verbose")
+if [ "${INPUT_VERBOSE}" == 'true' ]; then
+    gopts+=('--verbose')
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
