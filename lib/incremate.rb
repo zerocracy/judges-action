@@ -22,6 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+require 'time'
 require 'fbe/octo'
 require 'fbe/overwrite'
 require_relative 'jp'
