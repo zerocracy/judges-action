@@ -31,6 +31,10 @@ require_relative 'jp'
 # Incrementaly accumulates data into a fact, using Ruby scripts
 # found in the directory provided, by the prefix.
 def Jp.incremate(fact, dir, prefix)
+  if Time.now - $start > 15 * 60
+    $loog.info('We are busy for too long already, won\'t run incremate')
+    return
+  end
   start = Time.now
   Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')

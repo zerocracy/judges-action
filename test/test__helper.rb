@@ -43,6 +43,7 @@ class Minitest::Test
     $judge = judge
     $options = options
     $loog = Loog::NULL
+    $start = Time.now
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
 
