@@ -22,40 +22,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/fb'
 require 'fbe/octo'
-require 'fbe/overwrite'
 require 'fbe/unmask_repos'
-require 'fbe/regularly'
 
-start = Time.now
-Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
-  Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
-    n = File.basename(rb).gsub(/\.rb$/, '')
-    next unless f[n].nil?
-    if Fbe.octo.off_quota
-      $loog.info('No GitHub quota left, it is time to stop')
-      break
-    end
-    if Time.now - start > 5 * 60
-      $loog.info('We are doing this for too long, time to stop')
-      break
-    end
-    require_relative rb
-    send(n, f).each { |k, v| f = Fbe.overwrite(f, k.to_s, v) }
-  end
-
-  # Number of commits pushed and their hits-of-code:
-  commits = 0
-  hoc = 0
+# Number of issues and pull requests created:
+#
+# This function is called from the "quantity-of-deliverables.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def total_issues_created(fact)
+  issues = 0
+  pulls = 0
   Fbe.unmask_repos.each do |repo|
-    next if Fbe.octo.repository(repo)[:size].zero?
-
-    Fbe.octo.commits_since(repo, f.since).each do |json|
-      commits += 1
-      hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
+    Fbe.octo.list_issues(repo, since: ">#{fact.since.utc.iso8601[0..9]}").each do |json|
+      issues += 1
+      pulls += 1 unless json[:pull_request].nil?
     end
   end
-  f.total_commits_pushed = commits
-  f.total_hoc_committed = hoc
+  {
+    total_issues_created: issues,
+    total_pulls_submitted: pulls
+  }
 end
