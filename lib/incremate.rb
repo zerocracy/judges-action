@@ -23,6 +23,7 @@
 # SOFTWARE.
 
 require 'time'
+require 'tago'
 require 'fbe/octo'
 require 'fbe/overwrite'
 require_relative 'jp'
@@ -43,6 +44,9 @@ def Jp.incremate(fact, dir, prefix)
       break
     end
     require_relative rb
-    send(n, fact).each { |k, v| fact = Fbe.overwrite(fact, k.to_s, v) }
+    before = Time.now
+    h = send(n, fact)
+    h.each { |k, v| fact = Fbe.overwrite(fact, k.to_s, v) }
+    $loog.info("Collected #{n} in #{before.ago}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
   end
 end
