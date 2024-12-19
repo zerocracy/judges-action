@@ -42,7 +42,7 @@ Fbe.iterate do
     rescue Octokit::NotFound
       next 0
     end
-    if Time.now - start > 5 * 60
+    if Time.now - start > 2 * 60
       $loog.info("We are doing this for #{start.ago} already, won't check #{repo}")
       next issue
     end
