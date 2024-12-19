@@ -24,10 +24,27 @@
 
 require 'fbe/fb'
 require 'fbe/octo'
+require 'fbe/overwrite'
 require 'fbe/unmask_repos'
 require 'fbe/regularly'
 
+start = Time.now
 Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
+  Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
+    n = File.basename(rb).gsub(/\.rb$/, '')
+    next unless f[n].nil?
+    if Fbe.octo.off_quota
+      $loog.info('No GitHub quota left, it is time to stop')
+      break
+    end
+    if Time.now - start > 5 * 60
+      $loog.info('We are doing this for too long, time to stop')
+      break
+    end
+    require_relative rb
+    send(n, f).each { |k, v| f = Fbe.overwrite(f, k.to_s, v) }
+  end
+
   # Number of commits pushed and their hits-of-code:
   commits = 0
   hoc = 0

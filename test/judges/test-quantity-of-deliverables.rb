@@ -36,6 +36,7 @@ require 'judges/options'
 class TestQuantityOfDeliverables < Minitest::Test
   def test_counts_commits
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
         'content-type': 'application/json'
@@ -111,6 +112,7 @@ class TestQuantityOfDeliverables < Minitest::Test
 
   def test_processes_empty_repository
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
         'content-type': 'application/json'
@@ -160,6 +162,7 @@ class TestQuantityOfDeliverables < Minitest::Test
 
   def test_quantity_of_deliverables_total_releases_published
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
@@ -220,6 +223,7 @@ class TestQuantityOfDeliverables < Minitest::Test
 
   def test_quantity_of_deliverables_total_reviews_submitted
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
@@ -406,6 +410,7 @@ class TestQuantityOfDeliverables < Minitest::Test
 
   def test_quantity_of_deliverables_total_builds_ran
     WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
