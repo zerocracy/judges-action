@@ -28,6 +28,7 @@ require 'json'
 require 'minitest/autorun'
 require 'webmock/minitest'
 require 'judges/options'
+require_relative '../test__helper'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
@@ -37,17 +38,16 @@ class TestQuantityOfDeliverables < Minitest::Test
   def test_counts_commits
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/rate_limit', body: {})
-    stub_request(:get, 'https://api.github.com/user/42').to_return(
-      body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
-      }
+    stub_github(
+      'https://api.github.com/user/42',
+      body: { id: 42, login: 'torvalds' }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }.to_json, headers: {
-        'content-type': 'application/json'
-      }
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00').to_return(
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00',
       body: [
         {
           sha: 'bcb3cd5c2a6f3daebe1a2ab16a195a0bf2609943'
@@ -55,40 +55,31 @@ class TestQuantityOfDeliverables < Minitest::Test
         {
           sha: '0d705c564abc9e5088f00310c42b82bc9f192a3d'
         }
-      ].to_json,
-      headers: {
-        'content-type': 'application/json'
-      }
+      ]
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits/bcb3cd5c2a6f3daebe1a2ab16a195a0bf2609943').to_return(
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/bcb3cd5c2a6f3daebe1a2ab16a195a0bf2609943',
       body: {
         stats: {
           total: 10
         }
-      }.to_json,
-      headers: {
-        'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits/0d705c564abc9e5088f00310c42b82bc9f192a3d').to_return(
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/0d705c564abc9e5088f00310c42b82bc9f192a3d',
       body: {
         stats: {
           total: 10
         }
-      }.to_json,
-      headers: {
-        'content-type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15').to_return(
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15',
       body: [
         {
           pull_request: {}
         }
-      ].to_json,
-      headers: {
-        'content-type': 'application/json'
-      }
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
@@ -113,32 +104,26 @@ class TestQuantityOfDeliverables < Minitest::Test
   def test_processes_empty_repository
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/rate_limit', body: {})
-    stub_request(:get, 'https://api.github.com/user/42').to_return(
-      body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
-      }
+    stub_github(
+      'https://api.github.com/user/42',
+      body: { id: 42, login: 'torvalds' }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }.to_json, headers: {
-        'content-type': 'application/json'
-      }
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00').to_return(
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00',
       status: 409,
-      body: [].to_json,
-      headers: {
-        'content-type': 'application/json'
-      }
+      body: []
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15').to_return(
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15',
       body: [
         {
           pull_request: {}
         }
-      ].to_json,
-      headers: {
-        'content-type': 'application/json'
-      }
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',

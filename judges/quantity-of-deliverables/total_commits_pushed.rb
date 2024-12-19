@@ -22,24 +22,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/overwrite'
 require 'fbe/octo'
-require 'fbe/regularly'
+require 'fbe/unmask_repos'
 
-start = Time.now
-Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
-  Dir[File.join(__dir__, 'total_*.rb')].each do |rb|
-    n = File.basename(rb).gsub(/\.rb$/, '')
-    next unless f[n].nil?
-    if Fbe.octo.off_quota
-      $loog.info('No GitHub quota left, it is time to stop')
-      break
+# Number of commits pushed and their hits-of-code:
+#
+# This function is called from the "quantity-of-deliverables.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def total_commits_pushed(fact)
+  commits = 0
+  hoc = 0
+  Fbe.unmask_repos.each do |repo|
+    next if Fbe.octo.repository(repo)[:size].zero?
+    Fbe.octo.commits_since(repo, fact.since).each do |json|
+      commits += 1
+      hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
     end
-    if Time.now - start > 5 * 60
-      $loog.info('We are doing this for too long, time to stop')
-      break
-    end
-    require_relative rb
-    send(n, f).each { |k, v| f = Fbe.overwrite(f, k.to_s, v) }
   end
+  {
+    total_commits_pushed: commits,
+    total_hoc_committed: hoc
+  }
 end
