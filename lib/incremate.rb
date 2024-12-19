@@ -43,7 +43,10 @@ def Jp.incremate(fact, dir, prefix)
   start = Time.now
   Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
-    next unless fact[n].nil?
+    unless fact[n].nil?
+      $loog.info("#{n} is here: #{fact[n].first}")
+      next
+    end
     if Fbe.octo.off_quota
       $loog.info('No GitHub quota left, it is time to stop')
       break
