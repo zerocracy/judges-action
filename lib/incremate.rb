@@ -49,13 +49,13 @@ def Jp.incremate(fact, dir, prefix)
       break
     end
     if Time.now - start > 5 * 60
-      $loog.info('We are doing this for too long, time to stop')
+      $loog.info("We are doing this for too long (#{start.ago}), time to stop")
       break
     end
     require_relative rb
     before = Time.now
     h = send(n, fact)
     h.each { |k, v| fact = Fbe.overwrite(fact, k.to_s, v) }
-    $loog.info("Collected #{n} in #{before.ago}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
+    $loog.info("Collected #{n} in #{before.ago} (#{start.ago} total): [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
   end
 end
