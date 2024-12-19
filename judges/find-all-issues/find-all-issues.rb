@@ -30,6 +30,7 @@ require 'fbe/if_absent'
 require 'fbe/who'
 require 'fbe/issue'
 
+start = Time.now
 Fbe.iterate do
   as 'min-issue-was-found'
   by "(agg (and (eq where 'github') (eq repository $repository) (eq what 'issue-was-opened')) (min issue))"
@@ -41,8 +42,12 @@ Fbe.iterate do
     rescue Octokit::NotFound
       next 0
     end
+    if Time.now - start > 5 * 60
+      $loog.info("We are doing this for #{start.ago} already, won't check #{repo}")
+      next issue
+    end
     total = 0
-    start = Time.now
+    before = Time.now
     Fbe.octo.search_issues("repo:#{repo} type:issue created:<=#{after.iso8601[0..9]}")[:items].each do |json|
       total += 1
       f =
@@ -57,7 +62,7 @@ Fbe.iterate do
       f.who = json.dig(:user, :id)
       f.details = "The issue #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
     end
-    $loog.info("Checked #{total} issues in #{repo} in #{start.ago}")
+    $loog.info("Checked #{total} issues in #{repo} in #{before.ago}")
     issue
   end
 end
