@@ -23,7 +23,11 @@
 name: rake
 'on':
   push:
+    branches:
+      - master
   pull_request:
+    branches:
+      - master
 jobs:
   rake:
     runs-on: ubuntu-24.04
