@@ -30,16 +30,17 @@ concurrency:
 jobs:
   zerocracy:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.0.55
+      - uses: zerocracy/judges-action@0.0.56
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           verbose: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repositories: yegor256/judges,yegor256/factbase,zerocracy/*
           options: |
             max_events=1000
-            github_token=${{ secrets.GITHUB_TOKEN }}
-            repositories=yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: zerocracy.fb
           cycles: 2
       - uses: zerocracy/pages-action@0.0.40
