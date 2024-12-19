@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,18 +21,27 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: copyrights
-'on':
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  copyrights:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: yegor256/copyrights-action@0.0.8
+
+require 'fbe/octo'
+require 'fbe/unmask_repos'
+
+# Number of issues and pull requests created:
+#
+# This function is called from the "quantity-of-deliverables.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def total_issues_created(fact)
+  issues = 0
+  pulls = 0
+  Fbe.unmask_repos.each do |repo|
+    Fbe.octo.list_issues(repo, since: ">#{fact.since.utc.iso8601[0..9]}").each do |json|
+      issues += 1
+      pulls += 1 unless json[:pull_request].nil?
+    end
+  end
+  {
+    total_issues_created: issues,
+    total_pulls_submitted: pulls
+  }
+end

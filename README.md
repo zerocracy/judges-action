@@ -126,6 +126,12 @@ In order to run "live" tests of some judges, do this:
 bundle exec rake -- --live
 ```
 
+In order to run a single test, try this:
+
+```bash
+bundle exec ruby test/judges/test-dimensions-of-terrain.rb -n test_total_repositories
+```
+
 [factbase]: https://github.com/yegor256/factbase
 [secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
 [ours]: https://github.com/zerocracy/judges-action/blob/master/.github/workflows/zerocracy.yml

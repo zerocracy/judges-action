@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,18 +21,23 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: copyrights
-'on':
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  copyrights:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: yegor256/copyrights-action@0.0.8
+
+require 'fbe/octo'
+require 'fbe/unmask_repos'
+
+# Total number of unique contributors in all repos
+#
+# This function is called from the "dimensions-of-terrain.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def total_contributors(_fact)
+  contributors = Set.new
+  Fbe.unmask_repos.each do |repo|
+    next if Fbe.octo.repository(repo)[:size].zero?
+    Fbe.octo.contributors(repo).each do |contributor|
+      contributors << contributor[:id]
+    end
+  end
+  { total_contributors: contributors.count }
+end

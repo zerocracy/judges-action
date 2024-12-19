@@ -46,7 +46,8 @@ class Minitest::Test
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
 
-  def stub_github(url, body:, method: :get, status: 200, headers: { 'content-type': 'application/json' })
+  def stub_github(url, body:, method: :get, status: 200, headers:
+    { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '1000' })
     stub_request(method, url).to_return(status:, body: body.to_json, headers:)
   end
 end

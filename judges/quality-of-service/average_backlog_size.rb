@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,18 +21,28 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: copyrights
-'on':
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  copyrights:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: yegor256/copyrights-action@0.0.8
+
+require 'fbe/octo'
+require 'fbe/unmask_repos'
+
+# Average issues
+#
+# This function is called from the "quality-of-service.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def average_backlog_size(fact)
+  issues = []
+  Fbe.unmask_repos.each do |repo|
+    (fact.since.utc.to_date..Time.now.utc.to_date).each do |date|
+      count = 0
+      Fbe.octo.search_issues(
+        "repo:#{repo} type:issue created:#{fact.since.utc.to_date.iso8601[0..9]}..#{date.iso8601[0..9]}"
+      )[:items].each do |item|
+        count += 1 if item[:closed_at].nil? || item[:closed_at].utc.to_date >= date
+      end
+      issues << count
+    end
+  end
+  { average_backlog_size: issues.empty? ? 0 : issues.inject(&:+).to_f / issues.size }
+end

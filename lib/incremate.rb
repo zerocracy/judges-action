@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,18 +21,28 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: copyrights
-'on':
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  copyrights:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: yegor256/copyrights-action@0.0.8
+
+require 'time'
+require 'fbe/octo'
+require 'fbe/overwrite'
+require_relative 'jp'
+
+# Incrementaly accumulates data into a fact, using Ruby scripts
+# found in the directory provided, by the prefix.
+def Jp.incremate(fact, dir, prefix)
+  start = Time.now
+  Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
+    n = File.basename(rb).gsub(/\.rb$/, '')
+    next unless fact[n].nil?
+    if Fbe.octo.off_quota
+      $loog.info('No GitHub quota left, it is time to stop')
+      break
+    end
+    if Time.now - start > 5 * 60
+      $loog.info('We are doing this for too long, time to stop')
+      break
+    end
+    require_relative rb
+    send(n, fact).each { |k, v| fact = Fbe.overwrite(fact, k.to_s, v) }
+  end
+end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,18 +21,31 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: copyrights
-'on':
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  copyrights:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: yegor256/copyrights-action@0.0.8
+
+require 'fbe/octo'
+require 'fbe/unmask_repos'
+
+# Issue and PR lifetimes:
+#
+# This function is called from the "quality-of-service.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def average_issue_lifetime(fact)
+  ret = {}
+  { issue: 'average_issue_lifetime', pr: 'average_pull_lifetime' }.each do |type, prop|
+    ages = []
+    Fbe.unmask_repos.each do |repo|
+      q = "repo:#{repo} type:#{type} closed:>#{fact.since.utc.iso8601[0..9]}"
+      ages +=
+        Fbe.octo.search_issues(q)[:items].map do |json|
+          next if json[:closed_at].nil?
+          next if json[:created_at].nil?
+          json[:closed_at] - json[:created_at]
+        end
+    end
+    ages.compact!
+    ret[prop] = ages.empty? ? 0 : ages.inject(&:+).to_f / ages.size
+  end
+  ret
+end

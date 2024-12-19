@@ -23,7 +23,11 @@
 name: hadolint
 'on':
   push:
+    branches:
+      - master
   pull_request:
+    branches:
+      - master
 jobs:
   hadolint:
     runs-on: ubuntu-24.04

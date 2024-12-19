@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # MIT License
 #
 # Copyright (c) 2024 Zerocracy
@@ -19,18 +21,24 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
----
-name: copyrights
-'on':
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
-jobs:
-  copyrights:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: yegor256/copyrights-action@0.0.8
+
+require 'fbe/octo'
+require 'fbe/unmask_repos'
+
+# Total number of code reviews in all repositories from since
+#
+# This function is called from the "quantity-of-deliverables.rb".
+#
+# @param [Factbase::Fact] fact The fact just under processing
+# @return [Hash] Map with keys as fact attributes and values as integers
+def total_reviews_submitted(fact)
+  total =
+    Fbe.unmask_repos.sum do |repo|
+      Fbe.octo.pull_requests(repo, state: 'all').sum do |pr|
+        Fbe.octo.pull_request_reviews(repo, pr[:number]).count do |review|
+          review[:submitted_at] && review[:submitted_at] > fact.since
+        end
+      end
+    end
+  { total_reviews_submitted: total }
+end
