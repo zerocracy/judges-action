@@ -40,7 +40,9 @@ Fbe.iterate do
     rescue Octokit::NotFound
       next 0
     end
+    total = 0
     Fbe.octo.search_issues("repo:#{repo} type:issue created:<=#{after.iso8601[0..9]}")[:items].each do |json|
+      total += 1
       f =
         Fbe.if_absent do |ff|
           ff.where = 'github'
@@ -53,6 +55,7 @@ Fbe.iterate do
       f.who = json.dig(:user, :id)
       f.details = "The issue #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
     end
+    $loog.info("Checked #{total} issues in #{repo}")
     issue
   end
 end
