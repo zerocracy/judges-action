@@ -22,24 +22,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/octo'
-require 'fbe/overwrite'
 require 'fbe/regularly'
+require_relative '../../lib/incremate'
 
-start = Time.now
 Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
-  Dir[File.join(__dir__, 'average_*.rb')].each do |rb|
-    n = File.basename(rb).gsub(/\.rb$/, '')
-    next unless f[n].nil?
-    if Fbe.octo.off_quota
-      $loog.info('No GitHub quota left, it is time to stop')
-      break
-    end
-    if Time.now - start > 5 * 60
-      $loog.info('We are doing this for too long, time to stop')
-      break
-    end
-    require_relative rb
-    send(n, f).each { |k, v| f = Fbe.overwrite(f, k.to_s, v) }
-  end
+  Jp.incremate(f, __dir__, 'average')
 end

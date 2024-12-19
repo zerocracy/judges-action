@@ -22,9 +22,5 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/regularly'
-require_relative '../../lib/incremate'
-
-Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
-  Jp.incremate(f, __dir__, 'total')
-end
+# The module with supplementary features.
+module Jp; end

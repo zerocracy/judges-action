@@ -22,9 +22,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-require 'fbe/regularly'
-require_relative '../../lib/incremate'
+require 'fbe/octo'
+require 'fbe/overwrite'
+require_relative 'jp'
 
-Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
-  Jp.incremate(f, __dir__, 'total')
+# Incrementaly accumulates data into a fact, using Ruby scripts
+# found in the directory provided, by the prefix.
+def Jp.incremate(fact, dir, prefix)
+  start = Time.now
+  Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
+    n = File.basename(rb).gsub(/\.rb$/, '')
+    next unless fact[n].nil?
+    if Fbe.octo.off_quota
+      $loog.info('No GitHub quota left, it is time to stop')
+      break
+    end
+    if Time.now - start > 5 * 60
+      $loog.info('We are doing this for too long, time to stop')
+      break
+    end
+    require_relative rb
+    send(n, fact).each { |k, v| fact = Fbe.overwrite(fact, k.to_s, v) }
+  end
 end
