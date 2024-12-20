@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.0.61
+      - uses: zerocracy/judges-action@0.0.62
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
