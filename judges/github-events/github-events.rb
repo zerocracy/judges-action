@@ -30,6 +30,8 @@ require 'fbe/if_absent'
 require 'fbe/who'
 require 'fbe/issue'
 
+start = Time.now
+
 Fbe.iterate do
   as 'events-were-scanned'
   by '(plus 0 $before)'
@@ -302,7 +304,6 @@ Fbe.iterate do
     end
   end
 
-  start = Time.now
   over do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
     $loog.debug("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
@@ -316,7 +317,7 @@ Fbe.iterate do
         break
       end
       if Time.now - start > 5 * 60
-        $loog.debug("We are scanning GitHub events for #{start.ago} already, it's time to stop")
+        $loog.debug("We are scanning GitHub events for #{start.ago} already, it's time to stop at #{rname}")
         break
       end
       total += 1
