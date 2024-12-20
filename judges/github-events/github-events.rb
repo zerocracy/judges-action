@@ -302,6 +302,7 @@ Fbe.iterate do
     end
   end
 
+  start = Time.now
   over do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
     $loog.debug("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
@@ -312,6 +313,10 @@ Fbe.iterate do
     Fbe.octo.repository_events(repository).each_with_index do |json, idx|
       if !$options.max_events.nil? && idx >= $options.max_events
         $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
+        break
+      end
+      if Time.now - start > 5 * 60
+        $loog.debug("We are scanning GitHub events for #{start.ago} already, it's time to stop")
         break
       end
       total += 1
