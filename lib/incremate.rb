@@ -41,7 +41,7 @@ def Jp.incremate(fact, dir, prefix)
     return
   end
   start = Time.now
-  Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
+  Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
     unless fact[n].nil?
       $loog.info("#{n} is here: #{fact[n].first}")
