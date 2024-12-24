@@ -24,7 +24,7 @@ FROM ruby:3.3
 
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
-LABEL "version"="0.0.0"
+LABEL "version"="0.0.65"
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y curl=7.88.* jq=1.6* \
