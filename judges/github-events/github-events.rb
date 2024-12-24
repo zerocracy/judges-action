@@ -311,6 +311,7 @@ Fbe.iterate do
     total = 0
     detected = 0
     first = nil
+    rstart = Time.now
     Fbe.octo.repository_events(repository).each_with_index do |json, idx|
       if !$options.max_events.nil? && idx >= $options.max_events
         $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
@@ -342,15 +343,15 @@ Fbe.iterate do
         end
       end
     end
-    $loog.info("In #{rname}, detected #{detected} events out of #{total} scanned")
+    $loog.info("In #{rname}, detected #{detected} events out of #{total} scanned in #{rstart.ago}")
     if id.nil?
-      $loog.debug("No events found in #{rname}, the latest event_id remains ##{latest}")
+      $loog.debug("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
       latest
     elsif id <= latest || latest.zero?
-      $loog.debug("Finished scanning #{rname} correctly, next time will scan until ##{first}")
+      $loog.debug("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
       first
     else
-      $loog.debug("Scanning of #{rname} wasn't completed, next time will try again until ##{latest}")
+      $loog.debug("Scanning of #{rname} wasn't completed in #{rstart.ago}, next time will try again until ##{latest}")
       latest
     end
   end
