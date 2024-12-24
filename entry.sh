@@ -114,6 +114,7 @@ ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
     --summary \
+    --timeout=180 \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
     "${options[@]}" \

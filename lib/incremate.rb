@@ -36,10 +36,6 @@ require_relative 'jp'
 # @param [String] prefix The prefix to use for scripts (e.g. "total")
 # @return nil
 def Jp.incremate(fact, dir, prefix)
-  if Time.now - $start > 15 * 60
-    $loog.info('We are busy for too long already, won\'t run incremate')
-    return
-  end
   start = Time.now
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
