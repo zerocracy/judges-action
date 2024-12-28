@@ -23,7 +23,7 @@
 name: zerocracy
 'on':
   schedule:
-    - cron: '0 2,6,10,14,18,22 * * *'
+    - cron: '0 * * * *'
 concurrency:
   group: zerocracy
   cancel-in-progress: false
@@ -39,8 +39,6 @@ jobs:
           verbose: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*
-          options: |
-            max_events=1000
           factbase: zerocracy.fb
           cycles: 1
       - uses: zerocracy/pages-action@0.0.40
