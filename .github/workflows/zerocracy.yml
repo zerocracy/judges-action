@@ -41,7 +41,7 @@ jobs:
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: zerocracy.fb
           cycles: 1
-      - uses: zerocracy/pages-action@0.0.40
+      - uses: zerocracy/pages-action@0.0.41
         with:
           options: |
             github_token=${{ secrets.GITHUB_TOKEN }}
