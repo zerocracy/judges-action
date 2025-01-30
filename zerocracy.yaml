@@ -8,10 +8,10 @@
 - added: 8
   cycles: 1
   removed: 8
-  seconds: 408.839083173
+  seconds: 403.132405425
   version: 0.31.1
   what: judges-summary
-  when: 2025-01-30 20:12:27.283266924 Z
+  when: 2025-01-30 21:11:50.634770163 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -100652,54 +100652,6 @@
   where: github
   who: 526301
   why: Pushed 1618c188b to the default branch 'master' in yegor256/factbase
-- _id: 474199
-  _job: 13886
-  _time: 2025-01-30 11:20:20.288097483 Z
-  _version: 0.5.2/0.31.1/0.0.67
-  cost_of_qod:
-  - 26.17419571796884
-  - 16.11800332128553
-  - 19.329351455580113
-  - 3.630121063643354
-  - 3.48598158686649
-  - 2.1162974683544302
-  - 5.421069231982337
-  - 6.813358650731598
-  - 7.799424248510411
-  - 5.338809034907598
-  - 1.320841652587928
-  - 0.10220115742810787
-  - 0.5296817985639738
-  - 0.3300641267446247
-  - 0.17081947797567532
-  - 1.016053647632595
-  - -0.3742865163282493
-  - 0.0808472794890452
-  - -0.19317139131694594
-  - -3.1246948540181623
-  qod_per_day:
-  - 2.5488488282701915
-  - 2.924857143293144
-  - 3.037571429051574
-  - 7.988714286790978
-  - 9.58942857227318
-  - 7.222857143708444
-  - 7.2468571441813845
-  - 5.1160000008284054
-  - 4.267714286277028
-  - 4.174285714859865
-  - 9.301428572500205
-  - 11.182428573670734
-  - 14.564000002692676
-  - 12.1188571441293
-  - 12.544571429990324
-  - 8.436000001253376
-  - 7.633571429692055
-  - 7.068000001010452
-  - 5.91628571504418
-  - 1.463000000103871
-  what: learn-eva
-  when: 2025-01-30 11:20:02.931361883 Z
 - _id: 474207
   _time: 2025-01-30 12:10:02.567235946 Z
   _version: 0.5.0/0.31.1/
@@ -100981,55 +100933,6 @@
   when: 2025-01-28 05:36:42.000000000 Z
   where: github
   who: 526301
-- _id: 474350
-  _time: 2025-01-30 20:05:53.617374646 Z
-  _version: 0.5.0/0.31.1/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 474351
-  _time: 2025-01-30 20:06:07.201286802 Z
-  _version: 0.5.0/0.31.1/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 474352
-  _time: 2025-01-30 20:06:20.737584397 Z
-  _version: 0.5.0/0.31.1/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 474353
-  _time: 2025-01-30 20:06:34.315685213 Z
-  _version: 0.5.0/0.31.1/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 474354
-  _time: 2025-01-30 20:06:48.084975194 Z
-  _version: 0.5.0/0.31.1/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 474355
-  _time: 2025-01-30 20:07:01.580704408 Z
-  _version: 0.5.0/0.31.1/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 474356
-  _time: 2025-01-30 20:07:15.131612322 Z
-  _version: 0.5.0/0.31.1/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 474357
   _time: 2025-01-30 20:07:29.508711788 Z
   _version: 0.5.0/0.31.1/
@@ -101084,52 +100987,208 @@
   when: 2025-01-29 18:46:54.000000000 Z
   where: github
   who: 526301
-- _id: 474360
-  _time: 2025-01-30 20:10:29.322733988 Z
-  _version: 0.5.0/0.31.1/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
+- _id: 474370
+  _job: 13904
+  _time: 2025-01-30 20:15:17.801307665 Z
+  _version: 0.5.2/0.31.1/0.0.67
+  award: -16
+  commit: 6ad2e466f6d9833bca9085e545ba99bc5d1c0e4c
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/judges, the penalty amount is -16.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -16 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-240](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  href: https://github.com/yegor256/judges/commit/6ad2e466f6d9833bca9085e545ba99bc5d1c0e4c/#commitcomment-151970016
+  is_human: 1
+  repository: 799113787
+  what: push-to-master-was-punished
+  when: 2025-01-30 20:15:17.846299959 Z
   where: github
-- _id: 474364
-  _time: 2025-01-30 20:11:21.615817502 Z
+  who: 526301
+  why: Pushed 6ad2e466f to the default branch 'master' in yegor256/judges
+- _id: 474371
+  _job: 13904
+  _time: 2025-01-30 20:18:24.489363041 Z
+  _version: 0.5.2/0.31.1/0.0.67
+  cost_of_qod:
+  - 26.17419571796884
+  - 16.11800332128553
+  - 19.329351455580113
+  - 3.630121063643354
+  - 3.48598158686649
+  - 2.1162974683544302
+  - 5.421069231982337
+  - 6.813358650731598
+  - 7.799424248510411
+  - 5.338809034907598
+  - 1.320841652587928
+  - 0.10220115742810787
+  - 0.5296817985639738
+  - 0.3300641267446247
+  - 0.17081947797567532
+  - 1.016053647632595
+  - -0.3742865163282493
+  - 0.0808472794890452
+  - -0.19317139131694594
+  - -3.1246948540181623
+  qod_per_day:
+  - 2.5488488282701915
+  - 2.924857143293144
+  - 3.037571429051574
+  - 7.988714286790978
+  - 9.58942857227318
+  - 7.222857143708444
+  - 7.2468571441813845
+  - 5.1160000008284054
+  - 4.267714286277028
+  - 4.174285714859865
+  - 9.301428572500205
+  - 11.182428573670734
+  - 14.564000002692676
+  - 12.1188571441293
+  - 12.544571429990324
+  - 8.436000001253376
+  - 7.633571429692055
+  - 7.068000001010452
+  - 5.91628571504418
+  - 1.463000000103871
+  what: learn-eva
+  when: 2025-01-30 20:18:02.885667989 Z
+- _id: 474372
+  _time: 2025-01-30 21:05:23.459716646 Z
+  _version: 0.5.0/0.31.1/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 474373
+  _time: 2025-01-30 21:05:36.588489550 Z
+  _version: 0.5.0/0.31.1/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 474374
+  _time: 2025-01-30 21:05:49.621344016 Z
+  _version: 0.5.0/0.31.1/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 474375
+  _time: 2025-01-30 21:06:02.631221418 Z
+  _version: 0.5.0/0.31.1/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 474376
+  _time: 2025-01-30 21:06:15.751740593 Z
+  _version: 0.5.0/0.31.1/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 474377
+  _time: 2025-01-30 21:06:28.883267653 Z
   _version: 0.5.0/0.31.1/
   latest: 3
   repository: 849726475
-  what: labels-were-scanned
+  what: min-issue-was-found
   where: github
-- _id: 474365
-  _time: 2025-01-30 20:11:34.918764182 Z
+- _id: 474378
+  _time: 2025-01-30 21:06:42.268031662 Z
   _version: 0.5.0/0.31.1/
-  latest: 15
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 474379
+  _time: 2025-01-30 21:06:56.555757486 Z
+  _version: 0.5.0/0.31.1/
+  commit: bff76f729d6a563905c51df8af81124e0ebc0984
+  default_branch: master
+  details: 'A new Git push #22380535490 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 46041891279
+  event_type: PushEvent
+  is_human: 1
+  push_id: 22380535490
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-01-29 19:31:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 474380
+  _time: 2025-01-30 21:07:09.574416375 Z
+  _version: 0.5.0/0.31.1/
+  commit: a01ade17832d44e0d32f714d893c6691f4320633
+  default_branch: master
+  details: 'A new Git push #22379586410 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 46039931633
+  event_type: PushEvent
+  is_human: 1
+  push_id: 22379586410
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-01-29 18:29:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 474384
+  _time: 2025-01-30 21:10:34.539566896 Z
+  _version: 0.5.0/0.31.1/
+  latest: 16
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 474366
-  _time: 2025-01-30 20:11:48.121716169 Z
+- _id: 474385
+  _time: 2025-01-30 21:10:47.011647307 Z
   _version: 0.5.0/0.31.1/
-  latest: 84
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 474367
-  _time: 2025-01-30 20:12:01.336200254 Z
-  _version: 0.5.0/0.31.1/
-  latest: 116
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 474368
-  _time: 2025-01-30 20:12:13.939895438 Z
-  _version: 0.5.0/0.31.1/
-  latest: 5
+  latest: 6
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 474369
-  _time: 2025-01-30 20:12:27.048714108 Z
+- _id: 474386
+  _time: 2025-01-30 21:10:59.381151051 Z
   _version: 0.5.0/0.31.1/
-  latest: 5
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 474387
+  _time: 2025-01-30 21:11:12.093044786 Z
+  _version: 0.5.0/0.31.1/
+  latest: 6
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 474388
+  _time: 2025-01-30 21:11:24.783806444 Z
+  _version: 0.5.0/0.31.1/
+  latest: 2
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 474389
+  _time: 2025-01-30 21:11:37.711320282 Z
+  _version: 0.5.0/0.31.1/
+  latest: 149
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 474390
+  _time: 2025-01-30 21:11:50.390105475 Z
+  _version: 0.5.0/0.31.1/
+  latest: 86
+  repository: 802720676
   what: labels-were-scanned
   where: github
