@@ -27,7 +27,6 @@ AllCops:
   TargetRubyVersion: 3.2
   SuggestExtensions: false
   NewCops: enable
-
 Naming/FileName:
   Regex: '^[a-z0-9\-._]*$'
 Style/GlobalVars:
@@ -60,3 +59,7 @@ Naming/MethodParameterName:
   MinNameLength: 2
 Layout/MultilineAssignmentLayout:
   Enabled: true
+required:
+  - rubocop-rake
+  - rubocop-minitest
+  - rubocop-performance
