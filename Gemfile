@@ -38,4 +38,4 @@ gem 'rubocop-performance', '>0', require: false
 gem 'rubocop-rake', '>0', require: false
 gem 'simplecov', '0.22.0', require: false
 gem 'simplecov-cobertura', '~> 2.1', require: false
-gem 'webmock', '3.24.0', require: false
+gem 'webmock', '3.25.0', require: false
