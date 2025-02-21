@@ -33,10 +33,10 @@ Fbe.conclude do
     type = json[:type]
     if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
       f.is_human = 0
-      $loog.info("GitHub user ##{f.who} is actually a bot")
+      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot")
     else
       f.is_human = 1
-      $loog.info("GitHub user ##{f.who} is not a bot")
+      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is not a bot")
     end
   end
 end
