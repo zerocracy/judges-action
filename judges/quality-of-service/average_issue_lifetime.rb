@@ -26,7 +26,7 @@ def average_issue_lifetime(fact)
         end
     end
     ages.compact!
-    ret[prop] = ages.empty? ? 0 : ages.inject(&:+).to_f / ages.size
+    ret[prop] = ages.empty? ? 0 : ages.sum.to_f / ages.size
   end
   ret
 end

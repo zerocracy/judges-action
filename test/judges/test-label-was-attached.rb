@@ -40,7 +40,7 @@ class TestLabelWasAttached < Minitest::Test
     load_it('label-was-attached', fb)
     load(File.join(__dir__, '../../judges/label-was-attached/label-was-attached.rb'))
     f = fb.query('(eq what "label-was-attached")').each.to_a.first
-    assert(!f.nil?)
+    refute_nil(f)
     assert_equal(42, f.who)
     assert_equal('bug', f.label)
   end

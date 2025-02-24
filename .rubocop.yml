@@ -40,7 +40,9 @@ Naming/MethodParameterName:
   MinNameLength: 2
 Layout/MultilineAssignmentLayout:
   Enabled: true
-require:
+Minitest/EmptyLineBeforeAssertionMethods:
+  Enabled: false
+plugins:
   - rubocop-rake
   - rubocop-minitest
   - rubocop-performance

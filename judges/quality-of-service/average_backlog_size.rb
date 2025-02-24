@@ -25,5 +25,5 @@ def average_backlog_size(fact)
       issues << count
     end
   end
-  { average_backlog_size: issues.empty? ? 0 : issues.inject(&:+).to_f / issues.size }
+  { average_backlog_size: issues.empty? ? 0 : issues.sum.to_f / issues.size }
 end

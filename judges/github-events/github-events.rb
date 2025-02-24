@@ -61,7 +61,7 @@ Fbe.iterate do
     info = {}
     Fbe.octo.compare(repo, tag, fact.tag).then do |json|
       info[:commits] = json[:total_commits]
-      info[:hoc] = json[:files].map { |f| f[:changes] }.sum
+      info[:hoc] = json[:files].sum { |f| f[:changes] }
       info[:last_commit] = json[:commits].first[:sha]
     end
     info

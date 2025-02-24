@@ -10,6 +10,8 @@ require 'fbe/issue'
 
 start = Time.now
 
+badges = %w[bug enhancement question]
+
 Fbe.iterate do
   as 'labels-were-scanned'
   by "(agg (and (eq repository $repository) (eq what 'issue-was-opened') (gt issue $before)) (min issue))"
@@ -24,7 +26,7 @@ Fbe.iterate do
         end
         next unless te[:event] == 'labeled'
         badge = te[:label][:name]
-        next unless %w[bug enhancement question].include?(badge)
+        next unless badges.include?(badge)
         nn =
           Fbe.if_absent do |n|
             n.where = 'github'

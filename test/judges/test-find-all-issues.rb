@@ -162,7 +162,7 @@ class TestFindAllIssues < Minitest::Test
       f.who = 257_962
     end
     load_it('find-all-issues', fb)
-    assert_equal(6, fb.query('(always)').each.to_a.count)
+    assert_equal(6, fb.query('(always)').each.to_a.size)
     fb.query("(eq what 'min-issue-was-found')").each.to_a.first.then do |f|
       assert_equal('min-issue-was-found', f.what)
       assert_equal('github', f.where)

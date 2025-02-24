@@ -25,7 +25,7 @@ def average_release_hoc_size(fact)
   repo_releases.each do |repo, releases|
     releases.reverse.each_cons(2) do |first, last|
       Fbe.octo.compare(repo, first[:tag_name], last[:tag_name]).then do |json|
-        hocs << json[:files].map { |file| file[:changes] }.sum
+        hocs << json[:files].sum { |file| file[:changes] }
         commits << json[:total_commits]
       end
     end
