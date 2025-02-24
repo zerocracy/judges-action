@@ -31,13 +31,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.0.67
+      - uses: zerocracy/judges-action@0.0.68
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.0.41
+      - uses: zerocracy/pages-action@0.0.42
         with:
           factbase: foo.fb
           options: |
