@@ -59,15 +59,16 @@
 - {}
 - {}
 - {}
+- {}
 - added: 8
   cycles: 1
   deleted: 8
   error: 'Judge github-events stopped by timeout: execution expired'
   inserted: 8
-  seconds: 427.026574669
+  seconds: 403.250349441
   version: 0.32.0
   what: judges-summary
-  when: 2025-02-25 21:12:19.320350257 Z
+  when: 2025-02-25 22:12:03.463000770 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -104795,55 +104796,6 @@
   when: 2025-02-25 10:49:03.000000000 Z
   where: github
   who: 526301
-- _id: 481060
-  _time: 2025-02-25 21:05:29.725534612 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 481061
-  _time: 2025-02-25 21:05:44.842419626 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 481062
-  _time: 2025-02-25 21:05:59.841015810 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 481063
-  _time: 2025-02-25 21:06:15.339181072 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 481064
-  _time: 2025-02-25 21:06:30.595746994 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 481065
-  _time: 2025-02-25 21:06:45.794794422 Z
-  _version: 0.7.3/0.32.0/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 481066
-  _time: 2025-02-25 21:07:00.796646531 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
 - _id: 481067
   _time: 2025-02-25 21:08:31.111395615 Z
   _version: 0.7.3/0.32.0/
@@ -104858,52 +104810,153 @@
   when: 2025-02-25 05:04:22.000000000 Z
   where: github
   who: 41898282
-- _id: 481068
-  _time: 2025-02-25 21:10:17.685444561 Z
+- _id: 481077
+  _time: 2025-02-25 22:05:36.259529492 Z
   _version: 0.7.3/0.32.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
   where: github
-- _id: 481071
-  _time: 2025-02-25 21:11:01.668098244 Z
+- _id: 481078
+  _time: 2025-02-25 22:05:50.271779070 Z
   _version: 0.7.3/0.32.0/
-  latest: 6
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 481079
+  _time: 2025-02-25 22:06:04.137683506 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 481080
+  _time: 2025-02-25 22:06:17.883113198 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 481081
+  _time: 2025-02-25 22:06:31.936146526 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 481082
+  _time: 2025-02-25 22:06:45.843216824 Z
+  _version: 0.7.3/0.32.0/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 481083
+  _time: 2025-02-25 22:06:59.930282925 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 481084
+  _time: 2025-02-25 22:07:44.415892960 Z
+  _version: 0.7.3/0.32.0/
+  commit: 25fe7c5a0959e7f71115c3c00ee1411a0fcdd37a
+  default_branch: master
+  details: 'A new Git push #22844747855 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 46930164060
+  event_type: PushEvent
+  is_human: 1
+  push_id: 22844747855
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-02-25 10:47:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 481085
+  _time: 2025-02-25 22:08:26.683657480 Z
+  _version: 0.7.3/0.32.0/
+  details: The issue yegor256/judges#175 has been closed by @yegor256.
+  event_id: 46930155533
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 175
+  repository: 799113787
+  what: issue-was-closed
+  when: 2025-02-25 10:46:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 481086
+  _time: 2025-02-25 22:09:49.167745368 Z
+  _version: 0.7.3/0.32.0/
+  commits: 4
+  contributors:
+  - 526301
+  - 8086956
+  details: A new release '`repeat` option in YAML configs' has been published in yegor256/judges
+    by @rultor.
+  event_id: 46930032504
+  event_type: ReleaseEvent
+  hoc: 64
+  is_human: 0
+  last_commit: e8016a102c7b470dfcb85223384c8a39139cadc3
+  release: 202262172
+  repository: 799113787
+  tag: 0.34.0
+  what: release-published
+  when: 2025-02-25 10:43:44.000000000 Z
+  where: github
+  who: 8086956
+- _id: 481089
+  _time: 2025-02-25 22:10:42.212579730 Z
+  _version: 0.7.3/0.32.0/
+  latest: 7
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 481072
-  _time: 2025-02-25 21:11:16.733705083 Z
+- _id: 481090
+  _time: 2025-02-25 22:10:55.534852882 Z
+  _version: 0.7.3/0.32.0/
+  latest: 3
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 481091
+  _time: 2025-02-25 22:11:08.997911677 Z
+  _version: 0.7.3/0.32.0/
+  latest: 63
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 481092
+  _time: 2025-02-25 22:11:22.570217228 Z
   _version: 0.7.3/0.32.0/
   latest: 74
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 481073
-  _time: 2025-02-25 21:11:31.931304116 Z
-  _version: 0.7.3/0.32.0/
-  latest: 41
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 481074
-  _time: 2025-02-25 21:11:47.248401162 Z
-  _version: 0.7.3/0.32.0/
-  latest: 73
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 481075
-  _time: 2025-02-25 21:12:02.582460561 Z
+- _id: 481093
+  _time: 2025-02-25 22:11:36.310912697 Z
   _version: 0.7.3/0.32.0/
-  latest: 405
-  repository: 799177290
+  latest: 42
+  repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 481076
-  _time: 2025-02-25 21:12:19.044904457 Z
+- _id: 481094
+  _time: 2025-02-25 22:11:49.809391183 Z
   _version: 0.7.3/0.32.0/
-  latest: 62
-  repository: 820463873
+  latest: 77
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 481095
+  _time: 2025-02-25 22:12:03.202959244 Z
+  _version: 0.7.3/0.32.0/
+  latest: 0
+  repository: 799177290
   what: labels-were-scanned
   where: github
