@@ -9,7 +9,7 @@ require 'fbe/octo'
 require 'fbe/overwrite'
 require_relative 'jp'
 
-# Incrementaly accumulates data into a fact, using Ruby scripts
+# Incrementally accumulates data into a fact, using Ruby scripts
 # found in the directory provided, by the prefix.
 #
 # @param [Factbase::Fact] fact The fact to put data into (some data already there)

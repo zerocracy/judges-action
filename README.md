@@ -8,7 +8,7 @@
 
 **ATTENTION**: The repository is in active development right now. It is
 "work in progress" — most likely it won't work correctly if you use it "as is."
-If you are interested in this plugin, better wait for a few weeks until it's
+If you are interested in this plugin, better wait for a few weeks until its
 stable version 0.1.0 is released.
 
 First, get a free authentication token from
@@ -52,8 +52,8 @@ In the file, there is only one place that you should configure:
 the `repositories=...` should have a comma-separated list
 of repositories where your team works (instead of `...`).
 
-Once the file is added, GitHub will start running this job every ten
-minutes, collecting information about most important activities of
+Once the file is added, GitHub will start running this job hourly,
+collecting information about most important activities of
 your programmers. The plugin will give them awards for good things
 they do (like fixing bugs) and will also punish them (by deducting points)
 for bad things (like stale pull requests).
@@ -62,7 +62,7 @@ The plugin will also generate a summary `foo.html` file, which will
 be automatically deployed to the `gh-pages` branch. You can configure
 your GitHub repository to render the branch as a static website via
 [GitHub Pages](https://pages.github.com/). Thus,
-the summary page will be updated every ten minutes and you will see
+the summary page will be updated hourly and you will see
 who is the best performer in your team, similar to
 [what we see](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
 in our team.
