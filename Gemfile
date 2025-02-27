@@ -13,7 +13,7 @@ gem 'minitest', '5.25.4', require: false
 gem 'minitest-reporters', '1.7.1', require: false
 gem 'others', '>0'
 gem 'rake', '>=13'
-gem 'rubocop', '1.73.0', require: false
+gem 'rubocop', '1.73.1', require: false
 gem 'rubocop-minitest', '>0', require: false
 gem 'rubocop-performance', '>0', require: false
 gem 'rubocop-rake', '>0', require: false
