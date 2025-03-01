@@ -71,7 +71,9 @@ declare -A optionmap=(
 declare -a options=()
 while IFS= read -r o; do
     s=$(echo "${o}" | xargs)
-    if [ "${s}" = "" ]; then continue; fi
+    if [ "${s}" = "" ]; then
+        continue
+    fi
     k=$(echo "${s} "| cut -f1 -d '=')
     v=$(echo "${s}" | cut -f2- -d '=')
     if [[ "${k}" == vitals_url ]]; then
