@@ -151,15 +151,16 @@
 - {}
 - {}
 - {}
+- {}
 - added: 8
   cycles: 1
   deleted: 8
   error: 'Judge github-events stopped by timeout: execution expired'
   inserted: 8
-  seconds: 426.159802647
+  seconds: 409.746841546
   version: 0.32.0
   what: judges-summary
-  when: 2025-03-01 16:12:35.812304274 Z
+  when: 2025-03-01 17:11:41.926942069 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -105814,55 +105815,6 @@
   when: 2025-02-28 07:26:11.000000000 Z
   where: github
   who: 526301
-- _id: 482565
-  _time: 2025-03-01 16:05:47.962239592 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 482566
-  _time: 2025-03-01 16:06:04.179505261 Z
-  _version: 0.7.3/0.32.0/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 482567
-  _time: 2025-03-01 16:06:21.097693811 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 482568
-  _time: 2025-03-01 16:06:37.443035935 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 482569
-  _time: 2025-03-01 16:06:53.871036075 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 482570
-  _time: 2025-03-01 16:07:10.445543015 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 482571
-  _time: 2025-03-01 16:07:27.397507295 Z
-  _version: 0.7.3/0.32.0/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
 - _id: 482572
   _time: 2025-03-01 16:09:02.306801166 Z
   _version: 0.7.3/0.32.0/
@@ -105877,52 +105829,119 @@
   when: 2025-03-01 09:13:56.000000000 Z
   where: github
   who: 29139614
-- _id: 482574
-  _time: 2025-03-01 16:11:00.740910936 Z
+- _id: 482581
+  _time: 2025-03-01 17:05:08.161464928 Z
   _version: 0.7.3/0.32.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 482575
-  _time: 2025-03-01 16:11:16.382235518 Z
-  _version: 0.7.3/0.32.0/
-  latest: 5
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 482576
-  _time: 2025-03-01 16:11:32.001304282 Z
-  _version: 0.7.3/0.32.0/
-  latest: 40
+  latest: 1
   repository: 802720676
-  what: labels-were-scanned
+  what: min-issue-was-found
   where: github
-- _id: 482577
-  _time: 2025-03-01 16:11:47.870743519 Z
+- _id: 482582
+  _time: 2025-03-01 17:05:22.371889618 Z
   _version: 0.7.3/0.32.0/
-  latest: 104
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 482583
+  _time: 2025-03-01 17:05:36.829256541 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 482584
+  _time: 2025-03-01 17:05:51.347035200 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 482585
+  _time: 2025-03-01 17:06:05.770270446 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
   repository: 799113787
-  what: labels-were-scanned
+  what: min-issue-was-found
   where: github
-- _id: 482578
-  _time: 2025-03-01 16:12:03.683550709 Z
+- _id: 482586
+  _time: 2025-03-01 17:06:20.372149106 Z
   _version: 0.7.3/0.32.0/
-  latest: 74
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 482587
+  _time: 2025-03-01 17:06:35.247308679 Z
+  _version: 0.7.3/0.32.0/
+  latest: 1
   repository: 798641472
-  what: labels-were-scanned
+  what: min-issue-was-found
   where: github
-- _id: 482579
-  _time: 2025-03-01 16:12:19.527895440 Z
+- _id: 482588
+  _time: 2025-03-01 17:07:19.885570210 Z
   _version: 0.7.3/0.32.0/
-  latest: 57
+  commit: '01458a734bf353f50c14632d8c9f1c17df54a924'
+  default_branch: master
+  details: 'A new Git push #22925549744 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 47089951887
+  event_type: PushEvent
+  is_human: 1
+  push_id: 22925549744
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-03-01 05:07:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 482591
+  _time: 2025-03-01 17:10:18.017632855 Z
+  _version: 0.7.3/0.32.0/
+  latest: 58
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 482580
-  _time: 2025-03-01 16:12:35.551517236 Z
+- _id: 482592
+  _time: 2025-03-01 17:10:31.968943993 Z
   _version: 0.7.3/0.32.0/
-  latest: 14
+  latest: 27
   repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 482593
+  _time: 2025-03-01 17:10:46.024922529 Z
+  _version: 0.7.3/0.32.0/
+  latest: 41
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 482594
+  _time: 2025-03-01 17:10:59.986050195 Z
+  _version: 0.7.3/0.32.0/
+  latest: 75
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 482595
+  _time: 2025-03-01 17:11:13.883502667 Z
+  _version: 0.7.3/0.32.0/
+  latest: 6
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 482596
+  _time: 2025-03-01 17:11:27.875995238 Z
+  _version: 0.7.3/0.32.0/
+  latest: 106
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 482597
+  _time: 2025-03-01 17:11:41.663419342 Z
+  _version: 0.7.3/0.32.0/
+  latest: 0
+  repository: 849726475
   what: labels-were-scanned
   where: github
