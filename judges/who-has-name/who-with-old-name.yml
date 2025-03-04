@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  TODAY: 2025-03-03T00:00:00
+input:
+  -
+    _id: 1
+    where: github
+    what: bug-was-resolved
+    who: 4444
+    issue: 42
+    repository: 100
+    when: 2024-01-01T03:15:45Z
+  -
+    _id: 2
+    where: github
+    what: who-has-name
+    who: 4444
+    name: john-travolta
+    when: 2024-03-01T00:00:00
+expected:
+  - /fb[count(f)=2]
+  - /fb/f[_id=2 and name='torvalds']
