@@ -38,7 +38,7 @@ Fbe.fb.query(
     (eq what 'who-has-name')
     (eq where 'github')
     (exists who)
-    (lt when #{(Time.now - (5 * 24 * 60 * 60)).utc.iso8601}))"
+    (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days')))"
 ).each.to_a.each do |f|
   Fbe.overwrite(f, 'name', name_of(f.who))
 end

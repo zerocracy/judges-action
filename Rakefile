@@ -7,6 +7,8 @@ require 'rubygems'
 require 'rake'
 require 'rake/clean'
 
+ENV['RACK_RUN'] = 'true'
+
 task default: %i[clean test judges rubocop]
 
 require 'rake/testtask'

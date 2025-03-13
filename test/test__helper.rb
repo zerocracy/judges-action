@@ -23,7 +23,7 @@ class Minitest::Test
     $local = {}
     $judge = judge
     $options = options
-    $loog = Loog::NULL
+    $loog = ENV['RACK_RUN'] ? Loog::NULL : Loog::VERBOSE
     $start = Time.now
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end

@@ -4,13 +4,12 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'fbe/octo'
 require 'fbe/github_graph'
-require 'loog'
+require 'fbe/octo'
 require 'json'
-require 'minitest/autorun'
-require 'webmock/minitest'
 require 'judges/options'
+require 'loog'
+require 'webmock/minitest'
 require_relative '../test__helper'
 
 # Test.

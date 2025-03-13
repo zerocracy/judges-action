@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (8.0.1)
+    activesupport (8.0.2)
       base64
       benchmark (>= 0.3)
       bigdecimal
@@ -48,7 +48,7 @@ GEM
       tago (> 0)
     ethon (0.16.0)
       ffi (>= 1.15.0)
-    factbase (0.8.0)
+    factbase (0.9.1)
       backtrace (>= 0.4.0)
       decoor (>= 0.0.1)
       json (~> 2.7)
@@ -69,11 +69,11 @@ GEM
       net-http (>= 0.5.0)
     faraday-retry (2.2.1)
       faraday (~> 2.0)
-    fbe (0.1.0)
+    fbe (0.2.1)
       backtrace (~> 0)
       baza.rb (~> 0)
       decoor (~> 0)
-      factbase (>= 0.7.4)
+      factbase (>= 0.9.1)
       faraday (~> 2)
       faraday-http-cache (~> 2)
       faraday-multipart (~> 1)
@@ -92,7 +92,7 @@ GEM
     fiber-storage (1.0.0)
     gli (2.22.2)
       ostruct
-    graphql (2.4.11)
+    graphql (2.4.13)
       base64
       fiber-storage
       logger
@@ -103,13 +103,13 @@ GEM
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     iri (0.10.0)
-    json (2.10.1)
-    judges (0.36.2)
+    json (2.10.2)
+    judges (0.36.3)
       backtrace (~> 0)
       baza.rb (~> 0)
       concurrent-ruby (~> 1.2)
       elapsed (~> 0)
-      factbase (>= 0.7.5)
+      factbase (>= 0.9.1)
       gli (~> 2.21)
       iri (~> 0)
       loog (~> 0)
@@ -226,9 +226,9 @@ PLATFORMS
 
 DEPENDENCIES
   decoor (> 0)
-  factbase (>= 0.8.0)
-  fbe (>= 0.0.86)
-  judges (>= 0.36.2)
+  factbase (>= 0.9.1)
+  fbe (>= 0.2.1)
+  judges (>= 0.36.3)
   minitest (= 5.25.4)
   minitest-reporters (= 1.7.1)
   others (> 0)

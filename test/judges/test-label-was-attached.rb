@@ -4,11 +4,11 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'loog'
 require 'json'
-require 'minitest/autorun'
-require 'webmock/minitest'
 require 'judges/options'
+require 'loog'
+require 'webmock/minitest'
+require_relative '../test__helper'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)

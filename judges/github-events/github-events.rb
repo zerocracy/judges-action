@@ -33,12 +33,13 @@ Fbe.iterate do
       tag = Fbe.octo.release(
         "https://api.github.com/repos/#{repo}/releases/#{fact.release_id}"
       ).fetch(:tag_name, nil)
+      $loog.debug("The release ##{fact.release_id} has this tag: #{tag.inspect}")
     end
     tag
   end
 
   def self.fetch_contributors(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
+    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last
     tag = fetch_tag(last, repo)
     contributors = Set.new
     if tag
@@ -51,11 +52,12 @@ Fbe.iterate do
         contributors << contributor[:id]
       end
     end
+    $loog.debug("The repository ##{fact.repository} has #{contributors.count} contributors")
     contributors.to_a
   end
 
   def self.fetch_release_info(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
+    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last
     tag = fetch_tag(last, repo)
     tag ||= find_first_commit(repo)[:sha]
     info = {}
@@ -64,6 +66,7 @@ Fbe.iterate do
       info[:hoc] = json[:files].sum { |f| f[:changes] }
       info[:last_commit] = json[:commits].first[:sha]
     end
+    $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
   end
 
@@ -74,6 +77,7 @@ Fbe.iterate do
       commits = Fbe.octo.commits(repo, sha: last[:sha])
       last = commits.last
     end
+    $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last
   end
 
@@ -172,6 +176,7 @@ Fbe.iterate do
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{rname}, " \
         "made by #{Fbe.who(fact)} (default branch is '#{fact.default_branch}'), " \
         'not associated with any pull request.'
+      $loog.debug("New PushEvent ##{json[:payload][:push_id]} recorded")
 
     when 'PullRequestEvent'
       pl = json[:payload][:pull_request]
@@ -181,6 +186,7 @@ Fbe.iterate do
         fact.what = 'pull-was-opened'
         fact.branch = pl[:head][:ref]
         fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
+        $loog.debug("New PR #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
@@ -191,6 +197,7 @@ Fbe.iterate do
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
+        $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       else
         skip_event(json)
       end
@@ -204,7 +211,7 @@ Fbe.iterate do
           '(eq what "pull-was-reviewed") ' \
           "(eq who #{fact.who}) " \
           "(eq issue #{json[:payload][:pull_request][:number]}))"
-        ).each.last
+        ).each.to_a.last
           skip_event(json)
         end
         skip_event(json) unless json[:payload][:review][:state] == 'approved'
@@ -220,6 +227,7 @@ Fbe.iterate do
           "The pull request #{Fbe.issue(fact)} " \
           "has been reviewed by #{Fbe.who(fact)} " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
+        $loog.debug("PR #{Fbe.issue(fact)} was reviewed by #{Fbe.who(fact)}")
       else
         skip_event(json)
       end
@@ -230,9 +238,11 @@ Fbe.iterate do
       when 'closed'
         fact.what = 'issue-was-closed'
         fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
+        $loog.debug("Issue #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       when 'opened'
         fact.what = 'issue-was-opened'
         fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
+        $loog.debug("Issue #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       else
         skip_event(json)
       end
@@ -249,6 +259,7 @@ Fbe.iterate do
         fact.details =
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
           "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
+        $loog.debug("Issue comment posted to #{Fbe.issue(fact)} by #{Fbe.who(fact)}")
       end
       skip_event(json)
 
@@ -264,6 +275,7 @@ Fbe.iterate do
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
           "in #{rname} by #{Fbe.who(fact)}."
+        $loog.debug("Release published by #{Fbe.who(fact)}")
       else
         skip_event(json)
       end
@@ -276,6 +288,7 @@ Fbe.iterate do
         fact.details =
           "A new tag '#{fact.tag}' has been created " \
           "in #{rname} by #{Fbe.who(fact)}."
+        $loog.debug("Tag #{fact.tag.inspect} created by #{Fbe.who(fact)}")
       else
         skip_event(json)
       end
