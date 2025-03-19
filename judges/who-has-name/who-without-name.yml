@@ -15,4 +15,4 @@ input:
     when: 2024-01-01T03:15:45Z
 expected:
   - /fb[count(f)=2]
-  - /fb/f[who=4444 and name='torvalds']
+  - /fb/f[who=4444 and name='torvalds' and what='who-has-name']

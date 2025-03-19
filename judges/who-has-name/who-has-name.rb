@@ -20,13 +20,15 @@ Fbe.fb.query(
   "(and
     (eq where 'github')
     (exists who)
+    (unique who)
     (empty
       (and
         (eq what '#{$judge}')
         (eq who $who)
         (eq where $where))))"
-).each.to_a.each do |f|
+).each do |f|
   n = Fbe.fb.insert
+  n.what = $judge
   n.who = f.who
   n.where = f.where
   n.when = Time.now
@@ -39,6 +41,6 @@ Fbe.fb.query(
     (eq where 'github')
     (exists who)
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days')))"
-).each.to_a.each do |f|
+).each do |f|
   Fbe.overwrite(f, 'name', name_of(f.who))
 end
