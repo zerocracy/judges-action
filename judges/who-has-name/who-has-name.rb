@@ -21,11 +21,10 @@ Fbe.fb.query(
     (eq where 'github')
     (exists who)
     (unique who)
-    (empty
-      (and
-        (eq what '#{$judge}')
-        (eq who $who)
-        (eq where $where))))"
+    (empty (and
+      (eq who $who)
+      (eq what '#{$judge}')
+      (eq where $where))))"
 ).each do |f|
   n = Fbe.fb.insert
   n.what = $judge
