@@ -283,10 +283,10 @@
   deleted: 8
   error: 'GET https://api.github.com/user/13273243: 404 - Not Found // See: https://docs.github.com/rest'
   inserted: 8
-  seconds: 83.325162055
+  seconds: 72.835760635
   version: 0.36.5
   what: judges-summary
-  when: 2025-03-21 22:06:33.201940519 Z
+  when: 2025-03-21 23:06:32.547162858 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -115081,76 +115081,6 @@
   qod_per_day: 5.261714286182081
   what: learn-eva
   when: 2025-03-21 19:12:16.025811733 Z
-- _id: 491295
-  _time: 2025-03-21 22:05:13.173351181 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 491296
-  _time: 2025-03-21 22:05:14.309309939 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 491297
-  _time: 2025-03-21 22:05:15.425053420 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 491298
-  _time: 2025-03-21 22:05:16.874273423 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 491299
-  _time: 2025-03-21 22:05:17.810829241 Z
-  _version: 0.9.5/0.36.5/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 491300
-  _time: 2025-03-21 22:05:18.803534353 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 491301
-  _time: 2025-03-21 22:05:19.956752702 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 491302
-  _time: 2025-03-21 22:05:20.742294514 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47694876404
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 491303
-  _time: 2025-03-21 22:05:22.046216575 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47779554107
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 491304
-  _time: 2025-03-21 22:05:22.483670919 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47770150356
-  repository: 849726475
-  what: events-were-scanned
-  where: github
 - _id: 491305
   _time: 2025-03-21 22:05:24.490185205 Z
   _version: 0.9.5/0.36.5/
@@ -115171,83 +115101,169 @@
   repository: 799177290
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2025-03-21 11:02:38.000000000 Z
+  when: &105 2025-03-21 11:02:38.000000000 Z
   where: github
   who: 526301
-- _id: 491306
-  _time: 2025-03-21 22:05:31.045599921 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47817396903
+- _id: 491418
+  _job: 15860
+  _time: 2025-03-21 22:12:03.442470594 Z
+  _version: 0.9.5/0.38.1/0.0.73
+  comments: 0
+  details: The pull request zerocracy/judges-action#506 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 4 hours of being in review and 0 comments.
+  hoc: 2
+  issue: 506
+  merger: 526301
   repository: 799177290
-  what: events-were-scanned
+  seconds: 16463
+  what: code-was-contributed
+  when: *105
   where: github
-- _id: 491307
-  _time: 2025-03-21 22:05:32.053881292 Z
+  who: 41898282
+- _id: 491419
+  _time: 2025-03-21 23:05:22.454817956 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 491420
+  _time: 2025-03-21 23:05:23.415965540 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 491421
+  _time: 2025-03-21 23:05:24.457643056 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 491422
+  _time: 2025-03-21 23:05:25.447413763 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 491423
+  _time: 2025-03-21 23:05:26.746431025 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 491424
+  _time: 2025-03-21 23:05:27.691095120 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 491425
+  _time: 2025-03-21 23:05:28.440956333 Z
+  _version: 0.9.5/0.36.5/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 491426
+  _time: 2025-03-21 23:05:29.622427989 Z
   _version: 0.9.5/0.36.5/
   latest: 47764275603
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 491308
-  _time: 2025-03-21 22:05:32.832424988 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47684577285
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 491309
-  _time: 2025-03-21 22:05:34.186354869 Z
+- _id: 491427
+  _time: 2025-03-21 23:05:30.869531391 Z
   _version: 0.9.5/0.36.5/
   latest: 47781592563
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 491319
-  _time: 2025-03-21 22:05:39.859419535 Z
+- _id: 491428
+  _time: 2025-03-21 23:05:32.389381990 Z
+  _version: 0.9.5/0.36.5/
+  latest: 47817558403
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 491429
+  _time: 2025-03-21 23:05:32.962647135 Z
+  _version: 0.9.5/0.36.5/
+  latest: 47684577285
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 491430
+  _time: 2025-03-21 23:05:33.319736472 Z
+  _version: 0.9.5/0.36.5/
+  latest: 47694876404
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 491431
+  _time: 2025-03-21 23:05:33.700851265 Z
+  _version: 0.9.5/0.36.5/
+  latest: 47770150356
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 491432
+  _time: 2025-03-21 23:05:34.693332742 Z
+  _version: 0.9.5/0.36.5/
+  latest: 47779554107
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 491442
+  _time: 2025-03-21 23:05:39.846108759 Z
   _version: 0.9.5/0.36.5/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 491373
-  _time: 2025-03-21 22:06:07.816936339 Z
+- _id: 491500
+  _time: 2025-03-21 23:06:07.867828537 Z
   _version: 0.9.5/0.36.5/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 491395
-  _time: 2025-03-21 22:06:20.075447134 Z
+- _id: 491541
+  _time: 2025-03-21 23:06:28.760310924 Z
   _version: 0.9.5/0.36.5/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 491414
-  _time: 2025-03-21 22:06:30.067146111 Z
-  _version: 0.9.5/0.36.5/
-  latest: 135
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 491415
-  _time: 2025-03-21 22:06:30.528953138 Z
-  _version: 0.9.5/0.36.5/
-  latest: 25
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 491416
-  _time: 2025-03-21 22:06:30.998789378 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47
+  latest: 73
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 491417
-  _time: 2025-03-21 22:06:31.494987253 Z
+- _id: 491542
+  _time: 2025-03-21 23:06:29.203266407 Z
   _version: 0.9.5/0.36.5/
-  latest: 57
+  latest: 31
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 491543
+  _time: 2025-03-21 23:06:29.921315281 Z
+  _version: 0.9.5/0.36.5/
+  latest: 194
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 491544
+  _time: 2025-03-21 23:06:30.417471533 Z
+  _version: 0.9.5/0.36.5/
+  latest: 130
   repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 491545
+  _time: 2025-03-21 23:06:30.838373173 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48
+  repository: 798641472
   what: labels-were-scanned
   where: github
