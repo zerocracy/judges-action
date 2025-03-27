@@ -283,10 +283,10 @@
   deleted: 8
   error: 'GET https://api.github.com/user/13273243: 404 - Not Found // See: https://docs.github.com/rest'
   inserted: 8
-  seconds: 117.788874662
+  seconds: 100.688822685
   version: 0.36.5
   what: judges-summary
-  when: 2025-03-26 23:07:20.914146142 Z
+  when: 2025-03-27 00:23:34.978613858 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -115751,69 +115751,6 @@
   when: *112
   where: github
   who: 29139614
-- _id: 505830
-  _time: 2025-03-26 23:05:27.114611659 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 505831
-  _time: 2025-03-26 23:05:28.220914880 Z
-  _version: 0.9.5/0.36.5/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 505832
-  _time: 2025-03-26 23:05:29.898240666 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 505833
-  _time: 2025-03-26 23:05:31.202660951 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 505834
-  _time: 2025-03-26 23:05:32.550372146 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 505835
-  _time: 2025-03-26 23:05:33.740595080 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 505836
-  _time: 2025-03-26 23:05:35.046053503 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 505837
-  _time: 2025-03-26 23:05:35.847096582 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47999661728
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 505838
-  _time: 2025-03-26 23:05:37.745923152 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48004802893
-  repository: 799177290
-  what: events-were-scanned
-  where: github
 - _id: 505839
   _time: 2025-03-26 23:05:39.804818870 Z
   _version: 0.9.5/0.36.5/
@@ -115834,90 +115771,218 @@
   repository: 802720676
   succeeded_builds: 12
   what: pull-was-merged
-  when: 2025-03-26 17:55:14.000000000 Z
+  when: &113 2025-03-26 17:55:14.000000000 Z
   where: github
   who: 8086956
-- _id: 505840
-  _time: 2025-03-26 23:06:00.338017451 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48002295419
+- _id: 505958
+  _job: 16130
+  _time: 2025-03-26 23:13:07.067077106 Z
+  _version: 0.9.5/0.38.1/0.0.73
+  comments: 2
+  details: The pull request zerocracy/pages-action#231 with 16 HoC created by @renovate[bot]
+    was merged by @rultor after 1 hours of being in review and 2 comments.
+  hoc: 16
+  issue: 231
+  merger: 8086956
   repository: 802720676
-  what: events-were-scanned
+  seconds: 7092
+  what: code-was-contributed
+  when: *113
   where: github
-- _id: 505841
-  _time: 2025-03-26 23:06:01.358281569 Z
+  who: 29139614
+- _id: 505959
+  _time: 2025-03-27 00:21:57.857246790 Z
   _version: 0.9.5/0.36.5/
-  latest: 47899603505
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 505960
+  _time: 2025-03-27 00:21:59.191662313 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 505961
+  _time: 2025-03-27 00:22:00.266272347 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 505962
+  _time: 2025-03-27 00:22:01.211499226 Z
+  _version: 0.9.5/0.36.5/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 505963
+  _time: 2025-03-27 00:22:02.463798407 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 505964
+  _time: 2025-03-27 00:22:03.513692686 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 505965
+  _time: 2025-03-27 00:22:04.586455030 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 505966
+  _time: 2025-03-27 00:22:05.923796559 Z
+  _version: 0.9.5/0.36.5/
+  branch: renovate/rubocop-1.x
+  details: The pull request yegor256/judges#191 has been opened by @renovate[bot].
+  event_id: 48001998947
+  event_type: PullRequestEvent
+  issue: 191
+  repository: 799113787
+  what: pull-was-opened
+  when: 2025-03-26 17:47:57.000000000 Z
+  where: github
+  who: 29139614
+- _id: 505967
+  _time: 2025-03-27 00:22:06.244002534 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48001998947
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 505842
-  _time: 2025-03-26 23:06:02.305623000 Z
-  _version: 0.9.5/0.36.5/
-  latest: 47996534096
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 505843
-  _time: 2025-03-26 23:06:02.925575592 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48000276132
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 505844
-  _time: 2025-03-26 23:06:04.802467538 Z
+- _id: 505968
+  _time: 2025-03-27 00:22:07.541652632 Z
   _version: 0.9.5/0.36.5/
   latest: 48003246628
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 505855
-  _time: 2025-03-26 23:06:11.753992254 Z
+- _id: 505969
+  _time: 2025-03-27 00:22:08.959515849 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48002295419
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 505970
+  _time: 2025-03-27 00:22:10.032117298 Z
+  _version: 0.9.5/0.36.5/
+  branch: renovate/rubocop-1.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/swarm-template#55 has been closed by @rultor,
+    with 10 HoC and 2 comments.
+  event_id: 48002398887
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 10
+  issue: 55
+  repository: 849726475
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2025-03-26 17:58:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 505971
+  _time: 2025-03-27 00:22:27.666115336 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48002439377
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 505972
+  _time: 2025-03-27 00:22:29.134536701 Z
+  _version: 0.9.5/0.36.5/
+  branch: renovate/rubocop-1.x
+  details: The pull request zerocracy/judges-action#508 has been opened by @renovate[bot].
+  event_id: 48006807619
+  event_type: PullRequestEvent
+  issue: 508
+  repository: 799177290
+  what: pull-was-opened
+  when: 2025-03-26 20:08:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 505973
+  _time: 2025-03-27 00:22:29.464417091 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48006807619
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 505974
+  _time: 2025-03-27 00:22:30.252549734 Z
+  _version: 0.9.5/0.36.5/
+  latest: 47996534096
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 505975
+  _time: 2025-03-27 00:22:30.618197235 Z
+  _version: 0.9.5/0.36.5/
+  latest: 47999661728
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 505983
+  _time: 2025-03-27 00:22:35.271453530 Z
   _version: 0.9.5/0.36.5/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 505910
-  _time: 2025-03-26 23:06:46.643400852 Z
+- _id: 506027
+  _time: 2025-03-27 00:23:01.850351382 Z
+  _version: 0.9.5/0.36.5/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 506038
+  _time: 2025-03-27 00:23:08.145996423 Z
   _version: 0.9.5/0.36.5/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 505953
-  _time: 2025-03-26 23:07:13.253137527 Z
+- _id: 506074
+  _time: 2025-03-27 00:23:29.335204258 Z
   _version: 0.9.5/0.36.5/
-  latest: 31
-  repository: 802720676
+  latest: 74
+  repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 505954
-  _time: 2025-03-26 23:07:13.840520005 Z
+- _id: 506075
+  _time: 2025-03-27 00:23:29.832306605 Z
   _version: 0.9.5/0.36.5/
-  latest: 73
+  latest: 105
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 505955
-  _time: 2025-03-26 23:07:14.695756163 Z
+- _id: 506076
+  _time: 2025-03-27 00:23:30.519460817 Z
   _version: 0.9.5/0.36.5/
-  latest: 194
+  latest: 239
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 505956
-  _time: 2025-03-26 23:07:15.345173393 Z
+- _id: 506077
+  _time: 2025-03-27 00:23:31.023224352 Z
   _version: 0.9.5/0.36.5/
-  latest: 130
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 505957
-  _time: 2025-03-26 23:07:15.936768307 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48
-  repository: 798641472
+  latest: 73
+  repository: 802720676
   what: labels-were-scanned
   where: github
