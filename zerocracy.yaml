@@ -283,10 +283,10 @@
   deleted: 8
   error: 'GET https://api.github.com/user/13273243: 404 - Not Found // See: https://docs.github.com/rest'
   inserted: 8
-  seconds: 100.108901358
+  seconds: 91.612277336
   version: 0.36.5
   what: judges-summary
-  when: 2025-03-29 21:06:40.809856167 Z
+  when: 2025-03-29 22:06:30.672856297 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -116828,76 +116828,6 @@
   when: *120
   where: github
   who: 29139614
-- _id: 512518
-  _time: 2025-03-29 21:05:03.676274814 Z
-  _version: 0.9.5/0.36.5/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 512519
-  _time: 2025-03-29 21:05:04.650969089 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 512520
-  _time: 2025-03-29 21:05:05.698894407 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 512521
-  _time: 2025-03-29 21:05:06.786872086 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 512522
-  _time: 2025-03-29 21:05:07.815302810 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 512523
-  _time: 2025-03-29 21:05:09.219832515 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 512524
-  _time: 2025-03-29 21:05:10.356346040 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 512525
-  _time: 2025-03-29 21:05:11.520210371 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48102146123
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 512526
-  _time: 2025-03-29 21:05:12.637888987 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48021786860
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 512527
-  _time: 2025-03-29 21:05:14.235500662 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48106675338
-  repository: 799177290
-  what: events-were-scanned
-  where: github
 - _id: 512528
   _time: 2025-03-29 21:05:16.052218685 Z
   _version: 0.9.5/0.36.5/
@@ -116918,7 +116848,7 @@
   repository: 802720676
   succeeded_builds: 12
   what: pull-was-merged
-  when: 2025-03-29 07:00:20.000000000 Z
+  when: &121 2025-03-29 07:00:20.000000000 Z
   where: github
   who: 8086956
 - _id: 512529
@@ -116934,27 +116864,6 @@
   when: 2025-03-29 05:44:21.000000000 Z
   where: github
   who: 29139614
-- _id: 512530
-  _time: 2025-03-29 21:05:32.883739457 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48103614593
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 512531
-  _time: 2025-03-29 21:05:33.459940422 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48022894745
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 512532
-  _time: 2025-03-29 21:05:34.194887987 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48022559851
-  repository: 799113787
-  what: events-were-scanned
-  where: github
 - _id: 512533
   _time: 2025-03-29 21:05:34.744503266 Z
   _version: 0.9.5/0.36.5/
@@ -117028,20 +116937,6 @@
   when: 2025-03-29 02:56:01.000000000 Z
   where: github
   who: 526301
-- _id: 512538
-  _time: 2025-03-29 21:05:36.774006942 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48101396236
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 512546
-  _time: 2025-03-29 21:05:41.123730914 Z
-  _version: 0.9.5/0.36.5/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
 - _id: 512612
   _time: 2025-03-29 21:06:18.100035416 Z
   _version: 0.9.5/0.36.5/
@@ -117053,45 +116948,302 @@
   when: 2025-03-29 02:56:00.000000000 Z
   where: github
   who: 526301
-- _id: 512619
-  _time: 2025-03-29 21:06:21.319931932 Z
+- _id: 512650
+  _job: 16306
+  _time: 2025-03-29 21:11:29.777403519 Z
+  _version: 0.9.5/0.38.1/0.0.73
+  comments: 2
+  details: The pull request zerocracy/pages-action#233 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 1 hours of being in review and 2 comments.
+  hoc: 4
+  issue: 233
+  merger: 8086956
+  repository: 802720676
+  seconds: 4559
+  what: code-was-contributed
+  when: *121
+  where: github
+  who: 29139614
+- _id: 512651
+  _time: 2025-03-29 22:05:01.864763216 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 512652
+  _time: 2025-03-29 22:05:02.630962920 Z
+  _version: 0.9.5/0.36.5/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 512653
+  _time: 2025-03-29 22:05:03.564876307 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 512654
+  _time: 2025-03-29 22:05:04.548065465 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 512655
+  _time: 2025-03-29 22:05:05.797284592 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 512656
+  _time: 2025-03-29 22:05:06.653919125 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 512657
+  _time: 2025-03-29 22:05:07.564974157 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 512658
+  _time: 2025-03-29 22:05:08.678653729 Z
+  _version: 0.9.5/0.36.5/
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/swarm-template#57 has been closed by @rultor,
+    with 4 HoC and 2 comments.
+  event_id: 48103602753
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 4
+  issue: 57
+  repository: 849726475
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2025-03-29 07:00:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 512659
+  _time: 2025-03-29 22:05:22.294428310 Z
+  _version: 0.9.5/0.36.5/
+  branch: renovate/fbe-0.x-lockfile
+  details: The pull request zerocracy/swarm-template#57 has been opened by @renovate[bot].
+  event_id: 48103387446
+  event_type: PullRequestEvent
+  issue: 57
+  repository: 849726475
+  what: pull-was-opened
+  when: 2025-03-29 06:38:01.000000000 Z
+  where: github
+  who: 29139614
+- _id: 512660
+  _time: 2025-03-29 22:05:22.528840185 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48103612863
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 512661
+  _time: 2025-03-29 22:05:23.156866405 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48102146123
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 512662
+  _time: 2025-03-29 22:05:24.156408013 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48021786860
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 512663
+  _time: 2025-03-29 22:05:25.142575801 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48103614593
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 512664
+  _time: 2025-03-29 22:05:25.855643337 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48022559851
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 512665
+  _time: 2025-03-29 22:05:26.928223892 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48107376223
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 512666
+  _time: 2025-03-29 22:05:27.460898929 Z
+  _version: 0.9.5/0.36.5/
+  details: The issue zerocracy/baza.rb#48 has been closed by @yegor256.
+  event_id: 48102232274
+  event_type: IssuesEvent
+  issue: 48
+  repository: 840215648
+  what: issue-was-closed
+  when: 2025-03-29 04:36:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 512667
+  _time: 2025-03-29 22:05:27.879590959 Z
+  _version: 0.9.5/0.36.5/
+  commits: 3
+  contributors:
+  - 526301
+  - 8086956
+  details: A new release '' has been published in zerocracy/baza.rb by @rultor.
+  event_id: 48102197956
+  event_type: ReleaseEvent
+  hoc: 291
+  last_commit: 7c5435dcfed0b8148b97d7fe39bdd30d8acd8890
+  release: 209127833
+  repository: 840215648
+  tag: 0.0.12
+  what: release-published
+  when: 2025-03-29 04:33:07.000000000 Z
+  where: github
+  who: 8086956
+- _id: 512668
+  _time: 2025-03-29 22:05:28.436289394 Z
+  _version: 0.9.5/0.36.5/
+  details: A new tag '0.0.12' has been created in zerocracy/baza.rb by @rultor.
+  event_id: 48102191045
+  event_type: CreateEvent
+  repository: 840215648
+  tag: 0.0.12
+  what: tag-was-created
+  when: 2025-03-29 04:32:18.000000000 Z
+  where: github
+  who: 8086956
+- _id: 512669
+  _time: 2025-03-29 22:05:28.792132564 Z
+  _version: 0.9.5/0.36.5/
+  commit: 9f04b981a90751660919e8621c78b14a631cf31d
+  default_branch: master
+  details: 'A new Git push #23450553831 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48102135649
+  event_type: PushEvent
+  push_id: 23450553831
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-03-29 04:26:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 512670
+  _time: 2025-03-29 22:05:29.080904659 Z
+  _version: 0.9.5/0.36.5/
+  commit: 7c5435dcfed0b8148b97d7fe39bdd30d8acd8890
+  default_branch: master
+  details: 'A new Git push #23450526374 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48102095103
+  event_type: PushEvent
+  push_id: 23450526374
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-03-29 04:21:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 512671
+  _time: 2025-03-29 22:05:29.385452189 Z
+  _version: 0.9.5/0.36.5/
+  details: The issue zerocracy/baza.rb#48 has been opened by @yegor256.
+  event_id: 48101980859
+  event_type: IssuesEvent
+  issue: 48
+  repository: 840215648
+  what: issue-was-opened
+  when: 2025-03-29 04:08:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 512672
+  _time: 2025-03-29 22:05:29.595071826 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48102232274
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 512684
+  _time: 2025-03-29 22:05:35.584146051 Z
+  _version: 0.9.5/0.36.5/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 512752
+  _time: 2025-03-29 22:06:09.975846647 Z
+  _version: 0.9.5/0.36.5/
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/baza.rb#48.
+  issue: 48
+  label: bug
+  repository: 840215648
+  what: label-was-attached
+  when: 2025-03-29 04:08:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 512759
+  _time: 2025-03-29 22:06:12.908786058 Z
   _version: 0.9.5/0.36.5/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 512629
-  _time: 2025-03-29 21:06:26.396424331 Z
+- _id: 512785
+  _time: 2025-03-29 22:06:25.682468690 Z
   _version: 0.9.5/0.36.5/
-  latest: 0
-  repository: 802720676
+  latest: 177
+  repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 512646
-  _time: 2025-03-29 21:06:35.408911831 Z
+- _id: 512786
+  _time: 2025-03-29 22:06:26.365076019 Z
   _version: 0.9.5/0.36.5/
-  latest: 48
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 512647
-  _time: 2025-03-29 21:06:35.839929030 Z
-  _version: 0.9.5/0.36.5/
-  latest: 57
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 512648
-  _time: 2025-03-29 21:06:36.543263453 Z
-  _version: 0.9.5/0.36.5/
-  latest: 239
+  latest: 325
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 512649
-  _time: 2025-03-29 21:06:37.046997911 Z
+- _id: 512787
+  _time: 2025-03-29 22:06:26.781613451 Z
   _version: 0.9.5/0.36.5/
-  latest: 105
-  repository: 799113787
+  latest: 31
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 512788
+  _time: 2025-03-29 22:06:27.168320106 Z
+  _version: 0.9.5/0.36.5/
+  latest: 74
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 512789
+  _time: 2025-03-29 22:06:27.670617367 Z
+  _version: 0.9.5/0.36.5/
+  latest: 130
+  repository: 820463873
   what: labels-were-scanned
   where: github
