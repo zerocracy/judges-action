@@ -14,6 +14,8 @@ SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
 
+require 'judges/options'
+require 'loog'
 require 'minitest/autorun'
 
 class Minitest::Test
