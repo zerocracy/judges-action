@@ -7,7 +7,7 @@ source 'https://rubygems.org'
 
 gem 'base64', '>0'
 gem 'decoor', '>0'
-gem 'factbase', '0.9.5'
+gem 'factbase', '~>0.9'
 gem 'fbe', '>=0.2.3'
 gem 'judges', '>=0.36.5'
 gem 'minitest', '~>5.25', require: false
