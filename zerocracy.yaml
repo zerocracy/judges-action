@@ -283,10 +283,10 @@
   deleted: 8
   error: 'GET https://api.github.com/user/13273243: 404 - Not Found // See: https://docs.github.com/rest'
   inserted: 8
-  seconds: 76.358721719
+  seconds: 83.014569246
   version: 0.36.5
   what: judges-summary
-  when: 2025-03-30 06:08:05.173888843 Z
+  when: 2025-03-30 07:06:33.904301866 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -117342,83 +117342,6 @@
   since: 2025-03-23 05:08:43.764706151 Z
   what: quantity-of-deliverables
   when: 2025-03-30 05:08:43.764670344 Z
-- _id: 513660
-  _time: 2025-03-30 06:06:51.772619751 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 513661
-  _time: 2025-03-30 06:06:52.687972865 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 513662
-  _time: 2025-03-30 06:06:53.506932793 Z
-  _version: 0.9.5/0.36.5/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 513663
-  _time: 2025-03-30 06:06:54.381723064 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 513664
-  _time: 2025-03-30 06:06:55.398518878 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 513665
-  _time: 2025-03-30 06:06:56.329476321 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 513666
-  _time: 2025-03-30 06:06:57.250878276 Z
-  _version: 0.9.5/0.36.5/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 513667
-  _time: 2025-03-30 06:06:58.759113564 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48116119103
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 513668
-  _time: 2025-03-30 06:06:59.247863559 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48103612863
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 513669
-  _time: 2025-03-30 06:06:59.806733880 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48102146123
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 513670
-  _time: 2025-03-30 06:07:00.610728217 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48103614593
-  repository: 802720676
-  what: events-were-scanned
-  where: github
 - _id: 513671
   _time: 2025-03-30 06:07:02.230652694 Z
   _version: 0.9.5/0.36.5/
@@ -117439,7 +117362,7 @@
   repository: 798641472
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2025-03-30 03:23:18.000000000 Z
+  when: &123 2025-03-30 03:23:18.000000000 Z
   where: github
   who: 526301
 - _id: 513672
@@ -117459,73 +117382,363 @@
   when: 2025-03-30 03:00:55.000000000 Z
   where: github
   who: 526301
-- _id: 513673
-  _time: 2025-03-30 06:07:07.718354409 Z
-  _version: 0.9.5/0.36.5/
-  latest: 48116128883
+- _id: 513793
+  _job: 16343
+  _time: 2025-03-30 06:08:36.980490382 Z
+  _version: 0.9.6/0.38.1/0.0.73
+  comments: 0
+  details: The pull request yegor256/factbase#210 with 48 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 4 days of being in review and 0 comments.
+  hoc: 48
+  issue: 210
+  merger: 526301
   repository: 798641472
-  what: events-were-scanned
+  seconds: 409140
+  what: code-was-contributed
+  when: *123
   where: github
-- _id: 513674
-  _time: 2025-03-30 06:07:08.343900218 Z
+  who: 41898282
+- _id: 513794
+  _time: 2025-03-30 07:05:13.656964051 Z
   _version: 0.9.5/0.36.5/
-  latest: 48103184721
-  repository: 840215648
-  what: events-were-scanned
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
   where: github
-- _id: 513675
-  _time: 2025-03-30 06:07:08.992435006 Z
+- _id: 513795
+  _time: 2025-03-30 07:05:14.694403668 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 513796
+  _time: 2025-03-30 07:05:15.732523600 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 513797
+  _time: 2025-03-30 07:05:16.558635676 Z
+  _version: 0.9.5/0.36.5/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 513798
+  _time: 2025-03-30 07:05:17.585581167 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 513799
+  _time: 2025-03-30 07:05:18.519961395 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 513800
+  _time: 2025-03-30 07:05:19.796477640 Z
+  _version: 0.9.5/0.36.5/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 513801
+  _time: 2025-03-30 07:05:20.871137099 Z
   _version: 0.9.5/0.36.5/
   latest: 48022559851
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 513686
-  _time: 2025-03-30 06:07:14.103623023 Z
+- _id: 513802
+  _time: 2025-03-30 07:05:21.767256262 Z
+  _version: 0.9.5/0.36.5/
+  details: The issue zerocracy/fbe#156 has been opened by @yegor256.
+  event_id: 48117939602
+  event_type: IssuesEvent
+  issue: 156
+  repository: 820463873
+  what: issue-was-opened
+  when: 2025-03-30 07:03:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 513803
+  _time: 2025-03-30 07:05:22.114139750 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48117939602
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 513804
+  _time: 2025-03-30 07:05:22.558025012 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48103612863
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 513805
+  _time: 2025-03-30 07:05:23.903504888 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48103614593
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 513806
+  _time: 2025-03-30 07:05:24.543293259 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48103184721
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 513807
+  _time: 2025-03-30 07:05:25.768583760 Z
+  _version: 0.9.5/0.36.5/
+  details: The issue yegor256/factbase#212 has been closed by @yegor256.
+  event_id: 48117143497
+  event_type: IssuesEvent
+  issue: 212
+  repository: 798641472
+  what: issue-was-closed
+  when: 2025-03-30 05:29:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 513808
+  _time: 2025-03-30 07:05:26.414107907 Z
+  _version: 0.9.5/0.36.5/
+  commits: 176
+  contributors:
+  - 526301
+  - 29139614
+  - 8086956
+  details: A new release 'indexing doesn't help much' has been published in yegor256/factbase
+    by @rultor.
+  event_id: 48117140432
+  event_type: ReleaseEvent
+  hoc: 4149
+  last_commit: 127abb8ba4ad8dff11ae7dd93162d157cb9f3e95
+  release: 209191528
+  repository: 798641472
+  tag: 0.9.6
+  what: release-published
+  when: 2025-03-30 05:28:52.000000000 Z
+  where: github
+  who: 8086956
+- _id: 513809
+  _time: 2025-03-30 07:05:28.586157364 Z
+  _version: 0.9.5/0.36.5/
+  details: A new tag '0.9.6' has been created in yegor256/factbase by @rultor.
+  event_id: 48117136832
+  event_type: CreateEvent
+  repository: 798641472
+  tag: 0.9.6
+  what: tag-was-created
+  when: 2025-03-30 05:28:24.000000000 Z
+  where: github
+  who: 8086956
+- _id: 513810
+  _time: 2025-03-30 07:05:28.994091979 Z
+  _version: 0.9.5/0.36.5/
+  commit: d3b615f5aa155a9a79b3d5729b3d16432f807f5a
+  default_branch: master
+  details: 'A new Git push #23460713222 has arrived to yegor256/factbase, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48117079050
+  event_type: PushEvent
+  push_id: 23460713222
+  ref: refs/heads/master
+  repository: 798641472
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-03-30 05:22:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 513811
+  _time: 2025-03-30 07:05:29.469524712 Z
+  _version: 0.9.5/0.36.5/
+  branch: benchmark-results
+  details: The pull request yegor256/factbase#214 has been opened by @github-actions[bot].
+  event_id: 48117019542
+  event_type: PullRequestEvent
+  issue: 214
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-03-30 05:15:37.000000000 Z
+  where: github
+  who: 41898282
+- _id: 513812
+  _time: 2025-03-30 07:05:29.857522554 Z
+  _version: 0.9.5/0.36.5/
+  commit: 48158322435d6587a028f66d70447eff7fa1209d
+  default_branch: master
+  details: 'A new Git push #23460666141 has arrived to yegor256/factbase, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48117014730
+  event_type: PushEvent
+  push_id: 23460666141
+  ref: refs/heads/master
+  repository: 798641472
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-03-30 05:15:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 513813
+  _time: 2025-03-30 07:05:30.583955068 Z
+  _version: 0.9.5/0.36.5/
+  branch: benchmark-results
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/factbase#213 has been closed by @yegor256, with
+    48 HoC and 0 comments.
+  event_id: 48117008202
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 48
+  issue: 213
+  repository: 798641472
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2025-03-30 05:14:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 513814
+  _time: 2025-03-30 07:05:35.859296203 Z
+  _version: 0.9.5/0.36.5/
+  commit: 9207245c58396e207eb632ea0f30a50fa48e8f91
+  default_branch: master
+  details: 'A new Git push #23460594767 has arrived to yegor256/factbase, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48116912186
+  event_type: PushEvent
+  push_id: 23460594767
+  ref: refs/heads/master
+  repository: 798641472
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-03-30 05:02:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 513815
+  _time: 2025-03-30 07:05:36.353325243 Z
+  _version: 0.9.5/0.36.5/
+  branch: benchmark-results
+  details: The pull request yegor256/factbase#213 has been opened by @github-actions[bot].
+  event_id: 48116829205
+  event_type: PullRequestEvent
+  issue: 213
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-03-30 04:51:48.000000000 Z
+  where: github
+  who: 41898282
+- _id: 513816
+  _time: 2025-03-30 07:05:36.684702038 Z
+  _version: 0.9.5/0.36.5/
+  commit: 0f55d01f802457c0bdec3a473266e8953c4291c8
+  default_branch: master
+  details: 'A new Git push #23460532694 has arrived to yegor256/factbase, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48116824787
+  event_type: PushEvent
+  push_id: 23460532694
+  ref: refs/heads/master
+  repository: 798641472
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-03-30 04:51:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 513817
+  _time: 2025-03-30 07:05:36.933010864 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48117143497
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 513818
+  _time: 2025-03-30 07:05:38.201512034 Z
+  _version: 0.9.5/0.36.5/
+  details: The issue zerocracy/judges-action#511 has been opened by @yegor256.
+  event_id: 48117190438
+  event_type: IssuesEvent
+  issue: 511
+  repository: 799177290
+  what: issue-was-opened
+  when: 2025-03-30 05:35:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 513819
+  _time: 2025-03-30 07:05:38.692521432 Z
+  _version: 0.9.5/0.36.5/
+  latest: 48117190438
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 513830
+  _time: 2025-03-30 07:05:44.044226837 Z
   _version: 0.9.5/0.36.5/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 513762
-  _time: 2025-03-30 06:07:48.567926689 Z
+- _id: 513878
+  _time: 2025-03-30 07:06:06.849532992 Z
+  _version: 0.9.5/0.36.5/
+  details: The '#bug' label was attached by @yegor256 to the issue zerocracy/fbe#156.
+  issue: 156
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2025-03-30 07:03:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 513885
+  _time: 2025-03-30 07:06:09.577817952 Z
+  _version: 0.9.5/0.36.5/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 513904
+  _time: 2025-03-30 07:06:19.011504101 Z
   _version: 0.9.5/0.36.5/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 513788
-  _time: 2025-03-30 06:08:00.552717328 Z
+- _id: 513925
+  _time: 2025-03-30 07:06:29.462623293 Z
   _version: 0.9.5/0.36.5/
-  latest: 62
+  latest: 135
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 513789
-  _time: 2025-03-30 06:08:00.966128148 Z
+- _id: 513926
+  _time: 2025-03-30 07:06:29.886992929 Z
   _version: 0.9.5/0.36.5/
-  latest: 31
+  latest: 48
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 513927
+  _time: 2025-03-30 07:06:30.357464109 Z
+  _version: 0.9.5/0.36.5/
+  latest: 73
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 513790
-  _time: 2025-03-30 06:08:01.531472086 Z
+- _id: 513928
+  _time: 2025-03-30 07:06:30.780166908 Z
   _version: 0.9.5/0.36.5/
-  latest: 21
+  latest: 47
   repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 513791
-  _time: 2025-03-30 06:08:02.013850773 Z
-  _version: 0.9.5/0.36.5/
-  latest: 130
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 513792
-  _time: 2025-03-30 06:08:02.527388320 Z
-  _version: 0.9.5/0.36.5/
-  latest: 25
-  repository: 798641472
   what: labels-were-scanned
   where: github
