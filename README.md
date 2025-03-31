@@ -6,11 +6,6 @@
 [![Hits-of-Code](https://hitsofcode.com/github/zerocracy/judges-action)](https://hitsofcode.com/view/github/zerocracy/judges-action)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/zerocracy/judges-action/blob/master/LICENSE.txt)
 
-**ATTENTION**: The repository is in active development right now. It is
-"work in progress" — most likely it won't work correctly if you use it "as is."
-If you are interested in this plugin, better wait for a few weeks until its
-stable version 0.1.0 is released.
-
 First, get a free authentication token from
 [Zerocracy.com](https://www.zerocracy.com) and add it as
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
