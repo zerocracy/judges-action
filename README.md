@@ -105,7 +105,6 @@ and [GNU make](https://www.gnu.org/software/make/) installed):
 
 ```bash
 bundle update
-bundle exec rake
 make
 ```
 
