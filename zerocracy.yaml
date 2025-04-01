@@ -283,10 +283,10 @@
   deleted: 8
   error: 'GET https://api.github.com/user/13273243: 404 - Not Found // See: https://docs.github.com/rest'
   inserted: 8
-  seconds: 107.295289584
+  seconds: 130.214290949
   version: 0.38.1
   what: judges-summary
-  when: 2025-04-01 12:10:55.049497138 Z
+  when: 2025-04-01 13:15:02.703953008 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -119283,13 +119283,6 @@
   when: *137
   where: github
   who: 29139614
-- _id: 519468
-  _job: 16468
-  _time: 2025-04-01 03:26:59.312418353 Z
-  _version: 0.9.10/0.38.1/0.1.0
-  qod_per_day: 5.261714286182081
-  what: learn-eva
-  when: 2025-04-01 03:26:59.265167985 Z
 - _id: 519698
   _time: 2025-04-01 06:07:58.576129030 Z
   _version: 0.9.10/0.38.1/
@@ -119365,69 +119358,6 @@
   when: 2025-04-01 03:27:20.000000000 Z
   where: github
   who: 29139614
-- _id: 520439
-  _time: 2025-04-01 12:09:10.889856731 Z
-  _version: 0.9.10/0.38.1/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 520440
-  _time: 2025-04-01 12:09:11.853484937 Z
-  _version: 0.9.10/0.38.1/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 520441
-  _time: 2025-04-01 12:09:12.624355489 Z
-  _version: 0.9.10/0.38.1/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 520442
-  _time: 2025-04-01 12:09:13.439804077 Z
-  _version: 0.9.10/0.38.1/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 520443
-  _time: 2025-04-01 12:09:14.298068827 Z
-  _version: 0.9.10/0.38.1/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 520444
-  _time: 2025-04-01 12:09:15.134592547 Z
-  _version: 0.9.10/0.38.1/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 520445
-  _time: 2025-04-01 12:09:15.888758558 Z
-  _version: 0.9.10/0.38.1/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 520446
-  _time: 2025-04-01 12:09:17.002408972 Z
-  _version: 0.9.10/0.38.1/
-  latest: 48178426922
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 520447
-  _time: 2025-04-01 12:09:17.526421524 Z
-  _version: 0.9.10/0.38.1/
-  latest: 48120025017
-  repository: 849726475
-  what: events-were-scanned
-  where: github
 - _id: 520448
   _time: 2025-04-01 12:09:19.508650694 Z
   _version: 0.9.10/0.38.1/
@@ -119448,7 +119378,7 @@
   repository: 799177290
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2025-04-01 04:20:22.000000000 Z
+  when: &138 2025-04-01 04:20:22.000000000 Z
   where: github
   who: 8086956
 - _id: 520449
@@ -119471,16 +119401,9 @@
   repository: 799177290
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2025-04-01 04:04:30.000000000 Z
+  when: &139 2025-04-01 04:04:30.000000000 Z
   where: github
   who: 8086956
-- _id: 520450
-  _time: 2025-04-01 12:09:44.152217344 Z
-  _version: 0.9.10/0.38.1/
-  latest: 48176961372
-  repository: 799177290
-  what: events-were-scanned
-  where: github
 - _id: 520451
   _time: 2025-04-01 12:09:45.595110493 Z
   _version: 0.9.10/0.38.1/
@@ -119507,80 +119430,307 @@
   when: 2025-04-01 04:28:34.000000000 Z
   where: github
   who: 29139614
-- _id: 520453
-  _time: 2025-04-01 12:09:46.112420368 Z
-  _version: 0.9.10/0.38.1/
-  latest: 48176178154
-  repository: 798641472
-  what: events-were-scanned
+- _id: 520574
+  _job: 16503
+  _time: 2025-04-01 12:11:38.755701550 Z
+  _version: 0.9.10/0.38.1/0.1.0
+  comments: 2
+  details: The pull request zerocracy/judges-action#522 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 53 minutes of being in review and 2 comments.
+  hoc: 4
+  issue: 522
+  merger: 8086956
+  repository: 799177290
+  seconds: 3182
+  what: code-was-contributed
+  when: *138
   where: github
-- _id: 520454
-  _time: 2025-04-01 12:09:46.669115511 Z
-  _version: 0.9.10/0.38.1/
-  latest: 48118161677
-  repository: 820463873
-  what: events-were-scanned
+  who: 29139614
+- _id: 520575
+  _job: 16503
+  _time: 2025-04-01 12:11:39.104649235 Z
+  _version: 0.9.10/0.38.1/0.1.0
+  comments: 2
+  details: The pull request zerocracy/judges-action#523 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 37 minutes of being in review and 2 comments.
+  hoc: 4
+  issue: 523
+  merger: 8086956
+  repository: 799177290
+  seconds: 2221
+  what: code-was-contributed
+  when: *139
   where: github
-- _id: 520455
-  _time: 2025-04-01 12:09:47.415607237 Z
+  who: 29139614
+- _id: 520576
+  _job: 16503
+  _time: 2025-04-01 12:11:57.499147615 Z
+  _version: 0.9.10/0.38.1/0.1.0
+  qod_per_day: 5.261714286182081
+  what: learn-eva
+  when: 2025-04-01 12:11:57.452260537 Z
+- _id: 520577
+  _time: 2025-04-01 13:12:55.585674770 Z
   _version: 0.9.10/0.38.1/
-  latest: 48117440150
+  latest: 1
   repository: 799113787
-  what: events-were-scanned
+  what: min-issue-was-found
   where: github
-- _id: 520456
-  _time: 2025-04-01 12:09:48.833049357 Z
+- _id: 520578
+  _time: 2025-04-01 13:12:56.371595679 Z
+  _version: 0.9.10/0.38.1/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 520579
+  _time: 2025-04-01 13:12:57.246815983 Z
+  _version: 0.9.10/0.38.1/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 520580
+  _time: 2025-04-01 13:12:58.061098315 Z
+  _version: 0.9.10/0.38.1/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 520581
+  _time: 2025-04-01 13:12:58.935070152 Z
+  _version: 0.9.10/0.38.1/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 520582
+  _time: 2025-04-01 13:12:59.682032836 Z
+  _version: 0.9.10/0.38.1/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 520583
+  _time: 2025-04-01 13:13:00.550275654 Z
+  _version: 0.9.10/0.38.1/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 520584
+  _time: 2025-04-01 13:13:02.439896892 Z
   _version: 0.9.10/0.38.1/
   latest: 48135958755
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 520470
-  _time: 2025-04-01 12:09:56.057979758 Z
+- _id: 520585
+  _time: 2025-04-01 13:13:03.007875772 Z
+  _version: 0.9.10/0.38.1/
+  latest: 48120025017
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 520586
+  _time: 2025-04-01 13:13:04.337361957 Z
+  _version: 0.9.10/0.38.1/
+  latest: 48117440150
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 520587
+  _time: 2025-04-01 13:13:05.542958610 Z
+  _version: 0.9.10/0.38.1/
+  branch: renovate/rubocop-minitest-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/fbe#157 has been closed by @rultor, with 6 HoC
+    and 2 comments.
+  event_id: 48178215484
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  issue: 157
+  repository: 820463873
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2025-04-01 06:01:16.000000000 Z
+  where: github
+  who: 8086956
+- _id: 520588
+  _time: 2025-04-01 13:13:19.436621842 Z
+  _version: 0.9.10/0.38.1/
+  branch: renovate/rubocop-performance-1.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/fbe#158 has been closed by @rultor, with 6 HoC
+    and 2 comments.
+  event_id: 48178027478
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  issue: 158
+  repository: 820463873
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2025-04-01 05:53:49.000000000 Z
+  where: github
+  who: 8086956
+- _id: 520589
+  _time: 2025-04-01 13:13:30.814884458 Z
+  _version: 0.9.10/0.38.1/
+  branch: renovate/rubocop-performance-1.x-lockfile
+  details: The pull request zerocracy/fbe#158 has been opened by @renovate[bot].
+  event_id: 48177797568
+  event_type: PullRequestEvent
+  issue: 158
+  repository: 820463873
+  what: pull-was-opened
+  when: 2025-04-01 05:44:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 520590
+  _time: 2025-04-01 13:13:31.174172866 Z
+  _version: 0.9.10/0.38.1/
+  branch: renovate/rubocop-minitest-0.x-lockfile
+  details: The pull request zerocracy/fbe#157 has been opened by @renovate[bot].
+  event_id: 48177793975
+  event_type: PullRequestEvent
+  issue: 157
+  repository: 820463873
+  what: pull-was-opened
+  when: 2025-04-01 05:43:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 520591
+  _time: 2025-04-01 13:13:31.335400978 Z
+  _version: 0.9.10/0.38.1/
+  latest: 48178229124
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 520592
+  _time: 2025-04-01 13:13:32.926776339 Z
+  _version: 0.9.10/0.38.1/
+  latest: 48178624751
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 520593
+  _time: 2025-04-01 13:13:33.729315855 Z
+  _version: 0.9.10/0.38.1/
+  latest: 48178426922
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 520594
+  _time: 2025-04-01 13:13:35.550681389 Z
+  _version: 0.9.10/0.38.1/
+  branch: renovate/rubocop-minitest-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/factbase#219 has been closed by @rultor, with
+    6 HoC and 2 comments.
+  event_id: 48178116882
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  issue: 219
+  repository: 798641472
+  succeeded_builds: 10
+  what: pull-was-merged
+  when: 2025-04-01 05:57:34.000000000 Z
+  where: github
+  who: 8086956
+- _id: 520595
+  _time: 2025-04-01 13:13:41.989000409 Z
+  _version: 0.9.10/0.38.1/
+  branch: renovate/rubocop-performance-1.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request yegor256/factbase#220 has been closed by @rultor, with
+    6 HoC and 2 comments.
+  event_id: 48177904413
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 6
+  issue: 220
+  repository: 798641472
+  succeeded_builds: 10
+  what: pull-was-merged
+  when: 2025-04-01 05:48:34.000000000 Z
+  where: github
+  who: 8086956
+- _id: 520596
+  _time: 2025-04-01 13:13:53.271065510 Z
+  _version: 0.9.10/0.38.1/
+  latest: 48178133512
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 520610
+  _time: 2025-04-01 13:14:02.250050830 Z
   _version: 0.9.10/0.38.1/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 520544
-  _time: 2025-04-01 12:10:36.440480432 Z
+- _id: 520688
+  _time: 2025-04-01 13:14:47.661456300 Z
   _version: 0.9.10/0.38.1/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 520569
-  _time: 2025-04-01 12:10:49.811370508 Z
+- _id: 520695
+  _time: 2025-04-01 13:14:50.871156685 Z
   _version: 0.9.10/0.38.1/
-  latest: 21
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 520570
-  _time: 2025-04-01 12:10:50.320600986 Z
-  _version: 0.9.10/0.38.1/
-  latest: 48
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 520571
-  _time: 2025-04-01 12:10:50.813229706 Z
-  _version: 0.9.10/0.38.1/
-  latest: 62
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 520572
-  _time: 2025-04-01 12:10:51.500993472 Z
-  _version: 0.9.10/0.38.1/
-  latest: 138
+  latest: 0
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 520573
-  _time: 2025-04-01 12:10:52.029572976 Z
+- _id: 520707
+  _time: 2025-04-01 13:14:58.131224864 Z
   _version: 0.9.10/0.38.1/
-  latest: 28
+  latest: 74
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 520708
+  _time: 2025-04-01 13:14:58.619909319 Z
+  _version: 0.9.10/0.38.1/
+  latest: 47
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 520709
+  _time: 2025-04-01 13:14:59.177356619 Z
+  _version: 0.9.10/0.38.1/
+  latest: 135
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 520710
+  _time: 2025-04-01 13:14:59.689353927 Z
+  _version: 0.9.10/0.38.1/
+  latest: 57
   repository: 820463873
   what: labels-were-scanned
   where: github
