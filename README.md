@@ -11,13 +11,14 @@ First, get a free authentication token from
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
-(replace `foo` with the name of your team):
+(replace `foo` with the name of your team and `42` with anything
+between zero and `60`):
 
 ```yaml
 name: zerocracy
 'on':
   schedule:
-    - cron: '0 * * * *'
+    - cron: '42 * * * *'
 concurrency:
   group: zerocracy
   cancel-in-progress: false
