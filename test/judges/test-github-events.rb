@@ -720,6 +720,8 @@ class TestGithubEvents < Minitest::Test
     assert_equal(2, f.count)
     assert_equal(42, f.first.who)
     assert_equal(55, f.last.who)
+    assert_equal(2, f.first.review_comments)
+    assert_equal(2, f.last.review_comments)
   end
 
   def test_release_event_contributors
