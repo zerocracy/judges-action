@@ -14,7 +14,7 @@ Fbe.conclude do
       json = Fbe.octo.user(f.who)
     rescue Octokit::NotFound
       $loog.info("GitHub user ##{f.who} is not found")
-      return
+      next
     end
     type = json[:type]
     if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
