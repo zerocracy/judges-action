@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/foo
+input:
+  -
+    what: pull-was-reviewed
+    issue: github
+    repository: 695
+    issue: 94
+expected:
+  - /fb[count(f)=1]
+  - /fb/f[review_comments='2']
