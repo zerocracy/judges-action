@@ -15,6 +15,7 @@ require_relative 'jp'
 # @param [Factbase::Fact] fact The fact to put data into (some data already there)
 # @param [String] dir Where to find Ruby scripts
 # @param [String] prefix The prefix to use for scripts (e.g. "total")
+# @param [Integer] timeout How many seconds to spend, after which we give up
 # @return nil
 def Jp.incremate(fact, dir, prefix, timeout: 30)
   start = Time.now
