@@ -3,10 +3,10 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
-require 'time'
-require 'tago'
 require 'fbe/octo'
 require 'fbe/overwrite'
+require 'tago'
+require 'time'
 require_relative 'jp'
 
 # Incrementally accumulates data into a fact, using Ruby scripts
@@ -16,7 +16,7 @@ require_relative 'jp'
 # @param [String] dir Where to find Ruby scripts
 # @param [String] prefix The prefix to use for scripts (e.g. "total")
 # @return nil
-def Jp.incremate(fact, dir, prefix)
+def Jp.incremate(fact, dir, prefix, timeout: 30)
   start = Time.now
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
@@ -28,8 +28,8 @@ def Jp.incremate(fact, dir, prefix)
       $loog.info('No GitHub quota left, it is time to stop')
       break
     end
-    if Time.now - start > 5 * 60
-      $loog.info("We are doing this for too long (#{start.ago}), time to stop")
+    if Time.now - start > timeout
+      $loog.info("We are doing this for too long (#{start.ago} > #{timeout}s), time to stop")
       break
     end
     require_relative rb
