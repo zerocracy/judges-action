@@ -185,7 +185,8 @@ Fbe.iterate do
       when 'opened'
         fact.what = 'pull-was-opened'
         fact.branch = pl[:head][:ref]
-        fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
+        fact.details =
+          "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("New PR #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
@@ -238,11 +239,13 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'closed'
         fact.what = 'issue-was-closed'
-        fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
+        fact.details =
+          "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
         $loog.debug("Issue #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       when 'opened'
         fact.what = 'issue-was-opened'
-        fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
+        fact.details =
+          "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("Issue #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       else
         skip_event(json)
@@ -272,7 +275,9 @@ Fbe.iterate do
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
         fetch_contributors(fact, rname).each { |c| fact.contributors = c }
-        fill_fact_by_hash(fact, fetch_release_info(fact, rname))
+        fill_fact_by_hash(
+          fact, fetch_release_info(fact, rname)
+        )
         fact.details =
           "A new release '#{json[:payload][:release][:name]}' has been published " \
           "in #{rname} by #{Fbe.who(fact)}."

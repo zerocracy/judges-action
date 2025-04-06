@@ -36,7 +36,9 @@ def Jp.incremate(fact, dir, prefix, timeout: 30)
     require_relative rb
     before = Time.now
     h = send(n, fact)
-    h.each { |k, v| fact = Fbe.overwrite(fact, k.to_s, v) }
+    h.each do |k, v|
+      fact = Fbe.overwrite(fact, k.to_s, v)
+    end
     $loog.info("Collected #{n} in #{before.ago} (#{start.ago} total): [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
   end
 end
