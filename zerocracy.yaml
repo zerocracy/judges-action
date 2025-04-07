@@ -5,10 +5,10 @@
   error: 'GET https://api.github.com/repositories/728758275: 404 - Not Found // See:
     https://docs.github.com/rest/repos/repos#get-a-repository'
   inserted: 8
-  seconds: 78.751780485
+  seconds: 93.152994772
   version: 0.39.2
   what: judges-summary
-  when: 2025-04-07 19:06:18.923666135 Z
+  when: 2025-04-07 20:07:49.912875109 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -125088,76 +125088,6 @@
   when: 2025-04-07 12:42:45.000000000 Z
   where: github
   who: 526301
-- _id: 539640
-  _time: 2025-04-07 19:05:04.820990077 Z
-  _version: 0.9.10/0.39.2/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
-- _id: 539641
-  _time: 2025-04-07 19:05:05.720880180 Z
-  _version: 0.9.10/0.39.2/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
-- _id: 539642
-  _time: 2025-04-07 19:05:06.498657398 Z
-  _version: 0.9.10/0.39.2/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 539643
-  _time: 2025-04-07 19:05:07.091033775 Z
-  _version: 0.9.10/0.39.2/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 539644
-  _time: 2025-04-07 19:05:07.930124202 Z
-  _version: 0.9.10/0.39.2/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 539645
-  _time: 2025-04-07 19:05:08.708294895 Z
-  _version: 0.9.10/0.39.2/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
-- _id: 539646
-  _time: 2025-04-07 19:05:09.660463592 Z
-  _version: 0.9.10/0.39.2/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
-- _id: 539647
-  _time: 2025-04-07 19:05:10.866819374 Z
-  _version: 0.9.10/0.39.2/
-  latest: 48372196500
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 539648
-  _time: 2025-04-07 19:05:12.457988654 Z
-  _version: 0.9.10/0.39.2/
-  latest: 48372242018
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 539649
-  _time: 2025-04-07 19:05:13.114715898 Z
-  _version: 0.9.10/0.39.2/
-  latest: 48398030309
-  repository: 799113787
-  what: events-were-scanned
-  where: github
 - _id: 539650
   _time: 2025-04-07 19:05:14.488244522 Z
   _version: 0.9.10/0.39.2/
@@ -125176,80 +125106,222 @@
   when: 2025-04-07 14:27:58.000000000 Z
   where: github
   who: 526301
-- _id: 539651
-  _time: 2025-04-07 19:05:14.913998086 Z
+- _id: 539763
+  _time: 2025-04-07 20:06:22.150930230 Z
+  _version: 0.9.10/0.39.2/
+  latest: 3
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 539764
+  _time: 2025-04-07 20:06:22.940452961 Z
+  _version: 0.9.10/0.39.2/
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
+  where: github
+- _id: 539765
+  _time: 2025-04-07 20:06:23.769811086 Z
+  _version: 0.9.10/0.39.2/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 539766
+  _time: 2025-04-07 20:06:24.588246916 Z
+  _version: 0.9.10/0.39.2/
+  latest: 1
+  repository: 840215648
+  what: min-issue-was-found
+  where: github
+- _id: 539767
+  _time: 2025-04-07 20:06:25.161350941 Z
+  _version: 0.9.10/0.39.2/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 539768
+  _time: 2025-04-07 20:06:25.960108357 Z
+  _version: 0.9.10/0.39.2/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 539769
+  _time: 2025-04-07 20:06:27.056124506 Z
+  _version: 0.9.10/0.39.2/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 539770
+  _time: 2025-04-07 20:06:28.991291123 Z
+  _version: 0.9.10/0.39.2/
+  commit: 2881e0db309d2a671940e8a4b0ca698747370d47
+  default_branch: master
+  details: 'A new Git push #23612031214 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48406282128
+  event_type: PushEvent
+  is_human: 1
+  push_id: 23612031214
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-04-07 14:54:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 539771
+  _time: 2025-04-07 20:06:29.403721831 Z
+  _version: 0.9.10/0.39.2/
+  latest: 48406282128
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 539772
+  _time: 2025-04-07 20:06:30.311458196 Z
+  _version: 0.9.10/0.39.2/
+  commit: 88083b4dc563d932191641e9696dd07ae2b75f87
+  default_branch: master
+  details: 'A new Git push #23611443242 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 48405018809
+  event_type: PushEvent
+  is_human: 1
+  push_id: 23611443242
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-04-07 14:28:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 539773
+  _time: 2025-04-07 20:06:30.600275959 Z
+  _version: 0.9.10/0.39.2/
+  latest: 48405018809
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 539774
+  _time: 2025-04-07 20:06:31.996240578 Z
   _version: 0.9.10/0.39.2/
   latest: 48404972848
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 539652
-  _time: 2025-04-07 19:05:15.841600282 Z
+- _id: 539775
+  _time: 2025-04-07 20:06:33.690581082 Z
+  _version: 0.9.10/0.39.2/
+  commit: 9afd9bf23c971a35b1475e9d13449dd4913201e7
+  default_branch: master
+  details: 'A new Git push #23611912426 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 48406025234
+  event_type: PushEvent
+  is_human: 1
+  push_id: 23611912426
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-04-07 14:49:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 539776
+  _time: 2025-04-07 20:06:33.944180964 Z
+  _version: 0.9.10/0.39.2/
+  latest: 48406903485
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 539777
+  _time: 2025-04-07 20:06:34.782758079 Z
+  _version: 0.9.10/0.39.2/
+  latest: 48372196500
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 539778
+  _time: 2025-04-07 20:06:35.593165017 Z
+  _version: 0.9.10/0.39.2/
+  commit: a55c377275d5c1c6e3e3a917a78a99ef4a8ed57a
+  default_branch: master
+  details: 'A new Git push #23611899698 has arrived to yegor256/judges, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 48405998242
+  event_type: PushEvent
+  is_human: 1
+  push_id: 23611899698
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-04-07 14:48:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 539779
+  _time: 2025-04-07 20:06:35.909394741 Z
+  _version: 0.9.10/0.39.2/
+  latest: 48405998242
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 539780
+  _time: 2025-04-07 20:06:36.816735482 Z
   _version: 0.9.10/0.39.2/
   latest: 48399959324
   repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 539653
-  _time: 2025-04-07 19:05:17.373302261 Z
-  _version: 0.9.10/0.39.2/
-  latest: 48403965500
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 539654
-  _time: 2025-04-07 19:05:18.389371468 Z
-  _version: 0.9.10/0.39.2/
-  latest: 48368987552
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 539662
-  _time: 2025-04-07 19:05:23.003307990 Z
+- _id: 539789
+  _time: 2025-04-07 20:06:46.745527816 Z
   _version: 0.9.10/0.39.2/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 539725
-  _time: 2025-04-07 19:05:56.131679695 Z
-  _version: 0.9.10/0.39.2/
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 539749
-  _time: 2025-04-07 19:06:09.524288639 Z
+- _id: 539883
+  _time: 2025-04-07 20:07:38.455779923 Z
   _version: 0.9.10/0.39.2/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 539753
-  _time: 2025-04-07 19:06:11.389003022 Z
+- _id: 539895
+  _time: 2025-04-07 20:07:44.795828753 Z
   _version: 0.9.10/0.39.2/
-  latest: 0
-  repository: 802720676
+  latest: 21
+  repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 539760
-  _time: 2025-04-07 19:06:15.005526564 Z
+- _id: 539896
+  _time: 2025-04-07 20:07:45.283066702 Z
   _version: 0.9.10/0.39.2/
-  latest: 57
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 539761
-  _time: 2025-04-07 19:06:15.542369048 Z
-  _version: 0.9.10/0.39.2/
-  latest: 25
+  latest: 48
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 539762
-  _time: 2025-04-07 19:06:16.030374104 Z
+- _id: 539897
+  _time: 2025-04-07 20:07:45.853700889 Z
   _version: 0.9.10/0.39.2/
-  latest: 62
+  latest: 135
   repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 539898
+  _time: 2025-04-07 20:07:46.393472981 Z
+  _version: 0.9.10/0.39.2/
+  latest: 130
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 539899
+  _time: 2025-04-07 20:07:46.923720497 Z
+  _version: 0.9.10/0.39.2/
+  latest: 31
+  repository: 802720676
   what: labels-were-scanned
   where: github
