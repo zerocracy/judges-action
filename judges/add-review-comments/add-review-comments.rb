@@ -10,8 +10,13 @@ Fbe.conclude do
   quota_aware
   on '(and (eq what "pull-was-reviewed") (not (exists review_comments)))'
   consider do |f|
-    pl = Fbe.octo.pull_request(Fbe.octo.repo_name_by_id(f.repository), f.issue)
-    f.review_comments = pl[:review_comments]
-    $loog.info("Set #{pl[:review_comments]} review comments for PR ##{f.issue} in repository #{f.repository}")
+    begin
+      pl = Fbe.octo.pull_request(Fbe.octo.repo_name_by_id(f.repository), f.issue)
+      comments = pl[:review_comments]
+    rescue Octokit::NotFound
+      comments = 0
+    end
+    f.review_comments = comments
+    $loog.info("Set #{comments} review comments for PR ##{f.issue} in repository #{f.repository}")
   end
 end
