@@ -71,6 +71,23 @@ class TestAddReviewComments < Minitest::Test
     end
   end
 
+  def test_handles_not_found_repo
+    WebMock.disable_net_connect!
+    pl = { id: 93, comments: 2 }
+    repo = 90
+    stub(repo, pl)
+    what = 'pull-was-reviewed'
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = what
+    fact.issue = pl[:id]
+    fact.repository = repo
+    load_it('add-review-comments', fb)
+    facts = fb.query("(eq what '#{what}')").each.to_a
+    assert_equal(pl[:id], facts.first.issue)
+    assert_nil(facts.first['review_comments'])
+  end
+
   def stub(repo, *pulls)
     pulls.each do |pl|
       stub_github(
@@ -88,6 +105,7 @@ class TestAddReviewComments < Minitest::Test
     end
     stub_github(
       "https://api.github.com/repositories/#{repo}",
+      status: repo == 90 ? 404 : 200,
       body: { id: 820_463_873, name: 'foo', full_name: 'foo/foo' }
     )
     stub_github(
