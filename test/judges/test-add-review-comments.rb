@@ -85,7 +85,10 @@ class TestAddReviewComments < Minitest::Test
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what \"#{what}\")").each.to_a
     assert_equal(pl[:id], facts.first.issue)
-    assert_equal(0, facts.first.review_comments)
+    assert_equal(
+      "Can't find 'review_comments' attribute out of [what, issue, repository]",
+      assert_raises(RuntimeError) { facts.first.review_comments }.message
+    )
   end
 
   def stub(repo, *pulls)

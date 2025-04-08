@@ -12,11 +12,10 @@ Fbe.conclude do
   consider do |f|
     begin
       pl = Fbe.octo.pull_request(Fbe.octo.repo_name_by_id(f.repository), f.issue)
-      comments = pl[:review_comments]
     rescue Octokit::NotFound
-      comments = 0
+      next
     end
-    f.review_comments = comments
-    $loog.info("Set #{comments} review comments for PR ##{f.issue} in repository #{f.repository}")
+    f.review_comments = pl[:review_comments]
+    $loog.info("Set #{pl[:review_comments]} review comments for PR ##{f.issue} in repository #{f.repository}")
   end
 end
