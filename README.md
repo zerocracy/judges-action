@@ -9,6 +9,8 @@
 First, get a free authentication token from
 [Zerocracy.com](https://www.zerocracy.com) and add it as
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
+Then, create a new [personal access token][PAT] and add it as a `PAT` secret
+to your repository.
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
 (replace `foo` with the name of your team and `42` with anything
@@ -30,14 +32,14 @@ jobs:
       - uses: zerocracy/judges-action@0.3.1
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.0.48
         with:
           factbase: foo.fb
           options: |
-            github_token=${{ secrets.GITHUB_TOKEN }}
+            github_token=${{ secrets.PAT }}
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           folder: pages
@@ -130,3 +132,4 @@ bundle exec ruby test/judges/test-dimensions-of-terrain.rb -n test_total_reposit
 [factbase]: https://github.com/yegor256/factbase
 [secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
 [ours]: https://github.com/zerocracy/judges-action/blob/master/.github/workflows/zerocracy.yml
+[PAT]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
