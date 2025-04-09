@@ -19,14 +19,14 @@ jobs:
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           verbose: false
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: zerocracy.fb
           cycles: 1
       - uses: zerocracy/pages-action@0.0.48
         with:
           options: |
-            github_token=${{ secrets.GITHUB_TOKEN }}
+            github_token=${{ secrets.PAT }}
           verbose: true
           factbase: zerocracy.fb
           output: pages
