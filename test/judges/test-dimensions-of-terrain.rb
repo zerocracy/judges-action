@@ -9,11 +9,10 @@ require 'fbe/octo'
 require 'json'
 require 'judges/options'
 require 'loog'
-require 'webmock/minitest'
 require_relative '../test__helper'
 
 # Test.
-class TestDimensionsOfTerrain < Minitest::Test
+class TestDimensionsOfTerrain < Jp::Test
   def test_total_repositories
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/rate_limit', body: {})

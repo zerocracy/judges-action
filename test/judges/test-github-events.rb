@@ -6,7 +6,6 @@
 require 'factbase'
 require 'loog'
 require 'json'
-require 'webmock/minitest'
 require 'judges/options'
 require 'fbe'
 require 'fbe/github_graph'
@@ -16,7 +15,7 @@ require_relative '../test__helper'
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
-class TestGithubEvents < Minitest::Test
+class TestGithubEvents < Jp::Test
   def test_create_tag_event
     WebMock.disable_net_connect!
     stub_event(

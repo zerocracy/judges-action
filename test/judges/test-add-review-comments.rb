@@ -4,14 +4,13 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'webmock/minitest'
 require_relative '../test__helper'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2025 Yegor Bugayenko
 # License:: MIT
-class TestAddReviewComments < Minitest::Test
+class TestAddReviewComments < Jp::Test
   def test_sets_review_comments_when_missing
     WebMock.disable_net_connect!
     pl = { id: 93, comments: 2 }

@@ -4,14 +4,13 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'webmock/minitest'
 require_relative '../test__helper'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2025 Yegor Bugayenko
 # License:: MIT
-class TestIsHumanOrRobot < Minitest::Test
+class TestIsHumanOrRobot < Jp::Test
   def test_handles_missing_github_user_gracefully
     WebMock.disable_net_connect!
     id = 444

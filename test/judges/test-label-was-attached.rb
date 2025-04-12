@@ -7,14 +7,13 @@ require 'factbase'
 require 'json'
 require 'judges/options'
 require 'loog'
-require 'webmock/minitest'
 require_relative '../test__helper'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
-class TestLabelWasAttached < Minitest::Test
+class TestLabelWasAttached < Jp::Test
   def test_catches_label_event
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(

@@ -7,14 +7,13 @@ require 'factbase'
 require 'json'
 require 'judges/options'
 require 'loog'
-require 'webmock/minitest'
 require_relative '../test__helper'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
-class TestQuantityOfDeliverables < Minitest::Test
+class TestQuantityOfDeliverables < Jp::Test
   def test_counts_commits
     WebMock.disable_net_connect!
     stub_github('https://api.github.com/rate_limit', body: {})

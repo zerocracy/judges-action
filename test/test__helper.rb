@@ -29,8 +29,11 @@ Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
 require 'judges/options'
 require 'loog'
 require 'minitest/autorun'
+require 'webmock/minitest'
+require_relative '../lib/jp'
 
-class Minitest::Test
+# Parent class for all tests.
+class Jp::Test < Minitest::Test
   def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }))
     $fb = fb
     $global = {}
