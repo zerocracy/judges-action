@@ -12,7 +12,7 @@ require 'shellwords'
 
 ENV['RACK_RUN'] = 'true'
 
-task default: %i[clean test picks judges rubocop]
+task default: %i[clean test judges picks rubocop]
 
 require 'rake/testtask'
 desc 'Run all unit tests'
