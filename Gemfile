@@ -5,17 +5,17 @@
 
 source 'https://rubygems.org'
 
-gem 'base64', '>0'
+gem 'base64', '~>0.2'
 gem 'decoor', '>0'
 gem 'factbase', '~>0.9'
-gem 'fbe', '~>0.2'
-gem 'judges', '~>0.36'
+gem 'fbe', '~>0.5'
+gem 'judges', '~>0.39'
 gem 'minitest', '~>5.25', require: false
 gem 'minitest-reporters', '~>1.7', require: false
 gem 'os', '>0', require: false
-gem 'others', '>0'
-gem 'qbash', '>0'
-gem 'rake', '~>13'
+gem 'others', '~>0.0'
+gem 'qbash', '~>0.4'
+gem 'rake', '~>13.2'
 gem 'rubocop', '~>1.75', require: false
 gem 'rubocop-minitest', '>0', require: false
 gem 'rubocop-performance', '>0', require: false
