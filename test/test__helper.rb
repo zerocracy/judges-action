@@ -3,8 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
-ENV['RACK_ENV'] = 'test'
-
 require 'simplecov'
 require 'simplecov-cobertura'
 unless SimpleCov.running || ARGV.include?('--no-cov')
