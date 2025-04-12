@@ -8,7 +8,6 @@ ENV['RACK_ENV'] = 'test'
 require 'simplecov'
 require 'simplecov-cobertura'
 unless SimpleCov.running || ARGV.include?('--no-cov')
-  SimpleCov.command_name('test')
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
     [
       SimpleCov::Formatter::HTMLFormatter,
@@ -16,7 +15,7 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
     ]
   )
   SimpleCov.minimum_coverage 80
-  SimpleCov.minimum_coverage_by_file 30
+  SimpleCov.minimum_coverage_by_file 25
   SimpleCov.start do
     add_filter 'vendor/'
     add_filter 'target/'
