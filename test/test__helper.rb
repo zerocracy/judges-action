@@ -6,10 +6,25 @@
 ENV['RACK_ENV'] = 'test'
 
 require 'simplecov'
-SimpleCov.start
-
 require 'simplecov-cobertura'
-SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+unless SimpleCov.running || ARGV.include?('--no-cov')
+  SimpleCov.command_name('test')
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+    [
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::CoberturaFormatter
+    ]
+  )
+  SimpleCov.minimum_coverage 80
+  SimpleCov.minimum_coverage_by_file 30
+  SimpleCov.start do
+    add_filter 'vendor/'
+    add_filter 'target/'
+    track_files 'judges/**/*.rb'
+    track_files 'lib/**/*.rb'
+    track_files '*.rb'
+  end
+end
 
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
