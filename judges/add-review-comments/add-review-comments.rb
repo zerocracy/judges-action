@@ -9,7 +9,7 @@ require 'fbe/conclude'
 Fbe.conclude do
   quota_aware
   on '(and
-    (or (eq what "pull-was-reviewed") (eq what "code-was-merged"))
+    (or (eq what "pull-was-reviewed") (eq what "pull-was-merged"))
     (not (exists review_comments)))'
   consider do |f|
     begin
