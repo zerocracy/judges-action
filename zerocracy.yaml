@@ -1,12 +1,29 @@
 ---
 - added: 8
-  cycles: 3
+  cycles: 1
   deleted: 8
+  error:
+  - 'GET https://api.github.com/users/zerocracy/repos?per_page=100: 403 - API rate
+    limit exceeded for user ID 526301. If you reach out to GitHub Support for help,
+    please include the request ID 2740:1479C2:106D1ED:10F4D59:67FD1692 and timestamp
+    2025-04-14 14:07:14 UTC. // See: https://docs.github.com/rest/overview/rate-limits-for-the-rest-api'
+  - 'GET https://api.github.com/users/zerocracy/repos?per_page=100: 403 - API rate
+    limit exceeded for user ID 526301. If you reach out to GitHub Support for help,
+    please include the request ID 2740:1479C2:107D323:110558E:67FD16CF and timestamp
+    2025-04-14 14:08:15 UTC. // See: https://docs.github.com/rest/overview/rate-limits-for-the-rest-api'
+  - 'GET https://api.github.com/users/zerocracy/repos?per_page=100: 403 - API rate
+    limit exceeded for user ID 526301. If you reach out to GitHub Support for help,
+    please include the request ID 2740:1479C2:108C404:1114D40:67FD170D and timestamp
+    2025-04-14 14:09:17 UTC. // See: https://docs.github.com/rest/overview/rate-limits-for-the-rest-api'
+  - 'GET https://api.github.com/user/13273243: 403 - API rate limit exceeded for user
+    ID 526301. If you reach out to GitHub Support for help, please include the request
+    ID 2740:1479C2:109BD55:1124D77:67FD174A and timestamp 2025-04-14 14:10:18 UTC.
+    // See: https://docs.github.com/rest/overview/rate-limits-for-the-rest-api'
   inserted: 8
-  seconds: 340.902341016
+  seconds: 245.977721055
   version: 0.39.2
   what: judges-summary
-  when: 2025-04-14 13:18:44.725716806 Z
+  when: 2025-04-14 14:10:18.886178672 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
