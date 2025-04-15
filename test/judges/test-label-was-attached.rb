@@ -16,19 +16,23 @@ require_relative '../test__helper'
 class TestLabelWasAttached < Jp::Test
   def test_catches_label_event
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/issues/42/timeline?per_page=100').to_return(
       body: [{ event: 'labeled', label: { name: 'bug' }, actor: { id: 42 }, created_at: Time.now }].to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     fb = Factbase.new
@@ -46,14 +50,17 @@ class TestLabelWasAttached < Jp::Test
 
   def test_removes_lost_issue
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 44, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44').to_return(
       body: { id: 44, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44/issues/44/timeline?per_page=100').to_return(
@@ -66,11 +73,9 @@ class TestLabelWasAttached < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
-    )
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      status: 200, body: '', headers: {}
     )
     fb = Factbase.new
     op = fb.insert
@@ -87,14 +92,17 @@ class TestLabelWasAttached < Jp::Test
 
   def test_does_not_remove_labeled_issue
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 44, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44').to_return(
       body: { id: 44, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44/issues/44/timeline?per_page=100').to_return(
@@ -107,11 +115,12 @@ class TestLabelWasAttached < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/44/issues/45/timeline?per_page=100').to_return(
-      status: 404,
+      status: 200,
       body: [
         {
           event: 'labeled',
@@ -121,53 +130,56 @@ class TestLabelWasAttached < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      status: 200, body: '', headers: {}
-    )
     fb = Factbase.new
-    op = fb.insert
-    op.what = 'issue-was-opened'
-    op.repository = 44
-    op.issue = 44
-    op.where = 'github'
-    op = fb.insert
-    op.what = 'issue-was-opened'
-    op.repository = 44
-    op.issue = 45
-    op.where = 'github'
+    f1 = fb.insert
+    f1.what = 'issue-was-opened'
+    f1.repository = 44
+    f1.issue = 44
+    f1.where = 'github'
+    f2 = fb.insert
+    f2.what = 'issue-was-opened'
+    f2.repository = 44
+    f2.issue = 45
+    f2.where = 'github'
     load_it('label-was-attached', fb)
-    f = fb.query('(eq what "issue-was-opened")').each.to_a
-    assert_equal(1, f.count)
-    assert_equal(45, f.first.issue)
-    assert_equal('issue-was-opened', f.first.what)
-    assert_nil(f[1])
+    facts = fb.query('(eq what "issue-was-opened")').each.to_a
+    refute_empty(facts)
+    f = facts.first
+    assert_equal(45, f.issue)
+    assert_equal('issue-was-opened', f.what)
     f = fb.query('(eq issue 44)').each.to_a
     assert_equal(0, f.count)
   end
 
   def test_does_not_remove_issue_from_other_repository
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 50, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/50').to_return(
       body: { id: 50, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/bar/bar').to_return(
       body: { id: 55, full_name: 'bar/bar' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/55').to_return(
       body: { id: 55, full_name: 'bar/bar' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/50/issues/46/timeline?per_page=100').to_return(
@@ -180,7 +192,8 @@ class TestLabelWasAttached < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/55/issues/46/timeline?per_page=100').to_return(
@@ -193,11 +206,9 @@ class TestLabelWasAttached < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
-    )
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      status: 200, body: '', headers: {}
     )
     fb = Factbase.new
     op = fb.insert

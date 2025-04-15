@@ -34,6 +34,13 @@ require_relative '../lib/jp'
 
 # Parent class for all tests.
 class Jp::Test < Minitest::Test
+  def rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'X-RateLimit-Remaining' => '999' }
+    )
+  end
+
   def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }))
     $fb = fb
     $global = {}
@@ -46,7 +53,7 @@ class Jp::Test < Minitest::Test
   end
 
   def stub_github(url, body:, method: :get, status: 200,
-                  headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '1000' })
+                  headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' })
     stub_request(method, url).to_return(status:, body: body.to_json, headers:)
   end
 end

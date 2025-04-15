@@ -18,6 +18,7 @@ require_relative '../test__helper'
 class TestGithubEvents < Jp::Test
   def test_create_tag_event
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_event(
       {
         id: 42,
@@ -30,18 +31,21 @@ class TestGithubEvents < Jp::Test
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     fb = Factbase.new
     load_it('github-events', fb)
     f = fb.query('(eq what "tag-was-created")').each.to_a.first
+    refute_nil(f)
     assert_equal(42, f.who)
     assert_equal('foo', f.tag)
   end
 
   def test_skip_watch_event
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_event(
       {
         id: 42,
@@ -58,14 +62,17 @@ class TestGithubEvents < Jp::Test
 
   def test_skip_event_when_user_equals_pr_author
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
@@ -188,17 +195,20 @@ class TestGithubEvents < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/526200').to_return(
       body: { id: 526_200, login: 'test' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/93')
@@ -213,7 +223,10 @@ class TestGithubEvents < Jp::Test
           commits: 2,
           changed_files: 3
         }.to_json,
-        headers: { 'content-type': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RateLimit-Remaining' => '999'
+        }
       )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -224,14 +237,17 @@ class TestGithubEvents < Jp::Test
 
   def test_add_only_approved_pull_request_review_events
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
@@ -321,22 +337,26 @@ class TestGithubEvents < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/43').to_return(
       body: { id: 43, login: 'yegor256' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/526200').to_return(
       body: { id: 526_200, login: 'test' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/93')
@@ -351,7 +371,10 @@ class TestGithubEvents < Jp::Test
           commits: 2,
           changed_files: 3
         }.to_json,
-        headers: { 'content-type': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RateLimit-Remaining' => '999'
+        }
       )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -362,14 +385,15 @@ class TestGithubEvents < Jp::Test
 
   def test_skip_issue_was_opened_event
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
@@ -403,18 +427,23 @@ class TestGithubEvents < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/yegor256/judges/issues/1347').to_return(
       status: 200,
       body: { number: 1347, state: 'open' }.to_json,
-      headers: { 'content-type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
     )
     fb = Factbase.new
     op = fb.insert
@@ -430,14 +459,17 @@ class TestGithubEvents < Jp::Test
 
   def test_skip_issue_was_closed_event
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
@@ -471,18 +503,23 @@ class TestGithubEvents < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/yegor256/judges/issues/1347').to_return(
       status: 200,
       body: { number: 1347, state: 'closed' }.to_json,
-      headers: { 'content-type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
     )
     fb = Factbase.new
     op = fb.insert
@@ -498,14 +535,17 @@ class TestGithubEvents < Jp::Test
 
   def test_watch_pull_request_review_events
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
@@ -686,17 +726,20 @@ class TestGithubEvents < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/55').to_return(
       body: { id: 55, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/93')
@@ -711,7 +754,10 @@ class TestGithubEvents < Jp::Test
           commits: 2,
           changed_files: 3
         }.to_json,
-        headers: { 'content-type': 'application/json' }
+        headers: {
+          'Content-Type' => 'application/json',
+          'X-RateLimit-Remaining' => '999'
+        }
       )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -725,6 +771,7 @@ class TestGithubEvents < Jp::Test
 
   def test_release_event_contributors
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_event(
       {
         id: '1',
@@ -812,7 +859,7 @@ class TestGithubEvents < Jp::Test
           id: 526_302
         }
       ].to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }
     )
     stub_request(:get, 'https://api.github.com/user/8086956').to_return(
@@ -820,7 +867,8 @@ class TestGithubEvents < Jp::Test
         login: 'rultor',
         id: 8_086_956
       }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?per_page=100').to_return(
@@ -828,7 +876,10 @@ class TestGithubEvents < Jp::Test
         { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
         { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
       ].to_json,
-      headers: { 'content-type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
     )
     stub_request(
       :get,
@@ -836,7 +887,10 @@ class TestGithubEvents < Jp::Test
       'per_page=100&sha=69a28ba1122af281936371bbb36f67e5b97246b1'
     ).to_return(
       body: [{ sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }].to_json,
-      headers: { 'content-type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
     )
 
     stub_request(
@@ -856,7 +910,10 @@ class TestGithubEvents < Jp::Test
           { additions: 0, deletions: 7, changes: 7 }
         ]
       }.to_json,
-      headers: { 'content-type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
     )
     stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/compare/0.0.1...0.0.5?per_page=100').to_return(
       body: {
@@ -876,7 +933,10 @@ class TestGithubEvents < Jp::Test
           { additions: 0, deletions: 10, changes: 10 }
         ]
       }.to_json,
-      headers: { 'content-type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
     )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -894,6 +954,7 @@ class TestGithubEvents < Jp::Test
 
   def test_release_event_contributors_without_last_release_tag_and_with_release_id
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_event(
       {
         id: '10',
@@ -985,6 +1046,7 @@ class TestGithubEvents < Jp::Test
 
   def test_release_event_contributors_without_last_release_tag_and_without_release_id
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_event(
       {
         id: '10',
@@ -1068,6 +1130,7 @@ class TestGithubEvents < Jp::Test
 
   def test_event_for_renamed_repository
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_github(
       'https://api.github.com/repositories/111/events?per_page=100',
       body: [
@@ -1209,18 +1272,21 @@ class TestGithubEvents < Jp::Test
   def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
       body: json.to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
   end

@@ -13,6 +13,7 @@ require_relative '../test__helper'
 class TestFindAllIssues < Jp::Test
   def test_find_all_issues_without_issues_in_fb
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }

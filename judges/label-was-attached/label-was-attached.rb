@@ -43,7 +43,8 @@ Fbe.iterate do
           "to the issue #{Fbe.issue(nn)}."
       end
     rescue Octokit::NotFound
-      Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq issue #{issue}))").delete!
+      bad = Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq issue #{issue}))").delete!
+      $loog.debug("Can't find issue ##{issue} in repository ##{repository}, deleted #{bad} fact(s) related to it")
     end
     issue
   end

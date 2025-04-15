@@ -19,12 +19,14 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/rate_limit', body: {})
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo', open_issues: 0 }.to_json, headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100').to_return(
@@ -35,14 +37,16 @@ class TestQualityOfService < Jp::Test
         ]
       }.to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs/1/timing').to_return(
       status: 200,
       body: {}.to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/releases?per_page=100').to_return(
@@ -54,7 +58,8 @@ class TestQualityOfService < Jp::Test
         }
       ].to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-07-15').to_return(
@@ -64,7 +69,8 @@ class TestQualityOfService < Jp::Test
         items: []
       }.to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     (Date.parse('2024-07-15')..Date.parse('2024-08-12')).each do |date|
@@ -81,7 +87,7 @@ class TestQualityOfService < Jp::Test
         items: []
       }.to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       }
     )
     stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-15').to_return(
@@ -91,7 +97,8 @@ class TestQualityOfService < Jp::Test
         items: []
       }.to_json,
       headers: {
-        'content-type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_github(
