@@ -13,11 +13,18 @@ Fbe.conclude do
     (not (exists review_comments)))'
   consider do |f|
     begin
-      pl = Fbe.octo.pull_request(Fbe.octo.repo_name_by_id(f.repository), f.issue)
-    rescue Octokit::NotFound
+      repo = Fbe.octo.repo_name_by_id(f.repository)
+    rescue Octokit::NotFound => e
+      $loog.info("Failed to find repository #{f.repository}: #{e.message}")
+      next
+    end
+    begin
+      pl = Fbe.octo.pull_request(repo, f.issue)
+    rescue Octokit::NotFound => e
+      $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
       next
     end
     f.review_comments = pl[:review_comments]
-    $loog.info("Set #{pl[:review_comments]} review comments for PR ##{f.issue} in repository #{f.repository}")
+    $loog.info("Set #{pl[:review_comments]} review comments for PR ##{f.issue} in #{repo}")
   end
 end
