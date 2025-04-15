@@ -27,6 +27,6 @@ Fbe.conclude do
     end
     c = json[:review_comments]
     f.review_comments = c
-    $loog.info("Set #{c} review comments for PR ##{f.issue} in #{repo}")
+    $loog.info("Found #{c} review comments in #{repo}##{f.issue}")
   end
 end
