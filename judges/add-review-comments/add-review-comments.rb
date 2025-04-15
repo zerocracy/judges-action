@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'octokit'
 require 'fbe/octo'
 require 'fbe/conclude'
 
@@ -24,7 +25,8 @@ Fbe.conclude do
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
       next
     end
-    f.review_comments = pl[:review_comments]
-    $loog.info("Set #{pl[:review_comments]} review comments for PR ##{f.issue} in #{repo}")
+    c = pl[:review_comments]
+    f.review_comments = c
+    $loog.info("Set #{c} review comments for PR ##{f.issue} in #{repo}")
   end
 end
