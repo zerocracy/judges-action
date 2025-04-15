@@ -20,12 +20,12 @@ Fbe.conclude do
       next
     end
     begin
-      pl = Fbe.octo.pull_request(repo, f.issue)
+      json = Fbe.octo.pull_request(repo, f.issue)
     rescue Octokit::NotFound => e
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
       next
     end
-    c = pl[:review_comments]
+    c = json[:review_comments]
     f.review_comments = c
     $loog.info("Set #{c} review comments for PR ##{f.issue} in #{repo}")
   end
