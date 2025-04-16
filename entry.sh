@@ -97,6 +97,7 @@ ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
     --summary \
+    --shuffle=aaa \
     --timeout=180 \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
