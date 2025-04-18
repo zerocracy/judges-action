@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 76.365251716
+  seconds: 6.047993345
   version: 0.39.2
   what: judges-summary
-  when: 2025-04-18 17:06:50.975618223 Z
+  when: 2025-04-18 18:07:11.682272329 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -130327,13 +130327,6 @@
   when: 2025-04-18 13:12:54.000000000 Z
   where: github
   who: 29139614
-- _id: 570361
-  _time: 2025-04-18 14:07:52.196118441 Z
-  _version: 0.10.0/0.39.2/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
 - _id: 570362
   _job: 17932
   _time: 2025-04-18 14:08:43.157390075 Z
@@ -130858,7 +130851,7 @@
   review_comments: 0
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2025-04-18 15:38:16.000000000 Z
+  when: &205 2025-04-18 15:38:16.000000000 Z
   where: github
   who: 8086956
 - _id: 570645
@@ -130897,7 +130890,7 @@
   review_comments: 0
   succeeded_builds: 9
   what: pull-was-merged
-  when: 2025-04-18 15:58:17.000000000 Z
+  when: &206 2025-04-18 15:58:17.000000000 Z
   where: github
   who: 8086956
 - _id: 570651
@@ -131062,5 +131055,46 @@
   _version: 0.10.0/0.39.2/
   latest: 1
   repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 570765
+  _job: 17948
+  _time: 2025-04-18 17:07:11.674544547 Z
+  _version: 0.10.0/0.39.2/0.5.0
+  comments: 2
+  details: The pull request zerocracy/judges-action#576 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 27m41s of being in review and 2 comments.
+  hoc: 2
+  issue: 576
+  merger: 8086956
+  repository: 799177290
+  review_comments: 0
+  seconds: 1662
+  what: code-was-contributed
+  when: *205
+  where: github
+  who: 29139614
+- _id: 570766
+  _job: 17948
+  _time: 2025-04-18 17:07:12.083146508 Z
+  _version: 0.10.0/0.39.2/0.5.0
+  comments: 2
+  details: The pull request zerocracy/swarm-template#69 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h19m of being in review and 2 comments.
+  hoc: 2
+  issue: 69
+  merger: 8086956
+  repository: 849726475
+  review_comments: 0
+  seconds: 4747
+  what: code-was-contributed
+  when: *206
+  where: github
+  who: 29139614
+- _id: 570767
+  _time: 2025-04-18 18:07:10.718122736 Z
+  _version: 0.10.0/0.39.2/
+  latest: 1
+  repository: 820463873
   what: min-issue-was-found
   where: github
