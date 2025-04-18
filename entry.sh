@@ -8,7 +8,7 @@ set -o pipefail
 
 start=$(date +%s)
 
-VERSION=0.0.0
+VERSION=0.4.0
 
 if [ -z "${JUDGES}" ]; then
     JUDGES=judges
