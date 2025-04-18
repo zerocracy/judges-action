@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 32.211702652
+  seconds: 17.977016081
   version: 0.39.2
   what: judges-summary
-  when: 2025-04-18 19:05:37.570055024 Z
+  when: 2025-04-18 20:06:26.644646000 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -130994,13 +130994,6 @@
   total_stars: 35
   what: dimensions-of-terrain
   when: 2025-04-18 16:07:10.395567694 Z
-- _id: 570764
-  _time: 2025-04-18 17:06:49.750851985 Z
-  _version: 0.10.0/0.39.2/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 570765
   _job: 17948
   _time: 2025-04-18 17:07:11.674544547 Z
@@ -131051,27 +131044,6 @@
   repository: 799113787
   what: min-issue-was-found
   where: github
-- _id: 570769
-  _time: 2025-04-18 19:05:12.983200928 Z
-  _version: 0.10.0/0.39.2/
-  latest: 48830783506
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 570770
-  _time: 2025-04-18 19:05:14.730321381 Z
-  _version: 0.10.0/0.39.2/
-  latest: 48836194282
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 570771
-  _time: 2025-04-18 19:05:15.783722404 Z
-  _version: 0.10.0/0.39.2/
-  latest: 48829693428
-  repository: 798641472
-  what: events-were-scanned
-  where: github
 - _id: 570772
   _time: 2025-04-18 19:05:17.352260987 Z
   _version: 0.10.0/0.39.2/
@@ -131088,12 +131060,13 @@
   event_type: PullRequestEvent
   failed_builds: 0
   hoc: 2
+  is_human: 0
   issue: 254
   repository: 802720676
   review_comments: 0
   succeeded_builds: 12
   what: pull-was-merged
-  when: 2025-04-18 18:59:13.000000000 Z
+  when: &207 2025-04-18 18:59:13.000000000 Z
   where: github
   who: 8086956
 - _id: 570773
@@ -131103,33 +131076,13 @@
   details: The pull request zerocracy/pages-action#254 has been opened by @renovate[bot].
   event_id: 48835861685
   event_type: PullRequestEvent
+  is_human: 0
   issue: 254
   repository: 802720676
   what: pull-was-opened
   when: 2025-04-18 17:53:02.000000000 Z
   where: github
   who: 29139614
-- _id: 570774
-  _time: 2025-04-18 19:05:33.999603350 Z
-  _version: 0.10.0/0.39.2/
-  latest: 48837331472
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 570775
-  _time: 2025-04-18 19:05:35.038370225 Z
-  _version: 0.10.0/0.39.2/
-  latest: 48833209474
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 570776
-  _time: 2025-04-18 19:05:36.049060684 Z
-  _version: 0.10.0/0.39.2/
-  latest: 48723581243
-  repository: 840215648
-  what: events-were-scanned
-  where: github
 - _id: 570777
   _time: 2025-04-18 19:05:36.588923304 Z
   _version: 0.10.0/0.39.2/
@@ -131139,6 +131092,7 @@
     (default branch is ''master''), not associated with any pull request.'
   event_id: 48836157880
   event_type: PushEvent
+  is_human: 1
   push_id: 23833351437
   ref: refs/heads/master
   repository: 799113787
@@ -131147,10 +131101,85 @@
   when: 2025-04-18 18:05:54.000000000 Z
   where: github
   who: 526301
-- _id: 570778
-  _time: 2025-04-18 19:05:36.940842934 Z
+- _id: 570779
+  _job: 17959
+  _time: 2025-04-18 19:06:34.248855683 Z
+  _version: 0.10.0/0.39.2/0.5.0
+  comments: 2
+  details: The pull request zerocracy/pages-action#254 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h6m of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 254
+  merger: 8086956
+  repository: 802720676
+  review_comments: 0
+  seconds: 3971
+  what: code-was-contributed
+  when: *207
+  where: github
+  who: 29139614
+- _id: 570780
+  _job: 17959
+  _time: 2025-04-18 19:06:57.696315511 Z
+  _version: 0.9.10/0.39.2/0.5.0
+  ac: -340
+  start: 2024-07-31 20:09:06.291243736 Z
+  what: earned-value
+  when: 2025-04-18 19:06:57.696636818 Z
+- _id: 570781
+  _time: 2025-04-18 20:06:16.100856407 Z
   _version: 0.10.0/0.39.2/
   latest: 48836157880
   repository: 799113787
   what: events-were-scanned
+  where: github
+- _id: 570782
+  _time: 2025-04-18 20:06:17.522990577 Z
+  _version: 0.10.0/0.39.2/
+  latest: 48837331472
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 570783
+  _time: 2025-04-18 20:06:18.977776806 Z
+  _version: 0.10.0/0.39.2/
+  latest: 48723581243
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 570784
+  _time: 2025-04-18 20:06:20.082159864 Z
+  _version: 0.10.0/0.39.2/
+  latest: 48829693428
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 570785
+  _time: 2025-04-18 20:06:21.916531978 Z
+  _version: 0.10.0/0.39.2/
+  latest: 48837478020
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 570786
+  _time: 2025-04-18 20:06:23.350369018 Z
+  _version: 0.10.0/0.39.2/
+  latest: 48833209474
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 570787
+  _time: 2025-04-18 20:06:24.644810576 Z
+  _version: 0.10.0/0.39.2/
+  latest: 48830783506
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 570788
+  _time: 2025-04-18 20:06:26.504186666 Z
+  _version: 0.10.0/0.39.2/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
   where: github
