@@ -22,6 +22,7 @@ users.each do |who|
     $loog.debug("GitHub user @#{nick} (##{who}) is alive")
     next
   end
+  Fbe.fb.query("(and (eq what 'who-has-name') (eq who #{who}))").delete!
   done =
     Fbe.fb.query("(eq who #{who})").each do |n|
       Fbe.delete(n, 'who')

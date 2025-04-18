@@ -24,5 +24,6 @@ class TestWhoIsAlive < Jp::Test
     f.name = 'jack'
     load_it('who-is-alive', fb)
     assert_empty(fb.query('(exists who)').each.to_a)
+    assert_empty(fb.query('(eq what "who-has-name")').each.to_a)
   end
 end
