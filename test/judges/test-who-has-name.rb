@@ -27,7 +27,7 @@ class TestWhoHasName < Jp::Test
     assert_equal('lebowski', fb.query('(exists name)').each.to_a.first.name)
   end
 
-  def test_deletes_who_when_not_found
+  def test_ignores_who_when_not_found
     WebMock.disable_net_connect!
     stub_github(
       'https://api.github.com/user/444',
@@ -39,6 +39,6 @@ class TestWhoHasName < Jp::Test
     f.who = 444
     f.where = 'github'
     load_it('who-has-name', fb)
-    assert_empty(fb.query('(exists who)').each.to_a)
+    assert_equal(1, fb.query('(exists who)').each.to_a.size)
   end
 end
