@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 183.421526108
+  seconds: 99.292106255
   version: 0.41.0
   what: judges-summary
-  when: 2025-04-19 20:09:11.129944855 Z
+  when: 2025-04-19 21:06:46.122230661 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -131343,7 +131343,7 @@
   review_comments: 0
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2025-04-19 16:45:50.000000000 Z
+  when: &209 2025-04-19 16:45:50.000000000 Z
   where: github
   who: 8086956
 - _id: 573534
@@ -131373,13 +131373,6 @@
   when: 2025-04-19 17:51:58.000000000 Z
   where: github
   who: 526301
-- _id: 573900
-  _time: 2025-04-19 18:10:20.145946855 Z
-  _version: 0.10.0/0.39.2/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 573901
   _time: 2025-04-19 19:05:30.923640664 Z
   _version: 0.10.0/0.41.0/
@@ -131423,7 +131416,7 @@
   review_comments: 0
   succeeded_builds: 12
   what: pull-was-merged
-  when: 2025-04-19 19:44:05.000000000 Z
+  when: &210 2025-04-19 19:44:05.000000000 Z
   where: github
   who: 8086956
 - _id: 574020
@@ -131462,7 +131455,7 @@
   review_comments: 0
   succeeded_builds: 9
   what: pull-was-merged
-  when: 2025-04-19 19:44:22.000000000 Z
+  when: &211 2025-04-19 19:44:22.000000000 Z
   where: github
   who: 8086956
 - _id: 574023
@@ -131501,7 +131494,7 @@
   review_comments: 0
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2025-04-19 18:47:03.000000000 Z
+  when: &212 2025-04-19 18:47:03.000000000 Z
   where: github
   who: 8086956
 - _id: 574029
@@ -131567,101 +131560,180 @@
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 574047
-  _time: 2025-04-19 20:08:14.978785372 Z
-  _version: 0.10.0/0.41.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 574100
-  _time: 2025-04-19 20:08:41.023508472 Z
-  _version: 0.10.0/0.41.0/
-  latest: 0
+- _id: 574153
+  _job: 18058
+  _time: 2025-04-19 20:10:12.626986910 Z
+  _version: 0.10.0/0.40.0/0.6.0
+  comments: 2
+  details: The pull request zerocracy/judges-action#577 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 36m27s of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 577
+  merger: 8086956
   repository: 799177290
-  what: labels-were-scanned
+  review_comments: 0
+  seconds: 2188
+  what: code-was-contributed
+  when: *209
   where: github
-- _id: 574134
-  _time: 2025-04-19 20:08:57.584549093 Z
-  _version: 0.10.0/0.41.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 574142
-  _time: 2025-04-19 20:09:01.689815423 Z
-  _version: 0.10.0/0.41.0/
-  latest: 74
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 574143
-  _time: 2025-04-19 20:09:02.178727143 Z
-  _version: 0.10.0/0.41.0/
-  latest: 28
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 574144
-  _time: 2025-04-19 20:09:02.832811377 Z
-  _version: 0.10.0/0.41.0/
-  latest: 138
+  who: 29139614
+- _id: 574154
+  _job: 18058
+  _time: 2025-04-19 20:10:12.923065490 Z
+  _version: 0.10.0/0.40.0/0.6.0
+  comments: 2
+  details: The pull request zerocracy/pages-action#255 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 42m49s of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 255
+  merger: 8086956
   repository: 802720676
-  what: labels-were-scanned
+  review_comments: 0
+  seconds: 2570
+  what: code-was-contributed
+  when: *210
   where: github
-- _id: 574145
-  _time: 2025-04-19 20:09:03.326480138 Z
-  _version: 0.10.0/0.41.0/
-  latest: 21
-  repository: 799113787
-  what: labels-were-scanned
+  who: 29139614
+- _id: 574155
+  _job: 18058
+  _time: 2025-04-19 20:10:13.095449466 Z
+  _version: 0.10.0/0.40.0/0.6.0
+  comments: 2
+  details: The pull request zerocracy/swarm-template#70 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h12m of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 70
+  merger: 8086956
+  repository: 849726475
+  review_comments: 0
+  seconds: 4349
+  what: code-was-contributed
+  when: *211
   where: github
-- _id: 574146
-  _time: 2025-04-19 20:09:04.535213677 Z
+  who: 29139614
+- _id: 574156
+  _job: 18058
+  _time: 2025-04-19 20:10:13.275738465 Z
+  _version: 0.10.0/0.40.0/0.6.0
+  comments: 2
+  details: The pull request zerocracy/judges-action#578 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 41m1s of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 578
+  merger: 8086956
+  repository: 799177290
+  review_comments: 0
+  seconds: 2462
+  what: code-was-contributed
+  when: *212
+  where: github
+  who: 29139614
+- _id: 574157
+  _time: 2025-04-19 21:05:16.126725986 Z
   _version: 0.10.0/0.41.0/
   latest: 48830783506
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 574147
-  _time: 2025-04-19 20:09:05.436446266 Z
+- _id: 574158
+  _time: 2025-04-19 21:05:17.698291003 Z
   _version: 0.10.0/0.41.0/
-  latest: 48854317997
-  repository: 802720676
+  latest: 48723581243
+  repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 574148
-  _time: 2025-04-19 20:09:06.701460630 Z
+- _id: 574159
+  _time: 2025-04-19 21:05:19.917163157 Z
   _version: 0.10.0/0.41.0/
-  latest: 48853944666
+  latest: 48854557852
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 574149
-  _time: 2025-04-19 20:09:07.764059949 Z
+- _id: 574160
+  _time: 2025-04-19 21:05:21.574175500 Z
   _version: 0.10.0/0.41.0/
   latest: 48854324541
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 574150
-  _time: 2025-04-19 20:09:08.452421853 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48853185693
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 574151
-  _time: 2025-04-19 20:09:09.584686397 Z
+- _id: 574161
+  _time: 2025-04-19 21:05:22.945725349 Z
   _version: 0.10.0/0.41.0/
   latest: 48829693428
   repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 574152
-  _time: 2025-04-19 20:09:10.849021841 Z
+- _id: 574162
+  _time: 2025-04-19 21:05:25.189867301 Z
   _version: 0.10.0/0.41.0/
-  latest: 48723581243
-  repository: 840215648
+  latest: 48854317997
+  repository: 802720676
   what: events-were-scanned
+  where: github
+- _id: 574163
+  _time: 2025-04-19 21:05:26.106428520 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48853185693
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 574177
+  _time: 2025-04-19 21:05:33.890732221 Z
+  _version: 0.10.0/0.41.0/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 574269
+  _time: 2025-04-19 21:06:32.819816866 Z
+  _version: 0.10.0/0.41.0/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 574273
+  _time: 2025-04-19 21:06:34.716888333 Z
+  _version: 0.10.0/0.41.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 574278
+  _time: 2025-04-19 21:06:37.786044588 Z
+  _version: 0.10.0/0.41.0/
+  latest: 106
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 574279
+  _time: 2025-04-19 21:06:38.379041800 Z
+  _version: 0.10.0/0.41.0/
+  latest: 47
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 574280
+  _time: 2025-04-19 21:06:38.960806981 Z
+  _version: 0.10.0/0.41.0/
+  latest: 62
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 574281
+  _time: 2025-04-19 21:06:39.520047262 Z
+  _version: 0.10.0/0.41.0/
+  latest: 57
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 574282
+  _time: 2025-04-19 21:06:45.983195709 Z
+  _version: 0.10.0/0.41.0/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
   where: github
