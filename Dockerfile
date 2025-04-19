@@ -13,12 +13,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /action
-COPY entry.sh /action
-COPY judges /action/judges
-COPY lib /action/lib
 COPY Gemfile /action
 COPY Gemfile.lock /action
-
 RUN bundle update --gemfile=/action/Gemfile
+
+COPY judges /action/judges
+COPY lib /action/lib
+COPY entry.sh /action
 
 ENTRYPOINT ["/action/entry.sh", "/action"]

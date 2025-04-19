@@ -93,6 +93,10 @@ options+=("--option=vitals_url=${VITALS_URL}")
 echo "The 'judges-action' ${VERSION} is running"
 
 cd "${SELF}"
+${JUDGES} "${gopts[@]}" eval \
+    "${fb}" \
+    "\$fb.query(\"(eq what 'judges-summary')\").delete!"
+
 ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
