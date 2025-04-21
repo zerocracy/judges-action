@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 3
+  cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 229.211113256
+  seconds: 10.184062744
   version: 0.41.0
   what: judges-summary
-  when: 2025-04-21 21:09:17.569850698 Z
+  when: 2025-04-21 22:06:05.043963729 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -131657,13 +131657,6 @@
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 580286
-  _time: 2025-04-21 16:06:39.268990451 Z
-  _version: 0.10.0/0.41.0/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
 - _id: 580398
   _time: 2025-04-21 17:05:44.136684880 Z
   _version: 0.10.0/0.41.0/
@@ -131750,7 +131743,7 @@
   review_comments: 0
   succeeded_builds: 10
   what: pull-was-merged
-  when: 2025-04-21 20:45:47.000000000 Z
+  when: &214 2025-04-21 20:45:47.000000000 Z
   where: github
   who: 8086956
 - _id: 581022
@@ -131863,5 +131856,30 @@
   _version: 0.10.0/0.41.0/
   latest: 1
   repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 581252
+  _job: 18207
+  _time: 2025-04-21 21:09:38.610254912 Z
+  _version: 0.10.0/0.40.0/0.6.0
+  comments: 2
+  details: The pull request yegor256/judges#202 with 14 HoC created by @renovate[bot]
+    was merged by @rultor after 12m35s of being in review and 2 comments.
+  hoc: 14
+  is_human: 0
+  issue: 202
+  merger: 8086956
+  repository: 799113787
+  review_comments: 0
+  seconds: 756
+  what: code-was-contributed
+  when: *214
+  where: github
+  who: 29139614
+- _id: 581253
+  _time: 2025-04-21 22:06:04.101901822 Z
+  _version: 0.10.0/0.41.0/
+  latest: 1
+  repository: 799113787
   what: min-issue-was-found
   where: github
