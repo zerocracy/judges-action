@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 3
+  cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 233.042709768
+  seconds: 99.303774556
   version: 0.41.0
   what: judges-summary
-  when: 2025-04-23 16:10:48.732394104 Z
+  when: 2025-04-23 17:07:47.893358949 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -132296,13 +132296,6 @@
   when: 2025-04-23 04:11:02.000000000 Z
   where: github
   who: 526301
-- _id: 585807
-  _time: 2025-04-23 14:07:39.559121446 Z
-  _version: 0.10.0/0.41.0/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
 - _id: 585909
   _time: 2025-04-23 15:07:21.395636216 Z
   _version: 0.10.0/0.41.0/
@@ -132325,7 +132318,7 @@
   review_comments: 0
   succeeded_builds: 9
   what: pull-was-merged
-  when: 2025-04-23 07:51:36.000000000 Z
+  when: &222 2025-04-23 07:51:36.000000000 Z
   where: github
   who: 8086956
 - _id: 585912
@@ -132350,7 +132343,7 @@
   review_comments: 0
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2025-04-23 07:00:11.000000000 Z
+  when: &223 2025-04-23 07:00:11.000000000 Z
   where: github
   who: 8086956
 - _id: 585918
@@ -132360,52 +132353,6 @@
   repository: 799113787
   what: min-issue-was-found
   where: github
-- _id: 585919
-  _job: 18352
-  _time: 2025-04-23 15:08:53.003601057 Z
-  _version: 0.10.0/0.41.0/0.6.0
-  award: -16
-  commit: a7ff49ef519b4b3944ca52adaf3c4c4da767ed91
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/fbe, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-1152](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/zerocracy/fbe/commit/a7ff49ef519b4b3944ca52adaf3c4c4da767ed91/#commitcomment-155766971
-  is_human: 1
-  repository: 820463873
-  what: push-to-master-was-punished
-  when: 2025-04-23 15:08:53.019806858 Z
-  where: github
-  who: 526301
-  why: Pushed a7ff49ef5 to the default branch 'master' in zerocracy/fbe
-- _id: 585920
-  _job: 18352
-  _time: 2025-04-23 15:08:53.554870526 Z
-  _version: 0.10.0/0.41.0/0.6.0
-  award: -16
-  commit: 4f111c51dd2b94453cf470d4750b47d88cede14e
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/fbe, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-1152](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/zerocracy/fbe/commit/4f111c51dd2b94453cf470d4750b47d88cede14e/#commitcomment-155766972
-  is_human: 1
-  repository: 820463873
-  what: push-to-master-was-punished
-  when: 2025-04-23 15:08:53.568748134 Z
-  where: github
-  who: 526301
-  why: Pushed 4f111c51d to the default branch 'master' in zerocracy/fbe
 - _id: 585921
   _job: 18352
   _time: 2025-04-23 15:09:14.079368482 Z
@@ -132452,108 +132399,221 @@
   repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 586161
-  _time: 2025-04-23 16:09:33.036737830 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48923409838
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 586162
-  _time: 2025-04-23 16:09:34.022243303 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48931300548
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 586163
-  _time: 2025-04-23 16:09:35.135826622 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48927236878
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 586164
-  _time: 2025-04-23 16:09:36.675687631 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48959694099
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 586165
-  _time: 2025-04-23 16:09:37.725204680 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48956317499
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 586166
-  _time: 2025-04-23 16:09:38.860750447 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48961298521
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 586167
-  _time: 2025-04-23 16:09:40.755197951 Z
-  _version: 0.10.0/0.41.0/
-  latest: 48960886510
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 586176
-  _time: 2025-04-23 16:09:53.185607841 Z
-  _version: 0.10.0/0.41.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 586189
-  _time: 2025-04-23 16:10:00.039324980 Z
-  _version: 0.10.0/0.41.0/
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 586263
-  _time: 2025-04-23 16:10:42.695462319 Z
-  _version: 0.10.0/0.41.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 586268
-  _time: 2025-04-23 16:10:45.462033684 Z
-  _version: 0.10.0/0.41.0/
-  latest: 62
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 586269
-  _time: 2025-04-23 16:10:45.944504076 Z
-  _version: 0.10.0/0.41.0/
-  latest: 105
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 586270
-  _time: 2025-04-23 16:10:46.438528613 Z
-  _version: 0.10.0/0.41.0/
-  latest: 73
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 586271
-  _time: 2025-04-23 16:10:47.043205738 Z
-  _version: 0.10.0/0.41.0/
-  latest: 130
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
 - _id: 586272
   _time: 2025-04-23 16:10:48.402322452 Z
   _version: 0.10.0/0.41.0/
   latest: 1
   repository: 799177290
   what: min-issue-was-found
+  where: github
+- _id:
+  - 586273
+  - 585919
+  _job:
+  - 18355
+  - 18352
+  _time:
+  - 2025-04-23 16:11:10.725040251 Z
+  - 2025-04-23 15:08:53.003601057 Z
+  _version: 0.10.0/0.41.0/0.6.0
+  award: -16
+  commit: a7ff49ef519b4b3944ca52adaf3c4c4da767ed91
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/fbe, the penalty amount is -16.
+  href: https://github.com/zerocracy/fbe/commit/a7ff49ef519b4b3944ca52adaf3c4c4da767ed91/#commitcomment-155766971
+  is_human: 1
+  repository: 820463873
+  what: push-to-master-was-punished
+  when: 2025-04-23 15:08:53.019806858 Z
+  where: github
+  who: 526301
+  why: Pushed a7ff49ef5 to the default branch 'master' in zerocracy/fbe
+- _id:
+  - 586274
+  - 585920
+  _job:
+  - 18355
+  - 18352
+  _time:
+  - 2025-04-23 16:11:10.776178053 Z
+  - 2025-04-23 15:08:53.554870526 Z
+  _version: 0.10.0/0.41.0/0.6.0
+  award: -16
+  commit: 4f111c51dd2b94453cf470d4750b47d88cede14e
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/fbe, the penalty amount is -16.
+  href: https://github.com/zerocracy/fbe/commit/4f111c51dd2b94453cf470d4750b47d88cede14e/#commitcomment-155766972
+  is_human: 1
+  repository: 820463873
+  what: push-to-master-was-punished
+  when: 2025-04-23 15:08:53.568748134 Z
+  where: github
+  who: 526301
+  why: Pushed 4f111c51d to the default branch 'master' in zerocracy/fbe
+- _id: 586275
+  _job: 18355
+  _time: 2025-04-23 16:11:14.823606432 Z
+  _version: 0.10.0/0.41.0/0.6.0
+  comments: 2
+  details: The pull request zerocracy/swarm-template#72 with 24 HoC created by @renovate[bot]
+    was merged by @rultor after 24m21s of being in review and 2 comments.
+  hoc: 24
+  is_human: 0
+  issue: 72
+  merger: 8086956
+  repository: 849726475
+  review_comments: 0
+  seconds: 1462
+  what: code-was-contributed
+  when: *222
+  where: github
+  who: 29139614
+- _id: 586276
+  _job: 18355
+  _time: 2025-04-23 16:11:15.261075948 Z
+  _version: 0.10.0/0.41.0/0.6.0
+  comments: 2
+  details: The pull request zerocracy/judges-action#580 with 8 HoC created by @renovate[bot]
+    was merged by @rultor after 1h20m of being in review and 2 comments.
+  hoc: 8
+  is_human: 0
+  issue: 580
+  merger: 8086956
+  repository: 799177290
+  review_comments: 0
+  seconds: 4827
+  what: code-was-contributed
+  when: *223
+  where: github
+  who: 29139614
+- _id: 586277
+  _time: 2025-04-23 17:06:11.903308758 Z
+  _version: 0.10.0/0.41.0/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 586278
+  _time: 2025-04-23 17:06:17.426125116 Z
+  _version: 0.10.0/0.41.0/
+  branch: renovate/fbe-0.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#257 has been closed by @rultor,
+    with 24 HoC and 2 comments.
+  event_id: 48961297461
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 24
+  issue: 257
+  repository: 802720676
+  review_comments: 0
+  succeeded_builds: 12
+  what: pull-was-merged
+  when: 2025-04-23 07:52:10.000000000 Z
+  where: github
+  who: 8086956
+- _id: 586279
+  _time: 2025-04-23 17:06:34.222713759 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48961331388
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 586280
+  _time: 2025-04-23 17:06:35.428987816 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48961298521
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 586281
+  _time: 2025-04-23 17:06:36.242792704 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48956317499
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 586282
+  _time: 2025-04-23 17:06:37.183724321 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48923409838
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 586283
+  _time: 2025-04-23 17:06:38.950077026 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48962053786
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 586284
+  _time: 2025-04-23 17:06:39.839692799 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48931300548
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 586285
+  _time: 2025-04-23 17:06:40.922789681 Z
+  _version: 0.10.0/0.41.0/
+  latest: 48927236878
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 586293
+  _time: 2025-04-23 17:06:45.394604176 Z
+  _version: 0.10.0/0.41.0/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 586392
+  _time: 2025-04-23 17:07:40.378061015 Z
+  _version: 0.10.0/0.41.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 586401
+  _time: 2025-04-23 17:07:45.328061625 Z
+  _version: 0.10.0/0.41.0/
+  latest: 171
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 586402
+  _time: 2025-04-23 17:07:45.854232992 Z
+  _version: 0.10.0/0.41.0/
+  latest: 25
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 586403
+  _time: 2025-04-23 17:07:46.370482274 Z
+  _version: 0.10.0/0.41.0/
+  latest: 177
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 586404
+  _time: 2025-04-23 17:07:46.874690202 Z
+  _version: 0.10.0/0.41.0/
+  latest: 135
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 586405
+  _time: 2025-04-23 17:07:47.639829034 Z
+  _version: 0.10.0/0.41.0/
+  latest: 138
+  repository: 802720676
+  what: labels-were-scanned
   where: github
