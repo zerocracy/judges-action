@@ -1,14 +1,12 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 3
   deleted: 8
-  error: 'Judge quantity-of-deliverables stopped by timeout after 3m0s: execution
-    expired'
   inserted: 8
-  seconds: 331.994234206
+  seconds: 80.659383692
   version: 0.41.0
   what: judges-summary
-  when: 2025-04-29 14:11:48.952530250 Z
+  when: 2025-04-29 15:07:37.260111695 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -132962,13 +132960,6 @@
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 603405
-  _time: 2025-04-29 10:06:39.418905972 Z
-  _version: 0.10.0/0.41.0/
-  latest: 0
-  repository: 974194993
-  what: min-issue-was-found
-  where: github
 - _id: 603408
   _job: 18766
   _time: 2025-04-29 11:06:36.872450911 Z
@@ -132983,13 +132974,6 @@
   - 1.4525714286703248
   what: learn-eva
   when: 2025-04-29 11:06:36.823205373 Z
-- _id: 603409
-  _time: 2025-04-29 12:10:08.462486711 Z
-  _version: 0.10.0/0.41.0/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 603636
   _time: 2025-04-29 13:16:21.507197331 Z
   _version: 0.10.0/0.41.0/
@@ -133131,66 +133115,131 @@
   since: 2025-04-22 14:07:32.154743547 Z
   what: quantity-of-deliverables
   when: 2025-04-29 14:07:32.154700897 Z
-- _id: 603875
-  _time: 2025-04-29 14:10:35.267427957 Z
+- _id: 603998
+  _job: 18776
+  _time: 2025-04-29 14:12:25.420585385 Z
+  _version: 0.10.0/0.41.0/0.6.0
+  award: -16
+  commit: d145ea8eca2c7eff32d45acb3e37a8ffb8fa4d01
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/zerocracy-mcp-server, the penalty amount is -16.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -16 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-1184](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  is_human: 1
+  repository: 974194993
+  what: push-to-master-was-punished
+  when: 2025-04-29 14:12:25.432747770 Z
+  where: github
+  who: 526301
+  why: Pushed d145ea8ec to the default branch 'master' in zerocracy/zerocracy-mcp-server
+- _id: 603999
+  _job: 18776
+  _time: 2025-04-29 14:12:25.879079632 Z
+  _version: 0.10.0/0.41.0/0.6.0
+  award: -16
+  commit: fa8b160d68e0475e6ca9d6c5435745bcf1248d4c
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/zerocracy-mcp-server, the penalty amount is -16.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -16 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running balance is [-1184](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
+  is_human: 1
+  repository: 974194993
+  what: push-to-master-was-punished
+  when: 2025-04-29 14:12:25.902538924 Z
+  where: github
+  who: 526301
+  why: Pushed fa8b160d6 to the default branch 'master' in zerocracy/zerocracy-mcp-server
+- _id: 604000
+  _time: 2025-04-29 15:06:19.702685030 Z
   _version: 0.10.0/0.41.0/
   latest: 1
-  repository: 802720676
+  repository: 974194993
   what: min-issue-was-found
   where: github
-- _id: 603884
-  _time: 2025-04-29 14:10:45.311082052 Z
+- _id: 604010
+  _time: 2025-04-29 15:06:26.691146607 Z
   _version: 0.10.0/0.41.0/
   latest: 0
   repository: 974194993
   what: labels-were-scanned
   where: github
-- _id: 603889
-  _time: 2025-04-29 14:10:47.218918944 Z
+- _id: 604015
+  _time: 2025-04-29 15:06:28.835567413 Z
   _version: 0.10.0/0.41.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 603984
-  _time: 2025-04-29 14:11:40.721655888 Z
+- _id: 604028
+  _time: 2025-04-29 15:06:36.264176590 Z
+  _version: 0.10.0/0.41.0/
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 604094
+  _time: 2025-04-29 15:07:14.941790315 Z
   _version: 0.10.0/0.41.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 603993
-  _time: 2025-04-29 14:11:46.609117788 Z
+- _id: 604097
+  _time: 2025-04-29 15:07:16.287153177 Z
   _version: 0.10.0/0.41.0/
-  latest: 138
+  latest: 0
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 603994
-  _time: 2025-04-29 14:11:47.110298033 Z
+- _id: 604102
+  _time: 2025-04-29 15:07:19.347272648 Z
   _version: 0.10.0/0.41.0/
-  latest: 216
-  repository: 798641472
+  latest: 130
+  repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 603995
-  _time: 2025-04-29 14:11:47.890396801 Z
+- _id: 604103
+  _time: 2025-04-29 15:07:20.139829030 Z
   _version: 0.10.0/0.41.0/
-  latest: 194
+  latest: 239
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 603996
-  _time: 2025-04-29 14:11:48.329607034 Z
+- _id: 604104
+  _time: 2025-04-29 15:07:20.612017655 Z
   _version: 0.10.0/0.41.0/
-  latest: 73
+  latest: 105
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 603997
-  _time: 2025-04-29 14:11:48.808876874 Z
+- _id: 604105
+  _time: 2025-04-29 15:07:23.322805000 Z
   _version: 0.10.0/0.41.0/
-  latest: 57
-  repository: 820463873
-  what: labels-were-scanned
+  average_triage_time: 0.0
+  since: 2025-04-22 15:07:20.714833992 Z
+  what: quality-of-service
+  when: 2025-04-29 15:07:20.714769852 Z
+- _id: 604106
+  _time: 2025-04-29 15:07:28.429183674 Z
+  _version: 0.10.0/0.41.0/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 604107
+  _time: 2025-04-29 15:07:34.106951366 Z
+  _version: 0.10.0/0.41.0/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
   where: github
