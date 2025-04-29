@@ -24,3 +24,7 @@ def average_release_interval(fact)
   diffs = (1..dates.size - 1).map { |i| dates[i] - dates[i - 1] }
   { average_release_interval: diffs.empty? ? 0 : diffs.sum / diffs.size }
 end
+
+def average_release_interval_props
+  %w[average_release_interval]
+end

@@ -30,3 +30,7 @@ def average_hoc_size(fact)
     average_pull_files_size: files.empty? ? 0 : files.sum.to_f / files.size
   }
 end
+
+def average_hoc_size_props
+  %w[average_pull_hoc_size average_pull_files_size]
+end

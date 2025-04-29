@@ -37,3 +37,7 @@ def average_triage_time(fact)
   end
   { average_triage_time: triage_times.empty? ? 0 : triage_times.sum.to_f / triage_times.size }
 end
+
+def average_triage_time_props
+  %w[average_triage_time]
+end
