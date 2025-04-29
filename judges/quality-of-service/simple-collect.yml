@@ -13,8 +13,10 @@ input:
     qos_days: 7
     qos_interval: 3
   -
+    _id: 1
     what: quality-of-service
     when: 2024-01-01T00:00:00
+    since: 2023-12-24T00:00:00
 expected:
   - /fb[count(f)=3]
   - /fb/f[what='quality-of-service']
