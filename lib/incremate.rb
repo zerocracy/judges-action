@@ -35,7 +35,6 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
     end
     require_relative rb
     before = Time.now
-    next if avoid_duplicate && (send("#{n}_props") - fact.all_properties).empty?
     h = send(n, fact)
     h.each do |k, v|
       next if avoid_duplicate && fact.all_properties.include?(k.to_s)

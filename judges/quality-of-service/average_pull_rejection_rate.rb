@@ -23,7 +23,3 @@ def average_pull_rejection_rate(fact)
   end
   { average_pull_rejection_rate: pulls.zero? ? 0 : rejected.to_f / pulls }
 end
-
-def average_pull_rejection_rate_props
-  %w[average_pull_rejection_rate]
-end

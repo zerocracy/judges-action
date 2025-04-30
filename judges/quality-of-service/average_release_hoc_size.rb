@@ -35,7 +35,3 @@ def average_release_hoc_size(fact)
     average_release_commits_size: commits.empty? ? 0 : commits.sum.to_f / commits.size
   }
 end
-
-def average_release_hoc_size_props
-  %w[average_release_hoc_size average_release_commits_size]
-end

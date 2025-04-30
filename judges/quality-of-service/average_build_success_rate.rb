@@ -40,7 +40,3 @@ def average_build_success_rate(fact)
     average_build_mttr: ttrs.any? ? ttrs.sum / ttrs.size : 0
   }
 end
-
-def average_build_success_rate_props
-  %w[average_build_success_rate average_build_duration average_build_mttr]
-end

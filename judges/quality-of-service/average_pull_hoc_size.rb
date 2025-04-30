@@ -12,7 +12,7 @@ require 'fbe/unmask_repos'
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_hoc_size(fact)
+def average_pull_hoc_size(fact)
   hocs = []
   files = []
   Fbe.unmask_repos.each do |repo|
@@ -29,8 +29,4 @@ def average_hoc_size(fact)
     average_pull_hoc_size: hocs.empty? ? 0 : hocs.sum.to_f / hocs.size,
     average_pull_files_size: files.empty? ? 0 : files.sum.to_f / files.size
   }
-end
-
-def average_hoc_size_props
-  %w[average_pull_hoc_size average_pull_files_size]
 end

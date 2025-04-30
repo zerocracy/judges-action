@@ -1272,7 +1272,6 @@ class TestQualityOfService < Jp::Test
       f.average_review_size = 0.0
       f.average_reviewers_per_pull = 1.0
       f.average_reviews_per_pull = 1.0
-      f.average_pull_hoc_size = 17.0
       f.average_pull_rejection_rate = 100
     end
     fb.insert.then do |f|
@@ -1305,11 +1304,13 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-07-02 21:00:00 UTC'), f1.since)
       assert_equal(Time.parse('2024-07-09 21:00:00 UTC'), f1.when)
       assert_in_delta(121, f1.average_build_mttr)
+      assert_in_delta(0, f1.average_pull_hoc_size)
       assert_in_delta(0, f1.average_pull_files_size)
       assert_in_delta(100, f1.average_pull_rejection_rate)
       assert_equal(Time.parse('2024-07-02 22:00:00 UTC'), f2.since)
       assert_equal(Time.parse('2024-07-09 22:00:00 UTC'), f2.when)
       assert_in_delta(122, f2.average_build_mttr)
+      assert_in_delta(17.0, f2.average_pull_hoc_size)
       assert_in_delta(200, f2.average_pull_files_size)
       assert_in_delta(0, f2.average_pull_rejection_rate)
     end

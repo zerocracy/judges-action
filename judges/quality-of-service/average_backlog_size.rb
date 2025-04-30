@@ -27,7 +27,3 @@ def average_backlog_size(fact)
   end
   { average_backlog_size: issues.empty? ? 0 : issues.sum.to_f / issues.size }
 end
-
-def average_backlog_size_props
-  %w[average_backlog_size]
-end

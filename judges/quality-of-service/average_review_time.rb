@@ -36,7 +36,3 @@ def average_review_time(fact)
     average_reviews_per_pull: reviews.empty? ? 0 : reviews.sum.to_f / reviews.size
   }
 end
-
-def average_review_time_props
-  %w[average_review_time average_review_size average_reviewers_per_pull average_reviews_per_pull]
-end

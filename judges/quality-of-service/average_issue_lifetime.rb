@@ -30,7 +30,3 @@ def average_issue_lifetime(fact)
   end
   ret
 end
-
-def average_issue_lifetime_props
-  %w[average_issue_lifetime average_pull_lifetime]
-end
