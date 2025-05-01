@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 3
+  cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 311.552267071
+  seconds: 60.574588252
   version: 0.41.0
   what: judges-summary
-  when: 2025-05-01 11:10:32.369365016 Z
+  when: 2025-05-01 12:10:01.252623538 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -133812,7 +133812,7 @@
   review_comments: 4
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2025-05-01 05:56:57.000000000 Z
+  when: &232 2025-05-01 05:56:57.000000000 Z
   where: github
   who: 8086956
 - _id: 610509
@@ -133905,66 +133905,84 @@
   repository: 974194993
   what: min-issue-was-found
   where: github
-- _id: 610589
-  _time: 2025-05-01 11:09:11.761229646 Z
-  _version: 0.10.0/0.41.0/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
+- _id: 610715
+  _job: 18923
+  _time: 2025-05-01 11:11:08.997171236 Z
+  _version: 0.10.0/0.41.0/0.6.0
+  comments: 8
+  details: The pull request zerocracy/judges-action#582 with 144 HoC created by @yegorov
+    was merged by @rultor after 1d9h of being in review and 8 comments.
+  hoc: 144
+  is_human: 1
+  issue: 582
+  merger: 8086956
+  repository: 799177290
+  review_comments: 4
+  seconds: 121968
+  what: code-was-contributed
+  when: *232
   where: github
-- _id: 610603
-  _time: 2025-05-01 11:09:24.015441230 Z
+  who: 2566462
+- _id: 610731
+  _time: 2025-05-01 12:09:10.172866529 Z
   _version: 0.10.0/0.41.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 610626
-  _time: 2025-05-01 11:09:38.002347783 Z
+- _id: 610743
+  _time: 2025-05-01 12:09:16.234963046 Z
+  _version: 0.10.0/0.41.0/
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 610750
+  _time: 2025-05-01 12:09:19.280684189 Z
   _version: 0.10.0/0.41.0/
   latest: 0
   repository: 974194993
   what: labels-were-scanned
   where: github
-- _id: 610703
-  _time: 2025-05-01 11:10:25.792550342 Z
+- _id: 610815
+  _time: 2025-05-01 12:09:52.682125020 Z
   _version: 0.10.0/0.41.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 610710
-  _time: 2025-05-01 11:10:29.938280559 Z
+- _id: 610821
+  _time: 2025-05-01 12:09:55.572885935 Z
   _version: 0.10.0/0.41.0/
-  latest: 62
+  latest: 57
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 610822
+  _time: 2025-05-01 12:09:56.109746776 Z
+  _version: 0.10.0/0.41.0/
+  latest: 135
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 610711
-  _time: 2025-05-01 11:10:30.544131017 Z
-  _version: 0.10.0/0.41.0/
-  latest: 216
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 610712
-  _time: 2025-05-01 11:10:31.083422535 Z
+- _id: 610823
+  _time: 2025-05-01 12:09:56.560832537 Z
   _version: 0.10.0/0.41.0/
   latest: 73
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 610713
-  _time: 2025-05-01 11:10:31.610712124 Z
-  _version: 0.10.0/0.41.0/
-  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 610714
-  _time: 2025-05-01 11:10:32.221018051 Z
+- _id: 610824
+  _time: 2025-05-01 12:09:57.030145637 Z
   _version: 0.10.0/0.41.0/
-  latest: 28
-  repository: 820463873
+  latest: 105
+  repository: 799113787
   what: labels-were-scanned
+  where: github
+- _id: 610825
+  _time: 2025-05-01 12:10:00.566252160 Z
+  _version: 0.10.0/0.41.0/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
   where: github
