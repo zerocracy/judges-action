@@ -102,6 +102,7 @@ ${JUDGES} "${gopts[@]}" update \
     --quiet \
     --summary \
     --shuffle=aaa \
+    --boost=github-events \
     --timeout=180 \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
