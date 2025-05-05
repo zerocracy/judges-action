@@ -4,10 +4,10 @@
   deleted: 8
   error: Can't find 'since' attribute out of [_id, _time, _version, _job, what, when]
   inserted: 8
-  seconds: 225.606870714
+  seconds: 189.740525883
   version: 0.42.0
   what: judges-summary
-  when: 2025-05-05 07:11:52.719656303 Z
+  when: 2025-05-05 07:39:12.979699982 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -134828,13 +134828,6 @@
   - 1.4525714286703248
   what: learn-eva
   when: 2025-05-05 00:34:44.083412306 Z
-- _id: 649282
-  _time: 2025-05-05 01:01:30.636281035 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 650331
   _time: 2025-05-05 04:09:40.855501761 Z
   _version: 0.10.1/0.42.0/
@@ -135335,7 +135328,7 @@
   review_comments: 0
   succeeded_builds: 9
   what: pull-was-merged
-  when: 2025-05-05 07:02:27.000000000 Z
+  when: &246 2025-05-05 07:02:27.000000000 Z
   where: github
   who: 8086956
 - _id: 652283
@@ -135345,129 +135338,193 @@
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 652399
-  _time: 2025-05-05 07:10:40.143584189 Z
+- _id: 652518
+  _job: 19316
+  _time: 2025-05-05 07:12:35.398443389 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  comments: 2
+  details: The pull request zerocracy/baza.rb#60 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 40m11s of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 60
+  merger: 8086956
+  repository: 840215648
+  review_comments: 0
+  seconds: 2412
+  what: code-was-contributed
+  when: *246
+  where: github
+  who: 29139614
+- _id: 652521
+  _time: 2025-05-05 07:36:09.876506710 Z
+  _version: 0.10.1/0.42.0/
+  branch: renovate/rubocop-1.x-lockfile
+  details: The pull request zerocracy/swarm-template#76 has been opened by @renovate[bot].
+  event_id: 49353294828
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 76
+  repository: 849726475
+  what: pull-was-opened
+  when: 2025-05-05 07:23:36.000000000 Z
+  where: github
+  who: 29139614
+- _id: 652528
+  _time: 2025-05-05 07:36:18.441842141 Z
   _version: 0.10.1/0.42.0/
   latest: 1
-  repository: 802720676
+  repository: 799177290
   what: min-issue-was-found
   where: github
-- _id: 652400
-  _time: 2025-05-05 07:10:45.530187854 Z
+- _id: 652675
+  _time: 2025-05-05 07:37:42.519072629 Z
   _version: 0.10.1/0.42.0/
-  latest: 49351925256
-  repository: 802720676
-  what: events-were-scanned
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
   where: github
-- _id: 652401
-  _time: 2025-05-05 07:10:46.129706687 Z
+- _id: 652696
+  _time: 2025-05-05 07:37:54.064279482 Z
   _version: 0.10.1/0.42.0/
-  latest: 49352685970
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 652402
-  _time: 2025-05-05 07:10:47.020073675 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49351348880
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 652403
-  _time: 2025-05-05 07:10:48.202694013 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49352218342
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 652404
-  _time: 2025-05-05 07:10:48.755453093 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49325017382
+  latest: 0
   repository: 974194993
-  what: events-were-scanned
+  what: labels-were-scanned
   where: github
-- _id: 652405
-  _time: 2025-05-05 07:10:49.283429274 Z
+- _id: 652760
+  _time: 2025-05-05 07:38:28.924873560 Z
   _version: 0.10.1/0.42.0/
-  latest: 49341631010
-  repository: 798641472
-  what: events-were-scanned
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
   where: github
-- _id: 652406
-  _time: 2025-05-05 07:10:49.777998194 Z
+- _id: 652773
+  _time: 2025-05-05 07:38:36.127315911 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 652774
+  _time: 2025-05-05 07:38:36.367114669 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 652778
+  _time: 2025-05-05 07:38:38.689237953 Z
+  _version: 0.10.1/0.42.0/
+  latest: 48
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 652779
+  _time: 2025-05-05 07:38:39.183906585 Z
+  _version: 0.10.1/0.42.0/
+  latest: 535
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 652780
+  _time: 2025-05-05 07:38:39.766818638 Z
+  _version: 0.10.1/0.42.0/
+  latest: 130
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 652781
+  _time: 2025-05-05 07:38:44.314150379 Z
+  _version: 0.10.1/0.42.0/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 652782
+  _time: 2025-05-05 07:38:47.623667883 Z
   _version: 0.10.1/0.42.0/
   latest: 49316855079
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 652407
-  _time: 2025-05-05 07:10:50.474358752 Z
+- _id: 652783
+  _time: 2025-05-05 07:38:48.590656541 Z
   _version: 0.10.1/0.42.0/
-  latest: 49273805632
+  latest: 49352909330
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 652784
+  _time: 2025-05-05 07:38:49.247630186 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49352685970
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 652785
+  _time: 2025-05-05 07:38:49.923943994 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49325017382
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 652786
+  _time: 2025-05-05 07:38:51.165808097 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49352944064
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 652787
+  _time: 2025-05-05 07:38:52.141334509 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49351925256
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 652788
+  _time: 2025-05-05 07:38:53.396287958 Z
+  _version: 0.10.1/0.42.0/
+  branch: renovate/rubocop-1.x-lockfile
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/swarm-template#76 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 49353756571
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 0
+  issue: 76
+  repository: 849726475
+  review_comments: 0
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2025-05-05 07:38:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 652789
+  _time: 2025-05-05 07:39:07.677239792 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49353770041
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 652419
-  _time: 2025-05-05 07:10:56.226324747 Z
+- _id: 652790
+  _time: 2025-05-05 07:39:08.235869319 Z
   _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 652431
-  _time: 2025-05-05 07:11:02.250985759 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
+  latest: 49341631010
   repository: 798641472
-  what: labels-were-scanned
+  what: events-were-scanned
   where: github
-- _id: 652439
-  _time: 2025-05-05 07:11:06.292689472 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 974194993
-  what: labels-were-scanned
-  where: github
-- _id: 652505
-  _time: 2025-05-05 07:11:41.184018815 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 652513
-  _time: 2025-05-05 07:11:45.962875487 Z
-  _version: 0.10.1/0.42.0/
-  latest: 239
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 652514
-  _time: 2025-05-05 07:11:46.637060941 Z
-  _version: 0.10.1/0.42.0/
-  latest: 73
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 652515
-  _time: 2025-05-05 07:11:47.166413203 Z
-  _version: 0.10.1/0.42.0/
-  latest: 28
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 652516
-  _time: 2025-05-05 07:11:47.659805612 Z
-  _version: 0.10.1/0.42.0/
-  latest: 105
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 652517
-  _time: 2025-05-05 07:11:52.570379914 Z
+- _id: 652791
+  _time: 2025-05-05 07:39:12.733044035 Z
   _version: 0.10.1/0.42.0/
   latest: 1
-  repository: 820463873
+  repository: 802720676
   what: min-issue-was-found
   where: github
