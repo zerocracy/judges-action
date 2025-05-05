@@ -4,10 +4,10 @@
   deleted: 8
   error: Can't find 'since' attribute out of [_id, _time, _version, _job, what, when]
   inserted: 8
-  seconds: 132.979982539
+  seconds: 107.565871417
   version: 0.42.0
   what: judges-summary
-  when: 2025-05-05 11:08:47.739518914 Z
+  when: 2025-05-05 11:36:49.950757293 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -135399,13 +135399,6 @@
   repository: 798641472
   what: min-issue-was-found
   where: github
-- _id: 654090
-  _time: 2025-05-05 10:09:08.100343629 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 840215648
-  what: min-issue-was-found
-  where: github
 - _id: 654216
   _time: 2025-05-05 10:11:02.843907169 Z
   _version: 0.10.1/0.42.0/
@@ -135461,6 +135454,7 @@
   is_human: 0
   issue: 207
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 10
   what: pull-was-merged
   when: 2025-05-05 09:46:24.000000000 Z
@@ -135499,6 +135493,7 @@
   is_human: 1
   issue: 174
   repository: 820463873
+  review_comments: 0
   succeeded_builds: 9
   what: pull-was-merged
   when: 2025-05-05 09:50:02.000000000 Z
@@ -135511,129 +135506,197 @@
   repository: 799113787
   what: min-issue-was-found
   where: github
-- _id: 654491
-  _time: 2025-05-05 11:07:19.229199210 Z
+- _id: 654629
+  _time: 2025-05-05 11:35:08.623546349 Z
+  _version: 0.10.1/0.42.0/
+  branch: renovate/rubocop-1.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/fbe#178 has been closed by @yegor256, with 2
+    HoC and 0 comments.
+  event_id: 49358993474
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  is_human: 1
+  issue: 178
+  repository: 820463873
+  review_comments: 0
+  succeeded_builds: 9
+  what: pull-was-merged
+  when: 2025-05-05 10:09:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 654630
+  _time: 2025-05-05 11:35:17.134748551 Z
+  _version: 0.10.1/0.42.0/
+  commits: 13
+  contributors:
+  - 29139614
+  - 526301
+  - 2566462
+  - 8086956
+  details: 'A new release ''judges-action#544: fix Fbe::FakeOctokit#user'' has been
+    published in zerocracy/fbe by @rultor.'
+  event_id: 49358657582
+  event_type: ReleaseEvent
+  hoc: 403
+  is_human: 0
+  last_commit: 51e557fdc38939ce034b34e0105173bc5cade850
+  release: 216451891
+  repository: 820463873
+  tag: 0.11.0
+  what: release-published
+  when: 2025-05-05 09:59:47.000000000 Z
+  where: github
+  who: 8086956
+- _id: 654631
+  _time: 2025-05-05 11:35:17.811084423 Z
+  _version: 0.10.1/0.42.0/
+  details: A new tag '0.11.0' has been created in zerocracy/fbe by @rultor.
+  event_id: 49358593575
+  event_type: CreateEvent
+  is_human: 0
+  repository: 820463873
+  tag: 0.11.0
+  what: tag-was-created
+  when: 2025-05-05 09:57:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 654637
+  _time: 2025-05-05 11:35:22.801104920 Z
   _version: 0.10.1/0.42.0/
   latest: 1
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 654492
-  _time: 2025-05-05 11:07:25.980906897 Z
+- _id: 654646
+  _time: 2025-05-05 11:35:33.058243681 Z
   _version: 0.10.1/0.42.0/
-  latest: 49358192310
-  repository: 799113787
-  what: events-were-scanned
+  latest: 1
+  repository: 974194993
+  what: min-issue-was-found
   where: github
-- _id: 654493
-  _time: 2025-05-05 11:07:27.102286402 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49351925256
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 654494
-  _time: 2025-05-05 11:07:27.638235039 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49356641903
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 654495
-  _time: 2025-05-05 11:07:28.641760492 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49358363010
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 654496
-  _time: 2025-05-05 11:07:29.287068390 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49352685970
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 654497
-  _time: 2025-05-05 11:07:30.627865966 Z
+- _id: 654647
+  _time: 2025-05-05 11:35:38.700600001 Z
   _version: 0.10.1/0.42.0/
   latest: 49357981380
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 654498
-  _time: 2025-05-05 11:07:31.353137566 Z
+- _id: 654648
+  _time: 2025-05-05 11:35:39.118246255 Z
   _version: 0.10.1/0.42.0/
-  latest: 49325017382
-  repository: 974194993
+  latest: 49356641903
+  repository: 798641472
   what: events-were-scanned
   where: github
-- _id: 654499
-  _time: 2025-05-05 11:07:32.132513241 Z
+- _id: 654649
+  _time: 2025-05-05 11:35:39.636733581 Z
   _version: 0.10.1/0.42.0/
   latest: 49353770041
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 654512
-  _time: 2025-05-05 11:07:40.959392845 Z
+- _id: 654650
+  _time: 2025-05-05 11:35:40.181090385 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49358192310
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 654651
+  _time: 2025-05-05 11:35:40.733369398 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49352685970
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 654652
+  _time: 2025-05-05 11:35:41.281547370 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49325017382
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 654653
+  _time: 2025-05-05 11:35:42.142855057 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49358994415
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 654654
+  _time: 2025-05-05 11:35:42.992160291 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49351925256
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 654668
+  _time: 2025-05-05 11:35:51.897982806 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 654533
-  _time: 2025-05-05 11:07:51.970468808 Z
+- _id: 654691
+  _time: 2025-05-05 11:36:03.651481816 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 974194993
   what: labels-were-scanned
   where: github
-- _id: 654614
-  _time: 2025-05-05 11:08:37.371138646 Z
+- _id: 654741
+  _time: 2025-05-05 11:36:29.981185709 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 654765
+  _time: 2025-05-05 11:36:42.109207495 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 654620
-  _time: 2025-05-05 11:08:40.837460104 Z
+- _id: 654770
+  _time: 2025-05-05 11:36:44.649159201 Z
   _version: 0.10.1/0.42.0/
-  latest: 106
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 654621
-  _time: 2025-05-05 11:08:41.398540065 Z
-  _version: 0.10.1/0.42.0/
-  latest: 47
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 654622
-  _time: 2025-05-05 11:08:41.903793594 Z
-  _version: 0.10.1/0.42.0/
-  latest: 535
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 654623
-  _time: 2025-05-05 11:08:42.391146014 Z
-  _version: 0.10.1/0.42.0/
-  latest: 57
+  latest: 130
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 654624
-  _time: 2025-05-05 11:08:42.822486209 Z
+- _id: 654771
+  _time: 2025-05-05 11:36:45.127277360 Z
   _version: 0.10.1/0.42.0/
-  latest: 73
+  latest: 216
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 654772
+  _time: 2025-05-05 11:36:45.772825199 Z
+  _version: 0.10.1/0.42.0/
+  latest: 138
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 654625
-  _time: 2025-05-05 11:08:44.242995942 Z
+- _id: 654773
+  _time: 2025-05-05 11:36:46.207255101 Z
+  _version: 0.10.1/0.42.0/
+  latest: 73
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 654774
+  _time: 2025-05-05 11:36:49.473157466 Z
   _version: 0.10.1/0.42.0/
   latest: 1
-  repository: 974194993
+  repository: 840215648
   what: min-issue-was-found
   where: github
