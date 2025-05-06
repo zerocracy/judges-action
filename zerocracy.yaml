@@ -4,10 +4,10 @@
   deleted: 8
   error: Can't find 'since' attribute out of [_id, _time, _version, _job, what, when]
   inserted: 8
-  seconds: 101.241538459
+  seconds: 61.259660716
   version: 0.42.0
   what: judges-summary
-  when: 2025-05-06 10:09:18.440760248 Z
+  when: 2025-05-06 10:40:49.037283590 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -136035,13 +136035,6 @@
   when: 2025-05-06 05:22:07.000000000 Z
   where: github
   who: 526301
-- _id: 664981
-  _time: 2025-05-06 08:10:13.766849258 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 820463873
-  what: min-issue-was-found
-  where: github
 - _id: 665117
   _time: 2025-05-06 08:40:55.190832245 Z
   _version: 0.10.1/0.42.0/
@@ -136110,36 +136103,6 @@
   when: 2025-05-06 08:12:07.000000000 Z
   where: github
   who: 526301
-- _id: 665756
-  _time: 2025-05-06 09:12:29.844016184 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 665757
-  _job: 19461
-  _time: 2025-05-06 09:13:13.990529012 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: b901e55c52ec0168ad2c4005fad492352141c8b7
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/judges, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-472](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/judges/commit/b901e55c52ec0168ad2c4005fad492352141c8b7/#commitcomment-156448989
-  is_human: 1
-  repository: 799113787
-  what: push-to-master-was-punished
-  when: 2025-05-06 09:13:14.003125473 Z
-  where: github
-  who: 526301
-  why: Pushed b901e55c5 to the default branch 'master' in yegor256/judges
 - _id: 665762
   _time: 2025-05-06 09:37:50.112194503 Z
   _version: 0.10.1/0.42.0/
@@ -136264,66 +136227,118 @@
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 666161
-  _time: 2025-05-06 10:09:09.190380277 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49380150896
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 666162
-  _time: 2025-05-06 10:09:09.721456241 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49396584036
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 666163
-  _time: 2025-05-06 10:09:10.236315688 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49392770715
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 666164
-  _time: 2025-05-06 10:09:11.459540297 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49398128671
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 666165
-  _time: 2025-05-06 10:09:11.926621848 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49392961952
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 666166
-  _time: 2025-05-06 10:09:12.619525305 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49361737335
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 666167
-  _time: 2025-05-06 10:09:13.647708335 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49392961750
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 666168
-  _time: 2025-05-06 10:09:14.455197098 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49398148855
-  repository: 802720676
-  what: events-were-scanned
-  where: github
 - _id: 666169
   _time: 2025-05-06 10:09:15.789411265 Z
   _version: 0.10.1/0.42.0/
   latest: 3
   repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id:
+  - 666170
+  - 665757
+  _job:
+  - 19466
+  - 19461
+  _time:
+  - 2025-05-06 10:09:37.721686710 Z
+  - 2025-05-06 09:13:13.990529012 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: b901e55c52ec0168ad2c4005fad492352141c8b7
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/judges, the penalty amount is -16.
+  href: https://github.com/yegor256/judges/commit/b901e55c52ec0168ad2c4005fad492352141c8b7/#commitcomment-156448989
+  is_human: 1
+  repository: 799113787
+  what: push-to-master-was-punished
+  when: 2025-05-06 09:13:14.003125473 Z
+  where: github
+  who: 526301
+  why: Pushed b901e55c5 to the default branch 'master' in yegor256/judges
+- _id: 666188
+  _time: 2025-05-06 10:40:34.125475921 Z
+  _version: 0.10.1/0.42.0/
+  total_active_contributors: 5
+  total_commits: 4059
+  total_contributors: 12
+  total_files: 570
+  total_forks: 20
+  total_issues: 566
+  total_pulls: 1047
+  total_releases: 448
+  total_repositories: 8
+  total_stars: 39
+  what: dimensions-of-terrain
+  when: 2025-05-06 10:40:01.313146915 Z
+- _id: 666189
+  _time: 2025-05-06 10:40:35.019623516 Z
+  _version: 0.10.1/0.42.0/
+  latest: 1
+  repository: 820463873
+  what: min-issue-was-found
+  where: github
+- _id: 666190
+  _time: 2025-05-06 10:40:38.431736635 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49392770715
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 666191
+  _time: 2025-05-06 10:40:39.082313565 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49380150896
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 666192
+  _time: 2025-05-06 10:40:39.651673586 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49396584036
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 666193
+  _time: 2025-05-06 10:40:41.020011233 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49399389501
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 666194
+  _time: 2025-05-06 10:40:41.647600573 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49392961952
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 666195
+  _time: 2025-05-06 10:40:42.602617268 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49398148855
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 666196
+  _time: 2025-05-06 10:40:43.492586911 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49392961750
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 666197
+  _time: 2025-05-06 10:40:44.234807135 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49361737335
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 666198
+  _time: 2025-05-06 10:40:47.317170088 Z
+  _version: 0.10.1/0.42.0/
+  latest: 1
+  repository: 799177290
   what: min-issue-was-found
   where: github
