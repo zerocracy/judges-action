@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+input:
+  -
+    _id: 1
+    where: github
+    repository: 1234
+  -
+    _id: 2
+    where: github
+    repository: 404_123
+  -
+    _id: 3
+    where: gitlab
+    repository: 404_123
+  -
+    _id: 4
+    where: github
+    repository: 1235
+  -
+    _id: 5
+    where: github
+  -
+    _id: 6
+    where: github
+    repository: 404_124
+expected:
+  - /fb[count(f)=6]
+  - /fb/f[_id=1 and where='github' and repository=1234]
+  - /fb/f[_id/v[1]=7 and _id/v[2]=2 and where='github' and not(repository)]
+  - /fb/f[_id=3 and where='gitlab' and repository=404123]
+  - /fb/f[_id=4 and where='github' and repository=1235]
+  - /fb/f[_id=5 and where='github' and not(repository)]
+  - /fb/f[_id/v[1]=8 and _id/v[2]=6 and where='github' and not(repository)]
