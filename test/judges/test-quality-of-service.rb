@@ -1316,6 +1316,181 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since
+    WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_workflow_runs(
+      [{
+        id: 42,
+        name: 'copyrights',
+        head_branch: 'master',
+        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+        event: 'push',
+        status: 'completed',
+        conclusion: 'success',
+        workflow_id: 42,
+        created_at: Time.now - rand(10_000),
+        updated_at: Time.now - rand(10_000) + 100,
+        run_started_at: Time.now - rand(10_000),
+        repository: {
+          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+          owner: { login: 'foo', id: 526_301, site_admin: false },
+          created_at: Time.now - rand(10_000),
+          updated_at: Time.now - rand(10_000),
+          pushed_at: Time.now - rand(10_000),
+          size: 470, stargazers_count: 1, watchers_count: 1,
+          language: 'Ruby', forks_count: 0, archived: false,
+          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+        }
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-02',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-07-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-10',
+      body: { total_count: 0, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-07-12..2024-07-12',
+      body: { total_count: 0, items: [] }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+    end
+    fb.insert.then do |f|
+      f._id = 1
+      f._time = Time.parse('2024-08-09 21:00:00 UTC')
+      f._version = '0.10.0/0.41.0/'
+      f.what = 'quality-of-service'
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f._time = Time.parse('2024-08-09 22:00:00 UTC')
+      f._version = '0.10.0/0.41.0/'
+      f.what = 'quality-of-service'
+      f.when = Time.parse('2024-08-09 22:00:00 UTC')
+    end
+    Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      fs = fb.query('(eq what "quality-of-service")').each.to_a.sort_by(&:_time)
+      assert_equal(2, fs.size)
+      f1, f2 = fs
+      assert_nil(f1['since'])
+      assert_nil(f1['when'])
+      assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f2.since)
+      assert_equal(Time.parse('2024-08-09 22:00:00 UTC'), f2.when)
+      refute_nil(f2.average_build_success_rate)
+      refute_nil(f2.average_build_duration)
+      refute_nil(f2.average_build_mttr)
+      refute_nil(f2.average_pull_hoc_size)
+      refute_nil(f2.average_pull_files_size)
+      refute_nil(f2.average_triage_time)
+      refute_nil(f2.average_backlog_size)
+      refute_nil(f2.average_release_interval)
+      refute_nil(f2.average_pull_rejection_rate)
+      refute_nil(f2.average_issue_lifetime)
+      refute_nil(f2.average_pull_lifetime)
+      refute_nil(f2.average_review_time)
+      refute_nil(f2.average_review_size)
+      refute_nil(f2.average_reviewers_per_pull)
+      refute_nil(f2.average_reviews_per_pull)
+      refute_nil(f2.average_release_hoc_size)
+      refute_nil(f2.average_release_commits_size)
+    end
+  end
+
+  def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since_and_absent_qos_days
+    WebMock.disable_net_connect!
+    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_workflow_runs(
+      [{
+        id: 42,
+        name: 'copyrights',
+        head_branch: 'master',
+        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+        event: 'push',
+        status: 'completed',
+        conclusion: 'success',
+        workflow_id: 42,
+        created_at: Time.now - rand(10_000),
+        updated_at: Time.now - rand(10_000) + 100,
+        run_started_at: Time.now - rand(10_000),
+        repository: {
+          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+          owner: { login: 'foo', id: 526_301, site_admin: false },
+          created_at: Time.now - rand(10_000),
+          updated_at: Time.now - rand(10_000),
+          pushed_at: Time.now - rand(10_000),
+          size: 470, stargazers_count: 1, watchers_count: 1,
+          language: 'Ruby', forks_count: 0, archived: false,
+          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+        }
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    (Date.parse('2024-08-10')..Date.parse('2024-09-01')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_interval = 3
+    end
+    fb.insert.then do |f|
+      f._id = 1
+      f._time = Time.parse('2024-08-30 22:00:00 UTC')
+      f._version = '0.10.0/0.41.0/'
+      f.what = 'quality-of-service'
+      f.when = Time.parse('2024-08-30 22:00:00 UTC')
+    end
+    Time.stub(:now, Time.parse('2024-09-01 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f.since)
+      assert_equal(Time.parse('2024-08-30 22:00:00 UTC'), f.when)
+      refute_nil(f.average_release_commits_size)
+    end
+  end
+
   private
 
   def stub_workflow_runs(workflow_runs)
