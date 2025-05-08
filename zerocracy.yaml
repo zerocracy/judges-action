@@ -4,10 +4,10 @@
   deleted: 8
   error: Can't find 'since' attribute out of [_id, _time, _version, _job, what, when]
   inserted: 8
-  seconds: 187.449635398
+  seconds: 88.111730706
   version: 0.42.0
   what: judges-summary
-  when: 2025-05-08 22:09:59.658037386 Z
+  when: 2025-05-08 22:39:28.528499045 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -137012,13 +137012,6 @@
   when: 2025-05-08 07:42:00.000000000 Z
   where: github
   who: 526301
-- _id: 693766
-  _time: 2025-05-08 19:08:09.160409170 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 694280
   _time: 2025-05-08 20:10:54.708098228 Z
   _version: 0.10.1/0.42.0/
@@ -137089,27 +137082,6 @@
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 695089
-  _job: 19743
-  _time: 2025-05-08 21:09:47.553621957 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -12
-  branch: master
-  details: It's time to punish @artur-intech for the branch named as 'master', which
-    is wrong in yegor256/0rsk#133, the penalty amount is -12.
-  greeting: |-
-    As per our work policy, naming Git branches like \"`master`\" is [not recommended](https://www.yegor256.com/2014/04/15/github-guidelines.html) and incurs a penalty. You've been deducted **-12** points for this violation. In the future, please name your branch after the ticket number you're working on (e.g., \"`132`\"). This helps maintain consistency and clarity in our version control system. Let's adhere to the conventions to streamline our workflow.
-
-    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`master`". You've earned -12 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`132`".  -->
-  href: https://github.com/yegor256/0rsk/issues/133/#issuecomment-2864378546
-  is_human: 1
-  issue: 133
-  repository: 181044958
-  what: bad-branch-name-was-punished
-  when: 2025-05-08 21:09:47.571464250 Z
-  where: github
-  who: 22315378
-  why: Wrongly named a branch in yegor256/0rsk#133
 - _id: 695099
   _time: 2025-05-08 21:36:11.273538535 Z
   _version: 0.10.1/0.42.0/
@@ -137138,136 +137110,166 @@
   repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 695516
-  _time: 2025-05-08 22:08:43.424206788 Z
+- _id:
+  - 695635
+  - 695089
+  _job:
+  - 19748
+  - 19743
+  _time:
+  - 2025-05-08 22:10:29.734755639 Z
+  - 2025-05-08 21:09:47.553621957 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -12
+  branch: master
+  details: It's time to punish @artur-intech for the branch named as 'master', which
+    is wrong in yegor256/0rsk#133, the penalty amount is -12.
+  href: https://github.com/yegor256/0rsk/issues/133/#issuecomment-2864378546
+  is_human: 1
+  issue: 133
+  repository: 181044958
+  what: bad-branch-name-was-punished
+  when: 2025-05-08 21:09:47.571464250 Z
+  where: github
+  who: 22315378
+  why: Wrongly named a branch in yegor256/0rsk#133
+- _id: 695645
+  _time: 2025-05-08 22:38:12.650544520 Z
+  _version: 0.10.1/0.42.0/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 695655
+  _time: 2025-05-08 22:38:23.180660700 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 181044958
+  what: labels-were-scanned
+  where: github
+- _id: 695667
+  _time: 2025-05-08 22:38:28.380306538 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 695682
+  _time: 2025-05-08 22:38:35.623488808 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 695691
+  _time: 2025-05-08 22:38:39.288084639 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 974194993
+  what: labels-were-scanned
+  where: github
+- _id: 695753
+  _time: 2025-05-08 22:39:09.737014733 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 695758
+  _time: 2025-05-08 22:39:12.052854004 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 695761
+  _time: 2025-05-08 22:39:13.333915538 Z
+  _version: 0.10.1/0.42.0/
+  latest: 28
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 695762
+  _time: 2025-05-08 22:39:13.944946539 Z
+  _version: 0.10.1/0.42.0/
+  latest: 325
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 695763
+  _time: 2025-05-08 22:39:14.499134480 Z
+  _version: 0.10.1/0.42.0/
+  latest: 105
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 695765
+  _time: 2025-05-08 22:39:19.847784572 Z
   _version: 0.10.1/0.42.0/
   latest: 49486836599
   repository: 974194993
   what: events-were-scanned
   where: github
-- _id: 695517
-  _time: 2025-05-08 22:08:44.025122486 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49493203145
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 695518
-  _time: 2025-05-08 22:08:44.655142890 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49470479739
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 695519
-  _time: 2025-05-08 22:08:46.079969073 Z
+- _id: 695766
+  _time: 2025-05-08 22:39:20.880827980 Z
   _version: 0.10.1/0.42.0/
   latest: 49495590327
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 695520
-  _time: 2025-05-08 22:08:46.682343597 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49470858680
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 695521
-  _time: 2025-05-08 22:08:47.496869256 Z
+- _id: 695767
+  _time: 2025-05-08 22:39:21.404635788 Z
   _version: 0.10.1/0.42.0/
   latest: 49487832766
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 695522
-  _time: 2025-05-08 22:08:48.554051656 Z
+- _id: 695768
+  _time: 2025-05-08 22:39:21.915599677 Z
   _version: 0.10.1/0.42.0/
-  latest: 49470859469
-  repository: 820463873
+  latest: 49493203145
+  repository: 181044958
   what: events-were-scanned
   where: github
-- _id: 695523
-  _time: 2025-05-08 22:08:49.652603796 Z
+- _id: 695769
+  _time: 2025-05-08 22:39:22.644785789 Z
   _version: 0.10.1/0.42.0/
   latest: 49471366628
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 695524
-  _time: 2025-05-08 22:08:50.414771347 Z
+- _id: 695770
+  _time: 2025-05-08 22:39:23.108862844 Z
   _version: 0.10.1/0.42.0/
   latest: 49471231698
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 695525
-  _time: 2025-05-08 22:08:54.443110957 Z
+- _id: 695771
+  _time: 2025-05-08 22:39:23.563051286 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49470858680
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 695772
+  _time: 2025-05-08 22:39:24.415943721 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49470859469
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 695773
+  _time: 2025-05-08 22:39:24.870838018 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49470479739
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 695774
+  _time: 2025-05-08 22:39:27.507019500 Z
   _version: 0.10.1/0.42.0/
   latest: 1
   repository: 798641472
   what: min-issue-was-found
-  where: github
-- _id: 695532
-  _time: 2025-05-08 22:08:59.368013215 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 695537
-  _time: 2025-05-08 22:09:01.430797190 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 695542
-  _time: 2025-05-08 22:09:03.829874207 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 695556
-  _time: 2025-05-08 22:09:12.059642068 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 974194993
-  what: labels-were-scanned
-  where: github
-- _id: 695626
-  _time: 2025-05-08 22:09:54.644427349 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 695631
-  _time: 2025-05-08 22:09:57.727630918 Z
-  _version: 0.10.1/0.42.0/
-  latest: 138
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 695632
-  _time: 2025-05-08 22:09:58.428712846 Z
-  _version: 0.10.1/0.42.0/
-  latest: 239
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 695633
-  _time: 2025-05-08 22:09:58.973633788 Z
-  _version: 0.10.1/0.42.0/
-  latest: 216
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 695634
-  _time: 2025-05-08 22:09:59.509003714 Z
-  _version: 0.10.1/0.42.0/
-  latest: 73
-  repository: 799113787
-  what: labels-were-scanned
   where: github
