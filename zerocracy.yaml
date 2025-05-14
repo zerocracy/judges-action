@@ -2,11 +2,12 @@
 - added: 8
   cycles: 3
   deleted: 8
+  error: Can't find 'since' attribute out of [_id, _time, _version, _job, what, when]
   inserted: 8
-  seconds: 318.259803444
+  seconds: 264.568029357
   version: 0.42.0
   what: judges-summary
-  when: 2025-05-14 06:48:02.907251203 Z
+  when: 2025-05-14 07:12:18.943010401 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -139029,13 +139030,6 @@
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 762022
-  _time: 2025-05-13 13:44:40.545831404 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
 - _id: 762151
   _time: 2025-05-13 14:07:49.021030717 Z
   _version: 0.10.1/0.42.0/
@@ -139811,466 +139805,6 @@
   when: &269 2025-05-13 11:10:19.000000000 Z
   where: github
   who: 526301
-- _id: 763232
-  _job: 20323
-  _time: 2025-05-14 05:45:12.352393114 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 47abec871dec2c5329b1bf3349ce3b5afcd754c3
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/fbe, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/zerocracy/fbe/commit/47abec871dec2c5329b1bf3349ce3b5afcd754c3/#commitcomment-156976231
-  is_human: 1
-  repository: 820463873
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:12.367140708 Z
-  where: github
-  who: 526301
-  why: Pushed 47abec871 to the default branch 'master' in zerocracy/fbe
-- _id: 763233
-  _job: 20323
-  _time: 2025-05-14 05:45:12.748696047 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 73a7ee1b1c676bd16fd119e345f5de5af09f60bd
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/swarm-template, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/zerocracy/swarm-template/commit/73a7ee1b1c676bd16fd119e345f5de5af09f60bd/#commitcomment-156976233
-  is_human: 1
-  repository: 849726475
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:12.772149524 Z
-  where: github
-  who: 526301
-  why: Pushed 73a7ee1b1 to the default branch 'master' in zerocracy/swarm-template
-- _id: 763234
-  _job: 20323
-  _time: 2025-05-14 05:45:13.093856000 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 8ddcada3bcff51fdc08cd73dddaea46c1f683ffe
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/judges, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/judges/commit/8ddcada3bcff51fdc08cd73dddaea46c1f683ffe/#commitcomment-156976236
-  is_human: 1
-  repository: 799113787
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:13.109581060 Z
-  where: github
-  who: 526301
-  why: Pushed 8ddcada3b to the default branch 'master' in yegor256/judges
-- _id: 763235
-  _job: 20323
-  _time: 2025-05-14 05:45:13.366739776 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 4a57ed5d1f7368e3130d346ab4113f820f20b320
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/4a57ed5d1f7368e3130d346ab4113f820f20b320/#commitcomment-156976238
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:13.378157062 Z
-  where: github
-  who: 526301
-  why: Pushed 4a57ed5d1 to the default branch 'master' in yegor256/0rsk
-- _id: 763236
-  _job: 20323
-  _time: 2025-05-14 05:45:13.651474448 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 7aa179a385047f2ab365df0388def0116c626197
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/7aa179a385047f2ab365df0388def0116c626197/#commitcomment-156976239
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:13.666825713 Z
-  where: github
-  who: 526301
-  why: Pushed 7aa179a38 to the default branch 'master' in yegor256/0rsk
-- _id: 763237
-  _job: 20323
-  _time: 2025-05-14 05:45:13.821385585 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: ed98d6230a35a7bc8e656e27757ce1735c4d4fd1
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/ed98d6230a35a7bc8e656e27757ce1735c4d4fd1/#commitcomment-156976240
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:13.837590643 Z
-  where: github
-  who: 526301
-  why: Pushed ed98d6230 to the default branch 'master' in yegor256/0rsk
-- _id: 763238
-  _job: 20323
-  _time: 2025-05-14 05:45:13.984662919 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 4023b7c733461e77f4b2c8facd4ca4e0dd12ed68
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/4023b7c733461e77f4b2c8facd4ca4e0dd12ed68/#commitcomment-156976241
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:13.995673373 Z
-  where: github
-  who: 526301
-  why: Pushed 4023b7c73 to the default branch 'master' in yegor256/0rsk
-- _id: 763239
-  _job: 20323
-  _time: 2025-05-14 05:45:14.162817148 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 8291d66c347404ffd2f7f1e11ead52adbf617d2f
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/8291d66c347404ffd2f7f1e11ead52adbf617d2f/#commitcomment-156976243
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:14.178189246 Z
-  where: github
-  who: 526301
-  why: Pushed 8291d66c3 to the default branch 'master' in yegor256/0rsk
-- _id: 763240
-  _job: 20323
-  _time: 2025-05-14 05:45:14.335134091 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: f8baa3cf43e70d8d7df0df525feeef77051b8b8e
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/f8baa3cf43e70d8d7df0df525feeef77051b8b8e/#commitcomment-156976246
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:14.346611949 Z
-  where: github
-  who: 526301
-  why: Pushed f8baa3cf4 to the default branch 'master' in yegor256/0rsk
-- _id: 763241
-  _job: 20323
-  _time: 2025-05-14 05:45:14.499630843 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 07a6864917e34b343b8ee583dee67d97f21f1c71
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/07a6864917e34b343b8ee583dee67d97f21f1c71/#commitcomment-156976247
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:14.515253499 Z
-  where: github
-  who: 526301
-  why: Pushed 07a686491 to the default branch 'master' in yegor256/0rsk
-- _id: 763242
-  _job: 20323
-  _time: 2025-05-14 05:45:14.671068992 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: b92f0798769e04f8156131e7c2d0b62dc514559c
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/b92f0798769e04f8156131e7c2d0b62dc514559c/#commitcomment-156976248
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:14.686369208 Z
-  where: github
-  who: 526301
-  why: Pushed b92f07987 to the default branch 'master' in yegor256/0rsk
-- _id: 763243
-  _job: 20323
-  _time: 2025-05-14 05:45:14.834958962 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: de602813157435a2c5270c9bf876287f7ec4bb51
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/de602813157435a2c5270c9bf876287f7ec4bb51/#commitcomment-156976250
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:14.846326270 Z
-  where: github
-  who: 526301
-  why: Pushed de6028131 to the default branch 'master' in yegor256/0rsk
-- _id: 763244
-  _job: 20323
-  _time: 2025-05-14 05:45:15.007179387 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 91f00eaaa7405f5caaa09a204683e6402c8ee97d
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/91f00eaaa7405f5caaa09a204683e6402c8ee97d/#commitcomment-156976251
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:15.022527512 Z
-  where: github
-  who: 526301
-  why: Pushed 91f00eaaa to the default branch 'master' in yegor256/0rsk
-- _id: 763245
-  _job: 20323
-  _time: 2025-05-14 05:45:15.178678807 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: a6ca8127ac205998cdf2d5abbc2cb05918f53261
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/a6ca8127ac205998cdf2d5abbc2cb05918f53261/#commitcomment-156976252
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:15.192165662 Z
-  where: github
-  who: 526301
-  why: Pushed a6ca8127a to the default branch 'master' in yegor256/0rsk
-- _id: 763246
-  _job: 20323
-  _time: 2025-05-14 05:45:15.335050420 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: e645ff978d6a68f0b55eb9e54d3d3b259c9be2b2
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/e645ff978d6a68f0b55eb9e54d3d3b259c9be2b2/#commitcomment-156976253
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:15.359624057 Z
-  where: github
-  who: 526301
-  why: Pushed e645ff978 to the default branch 'master' in yegor256/0rsk
-- _id: 763247
-  _job: 20323
-  _time: 2025-05-14 05:45:15.514972854 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: f97024b49e4ff0ea8df7bb7c405f65f02aa286fc
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/0rsk, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/0rsk/commit/f97024b49e4ff0ea8df7bb7c405f65f02aa286fc/#commitcomment-156976254
-  is_human: 1
-  repository: 181044958
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:15.530161074 Z
-  where: github
-  who: 526301
-  why: Pushed f97024b49 to the default branch 'master' in yegor256/0rsk
-- _id: 763248
-  _job: 20323
-  _time: 2025-05-14 05:45:15.679948690 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 171ea2312f811c69cf1ee1856be71a15b633f124
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/pages-action, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/zerocracy/pages-action/commit/171ea2312f811c69cf1ee1856be71a15b633f124/#commitcomment-156976257
-  is_human: 1
-  repository: 802720676
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:15.690921934 Z
-  where: github
-  who: 526301
-  why: Pushed 171ea2312 to the default branch 'master' in zerocracy/pages-action
-- _id: 763249
-  _job: 20323
-  _time: 2025-05-14 05:45:16.017113142 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 88a7f9ea6e7f0681e4be1afd878efd82de01b9c0
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/baza.rb, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/zerocracy/baza.rb/commit/88a7f9ea6e7f0681e4be1afd878efd82de01b9c0/#commitcomment-156976258
-  is_human: 1
-  repository: 840215648
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:16.032298262 Z
-  where: github
-  who: 526301
-  why: Pushed 88a7f9ea6 to the default branch 'master' in zerocracy/baza.rb
-- _id: 763250
-  _job: 20323
-  _time: 2025-05-14 05:45:16.367420495 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: baad9ca9bb91a3d0a2dd65c5fb8ed4e560eb957c
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in zerocracy/judges-action, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/zerocracy/judges-action/commit/baad9ca9bb91a3d0a2dd65c5fb8ed4e560eb957c/#commitcomment-156976260
-  is_human: 1
-  repository: 799177290
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:16.384183765 Z
-  where: github
-  who: 526301
-  why: Pushed baad9ca9b to the default branch 'master' in zerocracy/judges-action
-- _id: 763251
-  _job: 20323
-  _time: 2025-05-14 05:45:16.705678138 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  award: -16
-  commit: 01d8653040dea3ed3ab243da2d61d527440b2d06
-  default_branch: master
-  details: It's time to punish @yegor256 for pushing to the default branch 'master'
-    in yegor256/factbase, the penalty amount is -16.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -16 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running balance is [-372](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). '
-  href: https://github.com/yegor256/factbase/commit/01d8653040dea3ed3ab243da2d61d527440b2d06/#commitcomment-156976262
-  is_human: 1
-  repository: 798641472
-  what: push-to-master-was-punished
-  when: 2025-05-14 05:45:16.726751343 Z
-  where: github
-  who: 526301
-  why: Pushed 01d865304 to the default branch 'master' in yegor256/factbase
 - _id: 763252
   _job: 20323
   _time: 2025-05-14 05:45:17.549857939 Z
@@ -140341,13 +139875,6 @@
   when: *269
   where: github
   who: 526301
-- _id: 763700
-  _time: 2025-05-14 06:13:53.610877377 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 181044958
-  what: min-issue-was-found
-  where: github
 - _id: 763701
   _job: 20324
   _time: 2025-05-14 06:15:33.284916805 Z
@@ -140368,8 +139895,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running balance is [-12](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
     \ -->"
+  href: https://github.com/yegor256/0rsk/issues/136/#issuecomment-2878885395
   is_human: 1
   issue: 136
+  receipt: receipt-#22891
   repository: 181044958
   what: bug-report-was-rewarded
   when: 2025-05-14 06:15:33.313369815 Z
@@ -140397,8 +139926,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running balance is [-12](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
     \ -->"
+  href: https://github.com/yegor256/0rsk/issues/137/#issuecomment-2878885435
   is_human: 1
   issue: 137
+  receipt: receipt-#22892
   repository: 181044958
   what: bug-report-was-rewarded
   when: 2025-05-14 06:15:40.262272435 Z
@@ -140426,8 +139957,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running balance is [-12](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
     \ -->"
+  href: https://github.com/yegor256/0rsk/issues/148/#issuecomment-2878885473
   is_human: 1
   issue: 148
+  receipt: receipt-#22893
   repository: 181044958
   what: bug-report-was-rewarded
   when: 2025-05-14 06:15:47.234902141 Z
@@ -140453,8 +139986,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running balance is [-12](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
     \ -->"
+  href: https://github.com/yegor256/0rsk/issues/149/#issuecomment-2878885511
   is_human: 1
   issue: 149
+  receipt: receipt-#22894
   repository: 181044958
   what: bug-report-was-rewarded
   when: 2025-05-14 06:15:54.196697072 Z
@@ -140472,8 +140007,10 @@
     Thank you for your valuable contribution in reporting a new bug! We appreciate your efforts in helping improve our project's quality. As per our team's policy, you've been awarded **12** points for this report. Your attention to detail is commendable, and we encourage you to continue [reporting](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) any issues you may find. If you notice anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) up to standard, please [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to bring it to our attention. Your current balance stands at [-12](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) points.
 
     <!-- Thanks for reporting a new bug! You've earned +12 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running balance is [-12](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).  -->
+  href: https://github.com/yegor256/0rsk/issues/150/#issuecomment-2878885542
   is_human: 1
   issue: 150
+  receipt: receipt-#22895
   repository: 181044958
   what: bug-report-was-rewarded
   when: 2025-05-14 06:16:00.475346830 Z
@@ -140494,69 +140031,6 @@
   repository: 798641472
   what: min-issue-was-found
   where: github
-- _id: 763994
-  _time: 2025-05-14 06:46:30.013530776 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49679206050
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 763995
-  _time: 2025-05-14 06:46:31.076709048 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49664097187
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 763996
-  _time: 2025-05-14 06:46:32.191469557 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49676147435
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 763997
-  _time: 2025-05-14 06:46:32.985512880 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49670754162
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 763998
-  _time: 2025-05-14 06:46:33.772743786 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49663158299
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 763999
-  _time: 2025-05-14 06:46:34.594744165 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49663950488
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 764000
-  _time: 2025-05-14 06:46:35.608059743 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49673665807
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 764001
-  _time: 2025-05-14 06:46:36.782337530 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49663768996
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 764002
-  _time: 2025-05-14 06:46:38.311371535 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49682813249
-  repository: 799177290
-  what: events-were-scanned
-  where: github
 - _id: 764003
   _time: 2025-05-14 06:46:39.497525910 Z
   _version: 0.10.1/0.42.0/
@@ -140564,66 +140038,603 @@
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 764016
-  _time: 2025-05-14 06:46:51.378718512 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
+- _id:
+  - 764132
+  - 763232
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.165099814 Z
+  - 2025-05-14 05:45:12.352393114 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 47abec871dec2c5329b1bf3349ce3b5afcd754c3
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/fbe, the penalty amount is -16.
+  href: https://github.com/zerocracy/fbe/commit/47abec871dec2c5329b1bf3349ce3b5afcd754c3/#commitcomment-156976231
+  is_human: 1
   repository: 820463873
-  what: labels-were-scanned
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:12.367140708 Z
   where: github
-- _id: 764021
-  _time: 2025-05-14 06:46:53.726417234 Z
+  who: 526301
+  why: Pushed 47abec871 to the default branch 'master' in zerocracy/fbe
+- _id:
+  - 764133
+  - 763233
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.224958608 Z
+  - 2025-05-14 05:45:12.748696047 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 73a7ee1b1c676bd16fd119e345f5de5af09f60bd
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/swarm-template, the penalty amount is -16.
+  href: https://github.com/zerocracy/swarm-template/commit/73a7ee1b1c676bd16fd119e345f5de5af09f60bd/#commitcomment-156976233
+  is_human: 1
+  repository: 849726475
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:12.772149524 Z
+  where: github
+  who: 526301
+  why: Pushed 73a7ee1b1 to the default branch 'master' in zerocracy/swarm-template
+- _id:
+  - 764134
+  - 763234
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.282851657 Z
+  - 2025-05-14 05:45:13.093856000 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 8ddcada3bcff51fdc08cd73dddaea46c1f683ffe
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/judges, the penalty amount is -16.
+  href: https://github.com/yegor256/judges/commit/8ddcada3bcff51fdc08cd73dddaea46c1f683ffe/#commitcomment-156976236
+  is_human: 1
+  repository: 799113787
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:13.109581060 Z
+  where: github
+  who: 526301
+  why: Pushed 8ddcada3b to the default branch 'master' in yegor256/judges
+- _id:
+  - 764135
+  - 763235
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.343996582 Z
+  - 2025-05-14 05:45:13.366739776 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 4a57ed5d1f7368e3130d346ab4113f820f20b320
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/4a57ed5d1f7368e3130d346ab4113f820f20b320/#commitcomment-156976238
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:13.378157062 Z
+  where: github
+  who: 526301
+  why: Pushed 4a57ed5d1 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764136
+  - 763236
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.403664553 Z
+  - 2025-05-14 05:45:13.651474448 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 7aa179a385047f2ab365df0388def0116c626197
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/7aa179a385047f2ab365df0388def0116c626197/#commitcomment-156976239
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:13.666825713 Z
+  where: github
+  who: 526301
+  why: Pushed 7aa179a38 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764137
+  - 763237
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.463940316 Z
+  - 2025-05-14 05:45:13.821385585 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: ed98d6230a35a7bc8e656e27757ce1735c4d4fd1
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/ed98d6230a35a7bc8e656e27757ce1735c4d4fd1/#commitcomment-156976240
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:13.837590643 Z
+  where: github
+  who: 526301
+  why: Pushed ed98d6230 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764138
+  - 763238
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.522442321 Z
+  - 2025-05-14 05:45:13.984662919 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 4023b7c733461e77f4b2c8facd4ca4e0dd12ed68
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/4023b7c733461e77f4b2c8facd4ca4e0dd12ed68/#commitcomment-156976241
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:13.995673373 Z
+  where: github
+  who: 526301
+  why: Pushed 4023b7c73 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764139
+  - 763239
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.572939800 Z
+  - 2025-05-14 05:45:14.162817148 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 8291d66c347404ffd2f7f1e11ead52adbf617d2f
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/8291d66c347404ffd2f7f1e11ead52adbf617d2f/#commitcomment-156976243
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:14.178189246 Z
+  where: github
+  who: 526301
+  why: Pushed 8291d66c3 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764140
+  - 763240
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.631650108 Z
+  - 2025-05-14 05:45:14.335134091 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: f8baa3cf43e70d8d7df0df525feeef77051b8b8e
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/f8baa3cf43e70d8d7df0df525feeef77051b8b8e/#commitcomment-156976246
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:14.346611949 Z
+  where: github
+  who: 526301
+  why: Pushed f8baa3cf4 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764141
+  - 763241
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.689449368 Z
+  - 2025-05-14 05:45:14.499630843 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 07a6864917e34b343b8ee583dee67d97f21f1c71
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/07a6864917e34b343b8ee583dee67d97f21f1c71/#commitcomment-156976247
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:14.515253499 Z
+  where: github
+  who: 526301
+  why: Pushed 07a686491 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764142
+  - 763242
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.748624846 Z
+  - 2025-05-14 05:45:14.671068992 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: b92f0798769e04f8156131e7c2d0b62dc514559c
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/b92f0798769e04f8156131e7c2d0b62dc514559c/#commitcomment-156976248
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:14.686369208 Z
+  where: github
+  who: 526301
+  why: Pushed b92f07987 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764143
+  - 763243
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.807306552 Z
+  - 2025-05-14 05:45:14.834958962 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: de602813157435a2c5270c9bf876287f7ec4bb51
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/de602813157435a2c5270c9bf876287f7ec4bb51/#commitcomment-156976250
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:14.846326270 Z
+  where: github
+  who: 526301
+  why: Pushed de6028131 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764144
+  - 763244
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.867445216 Z
+  - 2025-05-14 05:45:15.007179387 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 91f00eaaa7405f5caaa09a204683e6402c8ee97d
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/91f00eaaa7405f5caaa09a204683e6402c8ee97d/#commitcomment-156976251
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:15.022527512 Z
+  where: github
+  who: 526301
+  why: Pushed 91f00eaaa to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764145
+  - 763245
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.926180542 Z
+  - 2025-05-14 05:45:15.178678807 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: a6ca8127ac205998cdf2d5abbc2cb05918f53261
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/a6ca8127ac205998cdf2d5abbc2cb05918f53261/#commitcomment-156976252
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:15.192165662 Z
+  where: github
+  who: 526301
+  why: Pushed a6ca8127a to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764146
+  - 763246
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:35.979927909 Z
+  - 2025-05-14 05:45:15.335050420 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: e645ff978d6a68f0b55eb9e54d3d3b259c9be2b2
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/e645ff978d6a68f0b55eb9e54d3d3b259c9be2b2/#commitcomment-156976253
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:15.359624057 Z
+  where: github
+  who: 526301
+  why: Pushed e645ff978 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764147
+  - 763247
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:36.040119211 Z
+  - 2025-05-14 05:45:15.514972854 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: f97024b49e4ff0ea8df7bb7c405f65f02aa286fc
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/0rsk, the penalty amount is -16.
+  href: https://github.com/yegor256/0rsk/commit/f97024b49e4ff0ea8df7bb7c405f65f02aa286fc/#commitcomment-156976254
+  is_human: 1
+  repository: 181044958
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:15.530161074 Z
+  where: github
+  who: 526301
+  why: Pushed f97024b49 to the default branch 'master' in yegor256/0rsk
+- _id:
+  - 764148
+  - 763248
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:36.099404450 Z
+  - 2025-05-14 05:45:15.679948690 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 171ea2312f811c69cf1ee1856be71a15b633f124
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/pages-action, the penalty amount is -16.
+  href: https://github.com/zerocracy/pages-action/commit/171ea2312f811c69cf1ee1856be71a15b633f124/#commitcomment-156976257
+  is_human: 1
+  repository: 802720676
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:15.690921934 Z
+  where: github
+  who: 526301
+  why: Pushed 171ea2312 to the default branch 'master' in zerocracy/pages-action
+- _id:
+  - 764149
+  - 763249
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:36.159454952 Z
+  - 2025-05-14 05:45:16.017113142 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 88a7f9ea6e7f0681e4be1afd878efd82de01b9c0
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/baza.rb, the penalty amount is -16.
+  href: https://github.com/zerocracy/baza.rb/commit/88a7f9ea6e7f0681e4be1afd878efd82de01b9c0/#commitcomment-156976258
+  is_human: 1
+  repository: 840215648
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:16.032298262 Z
+  where: github
+  who: 526301
+  why: Pushed 88a7f9ea6 to the default branch 'master' in zerocracy/baza.rb
+- _id:
+  - 764150
+  - 763250
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:36.213114570 Z
+  - 2025-05-14 05:45:16.367420495 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: baad9ca9bb91a3d0a2dd65c5fb8ed4e560eb957c
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/judges-action, the penalty amount is -16.
+  href: https://github.com/zerocracy/judges-action/commit/baad9ca9bb91a3d0a2dd65c5fb8ed4e560eb957c/#commitcomment-156976260
+  is_human: 1
+  repository: 799177290
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:16.384183765 Z
+  where: github
+  who: 526301
+  why: Pushed baad9ca9b to the default branch 'master' in zerocracy/judges-action
+- _id:
+  - 764151
+  - 763251
+  _job:
+  - 20326
+  - 20323
+  _time:
+  - 2025-05-14 06:48:36.278747316 Z
+  - 2025-05-14 05:45:16.705678138 Z
+  _version: 0.10.1/0.42.0/0.7.0
+  award: -16
+  commit: 01d8653040dea3ed3ab243da2d61d527440b2d06
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in yegor256/factbase, the penalty amount is -16.
+  href: https://github.com/yegor256/factbase/commit/01d8653040dea3ed3ab243da2d61d527440b2d06/#commitcomment-156976262
+  is_human: 1
+  repository: 798641472
+  what: push-to-master-was-punished
+  when: 2025-05-14 05:45:16.726751343 Z
+  where: github
+  who: 526301
+  why: Pushed 01d865304 to the default branch 'master' in yegor256/factbase
+- _id: 764317
+  _time: 2025-05-14 07:09:33.087155536 Z
+  _version: 0.10.1/0.42.0/
+  latest: 1
+  repository: 181044958
+  what: min-issue-was-found
+  where: github
+- _id: 764458
+  _time: 2025-05-14 07:10:52.138510413 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49663158299
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 764459
+  _time: 2025-05-14 07:10:53.004739592 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49663768996
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 764460
+  _time: 2025-05-14 07:10:54.091112375 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49682813249
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 764461
+  _time: 2025-05-14 07:10:54.844742404 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49673665807
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 764462
+  _time: 2025-05-14 07:10:55.560661726 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49664097187
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 764463
+  _time: 2025-05-14 07:10:55.985538849 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49670754162
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 764464
+  _time: 2025-05-14 07:10:56.613873039 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49663950488
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 764465
+  _time: 2025-05-14 07:10:57.467359158 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49676147435
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 764466
+  _time: 2025-05-14 07:10:58.272022756 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49679206050
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 764477
+  _time: 2025-05-14 07:11:03.630222578 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 764040
-  _time: 2025-05-14 06:47:05.462650212 Z
+- _id: 764505
+  _time: 2025-05-14 07:11:17.882981598 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 974194993
   what: labels-were-scanned
   where: github
-- _id: 764126
-  _time: 2025-05-14 06:47:59.485452690 Z
+- _id: 764596
+  _time: 2025-05-14 07:12:05.611976541 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 764601
+  _time: 2025-05-14 07:12:07.941154272 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 764127
-  _time: 2025-05-14 06:48:00.072042005 Z
+- _id: 764606
+  _time: 2025-05-14 07:12:10.446193811 Z
   _version: 0.10.1/0.42.0/
-  latest: 21
+  latest: 105
   repository: 799113787
   what: labels-were-scanned
   where: github
-- _id: 764128
-  _time: 2025-05-14 06:48:00.947386051 Z
+- _id: 764607
+  _time: 2025-05-14 07:12:10.942062351 Z
   _version: 0.10.1/0.42.0/
-  latest: 325
+  latest: 62
   repository: 799177290
   what: labels-were-scanned
   where: github
-- _id: 764129
-  _time: 2025-05-14 06:48:01.541727407 Z
+- _id: 764608
+  _time: 2025-05-14 07:12:11.456647208 Z
   _version: 0.10.1/0.42.0/
-  latest: 31
-  repository: 802720676
+  latest: 130
+  repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 764130
-  _time: 2025-05-14 06:48:02.165493167 Z
+- _id: 764609
+  _time: 2025-05-14 07:12:12.010645430 Z
   _version: 0.10.1/0.42.0/
-  latest: 40
+  latest: 106
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 764610
+  _time: 2025-05-14 07:12:13.516530335 Z
+  _version: 0.10.1/0.42.0/
+  latest: 20
   repository: 181044958
   what: labels-were-scanned
   where: github
-- _id: 764131
-  _time: 2025-05-14 06:48:02.752136791 Z
+- _id: 764611
+  _time: 2025-05-14 07:12:17.543208234 Z
   _version: 0.10.1/0.42.0/
-  latest: 25
-  repository: 798641472
-  what: labels-were-scanned
+  latest: 1
+  repository: 799113787
+  what: min-issue-was-found
   where: github
