@@ -302,6 +302,8 @@ Fbe.iterate do
     else
       skip_event(json)
     end
+  rescue Octokit::Forbidden
+    raise "@#{Fbe.octo.user[:login]} doesn't have access to the #{rname} repository, maybe it's private"
   end
 
   over do |repository, latest|
