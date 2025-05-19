@@ -21,7 +21,7 @@ Fbe.iterate do
     begin
       Fbe.octo.issue_timeline(repository, issue).each do |te|
         if Time.now - start > 5 * 60
-          $loog.debug("We are scanning labels for #{start.ago} already, it's time to quit")
+          $loog.debug("We are scanning types for #{start.ago} already, it's time to quit")
           break
         end
         next unless events.include?(te[:event])

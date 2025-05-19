@@ -14,7 +14,7 @@ require_relative '../test__helper'
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
-class TestLabelWasAttached < Jp::Test
+class TestTypeWasAttached < Jp::Test
   def test_catches_type_event
     WebMock.disable_net_connect!
     rate_limit_up
