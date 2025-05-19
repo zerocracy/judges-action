@@ -4,10 +4,10 @@
   deleted: 8
   error: Can't find 'since' attribute out of [_id, _time, _version, _job, what, when]
   inserted: 8
-  seconds: 229.083911303
+  seconds: 290.088887685
   version: 0.42.0
   what: judges-summary
-  when: 2025-05-19 04:16:29.471829710 Z
+  when: 2025-05-19 04:46:21.202953372 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -142046,20 +142046,6 @@
   repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 802559
-  _time: 2025-05-19 01:37:43.187363931 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 974194993
-  what: min-issue-was-found
-  where: github
-- _id: 802715
-  _time: 2025-05-19 02:39:47.027215404 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 799113787
-  what: min-issue-was-found
-  where: github
 - _id: 803451
   _time: 2025-05-19 03:53:21.414990760 Z
   _version: 0.10.1/0.42.0/
@@ -142081,76 +142067,6 @@
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 803894
-  _time: 2025-05-19 04:15:10.111103414 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 181044958
-  what: min-issue-was-found
-  where: github
-- _id: 803895
-  _time: 2025-05-19 04:15:15.261824090 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49850365468
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 803896
-  _time: 2025-05-19 04:15:16.056236560 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49853719547
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 803897
-  _time: 2025-05-19 04:15:17.024515387 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49860602057
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 803898
-  _time: 2025-05-19 04:15:18.092526710 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49846675438
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 803899
-  _time: 2025-05-19 04:15:18.785023240 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49820685427
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 803900
-  _time: 2025-05-19 04:15:19.244843230 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49801208429
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 803901
-  _time: 2025-05-19 04:15:19.717946949 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49778290184
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 803902
-  _time: 2025-05-19 04:15:20.280132157 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49854382486
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 803903
-  _time: 2025-05-19 04:15:21.103790978 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49824075264
-  repository: 974194993
-  what: events-were-scanned
-  where: github
 - _id: 803904
   _time: 2025-05-19 04:15:21.707946288 Z
   _version: 0.10.1/0.42.0/
@@ -142158,66 +142074,224 @@
   repository: 799177290
   what: min-issue-was-found
   where: github
-- _id: 803916
-  _time: 2025-05-19 04:15:30.502821943 Z
+- _id: 804043
+  _time: 2025-05-19 04:41:42.048748683 Z
+  _version: 0.10.1/0.42.0/
+  commit: 8303bc4195f8328a50a9948155756c210a891773
+  default_branch: master
+  details: 'A new Git push #24371018361 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 49861335249
+  event_type: PushEvent
+  is_human: 1
+  push_id: 24371018361
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-05-19 04:32:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 804044
+  _time: 2025-05-19 04:41:42.399844012 Z
+  _version: 0.10.1/0.42.0/
+  commit: 63762ba663380647c3e40dca3127a6e4a5ba9468
+  default_branch: master
+  details: 'A new Git push #24371007952 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 49861313835
+  event_type: PushEvent
+  is_human: 1
+  push_id: 24371007952
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-05-19 04:31:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 804045
+  _time: 2025-05-19 04:41:43.160189791 Z
+  _version: 0.10.1/0.42.0/
+  details: The issue zerocracy/judges-action#601 has been closed by @yegor256.
+  event_id: 49861286551
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 601
+  repository: 799177290
+  what: issue-was-closed
+  when: 2025-05-19 04:29:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 804046
+  _time: 2025-05-19 04:41:43.526882864 Z
+  _version: 0.10.1/0.42.0/
+  branch: '601'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#606 has been closed by @yegor256,
+    with 43 HoC and 1 comments.
+  event_id: 49861286323
+  event_type: PullRequestEvent
+  failed_builds: 1
+  hoc: 43
+  is_human: 1
+  issue: 606
+  repository: 799177290
+  review_comments: 0
+  succeeded_builds: 12
+  what: pull-was-merged
+  when: 2025-05-19 04:29:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 804194
+  _time: 2025-05-19 04:43:19.016433230 Z
+  _version: 0.10.1/0.42.0/
+  latest: 1
+  repository: 181044958
+  what: min-issue-was-found
+  where: github
+- _id: 804348
+  _time: 2025-05-19 04:44:52.503145412 Z
+  _version: 0.10.1/0.42.0/
+  latest: 1
+  repository: 974194993
+  what: min-issue-was-found
+  where: github
+- _id: 804349
+  _time: 2025-05-19 04:44:59.640447898 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49853719547
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 804350
+  _time: 2025-05-19 04:45:00.193186340 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49801208429
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 804351
+  _time: 2025-05-19 04:45:01.339534609 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49861361481
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 804352
+  _time: 2025-05-19 04:45:02.036825020 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49850365468
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 804353
+  _time: 2025-05-19 04:45:02.617203406 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49778290184
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 804354
+  _time: 2025-05-19 04:45:03.473838053 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49824075264
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 804355
+  _time: 2025-05-19 04:45:04.742973511 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49846675438
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 804356
+  _time: 2025-05-19 04:45:05.495929148 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49820685427
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 804357
+  _time: 2025-05-19 04:45:06.153695607 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49854382486
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 804373
+  _time: 2025-05-19 04:45:14.205046227 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 849726475
   what: labels-were-scanned
   where: github
-- _id: 803931
-  _time: 2025-05-19 04:15:37.503413802 Z
+- _id: 804392
+  _time: 2025-05-19 04:45:24.949733155 Z
   _version: 0.10.1/0.42.0/
   latest: 0
-  repository: 820463873
+  repository: 181044958
   what: labels-were-scanned
   where: github
-- _id: 803943
-  _time: 2025-05-19 04:15:42.654236404 Z
+- _id: 804396
+  _time: 2025-05-19 04:45:26.790459928 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 974194993
   what: labels-were-scanned
   where: github
-- _id: 804026
-  _time: 2025-05-19 04:16:24.200817032 Z
+- _id: 804469
+  _time: 2025-05-19 04:46:06.892666562 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 804480
+  _time: 2025-05-19 04:46:12.422338958 Z
   _version: 0.10.1/0.42.0/
   latest: 0
   repository: 840215648
   what: labels-were-scanned
   where: github
-- _id: 804030
-  _time: 2025-05-19 04:16:26.226216667 Z
+- _id: 804482
+  _time: 2025-05-19 04:46:13.500596898 Z
   _version: 0.10.1/0.42.0/
-  latest: 73
+  latest: 130
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 804483
+  _time: 2025-05-19 04:46:14.010557912 Z
+  _version: 0.10.1/0.42.0/
+  latest: 177
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 804484
+  _time: 2025-05-19 04:46:14.462393369 Z
+  _version: 0.10.1/0.42.0/
+  latest: 31
   repository: 802720676
   what: labels-were-scanned
   where: github
-- _id: 804031
-  _time: 2025-05-19 04:16:26.664280565 Z
+- _id: 804485
+  _time: 2025-05-19 04:46:14.965945008 Z
   _version: 0.10.1/0.42.0/
-  latest: 48
+  latest: 216
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 804032
-  _time: 2025-05-19 04:16:27.199961054 Z
+- _id: 804486
+  _time: 2025-05-19 04:46:20.428885060 Z
   _version: 0.10.1/0.42.0/
-  latest: 40
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 804033
-  _time: 2025-05-19 04:16:27.908895728 Z
-  _version: 0.10.1/0.42.0/
-  latest: 239
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 804034
-  _time: 2025-05-19 04:16:28.404157310 Z
-  _version: 0.10.1/0.42.0/
-  latest: 47
+  latest: 1
   repository: 799113787
-  what: labels-were-scanned
+  what: min-issue-was-found
   where: github
