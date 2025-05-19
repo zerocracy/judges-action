@@ -4,10 +4,10 @@
   deleted: 8
   error: Can't find 'since' attribute out of [_id, _time, _version, _job, what, when]
   inserted: 8
-  seconds: 302.621324463
+  seconds: 232.81004042
   version: 0.42.0
   what: judges-summary
-  when: 2025-05-19 10:13:28.884580189 Z
+  when: 2025-05-19 10:44:41.079912497 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -142250,13 +142250,6 @@
   repository: 798641472
   what: min-issue-was-found
   where: github
-- _id: 806582
-  _time: 2025-05-19 08:11:59.181118870 Z
-  _version: 0.10.1/0.42.0/
-  latest: 1
-  repository: 181044958
-  what: min-issue-was-found
-  where: github
 - _id: 807193
   _time: 2025-05-19 09:08:42.031089744 Z
   _version: 0.10.1/0.42.0/
@@ -142299,136 +142292,228 @@
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 808197
-  _time: 2025-05-19 10:11:45.115036769 Z
+- _id: 808354
+  _time: 2025-05-19 10:40:54.407660565 Z
   _version: 0.10.1/0.42.0/
-  latest: 49778290184
+  commit: 576db82271bb062fc7b93329bf0e993fb20477dc
+  default_branch: master
+  details: 'A new Git push #24376063713 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 49872041723
+  event_type: PushEvent
+  is_human: 1
+  push_id: 24376063713
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-05-19 09:35:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 808358
+  _time: 2025-05-19 10:40:59.594374478 Z
+  _version: 0.10.1/0.42.0/
+  branch: renovate/glogin-0.x-lockfile
+  details: The pull request yegor256/0rsk#166 has been opened by @renovate[bot].
+  event_id: 49871452817
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 166
+  repository: 181044958
+  what: pull-was-opened
+  when: 2025-05-19 09:22:16.000000000 Z
+  where: github
+  who: 29139614
+- _id: 808359
+  _time: 2025-05-19 10:40:59.996223382 Z
+  _version: 0.10.1/0.42.0/
+  commit: aa1070c37c2db9a82c9dd78810799707d4920550
+  default_branch: master
+  details: 'A new Git push #24375773989 has arrived to yegor256/0rsk, made by @yegor256
+    (default branch is ''master''), not associated with any pull request.'
+  event_id: 49871413505
+  event_type: PushEvent
+  is_human: 1
+  push_id: 24375773989
+  ref: refs/heads/master
+  repository: 181044958
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-05-19 09:21:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 808361
+  _time: 2025-05-19 10:41:01.203903250 Z
+  _version: 0.10.1/0.42.0/
+  commit: 756c10bcb5c17c0cc003a114b2d8d35a6053783c
+  default_branch: master
+  details: 'A new Git push #24375811066 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 49871492748
+  event_type: PushEvent
+  is_human: 1
+  push_id: 24375811066
+  ref: refs/heads/master
   repository: 840215648
-  what: events-were-scanned
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-05-19 09:23:10.000000000 Z
   where: github
-- _id: 808198
-  _time: 2025-05-19 10:11:45.940909414 Z
+  who: 526301
+- _id: 808504
+  _time: 2025-05-19 10:42:51.761197094 Z
   _version: 0.10.1/0.42.0/
-  latest: 49820685427
-  repository: 799113787
-  what: events-were-scanned
+  latest: 1
+  repository: 181044958
+  what: min-issue-was-found
   where: github
-- _id: 808199
-  _time: 2025-05-19 10:11:46.761605780 Z
+- _id: 808522
+  _time: 2025-05-19 10:43:02.319032777 Z
   _version: 0.10.1/0.42.0/
-  latest: 49854382486
+  latest: 0
   repository: 849726475
-  what: events-were-scanned
+  what: labels-were-scanned
   where: github
-- _id: 808200
-  _time: 2025-05-19 10:11:47.515667104 Z
+- _id: 808542
+  _time: 2025-05-19 10:43:15.444849221 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 974194993
+  what: labels-were-scanned
+  where: github
+- _id: 808624
+  _time: 2025-05-19 10:44:05.955618644 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 808640
+  _time: 2025-05-19 10:44:14.610791490 Z
+  _version: 0.10.1/0.42.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 808643
+  _time: 2025-05-19 10:44:16.162418711 Z
+  _version: 0.10.1/0.42.0/
+  latest: 73
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 808644
+  _time: 2025-05-19 10:44:16.733291801 Z
+  _version: 0.10.1/0.42.0/
+  latest: 31
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 808645
+  _time: 2025-05-19 10:44:17.253299742 Z
+  _version: 0.10.1/0.42.0/
+  latest: 28
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 808646
+  _time: 2025-05-19 10:44:17.903692762 Z
+  _version: 0.10.1/0.42.0/
+  latest: 80
+  repository: 181044958
+  what: labels-were-scanned
+  where: github
+- _id: 808647
+  _time: 2025-05-19 10:44:18.430257435 Z
+  _version: 0.10.1/0.42.0/
+  latest: 74
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 808648
+  _time: 2025-05-19 10:44:23.556538426 Z
   _version: 0.10.1/0.42.0/
   latest: 49850365468
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 808201
-  _time: 2025-05-19 10:11:48.181794278 Z
+- _id: 808649
+  _time: 2025-05-19 10:44:25.649795948 Z
   _version: 0.10.1/0.42.0/
-  latest: 49801208429
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 808202
-  _time: 2025-05-19 10:11:49.590447710 Z
-  _version: 0.10.1/0.42.0/
-  latest: 49846675438
+  latest: 49871845816
   repository: 181044958
   what: events-were-scanned
   where: github
-- _id: 808203
-  _time: 2025-05-19 10:11:50.758095808 Z
+- _id: 808650
+  _time: 2025-05-19 10:44:26.428830781 Z
+  _version: 0.10.1/0.42.0/
+  commit: c406fdbd24bbea55a8396c81589f874347d1debb
+  default_branch: master
+  details: 'A new Git push #24376048055 has arrived to yegor256/factbase, made by
+    @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 49872007580
+  event_type: PushEvent
+  push_id: 24376048055
+  ref: refs/heads/master
+  repository: 798641472
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-05-19 09:34:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 808651
+  _time: 2025-05-19 10:44:26.941814723 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49872007580
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 808652
+  _time: 2025-05-19 10:44:27.952516060 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49820685427
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 808653
+  _time: 2025-05-19 10:44:29.127629734 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49872041723
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 808654
+  _time: 2025-05-19 10:44:30.275417601 Z
   _version: 0.10.1/0.42.0/
   latest: 49824075264
   repository: 974194993
   what: events-were-scanned
   where: github
-- _id: 808204
-  _time: 2025-05-19 10:11:51.906379912 Z
+- _id: 808655
+  _time: 2025-05-19 10:44:31.062264341 Z
   _version: 0.10.1/0.42.0/
-  latest: 49853719547
-  repository: 820463873
+  latest: 49871492748
+  repository: 840215648
   what: events-were-scanned
   where: github
-- _id: 808205
-  _time: 2025-05-19 10:11:54.099502404 Z
+- _id: 808656
+  _time: 2025-05-19 10:44:31.904929145 Z
+  _version: 0.10.1/0.42.0/
+  latest: 49854382486
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 808657
+  _time: 2025-05-19 10:44:33.563320320 Z
   _version: 0.10.1/0.42.0/
   latest: 49870970684
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 808206
-  _time: 2025-05-19 10:11:54.970079662 Z
+- _id: 808658
+  _time: 2025-05-19 10:44:34.400726417 Z
   _version: 0.10.1/0.42.0/
   latest: 1
   repository: 820463873
   what: min-issue-was-found
-  where: github
-- _id: 808219
-  _time: 2025-05-19 10:12:06.867611510 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 808242
-  _time: 2025-05-19 10:12:19.439792465 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 974194993
-  what: labels-were-scanned
-  where: github
-- _id: 808344
-  _time: 2025-05-19 10:13:19.118931633 Z
-  _version: 0.10.1/0.42.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 808347
-  _time: 2025-05-19 10:13:20.646587148 Z
-  _version: 0.10.1/0.42.0/
-  latest: 21
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 808348
-  _time: 2025-05-19 10:13:21.333529476 Z
-  _version: 0.10.1/0.42.0/
-  latest: 325
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 808349
-  _time: 2025-05-19 10:13:21.945279749 Z
-  _version: 0.10.1/0.42.0/
-  latest: 20
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 808350
-  _time: 2025-05-19 10:13:22.523319962 Z
-  _version: 0.10.1/0.42.0/
-  latest: 171
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 808351
-  _time: 2025-05-19 10:13:23.291144285 Z
-  _version: 0.10.1/0.42.0/
-  latest: 138
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 808352
-  _time: 2025-05-19 10:13:23.809086676 Z
-  _version: 0.10.1/0.42.0/
-  latest: 25
-  repository: 798641472
-  what: labels-were-scanned
   where: github
