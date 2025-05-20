@@ -3,6 +3,14 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+# Judge that identifies whether a GitHub user is a human or a bot.
+# Examines GitHub users found in the factbase, determines if they are
+# humans or bots based on GitHub user type, and special cases for known
+# bots like 'rultor' and '0pdd'. Records the result in the factbase.
+#
+# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/conclude.rb Implementation of Fbe.conclude
+# @note Sets is_human=1 for humans and is_human=0 for bots
+
 require 'fbe/octo'
 require 'fbe/conclude'
 

@@ -3,6 +3,15 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+# Judge that monitors and records GitHub repository events into the factbase.
+# Fetches events from GitHub repositories like push events, pull request events,
+# issue events, release events, etc., and records them with detailed metadata
+# in the factbase for analytics and tracking purposes.
+#
+# @note Limited to running for 5 minutes maximum to prevent excessive API usage
+# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
+# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/if_absent.rb Implementation of Fbe.if_absent
+
 require 'tago'
 require 'fbe/octo'
 require 'fbe/github_graph'

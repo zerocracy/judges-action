@@ -3,6 +3,14 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+# Judge that monitors issues for type label attachments.
+# Scans GitHub issue timelines for 'issue_type_added' and 'issue_type_changed' events,
+# records type attachment information into the factbase with details about
+# who attached the type and when it happened.
+#
+# @note Limited to running for 5 minutes maximum to prevent excessive API usage
+# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
+
 require 'fbe/octo'
 require 'fbe/iterate'
 require 'fbe/if_absent'

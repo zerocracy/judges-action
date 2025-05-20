@@ -3,6 +3,14 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+# Judge that collects review comments count for pull requests.
+# For pull requests that have been reviewed or merged but do not have
+# a review_comments count recorded, this judge fetches the count from GitHub
+# and stores it in the factbase.
+#
+# @note Uses Fbe.conclude to process pull requests that need comment counting
+# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/conclude.rb Implementation of Fbe.conclude
+
 require 'octokit'
 require 'fbe/octo'
 require 'fbe/conclude'

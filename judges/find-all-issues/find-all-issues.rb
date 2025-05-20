@@ -3,6 +3,14 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+# Judge that finds and records all issues in GitHub repositories.
+# Iterates through repositories, identifies existing issues by searching GitHub,
+# and records them in the factbase with metadata about when they were opened
+# and by whom. Used to ensure a complete record of issues in the monitored repos.
+#
+# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
+# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/if_absent.rb Implementation of Fbe.if_absent
+
 require 'time'
 require 'fbe/fb'
 require 'fbe/octo'
