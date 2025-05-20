@@ -2,11 +2,12 @@
 - added: 8
   cycles: 2
   deleted: 8
+  error: 'Judge quality-of-service stopped by timeout after 3m0s: execution expired'
   inserted: 8
-  seconds: 304.333978345
+  seconds: 326.873493413
   version: 0.42.1
   what: judges-summary
-  when: 2025-05-20 12:16:45.491997833 Z
+  when: 2025-05-20 12:53:18.340242771 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -36043,22 +36044,6 @@
   since: 2024-07-27 06:09:26.746166044 Z
   what: quality-of-service
   when: 2024-08-03 06:09:26.746166044 Z
-- _id: 170170
-  _job: 4901
-  _time: 2024-08-20 01:49:44.845743508 Z
-  _version: 0.4.0/0.26.0/0.0.47
-  average_backlog_size: 0.9821428571428571
-  average_build_duration: 58.62807295796986
-  average_build_success_rate: 0.9758128469468675
-  average_issue_lifetime: 572293.0256410256
-  average_pull_lifetime: 22568.830769230768
-  average_pull_rejection_rate: 0.03076923076923077
-  average_release_interval: 21596.08
-  composite: 0.845
-  ffact: 139380
-  since: 2024-08-10 07:11:47.400287667 Z
-  what: quality-of-service
-  when: 2024-08-17 07:11:47.400207638 Z
 - _id: 170539
   _time: 2024-08-20 04:05:58.815819773 Z
   _version: 0.4.0/0.25.2/
@@ -150532,69 +150517,6 @@
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 824014
-  _time: 2025-05-20 12:11:45.186544830 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49876156892
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 824015
-  _time: 2025-05-20 12:11:46.474484237 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49894484657
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 824016
-  _time: 2025-05-20 12:11:47.982496669 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49916561233
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 824017
-  _time: 2025-05-20 12:11:49.000707811 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49894438487
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 824018
-  _time: 2025-05-20 12:11:49.721078117 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49905082703
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 824019
-  _time: 2025-05-20 12:11:50.775676158 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49910554730
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 824020
-  _time: 2025-05-20 12:11:51.391606478 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49901540277
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 824021
-  _time: 2025-05-20 12:11:52.036250036 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49897230790
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 824022
-  _time: 2025-05-20 12:11:53.261618858 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49916876230
-  repository: 802720676
-  what: events-were-scanned
-  where: github
 - _id: 824036
   _time: 2025-05-20 12:12:04.619833855 Z
   _version: 0.10.2/0.42.1/
@@ -150658,69 +150580,6 @@
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 824166
-  _time: 2025-05-20 12:13:18.442895106 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 849726475
-  what: types-were-scanned
-  where: github
-- _id: 824186
-  _time: 2025-05-20 12:13:28.166349146 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 820463873
-  what: types-were-scanned
-  where: github
-- _id: 824189
-  _time: 2025-05-20 12:13:29.344341205 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 181044958
-  what: types-were-scanned
-  where: github
-- _id: 824191
-  _time: 2025-05-20 12:13:30.091782225 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 974194993
-  what: types-were-scanned
-  where: github
-- _id: 824259
-  _time: 2025-05-20 12:14:07.673584503 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 840215648
-  what: types-were-scanned
-  where: github
-- _id: 824264
-  _time: 2025-05-20 12:14:10.339817611 Z
-  _version: 0.10.2/0.42.1/
-  latest: 73
-  repository: 802720676
-  what: types-were-scanned
-  where: github
-- _id: 824265
-  _time: 2025-05-20 12:14:10.870713334 Z
-  _version: 0.10.2/0.42.1/
-  latest: 106
-  repository: 798641472
-  what: types-were-scanned
-  where: github
-- _id: 824266
-  _time: 2025-05-20 12:14:11.336544227 Z
-  _version: 0.10.2/0.42.1/
-  latest: 105
-  repository: 799113787
-  what: types-were-scanned
-  where: github
-- _id: 824267
-  _time: 2025-05-20 12:14:11.982721382 Z
-  _version: 0.10.2/0.42.1/
-  latest: 194
-  repository: 799177290
-  what: types-were-scanned
-  where: github
 - _id: 824268
   _job: 4901
   _time: 2025-05-20 12:14:51.641070383 Z
@@ -150756,3 +150615,344 @@
   since: 2024-08-08 06:19:57.057645313 Z
   what: quality-of-service
   when: 2024-08-15 06:19:57.057562658 Z
+- _id: 824270
+  _time: 2025-05-20 12:47:56.500613048 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49917931789
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 824271
+  _time: 2025-05-20 12:47:57.192133769 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49897230790
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 824272
+  _time: 2025-05-20 12:47:58.769055358 Z
+  _version: 0.10.2/0.42.1/
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#270 has been closed by @yegor256,
+    with 2 HoC and 0 comments.
+  event_id: 49918767237
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  issue: 270
+  repository: 802720676
+  review_comments: 0
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2025-05-20 09:06:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 824273
+  _time: 2025-05-20 12:48:08.706559847 Z
+  _version: 0.10.2/0.42.1/
+  commits: 48
+  contributors:
+  - 29139614
+  - 8086956
+  - 526301
+  details: A new release 'let github_token be the option of the plugin' has been published
+    in zerocracy/pages-action by @rultor.
+  event_id: 49918702769
+  event_type: ReleaseEvent
+  hoc: 434
+  last_commit: c91a8e27f1280a3563dd0226472270702c2ea429
+  release: 219720727
+  repository: 802720676
+  tag: 0.1.0
+  what: release-published
+  when: 2025-05-20 09:04:46.000000000 Z
+  where: github
+  who: 8086956
+- _id: 824274
+  _time: 2025-05-20 12:48:09.561324486 Z
+  _version: 0.10.2/0.42.1/
+  branch: version-up
+  details: The pull request zerocracy/pages-action#270 has been opened by @github-actions[bot].
+  event_id: 49918659604
+  event_type: PullRequestEvent
+  issue: 270
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-05-20 09:03:49.000000000 Z
+  where: github
+  who: 41898282
+- _id: 824275
+  _time: 2025-05-20 12:48:09.920525482 Z
+  _version: 0.10.2/0.42.1/
+  details: A new tag '0.1.0' has been created in zerocracy/pages-action by @rultor.
+  event_id: 49918646184
+  event_type: CreateEvent
+  repository: 802720676
+  tag: 0.1.0
+  what: tag-was-created
+  when: 2025-05-20 09:03:30.000000000 Z
+  where: github
+  who: 8086956
+- _id: 824276
+  _time: 2025-05-20 12:48:10.250495397 Z
+  _version: 0.10.2/0.42.1/
+  branch: renovate/rubocop-1.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#265 has been closed by @renovate[bot],
+    with 2 HoC and 0 comments.
+  event_id: 49918171926
+  event_type: PullRequestEvent
+  failed_builds: 2
+  hoc: 2
+  issue: 265
+  repository: 802720676
+  succeeded_builds: 12
+  what: pull-was-closed
+  when: 2025-05-20 08:53:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 824277
+  _time: 2025-05-20 12:48:18.001355273 Z
+  _version: 0.10.2/0.42.1/
+  branch: renovate/judges-0.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#267 has been closed by @renovate[bot],
+    with 4 HoC and 0 comments.
+  event_id: 49918170767
+  event_type: PullRequestEvent
+  failed_builds: 2
+  hoc: 4
+  issue: 267
+  repository: 802720676
+  succeeded_builds: 12
+  what: pull-was-closed
+  when: 2025-05-20 08:53:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 824278
+  _time: 2025-05-20 12:48:25.519505797 Z
+  _version: 0.10.2/0.42.1/
+  branch: renovate/fbe-0.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#268 has been closed by @renovate[bot],
+    with 8 HoC and 0 comments.
+  event_id: 49918169452
+  event_type: PullRequestEvent
+  failed_builds: 2
+  hoc: 8
+  issue: 268
+  repository: 802720676
+  succeeded_builds: 12
+  what: pull-was-closed
+  when: 2025-05-20 08:53:07.000000000 Z
+  where: github
+  who: 29139614
+- _id: 824279
+  _time: 2025-05-20 12:48:32.644357976 Z
+  _version: 0.10.2/0.42.1/
+  branch: renovate/factbase-0.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#266 has been closed by @renovate[bot],
+    with 2 HoC and 0 comments.
+  event_id: 49918168486
+  event_type: PullRequestEvent
+  failed_builds: 2
+  hoc: 2
+  issue: 266
+  repository: 802720676
+  succeeded_builds: 12
+  what: pull-was-closed
+  when: 2025-05-20 08:53:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 824280
+  _time: 2025-05-20 12:48:40.487394120 Z
+  _version: 0.10.2/0.42.1/
+  details: The issue zerocracy/pages-action#134 has been closed by @yegor256.
+  event_id: 49918147763
+  event_type: IssuesEvent
+  issue: 134
+  repository: 802720676
+  what: issue-was-closed
+  when: 2025-05-20 08:52:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 824281
+  _time: 2025-05-20 12:48:40.842883638 Z
+  _version: 0.10.2/0.42.1/
+  branch: '134'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/pages-action#269 has been closed by @yegor256,
+    with 252 HoC and 0 comments.
+  event_id: 49918147399
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 252
+  issue: 269
+  repository: 802720676
+  review_comments: 0
+  succeeded_builds: 15
+  what: pull-was-merged
+  when: 2025-05-20 08:52:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 824282
+  _time: 2025-05-20 12:48:47.915005472 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49918768181
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 824283
+  _time: 2025-05-20 12:48:48.444794622 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49901540277
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 824284
+  _time: 2025-05-20 12:48:49.460836581 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49910554730
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 824285
+  _time: 2025-05-20 12:48:50.854875566 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49894484657
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 824286
+  _time: 2025-05-20 12:48:51.905429728 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49894438487
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 824287
+  _time: 2025-05-20 12:48:52.706061923 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49905082703
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 824288
+  _time: 2025-05-20 12:48:53.498263191 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49876156892
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 824300
+  _time: 2025-05-20 12:49:02.939104317 Z
+  _version: 0.10.2/0.42.1/
+  latest: 0
+  repository: 849726475
+  what: types-were-scanned
+  where: github
+- _id: 824327
+  _time: 2025-05-20 12:49:17.969094307 Z
+  _version: 0.10.2/0.42.1/
+  latest: 0
+  repository: 974194993
+  what: types-were-scanned
+  where: github
+- _id: 824425
+  _time: 2025-05-20 12:50:12.991081596 Z
+  _version: 0.10.2/0.42.1/
+  latest: 0
+  repository: 840215648
+  what: types-were-scanned
+  where: github
+- _id: 824429
+  _time: 2025-05-20 12:50:15.155851729 Z
+  _version: 0.10.2/0.42.1/
+  latest: 216
+  repository: 798641472
+  what: types-were-scanned
+  where: github
+- _id: 824430
+  _time: 2025-05-20 12:50:15.849973421 Z
+  _version: 0.10.2/0.42.1/
+  latest: 138
+  repository: 802720676
+  what: types-were-scanned
+  where: github
+- _id: 824431
+  _time: 2025-05-20 12:50:16.491611515 Z
+  _version: 0.10.2/0.42.1/
+  latest: 239
+  repository: 799177290
+  what: types-were-scanned
+  where: github
+- _id: 824432
+  _time: 2025-05-20 12:50:17.018428547 Z
+  _version: 0.10.2/0.42.1/
+  latest: 28
+  repository: 820463873
+  what: types-were-scanned
+  where: github
+- _id: 824433
+  _time: 2025-05-20 12:50:17.557198292 Z
+  _version: 0.10.2/0.42.1/
+  latest: 20
+  repository: 181044958
+  what: types-were-scanned
+  where: github
+- _id: 824434
+  _time: 2025-05-20 12:50:18.058934098 Z
+  _version: 0.10.2/0.42.1/
+  latest: 177
+  repository: 799113787
+  what: types-were-scanned
+  where: github
+- _id: 824435
+  _job: 4901
+  _time: 2025-05-20 12:50:54.300583009 Z
+  _version: 0.10.2/0.42.1/
+  average_backlog_size: 0.9821428571428571
+  average_build_duration: 58.62807295796986
+  average_build_success_rate: 0.9758128469468675
+  average_issue_lifetime: 572293.0256410256
+  average_pull_lifetime: 22568.830769230768
+  average_pull_rejection_rate: 0.03076923076923077
+  average_release_interval: 21596.08
+  average_triage_time: 123104.91304347826
+  composite: 0.845
+  ffact: 139380
+  since: 2024-08-10 07:11:47.400287667 Z
+  what: quality-of-service
+  when: 2024-08-17 07:11:47.400207638 Z
