@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 3
+  cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 301.671446744
+  seconds: 302.347325634
   version: 0.42.1
   what: judges-summary
-  when: 2025-05-20 10:45:15.901086432 Z
+  when: 2025-05-20 11:11:25.971005642 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -36043,21 +36043,6 @@
   since: 2024-07-27 06:09:26.746166044 Z
   what: quality-of-service
   when: 2024-08-03 06:09:26.746166044 Z
-- _id: 170167
-  _job: 4901
-  _time: 2024-08-20 01:49:32.607985340 Z
-  _version: 0.4.0/0.26.0/0.0.47
-  average_backlog_size: 15
-  average_build_success_rate: 0.9560025141420491
-  average_issue_lifetime: 131477.96153846153
-  average_pull_lifetime: 65477.89189189189
-  average_pull_rejection_rate: 0.02702702702702703
-  average_release_interval: 34676.470588235294
-  composite: 0.851
-  ffact: 139380
-  since: 2024-08-04 06:12:28.836930382 Z
-  what: quality-of-service
-  when: 2024-08-11 06:12:30.927228410 Z
 - _id: 170168
   _job: 4901
   _time: 2024-08-20 01:49:36.673995362 Z
@@ -150416,7 +150401,7 @@
   review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
-  when: 2025-05-20 06:42:09.000000000 Z
+  when: &281 2025-05-20 06:42:09.000000000 Z
   where: github
   who: 8086956
 - _id: 823006
@@ -150433,69 +150418,6 @@
   when: 2025-05-20 06:15:36.000000000 Z
   where: github
   who: 29139614
-- _id: 823023
-  _time: 2025-05-20 10:41:04.084597334 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 823049
-  _time: 2025-05-20 10:41:20.096314189 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 823055
-  _time: 2025-05-20 10:41:23.484208870 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 974194993
-  what: labels-were-scanned
-  where: github
-- _id: 823122
-  _time: 2025-05-20 10:42:02.027927214 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 823133
-  _time: 2025-05-20 10:42:07.200919354 Z
-  _version: 0.10.2/0.42.1/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 823138
-  _time: 2025-05-20 10:42:09.994588094 Z
-  _version: 0.10.2/0.42.1/
-  latest: 57
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 823139
-  _time: 2025-05-20 10:42:10.693724900 Z
-  _version: 0.10.2/0.42.1/
-  latest: 239
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 823140
-  _time: 2025-05-20 10:42:11.044520865 Z
-  _version: 0.10.2/0.42.1/
-  latest: 157
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 823141
-  _time: 2025-05-20 10:42:11.554111548 Z
-  _version: 0.10.2/0.42.1/
-  latest: 73
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
 - _id:
   - 823142
   - 464228
@@ -150593,129 +150515,227 @@
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 823274
-  _time: 2025-05-20 10:43:51.031786985 Z
+- _id: 823427
+  _job: 20969
+  _time: 2025-05-20 10:46:32.973084476 Z
+  _version: 0.10.2/0.42.1/0.8.0
+  comments: 2
+  details: The pull request zerocracy/judges-action#609 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 26m32s of being in review and 2 comments.
+  hoc: 2
+  is_human: 0
+  issue: 609
+  merger: 8086956
+  repository: 799177290
+  review_comments: 0
+  seconds: 1593
+  what: code-was-contributed
+  when: *281
+  where: github
+  who: 29139614
+- _id: 823428
+  _time: 2025-05-20 11:06:28.020623387 Z
   _version: 0.10.2/0.42.1/
   latest: 49897556013
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 823275
-  _time: 2025-05-20 10:43:51.614667843 Z
+- _id: 823429
+  _time: 2025-05-20 11:06:29.616800176 Z
   _version: 0.10.2/0.42.1/
-  latest: 49876156892
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 823276
-  _time: 2025-05-20 10:43:52.835005821 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49894484657
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 823277
-  _time: 2025-05-20 10:43:54.191048166 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49912892837
+  latest: 49913920130
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 823278
-  _time: 2025-05-20 10:43:54.659449608 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49901540277
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 823279
-  _time: 2025-05-20 10:43:55.261692561 Z
-  _version: 0.10.2/0.42.1/
-  latest: 49897230790
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 823280
-  _time: 2025-05-20 10:43:55.969722656 Z
+- _id: 823430
+  _time: 2025-05-20 11:06:30.469811438 Z
   _version: 0.10.2/0.42.1/
   latest: 49905082703
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 823281
-  _time: 2025-05-20 10:43:56.969005691 Z
+- _id: 823431
+  _time: 2025-05-20 11:06:31.107693013 Z
   _version: 0.10.2/0.42.1/
-  latest: 49894438487
-  repository: 974194993
+  latest: 49897230790
+  repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 823282
-  _time: 2025-05-20 10:43:57.955189936 Z
+- _id: 823432
+  _time: 2025-05-20 11:06:32.310829592 Z
   _version: 0.10.2/0.42.1/
   latest: 49910554730
   repository: 820463873
   what: events-were-scanned
   where: github
-- _id: 823298
-  _time: 2025-05-20 10:44:08.888679395 Z
+- _id: 823433
+  _time: 2025-05-20 11:06:32.925709702 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49901540277
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 823434
+  _time: 2025-05-20 11:06:34.485623463 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49894484657
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 823435
+  _time: 2025-05-20 11:06:35.376898728 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49876156892
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 823436
+  _time: 2025-05-20 11:06:36.413537160 Z
+  _version: 0.10.2/0.42.1/
+  latest: 49894438487
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 823448
+  _time: 2025-05-20 11:06:42.714767169 Z
   _version: 0.10.2/0.42.1/
   latest: 0
   repository: 849726475
   what: types-were-scanned
   where: github
-- _id: 823319
-  _time: 2025-05-20 10:44:19.722150319 Z
+- _id: 823476
+  _time: 2025-05-20 11:06:57.793129421 Z
   _version: 0.10.2/0.42.1/
   latest: 0
   repository: 974194993
   what: types-were-scanned
   where: github
-- _id: 823415
-  _time: 2025-05-20 10:45:10.096247128 Z
+- _id: 823568
+  _time: 2025-05-20 11:07:49.049791981 Z
   _version: 0.10.2/0.42.1/
   latest: 0
-  repository: 799177290
+  repository: 802720676
   what: types-were-scanned
   where: github
-- _id: 823419
-  _time: 2025-05-20 10:45:11.919336803 Z
+- _id: 823572
+  _time: 2025-05-20 11:07:50.704788031 Z
   _version: 0.10.2/0.42.1/
   latest: 0
   repository: 840215648
   what: types-were-scanned
   where: github
-- _id: 823422
-  _time: 2025-05-20 10:45:13.407713517 Z
+- _id: 823576
+  _time: 2025-05-20 11:07:52.876973708 Z
   _version: 0.10.2/0.42.1/
-  latest: 57
+  latest: 62
+  repository: 799177290
+  what: types-were-scanned
+  where: github
+- _id: 823577
+  _time: 2025-05-20 11:07:53.471804318 Z
+  _version: 0.10.2/0.42.1/
+  latest: 80
+  repository: 181044958
+  what: types-were-scanned
+  where: github
+- _id: 823578
+  _time: 2025-05-20 11:07:54.009263729 Z
+  _version: 0.10.2/0.42.1/
+  latest: 130
   repository: 820463873
   what: types-were-scanned
   where: github
-- _id: 823423
-  _time: 2025-05-20 10:45:13.862348967 Z
+- _id: 823579
+  _time: 2025-05-20 11:07:54.543176465 Z
   _version: 0.10.2/0.42.1/
-  latest: 21
-  repository: 799113787
-  what: types-were-scanned
-  where: github
-- _id: 823424
-  _time: 2025-05-20 10:45:14.596591626 Z
-  _version: 0.10.2/0.42.1/
-  latest: 138
-  repository: 802720676
-  what: types-were-scanned
-  where: github
-- _id: 823425
-  _time: 2025-05-20 10:45:15.110513819 Z
-  _version: 0.10.2/0.42.1/
-  latest: 25
+  latest: 48
   repository: 798641472
   what: types-were-scanned
   where: github
-- _id: 823426
-  _time: 2025-05-20 10:45:15.612332077 Z
+- _id: 823580
+  _time: 2025-05-20 11:07:55.098211722 Z
   _version: 0.10.2/0.42.1/
-  latest: 40
-  repository: 181044958
+  latest: 47
+  repository: 799113787
   what: types-were-scanned
+  where: github
+- _id: 823581
+  _job: 4901
+  _time: 2025-05-20 11:09:52.388299045 Z
+  _version: 0.10.2/0.42.1/
+  average_backlog_size: 15
+  average_build_success_rate: 0.9560025141420491
+  average_issue_lifetime: 131477.96153846153
+  average_pull_lifetime: 65477.89189189189
+  average_pull_rejection_rate: 0.02702702702702703
+  average_release_commits_size: 10.893023255813954
+  average_release_hoc_size: 253.97674418604652
+  average_release_interval: 34676.470588235294
+  composite: 0.851
+  ffact: 139380
+  since: 2024-08-04 06:12:28.836930382 Z
+  what: quality-of-service
+  when: 2024-08-11 06:12:30.927228410 Z
+- _id: 823594
+  _time: 2025-05-20 11:10:02.009375598 Z
+  _version: 0.10.2/0.42.1/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 823616
+  _time: 2025-05-20 11:10:13.627395999 Z
+  _version: 0.10.2/0.42.1/
+  latest: 0
+  repository: 181044958
+  what: labels-were-scanned
+  where: github
+- _id: 823622
+  _time: 2025-05-20 11:10:16.474175236 Z
+  _version: 0.10.2/0.42.1/
+  latest: 0
+  repository: 974194993
+  what: labels-were-scanned
+  where: github
+- _id: 823703
+  _time: 2025-05-20 11:11:03.672369051 Z
+  _version: 0.10.2/0.42.1/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 823708
+  _time: 2025-05-20 11:11:06.505602557 Z
+  _version: 0.10.2/0.42.1/
+  latest: 325
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 823709
+  _time: 2025-05-20 11:11:06.978123106 Z
+  _version: 0.10.2/0.42.1/
+  latest: 25
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 823710
+  _time: 2025-05-20 11:11:07.725605000 Z
+  _version: 0.10.2/0.42.1/
+  latest: 138
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 823711
+  _time: 2025-05-20 11:11:08.279447016 Z
+  _version: 0.10.2/0.42.1/
+  latest: 21
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 823712
+  _time: 2025-05-20 11:11:08.857627210 Z
+  _version: 0.10.2/0.42.1/
+  latest: 130
+  repository: 820463873
+  what: labels-were-scanned
   where: github
