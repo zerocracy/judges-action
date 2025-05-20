@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.7.0
+      - uses: zerocracy/judges-action@0.8.0
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github_token: ${{ secrets.ZEROCRACY_PAT }}
