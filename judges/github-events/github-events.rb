@@ -207,6 +207,7 @@ Fbe.iterate do
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
+        skip_event(json) if issue_seen_already?(fact)
         $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       else
         skip_event(json)
