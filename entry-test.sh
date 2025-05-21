@@ -11,6 +11,8 @@ testScansOneRepo() {
   export INPUT_VERBOSE
   INPUT_REPOSITORIES=yegor256/factbase
   export INPUT_REPOSITORIES
+  INPUT_FAIL_FAST=true
+  export INPUT_FAIL_FAST
   INPUT_CYCLES=1
   export INPUT_CYCLES
   INPUT_FACTBASE=test.fb
@@ -26,6 +28,8 @@ testPassesGithubToken() {
   export GITHUB_WORKSPACE
   INPUT_VERBOSE=false
   export INPUT_VERBOSE
+  INPUT_FAIL_FAST=true
+  export INPUT_FAIL_FAST
   INPUT_FACTBASE=test.fb
   export INPUT_FACTBASE
   INPUT_REPOSITORIES=yegor256/factbase

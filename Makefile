@@ -26,6 +26,9 @@ rmi: target/docker-image.txt
 	docker rmi "$${img}"
 	rm "$<"
 
+shunit2:
+	shunit2 entry-test.sh
+
 verify:
 	e1=$$(cat target/test.exit)
 	test "$${e1}" = "0"

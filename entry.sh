@@ -93,6 +93,9 @@ if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
 fi
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
+if [ -n "${INPUT_FAIL_FAST}" ]; then
+    options+=("--fail-fast");
+fi
 
 echo "The 'judges-action' ${VERSION} is running"
 
