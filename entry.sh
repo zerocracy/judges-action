@@ -28,6 +28,16 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     exit 1
 fi
 
+if [ -z "${INPUT_CYCLES}" ]; then
+    echo 'The INPUT_CYCLES environment variable is not specified, but it should be.'
+    exit 1
+fi
+
+if [ -z "${INPUT_REPOSITORIES}" ]; then
+    echo 'The INPUT_REPOSITORIES environment variable is not specified, but it should be.'
+    exit 1
+fi
+
 name="$(basename "${INPUT_FACTBASE}")"
 name="${name%.*}"
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
@@ -59,15 +69,9 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "${name}" "${fb}"
 fi
 
-# Set URL of the published pages:
 GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
 VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html"
 
-# Add new facts, using the judges (Ruby scripts) in the /judges directory
-declare -A optionmap=(
-    ["repositories"]="${INPUT_REPOSITORIES}"
-    ["github_token"]="${INPUT_GITHUB_TOKEN}"
-)
 declare -a options=()
 while IFS= read -r o; do
     s=$(echo "${o}" | xargs)
@@ -80,13 +84,13 @@ while IFS= read -r o; do
         VITALS_URL="${v}"
         continue
     fi
-    optionmap[$k]=$v
 done <<< "${INPUT_OPTIONS}"
-for k in "${!optionmap[@]}"; do
-    if [ -n "${optionmap[$k]}" ]; then
-        options+=("--option=${k}=${optionmap[$k]}");
-    fi
-done
+if [ -n "${INPUT_REPOSITORIES}" ]; then
+    options+=("--option=repositories=${INPUT_REPOSITORIES}");
+fi
+if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
+    options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
+fi
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
 
