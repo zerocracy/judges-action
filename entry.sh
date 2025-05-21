@@ -11,7 +11,7 @@ start=$(date +%s)
 VERSION=0.0.0
 
 if [ -z "${JUDGES}" ]; then
-    JUDGES=judges
+    JUDGES='bundle exec judges'
 fi
 
 if [ -z "$1" ]; then
