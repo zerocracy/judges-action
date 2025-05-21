@@ -1263,8 +1263,7 @@ class TestGithubEvents < Jp::Test
       Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true })
     )
     f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.to_a.first
-    assert_equal(3, f.succeeded_builds)
-    assert_equal(2, f.failed_builds)
+    assert_nil(f)
   end
 
   def test_no_have_access_to_resource_by_integration
@@ -1306,6 +1305,115 @@ class TestGithubEvents < Jp::Test
       end
     assert_equal("@GithubUser doesn't have access to the foo/foo repository, maybe it's private", ex.message)
     assert_equal(0, fb.size)
+  end
+
+  def test_prevent_creation_of_duplicate_facts_upon_multiple_pr_closures
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '123123111',
+        type: 'PullRequestEvent',
+        actor: { id: 411, login: 'user' },
+        repo: { id: 42, name: 'foo', full_name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          number: 305,
+          pull_request: {
+            id: 249_156, number: 305,
+            state: 'closed', title: 'some title', body: 'some body',
+            created_at: Time.parse('2025-04-30 13:52:28 UTC'),
+            updated_at: Time.parse('2025-05-03 11:36:34 UTC'),
+            closed_at: Time.parse('2025-05-03 11:36:33 UTC'),
+            merged_at: nil,
+            user: { id: 411, login: 'user' },
+            head: {
+              label: 'foo:origin/master', ref: 'origin/master', sha: '42b24481',
+              user: { id: 411, login: 'user' },
+              repo: { id: 42,  name: 'foo', full_name: 'foo/foo' }
+            },
+            base: {
+              label: 'bar:master', ref: 'master', sha: '9f4767929',
+              user: { id: 422, login: 'user2' },
+              repo: { id: 43,  name: 'bar', full_name: 'bar/bar' }
+            },
+            author_association: 'CONTRIBUTOR',
+            auto_merge: nil,
+            active_lock_reason: nil,
+            merged: false,
+            mergeable: nil,
+            rebaseable: nil,
+            mergeable_state: 'unknown',
+            merged_by: nil,
+            comments: 3,
+            review_comments: 0,
+            maintainer_can_modify: false,
+            commits: 1,
+            additions: 2,
+            deletions: 2,
+            changed_files: 2
+          }
+        },
+        public: true,
+        created_at: Time.parse('2025-05-04 03:46:04 UTC')
+      },
+      {
+        id: '123123222',
+        type: 'PullRequestEvent',
+        actor: { id: 411, login: 'user' },
+        repo: { id: 42, name: 'foo', full_name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          number: 305,
+          pull_request: {
+            id: 249_156, number: 305,
+            state: 'closed', title: 'some title', body: 'some body',
+            created_at: Time.parse('2025-04-30 13:52:28 UTC'),
+            updated_at: Time.parse('2025-05-03 11:36:34 UTC'),
+            closed_at: Time.parse('2025-05-03 11:36:33 UTC'),
+            merged_at: nil,
+            user: { id: 411, login: 'user' },
+            head: {
+              label: 'foo:origin/master', ref: 'origin/master', sha: '42b24481',
+              user: { id: 411, login: 'user' },
+              repo: { id: 42,  name: 'foo', full_name: 'foo/foo' }
+            },
+            base: {
+              label: 'bar:master', ref: 'master', sha: '9f4767929',
+              user: { id: 422, login: 'user2' },
+              repo: { id: 43,  name: 'bar', full_name: 'bar/bar' }
+            },
+            author_association: 'CONTRIBUTOR',
+            auto_merge: nil,
+            active_lock_reason: nil,
+            merged: false,
+            mergeable: nil,
+            rebaseable: nil,
+            mergeable_state: 'unknown',
+            merged_by: nil,
+            comments: 3,
+            review_comments: 0,
+            maintainer_can_modify: false,
+            commits: 1,
+            additions: 2,
+            deletions: 2,
+            changed_files: 2
+          }
+        },
+        public: true,
+        created_at: Time.parse('2025-05-04 03:46:04 UTC')
+      }
+    )
+    stub_github('https://api.github.com/repos/bar/bar/pulls/305/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/bar/bar/issues/305/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100',
+                body: { check_runs: [] })
+    stub_github('https://api.github.com/user/411', body: { id: 411, login: 'user' })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    assert_equal(1, fb.query('(eq what "pull-was-closed")').each.to_a.size)
   end
 
   private
