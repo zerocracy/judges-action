@@ -2,22 +2,22 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
-set -e
-set -x
-set -o pipefail
+set -ex -o pipefail
 
 start=$(date +%s)
 
 VERSION=0.0.0
 
-if [ -z "${JUDGES}" ]; then
-    JUDGES='bundle exec judges'
-fi
-
 if [ -z "$1" ]; then
     SELF=$(pwd)
 else
     SELF=$1
+fi
+
+if [ -z "${JUDGES}" ]; then
+    BUNDLE_GEMFILE="${SELF}/Gemfile"
+    export BUNDLE_GEMFILE
+    JUDGES="bundle exec judges"
 fi
 
 if [ -z "${GITHUB_WORKSPACE}" ]; then
@@ -28,16 +28,6 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     exit 1
 fi
 cd "${GITHUB_WORKSPACE}" || exit 1
-
-if [ -z "${INPUT_CYCLES}" ]; then
-    echo 'The INPUT_CYCLES environment variable is not specified, but it should be.'
-    exit 1
-fi
-
-if [ -z "${INPUT_REPOSITORIES}" ]; then
-    echo 'The INPUT_REPOSITORIES environment variable is not specified, but it should be.'
-    exit 1
-fi
 
 name="$(basename "${INPUT_FACTBASE}")"
 name="${name%.*}"

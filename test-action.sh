@@ -21,6 +21,8 @@ docker run --rm \
     -e "INPUT_CYCLES=2" \
     -e "INPUT_VERBOSE=true" \
     -e "INPUT_PAGES=pages" \
+    -e "INPUT_FAIL_FAST=true" \
+    -e "INPUT_REPOSITORIES=zerocracy/judges-action" \
     -e "INPUT_TOKEN=00000000-0000-0000-0000-000000000000" \
     -e "INPUT_GITHUB_TOKEN=00000000-0000-0000-0000-000000000000" \
     -e "INPUT_OPTIONS=$(cat target/opts.txt)" \

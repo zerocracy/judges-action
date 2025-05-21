@@ -6,8 +6,6 @@
 .SHELLFLAGS := -e -o pipefail -c
 SHELL := /bin/bash
 
-JUDGES = judges
-
 export
 
 all: rubocop test entry rmi verify
