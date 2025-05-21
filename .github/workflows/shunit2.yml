@@ -16,19 +16,10 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: 21
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.3
           bundler-cache: true
       - run: bundle config set --global path "$(pwd)/vendor/bundle"
-      - run: sudo apt-get update --yes --fix-missing && sudo apt-get install --yes libxml2-utils
-      - run: make install
       - run: sudo apt-get update --yes && sudo apt-get install --yes shunit2
       - run: make shunit2
