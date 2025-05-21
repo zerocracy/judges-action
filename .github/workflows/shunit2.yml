@@ -21,5 +21,6 @@ jobs:
           ruby-version: 3.3
           bundler-cache: true
       - run: bundle config set --global path "$(pwd)/vendor/bundle"
+      - run: bundle install --no-color
       - run: sudo apt-get update --yes && sudo apt-get install --yes shunit2
       - run: make shunit2
