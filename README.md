@@ -24,6 +24,8 @@ name: zerocracy
 concurrency:
   group: zerocracy
   cancel-in-progress: false
+permissions:
+  contents: write
 jobs:
   zerocracy:
     runs-on: ubuntu-24.04
@@ -38,7 +40,6 @@ jobs:
       - uses: zerocracy/pages-action@0.1.0
         with:
           factbase: foo.fb
-          github_token=${{ secrets.ZEROCRACY_PAT }}
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           folder: pages
