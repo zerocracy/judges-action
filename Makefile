@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 .ONESHELL:
-.PHONY: clean test all entry rmi verify rubocop
+.PHONY: clean test all entry rmi verify rubocop shunit2
 .SHELLFLAGS := -e -o pipefail -c
 SHELL := /bin/bash
 
