@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 3
   deleted: 8
+  error: 'Judge quality-of-service stopped by timeout after 3m0s: execution expired'
   inserted: 8
-  seconds: 392.179129256
+  seconds: 367.820146886
   version: 0.43.0
   what: judges-summary
-  when: 2025-05-21 15:45:05.309115752 Z
+  when: 2025-05-21 16:14:29.418892414 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -28805,16 +28806,6 @@
   when: 2024-08-12 05:31:03.000000000 Z
   where: github
   who: 526301
-- _id: 139380
-  _time: 2024-08-12 06:17:57.022131866 Z
-  _version: 0.3.0/0.25.0/
-  area: quality
-  qos_composite: "(join 15 (below '3 days' average_release_interval) 10 (above 0.95
-    average_build_success_rate) 10 (below '2 days' average_issue_lifetime) 5 (below
-    '12 hours' average_pull_lifetime) 5 (below 8 average_backlog_size))"
-  qos_days: 7
-  qos_interval: 2
-  what: pmp
 - _id: 139386
   _time: 2024-08-12 07:05:18.419470255 Z
   _version: 0.3.0/0.24.0/0.0.43
@@ -36011,38 +36002,6 @@
   total_pulls_submitted: 5
   what: quantity-of-deliverables
   when: 2024-08-19 17:12:44.201452877 Z
-- _id: 170163
-  _job: 4901
-  _time: 2024-08-20 01:49:16.420651911 Z
-  _version: 0.4.0/0.26.0/0.0.47
-  average_backlog_size: 11
-  average_build_success_rate: 0.955565142364107
-  average_forks: 1
-  average_issue_lifetime: 184374.2962962963
-  average_pull_lifetime: 34508.2972972973
-  average_release_interval: 24548.44210526316
-  average_stars: 4
-  composite: 0.875
-  ffact: 139380
-  since: 2024-07-24 06:07:46.877340169 Z
-  what: quality-of-service
-  when: 2024-07-31 06:07:46.877340169 Z
-- _id: 170164
-  _job: 4901
-  _time: 2024-08-20 01:49:20.364676828 Z
-  _version: 0.4.0/0.26.0/0.0.47
-  average_backlog_size: 12
-  average_build_success_rate: 0.9447513812154696
-  average_forks: 1
-  average_issue_lifetime: 178852.6739130435
-  average_pull_lifetime: 33114.51612903226
-  average_release_interval: 26562.620689655174
-  average_stars: 4
-  composite: 0.88
-  ffact: 139380
-  since: 2024-07-27 06:09:26.746166044 Z
-  what: quality-of-service
-  when: 2024-08-03 06:09:26.746166044 Z
 - _id: 170539
   _time: 2024-08-20 04:05:58.815819773 Z
   _version: 0.4.0/0.25.2/
@@ -50824,31 +50783,6 @@
   when: 2024-10-06 14:13:17.000000000 Z
   where: github
   who: 29139614
-- _id: 360130
-  _time: 2024-10-06 20:20:19.601772970 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.171875
-  average_build_duration: 250.5456942003515
-  average_build_mttr: -101485
-  average_build_success_rate: 0.9384885764499121
-  average_issue_lifetime: 4071467.4
-  average_pull_files_size: 1.6923076923076923
-  average_pull_hoc_size: 37.15384615384615
-  average_pull_lifetime: 102546.54545454546
-  average_pull_rejection_rate: 0.21212121212121213
-  average_release_commits_size: 3.0
-  average_release_hoc_size: 59.0
-  average_release_interval: 250387.5
-  average_review_size: 0.07692307692307693
-  average_review_time: 101485.71428571429
-  average_reviewers_per_pull: 0.3076923076923077
-  average_reviews_per_pull: 0.34615384615384615
-  average_triage_time: 8136.333333333333
-  composite: 0.72
-  ffact: 139380
-  since: 2024-09-29 20:20:19.602097417 Z
-  what: quality-of-service
-  when: 2024-10-06 20:20:19.601984666 Z
 - _id: 361506
   _time: 2024-10-07 04:06:26.988342456 Z
   _version: 0.4.0/0.26.1/
@@ -51197,31 +51131,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-10-08 05:05:26.646053566 Z
-- _id: 368123
-  _time: 2024-10-08 20:25:16.230004304 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.265625
-  average_build_duration: 309.29133858267716
-  average_build_mttr: -81688
-  average_build_success_rate: 0.8695163104611924
-  average_issue_lifetime: 2081487.2
-  average_pull_files_size: 1.5625
-  average_pull_hoc_size: 37.125
-  average_pull_lifetime: 242659.04166666666
-  average_pull_rejection_rate: 0.3333333333333333
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 153039.0
-  average_review_size: 0.0
-  average_review_time: 23566.666666666668
-  average_reviewers_per_pull: 0.1875
-  average_reviews_per_pull: 0.1875
-  average_triage_time: 8136.333333333333
-  composite: 0.686
-  ffact: 139380
-  since: 2024-10-01 20:25:16.230269222 Z
-  what: quality-of-service
-  when: 2024-10-08 20:25:16.230174535 Z
 - _id: 368129
   _time: 2024-10-08 20:38:52.895657208 Z
   _version: 0.4.0/0.26.1/
@@ -51477,31 +51386,6 @@
   when: 2024-10-10 06:50:32.000000000 Z
   where: github
   who: 526301
-- _id: 375382
-  _time: 2024-10-10 21:23:53.446615096 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.421875
-  average_build_duration: 361.8270777479893
-  average_build_mttr: -133821
-  average_build_success_rate: 0.7815013404825737
-  average_issue_lifetime: 1157862.0
-  average_pull_files_size: 1.4
-  average_pull_hoc_size: 34.06666666666667
-  average_pull_lifetime: 260677.36363636365
-  average_pull_rejection_rate: 0.3181818181818182
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 153039.0
-  average_review_size: 0.7333333333333333
-  average_review_time: 43640.333333333336
-  average_reviewers_per_pull: 0.3333333333333333
-  average_reviews_per_pull: 0.9333333333333333
-  average_triage_time: 5725.833333333333
-  composite: 0.679
-  ffact: 139380
-  since: 2024-10-03 21:23:53.446907291 Z
-  what: quality-of-service
-  when: 2024-10-10 21:23:53.446799550 Z
 - _id: 376501
   _time: 2024-10-11 06:06:49.314750407 Z
   _version: 0.4.0/0.26.1/
@@ -51856,31 +51740,6 @@
   when: 2024-10-12 09:29:44.000000000 Z
   where: github
   who: 88084038
-- _id: 382813
-  _time: 2024-10-12 21:24:16.655054895 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.328125
-  average_build_duration: 336.07085561497325
-  average_build_mttr: -62051
-  average_build_success_rate: 0.7580213903743316
-  average_issue_lifetime: 216476.33333333334
-  average_pull_files_size: 1.3125
-  average_pull_hoc_size: 12.625
-  average_pull_lifetime: 246995.4090909091
-  average_pull_rejection_rate: 0.2727272727272727
-  average_release_commits_size: 3.0
-  average_release_hoc_size: 6.0
-  average_release_interval: 233209.0
-  average_review_size: 0.6875
-  average_review_time: 80220.0
-  average_reviewers_per_pull: 0.1875
-  average_reviews_per_pull: 0.75
-  average_triage_time: 8588.75
-  composite: 0.819
-  ffact: 139380
-  since: 2024-10-05 21:24:16.655317465 Z
-  what: quality-of-service
-  when: 2024-10-12 21:24:16.655228679 Z
 - _id: 383819
   _time: 2024-10-13 05:06:50.201526888 Z
   _version: 0.4.0/0.26.1/
@@ -54863,31 +54722,6 @@
   when: 2024-10-14 11:45:36.000000000 Z
   where: github
   who: 29139614
-- _id: 389940
-  _time: 2024-10-14 22:23:52.847947645 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.53125
-  average_build_duration: 221.9358108108108
-  average_build_mttr: -34007
-  average_build_success_rate: 0.8445945945945946
-  average_issue_lifetime: 878008.4
-  average_pull_files_size: 1.7666666666666666
-  average_pull_hoc_size: 29.333333333333332
-  average_pull_lifetime: 232272.78125
-  average_pull_rejection_rate: 0.0625
-  average_release_commits_size: 10.0
-  average_release_hoc_size: 198.66666666666666
-  average_release_interval: 43383.57142857143
-  average_review_size: 0.7
-  average_review_time: 154697.0
-  average_reviewers_per_pull: 0.2
-  average_reviews_per_pull: 0.7
-  average_triage_time: 8588.75
-  composite: 0.706
-  ffact: 139380
-  since: 2024-10-07 22:23:52.848226535 Z
-  what: quality-of-service
-  when: 2024-10-14 22:23:52.848126509 Z
 - _id: 389954
   _time: 2024-10-14 22:35:27.603468016 Z
   _version: 0.4.0/0.26.1/
@@ -56556,31 +56390,6 @@
   total_reviews_submitted: 11
   what: quantity-of-deliverables
   when: 2024-10-18 02:52:53.372498102 Z
-- _id: 394917
-  _time: 2024-10-19 02:44:48.024214008 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.109375
-  average_build_duration: 111.55176540993418
-  average_build_mttr: -10914
-  average_build_success_rate: 0.9557151406343507
-  average_issue_lifetime: 842043.0909090909
-  average_pull_files_size: 1.6304347826086956
-  average_pull_hoc_size: 20.804347826086957
-  average_pull_lifetime: 164400.27083333334
-  average_pull_rejection_rate: 0.041666666666666664
-  average_release_commits_size: 6.75
-  average_release_hoc_size: 44.75
-  average_release_interval: 16647.5
-  average_review_size: 0.21739130434782608
-  average_review_time: 124391.0
-  average_reviewers_per_pull: 0.08695652173913043
-  average_reviews_per_pull: 0.21739130434782608
-  average_triage_time: 0
-  composite: 0.741
-  ffact: 139380
-  since: 2024-10-12 02:44:48.024470428 Z
-  what: quality-of-service
-  when: 2024-10-19 02:44:48.024387423 Z
 - _id: 394918
   _time: 2024-10-19 02:54:55.293665573 Z
   _version: 0.4.0/0.26.1/
@@ -56626,31 +56435,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-10-20 02:59:27.405305734 Z
-- _id: 397078
-  _time: 2024-10-21 02:47:33.456274057 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.109375
-  average_build_duration: 145.0529634300126
-  average_build_mttr: -18197
-  average_build_success_rate: 0.9810844892812106
-  average_issue_lifetime: 326080.0
-  average_pull_files_size: 1.35
-  average_pull_hoc_size: 10.4
-  average_pull_lifetime: 29147.45
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 6.75
-  average_release_hoc_size: 44.75
-  average_release_interval: 16647.5
-  average_review_size: 0.0
-  average_review_time: 19608.0
-  average_reviewers_per_pull: 0.05
-  average_reviews_per_pull: 0.05
-  average_triage_time: 0
-  composite: 0.896
-  ffact: 139380
-  since: 2024-10-14 02:47:33.456488507 Z
-  what: quality-of-service
-  when: 2024-10-21 02:47:33.456418917 Z
 - _id: 397226
   _time: 2024-10-21 06:07:19.702861414 Z
   _version: 0.4.0/0.26.1/
@@ -56762,31 +56546,6 @@
   when: 2024-10-22 07:20:55.000000000 Z
   where: github
   who: 29139614
-- _id: 399396
-  _time: 2024-10-23 02:51:35.162459404 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 299.32978723404256
-  average_build_mttr: 0
-  average_build_success_rate: 0.9964539007092199
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.125
-  average_pull_hoc_size: 11.75
-  average_pull_lifetime: 768780.1
-  average_pull_rejection_rate: 0.2
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.228
-  ffact: 139380
-  since: 2024-10-16 02:51:35.162782208 Z
-  what: quality-of-service
-  when: 2024-10-23 02:51:35.162667263 Z
 - _id: 399686
   _time: 2024-10-23 10:05:38.523699518 Z
   _version: 0.4.0/0.26.1/
@@ -56950,31 +56709,6 @@
   when: 2024-10-24 05:26:22.000000000 Z
   where: github
   who: 526301
-- _id: 401975
-  _time: 2024-10-25 06:27:12.111161679 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.109375
-  average_build_duration: 421.4824120603015
-  average_build_mttr: -15542
-  average_build_success_rate: 0.9899497487437185
-  average_issue_lifetime: 4482293.5
-  average_pull_files_size: 1.8
-  average_pull_hoc_size: 9.6
-  average_pull_lifetime: 1126987.142857143
-  average_pull_rejection_rate: 0.2857142857142857
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 640021.0
-  average_reviewers_per_pull: 0.2
-  average_reviews_per_pull: 0.2
-  average_triage_time: 3.0
-  composite: 0.346
-  ffact: 139380
-  since: 2024-10-18 06:27:12.111374388 Z
-  what: quality-of-service
-  when: 2024-10-25 06:27:12.111315277 Z
 - _id: 402265
   _time: 2024-10-25 10:31:48.976048825 Z
   _version: 0.4.0/0.26.1/
@@ -57160,31 +56894,6 @@
   when: 2024-10-26 10:34:35.000000000 Z
   where: github
   who: 29139614
-- _id: 404437
-  _time: 2024-10-27 06:29:40.346304252 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.203125
-  average_build_duration: 344.98046875
-  average_build_mttr: -186464
-  average_build_success_rate: 0.98828125
-  average_issue_lifetime: 4482293.5
-  average_pull_files_size: 1.8571428571428572
-  average_pull_hoc_size: 9.142857142857142
-  average_pull_lifetime: 877064.5555555555
-  average_pull_rejection_rate: 0.2222222222222222
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 640021.0
-  average_reviewers_per_pull: 0.14285714285714285
-  average_reviews_per_pull: 0.14285714285714285
-  average_triage_time: 3.0
-  composite: 0.347
-  ffact: 139380
-  since: 2024-10-20 06:29:40.346519575 Z
-  what: quality-of-service
-  when: 2024-10-27 06:29:40.346449293 Z
 - _id: 404691
   _time: 2024-10-27 14:05:14.401824085 Z
   _version: 0.4.0/0.26.1/
@@ -57230,31 +56939,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2024-10-28 14:24:55.913123857 Z
-- _id: 406590
-  _time: 2024-10-29 10:27:58.005772195 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.296875
-  average_build_duration: 388.5183486238532
-  average_build_mttr: -15542
-  average_build_success_rate: 0.9862385321100917
-  average_issue_lifetime: 4482293.5
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 10.4
-  average_pull_lifetime: 129567.0
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 640021.0
-  average_reviewers_per_pull: 0.2
-  average_reviews_per_pull: 0.2
-  average_triage_time: 3.0
-  composite: 0.379
-  ffact: 139380
-  since: 2024-10-22 10:27:58.006007607 Z
-  what: quality-of-service
-  when: 2024-10-29 10:27:58.005918891 Z
 - _id: 406860
   _time: 2024-10-29 18:06:27.176698616 Z
   _version: 0.4.0/0.26.1/
@@ -57300,31 +56984,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-10-30 18:06:40.725217237 Z
-- _id: 408770
-  _time: 2024-10-31 14:32:35.610692058 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.25
-  average_build_duration: 282.7605177993527
-  average_build_mttr: -237023
-  average_build_success_rate: 0.9838187702265372
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 9.25
-  average_pull_lifetime: 57066.125
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.417
-  ffact: 139380
-  since: 2024-10-24 14:32:35.610944028 Z
-  what: quality-of-service
-  when: 2024-10-31 14:32:35.610856976 Z
 - _id: 409027
   _time: 2024-10-31 22:05:09.132887626 Z
   _version: 0.4.0/0.26.1/
@@ -57706,31 +57365,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-11-02 02:26:25.159094468 Z
-- _id: 411342
-  _time: 2024-11-02 18:27:14.662673282 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 346.3503937007874
-  average_build_mttr: -42500
-  average_build_success_rate: 0.984251968503937
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 9.666666666666666
-  average_pull_lifetime: 75309.66666666667
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.286
-  ffact: 139380
-  since: 2024-10-26 18:27:14.662913069 Z
-  what: quality-of-service
-  when: 2024-11-02 18:27:14.662832488 Z
 - _id: 411632
   _time: 2024-11-04 10:06:03.465143977 Z
   _version: 0.4.0/0.26.1/
@@ -57775,31 +57409,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2024-11-04 10:28:45.690605474 Z
-- _id: 412169
-  _time: 2024-11-04 18:29:16.565766298 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 272.1899641577061
-  average_build_mttr: -78118
-  average_build_success_rate: 0.9032258064516129
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 9.666666666666666
-  average_pull_lifetime: 75309.66666666667
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.275
-  ffact: 139380
-  since: 2024-10-28 18:29:16.565980719 Z
-  what: quality-of-service
-  when: 2024-11-04 18:29:16.565917240 Z
 - _id: 412445
   _time: 2024-11-05 02:27:51.190825330 Z
   _version: 0.4.0/0.26.1/
@@ -58245,31 +57854,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-11-06 18:06:22.178856929 Z
-- _id: 414622
-  _time: 2024-11-06 18:29:49.105676981 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 357.7521551724138
-  average_build_mttr: -270813
-  average_build_success_rate: 0.9008620689655172
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.5
-  average_pull_hoc_size: 5.833333333333333
-  average_pull_lifetime: 66050.83333333333
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.283
-  ffact: 139380
-  since: 2024-10-30 18:29:49.105893658 Z
-  what: quality-of-service
-  when: 2024-11-06 18:29:49.105829518 Z
 - _id: 415858
   _time: 2024-11-07 22:05:12.743616694 Z
   _version: 0.4.0/0.26.1/
@@ -58300,31 +57884,6 @@
   total_reviews_submitted: 1
   what: quantity-of-deliverables
   when: 2024-11-08 14:24:21.309866514 Z
-- _id: 416937
-  _time: 2024-11-08 18:32:39.675524503 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 714.3213367609254
-  average_build_mttr: -147717
-  average_build_success_rate: 0.8740359897172236
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.0
-  average_pull_hoc_size: 2.0
-  average_pull_lifetime: 56792.0
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.289
-  ffact: 139380
-  since: 2024-11-01 18:32:39.675784410 Z
-  what: quality-of-service
-  when: 2024-11-08 18:32:39.675695002 Z
 - _id: 417194
   _time: 2024-11-09 02:23:19.865548547 Z
   _version: 0.4.0/0.26.1/
@@ -58566,31 +58125,6 @@
   total_reviews_submitted: 1
   what: quantity-of-deliverables
   when: 2024-11-10 14:31:33.404345246 Z
-- _id: 419503
-  _time: 2024-11-10 22:25:40.306784770 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 694.2505446623094
-  average_build_mttr: -94466
-  average_build_success_rate: 0.9302832244008714
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.3333333333333333
-  average_pull_hoc_size: 16.444444444444443
-  average_pull_lifetime: 38471.88888888889
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.329
-  ffact: 139380
-  since: 2024-11-03 22:25:40.307046468 Z
-  what: quality-of-service
-  when: 2024-11-10 22:25:40.306959005 Z
 - _id: 419800
   _time: 2024-11-11 06:06:53.849727952 Z
   _version: 0.4.0/0.26.1/
@@ -58650,31 +58184,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2024-11-12 14:55:08.974388414 Z
-- _id: 422241
-  _time: 2024-11-12 22:27:43.416228227 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 751.9975845410628
-  average_build_mttr: -99957
-  average_build_success_rate: 0.9347826086956522
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.7142857142857142
-  average_pull_hoc_size: 22.0
-  average_pull_lifetime: 676763.3076923077
-  average_pull_rejection_rate: 0.46153846153846156
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.226
-  ffact: 139380
-  since: 2024-11-05 22:27:43.416441908 Z
-  what: quality-of-service
-  when: 2024-11-12 22:27:43.416371837 Z
 - _id: 422658
   _time: 2024-11-13 14:05:37.199863116 Z
   _version: 0.4.0/0.26.1/
@@ -59003,31 +58512,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-11-17 02:31:48.266428033 Z
-- _id: 427004
-  _time: 2024-11-17 03:12:58.018861308 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 297.5943238731219
-  average_build_mttr: -7167
-  average_build_success_rate: 0.9415692821368948
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.3571428571428572
-  average_pull_hoc_size: 7.142857142857143
-  average_pull_lifetime: 719835.8888888889
-  average_pull_rejection_rate: 0.2222222222222222
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.227
-  ffact: 139380
-  since: 2024-11-10 03:12:58.019181123 Z
-  what: quality-of-service
-  when: 2024-11-17 03:12:58.019074394 Z
 - _id: 427985
   _time: 2024-11-18 06:07:25.273437407 Z
   _version: 0.4.0/0.26.1/
@@ -59058,31 +58542,6 @@
   total_reviews_submitted: 0
   what: quantity-of-deliverables
   when: 2024-11-18 22:32:12.082150465 Z
-- _id: 429184
-  _time: 2024-11-19 06:28:53.812052265 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 205.0529531568228
-  average_build_mttr: 6
-  average_build_success_rate: 0.9613034623217923
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.3
-  average_pull_hoc_size: 8.2
-  average_pull_lifetime: 688522.3636363636
-  average_pull_rejection_rate: 0.09090909090909091
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.229
-  ffact: 139380
-  since: 2024-11-12 06:28:53.812280222 Z
-  what: quality-of-service
-  when: 2024-11-19 06:28:53.812205081 Z
 - _id: 429185
   _time: 2024-11-19 06:36:43.195808787 Z
   _version: 0.4.0/0.26.1/
@@ -59128,31 +58587,6 @@
   total_reviews_submitted: 4
   what: quantity-of-deliverables
   when: 2024-11-21 02:56:31.706132406 Z
-- _id: 431505
-  _time: 2024-11-21 06:34:00.122670965 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 285.83734939759034
-  average_build_mttr: -40286
-  average_build_success_rate: 0.9698795180722891
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.0
-  average_pull_hoc_size: 6.666666666666667
-  average_pull_lifetime: 1080771.857142857
-  average_pull_rejection_rate: 0.14285714285714285
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.227
-  ffact: 139380
-  since: 2024-11-14 06:34:00.122932975 Z
-  what: quality-of-service
-  when: 2024-11-21 06:34:00.122846213 Z
 - _id: 431773
   _time: 2024-11-21 14:05:30.524360698 Z
   _version: 0.4.0/0.26.1/
@@ -59548,31 +58982,6 @@
   total_reviews_submitted: 4
   what: quantity-of-deliverables
   when: 2024-11-23 06:27:55.467813399 Z
-- _id: 433687
-  _time: 2024-11-23 06:56:39.634504144 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 244.01078167115904
-  average_build_mttr: -40286
-  average_build_success_rate: 0.9838274932614556
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 6.0
-  average_pull_lifetime: 1936.1666666666667
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.333
-  ffact: 139380
-  since: 2024-11-16 06:56:39.634797432 Z
-  what: quality-of-service
-  when: 2024-11-23 06:56:39.634703617 Z
 - _id: 433970
   _time: 2024-11-23 18:06:37.796318702 Z
   _version: 0.4.0/0.26.1/
@@ -59618,31 +59027,6 @@
   total_reviews_submitted: 4
   what: quantity-of-deliverables
   when: 2024-11-25 06:32:52.945382660 Z
-- _id: 435842
-  _time: 2024-11-25 10:29:35.114025243 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 253.68595041322314
-  average_build_mttr: -40286
-  average_build_success_rate: 0.9834710743801653
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 6.0
-  average_pull_lifetime: 1936.1666666666667
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.333
-  ffact: 139380
-  since: 2024-11-18 10:29:35.114244712 Z
-  what: quality-of-service
-  when: 2024-11-25 10:29:35.114174962 Z
 - _id: 436259
   _time: 2024-11-25 22:05:30.925650674 Z
   _version: 0.4.0/0.26.1/
@@ -59953,31 +59337,6 @@
   when: 2024-11-26 20:49:39.000000000 Z
   where: github
   who: 29139614
-- _id: 438036
-  _time: 2024-11-27 10:32:44.490539152 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 248.9162162162162
-  average_build_mttr: -408463
-  average_build_success_rate: 0.9918918918918919
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 9.454545454545455
-  average_pull_lifetime: 2518.0
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.333
-  ffact: 139380
-  since: 2024-11-20 10:32:44.490762027 Z
-  what: quality-of-service
-  when: 2024-11-27 10:32:44.490688350 Z
 - _id: 438037
   _time: 2024-11-27 10:39:05.104687345 Z
   _version: 0.4.0/0.26.1/
@@ -60172,31 +59531,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-11-29 10:05:42.553061880 Z
-- _id: 440213
-  _time: 2024-11-29 10:34:09.605520158 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 296.63139931740614
-  average_build_mttr: 0
-  average_build_success_rate: 0.9180887372013652
-  average_issue_lifetime: 11969774.0
-  average_pull_files_size: 1.7142857142857142
-  average_pull_hoc_size: 10.285714285714286
-  average_pull_lifetime: 204477.375
-  average_pull_rejection_rate: 0.125
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.241
-  ffact: 139380
-  since: 2024-11-22 10:34:09.605769625 Z
-  what: quality-of-service
-  when: 2024-11-29 10:34:09.605683935 Z
 - _id: 440214
   _time: 2024-11-29 10:39:34.221259778 Z
   _version: 0.4.0/0.26.1/
@@ -60444,31 +59778,6 @@
   when: 2024-12-01 04:51:52.000000000 Z
   where: github
   who: 526301
-- _id: 442942
-  _time: 2024-12-01 10:53:40.858858084 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.046875
-  average_build_duration: 284.0118343195266
-  average_build_mttr: 0
-  average_build_success_rate: 0.9615384615384616
-  average_issue_lifetime: 7582238.0
-  average_pull_files_size: 1.6
-  average_pull_hoc_size: 20.9
-  average_pull_lifetime: 351514.36363636365
-  average_pull_rejection_rate: 0.09090909090909091
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 2197769.0
-  average_reviewers_per_pull: 0.1
-  average_reviews_per_pull: 0.1
-  average_triage_time: 3.0
-  composite: 0.352
-  ffact: 139380
-  since: 2024-11-24 10:53:40.859121176 Z
-  what: quality-of-service
-  when: 2024-12-01 10:53:40.859036507 Z
 - _id: 442943
   _time: 2024-12-01 10:59:55.943792891 Z
   _version: 0.4.0/0.26.1/
@@ -60659,31 +59968,6 @@
   when: 2024-12-03 09:58:20.000000000 Z
   where: github
   who: 29139614
-- _id: 445272
-  _time: 2024-12-03 14:38:06.276014348 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.109375
-  average_build_duration: 263.08396946564886
-  average_build_mttr: 0
-  average_build_success_rate: 0.9618320610687023
-  average_issue_lifetime: 7582238.0
-  average_pull_files_size: 1.6
-  average_pull_hoc_size: 21.1
-  average_pull_lifetime: 352272.2727272727
-  average_pull_rejection_rate: 0.09090909090909091
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 2197769.0
-  average_reviewers_per_pull: 0.1
-  average_reviews_per_pull: 0.1
-  average_triage_time: 3.0
-  composite: 0.352
-  ffact: 139380
-  since: 2024-11-26 14:38:06.276276627 Z
-  what: quality-of-service
-  when: 2024-12-03 14:38:06.276180888 Z
 - _id: 445273
   _time: 2024-12-03 14:43:52.138662602 Z
   _version: 0.4.0/0.26.1/
@@ -61885,31 +61169,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-12-06 22:05:22.606996766 Z
-- _id: 450213
-  _time: 2024-12-07 18:31:11.526829106 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.234375
-  average_build_duration: 182.03625377643505
-  average_build_mttr: -4888
-  average_build_success_rate: 0.9259818731117825
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.9
-  average_pull_hoc_size: 35.8
-  average_pull_lifetime: 97918.04761904762
-  average_pull_rejection_rate: 0.047619047619047616
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.35
-  average_review_time: 1238773.0
-  average_reviewers_per_pull: 0.1
-  average_reviews_per_pull: 0.35
-  average_triage_time: 6.0
-  composite: 0.377
-  ffact: 139380
-  since: 2024-11-30 18:31:11.527045299 Z
-  what: quality-of-service
-  when: 2024-12-07 18:31:11.526976050 Z
 - _id: 450214
   _time: 2024-12-07 18:38:56.680001962 Z
   _version: 0.4.0/0.26.1/
@@ -61955,31 +61214,6 @@
   total_stars: 34
   what: dimensions-of-terrain
   when: 2024-12-09 06:07:38.350993073 Z
-- _id: 452240
-  _time: 2024-12-09 18:31:31.628243880 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 190.98673300165837
-  average_build_mttr: -4888
-  average_build_success_rate: 0.9220563847429519
-  average_issue_lifetime: 0
-  average_pull_files_size: 1.9473684210526316
-  average_pull_hoc_size: 37.578947368421055
-  average_pull_lifetime: 101589.9
-  average_pull_rejection_rate: 0.05
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.3684210526315789
-  average_review_time: 1238773.0
-  average_reviewers_per_pull: 0.10526315789473684
-  average_reviews_per_pull: 0.3684210526315789
-  average_triage_time: 0
-  composite: 0.263
-  ffact: 139380
-  since: 2024-12-02 18:31:31.628481957 Z
-  what: quality-of-service
-  when: 2024-12-09 18:31:31.628400083 Z
 - _id: 452241
   _time: 2024-12-09 18:39:31.173957053 Z
   _version: 0.4.0/0.26.1/
@@ -62025,31 +61259,6 @@
   total_stars: 35
   what: dimensions-of-terrain
   when: 2024-12-11 14:05:51.662495020 Z
-- _id: 454424
-  _time: 2024-12-11 22:34:45.543598986 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 698.1935483870968
-  average_build_mttr: 0
-  average_build_success_rate: 0.9274193548387096
-  average_issue_lifetime: 0
-  average_pull_files_size: 0
-  average_pull_hoc_size: 0
-  average_pull_lifetime: 0
-  average_pull_rejection_rate: 0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0
-  average_review_time: 0
-  average_reviewers_per_pull: 0
-  average_reviews_per_pull: 0
-  average_triage_time: 0
-  composite: 0.217
-  ffact: 139380
-  since: 2024-12-04 22:34:45.543849345 Z
-  what: quality-of-service
-  when: 2024-12-11 22:34:45.543760849 Z
 - _id: 454425
   _time: 2024-12-11 22:40:38.496468421 Z
   _version: 0.4.0/0.26.1/
@@ -62361,31 +61570,6 @@
   total_stars: 35
   what: dimensions-of-terrain
   when: 2024-12-13 22:04:48.801421052 Z
-- _id: 456765
-  _time: 2024-12-13 22:34:57.693205465 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 338.06920415224914
-  average_build_mttr: 0
-  average_build_success_rate: 0.9653979238754326
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 6.0
-  average_pull_lifetime: 1294.0
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.333
-  ffact: 139380
-  since: 2024-12-06 22:34:57.693419795 Z
-  what: quality-of-service
-  when: 2024-12-13 22:34:57.693360134 Z
 - _id: 456766
   _time: 2024-12-13 22:40:53.178029177 Z
   _version: 0.4.0/0.26.1/
@@ -62416,31 +61600,6 @@
   total_stars: 35
   what: dimensions-of-terrain
   when: 2024-12-15 02:34:21.475211476 Z
-- _id: 458791
-  _time: 2024-12-16 03:00:37.762264288 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 330.20622568093387
-  average_build_mttr: 0
-  average_build_success_rate: 0.9610894941634242
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 6.0
-  average_pull_lifetime: 1294.0
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.333
-  ffact: 139380
-  since: 2024-12-09 03:00:37.762548991 Z
-  what: quality-of-service
-  when: 2024-12-16 03:00:37.762456147 Z
 - _id: 458792
   _time: 2024-12-16 03:07:11.211941372 Z
   _version: 0.4.0/0.26.1/
@@ -62501,31 +61660,6 @@
   total_stars: 35
   what: dimensions-of-terrain
   when: 2024-12-18 06:07:30.229232788 Z
-- _id: 460829
-  _time: 2024-12-18 06:30:58.623220064 Z
-  _version: 0.4.0/0.26.1/
-  average_backlog_size: 0.0
-  average_build_duration: 329.94594594594594
-  average_build_mttr: 0
-  average_build_success_rate: 0.9613899613899614
-  average_issue_lifetime: 0
-  average_pull_files_size: 2.0
-  average_pull_hoc_size: 6.0
-  average_pull_lifetime: 1294.0
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 0
-  average_release_hoc_size: 0
-  average_release_interval: 0
-  average_review_size: 0.0
-  average_review_time: 0
-  average_reviewers_per_pull: 0.0
-  average_reviews_per_pull: 0.0
-  average_triage_time: 0
-  composite: 0.333
-  ffact: 139380
-  since: 2024-12-11 06:30:58.623459051 Z
-  what: quality-of-service
-  when: 2024-12-18 06:30:58.623381857 Z
 - _id: 460830
   _time: 2024-12-18 06:38:11.734880055 Z
   _version: 0.4.0/0.26.1/
@@ -66805,13 +65939,6 @@
   when: 2025-01-28 08:36:39.000000000 Z
   where: github
   who: 526301
-- _id: 473796
-  _time: 2025-01-29 04:14:20.099772405 Z
-  _version: 0.5.0/0.31.1/
-  average_backlog_size: 0.125
-  since: 2025-01-22 04:12:59.488826703 Z
-  what: quality-of-service
-  when: 2025-01-29 04:12:59.488783783 Z
 - _id: 473832
   _time: 2025-01-29 07:07:48.247280560 Z
   _version: 0.5.0/0.31.1/
@@ -98084,14 +97211,6 @@
   total_releases_published: 11
   what: quantity-of-deliverables
   when: 2025-04-09 09:08:02.231000901 Z
-- _id: 544556
-  _job: 17190
-  _time: 2025-04-09 09:12:23.447878074 Z
-  _version: 0.9.10/0.39.2/0.3.1
-  area: cost
-  award_price: 1
-  slaves: torvalds
-  what: pmp
 - _id: 544691
   _time: 2025-04-09 11:05:55.674181523 Z
   _version: 0.9.10/0.39.2/
@@ -107226,66 +106345,6 @@
   where: github
   who: 2566462
   why: Contributed code in zerocracy/fbe#174
-- _id: 655783
-  _job: 19353
-  _time: 2025-05-05 13:18:38.671411960 Z
-  _version: 0.10.1/0.42.0/0.7.0
-  area: hr
-  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\\\\\'t
-    obey the convention, a penalty is given to the author') (aka (let fee -12) (give
-    fee 'as a basis') 'deduct ${fee} points'))"
-  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
-    the team, the reporter receives a bonus') (aka (let bonus 12) (give bonus 'as
-    a basis') 'award ${bonus} points'))"
-  code_contribution_was_rewarded: |-
-    (award (explain 'When a code contribution is made, the author receives a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 16) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.05) (let hoc_threshold 200) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let many_hoc_fee 8) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let many_hoc_fee2 16) (let hoc_threshold2 800) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 many_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${many_hoc_fee2} points if more than ${hoc_threshold2}
-          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let no_review_fee 16) (set penalty_for_no_review (if (eq reviews 0) (times -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review') 'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k 0.2) (let comments_max -16) (let comments_min -4) (let comments_threshold 8) (set bonus_for_comments (if (gt comments comments_threshold) (times comments (times -1 comments_k)) 0)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (give bonus_for_comments 'for too many (${comments} > ${comments_threshold}) comments that were made during review') 'deduct ${comments_k} points for every comment above ${comments_threshold} made during review, but not more than ${comments_max} points') (aka (let few_hoc_fee 8) (let hoc_needed 20) (set penalty_for_few_hoc (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
-  code_review_was_rewarded: |-
-    (award (explain 'An author of every code review receives a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 12) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 24) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.01) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 16) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 0.25) (let comments_max 8) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 8) (let hoc_needed 16) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
-  days_of_running_balance: 56
-  days_to_reward: 14
-  dud_was_punished: "(award (explain 'When an issue is submitted but then rejected
-    by the team, the reporter receives a penalty') (aka (let fee -16) (give fee 'as
-    a basis') 'deduct ${fee} points'))"
-  enhancement_suggestion_was_rewarded: "(award (explain 'When an enhancement is suggested
-    and accepted by the team, the reporter receives a bonus') (aka (let bonus 12)
-    (give bonus 'as a basis') 'award ${bonus} points'))"
-  long_pull_was_punished: "(award (explain 'Oversized pull requests get penalized')
-    (aka (let fee -8) (give fee 'as a basis') 'deduct ${fee} points'))"
-  master_punish_days: 4
-  published_release_was_rewarded: |-
-    (award (explain 'When a new release is published, everyone who contributed receives a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 24) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 24) (let hoc_min 4) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let max 32) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
-  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
-    default branch, they get a penalty') (aka (let fee -16) (give fee 'as a basis')
-    '${fee} points'))"
-  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
-    0.1 total_hoc_committed)"
-  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
-    who was assigned to it receives a bonus') (in hours 'how many hours it took to
-    resolve the bug') (in self '1 if the bug was reported and resolved by the same
-    person, otherwise zero') (set days (div hours 24)) (aka (let basis 8) (give basis
-    'as a basis') 'award ${basis} points') (aka (let b1 4) (let hours_threshold 24)
-    (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less
-    than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than
-    ${hours_threshold} hours') (aka (let self_fee 16) (set penalty_for_self (if (eq
-    self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug
-    reported by you earlier') 'deduct ${self_fee} points if they resolved the bug
-    earlier reported by themselves') (aka (let day_fee 1.0) (set b2 (times -1 (times
-    days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2
-    'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay,
-    but no more than ${days_fee_max} points') (aka (let max 16) (set over (if (gt
-    (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let
-    min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to
-    give you at least something') 'make sure the reward is not larger than ${max}
-    points and not smaller than ${min} points'))"
-  what: pmp
 - _id: 656576
   _time: 2025-05-05 15:07:36.949131136 Z
   _version: 0.10.1/0.42.0/
@@ -141010,23 +140069,6 @@
   when: 2024-11-25 23:26:10.000000000 Z
   where: github
   who: 29139614
-- _id: 821937
-  _job: 4901
-  _time: 2025-05-20 09:11:37.846571715 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 14
-  average_build_success_rate: 0.9303011160244262
-  average_issue_lifetime: 196309.75531914894
-  average_pull_lifetime: 36463.721649484534
-  average_pull_rejection_rate: 0.10309278350515463
-  average_release_commits_size: 10.35958904109589
-  average_release_hoc_size: 226.6986301369863
-  average_release_interval: 29211.585365853658
-  composite: 0.858
-  ffact: 139380
-  since: 2024-07-09 06:10:15.413042685 Z
-  what: quality-of-service
-  when: 2024-08-06 06:10:17.104093048 Z
 - _id: 822215
   _time: 2025-05-20 09:38:07.201032679 Z
   _version: 0.10.2/0.42.1/
@@ -143252,22 +142294,6 @@
   where: github
   who: 88084038
   why: Branch name was wrong in zerocracy/baza#138
-- _id: 822325
-  _job: 4901
-  _time: 2025-05-20 09:40:21.159993806 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 14
-  average_build_success_rate: 0.933974358974359
-  average_issue_lifetime: 167066.70103092783
-  average_pull_lifetime: 31066.57219251337
-  average_pull_rejection_rate: 0.10160427807486631
-  average_release_interval: 29792.151898734177
-  average_triage_time: 90630.29611650485
-  composite: 0.885
-  ffact: 139380
-  since: 2024-07-12 06:10:51.318850624 Z
-  what: quality-of-service
-  when: 2024-08-09 06:10:53.229687656 Z
 - _id:
   - 822741
   - 70968
@@ -149813,23 +148839,6 @@
   when: *281
   where: github
   who: 29139614
-- _id: 823581
-  _job: 4901
-  _time: 2025-05-20 11:09:52.388299045 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 15
-  average_build_success_rate: 0.9560025141420491
-  average_issue_lifetime: 131477.96153846153
-  average_pull_lifetime: 65477.89189189189
-  average_pull_rejection_rate: 0.02702702702702703
-  average_release_commits_size: 10.893023255813954
-  average_release_hoc_size: 253.97674418604652
-  average_release_interval: 34676.470588235294
-  composite: 0.851
-  ffact: 139380
-  since: 2024-08-04 06:12:28.836930382 Z
-  what: quality-of-service
-  when: 2024-08-11 06:12:30.927228410 Z
 - _id: 823714
   _time: 2025-05-20 11:35:24.085373544 Z
   _version: 0.10.2/0.42.1/
@@ -149844,41 +148853,6 @@
   when: 2025-05-20 08:10:28.000000000 Z
   where: github
   who: 526301
-- _id: 824268
-  _job: 4901
-  _time: 2025-05-20 12:14:51.641070383 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 12
-  average_build_duration: 76.58679339669835
-  average_build_success_rate: 0.9779889944972486
-  average_issue_lifetime: 63861.76666666667
-  average_pull_lifetime: 33788.92307692308
-  average_pull_rejection_rate: 0.02564102564102564
-  average_release_interval: 23033.772727272728
-  average_triage_time: 119822.77464788733
-  composite: 0.889
-  ffact: 139380
-  since: 2024-08-06 06:16:35.941357469 Z
-  what: quality-of-service
-  when: 2024-08-13 06:16:35.941276478 Z
-- _id: 824269
-  _job: 4901
-  _time: 2025-05-20 12:16:45.217348484 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 1.3392857142857142
-  average_build_duration: 62.35557397430584
-  average_build_success_rate: 0.9697472026523001
-  average_issue_lifetime: 38059.78125
-  average_pull_lifetime: 18823.5
-  average_pull_rejection_rate: 0.05555555555555555
-  average_release_commits_size: 11.132352941176471
-  average_release_hoc_size: 259.1372549019608
-  average_release_interval: 21105.76
-  composite: 1.0
-  ffact: 139380
-  since: 2024-08-08 06:19:57.057645313 Z
-  what: quality-of-service
-  when: 2024-08-15 06:19:57.057562658 Z
 - _id: 824272
   _time: 2025-05-20 12:47:58.769055358 Z
   _version: 0.10.2/0.42.1/
@@ -150087,23 +149061,6 @@
   when: &283 2025-05-20 08:52:38.000000000 Z
   where: github
   who: 526301
-- _id: 824435
-  _job: 4901
-  _time: 2025-05-20 12:50:54.300583009 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.9821428571428571
-  average_build_duration: 58.62807295796986
-  average_build_success_rate: 0.9758128469468675
-  average_issue_lifetime: 572293.0256410256
-  average_pull_lifetime: 22568.830769230768
-  average_pull_rejection_rate: 0.03076923076923077
-  average_release_interval: 21596.08
-  average_triage_time: 123104.91304347826
-  composite: 0.845
-  ffact: 139380
-  since: 2024-08-10 07:11:47.400287667 Z
-  what: quality-of-service
-  when: 2024-08-17 07:11:47.400207638 Z
 - _id: 824436
   _job: 20983
   _time: 2025-05-20 12:53:53.542596600 Z
@@ -150197,40 +149154,6 @@
   when: &284 2025-05-20 09:46:27.000000000 Z
   where: github
   who: 8086956
-- _id: 825165
-  _time: 2025-05-20 14:08:16.237226759 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.546875
-  average_build_duration: 85.7258855585831
-  average_build_success_rate: 0.9629427792915531
-  average_issue_lifetime: 1203893.64
-  average_pull_lifetime: 40648.583333333336
-  average_pull_rejection_rate: 0.125
-  average_release_interval: 40035.166666666664
-  average_triage_time: 127605.9022556391
-  composite: 0.81
-  ffact: 139380
-  since: 2024-08-14 07:12:40.759700116 Z
-  what: quality-of-service
-  when: 2024-08-21 07:12:40.759647748 Z
-- _id: 825166
-  _time: 2025-05-20 14:08:51.418825821 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.859375
-  average_build_duration: 95.91449194891727
-  average_build_success_rate: 0.9622431982232094
-  average_issue_lifetime: 876933.125
-  average_pull_files_size: 1.4761904761904763
-  average_pull_hoc_size: 34.04761904761905
-  average_pull_lifetime: 73891.4693877551
-  average_pull_rejection_rate: 0.14285714285714285
-  average_release_interval: 46366.90909090909
-  average_triage_time: 127605.9022556391
-  composite: 0.775
-  ffact: 139380
-  since: 2024-08-16 07:14:31.747011705 Z
-  what: quality-of-service
-  when: 2024-08-23 07:14:31.746937255 Z
 - _id: 825584
   _job: 20992
   _time: 2025-05-20 14:14:17.110302996 Z
@@ -150271,99 +149194,6 @@
   where: github
   who: 526301
   why: Contributed code in zerocracy/pages-action#269
-- _id: 825736
-  _time: 2025-05-20 15:10:15.902581316 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.53125
-  average_build_duration: 125.36173633440515
-  average_build_success_rate: 0.9622186495176849
-  average_issue_lifetime: 536482.3
-  average_pull_files_size: 1.48
-  average_pull_hoc_size: 35.12
-  average_pull_lifetime: 89544.66666666667
-  average_pull_rejection_rate: 0.16666666666666666
-  average_release_commits_size: 11.00578034682081
-  average_release_hoc_size: 274.4971098265896
-  average_release_interval: 41358.444444444445
-  composite: 0.792
-  ffact: 139380
-  since: 2024-08-18 08:14:01.420005718 Z
-  what: quality-of-service
-  when: 2024-08-25 08:14:01.419939284 Z
-- _id: 826907
-  _time: 2025-05-20 16:45:43.871803728 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.609375
-  average_build_duration: 129.38981702466188
-  average_build_success_rate: 0.9753381066030231
-  average_issue_lifetime: 683290.0
-  average_pull_files_size: 1.5357142857142858
-  average_pull_hoc_size: 31.714285714285715
-  average_pull_lifetime: 86070.23333333334
-  average_pull_rejection_rate: 0.06666666666666667
-  average_release_interval: 62165.42857142857
-  average_triage_time: 133168.1496062992
-  composite: 0.779
-  ffact: 139380
-  since: 2024-08-20 09:14:18.353591796 Z
-  what: quality-of-service
-  when: 2024-08-27 09:14:18.353533397 Z
-- _id: 826908
-  _time: 2025-05-20 16:46:14.663939125 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.640625
-  average_build_duration: 137.90610756608933
-  average_build_success_rate: 0.96718322698268
-  average_issue_lifetime: 999749.0
-  average_pull_files_size: 1.65
-  average_pull_hoc_size: 32.5
-  average_pull_lifetime: 27879.55
-  average_pull_rejection_rate: 0.0
-  average_release_interval: 113751.6
-  average_triage_time: 135277.728
-  composite: 0.816
-  ffact: 139380
-  since: 2024-08-22 09:22:40.131232105 Z
-  what: quality-of-service
-  when: 2024-08-29 09:22:40.131132938 Z
-- _id: 826919
-  _time: 2025-05-20 17:07:18.131623162 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.203125
-  average_build_duration: 125.84870848708488
-  average_build_success_rate: 0.9726937269372694
-  average_issue_lifetime: 1294888.2222222222
-  average_pull_files_size: 3.3548387096774195
-  average_pull_hoc_size: 112.0
-  average_pull_lifetime: 44570.74193548387
-  average_pull_rejection_rate: 0.0
-  average_release_interval: 84240.4
-  average_triage_time: 136368.67741935485
-  composite: 0.804
-  ffact: 139380
-  since: 2024-08-24 10:13:42.266318356 Z
-  what: quality-of-service
-  when: 2024-08-31 10:13:42.266226074 Z
-- _id: 827089
-  _time: 2025-05-20 17:39:24.285239725 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.328125
-  average_build_duration: 141.13235294117646
-  average_build_success_rate: 0.9757785467128027
-  average_issue_lifetime: 1661318.6666666667
-  average_pull_files_size: 3.642857142857143
-  average_pull_hoc_size: 112.53571428571429
-  average_pull_lifetime: 41012.96428571428
-  average_pull_rejection_rate: 0.0
-  average_release_commits_size: 11.24074074074074
-  average_release_hoc_size: 283.24074074074076
-  average_release_interval: 78021.0
-  average_triage_time: 161017.47154471546
-  composite: 0.801
-  ffact: 139380
-  since: 2024-08-26 10:16:42.552046116 Z
-  what: quality-of-service
-  when: 2024-09-02 10:16:42.551980973 Z
 - _id: 827665
   _time: 2025-05-20 18:43:03.206414139 Z
   _version: 0.10.2/0.42.1/
@@ -150403,61 +149233,6 @@
   total_stars: 63
   what: dimensions-of-terrain
   when: 2025-05-20 18:46:14.003726380 Z
-- _id: 828406
-  _time: 2025-05-20 20:09:26.695926449 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.34375
-  average_build_duration: 104.1822966507177
-  average_build_success_rate: 0.9607655502392345
-  average_issue_lifetime: 1883086.4545454546
-  average_pull_lifetime: 63093.6
-  average_pull_rejection_rate: 0.16022099447513813
-  average_release_interval: 176354.0
-  composite: 0.763
-  ffact: 139380
-  since: 2024-08-28 10:24:27.102338424 Z
-  what: quality-of-service
-  when: 2024-09-04 10:24:27.102265368 Z
-- _id: 828583
-  _time: 2025-05-20 20:39:26.867773582 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.4375
-  average_build_duration: 110.23160892263883
-  average_build_mttr: -29370
-  average_build_success_rate: 0.9235880398671097
-  average_issue_lifetime: 2119327.875
-  average_pull_files_size: 2.188679245283019
-  average_pull_hoc_size: 47.490566037735846
-  average_pull_lifetime: 47699.87719298246
-  average_pull_rejection_rate: 0.07017543859649122
-  average_release_commits_size: 11.171974522292993
-  average_release_hoc_size: 285.43949044585986
-  average_release_interval: 79915.0
-  composite: 0.779
-  ffact: 139380
-  since: 2024-08-30 10:26:56.500122047 Z
-  what: quality-of-service
-  when: 2024-09-06 10:26:56.500045675 Z
-- _id: 829159
-  _time: 2025-05-20 21:37:35.259247740 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.125
-  average_build_duration: 118.6546146527117
-  average_build_mttr: -64861
-  average_build_success_rate: 0.8986679352997146
-  average_issue_lifetime: 1912172.7777777778
-  average_pull_files_size: 2.1551724137931036
-  average_pull_hoc_size: 44.86206896551724
-  average_pull_lifetime: 64144.88888888889
-  average_pull_rejection_rate: 0.07936507936507936
-  average_release_commits_size: 11.171974522292993
-  average_release_hoc_size: 285.43949044585986
-  average_release_interval: 79915.0
-  composite: 0.75
-  ffact: 139380
-  since: 2024-09-01 11:18:07.844074210 Z
-  what: quality-of-service
-  when: 2024-09-08 11:18:07.843994150 Z
 - _id: 829595
   _time: 2025-05-20 22:38:02.095501081 Z
   _version: 0.10.2/0.42.1/
@@ -150483,45 +149258,6 @@
   when: &285 2025-05-20 14:41:15.000000000 Z
   where: github
   who: 526301
-- _id: 829729
-  _time: 2025-05-20 22:40:19.603470070 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.109375
-  average_build_duration: 132.5934914506343
-  average_build_mttr: -51246
-  average_build_success_rate: 0.8119139547710976
-  average_issue_lifetime: 1492187.857142857
-  average_pull_files_size: 1.8571428571428572
-  average_pull_hoc_size: 25.714285714285715
-  average_pull_lifetime: 88336.86486486487
-  average_pull_rejection_rate: 0.05405405405405406
-  average_release_interval: 79915.0
-  average_triage_time: 138221.52459016393
-  composite: 0.714
-  ffact: 139380
-  since: 2024-09-03 12:17:52.275465535 Z
-  what: quality-of-service
-  when: 2024-09-10 12:17:52.275365258 Z
-- _id: 829730
-  _time: 2025-05-20 22:41:53.658304983 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.140625
-  average_build_duration: 168.45214521452147
-  average_build_mttr: -26119
-  average_build_success_rate: 0.7227722772277227
-  average_issue_lifetime: 1876652.75
-  average_pull_files_size: 1.8666666666666667
-  average_pull_hoc_size: 28.533333333333335
-  average_pull_lifetime: 106665.8125
-  average_pull_rejection_rate: 0.0625
-  average_release_commits_size: 11.129032258064516
-  average_release_hoc_size: 286.3806451612903
-  average_release_interval: 0
-  composite: 0.346
-  ffact: 139380
-  since: 2024-09-05 12:21:58.284422720 Z
-  what: quality-of-service
-  when: 2024-09-12 12:21:58.284340747 Z
 - _id: 829741
   _job: 21069
   _time: 2025-05-20 22:46:30.538802366 Z
@@ -150540,64 +149276,6 @@
   when: *285
   where: github
   who: 41898282
-- _id: 830201
-  _time: 2025-05-21 00:30:08.363370231 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.109375
-  average_build_duration: 178.09084457061746
-  average_build_mttr: -19540
-  average_build_success_rate: 0.7551454932576295
-  average_issue_lifetime: 2448758.8333333335
-  average_pull_files_size: 2.1538461538461537
-  average_pull_hoc_size: 33.76923076923077
-  average_pull_lifetime: 151117.93333333332
-  average_pull_rejection_rate: 0.13333333333333333
-  average_release_interval: 0
-  average_triage_time: 139363.85123966943
-  composite: 0.335
-  ffact: 139380
-  since: 2024-09-07 13:20:07.977031350 Z
-  what: quality-of-service
-  when: 2024-09-14 13:20:07.976951681 Z
-- _id: 830202
-  _time: 2025-05-21 00:30:39.530627698 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.140625
-  average_build_duration: 165.24365482233503
-  average_build_mttr: -35454
-  average_build_success_rate: 0.7988578680203046
-  average_issue_lifetime: 3006126.2
-  average_pull_files_size: 1.7647058823529411
-  average_pull_hoc_size: 30.941176470588236
-  average_pull_lifetime: 88135.83333333333
-  average_pull_rejection_rate: 0.05555555555555555
-  average_release_interval: 97043.0
-  average_triage_time: 139363.85123966943
-  composite: 0.699
-  ffact: 139380
-  since: 2024-09-09 13:24:03.373484569 Z
-  what: quality-of-service
-  when: 2024-09-16 13:24:03.373422824 Z
-- _id: 830933
-  _time: 2025-05-21 01:01:29.509107494 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.078125
-  average_build_duration: 155.56179066834804
-  average_build_mttr: -47651
-  average_build_success_rate: 0.8701134930643127
-  average_issue_lifetime: 3140672.6
-  average_pull_files_size: 1.5714285714285714
-  average_pull_hoc_size: 27.892857142857142
-  average_pull_lifetime: 59106.6129032258
-  average_pull_rejection_rate: 0.0967741935483871
-  average_release_commits_size: 11.181818181818182
-  average_release_hoc_size: 287.61038961038963
-  average_release_interval: 105105.66666666667
-  composite: 0.741
-  ffact: 139380
-  since: 2024-09-11 14:17:27.298787465 Z
-  what: quality-of-service
-  when: 2024-09-18 14:17:27.298703598 Z
 - _id: 831041
   _time: 2025-05-21 01:37:39.495642285 Z
   _version: 0.10.2/0.42.1/
@@ -150612,176 +149290,6 @@
   since: 2024-09-13 14:20:14.802145861 Z
   what: quality-of-service
   when: 2024-09-20 14:20:14.801946309 Z
-- _id: 831334
-  _time: 2025-05-21 02:38:14.477196463 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.140625
-  average_build_duration: 151.08866371120962
-  average_build_mttr: -56404
-  average_build_success_rate: 0.798606713109563
-  average_issue_lifetime: 3088805.6666666665
-  average_pull_files_size: 1.875
-  average_pull_hoc_size: 38.8125
-  average_pull_lifetime: 40006.0
-  average_pull_rejection_rate: 0.1111111111111111
-  average_release_commits_size: 11.111842105263158
-  average_release_hoc_size: 286.73026315789474
-  average_release_interval: 52589.0
-  composite: 0.755
-  ffact: 139380
-  since: 2024-09-15 15:17:09.482454927 Z
-  what: quality-of-service
-  when: 2024-09-22 15:17:09.482383403 Z
-- _id: 831783
-  _time: 2025-05-21 03:27:14.546438120 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.234375
-  average_build_duration: 154.8364698247891
-  average_build_mttr: -14626
-  average_build_success_rate: 0.8260869565217391
-  average_issue_lifetime: 2783068.6666666665
-  average_pull_files_size: 1.72
-  average_pull_hoc_size: 29.84
-  average_pull_lifetime: 200777.5357142857
-  average_pull_rejection_rate: 0.10714285714285714
-  average_release_commits_size: 5.0
-  average_release_hoc_size: 113.0
-  average_release_interval: 143429.25
-  average_review_size: 1.0
-  average_review_time: 52532.0
-  average_reviewers_per_pull: 0.32
-  average_reviews_per_pull: 0.8
-  average_triage_time: 141706.10084033615
-  composite: 0.675
-  ffact: 139380
-  since: 2024-09-17 16:22:08.919306831 Z
-  what: quality-of-service
-  when: 2024-09-24 16:22:08.919214308 Z
-- _id: 831784
-  _time: 2025-05-21 03:27:45.556969794 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.28125
-  average_build_duration: 154.2012401352875
-  average_build_mttr: -24335
-  average_build_success_rate: 0.9368658399098083
-  average_issue_lifetime: 2942518.5555555555
-  average_pull_files_size: 1.6153846153846154
-  average_pull_hoc_size: 23.384615384615383
-  average_pull_lifetime: 162128.0
-  average_pull_rejection_rate: 0.1702127659574468
-  average_release_commits_size: 6.8
-  average_release_hoc_size: 149.0
-  average_release_interval: 40214.0
-  average_review_size: 0.5384615384615384
-  average_review_time: 46451.0
-  average_reviewers_per_pull: 0.2564102564102564
-  average_reviews_per_pull: 0.48717948717948717
-  average_triage_time: 141706.10084033615
-  composite: 0.706
-  ffact: 139380
-  since: 2024-09-19 16:22:35.346465733 Z
-  what: quality-of-service
-  when: 2024-09-26 16:22:35.346393717 Z
-- _id: 831936
-  _time: 2025-05-21 03:47:18.566348147 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.390625
-  average_build_duration: 164.63888888888889
-  average_build_mttr: -22398
-  average_build_success_rate: 0.966183574879227
-  average_issue_lifetime: 2426900.111111111
-  average_pull_files_size: 1.65
-  average_pull_hoc_size: 17.2
-  average_pull_lifetime: 157709.58333333334
-  average_pull_rejection_rate: 0.16666666666666666
-  average_release_commits_size: 6.8
-  average_release_hoc_size: 149.0
-  average_release_interval: 40214.0
-  average_review_size: 0.35
-  average_review_time: 46028.5
-  average_reviewers_per_pull: 0.225
-  average_reviews_per_pull: 0.425
-  average_triage_time: 141706.10084033615
-  composite: 0.713
-  ffact: 139380
-  since: 2024-09-21 17:20:15.567540265 Z
-  what: quality-of-service
-  when: 2024-09-28 17:20:15.567459834 Z
-- _id: 831937
-  _time: 2025-05-21 03:47:49.922306095 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.484375
-  average_build_duration: 174.02825552825553
-  average_build_mttr: -12610
-  average_build_success_rate: 0.9692874692874693
-  average_issue_lifetime: 2548903.375
-  average_pull_files_size: 1.6285714285714286
-  average_pull_hoc_size: 14.885714285714286
-  average_pull_lifetime: 72642.23809523809
-  average_pull_rejection_rate: 0.16666666666666666
-  average_release_commits_size: 4.0
-  average_release_hoc_size: 84.83333333333333
-  average_release_interval: 70946.5
-  average_review_size: 0.0
-  average_review_time: 82724.33333333333
-  average_reviewers_per_pull: 0.2571428571428571
-  average_reviews_per_pull: 0.2571428571428571
-  average_triage_time: 144128.36752136753
-  composite: 0.748
-  ffact: 139380
-  since: 2024-09-23 18:23:40.946166302 Z
-  what: quality-of-service
-  when: 2024-09-30 18:23:40.946081373 Z
-- _id: 832238
-  _time: 2025-05-21 03:51:16.669372541 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.03125
-  average_build_duration: 191.81156316916488
-  average_build_mttr: -32620
-  average_build_success_rate: 0.9785867237687366
-  average_issue_lifetime: 3065299.4
-  average_pull_files_size: 1.71875
-  average_pull_hoc_size: 20.40625
-  average_pull_lifetime: 81223.92105263157
-  average_pull_rejection_rate: 0.15789473684210525
-  average_release_commits_size: 4.666666666666667
-  average_release_hoc_size: 127.66666666666667
-  average_release_interval: 93855.5
-  average_review_size: 0.0625
-  average_review_time: 115609.66666666667
-  average_reviewers_per_pull: 0.21875
-  average_reviews_per_pull: 0.25
-  average_triage_time: 146944.09649122806
-  composite: 0.738
-  ffact: 139380
-  since: 2024-09-25 19:20:33.818772871 Z
-  what: quality-of-service
-  when: 2024-10-02 19:20:33.818696358 Z
-- _id: 832239
-  _time: 2025-05-21 03:51:47.289230505 Z
-  _version: 0.10.2/0.42.1/
-  average_backlog_size: 0.0625
-  average_build_duration: 253.13869346733668
-  average_build_mttr: -65286
-  average_build_success_rate: 0.985929648241206
-  average_issue_lifetime: 5058593.25
-  average_pull_files_size: 1.7142857142857142
-  average_pull_hoc_size: 35.904761904761905
-  average_pull_lifetime: 86141.58333333333
-  average_pull_rejection_rate: 0.125
-  average_release_commits_size: 3.0
-  average_release_hoc_size: 59.0
-  average_release_interval: 24918.0
-  average_review_size: 0.09523809523809523
-  average_review_time: 113640.83333333333
-  average_reviewers_per_pull: 0.3333333333333333
-  average_reviews_per_pull: 0.38095238095238093
-  average_triage_time: 148244.4867256637
-  composite: 0.73
-  ffact: 139380
-  since: 2024-09-27 19:22:06.427174054 Z
-  what: quality-of-service
-  when: 2024-10-04 19:22:06.427087723 Z
 - _id: 833108
   _time: 2025-05-21 05:38:43.641235226 Z
   _version: 0.10.2/0.42.1/
@@ -150951,13 +149459,6 @@
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 837430
-  _time: 2025-05-21 11:10:11.268965815 Z
-  _version: 0.10.2/0.42.1/
-  latest: 1
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
 - _id: 837431
   _time: 2025-05-21 11:10:45.606079585 Z
   _version: 0.10.2/0.42.1/
@@ -151030,20 +149531,6 @@
   since: 2025-01-16 02:31:58.662955223 Z
   what: quality-of-service
   when: 2025-01-23 02:31:58.662911782 Z
-- _id: 838477
-  _time: 2025-05-21 13:44:53.674330259 Z
-  _version: 0.10.2/0.42.1/
-  latest: 1
-  repository: 974194993
-  what: min-issue-was-found
-  where: github
-- _id: 838615
-  _time: 2025-05-21 13:46:25.656338202 Z
-  _version: 0.10.2/0.42.1/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 838907
   _time: 2025-05-21 14:09:43.262965692 Z
   _version: 0.10.2/0.42.1/
@@ -151060,41 +149547,6 @@
   since: 2025-01-18 03:12:26.383707284 Z
   what: quality-of-service
   when: 2025-01-25 03:12:26.383662972 Z
-- _id: 839598
-  _time: 2025-05-21 15:38:38.683257136 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49876156892
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 839599
-  _time: 2025-05-21 15:38:40.172012986 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49894438487
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 839600
-  _time: 2025-05-21 15:38:41.717961415 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49910554730
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 839601
-  _time: 2025-05-21 15:38:43.138968626 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49932749729
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 839602
-  _time: 2025-05-21 15:38:44.236384934 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49905082703
-  repository: 849726475
-  what: events-were-scanned
-  where: github
 - _id: 839603
   _time: 2025-05-21 15:38:47.761479226 Z
   _version: 0.10.2/0.43.0/
@@ -151127,6 +149579,7 @@
   is_human: 1
   issue: 611
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
   when: 2025-05-21 04:29:26.000000000 Z
@@ -151148,37 +149601,9 @@
   repository: 799177290
   review_comments: 0
   what: pull-was-reviewed
-  when: 2025-05-21 04:29:20.000000000 Z
+  when: &286 2025-05-21 04:29:20.000000000 Z
   where: github
   who: 526301
-- _id: 839606
-  _time: 2025-05-21 15:39:06.330193609 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49958139248
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 839607
-  _time: 2025-05-21 15:39:07.103420482 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49901540277
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 839608
-  _time: 2025-05-21 15:39:08.000162865 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49897230790
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 839609
-  _time: 2025-05-21 15:39:10.068750004 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49894484657
-  repository: 181044958
-  what: events-were-scanned
-  where: github
 - _id: 839620
   _time: 2025-05-21 15:39:23.206662097 Z
   _version: 0.10.2/0.43.0/
@@ -151257,66 +149682,1912 @@
   since: 2025-01-20 03:14:09.683013170 Z
   what: quality-of-service
   when: 2025-01-27 03:14:09.682971171 Z
-- _id: 839768
-  _time: 2025-05-21 15:43:38.130857959 Z
+- _id: 839902
+  _job: 17190
+  _time: 2025-05-21 15:45:28.870808383 Z
+  _version: 0.10.2/0.43.0/
+  area: cost
+  award_price: 1
+  love: 2
+  slaves: torvalds
+  what: pmp
+- _id: 839903
+  _time: 2025-05-21 15:45:28.948167139 Z
+  _version: 0.10.2/0.43.0/
+  area: quality
+  paranoia: 3
+  qos_composite: "(join 15 (below '3 days' average_release_interval) 10 (above 0.95
+    average_build_success_rate) 10 (below '2 days' average_issue_lifetime) 5 (below
+    '12 hours' average_pull_lifetime) 5 (below 8 average_backlog_size))"
+  qos_days: 7
+  qos_interval: 2
+  what: pmp
+- _id: 839904
+  _job: 21231
+  _time: 2025-05-21 15:45:52.949140397 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  anger: 2
+  area: hr
+  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\\\\\'t
+    obey the convention, a penalty is given to the author') (aka (let fee -12) (give
+    fee 'as a basis') 'deduct ${fee} points'))"
+  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
+    the team, the reporter receives a bonus') (aka (let bonus 12) (give bonus 'as
+    a basis') 'award ${bonus} points'))"
+  code_contribution_was_rewarded: |-
+    (award (explain 'When a code contribution is made, the author receives a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in reviews 'the number of reviews provided') (aka (let basis 16) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.05) (let hoc_threshold 200) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold) (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let many_hoc_fee 8) (set penalty_for_hoc (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc 'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${many_hoc_fee} points if more than ${hoc_threshold}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let many_hoc_fee2 16) (let hoc_threshold2 800) (set penalty_for_hoc2 (if (gte hoc hoc_threshold2) (times -1 many_hoc_fee2) 0)) (give penalty_for_hoc2 'for way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${many_hoc_fee2} points if more than ${hoc_threshold2}
+          [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)') (aka (let no_review_fee 16) (set penalty_for_no_review (if (eq reviews 0) (times -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review') 'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k 0.2) (let comments_max -16) (let comments_min -4) (let comments_threshold 8) (set bonus_for_comments (if (gt comments comments_threshold) (times comments (times -1 comments_k)) 0)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (give bonus_for_comments 'for too many (${comments} > ${comments_threshold}) comments that were made during review') 'deduct ${comments_k} points for every comment above ${comments_threshold} made during review, but not more than ${comments_max} points') (aka (let few_hoc_fee 8) (let hoc_needed 20) (set penalty_for_few_hoc (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
+  code_review_was_rewarded: |-
+    (award (explain 'An author of every code review receives a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 12) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 24) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.01) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 16) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 0.25) (let comments_max 8) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 8) (let hoc_needed 16) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
+  days_of_running_balance: 56
+  days_to_reward: 14
+  dud_was_punished: "(award (explain 'When an issue is submitted but then rejected
+    by the team, the reporter receives a penalty') (aka (let fee -16) (give fee 'as
+    a basis') 'deduct ${fee} points'))"
+  enhancement_suggestion_was_rewarded: "(award (explain 'When an enhancement is suggested
+    and accepted by the team, the reporter receives a bonus') (aka (let bonus 12)
+    (give bonus 'as a basis') 'award ${bonus} points'))"
+  long_pull_was_punished: "(award (explain 'Oversized pull requests get penalized')
+    (aka (let fee -8) (give fee 'as a basis') 'deduct ${fee} points'))"
+  master_punish_days: 4
+  published_release_was_rewarded: |-
+    (award (explain 'When a new release is published, everyone who contributed receives a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 24) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 24) (let hoc_min 4) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let max 32) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
+  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
+    default branch, they get a penalty') (aka (let fee -16) (give fee 'as a basis')
+    '${fee} points'))"
+  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
+    0.1 total_hoc_committed)"
+  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
+    who was assigned to it receives a bonus') (in hours 'how many hours it took to
+    resolve the bug') (in self '1 if the bug was reported and resolved by the same
+    person, otherwise zero') (set days (div hours 24)) (aka (let basis 8) (give basis
+    'as a basis') 'award ${basis} points') (aka (let b1 4) (let hours_threshold 24)
+    (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less
+    than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than
+    ${hours_threshold} hours') (aka (let self_fee 16) (set penalty_for_self (if (eq
+    self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug
+    reported by you earlier') 'deduct ${self_fee} points if they resolved the bug
+    earlier reported by themselves') (aka (let day_fee 1.0) (set b2 (times -1 (times
+    days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2
+    'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay,
+    but no more than ${days_fee_max} points') (aka (let max 16) (set over (if (gt
+    (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let
+    min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to
+    give you at least something') 'make sure the reward is not larger than ${max}
+    points and not smaller than ${min} points'))"
+  what: pmp
+- _id: 839905
+  _job: 21231
+  _time: 2025-05-21 15:45:54.803965285 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  author: 2566462
+  comments: 1
+  details: The pull request zerocracy/judges-action#611 with 113 HoC created by @yegorov
+    was reviewed by @yegor256 after 9h2m and 1 comments.
+  hoc: 113
+  is_human: 1
+  issue: 611
+  repository: 799177290
+  review_comments: 0
+  seconds: 32561
+  what: code-was-reviewed
+  when: *286
+  where: github
+  who: 526301
+- _id: 839906
+  _job: 21231
+  _time: 2025-05-21 15:46:00.123404502 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.171875
+  average_build_duration: 250.5456942003515
+  average_build_mttr: -101485
+  average_build_success_rate: 0.9384885764499121
+  average_issue_lifetime: 4071467.4
+  average_pull_files_size: 1.6923076923076923
+  average_pull_hoc_size: 37.15384615384615
+  average_pull_lifetime: 102546.54545454546
+  average_pull_rejection_rate: 0.21212121212121213
+  average_release_commits_size: 3.0
+  average_release_hoc_size: 59.0
+  average_release_interval: 250387.5
+  average_review_size: 0.07692307692307693
+  average_review_time: 101485.71428571429
+  average_reviewers_per_pull: 0.3076923076923077
+  average_reviews_per_pull: 0.34615384615384615
+  average_triage_time: 8136.333333333333
+  composite: 0.72
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-29 20:20:19.602097417 Z
+  what: quality-of-service
+  when: 2024-10-06 20:20:19.601984666 Z
+- _id: 839907
+  _job: 21231
+  _time: 2025-05-21 15:46:00.132465547 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.265625
+  average_build_duration: 309.29133858267716
+  average_build_mttr: -81688
+  average_build_success_rate: 0.8695163104611924
+  average_issue_lifetime: 2081487.2
+  average_pull_files_size: 1.5625
+  average_pull_hoc_size: 37.125
+  average_pull_lifetime: 242659.04166666666
+  average_pull_rejection_rate: 0.3333333333333333
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 153039.0
+  average_review_size: 0.0
+  average_review_time: 23566.666666666668
+  average_reviewers_per_pull: 0.1875
+  average_reviews_per_pull: 0.1875
+  average_triage_time: 8136.333333333333
+  composite: 0.686
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-01 20:25:16.230269222 Z
+  what: quality-of-service
+  when: 2024-10-08 20:25:16.230174535 Z
+- _id: 839908
+  _job: 21231
+  _time: 2025-05-21 15:46:00.141765791 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.421875
+  average_build_duration: 361.8270777479893
+  average_build_mttr: -133821
+  average_build_success_rate: 0.7815013404825737
+  average_issue_lifetime: 1157862.0
+  average_pull_files_size: 1.4
+  average_pull_hoc_size: 34.06666666666667
+  average_pull_lifetime: 260677.36363636365
+  average_pull_rejection_rate: 0.3181818181818182
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 153039.0
+  average_review_size: 0.7333333333333333
+  average_review_time: 43640.333333333336
+  average_reviewers_per_pull: 0.3333333333333333
+  average_reviews_per_pull: 0.9333333333333333
+  average_triage_time: 5725.833333333333
+  composite: 0.679
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-03 21:23:53.446907291 Z
+  what: quality-of-service
+  when: 2024-10-10 21:23:53.446799550 Z
+- _id: 839909
+  _job: 21231
+  _time: 2025-05-21 15:46:00.150885314 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.328125
+  average_build_duration: 336.07085561497325
+  average_build_mttr: -62051
+  average_build_success_rate: 0.7580213903743316
+  average_issue_lifetime: 216476.33333333334
+  average_pull_files_size: 1.3125
+  average_pull_hoc_size: 12.625
+  average_pull_lifetime: 246995.4090909091
+  average_pull_rejection_rate: 0.2727272727272727
+  average_release_commits_size: 3.0
+  average_release_hoc_size: 6.0
+  average_release_interval: 233209.0
+  average_review_size: 0.6875
+  average_review_time: 80220.0
+  average_reviewers_per_pull: 0.1875
+  average_reviews_per_pull: 0.75
+  average_triage_time: 8588.75
+  composite: 0.819
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-05 21:24:16.655317465 Z
+  what: quality-of-service
+  when: 2024-10-12 21:24:16.655228679 Z
+- _id: 839910
+  _job: 21231
+  _time: 2025-05-21 15:46:00.164093460 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.53125
+  average_build_duration: 221.9358108108108
+  average_build_mttr: -34007
+  average_build_success_rate: 0.8445945945945946
+  average_issue_lifetime: 878008.4
+  average_pull_files_size: 1.7666666666666666
+  average_pull_hoc_size: 29.333333333333332
+  average_pull_lifetime: 232272.78125
+  average_pull_rejection_rate: 0.0625
+  average_release_commits_size: 10.0
+  average_release_hoc_size: 198.66666666666666
+  average_release_interval: 43383.57142857143
+  average_review_size: 0.7
+  average_review_time: 154697.0
+  average_reviewers_per_pull: 0.2
+  average_reviews_per_pull: 0.7
+  average_triage_time: 8588.75
+  composite: 0.706
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-07 22:23:52.848226535 Z
+  what: quality-of-service
+  when: 2024-10-14 22:23:52.848126509 Z
+- _id: 839911
+  _job: 21231
+  _time: 2025-05-21 15:46:00.173211105 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.109375
+  average_build_duration: 111.55176540993418
+  average_build_mttr: -10914
+  average_build_success_rate: 0.9557151406343507
+  average_issue_lifetime: 842043.0909090909
+  average_pull_files_size: 1.6304347826086956
+  average_pull_hoc_size: 20.804347826086957
+  average_pull_lifetime: 164400.27083333334
+  average_pull_rejection_rate: 0.041666666666666664
+  average_release_commits_size: 6.75
+  average_release_hoc_size: 44.75
+  average_release_interval: 16647.5
+  average_review_size: 0.21739130434782608
+  average_review_time: 124391.0
+  average_reviewers_per_pull: 0.08695652173913043
+  average_reviews_per_pull: 0.21739130434782608
+  average_triage_time: 0
+  composite: 0.741
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-12 02:44:48.024470428 Z
+  what: quality-of-service
+  when: 2024-10-19 02:44:48.024387423 Z
+- _id: 839912
+  _job: 21231
+  _time: 2025-05-21 15:46:00.186382412 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.109375
+  average_build_duration: 145.0529634300126
+  average_build_mttr: -18197
+  average_build_success_rate: 0.9810844892812106
+  average_issue_lifetime: 326080.0
+  average_pull_files_size: 1.35
+  average_pull_hoc_size: 10.4
+  average_pull_lifetime: 29147.45
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 6.75
+  average_release_hoc_size: 44.75
+  average_release_interval: 16647.5
+  average_review_size: 0.0
+  average_review_time: 19608.0
+  average_reviewers_per_pull: 0.05
+  average_reviews_per_pull: 0.05
+  average_triage_time: 0
+  composite: 0.896
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-14 02:47:33.456488507 Z
+  what: quality-of-service
+  when: 2024-10-21 02:47:33.456418917 Z
+- _id: 839913
+  _job: 21231
+  _time: 2025-05-21 15:46:00.199514805 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 299.32978723404256
+  average_build_mttr: 0
+  average_build_success_rate: 0.9964539007092199
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.125
+  average_pull_hoc_size: 11.75
+  average_pull_lifetime: 768780.1
+  average_pull_rejection_rate: 0.2
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.228
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-16 02:51:35.162782208 Z
+  what: quality-of-service
+  when: 2024-10-23 02:51:35.162667263 Z
+- _id: 839914
+  _job: 21231
+  _time: 2025-05-21 15:46:00.208620380 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.109375
+  average_build_duration: 421.4824120603015
+  average_build_mttr: -15542
+  average_build_success_rate: 0.9899497487437185
+  average_issue_lifetime: 4482293.5
+  average_pull_files_size: 1.8
+  average_pull_hoc_size: 9.6
+  average_pull_lifetime: 1126987.142857143
+  average_pull_rejection_rate: 0.2857142857142857
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 640021.0
+  average_reviewers_per_pull: 0.2
+  average_reviews_per_pull: 0.2
+  average_triage_time: 3.0
+  composite: 0.346
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-18 06:27:12.111374388 Z
+  what: quality-of-service
+  when: 2024-10-25 06:27:12.111315277 Z
+- _id: 839915
+  _job: 21231
+  _time: 2025-05-21 15:46:00.217748033 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.203125
+  average_build_duration: 344.98046875
+  average_build_mttr: -186464
+  average_build_success_rate: 0.98828125
+  average_issue_lifetime: 4482293.5
+  average_pull_files_size: 1.8571428571428572
+  average_pull_hoc_size: 9.142857142857142
+  average_pull_lifetime: 877064.5555555555
+  average_pull_rejection_rate: 0.2222222222222222
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 640021.0
+  average_reviewers_per_pull: 0.14285714285714285
+  average_reviews_per_pull: 0.14285714285714285
+  average_triage_time: 3.0
+  composite: 0.347
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-20 06:29:40.346519575 Z
+  what: quality-of-service
+  when: 2024-10-27 06:29:40.346449293 Z
+- _id: 839916
+  _job: 21231
+  _time: 2025-05-21 15:46:00.226561774 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.296875
+  average_build_duration: 388.5183486238532
+  average_build_mttr: -15542
+  average_build_success_rate: 0.9862385321100917
+  average_issue_lifetime: 4482293.5
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 10.4
+  average_pull_lifetime: 129567.0
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 640021.0
+  average_reviewers_per_pull: 0.2
+  average_reviews_per_pull: 0.2
+  average_triage_time: 3.0
+  composite: 0.379
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-22 10:27:58.006007607 Z
+  what: quality-of-service
+  when: 2024-10-29 10:27:58.005918891 Z
+- _id: 839917
+  _job: 21231
+  _time: 2025-05-21 15:46:00.239836503 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.25
+  average_build_duration: 282.7605177993527
+  average_build_mttr: -237023
+  average_build_success_rate: 0.9838187702265372
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 9.25
+  average_pull_lifetime: 57066.125
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.417
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-24 14:32:35.610944028 Z
+  what: quality-of-service
+  when: 2024-10-31 14:32:35.610856976 Z
+- _id: 839918
+  _job: 21231
+  _time: 2025-05-21 15:46:00.249290211 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 346.3503937007874
+  average_build_mttr: -42500
+  average_build_success_rate: 0.984251968503937
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 9.666666666666666
+  average_pull_lifetime: 75309.66666666667
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.286
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-26 18:27:14.662913069 Z
+  what: quality-of-service
+  when: 2024-11-02 18:27:14.662832488 Z
+- _id: 839919
+  _job: 21231
+  _time: 2025-05-21 15:46:00.258517660 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 272.1899641577061
+  average_build_mttr: -78118
+  average_build_success_rate: 0.9032258064516129
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 9.666666666666666
+  average_pull_lifetime: 75309.66666666667
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.275
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-28 18:29:16.565980719 Z
+  what: quality-of-service
+  when: 2024-11-04 18:29:16.565917240 Z
+- _id: 839920
+  _job: 21231
+  _time: 2025-05-21 15:46:00.267713043 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 357.7521551724138
+  average_build_mttr: -270813
+  average_build_success_rate: 0.9008620689655172
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.5
+  average_pull_hoc_size: 5.833333333333333
+  average_pull_lifetime: 66050.83333333333
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.283
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-10-30 18:29:49.105893658 Z
+  what: quality-of-service
+  when: 2024-11-06 18:29:49.105829518 Z
+- _id: 839921
+  _job: 21231
+  _time: 2025-05-21 15:46:00.281193185 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 714.3213367609254
+  average_build_mttr: -147717
+  average_build_success_rate: 0.8740359897172236
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.0
+  average_pull_hoc_size: 2.0
+  average_pull_lifetime: 56792.0
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.289
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-01 18:32:39.675784410 Z
+  what: quality-of-service
+  when: 2024-11-08 18:32:39.675695002 Z
+- _id: 839922
+  _job: 21231
+  _time: 2025-05-21 15:46:00.290959502 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 694.2505446623094
+  average_build_mttr: -94466
+  average_build_success_rate: 0.9302832244008714
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.3333333333333333
+  average_pull_hoc_size: 16.444444444444443
+  average_pull_lifetime: 38471.88888888889
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.329
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-03 22:25:40.307046468 Z
+  what: quality-of-service
+  when: 2024-11-10 22:25:40.306959005 Z
+- _id: 839923
+  _job: 21231
+  _time: 2025-05-21 15:46:00.300215523 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 751.9975845410628
+  average_build_mttr: -99957
+  average_build_success_rate: 0.9347826086956522
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.7142857142857142
+  average_pull_hoc_size: 22.0
+  average_pull_lifetime: 676763.3076923077
+  average_pull_rejection_rate: 0.46153846153846156
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.226
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-05 22:27:43.416441908 Z
+  what: quality-of-service
+  when: 2024-11-12 22:27:43.416371837 Z
+- _id: 839924
+  _job: 21231
+  _time: 2025-05-21 15:46:00.309572670 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 297.5943238731219
+  average_build_mttr: -7167
+  average_build_success_rate: 0.9415692821368948
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.3571428571428572
+  average_pull_hoc_size: 7.142857142857143
+  average_pull_lifetime: 719835.8888888889
+  average_pull_rejection_rate: 0.2222222222222222
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.227
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-10 03:12:58.019181123 Z
+  what: quality-of-service
+  when: 2024-11-17 03:12:58.019074394 Z
+- _id: 839925
+  _job: 21231
+  _time: 2025-05-21 15:46:00.318797458 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 205.0529531568228
+  average_build_mttr: 6
+  average_build_success_rate: 0.9613034623217923
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.3
+  average_pull_hoc_size: 8.2
+  average_pull_lifetime: 688522.3636363636
+  average_pull_rejection_rate: 0.09090909090909091
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.229
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-12 06:28:53.812280222 Z
+  what: quality-of-service
+  when: 2024-11-19 06:28:53.812205081 Z
+- _id: 839926
+  _job: 21231
+  _time: 2025-05-21 15:46:00.327955187 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 285.83734939759034
+  average_build_mttr: -40286
+  average_build_success_rate: 0.9698795180722891
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.0
+  average_pull_hoc_size: 6.666666666666667
+  average_pull_lifetime: 1080771.857142857
+  average_pull_rejection_rate: 0.14285714285714285
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.227
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-14 06:34:00.122932975 Z
+  what: quality-of-service
+  when: 2024-11-21 06:34:00.122846213 Z
+- _id: 839927
+  _job: 21231
+  _time: 2025-05-21 15:46:00.337975599 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 244.01078167115904
+  average_build_mttr: -40286
+  average_build_success_rate: 0.9838274932614556
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 6.0
+  average_pull_lifetime: 1936.1666666666667
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.333
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-16 06:56:39.634797432 Z
+  what: quality-of-service
+  when: 2024-11-23 06:56:39.634703617 Z
+- _id: 839928
+  _job: 21231
+  _time: 2025-05-21 15:46:00.347338555 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 253.68595041322314
+  average_build_mttr: -40286
+  average_build_success_rate: 0.9834710743801653
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 6.0
+  average_pull_lifetime: 1936.1666666666667
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.333
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-18 10:29:35.114244712 Z
+  what: quality-of-service
+  when: 2024-11-25 10:29:35.114174962 Z
+- _id: 839929
+  _job: 21231
+  _time: 2025-05-21 15:46:00.356963107 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 248.9162162162162
+  average_build_mttr: -408463
+  average_build_success_rate: 0.9918918918918919
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 9.454545454545455
+  average_pull_lifetime: 2518.0
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.333
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-20 10:32:44.490762027 Z
+  what: quality-of-service
+  when: 2024-11-27 10:32:44.490688350 Z
+- _id: 839930
+  _job: 21231
+  _time: 2025-05-21 15:46:00.366739999 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 296.63139931740614
+  average_build_mttr: 0
+  average_build_success_rate: 0.9180887372013652
+  average_issue_lifetime: 11969774.0
+  average_pull_files_size: 1.7142857142857142
+  average_pull_hoc_size: 10.285714285714286
+  average_pull_lifetime: 204477.375
+  average_pull_rejection_rate: 0.125
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.241
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-22 10:34:09.605769625 Z
+  what: quality-of-service
+  when: 2024-11-29 10:34:09.605683935 Z
+- _id: 839931
+  _job: 21231
+  _time: 2025-05-21 15:46:00.376569515 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.046875
+  average_build_duration: 284.0118343195266
+  average_build_mttr: 0
+  average_build_success_rate: 0.9615384615384616
+  average_issue_lifetime: 7582238.0
+  average_pull_files_size: 1.6
+  average_pull_hoc_size: 20.9
+  average_pull_lifetime: 351514.36363636365
+  average_pull_rejection_rate: 0.09090909090909091
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 2197769.0
+  average_reviewers_per_pull: 0.1
+  average_reviews_per_pull: 0.1
+  average_triage_time: 3.0
+  composite: 0.352
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-24 10:53:40.859121176 Z
+  what: quality-of-service
+  when: 2024-12-01 10:53:40.859036507 Z
+- _id: 839932
+  _job: 21231
+  _time: 2025-05-21 15:46:00.386799441 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.109375
+  average_build_duration: 263.08396946564886
+  average_build_mttr: 0
+  average_build_success_rate: 0.9618320610687023
+  average_issue_lifetime: 7582238.0
+  average_pull_files_size: 1.6
+  average_pull_hoc_size: 21.1
+  average_pull_lifetime: 352272.2727272727
+  average_pull_rejection_rate: 0.09090909090909091
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 2197769.0
+  average_reviewers_per_pull: 0.1
+  average_reviews_per_pull: 0.1
+  average_triage_time: 3.0
+  composite: 0.352
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-26 14:38:06.276276627 Z
+  what: quality-of-service
+  when: 2024-12-03 14:38:06.276180888 Z
+- _id: 839933
+  _job: 21231
+  _time: 2025-05-21 15:46:00.396123685 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.234375
+  average_build_duration: 182.03625377643505
+  average_build_mttr: -4888
+  average_build_success_rate: 0.9259818731117825
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.9
+  average_pull_hoc_size: 35.8
+  average_pull_lifetime: 97918.04761904762
+  average_pull_rejection_rate: 0.047619047619047616
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.35
+  average_review_time: 1238773.0
+  average_reviewers_per_pull: 0.1
+  average_reviews_per_pull: 0.35
+  average_triage_time: 6.0
+  composite: 0.377
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-11-30 18:31:11.527045299 Z
+  what: quality-of-service
+  when: 2024-12-07 18:31:11.526976050 Z
+- _id: 839934
+  _job: 21231
+  _time: 2025-05-21 15:46:00.405353412 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 190.98673300165837
+  average_build_mttr: -4888
+  average_build_success_rate: 0.9220563847429519
+  average_issue_lifetime: 0
+  average_pull_files_size: 1.9473684210526316
+  average_pull_hoc_size: 37.578947368421055
+  average_pull_lifetime: 101589.9
+  average_pull_rejection_rate: 0.05
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.3684210526315789
+  average_review_time: 1238773.0
+  average_reviewers_per_pull: 0.10526315789473684
+  average_reviews_per_pull: 0.3684210526315789
+  average_triage_time: 0
+  composite: 0.263
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-12-02 18:31:31.628481957 Z
+  what: quality-of-service
+  when: 2024-12-09 18:31:31.628400083 Z
+- _id: 839935
+  _job: 21231
+  _time: 2025-05-21 15:46:00.414856326 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 698.1935483870968
+  average_build_mttr: 0
+  average_build_success_rate: 0.9274193548387096
+  average_issue_lifetime: 0
+  average_pull_files_size: 0
+  average_pull_hoc_size: 0
+  average_pull_lifetime: 0
+  average_pull_rejection_rate: 0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0
+  average_review_time: 0
+  average_reviewers_per_pull: 0
+  average_reviews_per_pull: 0
+  average_triage_time: 0
+  composite: 0.217
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-12-04 22:34:45.543849345 Z
+  what: quality-of-service
+  when: 2024-12-11 22:34:45.543760849 Z
+- _id: 839936
+  _job: 21231
+  _time: 2025-05-21 15:46:00.425493492 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 338.06920415224914
+  average_build_mttr: 0
+  average_build_success_rate: 0.9653979238754326
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 6.0
+  average_pull_lifetime: 1294.0
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.333
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-12-06 22:34:57.693419795 Z
+  what: quality-of-service
+  when: 2024-12-13 22:34:57.693360134 Z
+- _id: 839937
+  _job: 21231
+  _time: 2025-05-21 15:46:00.434484875 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 330.20622568093387
+  average_build_mttr: 0
+  average_build_success_rate: 0.9610894941634242
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 6.0
+  average_pull_lifetime: 1294.0
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.333
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-12-09 03:00:37.762548991 Z
+  what: quality-of-service
+  when: 2024-12-16 03:00:37.762456147 Z
+- _id: 839938
+  _job: 21231
+  _time: 2025-05-21 15:46:00.443495683 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0
+  average_build_duration: 329.94594594594594
+  average_build_mttr: 0
+  average_build_success_rate: 0.9613899613899614
+  average_issue_lifetime: 0
+  average_pull_files_size: 2.0
+  average_pull_hoc_size: 6.0
+  average_pull_lifetime: 1294.0
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 0
+  average_release_hoc_size: 0
+  average_release_interval: 0
+  average_review_size: 0.0
+  average_review_time: 0
+  average_reviewers_per_pull: 0.0
+  average_reviews_per_pull: 0.0
+  average_triage_time: 0
+  composite: 0.333
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-12-11 06:30:58.623459051 Z
+  what: quality-of-service
+  when: 2024-12-18 06:30:58.623381857 Z
+- _id: 839939
+  _job: 21231
+  _time: 2025-05-21 15:46:00.452409915 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 11
+  average_build_success_rate: 0.955565142364107
+  average_forks: 1
+  average_issue_lifetime: 184374.2962962963
+  average_pull_lifetime: 34508.2972972973
+  average_release_interval: 24548.44210526316
+  average_stars: 4
+  composite: 0.875
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-07-24 06:07:46.877340169 Z
+  what: quality-of-service
+  when: 2024-07-31 06:07:46.877340169 Z
+- _id: 839940
+  _job: 21231
+  _time: 2025-05-21 15:46:00.460674978 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 12
+  average_build_success_rate: 0.9447513812154696
+  average_forks: 1
+  average_issue_lifetime: 178852.6739130435
+  average_pull_lifetime: 33114.51612903226
+  average_release_interval: 26562.620689655174
+  average_stars: 4
+  composite: 0.88
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-07-27 06:09:26.746166044 Z
+  what: quality-of-service
+  when: 2024-08-03 06:09:26.746166044 Z
+- _id: 839941
+  _job: 21231
+  _time: 2025-05-21 15:46:00.468850905 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 14
+  average_build_success_rate: 0.9303011160244262
+  average_issue_lifetime: 196309.75531914894
+  average_pull_lifetime: 36463.721649484534
+  average_pull_rejection_rate: 0.10309278350515463
+  average_release_commits_size: 10.35958904109589
+  average_release_hoc_size: 226.6986301369863
+  average_release_interval: 29211.585365853658
+  composite: 0.858
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-07-09 06:10:15.413042685 Z
+  what: quality-of-service
+  when: 2024-08-06 06:10:17.104093048 Z
+- _id: 839942
+  _job: 21231
+  _time: 2025-05-21 15:46:00.477461100 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 14
+  average_build_success_rate: 0.933974358974359
+  average_issue_lifetime: 167066.70103092783
+  average_pull_lifetime: 31066.57219251337
+  average_pull_rejection_rate: 0.10160427807486631
+  average_release_interval: 29792.151898734177
+  average_triage_time: 90630.29611650485
+  composite: 0.885
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-07-12 06:10:51.318850624 Z
+  what: quality-of-service
+  when: 2024-08-09 06:10:53.229687656 Z
+- _id: 839943
+  _job: 21231
+  _time: 2025-05-21 15:46:00.485729818 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 15
+  average_build_success_rate: 0.9560025141420491
+  average_issue_lifetime: 131477.96153846153
+  average_pull_lifetime: 65477.89189189189
+  average_pull_rejection_rate: 0.02702702702702703
+  average_release_commits_size: 10.893023255813954
+  average_release_hoc_size: 253.97674418604652
+  average_release_interval: 34676.470588235294
+  composite: 0.851
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-04 06:12:28.836930382 Z
+  what: quality-of-service
+  when: 2024-08-11 06:12:30.927228410 Z
+- _id: 839944
+  _job: 21231
+  _time: 2025-05-21 15:46:00.494374002 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 12
+  average_build_duration: 76.58679339669835
+  average_build_success_rate: 0.9779889944972486
+  average_issue_lifetime: 63861.76666666667
+  average_pull_lifetime: 33788.92307692308
+  average_pull_rejection_rate: 0.02564102564102564
+  average_release_interval: 23033.772727272728
+  average_triage_time: 119822.77464788733
+  composite: 0.889
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-06 06:16:35.941357469 Z
+  what: quality-of-service
+  when: 2024-08-13 06:16:35.941276478 Z
+- _id: 839945
+  _job: 21231
+  _time: 2025-05-21 15:46:00.502748107 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 1.3392857142857142
+  average_build_duration: 62.35557397430584
+  average_build_success_rate: 0.9697472026523001
+  average_issue_lifetime: 38059.78125
+  average_pull_lifetime: 18823.5
+  average_pull_rejection_rate: 0.05555555555555555
+  average_release_commits_size: 11.132352941176471
+  average_release_hoc_size: 259.1372549019608
+  average_release_interval: 21105.76
+  composite: 1.0
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-08 06:19:57.057645313 Z
+  what: quality-of-service
+  when: 2024-08-15 06:19:57.057562658 Z
+- _id: 839946
+  _job: 21231
+  _time: 2025-05-21 15:46:00.511124014 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.9821428571428571
+  average_build_duration: 58.62807295796986
+  average_build_success_rate: 0.9758128469468675
+  average_issue_lifetime: 572293.0256410256
+  average_pull_lifetime: 22568.830769230768
+  average_pull_rejection_rate: 0.03076923076923077
+  average_release_interval: 21596.08
+  average_triage_time: 123104.91304347826
+  composite: 0.845
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-10 07:11:47.400287667 Z
+  what: quality-of-service
+  when: 2024-08-17 07:11:47.400207638 Z
+- _id: 839947
+  _job: 21231
+  _time: 2025-05-21 15:46:00.534437823 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.546875
+  average_build_duration: 85.7258855585831
+  average_build_success_rate: 0.9629427792915531
+  average_issue_lifetime: 1203893.64
+  average_pull_lifetime: 40648.583333333336
+  average_pull_rejection_rate: 0.125
+  average_release_interval: 40035.166666666664
+  average_triage_time: 127605.9022556391
+  composite: 0.81
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-14 07:12:40.759700116 Z
+  what: quality-of-service
+  when: 2024-08-21 07:12:40.759647748 Z
+- _id: 839948
+  _job: 21231
+  _time: 2025-05-21 15:46:00.548783244 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.859375
+  average_build_duration: 95.91449194891727
+  average_build_success_rate: 0.9622431982232094
+  average_issue_lifetime: 876933.125
+  average_pull_files_size: 1.4761904761904763
+  average_pull_hoc_size: 34.04761904761905
+  average_pull_lifetime: 73891.4693877551
+  average_pull_rejection_rate: 0.14285714285714285
+  average_release_interval: 46366.90909090909
+  average_triage_time: 127605.9022556391
+  composite: 0.775
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-16 07:14:31.747011705 Z
+  what: quality-of-service
+  when: 2024-08-23 07:14:31.746937255 Z
+- _id: 839949
+  _job: 21231
+  _time: 2025-05-21 15:46:00.561436712 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.53125
+  average_build_duration: 125.36173633440515
+  average_build_success_rate: 0.9622186495176849
+  average_issue_lifetime: 536482.3
+  average_pull_files_size: 1.48
+  average_pull_hoc_size: 35.12
+  average_pull_lifetime: 89544.66666666667
+  average_pull_rejection_rate: 0.16666666666666666
+  average_release_commits_size: 11.00578034682081
+  average_release_hoc_size: 274.4971098265896
+  average_release_interval: 41358.444444444445
+  composite: 0.792
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-18 08:14:01.420005718 Z
+  what: quality-of-service
+  when: 2024-08-25 08:14:01.419939284 Z
+- _id: 839950
+  _job: 21231
+  _time: 2025-05-21 15:46:00.570775762 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.609375
+  average_build_duration: 129.38981702466188
+  average_build_success_rate: 0.9753381066030231
+  average_issue_lifetime: 683290.0
+  average_pull_files_size: 1.5357142857142858
+  average_pull_hoc_size: 31.714285714285715
+  average_pull_lifetime: 86070.23333333334
+  average_pull_rejection_rate: 0.06666666666666667
+  average_release_interval: 62165.42857142857
+  average_triage_time: 133168.1496062992
+  composite: 0.779
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-20 09:14:18.353591796 Z
+  what: quality-of-service
+  when: 2024-08-27 09:14:18.353533397 Z
+- _id: 839951
+  _job: 21231
+  _time: 2025-05-21 15:46:00.579674079 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.640625
+  average_build_duration: 137.90610756608933
+  average_build_success_rate: 0.96718322698268
+  average_issue_lifetime: 999749.0
+  average_pull_files_size: 1.65
+  average_pull_hoc_size: 32.5
+  average_pull_lifetime: 27879.55
+  average_pull_rejection_rate: 0.0
+  average_release_interval: 113751.6
+  average_triage_time: 135277.728
+  composite: 0.816
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-22 09:22:40.131232105 Z
+  what: quality-of-service
+  when: 2024-08-29 09:22:40.131132938 Z
+- _id: 839952
+  _job: 21231
+  _time: 2025-05-21 15:46:00.588988940 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.203125
+  average_build_duration: 125.84870848708488
+  average_build_success_rate: 0.9726937269372694
+  average_issue_lifetime: 1294888.2222222222
+  average_pull_files_size: 3.3548387096774195
+  average_pull_hoc_size: 112.0
+  average_pull_lifetime: 44570.74193548387
+  average_pull_rejection_rate: 0.0
+  average_release_interval: 84240.4
+  average_triage_time: 136368.67741935485
+  composite: 0.804
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-24 10:13:42.266318356 Z
+  what: quality-of-service
+  when: 2024-08-31 10:13:42.266226074 Z
+- _id: 839953
+  _job: 21231
+  _time: 2025-05-21 15:46:00.597332343 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.328125
+  average_build_duration: 141.13235294117646
+  average_build_success_rate: 0.9757785467128027
+  average_issue_lifetime: 1661318.6666666667
+  average_pull_files_size: 3.642857142857143
+  average_pull_hoc_size: 112.53571428571429
+  average_pull_lifetime: 41012.96428571428
+  average_pull_rejection_rate: 0.0
+  average_release_commits_size: 11.24074074074074
+  average_release_hoc_size: 283.24074074074076
+  average_release_interval: 78021.0
+  average_triage_time: 161017.47154471546
+  composite: 0.801
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-26 10:16:42.552046116 Z
+  what: quality-of-service
+  when: 2024-09-02 10:16:42.551980973 Z
+- _id: 839954
+  _job: 21231
+  _time: 2025-05-21 15:46:00.605647240 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.34375
+  average_build_duration: 104.1822966507177
+  average_build_success_rate: 0.9607655502392345
+  average_issue_lifetime: 1883086.4545454546
+  average_pull_lifetime: 63093.6
+  average_pull_rejection_rate: 0.16022099447513813
+  average_release_interval: 176354.0
+  composite: 0.763
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-28 10:24:27.102338424 Z
+  what: quality-of-service
+  when: 2024-09-04 10:24:27.102265368 Z
+- _id: 839955
+  _job: 21231
+  _time: 2025-05-21 15:46:00.613719244 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.4375
+  average_build_duration: 110.23160892263883
+  average_build_mttr: -29370
+  average_build_success_rate: 0.9235880398671097
+  average_issue_lifetime: 2119327.875
+  average_pull_files_size: 2.188679245283019
+  average_pull_hoc_size: 47.490566037735846
+  average_pull_lifetime: 47699.87719298246
+  average_pull_rejection_rate: 0.07017543859649122
+  average_release_commits_size: 11.171974522292993
+  average_release_hoc_size: 285.43949044585986
+  average_release_interval: 79915.0
+  composite: 0.779
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-08-30 10:26:56.500122047 Z
+  what: quality-of-service
+  when: 2024-09-06 10:26:56.500045675 Z
+- _id: 839956
+  _job: 21231
+  _time: 2025-05-21 15:46:00.623133678 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.125
+  average_build_duration: 118.6546146527117
+  average_build_mttr: -64861
+  average_build_success_rate: 0.8986679352997146
+  average_issue_lifetime: 1912172.7777777778
+  average_pull_files_size: 2.1551724137931036
+  average_pull_hoc_size: 44.86206896551724
+  average_pull_lifetime: 64144.88888888889
+  average_pull_rejection_rate: 0.07936507936507936
+  average_release_commits_size: 11.171974522292993
+  average_release_hoc_size: 285.43949044585986
+  average_release_interval: 79915.0
+  composite: 0.75
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-01 11:18:07.844074210 Z
+  what: quality-of-service
+  when: 2024-09-08 11:18:07.843994150 Z
+- _id: 839957
+  _job: 21231
+  _time: 2025-05-21 15:46:00.631343214 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.109375
+  average_build_duration: 132.5934914506343
+  average_build_mttr: -51246
+  average_build_success_rate: 0.8119139547710976
+  average_issue_lifetime: 1492187.857142857
+  average_pull_files_size: 1.8571428571428572
+  average_pull_hoc_size: 25.714285714285715
+  average_pull_lifetime: 88336.86486486487
+  average_pull_rejection_rate: 0.05405405405405406
+  average_release_interval: 79915.0
+  average_triage_time: 138221.52459016393
+  composite: 0.714
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-03 12:17:52.275465535 Z
+  what: quality-of-service
+  when: 2024-09-10 12:17:52.275365258 Z
+- _id: 839958
+  _job: 21231
+  _time: 2025-05-21 15:46:00.641715062 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.140625
+  average_build_duration: 168.45214521452147
+  average_build_mttr: -26119
+  average_build_success_rate: 0.7227722772277227
+  average_issue_lifetime: 1876652.75
+  average_pull_files_size: 1.8666666666666667
+  average_pull_hoc_size: 28.533333333333335
+  average_pull_lifetime: 106665.8125
+  average_pull_rejection_rate: 0.0625
+  average_release_commits_size: 11.129032258064516
+  average_release_hoc_size: 286.3806451612903
+  average_release_interval: 0
+  composite: 0.346
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-05 12:21:58.284422720 Z
+  what: quality-of-service
+  when: 2024-09-12 12:21:58.284340747 Z
+- _id: 839959
+  _job: 21231
+  _time: 2025-05-21 15:46:00.650147343 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.109375
+  average_build_duration: 178.09084457061746
+  average_build_mttr: -19540
+  average_build_success_rate: 0.7551454932576295
+  average_issue_lifetime: 2448758.8333333335
+  average_pull_files_size: 2.1538461538461537
+  average_pull_hoc_size: 33.76923076923077
+  average_pull_lifetime: 151117.93333333332
+  average_pull_rejection_rate: 0.13333333333333333
+  average_release_interval: 0
+  average_triage_time: 139363.85123966943
+  composite: 0.335
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-07 13:20:07.977031350 Z
+  what: quality-of-service
+  when: 2024-09-14 13:20:07.976951681 Z
+- _id: 839960
+  _job: 21231
+  _time: 2025-05-21 15:46:00.659786031 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.140625
+  average_build_duration: 165.24365482233503
+  average_build_mttr: -35454
+  average_build_success_rate: 0.7988578680203046
+  average_issue_lifetime: 3006126.2
+  average_pull_files_size: 1.7647058823529411
+  average_pull_hoc_size: 30.941176470588236
+  average_pull_lifetime: 88135.83333333333
+  average_pull_rejection_rate: 0.05555555555555555
+  average_release_interval: 97043.0
+  average_triage_time: 139363.85123966943
+  composite: 0.699
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-09 13:24:03.373484569 Z
+  what: quality-of-service
+  when: 2024-09-16 13:24:03.373422824 Z
+- _id: 839961
+  _job: 21231
+  _time: 2025-05-21 15:46:00.668504044 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.078125
+  average_build_duration: 155.56179066834804
+  average_build_mttr: -47651
+  average_build_success_rate: 0.8701134930643127
+  average_issue_lifetime: 3140672.6
+  average_pull_files_size: 1.5714285714285714
+  average_pull_hoc_size: 27.892857142857142
+  average_pull_lifetime: 59106.6129032258
+  average_pull_rejection_rate: 0.0967741935483871
+  average_release_commits_size: 11.181818181818182
+  average_release_hoc_size: 287.61038961038963
+  average_release_interval: 105105.66666666667
+  composite: 0.741
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-11 14:17:27.298787465 Z
+  what: quality-of-service
+  when: 2024-09-18 14:17:27.298703598 Z
+- _id: 839962
+  _job: 21231
+  _time: 2025-05-21 15:46:00.677924140 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.140625
+  average_build_duration: 151.08866371120962
+  average_build_mttr: -56404
+  average_build_success_rate: 0.798606713109563
+  average_issue_lifetime: 3088805.6666666665
+  average_pull_files_size: 1.875
+  average_pull_hoc_size: 38.8125
+  average_pull_lifetime: 40006.0
+  average_pull_rejection_rate: 0.1111111111111111
+  average_release_commits_size: 11.111842105263158
+  average_release_hoc_size: 286.73026315789474
+  average_release_interval: 52589.0
+  composite: 0.755
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-15 15:17:09.482454927 Z
+  what: quality-of-service
+  when: 2024-09-22 15:17:09.482383403 Z
+- _id: 839963
+  _job: 21231
+  _time: 2025-05-21 15:46:00.686590505 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.234375
+  average_build_duration: 154.8364698247891
+  average_build_mttr: -14626
+  average_build_success_rate: 0.8260869565217391
+  average_issue_lifetime: 2783068.6666666665
+  average_pull_files_size: 1.72
+  average_pull_hoc_size: 29.84
+  average_pull_lifetime: 200777.5357142857
+  average_pull_rejection_rate: 0.10714285714285714
+  average_release_commits_size: 5.0
+  average_release_hoc_size: 113.0
+  average_release_interval: 143429.25
+  average_review_size: 1.0
+  average_review_time: 52532.0
+  average_reviewers_per_pull: 0.32
+  average_reviews_per_pull: 0.8
+  average_triage_time: 141706.10084033615
+  composite: 0.675
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-17 16:22:08.919306831 Z
+  what: quality-of-service
+  when: 2024-09-24 16:22:08.919214308 Z
+- _id: 839964
+  _job: 21231
+  _time: 2025-05-21 15:46:00.695555652 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.28125
+  average_build_duration: 154.2012401352875
+  average_build_mttr: -24335
+  average_build_success_rate: 0.9368658399098083
+  average_issue_lifetime: 2942518.5555555555
+  average_pull_files_size: 1.6153846153846154
+  average_pull_hoc_size: 23.384615384615383
+  average_pull_lifetime: 162128.0
+  average_pull_rejection_rate: 0.1702127659574468
+  average_release_commits_size: 6.8
+  average_release_hoc_size: 149.0
+  average_release_interval: 40214.0
+  average_review_size: 0.5384615384615384
+  average_review_time: 46451.0
+  average_reviewers_per_pull: 0.2564102564102564
+  average_reviews_per_pull: 0.48717948717948717
+  average_triage_time: 141706.10084033615
+  composite: 0.706
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-19 16:22:35.346465733 Z
+  what: quality-of-service
+  when: 2024-09-26 16:22:35.346393717 Z
+- _id: 839965
+  _job: 21231
+  _time: 2025-05-21 15:46:00.705327119 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.390625
+  average_build_duration: 164.63888888888889
+  average_build_mttr: -22398
+  average_build_success_rate: 0.966183574879227
+  average_issue_lifetime: 2426900.111111111
+  average_pull_files_size: 1.65
+  average_pull_hoc_size: 17.2
+  average_pull_lifetime: 157709.58333333334
+  average_pull_rejection_rate: 0.16666666666666666
+  average_release_commits_size: 6.8
+  average_release_hoc_size: 149.0
+  average_release_interval: 40214.0
+  average_review_size: 0.35
+  average_review_time: 46028.5
+  average_reviewers_per_pull: 0.225
+  average_reviews_per_pull: 0.425
+  average_triage_time: 141706.10084033615
+  composite: 0.713
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-21 17:20:15.567540265 Z
+  what: quality-of-service
+  when: 2024-09-28 17:20:15.567459834 Z
+- _id: 839966
+  _job: 21231
+  _time: 2025-05-21 15:46:00.714521068 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.484375
+  average_build_duration: 174.02825552825553
+  average_build_mttr: -12610
+  average_build_success_rate: 0.9692874692874693
+  average_issue_lifetime: 2548903.375
+  average_pull_files_size: 1.6285714285714286
+  average_pull_hoc_size: 14.885714285714286
+  average_pull_lifetime: 72642.23809523809
+  average_pull_rejection_rate: 0.16666666666666666
+  average_release_commits_size: 4.0
+  average_release_hoc_size: 84.83333333333333
+  average_release_interval: 70946.5
+  average_review_size: 0.0
+  average_review_time: 82724.33333333333
+  average_reviewers_per_pull: 0.2571428571428571
+  average_reviews_per_pull: 0.2571428571428571
+  average_triage_time: 144128.36752136753
+  composite: 0.748
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-23 18:23:40.946166302 Z
+  what: quality-of-service
+  when: 2024-09-30 18:23:40.946081373 Z
+- _id: 839967
+  _job: 21231
+  _time: 2025-05-21 15:46:00.723497380 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.03125
+  average_build_duration: 191.81156316916488
+  average_build_mttr: -32620
+  average_build_success_rate: 0.9785867237687366
+  average_issue_lifetime: 3065299.4
+  average_pull_files_size: 1.71875
+  average_pull_hoc_size: 20.40625
+  average_pull_lifetime: 81223.92105263157
+  average_pull_rejection_rate: 0.15789473684210525
+  average_release_commits_size: 4.666666666666667
+  average_release_hoc_size: 127.66666666666667
+  average_release_interval: 93855.5
+  average_review_size: 0.0625
+  average_review_time: 115609.66666666667
+  average_reviewers_per_pull: 0.21875
+  average_reviews_per_pull: 0.25
+  average_triage_time: 146944.09649122806
+  composite: 0.738
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-25 19:20:33.818772871 Z
+  what: quality-of-service
+  when: 2024-10-02 19:20:33.818696358 Z
+- _id: 839968
+  _job: 21231
+  _time: 2025-05-21 15:46:00.732492110 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  average_backlog_size: 0.0625
+  average_build_duration: 253.13869346733668
+  average_build_mttr: -65286
+  average_build_success_rate: 0.985929648241206
+  average_issue_lifetime: 5058593.25
+  average_pull_files_size: 1.7142857142857142
+  average_pull_hoc_size: 35.904761904761905
+  average_pull_lifetime: 86141.58333333333
+  average_pull_rejection_rate: 0.125
+  average_release_commits_size: 3.0
+  average_release_hoc_size: 59.0
+  average_release_interval: 24918.0
+  average_review_size: 0.09523809523809523
+  average_review_time: 113640.83333333333
+  average_reviewers_per_pull: 0.3333333333333333
+  average_reviews_per_pull: 0.38095238095238093
+  average_triage_time: 148244.4867256637
+  composite: 0.73
+  ffact:
+  - 139380
+  - 839903
+  since: 2024-09-27 19:22:06.427174054 Z
+  what: quality-of-service
+  when: 2024-10-04 19:22:06.427087723 Z
+- _id: 839969
+  _time: 2025-05-21 16:08:26.676454923 Z
+  _version: 0.10.2/0.43.0/
+  branch: version-up
+  details: The pull request zerocracy/judges-action#612 has been opened by @github-actions[bot].
+  event_id: 49958426912
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 612
+  repository: 799177290
+  what: pull-was-opened
+  when: 2025-05-21 04:45:44.000000000 Z
+  where: github
+  who: 41898282
+- _id: 839970
+  _time: 2025-05-21 16:08:27.440554163 Z
+  _version: 0.10.2/0.43.0/
+  commits: 9
+  contributors:
+  - 29139614
+  - 526301
+  - 8086956
+  - 41898282
+  - 2566462
+  details: A new release 'Prevent creation of duplicate facts upon multiple PR closures'
+    has been published in zerocracy/judges-action by @rultor.
+  event_id: 49958398167
+  event_type: ReleaseEvent
+  hoc: 136
+  is_human: 0
+  last_commit: 79ee3e32ebe5fced53b6fd9b3485b06331e3006e
+  release: 219948811
+  repository: 799177290
+  tag: 0.8.1
+  what: release-published
+  when: 2025-05-21 04:44:25.000000000 Z
+  where: github
+  who: 8086956
+- _id: 839971
+  _time: 2025-05-21 16:08:28.059452935 Z
+  _version: 0.10.2/0.43.0/
+  details: A new tag '0.8.1' has been created in zerocracy/judges-action by @rultor.
+  event_id: 49958379610
+  event_type: CreateEvent
+  is_human: 0
+  repository: 799177290
+  tag: 0.8.1
+  what: tag-was-created
+  when: 2025-05-21 04:43:33.000000000 Z
+  where: github
+  who: 8086956
+- _id: 839981
+  _time: 2025-05-21 16:09:32.135420970 Z
+  _version: 0.10.2/0.43.0/
+  average_backlog_size: 0.125
+  average_release_commits_size: 11.155963302752294
+  average_release_hoc_size: 331.9724770642202
+  average_release_interval: 85544.47826086957
+  since: 2025-01-22 04:12:59.488826703 Z
+  what: quality-of-service
+  when: 2025-01-29 04:12:59.488783783 Z
+- _id: 839982
+  _time: 2025-05-21 16:11:57.713589862 Z
+  _version: 0.10.2/0.43.0/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 839985
+  _time: 2025-05-21 16:12:12.140124042 Z
+  _version: 0.10.2/0.43.0/
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The pull request zerocracy/judges-action#613 has been opened by @renovate[bot].
+  event_id: 49959098340
+  event_type: PullRequestEvent
+  issue: 613
+  repository: 799177290
+  what: pull-was-opened
+  when: 2025-05-21 05:14:41.000000000 Z
+  where: github
+  who: 29139614
+- _id: 839993
+  _time: 2025-05-21 16:12:43.536957080 Z
+  _version: 0.10.2/0.43.0/
+  latest: 1
+  repository: 974194993
+  what: min-issue-was-found
+  where: github
+- _id: 839994
+  _time: 2025-05-21 16:12:48.405075239 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49894484657
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 839995
+  _time: 2025-05-21 16:12:49.386928220 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49932749729
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 839996
+  _time: 2025-05-21 16:12:50.123189819 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49905082703
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 839997
+  _time: 2025-05-21 16:12:50.715079382 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49897230790
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 839998
+  _time: 2025-05-21 16:12:51.259426935 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49901540277
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 839999
+  _time: 2025-05-21 16:12:52.384837128 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49910554730
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 840000
+  _time: 2025-05-21 16:12:53.025587439 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49876156892
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 840001
+  _time: 2025-05-21 16:12:54.112639715 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49894438487
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 840002
+  _time: 2025-05-21 16:12:55.662476253 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49959098340
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 840003
+  _time: 2025-05-21 16:13:08.013856681 Z
+  _version: 0.10.2/0.43.0/
+  latest: 1
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 840016
+  _time: 2025-05-21 16:13:16.913816884 Z
   _version: 0.10.2/0.43.0/
   latest: 0
   repository: 849726475
   what: types-were-scanned
   where: github
-- _id: 839789
-  _time: 2025-05-21 15:43:51.607570295 Z
+- _id: 840041
+  _time: 2025-05-21 16:13:29.722944748 Z
   _version: 0.10.2/0.43.0/
   latest: 0
   repository: 974194993
   what: types-were-scanned
   where: github
-- _id: 839894
-  _time: 2025-05-21 15:45:01.171738862 Z
+- _id: 840141
+  _time: 2025-05-21 16:14:24.824383781 Z
   _version: 0.10.2/0.43.0/
   latest: 0
   repository: 840215648
   what: types-were-scanned
   where: github
-- _id: 839895
-  _time: 2025-05-21 15:45:01.824751527 Z
+- _id: 840144
+  _time: 2025-05-21 16:14:26.533655821 Z
   _version: 0.10.2/0.43.0/
-  latest: 135
+  latest: 194
   repository: 799177290
   what: types-were-scanned
   where: github
-- _id: 839896
-  _time: 2025-05-21 15:45:02.408631081 Z
+- _id: 840145
+  _time: 2025-05-21 16:14:27.090864509 Z
   _version: 0.10.2/0.43.0/
-  latest: 73
-  repository: 802720676
-  what: types-were-scanned
-  where: github
-- _id: 839897
-  _time: 2025-05-21 15:45:03.103054753 Z
-  _version: 0.10.2/0.43.0/
-  latest: 106
+  latest: 216
   repository: 798641472
   what: types-were-scanned
   where: github
-- _id: 839898
-  _time: 2025-05-21 15:45:03.715925647 Z
+- _id: 840146
+  _time: 2025-05-21 16:14:27.798279130 Z
   _version: 0.10.2/0.43.0/
-  latest: 130
-  repository: 820463873
+  latest: 138
+  repository: 802720676
   what: types-were-scanned
   where: github
-- _id: 839899
-  _time: 2025-05-21 15:45:04.430655178 Z
+- _id: 840147
+  _time: 2025-05-21 16:14:28.201420491 Z
   _version: 0.10.2/0.43.0/
-  latest: 80
+  latest: 157
   repository: 181044958
   what: types-were-scanned
   where: github
-- _id: 839900
-  _time: 2025-05-21 15:45:05.039405476 Z
+- _id: 840148
+  _time: 2025-05-21 16:14:28.769067011 Z
   _version: 0.10.2/0.43.0/
-  latest: 105
+  latest: 171
+  repository: 820463873
+  what: types-were-scanned
+  where: github
+- _id: 840149
+  _time: 2025-05-21 16:14:29.245476633 Z
+  _version: 0.10.2/0.43.0/
+  latest: 177
   repository: 799113787
   what: types-were-scanned
   where: github
