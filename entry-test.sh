@@ -19,7 +19,7 @@ testScansOneRepo() {
   export INPUT_FACTBASE
   bundle exec judges eval "${tmp}/test.fb" "\$fb.insert" > /dev/null
   ./entry.sh 2>&1 | tee "${tmp}/log.txt"
-  assertTrue "[ -e '${tmp}' ]"
+  assertTrue "[ -e '${tmp}/test.fb' ]"
 }
 
 testPassesGithubToken() {
