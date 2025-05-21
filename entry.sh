@@ -27,6 +27,7 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     echo '  docker run -it --rm --entrypoint /bin/bash judges-action'
     exit 1
 fi
+cd "${GITHUB_WORKSPACE}" || exit 1
 
 if [ -z "${INPUT_CYCLES}" ]; then
     echo 'The INPUT_CYCLES environment variable is not specified, but it should be.'
@@ -58,8 +59,6 @@ if [ "${INPUT_VERBOSE}" == 'true' ]; then
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-
-cd "${GITHUB_WORKSPACE}"
 
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" pull \
