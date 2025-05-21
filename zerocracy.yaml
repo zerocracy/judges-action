@@ -4,10 +4,10 @@
   deleted: 8
   error: 'Judge quality-of-service stopped by timeout after 3m0s: execution expired'
   inserted: 8
-  seconds: 367.820146886
+  seconds: 370.042158536
   version: 0.43.0
   what: judges-summary
-  when: 2025-05-21 16:14:29.418892414 Z
+  when: 2025-05-21 16:47:24.215481327 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -149471,13 +149471,6 @@
   since: 2025-01-07 22:14:46.531987508 Z
   what: quality-of-service
   when: 2025-01-14 22:14:46.531945721 Z
-- _id: 837557
-  _time: 2025-05-21 11:36:25.810512002 Z
-  _version: 0.10.2/0.42.1/
-  latest: 1
-  repository: 181044958
-  what: min-issue-was-found
-  where: github
 - _id: 837868
   _time: 2025-05-21 12:17:47.031549493 Z
   _version: 0.10.2/0.42.1/
@@ -149582,7 +149575,7 @@
   review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
-  when: 2025-05-21 04:29:26.000000000 Z
+  when: &287 2025-05-21 04:29:26.000000000 Z
   where: github
   who: 526301
 - _id: 839605
@@ -151445,6 +151438,7 @@
   details: The pull request zerocracy/judges-action#613 has been opened by @renovate[bot].
   event_id: 49959098340
   event_type: PullRequestEvent
+  is_human: 0
   issue: 613
   repository: 799177290
   what: pull-was-opened
@@ -151458,69 +151452,6 @@
   repository: 974194993
   what: min-issue-was-found
   where: github
-- _id: 839994
-  _time: 2025-05-21 16:12:48.405075239 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49894484657
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 839995
-  _time: 2025-05-21 16:12:49.386928220 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49932749729
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 839996
-  _time: 2025-05-21 16:12:50.123189819 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49905082703
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 839997
-  _time: 2025-05-21 16:12:50.715079382 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49897230790
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 839998
-  _time: 2025-05-21 16:12:51.259426935 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49901540277
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 839999
-  _time: 2025-05-21 16:12:52.384837128 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49910554730
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 840000
-  _time: 2025-05-21 16:12:53.025587439 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49876156892
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 840001
-  _time: 2025-05-21 16:12:54.112639715 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49894438487
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 840002
-  _time: 2025-05-21 16:12:55.662476253 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49959098340
-  repository: 799177290
-  what: events-were-scanned
-  where: github
 - _id: 840003
   _time: 2025-05-21 16:13:08.013856681 Z
   _version: 0.10.2/0.43.0/
@@ -151528,66 +151459,201 @@
   repository: 798641472
   what: min-issue-was-found
   where: github
-- _id: 840016
-  _time: 2025-05-21 16:13:16.913816884 Z
+- _id: 840150
+  _job: 21233
+  _time: 2025-05-21 16:15:03.524237465 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  award: 4
+  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#611,
+    the reward amount is 4.
+  greeting: "Great job on your review! \U0001F31F You've earned +4 points: +12 base,
+    -16 for missing comments, +8 bonus. While there's room for improvement with adding
+    comments, we appreciate your effort. Your current balance is [-700](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Keep up the good work!\n\n<!-- Thanks for the review! You've earned +4 points
+    for this: +12 as a basis; -16 for absolutely no comments posted; +8 to give you
+    at least something.  Your running balance is [-700](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    \ -->"
+  href: https://github.com/zerocracy/judges-action/issues/611/#issuecomment-2898525879
+  is_human: 1
+  issue: 611
+  repository: 799177290
+  what: code-review-was-rewarded
+  when: 2025-05-21 16:15:03.544478661 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/judges-action#611
+- _id: 840151
+  _job: 21233
+  _time: 2025-05-21 16:15:32.550758357 Z
+  _version: 0.10.2/0.42.1/0.8.2
+  comments: 1
+  details: The pull request zerocracy/judges-action#611 with 113 HoC created by @yegorov
+    was merged by @yegor256 after 9h2m of being in review and 1 comments.
+  hoc: 113
+  is_human: 1
+  issue: 611
+  merger: 526301
+  repository: 799177290
+  review_comments: 0
+  seconds: 32567
+  what: code-was-contributed
+  when: *287
+  where: github
+  who: 2566462
+- _id: 840161
+  _time: 2025-05-21 16:41:28.123631354 Z
+  _version: 0.10.2/0.43.0/
+  latest: 1
+  repository: 181044958
+  what: min-issue-was-found
+  where: github
+- _id: 840258
+  _time: 2025-05-21 16:45:32.440669016 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49905082703
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 840259
+  _time: 2025-05-21 16:45:33.009011379 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49897230790
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 840260
+  _time: 2025-05-21 16:45:33.717374885 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49894438487
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 840261
+  _time: 2025-05-21 16:45:34.787916522 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49894484657
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 840262
+  _time: 2025-05-21 16:45:36.453553621 Z
+  _version: 0.10.2/0.43.0/
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: The pull request zerocracy/judges-action#613 has been closed by @rultor,
+    with 2 HoC and 2 comments.
+  event_id: 49960256629
+  event_type: PullRequestEvent
+  failed_builds: 0
+  hoc: 2
+  issue: 613
+  repository: 799177290
+  review_comments: 0
+  succeeded_builds: 13
+  what: pull-was-merged
+  when: 2025-05-21 05:59:04.000000000 Z
+  where: github
+  who: 8086956
+- _id: 840263
+  _time: 2025-05-21 16:45:58.199102103 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49960279323
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 840264
+  _time: 2025-05-21 16:45:58.716933496 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49876156892
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 840265
+  _time: 2025-05-21 16:45:59.263728559 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49901540277
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 840266
+  _time: 2025-05-21 16:46:00.027069990 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49932749729
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 840267
+  _time: 2025-05-21 16:46:00.968388118 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49910554730
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 840278
+  _time: 2025-05-21 16:46:15.794448107 Z
   _version: 0.10.2/0.43.0/
   latest: 0
   repository: 849726475
   what: types-were-scanned
   where: github
-- _id: 840041
-  _time: 2025-05-21 16:13:29.722944748 Z
+- _id: 840306
+  _time: 2025-05-21 16:46:29.998529716 Z
   _version: 0.10.2/0.43.0/
   latest: 0
   repository: 974194993
   what: types-were-scanned
   where: github
-- _id: 840141
-  _time: 2025-05-21 16:14:24.824383781 Z
+- _id: 840404
+  _time: 2025-05-21 16:47:19.483794173 Z
   _version: 0.10.2/0.43.0/
   latest: 0
   repository: 840215648
   what: types-were-scanned
   where: github
-- _id: 840144
-  _time: 2025-05-21 16:14:26.533655821 Z
+- _id: 840408
+  _time: 2025-05-21 16:47:21.317399422 Z
   _version: 0.10.2/0.43.0/
-  latest: 194
-  repository: 799177290
-  what: types-were-scanned
-  where: github
-- _id: 840145
-  _time: 2025-05-21 16:14:27.090864509 Z
-  _version: 0.10.2/0.43.0/
-  latest: 216
-  repository: 798641472
-  what: types-were-scanned
-  where: github
-- _id: 840146
-  _time: 2025-05-21 16:14:27.798279130 Z
-  _version: 0.10.2/0.43.0/
-  latest: 138
-  repository: 802720676
-  what: types-were-scanned
-  where: github
-- _id: 840147
-  _time: 2025-05-21 16:14:28.201420491 Z
-  _version: 0.10.2/0.43.0/
-  latest: 157
-  repository: 181044958
-  what: types-were-scanned
-  where: github
-- _id: 840148
-  _time: 2025-05-21 16:14:28.769067011 Z
-  _version: 0.10.2/0.43.0/
-  latest: 171
+  latest: 28
   repository: 820463873
   what: types-were-scanned
   where: github
-- _id: 840149
-  _time: 2025-05-21 16:14:29.245476633 Z
+- _id: 840409
+  _time: 2025-05-21 16:47:21.807397806 Z
   _version: 0.10.2/0.43.0/
-  latest: 177
+  latest: 25
+  repository: 798641472
+  what: types-were-scanned
+  where: github
+- _id: 840410
+  _time: 2025-05-21 16:47:22.341264720 Z
+  _version: 0.10.2/0.43.0/
+  latest: 20
+  repository: 181044958
+  what: types-were-scanned
+  where: github
+- _id: 840411
+  _time: 2025-05-21 16:47:22.813765458 Z
+  _version: 0.10.2/0.43.0/
+  latest: 21
   repository: 799113787
+  what: types-were-scanned
+  where: github
+- _id: 840412
+  _time: 2025-05-21 16:47:23.286303627 Z
+  _version: 0.10.2/0.43.0/
+  latest: 31
+  repository: 802720676
+  what: types-were-scanned
+  where: github
+- _id: 840413
+  _time: 2025-05-21 16:47:23.934393647 Z
+  _version: 0.10.2/0.43.0/
+  latest: 325
+  repository: 799177290
   what: types-were-scanned
   where: github
