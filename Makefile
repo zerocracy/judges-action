@@ -2,11 +2,9 @@
 # SPDX-License-Identifier: MIT
 
 .ONESHELL:
-.PHONY: clean test all entry rmi verify rubocop
+.PHONY: clean test all entry rmi verify rubocop shunit2
 .SHELLFLAGS := -e -o pipefail -c
 SHELL := /bin/bash
-
-JUDGES = judges
 
 export
 
@@ -25,6 +23,9 @@ rmi: target/docker-image.txt
 	img=$$(cat $<)
 	docker rmi "$${img}"
 	rm "$<"
+
+shunit2:
+	shunit2 entry-test.sh
 
 verify:
 	e1=$$(cat target/test.exit)

@@ -2,22 +2,22 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
-set -e
-set -x
-set -o pipefail
+set -ex -o pipefail
 
 start=$(date +%s)
 
 VERSION=0.0.0
 
-if [ -z "${JUDGES}" ]; then
-    JUDGES=judges
-fi
-
 if [ -z "$1" ]; then
     SELF=$(pwd)
 else
     SELF=$1
+fi
+
+if [ -z "${JUDGES}" ]; then
+    BUNDLE_GEMFILE="${SELF}/Gemfile"
+    export BUNDLE_GEMFILE
+    JUDGES="bundle exec judges"
 fi
 
 if [ -z "${GITHUB_WORKSPACE}" ]; then
@@ -27,6 +27,7 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     echo '  docker run -it --rm --entrypoint /bin/bash judges-action'
     exit 1
 fi
+cd "${GITHUB_WORKSPACE}" || exit 1
 
 name="$(basename "${INPUT_FACTBASE}")"
 name="${name%.*}"
@@ -49,8 +50,6 @@ fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
-cd "${GITHUB_WORKSPACE}"
-
 if [ -n "${INPUT_TOKEN}" ]; then
     ${JUDGES} "${gopts[@]}" pull \
         --timeout=0 \
@@ -59,15 +58,9 @@ if [ -n "${INPUT_TOKEN}" ]; then
         "${name}" "${fb}"
 fi
 
-# Set URL of the published pages:
 GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
 VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html"
 
-# Add new facts, using the judges (Ruby scripts) in the /judges directory
-declare -A optionmap=(
-    ["repositories"]="${INPUT_REPOSITORIES}"
-    ["github_token"]="${INPUT_GITHUB_TOKEN}"
-)
 declare -a options=()
 while IFS= read -r o; do
     s=$(echo "${o}" | xargs)
@@ -80,15 +73,18 @@ while IFS= read -r o; do
         VITALS_URL="${v}"
         continue
     fi
-    optionmap[$k]=$v
 done <<< "${INPUT_OPTIONS}"
-for k in "${!optionmap[@]}"; do
-    if [ -n "${optionmap[$k]}" ]; then
-        options+=("--option=${k}=${optionmap[$k]}");
-    fi
-done
+if [ -n "${INPUT_REPOSITORIES}" ]; then
+    options+=("--option=repositories=${INPUT_REPOSITORIES}");
+fi
+if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
+    options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
+fi
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
+if [ -n "${INPUT_FAIL_FAST}" ]; then
+    options+=("--fail-fast");
+fi
 
 echo "The 'judges-action' ${VERSION} is running"
 
