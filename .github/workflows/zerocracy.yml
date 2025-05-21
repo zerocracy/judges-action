@@ -9,6 +9,8 @@ name: zerocracy
 concurrency:
   group: zerocracy
   cancel-in-progress: false
+permissions:
+  contents: write
 jobs:
   zerocracy:
     runs-on: ubuntu-24.04
@@ -25,8 +27,7 @@ jobs:
           cycles: 3
       - uses: zerocracy/pages-action@0.1.0
         with:
-          options: |
-            github_token=${{ secrets.PAT }}
+          github_token: ${{ secrets.PAT }}
           verbose: true
           factbase: zerocracy.fb
           output: pages
