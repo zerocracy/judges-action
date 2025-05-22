@@ -2,11 +2,12 @@
 - added: 8
   cycles: 3
   deleted: 8
+  error: 'Judge quality-of-service stopped by timeout after 3m0s: execution expired'
   inserted: 8
-  seconds: 304.05328608
+  seconds: 302.018236429
   version: 0.43.0
   what: judges-summary
-  when: 2025-05-22 18:14:08.321634119 Z
+  when: 2025-05-22 18:47:00.675120884 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -109119,14 +109120,6 @@
   when: *254
   where: github
   who: 29139614
-- _id: 735768
-  _time: 2025-05-11 18:11:53.100377682 Z
-  _version: 0.10.1/0.42.0/
-  average_issue_lifetime: 11328355.714285715
-  average_pull_lifetime: 429904.6153846154
-  since: 2025-05-04 18:11:49.316117623 Z
-  what: quality-of-service
-  when: 2025-05-11 18:11:49.316069123 Z
 - _id: 739867
   _time: 2025-05-12 03:26:18.144315604 Z
   _version: 0.10.1/0.42.0/
@@ -152389,13 +152382,6 @@
   since: 2025-04-30 18:10:49.898264119 Z
   what: quality-of-service
   when: 2025-05-07 18:10:49.898225447 Z
-- _id: 851676
-  _time: 2025-05-22 16:09:59.974168926 Z
-  _version: 0.10.2/0.43.0/
-  latest: 1
-  repository: 802720676
-  what: min-issue-was-found
-  where: github
 - _id: 852262
   _time: 2025-05-22 17:08:00.771379312 Z
   _version: 0.10.2/0.43.0/
@@ -152418,82 +152404,12 @@
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 852560
-  _time: 2025-05-22 17:39:53.406544971 Z
-  _version: 0.10.2/0.43.0/
-  latest: 1
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
 - _id: 852570
   _time: 2025-05-22 18:09:14.672326263 Z
   _version: 0.10.2/0.43.0/
   latest: 1
   repository: 798641472
   what: min-issue-was-found
-  where: github
-- _id: 852846
-  _time: 2025-05-22 18:11:32.361975361 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49992260732
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 852847
-  _time: 2025-05-22 18:11:33.212562782 Z
-  _version: 0.10.2/0.43.0/
-  latest: 50000985525
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 852848
-  _time: 2025-05-22 18:11:34.522435363 Z
-  _version: 0.10.2/0.43.0/
-  latest: 50038588032
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 852849
-  _time: 2025-05-22 18:11:35.374578681 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49980207101
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 852850
-  _time: 2025-05-22 18:11:35.781286841 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49991519885
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 852851
-  _time: 2025-05-22 18:11:36.838530571 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49991048136
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 852852
-  _time: 2025-05-22 18:11:37.765631206 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49996177931
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 852853
-  _time: 2025-05-22 18:11:38.314037644 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49876156892
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 852854
-  _time: 2025-05-22 18:11:39.174451455 Z
-  _version: 0.10.2/0.43.0/
-  latest: 49988447257
-  repository: 802720676
-  what: events-were-scanned
   where: github
 - _id: 852868
   _time: 2025-05-22 18:11:54.933955336 Z
@@ -152620,4 +152536,101 @@
   latest: 73
   repository: 799113787
   what: types-were-scanned
+  where: github
+- _id: 853126
+  _time: 2025-05-22 18:42:10.095466393 Z
+  _version: 0.10.2/0.43.0/
+  latest: 1
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 853136
+  _time: 2025-05-22 18:43:04.064028865 Z
+  _version: 0.10.2/0.43.0/
+  average_issue_lifetime: 11328355.714285715
+  average_pull_lifetime: 429904.6153846154
+  average_release_interval: 98089.33333333333
+  average_review_size: 0.06896551724137931
+  average_review_time: 2877.8333333333335
+  average_reviewers_per_pull: 0.13793103448275862
+  average_reviews_per_pull: 0.15517241379310345
+  since: 2025-05-04 18:11:49.316117623 Z
+  what: quality-of-service
+  when: 2025-05-11 18:11:49.316069123 Z
+- _id: 853137
+  _time: 2025-05-22 18:46:48.468371050 Z
+  _version: 0.10.2/0.43.0/
+  since: 2025-05-15 18:45:45.250864772 Z
+  total_builds_ran: 3176
+  what: quantity-of-deliverables
+  when: 2025-05-22 18:45:45.250825247 Z
+- _id: 853138
+  _time: 2025-05-22 18:46:50.997621774 Z
+  _version: 0.10.2/0.43.0/
+  latest: 1
+  repository: 802720676
+  what: min-issue-was-found
+  where: github
+- _id: 853139
+  _time: 2025-05-22 18:46:53.775520728 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49876156892
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 853140
+  _time: 2025-05-22 18:46:54.247005462 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49991519885
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 853141
+  _time: 2025-05-22 18:46:55.365916033 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49991048136
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 853142
+  _time: 2025-05-22 18:46:55.971418168 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49992260732
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 853143
+  _time: 2025-05-22 18:46:56.754705688 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49996177931
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 853144
+  _time: 2025-05-22 18:46:57.998623478 Z
+  _version: 0.10.2/0.43.0/
+  latest: 50039839297
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 853145
+  _time: 2025-05-22 18:46:58.776477174 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49988447257
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 853146
+  _time: 2025-05-22 18:46:59.589591500 Z
+  _version: 0.10.2/0.43.0/
+  latest: 49980207101
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 853147
+  _time: 2025-05-22 18:47:00.435233112 Z
+  _version: 0.10.2/0.43.0/
+  latest: 50000985525
+  repository: 820463873
+  what: events-were-scanned
   where: github
