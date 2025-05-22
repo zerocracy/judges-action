@@ -79,6 +79,8 @@ if [ -n "${INPUT_REPOSITORIES}" ]; then
 fi
 if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
     options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
+elif [ -n "${GITHUB_TOKEN}" ]; then
+    options+=("--option=github_token=${GITHUB_TOKEN}");
 fi
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
@@ -93,6 +95,12 @@ ${JUDGES} "${gopts[@]}" eval \
     "${fb}" \
     "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 
+if [ -z "${INPUT_DRY_RUN}" ]; then
+    ALL_JUDGES=${SELF}/judges
+else
+    ALL_JUDGES=$(mktemp -d)
+fi
+
 ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
@@ -103,7 +111,7 @@ ${JUDGES} "${gopts[@]}" update \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
     "${options[@]}" \
-    "${SELF}/judges" \
+    "${ALL_JUDGES}" \
     "${fb}"
 
 action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')

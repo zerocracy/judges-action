@@ -32,6 +32,10 @@ inputs:
     description: 'Stop after the first error'
     required: false
     default: false
+  dry-run:
+    description: 'Skip all judges, make no changes to the factbase'
+    required: false
+    default: false
   cycles:
     description: 'How many update cycles to run (keep it under 10)'
     required: true
