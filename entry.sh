@@ -107,8 +107,8 @@ ${JUDGES} "${gopts[@]}" update \
     "${fb}"
 
 action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-if [ "$action_version" = "$VERSION" ]; then
-    action_version=$VERSION
+if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
+    action_version=${VERSION}
 else
     action_version="${VERSION}!${action_version}"
 fi
