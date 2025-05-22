@@ -6,7 +6,7 @@ set -ex -o pipefail
 
 start=$(date +%s)
 
-VERSION=0.0.0
+VERSION=0.8.5
 
 if [ -z "$1" ]; then
     SELF=$(pwd)
