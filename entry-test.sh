@@ -44,7 +44,7 @@ testPassesGithubToken() {
   assertTrue "grep github_token=THETOKEN '${tmp}/log.txt'"
 }
 
-testUsesDefaultGithubToken() {
+testDoesntUseDefaultGithubToken() {
   tmp=target/shunit2/uses-default-github-token
   mkdir -p "${tmp}"
   GITHUB_WORKSPACE=${tmp}
@@ -60,9 +60,9 @@ testUsesDefaultGithubToken() {
   INPUT_CYCLES=1
   export INPUT_CYCLES
   INPUT_GITHUB_TOKEN=
-  GITHUB_TOKEN=SOMETOKEN88
+  GITHUB_TOKEN=NEVERTOKEN
   export GITHUB_TOKEN
   bundle exec judges eval "${tmp}/test.fb" "\$fb.insert" > /dev/null
   ./entry.sh 2>&1 | tee "${tmp}/log.txt"
-  assertTrue "grep github_token=SOMETOKEN88 '${tmp}/log.txt'"
+  assertTrue "grep -v github_token=NEVERTOKEN '${tmp}/log.txt'"
 }

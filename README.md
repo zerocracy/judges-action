@@ -34,7 +34,7 @@ jobs:
       - uses: zerocracy/judges-action@0.8.2
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
-          github_token: ${{ secrets.ZEROCRACY_PAT }}
+          github-token: ${{ secrets.ZEROCRACY_PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.1.0
@@ -83,7 +83,7 @@ The following options are expected by the plugin
   `yegor256/judges` means a specific repo,
   and
   `-yegor256/judges` means an exclusion of the repo from the list.
-* `github_token` (optional) is an authentication GitHub access token
+* `github-token` (optional) is an authentication GitHub access token
 * `verbose` (optional) makes it print debugging info if set to `true`
 * `cycles` (optional) is a number of update cycles to run
 
