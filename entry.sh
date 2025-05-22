@@ -94,9 +94,9 @@ ${JUDGES} "${gopts[@]}" eval \
     "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 
 if [ -z "${INPUT_DRY_RUN}" ]; then
-    options+=("${SELF}/judges");
+    ALL_JUDGES=${SELF}/judges
 else
-    options+=("$(mktemp -d)");
+    ALL_JUDGES=$(mktemp -d)
 fi
 
 ${JUDGES} "${gopts[@]}" update \
@@ -109,6 +109,7 @@ ${JUDGES} "${gopts[@]}" update \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
     "${options[@]}" \
+    "${ALL_JUDGES}" \
     "${fb}"
 
 action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
