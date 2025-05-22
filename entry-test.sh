@@ -11,8 +11,8 @@ testScansOneRepo() {
   export INPUT_VERBOSE
   INPUT_REPOSITORIES=yegor256/factbase
   export INPUT_REPOSITORIES
-  INPUT_FAIL_FAST=true
-  export INPUT_FAIL_FAST
+  INPUT_DRY_RUN=true
+  export INPUT_DRY_RUN
   INPUT_CYCLES=1
   export INPUT_CYCLES
   INPUT_FACTBASE=test.fb
@@ -29,8 +29,8 @@ testPassesGithubToken() {
   export GITHUB_WORKSPACE
   INPUT_VERBOSE=false
   export INPUT_VERBOSE
-  INPUT_FAIL_FAST=true
-  export INPUT_FAIL_FAST
+  INPUT_DRY_RUN=true
+  export INPUT_DRY_RUN
   INPUT_FACTBASE=test.fb
   export INPUT_FACTBASE
   INPUT_REPOSITORIES=yegor256/factbase
@@ -39,6 +39,28 @@ testPassesGithubToken() {
   export INPUT_CYCLES
   INPUT_GITHUB_TOKEN=THETOKEN
   export INPUT_GITHUB_TOKEN
+  bundle exec judges eval "${tmp}/test.fb" "\$fb.insert" > /dev/null
+  ./entry.sh 2>&1 | tee "${tmp}/log.txt"
+  assertTrue "grep github_token=THETOKEN '${tmp}/log.txt'"
+}
+
+testUsesDefaultGithubToken() {
+  tmp=target/shunit2/uses-default-github-token
+  mkdir -p "${tmp}"
+  GITHUB_WORKSPACE=${tmp}
+  export GITHUB_WORKSPACE
+  INPUT_VERBOSE=false
+  export INPUT_VERBOSE
+  INPUT_DRY_RUN=true
+  export INPUT_DRY_RUN
+  INPUT_FACTBASE=test.fb
+  export INPUT_FACTBASE
+  INPUT_REPOSITORIES=yegor256/factbase
+  export INPUT_REPOSITORIES
+  INPUT_CYCLES=1
+  export INPUT_CYCLES
+  GITHUB_TOKEN=THETOKEN
+  export GITHUB_TOKEN
   bundle exec judges eval "${tmp}/test.fb" "\$fb.insert" > /dev/null
   ./entry.sh 2>&1 | tee "${tmp}/log.txt"
   assertTrue "grep github_token=THETOKEN '${tmp}/log.txt'"
