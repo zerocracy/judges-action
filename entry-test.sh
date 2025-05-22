@@ -59,9 +59,10 @@ testUsesDefaultGithubToken() {
   export INPUT_REPOSITORIES
   INPUT_CYCLES=1
   export INPUT_CYCLES
-  GITHUB_TOKEN=THETOKEN
+  INPUT_GITHUB_TOKEN=
+  GITHUB_TOKEN=SOMETOKEN88
   export GITHUB_TOKEN
   bundle exec judges eval "${tmp}/test.fb" "\$fb.insert" > /dev/null
   ./entry.sh 2>&1 | tee "${tmp}/log.txt"
-  assertTrue "grep github_token=THETOKEN '${tmp}/log.txt'"
+  assertTrue "grep github_token=SOMETOKEN88 '${tmp}/log.txt'"
 }

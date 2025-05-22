@@ -79,6 +79,8 @@ if [ -n "${INPUT_REPOSITORIES}" ]; then
 fi
 if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
     options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
+elif [ -n "${GITHUB_TOKEN}" ]; then
+    options+=("--option=github_token=${GITHUB_TOKEN}");
 fi
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
