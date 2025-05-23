@@ -17,18 +17,15 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.8.5
+      - uses: zerocracy/judges-action@0.8.7
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
-          verbose: false
-          github_token: ${{ secrets.PAT }}
+          github-token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
           factbase: zerocracy.fb
-          cycles: 3
-      - uses: zerocracy/pages-action@0.1.3
+      - uses: zerocracy/pages-action@0.1.4
         with:
-          github_token: ${{ secrets.PAT }}
-          verbose: true
+          github-token: ${{ secrets.PAT }}
           factbase: zerocracy.fb
           output: pages
       - uses: JamesIves/github-pages-deploy-action@v4.7.3

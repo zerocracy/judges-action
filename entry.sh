@@ -121,15 +121,6 @@ if [ "${github_token_found}" == "false" ]; then
     fi
 fi
 if [ "${github_token_found}" == "false" ]; then
-    if [ -z "${GITHUB_TOKEN}" ]; then
-        echo "The \$GITHUB_TOKEN environment variable is not provided"
-    else
-        echo "The \$GITHUB_TOKEN environment variable is set, using its value"
-        options+=("--option=github_token=${GITHUB_TOKEN}");
-        github_token_found=true
-    fi
-fi
-if [ "${github_token_found}" == "false" ]; then
     echo "You haven't provided GitHub token, via the 'github-token' option."
     echo "We stop here, because all further processing most definitely will fail."
     exit 1
