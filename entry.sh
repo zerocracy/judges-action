@@ -95,7 +95,7 @@ ${JUDGES} "${gopts[@]}" eval \
     "${fb}" \
     "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 
-if [ -z "${INPUT_DRY-RUN}" ]; then
+if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
     ALL_JUDGES=${SELF}/judges
 else
     ALL_JUDGES=$(mktemp -d)
@@ -127,14 +127,14 @@ if [ "${github_token_found}" == "false" ]; then
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-if [ -z "$(printenv "INPUT_DRY-RUN")" ]; then
+if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
+    echo "We are in 'dry' mode, skipping the 'pull'"
+else
     ${JUDGES} "${gopts[@]}" pull \
         --timeout=0 \
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${fb}"
-else
-    echo "We are in 'dry' mode, skipping the 'pull'"
 fi
 
 ${JUDGES} "${gopts[@]}" update \
@@ -157,7 +157,9 @@ else
     action_version="${VERSION}!${action_version}"
 fi
 
-if [ -z "$(printenv "INPUT_DRY-RUN")" ]; then
+if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
+    echo "We are in 'dry' mode, skipping the 'push'"
+else
     ${JUDGES} "${gopts[@]}" push \
         --no-zip \
         --timeout=0 \
@@ -168,6 +170,4 @@ if [ -z "$(printenv "INPUT_DRY-RUN")" ]; then
         "--meta=action_version:${action_version}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
-else
-    echo "We are in 'dry' mode, skipping the 'push'"
 fi
