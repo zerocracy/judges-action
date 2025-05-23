@@ -61,18 +61,6 @@ else
     echo "Since the 'verbose' is not set to 'true', you won't see detailed logs"
 fi
 
-owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-
-if [ -z "$(printenv "INPUT_DRY-RUN")" ]; then
-    ${JUDGES} "${gopts[@]}" pull \
-        --timeout=0 \
-        "--token=${INPUT_TOKEN}" \
-        "--owner=${owner}" \
-        "${name}" "${fb}"
-else
-    echo "We are in 'dry' mode, skipping the 'pull'"
-fi
-
 GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
 VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html"
 
@@ -142,6 +130,17 @@ if [ "${github_token_found}" == "false" ]; then
     echo "You haven't provided GitHub token, via the 'github-token' option."
     echo "We stop here, because all further processing most definitely will fail."
     exit 1
+fi
+
+owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+if [ -z "$(printenv "INPUT_DRY-RUN")" ]; then
+    ${JUDGES} "${gopts[@]}" pull \
+        --timeout=0 \
+        "--token=${INPUT_TOKEN}" \
+        "--owner=${owner}" \
+        "${name}" "${fb}"
+else
+    echo "We are in 'dry' mode, skipping the 'pull'"
 fi
 
 ${JUDGES} "${gopts[@]}" update \
