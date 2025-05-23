@@ -6,6 +6,8 @@ set -ex -o pipefail
 
 SELF=$1
 
+BUNDLE_GEMFILE="${SELF}/Gemfile"
+export BUNDLE_GEMFILE
 bundle exec judges eval test.fb "\$fb.insert" > /dev/null
 
 (env "GITHUB_WORKSPACE=$(pwd)" \
