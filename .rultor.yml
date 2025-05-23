@@ -6,6 +6,8 @@ docker:
   image: yegor256/ruby
 assets:
   docker-password: yegor256/home#assets/docker-password
+install: |
+  bundle install --no-color
 merge:
   script: |-
     sudo make -C "$(pwd)"
