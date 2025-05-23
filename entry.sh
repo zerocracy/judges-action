@@ -85,11 +85,7 @@ if [ -z "${INPUT_REPOSITORIES}" ]; then
 else
     options+=("--option=repositories=${INPUT_REPOSITORIES}");
 fi
-if [ -z "${INPUT_GITHUB_TOKEN}" ]; then
-    echo "The 'github-token' plugin parameter is not set"
-else
-    options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
-fi
+
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
 if [ -z "${INPUT_FAIL_FAST}" ]; then
@@ -109,14 +105,30 @@ else
     ALL_JUDGES=$(mktemp -d)
 fi
 
-has_github_token=false
+github_token_found=false
 for opt in "${options[@]}"; do
     if [[ "${opt}" == "--option=github_token="* ]]; then
-        has_github_token=true
+        github_token_found=true
         break
     fi
 done
-if [ "${has_github_token}" == "false" ]; then
+if [ "${github_token_found}" == "false" ]; then
+    if [ -z "${INPUT_GITHUB_TOKEN}" ]; then
+        echo "The 'github-token' plugin parameter is not set"
+    else
+        options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
+        github_token_found=true
+    fi
+fi
+if [ "${github_token_found}" == "false" ]; then
+    if [ -z "${GITHUB_TOKEN}" ]; then
+        echo "The \$GITHUB_TOKEN environment variable is not provided"
+    else
+        options+=("--option=github_token=${GITHUB_TOKEN}");
+        github_token_found=true
+    fi
+fi
+if [ "${github_token_found}" == "false" ]; then
     echo "You haven't provided GitHub token, via the 'github-token' option."
     echo "We stop here, because all further processing most definitely will fail."
     exit 1
