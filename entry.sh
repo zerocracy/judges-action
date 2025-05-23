@@ -48,11 +48,15 @@ fb=$(realpath "${INPUT_FACTBASE}")
 declare -a gopts=()
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
     gopts+=('--verbose')
+else
+    echo "Since the 'verbose' is not set to 'true', you won't see detailed logs"
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
-if [ -n "${INPUT_TOKEN}" ]; then
+if [ -z "${INPUT_TOKEN}" ]; then
+    echo "The 'token' plugin parameter is not set"
+else
     ${JUDGES} "${gopts[@]}" pull \
         --timeout=0 \
         "--token=${INPUT_TOKEN}" \
@@ -76,15 +80,21 @@ while IFS= read -r o; do
         continue
     fi
 done <<< "${INPUT_OPTIONS}"
-if [ -n "${INPUT_REPOSITORIES}" ]; then
+if [ -z "${INPUT_REPOSITORIES}" ]; then
+    echo "The 'repositories' plugin parameter is not set"
+else
     options+=("--option=repositories=${INPUT_REPOSITORIES}");
 fi
-if [ -n "${INPUT_GITHUB_TOKEN}" ]; then
+if [ -z "${INPUT_GITHUB_TOKEN}" ]; then
+    echo "The 'github-token' plugin parameter is not set"
+else
     options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
 fi
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
-if [ -n "${INPUT_FAIL_FAST}" ]; then
+if [ -z "${INPUT_FAIL_FAST}" ]; then
+    echo "Since the 'fail-fast' is not set to 'true', we'll run all judges"
+else
     options+=("--fail-fast");
 fi
 
