@@ -9,8 +9,11 @@
 First, get a free authentication token from
 [Zerocracy.com](https://www.zerocracy.com) and add it as
 `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
+
 Then, create a new [personal access token][PAT]
 and add it as a `ZEROCRACY_PAT` secret to your repository.
+Don't forget to give it full "repository access".
+
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
 (replace `foo` with the name of your team and `42` with anything
@@ -24,8 +27,6 @@ name: zerocracy
 concurrency:
   group: zerocracy
   cancel-in-progress: false
-permissions:
-  contents: write
 jobs:
   zerocracy:
     runs-on: ubuntu-24.04
@@ -39,6 +40,7 @@ jobs:
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.1.2
         with:
+          github-token: ${{ secrets.ZEROCRACY_PAT }}
           factbase: foo.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:

@@ -8,6 +8,8 @@ start=$(date +%s)
 
 VERSION=0.0.0
 
+echo "The 'judges-action' ${VERSION} is running"
+
 if [ -z "$1" ]; then
     SELF=$(pwd)
 else
@@ -85,8 +87,6 @@ options+=("--option=vitals_url=${VITALS_URL}")
 if [ -n "${INPUT_FAIL_FAST}" ]; then
     options+=("--fail-fast");
 fi
-
-echo "The 'judges-action' ${VERSION} is running"
 
 cd "${SELF}"
 ${JUDGES} "${gopts[@]}" eval \
