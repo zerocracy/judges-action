@@ -6,7 +6,7 @@ description: 'Scan the repository and build a Factbase'
 author: 'Yegor Bugayenko <yegor256@gmail.com>'
 runs:
   using: 'docker'
-  image: 'docker://yegor256/judges-action:latest'
+  image: 'docker://yegor256/judges-action:0.8.7'
 inputs:
   token:
     description: 'Authentication token from www.zerocracy.com'
