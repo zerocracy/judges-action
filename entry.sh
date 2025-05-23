@@ -108,9 +108,12 @@ for opt in "${options[@]}"; do
         break
     fi
 done
+if [ "${github_token_found}" == "true" ]; then
+    echo "The 'github_token' option is set, using it"
+fi
 if [ "${github_token_found}" == "false" ]; then
     if [ -z "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
-        echo "The 'github-token' plugin parameter is not set"
+        echo "The 'github-token' plugin parameter is not set (\$INPUT_GITHUB-TOKEN is empty)"
     else
         echo "The 'github-token' plugin parameter is set, using it"
         options+=("--option=github_token=$(printenv "INPUT_GITHUB-TOKEN")");
