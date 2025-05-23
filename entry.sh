@@ -99,6 +99,19 @@ else
     ALL_JUDGES=$(mktemp -d)
 fi
 
+has_github_token=false
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=github_token="* ]]; then
+        has_github_token=true
+        break
+    fi
+done
+if [ "${has_github_token}" == "false" ]; then
+    echo "You haven't provided GitHub token, via the 'github-token' option."
+    echo "We stop here, because all further processing most definitely will fail."
+    exit 1
+fi
+
 ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
