@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: MIT
 
 .ONESHELL:
-.PHONY: clean test all entry rmi verify rubocop shunit2
+.PHONY: clean test all entry rmi verify entries rubocop
 .SHELLFLAGS := -e -o pipefail -c
 SHELL := /bin/bash
 
 export
 
-all: rubocop test entry rmi verify
+all: rubocop test entry rmi verify entries
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
@@ -24,8 +24,19 @@ rmi: target/docker-image.txt
 	docker rmi "$${img}"
 	rm "$<"
 
-shunit2:
-	shunit2 entry-test.sh
+.SILENT:
+entries:
+	mkdir -p target/entries-logs
+	for sh in $$(find entries -name '*.sh' -exec basename {} \;); do
+		mkdir -p "target/$${sh}"
+		if /bin/bash -c "cd \"target/$${sh}\" && exec \"$$(pwd)/entries/$${sh}\" \"$$(pwd)\" > \"$$(pwd)/target/entries-logs/$${sh}.txt\" 2>&1"; then
+			echo "👍🏻 $${sh} passed"
+		else
+			cat "target/entries-logs/$${sh}.txt"
+			echo "❌ $${sh} failed"
+			exit 1
+		fi
+	done
 
 verify:
 	e1=$$(cat target/test.exit)
