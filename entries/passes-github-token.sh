@@ -6,25 +6,16 @@ set -ex -o pipefail
 
 SELF=$1
 
-GITHUB_WORKSPACE=$(pwd)
-export GITHUB_WORKSPACE
-INPUT_TOKEN=something
-export INPUT_TOKEN
-INPUT_VERBOSE=false
-export INPUT_VERBOSE
-INPUT_DRY_RUN=true
-export INPUT_DRY_RUN
-INPUT_FACTBASE=test.fb
-export INPUT_FACTBASE
-INPUT_REPOSITORIES=yegor256/factbase
-export INPUT_REPOSITORIES
-INPUT_CYCLES=1
-export INPUT_CYCLES
-INPUT_GITHUB_TOKEN=THETOKEN
-export INPUT_GITHUB_TOKEN
-
 bundle exec judges eval test.fb "\$fb.insert" > /dev/null
 
-"${SELF}/entry.sh" 2>&1 | tee log.txt
+env "GITHUB_WORKSPACE=$(pwd)" \
+  'INPUT_FACTBASE=test.fb' \
+  'INPUT_CYCLES=1' \
+  'INPUT_REPOSITORIES=yegor256/factbase' \
+  'INPUT_VERBOSE=false' \
+  'INPUT_TOKEN=something' \
+  'INPUT_DRY-RUN=true' \
+  'INPUT_GITHUB-TOKEN=THETOKEN' \
+  "${SELF}/entry.sh" 2>&1 | tee log.txt
 
-grep github_token=THETOKEN 'log.txt'
+grep "The 'github-token' plugin parameter is set" 'log.txt'

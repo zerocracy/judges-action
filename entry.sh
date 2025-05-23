@@ -63,7 +63,7 @@ fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 
-if [ -z "${INPUT_DRY_RUN}" ]; then
+if [ -z "$(printenv "INPUT_DRY-RUN")" ]; then
     ${JUDGES} "${gopts[@]}" pull \
         --timeout=0 \
         "--token=${INPUT_TOKEN}" \
@@ -107,7 +107,7 @@ ${JUDGES} "${gopts[@]}" eval \
     "${fb}" \
     "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 
-if [ -z "${INPUT_DRY_RUN}" ]; then
+if [ -z "${INPUT_DRY-RUN}" ]; then
     ALL_JUDGES=${SELF}/judges
 else
     ALL_JUDGES=$(mktemp -d)
@@ -121,11 +121,11 @@ for opt in "${options[@]}"; do
     fi
 done
 if [ "${github_token_found}" == "false" ]; then
-    if [ -z "${INPUT_GITHUB_TOKEN}" ]; then
+    if [ -z "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
         echo "The 'github-token' plugin parameter is not set"
     else
         echo "The 'github-token' plugin parameter is set, using it"
-        options+=("--option=github_token=${INPUT_GITHUB_TOKEN}");
+        options+=("--option=github_token=$(printenv "INPUT_GITHUB-TOKEN")");
         github_token_found=true
     fi
 fi
@@ -164,7 +164,7 @@ else
     action_version="${VERSION}!${action_version}"
 fi
 
-if [ -z "${INPUT_DRY_RUN}" ]; then
+if [ -z "$(printenv "INPUT_DRY-RUN")" ]; then
     ${JUDGES} "${gopts[@]}" push \
         --no-zip \
         --timeout=0 \
