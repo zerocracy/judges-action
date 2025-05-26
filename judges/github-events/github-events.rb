@@ -313,7 +313,13 @@ Fbe.iterate do
       skip_event(json)
     end
   rescue Octokit::Forbidden
-    raise "@#{Fbe.octo.user[:login]} doesn't have access to the #{rname} repository, maybe it's private"
+    who =
+      begin
+        "@#{Fbe.octo.user[:login]}"
+      rescue Octokit::Forbidden
+        'You'
+      end
+    raise "#{who} doesn't have access to the #{rname} repository, maybe it's private"
   end
 
   over do |repository, latest|
