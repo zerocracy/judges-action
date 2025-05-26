@@ -97,6 +97,7 @@ ${JUDGES} "${gopts[@]}" eval \
 
 if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
+    options+=("--no-expect-judges")
 else
     ALL_JUDGES=${SELF}/judges
 fi
