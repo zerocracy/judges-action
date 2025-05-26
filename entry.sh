@@ -19,8 +19,10 @@ fi
 if [ -z "${JUDGES}" ]; then
     BUNDLE_GEMFILE="${SELF}/Gemfile"
     export BUNDLE_GEMFILE
-    JUDGES="bundle exec judges"
+    JUDGES='bundle exec judges'
 fi
+
+${JUDGES} --version
 
 if [ -z "${GITHUB_WORKSPACE}" ]; then
     echo 'Probably you are running this Docker image not from GitHub Actions.'
