@@ -96,9 +96,9 @@ ${JUDGES} "${gopts[@]}" eval \
     "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 
 if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
-    ALL_JUDGES=${SELF}/judges
-else
     ALL_JUDGES=$(mktemp -d)
+else
+    ALL_JUDGES=${SELF}/judges
 fi
 
 github_token_found=false
