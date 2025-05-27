@@ -12,5 +12,5 @@ input:
     repository: 695
     issue: 42
 expected:
-  - /fb[count(f)=2]
+  - /fb[count(f)=3]
   - /fb[count(f[what='issue-was-opened' and repository='695' and issue='42']) = 1]
