@@ -9,14 +9,32 @@ require 'tago'
 require 'time'
 require_relative 'jp'
 
-# Incrementally accumulates data into a fact, using Ruby scripts
-# found in the directory provided, by the prefix.
+# Incrementally accumulates data into a fact by executing Ruby scripts.
 #
-# @param [Factbase::Fact] fact The fact to put data into (some data already there)
-# @param [String] dir Where to find Ruby scripts
-# @param [String] prefix The prefix to use for scripts (e.g. "total")
-# @param [Integer] timeout How many seconds to spend, after which we give up
-# @return nil
+# This method finds and executes Ruby scripts in a specified directory that match
+# a given prefix pattern. Each script is expected to define a method with the same
+# name as the script file (minus the .rb extension) that returns a Hash of data
+# to be added to the fact. Scripts are executed in random order to avoid bias.
+#
+# The method will stop processing scripts if:
+# - The GitHub API quota is exhausted
+# - The timeout period is exceeded
+# - All matching scripts have been processed
+#
+# @example
+#   # Given scripts like total_commits.rb, total_issues.rb in /path/to/scripts/
+#   Jp.incremate(fact, '/path/to/scripts', 'total', timeout: 60)
+#
+# @param [Factbase::Fact] fact The fact object to accumulate data into. May already
+#   contain some data. Properties from scripts will be added or overwritten.
+# @param [String] dir The directory path where Ruby scripts are located
+# @param [String] prefix The filename prefix to match scripts (e.g., "total" matches
+#   "total_*.rb" files)
+# @param [Integer] timeout Maximum execution time in seconds (default: 30). Processing
+#   stops when this limit is exceeded
+# @param [Boolean] avoid_duplicate When true, skip adding properties that already
+#   exist in the fact (default: false)
+# @return [nil] This method modifies the fact in-place and returns nil
 def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
   start = Time.now
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
