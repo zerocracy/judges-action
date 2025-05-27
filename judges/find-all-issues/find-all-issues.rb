@@ -8,6 +8,11 @@
 # and records them in the factbase with metadata about when they were opened
 # and by whom. Used to ensure a complete record of issues in the monitored repos.
 #
+# We have this script because "github-events.rb" is unreliable - it may miss.
+# some issues, due to GitHub limitations. GitHub doesn't allow us to scan the
+# entire history of all events, only the last 1000. Moreover, there could be
+# connectivity problems.
+#
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/if_absent.rb Implementation of Fbe.if_absent
 
@@ -28,11 +33,12 @@ Fbe.iterate do
     begin
       after = Fbe.octo.issue(repo, issue)[:created_at]
     rescue Octokit::NotFound
+      $loog.debug("The issue ##{issue} doesn't exist, time to start from zero")
       next 0
     end
     total = 0
     before = Time.now
-    Fbe.octo.search_issues("repo:#{repo} type:issue created:<=#{after.iso8601[0..9]}")[:items].each do |json|
+    Fbe.octo.search_issues("repo:#{repo} type:issue created:>=#{after.iso8601[0..9]}")[:items].each do |json|
       total += 1
       f =
         Fbe.if_absent do |ff|
