@@ -20,6 +20,7 @@ inputs:
   github-token:
     description: 'Authentication GitHub access token'
     required: false
+    default: ${{ github.token }}
   verbose:
     description: 'Log as much debug information as possible'
     required: false

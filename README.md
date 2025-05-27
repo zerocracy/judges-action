@@ -13,6 +13,7 @@ First, get a free authentication token from
 Then, create a new [personal access token][PAT]
 and add it as a `ZEROCRACY_PAT` secret to your repository.
 Don't forget to give it full "repository access".
+You may ignore this, if all your repositories are public.
 
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
