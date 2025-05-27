@@ -26,7 +26,14 @@ require 'fbe/issue'
 
 Fbe.iterate do
   as 'min-issue-was-found'
-  by "(agg (and (eq where 'github') (eq repository $repository) (eq what 'issue-was-opened')) (min issue))"
+  by "
+    (agg
+      (and
+        (eq where 'github')
+        (eq repository $repository)
+        (eq what 'issue-was-opened')
+        (gt issue $before))
+      (min issue))"
   quota_aware
   over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
@@ -46,6 +53,7 @@ Fbe.iterate do
           ff.what = 'issue-was-opened'
           ff.repository = repository
           ff.issue = json[:number]
+          issue = ff.issue
         end
       next if f.nil?
       f.when = json[:created_at]
