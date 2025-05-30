@@ -119,7 +119,7 @@ class TestPullWasMerged < Jp::Test
         assert_equal(1, f.failed_builds)
         assert_equal('master', f.branch)
         assert_equal(
-          'The pull request foo/foo#51 has been merged by @user2, with 15 HoC and 3 comments.',
+          'Apparently, pull request foo/foo#51 has been merged by @user2, with 15 HoC and 3 comments.',
           f.details
         )
       end

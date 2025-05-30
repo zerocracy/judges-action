@@ -30,7 +30,7 @@ Fbe.conclude do
            (eq what 'pull-was-closed')
            (eq what 'pull-was-merged')))"
     ).each.to_a.first.nil?
-    next if f['not_merged'] && (f['not_merged'].last + (24 * 60 * 60) > now)
+    next if f['not_merged'] && (f.not_merged + (24 * 60 * 60) > now)
     rname = Fbe.octo.repo_name_by_id(f.repository)
     json = Fbe.octo.pull_request(rname, f.issue)
     if json[:state] == 'closed'
@@ -50,13 +50,13 @@ Fbe.conclude do
           Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(json))
           fact.branch = json[:head][:ref]
           fact.details =
-            "The pull request #{Fbe.issue(fact)} " \
+            "Apparently, pull request #{Fbe.issue(fact)} " \
             "has been #{action} by #{Fbe.who(fact)}, " \
             "with #{fact.hoc} HoC and #{fact.comments} comments."
         end
       end
     else
-      f.not_merged = now
+      Fbe.overwrite(f, 'not_merged', now)
     end
   end
 end
