@@ -19,6 +19,8 @@ require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/who'
 require 'fbe/issue'
+require_relative '../../lib/fill_fact'
+require_relative '../../lib/pull_request'
 
 start = Time.now
 
@@ -90,23 +92,6 @@ Fbe.iterate do
     last
   end
 
-  def self.comments_info(pr)
-    code_comments = Fbe.octo.pull_request_comments(pr[:base][:repo][:full_name], pr[:number])
-    issue_comments = Fbe.octo.issue_comments(pr[:base][:repo][:full_name], pr[:number])
-    {
-      comments: pr[:comments] + pr[:review_comments],
-      comments_to_code: code_comments.count,
-      comments_by_author: code_comments.count { |comment| comment[:user][:id] == pr[:user][:id] } +
-        issue_comments.count { |comment| comment[:user][:id] == pr[:user][:id] },
-      comments_by_reviewers: code_comments.count { |comment| comment[:user][:id] != pr[:user][:id] } +
-        issue_comments.count { |comment| comment[:user][:id] != pr[:user][:id] },
-      comments_appreciated: count_appreciated_comments(pr, issue_comments, code_comments),
-      comments_resolved: Fbe.github_graph.resolved_conversations(
-        pr[:base][:repo][:full_name].split('/').first, pr[:base][:repo][:name], pr[:number]
-      ).count
-    }
-  end
-
   def self.issue_seen_already?(fact)
     Fbe.fb.query(
       "(and (eq repository #{fact.repository}) " \
@@ -115,46 +100,6 @@ Fbe.iterate do
       "(eq what \"#{fact.what}\") " \
       "(eq issue #{fact.issue}))"
     ).each.any?
-  end
-
-  def self.count_appreciated_comments(pr, issue_comments, code_comments)
-    issue_appreciations =
-      issue_comments.sum do |comment|
-        Fbe.octo.issue_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
-           .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
-      end
-    code_appreciations =
-      code_comments.sum do |comment|
-        Fbe.octo.pull_request_review_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
-           .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
-      end
-    issue_appreciations + code_appreciations
-  end
-
-  def self.fetch_workflows(pr)
-    succeeded_builds = 0
-    failed_builds = 0
-    Fbe.octo.check_runs_for_ref(pr[:base][:repo][:full_name], pr[:head][:sha])[:check_runs].each do |run|
-      next unless run[:app][:slug] == 'github-actions'
-      workflow = Fbe.octo.workflow_run(
-        pr[:base][:repo][:full_name],
-        Fbe.octo.workflow_run_job(pr[:base][:repo][:full_name], run[:id])[:run_id]
-      )
-      next unless workflow[:event] == 'pull_request'
-      case workflow[:conclusion]
-      when 'success'
-        succeeded_builds += 1
-      when 'failure'
-        failed_builds += 1
-      end
-    end
-    { succeeded_builds:, failed_builds: }
-  end
-
-  def self.fill_fact_by_hash(fact, hash)
-    hash.each do |prop, value|
-      fact.send(:"#{prop}=", value)
-    end
   end
 
   def self.fill_up_event(fact, json)
@@ -200,8 +145,8 @@ Fbe.iterate do
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
-        fill_fact_by_hash(fact, comments_info(pl))
-        fill_fact_by_hash(fact, fetch_workflows(pl))
+        Jp.fill_fact_by_hash(fact, Jp.comments_info(pl))
+        Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(pl))
         fact.branch = pl[:head][:ref]
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
@@ -285,7 +230,7 @@ Fbe.iterate do
         fact.what = 'release-published'
         fact.who = json[:payload][:release][:author][:id]
         fetch_contributors(fact, rname).each { |c| fact.contributors = c }
-        fill_fact_by_hash(
+        Jp.fill_fact_by_hash(
           fact, fetch_release_info(fact, rname)
         )
         fact.details =
