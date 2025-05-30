@@ -71,9 +71,9 @@ class TestPullWasMerged < Jp::Test
     fb.create(_id: 4, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
     fb.create(_id: 5, what: 'pull-was-opened', repository: 42, issue: 47, where: 'github')
     fb.create(_id: 6, what: 'pull-was-opened', repository: 42, issue: 49, where: 'github',
-              watched: Time.parse('2025-05-27T10:20:00Z'))
+              not_merged: Time.parse('2025-05-27T10:20:00Z'))
     fb.create(_id: 7, what: 'pull-was-opened', repository: 42, issue: 50, where: 'github',
-              watched: Time.parse('2025-05-26T19:20:00Z'))
+              not_merged: Time.parse('2025-05-26T19:20:00Z'))
     fb.create(_id: 8, what: 'pull-was-opened', repository: 42, issue: 51, where: 'github')
     fb.create(_id: 9, what: 'pull-was-opened', repository: 42, issue: 40, where: 'gitlab')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
@@ -84,26 +84,26 @@ class TestPullWasMerged < Jp::Test
         assert_equal(1, fb.query('(eq what "pull-was-closed")').each.to_a.size)
         assert_equal(2, fb.query('(eq what "pull-was-merged")').each.to_a.size)
         assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 44, where: 'github').first['watched'])
+                           issue: 44, where: 'github').first['not_merged'])
         assert_nil(fb.find(what: 'pull-was-closed', repository: 42,
-                           issue: 44, where: 'github').first['watched'])
+                           issue: 44, where: 'github').first['not_merged'])
         assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 45, where: 'github').first['watched'])
+                           issue: 45, where: 'github').first['not_merged'])
         assert_nil(fb.find(what: 'pull-was-merged', repository: 42,
-                           issue: 45, where: 'github').first['watched'])
+                           issue: 45, where: 'github').first['not_merged'])
         assert_equal(now,
                      fb.find(what: 'pull-was-opened', repository: 42,
-                             issue: 47, where: 'github').first['watched'].last)
+                             issue: 47, where: 'github').first['not_merged'].last)
         assert_equal(Time.parse('2025-05-27T10:20:00Z'),
                      fb.find(what: 'pull-was-opened', repository: 42,
-                             issue: 49, where: 'github').first['watched'].last)
+                             issue: 49, where: 'github').first['not_merged'].last)
         assert_equal(now,
                      fb.find(what: 'pull-was-opened', repository: 42,
-                             issue: 50, where: 'github').first['watched'].last)
+                             issue: 50, where: 'github').first['not_merged'].last)
         assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 51, where: 'github').first['watched'])
+                           issue: 51, where: 'github').first['not_merged'])
         assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 40, where: 'gitlab').first['watched'])
+                           issue: 40, where: 'gitlab').first['not_merged'])
         f = fb.find(what: 'pull-was-merged', repository: 42, issue: 51, where: 'github').first
         refute_nil(f)
         assert_equal(Time.parse('2025-05-27T19:20:00Z'), f.when)

@@ -85,11 +85,11 @@ Fbe.conclude do
            (eq what 'pull-was-closed')
            (eq what 'pull-was-merged')))"
     ).each.to_a.first.nil?
-    next if f['watched'] && (f['watched'].last + (24 * 60 * 60) > now)
+    next if f['not_merged'] && (f['not_merged'].last + (24 * 60 * 60) > now)
     rname = Fbe.octo.repo_name_by_id(f.repository)
     json = Fbe.octo.pull_request(rname, f.issue)
     if json[:state] == 'closed'
-      Fbe.delete(f, 'watched') if f['watched']
+      Fbe.delete(f, 'not_merged') if f['not_merged']
       Fbe.fb.txn do |fbt|
         fbt.insert.then do |fact|
           fact.where = 'github'
@@ -111,7 +111,7 @@ Fbe.conclude do
         end
       end
     else
-      f.watched = now
+      f.not_merged = now
     end
   end
 end

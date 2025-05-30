@@ -48,4 +48,4 @@ options:
   max_labels: 5
 expected:
   - /fb[count(f)=5]
-  - /fb/f[watched and _id=5]
+  - /fb/f[not_merged and _id=5]
