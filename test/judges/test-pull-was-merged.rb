@@ -14,6 +14,8 @@ require_relative '../test__helper'
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
 class TestPullWasMerged < Jp::Test
+  using SmartFactbase
+
   def test_find_closed_and_merged_pull_requests
     WebMock.disable_net_connect!
     rate_limit_up
@@ -64,47 +66,47 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/actions/runs/223',
                 body: { event: 'pull_request', conclusion: 'failure' })
     stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
-    fb = factbase
-    fb.create(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
-    fb.create(_id: 2, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
-    fb.create(_id: 3, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
-    fb.create(_id: 4, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
-    fb.create(_id: 5, what: 'pull-was-opened', repository: 42, issue: 47, where: 'github')
-    fb.create(_id: 6, what: 'pull-was-opened', repository: 42, issue: 49, where: 'github',
-              not_merged: Time.parse('2025-05-27T10:20:00Z'))
-    fb.create(_id: 7, what: 'pull-was-opened', repository: 42, issue: 50, where: 'github',
-              not_merged: Time.parse('2025-05-26T19:20:00Z'))
-    fb.create(_id: 8, what: 'pull-was-opened', repository: 42, issue: 51, where: 'github')
-    fb.create(_id: 9, what: 'pull-was-opened', repository: 42, issue: 40, where: 'gitlab')
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+      .with(_id: 3, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+      .with(_id: 4, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
+      .with(_id: 5, what: 'pull-was-opened', repository: 42, issue: 47, where: 'github')
+      .with(_id: 6, what: 'pull-was-opened', repository: 42, issue: 49, where: 'github',
+            not_merged: Time.parse('2025-05-27T10:20:00Z'))
+      .with(_id: 7, what: 'pull-was-opened', repository: 42, issue: 50, where: 'github',
+            not_merged: Time.parse('2025-05-26T19:20:00Z'))
+      .with(_id: 8, what: 'pull-was-opened', repository: 42, issue: 51, where: 'github')
+      .with(_id: 9, what: 'pull-was-opened', repository: 42, issue: 40, where: 'gitlab')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       now = Time.parse('2025-05-27 20:00:00 UTC')
       Time.stub(:now, now) do
         load_it('pull-was-merged', fb)
-        assert_equal(7, fb.query('(eq what "pull-was-opened")').each.to_a.size)
-        assert_equal(1, fb.query('(eq what "pull-was-closed")').each.to_a.size)
-        assert_equal(2, fb.query('(eq what "pull-was-merged")').each.to_a.size)
-        assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 44, where: 'github').first['not_merged'])
-        assert_nil(fb.find(what: 'pull-was-closed', repository: 42,
-                           issue: 44, where: 'github').first['not_merged'])
-        assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 45, where: 'github').first['not_merged'])
-        assert_nil(fb.find(what: 'pull-was-merged', repository: 42,
-                           issue: 45, where: 'github').first['not_merged'])
+        assert_equal(7, fb.picks(what: 'pull-was-opened').size)
+        assert_equal(1, fb.picks(what: 'pull-was-closed').size)
+        assert_equal(2, fb.picks(what: 'pull-was-merged').size)
+        assert_nil(fb.pick(what: 'pull-was-opened', repository: 42,
+                           issue: 44, where: 'github')['not_merged'])
+        assert_nil(fb.pick(what: 'pull-was-closed', repository: 42,
+                           issue: 44, where: 'github')['not_merged'])
+        assert_nil(fb.pick(what: 'pull-was-opened', repository: 42,
+                           issue: 45, where: 'github')['not_merged'])
+        assert_nil(fb.pick(what: 'pull-was-merged', repository: 42,
+                           issue: 45, where: 'github')['not_merged'])
         assert_equal(now,
-                     fb.find(what: 'pull-was-opened', repository: 42,
-                             issue: 47, where: 'github').first['not_merged'].last)
+                     fb.pick(what: 'pull-was-opened', repository: 42,
+                             issue: 47, where: 'github')['not_merged'].first)
         assert_equal(Time.parse('2025-05-27T10:20:00Z'),
-                     fb.find(what: 'pull-was-opened', repository: 42,
-                             issue: 49, where: 'github').first['not_merged'].last)
+                     fb.pick(what: 'pull-was-opened', repository: 42,
+                             issue: 49, where: 'github')['not_merged'].first)
         assert_equal(now,
-                     fb.find(what: 'pull-was-opened', repository: 42,
-                             issue: 50, where: 'github').first['not_merged'].last)
-        assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 51, where: 'github').first['not_merged'])
-        assert_nil(fb.find(what: 'pull-was-opened', repository: 42,
-                           issue: 40, where: 'gitlab').first['not_merged'])
-        f = fb.find(what: 'pull-was-merged', repository: 42, issue: 51, where: 'github').first
+                     fb.pick(what: 'pull-was-opened', repository: 42,
+                             issue: 50, where: 'github')['not_merged'].first)
+        assert_nil(fb.pick(what: 'pull-was-opened', repository: 42,
+                           issue: 51, where: 'github')['not_merged'])
+        assert_nil(fb.pick(what: 'pull-was-opened', repository: 42,
+                           issue: 40, where: 'gitlab')['not_merged'])
+        f = fb.pick(what: 'pull-was-merged', repository: 42, issue: 51, where: 'github')
         refute_nil(f)
         assert_equal(Time.parse('2025-05-27T19:20:00Z'), f.when)
         assert_equal(422, f.who)
@@ -122,33 +124,6 @@ class TestPullWasMerged < Jp::Test
           'Apparently, pull request foo/foo#51 has been merged by @user2, with 15 HoC and 3 comments.',
           f.details
         )
-      end
-    end
-  end
-
-  private
-
-  def factbase(fb = Factbase.new)
-    decoor(fb) do
-      def find(**props)
-        eqs =
-          props.map do |prop, value|
-            val =
-              case value
-              when String then "'#{value}'"
-              else value
-              end
-            "(eq #{prop} #{val})"
-          end
-        @origin.query("(and #{eqs.join(' ')})").each.to_a
-      end
-
-      def create(**props)
-        @origin.insert.then do |f|
-          props.each do |prop, value|
-            f.send(:"#{prop}=", value)
-          end
-        end
       end
     end
   end

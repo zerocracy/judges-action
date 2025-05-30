@@ -31,6 +31,7 @@ require 'loog'
 require 'minitest/autorun'
 require 'webmock/minitest'
 require_relative '../lib/jp'
+require_relative 'smart_factbase'
 
 # Parent class for all tests.
 class Jp::Test < Minitest::Test
