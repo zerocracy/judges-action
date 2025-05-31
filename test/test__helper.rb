@@ -17,6 +17,7 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
   SimpleCov.start do
     add_filter 'vendor/'
     add_filter 'target/'
+    add_filter 'test/smart_factbase.rb'
     track_files 'judges/**/*.rb'
     track_files 'lib/**/*.rb'
     track_files '*.rb'

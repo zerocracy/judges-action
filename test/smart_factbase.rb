@@ -16,12 +16,17 @@ module SmartFactbase
       self
     end
 
+    def all
+      query('(always)').each.to_a
+    end
+
     def picks(**props)
       eqs =
         props.map do |prop, value|
           val =
             case value
             when String then "'#{value}'"
+            when Time then value.utc.iso8601
             else value
             end
           "(eq #{prop} #{val})"
