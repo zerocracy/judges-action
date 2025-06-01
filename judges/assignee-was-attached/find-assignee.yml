@@ -12,11 +12,12 @@ input:
     when: 2025-05-27T23:00:44Z
   -
     _id: 2
-    what: issue-was-closed
+    what: issue-was-assigned
     where: github
     issue: 40
     repository: 680
     who: 4444
+    assigner: 7777
     when: 2025-05-28T21:00:40Z
   -
     _id: 3
@@ -40,4 +41,5 @@ options:
   max_labels: 5
 expected:
   - /fb[count(f)=5]
-  - /fb/f[where='github' and what='issue-was-assigned' and repository=680 and issue=42]
+  - /fb/f[where='github' and what='issue-was-assigned' and repository=680 and
+          issue=42 and who=422 and assigner=411]
