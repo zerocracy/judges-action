@@ -18,19 +18,17 @@ def average_triage_time(fact)
   Fbe.unmask_repos.each do |repo|
     Fbe.octo.search_issues("repo:#{repo} type:issue created:>#{fact.since.utc.iso8601[0..9]}")[:items].each do |issue|
       ff = Fbe.fb.query(
-        <<~QUERY
-          (and
-            (eq where 'github')
-            (eq repository #{Fbe.octo.repo_id_by_name(repo)})
-            (eq issue #{issue[:number]})
-            (eq what 'label-was-attached')
-            (exists when)
-            (or
-              (eq label 'bug')
-              (eq label 'enhancement')
-            )
-          )
-        QUERY
+        "
+        (and
+          (eq where 'github')
+          (eq repository #{Fbe.octo.repo_id_by_name(repo)})
+          (eq issue #{issue[:number]})
+          (eq what 'label-was-attached')
+          (exists when)
+          (or
+            (eq label 'bug')
+            (eq label 'enhancement')))
+        "
       ).each.min_by(&:when)
       triage_times << (ff.when - issue[:created_at]) if ff
     end

@@ -40,7 +40,7 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
     unless fact[n].nil?
-      $loog.info("#{n} is here: #{fact[n].first}")
+      $loog.debug("#{n} is here: #{fact[n].first}")
       next
     end
     if Fbe.octo.off_quota
