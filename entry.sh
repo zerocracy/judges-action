@@ -143,7 +143,7 @@ fi
 ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
-    --summary \
+    --summary=add \
     --shuffle=aaa \
     --boost=github-events \
     --timeout=180 \
