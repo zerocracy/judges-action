@@ -20,6 +20,7 @@ Fbe.fb.query(
   "(and
     (eq where 'github')
     (exists who)
+    (not (exists stale))
     (unique who)
     (empty (and
       (eq who $who)
@@ -39,6 +40,7 @@ end
 Fbe.fb.query(
   "(and
     (eq what 'who-has-name')
+    (not (exists stale))
     (eq where 'github')
     (exists who)
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days')))"

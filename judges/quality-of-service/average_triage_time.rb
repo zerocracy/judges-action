@@ -23,6 +23,7 @@ def average_triage_time(fact)
           (eq where 'github')
           (eq repository #{Fbe.octo.repo_id_by_name(repo)})
           (eq issue #{issue[:number]})
+          (not (exists stale))
           (eq what 'label-was-attached')
           (exists when)
           (or

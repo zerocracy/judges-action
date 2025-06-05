@@ -22,6 +22,7 @@ class TestAddReviewComments < Jp::Test
     fact.what = what
     fact.issue = pl[:id]
     fact.repository = repo
+    fact.where = 'github'
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what \"#{what}\")").each.to_a
     assert_equal(pl[:id], facts.first.issue)
@@ -39,6 +40,7 @@ class TestAddReviewComments < Jp::Test
     fact.what = what
     fact.issue = pl[:id]
     fact.repository = repo
+    fact.where = 'github'
     fact.review_comments = 1
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what \"#{what}\")").each.to_a
@@ -62,6 +64,7 @@ class TestAddReviewComments < Jp::Test
       fact.what = what
       fact.issue = pl[:id]
       fact.repository = repo
+      fact.where = 'github'
     end
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what \"#{what}\")").each.to_a
@@ -81,6 +84,7 @@ class TestAddReviewComments < Jp::Test
     fact.what = what
     fact.issue = pl[:id]
     fact.repository = repo
+    fact.where = 'github'
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what '#{what}')").each.to_a
     assert_equal(pl[:id], facts.first.issue)

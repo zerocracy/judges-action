@@ -14,23 +14,24 @@ require 'fbe/who'
 Fbe.conclude do
   quota_aware
   on "(and
+    (eq where 'github')
+    (exists repository)
+    (exists what)
+    (exists issue)
+    (not (exists stale))
+    (unique issue)
+    (empty
+      (and
         (eq where 'github')
-        (exists repository)
-        (exists what)
-        (exists issue)
-        (unique issue)
-        (empty
-          (and
-            (eq where 'github')
-            (eq repository $repository)
-            (eq issue $issue)
-            (eq what 'issue-was-opened')))
-        (empty
-          (and
-            (eq where 'github')
-            (eq repository $repository)
-            (eq issue $issue)
-            (eq what 'pull-was-opened'))))"
+        (eq repository $repository)
+        (eq issue $issue)
+        (eq what 'issue-was-opened')))
+    (empty
+      (and
+        (eq where 'github')
+        (eq repository $repository)
+        (eq issue $issue)
+        (eq what 'pull-was-opened'))))"
 
   consider do |f|
     type =

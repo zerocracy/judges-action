@@ -19,6 +19,7 @@ users = Fbe.fb.query(
   "(and
     (eq where 'github')
     (eq what 'who-has-name')
+    (not (exists stale))
     (exists who)
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '2 days')))"
 ).each.map(&:who).uniq

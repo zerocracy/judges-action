@@ -25,7 +25,10 @@ end
 
 Fbe.conclude do
   quota_aware
-  on '(and (eq what "quality-of-service") (exists when) (absent since))'
+  on '(and
+    (eq what "quality-of-service")
+    (exists when)
+    (absent since))'
   consider do |f|
     pmp = Fbe.fb.query("(and (eq what 'pmp') (eq area 'quality') (exists qos_days))").each.to_a.first
     f.since = f.when - (((!pmp.nil? && pmp['qos_days']&.first) || 28) * 24 * 60 * 60)

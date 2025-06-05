@@ -20,6 +20,7 @@ Fbe.conclude do
   on "(and
     (exists issue)
     (exists repository)
+    (not (exists stale))
     (eq where 'github')
     (eq what 'pull-was-opened')
     (empty

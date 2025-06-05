@@ -13,7 +13,7 @@ require 'fbe/conclude'
 
 Fbe.conclude do
   quota_aware
-  on '(and (eq where "github") (exists who))'
+  on '(and (eq where "github") (exists who) (not (exists stale)))'
   consider do |f|
     Fbe.octo.user(f.who)
   rescue Octokit::NotFound
