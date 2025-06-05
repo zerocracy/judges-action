@@ -37,3 +37,5 @@ users.each do |who|
     end
   $loog.info("GitHub user ##{who} is gone, deleted it in #{done} facts")
 end
+
+Fbe.octo.print_trace!

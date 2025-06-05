@@ -25,3 +25,5 @@ Fbe.conclude do
     Fbe.delete(f, 'repository')
   end
 end
+
+Fbe.octo.print_trace!

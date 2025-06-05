@@ -48,3 +48,5 @@ Fbe.fb.query(
   next if nick.nil?
   Fbe.overwrite(f, 'name', nick)
 end
+
+Fbe.octo.print_trace!

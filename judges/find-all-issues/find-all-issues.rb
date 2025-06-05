@@ -66,3 +66,5 @@ require 'fbe/issue'
     end
   end
 end
+
+Fbe.octo.print_trace!

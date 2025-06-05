@@ -58,3 +58,5 @@ Fbe.iterate do
     issue
   end
 end
+
+Fbe.octo.print_trace!

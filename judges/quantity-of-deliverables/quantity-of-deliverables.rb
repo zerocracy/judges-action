@@ -13,9 +13,12 @@
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/regularly.rb Implementation of Fbe.regularly
 # @note Each supporting file with total_* prefix implements a specific metric collection
 
+require 'fbe/octo'
 require 'fbe/regularly'
 require_relative '../../lib/incremate'
 
 Fbe.regularly('scope', 'qod_interval', 'qod_days') do |f|
   Jp.incremate(f, __dir__, 'total')
 end
+
+Fbe.octo.print_trace!

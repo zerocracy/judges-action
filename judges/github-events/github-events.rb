@@ -319,3 +319,5 @@ Fbe.iterate do
     end
   end
 end
+
+Fbe.octo.print_trace!

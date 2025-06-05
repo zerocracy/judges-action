@@ -25,3 +25,5 @@ Fbe.conclude do
     Fbe.delete(f, 'who')
   end
 end
+
+Fbe.octo.print_trace!

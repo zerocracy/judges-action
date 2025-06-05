@@ -60,3 +60,5 @@ Fbe.conclude do
     end
   end
 end
+
+Fbe.octo.print_trace!

@@ -38,3 +38,5 @@ Fbe.conclude do
     $loog.info("Found #{c} review comments in #{repo}##{f.issue} (what: #{f.what})")
   end
 end
+
+Fbe.octo.print_trace!

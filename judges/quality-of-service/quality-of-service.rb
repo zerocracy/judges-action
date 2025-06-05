@@ -14,8 +14,9 @@
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/conclude.rb Implementation of Fbe.conclude
 # @note Each supporting file with average_* prefix implements a specific metric calculation
 
-require 'fbe/regularly'
 require 'fbe/conclude'
+require 'fbe/octo'
+require 'fbe/regularly'
 require_relative '../../lib/incremate'
 
 Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
@@ -38,3 +39,5 @@ Fbe.conclude do
     Jp.incremate(f, __dir__, 'average', avoid_duplicate: true)
   end
 end
+
+Fbe.octo.print_trace!

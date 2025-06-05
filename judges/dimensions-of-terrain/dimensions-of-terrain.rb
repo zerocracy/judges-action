@@ -13,6 +13,7 @@
 
 require 'time'
 require 'fbe/fb'
+require 'fbe/octo'
 require_relative '../../lib/incremate'
 
 f = Fbe.fb.query(
@@ -27,3 +28,5 @@ if f.nil?
 end
 
 Jp.incremate(f, __dir__, 'total')
+
+Fbe.octo.print_trace!
