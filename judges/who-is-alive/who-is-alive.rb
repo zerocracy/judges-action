@@ -34,7 +34,7 @@ users.each do |who|
     Fbe.fb.query("(eq who #{who})").each do |n|
       n.stale = "user ##{who}"
     end
-  $loog.info("GitHub user ##{who} is gone, deleted it in #{done} facts")
+  $loog.info("GitHub user ##{who} is gone, marked #{done} facts as stale")
 end
 
 Fbe.octo.print_trace!
