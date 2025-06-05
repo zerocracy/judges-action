@@ -11,7 +11,6 @@
 # @see ../../lib/nick_of.rb Implementation of the nick retrieval logic
 # @note This judge runs periodically to ensure all users have up-to-date nicknames recorded
 
-require 'fbe/delete'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'

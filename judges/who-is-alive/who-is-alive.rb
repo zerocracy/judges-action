@@ -6,12 +6,11 @@
 # Judge that verifies GitHub users still exist and are active.
 # Checks GitHub users in the factbase that haven't been updated in the last 2 days,
 # attempts to retrieve their nickname, and if the user no longer exists in GitHub,
-# removes their references from the factbase to maintain data integrity.
+# mark the entire fact as "stale".
 #
 # @see ../../lib/nick_of.rb Implementation of the nick retrieval logic
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/delete.rb Implementation of Fbe.delete
 
-require 'fbe/delete'
 require 'fbe/fb'
 require 'fbe/octo'
 require_relative '../../lib/nick_of'
@@ -33,7 +32,7 @@ users.each do |who|
   Fbe.fb.query("(and (eq what 'who-has-name') (eq who #{who}))").delete!
   done =
     Fbe.fb.query("(eq who #{who})").each do |n|
-      Fbe.delete(n, 'who')
+      n.stale = "user ##{who}"
     end
   $loog.info("GitHub user ##{who} is gone, deleted it in #{done} facts")
 end

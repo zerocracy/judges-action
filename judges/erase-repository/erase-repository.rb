@@ -7,9 +7,6 @@
 # Checks all records containing repository references against the GitHub API,
 # and if a repository no longer exists (returns 404), removes the repository reference
 # from the factbase record to maintain data integrity.
-#
-# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/conclude.rb Implementation of Fbe.conclude
-# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/delete.rb Implementation of Fbe.delete
 
 require 'fbe/octo'
 require 'fbe/conclude'
