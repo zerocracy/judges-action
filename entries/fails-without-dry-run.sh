@@ -17,7 +17,7 @@ bundle exec judges eval test.fb "\$fb.insert" > /dev/null
   'INPUT_REPOSITORIES=yegor256/factbase' \
   'INPUT_VERBOSE=false' \
   'INPUT_GITHUB-TOKEN=barfoo' \
-  'INPUT_TOKEN=00000000-0000-0000-0000-000000000000' \
+  'INPUT_TOKEN=ZRCY-00000000-0000-0000-0000-000000000000' \
   "${SELF}/entry.sh" 2>&1 || true) | tee log.txt
 
 grep 'Running who-has-name' log.txt
