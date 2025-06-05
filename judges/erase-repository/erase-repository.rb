@@ -13,16 +13,15 @@
 
 require 'fbe/octo'
 require 'fbe/conclude'
-require 'fbe/delete'
 
 Fbe.conclude do
   quota_aware
-  on '(and (eq where "github") (exists repository))'
+  on '(and (eq where "github") (exists repository) (not (exists stale)))'
   consider do |f|
     Fbe.octo.repository(f.repository)
   rescue Octokit::NotFound
     $loog.info("GitHub repository ##{f.repository} is not found")
-    Fbe.delete(f, 'repository')
+    f.stale = Time.now
   end
 end
 

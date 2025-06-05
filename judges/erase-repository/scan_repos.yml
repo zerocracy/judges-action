@@ -29,9 +29,8 @@ input:
     repository: 404_124
 expected:
   - /fb[count(f)=6]
-  - /fb/f[_id=1 and where='github' and repository=1234]
-  - /fb/f[_id/v[1]=7 and _id/v[2]=2 and where='github' and not(repository)]
-  - /fb/f[_id=3 and where='gitlab' and repository=404123]
-  - /fb/f[_id=4 and where='github' and repository=1235]
-  - /fb/f[_id=5 and where='github' and not(repository)]
-  - /fb/f[_id/v[1]=8 and _id/v[2]=6 and where='github' and not(repository)]
+  - /fb/f[_id=1 and not(stale) and repository]
+  - /fb/f[_id=2 and repository and stale]
+  - /fb/f[_id=3 and repository and not(stale)]
+  - /fb/f[_id=4 and repository and not(stale)]
+  - /fb/f[_id=6 and repository and stale]
