@@ -13,7 +13,6 @@
 
 require 'fbe/octo'
 require 'fbe/conclude'
-require 'fbe/delete'
 
 Fbe.conclude do
   quota_aware
@@ -22,7 +21,7 @@ Fbe.conclude do
     Fbe.octo.user(f.who)
   rescue Octokit::NotFound
     $loog.info("GitHub user ##{f.who} is not found")
-    Fbe.delete(f, 'who')
+    f.stale = "user ##{f.who}"
   end
 end
 

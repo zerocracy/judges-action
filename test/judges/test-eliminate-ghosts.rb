@@ -69,10 +69,11 @@ class TestEliminateGhosts < Jp::Test
       f.where = 'gitlab'
     end
     load_it('eliminate-ghosts', fb)
-    assert_equal(5, fb.query('(exists who)').each.to_a.size)
-    assert_equal(4, fb.query('(not (exists who))').each.to_a.size)
-    assert_equal(3, fb.query('(and (eq where "github") (exists who))').each.to_a.size)
-    assert_equal(3, fb.query('(and (eq where "github") (not (exists who)))').each.to_a.size)
+    assert_equal(7, fb.query('(exists who)').each.to_a.size)
+    assert_equal(2, fb.query('(and (exists who) (exists stale))').each.to_a.size)
+    assert_equal(2, fb.query('(not (exists who))').each.to_a.size)
+    assert_equal(5, fb.query('(and (eq where "github") (exists who))').each.to_a.size)
+    assert_equal(1, fb.query('(and (eq where "github") (not (exists who)))').each.to_a.size)
     assert_equal(2, fb.query('(and (eq where "gitlab") (exists who))').each.to_a.size)
     assert_equal(1, fb.query('(and (eq where "gitlab") (not (exists who)))').each.to_a.size)
   end

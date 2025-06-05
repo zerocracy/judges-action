@@ -21,7 +21,7 @@ Fbe.conclude do
     Fbe.octo.repository(f.repository)
   rescue Octokit::NotFound
     $loog.info("GitHub repository ##{f.repository} is not found")
-    f.stale = Time.now
+    f.stale = "repo ##{f.repository}"
   end
 end
 
