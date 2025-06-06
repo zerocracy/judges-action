@@ -6,7 +6,7 @@
 source 'https://rubygems.org'
 
 gem 'base64', '~>0.2'
-gem 'decoor', '~>0.0'
+gem 'decoor', '>0'
 gem 'factbase', '~>0.9'
 gem 'fbe', '~>0.5'
 gem 'judges', '~>0.43'
@@ -17,9 +17,9 @@ gem 'others', '~>0.0'
 gem 'qbash', '~>0.4'
 gem 'rake', '~>13.2'
 gem 'rubocop', '~>1.75', require: false
-gem 'rubocop-minitest', '~>0.38', require: false
-gem 'rubocop-performance', '~>1.25', require: false
-gem 'rubocop-rake', '~>0.7', require: false
+gem 'rubocop-minitest', '>0', require: false
+gem 'rubocop-performance', '>0', require: false
+gem 'rubocop-rake', '>0', require: false
 gem 'simplecov', '~>0.22', require: false
 gem 'simplecov-cobertura', '~>2.1', require: false
 gem 'webmock', '~>3.25', require: false

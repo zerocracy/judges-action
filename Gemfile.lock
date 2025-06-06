@@ -70,7 +70,7 @@ GEM
       net-http (>= 0.5.0)
     faraday-retry (2.3.1)
       faraday (~> 2.0)
-    fbe (0.17.0)
+    fbe (0.18.0)
       backtrace (> 0)
       baza.rb (> 0)
       decoor (> 0)
@@ -86,6 +86,7 @@ GEM
       obk (> 0)
       octokit (~> 10.0)
       others (> 0)
+      sqlite3 (~> 2.6)
       tago (> 0)
       verbose (> 0)
     ffi (1.17.2-arm64-darwin)
@@ -94,7 +95,7 @@ GEM
     fiber-storage (1.0.1)
     gli (2.22.2)
       ostruct
-    graphql (2.5.8)
+    graphql (2.5.9)
       base64
       fiber-storage
       logger
@@ -210,6 +211,9 @@ GEM
       simplecov (~> 0.19)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
+    sqlite3 (2.6.0-arm64-darwin)
+    sqlite3 (2.6.0-x64-mingw-ucrt)
+    sqlite3 (2.6.0-x86_64-linux-gnu)
     strscan (3.1.5)
     tago (0.1.0)
     timeout (0.4.3)
@@ -240,7 +244,7 @@ PLATFORMS
 
 DEPENDENCIES
   base64 (~> 0.2)
-  decoor (~> 0.0)
+  decoor (> 0)
   factbase (~> 0.9)
   fbe (~> 0.5)
   judges (~> 0.43)
@@ -251,9 +255,9 @@ DEPENDENCIES
   qbash (~> 0.4)
   rake (~> 13.2)
   rubocop (~> 1.75)
-  rubocop-minitest (~> 0.38)
-  rubocop-performance (~> 1.25)
-  rubocop-rake (~> 0.7)
+  rubocop-minitest (> 0)
+  rubocop-performance (> 0)
+  rubocop-rake (> 0)
   simplecov (~> 0.22)
   simplecov-cobertura (~> 2.1)
   webmock (~> 3.25)
