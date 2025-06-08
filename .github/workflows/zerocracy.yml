@@ -31,7 +31,7 @@ jobs:
         with:
           path: http-cache.sqlite
           key: http-cache
-      - uses: zerocracy/pages-action@0.1.5
+      - uses: zerocracy/pages-action@0.2.0
         with:
           github-token: ${{ secrets.PAT }}
           factbase: zerocracy.fb
