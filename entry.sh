@@ -57,7 +57,7 @@ fi
 
 export GLI_DEBUG=true
 
-cd "${SELF}" || exit 1
+cd "${SELF}"
 
 declare -a gopts=()
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
@@ -90,8 +90,9 @@ fi
 
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
-if printenv "INPUT_FAIL-FAST" > /dev/null; then
+if [ "$(printenv "INPUT_FAIL-FAST" || echo 'false')" == 'true' ]; then
     options+=("--fail-fast");
+    echo "Since the 'fail-fast' is set to 'true', we'll stop after the first failure"
 else
     echo "Since the 'fail-fast' is not set to 'true', we'll run all judges"
 fi
