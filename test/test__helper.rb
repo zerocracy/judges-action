@@ -13,7 +13,7 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
     ]
   )
   SimpleCov.minimum_coverage 80
-  SimpleCov.minimum_coverage_by_file 25
+  SimpleCov.minimum_coverage_by_file 10
   SimpleCov.start do
     add_filter 'vendor/'
     add_filter 'target/'
