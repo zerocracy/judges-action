@@ -10,6 +10,10 @@ VERSION=0.0.0
 
 echo "The 'judges-action' ${VERSION} is running"
 
+if [ "${INPUT_VERBOSE}" == 'true' ]; then
+    set -x
+fi
+
 if [ -z "$1" ]; then
     SELF=$(dirname "$0")
 else
@@ -32,10 +36,9 @@ if [ -z "${GITHUB_WORKSPACE}" ]; then
     exit 1
 fi
 
-cd "${GITHUB_WORKSPACE}" || exit 1
 name="$(basename "${INPUT_FACTBASE}")"
 name="${name%.*}"
-fb=$(realpath "${INPUT_FACTBASE}")
+fb=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )")
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
     echo "The file name is: \"${INPUT_FACTBASE}\""
@@ -87,17 +90,17 @@ fi
 
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
-if [ -z "${INPUT_FAIL_FAST}" ]; then
-    echo "Since the 'fail-fast' is not set to 'true', we'll run all judges"
-else
+if printenv "INPUT_FAIL-FAST" > /dev/null; then
     options+=("--fail-fast");
+else
+    echo "Since the 'fail-fast' is not set to 'true', we'll run all judges"
 fi
 
 ${JUDGES} "${gopts[@]}" eval \
     "${fb}" \
     "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 
-if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
+if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
     options+=("--no-expect-judges")
 else
@@ -130,7 +133,7 @@ if [ "${github_token_found}" == "false" ]; then
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
+if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     echo "We are in 'dry' mode, skipping the 'pull'"
 else
     ${JUDGES} "${gopts[@]}" pull \
@@ -138,6 +141,15 @@ else
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${fb}"
+fi
+
+sqlite=$(printenv "INPUT_SQLITE-CACHE" || true)
+if [ -n "${sqlite}" ]; then
+    sqlite=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
+    options+=("--option=sqlite_cache=${sqlite}");
+    echo "Using SQLite for HTTP caching: ${sqlite}"
+else
+    echo "SQLite is not used for HTTP caching, because sqlite-cache option is not set"
 fi
 
 ${JUDGES} "${gopts[@]}" update \
@@ -160,7 +172,7 @@ else
     action_version="${VERSION}!${action_version}"
 fi
 
-if [ "$(printenv "INPUT_DRY-RUN")" == 'true' ]; then
+if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     echo "We are in 'dry' mode, skipping the 'push'"
 else
     ${JUDGES} "${gopts[@]}" push \

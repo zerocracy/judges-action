@@ -43,7 +43,7 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
       $loog.debug("#{n} is here: #{fact[n].first}")
       next
     end
-    if Fbe.octo.off_quota
+    if Fbe.octo.off_quota?
       $loog.info('No GitHub quota left, it is time to stop')
       break
     end
