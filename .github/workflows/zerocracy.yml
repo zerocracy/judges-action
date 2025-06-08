@@ -16,21 +16,13 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/cache@v4
-        with:
-          path: http-cache.sqlite
-          key: http-cache
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.12.1
+      - uses: zerocracy/judges-action@0.13.0
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
           factbase: zerocracy.fb
-      - uses: actions/cache/save@v4
-        with:
-          path: http-cache.sqlite
-          key: http-cache
       - uses: zerocracy/pages-action@0.2.0
         with:
           github-token: ${{ secrets.PAT }}
