@@ -149,6 +149,10 @@ if [ -n "${sqlite}" ]; then
     sqlite=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
     options+=("--option=sqlite_cache=${sqlite}");
     echo "Using SQLite for HTTP caching: ${sqlite}"
+    ${JUDGES} "${gopts[@]}" download \
+        "--token=${INPUT_TOKEN}" \
+        "--owner=${owner}" \
+        "${name}" "${sqlite}"
 else
     echo "SQLite is not used for HTTP caching, because sqlite-cache option is not set"
 fi
@@ -165,6 +169,15 @@ ${JUDGES} "${gopts[@]}" update \
     "${options[@]}" \
     "${ALL_JUDGES}" \
     "${fb}"
+
+if [ -e "${sqlite}" ]; then
+    ${JUDGES} "${gopts[@]}" upload \
+        "--token=${INPUT_TOKEN}" \
+        "--owner=${owner}" \
+        "${name}" "${sqlite}"
+else
+    echo "SQLite is not used for HTTP caching, because sqlite-cache option is not set"
+fi
 
 action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
 if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
