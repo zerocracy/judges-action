@@ -157,13 +157,17 @@ else
     echo "SQLite is not used for HTTP caching, because sqlite-cache option is not set"
 fi
 
+minutes=15
+timeout=$((15 * 60))
+echo "Update will run for up to ${minutes} minutes (${timeout} seconds)"
+
 ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
     --summary=add \
     --shuffle=aaa \
     --boost=github-events \
-    --timeout=180 \
+    "--timeout=${timeout}" \
     --lib "${SELF}/lib" \
     --max-cycles "${INPUT_CYCLES}" \
     "${options[@]}" \
