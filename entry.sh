@@ -165,6 +165,9 @@ timeout=$((minutes * 60))
 echo "Update will run for up to ${minutes} minutes (${timeout} seconds)"
 
 cycles=${INPUT_CYCLES}
+if [ -z "${cycles}" ]; then
+    cycles=3
+fi
 echo "Total number of cycles to run is ${cycles}"
 
 ${JUDGES} "${gopts[@]}" update \
@@ -173,9 +176,9 @@ ${JUDGES} "${gopts[@]}" update \
     --summary=add \
     --shuffle=aaa \
     --boost=github-events \
-    "--timeout=${timeout}" \
+    --timeout "${timeout}" \
     --lib "${SELF}/lib" \
-    --max-cycles "${INPUT_CYCLES}" \
+    --max-cycles "${cycles}" \
     "${options[@]}" \
     "${ALL_JUDGES}" \
     "${fb}"
