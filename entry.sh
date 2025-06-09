@@ -157,9 +157,15 @@ else
     echo "SQLite is not used for HTTP caching, because sqlite-cache option is not set"
 fi
 
-minutes=15
-timeout=$((15 * 60))
+minutes=${INPUT_TIMEOUT}
+if [ -z "${minutes}" ]; then
+    minutes=15
+fi
+timeout=$((minutes * 60))
 echo "Update will run for up to ${minutes} minutes (${timeout} seconds)"
+
+cycles=${INPUT_CYCLES}
+echo "Total number of cycles to run is ${cycles}"
 
 ${JUDGES} "${gopts[@]}" update \
     --no-log \

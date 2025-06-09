@@ -37,6 +37,10 @@ inputs:
     description: 'Skip all judges, make no changes to the factbase'
     required: false
     default: false
+  timeout:
+    description: 'The number of seconds to spend on update'
+    required: false
+    default: 15
   cycles:
     description: 'How many update cycles to run (keep it under 10)'
     required: true
