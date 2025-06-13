@@ -15,6 +15,8 @@ require_relative '../test__helper'
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
 class TestTypeWasAttached < Jp::Test
+  using SmartFactbase
+
   def test_catches_type_event
     WebMock.disable_net_connect!
     rate_limit_up
@@ -184,6 +186,64 @@ class TestTypeWasAttached < Jp::Test
       assert_equal(2, f.size)
       assert_equal(46, f.first.issue)
       assert_equal(55, f.first.repository)
+    end
+  end
+
+  def test_catches_type_event_by_5_repeats
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stubs = []
+    stubs << stub_github(
+      'https://api.github.com/repositories/42/issues/42/timeline?per_page=100',
+      body: [
+        {
+          event: 'issue_type_added', node_id: 'ITAE_examplevq862Ga8lzwAAAAQZanzv',
+          actor: { id: 42 }, created_at: Time.now
+        }
+      ]
+    )
+    [43, 44, 45, 46].each do |issue|
+      stubs << stub_github("https://api.github.com/repositories/42/issues/#{issue}/timeline?per_page=100", body: [])
+    end
+    fb = Factbase.new
+    fb.with(what: 'issue-was-opened', repository: 42, issue: 42, where: 'github')
+      .with(what: 'issue-was-opened', repository: 42, issue: 43, where: 'github')
+      .with(what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
+      .with(what: 'issue-was-opened', repository: 42, issue: 46, where: 'github')
+      .with(what: 'issue-was-opened', repository: 42, issue: 47, where: 'github')
+      .with(what: 'issue-was-opened', repository: 42, issue: 48, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('type-was-attached', fb)
+      assert(fb.one?(what: 'type-was-attached', repository: 42, issue: 42, where: 'github',
+                     type: 'Bug', who: 526_301))
+      assert(fb.one?(what: 'types-were-scanned', repository: 42, latest: 46, where: 'github'))
+      stubs.each { WebMock.remove_request_stub(_1) }.clear
+      [47, 48].each do |issue|
+        stubs << stub_github("https://api.github.com/repositories/42/issues/#{issue}/timeline?per_page=100", body: [])
+      end
+      load_it('type-was-attached', fb)
+      assert(fb.one?(what: 'types-were-scanned', repository: 42, latest: 0, where: 'github'))
+      stubs.each { WebMock.remove_request_stub(_1) }.clear
+      [43, 44, 45, 46].each do |issue|
+        stubs << stub_github("https://api.github.com/repositories/42/issues/#{issue}/timeline?per_page=100", body: [])
+      end
+      stubs << stub_github(
+        'https://api.github.com/repositories/42/issues/47/timeline?per_page=100',
+        body: [
+          {
+            event: 'issue_type_added', node_id: 'ITAE_examplevq862Ga8lzwAAAAQZanzv',
+            actor: { id: 42 }, created_at: Time.now
+          }
+        ]
+      )
+      load_it('type-was-attached', fb)
+      assert(fb.one?(what: 'type-was-attached', repository: 42, issue: 47, where: 'github',
+                     type: 'Bug', who: 526_301))
+      assert(fb.one?(what: 'types-were-scanned', repository: 42, latest: 47, where: 'github'))
+      stubs.each { WebMock.remove_request_stub(_1) }.clear
     end
   end
 end
