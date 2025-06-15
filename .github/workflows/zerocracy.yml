@@ -19,12 +19,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: zerocracy/judges-action@0.14.2
         with:
+          verbose: true
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
           factbase: zerocracy.fb
       - uses: zerocracy/pages-action@0.2.0
         with:
+          verbose: true
           github-token: ${{ secrets.PAT }}
           factbase: zerocracy.fb
           output: pages
