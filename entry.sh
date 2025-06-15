@@ -42,7 +42,7 @@ fb=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || ec
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
     echo "The file name is: \"${INPUT_FACTBASE}\""
-    echo "A base name must only include low-case English letters, numbers, and a dash,"
+    echo "A base name must only include lowercase English letters, numbers, and a dash,"
     echo "may start only with a letter, and may not be longer than 24 characters."
     exit 1
 fi
@@ -63,7 +63,7 @@ declare -a gopts=(--echo)
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
     gopts+=('--verbose')
 else
-    echo "Since the 'verbose' is not set to 'true', you won't see detailed logs"
+    echo "Since 'verbose' is not set to 'true', you won't see detailed logs"
 fi
 
 GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
@@ -92,9 +92,9 @@ options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
 if [ "$(printenv "INPUT_FAIL-FAST" || echo 'false')" == 'true' ]; then
     options+=("--fail-fast");
-    echo "Since the 'fail-fast' is set to 'true', we'll stop after the first failure"
+    echo "Since 'fail-fast' is set to 'true', we'll stop after the first failure"
 else
-    echo "Since the 'fail-fast' is not set to 'true', we'll run all judges"
+    echo "Since 'fail-fast' is not set to 'true', we'll run all judges even if some of them fail"
 fi
 
 ${JUDGES} "${gopts[@]}" eval \
@@ -128,14 +128,14 @@ if [ "${github_token_found}" == "false" ]; then
     fi
 fi
 if [ "${github_token_found}" == "false" ]; then
-    echo "You haven't provided GitHub token, via the 'github-token' option."
+    echo "You haven't provided a GitHub token via the 'github-token' option."
     echo "We stop here, because all further processing most definitely will fail."
     exit 1
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
-    echo "We are in 'dry' mode, skipping the 'pull'"
+    echo "We are in 'dry' mode, skipping 'pull'"
 else
     ${JUDGES} "${gopts[@]}" pull \
         --timeout=0 \
@@ -154,7 +154,7 @@ if [ -n "${sqlite}" ]; then
         "--owner=${owner}" \
         "${name}" "${sqlite}"
 else
-    echo "SQLite is not used for HTTP caching, because sqlite-cache option is not set"
+    echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
 
 minutes=${INPUT_TIMEOUT}
@@ -162,13 +162,13 @@ if [ -z "${minutes}" ]; then
     minutes=15
 fi
 timeout=$((minutes * 60))
-echo "Update will run for up to ${minutes} minutes (${timeout} seconds)"
+echo "The update will run for up to ${minutes} minutes (${timeout} seconds)"
 
 cycles=${INPUT_CYCLES}
 if [ -z "${cycles}" ]; then
     cycles=3
 fi
-echo "Total number of cycles to run is ${cycles}"
+echo "The total number of cycles to run is ${cycles}"
 
 ${JUDGES} "${gopts[@]}" update \
     --no-log \
@@ -189,7 +189,7 @@ if [ -e "${sqlite}" ]; then
         "--owner=${owner}" \
         "${name}" "${sqlite}"
 else
-    echo "SQLite is not used for HTTP caching, because sqlite-cache option is not set"
+    echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
 
 action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
@@ -200,7 +200,7 @@ else
 fi
 
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
-    echo "We are in 'dry' mode, skipping the 'push'"
+    echo "We are in 'dry' mode, skipping 'push'"
 else
     ${JUDGES} "${gopts[@]}" push \
         --no-zip \
