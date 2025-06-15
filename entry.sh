@@ -59,7 +59,7 @@ export GLI_DEBUG=true
 
 cd "${SELF}"
 
-declare -a gopts=()
+declare -a gopts=(--echo)
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
     gopts+=('--verbose')
 else
