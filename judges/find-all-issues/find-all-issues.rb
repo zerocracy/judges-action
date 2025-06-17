@@ -45,6 +45,7 @@ require 'fbe/issue'
         next 0
       end
       total = 0
+      found = 0
       first = issue
       before = Time.now
       Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
@@ -58,11 +59,12 @@ require 'fbe/issue'
             issue = ff.issue
           end
         next if f.nil?
+        found += 1
         f.when = json[:created_at]
         f.who = json.dig(:user, :id)
         f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
       end
-      $loog.info("Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, in #{before.ago}")
+      $loog.info("Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}, in #{before.ago}")
       issue
     end
   end
