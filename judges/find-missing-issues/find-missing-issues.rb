@@ -30,6 +30,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
   ).each.to_a.map(&:issue).uniq.sort
   must = (issues.min..issues.max).to_a
   missing = must - issues
+  added = 0
   missing.each do |i|
     json = Fbe.octo.issue(repo, i)
     type = json[:pull_request] ? 'pull' : 'issue'
@@ -42,12 +43,17 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
       end
     next if f.nil?
     f.when = json[:created_at]
-    p json
     f.who = json.dig(:user, :id)
     f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
     $loog.info("Lost #{type} ##{Fbe.issue(f)} was found")
+    added += 1
   rescue Octokit::NotFound
     $loog.info("The issue ##{i} doesn't exist in #{repo}")
+  end
+  if missing.empty?
+    $loog.info("No missing issues in #{repo}")
+  else
+    $loog.info("Checked #{missing.count} missing issues in #{repo}, #{added} facts added")
   end
 end
 
