@@ -41,10 +41,11 @@ require 'fbe/issue'
       begin
         after = Fbe.octo.issue(repo, issue)[:created_at]
       rescue Octokit::NotFound
-        $loog.debug("The #{type} ##{issue} doesn't exist, time to start from zero")
+        $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero")
         next 0
       end
       total = 0
+      first = issue
       before = Time.now
       Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
         total += 1
@@ -61,7 +62,7 @@ require 'fbe/issue'
         f.who = json.dig(:user, :id)
         f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
       end
-      $loog.info("Checked #{total} #{type}s in #{repo} in #{before.ago}")
+      $loog.info("Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, in #{before.ago}")
       issue
     end
   end
