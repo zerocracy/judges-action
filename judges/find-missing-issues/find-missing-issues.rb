@@ -31,8 +31,12 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
   must = (issues.min..issues.max).to_a
   missing = must - issues
   added = 0
-  missing.each do |i|
+  missing.take(20).each do |i|
     json = Fbe.octo.issue(repo, i)
+    if json[:number].nil?
+      $loog.warn("Apparently, the JSON for the issue ##{i} doesn't have 'number' field")
+      next
+    end
     type = json[:pull_request] ? 'pull' : 'issue'
     f =
       Fbe.if_absent do |n|
