@@ -6,7 +6,7 @@ set -e -o pipefail
 
 start=$(date +%s)
 
-VERSION=0.0.0
+VERSION=0.14.8
 
 echo "The 'judges-action' ${VERSION} is running"
 
