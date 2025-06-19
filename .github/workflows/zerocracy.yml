@@ -24,6 +24,8 @@ jobs:
           github-token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
           factbase: zerocracy.fb
+          options: |
+            sqlite_cache_maxsize=50000000
       - uses: zerocracy/pages-action@0.2.0
         with:
           verbose: true
