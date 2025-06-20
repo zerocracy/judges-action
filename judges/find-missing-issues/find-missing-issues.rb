@@ -28,6 +28,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
   issues = Fbe.fb.query(
     "(and (eq where 'github') (eq repository #{r.repository}) (exists issue) (unique issue))"
   ).each.to_a.map(&:issue).uniq.sort
+  next if issues.empty?
   must = (issues.min..issues.max).to_a
   missing = must - issues
   added = 0

@@ -13,6 +13,9 @@ require_relative '../test__helper'
 class TestWhoIsAlive < Jp::Test
   def test_finds_dead_users
     WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/user/444', status: 404, body: '')
     fb = Factbase.new
     f = fb.insert

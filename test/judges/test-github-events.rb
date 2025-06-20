@@ -388,12 +388,14 @@ class TestGithubEvents < Jp::Test
     rate_limit_up
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42').to_return(
       body: { id: 42, full_name: 'foo/foo' }.to_json, headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/repositories/42/events?per_page=100').to_return(
@@ -859,7 +861,8 @@ class TestGithubEvents < Jp::Test
           id: 526_302
         }
       ].to_json, headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/8086956').to_return(
