@@ -56,6 +56,10 @@ Fbe.conclude do
         fact.issue = f.issue
         fact.when = json[:created_at]
         fact.who = json.dig(:user, :id)
+        if type == 'pull'
+          ref = json.dig(:pull_request, :head, :ref)
+          fact.branch = ref unless ref.nil?
+        end
         fact.details = "The #{type} #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
       end
     end

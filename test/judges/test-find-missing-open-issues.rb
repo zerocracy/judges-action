@@ -28,7 +28,7 @@ class TestFindMissingOpenIssues < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/issues/143',
                 body: {
                   id: 855, number: 143, user: { login: 'user2', id: 422, type: 'User' },
-                  pull_request: { merged_at: nil },
+                  pull_request: { merged_at: nil, head: { ref: 'master' } },
                   created_at: Time.parse('2025-05-29 17:00:55 UTC'), closed_at: Time.parse('2025-05-01 18:20:00 UTC')
                 })
     stub_github('https://api.github.com/repos/foo/foo/issues/50',
@@ -39,7 +39,7 @@ class TestFindMissingOpenIssues < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/issues/52',
                 body: {
                   id: 875, number: 52, user: { login: 'user2', id: 422, type: 'User' },
-                  pull_request: { merged_at: nil },
+                  pull_request: { merged_at: nil, head: { ref: 'master' } },
                   created_at: Time.parse('2025-05-28 17:40:55 UTC'), closed_at: Time.parse('2025-06-01 18:25:00 UTC')
                 })
     stub_github('https://api.github.com/repos/foo/foo/issues/404',
