@@ -26,6 +26,7 @@ jobs:
           factbase: zerocracy.fb
           options: |
             sqlite_cache_maxsize=50000000
+            sqlite_cache_maxvsize=100000
       - uses: zerocracy/pages-action@0.2.0
         with:
           verbose: true

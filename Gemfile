@@ -12,6 +12,7 @@ gem 'fbe', '~>0.19'
 gem 'judges', '~>0.47'
 gem 'minitest', '~>5.25', require: false
 gem 'minitest-reporters', '~>1.7', require: false
+gem 'online', '~>0.0'
 gem 'os', '~>1.1', require: false
 gem 'others', '~>0.0'
 gem 'qbash', '~>0.4'

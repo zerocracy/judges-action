@@ -102,6 +102,8 @@ determine the repositories to manage, where
 `yegor256/judges` means a specific repo,
 and
 `-yegor256/judges` means an exclusion of the repo from the list.
+* `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
+* `sqlite_cache_maxsize=10K` is the maximum size of a single HTTP entry to cache
 
 The `zerocracy/pages-action` plugin is responsible for rendering
 the summary HTML page: its configuration is not explained here,
