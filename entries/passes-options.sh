@@ -24,4 +24,4 @@ env "GITHUB_WORKSPACE=$(pwd)" \
   "${SELF}/entry.sh" 2>&1 | tee log.txt
 
 test -e "${name}.fb"
-grep "The foo42 is set" 'log.txt'
+grep " --option=foo42=bar" 'log.txt'
