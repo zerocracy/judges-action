@@ -19,7 +19,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: zerocracy/judges-action@0.14.13
         with:
-          verbose: true
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
