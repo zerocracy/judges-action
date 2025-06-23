@@ -11,4 +11,5 @@ input:
     issue: 94
 expected:
   - /fb[count(f)=1]
-  - /fb/f[stale]
+  - /fb/f[comments and comments_appreciated and comments_by_author and comments_by_reviewers]
+  - /fb/f[not(stale)]

@@ -81,6 +81,7 @@ while IFS= read -r o; do
         VITALS_URL="${v}"
         continue
     fi
+    options+=("--option=${k}=${v}");
 done <<< "${INPUT_OPTIONS}"
 if [ -z "${INPUT_REPOSITORIES}" ]; then
     echo "The 'repositories' plugin parameter is not set"

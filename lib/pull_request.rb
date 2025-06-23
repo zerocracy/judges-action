@@ -23,7 +23,7 @@ def Jp.comments_info(pr, repo: nil)
       icomments.count { |c| c[:user][:id] == pr[:user][:id] },
     comments_by_reviewers: ccomments.count { |c| c[:user][:id] != pr[:user][:id] } +
       icomments.count { |c| c[:user][:id] != pr[:user][:id] },
-    comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments),
+    comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
     comments_resolved: Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
   }
 end
@@ -34,15 +34,16 @@ end
 # @param [Array<Sawyer::Resource>] issue_comments Array of comments from issue
 # @param [Array<Sawyer::Resource>] code_comments Array of comments for pull request
 # @return [Integer] sum of the number of reactions to comments issue and pull request comments
-def Jp.count_appreciated_comments(pr, issue_comments, code_comments)
+def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
+  repo = pr[:base][:repo][:full_name] if repo.nil?
   issue_appreciations =
     issue_comments.sum do |comment|
-      Fbe.octo.issue_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
+      Fbe.octo.issue_comment_reactions(repo, comment[:id])
          .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
     end
   code_appreciations =
     code_comments.sum do |comment|
-      Fbe.octo.pull_request_review_comment_reactions(pr[:base][:repo][:full_name], comment[:id])
+      Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
          .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
     end
   issue_appreciations + code_appreciations
