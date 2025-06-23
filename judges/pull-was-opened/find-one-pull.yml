@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+input:
+  -
+    _id: 4
+    what: pull-was-closed
+    where: github
+    issue: 143
+    repository: 680
+    who: 4444
+    when: 2025-05-27T23:54:44Z
+options:
+  testing: true
+expected:
+  - /fb[count(f)=2]
+  - /fb/f[where='github' and what='pull-was-opened' and repository=680 and issue=143]
