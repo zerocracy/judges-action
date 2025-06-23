@@ -49,6 +49,7 @@ require 'fbe/issue'
       first = issue
       before = Time.now
       Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
+        next if Fbe.octo.off_quota?
         total += 1
         f =
           Fbe.if_absent do |ff|

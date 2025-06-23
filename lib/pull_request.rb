@@ -11,20 +11,20 @@ require_relative 'jp'
 #
 # @param [Sawyer::Resource] pr The pull request
 # @return [Hash] number of many kind of comments
-def Jp.comments_info(pr)
-  code_comments = Fbe.octo.pull_request_comments(pr[:base][:repo][:full_name], pr[:number])
-  issue_comments = Fbe.octo.issue_comments(pr[:base][:repo][:full_name], pr[:number])
+def Jp.comments_info(pr, repo: nil)
+  repo = pr[:base][:repo][:full_name] if repo.nil?
+  ccomments = Fbe.octo.pull_request_comments(repo, pr[:number])
+  icomments = Fbe.octo.issue_comments(repo, pr[:number])
+  org, rname = repo.split('/')
   {
-    comments: pr[:comments] + pr[:review_comments],
-    comments_to_code: code_comments.count,
-    comments_by_author: code_comments.count { |comment| comment[:user][:id] == pr[:user][:id] } +
-      issue_comments.count { |comment| comment[:user][:id] == pr[:user][:id] },
-    comments_by_reviewers: code_comments.count { |comment| comment[:user][:id] != pr[:user][:id] } +
-      issue_comments.count { |comment| comment[:user][:id] != pr[:user][:id] },
-    comments_appreciated: Jp.count_appreciated_comments(pr, issue_comments, code_comments),
-    comments_resolved: Fbe.github_graph.resolved_conversations(
-      pr[:base][:repo][:full_name].split('/').first, pr[:base][:repo][:name], pr[:number]
-    ).count
+    comments: (pr[:comments] || 0) + (pr[:review_comments] || 0),
+    comments_to_code: ccomments.count,
+    comments_by_author: ccomments.count { |c| c[:user][:id] == pr[:user][:id] } +
+      icomments.count { |c| c[:user][:id] == pr[:user][:id] },
+    comments_by_reviewers: ccomments.count { |c| c[:user][:id] != pr[:user][:id] } +
+      icomments.count { |c| c[:user][:id] != pr[:user][:id] },
+    comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments),
+    comments_resolved: Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
   }
 end
 
