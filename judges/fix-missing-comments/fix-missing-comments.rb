@@ -17,7 +17,7 @@ require_relative '../../lib/pull_request'
 Fbe.conclude do
   quota_aware
   on "(and
-    (eq what 'pull-was-merged')
+    (or (eq what 'pull-was-merged') (eq what 'pull-was-closed'))
     (eq where 'github')
     (exists issue)
     (exists repository)
@@ -34,7 +34,7 @@ Fbe.conclude do
       next
     end
     Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
-    $loog.info("Comments found for #{Fbe.issue(f)}")
+    $loog.info("Comments found for #{Fbe.issue(f)}: #{f.comments}")
   end
 end
 
