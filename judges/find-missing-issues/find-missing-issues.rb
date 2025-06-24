@@ -51,7 +51,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
     f.when = json[:created_at]
     f.who = json.dig(:user, :id)
     f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
-    $loog.info("Lost #{type} ##{Fbe.issue(f)} was found")
+    $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     added += 1
   rescue Octokit::NotFound
     $loog.info("The issue ##{i} doesn't exist in #{repo}")

@@ -11,14 +11,23 @@
 require 'fbe/octo'
 require 'fbe/conclude'
 
+good = {}
+
 Fbe.conclude do
   quota_aware
   on '(and (eq where "github") (exists repository) (not (exists stale)))'
   consider do |f|
-    Fbe.octo.repository(f.repository)
-  rescue Octokit::NotFound
-    $loog.info("GitHub repository ##{f.repository} is not found")
-    f.stale = "repo ##{f.repository}"
+    r = f.repository
+    if good[r].nil?
+      begin
+        Fbe.octo.repository(r)
+        good[r] = true
+      rescue Octokit::NotFound
+        good[r] = false
+        $loog.info("GitHub repository ##{r} is not found")
+      end
+    end
+    f.stale = "repo ##{r}" unless good[r]
   end
 end
 
