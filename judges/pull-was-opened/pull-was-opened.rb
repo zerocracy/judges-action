@@ -26,7 +26,7 @@ Fbe.conclude do
         (eq where 'github')
         (eq repository $repository)
         (eq issue $issue)
-        (eq what 'issue-was-opened'))))"
+        (eq what 'pull-was-opened'))))"
   follow 'where repository issue'
   draw do |n, f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
