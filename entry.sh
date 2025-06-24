@@ -167,7 +167,7 @@ echo "The update will run for up to ${minutes} minutes (${timeout} seconds)"
 
 cycles=${INPUT_CYCLES}
 if [ -z "${cycles}" ]; then
-    cycles=3
+    cycles=2
 fi
 echo "The total number of cycles to run is ${cycles}"
 
