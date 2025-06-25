@@ -34,9 +34,9 @@ Fbe.conclude do
       $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
       next
     end
-    Fbe.fb.query("(and (eq what 'who-has-name') (eq who #{f.who}))").delete!
+    Fbe.fb.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who}))").delete!
     done =
-      Fbe.fb.query("(eq who #{f.who})").each do |n|
+      Fbe.fb.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
         n.stale = "user ##{f.who}"
       end
     $loog.info("GitHub user ##{f.who} is gone, marked #{done} facts as stale")
