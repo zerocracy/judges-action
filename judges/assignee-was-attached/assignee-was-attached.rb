@@ -11,15 +11,15 @@ require 'fbe/octo'
 Fbe.conclude do
   quota_aware
   on "(and
+    (eq where 'github')
+    (eq what 'issue-was-opened')
+    (exists issue)
+    (empty
+      (and
         (eq where 'github')
-        (eq what 'issue-was-opened')
-        (empty
-          (and
-            (eq where 'github')
-            (eq repository $repository)
-            (eq issue $issue)
-            (eq what 'issue-was-assigned'))))"
-
+        (eq repository $repository)
+        (eq issue $issue)
+        (eq what 'issue-was-assigned'))))"
   consider do |f|
     Fbe.octo.issue_events(
       Fbe.octo.repo_name_by_id(f.repository),

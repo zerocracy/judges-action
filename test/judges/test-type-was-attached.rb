@@ -49,6 +49,7 @@ class TestTypeWasAttached < Jp::Test
     )
     fb = Factbase.new
     fb.insert.then do |f|
+      f.where = 'github'
       f.what = 'issue-was-opened'
       f.repository = 42
       f.issue = 42
@@ -81,6 +82,7 @@ class TestTypeWasAttached < Jp::Test
     )
     fb = Factbase.new
     fb.insert.then do |f|
+      f.where = 'github'
       f.what = 'issue-was-opened'
       f.repository = 44
       f.issue = 44
@@ -118,12 +120,14 @@ class TestTypeWasAttached < Jp::Test
     stub_github('https://api.github.com/repositories/44', body: { id: 44, full_name: 'foo/foo' })
     fb = Factbase.new
     fb.insert.then do |f|
+      f.where = 'github'
       f.what = 'issue-was-opened'
       f.repository = 44
       f.issue = 44
       f.where = 'github'
     end
     fb.insert.then do |f|
+      f.where = 'github'
       f.what = 'issue-was-opened'
       f.repository = 44
       f.issue = 45
@@ -167,12 +171,14 @@ class TestTypeWasAttached < Jp::Test
     stub_github('https://api.github.com/repositories/55', body: { id: 55, full_name: 'bar/bar' })
     fb = Factbase.new
     fb.insert.then do |f|
+      f.where = 'github'
       f.what = 'issue-was-opened'
       f.repository = 50
       f.issue = 46
       f.where = 'github'
     end
     fb.insert.then do |f|
+      f.where = 'github'
       f.what = 'issue-was-opened'
       f.repository = 55
       f.issue = 46

@@ -39,6 +39,7 @@ class TestLabelWasAttached < Jp::Test
     )
     fb = Factbase.new
     op = fb.insert
+    op.where = 'github'
     op.what = 'issue-was-opened'
     op.repository = 42
     op.issue = 42

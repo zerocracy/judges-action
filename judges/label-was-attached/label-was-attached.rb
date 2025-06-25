@@ -24,17 +24,18 @@ badges = %w[bug enhancement question]
 Fbe.iterate do
   as 'labels-were-scanned'
   by "(agg
+    (and
+      (eq where 'github')
+      (eq repository $repository)
+      (eq what 'issue-was-opened')
+      (gt issue $before)
+      (empty
         (and
+          (eq where 'github')
           (eq repository $repository)
-          (eq what 'issue-was-opened')
-          (gt issue $before)
-          (empty
-            (and
-              (eq where 'github')
-              (eq repository $repository)
-              (eq issue $issue)
-              (eq what 'label-was-attached'))))
-        (min issue))"
+          (eq issue $issue)
+          (eq what 'label-was-attached'))))
+    (min issue))"
   quota_aware
   repeats 5
   over do |repository, issue|
