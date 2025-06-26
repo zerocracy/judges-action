@@ -806,6 +806,39 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, f.last.review_comments)
   end
 
+  def test_skip_pull_request_review_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11124',
+        type: 'PullRequestReviewEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown',
+          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11124))
+    assert(fb.none?(event_type: 'PullRequestReviewEvent'))
+  end
+
   def test_release_event_contributors
     WebMock.disable_net_connect!
     rate_limit_up
