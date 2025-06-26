@@ -33,8 +33,10 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
   must = (issues.min..issues.max).to_a
   missing = must - issues
   added = 0
+  checked = 0
   missing.take(20).each do |i|
     json = Fbe.octo.issue(repo, i)
+    checked += 1
     if json[:number].nil?
       $loog.warn("Apparently, the JSON for the issue ##{i} doesn't have 'number' field")
       next
@@ -54,12 +56,18 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
     $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     added += 1
   rescue Octokit::NotFound
+    Fbe.if_absent do |n|
+      n.where = 'github'
+      n.what = 'issue-was-lost'
+      n.repository = r.repository
+      n.issue = i
+    end
     $loog.info("The issue ##{i} doesn't exist in #{repo}")
   end
   if missing.empty?
     $loog.info("No missing issues in #{repo}")
   else
-    $loog.info("Checked #{missing.count} missing issues in #{repo}, #{added} facts added")
+    $loog.info("Checked #{checked} out of #{missing.count} missing issues in #{repo}, #{added} facts added")
   end
 end
 
