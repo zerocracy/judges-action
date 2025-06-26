@@ -1427,6 +1427,75 @@ class TestGithubEvents < Jp::Test
     assert_equal(0, fb.size)
   end
 
+  def test_skip_push_event_if_push_to_non_default_branch
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/develop', head: 'f5d59b035' },
+        created_at: '2025-06-26 19:25:00 UTC'
+      }]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned'))
+    assert(fb.none?(what: 'git-was-pushed'))
+  end
+
+  def test_success_add_push_event_to_factbase
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+        created_at: '2025-06-26 19:03:16 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100', body: [])
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11111))
+    assert(
+      fb.one?(
+        what: 'git-was-pushed', event_id: 11111, when: Time.parse('2025-06-26 19:03:16 UTC'),
+        event_type: 'PushEvent', repository: 42, who: 43, push_id: 2412, ref: 'refs/heads/master',
+        commit: 'f5d59b035', default_branch: 'master', to_master: 1,
+        details:
+          "A new Git push #2412 has arrived to foo/foo, made by @yegor256 (default branch is 'master'), " \
+          'not associated with any pull request.'
+      )
+    )
+  end
+
   def test_prevent_creation_of_duplicate_facts_upon_multiple_pr_closures
     WebMock.disable_net_connect!
     rate_limit_up
