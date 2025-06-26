@@ -60,11 +60,11 @@ Fbe.iterate do
         nn.who = te[:actor][:id]
         nn.when = te[:created_at]
         nn.details =
-          "The '##{nn.label}' label was attached by @#{te[:actor][:login]} " \
+          "The '#{nn.label}' label was attached by @#{te[:actor][:login]} " \
           "to the issue #{Fbe.issue(nn)}."
       end
     rescue Octokit::NotFound
-      $loog.debug("Can't find issue ##{issue} in repository ##{repository}")
+      $loog.info("Can't find issue ##{issue} in repository ##{repository}")
     end
     issue
   end

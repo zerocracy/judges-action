@@ -59,11 +59,11 @@ Fbe.iterate do
         nn.who = tee.dig('actor', 'id')
         nn.when = tee['created_at']
         nn.details =
-          "The '##{nn.type}' type was attached by @#{tee.dig('actor', 'login')} " \
+          "The '#{nn.type}' type was attached by @#{tee.dig('actor', 'login')} " \
           "to the issue #{Fbe.issue(nn)}."
       end
     rescue Octokit::NotFound
-      $loog.debug("Can't find issue ##{issue} in repository ##{repository}")
+      $loog.info("Can't find issue ##{issue} in repository ##{repository}")
     end
     issue
   end
