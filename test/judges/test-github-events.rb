@@ -16,6 +16,8 @@ require_relative '../test__helper'
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
 class TestGithubEvents < Jp::Test
+  using SmartFactbase
+
   def test_create_tag_event
     WebMock.disable_net_connect!
     rate_limit_up
@@ -533,6 +535,39 @@ class TestGithubEvents < Jp::Test
     load_it('github-events', fb)
     f = fb.query('(eq what "issue-was-closed")').each.to_a
     assert_equal(1, f.length)
+  end
+
+  def test_skip_issue_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11125',
+        type: 'IssuesEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown',
+          issue: { number: 123 }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11125))
+    assert(fb.none?(event_type: 'IssuesEvent'))
   end
 
   def test_watch_pull_request_review_events
