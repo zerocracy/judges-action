@@ -566,7 +566,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11125))
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_125))
     assert(fb.none?(event_type: 'IssuesEvent'))
   end
 
@@ -835,7 +835,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11124))
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_124))
     assert(fb.none?(event_type: 'PullRequestReviewEvent'))
   end
 
@@ -1483,10 +1483,10 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11111))
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_111))
     assert(
       fb.one?(
-        what: 'git-was-pushed', event_id: 11111, when: Time.parse('2025-06-26 19:03:16 UTC'),
+        what: 'git-was-pushed', event_id: 11_111, when: Time.parse('2025-06-26 19:03:16 UTC'),
         event_type: 'PushEvent', repository: 42, who: 43, push_id: 2412, ref: 'refs/heads/master',
         commit: 'f5d59b035', default_branch: 'master', to_master: 1,
         details:
@@ -1525,10 +1525,10 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11122))
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_122))
     assert(
       fb.one?(
-        what: 'pull-was-opened', event_id: 11122, when: Time.parse('2025-06-27 19:00:05 UTC'),
+        what: 'pull-was-opened', event_id: 11_122, when: Time.parse('2025-06-27 19:00:05 UTC'),
         event_type: 'PullRequestEvent', repository: 42, who: 45, issue: 456, branch: '487',
         details: 'The pull request foo/foo#456 has been opened by @user.'
       )
@@ -1564,7 +1564,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11123))
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_123))
     assert(fb.none?(event_type: 'PullRequestEvent'))
   end
 
