@@ -1496,6 +1496,78 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_success_add_opened_pull_request_event_to_factbase
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11122',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 456,
+          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11122))
+    assert(
+      fb.one?(
+        what: 'pull-was-opened', event_id: 11122, when: Time.parse('2025-06-27 19:00:05 UTC'),
+        event_type: 'PullRequestEvent', repository: 42, who: 45, issue: 456, branch: '487',
+        details: 'The pull request foo/foo#456 has been opened by @user.'
+      )
+    )
+  end
+
+  def test_skip_pull_request_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11123',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown', number: 123,
+          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11123))
+    assert(fb.none?(event_type: 'PullRequestEvent'))
+  end
+
   def test_prevent_creation_of_duplicate_facts_upon_multiple_pr_closures
     WebMock.disable_net_connect!
     rate_limit_up
