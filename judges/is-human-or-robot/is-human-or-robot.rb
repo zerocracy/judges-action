@@ -19,6 +19,7 @@ Fbe.conclude do
   on '(and
     (eq where "github")
     (not (exists stale))
+    (exists what)
     (exists who)
     (not (exists is_human)))'
   consider do |f|
@@ -31,10 +32,10 @@ Fbe.conclude do
     type = json[:type]
     if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
       f.is_human = 0
-      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot")
+      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{f.what}")
     else
       f.is_human = 1
-      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is not a bot")
+      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is not a bot, in #{f.what}")
     end
   end
 end
