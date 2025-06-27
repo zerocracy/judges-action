@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'undefined local variable or method ''r'' for #<Object:0x00007f8ac1ae8910>'
   inserted: 8
-  seconds: 312.075113296
+  seconds: 351.483471983
   version: 0.50.5
   what: judges-summary
-  when: 2025-06-27 08:14:58.744383091 Z
+  when: 2025-06-27 08:47:55.146026558 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -133165,13 +133166,6 @@
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 1013266
-  _time: 2025-06-27 07:39:17.057673068 Z
-  _version: 0.12.1/0.50.5/
-  latest: 2802129398
-  repository: 820463873
-  what: events-were-scanned
-  where: github
 - _id: 1013267
   _time: 2025-06-27 07:39:19.616735613 Z
   _version: 0.12.1/0.50.5/
@@ -134329,13 +134323,6 @@
   when: 2025-06-26 17:46:48.000000000 Z
   where: github
   who: 526301
-- _id: 1013405
-  _time: 2025-06-27 08:13:13.048937055 Z
-  _version: 0.12.1/0.50.5/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
 - _id: 1013410
   _time: 2025-06-27 08:13:17.356619617 Z
   _version: 0.12.1/0.50.5/
@@ -134347,62 +134334,6 @@
   when: 2025-06-27 06:08:51.000000000 Z
   where: github
   who: 526301
-- _id: 1013419
-  _time: 2025-06-27 08:13:25.019200438 Z
-  _version: 0.12.1/0.50.5/
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 1013426
-  _time: 2025-06-27 08:13:31.571443385 Z
-  _version: 0.12.1/0.50.5/
-  latest: 26
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 1013427
-  _time: 2025-06-27 08:13:32.541948566 Z
-  _version: 0.12.1/0.50.5/
-  latest: 5
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 1013428
-  _time: 2025-06-27 08:13:33.389516310 Z
-  _version: 0.12.1/0.50.5/
-  latest: 10
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 1013429
-  _time: 2025-06-27 08:13:34.295627198 Z
-  _version: 0.12.1/0.50.5/
-  latest: 56
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 1013430
-  _time: 2025-06-27 08:13:34.928396742 Z
-  _version: 0.12.1/0.50.5/
-  latest: 0
-  repository: 974194993
-  what: labels-were-scanned
-  where: github
-- _id: 1013431
-  _time: 2025-06-27 08:13:35.785551663 Z
-  _version: 0.12.1/0.50.5/
-  latest: 50
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 1013432
-  _time: 2025-06-27 08:13:36.709681961 Z
-  _version: 0.12.1/0.50.5/
-  latest: 562
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
 - _id: 1013433
   _time: 2025-06-27 08:13:47.824722857 Z
   _version: 0.12.1/0.50.5/
@@ -134528,4 +134459,116 @@
   latest: 46
   repository: 799113787
   what: min-pull-was-found
+  where: github
+- _id: 1013451
+  _time: 2025-06-27 08:44:27.790918287 Z
+  _version: 0.12.1/0.50.5/
+  latest: 2802129398
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 1013452
+  _time: 2025-06-27 08:45:34.349652147 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#32 has been opened by @github-actions[bot].
+  issue: 32
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-06-13 04:14:44.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013453
+  _time: 2025-06-27 08:45:35.523460572 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#33 has been opened by @github-actions[bot].
+  issue: 33
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-06-13 04:14:59.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013463
+  _time: 2025-06-27 08:47:12.015651822 Z
+  _version: 0.12.1/0.50.5/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 1013478
+  _time: 2025-06-27 08:47:32.544065571 Z
+  _version: 0.12.1/0.50.5/
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#770.
+  issue: 770
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2025-06-26 17:30:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 1013487
+  _time: 2025-06-27 08:47:43.545462559 Z
+  _version: 0.12.1/0.50.5/
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#775.
+  issue: 775
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2025-06-27 07:09:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 1013490
+  _time: 2025-06-27 08:47:46.655139969 Z
+  _version: 0.12.1/0.50.5/
+  latest: 67
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 1013491
+  _time: 2025-06-27 08:47:48.033950136 Z
+  _version: 0.12.1/0.50.5/
+  latest: 45
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 1013492
+  _time: 2025-06-27 08:47:48.816364443 Z
+  _version: 0.12.1/0.50.5/
+  latest: 0
+  repository: 974194993
+  what: labels-were-scanned
+  where: github
+- _id: 1013493
+  _time: 2025-06-27 08:47:50.076726709 Z
+  _version: 0.12.1/0.50.5/
+  latest: 32
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 1013494
+  _time: 2025-06-27 08:47:51.278484006 Z
+  _version: 0.12.1/0.50.5/
+  latest: 5
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 1013495
+  _time: 2025-06-27 08:47:52.520659577 Z
+  _version: 0.12.1/0.50.5/
+  latest: 15
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 1013496
+  _time: 2025-06-27 08:47:53.279132874 Z
+  _version: 0.12.1/0.50.5/
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 1013497
+  _time: 2025-06-27 08:47:54.823764792 Z
+  _version: 0.12.1/0.50.5/
+  latest: 56
+  repository: 181044958
+  what: labels-were-scanned
   where: github
