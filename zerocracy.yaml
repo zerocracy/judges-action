@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'undefined local variable or method ''r'' for #<Object:0x00007fd8048c1ef8>'
   inserted: 8
-  seconds: 360.01480269
+  seconds: 305.196922833
   version: 0.50.5
   what: judges-summary
-  when: 2025-06-27 09:44:14.956310503 Z
+  when: 2025-06-27 10:13:00.315619403 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -133045,13 +133046,6 @@
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 1013157
-  _time: 2025-06-27 05:09:22.547383514 Z
-  _version: 0.12.0/0.50.5/
-  latest: 2726236576
-  repository: 181044958
-  what: events-were-scanned
-  where: github
 - _id: 1013199
   _time: 2025-06-27 06:11:17.743804723 Z
   _version: 0.12.1/0.50.5/
@@ -133638,76 +133632,6 @@
   when: 2025-06-27 07:09:51.000000000 Z
   where: github
   who: 526301
-- _id: 1013499
-  _time: 2025-06-27 09:10:44.068734385 Z
-  _version: 0.12.1/0.50.5/
-  latest: 2852680214
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 1013513
-  _time: 2025-06-27 09:11:12.148681248 Z
-  _version: 0.12.1/0.50.5/
-  latest: 0
-  repository: 849726475
-  what: types-were-scanned
-  where: github
-- _id: 1013514
-  _time: 2025-06-27 09:11:12.887932542 Z
-  _version: 0.12.1/0.50.5/
-  latest: 0
-  repository: 974194993
-  what: types-were-scanned
-  where: github
-- _id: 1013532
-  _time: 2025-06-27 09:11:37.918140458 Z
-  _version: 0.12.1/0.50.5/
-  latest: 207
-  repository: 181044958
-  what: types-were-scanned
-  where: github
-- _id: 1013533
-  _time: 2025-06-27 09:11:39.288071172 Z
-  _version: 0.12.1/0.50.5/
-  latest: 151
-  repository: 820463873
-  what: types-were-scanned
-  where: github
-- _id: 1013534
-  _time: 2025-06-27 09:11:40.031107919 Z
-  _version: 0.12.1/0.50.5/
-  latest: 0
-  repository: 840215648
-  what: types-were-scanned
-  where: github
-- _id: 1013535
-  _time: 2025-06-27 09:11:41.288087963 Z
-  _version: 0.12.1/0.50.5/
-  latest: 73
-  repository: 799113787
-  what: types-were-scanned
-  where: github
-- _id: 1013536
-  _time: 2025-06-27 09:11:43.061362170 Z
-  _version: 0.12.1/0.50.5/
-  latest: 160
-  repository: 799177290
-  what: types-were-scanned
-  where: github
-- _id: 1013537
-  _time: 2025-06-27 09:11:44.395693892 Z
-  _version: 0.12.1/0.50.5/
-  latest: 235
-  repository: 802720676
-  what: types-were-scanned
-  where: github
-- _id: 1013538
-  _time: 2025-06-27 09:11:45.662522552 Z
-  _version: 0.12.1/0.50.5/
-  latest: 53
-  repository: 798641472
-  what: types-were-scanned
-  where: github
 - _id: 1013542
   _time: 2025-06-27 09:12:13.055421356 Z
   _version: 0.12.1/0.50.5/
@@ -133792,129 +133716,816 @@
   repository: 849726475
   what: events-were-scanned
   where: github
-- _id: 1013580
-  _time: 2025-06-27 09:43:12.217782009 Z
+- _id: 1013598
+  _time: 2025-06-27 10:09:09.684718348 Z
   _version: 0.12.1/0.50.5/
-  latest: 26
-  repository: 802720676
-  what: min-issue-was-found
+  latest: 2852680214
+  repository: 799177290
+  what: events-were-scanned
   where: github
-- _id: 1013581
-  _time: 2025-06-27 09:43:20.980869218 Z
+- _id: 1013599
+  _time: 2025-06-27 10:10:13.594284983 Z
+  _version: 0.12.1/0.50.5/
+  latest: 2726236576
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 1013612
+  _time: 2025-06-27 10:10:28.744942398 Z
+  _version: 0.12.1/0.50.5/
+  latest: 0
+  repository: 849726475
+  what: types-were-scanned
+  where: github
+- _id: 1013634
+  _time: 2025-06-27 10:10:49.736569121 Z
+  _version: 0.12.1/0.50.5/
+  latest: 6
+  repository: 974194993
+  what: types-were-scanned
+  where: github
+- _id: 1013635
+  _time: 2025-06-27 10:10:50.578248580 Z
+  _version: 0.12.1/0.50.5/
+  latest: 60
+  repository: 798641472
+  what: types-were-scanned
+  where: github
+- _id: 1013636
+  _time: 2025-06-27 10:10:51.412786347 Z
+  _version: 0.12.1/0.50.5/
+  latest: 276
+  repository: 802720676
+  what: types-were-scanned
+  where: github
+- _id: 1013637
+  _time: 2025-06-27 10:10:52.637004099 Z
+  _version: 0.12.1/0.50.5/
+  latest: 188
+  repository: 799177290
+  what: types-were-scanned
+  where: github
+- _id: 1013638
+  _time: 2025-06-27 10:10:53.470166843 Z
+  _version: 0.12.1/0.50.5/
+  latest: 5
+  repository: 840215648
+  what: types-were-scanned
+  where: github
+- _id: 1013639
+  _time: 2025-06-27 10:10:54.400195921 Z
+  _version: 0.12.1/0.50.5/
+  latest: 216
+  repository: 181044958
+  what: types-were-scanned
+  where: github
+- _id: 1013640
+  _time: 2025-06-27 10:10:55.263245022 Z
+  _version: 0.12.1/0.50.5/
+  latest: 80
+  repository: 799113787
+  what: types-were-scanned
+  where: github
+- _id: 1013641
+  _time: 2025-06-27 10:10:56.167937594 Z
+  _version: 0.12.1/0.50.5/
+  latest: 161
+  repository: 820463873
+  what: types-were-scanned
+  where: github
+- _id: 1013642
+  _time: 2025-06-27 10:11:07.414398408 Z
   _version: 0.12.1/0.50.5/
   latest: 26
   repository: 799113787
   what: min-issue-was-found
   where: github
-- _id: 1013582
-  _time: 2025-06-27 09:43:29.228614725 Z
+- _id: 1013643
+  _time: 2025-06-27 10:11:14.240931209 Z
   _version: 0.12.1/0.50.5/
-  latest: 11
-  repository: 181044958
+  latest: 26
+  repository: 802720676
   what: min-issue-was-found
   where: github
-- _id: 1013583
-  _time: 2025-06-27 09:43:30.839185674 Z
+- _id: 1013644
+  _time: 2025-06-27 10:11:16.199549918 Z
   _version: 0.12.1/0.50.5/
-  latest: 3
-  repository: 974194993
-  what: min-issue-was-found
+  details: The issue zerocracy/fbe#228 has been opened by @yegor256.
+  issue: 228
+  repository: 820463873
+  what: issue-was-opened
+  when: 2025-06-27 10:05:58.000000000 Z
   where: github
-- _id: 1013584
-  _time: 2025-06-27 09:43:32.120117122 Z
-  _version: 0.12.1/0.50.5/
-  latest: 3
-  repository: 849726475
-  what: min-issue-was-found
-  where: github
-- _id: 1013585
-  _time: 2025-06-27 09:43:46.417445967 Z
-  _version: 0.12.1/0.50.5/
-  latest: 50
-  repository: 799177290
-  what: min-issue-was-found
-  where: github
-- _id: 1013586
-  _time: 2025-06-27 09:43:54.077220672 Z
-  _version: 0.12.1/0.50.5/
-  latest: 25
-  repository: 798641472
-  what: min-issue-was-found
-  where: github
-- _id: 1013587
-  _time: 2025-06-27 09:44:01.347206165 Z
+  who: 526301
+- _id: 1013645
+  _time: 2025-06-27 10:11:23.217339607 Z
   _version: 0.12.1/0.50.5/
   latest: 21
   repository: 820463873
   what: min-issue-was-found
   where: github
-- _id: 1013588
-  _time: 2025-06-27 09:44:03.156147715 Z
+- _id: 1013646
+  _time: 2025-06-27 10:11:41.072068914 Z
   _version: 0.12.1/0.50.5/
-  latest: 77
+  latest: 50
+  repository: 799177290
+  what: min-issue-was-found
+  where: github
+- _id: 1013647
+  _time: 2025-06-27 10:11:50.720290586 Z
+  _version: 0.12.1/0.50.5/
+  latest: 11
+  repository: 181044958
+  what: min-issue-was-found
+  where: github
+- _id: 1013648
+  _time: 2025-06-27 10:11:59.738802206 Z
+  _version: 0.12.1/0.50.5/
+  latest: 25
+  repository: 798641472
+  what: min-issue-was-found
+  where: github
+- _id: 1013649
+  _time: 2025-06-27 10:12:01.780716921 Z
+  _version: 0.12.1/0.50.5/
+  latest: 3
+  repository: 974194993
+  what: min-issue-was-found
+  where: github
+- _id: 1013650
+  _time: 2025-06-27 10:12:02.590988939 Z
+  _version: 0.12.1/0.50.5/
+  latest: 0
+  repository: 849726475
+  what: min-issue-was-found
+  where: github
+- _id: 1013651
+  _time: 2025-06-27 10:12:04.718692745 Z
+  _version: 0.12.1/0.50.5/
+  latest: 78
   repository: 840215648
   what: min-issue-was-found
   where: github
-- _id: 1013589
-  _time: 2025-06-27 09:44:05.393264945 Z
+- _id: 1013652
+  _time: 2025-06-27 10:12:07.524973601 Z
   _version: 0.12.1/0.50.5/
-  latest: 45
-  repository: 820463873
-  what: min-pull-was-found
-  where: github
-- _id: 1013590
-  _time: 2025-06-27 09:44:06.580998298 Z
-  _version: 0.12.1/0.50.5/
-  latest: 10
-  repository: 974194993
-  what: min-pull-was-found
-  where: github
-- _id: 1013591
-  _time: 2025-06-27 09:44:07.697387341 Z
-  _version: 0.12.1/0.50.5/
-  latest: 133
+  latest: 135
   repository: 181044958
   what: min-pull-was-found
   where: github
-- _id: 1013592
-  _time: 2025-06-27 09:44:09.027459635 Z
+- _id: 1013653
+  _time: 2025-06-27 10:12:08.899949822 Z
   _version: 0.12.1/0.50.5/
-  latest: 43
-  repository: 802720676
-  what: min-pull-was-found
-  where: github
-- _id: 1013593
-  _time: 2025-06-27 09:44:10.161396761 Z
-  _version: 0.12.1/0.50.5/
-  latest: 5
+  latest: 6
   repository: 849726475
   what: min-pull-was-found
   where: github
-- _id: 1013594
-  _time: 2025-06-27 09:44:11.275618906 Z
+- _id: 1013654
+  _time: 2025-06-27 10:12:10.283542715 Z
   _version: 0.12.1/0.50.5/
-  latest: 52
-  repository: 799113787
-  what: min-pull-was-found
-  where: github
-- _id: 1013595
-  _time: 2025-06-27 09:44:12.476961057 Z
-  _version: 0.12.1/0.50.5/
-  latest: 11
-  repository: 840215648
-  what: min-pull-was-found
-  where: github
-- _id: 1013596
-  _time: 2025-06-27 09:44:13.679483018 Z
-  _version: 0.12.1/0.50.5/
-  latest: 41
+  latest: 43
   repository: 799177290
   what: min-pull-was-found
   where: github
-- _id: 1013597
-  _time: 2025-06-27 09:44:14.757788154 Z
+- _id: 1013655
+  _time: 2025-06-27 10:12:11.450745280 Z
   _version: 0.12.1/0.50.5/
-  latest: 72
+  latest: 48
+  repository: 820463873
+  what: min-pull-was-found
+  where: github
+- _id: 1013656
+  _time: 2025-06-27 10:12:12.641249965 Z
+  _version: 0.12.1/0.50.5/
+  latest: 13
+  repository: 840215648
+  what: min-pull-was-found
+  where: github
+- _id: 1013657
+  _time: 2025-06-27 10:12:13.734114153 Z
+  _version: 0.12.1/0.50.5/
+  latest: 76
   repository: 798641472
   what: min-pull-was-found
   where: github
+- _id: 1013658
+  _time: 2025-06-27 10:12:14.937238529 Z
+  _version: 0.12.1/0.50.5/
+  latest: 55
+  repository: 799113787
+  what: min-pull-was-found
+  where: github
+- _id: 1013659
+  _time: 2025-06-27 10:12:16.243053980 Z
+  _version: 0.12.1/0.50.5/
+  latest: 46
+  repository: 802720676
+  what: min-pull-was-found
+  where: github
+- _id: 1013660
+  _time: 2025-06-27 10:12:17.295326335 Z
+  _version: 0.12.1/0.50.5/
+  latest: 11
+  repository: 974194993
+  what: min-pull-was-found
+  where: github
+- _id: 1013661
+  _time: 2025-06-27 10:12:18.432548737 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/judges#2 has been opened by @renovate[bot].
+  issue: 2
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-05-11 08:31:50.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013662
+  _time: 2025-06-27 10:12:19.061682063 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/judges#23 has been opened by @renovate[bot].
+  issue: 23
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-05-15 22:46:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013663
+  _time: 2025-06-27 10:12:19.585996754 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/judges#32 has been opened by @renovate[bot].
+  issue: 32
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-05-22 06:00:01.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013664
+  _time: 2025-06-27 10:12:20.075693190 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/judges#33 has been opened by @renovate[bot].
+  issue: 33
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-05-23 10:35:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013665
+  _time: 2025-06-27 10:12:20.648402393 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/judges#88 has been opened by @renovate[bot].
+  issue: 88
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-07-16 11:13:58.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013666
+  _time: 2025-06-27 10:12:21.103307846 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/judges#154 has been opened by @yegor256.
+  issue: 154
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-12-19 08:28:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 1013667
+  _time: 2025-06-27 10:12:21.675224778 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/judges#157 has been opened by @yegor256.
+  issue: 157
+  repository: 799113787
+  what: pull-was-opened
+  when: 2024-12-24 05:50:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 1013668
+  _time: 2025-06-27 10:12:22.568869507 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#2 has been opened by @renovate[bot].
+  issue: 2
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-10 09:00:25.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013669
+  _time: 2025-06-27 10:12:23.131628426 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#3 has been opened by @renovate[bot].
+  issue: 3
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-10 09:00:28.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013670
+  _time: 2025-06-27 10:12:23.624463133 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#5 has been opened by @renovate[bot].
+  issue: 5
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-10 11:28:18.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013671
+  _time: 2025-06-27 10:12:24.222423523 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#6 has been opened by @renovate[bot].
+  issue: 6
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-10 11:28:23.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013672
+  _time: 2025-06-27 10:12:24.710082290 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#7 has been opened by @renovate[bot].
+  issue: 7
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-10 12:14:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013673
+  _time: 2025-06-27 10:12:25.179042001 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#31 has been opened by @renovate[bot].
+  issue: 31
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-16 01:03:37.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013674
+  _time: 2025-06-27 10:12:25.680228178 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#43 has been opened by @renovate[bot].
+  issue: 43
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-22 11:01:44.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013675
+  _time: 2025-06-27 10:12:26.203712300 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#44 has been opened by @renovate[bot].
+  issue: 44
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-23 11:28:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013676
+  _time: 2025-06-27 10:12:26.672405903 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#56 has been opened by @renovate[bot].
+  issue: 56
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-05-31 10:03:54.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013677
+  _time: 2025-06-27 10:12:27.226751293 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#58 has been opened by @renovate[bot].
+  issue: 58
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-06-03 10:39:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013678
+  _time: 2025-06-27 10:12:27.767115972 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#96 has been opened by @renovate[bot].
+  issue: 96
+  repository: 798641472
+  what: pull-was-opened
+  when: 2024-07-16 11:44:47.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013679
+  _time: 2025-06-27 10:12:28.277582966 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#148 has been opened by @github-actions[bot].
+  issue: 148
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-01-27 11:25:55.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013680
+  _time: 2025-06-27 10:12:28.855715215 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#157 has been opened by @renovate[bot].
+  issue: 157
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-02-06 11:49:41.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013681
+  _time: 2025-06-27 10:12:29.378175238 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#162 has been opened by @renovate[bot].
+  issue: 162
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-02-21 06:18:28.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013682
+  _time: 2025-06-27 10:12:29.900038895 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#169 has been opened by @github-actions[bot].
+  issue: 169
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-02-24 13:32:39.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013683
+  _time: 2025-06-27 10:12:30.360526792 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#176 has been opened by @renovate[bot].
+  issue: 176
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-02-26 09:49:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013684
+  _time: 2025-06-27 10:12:30.870451736 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#179 has been opened by @github-actions[bot].
+  issue: 179
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-02-28 09:13:49.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013685
+  _time: 2025-06-27 10:12:31.445722329 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#194 has been opened by @github-actions[bot].
+  issue: 194
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-03-12 13:19:04.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013686
+  _time: 2025-06-27 10:12:31.953171900 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#196 has been opened by @github-actions[bot].
+  issue: 196
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-03-12 13:46:30.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013687
+  _time: 2025-06-27 10:12:32.418403096 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull yegor256/factbase#197 has been opened by @yegor256.
+  issue: 197
+  repository: 798641472
+  what: pull-was-opened
+  when: 2025-03-12 15:01:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 1013688
+  _time: 2025-06-27 10:12:33.412141938 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#36 has been opened by @renovate[bot].
+  issue: 36
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-07-11 08:15:54.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013689
+  _time: 2025-06-27 10:12:33.896500976 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#44 has been opened by @renovate[bot].
+  issue: 44
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-07-16 07:32:23.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013690
+  _time: 2025-06-27 10:12:34.404837401 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#177 has been opened by @renovate[bot].
+  issue: 177
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-19 09:32:08.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013691
+  _time: 2025-06-27 10:12:34.916847226 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#178 has been opened by @renovate[bot].
+  issue: 178
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-19 18:19:32.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013692
+  _time: 2025-06-27 10:12:35.536611560 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#179 has been opened by @renovate[bot].
+  issue: 179
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-19 22:42:10.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013693
+  _time: 2025-06-27 10:12:36.153766021 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#180 has been opened by @renovate[bot].
+  issue: 180
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-20 03:26:46.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013694
+  _time: 2025-06-27 10:12:36.618802108 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#181 has been opened by @renovate[bot].
+  issue: 181
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-20 07:30:13.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013695
+  _time: 2025-06-27 10:12:37.112022175 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#182 has been opened by @renovate[bot].
+  issue: 182
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-20 07:30:21.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013696
+  _time: 2025-06-27 10:12:37.767501339 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#183 has been opened by @renovate[bot].
+  issue: 183
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-20 12:26:17.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013697
+  _time: 2025-06-27 10:12:38.344571432 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#184 has been opened by @renovate[bot].
+  issue: 184
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-24 07:42:51.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013698
+  _time: 2025-06-27 10:12:38.872476436 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#185 has been opened by @renovate[bot].
+  issue: 185
+  repository: 802720676
+  what: pull-was-opened
+  when: 2024-12-25 12:48:16.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013699
+  _time: 2025-06-27 10:12:39.406069235 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#215 has been opened by @legolass322.
+  issue: 215
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-03-12 12:00:23.000000000 Z
+  where: github
+  who: 31362961
+- _id: 1013700
+  _time: 2025-06-27 10:12:40.032049271 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#218 has been opened by @legolass322.
+  issue: 218
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-03-12 12:43:27.000000000 Z
+  where: github
+  who: 31362961
+- _id: 1013701
+  _time: 2025-06-27 10:12:40.571153247 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#251 has been opened by @renovate[bot].
+  issue: 251
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-04-16 12:56:56.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013702
+  _time: 2025-06-27 10:12:41.038369794 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#259 has been opened by @renovate[bot].
+  issue: 259
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-04-30 11:54:07.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013703
+  _time: 2025-06-27 10:12:41.507760782 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#260 has been opened by @renovate[bot].
+  issue: 260
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-04-30 11:54:15.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013704
+  _time: 2025-06-27 10:12:42.035724561 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#272 has been opened by @yegor256.
+  issue: 272
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-05-22 07:36:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 1013705
+  _time: 2025-06-27 10:12:42.578108519 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#273 has been opened by @github-actions[bot].
+  issue: 273
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-05-22 07:51:21.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013706
+  _time: 2025-06-27 10:12:43.083579781 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/pages-action#275 has been opened by @github-actions[bot].
+  issue: 275
+  repository: 802720676
+  what: pull-was-opened
+  when: 2025-05-22 10:02:12.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013707
+  _time: 2025-06-27 10:12:44.618405684 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#2 has been opened by @github-actions[bot].
+  issue: 2
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-11 13:45:57.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013708
+  _time: 2025-06-27 10:12:45.217324846 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#3 has been opened by @renovate[bot].
+  issue: 3
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-11 13:45:59.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013709
+  _time: 2025-06-27 10:12:45.959652964 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#4 has been opened by @renovate[bot].
+  issue: 4
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-11 13:46:02.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013710
+  _time: 2025-06-27 10:12:46.407084450 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#8 has been opened by @renovate[bot].
+  issue: 8
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-17 19:01:27.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013711
+  _time: 2025-06-27 10:12:46.919736787 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#9 has been opened by @renovate[bot].
+  issue: 9
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-18 12:48:41.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013712
+  _time: 2025-06-27 10:12:47.469409520 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#10 has been opened by @renovate[bot].
+  issue: 10
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-19 07:44:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013713
+  _time: 2025-06-27 10:12:47.955474024 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#14 has been opened by @renovate[bot].
+  issue: 14
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-23 09:50:29.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013714
+  _time: 2025-06-27 10:12:48.476465214 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#15 has been opened by @renovate[bot].
+  issue: 15
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-25 03:26:16.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013715
+  _time: 2025-06-27 10:12:49.025282226 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#16 has been opened by @renovate[bot].
+  issue: 16
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-26 05:48:33.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013716
+  _time: 2025-06-27 10:12:49.522255252 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#19 has been opened by @danilax86.
+  issue: 19
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-27 17:25:39.000000000 Z
+  where: github
+  who: 46713109
+- _id: 1013717
+  _time: 2025-06-27 10:12:50.109892107 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#22 has been opened by @github-actions[bot].
+  issue: 22
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-30 13:36:50.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013718
+  _time: 2025-06-27 10:12:50.630803207 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#23 has been opened by @github-actions[bot].
+  issue: 23
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-30 13:59:35.000000000 Z
+  where: github
+  who: 41898282
+- _id: 1013719
+  _time: 2025-06-27 10:12:51.126615906 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#24 has been opened by @renovate[bot].
+  issue: 24
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-30 15:26:25.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1013720
+  _time: 2025-06-27 10:12:51.600121452 Z
+  _version: 0.12.1/0.50.5/
+  details: The pull zerocracy/judges-action#25 has been opened by @renovate[bot].
+  issue: 25
+  repository: 799177290
+  what: pull-was-opened
+  when: 2024-05-31 04:53:48.000000000 Z
+  where: github
+  who: 29139614
