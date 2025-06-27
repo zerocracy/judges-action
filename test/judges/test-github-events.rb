@@ -1306,6 +1306,32 @@ class TestGithubEvents < Jp::Test
     refute_match(/old_baz/, f.details)
   end
 
+  def test_skip_release_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '55555', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: { action: 'unknown', release: { id: 178_368, tag_name: '1.2.3' } },
+        created_at: Time.parse('2025-06-27T00:52:08Z')
+      }]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 55_555))
+  end
+
   def test_pull_request_event_with_comments
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
