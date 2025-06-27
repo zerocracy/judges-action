@@ -13,7 +13,9 @@ require_relative '../test__helper'
 class TestEraseRepository < Jp::Test
   def test_erase_not_found_repository
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/repositories/1234',
       body: { id: 1234, name: 'foo', full_name: 'foo/foo' }

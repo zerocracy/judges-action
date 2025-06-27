@@ -13,7 +13,9 @@ require_relative '../test__helper'
 class TestEliminateGhosts < Jp::Test
   def test_delete_who_if_user_not_found
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/user/526301',
       body: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false }

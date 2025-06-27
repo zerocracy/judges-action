@@ -16,7 +16,7 @@ class TestWhoHasName < Jp::Test
   def test_finds_name
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
     stub_github(
       'https://api.github.com/user/444',
@@ -35,7 +35,7 @@ class TestWhoHasName < Jp::Test
   def test_ignores_who_when_not_found
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
     stub_github(
       'https://api.github.com/user/444',
