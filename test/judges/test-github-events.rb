@@ -1677,6 +1677,77 @@ class TestGithubEvents < Jp::Test
     assert_equal(1, fb.query('(eq what "pull-was-closed")').each.to_a.size)
   end
 
+  def test_success_add_created_issue_comment_event_to_factbase
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '22222',
+        type: 'IssueCommentEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'created', issue: { number: 789 },
+          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+        },
+        created_at: '2025-06-27 19:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 22_222))
+    assert(
+      fb.one?(
+        what: 'comment-was-posted', event_id: 22_222, when: Time.parse('2025-06-27 19:00:00 UTC'), issue: 789,
+        event_type: 'IssueCommentEvent', repository: 42, who: 43, comment_id: 30_093, comment_body: 'some text',
+        details: 'A new comment #30093 has been posted to foo/foo#789 by @yegor256.'
+      )
+    )
+  end
+
+  def test_skip_issue_comment_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '22223',
+        type: 'IssueCommentEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown', issue: { number: 789 },
+          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+        },
+        created_at: '2025-06-27 19:00:00 UTC'
+      }]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 22_223))
+    assert(fb.none?(event_type: 'IssueCommentEvent'))
+  end
+
   private
 
   def stub_event(*json)
