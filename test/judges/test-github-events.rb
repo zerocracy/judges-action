@@ -45,6 +45,26 @@ class TestGithubEvents < Jp::Test
     assert_equal('foo', f.tag)
   end
 
+  def test_skip_tag_event_with_unknown_payload_ref_type
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: 11,
+        created_at: Time.now.to_s,
+        actor: { id: 42 },
+        type: 'CreateEvent',
+        repo: { id: 42 },
+        payload: { ref_type: 'unknown', ref: 'foo' }
+      }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11))
+    assert(fb.none?(event_type: 'CreateEvent'))
+  end
+
   def test_skip_watch_event
     WebMock.disable_net_connect!
     rate_limit_up
