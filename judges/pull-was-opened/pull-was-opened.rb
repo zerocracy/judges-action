@@ -35,7 +35,11 @@ Fbe.conclude do
       n.when = json[:created_at]
       n.who = json.dig(:user, :id)
       ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-      n.branch = ref if ref
+      if ref
+        n.branch = ref
+      else
+        n.stale = 'branch'
+      end
       n.details = "#{Fbe.issue(n)} has been opened by #{Fbe.who(n)}."
     rescue Octokit::NotFound
       $loog.info("The issue ##{f.issue} doesn't exist in #{repo}")
