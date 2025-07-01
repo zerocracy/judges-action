@@ -23,9 +23,9 @@ Fbe.conclude do
     (unique issue)
     (empty
       (and
-        (eq where 'github')
-        (eq repository $repository)
         (eq issue $issue)
+        (eq repository $repository)
+        (eq where 'github')
         (eq what 'issue-was-opened'))))"
   follow 'where repository issue'
   draw do |n, f|

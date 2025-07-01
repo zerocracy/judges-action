@@ -25,9 +25,9 @@ Fbe.conclude do
     (eq what 'pull-was-opened')
     (empty
       (and
-        (eq where $where)
-        (eq repository $repository)
         (eq issue $issue)
+        (eq repository $repository)
+        (eq where $where)
         (or
           (eq what 'pull-was-closed')
           (eq what 'pull-was-merged')))))"
