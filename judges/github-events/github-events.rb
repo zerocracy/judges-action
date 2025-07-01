@@ -219,8 +219,9 @@ Fbe.iterate do
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
           "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
         $loog.debug("Issue comment posted to #{Fbe.issue(fact)} by #{Fbe.who(fact)}")
+      else
+        skip_event(json)
       end
-      skip_event(json)
 
     when 'ReleaseEvent'
       fact.release = json[:payload][:release][:id]

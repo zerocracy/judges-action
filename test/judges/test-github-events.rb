@@ -16,6 +16,8 @@ require_relative '../test__helper'
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
 class TestGithubEvents < Jp::Test
+  using SmartFactbase
+
   def test_create_tag_event
     WebMock.disable_net_connect!
     rate_limit_up
@@ -41,6 +43,26 @@ class TestGithubEvents < Jp::Test
     refute_nil(f)
     assert_equal(42, f.who)
     assert_equal('foo', f.tag)
+  end
+
+  def test_skip_tag_event_with_unknown_payload_ref_type
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: 11,
+        created_at: Time.now.to_s,
+        actor: { id: 42 },
+        type: 'CreateEvent',
+        repo: { id: 42 },
+        payload: { ref_type: 'unknown', ref: 'foo' }
+      }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11))
+    assert(fb.none?(event_type: 'CreateEvent'))
   end
 
   def test_skip_watch_event
@@ -535,6 +557,39 @@ class TestGithubEvents < Jp::Test
     assert_equal(1, f.length)
   end
 
+  def test_skip_issue_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11125',
+        type: 'IssuesEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown',
+          issue: { number: 123 }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_125))
+    assert(fb.none?(event_type: 'IssuesEvent'))
+  end
+
   def test_watch_pull_request_review_events
     WebMock.disable_net_connect!
     rate_limit_up
@@ -769,6 +824,39 @@ class TestGithubEvents < Jp::Test
     assert_equal(55, f.last.who)
     assert_equal(2, f.first.review_comments)
     assert_equal(2, f.last.review_comments)
+  end
+
+  def test_skip_pull_request_review_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11124',
+        type: 'PullRequestReviewEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown',
+          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_124))
+    assert(fb.none?(event_type: 'PullRequestReviewEvent'))
   end
 
   def test_release_event_contributors
@@ -1238,6 +1326,32 @@ class TestGithubEvents < Jp::Test
     refute_match(/old_baz/, f.details)
   end
 
+  def test_skip_release_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '55555', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: { action: 'unknown', release: { id: 178_368, tag_name: '1.2.3' } },
+        created_at: Time.parse('2025-06-27T00:52:08Z')
+      }]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 55_555))
+  end
+
   def test_pull_request_event_with_comments
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
@@ -1359,6 +1473,147 @@ class TestGithubEvents < Jp::Test
     assert_equal(0, fb.size)
   end
 
+  def test_skip_push_event_if_push_to_non_default_branch
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/develop', head: 'f5d59b035' },
+        created_at: '2025-06-26 19:25:00 UTC'
+      }]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned'))
+    assert(fb.none?(what: 'git-was-pushed'))
+  end
+
+  def test_success_add_push_event_to_factbase
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+        created_at: '2025-06-26 19:03:16 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100', body: [])
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_111))
+    assert(
+      fb.one?(
+        what: 'git-was-pushed', event_id: 11_111, when: Time.parse('2025-06-26 19:03:16 UTC'),
+        event_type: 'PushEvent', repository: 42, who: 43, push_id: 2412, ref: 'refs/heads/master',
+        commit: 'f5d59b035', default_branch: 'master', to_master: 1,
+        details:
+          "A new Git push #2412 has arrived to foo/foo, made by @yegor256 (default branch is 'master'), " \
+          'not associated with any pull request.'
+      )
+    )
+  end
+
+  def test_success_add_opened_pull_request_event_to_factbase
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11122',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 456,
+          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_122))
+    assert(
+      fb.one?(
+        what: 'pull-was-opened', event_id: 11_122, when: Time.parse('2025-06-27 19:00:05 UTC'),
+        event_type: 'PullRequestEvent', repository: 42, who: 45, issue: 456, branch: '487',
+        details: 'The pull request foo/foo#456 has been opened by @user.'
+      )
+    )
+  end
+
+  def test_skip_pull_request_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11123',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown', number: 123,
+          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_123))
+    assert(fb.none?(event_type: 'PullRequestEvent'))
+  end
+
   def test_prevent_creation_of_duplicate_facts_upon_multiple_pr_closures
     WebMock.disable_net_connect!
     rate_limit_up
@@ -1466,6 +1721,244 @@ class TestGithubEvents < Jp::Test
       load_it('github-events', fb)
     end
     assert_equal(1, fb.query('(eq what "pull-was-closed")').each.to_a.size)
+  end
+
+  def test_success_add_created_issue_comment_event_to_factbase
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '22222',
+        type: 'IssueCommentEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'created', issue: { number: 789 },
+          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+        },
+        created_at: '2025-06-27 19:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 22_222))
+    assert(
+      fb.one?(
+        what: 'comment-was-posted', event_id: 22_222, when: Time.parse('2025-06-27 19:00:00 UTC'), issue: 789,
+        event_type: 'IssueCommentEvent', repository: 42, who: 43, comment_id: 30_093, comment_body: 'some text',
+        details: 'A new comment #30093 has been posted to foo/foo#789 by @yegor256.'
+      )
+    )
+  end
+
+  def test_skip_issue_comment_event_with_unknown_payload_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '22223',
+        type: 'IssueCommentEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown', issue: { number: 789 },
+          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+        },
+        created_at: '2025-06-27 19:00:00 UTC'
+      }]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 22_223))
+    assert(fb.none?(event_type: 'IssueCommentEvent'))
+  end
+
+  def test_stop_scanning_if_number_event_greater_than_max_events
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 14, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 13, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 12, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 11, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 3 }))
+    assert_equal(4, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 14))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 12))
+    assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 11))
+  end
+
+  def test_stop_scanning_if_event_id_less_or_eq_than_latest
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 15, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 14, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 13, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, latest: 14, what: 'events-were-scanned')
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 15))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
+    assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
+    assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
+  end
+
+  def test_skip_fill_up_if_event_exists_in_factbase
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 15, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(what: 'tag-was-created', event_type: 'CreateEvent', repository: 42, where: 'github', event_id: 15)
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 15))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
+  end
+
+  def test_empty_events
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/repositories/42/events?per_page=100', body: [])
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 0))
+  end
+
+  def test_not_completed_scanning
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 15, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, latest: 12, what: 'events-were-scanned')
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 12))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
   end
 
   private
