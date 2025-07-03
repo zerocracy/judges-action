@@ -89,6 +89,8 @@ The following options are expected by the plugin
   `-yegor256/judges` means an exclusion of the repo from the list.
 * `github-token` (optional) is an authentication GitHub access token
 * `verbose` (optional) makes it print debugging info if set to `true`
+* `timeout` (optional) is how many minutes each judge can spend
+* `lifetime` (optional) is how many minutes the entire update can take
 * `cycles` (optional) is a number of update cycles to run
 * `sqlite-cache` (optional) is a path of SQLite database file with HTTP cache
 
