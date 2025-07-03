@@ -14,7 +14,7 @@ permissions:
 jobs:
   zerocracy:
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: zerocracy/judges-action@0.14.22
@@ -24,6 +24,7 @@ jobs:
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
           factbase: zerocracy.fb
           timeout: 10
+          lifetime: 15
           cycles: 1
           options: |
             sqlite_cache_maxvsize=100K
