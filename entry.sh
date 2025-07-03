@@ -177,7 +177,7 @@ ${JUDGES} "${gopts[@]}" update \
     --summary=add \
     --shuffle=aaa \
     --boost=github-events \
-    --timeout "${timeout}" \
+    --lifetime "${timeout}" \
     --lib "${SELF}/lib" \
     --max-cycles "${cycles}" \
     "${options[@]}" \
