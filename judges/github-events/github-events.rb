@@ -208,6 +208,7 @@ Fbe.iterate do
       skip_event(json) if issue_seen_already?(fact)
 
     when 'IssueCommentEvent'
+      skip_event(json) # this event is not needed for now
       fact.issue = json[:payload][:issue][:number]
       case json[:payload][:action]
       when 'created'

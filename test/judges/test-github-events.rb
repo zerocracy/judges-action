@@ -1724,6 +1724,7 @@ class TestGithubEvents < Jp::Test
   end
 
   def test_success_add_created_issue_comment_event_to_factbase
+    skip('This type of event is not needed now')
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
