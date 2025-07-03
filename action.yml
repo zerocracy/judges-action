@@ -38,7 +38,11 @@ inputs:
     required: false
     default: false
   timeout:
-    description: 'The number of seconds to spend on update'
+    description: 'The number of minutes to spend on each judge'
+    required: false
+    default: 10
+  lifetime:
+    description: 'The number of minutes to spend on the entire lifetime'
     required: false
     default: 15
   cycles:

@@ -158,12 +158,19 @@ else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
 
-minutes=${INPUT_TIMEOUT}
-if [ -z "${minutes}" ]; then
-    minutes=15
+timeout=${INPUT_TIMEOUT}
+if [ -z "${timeout}" ]; then
+    timeout=10
 fi
-timeout=$((minutes * 60))
-echo "The update will run for up to ${minutes} minutes (${timeout} seconds)"
+timeout=$((timeout * 60))
+echo "Each judge will spend up to ${timeout} seconds"
+
+lifetime=${INPUT_LIFETIME}
+if [ -z "${lifetime}" ]; then
+    lifetime=15
+fi
+lifetime=$((lifetime * 60))
+echo "The update will run for up to ${lifetime} seconds"
 
 cycles=${INPUT_CYCLES}
 if [ -z "${cycles}" ]; then
@@ -177,7 +184,8 @@ ${JUDGES} "${gopts[@]}" update \
     --summary=add \
     --shuffle=aaa \
     --boost=github-events \
-    --lifetime "${timeout}" \
+    --lifetime "${lifetime}" \
+    --timeout "${timeout}" \
     --lib "${SELF}/lib" \
     --max-cycles "${cycles}" \
     "${options[@]}" \
