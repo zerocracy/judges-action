@@ -16,7 +16,9 @@ require_relative '../test__helper'
 class TestQualityOfService < Jp::Test
   def test_runs_when_run_duration_ms_is_nil
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
         'Content-Type': 'application/json',
@@ -149,7 +151,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_average_release_hocs_size_and_commits_size
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
@@ -327,7 +331,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_average_issues
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [{
@@ -377,7 +383,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_average_build_mttr
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [
@@ -470,7 +478,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_average_build_mttr_when_failure_several_times_in_a_row
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [
@@ -577,7 +587,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_average_hocs_and_files
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
@@ -736,7 +748,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_average_review_time_comments_reviewers_and_reviews
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
@@ -1062,7 +1076,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_average_triage_time
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
@@ -1194,7 +1210,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_fill_up_abandoned_facts
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [{
@@ -1318,7 +1336,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [{
@@ -1429,7 +1449,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since_and_absent_qos_days
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',

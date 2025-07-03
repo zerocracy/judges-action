@@ -15,7 +15,9 @@ require_relative '../test__helper'
 class TestDimensionsOfTerrain < Jp::Test
   def test_total_repositories
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -135,7 +137,9 @@ class TestDimensionsOfTerrain < Jp::Test
 
   def test_total_releases
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -187,7 +191,9 @@ class TestDimensionsOfTerrain < Jp::Test
 
   def test_total_stars_and_forks
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -276,7 +282,9 @@ class TestDimensionsOfTerrain < Jp::Test
 
   def test_total_files
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -407,7 +415,9 @@ class TestDimensionsOfTerrain < Jp::Test
 
   def test_total_contributors
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
@@ -488,7 +498,9 @@ class TestDimensionsOfTerrain < Jp::Test
 
   def test_total_active_contributors
     WebMock.disable_net_connect!
-    stub_github('https://api.github.com/rate_limit', body: {})
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: {
