@@ -16,9 +16,9 @@ require 'fbe/unmask_repos'
 def total_commits(_fact)
   commits = 0
   Fbe.unmask_repos.each do |repo|
-    repo_info = Fbe.octo.repository(repo)
-    next if repo_info[:size].zero?
-    commits += Fbe.github_graph.total_commits(*repo.split('/'), repo_info[:default_branch])
+    json = Fbe.octo.repository(repo)
+    next if json[:size].zero?
+    commits += Fbe.github_graph.total_commits(*repo.split('/'), json[:default_branch])
   end
   { total_commits: commits }
 end

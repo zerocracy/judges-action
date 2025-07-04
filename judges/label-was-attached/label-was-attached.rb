@@ -17,8 +17,6 @@ require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/issue'
 
-start = Time.now
-
 badges = %w[bug enhancement question]
 
 Fbe.iterate do
@@ -34,17 +32,13 @@ Fbe.iterate do
           (eq where 'github')
           (eq repository $repository)
           (eq issue $issue)
-          (eq what 'label-was-attached'))))
+          (eq what '#{$judge}'))))
     (min issue))"
   quota_aware
   repeats 5
-  over do |repository, issue|
+  over(timeout: 5 * 60) do |repository, issue|
     begin
       Fbe.octo.issue_timeline(repository, issue).each do |te|
-        if Time.now - start > 5 * 60
-          $loog.debug("We are scanning labels for #{start.ago} already, it's time to quit")
-          break
-        end
         next unless te[:event] == 'labeled'
         badge = te[:label][:name]
         next unless badges.include?(badge)

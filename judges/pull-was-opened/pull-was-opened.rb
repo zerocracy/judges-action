@@ -26,12 +26,13 @@ Fbe.conclude do
         (eq where 'github')
         (eq repository $repository)
         (eq issue $issue)
-        (eq what 'pull-was-opened'))))"
+        (eq what '#{$judge}'))))"
   follow 'where repository issue'
   draw do |n, f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
     begin
       json = Fbe.octo.issue(repo, f.issue)
+      n.what = $judge
       n.when = json[:created_at]
       n.who = json.dig(:user, :id)
       ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
@@ -41,8 +42,9 @@ Fbe.conclude do
         n.stale = 'branch'
       end
       n.details = "#{Fbe.issue(n)} has been opened by #{Fbe.who(n)}."
+      $loog.debug("The opening for #{Fbe.issue(n)} was found")
     rescue Octokit::NotFound
-      $loog.info("The issue ##{f.issue} doesn't exist in #{repo}")
+      $loog.info("The pull ##{f.issue} doesn't exist in #{repo}")
       next
     end
   end

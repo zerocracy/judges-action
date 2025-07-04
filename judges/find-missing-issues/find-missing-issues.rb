@@ -43,7 +43,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
   missing = must - issues
   added = 0
   checked = 0
-  missing.take(20).each do |i|
+  missing.take(200).each do |i|
     json = Fbe.octo.issue(repo, i)
     checked += 1
     if json[:number].nil?

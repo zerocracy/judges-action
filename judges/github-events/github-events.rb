@@ -22,8 +22,6 @@ require 'fbe/issue'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 
-start = Time.now
-
 Fbe.iterate do
   as 'events-were-scanned'
   by '(plus 0 $before)'
@@ -269,7 +267,7 @@ Fbe.iterate do
     raise "#{who} doesn't have access to the #{rname} repository, maybe it's private"
   end
 
-  over do |repository, latest|
+  over(timeout: 5 * 60) do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
     $loog.debug("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
     id = nil
@@ -280,10 +278,6 @@ Fbe.iterate do
     Fbe.octo.repository_events(repository).each_with_index do |json, idx|
       if !$options.max_events.nil? && idx >= $options.max_events
         $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
-        break
-      end
-      if Time.now - start > 5 * 60
-        $loog.debug("We are scanning GitHub events for #{start.ago} already, it's time to stop at #{rname}")
         break
       end
       total += 1

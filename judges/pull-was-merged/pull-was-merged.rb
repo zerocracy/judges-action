@@ -42,23 +42,23 @@ Fbe.conclude do
     end
     Fbe.delete(f, 'not_merged') if f['not_merged']
     Fbe.fb.txn do |fbt|
-      fbt.insert.then do |fact|
-        fact.where = 'github'
-        fact.when = Time.parse(json[:closed_at].iso8601)
-        fact.repository = json[:base][:repo][:id].to_i
+      fbt.insert.then do |n|
+        n.where = 'github'
+        n.when = Time.parse(json[:closed_at].iso8601)
+        n.repository = json[:base][:repo][:id].to_i
         actor = Fbe.octo.issue(rname, f.issue)[:closed_by]
-        fact.who = actor[:id].to_i if actor
+        n.who = actor[:id].to_i if actor
         action = json[:merged_at].nil? ? 'closed' : 'merged'
-        fact.what = "pull-was-#{action}"
-        fact.issue = json[:number]
-        fact.hoc = json[:additions] + json[:deletions]
-        Jp.fill_fact_by_hash(fact, Jp.comments_info(json))
-        Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(json))
-        fact.branch = json[:head][:ref]
-        fact.details =
-          "Apparently, pull request #{Fbe.issue(fact)} " \
-          "has been #{action} by #{Fbe.who(fact)}, " \
-          "with #{fact.hoc} HoC and #{fact.comments} comments."
+        n.what = "pull-was-#{action}"
+        n.issue = json[:number]
+        n.hoc = json[:additions] + json[:deletions]
+        Jp.fill_fact_by_hash(n, Jp.comments_info(json))
+        Jp.fill_fact_by_hash(n, Jp.fetch_workflows(json))
+        n.branch = json[:head][:ref]
+        n.details =
+          "Apparently, pull request #{Fbe.issue(n)} " \
+          "has been #{action} by #{Fbe.who(n)}, " \
+          "with #{n.hoc} HoC and #{n.comments} comments."
       end
     end
   end

@@ -20,8 +20,9 @@ Fbe.conclude do
     r = f.repository
     if good[r].nil?
       begin
-        Fbe.octo.repository(r)
+        json = Fbe.octo.repository(r)
         good[r] = true
+        $loog.info("GitHub repository ##{r} is found: #{json[:full_name]}")
       rescue Octokit::NotFound
         good[r] = false
         $loog.info("GitHub repository ##{r} is not found")

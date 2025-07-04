@@ -28,14 +28,13 @@ Fbe.conclude do
       (eq who $who)
       (eq what '#{$judge}')
       (eq where $where))))"
-  consider do |f|
+  follow 'who where'
+  draw do |n, f|
     nick = Jp.nick_of(f.who)
-    next if nick.nil?
-    n = Fbe.fb.insert
-    n.what = $judge
-    n.who = f.who
-    n.where = f.where
-    n.when = Time.now
+    if nick.nil?
+      f.stale = "user ##{f.who}"
+      throw :rollback
+    end
     n.name = nick
   end
 end
@@ -50,7 +49,10 @@ Fbe.conclude do
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days')))"
   consider do |f|
     nick = Jp.nick_of(f.who)
-    next if nick.nil?
+    if nick.nil?
+      f.stale = "user ##{f.who}"
+      next
+    end
     Fbe.overwrite(f, 'name', nick)
   end
 end

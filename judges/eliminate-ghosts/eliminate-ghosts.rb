@@ -15,7 +15,8 @@ Fbe.conclude do
   quota_aware
   on '(and (eq where "github") (exists who) (not (exists stale)))'
   consider do |f|
-    Fbe.octo.user(f.who)
+    json = Fbe.octo.user(f.who)
+    $loog.info("GitHub user ##{f.who} is found: @#{json[:login]}")
   rescue Octokit::NotFound
     $loog.info("GitHub user ##{f.who} is not found")
     f.stale = "user ##{f.who}"

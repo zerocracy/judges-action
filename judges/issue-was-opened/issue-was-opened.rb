@@ -26,15 +26,17 @@ Fbe.conclude do
         (eq issue $issue)
         (eq repository $repository)
         (eq where 'github')
-        (eq what 'issue-was-opened'))))"
+        (eq what '#{$judge}'))))"
   follow 'where repository issue'
   draw do |n, f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
     begin
       json = Fbe.octo.issue(repo, f.issue)
+      n.what = $judge
       n.when = json[:created_at]
       n.who = json.dig(:user, :id)
       n.details = "#{Fbe.issue(n)} has been opened by #{Fbe.who(n)}."
+      $loog.info("The opening of #{Fbe.issue(n)} by #{Fbe.who(n)} was found")
     rescue Octokit::NotFound
       $loog.info("The issue ##{f.issue} doesn't exist in #{repo}")
       next

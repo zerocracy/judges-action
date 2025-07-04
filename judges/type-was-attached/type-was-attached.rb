@@ -16,8 +16,6 @@ require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/issue'
 
-start = Time.now
-
 events = %w[issue_type_added issue_type_changed]
 
 Fbe.iterate do
@@ -37,13 +35,9 @@ Fbe.iterate do
     (min issue))"
   quota_aware
   repeats 5
-  over do |repository, issue|
+  over(timeout: 5 * 60) do |repository, issue|
     begin
       Fbe.octo.issue_timeline(repository, issue).each do |te|
-        if Time.now - start > 5 * 60
-          $loog.debug("We are scanning types for #{start.ago} already, it's time to quit")
-          break
-        end
         next unless events.include?(te[:event])
         tee = Fbe.github_graph.issue_type_event(te[:node_id])
         next if tee.nil?
