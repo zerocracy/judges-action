@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'Judge quality-of-service stopped by timeout after 10m0s: execution expired'
   inserted: 8
-  seconds: 1151.099672886
+  seconds: 1044.926314789
   version: 0.51.0
   what: judges-summary
-  when: 2025-07-04 21:25:58.666895248 Z
+  when: 2025-07-04 21:53:17.296643100 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -143687,31 +143688,11 @@
   when: &835 2024-05-24 05:21:25.000000000 Z
   where: github
   who: 526301
-- _id: 1056298
-  _time: 2025-07-04 20:15:47.434901539 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 1056320
-  _time: 2025-07-04 20:16:06.320198483 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 974194993
-  what: labels-were-scanned
-  where: github
-- _id: 1056325
-  _time: 2025-07-04 20:16:10.332346670 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
 - _id: 1056362
   _time: 2025-07-04 20:16:41.965060791 Z
   _version: 0.13.0/0.51.0/
   details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#800.
+  is_human: 1
   issue: 800
   label: bug
   repository: 799177290
@@ -143719,48 +143700,6 @@
   when: 2025-07-04 14:25:48.000000000 Z
   where: github
   who: 526301
-- _id: 1056368
-  _time: 2025-07-04 20:16:46.110403584 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 1056369
-  _time: 2025-07-04 20:16:46.700385032 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 1056419
-  _time: 2025-07-04 20:17:27.779113527 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 1056425
-  _time: 2025-07-04 20:17:32.290149963 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 1056460
-  _time: 2025-07-04 20:18:00.281758958 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 1056461
-  _time: 2025-07-04 20:18:01.650219247 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
 - _id: 1056462
   _job: 27783
   _time: 2025-07-04 20:29:35.039428817 Z
@@ -143769,6 +143708,7 @@
   details: The pull request zerocracy/pages-action#36 with 28 HoC created by @renovate[bot]
     was merged by @rultor after 33m59s of being in review and 3 comments.
   hoc: 28
+  is_human: 0
   issue: 36
   merger: 8086956
   repository: 802720676
@@ -143786,6 +143726,7 @@
   details: The pull request zerocracy/fbe#6 with 6 HoC created by @renovate[bot] was
     merged by @rultor after 1h12m of being in review and 3 comments.
   hoc: 6
+  is_human: 0
   issue: 6
   merger: 8086956
   repository: 820463873
@@ -143803,6 +143744,7 @@
   details: The pull request yegor256/judges#2 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 61s of being in review and 0 comments.
   hoc: 2
+  is_human: 0
   issue: 2
   merger: 526301
   repository: 799113787
@@ -143820,6 +143762,7 @@
   details: The pull request yegor256/0rsk#55 with 6 HoC created by @dependabot[bot]
     was merged by @rultor after 12w3d of being in review and 8 comments.
   hoc: 6
+  is_human: 0
   issue: 55
   merger: 8086956
   repository: 181044958
@@ -143837,6 +143780,7 @@
   details: The pull request yegor256/factbase#2 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 2h27m of being in review and 5 comments.
   hoc: 2
+  is_human: 0
   issue: 2
   merger: 8086956
   repository: 798641472
@@ -143854,6 +143798,7 @@
   details: The pull request zerocracy/baza.rb#59 with 10 HoC created by @renovate[bot]
     was merged by @rultor after 41m27s of being in review and 3 comments.
   hoc: 10
+  is_human: 0
   issue: 59
   merger: 8086956
   repository: 840215648
@@ -143871,6 +143816,7 @@
   details: The pull request zerocracy/swarm-template#33 with 32 HoC created by @renovate[bot]
     was merged by @rultor after 1h6m of being in review and 3 comments.
   hoc: 32
+  is_human: 0
   issue: 33
   merger: 8086956
   repository: 849726475
@@ -143888,6 +143834,7 @@
   details: The pull request zerocracy/pages-action#44 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 15m41s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 44
   merger: 8086956
   repository: 802720676
@@ -143905,6 +143852,7 @@
   details: The pull request zerocracy/fbe#10 with 6 HoC created by @renovate[bot]
     was merged by @rultor after 33m14s of being in review and 3 comments.
   hoc: 6
+  is_human: 0
   issue: 10
   merger: 8086956
   repository: 820463873
@@ -143922,6 +143870,7 @@
   details: The pull request yegor256/judges#23 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 47m27s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 23
   merger: 8086956
   repository: 799113787
@@ -143939,6 +143888,7 @@
   details: The pull request yegor256/factbase#3 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 3h12m of being in review and 5 comments.
   hoc: 2
+  is_human: 0
   issue: 3
   merger: 8086956
   repository: 798641472
@@ -143956,6 +143906,7 @@
   details: The pull request zerocracy/swarm-template#34 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 55m13s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 34
   merger: 8086956
   repository: 849726475
@@ -143973,6 +143924,7 @@
   details: The pull request zerocracy/fbe#20 with 6 HoC created by @renovate[bot]
     was merged by @rultor after 35m53s of being in review and 3 comments.
   hoc: 6
+  is_human: 0
   issue: 20
   merger: 8086956
   repository: 820463873
@@ -143990,6 +143942,7 @@
   details: The pull request zerocracy/pages-action#177 with 32 HoC created by @renovate[bot]
     was merged by @rultor after 18m8s of being in review and 3 comments.
   hoc: 32
+  is_human: 0
   issue: 177
   merger: 8086956
   repository: 802720676
@@ -144007,6 +143960,7 @@
   details: The pull request yegor256/judges#32 with 6 HoC created by @renovate[bot]
     was merged by @rultor after 40m42s of being in review and 3 comments.
   hoc: 6
+  is_human: 0
   issue: 32
   merger: 8086956
   repository: 799113787
@@ -144024,6 +143978,7 @@
   details: The pull request yegor256/0rsk#57 with 2 HoC created by @dependabot[bot]
     was merged by @rultor after 2w5d of being in review and 7 comments.
   hoc: 2
+  is_human: 0
   issue: 57
   merger: 8086956
   repository: 181044958
@@ -144041,6 +143996,7 @@
   details: The pull request zerocracy/judges-action#4 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 97s of being in review and 0 comments.
   hoc: 2
+  is_human: 0
   issue: 4
   merger: 526301
   repository: 799177290
@@ -144058,6 +144014,7 @@
   details: The pull request yegor256/factbase#5 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 55m57s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 5
   merger: 8086956
   repository: 798641472
@@ -144075,6 +144032,7 @@
   details: The pull request zerocracy/swarm-template#35 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 55m23s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 35
   merger: 8086956
   repository: 849726475
@@ -144092,6 +144050,7 @@
   details: The pull request zerocracy/fbe#26 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 20m12s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 26
   merger: 8086956
   repository: 820463873
@@ -144109,6 +144068,7 @@
   details: The pull request zerocracy/pages-action#178 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 29m6s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 178
   merger: 8086956
   repository: 802720676
@@ -144126,6 +144086,7 @@
   details: The pull request yegor256/judges#33 with 6 HoC created by @renovate[bot]
     was merged by @rultor after 1h0m of being in review and 3 comments.
   hoc: 6
+  is_human: 0
   issue: 33
   merger: 8086956
   repository: 799113787
@@ -144143,6 +144104,7 @@
   details: The pull request yegor256/0rsk#58 with 6 HoC created by @dependabot[bot]
     was merged by @rultor after 2w1d of being in review and 13 comments.
   hoc: 6
+  is_human: 0
   issue: 58
   merger: 8086956
   repository: 181044958
@@ -144160,6 +144122,7 @@
   details: The pull request zerocracy/pages-action#179 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 1h4m of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 179
   merger: 8086956
   repository: 802720676
@@ -144177,6 +144140,7 @@
   details: The pull request yegor256/factbase#6 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 1h58m of being in review and 6 comments.
   hoc: 2
+  is_human: 0
   issue: 6
   merger: 8086956
   repository: 798641472
@@ -144194,6 +144158,7 @@
   details: The pull request zerocracy/judges-action#8 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 4d11h of being in review and 0 comments.
   hoc: 6
+  is_human: 0
   issue: 8
   merger: 526301
   repository: 799177290
@@ -144211,6 +144176,7 @@
   details: The pull request yegor256/judges#88 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 22m44s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 88
   merger: 8086956
   repository: 799113787
@@ -144228,6 +144194,7 @@
   details: The pull request zerocracy/fbe#208 with 116 HoC created by @yegorov was
     merged by @rultor after 1d12h of being in review and 18 comments.
   hoc: 116
+  is_human: 1
   issue: 208
   merger: 8086956
   repository: 820463873
@@ -144245,6 +144212,7 @@
   details: The pull request zerocracy/swarm-template#36 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 44m3s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 36
   merger: 8086956
   repository: 849726475
@@ -144262,6 +144230,7 @@
   details: The pull request zerocracy/pages-action#180 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 27m11s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 180
   merger: 8086956
   repository: 802720676
@@ -144279,6 +144248,7 @@
   details: The pull request yegor256/factbase#7 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 31m0s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 7
   merger: 8086956
   repository: 798641472
@@ -144296,6 +144266,7 @@
   details: The pull request zerocracy/judges-action#9 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 3d17h of being in review and 0 comments.
   hoc: 2
+  is_human: 0
   issue: 9
   merger: 526301
   repository: 799177290
@@ -144313,6 +144284,7 @@
   details: The pull request yegor256/factbase#31 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 47m23s of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 31
   merger: 8086956
   repository: 798641472
@@ -144330,6 +144302,7 @@
   details: The pull request yegor256/judges#150 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 2w1d of being in review and 0 comments.
   hoc: 6
+  is_human: 0
   issue: 150
   merger: 526301
   repository: 799113787
@@ -144347,6 +144320,7 @@
   details: The pull request zerocracy/pages-action#181 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 1h30m of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 181
   merger: 8086956
   repository: 802720676
@@ -144364,6 +144338,7 @@
   details: The pull request zerocracy/fbe#215 with 43 HoC created by @yegorov was
     merged by @yegor256 after 7h57m of being in review and 2 comments.
   hoc: 43
+  is_human: 1
   issue: 215
   merger: 526301
   repository: 820463873
@@ -144381,6 +144356,7 @@
   details: The pull request zerocracy/judges-action#10 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 2d17h of being in review and 0 comments.
   hoc: 6
+  is_human: 0
   issue: 10
   merger: 526301
   repository: 799177290
@@ -144398,6 +144374,7 @@
   details: The pull request zerocracy/swarm-template#37 with 2 HoC created by @renovate[bot]
     was merged by @rultor after 1h54m of being in review and 3 comments.
   hoc: 2
+  is_human: 0
   issue: 37
   merger: 8086956
   repository: 849726475
@@ -144415,6 +144392,7 @@
   details: The pull request yegor256/factbase#43 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 1d21h of being in review and 0 comments.
   hoc: 6
+  is_human: 0
   issue: 43
   merger: 526301
   repository: 798641472
@@ -144432,6 +144410,7 @@
   details: The pull request yegor256/judges#151 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 6d17h of being in review and 0 comments.
   hoc: 6
+  is_human: 0
   issue: 151
   merger: 526301
   repository: 799113787
@@ -144449,6 +144428,7 @@
   details: The pull request yegor256/0rsk#64 with 1 HoC created by @dependabot[bot]
     was merged by @rultor after 5w6d of being in review and 15 comments.
   hoc: 1
+  is_human: 0
   issue: 64
   merger: 8086956
   repository: 181044958
@@ -144466,6 +144446,7 @@
   details: The pull request zerocracy/pages-action#182 with 6 HoC created by @renovate[bot]
     was merged by @rultor after 1h20m of being in review and 3 comments.
   hoc: 6
+  is_human: 0
   issue: 182
   merger: 8086956
   repository: 802720676
@@ -144483,6 +144464,7 @@
   details: The pull request zerocracy/fbe#231 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 1d12h of being in review and 1 comments.
   hoc: 2
+  is_human: 0
   issue: 231
   merger: 526301
   repository: 820463873
@@ -144500,6 +144482,7 @@
   details: The pull request zerocracy/judges-action#14 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 19h30m of being in review and 0 comments.
   hoc: 6
+  is_human: 0
   issue: 14
   merger: 526301
   repository: 799177290
@@ -144509,455 +144492,6 @@
   when: *835
   where: github
   who: 29139614
-- _id: 1056506
-  _job: 27783
-  _time: 2025-07-04 20:30:28.471348732 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#239
-    in 0 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job closing this issue promptly! You've earned a well-deserved
-    **+12 points** (+8 base, +4 bonus for <24h resolution). Your current balance stands
-    at [**-836**](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned
-    +12 points for this: +8 as a basis; +4 for resolving it in less than 24 hours.
-    Your running balance is [-836](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/factbase/issues/239/#issuecomment-3037232875
-  issue: 239
-  repository: 798641472
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:28.501716250 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/factbase#239
-- _id: 1056507
-  _job: 27783
-  _time: 2025-07-04 20:30:31.313543435 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#753
-    in 0 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job closing this issue! You've earned a well-deserved
-    +12 points: +8 base and +4 bonus for swift resolution within 24 hours. Your dedication
-    is impressive! Current balance: [-824](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work! \U0001F4AA\n\n<!-- Thanks for closing this issue!
-    You've earned +12 points for this: +8 as a basis; +4 for resolving it in less
-    than 24 hours. Your running balance is [-824](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/753/#issuecomment-3037232902
-  issue: 753
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:31.343019011 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#753
-- _id: 1056508
-  _job: 27783
-  _time: 2025-07-04 20:30:34.665128973 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#758
-    in 0 hours, the reward amount is 12.
-  greeting: "Hey there, rockstar! \U0001F389 You just crushed that bug in record time
-    - less than 24 hours! That's seriously impressive. You've snagged yourself a cool
-    12 points: 8 for the fix and an extra 4 for your speedy work. Just imagine if
-    you'd reported this bug yourself - that would've been a different story! \U0001F609
-    Your current balance is sitting at [-812](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the awesome work, and let's see how high we can get that score!\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [-812](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/758/#issuecomment-3037232919
-  issue: 758
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:34.719766549 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#758
-- _id: 1056509
-  _job: 27783
-  _time: 2025-07-04 20:30:38.765013599 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#759
-    in 0 hours, the reward amount is 12.
-  greeting: "Great job closing this issue! \U0001F389 Your swift resolution within
-    24 hours has earned you the maximum bonus of +12 points: +8 base points and +4
-    for quick turnaround, as per our [work policy](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work! Your current balance stands at -800 points.\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [-800](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/759/#issuecomment-3037232940
-  issue: 759
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:38.792399916 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#759
-- _id: 1056510
-  _job: 27783
-  _time: 2025-07-04 20:30:41.660350460 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#223
-    in 1 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job closing this issue! You've earned **12 points**:
-    8 base + 4 bonus for swift resolution (< 24 hours). Your current balance: [-788](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned
-    +12 points for this: +8 as a basis; +4 for resolving it in less than 24 hours.
-    Your running balance is [-788](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/fbe/issues/223/#issuecomment-3037232962
-  issue: 223
-  repository: 820463873
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:41.713369043 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/fbe#223
-- _id: 1056511
-  _job: 27783
-  _time: 2025-07-04 20:30:44.915305543 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegorov for the bug resolved in zerocracy/judges-action#646
-    in 14 hours, the reward amount is 12.
-  greeting: "Hey there, bug slayer! \U0001F41B\U0001F4AA You've just crushed that
-    issue and racked up a sweet +12 points! Here's the breakdown: +8 for your bug-busting
-    skills, and an extra +4 for knocking it out in under 24 hours. That's some speedy
-    work! Your total score is now sitting pretty at [+106](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the awesome work, and who knows? You might hit that max 16-point bonus
-    next time!\n\n<!-- Thanks for closing this issue! You've earned +12 points for
-    this: +8 as a basis; +4 for resolving it in less than 24 hours. Your running balance
-    is [+106](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).  -->"
-  href: https://github.com/zerocracy/judges-action/issues/646/#issuecomment-3037232981
-  issue: 646
-  receipt: receipt-#29591
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:44.944148850 Z
-  where: github
-  who: 2566462
-  why: Resolved bug in zerocracy/judges-action#646
-- _id: 1056512
-  _job: 27783
-  _time: 2025-07-04 20:30:48.547033948 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#240
-    in 0 hours, the reward amount is 12.
-  greeting: "Great job on resolving this issue! \U0001F389 You've earned +12 points:
-    +8 as the base reward, and +4 for completing it within 24 hours, aligning with
-    our team's policy. Your swift action is appreciated. Keep up the excellent work!
-    Your current balance stands at [-776](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [-776](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/factbase/issues/240/#issuecomment-3037232995
-  issue: 240
-  repository: 798641472
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:48.598016070 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/factbase#240
-- _id: 1056513
-  _job: 27783
-  _time: 2025-07-04 20:30:51.649054047 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#224
-    in 4 hours, the reward amount is 12.
-  greeting: "Great job closing this issue! \U0001F389 Your swift resolution (under
-    24 hours) earned you the maximum 16 points: 8 base points, 4 for quick turnaround,
-    and an additional 4 to hit our policy cap. Keep up the excellent work! Your updated
-    balance is [-764](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [-764](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/fbe/issues/224/#issuecomment-3037233007
-  issue: 224
-  repository: 820463873
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:51.676497830 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/fbe#224
-- _id: 1056514
-  _job: 27783
-  _time: 2025-07-04 20:30:55.222847751 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#762
-    in 7 hours, the reward amount is 12.
-  greeting: "Great job closing this issue! \U0001F389 Your swift resolution (under
-    24 hours) has earned you the maximum reward of 16 points: 8 base points, plus
-    4 for quick turnaround, capped at our policy's upper limit. This boosts your running
-    balance to [-748](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned
-    +12 points for this: +8 as a basis; +4 for resolving it in less than 24 hours.
-    Your running balance is [-752](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/762/#issuecomment-3037233029
-  issue: 762
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:55.277356956 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#762
-- _id: 1056515
-  _job: 27783
-  _time: 2025-07-04 20:30:58.406401645 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegorov for the bug resolved in zerocracy/judges-action#647
-    in 15 hours, the reward amount is 12.
-  greeting: "Great job closing this issue! \U0001F389 Your swift resolution (under
-    24 hours) earned you a solid 12 points: 8 base points plus 4 bonus points, as
-    per our [work policy](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Your running balance now stands at an impressive +118. Keep up the excellent work!\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [+118](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/647/#issuecomment-3037233051
-  issue: 647
-  receipt: receipt-#29592
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:30:58.434801772 Z
-  where: github
-  who: 2566462
-  why: Resolved bug in zerocracy/judges-action#647
-- _id: 1056516
-  _job: 27783
-  _time: 2025-07-04 20:31:01.406410982 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#242
-    in 1 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job closing this issue so quickly! You've earned a well-deserved
-    +12 points: +8 base points and +4 bonus for resolving it within 24 hours. Your
-    current balance stands at [-740](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned
-    +12 points for this: +8 as a basis; +4 for resolving it in less than 24 hours.
-    Your running balance is [-740](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/factbase/issues/242/#issuecomment-3037233071
-  issue: 242
-  repository: 798641472
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:01.458638913 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/factbase#242
-- _id: 1056517
-  _job: 27783
-  _time: 2025-07-04 20:31:03.969004213 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#244
-    in 0 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job closing this issue swiftly! You've earned **12 points**:
-    8 base + 4 bonus for resolving it within 24 hours. Your dedication is impressive!
-    Current balance: [-728](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work! \U0001F4AA\n\n<!-- Thanks for closing this issue!
-    You've earned +12 points for this: +8 as a basis; +4 for resolving it in less
-    than 24 hours. Your running balance is [-728](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/factbase/issues/244/#issuecomment-3037233089
-  issue: 244
-  repository: 798641472
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:03.996579861 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/factbase#244
-- _id: 1056518
-  _job: 27783
-  _time: 2025-07-04 20:31:06.808837172 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#775
-    in 0 hours, the reward amount is 12.
-  greeting: "Great job closing this issue! \U0001F389 Your quick resolution (under
-    24 hours) earned you a well-deserved +12 points: +8 base points and +4 bonus points,
-    as per our [bug resolution policy](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Your current balance stands at -716 points. Keep up the excellent work!\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [-716](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/775/#issuecomment-3037233112
-  issue: 775
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:06.863434368 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#775
-- _id: 1056519
-  _job: 27783
-  _time: 2025-07-04 20:31:09.717197659 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#770
-    in 11 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job closing this issue! You've earned a stellar **+12
-    points**: +8 base + 4 bonus for swift resolution within 24 hours. Your current
-    balance stands at [-704](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned
-    +12 points for this: +8 as a basis; +4 for resolving it in less than 24 hours.
-    Your running balance is [-704](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/770/#issuecomment-3037233139
-  issue: 770
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:09.745466759 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#770
-- _id: 1056520
-  _job: 27783
-  _time: 2025-07-04 20:31:12.430869326 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegorov for the bug resolved in zerocracy/fbe#225
-    in 9 hours, the reward amount is 12.
-  greeting: "Great job closing this issue! \U0001F389 You've earned +12 points: +8
-    base points and +4 for swift resolution (under 24 hours). This aligns with our
-    [bonus policy](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
-    which rewards quick bug fixes. Your running balance is now +130 points. Keep up
-    the excellent work!\n\n<!-- Thanks for closing this issue! You've earned +12 points
-    for this: +8 as a basis; +4 for resolving it in less than 24 hours. Your running
-    balance is [+130](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/fbe/issues/225/#issuecomment-3037233157
-  issue: 225
-  receipt: receipt-#29593
-  repository: 820463873
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:12.479942978 Z
-  where: github
-  who: 2566462
-  why: Resolved bug in zerocracy/fbe#225
-- _id: 1056521
-  _job: 27783
-  _time: 2025-07-04 20:31:15.347265671 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#778
-    in 2 hours, the reward amount is 12.
-  greeting: "Great job on closing this issue! \U0001F389 Your quick resolution (under
-    24 hours) has earned you the maximum reward of +12 points: +8 base points and
-    +4 bonus points for speedy completion. This aligns perfectly with our [work policy](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
-    which rewards efficiency. Your current balance stands at -692 points. Keep up
-    the excellent work!\n\n<!-- Thanks for closing this issue! You've earned +12 points
-    for this: +8 as a basis; +4 for resolving it in less than 24 hours. Your running
-    balance is [-692](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/778/#issuecomment-3037233193
-  issue: 778
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:15.374974172 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#778
-- _id: 1056522
-  _job: 27783
-  _time: 2025-07-04 20:31:18.481161278 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 7
-  details: It's time to reward @yegorov for the bug resolved in zerocracy/fbe#228
-    in 40 hours, the reward amount is 7.
-  greeting: "\U0001F389 Awesome job closing this issue! You've earned **7 points**
-    (8 base, -1 for 1 day delay). Your dedication keeps our project moving forward.
-    Current balance: [142 points](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work!\n\n<!-- Thanks for closing this issue! You've earned +7
-    points for this: +8 as a basis; -1 for 1 days of delay. Your running balance is
-    [+142](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).  -->"
-  href: https://github.com/zerocracy/fbe/issues/228/#issuecomment-3037233252
-  issue: 228
-  receipt: receipt-#29594
-  repository: 820463873
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:18.532543274 Z
-  where: github
-  who: 2566462
-  why: Resolved bug in zerocracy/fbe#228
-- _id: 1056523
-  _job: 27783
-  _time: 2025-07-04 20:31:21.141580805 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#253
-    in 0 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job closing this issue swiftly! You've earned +12 points:
-    +8 base and +4 for resolving it within 24 hours. Your current balance stands at
-    [-680](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep
-    up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned +12
-    points for this: +8 as a basis; +4 for resolving it in less than 24 hours. Your
-    running balance is [-680](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/judges/issues/253/#issuecomment-3037233329
-  issue: 253
-  repository: 799113787
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:21.168795356 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/judges#253
-- _id: 1056524
-  _job: 27783
-  _time: 2025-07-04 20:31:23.841790586 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 4
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#248
-    in 238 hours, the reward amount is 4.
-  greeting: "Great job on closing this issue! Here's your point breakdown: +8 base
-    points, -4 for the 9-day delay (capped at -20), resulting in +4 points total.
-    This aligns with our policy of rewarding bug resolution while considering timely
-    completion. Your updated balance is [-668](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the good work and aim for quicker resolutions in the future! \U0001F44D\n\n<!--
-    Thanks for closing this issue! You've earned +4 points for this: +8 as a basis;
-    -9 for 9 days of delay; +5 to give you at least something. Your running balance
-    is [-668](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).  -->"
-  href: https://github.com/yegor256/judges/issues/248/#issuecomment-3037233387
-  issue: 248
-  repository: 799113787
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:23.892882574 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/judges#248
-- _id: 1056525
-  _job: 27783
-  _time: 2025-07-04 20:31:27.099891466 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#251
-    in 14 hours, the reward amount is 12.
-  greeting: "\U0001F389 Great job on closing this issue swiftly! You've earned **12
-    points**: 8 base points + 4 bonus points for resolving it within 24 hours. Your
-    dedication is impressive! Your current balance stands at [-664](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work! \U0001F4AA\n\n<!-- Thanks for closing this issue!
-    You've earned +12 points for this: +8 as a basis; +4 for resolving it in less
-    than 24 hours. Your running balance is [-664](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/judges/issues/251/#issuecomment-3037233422
-  issue: 251
-  repository: 799113787
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:31:27.126991930 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/judges#251
 - _id: 1056531
   _time: 2025-07-04 20:38:10.181472485 Z
   _version: 0.13.0/0.51.0/
@@ -144967,6 +144501,7 @@
     (default branch is ''master''), not associated with any pull request.'
   event_id: 51704506578
   event_type: PushEvent
+  is_human: 1
   push_id: 25300680446
   ref: refs/heads/master
   repository: 820463873
@@ -144981,6 +144516,7 @@
   details: The issue zerocracy/fbe#240 has been closed by @yegor256.
   event_id: 51704395728
   event_type: IssuesEvent
+  is_human: 1
   issue: 240
   repository: 820463873
   what: issue-was-closed
@@ -144999,6 +144535,7 @@
   event_id: 51704348171
   event_type: ReleaseEvent
   hoc: 26
+  is_human: 0
   last_commit: a3ad7f8d838292f8e99ce5a91a625a77288ff09f
   release: 230059442
   repository: 820463873
@@ -145013,6 +144550,7 @@
   details: A new tag '0.24.2' has been created in zerocracy/fbe by @rultor.
   event_id: 51704305936
   event_type: CreateEvent
+  is_human: 0
   repository: 820463873
   tag: 0.24.2
   what: tag-was-created
@@ -145028,6 +144566,7 @@
     (default branch is ''master''), not associated with any pull request.'
   event_id: 51703923505
   event_type: PushEvent
+  is_human: 1
   push_id: 25300400933
   ref: refs/heads/master
   repository: 820463873
@@ -145045,6 +144584,7 @@
     (default branch is ''master''), not associated with any pull request.'
   event_id: 51703671088
   event_type: PushEvent
+  is_human: 1
   push_id: 25300279627
   ref: refs/heads/master
   repository: 820463873
@@ -145062,6 +144602,7 @@
     (default branch is ''master''), not associated with any pull request.'
   event_id: 51703611608
   event_type: PushEvent
+  is_human: 1
   push_id: 25300250935
   ref: refs/heads/master
   repository: 820463873
@@ -145086,6 +144627,7 @@
   event_type: PullRequestEvent
   failed_builds: 0
   hoc: 0
+  is_human: 0
   issue: 803
   repository: 799177290
   succeeded_builds: 0
@@ -145100,6 +144642,7 @@
   details: The pull request zerocracy/judges-action#803 has been opened by @github-actions[bot].
   event_id: 51709119008
   event_type: PullRequestEvent
+  is_human: 0
   issue: 803
   repository: 799177290
   what: pull-was-opened
@@ -145122,12 +144665,13 @@
   event_type: PullRequestEvent
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 801
   repository: 799177290
   review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2025-07-04 16:26:16.000000000 Z
+  when: &838 2025-07-04 16:26:16.000000000 Z
   where: github
   who: 526301
 - _id: 1056546
@@ -145146,12 +144690,13 @@
   event_type: PullRequestEvent
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 802
   repository: 799177290
   review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
-  when: 2025-07-04 16:26:06.000000000 Z
+  when: &839 2025-07-04 16:26:06.000000000 Z
   where: github
   who: 526301
 - _id: 1056547
@@ -145160,6 +144705,7 @@
   details: The issue zerocracy/judges-action#800 has been closed by @yegor256.
   event_id: 51709037295
   event_type: IssuesEvent
+  is_human: 1
   issue: 800
   repository: 799177290
   what: issue-was-closed
@@ -145368,6 +144914,7 @@
   details: Apparently, zerocracy/judges-action#15 has been 'pull-was-closed'.
   failed_builds: 2
   hoc: 6
+  is_human: 0
   issue: 15
   repository: 799177290
   succeeded_builds: 6
@@ -145388,12 +144935,13 @@
   details: Apparently, zerocracy/fbe#232 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 155
+  is_human: 0
   issue: 232
   repository: 820463873
   review_comments: 4
   succeeded_builds: 10
   what: pull-was-merged
-  when: 2025-07-02 03:56:56.000000000 Z
+  when: &840 2025-07-02 03:56:56.000000000 Z
   where: github
   who: 8086956
 - _id: 1056929
@@ -145409,12 +144957,13 @@
   details: Apparently, zerocracy/pages-action#183 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 0
   issue: 183
   repository: 802720676
   review_comments: 0
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2024-12-20 13:52:00.000000000 Z
+  when: &841 2024-12-20 13:52:00.000000000 Z
   where: github
   who: 8086956
 - _id: 1056932
@@ -145430,12 +144979,13 @@
   details: Apparently, yegor256/0rsk#65 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 6
+  is_human: 0
   issue: 65
   repository: 181044958
   review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2020-08-05 07:13:16.000000000 Z
+  when: &842 2020-08-05 07:13:16.000000000 Z
   where: github
   who: 8086956
 - _id: 1056934
@@ -145451,12 +145001,13 @@
   details: Apparently, zerocracy/swarm-template#38 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 0
   issue: 38
   repository: 849726475
   review_comments: 0
   succeeded_builds: 4
   what: pull-was-merged
-  when: 2024-12-20 13:51:59.000000000 Z
+  when: &843 2024-12-20 13:51:59.000000000 Z
   where: github
   who: 8086956
 - _id: 1056936
@@ -145472,12 +145023,13 @@
   details: Apparently, yegor256/judges#152 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 8
+  is_human: 1
   issue: 152
   repository: 799113787
   review_comments: 0
   succeeded_builds: 6
   what: pull-was-merged
-  when: 2024-12-19 08:10:52.000000000 Z
+  when: &844 2024-12-19 08:10:52.000000000 Z
   where: github
   who: 526301
 - _id: 1056938
@@ -145493,12 +145045,13 @@
   details: Apparently, yegor256/factbase#44 has been 'pull-was-merged'.
   failed_builds: 1
   hoc: 8
+  is_human: 1
   issue: 44
   repository: 798641472
   review_comments: 0
   succeeded_builds: 7
   what: pull-was-merged
-  when: 2024-05-24 08:19:22.000000000 Z
+  when: &845 2024-05-24 08:19:22.000000000 Z
   where: github
   who: 526301
 - _id: 1056940
@@ -145514,6 +145067,7 @@
   details: Apparently, zerocracy/judges-action#16 has been 'pull-was-closed'.
   failed_builds: 1
   hoc: 6
+  is_human: 0
   issue: 16
   repository: 799177290
   succeeded_builds: 7
@@ -145534,12 +145088,13 @@
   details: Apparently, zerocracy/pages-action#184 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 4
+  is_human: 0
   issue: 184
   repository: 802720676
   review_comments: 0
   succeeded_builds: 11
   what: pull-was-merged
-  when: 2024-12-25 14:02:50.000000000 Z
+  when: &846 2024-12-25 14:02:50.000000000 Z
   where: github
   who: 8086956
 - _id: 1056945
@@ -145555,12 +145110,13 @@
   details: Apparently, yegor256/0rsk#66 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 40
+  is_human: 0
   issue: 66
   repository: 181044958
   review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
-  when: 2020-08-05 07:06:10.000000000 Z
+  when: &847 2020-08-05 07:06:10.000000000 Z
   where: github
   who: 8086956
 - _id: 1056947
@@ -145576,201 +145132,15 @@
   details: Apparently, zerocracy/swarm-template#67 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 4
+  is_human: 0
   issue: 67
   repository: 849726475
   review_comments: 0
   succeeded_builds: 9
   what: pull-was-merged
-  when: 2025-04-16 16:38:15.000000000 Z
+  when: &848 2025-04-16 16:38:15.000000000 Z
   where: github
   who: 8086956
-- _id: 1056949
-  _job: 27785
-  _time: 2025-07-04 20:57:40.533044494 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegorov for the bug resolved in zerocracy/judges-action#649
-    in 0 hours, the reward amount is 12.
-  greeting: "Hey there, bug-buster! \U0001F389 Awesome job closing that issue so quickly!
-    You've racked up a sweet +12 points: +8 for the base reward, and +4 for crushing
-    it in under 24 hours. That's the max bonus you can get for speed, and you nailed
-    it! Your current score is sitting pretty at [+149](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the great work, and remember, the faster you squash those bugs, the more
-    points you can earn!\n\n<!-- Thanks for closing this issue! You've earned +12
-    points for this: +8 as a basis; +4 for resolving it in less than 24 hours. Your
-    running balance is [+149](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/649/#issuecomment-3037233458
-  issue: 649
-  receipt: receipt-#29595
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:57:40.611207883 Z
-  where: github
-  who: 2566462
-  why: Resolved bug in zerocracy/judges-action#649
-- _id: 1056950
-  _job: 27785
-  _time: 2025-07-04 20:57:44.691967493 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#254
-    in 0 hours, the reward amount is 12.
-  greeting: "Great job on closing this issue! \U0001F389 You've earned +12 points
-    for your work: +8 as the base reward, and +4 for resolving it within 24 hours,
-    which aligns with our team's policy. Keep up the excellent work! Your current
-    balance stands at [-652](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Let's continue to tackle issues efficiently and improve our codebase together.\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [-652](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/judges/issues/254/#issuecomment-3037233484
-  issue: 254
-  repository: 799113787
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:57:44.718008843 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/judges#254
-- _id: 1056951
-  _job: 27785
-  _time: 2025-07-04 20:57:47.957041423 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#233
-    in 0 hours, the reward amount is 12.
-  greeting: "Great job on closing this issue! \U0001F389 You've earned +12 points
-    for your work: +8 as the base reward, and +4 for resolving it within 24 hours,
-    which aligns with our team policy. Your quick resolution is appreciated and contributes
-    to our project's efficiency. Your current running balance is [-640](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned
-    +12 points for this: +8 as a basis; +4 for resolving it in less than 24 hours.
-    Your running balance is [-640](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/fbe/issues/233/#issuecomment-3037233503
-  issue: 233
-  repository: 820463873
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:57:47.978694412 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/fbe#233
-- _id: 1056952
-  _job: 27785
-  _time: 2025-07-04 20:57:51.561343902 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#794
-    in 0 hours, the reward amount is 12.
-  greeting: "Hey there, bug-squasher! \U0001F41B\U0001F4AA Great job on closing that
-    issue so quickly! You've racked up a cool 12 points for this one: 8 for the basic
-    resolve, plus an extra 4 for knocking it out in under 24 hours. That's the max
-    bonus you can get for a single bug fix – nice work! Your current balance sits
-    at [-628](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Keep
-    up the speedy fixes, and watch those points stack up!\n\n<!-- Thanks for closing
-    this issue! You've earned +12 points for this: +8 as a basis; +4 for resolving
-    it in less than 24 hours. Your running balance is [-628](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/794/#issuecomment-3037233523
-  issue: 794
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:57:51.582611832 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#794
-- _id: 1056953
-  _job: 27785
-  _time: 2025-07-04 20:57:55.582123152 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#248
-    in 0 hours, the reward amount is 12.
-  greeting: "Great job closing this issue! \U0001F389 Your quick resolution (under
-    24 hours) earned you a well-deserved +12 points: +8 base reward and +4 bonus for
-    speedy work, as per our [bug resolution policy](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Your current balance stands at -616 points. Keep up the excellent work!\n\n<!--
-    Thanks for closing this issue! You've earned +12 points for this: +8 as a basis;
-    +4 for resolving it in less than 24 hours. Your running balance is [-616](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/yegor256/factbase/issues/248/#issuecomment-3037233541
-  issue: 248
-  repository: 798641472
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:57:55.604838982 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/factbase#248
-- _id: 1056954
-  _job: 27785
-  _time: 2025-07-04 20:57:58.614260481 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#239
-    in 1 hours, the reward amount is 12.
-  greeting: "Great job on resolving this issue! \U0001F389 You've earned a total of
-    12 points: 8 points as the base reward, plus an additional 4 points for closing
-    it within 24 hours. This aligns perfectly with our team's policy for bug resolution.
-    Keep up the excellent work! Your current point balance stands at [-604](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Let's continue to tackle issues efficiently and boost that score!\n\n<!-- Thanks
-    for closing this issue! You've earned +12 points for this: +8 as a basis; +4 for
-    resolving it in less than 24 hours. Your running balance is [-604](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/fbe/issues/239/#issuecomment-3037233563
-  issue: 239
-  repository: 820463873
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:57:58.635835081 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/fbe#239
-- _id: 1056955
-  _job: 27785
-  _time: 2025-07-04 20:58:02.037635450 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegorov for the bug resolved in zerocracy/fbe#234
-    in 22 hours, the reward amount is 12.
-  greeting: "Great job on closing this issue! \U0001F389 You've earned +12 points:
-    +8 as the base reward, and +4 for resolving it within 24 hours, aligning with
-    our team's policy. Your quick resolution is commendable and contributes to our
-    project's efficiency. Your updated running balance is now [+161](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Keep up the excellent work!\n\n<!-- Thanks for closing this issue! You've earned
-    +12 points for this: +8 as a basis; +4 for resolving it in less than 24 hours.
-    Your running balance is [+161](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/fbe/issues/234/#issuecomment-3037233587
-  issue: 234
-  receipt: receipt-#29596
-  repository: 820463873
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:58:02.091215151 Z
-  where: github
-  who: 2566462
-  why: Resolved bug in zerocracy/fbe#234
-- _id: 1056956
-  _job: 27785
-  _time: 2025-07-04 20:58:05.094308560 Z
-  _version: 0.13.0/0.51.0/0.14.25
-  award: 12
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#797
-    in 16 hours, the reward amount is 12.
-  greeting: "Great job on resolving this issue! \U0001F389 Your efforts have earned
-    you +12 points: +8 as the base reward, and an additional +4 for closing it within
-    24 hours, aligning perfectly with our team's policy. Keep up the excellent work!
-    Your current balance stands at [-592](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Let's continue this momentum and tackle more challenges together!\n\n<!-- Thanks
-    for closing this issue! You've earned +12 points for this: +8 as a basis; +4 for
-    resolving it in less than 24 hours. Your running balance is [-592](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    \ -->"
-  href: https://github.com/zerocracy/judges-action/issues/797/#issuecomment-3037233603
-  issue: 797
-  repository: 799177290
-  what: resolved-bug-was-rewarded
-  when: 2025-07-04 20:58:05.176346530 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#797
 - _id: 1056957
   _job: 27785
   _time: 2025-07-04 21:00:35.732982864 Z
@@ -145779,6 +145149,7 @@
   details: The bug/feature in the issue zerocracy/fbe#240 opened @yegor256 by was
     resolved, after 12m32s of waiting, because it was closed by @yegor256 and earlier
     it was assigned to @yegor256 and the label '#bug' was attached.
+  is_human: 1
   issue: 240
   label: bug
   opener: 526301
@@ -145796,6 +145167,7 @@
   details: The bug/feature in the issue zerocracy/judges-action#800 opened @yegor256
     by was resolved, after 2h0m of waiting, because it was closed by @yegor256 and
     earlier it was assigned to @yegor256 and the label '#bug' was attached.
+  is_human: 1
   issue: 800
   label: bug
   opener: 526301
@@ -145805,67 +145177,6 @@
   when: *837
   where: github
   who: 526301
-- _id: 1056959
-  _time: 2025-07-04 21:06:50.987600368 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51689680203
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 1056960
-  _time: 2025-07-04 21:06:58.335796405 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2726236576
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 1056961
-  _time: 2025-07-04 21:07:06.670753764 Z
-  _version: 0.13.0/0.51.0/
-  branch: renovate/crate-ci-typos-1.x
-  details: The pull request yegor256/judges#250 has been opened by @renovate[bot].
-  event_id: 51510718179
-  event_type: PullRequestEvent
-  issue: 250
-  repository: 799113787
-  what: pull-was-opened
-  when: 2025-06-30 14:48:12.000000000 Z
-  where: github
-  who: 29139614
-- _id: 1056962
-  _time: 2025-07-04 21:07:09.787290648 Z
-  _version: 0.13.0/0.51.0/
-  branch: renovate/rubocop-1.x-lockfile
-  details: The pull request yegor256/judges#246 has been opened by @renovate[bot].
-  event_id: 51137420001
-  event_type: PullRequestEvent
-  issue: 246
-  repository: 799113787
-  what: pull-was-opened
-  when: 2025-06-20 08:56:05.000000000 Z
-  where: github
-  who: 29139614
-- _id: 1056963
-  _time: 2025-07-04 21:07:28.336422106 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2009165161
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 1056964
-  _time: 2025-07-04 21:08:18.397354845 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2852680214
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 1056965
-  _time: 2025-07-04 21:08:51.577932709 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2817990545
-  repository: 802720676
-  what: events-were-scanned
-  where: github
 - _id: 1056966
   _time: 2025-07-04 21:08:53.502001141 Z
   _version: 0.13.0/0.51.0/
@@ -145875,6 +145186,7 @@
     (default branch is ''master''), not associated with any pull request.'
   event_id: 51705154333
   event_type: PushEvent
+  is_human: 1
   push_id: 25300992090
   ref: refs/heads/master
   repository: 820463873
@@ -145892,6 +145204,7 @@
     (default branch is ''master''), not associated with any pull request.'
   event_id: 51704587100
   event_type: PushEvent
+  is_human: 1
   push_id: 25300719343
   ref: refs/heads/master
   repository: 820463873
@@ -145900,34 +145213,6 @@
   when: 2025-07-04 14:07:10.000000000 Z
   where: github
   who: 526301
-- _id: 1056968
-  _time: 2025-07-04 21:08:54.079195137 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51705154333
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 1056969
-  _time: 2025-07-04 21:08:55.502460623 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51701702838
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 1056970
-  _time: 2025-07-04 21:08:56.297342519 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51703148386
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 1056971
-  _time: 2025-07-04 21:09:00.021116841 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2780520136
-  repository: 974194993
-  what: events-were-scanned
-  where: github
 - _id: 1056984
   _time: 2025-07-04 21:09:12.173805515 Z
   _version: 0.13.0/0.51.0/
@@ -146004,6 +145289,7 @@
   details: Apparently, yegor256/factbase#56 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 8
+  is_human: 0
   issue: 56
   repository: 798641472
   succeeded_builds: 12
@@ -146024,6 +145310,7 @@
   details: Apparently, zerocracy/judges-action#19 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 19
   repository: 799177290
   succeeded_builds: 8
@@ -146051,6 +145338,7 @@
   details: Apparently, yegor256/judges#154 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 22
+  is_human: 0
   issue: 154
   repository: 799113787
   succeeded_builds: 8
@@ -146071,6 +145359,7 @@
   details: Apparently, yegor256/0rsk#68 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 6
+  is_human: 1
   issue: 68
   repository: 181044958
   succeeded_builds: 0
@@ -146098,6 +145387,7 @@
   details: Apparently, zerocracy/pages-action#185 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 6
+  is_human: 0
   issue: 185
   repository: 802720676
   succeeded_builds: 11
@@ -146118,6 +145408,7 @@
   details: Apparently, zerocracy/swarm-template#74 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 12
+  is_human: 0
   issue: 74
   repository: 849726475
   succeeded_builds: 9
@@ -146145,6 +145436,7 @@
   details: Apparently, yegor256/factbase#58 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 6
+  is_human: 0
   issue: 58
   repository: 798641472
   succeeded_builds: 12
@@ -146172,6 +145464,7 @@
   details: Apparently, zerocracy/judges-action#22 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 22
   repository: 799177290
   succeeded_builds: 0
@@ -146199,6 +145492,7 @@
   details: Apparently, yegor256/judges#157 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 54
+  is_human: 1
   issue: 157
   repository: 799113787
   succeeded_builds: 8
@@ -146233,6 +145527,7 @@
   details: Apparently, yegor256/0rsk#69 has been 'pull-was-closed'.
   failed_builds: 0
   hoc: 6
+  is_human: 0
   issue: 69
   repository: 181044958
   succeeded_builds: 0
@@ -146260,6 +145555,7 @@
   details: Apparently, zerocracy/pages-action#215 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 27
+  is_human: 1
   issue: 215
   repository: 802720676
   succeeded_builds: 12
@@ -146273,4 +145569,978 @@
   latest: 215
   repository: 802720676
   what: merges-were-scanned
+  where: github
+- _id:
+  - 1057394
+  - 1056506
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:26.934919727 Z
+  - 2025-07-04 20:30:28.471348732 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#239
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/yegor256/factbase/issues/239/#issuecomment-3037232875
+  is_human: 1
+  issue: 239
+  repository: 798641472
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:28.501716250 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/factbase#239
+- _id:
+  - 1057395
+  - 1056507
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:26.984228624 Z
+  - 2025-07-04 20:30:31.313543435 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#753
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/753/#issuecomment-3037232902
+  is_human: 1
+  issue: 753
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:31.343019011 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#753
+- _id:
+  - 1057396
+  - 1056508
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.044244811 Z
+  - 2025-07-04 20:30:34.665128973 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#758
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/758/#issuecomment-3037232919
+  is_human: 1
+  issue: 758
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:34.719766549 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#758
+- _id:
+  - 1057397
+  - 1056509
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.093697490 Z
+  - 2025-07-04 20:30:38.765013599 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#759
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/759/#issuecomment-3037232940
+  is_human: 1
+  issue: 759
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:38.792399916 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#759
+- _id:
+  - 1057398
+  - 1056510
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.154065048 Z
+  - 2025-07-04 20:30:41.660350460 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#223
+    in 1 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/fbe/issues/223/#issuecomment-3037232962
+  is_human: 1
+  issue: 223
+  repository: 820463873
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:41.713369043 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/fbe#223
+- _id:
+  - 1057399
+  - 1056511
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.203897189 Z
+  - 2025-07-04 20:30:44.915305543 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegorov for the bug resolved in zerocracy/judges-action#646
+    in 14 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/646/#issuecomment-3037232981
+  is_human: 1
+  issue: 646
+  receipt: receipt-#29591
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:44.944148850 Z
+  where: github
+  who: 2566462
+  why: Resolved bug in zerocracy/judges-action#646
+- _id:
+  - 1057400
+  - 1056512
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.263851999 Z
+  - 2025-07-04 20:30:48.547033948 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#240
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/yegor256/factbase/issues/240/#issuecomment-3037232995
+  is_human: 1
+  issue: 240
+  repository: 798641472
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:48.598016070 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/factbase#240
+- _id:
+  - 1057401
+  - 1056513
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.313764715 Z
+  - 2025-07-04 20:30:51.649054047 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#224
+    in 4 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/fbe/issues/224/#issuecomment-3037233007
+  is_human: 1
+  issue: 224
+  repository: 820463873
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:51.676497830 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/fbe#224
+- _id:
+  - 1057402
+  - 1056514
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.373845051 Z
+  - 2025-07-04 20:30:55.222847751 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#762
+    in 7 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/762/#issuecomment-3037233029
+  is_human: 1
+  issue: 762
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:55.277356956 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#762
+- _id:
+  - 1057403
+  - 1056515
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.423613023 Z
+  - 2025-07-04 20:30:58.406401645 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegorov for the bug resolved in zerocracy/judges-action#647
+    in 15 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/647/#issuecomment-3037233051
+  is_human: 1
+  issue: 647
+  receipt: receipt-#29592
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:30:58.434801772 Z
+  where: github
+  who: 2566462
+  why: Resolved bug in zerocracy/judges-action#647
+- _id:
+  - 1057404
+  - 1056516
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.483051102 Z
+  - 2025-07-04 20:31:01.406410982 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#242
+    in 1 hours, the reward amount is 12.
+  href: https://github.com/yegor256/factbase/issues/242/#issuecomment-3037233071
+  is_human: 1
+  issue: 242
+  repository: 798641472
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:01.458638913 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/factbase#242
+- _id:
+  - 1057405
+  - 1056517
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.533018316 Z
+  - 2025-07-04 20:31:03.969004213 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#244
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/yegor256/factbase/issues/244/#issuecomment-3037233089
+  is_human: 1
+  issue: 244
+  repository: 798641472
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:03.996579861 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/factbase#244
+- _id:
+  - 1057406
+  - 1056518
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.592473812 Z
+  - 2025-07-04 20:31:06.808837172 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#775
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/775/#issuecomment-3037233112
+  is_human: 1
+  issue: 775
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:06.863434368 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#775
+- _id:
+  - 1057407
+  - 1056519
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.642448920 Z
+  - 2025-07-04 20:31:09.717197659 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#770
+    in 11 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/770/#issuecomment-3037233139
+  is_human: 1
+  issue: 770
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:09.745466759 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#770
+- _id:
+  - 1057408
+  - 1056520
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.702171601 Z
+  - 2025-07-04 20:31:12.430869326 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegorov for the bug resolved in zerocracy/fbe#225
+    in 9 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/fbe/issues/225/#issuecomment-3037233157
+  is_human: 1
+  issue: 225
+  receipt: receipt-#29593
+  repository: 820463873
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:12.479942978 Z
+  where: github
+  who: 2566462
+  why: Resolved bug in zerocracy/fbe#225
+- _id:
+  - 1057409
+  - 1056521
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.752072837 Z
+  - 2025-07-04 20:31:15.347265671 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#778
+    in 2 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/778/#issuecomment-3037233193
+  is_human: 1
+  issue: 778
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:15.374974172 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#778
+- _id:
+  - 1057410
+  - 1056522
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.811699054 Z
+  - 2025-07-04 20:31:18.481161278 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 7
+  details: It's time to reward @yegorov for the bug resolved in zerocracy/fbe#228
+    in 40 hours, the reward amount is 7.
+  href: https://github.com/zerocracy/fbe/issues/228/#issuecomment-3037233252
+  is_human: 1
+  issue: 228
+  receipt: receipt-#29594
+  repository: 820463873
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:18.532543274 Z
+  where: github
+  who: 2566462
+  why: Resolved bug in zerocracy/fbe#228
+- _id:
+  - 1057411
+  - 1056523
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.861290384 Z
+  - 2025-07-04 20:31:21.141580805 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#253
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/yegor256/judges/issues/253/#issuecomment-3037233329
+  is_human: 1
+  issue: 253
+  repository: 799113787
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:21.168795356 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/judges#253
+- _id:
+  - 1057412
+  - 1056524
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.921260419 Z
+  - 2025-07-04 20:31:23.841790586 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 4
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#248
+    in 238 hours, the reward amount is 4.
+  href: https://github.com/yegor256/judges/issues/248/#issuecomment-3037233387
+  is_human: 1
+  issue: 248
+  repository: 799113787
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:23.892882574 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/judges#248
+- _id:
+  - 1057413
+  - 1056525
+  _job:
+  - 27787
+  - 27783
+  _time:
+  - 2025-07-04 21:26:27.975226990 Z
+  - 2025-07-04 20:31:27.099891466 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#251
+    in 14 hours, the reward amount is 12.
+  href: https://github.com/yegor256/judges/issues/251/#issuecomment-3037233422
+  is_human: 1
+  issue: 251
+  repository: 799113787
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:31:27.126991930 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/judges#251
+- _id:
+  - 1057414
+  - 1056949
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.034304966 Z
+  - 2025-07-04 20:57:40.533044494 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegorov for the bug resolved in zerocracy/judges-action#649
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/649/#issuecomment-3037233458
+  is_human: 1
+  issue: 649
+  receipt: receipt-#29595
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:57:40.611207883 Z
+  where: github
+  who: 2566462
+  why: Resolved bug in zerocracy/judges-action#649
+- _id:
+  - 1057415
+  - 1056950
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.083645744 Z
+  - 2025-07-04 20:57:44.691967493 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#254
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/yegor256/judges/issues/254/#issuecomment-3037233484
+  is_human: 1
+  issue: 254
+  repository: 799113787
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:57:44.718008843 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/judges#254
+- _id:
+  - 1057416
+  - 1056951
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.143832741 Z
+  - 2025-07-04 20:57:47.957041423 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#233
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/fbe/issues/233/#issuecomment-3037233503
+  is_human: 1
+  issue: 233
+  repository: 820463873
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:57:47.978694412 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/fbe#233
+- _id:
+  - 1057417
+  - 1056952
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.195168548 Z
+  - 2025-07-04 20:57:51.561343902 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#794
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/794/#issuecomment-3037233523
+  is_human: 1
+  issue: 794
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:57:51.582611832 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#794
+- _id:
+  - 1057418
+  - 1056953
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.255184601 Z
+  - 2025-07-04 20:57:55.582123152 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in yegor256/factbase#248
+    in 0 hours, the reward amount is 12.
+  href: https://github.com/yegor256/factbase/issues/248/#issuecomment-3037233541
+  is_human: 1
+  issue: 248
+  repository: 798641472
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:57:55.604838982 Z
+  where: github
+  who: 526301
+  why: Resolved bug in yegor256/factbase#248
+- _id:
+  - 1057419
+  - 1056954
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.304739980 Z
+  - 2025-07-04 20:57:58.614260481 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/fbe#239
+    in 1 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/fbe/issues/239/#issuecomment-3037233563
+  is_human: 1
+  issue: 239
+  repository: 820463873
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:57:58.635835081 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/fbe#239
+- _id:
+  - 1057420
+  - 1056955
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.364005567 Z
+  - 2025-07-04 20:58:02.037635450 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegorov for the bug resolved in zerocracy/fbe#234
+    in 22 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/fbe/issues/234/#issuecomment-3037233587
+  is_human: 1
+  issue: 234
+  receipt: receipt-#29596
+  repository: 820463873
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:58:02.091215151 Z
+  where: github
+  who: 2566462
+  why: Resolved bug in zerocracy/fbe#234
+- _id:
+  - 1057421
+  - 1056956
+  _job:
+  - 27787
+  - 27785
+  _time:
+  - 2025-07-04 21:26:28.413433060 Z
+  - 2025-07-04 20:58:05.094308560 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  award: 12
+  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#797
+    in 16 hours, the reward amount is 12.
+  href: https://github.com/zerocracy/judges-action/issues/797/#issuecomment-3037233603
+  is_human: 1
+  issue: 797
+  repository: 799177290
+  what: resolved-bug-was-rewarded
+  when: 2025-07-04 20:58:05.176346530 Z
+  where: github
+  who: 526301
+  why: Resolved bug in zerocracy/judges-action#797
+- _id: 1057422
+  _job: 27787
+  _time: 2025-07-04 21:28:12.534097690 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 1
+  details: The pull request zerocracy/judges-action#801 with 2 HoC created by @github-actions[bot]
+    was merged by @yegor256 after 1h33m of being in review and 1 comments.
+  hoc: 2
+  is_human: 0
+  issue: 801
+  merger: 526301
+  repository: 799177290
+  review_comments: 0
+  seconds: 5602
+  what: code-was-contributed
+  when: *838
+  where: github
+  who: 41898282
+- _id: 1057423
+  _job: 27787
+  _time: 2025-07-04 21:28:13.029553034 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 1
+  details: The pull request zerocracy/judges-action#802 with 2 HoC created by @renovate[bot]
+    was merged by @yegor256 after 58m24s of being in review and 1 comments.
+  hoc: 2
+  is_human: 0
+  issue: 802
+  merger: 526301
+  repository: 799177290
+  review_comments: 0
+  seconds: 3505
+  what: code-was-contributed
+  when: *839
+  where: github
+  who: 29139614
+- _id: 1057424
+  _job: 27787
+  _time: 2025-07-04 21:28:13.274448692 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 10
+  details: The pull request zerocracy/fbe#232 with 155 HoC created by @yegorov was
+    merged by @rultor after 1d7h of being in review and 10 comments.
+  hoc: 155
+  is_human: 1
+  issue: 232
+  merger: 8086956
+  repository: 820463873
+  review_comments: 4
+  seconds: 114326
+  what: code-was-contributed
+  when: *840
+  where: github
+  who: 2566462
+- _id: 1057425
+  _job: 27787
+  _time: 2025-07-04 21:28:13.722672953 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 3
+  details: The pull request zerocracy/pages-action#183 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h25m of being in review and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 183
+  merger: 8086956
+  repository: 802720676
+  review_comments: 0
+  seconds: 5143
+  what: code-was-contributed
+  when: *841
+  where: github
+  who: 29139614
+- _id: 1057426
+  _job: 27787
+  _time: 2025-07-04 21:28:14.076988184 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 8
+  details: The pull request yegor256/0rsk#65 with 6 HoC created by @dependabot[bot]
+    was merged by @rultor after 5w6d of being in review and 8 comments.
+  hoc: 6
+  is_human: 0
+  issue: 65
+  merger: 8086956
+  repository: 181044958
+  review_comments: 0
+  seconds: 3545757
+  what: code-was-contributed
+  when: *842
+  where: github
+  who: 49699333
+- _id: 1057427
+  _job: 27787
+  _time: 2025-07-04 21:28:14.463520677 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 3
+  details: The pull request zerocracy/swarm-template#38 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h27m of being in review and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 38
+  merger: 8086956
+  repository: 849726475
+  review_comments: 0
+  seconds: 5232
+  what: code-was-contributed
+  when: *843
+  where: github
+  who: 29139614
+- _id: 1057428
+  _job: 27787
+  _time: 2025-07-04 21:28:14.798433370 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 0
+  details: The pull request yegor256/judges#152 with 8 HoC created by @renovate[bot]
+    was merged by @yegor256 after 6d17h of being in review and 0 comments.
+  hoc: 8
+  is_human: 0
+  issue: 152
+  merger: 526301
+  repository: 799113787
+  review_comments: 0
+  seconds: 582332
+  what: code-was-contributed
+  when: *844
+  where: github
+  who: 29139614
+- _id: 1057429
+  _job: 27787
+  _time: 2025-07-04 21:28:15.093074162 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 0
+  details: The pull request yegor256/factbase#44 with 8 HoC created by @renovate[bot]
+    was merged by @yegor256 after 20h51m of being in review and 0 comments.
+  hoc: 8
+  is_human: 0
+  issue: 44
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 75067
+  what: code-was-contributed
+  when: *845
+  where: github
+  who: 29139614
+- _id: 1057430
+  _job: 27787
+  _time: 2025-07-04 21:28:15.374863959 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 3
+  details: The pull request zerocracy/pages-action#184 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 1d6h of being in review and 3 comments.
+  hoc: 4
+  is_human: 0
+  issue: 184
+  merger: 8086956
+  repository: 802720676
+  review_comments: 0
+  seconds: 109199
+  what: code-was-contributed
+  when: *846
+  where: github
+  who: 29139614
+- _id: 1057431
+  _job: 27787
+  _time: 2025-07-04 21:28:15.552124363 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 13
+  details: The pull request yegor256/0rsk#66 with 40 HoC created by @dependabot[bot]
+    was merged by @rultor after 4w0d of being in review and 13 comments.
+  hoc: 40
+  is_human: 0
+  issue: 66
+  merger: 8086956
+  repository: 181044958
+  review_comments: 0
+  seconds: 2469912
+  what: code-was-contributed
+  when: *847
+  where: github
+  who: 49699333
+- _id: 1057432
+  _job: 27787
+  _time: 2025-07-04 21:28:15.730820709 Z
+  _version: 0.13.0/0.51.0/0.14.25
+  comments: 3
+  details: The pull request zerocracy/swarm-template#67 with 4 HoC created by @renovate[bot]
+    was merged by @rultor after 33m7s of being in review and 3 comments.
+  hoc: 4
+  is_human: 0
+  issue: 67
+  merger: 8086956
+  repository: 849726475
+  review_comments: 0
+  seconds: 1988
+  what: code-was-contributed
+  when: *848
+  where: github
+  who: 29139614
+- _id: 1057433
+  _time: 2025-07-04 21:36:43.831142574 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2852680214
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 1057434
+  _time: 2025-07-04 21:36:47.284370610 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2780520136
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 1057435
+  _time: 2025-07-04 21:36:47.922403406 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51703148386
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 1057436
+  _time: 2025-07-04 21:36:49.497148997 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51705154333
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 1057437
+  _time: 2025-07-04 21:36:57.844741795 Z
+  _version: 0.13.0/0.51.0/
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request yegor256/judges#250 has been opened by @renovate[bot].
+  event_id: 51510718179
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 250
+  repository: 799113787
+  what: pull-was-opened
+  when: 2025-06-30 14:48:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1057438
+  _time: 2025-07-04 21:37:00.833110017 Z
+  _version: 0.13.0/0.51.0/
+  branch: renovate/rubocop-1.x-lockfile
+  details: The pull request yegor256/judges#246 has been opened by @renovate[bot].
+  event_id: 51137420001
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 246
+  repository: 799113787
+  what: pull-was-opened
+  when: 2025-06-20 08:56:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1057439
+  _time: 2025-07-04 21:37:18.731530984 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2009165161
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 1057440
+  _time: 2025-07-04 21:37:20.199881560 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51701702838
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 1057441
+  _time: 2025-07-04 21:37:27.573949519 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2726236576
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 1057442
+  _time: 2025-07-04 21:37:59.494518942 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2817990545
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 1057443
+  _time: 2025-07-04 21:38:00.790659600 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51689680203
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 1057461
+  _time: 2025-07-04 21:38:16.888096598 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 1057481
+  _time: 2025-07-04 21:38:34.722109079 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 974194993
+  what: labels-were-scanned
+  where: github
+- _id: 1057534
+  _time: 2025-07-04 21:39:18.750709203 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 1057730
+  _time: 2025-07-04 21:41:58.687167620 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 1057790
+  _time: 2025-07-04 21:42:48.267459057 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 1057806
+  _time: 2025-07-04 21:43:00.707999483 Z
+  _version: 0.13.0/0.51.0/
+  latest: 160
+  repository: 181044958
+  what: labels-were-scanned
+  where: github
+- _id: 1057807
+  _time: 2025-07-04 21:43:01.477053151 Z
+  _version: 0.13.0/0.51.0/
+  latest: 84
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 1057808
+  _time: 2025-07-04 21:43:02.294343133 Z
+  _version: 0.13.0/0.51.0/
+  latest: 94
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 1057809
+  _time: 2025-07-04 21:43:03.116524272 Z
+  _version: 0.13.0/0.51.0/
+  latest: 702
+  repository: 799177290
+  what: labels-were-scanned
   where: github
