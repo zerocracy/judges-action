@@ -19,7 +19,9 @@ Fbe.conclude do
     (exists what)
     (exists issue)
     (not (exists stale))
-    (or (eq what 'pull-was-closed') (eq what 'pull-was-merged'))
+    (or
+      (eq what 'pull-was-closed')
+      (eq what 'pull-was-merged'))
     (unique issue)
     (empty
       (and
