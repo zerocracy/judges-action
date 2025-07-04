@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bar
+input:
+  -
+    _id: 1
+    what: pull-was-opened
+    where: github
+    issue: 40
+    repository: 680
+    who: 4444
+    when: 2025-05-27T23:54:44Z
+  -
+    _id: 2
+    what: pull-was-merged
+    where: github
+    issue: 40
+    repository: 680
+    who: 555
+    when: 2025-05-28T20:00:40Z
+expected:
+  - /fb[count(f)=3]
+  - /fb/f[what = 'merges-were-scanned']

@@ -16,7 +16,7 @@ require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 
 Fbe.iterate do
-  as 'assignees-were-scanned'
+  as 'merges-were-scanned'
   by "(agg
     (and
       (eq where 'github')
@@ -37,14 +37,17 @@ Fbe.iterate do
   over(timeout: 5 * 60) do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
     json = Fbe.octo.pull_request(repo, issue)
-    next issue unless json[:state] == 'closed'
+    unless json[:state] == 'closed'
+      $loog.debug("Pull #{repo}##{issue} is not closed: #{json[:state].inspect}")
+      next issue
+    end
     nn =
       Fbe.if_absent do |n|
         n.where = 'github'
         n.repository = repository
         n.issue = issue
-        n.when = Time.parse(json[:closed_at].iso8601)
-        actor = Fbe.octo.issue(repo, f.issue)[:closed_by]
+        n.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
+        actor = Fbe.octo.issue(repo, issue)[:closed_by]
         n.who = actor[:id].to_i if actor
         action = json[:merged_at].nil? ? 'closed' : 'merged'
         n.what = "pull-was-#{action}"
@@ -54,9 +57,7 @@ Fbe.iterate do
         n.branch = json[:head][:ref]
       end
     next issue if nn.nil?
-    nn.details =
-      "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}' by #{Fbe.who(nn)}, " \
-      "with #{nn.hoc} HoC and #{nn.comments} comments."
+    nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
     issue
   end
 end

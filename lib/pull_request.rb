@@ -12,17 +12,19 @@ require_relative 'jp'
 # @param [Sawyer::Resource] pr The pull request
 # @return [Hash] number of many kind of comments
 def Jp.comments_info(pr, repo: nil)
-  repo = pr[:base][:repo][:full_name] if repo.nil?
+  repo = pr.dig(:base, :repo, :full_name) if repo.nil?
+  return {} if repo.nil?
   ccomments = Fbe.octo.pull_request_comments(repo, pr[:number])
   icomments = Fbe.octo.issue_comments(repo, pr[:number])
   org, rname = repo.split('/')
+  uid = pr.dig(:user, :id)
   {
     comments: (pr[:comments] || 0) + (pr[:review_comments] || 0),
     comments_to_code: ccomments.count,
-    comments_by_author: ccomments.count { |c| c[:user][:id] == pr[:user][:id] } +
-      icomments.count { |c| c[:user][:id] == pr[:user][:id] },
-    comments_by_reviewers: ccomments.count { |c| c[:user][:id] != pr[:user][:id] } +
-      icomments.count { |c| c[:user][:id] != pr[:user][:id] },
+    comments_by_author: ccomments.count { |c| c[:user][:id] == uid } +
+      icomments.count { |c| c[:user][:id] == uid },
+    comments_by_reviewers: ccomments.count { |c| c.dig(:user, :id) != uid } +
+      icomments.count { |c| c[:user][:id] != uid },
     comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
     comments_resolved: Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
   }
@@ -35,7 +37,7 @@ end
 # @param [Array<Sawyer::Resource>] code_comments Array of comments for pull request
 # @return [Integer] sum of the number of reactions to comments issue and pull request comments
 def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
-  repo = pr[:base][:repo][:full_name] if repo.nil?
+  repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   issue_appreciations =
     issue_comments.sum do |comment|
       Fbe.octo.issue_comment_reactions(repo, comment[:id])
@@ -56,11 +58,13 @@ end
 def Jp.fetch_workflows(pr)
   succeeded_builds = 0
   failed_builds = 0
-  Fbe.octo.check_runs_for_ref(pr[:base][:repo][:full_name], pr[:head][:sha])[:check_runs].each do |run|
+  repo = pr.dig(:base, :repo, :full_name)
+  return {} if repo.nil?
+  Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))[:check_runs].each do |run|
     next unless run[:app][:slug] == 'github-actions'
     workflow = Fbe.octo.workflow_run(
-      pr[:base][:repo][:full_name],
-      Fbe.octo.workflow_run_job(pr[:base][:repo][:full_name], run[:id])[:run_id]
+      repo,
+      Fbe.octo.workflow_run_job(repo, run[:id])[:run_id]
     )
     next unless workflow[:event] == 'pull_request'
     case workflow[:conclusion]

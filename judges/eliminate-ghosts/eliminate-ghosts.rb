@@ -10,16 +10,24 @@
 
 require 'fbe/octo'
 require 'fbe/conclude'
+require_relative '../../lib/nick_of'
+
+good = Set.new
+bad = Set.new
 
 Fbe.conclude do
   quota_aware
   on '(and (eq where "github") (exists who) (not (exists stale)))'
   consider do |f|
-    json = Fbe.octo.user(f.who)
-    $loog.info("GitHub user ##{f.who} is found: @#{json[:login]}")
-  rescue Octokit::NotFound
-    $loog.info("GitHub user ##{f.who} is not found")
-    f.stale = "user ##{f.who}"
+    next if good.include?(f.who)
+    if Jp.nick_of(f.who).nil? || bad.include?(f.who)
+      $loog.info("GitHub user ##{f.who} is not found")
+      f.stale = "user ##{f.who}"
+      bad.add(f.who)
+    else
+      $loog.info("GitHub user ##{f.who} is good")
+      good.add(f.who)
+    end
   end
 end
 
