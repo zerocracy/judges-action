@@ -4,10 +4,10 @@
   deleted: 8
   error: 'Judge quality-of-service stopped by timeout after 10m0s: execution expired'
   inserted: 8
-  seconds: 1047.869747444
+  seconds: 1085.010081093
   version: 0.51.0
   what: judges-summary
-  when: 2025-07-04 11:53:22.223786226 Z
+  when: 2025-07-04 12:29:48.865039306 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -138711,13 +138711,6 @@
   repository: 820463873
   what: labels-were-scanned
   where: github
-- _id: 1052464
-  _time: 2025-07-04 11:35:58.283992964 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51689680203
-  repository: 849726475
-  what: events-were-scanned
-  where: github
 - _id: 1052465
   _time: 2025-07-04 11:36:00.225558631 Z
   _version: 0.13.0/0.51.0/
@@ -138767,13 +138760,6 @@
   when: 2025-07-04 05:55:58.000000000 Z
   where: github
   who: 526301
-- _id: 1052468
-  _time: 2025-07-04 11:36:01.674949995 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51686613218
-  repository: 820463873
-  what: events-were-scanned
-  where: github
 - _id: 1052469
   _time: 2025-07-04 11:36:02.927638642 Z
   _version: 0.13.0/0.51.0/
@@ -138825,15 +138811,86 @@
   when: 2025-07-04 08:57:43.000000000 Z
   where: github
   who: 526301
-- _id: 1052472
-  _time: 2025-07-04 11:36:42.545020545 Z
+- _id: 1052481
+  _time: 2025-07-04 12:11:49.823540602 Z
+  _version: 0.13.0/0.51.0/
+  commit: 3b316ad1c59baa62ea12f74556bd8a67059be90d
+  default_branch: master
+  details: 'A new Git push #25295404208 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is ''master''), not associated with any pull request.'
+  event_id: 51693591162
+  event_type: PushEvent
+  push_id: 25295404208
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2025-07-04 09:21:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 1052482
+  _time: 2025-07-04 12:12:36.146102764 Z
   _version: 0.13.0/0.51.0/
   latest: 2852680214
   repository: 799177290
   what: events-were-scanned
   where: github
-- _id: 1052473
-  _time: 2025-07-04 11:36:50.809513859 Z
+- _id: 1052483
+  _time: 2025-07-04 12:12:39.501072065 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2780520136
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 1052484
+  _time: 2025-07-04 12:12:42.009380574 Z
+  _version: 0.13.0/0.51.0/
+  details: The issue zerocracy/fbe#239 has been closed by @yegor256.
+  event_id: 51687664311
+  event_type: IssuesEvent
+  issue: 239
+  repository: 820463873
+  what: issue-was-closed
+  when: 2025-07-04 06:43:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 1052485
+  _time: 2025-07-04 12:12:43.226560515 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51687664311
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 1052486
+  _time: 2025-07-04 12:13:26.314770339 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2817990545
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 1052487
+  _time: 2025-07-04 12:13:27.642315278 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51691377517
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 1052488
+  _time: 2025-07-04 12:13:29.365783848 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51689680203
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 1052489
+  _time: 2025-07-04 12:13:31.297335054 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51640380852
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 1052490
+  _time: 2025-07-04 12:13:40.502091546 Z
   _version: 0.13.0/0.51.0/
   branch: renovate/crate-ci-typos-1.x
   details: The pull request yegor256/judges#250 has been opened by @renovate[bot].
@@ -138845,8 +138902,8 @@
   when: 2025-06-30 14:48:12.000000000 Z
   where: github
   who: 29139614
-- _id: 1052474
-  _time: 2025-07-04 11:36:53.725841648 Z
+- _id: 1052491
+  _time: 2025-07-04 12:13:43.548288097 Z
   _version: 0.13.0/0.51.0/
   branch: renovate/rubocop-1.x-lockfile
   details: The pull request yegor256/judges#246 has been opened by @renovate[bot].
@@ -138858,45 +138915,17 @@
   when: 2025-06-20 08:56:05.000000000 Z
   where: github
   who: 29139614
-- _id: 1052475
-  _time: 2025-07-04 11:37:11.858201238 Z
+- _id: 1052492
+  _time: 2025-07-04 12:14:02.611731690 Z
   _version: 0.13.0/0.51.0/
   latest: 2009165161
   repository: 799113787
   what: events-were-scanned
   where: github
-- _id: 1052476
-  _time: 2025-07-04 11:37:15.441302468 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2780520136
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 1052477
-  _time: 2025-07-04 11:37:16.803407684 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51640380852
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 1052478
-  _time: 2025-07-04 11:37:50.494538202 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2817990545
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 1052479
-  _time: 2025-07-04 11:37:57.489531004 Z
+- _id: 1052493
+  _time: 2025-07-04 12:14:09.910749219 Z
   _version: 0.13.0/0.51.0/
   latest: 2726236576
   repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 1052480
-  _time: 2025-07-04 11:37:58.388324326 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51691377517
-  repository: 798641472
   what: events-were-scanned
   where: github
