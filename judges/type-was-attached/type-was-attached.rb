@@ -34,7 +34,7 @@ Fbe.iterate do
           (eq what 'type-was-attached'))))
     (min issue))"
   quota_aware
-  repeats 5
+  repeats 100
   over(timeout: 5 * 60) do |repository, issue|
     begin
       Fbe.octo.issue_timeline(repository, issue).each do |te|
