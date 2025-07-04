@@ -26,6 +26,7 @@ Fbe.iterate do
       (eq where 'github')
       (eq repository $repository)
       (eq what 'issue-was-opened')
+      (not (exists stale))
       (gt issue $before)
       (empty
         (and

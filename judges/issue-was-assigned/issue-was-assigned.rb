@@ -5,7 +5,7 @@
 
 # Judge that monitors open issue and create missing issue-was-assigned facts.
 
-require 'fbe/conclude'
+require 'fbe/iterate'
 require 'fbe/octo'
 
 Fbe.iterate do
@@ -15,6 +15,7 @@ Fbe.iterate do
       (eq where 'github')
       (eq what 'issue-was-opened')
       (eq repository $repository)
+      (not (exists stale))
       (gt issue $before)
       (empty
         (and
