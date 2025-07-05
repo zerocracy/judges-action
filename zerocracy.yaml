@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'Judge quality-of-service stopped by timeout after 10m0s: execution expired'
   inserted: 8
-  seconds: 1013.97272145
+  seconds: 1129.066032913
   version: 0.51.0
   what: judges-summary
-  when: 2025-07-05 04:27:48.689364934 Z
+  when: 2025-07-05 05:01:06.528194368 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -146918,95 +146919,6 @@
   repository: 974194993
   what: min-pull-was-found
   where: github
-- _id: 1060987
-  _time: 2025-07-05 04:10:59.984143486 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51713121278
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 1060988
-  _time: 2025-07-05 04:11:03.927834633 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2780520136
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 1060989
-  _time: 2025-07-05 04:11:06.319279329 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51715424074
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 1060990
-  _time: 2025-07-05 04:11:14.225398480 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2726236576
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 1060991
-  _time: 2025-07-05 04:12:00.233049715 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2817990545
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 1060992
-  _time: 2025-07-05 04:12:09.509742780 Z
-  _version: 0.13.0/0.51.0/
-  branch: renovate/crate-ci-typos-1.x
-  details: The pull request yegor256/judges#250 has been opened by @renovate[bot].
-  event_id: 51510718179
-  event_type: PullRequestEvent
-  issue: 250
-  repository: 799113787
-  what: pull-was-opened
-  when: 2025-06-30 14:48:12.000000000 Z
-  where: github
-  who: 29139614
-- _id: 1060993
-  _time: 2025-07-05 04:12:12.881059960 Z
-  _version: 0.13.0/0.51.0/
-  branch: renovate/rubocop-1.x-lockfile
-  details: The pull request yegor256/judges#246 has been opened by @renovate[bot].
-  event_id: 51137420001
-  event_type: PullRequestEvent
-  issue: 246
-  repository: 799113787
-  what: pull-was-opened
-  when: 2025-06-20 08:56:05.000000000 Z
-  where: github
-  who: 29139614
-- _id: 1060994
-  _time: 2025-07-05 04:12:31.339663474 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2009165161
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 1060995
-  _time: 2025-07-05 04:13:25.229703362 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2852680214
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 1060996
-  _time: 2025-07-05 04:13:26.536441385 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51714564961
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 1060997
-  _time: 2025-07-05 04:13:28.580538606 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51712148622
-  repository: 840215648
-  what: events-were-scanned
-  where: github
 - _id: 1061015
   _time: 2025-07-05 04:13:48.003472634 Z
   _version: 0.13.0/0.51.0/
@@ -147132,4 +147044,93 @@
   latest: 0
   repository: 181044958
   what: labels-were-scanned
+  where: github
+- _id: 1061509
+  _time: 2025-07-05 04:43:05.352528215 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2817990545
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 1061510
+  _time: 2025-07-05 04:43:07.211216990 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51712148622
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 1061511
+  _time: 2025-07-05 04:44:01.893853235 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2852680214
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 1061512
+  _time: 2025-07-05 04:44:10.008046499 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2726236576
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 1061513
+  _time: 2025-07-05 04:44:19.405147822 Z
+  _version: 0.13.0/0.51.0/
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request yegor256/judges#250 has been opened by @renovate[bot].
+  event_id: 51510718179
+  event_type: PullRequestEvent
+  issue: 250
+  repository: 799113787
+  what: pull-was-opened
+  when: 2025-06-30 14:48:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1061514
+  _time: 2025-07-05 04:44:22.639613462 Z
+  _version: 0.13.0/0.51.0/
+  branch: renovate/rubocop-1.x-lockfile
+  details: The pull request yegor256/judges#246 has been opened by @renovate[bot].
+  event_id: 51137420001
+  event_type: PullRequestEvent
+  issue: 246
+  repository: 799113787
+  what: pull-was-opened
+  when: 2025-06-20 08:56:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1061515
+  _time: 2025-07-05 04:44:41.102479990 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2009165161
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 1061516
+  _time: 2025-07-05 04:44:42.372617434 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51714564961
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 1061517
+  _time: 2025-07-05 04:44:43.987235911 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51713121278
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 1061518
+  _time: 2025-07-05 04:44:48.144424760 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2780520136
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 1061519
+  _time: 2025-07-05 04:44:50.407244000 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51715424074
+  repository: 820463873
+  what: events-were-scanned
   where: github
