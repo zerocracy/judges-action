@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'Judge quality-of-service stopped by timeout after 10m0s: execution expired'
   inserted: 8
-  seconds: 989.979152547
+  seconds: 963.37496376
   version: 0.51.0
   what: judges-summary
-  when: 2025-07-06 06:26:05.637706486 Z
+  when: 2025-07-06 06:58:36.948452026 Z
 - _id: 1
   _time: 2024-07-02 10:14:27.728103871 Z
   _version: 0.0.60/0.15.0/0.0.0
@@ -152021,8 +152022,10 @@
   details: Apparently, zerocracy/judges-action#707 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 707
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2025-06-11 14:11:21.000000000 Z
@@ -152041,6 +152044,7 @@
   details: Apparently, zerocracy/judges-action#708 has been 'pull-was-closed'.
   failed_builds: 0
   hoc: 2
+  is_human: 0
   issue: 708
   repository: 799177290
   succeeded_builds: 0
@@ -152061,8 +152065,10 @@
   details: Apparently, zerocracy/judges-action#769 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 68
+  is_human: 1
   issue: 769
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
   when: 2025-06-26 05:09:08.000000000 Z
@@ -152081,8 +152087,10 @@
   details: Apparently, zerocracy/judges-action#788 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 788
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2025-07-03 07:40:33.000000000 Z
@@ -152101,8 +152109,10 @@
   details: Apparently, zerocracy/judges-action#789 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 789
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
   when: 2025-07-03 09:13:39.000000000 Z
@@ -152121,8 +152131,10 @@
   details: Apparently, zerocracy/judges-action#791 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 791
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 0
   what: pull-was-merged
   when: 2025-07-03 11:40:36.000000000 Z
@@ -152141,8 +152153,10 @@
   details: Apparently, zerocracy/judges-action#792 has been 'pull-was-merged'.
   failed_builds: 0
   hoc: 2
+  is_human: 1
   issue: 792
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
   when: 2025-07-03 11:40:28.000000000 Z
@@ -152161,6 +152175,7 @@
   details: Apparently, zerocracy/judges-action#793 has been 'pull-was-closed'.
   failed_builds: 0
   hoc: 0
+  is_human: 0
   issue: 793
   repository: 799177290
   succeeded_builds: 0
@@ -152230,158 +152245,6 @@
   latest: 688
   repository: 799177290
   what: types-were-scanned
-  where: github
-- _id: 1077001
-  _time: 2025-07-06 06:10:42.265924832 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2852680214
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 1077002
-  _time: 2025-07-06 06:10:44.768323064 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51736099830
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 1077003
-  _time: 2025-07-06 06:10:49.169985940 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2780520136
-  repository: 974194993
-  what: events-were-scanned
-  where: github
-- _id: 1077004
-  _time: 2025-07-06 06:10:50.626260127 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51714564961
-  repository: 798641472
-  what: events-were-scanned
-  where: github
-- _id: 1077005
-  _time: 2025-07-06 06:10:52.456631748 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51713121278
-  repository: 849726475
-  what: events-were-scanned
-  where: github
-- _id: 1077006
-  _time: 2025-07-06 06:11:02.726687472 Z
-  _version: 0.13.0/0.51.0/
-  branch: renovate/crate-ci-typos-1.x
-  details: The pull request yegor256/judges#250 has been opened by @renovate[bot].
-  event_id: 51510718179
-  event_type: PullRequestEvent
-  issue: 250
-  repository: 799113787
-  what: pull-was-opened
-  when: 2025-06-30 14:48:12.000000000 Z
-  where: github
-  who: 29139614
-- _id: 1077007
-  _time: 2025-07-06 06:11:05.684497113 Z
-  _version: 0.13.0/0.51.0/
-  branch: renovate/rubocop-1.x-lockfile
-  details: The pull request yegor256/judges#246 has been opened by @renovate[bot].
-  event_id: 51137420001
-  event_type: PullRequestEvent
-  issue: 246
-  repository: 799113787
-  what: pull-was-opened
-  when: 2025-06-20 08:56:05.000000000 Z
-  where: github
-  who: 29139614
-- _id: 1077008
-  _time: 2025-07-06 06:11:24.316287295 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2009165161
-  repository: 799113787
-  what: events-were-scanned
-  where: github
-- _id: 1077009
-  _time: 2025-07-06 06:12:06.934230365 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2817990545
-  repository: 802720676
-  what: events-were-scanned
-  where: github
-- _id: 1077010
-  _time: 2025-07-06 06:12:14.332919108 Z
-  _version: 0.13.0/0.51.0/
-  latest: 2726236576
-  repository: 181044958
-  what: events-were-scanned
-  where: github
-- _id: 1077011
-  _time: 2025-07-06 06:12:16.117962606 Z
-  _version: 0.13.0/0.51.0/
-  latest: 51712148622
-  repository: 840215648
-  what: events-were-scanned
-  where: github
-- _id: 1077022
-  _time: 2025-07-06 06:12:28.987635467 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 849726475
-  what: labels-were-scanned
-  where: github
-- _id: 1077051
-  _time: 2025-07-06 06:12:58.268056940 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 974194993
-  what: labels-were-scanned
-  where: github
-- _id: 1077097
-  _time: 2025-07-06 06:13:46.336383780 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 840215648
-  what: labels-were-scanned
-  where: github
-- _id: 1077296
-  _time: 2025-07-06 06:17:08.548172148 Z
-  _version: 0.13.0/0.51.0/
-  latest: 0
-  repository: 802720676
-  what: labels-were-scanned
-  where: github
-- _id: 1077299
-  _time: 2025-07-06 06:17:11.469981845 Z
-  _version: 0.13.0/0.51.0/
-  latest: 80
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 1077300
-  _time: 2025-07-06 06:17:12.468752955 Z
-  _version: 0.13.0/0.51.0/
-  latest: 232
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 1077301
-  _time: 2025-07-06 06:17:13.423557435 Z
-  _version: 0.13.0/0.51.0/
-  latest: 60
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 1077302
-  _time: 2025-07-06 06:17:14.402825834 Z
-  _version: 0.13.0/0.51.0/
-  latest: 65
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 1077303
-  _time: 2025-07-06 06:17:20.389767659 Z
-  _version: 0.13.0/0.51.0/
-  latest: 68
-  repository: 799113787
-  what: labels-were-scanned
   where: github
 - _id: 1077305
   _time: 2025-07-06 06:17:42.218984350 Z
@@ -152634,4 +152497,158 @@
   latest: 0
   repository: 802720676
   what: assignees-were-scanned
+  where: github
+- _id: 1077554
+  _time: 2025-07-06 06:42:38.280655301 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51714564961
+  repository: 798641472
+  what: events-were-scanned
+  where: github
+- _id: 1077555
+  _time: 2025-07-06 06:42:40.353822411 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51736099830
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 1077556
+  _time: 2025-07-06 06:43:36.255566531 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2852680214
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 1077557
+  _time: 2025-07-06 06:43:37.813178138 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51712148622
+  repository: 840215648
+  what: events-were-scanned
+  where: github
+- _id: 1077558
+  _time: 2025-07-06 06:43:44.757795910 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2726236576
+  repository: 181044958
+  what: events-were-scanned
+  where: github
+- _id: 1077559
+  _time: 2025-07-06 06:43:54.389901536 Z
+  _version: 0.13.0/0.51.0/
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request yegor256/judges#250 has been opened by @renovate[bot].
+  event_id: 51510718179
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 250
+  repository: 799113787
+  what: pull-was-opened
+  when: 2025-06-30 14:48:12.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1077560
+  _time: 2025-07-06 06:43:57.445759632 Z
+  _version: 0.13.0/0.51.0/
+  branch: renovate/rubocop-1.x-lockfile
+  details: The pull request yegor256/judges#246 has been opened by @renovate[bot].
+  event_id: 51137420001
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 246
+  repository: 799113787
+  what: pull-was-opened
+  when: 2025-06-20 08:56:05.000000000 Z
+  where: github
+  who: 29139614
+- _id: 1077561
+  _time: 2025-07-06 06:44:15.785915261 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2009165161
+  repository: 799113787
+  what: events-were-scanned
+  where: github
+- _id: 1077562
+  _time: 2025-07-06 06:44:19.500907478 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2780520136
+  repository: 974194993
+  what: events-were-scanned
+  where: github
+- _id: 1077563
+  _time: 2025-07-06 06:44:21.060271116 Z
+  _version: 0.13.0/0.51.0/
+  latest: 51713121278
+  repository: 849726475
+  what: events-were-scanned
+  where: github
+- _id: 1077564
+  _time: 2025-07-06 06:45:00.459306388 Z
+  _version: 0.13.0/0.51.0/
+  latest: 2817990545
+  repository: 802720676
+  what: events-were-scanned
+  where: github
+- _id: 1077575
+  _time: 2025-07-06 06:45:14.358454046 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 849726475
+  what: labels-were-scanned
+  where: github
+- _id: 1077601
+  _time: 2025-07-06 06:45:39.637719708 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 974194993
+  what: labels-were-scanned
+  where: github
+- _id: 1077642
+  _time: 2025-07-06 06:46:19.696138269 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 1077652
+  _time: 2025-07-06 06:46:29.139352233 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 840215648
+  what: labels-were-scanned
+  where: github
+- _id: 1077684
+  _time: 2025-07-06 06:46:59.063154614 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 1077733
+  _time: 2025-07-06 06:47:45.602168922 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 1077741
+  _time: 2025-07-06 06:47:52.611709994 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 1077765
+  _time: 2025-07-06 06:48:13.916304616 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 802720676
+  what: labels-were-scanned
+  where: github
+- _id: 1077766
+  _time: 2025-07-06 06:48:20.247021322 Z
+  _version: 0.13.0/0.51.0/
+  latest: 0
+  repository: 181044958
+  what: labels-were-scanned
   where: github
