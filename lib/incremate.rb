@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'elapsed'
 require 'fbe/octo'
 require 'fbe/overwrite'
 require 'tago'
@@ -47,17 +48,18 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
       $loog.info('No GitHub quota left, it is time to stop')
       break
     end
-    if Time.now - start > timeout
+    if Time.now > start + timeout
       $loog.info("We are doing this for too long (#{start.ago} > #{timeout}s), time to stop")
       break
     end
     require_relative rb
-    before = Time.now
-    h = send(n, fact)
-    h.each do |k, v|
-      next if avoid_duplicate && fact.all_properties.include?(k.to_s)
-      fact = Fbe.overwrite(fact, k.to_s, v)
+    elapsed($loog) do
+      h = send(n, fact)
+      h.each do |k, v|
+        next if avoid_duplicate && fact.all_properties.include?(k.to_s)
+        fact = Fbe.overwrite(fact, k.to_s, v)
+      end
+      throw :"Collected #{n} (#{start.ago} total): [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]"
     end
-    $loog.info("Collected #{n} in #{before.ago} (#{start.ago} total): [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
   end
 end
