@@ -16,13 +16,14 @@
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/if_absent.rb Implementation of Fbe.if_absent
 
-require 'time'
+require 'elapsed'
 require 'fbe/fb'
-require 'fbe/octo'
-require 'fbe/iterate'
 require 'fbe/if_absent'
-require 'fbe/who'
 require 'fbe/issue'
+require 'fbe/iterate'
+require 'fbe/octo'
+require 'fbe/who'
+require 'time'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
@@ -47,25 +48,26 @@ require 'fbe/issue'
       total = 0
       found = 0
       first = issue
-      before = Time.now
-      Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
-        next if Fbe.octo.off_quota?
-        total += 1
-        f =
-          Fbe.if_absent do |ff|
-            ff.where = 'github'
-            ff.what = "#{type}-was-opened"
-            ff.repository = repository
-            ff.issue = json[:number]
-            issue = ff.issue
-          end
-        next if f.nil?
-        found += 1
-        f.when = json[:created_at]
-        f.who = json.dig(:user, :id)
-        f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+      elapsed($loog) do
+        Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
+          next if Fbe.octo.off_quota?
+          total += 1
+          f =
+            Fbe.if_absent do |ff|
+              ff.where = 'github'
+              ff.what = "#{type}-was-opened"
+              ff.repository = repository
+              ff.issue = json[:number]
+              issue = ff.issue
+            end
+          next if f.nil?
+          found += 1
+          f.when = json[:created_at]
+          f.who = json.dig(:user, :id)
+          f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+        end
+        throw :"Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}"
       end
-      $loog.info("Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}, in #{before.ago}")
       issue
     end
   end
