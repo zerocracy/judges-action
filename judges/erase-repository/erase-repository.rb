@@ -8,6 +8,7 @@
 # and if a repository no longer exists (returns 404), removes the repository reference
 # from the factbase record to maintain data integrity.
 
+require 'elapsed'
 require 'fbe/octo'
 require 'fbe/conclude'
 
@@ -19,13 +20,13 @@ Fbe.conclude do
   consider do |f|
     r = f.repository
     if good[r].nil?
-      begin
+      elapsed($loog) do
         json = Fbe.octo.repository(r)
         good[r] = true
-        $loog.info("GitHub repository ##{r} is found: #{json[:full_name]}")
+        throw :"GitHub repository ##{r} is found: #{json[:full_name]}"
       rescue Octokit::NotFound
         good[r] = false
-        $loog.info("GitHub repository ##{r} is not found")
+        throw :"GitHub repository ##{r} is not found"
       end
     end
     f.stale = "repo ##{r}" unless good[r]
