@@ -11,6 +11,8 @@ require_relative '../test__helper'
 # Copyright:: Copyright (c) 2025 Yegor Bugayenko
 # License:: MIT
 class TestEliminateGhosts < Jp::Test
+  using SmartFactbase
+
   def test_delete_who_if_user_not_found
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -78,5 +80,36 @@ class TestEliminateGhosts < Jp::Test
     assert_equal(1, fb.query('(and (eq where "github") (not (exists who)))').each.to_a.size)
     assert_equal(2, fb.query('(and (eq where "gitlab") (exists who))').each.to_a.size)
     assert_equal(1, fb.query('(and (eq where "gitlab") (not (exists who)))').each.to_a.size)
+  end
+
+  def test_process_unique_users_first_and_set_stale_property_later_for_other_facts
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/user/111', body: {}, status: 404)
+    stub_github('https://api.github.com/user/222', body: {}, status: 404)
+    stub_github('https://api.github.com/user/333', body: { login: 'user333', id: 333, type: 'User' })
+    stub_github('https://api.github.com/user/444', body: {}, status: 404)
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', who: 111, what: 'something1')
+      .with(_id: 2, where: 'github', who: 111, what: 'something2')
+      .with(_id: 3, where: 'github', who: 222, what: 'something3')
+      .with(_id: 4, where: 'github', who: 222, what: 'something4')
+      .with(_id: 5, where: 'github', who: 222, what: 'something5')
+      .with(_id: 6, where: 'github', who: 333, what: 'something6')
+      .with(_id: 7, where: 'github', who: 333, what: 'something7')
+      .with(_id: 8, where: 'github', who: 444, what: 'something8')
+      .with(_id: 9, where: 'github', who: 444, what: 'something9')
+      .with(_id: 10, where: 'github', who: 555, what: 'something10', stale: 'user #555')
+      .with(_id: 11, where: 'github', who: 555, what: 'something11')
+      .with(_id: 12, where: 'github', who: 555, what: 'something12')
+    load_it('eliminate-ghosts', fb)
+    assert_equal(2, fb.picks(where: 'github', who: 111, stale: 'user #111').count)
+    assert_equal(3, fb.picks(where: 'github', who: 222, stale: 'user #222').count)
+    assert_equal(2, fb.picks(where: 'github', who: 444, stale: 'user #444').count)
+    assert_equal(3, fb.picks(where: 'github', who: 555, stale: 'user #555').count)
+    assert(fb.none?(where: 'github', who: 333, stale: 'user #333'))
+    assert(fb.has?(where: 'github', who: 333))
   end
 end
