@@ -64,6 +64,14 @@ require 'time'
           found += 1
           f.when = json[:created_at]
           f.who = json.dig(:user, :id)
+          if type == 'pull'
+            ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+            if ref
+              f.branch = ref
+            else
+              f.stale = 'branch'
+            end
+          end
           f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
         end
         throw :"Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}"
