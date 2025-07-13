@@ -6,6 +6,7 @@
 source 'https://rubygems.org'
 
 gem 'base64', '~>0.2'
+gem 'baza.rb', '~>0.9'
 gem 'decoor', '~>0.0'
 gem 'factbase', '~>0.11'
 gem 'fbe', '~>0.19'
