@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bar
+input:
+  -
+    _id: 1
+    what: issue-was-opened
+    where: github
+    issue: 50
+    repository: 680
+    who: 4444
+    when: 2025-07-18T20:50:50Z
+  -
+    _id: 2
+    what: issue-was-closed
+    where: github
+    issue: 50
+    repository: 680
+    who: 4444
+    when: 2025-07-18T20:50:50Z
+  -
+    _id: 3
+    what: issue-was-opened
+    where: github
+    issue: 142
+    repository: 680
+    who: 4444
+    when: 2025-07-18T20:50:50Z
+expected:
+  - /fb[count(f)=5]
+  - /fb/f[what='issue-was-closed' and where='github' and issue=142 and repository=680]
+  - /fb/f[what = 'issues-were-scanned']
