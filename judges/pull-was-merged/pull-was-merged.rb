@@ -48,7 +48,11 @@ Fbe.iterate do
         n.issue = issue
         n.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
         actor = Fbe.octo.issue(repo, issue)[:closed_by]
-        n.who = actor[:id].to_i if actor
+        if actor
+          n.who = actor[:id].to_i
+        else
+          n.stale = 'who'
+        end
         action = json[:merged_at].nil? ? 'closed' : 'merged'
         n.what = "pull-was-#{action}"
         n.hoc = json[:additions] + json[:deletions]
