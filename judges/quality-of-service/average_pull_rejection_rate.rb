@@ -15,7 +15,7 @@ require 'fbe/unmask_repos'
 def average_pull_rejection_rate(fact)
   pulls = 0
   rejected = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     pulls += Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{fact.since.utc.iso8601[0..9]}")[:total_count]
     rejected += Fbe.octo.search_issues(
       "repo:#{repo} type:pr is:unmerged closed:>#{fact.since.utc.iso8601[0..9]}"

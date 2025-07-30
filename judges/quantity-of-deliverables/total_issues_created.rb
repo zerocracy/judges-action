@@ -15,7 +15,7 @@ require 'fbe/unmask_repos'
 def total_issues_created(fact)
   issues = 0
   pulls = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.list_issues(repo, since: ">#{fact.since.utc.iso8601[0..9]}").each do |json|
       issues += 1
       pulls += 1 unless json[:pull_request].nil?

@@ -45,11 +45,11 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
       next
     end
     if Fbe.octo.off_quota?
-      $loog.info('No GitHub quota left, it is time to stop')
+      $loog.info("No GitHub quota left, it is time to stop at #{n}")
       break
     end
     if Time.now > start + timeout
-      $loog.info("We are doing this for too long (#{start.ago} > #{timeout}s), time to stop")
+      $loog.info("We are doing this for too long (#{start.ago} > #{timeout}s), time to stop at #{n}")
       break
     end
     require_relative rb

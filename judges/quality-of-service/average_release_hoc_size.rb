@@ -16,7 +16,7 @@ def average_release_hoc_size(fact)
   repo_releases = {}
   hocs = []
   commits = []
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.releases(repo).each do |json|
       break if json[:published_at] < fact.since
       (repo_releases[repo] ||= []) << json

@@ -17,7 +17,7 @@ def average_review_time(fact)
   review_comments = []
   reviewers = []
   reviews = []
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues(
       "repo:#{repo} type:pr is:merged closed:>#{fact.since.utc.iso8601[0..9]}"
     )[:items].each do |pr|

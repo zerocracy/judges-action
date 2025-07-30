@@ -21,7 +21,7 @@ def average_issue_lifetime(fact)
   ret = {}
   { issue: 'average_issue_lifetime', pr: 'average_pull_lifetime' }.each do |type, prop|
     ages = []
-    Fbe.unmask_repos.each do |repo|
+    Fbe.unmask_repos do |repo|
       q = "repo:#{repo} type:#{type} closed:>#{fact.since.utc.iso8601[0..9]}"
       ages +=
         Fbe.octo.search_issues(q)[:items].map do |json|

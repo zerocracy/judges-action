@@ -14,7 +14,7 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def total_active_contributors(fact)
   active_contributors = Set.new
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.search_commits(
       "repo:#{repo} author-date:>#{(fact.when - (30 * 24 * 60 * 60)).iso8601[0..9]}"
     )[:items].each do |commit|

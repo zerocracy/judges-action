@@ -20,7 +20,7 @@ require 'fbe/unmask_repos'
 def total_stars(_fact)
   stars = 0
   forks = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.repository(repo).then do |json|
       stars += json[:stargazers_count]
       forks += json[:forks]

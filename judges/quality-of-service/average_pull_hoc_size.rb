@@ -15,7 +15,7 @@ require 'fbe/unmask_repos'
 def average_pull_hoc_size(fact)
   hocs = []
   files = []
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues(
       "repo:#{repo} type:pr is:merged closed:>#{fact.since.utc.iso8601[0..9]}"
     )[:items].each do |json|

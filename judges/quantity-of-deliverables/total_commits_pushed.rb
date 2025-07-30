@@ -15,7 +15,7 @@ require 'fbe/unmask_repos'
 def total_commits_pushed(fact)
   commits = 0
   hoc = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     next if Fbe.octo.repository(repo)[:size].zero?
     Fbe.octo.commits_since(repo, fact.since).each do |json|
       commits += 1

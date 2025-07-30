@@ -15,7 +15,7 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def average_triage_time(fact)
   triage_times = []
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues("repo:#{repo} type:issue created:>#{fact.since.utc.iso8601[0..9]}")[:items].each do |issue|
       ff = Fbe.fb.query(
         "

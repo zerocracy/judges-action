@@ -19,7 +19,7 @@ require 'fbe/unmask_repos'
 # @see ../dimensions-of-terrain.rb Main judge that calls this function
 def total_contributors(_fact)
   contributors = Set.new
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     next if Fbe.octo.repository(repo)[:size].zero?
     Fbe.octo.contributors(repo).each do |contributor|
       contributors << contributor[:id]

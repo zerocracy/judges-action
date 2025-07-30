@@ -14,7 +14,7 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def total_releases(_fact)
   total = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.releases(repo).each do |_|
       total += 1
     end

@@ -14,7 +14,7 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def average_release_interval(fact)
   dates = []
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.releases(repo).each do |json|
       break if json[:published_at] < fact.since
       dates << json[:published_at]

@@ -14,7 +14,7 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def average_backlog_size(fact)
   issues = []
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     (fact.since.utc.to_date..Time.now.utc.to_date).each do |date|
       count = 0
       Fbe.octo.search_issues(

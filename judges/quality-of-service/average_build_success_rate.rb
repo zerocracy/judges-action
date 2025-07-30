@@ -18,7 +18,7 @@ def average_build_success_rate(fact)
   duration = 0
   ttrs = []
   failed = {}
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     Fbe.octo.repository_workflow_runs(repo, created: ">#{fact.since.utc.iso8601[0..9]}")[:workflow_runs].each do |json|
       workflow_id = json[:workflow_id]
       run_duration = (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000

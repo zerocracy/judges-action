@@ -14,7 +14,7 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def total_repositories(_fact)
   total = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     total += 1 unless Fbe.octo.repository(repo)[:archived]
   end
   { total_repositories: total }

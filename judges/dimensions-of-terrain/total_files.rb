@@ -18,7 +18,7 @@ require 'fbe/unmask_repos'
 # @see ../dimensions-of-terrain.rb Main judge that calls this function
 def total_files(_fact)
   files = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     repo_info = Fbe.octo.repository(repo)
     next if repo_info[:size].zero?
     Fbe.octo.tree(repo, repo_info[:default_branch], recursive: true).then do |json|

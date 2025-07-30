@@ -15,7 +15,7 @@ require 'fbe/unmask_repos'
 def total_issues(_fact)
   issues = 0
   pulls = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     json = Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
     issues += json['issues']
     pulls += json['pulls']
