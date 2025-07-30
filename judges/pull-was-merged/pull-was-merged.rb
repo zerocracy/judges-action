@@ -28,9 +28,13 @@ Fbe.iterate do
           (eq where $where)
           (eq repository $repository)
           (eq issue $issue)
-          (or
-            (eq what 'pull-was-closed')
-            (eq what 'pull-was-merged')))))
+          (eq what 'pull-was-closed')))
+      (empty
+        (and
+          (eq where $where)
+          (eq repository $repository)
+          (eq issue $issue)
+          (eq what 'pull-was-merged'))))
     (min issue))"
   quota_aware
   repeats 100
