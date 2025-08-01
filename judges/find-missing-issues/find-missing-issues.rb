@@ -62,6 +62,14 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
     next if f.nil?
     f.when = json[:created_at]
     f.who = json.dig(:user, :id)
+    if type == 'pull'
+      ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+      if ref
+        f.branch = ref
+      else
+        f.stale = 'branch'
+      end
+    end
     f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
     $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     added += 1
