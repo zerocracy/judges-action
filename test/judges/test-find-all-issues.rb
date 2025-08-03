@@ -144,8 +144,8 @@ class TestFindAllIssues < Jp::Test
     stub_github(
       'https://api.github.com/rate_limit',
       body: {
-        resources: { core: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' } },
-        rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
+        resources: { core: { limit: 999, remaining: 999, reset: 1_728_464_472, used: 1, resource: 'core' } },
+        rate: { limit: 999, remaining: 999, reset: 1_728_464_472, used: 1, resource: 'core' }
       }
     )
     stub_github(
@@ -209,7 +209,7 @@ class TestFindAllIssues < Jp::Test
       f.who = 257_962
     end
     load_it('find-all-issues', fb)
-    assert_equal(6, fb.query('(always)').each.to_a.size)
+    assert_equal(7, fb.query('(always)').each.to_a.size)
     fb.query("(eq what 'min-issue-was-found')").each.to_a.first.then do |f|
       assert_equal('min-issue-was-found', f.what)
       assert_equal('github', f.where)
