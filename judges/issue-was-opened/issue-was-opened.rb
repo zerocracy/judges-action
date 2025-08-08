@@ -35,7 +35,7 @@ Fbe.conclude do
       n.what = $judge
       n.when = json[:created_at]
       n.who = json.dig(:user, :id)
-      n.details = "#{Fbe.issue(n)} has been opened by #{Fbe.who(n)}."
+      n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
       $loog.info("The opening of #{Fbe.issue(n)} by #{Fbe.who(n)} was found")
     rescue Octokit::NotFound
       $loog.info("The issue ##{f.issue} doesn't exist in #{repo}")

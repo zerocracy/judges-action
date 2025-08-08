@@ -43,7 +43,7 @@ Fbe.conclude do
       else
         n.stale = 'branch'
       end
-      n.details = "#{Fbe.issue(n)} has been opened by #{Fbe.who(n)}."
+      n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
       $loog.debug("The opening for #{Fbe.issue(n)} was found")
     rescue Octokit::NotFound
       $loog.info("The pull ##{f.issue} doesn't exist in #{repo}")
