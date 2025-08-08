@@ -10,6 +10,16 @@ VERSION=0.0.0
 
 echo "The 'judges-action' ${VERSION} is running"
 
+latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
+
+if [ "${latest}" != "${VERSION}" ]; then
+    echo "!!! The latest version of the judges-action plugin available in"
+    echo "!!! its GitHub repository is ${latest}: https://github.com/zerocracy/judges-action."
+    echo "!!! However, you are using a different version: ${VERSION}."
+    echo "!!! This will most likely lead to runtime issues and maybe even data corruption."
+    echo "!!! It is strongly advised to upgrade."
+fi
+
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
     set -x
 fi
@@ -63,7 +73,7 @@ declare -a gopts=(--echo)
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
     gopts+=('--verbose')
 else
-    echo "Since 'verbose' is not set to 'true', you won't see detailed logs"
+    echo "Since 'verbose' is not set to 'true', you will not see detailed logs"
 fi
 
 GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
@@ -93,9 +103,9 @@ options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
 if [ "$(printenv "INPUT_FAIL-FAST" || echo 'false')" == 'true' ]; then
     options+=("--fail-fast");
-    echo "Since 'fail-fast' is set to 'true', we'll stop after the first failure"
+    echo "Since 'fail-fast' is set to 'true', we will stop after the first failure"
 else
-    echo "Since 'fail-fast' is not set to 'true', we'll run all judges even if some of them fail"
+    echo "Since 'fail-fast' is not set to 'true', we will run all judges even if some of them fail"
 fi
 
 ${JUDGES} "${gopts[@]}" eval \
@@ -129,14 +139,14 @@ if [ "${github_token_found}" == "false" ]; then
     fi
 fi
 if [ "${github_token_found}" == "false" ]; then
-    echo "You haven't provided a GitHub token via the 'github-token' option."
-    echo "We stop here, because all further processing most definitely will fail."
+    echo "You have not provided a GitHub token via the 'github-token' option."
+    echo "We stop here because all further processing will most likely fail."
     exit 1
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
-    echo "We are in 'dry' mode, skipping 'pull'"
+    echo "We are in 'dry' mode; skipping 'pull'"
 else
     ${JUDGES} "${gopts[@]}" pull \
         --timeout=0 \
@@ -209,7 +219,7 @@ else
 fi
 
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
-    echo "We are in 'dry' mode, skipping 'push'"
+    echo "We are in 'dry' mode; skipping 'push'"
 else
     ${JUDGES} "${gopts[@]}" push \
         --no-zip \
