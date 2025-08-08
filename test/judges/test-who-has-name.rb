@@ -27,6 +27,7 @@ class TestWhoHasName < Jp::Test
     f._id = 333
     f.who = 444
     f.where = 'github'
+    f.what = 'issue-was-opened'
     load_it('who-has-name', fb)
     assert_equal(2, fb.query('(always)').each.to_a.size)
     assert_equal('lebowski', fb.query('(exists name)').each.to_a.first.name)

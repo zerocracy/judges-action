@@ -21,6 +21,7 @@ Fbe.conclude do
   quota_aware
   on "(and
     (eq where 'github')
+    (exists what)
     (exists who)
     (not (exists stale))
     (unique who)
@@ -36,6 +37,8 @@ Fbe.conclude do
       throw :rollback
     end
     n.name = nick
+    n.what = $judge
+    n.details = "We found out that the user ##{f.who} is known in GitHub as @#{nick}."
   end
 end
 
