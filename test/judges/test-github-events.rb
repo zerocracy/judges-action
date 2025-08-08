@@ -1116,7 +1116,7 @@ class TestGithubEvents < Jp::Test
     )
     fb = Factbase.new
     fb.insert.then do |f|
-      f.details = 'v0.0.2'
+      f.details = 'A new release was published in this repo by the crew: v0.0.2.'
       f.event_id = 30_406
       f.event_type = 'ReleaseEvent'
       f.is_human = 1
@@ -1201,7 +1201,7 @@ class TestGithubEvents < Jp::Test
     )
     fb = Factbase.new
     fb.insert.then do |f|
-      f.details = 'v0.0.2'
+      f.details = 'The release v0.0.2 was published in the repo by the crew.'
       f.event_id = 30_407
       f.event_type = 'ReleaseEvent'
       f.is_human = 1
@@ -1308,7 +1308,7 @@ class TestGithubEvents < Jp::Test
     )
     fb = Factbase.new
     fb.insert.then do |f|
-      f.details = 'Release v1.2.2'
+      f.details = 'The release v1.2.2 was published recently by the developer in this repo.'
       f.event_id = 35_207
       f.event_type = 'ReleaseEvent'
       f.is_human = 1
