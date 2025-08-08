@@ -44,6 +44,9 @@ Fbe.iterate do
       nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)} ."
     end
     issue
+  rescue Octokit::NotFound => e
+    $loog.info("Not found issue events for issue ##{issue} in #{repo}: #{e.message}")
+    issue
   end
 end
 
