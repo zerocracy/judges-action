@@ -1622,7 +1622,7 @@ class TestGithubEvents < Jp::Test
         id: '123123111',
         type: 'PullRequestEvent',
         actor: { id: 411, login: 'user' },
-        repo: { id: 42, name: 'foo', full_name: 'foo/foo' },
+        repo: { id: 43, name: 'bar', full_name: 'bar/bar' },
         payload: {
           action: 'closed',
           number: 305,
@@ -1668,7 +1668,7 @@ class TestGithubEvents < Jp::Test
         id: '123123222',
         type: 'PullRequestEvent',
         actor: { id: 411, login: 'user' },
-        repo: { id: 42, name: 'foo', full_name: 'foo/foo' },
+        repo: { id: 43, name: 'bar', full_name: 'bar/bar' },
         payload: {
           action: 'closed',
           number: 305,
@@ -1716,6 +1716,7 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100',
                 body: { check_runs: [] })
     stub_github('https://api.github.com/user/411', body: { id: 411, login: 'user' })
+    stub_github('https://api.github.com/repositories/43', body: { id: 43,  name: 'bar', full_name: 'bar/bar' })
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       load_it('github-events', fb)
@@ -1960,6 +1961,106 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, fb.all.size)
     assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 12))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
+  end
+
+  def test_handle_pull_request_event_with_old_repo_name
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user1' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11122',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/old_foo' },
+          payload: {
+            action: 'closed',
+            number: 456,
+            pull_request: {
+              number: 456,
+              head: { ref: '487', sha: '5c955da3b5a' },
+              additions: 1,
+              deletions: 1,
+              user: { id: 123 },
+              base: {
+                ref: 'master',
+                sha: 'e38d0ec',
+                repo: {
+                  id: 42,
+                  name: 'old_foo',
+                  full_name: 'foo/old_foo'
+                }
+              }
+            }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/old_foo/issues/456/comments?per_page=100',
+      status: 302,
+      body: {
+        message: 'Moved Permanently',
+        url: 'https://api.github.com/repositories/42/issues/456/comments?per_page=100',
+        documentation_url: 'https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/old_foo/pulls/456/comments?per_page=100',
+      status: 302,
+      body: {
+        message: 'Moved Permanently',
+        url: 'https://api.github.com/repositories/42/pulls/456/comments?per_page=100',
+        documentation_url: 'https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/456/comments?per_page=100',
+      body: [{ pull_request_review_id: 291, id: 213, user: { login: 'user123', id: 123 } }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/456/comments?per_page=100',
+      body: [{ id: 313, user: { login: 'user123', id: 123 } }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/313/reactions',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/comments/213/reactions',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/old_foo/commits/5c955da3b5a/check-runs?per_page=100',
+      status: 302,
+      body: {
+        message: 'Moved Permanently',
+        url: 'https://api.github.com/repositories/42/commits/5c955da3b5a/check-runs?per_page=100',
+        documentation_url: 'https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/5c955da3b5a/check-runs?per_page=100',
+      body: { check_runs: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 11_122))
+    assert(fb.one?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 456))
   end
 
   private

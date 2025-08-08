@@ -55,10 +55,10 @@ end
 #
 # @param [Sawyer::Resource] pr The pull request
 # @return [Hash] count of success/failure builds
-def Jp.fetch_workflows(pr)
+def Jp.fetch_workflows(pr, repo: nil)
   succeeded_builds = 0
   failed_builds = 0
-  repo = pr.dig(:base, :repo, :full_name)
+  repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
   Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))[:check_runs].each do |run|
     next unless run[:app][:slug] == 'github-actions'
