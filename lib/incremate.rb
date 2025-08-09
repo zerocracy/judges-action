@@ -53,7 +53,7 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
       break
     end
     require_relative rb
-    elapsed($loog) do
+    elapsed($loog, level: Logger::INFO) do
       h = send(n, fact)
       h.each do |k, v|
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
