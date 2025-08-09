@@ -57,7 +57,7 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
       h = send(n, fact)
       h.each do |k, v|
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
-        fact = Fbe.overwrite(fact, k.to_s, v)
+        fact.send("#{k}=", v)
       end
       throw :"Collected #{n} (#{start.ago} total): [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]"
     end
