@@ -33,7 +33,7 @@ Fbe.conclude do
     end
     ref = json.dig(:pull_request, :head, :ref)
     if ref.nil?
-      f.stale = "branch ##{f.issue}"
+      f.stale = "branch #{f.issue}"
       $loog.info("Branch is lost in #{Fbe.issue(f)}")
     else
       f.branch = ref
