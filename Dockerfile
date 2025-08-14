@@ -8,7 +8,7 @@ LABEL "maintainer"="Yegor Bugayenko"
 LABEL "version"="0.0.0"
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y curl=7.88.* jq=1.6* \
+    && apt-get install --no-install-recommends -y curl=* jq=* \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
