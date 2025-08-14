@@ -16,12 +16,15 @@ Fbe.conclude do
   on "(and
     (eq where 'github')
     (exists repository)
-    (exists what)
     (exists issue)
     (not (exists stale))
     (or
       (eq what 'pull-was-closed')
-      (eq what 'pull-was-merged'))
+      (eq what 'pull-was-merged')
+      (eq what 'code-was-contributed')
+      (eq what 'code-was-reviewed')
+      (eq what 'code-contribution-was-rewarded')
+      (eq what 'code-review-was-rewarded'))
     (unique issue)
     (empty
       (and
