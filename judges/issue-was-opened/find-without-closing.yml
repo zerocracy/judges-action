@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+input:
+  -
+    _id: 3
+    what: bug-was-accepted
+    where: github
+    issue: 142
+    repository: 680
+    who: 4444
+    when: 2025-05-27T23:54:44Z
+expected:
+  - /fb[count(f)=2]
+  - /fb/f[where='github' and what='issue-was-opened' and repository=680 and issue=142]
