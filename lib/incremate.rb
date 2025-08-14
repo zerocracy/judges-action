@@ -52,6 +52,7 @@ def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
       $loog.info("We are doing this for too long (#{start.ago} > #{timeout}s), time to stop at #{n}")
       break
     end
+    $loog.info("Evaluating #{n}...")
     require_relative rb
     elapsed($loog, level: Logger::INFO) do
       h = send(n, fact)

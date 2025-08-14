@@ -26,7 +26,7 @@ Fbe.iterate do
     (min issue))"
   quota_aware
   repeats 100
-  over(timeout: 5 * 60) do |repository, issue|
+  over(timeout: 2 * 60) do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
     Fbe.octo.issue_events(repo, issue).find { _1[:event] == 'assigned' }.then do |event|
       next if event.nil?
