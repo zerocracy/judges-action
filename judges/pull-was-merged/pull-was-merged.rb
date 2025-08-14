@@ -20,7 +20,12 @@ Fbe.iterate do
   by "(agg
     (and
       (eq where 'github')
-      (eq what 'pull-was-opened')
+      (or
+        (eq what 'pull-was-opened')
+        (eq what 'code-was-contributed')
+        (eq what 'code-was-reviewed')
+        (eq what 'code-contribution-was-rewarded')
+        (eq what 'code-review-was-rewarded'))
       (eq repository $repository)
       (gt issue $before)
       (empty

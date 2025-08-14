@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bar
+input:
+  -
+    _id: 3
+    what: bug-was-resolved
+    where: github
+    issue: 142
+    repository: 680
+    who: 4444
+    label: bug
+    when: 2025-05-27T23:54:44Z
+expected:
+  - /fb[count(f)=3]
+  - /fb/f[where='github' and what='issue-was-closed' and repository=680 and issue=142]

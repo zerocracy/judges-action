@@ -16,8 +16,15 @@ Fbe.iterate do
   by "(agg
     (and
       (eq where 'github')
-      (eq what 'issue-was-opened')
       (eq repository $repository)
+      (or
+        (eq what 'issue-was-opened')
+        (eq what 'bug-was-accepted')
+        (eq what 'bug-was-resolved')
+        (eq what 'enhancement-was-accepted')
+        (eq what 'resolved-bug-was-rewarded')
+        (eq what 'bug-report-was-rewarded')
+        (eq what 'enhancement-suggestion-was-rewarded'))
       (gt issue $before)
       (empty
         (and
