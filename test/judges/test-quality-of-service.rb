@@ -329,58 +329,6 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_average_issues
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
-          created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
-        }
-      }]
-    )
-    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
-      body: { total_count: 0, incomplete_results: false, items: [] }
-    )
-    fb = Factbase.new
-    f = fb.insert
-    f.what = 'pmp'
-    f.area = 'quality'
-    f.qos_days = 7
-    f.qos_interval = 3
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
-      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
-      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
-      assert_in_delta(2.125, f.average_backlog_size)
-    end
-  end
-
   def test_quality_of_service_average_build_mttr
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(

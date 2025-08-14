@@ -15,7 +15,8 @@ require 'fbe/unmask_repos'
 def average_backlog_size(fact)
   issues = []
   Fbe.unmask_repos do |repo|
-    (fact.since.utc.to_date..Time.now.utc.to_date).each do |date|
+    (fact.since.utc.to_date..Time.now.utc.to_date).last(7).each do |date|
+      return {} if Fbe.octo.off_quota?
       count = 0
       Fbe.octo.search_issues(
         "repo:#{repo} type:issue created:#{fact.since.utc.to_date.iso8601[0..9]}..#{date.iso8601[0..9]}"
