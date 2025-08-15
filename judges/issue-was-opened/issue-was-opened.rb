@@ -26,7 +26,7 @@ Fbe.conclude do
       (eq what 'bug-report-was-rewarded')
       (eq what 'enhancement-suggestion-was-rewarded'))
     (not (exists stale))
-    (unique issue)
+    (unique where repository issue)
     (empty
       (and
         (eq issue $issue)

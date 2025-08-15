@@ -25,7 +25,7 @@ Fbe.conclude do
       (eq what 'code-was-reviewed')
       (eq what 'code-contribution-was-rewarded')
       (eq what 'code-review-was-rewarded'))
-    (unique issue)
+    (unique repository issue)
     (empty
       (and
         (eq where 'github')
