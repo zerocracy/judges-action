@@ -5,7 +5,7 @@
 name: zerocracy
 'on':
   schedule:
-    - cron: '0,30 * * * *'
+    - cron: '11 * * * *'
 concurrency:
   group: zerocracy
   cancel-in-progress: false
@@ -14,7 +14,7 @@ permissions:
 jobs:
   zerocracy:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
       - uses: zerocracy/judges-action@0.15.15
@@ -23,8 +23,8 @@ jobs:
           github-token: ${{ secrets.PAT }}
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
           factbase: zerocracy.fb
-          timeout: 10
-          lifetime: 15
+          timeout: 30
+          lifetime: 40
           cycles: 1
           options: |
             sqlite_cache_maxvsize=100K
