@@ -36,7 +36,7 @@ require_relative 'jp'
 # @param [Boolean] avoid_duplicate When true, skip adding properties that already
 #   exist in the fact (default: false)
 # @return [nil] This method modifies the fact in-place and returns nil
-def Jp.incremate(fact, dir, prefix, timeout: 30, avoid_duplicate: false)
+def Jp.incremate(fact, dir, prefix, timeout: ($options.timeout || 60) * 0.8, avoid_duplicate: false)
   start = Time.now
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')

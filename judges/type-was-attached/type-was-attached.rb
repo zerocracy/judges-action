@@ -36,7 +36,7 @@ Fbe.iterate do
     (min issue))"
   quota_aware
   repeats 100
-  over(timeout: 5 * 60) do |repository, issue|
+  over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
     begin
       Fbe.octo.issue_timeline(repository, issue).each do |te|
         next unless events.include?(te[:event])

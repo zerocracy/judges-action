@@ -43,7 +43,7 @@ Fbe.iterate do
     (min issue))"
   quota_aware
   repeats 100
-  over(timeout: 5 * 60) do |repository, issue|
+  over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
     json = Fbe.octo.pull_request(repo, issue)
     unless json[:state] == 'closed'

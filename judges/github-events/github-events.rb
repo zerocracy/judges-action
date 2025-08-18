@@ -267,7 +267,7 @@ Fbe.iterate do
     raise "#{who} doesn't have access to the #{rname} repository, maybe it's private"
   end
 
-  over(timeout: 5 * 60) do |repository, latest|
+  over(timeout: ($options.timeout || 60) * 0.8) do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
     $loog.debug("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
     id = nil
