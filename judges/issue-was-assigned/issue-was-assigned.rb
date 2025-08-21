@@ -12,11 +12,11 @@ Fbe.iterate do
   as 'assignees-were-scanned'
   by "(agg
     (and
-      (eq where 'github')
+      (gt issue $before)
       (eq what 'issue-was-opened')
       (eq repository $repository)
+      (eq where 'github')
       (not (exists stale))
-      (gt issue $before)
       (empty
         (and
           (eq where $where)

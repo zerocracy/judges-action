@@ -19,7 +19,7 @@ Fbe.iterate do
   as 'merges-were-scanned'
   by "(agg
     (and
-      (eq where 'github')
+      (gt issue $before)
       (or
         (eq what 'pull-was-opened')
         (eq what 'code-was-contributed')
@@ -27,7 +27,7 @@ Fbe.iterate do
         (eq what 'code-contribution-was-rewarded')
         (eq what 'code-review-was-rewarded'))
       (eq repository $repository)
-      (gt issue $before)
+      (eq where 'github')
       (empty
         (and
           (eq where $where)

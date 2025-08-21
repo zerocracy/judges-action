@@ -22,11 +22,11 @@ Fbe.iterate do
   as 'types-were-scanned'
   by "(agg
     (and
+      (eq what 'issue-was-opened')
+      (gt issue $before)
       (eq where 'github')
       (eq repository $repository)
-      (eq what 'issue-was-opened')
       (not (exists stale))
-      (gt issue $before)
       (empty
         (and
           (eq where 'github')

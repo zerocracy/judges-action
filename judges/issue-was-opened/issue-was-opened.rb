@@ -14,14 +14,14 @@ require 'fbe/who'
 Fbe.conclude do
   quota_aware
   on "(and
-    (eq where 'github')
-    (exists repository)
-    (exists issue)
     (or
       (eq what 'issue-was-closed')
       (eq what 'bug-was-accepted')
       (eq what 'bug-was-resolved')
       (eq what 'enhancement-was-accepted'))
+    (eq where 'github')
+    (exists repository)
+    (exists issue)
     (not (exists stale))
     (unique where repository issue)
     (empty

@@ -15,8 +15,7 @@ Fbe.iterate do
   as 'issues-were-scanned'
   by "(agg
     (and
-      (eq where 'github')
-      (eq repository $repository)
+      (gt issue $before)
       (or
         (eq what 'issue-was-opened')
         (eq what 'bug-was-accepted')
@@ -25,7 +24,8 @@ Fbe.iterate do
         (eq what 'resolved-bug-was-rewarded')
         (eq what 'bug-report-was-rewarded')
         (eq what 'enhancement-suggestion-was-rewarded'))
-      (gt issue $before)
+      (eq where 'github')
+      (eq repository $repository)
       (empty
         (and
           (eq where $where)
