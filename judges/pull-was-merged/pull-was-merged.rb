@@ -27,19 +27,19 @@ Fbe.iterate do
         (eq what 'code-contribution-was-rewarded')
         (eq what 'code-review-was-rewarded'))
       (eq repository $repository)
-      (eq where 'github')
       (empty
         (and
-          (eq where $where)
           (eq repository $repository)
           (eq issue $issue)
-          (eq what 'pull-was-closed')))
+          (eq what 'pull-was-closed')
+          (eq where $where)))
       (empty
         (and
-          (eq where $where)
           (eq repository $repository)
           (eq issue $issue)
-          (eq what 'pull-was-merged'))))
+          (eq what 'pull-was-merged')
+          (eq where $where)))
+      (eq where 'github'))
     (min issue))"
   quota_aware
   repeats 100

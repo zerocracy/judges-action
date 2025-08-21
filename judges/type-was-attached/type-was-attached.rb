@@ -24,15 +24,15 @@ Fbe.iterate do
     (and
       (eq what 'issue-was-opened')
       (gt issue $before)
-      (eq where 'github')
       (eq repository $repository)
       (not (exists stale))
       (empty
         (and
-          (eq where 'github')
           (eq repository $repository)
           (eq issue $issue)
-          (eq what 'type-was-attached'))))
+          (eq what 'type-was-attached')
+          (eq where 'github')))
+      (eq where 'github'))
     (min issue))"
   quota_aware
   repeats 100

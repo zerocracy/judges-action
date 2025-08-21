@@ -23,10 +23,10 @@ alive = []
 Fbe.conclude do
   quota_aware
   on "(and
-    (eq where 'github')
+    (not (exists stale))
     (exists what)
     (exists who)
-    (not (exists stale))
+    (eq where 'github')
     (unique who)
     (empty (and
       (eq who $who)
@@ -50,10 +50,10 @@ Fbe.conclude do
   quota_aware
   on "(and
     (eq what 'who-has-name')
+    (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days'))
     (not (exists stale))
-    (eq where 'github')
     (exists who)
-    (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days')))"
+    (eq where 'github'))"
   consider do |f|
     nick = Jp.nick_of(f.who)
     if nick.nil?

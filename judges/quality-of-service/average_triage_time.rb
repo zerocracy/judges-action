@@ -20,15 +20,15 @@ def average_triage_time(fact)
       ff = Fbe.fb.query(
         "
         (and
-          (eq where 'github')
           (eq repository #{Fbe.octo.repo_id_by_name(repo)})
           (eq issue #{issue[:number]})
-          (not (exists stale))
           (eq what 'label-was-attached')
-          (exists when)
           (or
             (eq label 'bug')
-            (eq label 'enhancement')))
+            (eq label 'enhancement'))
+          (not (exists stale))
+          (exists when)
+          (eq where 'github'))
         "
       ).each.min_by(&:when)
       triage_times << (ff.when - issue[:created_at]) if ff

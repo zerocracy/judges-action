@@ -22,11 +22,11 @@ seen = []
 Fbe.conclude do
   quota_aware
   on "(and
-    (eq where 'github')
     (eq what 'who-has-name')
+    (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '2 days'))
     (not (exists stale))
     (exists who)
-    (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '2 days')))"
+    (eq where 'github'))"
   consider do |f|
     next if seen.include?(f.who)
     seen << f.who
