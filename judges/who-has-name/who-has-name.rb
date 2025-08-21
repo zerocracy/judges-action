@@ -12,10 +12,13 @@
 # @note This judge runs periodically to ensure all users have up-to-date nicknames recorded
 
 require 'fbe/conclude'
+require 'fbe/delete'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
 require_relative '../../lib/nick_of'
+
+alive = []
 
 Fbe.conclude do
   quota_aware
@@ -36,6 +39,7 @@ Fbe.conclude do
       f.stale = "user ##{f.who}"
       throw :rollback
     end
+    alive << f.who
     n.name = nick
     n.what = $judge
     n.details = "We found out that the user ##{f.who} is known in GitHub as @#{nick}."
@@ -56,8 +60,20 @@ Fbe.conclude do
       f.stale = "user ##{f.who}"
       next
     end
+    alive << f.who
     Fbe.overwrite(f, 'name', nick)
   end
+end
+
+Fbe.fb.query(
+  "(and
+    (exists _id)
+    (exists stale)
+    (exists who)
+    (or #{alive.uniq.map { |u| "(eq who #{u})" }.join}))"
+).each do |f|
+  next unless f.stale.start_with?('user #')
+  Fbe.delete(f, 'stale')
 end
 
 Fbe.octo.print_trace!
