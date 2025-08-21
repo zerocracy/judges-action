@@ -19,10 +19,10 @@ Fbe.conclude do
       (eq what 'bug-was-accepted')
       (eq what 'bug-was-resolved')
       (eq what 'enhancement-was-accepted'))
-    (eq where 'github')
     (exists repository)
     (exists issue)
     (not (exists stale))
+    (eq where 'github')
     (unique where repository issue)
     (empty
       (and

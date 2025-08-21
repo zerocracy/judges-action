@@ -18,12 +18,12 @@ require 'fbe/conclude'
 Fbe.conclude do
   quota_aware
   on '(and
+    (or (eq what "pull-was-reviewed") (eq what "pull-was-merged"))
+    (not (exists review_comments))
+    (not (exists stale))
     (exists issue)
     (exists repository)
-    (eq where "github")
-    (not (exists stale))
-    (or (eq what "pull-was-reviewed") (eq what "pull-was-merged"))
-    (not (exists review_comments)))'
+    (eq where "github"))'
   consider do |f|
     begin
       repo = Fbe.octo.repo_name_by_id(f.repository)

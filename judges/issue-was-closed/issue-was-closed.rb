@@ -24,14 +24,14 @@ Fbe.iterate do
         (eq what 'resolved-bug-was-rewarded')
         (eq what 'bug-report-was-rewarded')
         (eq what 'enhancement-suggestion-was-rewarded'))
-      (eq where 'github')
       (eq repository $repository)
       (empty
         (and
           (eq where $where)
           (eq repository $repository)
           (eq issue $issue)
-          (eq what 'issue-was-closed'))))
+          (eq what 'issue-was-closed')))
+      (eq where 'github'))
     (min issue))"
   quota_aware
   repeats 100

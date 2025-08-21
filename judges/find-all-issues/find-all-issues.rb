@@ -31,10 +31,10 @@ require 'time'
     by "
       (agg
         (and
-          (eq where 'github')
-          (eq repository $repository)
           (eq what '#{type}-was-opened')
-          (gt issue $before))
+          (eq repository $repository)
+          (gt issue $before)
+          (eq where 'github'))
         (min issue))"
     quota_aware
     over do |repository, issue|

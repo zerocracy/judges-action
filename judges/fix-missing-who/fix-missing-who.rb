@@ -22,12 +22,12 @@ require 'fbe/who'
   Fbe.conclude do
     quota_aware
     on "(and
-      (eq where 'github')
+      (not (exists who))
+      (eq what '#{w}')
       (exists issue)
       (exists repository)
-      (eq what '#{w}')
       (not (exists stale))
-      (not (exists who)))"
+      (eq where 'github'))"
     consider do |f|
       repo = Fbe.octo.repo_name_by_id(f.repository)
       begin

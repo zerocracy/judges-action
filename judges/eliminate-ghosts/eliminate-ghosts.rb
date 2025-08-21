@@ -17,7 +17,7 @@ good = Set.new
 
 Fbe.conclude do
   quota_aware
-  on '(and (eq where "github") (exists who) (not (exists stale)))'
+  on '(and (not (exists stale)) (eq where "github") (exists who))'
   consider do |f|
     next if good.include?(f.who)
     elapsed($loog) do
@@ -37,7 +37,7 @@ Fbe.conclude do
   quota_aware
   on '(and (eq where "github") (exists who) (unique who) (exists stale))'
   consider do |f|
-    Fbe.fb.query("(and (eq where 'github') (eq who #{f.who}) (not (exists stale)))").each do |ff|
+    Fbe.fb.query("(and (eq who #{f.who}) (not (exists stale)) (eq where 'github'))").each do |ff|
       ff.stale = "user ##{f.who}"
     end
   end

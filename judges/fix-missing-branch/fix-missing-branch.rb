@@ -16,11 +16,11 @@ Fbe.conclude do
   quota_aware
   on "(and
     (eq what 'pull-was-opened')
-    (eq where 'github')
+    (not (exists branch))
+    (not (exists stale))
     (exists issue)
     (exists repository)
-    (not (exists stale))
-    (not (exists branch)))"
+    (eq where 'github'))"
   consider do |f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
     begin

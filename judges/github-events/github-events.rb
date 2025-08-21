@@ -92,11 +92,12 @@ Fbe.iterate do
 
   def self.issue_seen_already?(fact)
     Fbe.fb.query(
-      "(and (eq repository #{fact.repository}) " \
-      '(eq where "github") ' \
-      "(not (eq event_id #{fact.event_id}))" \
-      "(eq what \"#{fact.what}\") " \
-      "(eq issue #{fact.issue}))"
+      "(and
+        (eq repository #{fact.repository})
+        (eq issue #{fact.issue})
+        (eq what '#{fact.what}')
+        (not (eq event_id #{fact.event_id}))
+        (eq where 'github'))"
     ).each.any?
   end
 

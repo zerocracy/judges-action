@@ -15,14 +15,14 @@ Fbe.iterate do
       (gt issue $before)
       (eq what 'issue-was-opened')
       (eq repository $repository)
-      (eq where 'github')
       (not (exists stale))
       (empty
         (and
           (eq where $where)
           (eq repository $repository)
           (eq issue $issue)
-          (eq what '#{$judge}'))))
+          (eq what '#{$judge}')))
+      (eq where 'github'))
     (min issue))"
   quota_aware
   repeats 100

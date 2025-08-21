@@ -17,11 +17,12 @@ require 'fbe/conclude'
 Fbe.conclude do
   quota_aware
   on '(and
-    (eq where "github")
+    (not (exists is_human))
     (not (exists stale))
+    (eq where "github")
     (exists what)
     (exists who)
-    (not (exists is_human)))'
+    )'
   consider do |f|
     begin
       json = Fbe.octo.user(f.who)
