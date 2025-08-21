@@ -17,7 +17,7 @@ good = Set.new
 
 Fbe.conclude do
   quota_aware
-  on '(and (eq where "github") (exists who) (unique who) (not (exists stale)))'
+  on '(and (eq where "github") (exists who) (not (exists stale)))'
   consider do |f|
     next if good.include?(f.who)
     elapsed($loog) do
