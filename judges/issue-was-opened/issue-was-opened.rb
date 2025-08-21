@@ -21,10 +21,7 @@ Fbe.conclude do
       (eq what 'issue-was-closed')
       (eq what 'bug-was-accepted')
       (eq what 'bug-was-resolved')
-      (eq what 'enhancement-was-accepted')
-      (eq what 'resolved-bug-was-rewarded')
-      (eq what 'bug-report-was-rewarded')
-      (eq what 'enhancement-suggestion-was-rewarded'))
+      (eq what 'enhancement-was-accepted'))
     (not (exists stale))
     (unique where repository issue)
     (empty
