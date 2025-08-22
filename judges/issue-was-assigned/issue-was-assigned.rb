@@ -18,10 +18,10 @@ Fbe.iterate do
       (not (exists stale))
       (empty
         (and
-          (eq where $where)
-          (eq repository $repository)
           (eq issue $issue)
-          (eq what '#{$judge}')))
+          (eq repository $repository)
+          (eq what '#{$judge}')
+          (eq where $where)))
       (eq where 'github'))
     (min issue))"
   quota_aware

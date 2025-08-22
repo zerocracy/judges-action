@@ -27,10 +27,10 @@ Fbe.iterate do
       (eq repository $repository)
       (empty
         (and
-          (eq where $where)
-          (eq repository $repository)
           (eq issue $issue)
-          (eq what 'issue-was-closed')))
+          (eq repository $repository)
+          (eq what 'issue-was-closed')
+          (eq where $where)))
       (eq where 'github'))
     (min issue))"
   quota_aware
