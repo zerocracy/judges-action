@@ -191,6 +191,7 @@ echo "The total number of cycles to run is ${cycles}"
 ${JUDGES} "${gopts[@]}" update \
     --no-log \
     --quiet \
+    --hello \
     --summary=add \
     --shuffle=aaa \
     --boost=github-events \
