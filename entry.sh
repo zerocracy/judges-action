@@ -188,10 +188,9 @@ if [ -z "${cycles}" ]; then
 fi
 echo "The total number of cycles to run is ${cycles}"
 
-${JUDGES} "${gopts[@]}" update \
+${JUDGES} "${gopts[@]}" --hello update \
     --no-log \
     --quiet \
-    --hello \
     --summary=add \
     --shuffle=aaa \
     --boost=github-events \
