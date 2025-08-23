@@ -21,7 +21,7 @@ Fbe.conclude do
       (eq what 'enhancement-was-accepted'))
     (exists repository)
     (exists issue)
-    (not (exists stale))
+    (not (eq stale 'issue'))
     (eq where 'github')
     (unique where repository issue)
     (empty
@@ -42,7 +42,7 @@ Fbe.conclude do
       $loog.info("The opening of #{Fbe.issue(n)} by #{Fbe.who(n)} was found")
     rescue Octokit::NotFound
       $loog.info("The issue ##{f.issue} doesn't exist in #{repo}")
-      f.stale = "issue #{f.issue}"
+      f.stale = 'issue'
       throw :rollback
     end
   end

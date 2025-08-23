@@ -24,7 +24,7 @@ Fbe.conclude do
   on "(and
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '2 days'))
-    (not (exists stale))
+    (not (eq stale 'who'))
     (exists who)
     (eq where 'github'))"
   consider do |f|
@@ -39,7 +39,7 @@ Fbe.conclude do
       Fbe.fb.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who}))").delete!
       done =
         Fbe.fb.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
-          n.stale = "user ##{f.who}"
+          n.stale = 'who'
         end
       throw :"GitHub user ##{f.who} is gone, marked #{done} facts as stale"
     end

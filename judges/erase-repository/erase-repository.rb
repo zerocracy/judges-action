@@ -16,7 +16,7 @@ good = {}
 
 Fbe.conclude do
   quota_aware
-  on '(and (eq where "github") (exists repository) (not (exists stale)))'
+  on '(and (eq where "github") (exists repository) (not (eq stale "repository")))'
   consider do |f|
     r = f.repository
     if good[r].nil?
@@ -29,7 +29,7 @@ Fbe.conclude do
         throw :"GitHub repository ##{r} is not found"
       end
     end
-    f.stale = "repo ##{r}" unless good[r]
+    f.stale = 'repository' unless good[r]
   end
 end
 

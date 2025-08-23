@@ -26,7 +26,7 @@ require 'fbe/who'
       (eq what '#{w}')
       (exists issue)
       (exists repository)
-      (not (exists stale))
+      (not (eq stale 'issue'))
       (eq where 'github'))"
     consider do |f|
       repo = Fbe.octo.repo_name_by_id(f.repository)
@@ -34,7 +34,7 @@ require 'fbe/who'
         json = Fbe.octo.issue(repo, f.issue)
       rescue Octokit::NotFound
         $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-        f.stale = "issue ##{f.issue}"
+        f.stale = 'issue'
         $loog.info("#{Fbe.issue(f)} is lost")
         next
       end

@@ -15,7 +15,7 @@ Fbe.iterate do
       (gt issue $before)
       (eq what 'issue-was-opened')
       (eq repository $repository)
-      (not (exists stale))
+      (not (eq stale 'issue'))
       (empty
         (and
           (eq issue $issue)

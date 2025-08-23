@@ -17,14 +17,14 @@ good = Set.new
 
 Fbe.conclude do
   quota_aware
-  on '(and (not (exists stale)) (eq where "github") (exists who))'
+  on '(and (not (eq stale "who")) (eq where "github") (exists who))'
   consider do |f|
     next if good.include?(f.who)
     elapsed($loog) do
       nick = Jp.nick_of(f.who)
       if nick.nil?
-        f.stale = "user ##{f.who}"
-        throw :"GitHub user ##{f.who} is not found"
+        f.stale = 'who'
+        throw :"GitHub user ##{f.who} is not found (stale)"
       else
         good.add(f.who)
         throw :"GitHub user ##{f.who} (##{good.size}) is good: @#{nick}"
@@ -35,10 +35,10 @@ end
 
 Fbe.conclude do
   quota_aware
-  on '(and (eq where "github") (exists who) (unique who) (exists stale))'
+  on '(and (eq where "github") (exists who) (unique who) (eq stale "who"))'
   consider do |f|
-    Fbe.fb.query("(and (eq who #{f.who}) (not (exists stale)) (eq where 'github'))").each do |ff|
-      ff.stale = "user ##{f.who}"
+    Fbe.fb.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
+      ff.stale = 'who'
     end
   end
 end

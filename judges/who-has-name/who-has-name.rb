@@ -13,6 +13,7 @@
 
 require 'fbe/conclude'
 require 'fbe/delete'
+require 'fbe/delete_one'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
@@ -23,7 +24,7 @@ alive = []
 Fbe.conclude do
   quota_aware
   on "(and
-    (not (exists stale))
+    (not (eq stale 'who'))
     (exists what)
     (exists who)
     (eq where 'github')
@@ -36,7 +37,7 @@ Fbe.conclude do
   draw do |n, f|
     nick = Jp.nick_of(f.who)
     if nick.nil?
-      f.stale = "user ##{f.who}"
+      f.stale = 'who'
       throw :rollback
     end
     alive << f.who
@@ -51,13 +52,13 @@ Fbe.conclude do
   on "(and
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days'))
-    (not (exists stale))
+    (not (eq stale 'who'))
     (exists who)
     (eq where 'github'))"
   consider do |f|
     nick = Jp.nick_of(f.who)
     if nick.nil?
-      f.stale = "user ##{f.who}"
+      f.stale = 'who'
       next
     end
     alive << f.who
@@ -68,12 +69,12 @@ end
 Fbe.fb.query(
   "(and
     (exists _id)
-    (exists stale)
+    (eq stale 'who')
     (exists who)
     (or #{alive.uniq.map { |u| "(eq who #{u})" }.join}))"
 ).each do |f|
-  next unless f.stale == "user ##{f.who}"
-  Fbe.delete(f, 'stale')
+  next unless f.stale == 'who'
+  Fbe.delete_one(f, 'stale', 'who')
 end
 
 Fbe.octo.print_trace!

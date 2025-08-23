@@ -61,7 +61,7 @@ class TestWhoIsAlive < Jp::Test
       load_it('who-is-alive', fb)
       assert_equal(6, fb.all.size)
       assert(fb.none?(what: 'who-has-name', where: 'github', who: 10, name: 'user0'))
-      assert_equal('user #10', fb.pick(where: 'github', who: 10, name: 'user0').stale)
+      assert_equal('who', fb.pick(where: 'github', who: 10, name: 'user0').stale)
       assert(fb.one?(what: 'who-has-name', where: 'gitlab', who: 10, name: 'user0'))
       assert_nil(fb.pick(where: 'gitlab', who: 10, name: 'user0')['stale'])
     end

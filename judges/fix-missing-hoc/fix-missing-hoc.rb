@@ -27,7 +27,7 @@ Fbe.conclude do
       json = Fbe.octo.pull_request(repo, f.issue)
     rescue Octokit::NotFound
       $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-      f.stale = "pull ##{f.issue}"
+      f.stale = 'issue'
       $loog.info("#{Fbe.issue(f)} is lost")
       next
     end

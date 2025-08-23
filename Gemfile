@@ -9,7 +9,7 @@ gem 'base64', '~>0.2'
 gem 'baza.rb', '~>0.9'
 gem 'decoor', '~>0.1'
 gem 'factbase', '~>0.15'
-gem 'fbe', '~>0.26'
+gem 'fbe', '~>0.27'
 gem 'judges', '~>0.53'
 gem 'minitest', '~>5.25', require: false
 gem 'minitest-reporters', '~>1.7', require: false

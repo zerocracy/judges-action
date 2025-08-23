@@ -27,13 +27,13 @@ Fbe.conclude do
       json = Fbe.octo.issue(repo, f.issue)
     rescue Octokit::NotFound
       $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-      f.stale = "pull ##{f.issue}"
+      f.stale = 'issue'
       $loog.info("#{Fbe.issue(f)} is lost")
       next
     end
     ref = json.dig(:pull_request, :head, :ref)
     if ref.nil?
-      f.stale = "branch #{f.issue}"
+      f.stale = 'branch'
       $loog.info("Branch is lost in #{Fbe.issue(f)}")
     else
       f.branch = ref

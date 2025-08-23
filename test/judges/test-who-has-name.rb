@@ -64,7 +64,7 @@ class TestWhoHasName < Jp::Test
     fb = Factbase.new
     fb.with(
       _id: 1, what: 'who-has-name', where: 'github', who: 10, name: 'user0',
-      when: Time.parse('2025-06-19 20:00:00 UTC'), stale: 'user_old'
+      when: Time.parse('2025-06-19 20:00:00 UTC'), stale: 'who'
     ).with(
       _id: 2, what: 'who-has-name', where: 'github', who: 11, name: 'user1',
       when: Time.parse('2025-06-22 20:00:00 UTC')
@@ -81,7 +81,7 @@ class TestWhoHasName < Jp::Test
     Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
       load_it('who-has-name', fb)
       assert_equal(5, fb.all.size)
-      assert(fb.one?(what: 'who-has-name', where: 'github', who: 10, name: 'user0', stale: 'user_old'))
+      assert(fb.one?(what: 'who-has-name', where: 'github', who: 10, name: 'user0', stale: 'who'))
       assert(fb.one?(what: 'who-has-name', where: 'github', who: 11, name: 'user1'))
       assert(fb.one?(what: 'who-has-name', where: 'github', who: 12, name: 'user22'))
       assert(fb.one?(what: 'who-has-name', where: 'github', who: 13, name: 'user3'))

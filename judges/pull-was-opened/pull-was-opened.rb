@@ -49,7 +49,7 @@ Fbe.conclude do
       $loog.debug("The opening for #{Fbe.issue(n)} was found")
     rescue Octokit::NotFound
       $loog.info("The pull ##{f.issue} doesn't exist in #{repo}")
-      f.stale = "issue #{f.issue}"
+      f.stale = 'issue'
       throw :rollback
     end
   end
