@@ -21,6 +21,7 @@ Fbe.conclude do
     (or
       (eq what 'pull-was-closed')
       (eq what 'pull-was-merged')
+      (eq what 'pull-was-reviewed')
       (eq what 'code-was-contributed')
       (eq what 'code-was-reviewed'))
     (unique repository issue)

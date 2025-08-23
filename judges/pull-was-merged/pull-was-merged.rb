@@ -21,6 +21,7 @@ Fbe.iterate do
     (and
       (gt issue $before)
       (or
+        (eq what 'pull-was-reviewed')
         (eq what 'pull-was-opened')
         (eq what 'code-was-contributed')
         (eq what 'code-was-reviewed')
