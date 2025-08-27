@@ -52,7 +52,7 @@ Fbe.iterate do
         n.where = 'github'
         n.repository = repository
         n.issue = issue
-        n.what = 'issue-was-closed'
+        n.what = $judge
       end
     next issue if nn.nil?
     nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now

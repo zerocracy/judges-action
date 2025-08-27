@@ -57,24 +57,23 @@ Fbe.iterate do
         n.where = 'github'
         n.repository = repository
         n.issue = issue
-        n.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-        actor = Fbe.octo.issue(repo, issue)[:closed_by]
-        if actor
-          n.who = actor[:id].to_i
-        else
-          n.stale = 'who'
-        end
-        action = json[:merged_at].nil? ? 'closed' : 'merged'
-        n.what = "pull-was-#{action}"
+        n.what = "pull-was-#{json[:merged_at].nil? ? 'closed' : 'merged'}"
         n.hoc = json[:additions] + json[:deletions]
-        Jp.fill_fact_by_hash(n, Jp.comments_info(json))
-        Jp.fill_fact_by_hash(n, Jp.fetch_workflows(json))
         n.branch = json[:head][:ref]
       end
     if nn.nil?
       $loog.info("Pull already merged in #{repo}##{issue}")
       next issue
     end
+    Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
+    Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
+    actor = Fbe.octo.issue(repo, issue)[:closed_by]
+    if actor
+      nn.who = actor[:id].to_i
+    else
+      nn.stale = 'who'
+    end
+    nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
     nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
     $loog.debug("Just found out that #{Fbe.issue(nn)} has been '#{nn.what}'")
     issue
