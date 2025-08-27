@@ -19,8 +19,8 @@ Fbe.conclude do
   quota_aware
   on '(and
     (or (eq what "pull-was-reviewed") (eq what "pull-was-merged"))
-    (not (exists review_comments))
-    (not (exists stale))
+    (absent review_comments)
+    (absent stale)
     (exists issue)
     (exists repository)
     (eq where "github"))'

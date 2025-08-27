@@ -63,10 +63,10 @@ class TestEraseRepository < Jp::Test
     load_it('erase-repository', fb)
     assert_equal(5, fb.query('(exists repository)').each.to_a.size)
     assert_equal(2, fb.query('(exists stale)').each.to_a.size)
-    assert_equal(2, fb.query('(not (exists repository))').each.to_a.size)
+    assert_equal(2, fb.query('(absent repository)').each.to_a.size)
     assert_equal(4, fb.query('(and (eq where "github") (exists repository))').each.to_a.size)
-    assert_equal(1, fb.query('(and (eq where "github") (not (exists repository)))').each.to_a.size)
+    assert_equal(1, fb.query('(and (eq where "github") (absent repository))').each.to_a.size)
     assert_equal(1, fb.query('(and (eq where "gitlab") (exists repository))').each.to_a.size)
-    assert_equal(1, fb.query('(and (eq where "gitlab") (not (exists repository)))').each.to_a.size)
+    assert_equal(1, fb.query('(and (eq where "gitlab") (absent repository))').each.to_a.size)
   end
 end

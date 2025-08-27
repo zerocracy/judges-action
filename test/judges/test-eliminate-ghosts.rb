@@ -75,11 +75,11 @@ class TestEliminateGhosts < Jp::Test
     load_it('eliminate-ghosts', fb)
     assert_equal(7, fb.query('(exists who)').each.to_a.size)
     assert_equal(2, fb.query('(and (exists who) (exists stale))').each.to_a.size)
-    assert_equal(2, fb.query('(not (exists who))').each.to_a.size)
+    assert_equal(2, fb.query('(absent who)').each.to_a.size)
     assert_equal(5, fb.query('(and (eq where "github") (exists who))').each.to_a.size)
-    assert_equal(1, fb.query('(and (eq where "github") (not (exists who)))').each.to_a.size)
+    assert_equal(1, fb.query('(and (eq where "github") (absent who))').each.to_a.size)
     assert_equal(2, fb.query('(and (eq where "gitlab") (exists who))').each.to_a.size)
-    assert_equal(1, fb.query('(and (eq where "gitlab") (not (exists who)))').each.to_a.size)
+    assert_equal(1, fb.query('(and (eq where "gitlab") (absent who))').each.to_a.size)
   end
 
   def test_process_unique_users_first_and_set_stale_property_later_for_other_facts

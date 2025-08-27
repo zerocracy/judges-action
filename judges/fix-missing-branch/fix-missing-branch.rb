@@ -16,8 +16,8 @@ Fbe.conclude do
   quota_aware
   on "(and
     (eq what 'pull-was-opened')
-    (not (exists branch))
-    (not (exists stale))
+    (absent branch)
+    (absent stale)
     (exists issue)
     (exists repository)
     (eq where 'github'))"

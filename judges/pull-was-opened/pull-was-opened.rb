@@ -17,7 +17,7 @@ Fbe.conclude do
     (eq where 'github')
     (exists repository)
     (exists issue)
-    (not (exists stale))
+    (absent stale)
     (or
       (eq what 'pull-was-closed')
       (eq what 'pull-was-merged')

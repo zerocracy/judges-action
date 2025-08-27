@@ -26,7 +26,7 @@ def average_triage_time(fact)
           (or
             (eq label 'bug')
             (eq label 'enhancement'))
-          (not (exists stale))
+          (absent stale)
           (exists when)
           (eq where 'github'))
         "

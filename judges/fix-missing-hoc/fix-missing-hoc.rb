@@ -19,8 +19,8 @@ Fbe.conclude do
     (eq where 'github')
     (exists issue)
     (exists repository)
-    (not (exists stale))
-    (not (exists hoc)))"
+    (absent stale)
+    (absent hoc))"
   consider do |f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
     begin

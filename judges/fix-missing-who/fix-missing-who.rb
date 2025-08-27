@@ -22,7 +22,7 @@ require 'fbe/who'
   Fbe.conclude do
     quota_aware
     on "(and
-      (not (exists who))
+      (absent who)
       (eq what '#{w}')
       (exists issue)
       (exists repository)

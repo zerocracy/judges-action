@@ -17,7 +17,7 @@ require 'fbe/conclude'
 Fbe.conclude do
   quota_aware
   on '(and
-    (not (exists is_human))
+    (absent is_human)
     (absent stale)
     (eq where "github")
     (exists what)
