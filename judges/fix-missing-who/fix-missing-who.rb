@@ -26,7 +26,7 @@ require 'fbe/who'
       (eq what '#{w}')
       (exists issue)
       (exists repository)
-      (not (eq stale 'issue'))
+      (absent stale)
       (eq where 'github'))"
     consider do |f|
       repo = Fbe.octo.repo_name_by_id(f.repository)

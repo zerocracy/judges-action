@@ -21,7 +21,7 @@ Fbe.conclude do
       (eq what 'enhancement-was-accepted'))
     (exists repository)
     (exists issue)
-    (not (eq stale 'issue'))
+    (absent stale)
     (eq where 'github')
     (unique where repository issue)
     (empty

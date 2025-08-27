@@ -19,15 +19,8 @@ Fbe.iterate do
   as 'merges-were-scanned'
   by "(agg
     (and
-      (gt issue $before)
-      (or
-        (eq what 'pull-was-reviewed')
-        (eq what 'pull-was-opened')
-        (eq what 'code-was-contributed')
-        (eq what 'code-was-reviewed')
-        (eq what 'code-contribution-was-rewarded')
-        (eq what 'code-review-was-rewarded'))
       (eq repository $repository)
+      (gt issue $before)
       (empty
         (and
           (eq repository $repository)
@@ -40,6 +33,14 @@ Fbe.iterate do
           (eq issue $issue)
           (eq what 'pull-was-merged')
           (eq where $where)))
+      (or
+        (eq what 'pull-was-reviewed')
+        (eq what 'pull-was-opened')
+        (eq what 'code-was-contributed')
+        (eq what 'code-was-reviewed')
+        (eq what 'code-contribution-was-rewarded')
+        (eq what 'code-review-was-rewarded'))
+      (absent stale)
       (eq where 'github'))
     (min issue))"
   quota_aware

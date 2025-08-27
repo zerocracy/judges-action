@@ -24,7 +24,7 @@ alive = []
 Fbe.conclude do
   quota_aware
   on "(and
-    (not (eq stale 'who'))
+    (absent stale)
     (exists what)
     (exists who)
     (eq where 'github')
@@ -52,7 +52,7 @@ Fbe.conclude do
   on "(and
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days'))
-    (not (eq stale 'who'))
+    (absent stale)
     (exists who)
     (eq where 'github'))"
   consider do |f|
