@@ -36,10 +36,11 @@ Fbe.iterate do
       (eq where 'github'))
     (min issue))"
   quota_aware
-  repeats 100
+  repeats 64
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
     begin
-      Fbe.octo.issue_timeline(repository, issue).each do |te|
+      repo = Fbe.octo.repo_name_by_id(repository)
+      Fbe.octo.issue_timeline(repo, issue).each do |te|
         next unless te[:event] == 'labeled'
         badge = te[:label][:name]
         next unless badges.include?(badge)
@@ -51,12 +52,16 @@ Fbe.iterate do
             n.label = te[:label][:name]
             n.what = $judge
           end
-        next if nn.nil?
+        if nn.nil?
+          $loog.info("Label already attached to #{repo}##{issue}")
+          next issue
+        end
         nn.who = te[:actor][:id]
         nn.when = te[:created_at]
         nn.details =
           "The '#{nn.label}' label was attached by @#{te[:actor][:login]} " \
           "to the issue #{Fbe.issue(nn)}."
+        $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
       end
     rescue Octokit::NotFound
       $loog.info("Can't find issue ##{issue} in repository ##{repository}")

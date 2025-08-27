@@ -35,10 +35,11 @@ Fbe.iterate do
       (eq where 'github'))
     (min issue))"
   quota_aware
-  repeats 100
+  repeats 64
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
     begin
-      Fbe.octo.issue_timeline(repository, issue).each do |te|
+      repo = Fbe.octo.repo_name_by_id(repository)
+      Fbe.octo.issue_timeline(repo, issue).each do |te|
         next unless events.include?(te[:event])
         tee = Fbe.github_graph.issue_type_event(te[:node_id])
         next if tee.nil?
@@ -50,12 +51,16 @@ Fbe.iterate do
             n.type = tee.dig('issue_type', 'name')
             n.what = $judge
           end
-        next if nn.nil?
+        if nn.nil?
+          $loog.info("Type already attached to #{repo}##{issue}")
+          next issue
+        end
         nn.who = tee.dig('actor', 'id')
         nn.when = tee['created_at']
         nn.details =
           "The '#{nn.type}' type was attached by @#{tee.dig('actor', 'login')} " \
           "to the issue #{Fbe.issue(nn)}."
+        $loog.info("Type attached to #{Fbe.issue(nn)} found: #{nn.type.inspect}")
       end
     rescue Octokit::NotFound
       $loog.info("Can't find issue ##{issue} in repository ##{repository}")

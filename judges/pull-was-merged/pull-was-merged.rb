@@ -44,7 +44,7 @@ Fbe.iterate do
       (eq where 'github'))
     (min issue))"
   quota_aware
-  repeats 100
+  repeats 50
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
     json = Fbe.octo.pull_request(repo, issue)
