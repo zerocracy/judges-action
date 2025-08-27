@@ -41,10 +41,7 @@ Fbe.iterate do
             n.assigner = event.dig(:assigner, :id)
             n.when = event[:created_at]
           end
-        if nn.nil?
-          $loog.info("Assignee already exists in #{repo}##{issue}")
-          next issue
-        end
+        raise "Assignee already exists in #{repo}##{issue}" if nn.nil?
         nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)} ."
         $loog.info("Assignee found for #{Fbe.issue(nn)}: #{Fbe.who(nn)}")
       end

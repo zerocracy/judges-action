@@ -52,10 +52,7 @@ Fbe.iterate do
             n.label = te[:label][:name]
             n.what = $judge
           end
-        if nn.nil?
-          $loog.info("Label already attached to #{repo}##{issue}")
-          next issue
-        end
+        raise "Label already attached to #{repo}##{issue}" if nn.nil?
         nn.who = te[:actor][:id]
         nn.when = te[:created_at]
         nn.details =

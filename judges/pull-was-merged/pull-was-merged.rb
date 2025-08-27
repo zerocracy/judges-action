@@ -61,10 +61,7 @@ Fbe.iterate do
         n.hoc = json[:additions] + json[:deletions]
         n.branch = json[:head][:ref]
       end
-    if nn.nil?
-      $loog.info("Pull already merged in #{repo}##{issue}")
-      next issue
-    end
+    raise "Pull already merged in #{repo}##{issue}" if nn.nil?
     Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
     Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
     actor = Fbe.octo.issue(repo, issue)[:closed_by]
