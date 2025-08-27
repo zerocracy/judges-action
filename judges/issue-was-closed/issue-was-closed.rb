@@ -54,10 +54,11 @@ Fbe.iterate do
         n.issue = issue
         n.what = $judge
       end
-    next issue if nn.nil?
+    raise "Issue #{repo}##{issue} already closed" if nn.nil?
     nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
     nn.who = json.dig(:closed_by, :id)
     nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
+    $loog.info("It was found closed at #{Fbe.issue(nn)}")
     issue
   end
 end

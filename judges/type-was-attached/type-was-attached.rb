@@ -51,10 +51,7 @@ Fbe.iterate do
             n.type = tee.dig('issue_type', 'name')
             n.what = $judge
           end
-        if nn.nil?
-          $loog.info("Type already attached to #{repo}##{issue}")
-          next issue
-        end
+        raise "Type already attached to #{repo}##{issue}" if nn.nil?
         nn.who = tee.dig('actor', 'id')
         nn.when = tee['created_at']
         nn.details =
