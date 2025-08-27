@@ -70,8 +70,12 @@ Fbe.iterate do
         Jp.fill_fact_by_hash(n, Jp.fetch_workflows(json))
         n.branch = json[:head][:ref]
       end
-    next issue if nn.nil?
+    if nn.nil?
+      $loog.info("Pull already merged in #{repo}##{issue}")
+      next issue
+    end
     nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
+    $loog.debug("Just found out that #{Fbe.issue(nn)} has been '#{nn.what}'")
     issue
   end
 end

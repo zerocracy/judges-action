@@ -27,25 +27,30 @@ Fbe.iterate do
   quota_aware
   repeats 100
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
-    Fbe.octo.issue_events(repo, issue).find { _1[:event] == 'assigned' }.then do |event|
-      next if event.nil?
-      nn =
-        Fbe.if_absent do |n|
-          n.where = 'github'
-          n.repository = repository
-          n.issue = issue
-          n.what = $judge
-          n.who = event.dig(:assignee, :id)
-          n.assigner = event.dig(:assigner, :id)
-          n.when = event[:created_at]
+    begin
+      repo = Fbe.octo.repo_name_by_id(repository)
+      Fbe.octo.issue_events(repo, issue).find { _1[:event] == 'assigned' }.then do |event|
+        next if event.nil?
+        nn =
+          Fbe.if_absent do |n|
+            n.where = 'github'
+            n.repository = repository
+            n.issue = issue
+            n.what = $judge
+            n.who = event.dig(:assignee, :id)
+            n.assigner = event.dig(:assigner, :id)
+            n.when = event[:created_at]
+          end
+        if nn.nil?
+          $loog.info("Assignee already exists in #{repo}##{issue}")
+          next issue
         end
-      next if nn.nil?
-      nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)} ."
+        nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)} ."
+        $loog.info("Assignee found for #{Fbe.issue(nn)}: #{Fbe.who(nn)}")
+      end
+    rescue Octokit::NotFound => e
+      $loog.info("Not found issue events for issue ##{issue} in #{repo}: #{e.message}")
     end
-    issue
-  rescue Octokit::NotFound => e
-    $loog.info("Not found issue events for issue ##{issue} in #{repo}: #{e.message}")
     issue
   end
 end
