@@ -15,6 +15,7 @@ Fbe.conclude do
   quota_aware
   on "(and
     (or
+      (eq what 'dud-was-closed')
       (eq what 'issue-was-closed')
       (eq what 'bug-was-accepted')
       (eq what 'bug-was-resolved')
