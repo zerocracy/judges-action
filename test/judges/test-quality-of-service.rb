@@ -77,8 +77,8 @@ class TestQualityOfService < Jp::Test
     )
     (Date.parse('2024-07-15')..Date.parse('2024-08-12')).each do |date|
       stub_github(
-        'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:2024-07-15..#{date}",
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
         body: { total_count: 0, items: [] }
       )
     end
@@ -294,8 +294,8 @@ class TestQualityOfService < Jp::Test
     )
     (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
       stub_github(
-        'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
         body: { total_count: 0, items: [] }
       )
     end
@@ -562,8 +562,8 @@ class TestQualityOfService < Jp::Test
     )
     (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
       stub_github(
-        'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
         body: { total_count: 0, items: [] }
       )
     end
@@ -723,8 +723,8 @@ class TestQualityOfService < Jp::Test
     )
     (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
       stub_github(
-        'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
         body: { total_count: 0, items: [] }
       )
     end
@@ -1043,8 +1043,8 @@ class TestQualityOfService < Jp::Test
     )
     (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
       stub_github(
-        'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
         body: { total_count: 0, items: [] }
       )
     end
@@ -1337,8 +1337,8 @@ class TestQualityOfService < Jp::Test
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-10',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-10%20(closed:%3E=2024-08-10%20OR%20state:open)',
       body: { total_count: 0, items: [] }
     )
     stub_github(
@@ -1434,8 +1434,8 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     (Date.parse('2024-08-10')..Date.parse('2024-09-01')).each do |date|
       stub_github(
-        'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:2024-08-02..#{date}",
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
         body: { total_count: 0, items: [] }
       )
     end
@@ -1458,6 +1458,127 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-30 22:00:00 UTC'), f.when)
       refute_nil(f.average_release_commits_size)
+    end
+  end
+
+  def test_quality_of_service_average_backlog_size
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-22%20(closed:%3E=2025-08-22%20OR%20state:open)',
+      body: {
+        total_count: 1,
+        items: [
+          { number: 5, created_at: Time.parse('2025-08-10 10:10 UTC'), closed_at: nil }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-23%20(closed:%3E=2025-08-23%20OR%20state:open)',
+      body: {
+        total_count: 2,
+        items: [
+          { number: 5, created_at: Time.parse('2025-08-10 10:10 UTC'), closed_at: nil },
+          { number: 7, created_at: Time.parse('2025-08-23 10:10 UTC'), closed_at: Time.parse('2025-08-25 12:10 UTC') }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-24%20(closed:%3E=2025-08-24%20OR%20state:open)',
+      body: {
+        total_count: 2,
+        items: [
+          { number: 5, created_at: Time.parse('2025-08-10 10:10 UTC'), closed_at: nil },
+          { number: 7, created_at: Time.parse('2025-08-23 10:10 UTC'), closed_at: Time.parse('2025-08-25 12:10 UTC') }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-25%20(closed:%3E=2025-08-25%20OR%20state:open)',
+      body: {
+        total_count: 2,
+        items: [
+          { number: 5, created_at: Time.parse('2025-08-10 10:10 UTC'), closed_at: nil },
+          { number: 7, created_at: Time.parse('2025-08-23 10:10 UTC'), closed_at: Time.parse('2025-08-25 12:10 UTC') }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-26%20(closed:%3E=2025-08-26%20OR%20state:open)',
+      body: {
+        total_count: 2,
+        items: [
+          { number: 5, created_at: Time.parse('2025-08-10 10:10 UTC'), closed_at: nil },
+          { number: 8, created_at: Time.parse('2025-08-26 10:10 UTC'), closed_at: Time.parse('2025-08-26 12:10 UTC') }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-27%20(closed:%3E=2025-08-27%20OR%20state:open)',
+      body: {
+        total_count: 1,
+        items: [
+          { number: 5, created_at: Time.parse('2025-08-10 10:10 UTC'), closed_at: nil }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-28%20(closed:%3E=2025-08-28%20OR%20state:open)',
+      body: {
+        total_count: 1,
+        items: [
+          { number: 5, created_at: Time.parse('2025-08-10 10:10 UTC'), closed_at: nil }
+        ]
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2025-08-21&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2025-08-21',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2025-08-21',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2025-08-21',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2025-08-21',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2025-08-21',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+    end
+    Time.stub(:now, Time.parse('2025-08-28 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      assert_in_delta(1.5714, f.average_backlog_size)
     end
   end
 
@@ -1505,13 +1626,13 @@ class TestQualityOfService < Jp::Test
       body: { total_count: 0, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-03',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-03%20(closed:%3E=2024-08-03%20OR%20state:open)',
       body: { total_count: 0, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-04',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-04%20(closed:%3E=2024-08-04%20OR%20state:open)',
       body: {
         total_count: 1,
         items: [
@@ -1520,8 +1641,8 @@ class TestQualityOfService < Jp::Test
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-05',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-05%20(closed:%3E=2024-08-05%20OR%20state:open)',
       body: {
         total_count: 2,
         items: [
@@ -1531,8 +1652,8 @@ class TestQualityOfService < Jp::Test
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-06',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-06%20(closed:%3E=2024-08-06%20OR%20state:open)',
       body: {
         total_count: 3,
         items: [
@@ -1544,8 +1665,8 @@ class TestQualityOfService < Jp::Test
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-07',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-07%20(closed:%3E=2024-08-07%20OR%20state:open)',
       body: {
         total_count: 4,
         items: [
@@ -1558,8 +1679,8 @@ class TestQualityOfService < Jp::Test
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-08',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-08%20(closed:%3E=2024-08-08%20OR%20state:open)',
       body: {
         total_count: 4,
         items: [
@@ -1572,8 +1693,8 @@ class TestQualityOfService < Jp::Test
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02..2024-08-09',
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2024-08-09%20(closed:%3E=2024-08-09%20OR%20state:open)',
       body: {
         total_count: 3,
         items: [
