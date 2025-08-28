@@ -1,8 +1,8 @@
 #!/bin/bash
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
-
-set -e -o pipefail
+export PS4='+${BASH_SOURCE}:${LINENO}:' 
+set -ex -o pipefail
 
 start=$(date +%s)
 
