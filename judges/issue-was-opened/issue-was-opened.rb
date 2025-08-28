@@ -19,6 +19,8 @@ Fbe.conclude do
       (eq what 'issue-was-closed')
       (eq what 'bug-was-accepted')
       (eq what 'bug-was-resolved')
+      (eq what 'enhancement-suggestion-was-rewarded')
+      (eq what 'bug-report-was-rewarded')
       (eq what 'enhancement-was-accepted'))
     (exists repository)
     (exists issue)
