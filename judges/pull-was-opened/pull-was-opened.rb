@@ -18,6 +18,8 @@ Fbe.conclude do
     (exists repository)
     (exists issue)
     (absent stale)
+    (absent tombstone)
+    (absent done)
     (or
       (eq what 'pull-was-closed')
       (eq what 'pull-was-merged')

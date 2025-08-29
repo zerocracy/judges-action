@@ -25,6 +25,8 @@ Fbe.conclude do
     (exists repository)
     (exists issue)
     (absent stale)
+    (absent tombstone)
+    (absent done)
     (eq where 'github')
     (unique where repository issue)
     (empty

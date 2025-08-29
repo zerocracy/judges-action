@@ -26,6 +26,8 @@ Fbe.iterate do
       (gt issue $before)
       (eq repository $repository)
       (absent stale)
+      (absent tombstone)
+      (absent done)
       (empty
         (and
           (eq repository $repository)
