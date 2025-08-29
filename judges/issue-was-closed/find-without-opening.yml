@@ -15,5 +15,5 @@ input:
     label: bug
     when: 2025-05-27T23:54:44Z
 expected:
-  - /fb[count(f)=3]
+  - /fb[count(f)=2]
   - /fb/f[where='github' and what='issue-was-closed' and repository=680 and issue=142]

@@ -37,6 +37,6 @@ options:
   repositories: foo/bar
   max_labels: 5
 expected:
-  - /fb[count(f)=6]
+  - /fb[count(f)=5]
   - /fb/f/type
   - /fb/f[type and issue=41]

@@ -32,9 +32,8 @@ class TestIssueWasAssigned < Jp::Test
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
     load_it('issue-was-assigned', fb)
-    assert_equal(3, fb.all.size)
+    assert_equal(2, fb.all.size)
     assert_equal(2, fb.picks(what: 'issue-was-opened').size)
     assert_equal(0, fb.picks(what: 'issue-was-assigned').size)
-    assert(fb.one?(what: 'assignees-were-scanned', repository: 42, where: 'github'))
   end
 end

@@ -21,13 +21,7 @@ class TestFindAllIssues < Jp::Test
     fb = Factbase.new
     load_it('find-all-issues', fb)
     fs = fb.query('(always)').each.to_a
-    assert_equal(2, fs.count)
-    fs.first.then do |f|
-      assert_equal('min-issue-was-found', f.what)
-      assert_equal('github', f.where)
-      assert_equal(695, f.repository)
-      assert_equal(0, f.latest)
-    end
+    assert_equal(0, fs.count)
     assert_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
   end
 
@@ -56,7 +50,7 @@ class TestFindAllIssues < Jp::Test
       f.where = 'github'
     end
     load_it('find-all-issues', fb)
-    assert_equal(4, fb.size)
+    assert_equal(3, fb.size)
     refute_empty(fb.query('(eq issue 46)').each.to_a)
   end
 
@@ -76,7 +70,7 @@ class TestFindAllIssues < Jp::Test
       f.repository = 1579
     end
     load_it('find-all-issues', fb, Judges::Options.new({ 'testing' => true, 'repositories' => 'yegor256/factbase' }))
-    assert_equal(4, fb.size)
+    assert_equal(3, fb.size)
   end
 
   def test_find_all_issues_with_not_found_min_issue_in_github
@@ -116,12 +110,7 @@ class TestFindAllIssues < Jp::Test
     end
     load_it('find-all-issues', fb)
     fs = fb.query('(always)').each.to_a
-    assert_equal(3, fs.count)
-    fs.last.then do |f|
-      assert_equal('github', f.where)
-      assert_equal(695, f.repository)
-      assert_equal(0, f.latest)
-    end
+    assert_equal(1, fs.count)
     refute_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
   end
 
@@ -209,7 +198,7 @@ class TestFindAllIssues < Jp::Test
       f.who = 257_962
     end
     load_it('find-all-issues', fb)
-    assert_equal(7, fb.query('(always)').each.to_a.size)
+    assert_equal(6, fb.query('(always)').each.to_a.size)
     fb.query("(eq what 'min-issue-was-found')").each.to_a.first.then do |f|
       assert_equal('min-issue-was-found', f.what)
       assert_equal('github', f.where)

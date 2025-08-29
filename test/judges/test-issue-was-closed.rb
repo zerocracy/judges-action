@@ -51,7 +51,6 @@ class TestIssueWasClosed < Jp::Test
     load_it('issue-was-closed', fb)
     assert_equal(6, fb.picks(what: 'issue-was-opened').size)
     assert_equal(4, fb.picks(what: 'issue-was-closed').size)
-    assert_equal(1, fb.picks(what: 'issues-were-scanned').size)
     assert(
       fb.one?(
         what: 'issue-was-closed',

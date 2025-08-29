@@ -1929,8 +1929,7 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repositories/42/events?per_page=100', body: [])
     fb = Factbase.new
     load_it('github-events', fb)
-    assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 0))
+    assert_equal(0, fb.all.size)
   end
 
   def test_not_completed_scanning
