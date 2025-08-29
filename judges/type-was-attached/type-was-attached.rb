@@ -15,6 +15,7 @@ require 'fbe/octo'
 require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/issue'
+require 'joined'
 
 events = %w[issue_type_added issue_type_changed]
 
@@ -32,7 +33,7 @@ Fbe.iterate do
         (and
           (eq repository $repository)
           (eq issue $issue)
-          (eq what 'type-was-attached')
+          (eq what '#{$judge}')
           (eq where 'github')))
       (eq where 'github'))
     (min issue))"
@@ -42,9 +43,15 @@ Fbe.iterate do
     begin
       repo = Fbe.octo.repo_name_by_id(repository)
       Fbe.octo.issue_timeline(repo, issue).each do |te|
-        next unless events.include?(te[:event])
+        unless events.include?(te[:event])
+          $loog.debug("No #{events.joined} events at #{repo}##{issue}")
+          next
+        end
         tee = Fbe.github_graph.issue_type_event(te[:node_id])
-        next if tee.nil?
+        if tee.nil?
+          $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
+          next
+        end
         nn =
           Fbe.if_absent do |n|
             n.where = 'github'
