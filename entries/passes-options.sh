@@ -2,15 +2,11 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
-set -ex -o pipefail
-
 SELF=$1
 
-name=$(LC_ALL=C tr -dc '[:lower:]' </dev/urandom | head -c 16 || true)
-
-BUNDLE_GEMFILE="${SELF}/Gemfile"
-export BUNDLE_GEMFILE
-bundle exec judges eval "${name}.fb" "\$fb.insert" > /dev/null
+# shellcheck source=../makes/setup-test-env.sh
+source "${SELF}/makes/setup-test-env.sh"
+name=$(setup_test_env "${SELF}")
 
 opts=$(cat << 'EOF'
   foo42=bar

@@ -17,3 +17,5 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ludeeus/action-shellcheck@master
+        with:
+          check_together: 'yes'
