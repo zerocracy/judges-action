@@ -16,7 +16,6 @@ require_relative '../../lib/nick_of'
 good = Set.new
 
 Fbe.conclude do
-  quota_aware
   on '(and (absent stale) (eq where "github") (exists who))'
   consider do |f|
     next if good.include?(f.who)
@@ -34,7 +33,6 @@ Fbe.conclude do
 end
 
 Fbe.conclude do
-  quota_aware
   on '(and (eq where "github") (exists who) (unique who) (eq stale "who"))'
   consider do |f|
     Fbe.fb.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|

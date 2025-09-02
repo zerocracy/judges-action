@@ -25,7 +25,6 @@ require_relative '../../lib/pull_request'
 Fbe.iterate do
   as 'events-were-scanned'
   by '(plus 0 $before)'
-  quota_aware
 
   def self.skip_event(json)
     t = Time.parse(json[:created_at].iso8601)

@@ -13,7 +13,6 @@ require 'fbe/octo'
 require 'fbe/who'
 
 Fbe.conclude do
-  quota_aware
   on "(and
     (eq what 'pull-was-opened')
     (absent branch)

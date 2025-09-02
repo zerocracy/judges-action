@@ -22,7 +22,6 @@ require_relative '../../lib/nick_of'
 alive = []
 
 Fbe.conclude do
-  quota_aware
   on "(and
     (absent stale)
     (exists what)
@@ -48,7 +47,6 @@ Fbe.conclude do
 end
 
 Fbe.conclude do
-  quota_aware
   on "(and
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days'))

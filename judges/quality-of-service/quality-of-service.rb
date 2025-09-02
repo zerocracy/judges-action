@@ -24,7 +24,6 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
 end
 
 Fbe.conclude do
-  quota_aware
   on '(and
     (eq what "quality-of-service")
     (absent since)
@@ -36,7 +35,6 @@ Fbe.conclude do
 end
 
 Fbe.conclude do
-  quota_aware
   on '(and (eq what "quality-of-service") (exists since))'
   consider do |f|
     Jp.incremate(f, __dir__, 'average', avoid_duplicate: true)

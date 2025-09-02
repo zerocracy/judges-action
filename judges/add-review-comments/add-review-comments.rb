@@ -16,7 +16,6 @@ require 'fbe/octo'
 require 'fbe/conclude'
 
 Fbe.conclude do
-  quota_aware
   on '(and
     (or (eq what "pull-was-reviewed") (eq what "pull-was-merged"))
     (absent review_comments)

@@ -15,7 +15,6 @@ require 'fbe/octo'
 require 'fbe/conclude'
 
 Fbe.conclude do
-  quota_aware
   on '(and
     (absent is_human)
     (absent stale)

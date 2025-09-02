@@ -36,7 +36,6 @@ require 'time'
           (gt issue $before)
           (eq where 'github'))
         (min issue))"
-    quota_aware
     over do |repository, issue|
       repo = Fbe.octo.repo_name_by_id(repository)
       begin

@@ -20,7 +20,6 @@ require_relative '../../lib/nick_of'
 seen = []
 
 Fbe.conclude do
-  quota_aware
   on "(and
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '2 days'))

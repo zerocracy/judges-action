@@ -36,7 +36,6 @@ Fbe.iterate do
           (eq where $where)))
       (eq where 'github'))
     (min issue))"
-  quota_aware
   repeats 64
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)

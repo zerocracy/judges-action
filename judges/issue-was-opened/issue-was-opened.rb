@@ -12,7 +12,6 @@ require 'fbe/issue'
 require 'fbe/who'
 
 Fbe.conclude do
-  quota_aware
   on "(and
     (or
       (eq what 'dud-was-closed')

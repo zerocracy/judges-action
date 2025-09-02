@@ -20,7 +20,6 @@ require 'fbe/who'
   'pull-was-merged' => :merged_by
 }.each do |w, a|
   Fbe.conclude do
-    quota_aware
     on "(and
       (absent who)
       (eq what '#{w}')

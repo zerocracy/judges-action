@@ -15,7 +15,6 @@ require 'fbe/conclude'
 good = {}
 
 Fbe.conclude do
-  quota_aware
   on '(and (eq where "github") (exists repository) (absent stale))'
   consider do |f|
     r = f.repository

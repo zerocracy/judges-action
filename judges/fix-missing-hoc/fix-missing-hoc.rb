@@ -13,7 +13,6 @@ require 'fbe/octo'
 require 'fbe/who'
 
 Fbe.conclude do
-  quota_aware
   on "(and
     (or (eq what 'pull-was-merged') (eq what 'pull-was-closed'))
     (eq where 'github')
