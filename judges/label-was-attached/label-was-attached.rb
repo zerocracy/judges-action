@@ -64,6 +64,9 @@ Fbe.iterate do
       end
     rescue Octokit::NotFound
       $loog.info("Can't find issue ##{issue} in repository ##{repository}")
+      Fbe.fb.query(
+        "(and (eq issue #{issue}) (eq repository #{repository}) (eq where 'github') (absent stale))"
+      ).each { |f| f.stale = 'issue' }
     end
     issue
   end
