@@ -22,13 +22,13 @@ Fbe.conclude do
     (absent done)
     (eq where "github")
     (exists what)
-    (exists who)
-    )'
+    (exists who))'
   consider do |f|
     begin
       json = Fbe.octo.user(f.who)
     rescue Octokit::NotFound
       $loog.info("GitHub user ##{f.who} is not found")
+      f.stale = 'who'
       next
     end
     type = json[:type]
