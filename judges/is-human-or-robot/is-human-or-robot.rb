@@ -18,6 +18,8 @@ Fbe.conclude do
   on '(and
     (absent is_human)
     (absent stale)
+    (absent tombstone)
+    (absent done)
     (eq where "github")
     (exists what)
     (exists who)

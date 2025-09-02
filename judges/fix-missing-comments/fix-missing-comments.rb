@@ -21,6 +21,8 @@ Fbe.conclude do
     (exists issue)
     (exists repository)
     (absent stale)
+    (absent tombstone)
+    (absent done)
     (absent comments))"
   consider do |f|
     repo = Fbe.octo.repo_name_by_id(f.repository)

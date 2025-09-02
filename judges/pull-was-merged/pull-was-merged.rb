@@ -41,6 +41,8 @@ Fbe.iterate do
         (eq what 'code-contribution-was-rewarded')
         (eq what 'code-review-was-rewarded'))
       (absent stale)
+      (absent tombstone)
+      (absent done)
       (eq where 'github'))
     (min issue))"
   repeats 50

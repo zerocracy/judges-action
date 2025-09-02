@@ -17,6 +17,8 @@ Fbe.conclude do
     (eq what 'pull-was-opened')
     (absent branch)
     (absent stale)
+    (absent tombstone)
+    (absent done)
     (exists issue)
     (exists repository)
     (eq where 'github'))"

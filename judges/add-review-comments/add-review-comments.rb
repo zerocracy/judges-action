@@ -20,6 +20,8 @@ Fbe.conclude do
     (or (eq what "pull-was-reviewed") (eq what "pull-was-merged"))
     (absent review_comments)
     (absent stale)
+    (absent tombstone)
+    (absent done)
     (exists issue)
     (exists repository)
     (eq where "github"))'

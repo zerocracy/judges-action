@@ -24,6 +24,8 @@ Fbe.conclude do
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '2 days'))
     (absent stale)
+    (absent tombstone)
+    (absent done)
     (exists who)
     (eq where 'github'))"
   consider do |f|
