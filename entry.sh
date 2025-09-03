@@ -100,7 +100,10 @@ else
     options+=("--option=repositories=${INPUT_REPOSITORIES}");
 fi
 
-options+=("--option=job_id=${GITHUB_RUN_ID}")
+if [ -n "${GITHUB_RUN_ID}" ]; then
+    options+=("--option=job_id=${GITHUB_RUN_ID}")
+fi
+
 options+=("--option=judges_action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
 if [ "$(printenv "INPUT_FAIL-FAST" || echo 'false')" == 'true' ]; then
