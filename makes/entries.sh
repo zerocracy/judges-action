@@ -8,8 +8,13 @@ base=$(realpath "$(dirname "$0")/..")
 
 mkdir -p "${base}/target/entries-logs"
 while IFS= read -r sh; do
+    fqn=${base}/entries/${sh}
+    if [ ! -x "${fqn}" ]; then
+        echo "The file is not executable: ${fqn}"
+        exit 1
+    fi
     mkdir -p "${base}/target/${sh}"
-    if /bin/bash -c "cd \"target/${sh}\" && exec \"${base}/entries/${sh}\" \"${base}\" > \"${base}/target/entries-logs/${sh}.txt\" 2>&1"; then
+    if /bin/bash -c "cd \"target/${sh}\" && exec \"${fqn}\" \"${base}\" > \"${base}/target/entries-logs/${sh}.txt\" 2>&1"; then
         echo "👍🏻 ${sh} passed"
     else
         cat "${base}/target/entries-logs/${sh}.txt"
