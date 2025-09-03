@@ -17,6 +17,7 @@ require 'fbe/octo'
 require 'fbe/github_graph'
 require 'fbe/iterate'
 require 'fbe/if_absent'
+require 'fbe/tombstone'
 require 'fbe/who'
 require 'fbe/issue'
 require_relative '../../lib/fill_fact'
@@ -297,6 +298,12 @@ Fbe.iterate do
           $loog.debug("The event ##{id} just detected is already in the factbase")
         else
           fill_up_event(f, json)
+          if f['issue']
+            throw :rollback unless Fbe.fb.query(
+              "(and (eq what '#{f.where}') (eq repository #{f.repository}) (eq issue #{f.issue}) (exists done))"
+            ).each.empty?
+            throw :rollback if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
+          end
           $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
           detected += 1
         end
