@@ -115,7 +115,8 @@ check its [own repository](https://github.com/zerocracy/pages-action).
 
 In order to test this action, just run (provided, you have
 [Ruby](https://www.ruby-lang.org/en/) 3+, [Bundler](https://bundler.io/),
-and [GNU make](https://www.gnu.org/software/make/) installed):
+[GNU make](https://www.gnu.org/software/make/), and
+[GNU parallel](https://www.gnu.org/software/parallel/) installed):
 
 ```bash
 bundle update
