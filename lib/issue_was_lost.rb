@@ -17,7 +17,7 @@ def Jp.issue_was_lost(where, repository, issue)
     Fbe.if_absent do |n|
       n.where = where
       n.what = 'issue-was-lost'
-      n.repository = reposiotry
+      n.repository = repository
       n.issue = issue
     end
   raise "The issue ##{issue} was already lost" unless f

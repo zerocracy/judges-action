@@ -1,0 +1,26 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bar
+input:
+  -
+    _id: 1
+    what: pull-was-opened
+    where: github
+    issue: 29
+    repository: 680
+    who: 4444
+    when: 2025-08-27T23:54:44Z
+  -
+    _id: 2
+    what: pull-was-merged
+    where: github
+    issue: 29
+    repository: 680
+    who: 555
+    when: 2025-08-28T20:00:40Z
+expected:
+  - /fb[count(f)=4]
+  - /fb[count(f[what='code-was-reviewed' and repository='680' and issue='29'])=2]
