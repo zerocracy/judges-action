@@ -29,6 +29,7 @@ def issue_was_lost(repo, num)
     n.what = 'issue-was-lost'
     n.repository = repo
     n.issue = num
+    n.when = Time.now
   end
 end
 
@@ -73,9 +74,9 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
     f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
     $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     added += 1
-  rescue Octokit::NotFound
+  rescue Octokit::NotFound => e
     issue_was_lost(r.repository, i)
-    $loog.info("The issue ##{i} doesn't exist in #{repo}")
+    $loog.info("The issue ##{i} doesn't exist in #{repo}: #{e.message}")
   end
   if missing.empty?
     $loog.info("No missing issues in #{repo}")
