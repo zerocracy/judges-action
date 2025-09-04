@@ -7,6 +7,8 @@ docker:
 assets:
   docker-password: yegor256/home#assets/docker-password
 install: |
+  apt-get -y update
+  apt-get -y install parallel
   bundle install --no-color
 merge:
   script: |-
