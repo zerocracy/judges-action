@@ -24,6 +24,7 @@ Fbe.conclude do
       (eq what 'pull-was-merged')
       (eq what 'pull-was-reviewed')
       (eq what 'code-was-contributed')
+      (eq what 'bad-branch-name-was-punished')
       (eq what 'code-contribution-was-rewarded')
       (eq what 'code-review-was-rewarded')
       (eq what 'code-was-reviewed'))
