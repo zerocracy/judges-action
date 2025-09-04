@@ -10,6 +10,7 @@ require 'fbe/octo'
 require 'fbe/conclude'
 require 'fbe/issue'
 require 'fbe/who'
+require_relative '../../lib/issue_was_lost'
 
 Fbe.conclude do
   on "(and
@@ -38,24 +39,25 @@ Fbe.conclude do
   follow 'where repository issue'
   draw do |n, f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
-    begin
-      json = Fbe.octo.issue(repo, f.issue)
-      n.what = $judge
-      n.when = json[:created_at]
-      n.who = json.dig(:user, :id)
-      ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-      if ref
-        n.branch = ref
-      else
-        n.stale = 'branch'
+    json =
+      begin
+        Fbe.octo.issue(repo, f.issue)
+      rescue Octokit::NotFound => e
+        $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', f.repository, f.issue)
+        next issue
       end
-      n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-      $loog.debug("The opening for #{Fbe.issue(n)} was found")
-    rescue Octokit::NotFound
-      $loog.info("The pull ##{f.issue} doesn't exist in #{repo}")
-      f.stale = 'issue'
-      throw :rollback
+    n.what = $judge
+    n.when = json[:created_at]
+    n.who = json.dig(:user, :id)
+    ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+    if ref
+      n.branch = ref
+    else
+      n.stale = 'branch'
     end
+    n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
+    $loog.debug("The opening for #{Fbe.issue(n)} was found")
   end
 end
 

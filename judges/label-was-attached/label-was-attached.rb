@@ -16,6 +16,7 @@ require 'fbe/octo'
 require 'fbe/iterate'
 require 'fbe/if_absent'
 require 'fbe/issue'
+require_relative '../../lib/issue_was_lost'
 
 badges = %w[bug enhancement question]
 
@@ -39,33 +40,34 @@ Fbe.iterate do
     (min issue))"
   repeats 64
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
-    begin
-      repo = Fbe.octo.repo_name_by_id(repository)
-      Fbe.octo.issue_timeline(repo, issue).each do |te|
-        next unless te[:event] == 'labeled'
-        badge = te[:label][:name]
-        next unless badges.include?(badge)
-        nn =
-          Fbe.if_absent do |n|
-            n.where = 'github'
-            n.repository = repository
-            n.issue = issue
-            n.label = te[:label][:name]
-            n.what = $judge
-          end
-        raise "Label already attached to #{repo}##{issue}" if nn.nil?
-        nn.who = te[:actor][:id]
-        nn.when = te[:created_at]
-        nn.details =
-          "The '#{nn.label}' label was attached by @#{te[:actor][:login]} " \
-          "to the issue #{Fbe.issue(nn)}."
-        $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
+    repo = Fbe.octo.repo_name_by_id(repository)
+    events =
+      begin
+        Fbe.octo.issue_timeline(repo, issue)
+      rescue Octokit::NotFound => e
+        $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next
       end
-    rescue Octokit::NotFound
-      $loog.info("Can't find issue ##{issue} in repository ##{repository}")
-      Fbe.fb.query(
-        "(and (eq issue #{issue}) (eq repository #{repository}) (eq where 'github') (absent stale))"
-      ).each { |f| f.stale = 'issue' }
+    events.each do |te|
+      next unless te[:event] == 'labeled'
+      badge = te[:label][:name]
+      next unless badges.include?(badge)
+      nn =
+        Fbe.if_absent do |n|
+          n.where = 'github'
+          n.repository = repository
+          n.issue = issue
+          n.label = te[:label][:name]
+          n.what = $judge
+        end
+      raise "Label already attached to #{repo}##{issue}" if nn.nil?
+      nn.who = te[:actor][:id]
+      nn.when = te[:created_at]
+      nn.details =
+        "The '#{nn.label}' label was attached by @#{te[:actor][:login]} " \
+        "to the issue #{Fbe.issue(nn)}."
+      $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
     end
     issue
   end

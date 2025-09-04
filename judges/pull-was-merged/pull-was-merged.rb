@@ -6,13 +6,14 @@
 # Judge that monitors pulls which were closed or merged.
 
 require 'fbe/conclude'
-require 'fbe/octo'
-require 'fbe/github_graph'
-require 'fbe/who'
-require 'fbe/issue'
 require 'fbe/delete'
+require 'fbe/github_graph'
+require 'fbe/issue'
+require 'fbe/octo'
 require 'fbe/overwrite'
+require 'fbe/who'
 require_relative '../../lib/fill_fact'
+require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
 
 Fbe.iterate do
@@ -48,7 +49,14 @@ Fbe.iterate do
   repeats 50
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
-    json = Fbe.octo.pull_request(repo, issue)
+    json =
+      begin
+        Fbe.octo.pull_request(repo, issue)
+      rescue Octokit::NotFound => e
+        $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
+      end
     unless json[:state] == 'closed'
       $loog.debug("Pull #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue

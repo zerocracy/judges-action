@@ -24,6 +24,7 @@ require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
 require 'time'
+require_relative '../../lib/issue_was_lost'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
@@ -38,12 +39,14 @@ require 'time'
         (min issue))"
     over do |repository, issue|
       repo = Fbe.octo.repo_name_by_id(repository)
-      begin
-        after = Fbe.octo.issue(repo, issue)[:created_at]
-      rescue Octokit::NotFound
-        $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero")
-        next 0
-      end
+      after =
+        begin
+          Fbe.octo.issue(repo, issue)[:created_at]
+        rescue Octokit::NotFound => e
+          $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
+          Jp.issue_was_lost('github', repository, issue)
+          next 0
+        end
       total = 0
       found = 0
       first = issue

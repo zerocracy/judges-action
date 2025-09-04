@@ -22,16 +22,7 @@ require 'fbe/octo'
 require 'fbe/if_absent'
 require 'fbe/who'
 require 'fbe/issue'
-
-def issue_was_lost(repo, num)
-  Fbe.if_absent do |n|
-    n.where = 'github'
-    n.what = 'issue-was-lost'
-    n.repository = repo
-    n.issue = num
-    n.when = Time.now
-  end
-end
+require_relative '../../lib/issue_was_lost'
 
 Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))').each do |r|
   next if Fbe.octo.off_quota?
@@ -49,7 +40,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
     checked += 1
     if json[:number].nil?
       $loog.warn("Apparently, the JSON for the issue ##{i} doesn't have 'number' field")
-      issue_was_lost(r.repository, i)
+      Jp.issue_was_lost('github', r.repository, i)
       next
     end
     type = json[:pull_request] ? 'pull' : 'issue'
@@ -75,7 +66,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
     $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     added += 1
   rescue Octokit::NotFound => e
-    issue_was_lost(r.repository, i)
+    Jp.issue_was_lost('github', r.repository, i)
     $loog.info("The issue ##{i} doesn't exist in #{repo}: #{e.message}")
   end
   if missing.empty?

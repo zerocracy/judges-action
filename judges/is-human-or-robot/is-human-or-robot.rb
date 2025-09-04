@@ -26,8 +26,8 @@ Fbe.conclude do
   consider do |f|
     begin
       json = Fbe.octo.user(f.who)
-    rescue Octokit::NotFound
-      $loog.info("GitHub user ##{f.who} is not found")
+    rescue Octokit::NotFound => e
+      $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
       f.stale = 'who'
       next
     end

@@ -12,6 +12,7 @@ require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
 require_relative '../../lib/fill_fact'
+require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
 
 Fbe.conclude do
@@ -26,14 +27,14 @@ Fbe.conclude do
     (absent comments))"
   consider do |f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
-    begin
-      json = Fbe.octo.pull_request(repo, f.issue)
-    rescue Octokit::NotFound
-      $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-      f.stale = 'issue'
-      $loog.info("#{Fbe.issue(f)} is lost")
-      next
-    end
+    json =
+      begin
+        Fbe.octo.pull_request(repo, f.issue)
+      rescue Octokit::NotFound
+        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
+        Jp.issue_was_lost('github', f.repository, f.issue)
+        next
+      end
     Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
     $loog.info("Comments found for #{Fbe.issue(f)}: #{f.comments}")
   end

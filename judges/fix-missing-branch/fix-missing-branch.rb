@@ -11,6 +11,7 @@ require 'fbe/conclude'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
+require_relative '../../lib/issue_was_lost'
 
 Fbe.conclude do
   on "(and
@@ -24,14 +25,14 @@ Fbe.conclude do
     (eq where 'github'))"
   consider do |f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
-    begin
-      json = Fbe.octo.issue(repo, f.issue)
-    rescue Octokit::NotFound
-      $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-      f.stale = 'issue'
-      $loog.info("#{Fbe.issue(f)} is lost")
-      next
-    end
+    json =
+      begin
+        Fbe.octo.issue(repo, f.issue)
+      rescue Octokit::NotFound => e
+        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', f.repository, f.issue)
+        next
+      end
     ref = json.dig(:pull_request, :head, :ref)
     if ref.nil?
       f.stale = 'branch'

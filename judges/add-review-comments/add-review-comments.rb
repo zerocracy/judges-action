@@ -14,6 +14,7 @@
 require 'octokit'
 require 'fbe/octo'
 require 'fbe/conclude'
+require_relative '../../lib/issue_was_lost'
 
 Fbe.conclude do
   on '(and
@@ -26,18 +27,22 @@ Fbe.conclude do
     (exists repository)
     (eq where "github"))'
   consider do |f|
-    begin
-      repo = Fbe.octo.repo_name_by_id(f.repository)
-    rescue Octokit::NotFound => e
-      $loog.info("Failed to find repository #{f.repository}: #{e.message}")
-      next
-    end
-    begin
-      json = Fbe.octo.pull_request(repo, f.issue)
-    rescue Octokit::NotFound => e
-      $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
-      next
-    end
+    repo =
+      begin
+        Fbe.octo.repo_name_by_id(f.repository)
+      rescue Octokit::NotFound => e
+        $loog.info("Failed to find repository #{f.repository}: #{e.message}")
+        f.stale = 'repository'
+        next
+      end
+    json =
+      begin
+        Fbe.octo.pull_request(repo, f.issue)
+      rescue Octokit::NotFound => e
+        $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', f.repository, f.issue)
+        next
+      end
     c = json[:review_comments]
     f.review_comments = c
     $loog.info("Found #{c} review comments in #{repo}##{f.issue} (what: #{f.what})")
