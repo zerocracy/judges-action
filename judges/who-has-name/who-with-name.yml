@@ -22,4 +22,4 @@ input:
     when: 2025-03-01T00:00:00
 expected:
   - /fb[count(f)=2]
-  - /fb/f[_id=2 and name='john-travolta']
+  - /fb/f[_id=2 and name='john-travolta' and when]
