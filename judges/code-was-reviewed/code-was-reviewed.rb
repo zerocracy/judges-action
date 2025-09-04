@@ -19,6 +19,9 @@ Fbe.conclude do
       (eq what 'pull-was-closed'))
     (exists repository)
     (exists issue)
+    (absent stale)
+    (absent tombstone)
+    (absent done)
     (eq where 'github')
     (empty
       (and
