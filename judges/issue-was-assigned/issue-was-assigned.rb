@@ -50,7 +50,7 @@ Fbe.iterate do
           n.when = event[:created_at]
         end
       raise "Assignee already exists in #{repo}##{issue}" if nn.nil?
-      nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)} ."
+      nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
       $loog.info("Assignee found for #{Fbe.issue(nn)} (fact ##{nn._id}): #{Fbe.who(nn)}")
     end
     issue
