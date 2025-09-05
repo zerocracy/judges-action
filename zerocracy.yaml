@@ -2,13 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repos/yegor256/0rsk/actions/jobs/45949337491:
-    500 - '
+  error: Failed to open TCP connection to api.github.com:443 (execution expired)
   inserted: 8
-  seconds: 991.528352216
+  seconds: 689.088142409
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-05 08:37:15.783535721 Z
+  when: 2025-09-05 09:31:39.575214710 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -98125,63 +98124,6 @@
   when: 2025-07-03 11:43:25.000000000 Z
   where: github
   who: 41898282
-- _id: 1928258
-  _job: 34161
-  _time: 2025-08-23 18:42:45.887507202 Z
-  _version: 0.15.6/0.53.2/0.15.21
-  commit: 8b6c03fa94050ed0643cad99329f24a958fe1200
-  default_branch: master
-  details: 'A new Git push #25335039473 has arrived to zerocracy/judges-action, made
-    by @yegor256 (default branch is ''master''), not associated with any pull request.'
-  event_id: 51763202098
-  event_type: PushEvent
-  is_human: 1
-  push_id: 25335039473
-  ref: refs/heads/master
-  repository: 799177290
-  to_master: 1
-  what: git-was-pushed
-  when: 2025-07-07 08:06:37.000000000 Z
-  where: github
-  who: 526301
-- _id: 1928259
-  _job: 34161
-  _time: 2025-08-23 18:42:46.132653917 Z
-  _version: 0.15.6/0.53.2/0.15.21
-  commit: 01e256fe22d6acbca750f950caffc554d87d4371
-  default_branch: master
-  details: 'A new Git push #25334995877 has arrived to zerocracy/judges-action, made
-    by @yegor256 (default branch is ''master''), not associated with any pull request.'
-  event_id: 51763102916
-  event_type: PushEvent
-  is_human: 1
-  push_id: 25334995877
-  ref: refs/heads/master
-  repository: 799177290
-  to_master: 1
-  what: git-was-pushed
-  when: 2025-07-07 08:04:21.000000000 Z
-  where: github
-  who: 526301
-- _id: 1928260
-  _job: 34161
-  _time: 2025-08-23 18:42:46.375435559 Z
-  _version: 0.15.6/0.53.2/0.15.21
-  commit: 6b7aea60a74d3d84a96f7cc1e52204030d6e2ff5
-  default_branch: master
-  details: 'A new Git push #25334872915 has arrived to zerocracy/judges-action, made
-    by @yegor256 (default branch is ''master''), not associated with any pull request.'
-  event_id: 51762833388
-  event_type: PushEvent
-  is_human: 1
-  push_id: 25334872915
-  ref: refs/heads/master
-  repository: 799177290
-  to_master: 1
-  what: git-was-pushed
-  when: 2025-07-07 07:58:16.000000000 Z
-  where: github
-  who: 526301
 - _id: 1928263
   _job: 34161
   _time: 2025-08-23 18:42:47.102407099 Z
@@ -142660,105 +142602,6 @@
   when: 2025-09-04 15:09:20.000000000 Z
   where: github
   who: 70346889
-- _id: 2123909
-  _job: 17485423340
-  _time: 2025-09-05 06:22:14.523701947 Z
-  _version: 0.15.8/0.53.6
-  latest: 0
-  repository: 799177290
-  what: issues-were-scanned
-  where: github
-- _id: 2123969
-  _job: 17485423340
-  _time: 2025-09-05 06:30:15.541949749 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/judges-action#338 was assigned to @yegorov by @yegor256.
-  issue: 338
-  repository: 799177290
-  tombstone: 2025-09-05 06:38:03.060162100 Z
-  what: issue-was-assigned
-  when: 2024-09-17 09:39:00.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2123970
-  _job: 17485423340
-  _time: 2025-09-05 06:30:18.302629068 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/judges-action#345 was assigned to @yegorov by @yegor256.
-  issue: 345
-  repository: 799177290
-  tombstone: 2025-09-05 06:38:03.868548577 Z
-  what: issue-was-assigned
-  when: 2024-10-16 05:48:55.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2123971
-  _job: 17485423340
-  _time: 2025-09-05 06:30:20.666150740 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/judges-action#372 was assigned to @yegorov by @yegor256.
-  issue: 372
-  repository: 799177290
-  tombstone: 2025-09-05 06:38:05.107048358 Z
-  what: issue-was-assigned
-  when: 2024-10-04 02:17:45.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2123972
-  _job: 17485423340
-  _time: 2025-09-05 06:30:23.055947312 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/judges-action#373 was assigned to @yegorov by @yegor256.
-  issue: 373
-  repository: 799177290
-  tombstone: 2025-09-05 06:38:03.566257188 Z
-  what: issue-was-assigned
-  when: 2024-10-04 15:14:30.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2123973
-  _job: 17485423340
-  _time: 2025-09-05 06:30:25.918962947 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/judges-action#375 was assigned to @yegorov by @yegor256.
-  issue: 375
-  repository: 799177290
-  tombstone: 2025-09-05 06:38:03.667268850 Z
-  what: issue-was-assigned
-  when: 2024-10-06 13:48:11.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2123974
-  _job: 17485423340
-  _time: 2025-09-05 06:30:28.183712030 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/judges-action#380 was assigned to @yegorov by @yegor256.
-  issue: 380
-  repository: 799177290
-  tombstone: 2025-09-05 06:38:05.225143769 Z
-  what: issue-was-assigned
-  when: 2024-10-11 06:54:18.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2123975
-  _job: 17485423340
-  _time: 2025-09-05 06:30:30.477449206 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/judges-action#397 was assigned to @yegorov by @yegor256.
-  issue: 397
-  repository: 799177290
-  tombstone: 2025-09-05 06:38:03.967396056 Z
-  what: issue-was-assigned
-  when: 2024-11-02 13:55:43.000000000 Z
-  where: github
-  who: 2566462
 - _id: 2123982
   _job: 17485423340
   _time: 2025-09-05 06:33:54.719118059 Z
@@ -142790,902 +142633,6 @@
   repository: 802720676
   what: events-were-scanned
   where: github
-- _id: 2123993
-  _job: 17486517504
-  _time: 2025-09-05 07:19:49.366775682 Z
-  _version: 0.15.8/0.53.6
-  latest: 54287332911
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 2124027
-  _job: 17486517504
-  _time: 2025-09-05 07:20:21.319570284 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#434 has been opened by @yegor256.
-  issue: 434
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:48.616345284 Z
-  what: issue-was-opened
-  when: 2024-12-20 08:53:18.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124028
-  _job: 17486517504
-  _time: 2025-09-05 07:20:21.441152166 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#428 has been opened by @yegor256.
-  issue: 428
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:48.516488602 Z
-  what: issue-was-opened
-  when: 2024-12-20 00:59:03.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124029
-  _job: 17486517504
-  _time: 2025-09-05 07:20:21.534955958 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#421 has been opened by @yegor256.
-  issue: 421
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:48.416495114 Z
-  what: issue-was-opened
-  when: 2024-12-19 12:58:30.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124030
-  _job: 17486517504
-  _time: 2025-09-05 07:20:21.637088153 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#419 has been opened by @yegor256.
-  issue: 419
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:48.317102990 Z
-  what: issue-was-opened
-  when: 2024-12-19 10:08:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124031
-  _job: 17486517504
-  _time: 2025-09-05 07:20:21.718320313 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#416 has been opened by @yegor256.
-  issue: 416
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:48.217808780 Z
-  what: issue-was-opened
-  when: 2024-12-19 06:50:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124032
-  _job: 17486517504
-  _time: 2025-09-05 07:20:21.806708732 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#412 has been opened by @yegor256.
-  issue: 412
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:48.118569609 Z
-  what: issue-was-opened
-  when: 2024-12-18 12:08:21.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124033
-  _job: 17486517504
-  _time: 2025-09-05 07:20:21.888416810 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#397 has been opened by @yegor256.
-  issue: 397
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.814573450 Z
-  what: issue-was-opened
-  when: 2024-10-24 05:24:10.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124034
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.104076387 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#380 has been opened by @suban05.
-  issue: 380
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:56.019911923 Z
-  what: issue-was-opened
-  when: 2024-10-09 12:55:26.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124035
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.181909422 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#375 has been opened by @yegor256.
-  issue: 375
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.502400910 Z
-  what: issue-was-opened
-  when: 2024-10-05 21:05:50.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124036
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.269015130 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#373 has been opened by @yegor256.
-  issue: 373
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.403660839 Z
-  what: issue-was-opened
-  when: 2024-10-04 10:41:16.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124037
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.345099106 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#372 has been opened by @yegorov.
-  issue: 372
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.921675947 Z
-  what: issue-was-opened
-  when: 2024-10-03 19:30:52.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2124038
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.431750327 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#350 has been opened by @yegor256.
-  issue: 350
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:50.561223434 Z
-  what: issue-was-opened
-  when: 2024-09-24 02:43:05.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124039
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.515234244 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#345 has been opened by @yegor256.
-  issue: 345
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.714562668 Z
-  what: issue-was-opened
-  when: 2024-09-23 03:54:44.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124040
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.598448910 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#338 has been opened by @yegor256.
-  issue: 338
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.902025731 Z
-  what: issue-was-opened
-  when: 2024-09-16 13:59:55.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124041
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.684085111 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#325 has been opened by @yegor256.
-  issue: 325
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.705177337 Z
-  what: issue-was-opened
-  when: 2024-09-04 09:35:18.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124042
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.767615215 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#311 has been opened by @yegor256.
-  issue: 311
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:50.454285101 Z
-  what: issue-was-opened
-  when: 2024-08-23 20:54:29.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124043
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.852992001 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#308 has been opened by @suban05.
-  issue: 308
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.823036600 Z
-  what: issue-was-opened
-  when: 2024-08-22 08:44:35.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124044
-  _job: 17486517504
-  _time: 2025-09-05 07:20:22.932865419 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#298 has been opened by @yegor256.
-  issue: 298
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.605662699 Z
-  what: issue-was-opened
-  when: 2024-08-20 13:45:55.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124045
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.021998335 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#276 has been opened by @yegor256.
-  issue: 276
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.294569783 Z
-  what: issue-was-opened
-  when: 2024-08-13 16:36:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124046
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.100151144 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#271 has been opened by @suban05.
-  issue: 271
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.724781492 Z
-  what: issue-was-opened
-  when: 2024-08-13 10:16:37.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124047
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.192067859 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#254 has been opened by @yegor256.
-  issue: 254
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:49.955583655 Z
-  what: issue-was-opened
-  when: 2024-08-10 07:20:39.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124048
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.281676743 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#244 has been opened by @yegorov.
-  issue: 244
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.623863206 Z
-  what: issue-was-opened
-  when: 2024-08-07 20:29:34.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2124049
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.365533856 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#240 has been opened by @yegor256.
-  issue: 240
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.193612811 Z
-  what: issue-was-opened
-  when: 2024-08-07 09:57:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124050
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.450261051 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#239 has been opened by @yegor256.
-  issue: 239
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.302943578 Z
-  what: issue-was-opened
-  when: 2024-08-07 08:38:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124051
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.531043654 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#238 has been opened by @yegor256.
-  issue: 238
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.104130022 Z
-  what: issue-was-opened
-  when: 2024-08-07 08:37:47.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124052
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.616644447 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#229 has been opened by @yegor256.
-  issue: 229
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:49.855424195 Z
-  what: issue-was-opened
-  when: 2024-08-05 07:42:29.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124053
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.694774776 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#227 has been opened by @yegor256.
-  issue: 227
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.203317194 Z
-  what: issue-was-opened
-  when: 2024-08-05 06:08:04.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124054
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.782418398 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#224 has been opened by @yegor256.
-  issue: 224
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.095829662 Z
-  what: issue-was-opened
-  when: 2024-08-03 16:58:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124055
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.858182811 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#220 has been opened by @yegor256.
-  issue: 220
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.805060987 Z
-  what: issue-was-opened
-  when: 2024-08-03 13:19:45.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124056
-  _job: 17486517504
-  _time: 2025-09-05 07:20:23.945605183 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#219 has been opened by @suban05.
-  issue: 219
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.421862429 Z
-  what: issue-was-opened
-  when: 2024-08-03 08:44:29.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124057
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.029464794 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#218 has been opened by @yegor256.
-  issue: 218
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:49.757602731 Z
-  what: issue-was-opened
-  when: 2024-08-02 14:33:03.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124058
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.111723401 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#217 has been opened by @h1alexbel.
-  issue: 217
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:47.489955992 Z
-  what: issue-was-opened
-  when: 2024-08-02 12:44:30.000000000 Z
-  where: github
-  who: 83453843
-- _id: 2124059
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.391091813 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#216 has been opened by @suban05.
-  issue: 216
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.322620822 Z
-  what: issue-was-opened
-  when: 2024-08-02 11:01:24.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124060
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.472979366 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#214 has been opened by @yegor256.
-  issue: 214
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:50.253806818 Z
-  what: issue-was-opened
-  when: 2024-08-02 03:38:48.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124061
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.559885987 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#211 has been opened by @yegor256.
-  issue: 211
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:50.156455567 Z
-  what: issue-was-opened
-  when: 2024-08-01 09:59:48.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124062
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.636988977 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#209 has been opened by @yegor256.
-  issue: 209
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:50.056680381 Z
-  what: issue-was-opened
-  when: 2024-08-01 05:21:49.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124063
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.725671926 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#203 has been opened by @yegor256.
-  issue: 203
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.893351825 Z
-  what: issue-was-opened
-  when: 2024-07-30 06:00:59.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124064
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.804845486 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#202 has been opened by @yegor256.
-  issue: 202
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.792212459 Z
-  what: issue-was-opened
-  when: 2024-07-30 05:58:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124065
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.890946805 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#201 has been opened by @yegor256.
-  issue: 201
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:49.656766053 Z
-  what: issue-was-opened
-  when: 2024-07-30 05:35:24.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124066
-  _job: 17486517504
-  _time: 2025-09-05 07:20:24.978325575 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#200 has been opened by @yegor256.
-  issue: 200
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.689085125 Z
-  what: issue-was-opened
-  when: 2024-07-30 05:34:21.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124067
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.062970511 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#195 has been opened by @yegor256.
-  issue: 195
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.587678001 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:53:14.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124068
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.147289228 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#194 has been opened by @yegor256.
-  issue: 194
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.488830726 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:51:09.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124069
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.230689040 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#193 has been opened by @yegor256.
-  issue: 193
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.390414990 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:38:44.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124070
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.319023323 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#192 has been opened by @yegor256.
-  issue: 192
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.292125299 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:31:30.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124071
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.394865621 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#191 has been opened by @yegor256.
-  issue: 191
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.193066331 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:29:08.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124072
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.482126763 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#190 has been opened by @yegor256.
-  issue: 190
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.093318051 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:27:43.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124073
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.569845595 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#189 has been opened by @yegor256.
-  issue: 189
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:49.556023114 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:25:39.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124074
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.658493751 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#167 has been opened by @yegor256.
-  issue: 167
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.991659756 Z
-  what: issue-was-opened
-  when: 2024-07-28 14:13:58.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124075
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.743680085 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#166 has been opened by @yegor256.
-  issue: 166
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.784495731 Z
-  what: issue-was-opened
-  when: 2024-07-28 14:12:38.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124076
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.825728711 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#158 has been opened by @yegor256.
-  issue: 158
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.373161561 Z
-  what: issue-was-opened
-  when: 2024-07-24 05:13:55.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124077
-  _job: 17486517504
-  _time: 2025-09-05 07:20:25.912761459 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#157 has been opened by @yegor256.
-  issue: 157
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.681941214 Z
-  what: issue-was-opened
-  when: 2024-07-24 05:12:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124078
-  _job: 17486517504
-  _time: 2025-09-05 07:20:26.079137281 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#156 has been opened by @yegor256.
-  issue: 156
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.579149959 Z
-  what: issue-was-opened
-  when: 2024-07-24 05:11:01.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124079
-  _job: 17486517504
-  _time: 2025-09-05 07:20:26.181906048 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#155 has been opened by @yegor256.
-  issue: 155
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.475879813 Z
-  what: issue-was-opened
-  when: 2024-07-24 05:03:21.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124080
-  _job: 17486517504
-  _time: 2025-09-05 07:20:26.281722520 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/judges-action#102 has been opened by @yegor256.
-  issue: 102
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.993461863 Z
-  what: issue-was-opened
-  when: 2024-07-15 12:23:01.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124094
-  _job: 17486517504
-  _time: 2025-09-05 07:22:53.688280866 Z
-  _version: 0.15.8/0.53.6
-  details: Apparently, zerocracy/judges-action#102 has been 'issue-was-closed'.
-  issue: 102
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:52.996215681 Z
-  what: issue-was-closed
-  when: 2024-10-14 03:54:21.000000000 Z
-  where: github
-  who: 8086956
-- _id: 2124099
-  _job: 17486517504
-  _time: 2025-09-05 07:23:00.201868954 Z
-  _version: 0.15.8/0.53.6
-  details: Apparently, zerocracy/judges-action#155 has been 'issue-was-closed'.
-  issue: 155
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.478524455 Z
-  what: issue-was-closed
-  when: 2024-08-16 12:59:59.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124102
-  _job: 17486517504
-  _time: 2025-09-05 07:23:03.427445921 Z
-  _version: 0.15.8/0.53.6
-  details: Apparently, zerocracy/judges-action#156 has been 'issue-was-closed'.
-  issue: 156
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.581997700 Z
-  what: issue-was-closed
-  when: 2024-08-16 12:59:50.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124104
-  _job: 17486517504
-  _time: 2025-09-05 07:23:07.144356537 Z
-  _version: 0.15.8/0.53.6
-  details: Apparently, zerocracy/judges-action#157 has been 'issue-was-closed'.
-  issue: 157
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.684595604 Z
-  what: issue-was-closed
-  when: 2024-08-16 12:59:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124106
-  _job: 17486517504
-  _time: 2025-09-05 07:23:10.106315843 Z
-  _version: 0.15.8/0.53.6
-  details: Apparently, zerocracy/judges-action#158 has been 'issue-was-closed'.
-  issue: 158
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.376047193 Z
-  what: issue-was-closed
-  when: 2024-07-29 04:17:48.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124110
-  _job: 17486517504
-  _time: 2025-09-05 07:23:12.992017242 Z
-  _version: 0.15.8/0.53.6
-  details: Apparently, zerocracy/judges-action#166 has been 'issue-was-closed'.
-  issue: 166
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.787610441 Z
-  what: issue-was-closed
-  when: 2024-08-16 12:59:30.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124112
-  _job: 17486517504
-  _time: 2025-09-05 07:23:15.727576706 Z
-  _version: 0.15.8/0.53.6
-  details: Apparently, zerocracy/judges-action#167 has been 'issue-was-closed'.
-  issue: 167
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:51.994364389 Z
-  what: issue-was-closed
-  when: 2024-08-16 13:42:39.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124135
-  _job: 17486517504
-  _time: 2025-09-05 07:27:43.445290708 Z
-  _version: 0.15.8/0.53.6
-  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#227.
-  issue: 227
-  label: enhancement
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.205602446 Z
-  what: label-was-attached
-  when: 2024-08-23 20:55:34.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124136
-  _job: 17486517504
-  _time: 2025-09-05 07:27:48.382180307 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#229.
-  issue: 229
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:49.858101967 Z
-  what: label-was-attached
-  when: 2024-08-05 07:42:29.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124137
-  _job: 17486517504
-  _time: 2025-09-05 07:27:57.085125826 Z
-  _version: 0.15.8/0.53.6
-  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#238.
-  issue: 238
-  label: enhancement
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.106492517 Z
-  what: label-was-attached
-  when: 2024-08-07 08:37:47.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124139
-  _job: 17486517504
-  _time: 2025-09-05 07:28:01.661276183 Z
-  _version: 0.15.8/0.53.6
-  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#239.
-  issue: 239
-  label: enhancement
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:54.305266683 Z
-  what: label-was-attached
-  when: 2024-08-07 08:38:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124140
-  _job: 17486517504
-  _time: 2025-09-05 07:28:05.453045394 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#240.
-  issue: 240
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.196302091 Z
-  what: label-was-attached
-  when: 2024-08-07 09:57:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124141
-  _job: 17486517504
-  _time: 2025-09-05 07:28:09.111538526 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#244.
-  issue: 244
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.627217933 Z
-  what: label-was-attached
-  when: 2024-08-08 03:48:43.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124145
-  _job: 17486517504
-  _time: 2025-09-05 07:28:28.117034118 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#254.
-  issue: 254
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:49.958210969 Z
-  what: label-was-attached
-  when: 2024-08-10 07:20:51.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124148
-  _job: 17486517504
-  _time: 2025-09-05 07:28:36.164602499 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#271.
-  issue: 271
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.727112444 Z
-  what: label-was-attached
-  when: 2024-08-13 14:58:09.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124149
-  _job: 17486517504
-  _time: 2025-09-05 07:28:40.483534682 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#276.
-  issue: 276
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.297832113 Z
-  what: label-was-attached
-  when: 2024-08-13 16:36:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124150
-  _job: 17486517504
-  _time: 2025-09-05 07:28:43.241664833 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#298.
-  issue: 298
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:53.608269556 Z
-  what: label-was-attached
-  when: 2024-08-20 13:45:55.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124151
-  _job: 17486517504
-  _time: 2025-09-05 07:28:45.102273848 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#308.
-  issue: 308
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:55.825345600 Z
-  what: label-was-attached
-  when: 2024-08-22 09:28:34.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124152
-  _job: 17486517504
-  _time: 2025-09-05 07:28:47.277425179 Z
-  _version: 0.15.8/0.53.6
-  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#311.
-  issue: 311
-  label: bug
-  repository: 799177290
-  tombstone: 2025-09-05 07:36:50.456692922 Z
-  what: label-was-attached
-  when: 2024-08-23 20:54:29.000000000 Z
-  where: github
-  who: 526301
 - _id: 2124153
   _job: 17486517504
   _time: 2025-09-05 07:28:49.173987024 Z
@@ -143894,71 +142841,6 @@
   when: 2024-10-08 23:41:37.000000000 Z
   where: github
   who: 2566462
-- _id: 2124199
-  _job: 17486517504
-  _time: 2025-09-05 07:34:29.474496071 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#46 was assigned to @yegorov by @yegor256.
-  issue: 46
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:51.894965610 Z
-  what: issue-was-assigned
-  when: 2024-07-31 05:00:45.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2124200
-  _job: 17486517504
-  _time: 2025-09-05 07:34:38.442867411 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#61 was assigned to @suban05 by @yegor256.
-  issue: 61
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:48.929469952 Z
-  what: issue-was-assigned
-  when: 2024-08-12 05:28:53.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124201
-  _job: 17486517504
-  _time: 2025-09-05 07:34:39.996832856 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#75 was assigned to @yegor256 by @yegor256.
-  issue: 75
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:53.403588102 Z
-  what: issue-was-assigned
-  when: 2024-08-18 11:29:34.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124202
-  _job: 17486517504
-  _time: 2025-09-05 07:34:41.334932485 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#76 was assigned to @yegor256 by @yegor256.
-  issue: 76
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:53.508686124 Z
-  what: issue-was-assigned
-  when: 2024-08-18 13:08:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124203
-  _job: 17486517504
-  _time: 2025-09-05 07:34:42.808948985 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#78 was assigned to @suban05 by @yegor256.
-  issue: 78
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:50.357939687 Z
-  what: issue-was-assigned
-  when: 2024-08-21 17:28:39.000000000 Z
-  where: github
-  who: 88084038
 - _id: 2124204
   _job: 17486517504
   _time: 2025-09-05 07:34:43.696529405 Z
@@ -143998,19 +142880,6 @@
   when: 2024-07-28 18:46:08.000000000 Z
   where: github
   who: 2566462
-- _id: 2124207
-  _job: 17486517504
-  _time: 2025-09-05 07:34:46.851353750 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#127 was assigned to @yegor256 by @yegor256.
-  issue: 127
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:47.594627849 Z
-  what: issue-was-assigned
-  when: 2024-12-18 13:45:54.000000000 Z
-  where: github
-  who: 526301
 - _id: 2124208
   _job: 17486517504
   _time: 2025-09-05 07:34:47.870970982 Z
@@ -144024,19 +142893,6 @@
   when: 2024-07-26 04:13:57.000000000 Z
   where: github
   who: 2566462
-- _id: 2124209
-  _job: 17486517504
-  _time: 2025-09-05 07:34:49.472902281 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#129 was assigned to @yegor256 by @yegor256.
-  issue: 129
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:48.021121255 Z
-  what: issue-was-assigned
-  when: 2024-12-19 14:38:24.000000000 Z
-  where: github
-  who: 526301
 - _id: 2124210
   _job: 17486517504
   _time: 2025-09-05 07:34:50.376143105 Z
@@ -144050,19 +142906,6 @@
   when: 2024-08-06 00:28:00.000000000 Z
   where: github
   who: 2566462
-- _id: 2124211
-  _job: 17486517504
-  _time: 2025-09-05 07:34:51.024415611 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#130 was assigned to @yegor256 by @yegor256.
-  issue: 130
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:47.915650500 Z
-  what: issue-was-assigned
-  when: 2024-12-20 01:05:18.000000000 Z
-  where: github
-  who: 526301
 - _id: 2124212
   _job: 17486517504
   _time: 2025-09-05 07:34:51.977531055 Z
@@ -144076,19 +142919,6 @@
   when: 2024-08-11 13:18:29.000000000 Z
   where: github
   who: 2566462
-- _id: 2124213
-  _job: 17486517504
-  _time: 2025-09-05 07:34:52.486673366 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#131 was assigned to @yegor256 by @yegor256.
-  issue: 131
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:47.809754424 Z
-  what: issue-was-assigned
-  when: 2024-12-20 06:09:16.000000000 Z
-  where: github
-  who: 526301
 - _id: 2124215
   _job: 17486517504
   _time: 2025-09-05 07:34:53.680076276 Z
@@ -144102,19 +142932,6 @@
   when: 2024-08-25 15:58:09.000000000 Z
   where: github
   who: 88084038
-- _id: 2124216
-  _job: 17486517504
-  _time: 2025-09-05 07:34:54.176706131 Z
-  _version: 0.15.8/0.53.6
-  assigner: 526301
-  details: zerocracy/fbe#132 was assigned to @yegor256 by @yegor256.
-  issue: 132
-  repository: 820463873
-  tombstone: 2025-09-05 07:36:47.702988778 Z
-  what: issue-was-assigned
-  when: 2024-12-20 11:34:33.000000000 Z
-  where: github
-  who: 526301
 - _id: 2124218
   _job: 17486517504
   _time: 2025-09-05 07:34:55.342640906 Z
@@ -144276,21 +143093,121 @@
   when: *1204
   where: github
   who: 29139614
-- _id: 2124235
-  _job: 36195
-  _time: 2025-09-05 07:37:04.825419368 Z
+- _id: 2124249
+  _job: 17487779426
+  _time: 2025-09-05 08:27:27.850853715 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 2124310
+  _job: 36199
+  _time: 2025-09-05 08:38:45.969835588 Z
+  _version: 0.15.8/0.53.6/0.15.33
+  issues:
+  - 37-37
+  - 37-38
+  - 38-38
+  - 46-46
+  - 46-47
+  - 47-47
+  - 61-61
+  - 75-76
+  - 75-75
+  - 76-76
+  - 78-78
+  - 127-127
+  - 129-129
+  - 129-130
+  - 129-131
+  - 129-132
+  - 130-130
+  - 130-131
+  - 131-131
+  - 131-132
+  - 132-132
+  repo: 820463873
+  what: tombstone
+  where: github
+- _id: 2124311
+  _job: 36199
+  _time: 2025-09-05 08:38:47.574559905 Z
+  _version: 0.15.8/0.53.6/0.15.33
+  issues:
+  - 138-138
+  - 141-141
+  - 151-151
+  - 151-152
+  - 152-152
+  repo: 802720676
+  what: tombstone
+  where: github
+- _id: 2124312
+  _job: 36199
+  _time: 2025-09-05 08:38:48.194250524 Z
+  _version: 0.15.8/0.53.6/0.15.33
+  issues: 12-12
+  repo: 840215648
+  what: tombstone
+  where: github
+- _id: 2124313
+  _job: 36199
+  _time: 2025-09-05 08:38:48.457991334 Z
+  _version: 0.15.8/0.53.6/0.15.33
+  issues:
+  - 30-30
+  - 32-32
+  - 32-33
+  - 33-33
+  - 40-40
+  - 40-41
+  - 41-41
+  - 46-46
+  - 51-51
+  repo: 181044958
+  what: tombstone
+  where: github
+- _id: 2124314
+  _job: 36199
+  _time: 2025-09-05 08:38:49.189513890 Z
+  _version: 0.15.8/0.53.6/0.15.33
+  issues:
+  - 98-98
+  - 106-106
+  repo: 798641472
+  what: tombstone
+  where: github
+- _id: 2124315
+  _job: 36199
+  _time: 2025-09-05 08:38:49.531964216 Z
+  _version: 0.15.8/0.53.6/0.15.33
+  issues:
+  - 63-63
+  - 83-83
+  - 83-84
+  - 84-84
+  - 127-127
+  - 153-153
+  - 155-155
+  repo: 799113787
+  what: tombstone
+  where: github
+- _id: 2124316
+  _job: 36199
+  _time: 2025-09-05 08:39:18.399576959 Z
   _version: 0.15.8/0.53.6/0.15.33
   issues:
   - 37-37
   - 102-102
-  - 155-155
   - 155-158
   - 155-156
   - 155-157
-  - 156-156
+  - 155-155
   - 156-157
-  - 156-158
+  - 156-156
   - 157-158
+  - 158-158
   - 166-166
   - 166-167
   - 167-167
@@ -144302,37 +143219,38 @@
   - 189-191
   - 189-190
   - 190-190
-  - 190-193
-  - 190-192
   - 190-191
-  - 191-194
+  - 190-192
+  - 190-193
   - 191-191
-  - 191-193
   - 191-192
-  - 192-194
-  - 192-195
+  - 191-194
+  - 191-193
   - 192-193
+  - 192-195
+  - 192-194
   - 193-193
   - 193-194
   - 193-195
   - 194-194
   - 194-195
   - 195-195
-  - 200-200
   - 200-201
-  - 200-203
+  - 200-200
   - 200-202
-  - 201-202
+  - 200-203
+  - 201-203
   - 202-203
   - 203-203
   - 209-209
   - 211-211
   - 214-214
   - 216-216
-  - 216-219
-  - 216-217
-  - 216-218
   - 216-220
+  - 216-218
+  - 216-217
+  - 216-219
+  - 217-217
   - 217-220
   - 218-218
   - 218-220
@@ -144374,266 +143292,49 @@
   repo: 799177290
   what: tombstone
   where: github
-- _id: 2124236
-  _job: 36195
-  _time: 2025-09-05 07:37:07.375190608 Z
-  _version: 0.15.8/0.53.6/0.15.33
-  issues:
-  - 98-98
-  - 106-106
-  repo: 798641472
-  what: tombstone
-  where: github
-- _id: 2124237
-  _job: 36195
-  _time: 2025-09-05 07:37:07.968040461 Z
-  _version: 0.15.8/0.53.6/0.15.33
-  issues: 12-12
-  repo: 840215648
-  what: tombstone
-  where: github
-- _id: 2124238
-  _job: 36195
-  _time: 2025-09-05 07:37:08.387580573 Z
-  _version: 0.15.8/0.53.6/0.15.33
-  issues:
-  - 138-138
-  - 141-141
-  - 151-151
-  - 151-152
-  - 152-152
-  repo: 802720676
-  what: tombstone
-  where: github
-- _id: 2124239
-  _job: 36195
-  _time: 2025-09-05 07:37:09.487003372 Z
-  _version: 0.15.8/0.53.6/0.15.33
-  issues:
-  - 30-30
-  - 32-32
-  - 32-33
-  - 33-33
-  - 40-40
-  - 40-41
-  - 41-41
-  - 46-46
-  - 51-51
-  repo: 181044958
-  what: tombstone
-  where: github
-- _id: 2124240
-  _job: 36195
-  _time: 2025-09-05 07:37:10.471735114 Z
-  _version: 0.15.8/0.53.6/0.15.33
-  issues:
-  - 63-63
-  - 83-83
-  - 83-84
-  - 84-84
-  - 127-127
-  - 153-153
-  - 155-155
-  repo: 799113787
-  what: tombstone
-  where: github
-- _id: 2124241
-  _job: 36195
-  _time: 2025-09-05 07:37:11.850470354 Z
-  _version: 0.15.8/0.53.6/0.15.33
-  issues:
-  - 37-37
-  - 37-38
-  - 38-38
-  - 46-46
-  - 46-47
-  - 47-47
-  - 61-61
-  - 75-76
-  - 75-75
-  - 76-76
-  - 78-78
-  - 127-127
-  - 129-129
-  - 129-130
-  - 129-131
-  - 129-132
-  - 130-130
-  - 130-131
-  - 131-131
-  - 131-132
-  - 132-132
-  repo: 820463873
-  what: tombstone
-  where: github
-- _id: 2124242
-  _job: 17487779426
-  _time: 2025-09-05 08:24:48.006064735 Z
+- _id: 2124317
+  _job: 17489128985
+  _time: 2025-09-05 09:20:26.063367468 Z
   _version: 0.15.8/0.53.6
-  latest: 0
-  repository: 799113787
-  what: types-were-scanned
-  where: github
-- _id: 2124243
-  _job: 17487779426
-  _time: 2025-09-05 08:24:48.084286546 Z
-  _version: 0.15.8/0.53.6
-  latest: 660
+  latest: 54289552901
   repository: 799177290
-  what: types-were-scanned
+  what: events-were-scanned
   where: github
-- _id: 2124244
-  _job: 17487779426
-  _time: 2025-09-05 08:24:48.166173937 Z
+- _id: 2124318
+  _job: 17489128985
+  _time: 2025-09-05 09:22:55.406157685 Z
   _version: 0.15.8/0.53.6
   latest: 0
-  repository: 181044958
-  what: types-were-scanned
-  where: github
-- _id: 2124245
-  _job: 17487779426
-  _time: 2025-09-05 08:24:48.243969704 Z
-  _version: 0.15.8/0.53.6
-  latest: 80
-  repository: 798641472
-  what: types-were-scanned
-  where: github
-- _id: 2124246
-  _job: 17487779426
-  _time: 2025-09-05 08:24:48.324593080 Z
-  _version: 0.15.8/0.53.6
-  latest: 194
-  repository: 802720676
-  what: types-were-scanned
-  where: github
-- _id: 2124247
-  _job: 17487779426
-  _time: 2025-09-05 08:24:48.403781011 Z
-  _version: 0.15.8/0.53.6
-  latest: 163
-  repository: 820463873
-  what: types-were-scanned
-  where: github
-- _id: 2124248
-  _job: 17487779426
-  _time: 2025-09-05 08:27:27.773262014 Z
-  _version: 0.15.8/0.53.6
-  latest: 909
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
-- _id: 2124249
-  _job: 17487779426
-  _time: 2025-09-05 08:27:27.850853715 Z
-  _version: 0.15.8/0.53.6
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 2124250
-  _job: 17487779426
-  _time: 2025-09-05 08:27:27.932123412 Z
-  _version: 0.15.8/0.53.6
-  latest: 175
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 2124251
-  _job: 17487779426
-  _time: 2025-09-05 08:27:28.012703575 Z
-  _version: 0.15.8/0.53.6
-  latest: 103
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 2124252
-  _job: 17487779426
-  _time: 2025-09-05 08:27:28.092715381 Z
-  _version: 0.15.8/0.53.6
-  latest: 90
   repository: 798641472
   what: labels-were-scanned
   where: github
-- _id: 2124253
-  _job: 17487779426
-  _time: 2025-09-05 08:28:58.637341318 Z
+- _id: 2124319
+  _job: 17489128985
+  _time: 2025-09-05 09:22:55.490521116 Z
   _version: 0.15.8/0.53.6
-  branch: renovate/rack-2.x-lockfile
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  hoc: 2
-  issue: 220
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 2124320
+  _job: 17489128985
+  _time: 2025-09-05 09:22:55.568034093 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
   repository: 181044958
-  stale: who
-  what: pull-was-merged
+  what: labels-were-scanned
   where: github
-- _id: 2124254
-  _job: 17487779426
-  _time: 2025-09-05 08:34:18.920044911 Z
+- _id: 2124321
+  _job: 17489128985
+  _time: 2025-09-05 09:22:55.652329448 Z
   _version: 0.15.8/0.53.6
-  details: The issue zerocracy/pages-action#152 has been opened by @yegor256.
-  is_human: 1
-  issue: 152
-  repository: 802720676
-  what: issue-was-opened
-  when: 2024-10-10 06:50:32.000000000 Z
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
   where: github
-  who: 526301
-- _id: 2124255
-  _job: 17487779426
-  _time: 2025-09-05 08:34:19.150823127 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/pages-action#151 has been opened by @suban05.
-  is_human: 1
-  issue: 151
-  repository: 802720676
-  what: issue-was-opened
-  when: 2024-10-09 16:36:08.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124256
-  _job: 17487779426
-  _time: 2025-09-05 08:34:19.365176181 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/pages-action#141 has been opened by @yegor256.
-  is_human: 1
-  issue: 141
-  repository: 802720676
-  what: issue-was-opened
-  when: 2024-09-26 08:56:12.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124257
-  _job: 17487779426
-  _time: 2025-09-05 08:34:19.451595681 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/pages-action#138 has been opened by @suban05.
-  is_human: 1
-  issue: 138
-  repository: 802720676
-  what: issue-was-opened
-  when: 2024-09-24 18:51:36.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2124258
-  _job: 17487779426
-  _time: 2025-09-05 08:34:21.047741065 Z
-  _version: 0.15.8/0.53.6
-  details: The issue zerocracy/baza.rb#12 has been opened by @tank-bohr.
-  is_human: 1
-  issue: 12
-  repository: 840215648
-  what: issue-was-opened
-  when: 2024-08-17 19:48:46.000000000 Z
-  where: github
-  who: 1646020
-- _id: 2124259
-  _job: 17487779426
-  _time: 2025-09-05 08:34:23.760241754 Z
+- _id: 2124322
+  _job: 17489128985
+  _time: 2025-09-05 09:24:12.619003052 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/0rsk#51 has been opened by @apocryphe.
   is_human: 1
@@ -144643,9 +143344,9 @@
   when: 2019-07-19 13:12:25.000000000 Z
   where: github
   who: 50617301
-- _id: 2124260
-  _job: 17487779426
-  _time: 2025-09-05 08:34:23.857057561 Z
+- _id: 2124323
+  _job: 17489128985
+  _time: 2025-09-05 09:24:12.841554838 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/0rsk#46 has been opened by @apocryphe.
   is_human: 1
@@ -144655,9 +143356,9 @@
   when: 2019-07-05 09:48:05.000000000 Z
   where: github
   who: 50617301
-- _id: 2124261
-  _job: 17487779426
-  _time: 2025-09-05 08:34:23.942785962 Z
+- _id: 2124324
+  _job: 17489128985
+  _time: 2025-09-05 09:24:12.915988653 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/0rsk#41 has been opened by @agorlov.
   is_human: 1
@@ -144667,9 +143368,9 @@
   when: 2019-05-26 10:39:18.000000000 Z
   where: github
   who: 2485728
-- _id: 2124262
-  _job: 17487779426
-  _time: 2025-09-05 08:34:24.035034064 Z
+- _id: 2124325
+  _job: 17489128985
+  _time: 2025-09-05 09:24:13.119631330 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/0rsk#40 has been opened by @g4s8.
   is_human: 1
@@ -144679,9 +143380,9 @@
   when: 2019-05-21 10:04:52.000000000 Z
   where: github
   who: 1524988
-- _id: 2124263
-  _job: 17487779426
-  _time: 2025-09-05 08:34:24.128267027 Z
+- _id: 2124326
+  _job: 17489128985
+  _time: 2025-09-05 09:24:13.323412640 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/0rsk#33 has been opened by @smallcreep.
   is_human: 1
@@ -144691,9 +143392,9 @@
   when: 2019-05-15 08:57:37.000000000 Z
   where: github
   who: 5305846
-- _id: 2124264
-  _job: 17487779426
-  _time: 2025-09-05 08:34:24.207983185 Z
+- _id: 2124327
+  _job: 17489128985
+  _time: 2025-09-05 09:24:13.506452186 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/0rsk#32 has been opened by @amihaiemil.
   is_human: 1
@@ -144703,9 +143404,9 @@
   when: 2019-05-14 12:40:06.000000000 Z
   where: github
   who: 6305156
-- _id: 2124265
-  _job: 17487779426
-  _time: 2025-09-05 08:34:24.295705171 Z
+- _id: 2124328
+  _job: 17489128985
+  _time: 2025-09-05 09:24:13.708733319 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/0rsk#30 has been opened by @g4s8.
   is_human: 1
@@ -144715,9 +143416,9 @@
   when: 2019-05-14 09:11:01.000000000 Z
   where: github
   who: 1524988
-- _id: 2124266
-  _job: 17487779426
-  _time: 2025-09-05 08:34:27.397801606 Z
+- _id: 2124329
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.059866660 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#132 has been opened by @yegor256.
   is_human: 1
@@ -144727,9 +143428,9 @@
   when: 2024-12-20 11:34:30.000000000 Z
   where: github
   who: 526301
-- _id: 2124267
-  _job: 17487779426
-  _time: 2025-09-05 08:34:27.566693404 Z
+- _id: 2124330
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.263693423 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#131 has been opened by @yegor256.
   is_human: 1
@@ -144739,9 +143440,9 @@
   when: 2024-12-20 06:09:16.000000000 Z
   where: github
   who: 526301
-- _id: 2124268
-  _job: 17487779426
-  _time: 2025-09-05 08:34:27.660686300 Z
+- _id: 2124331
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.345767942 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#130 has been opened by @yegor256.
   is_human: 1
@@ -144751,9 +143452,9 @@
   when: 2024-12-20 01:05:18.000000000 Z
   where: github
   who: 526301
-- _id: 2124269
-  _job: 17487779426
-  _time: 2025-09-05 08:34:27.748553734 Z
+- _id: 2124332
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.441938288 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#129 has been opened by @yegor256.
   is_human: 1
@@ -144763,9 +143464,9 @@
   when: 2024-12-19 14:38:21.000000000 Z
   where: github
   who: 526301
-- _id: 2124270
-  _job: 17487779426
-  _time: 2025-09-05 08:34:27.830316146 Z
+- _id: 2124333
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.518360794 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#127 has been opened by @yegor256.
   is_human: 1
@@ -144775,9 +143476,9 @@
   when: 2024-12-18 13:45:54.000000000 Z
   where: github
   who: 526301
-- _id: 2124271
-  _job: 17487779426
-  _time: 2025-09-05 08:34:27.903781678 Z
+- _id: 2124334
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.617666047 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#78 has been opened by @yegor256.
   is_human: 1
@@ -144787,9 +143488,9 @@
   when: 2024-08-21 17:26:06.000000000 Z
   where: github
   who: 526301
-- _id: 2124272
-  _job: 17487779426
-  _time: 2025-09-05 08:34:27.995154142 Z
+- _id: 2124335
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.700154720 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#76 has been opened by @yegor256.
   is_human: 1
@@ -144799,9 +143500,9 @@
   when: 2024-08-18 13:08:42.000000000 Z
   where: github
   who: 526301
-- _id: 2124273
-  _job: 17487779426
-  _time: 2025-09-05 08:34:28.066022374 Z
+- _id: 2124336
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.778679102 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#75 has been opened by @yegor256.
   is_human: 1
@@ -144811,9 +143512,9 @@
   when: 2024-08-18 11:29:33.000000000 Z
   where: github
   who: 526301
-- _id: 2124274
-  _job: 17487779426
-  _time: 2025-09-05 08:34:28.154798909 Z
+- _id: 2124337
+  _job: 17489128985
+  _time: 2025-09-05 09:24:16.867820060 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#61 has been opened by @suban05.
   is_human: 1
@@ -144823,9 +143524,9 @@
   when: 2024-08-12 04:37:27.000000000 Z
   where: github
   who: 88084038
-- _id: 2124275
-  _job: 17487779426
-  _time: 2025-09-05 08:34:28.235271525 Z
+- _id: 2124338
+  _job: 17489128985
+  _time: 2025-09-05 09:24:17.063428111 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#47 has been opened by @suban05.
   is_human: 1
@@ -144835,9 +143536,9 @@
   when: 2024-07-30 13:51:41.000000000 Z
   where: github
   who: 88084038
-- _id: 2124276
-  _job: 17487779426
-  _time: 2025-09-05 08:34:28.315871121 Z
+- _id: 2124339
+  _job: 17489128985
+  _time: 2025-09-05 09:24:17.151356501 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#46 has been opened by @yegor256.
   is_human: 1
@@ -144847,9 +143548,9 @@
   when: 2024-07-30 05:08:03.000000000 Z
   where: github
   who: 526301
-- _id: 2124277
-  _job: 17487779426
-  _time: 2025-09-05 08:34:28.397243845 Z
+- _id: 2124340
+  _job: 17489128985
+  _time: 2025-09-05 09:24:17.236933777 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#38 has been opened by @yegor256.
   is_human: 1
@@ -144859,9 +143560,9 @@
   when: 2024-07-26 06:51:37.000000000 Z
   where: github
   who: 526301
-- _id: 2124278
-  _job: 17487779426
-  _time: 2025-09-05 08:34:28.475029154 Z
+- _id: 2124341
+  _job: 17489128985
+  _time: 2025-09-05 09:24:17.313521423 Z
   _version: 0.15.8/0.53.6
   details: The issue zerocracy/fbe#37 has been opened by @yegor256.
   is_human: 1
@@ -144871,33 +143572,9 @@
   when: 2024-07-26 05:35:31.000000000 Z
   where: github
   who: 526301
-- _id: 2124279
-  _job: 17487779426
-  _time: 2025-09-05 08:34:32.747578944 Z
-  _version: 0.15.8/0.53.6
-  details: The issue yegor256/factbase#106 has been opened by @tank-bohr.
-  is_human: 1
-  issue: 106
-  repository: 798641472
-  what: issue-was-opened
-  when: 2024-07-24 07:07:38.000000000 Z
-  where: github
-  who: 1646020
-- _id: 2124280
-  _job: 17487779426
-  _time: 2025-09-05 08:34:32.839580588 Z
-  _version: 0.15.8/0.53.6
-  details: The issue yegor256/factbase#98 has been opened by @yegor256.
-  is_human: 1
-  issue: 98
-  repository: 798641472
-  what: issue-was-opened
-  when: 2024-07-17 04:28:47.000000000 Z
-  where: github
-  who: 526301
-- _id: 2124281
-  _job: 17487779426
-  _time: 2025-09-05 08:34:40.770833593 Z
+- _id: 2124342
+  _job: 17489128985
+  _time: 2025-09-05 09:24:20.571247827 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/judges#155 has been opened by @yegor256.
   is_human: 1
@@ -144907,9 +143584,9 @@
   when: 2024-12-19 17:39:52.000000000 Z
   where: github
   who: 526301
-- _id: 2124282
-  _job: 17487779426
-  _time: 2025-09-05 08:34:40.861033831 Z
+- _id: 2124343
+  _job: 17489128985
+  _time: 2025-09-05 09:24:20.664302911 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/judges#153 has been opened by @yegor256.
   is_human: 1
@@ -144919,9 +143596,9 @@
   when: 2024-12-19 08:24:16.000000000 Z
   where: github
   who: 526301
-- _id: 2124283
-  _job: 17487779426
-  _time: 2025-09-05 08:34:40.980073021 Z
+- _id: 2124344
+  _job: 17489128985
+  _time: 2025-09-05 09:24:20.768763985 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/judges#127 has been opened by @yegorov.
   is_human: 1
@@ -144931,9 +143608,9 @@
   when: 2024-09-02 19:54:20.000000000 Z
   where: github
   who: 2566462
-- _id: 2124284
-  _job: 17487779426
-  _time: 2025-09-05 08:34:41.240089926 Z
+- _id: 2124345
+  _job: 17489128985
+  _time: 2025-09-05 09:24:21.021354244 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/judges#84 has been opened by @yegor256.
   is_human: 1
@@ -144943,9 +143620,9 @@
   when: 2024-07-14 11:25:50.000000000 Z
   where: github
   who: 526301
-- _id: 2124285
-  _job: 17487779426
-  _time: 2025-09-05 08:34:41.344300523 Z
+- _id: 2124346
+  _job: 17489128985
+  _time: 2025-09-05 09:24:21.125662841 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/judges#83 has been opened by @yegor256.
   is_human: 1
@@ -144955,9 +143632,9 @@
   when: 2024-07-14 11:24:48.000000000 Z
   where: github
   who: 526301
-- _id: 2124286
-  _job: 17487779426
-  _time: 2025-09-05 08:34:41.568262930 Z
+- _id: 2124347
+  _job: 17489128985
+  _time: 2025-09-05 09:24:21.226428686 Z
   _version: 0.15.8/0.53.6
   details: The issue yegor256/judges#63 has been opened by @davvd.
   is_human: 1
@@ -144967,219 +143644,2259 @@
   when: 2024-06-24 15:18:32.000000000 Z
   where: github
   who: 6305016
-- _id: 2124287
-  _job: 17487779426
-  _time: 2025-09-05 08:34:41.922316811 Z
+- _id: 2124348
+  _job: 17489128985
+  _time: 2025-09-05 09:24:23.759028675 Z
   _version: 0.15.8/0.53.6
-  latest: 3
+  details: The issue yegor256/factbase#302 has been opened by @yegor256.
+  is_human: 1
+  issue: 302
+  repository: 798641472
+  what: issue-was-opened
+  when: 2025-09-05 08:44:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124349
+  _job: 17489128985
+  _time: 2025-09-05 09:24:23.974221230 Z
+  _version: 0.15.8/0.53.6
+  details: The issue yegor256/factbase#106 has been opened by @tank-bohr.
+  is_human: 1
+  issue: 106
+  repository: 798641472
+  what: issue-was-opened
+  when: 2024-07-24 07:07:38.000000000 Z
+  where: github
+  who: 1646020
+- _id: 2124350
+  _job: 17489128985
+  _time: 2025-09-05 09:24:24.216621474 Z
+  _version: 0.15.8/0.53.6
+  details: The issue yegor256/factbase#98 has been opened by @yegor256.
+  is_human: 1
+  issue: 98
+  repository: 798641472
+  what: issue-was-opened
+  when: 2024-07-17 04:28:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124351
+  _job: 17489128985
+  _time: 2025-09-05 09:24:25.770414155 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/baza.rb#12 has been opened by @tank-bohr.
+  is_human: 1
+  issue: 12
+  repository: 840215648
+  what: issue-was-opened
+  when: 2024-08-17 19:48:46.000000000 Z
+  where: github
+  who: 1646020
+- _id: 2124352
+  _job: 17489128985
+  _time: 2025-09-05 09:24:30.463171942 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#434 has been opened by @yegor256.
+  is_human: 1
+  issue: 434
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-20 08:53:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124353
+  _job: 17489128985
+  _time: 2025-09-05 09:24:30.571071507 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#428 has been opened by @yegor256.
+  is_human: 1
+  issue: 428
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-20 00:59:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124354
+  _job: 17489128985
+  _time: 2025-09-05 09:24:30.728054704 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#421 has been opened by @yegor256.
+  is_human: 1
+  issue: 421
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-19 12:58:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124355
+  _job: 17489128985
+  _time: 2025-09-05 09:24:30.815663789 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#419 has been opened by @yegor256.
+  is_human: 1
+  issue: 419
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-19 10:08:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124356
+  _job: 17489128985
+  _time: 2025-09-05 09:24:30.901994566 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#416 has been opened by @yegor256.
+  is_human: 1
+  issue: 416
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-19 06:50:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124357
+  _job: 17489128985
+  _time: 2025-09-05 09:24:30.981876262 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#412 has been opened by @yegor256.
+  is_human: 1
+  issue: 412
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-18 12:08:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124358
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.156487764 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#397 has been opened by @yegor256.
+  is_human: 1
+  issue: 397
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-10-24 05:24:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124359
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.233664626 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#380 has been opened by @suban05.
+  is_human: 1
+  issue: 380
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-10-09 12:55:26.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124360
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.318633998 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#375 has been opened by @yegor256.
+  is_human: 1
+  issue: 375
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-10-05 21:05:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124361
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.401699038 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#373 has been opened by @yegor256.
+  is_human: 1
+  issue: 373
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-10-04 10:41:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124362
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.483993511 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#372 has been opened by @yegorov.
+  is_human: 1
+  issue: 372
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-10-03 19:30:52.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124363
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.568428130 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#350 has been opened by @yegor256.
+  is_human: 1
+  issue: 350
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-09-24 02:43:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124364
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.649277803 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#345 has been opened by @yegor256.
+  is_human: 1
+  issue: 345
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-09-23 03:54:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124365
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.737473369 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#338 has been opened by @yegor256.
+  is_human: 1
+  issue: 338
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-09-16 13:59:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124366
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.821151318 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#325 has been opened by @yegor256.
+  is_human: 1
+  issue: 325
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-09-04 09:35:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124367
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.906402068 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#311 has been opened by @yegor256.
+  is_human: 1
+  issue: 311
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-23 20:54:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124368
+  _job: 17489128985
+  _time: 2025-09-05 09:24:31.989567957 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#308 has been opened by @suban05.
+  is_human: 1
+  issue: 308
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-22 08:44:35.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124369
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.070171899 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#298 has been opened by @yegor256.
+  is_human: 1
+  issue: 298
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-20 13:45:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124370
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.158565265 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#276 has been opened by @yegor256.
+  is_human: 1
+  issue: 276
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-13 16:36:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124371
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.243785248 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#271 has been opened by @suban05.
+  is_human: 1
+  issue: 271
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-13 10:16:37.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124372
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.330483309 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#254 has been opened by @yegor256.
+  is_human: 1
+  issue: 254
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-10 07:20:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124373
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.419684749 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#244 has been opened by @yegorov.
+  is_human: 1
+  issue: 244
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-07 20:29:34.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124374
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.498159248 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#240 has been opened by @yegor256.
+  is_human: 1
+  issue: 240
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-07 09:57:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124375
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.585720704 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#239 has been opened by @yegor256.
+  is_human: 1
+  issue: 239
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-07 08:38:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124376
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.671799377 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#238 has been opened by @yegor256.
+  is_human: 1
+  issue: 238
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-07 08:37:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124377
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.754812019 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#229 has been opened by @yegor256.
+  is_human: 1
+  issue: 229
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-05 07:42:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124378
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.840611446 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#227 has been opened by @yegor256.
+  is_human: 1
+  issue: 227
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-05 06:08:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124379
+  _job: 17489128985
+  _time: 2025-09-05 09:24:32.920772216 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#224 has been opened by @yegor256.
+  is_human: 1
+  issue: 224
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-03 16:58:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124380
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.006755048 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#220 has been opened by @yegor256.
+  is_human: 1
+  issue: 220
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-03 13:19:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124381
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.092316160 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#219 has been opened by @suban05.
+  is_human: 1
+  issue: 219
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-03 08:44:29.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124382
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.175755472 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#218 has been opened by @yegor256.
+  is_human: 1
+  issue: 218
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-02 14:33:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124383
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.257383696 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#217 has been opened by @h1alexbel.
+  is_human: 1
+  issue: 217
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-02 12:44:30.000000000 Z
+  where: github
+  who: 83453843
+- _id: 2124384
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.438485664 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#216 has been opened by @suban05.
+  is_human: 1
+  issue: 216
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-02 11:01:24.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124385
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.518616578 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#214 has been opened by @yegor256.
+  is_human: 1
+  issue: 214
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-02 03:38:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124386
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.606218459 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#211 has been opened by @yegor256.
+  is_human: 1
+  issue: 211
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-01 09:59:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124387
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.693451890 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#209 has been opened by @yegor256.
+  is_human: 1
+  issue: 209
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-01 05:21:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124388
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.774978953 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#203 has been opened by @yegor256.
+  is_human: 1
+  issue: 203
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 06:00:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124389
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.859375781 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#202 has been opened by @yegor256.
+  is_human: 1
+  issue: 202
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 05:58:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124390
+  _job: 17489128985
+  _time: 2025-09-05 09:24:33.943071574 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#201 has been opened by @yegor256.
+  is_human: 1
+  issue: 201
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 05:35:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124391
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.024363439 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#200 has been opened by @yegor256.
+  is_human: 1
+  issue: 200
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 05:34:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124392
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.112094522 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#195 has been opened by @yegor256.
+  is_human: 1
+  issue: 195
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 01:53:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124393
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.197272866 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#194 has been opened by @yegor256.
+  is_human: 1
+  issue: 194
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 01:51:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124394
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.278160229 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#193 has been opened by @yegor256.
+  is_human: 1
+  issue: 193
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 01:38:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124395
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.362614265 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#192 has been opened by @yegor256.
+  is_human: 1
+  issue: 192
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 01:31:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124396
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.446551831 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#191 has been opened by @yegor256.
+  is_human: 1
+  issue: 191
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 01:29:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124397
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.527056086 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#190 has been opened by @yegor256.
+  is_human: 1
+  issue: 190
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 01:27:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124398
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.614680329 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#189 has been opened by @yegor256.
+  is_human: 1
+  issue: 189
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-30 01:25:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124399
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.707815653 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#167 has been opened by @yegor256.
+  is_human: 1
+  issue: 167
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-28 14:13:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124400
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.792147499 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#166 has been opened by @yegor256.
+  is_human: 1
+  issue: 166
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-28 14:12:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124401
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.879579071 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#158 has been opened by @yegor256.
+  is_human: 1
+  issue: 158
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-24 05:13:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124402
+  _job: 17489128985
+  _time: 2025-09-05 09:24:34.966156982 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#157 has been opened by @yegor256.
+  is_human: 1
+  issue: 157
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-24 05:12:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124403
+  _job: 17489128985
+  _time: 2025-09-05 09:24:35.050780552 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#156 has been opened by @yegor256.
+  is_human: 1
+  issue: 156
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-24 05:11:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124404
+  _job: 17489128985
+  _time: 2025-09-05 09:24:35.130309988 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#155 has been opened by @yegor256.
+  is_human: 1
+  issue: 155
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-24 05:03:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124405
+  _job: 17489128985
+  _time: 2025-09-05 09:24:35.227449053 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/judges-action#102 has been opened by @yegor256.
+  is_human: 1
+  issue: 102
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-07-15 12:23:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124406
+  _job: 17489128985
+  _time: 2025-09-05 09:24:36.844563756 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/pages-action#152 has been opened by @yegor256.
+  is_human: 1
+  issue: 152
+  repository: 802720676
+  what: issue-was-opened
+  when: 2024-10-10 06:50:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124407
+  _job: 17489128985
+  _time: 2025-09-05 09:24:37.045254862 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/pages-action#151 has been opened by @suban05.
+  is_human: 1
+  issue: 151
+  repository: 802720676
+  what: issue-was-opened
+  when: 2024-10-09 16:36:08.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124408
+  _job: 17489128985
+  _time: 2025-09-05 09:24:37.145007942 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/pages-action#141 has been opened by @yegor256.
+  is_human: 1
+  issue: 141
+  repository: 802720676
+  what: issue-was-opened
+  when: 2024-09-26 08:56:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124409
+  _job: 17489128985
+  _time: 2025-09-05 09:24:37.241979801 Z
+  _version: 0.15.8/0.53.6
+  details: The issue zerocracy/pages-action#138 has been opened by @suban05.
+  is_human: 1
+  issue: 138
+  repository: 802720676
+  what: issue-was-opened
+  when: 2024-09-24 18:51:36.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124410
+  _job: 17489128985
+  _time: 2025-09-05 09:24:37.523365707 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 2124288
-  _job: 17487779426
-  _time: 2025-09-05 08:34:46.600942156 Z
+- _id: 2124411
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.410466359 Z
   _version: 0.15.8/0.53.6
-  latest: 104
-  repository: 840215648
-  what: min-pull-was-found
-  where: github
-- _id: 2124289
-  _job: 17487779426
-  _time: 2025-09-05 08:34:46.673118415 Z
-  _version: 0.15.8/0.53.6
-  latest: 517
-  repository: 799177290
-  what: min-pull-was-found
-  where: github
-- _id: 2124290
-  _job: 17487779426
-  _time: 2025-09-05 08:34:46.758823107 Z
-  _version: 0.15.8/0.53.6
-  latest: 78
-  repository: 849726475
-  what: min-pull-was-found
-  where: github
-- _id: 2124291
-  _job: 17487779426
-  _time: 2025-09-05 08:34:46.840920338 Z
-  _version: 0.15.8/0.53.6
-  latest: 283
-  repository: 799113787
-  what: min-pull-was-found
-  where: github
-- _id: 2124292
-  _job: 17487779426
-  _time: 2025-09-05 08:34:46.916688127 Z
-  _version: 0.15.8/0.53.6
-  latest: 11
+  latest: 12
   repository: 974194993
   what: min-pull-was-found
   where: github
-- _id: 2124293
-  _job: 17487779426
-  _time: 2025-09-05 08:34:46.985415870 Z
+- _id: 2124412
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.507658610 Z
   _version: 0.15.8/0.53.6
-  latest: 222
-  repository: 181044958
+  latest: 284
+  repository: 799113787
   what: min-pull-was-found
   where: github
-- _id: 2124294
-  _job: 17487779426
-  _time: 2025-09-05 08:34:47.065951369 Z
+- _id: 2124413
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.587267280 Z
   _version: 0.15.8/0.53.6
-  latest: 162
+  latest: 105
+  repository: 840215648
+  what: min-pull-was-found
+  where: github
+- _id: 2124414
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.666658701 Z
+  _version: 0.15.8/0.53.6
+  latest: 519
+  repository: 799177290
+  what: min-pull-was-found
+  where: github
+- _id: 2124415
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.745459777 Z
+  _version: 0.15.8/0.53.6
+  latest: 79
+  repository: 849726475
+  what: min-pull-was-found
+  where: github
+- _id: 2124416
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.824988627 Z
+  _version: 0.15.8/0.53.6
+  latest: 163
   repository: 798641472
   what: min-pull-was-found
   where: github
-- _id: 2124295
-  _job: 17487779426
-  _time: 2025-09-05 08:34:47.141807373 Z
+- _id: 2124417
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.904638594 Z
   _version: 0.15.8/0.53.6
-  latest: 345
-  repository: 802720676
+  latest: 223
+  repository: 181044958
   what: min-pull-was-found
   where: github
-- _id: 2124296
-  _job: 17487779426
-  _time: 2025-09-05 08:34:47.216514576 Z
+- _id: 2124418
+  _job: 17489128985
+  _time: 2025-09-05 09:24:41.985442508 Z
   _version: 0.15.8/0.53.6
-  latest: 138
+  latest: 139
   repository: 820463873
   what: min-pull-was-found
   where: github
-- _id: 2124297
-  _job: 17487779426
-  _time: 2025-09-05 08:36:03.397769304 Z
+- _id: 2124419
+  _job: 17489128985
+  _time: 2025-09-05 09:24:42.065342554 Z
+  _version: 0.15.8/0.53.6
+  latest: 346
+  repository: 802720676
+  what: min-pull-was-found
+  where: github
+- _id: 2124420
+  _job: 17489128985
+  _time: 2025-09-05 09:28:14.546120780 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
+  repository: 802720676
+  what: types-were-scanned
+  where: github
+- _id: 2124421
+  _job: 17489128985
+  _time: 2025-09-05 09:28:14.634417580 Z
+  _version: 0.15.8/0.53.6
+  latest: 79
+  repository: 799113787
+  what: types-were-scanned
+  where: github
+- _id: 2124422
+  _job: 17489128985
+  _time: 2025-09-05 09:28:14.710458902 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
+  repository: 798641472
+  what: types-were-scanned
+  where: github
+- _id: 2124423
+  _job: 17489128985
+  _time: 2025-09-05 09:28:14.790505149 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
+  repository: 820463873
+  what: types-were-scanned
+  where: github
+- _id: 2124424
+  _job: 17489128985
+  _time: 2025-09-05 09:28:14.872775705 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
+  repository: 799177290
+  what: types-were-scanned
+  where: github
+- _id: 2124425
+  _job: 17489128985
+  _time: 2025-09-05 09:28:14.949502172 Z
+  _version: 0.15.8/0.53.6
+  latest: 141
+  repository: 181044958
+  what: types-were-scanned
+  where: github
+- _id: 2124426
+  _job: 17489128985
+  _time: 2025-09-05 09:28:26.848571996 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: yegor256/judges#83 was assigned to @tank-bohr by @yegor256.
+  issue: 83
+  repository: 799113787
+  what: issue-was-assigned
+  when: 2024-07-24 08:50:27.000000000 Z
+  where: github
+  who: 1646020
+- _id: 2124427
+  _job: 17489128985
+  _time: 2025-09-05 09:28:29.868915272 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: yegor256/judges#84 was assigned to @tank-bohr by @yegor256.
+  issue: 84
+  repository: 799113787
+  what: issue-was-assigned
+  when: 2024-07-27 05:32:53.000000000 Z
+  where: github
+  who: 1646020
+- _id: 2124428
+  _job: 17489128985
+  _time: 2025-09-05 09:28:44.222099460 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: yegor256/factbase#98 was assigned to @suban05 by @yegor256.
+  issue: 98
+  repository: 798641472
+  what: issue-was-assigned
+  when: 2024-08-20 16:40:10.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124429
+  _job: 17489128985
+  _time: 2025-09-05 09:28:56.896817934 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: yegor256/judges#127 was assigned to @yegorov by @yegor256.
+  issue: 127
+  repository: 799113787
+  what: issue-was-assigned
+  when: 2024-09-03 08:52:33.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124430
+  _job: 17489128985
+  _time: 2025-09-05 09:29:01.080473430 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: yegor256/judges#153 was assigned to @yegor256 by @yegor256.
+  issue: 153
+  repository: 799113787
+  what: issue-was-assigned
+  when: 2024-12-19 08:24:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124431
+  _job: 17489128985
+  _time: 2025-09-05 09:29:03.135808442 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: yegor256/judges#155 was assigned to @yegor256 by @yegor256.
+  issue: 155
+  repository: 799113787
+  what: issue-was-assigned
+  when: 2024-12-19 17:39:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124432
+  _job: 17489128985
+  _time: 2025-09-05 09:29:21.184045388 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
   details: zerocracy/fbe#37 was assigned to @suban05 by @yegor256.
-  is_human: 1
   issue: 37
   repository: 820463873
   what: issue-was-assigned
   when: 2024-07-27 19:11:23.000000000 Z
   where: github
   who: 88084038
-- _id: 2124298
-  _job: 17487779426
-  _time: 2025-09-05 08:36:06.083628905 Z
+- _id: 2124433
+  _job: 17489128985
+  _time: 2025-09-05 09:29:22.851665527 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
   details: zerocracy/fbe#38 was assigned to @suban05 by @yegor256.
-  is_human: 1
   issue: 38
   repository: 820463873
   what: issue-was-assigned
   when: 2024-07-26 07:34:10.000000000 Z
   where: github
   who: 88084038
-- _id: 2124299
-  _job: 17487779426
-  _time: 2025-09-05 08:36:26.447006651 Z
+- _id: 2124434
+  _job: 17489128985
+  _time: 2025-09-05 09:29:29.371948059 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
-  details: yegor256/0rsk#40 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 40
-  repository: 181044958
+  details: zerocracy/fbe#46 was assigned to @yegorov by @yegor256.
+  issue: 46
+  repository: 820463873
   what: issue-was-assigned
-  when: 2019-05-21 22:10:06.000000000 Z
+  when: 2024-07-31 05:00:45.000000000 Z
   where: github
-  who: 526301
-- _id: 2124300
-  _job: 17487779426
-  _time: 2025-09-05 08:36:28.923467834 Z
+  who: 2566462
+- _id: 2124435
+  _job: 17489128985
+  _time: 2025-09-05 09:29:36.899842322 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
-  details: yegor256/0rsk#41 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 41
-  repository: 181044958
+  details: zerocracy/fbe#61 was assigned to @suban05 by @yegor256.
+  issue: 61
+  repository: 820463873
   what: issue-was-assigned
-  when: 2019-05-29 08:24:31.000000000 Z
+  when: 2024-08-12 05:28:53.000000000 Z
   where: github
-  who: 526301
-- _id: 2124301
-  _job: 17487779426
-  _time: 2025-09-05 08:36:48.644102424 Z
+  who: 88084038
+- _id: 2124436
+  _job: 17489128985
+  _time: 2025-09-05 09:29:38.402319295 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
-  details: yegor256/judges#63 was assigned to @yegor256 by @yegor256.
-  is_human: 1
-  issue: 63
-  repository: 799113787
+  details: zerocracy/fbe#75 was assigned to @yegor256 by @yegor256.
+  issue: 75
+  repository: 820463873
   what: issue-was-assigned
-  when: 2024-06-24 15:18:56.000000000 Z
+  when: 2024-08-18 11:29:34.000000000 Z
   where: github
   who: 526301
-- _id: 2124302
-  _job: 17487779426
-  _time: 2025-09-05 08:36:51.065415946 Z
+- _id: 2124437
+  _job: 17489128985
+  _time: 2025-09-05 09:29:39.773517995 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/fbe#76 was assigned to @yegor256 by @yegor256.
+  issue: 76
+  repository: 820463873
+  what: issue-was-assigned
+  when: 2024-08-18 13:08:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124438
+  _job: 17489128985
+  _time: 2025-09-05 09:29:41.078137683 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/fbe#78 was assigned to @suban05 by @yegor256.
+  issue: 78
+  repository: 820463873
+  what: issue-was-assigned
+  when: 2024-08-21 17:28:39.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124439
+  _job: 17489128985
+  _time: 2025-09-05 09:29:42.669691406 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#211 was assigned to @suban05 by @yegor256.
+  issue: 211
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-09 07:04:55.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124440
+  _job: 17489128985
+  _time: 2025-09-05 09:29:43.917323631 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#214 was assigned to @suban05 by @yegor256.
+  issue: 214
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-16 13:43:08.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124441
+  _job: 17489128985
+  _time: 2025-09-05 09:29:44.914800437 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/fbe#127 was assigned to @yegor256 by @yegor256.
+  issue: 127
+  repository: 820463873
+  what: issue-was-assigned
+  when: 2024-12-18 13:45:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124442
+  _job: 17489128985
+  _time: 2025-09-05 09:29:45.528925448 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#216 was assigned to @yegor256 by @yegor256.
+  issue: 216
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-02 11:55:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124443
+  _job: 17489128985
+  _time: 2025-09-05 09:29:46.762825019 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#217 was assigned to @yegor256 by @yegor256.
+  issue: 217
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-02 13:51:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124444
+  _job: 17489128985
+  _time: 2025-09-05 09:29:47.595486132 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/fbe#129 was assigned to @yegor256 by @yegor256.
+  issue: 129
+  repository: 820463873
+  what: issue-was-assigned
+  when: 2024-12-19 14:38:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124445
+  _job: 17489128985
+  _time: 2025-09-05 09:29:48.204071931 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#218 was assigned to @suban05 by @yegor256.
+  issue: 218
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-03 16:05:48.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124446
+  _job: 17489128985
+  _time: 2025-09-05 09:29:49.144175742 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/fbe#130 was assigned to @yegor256 by @yegor256.
+  issue: 130
+  repository: 820463873
+  what: issue-was-assigned
+  when: 2024-12-20 01:05:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124447
+  _job: 17489128985
+  _time: 2025-09-05 09:29:49.699405083 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#219 was assigned to @yegor256 by @yegor256.
+  issue: 219
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-03 10:19:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124448
+  _job: 17489128985
+  _time: 2025-09-05 09:29:50.471383270 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/fbe#131 was assigned to @yegor256 by @yegor256.
+  issue: 131
+  repository: 820463873
+  what: issue-was-assigned
+  when: 2024-12-20 06:09:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124449
+  _job: 17489128985
+  _time: 2025-09-05 09:29:51.064444128 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#220 was assigned to @yegorov by @yegor256.
+  issue: 220
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-11 03:44:14.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124450
+  _job: 17489128985
+  _time: 2025-09-05 09:29:51.851594696 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/fbe#132 was assigned to @yegor256 by @yegor256.
+  issue: 132
+  repository: 820463873
+  what: issue-was-assigned
+  when: 2024-12-20 11:34:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124451
+  _job: 17489128985
+  _time: 2025-09-05 09:29:52.460387132 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#224 was assigned to @yegorov by @yegor256.
+  issue: 224
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-05 05:55:11.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124452
+  _job: 17489128985
+  _time: 2025-09-05 09:29:53.104353127 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
   details: zerocracy/pages-action#138 was assigned to @yegor256 by @yegor256.
-  is_human: 1
   issue: 138
   repository: 802720676
   what: issue-was-assigned
   when: 2024-09-26 01:48:08.000000000 Z
   where: github
   who: 526301
-- _id: 2124303
-  _job: 17487779426
-  _time: 2025-09-05 08:36:52.802243631 Z
+- _id: 2124453
+  _job: 17489128985
+  _time: 2025-09-05 09:29:54.000035391 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#227 was assigned to @yegorov by @yegor256.
+  issue: 227
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-10-01 02:10:25.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124454
+  _job: 17489128985
+  _time: 2025-09-05 09:29:54.470030879 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
   details: zerocracy/pages-action#141 was assigned to @yegor256 by @yegor256.
-  is_human: 1
   issue: 141
   repository: 802720676
   what: issue-was-assigned
   when: 2024-09-26 08:56:12.000000000 Z
   where: github
   who: 526301
-- _id: 2124304
-  _job: 17487779426
-  _time: 2025-09-05 08:36:57.050582805 Z
+- _id: 2124455
+  _job: 17489128985
+  _time: 2025-09-05 09:29:55.371788620 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#229 was assigned to @suban05 by @yegor256.
+  issue: 229
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-05 08:08:03.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2124456
+  _job: 17489128985
+  _time: 2025-09-05 09:29:56.481949874 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#238 was assigned to @yegorov by @yegor256.
+  issue: 238
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-27 07:37:40.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124457
+  _job: 17489128985
+  _time: 2025-09-05 09:29:57.726486538 Z
+  _version: 0.15.8/0.53.6
+  assigner: 526301
+  details: zerocracy/judges-action#239 was assigned to @yegorov by @yegor256.
+  issue: 239
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-10-03 02:50:53.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2124458
+  _job: 17489128985
+  _time: 2025-09-05 09:29:58.390477742 Z
   _version: 0.15.8/0.53.6
   assigner: 526301
   details: zerocracy/pages-action#152 was assigned to @yegor256 by @yegor256.
-  is_human: 1
   issue: 152
   repository: 802720676
   what: issue-was-assigned
   when: 2024-10-10 06:50:32.000000000 Z
   where: github
   who: 526301
-- _id: 2124305
-  _job: 17487779426
-  _time: 2025-09-05 08:37:08.145485981 Z
+- _id: 2124459
+  _job: 17489128985
+  _time: 2025-09-05 09:29:59.130976074 Z
   _version: 0.15.8/0.53.6
-  latest: 144
-  repository: 181044958
-  what: assignees-were-scanned
+  assigner: 526301
+  details: zerocracy/judges-action#240 was assigned to @yegorov by @yegor256.
+  issue: 240
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-07 19:36:47.000000000 Z
   where: github
-- _id: 2124306
-  _job: 17487779426
-  _time: 2025-09-05 08:37:08.241088452 Z
+  who: 2566462
+- _id: 2124460
+  _job: 17489128985
+  _time: 2025-09-05 09:30:00.136175676 Z
   _version: 0.15.8/0.53.6
-  latest: 79
-  repository: 799113787
-  what: assignees-were-scanned
+  assigner: 526301
+  details: zerocracy/judges-action#244 was assigned to @yegorov by @yegor256.
+  issue: 244
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-08 03:48:46.000000000 Z
   where: github
-- _id: 2124307
-  _job: 17487779426
-  _time: 2025-09-05 08:37:08.324362747 Z
+  who: 2566462
+- _id: 2124461
+  _job: 17489128985
+  _time: 2025-09-05 09:30:03.555455535 Z
   _version: 0.15.8/0.53.6
-  latest: 0
+  latest: 253
   repository: 799177290
   what: assignees-were-scanned
   where: github
-- _id: 2124308
-  _job: 17487779426
-  _time: 2025-09-05 08:37:08.406929561 Z
+- _id: 2124462
+  _job: 17489128985
+  _time: 2025-09-05 09:30:03.636764134 Z
   _version: 0.15.8/0.53.6
-  latest: 80
+  latest: 0
   repository: 798641472
   what: assignees-were-scanned
+  where: github
+- _id: 2124463
+  _job: 17489128985
+  _time: 2025-09-05 09:30:03.713838143 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
+  repository: 799113787
+  what: assignees-were-scanned
+  where: github
+- _id: 2124464
+  _job: 17489128985
+  _time: 2025-09-05 09:30:03.791975353 Z
+  _version: 0.15.8/0.53.6
+  latest: 0
+  repository: 181044958
+  what: assignees-were-scanned
+  where: github
+- _id: 2124465
+  _job: 17489128985
+  _time: 2025-09-05 09:30:20.496974266 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/baza.rb#12 has been 'issue-was-closed'.
+  issue: 12
+  repository: 840215648
+  what: issue-was-closed
+  when: 2024-08-30 07:42:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124466
+  _job: 17489128985
+  _time: 2025-09-05 09:30:20.974227758 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/factbase#98 has been 'issue-was-closed'.
+  issue: 98
+  repository: 798641472
+  what: issue-was-closed
+  when: 2024-08-22 16:28:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124467
+  _job: 17489128985
+  _time: 2025-09-05 09:30:21.728213650 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#102 has been 'issue-was-closed'.
+  issue: 102
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-14 03:54:21.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2124468
+  _job: 17489128985
+  _time: 2025-09-05 09:30:22.737726130 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#37 has been 'issue-was-closed'.
+  issue: 37
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-07-29 18:58:43.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2124469
+  _job: 17489128985
+  _time: 2025-09-05 09:30:24.249548672 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/judges#63 has been 'issue-was-closed'.
+  issue: 63
+  repository: 799113787
+  what: issue-was-closed
+  when: 2024-06-28 14:06:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124470
+  _job: 17489128985
+  _time: 2025-09-05 09:30:25.864949635 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#38 has been 'issue-was-closed'.
+  issue: 38
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-07-27 05:31:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124471
+  _job: 17489128985
+  _time: 2025-09-05 09:30:26.951702474 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/judges#83 has been 'issue-was-closed'.
+  issue: 83
+  repository: 799113787
+  what: issue-was-closed
+  when: 2024-08-05 06:09:09.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2124472
+  _job: 17489128985
+  _time: 2025-09-05 09:30:28.180968576 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#155 has been 'issue-was-closed'.
+  issue: 155
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 12:59:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124473
+  _job: 17489128985
+  _time: 2025-09-05 09:30:28.667234330 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#46 has been 'issue-was-closed'.
+  issue: 46
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-16 13:41:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124474
+  _job: 17489128985
+  _time: 2025-09-05 09:30:29.779146027 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/judges#84 has been 'issue-was-closed'.
+  issue: 84
+  repository: 799113787
+  what: issue-was-closed
+  when: 2024-08-18 11:12:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124475
+  _job: 17489128985
+  _time: 2025-09-05 09:30:31.095170545 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#156 has been 'issue-was-closed'.
+  issue: 156
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 12:59:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124476
+  _job: 17489128985
+  _time: 2025-09-05 09:30:31.586405701 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#47 has been 'issue-was-closed'.
+  issue: 47
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-07-31 04:51:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124477
+  _job: 17489128985
+  _time: 2025-09-05 09:30:33.928450889 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#157 has been 'issue-was-closed'.
+  issue: 157
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 12:59:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124478
+  _job: 17489128985
+  _time: 2025-09-05 09:30:34.358835758 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#61 has been 'issue-was-closed'.
+  issue: 61
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-14 15:38:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124479
+  _job: 17489128985
+  _time: 2025-09-05 09:30:36.374436211 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#158 has been 'issue-was-closed'.
+  issue: 158
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-07-29 04:17:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124480
+  _job: 17489128985
+  _time: 2025-09-05 09:30:36.815685280 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#75 has been 'issue-was-closed'.
+  issue: 75
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-18 12:40:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124481
+  _job: 17489128985
+  _time: 2025-09-05 09:30:37.635377931 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/0rsk#30 has been 'issue-was-closed'.
+  issue: 30
+  repository: 181044958
+  what: issue-was-closed
+  when: 2019-05-15 20:00:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124482
+  _job: 17489128985
+  _time: 2025-09-05 09:30:38.569369445 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/judges#127 has been 'issue-was-closed'.
+  issue: 127
+  repository: 799113787
+  what: issue-was-closed
+  when: 2024-09-04 08:08:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124483
+  _job: 17489128985
+  _time: 2025-09-05 09:30:39.475964976 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#166 has been 'issue-was-closed'.
+  issue: 166
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 12:59:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124484
+  _job: 17489128985
+  _time: 2025-09-05 09:30:39.939626116 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#76 has been 'issue-was-closed'.
+  issue: 76
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-19 06:16:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124485
+  _job: 17489128985
+  _time: 2025-09-05 09:30:41.708218132 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#167 has been 'issue-was-closed'.
+  issue: 167
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124486
+  _job: 17489128985
+  _time: 2025-09-05 09:30:42.168118521 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#78 has been 'issue-was-closed'.
+  issue: 78
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-08-22 05:28:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124487
+  _job: 17489128985
+  _time: 2025-09-05 09:30:42.890443193 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/0rsk#33 has been 'issue-was-closed'.
+  issue: 33
+  repository: 181044958
+  what: issue-was-closed
+  when: 2019-05-15 18:27:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124488
+  _job: 17489128985
+  _time: 2025-09-05 09:30:43.375388269 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/judges#153 has been 'issue-was-closed'.
+  issue: 153
+  repository: 799113787
+  what: issue-was-closed
+  when: 2024-12-19 08:36:17.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2124489
+  _job: 17489128985
+  _time: 2025-09-05 09:30:44.219055701 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#189 has been 'issue-was-closed'.
+  issue: 189
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-29 13:20:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124490
+  _job: 17489128985
+  _time: 2025-09-05 09:30:44.733840210 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#127 has been 'issue-was-closed'.
+  issue: 127
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-12-18 13:55:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124491
+  _job: 17489128985
+  _time: 2025-09-05 09:30:45.562297425 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/0rsk#40 has been 'issue-was-closed'.
+  issue: 40
+  repository: 181044958
+  what: issue-was-closed
+  when: 2019-05-22 05:28:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124492
+  _job: 17489128985
+  _time: 2025-09-05 09:30:45.998181445 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/judges#155 has been 'issue-was-closed'.
+  issue: 155
+  repository: 799113787
+  what: issue-was-closed
+  when: 2024-12-19 18:26:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124493
+  _job: 17489128985
+  _time: 2025-09-05 09:30:46.871676582 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#190 has been 'issue-was-closed'.
+  issue: 190
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-04 09:53:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124494
+  _job: 17489128985
+  _time: 2025-09-05 09:30:47.292569459 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#129 has been 'issue-was-closed'.
+  issue: 129
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-12-19 14:49:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124495
+  _job: 17489128985
+  _time: 2025-09-05 09:30:48.041293395 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/0rsk#41 has been 'issue-was-closed'.
+  issue: 41
+  repository: 181044958
+  what: issue-was-closed
+  when: 2019-05-29 09:00:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124496
+  _job: 17489128985
+  _time: 2025-09-05 09:30:49.033487758 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#191 has been 'issue-was-closed'.
+  issue: 191
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-08 16:09:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124497
+  _job: 17489128985
+  _time: 2025-09-05 09:30:49.483467283 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#130 has been 'issue-was-closed'.
+  issue: 130
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-12-20 02:01:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124498
+  _job: 17489128985
+  _time: 2025-09-05 09:30:51.076526468 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#192 has been 'issue-was-closed'.
+  issue: 192
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-10 14:53:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124499
+  _job: 17489128985
+  _time: 2025-09-05 09:30:51.517416199 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#131 has been 'issue-was-closed'.
+  issue: 131
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-12-20 07:08:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124500
+  _job: 17489128985
+  _time: 2025-09-05 09:30:53.021650477 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#193 has been 'issue-was-closed'.
+  issue: 193
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-15 13:02:27.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124501
+  _job: 17489128985
+  _time: 2025-09-05 09:30:53.466536597 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/fbe#132 has been 'issue-was-closed'.
+  issue: 132
+  repository: 820463873
+  what: issue-was-closed
+  when: 2024-12-20 13:25:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124502
+  _job: 17489128985
+  _time: 2025-09-05 09:30:54.243986696 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/0rsk#46 has been 'issue-was-closed'.
+  issue: 46
+  repository: 181044958
+  what: issue-was-closed
+  when: 2019-10-03 16:39:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124503
+  _job: 17489128985
+  _time: 2025-09-05 09:30:55.130966124 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#194 has been 'issue-was-closed'.
+  issue: 194
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-17 09:39:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124504
+  _job: 17489128985
+  _time: 2025-09-05 09:30:56.236826670 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, yegor256/0rsk#51 has been 'issue-was-closed'.
+  issue: 51
+  repository: 181044958
+  what: issue-was-closed
+  when: 2019-07-28 10:29:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124505
+  _job: 17489128985
+  _time: 2025-09-05 09:30:57.075432869 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#195 has been 'issue-was-closed'.
+  issue: 195
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-23 03:47:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124506
+  _job: 17489128985
+  _time: 2025-09-05 09:30:57.822327861 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/pages-action#138 has been 'issue-was-closed'.
+  issue: 138
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-09-27 05:15:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124507
+  _job: 17489128985
+  _time: 2025-09-05 09:30:59.069114869 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#200 has been 'issue-was-closed'.
+  issue: 200
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-24 09:14:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124508
+  _job: 17489128985
+  _time: 2025-09-05 09:30:59.756721225 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/pages-action#141 has been 'issue-was-closed'.
+  issue: 141
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-09-26 10:38:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124509
+  _job: 17489128985
+  _time: 2025-09-05 09:31:00.795994938 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#201 has been 'issue-was-closed'.
+  issue: 201
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-25 05:59:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124510
+  _job: 17489128985
+  _time: 2025-09-05 09:31:02.072499756 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#202 has been 'issue-was-closed'.
+  issue: 202
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-26 04:20:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124511
+  _job: 17489128985
+  _time: 2025-09-05 09:31:02.484617035 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/pages-action#151 has been 'issue-was-closed'.
+  issue: 151
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-10-14 12:56:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124512
+  _job: 17489128985
+  _time: 2025-09-05 09:31:03.355615988 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#203 has been 'issue-was-closed'.
+  issue: 203
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-30 09:03:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124513
+  _job: 17489128985
+  _time: 2025-09-05 09:31:03.777479426 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/pages-action#152 has been 'issue-was-closed'.
+  issue: 152
+  repository: 802720676
+  what: issue-was-closed
+  when: 2024-10-15 12:46:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124514
+  _job: 17489128985
+  _time: 2025-09-05 09:31:04.666621185 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#209 has been 'issue-was-closed'.
+  issue: 209
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124515
+  _job: 17489128985
+  _time: 2025-09-05 09:31:05.866463821 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#211 has been 'issue-was-closed'.
+  issue: 211
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-18 07:30:20.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2124516
+  _job: 17489128985
+  _time: 2025-09-05 09:31:07.003987551 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#214 has been 'issue-was-closed'.
+  issue: 214
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-21 15:35:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124517
+  _job: 17489128985
+  _time: 2025-09-05 09:31:07.934812844 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#216 has been 'issue-was-closed'.
+  issue: 216
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-02 14:28:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124518
+  _job: 17489128985
+  _time: 2025-09-05 09:31:09.545393806 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#218 has been 'issue-was-closed'.
+  issue: 218
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-04 10:09:37.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2124519
+  _job: 17489128985
+  _time: 2025-09-05 09:31:10.425858884 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#219 has been 'issue-was-closed'.
+  issue: 219
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-03 10:52:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124520
+  _job: 17489128985
+  _time: 2025-09-05 09:31:11.299957078 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#220 has been 'issue-was-closed'.
+  issue: 220
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-14 04:57:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124521
+  _job: 17489128985
+  _time: 2025-09-05 09:31:12.161122695 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#224 has been 'issue-was-closed'.
+  issue: 224
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124522
+  _job: 17489128985
+  _time: 2025-09-05 09:31:13.040899746 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#227 has been 'issue-was-closed'.
+  issue: 227
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-03 10:19:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124523
+  _job: 17489128985
+  _time: 2025-09-05 09:31:13.997611400 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#229 has been 'issue-was-closed'.
+  issue: 229
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-05 11:54:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124524
+  _job: 17489128985
+  _time: 2025-09-05 09:31:14.845122569 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#238 has been 'issue-was-closed'.
+  issue: 238
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-01 04:27:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124525
+  _job: 17489128985
+  _time: 2025-09-05 09:31:16.000546379 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#239 has been 'issue-was-closed'.
+  issue: 239
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-04 10:14:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124526
+  _job: 17489128985
+  _time: 2025-09-05 09:31:16.929055541 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#240 has been 'issue-was-closed'.
+  issue: 240
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124527
+  _job: 17489128985
+  _time: 2025-09-05 09:31:17.757780582 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#244 has been 'issue-was-closed'.
+  issue: 244
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-12 19:31:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124528
+  _job: 17489128985
+  _time: 2025-09-05 09:31:18.880209399 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#254 has been 'issue-was-closed'.
+  issue: 254
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-14 05:31:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124529
+  _job: 17489128985
+  _time: 2025-09-05 09:31:19.746733376 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#271 has been 'issue-was-closed'.
+  issue: 271
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-14 05:28:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124530
+  _job: 17489128985
+  _time: 2025-09-05 09:31:20.676630097 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#276 has been 'issue-was-closed'.
+  issue: 276
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124531
+  _job: 17489128985
+  _time: 2025-09-05 09:31:21.532540427 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#298 has been 'issue-was-closed'.
+  issue: 298
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-21 14:37:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124532
+  _job: 17489128985
+  _time: 2025-09-05 09:31:22.358496702 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#308 has been 'issue-was-closed'.
+  issue: 308
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-22 15:16:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124533
+  _job: 17489128985
+  _time: 2025-09-05 09:31:23.262873745 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#311 has been 'issue-was-closed'.
+  issue: 311
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-25 15:57:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124534
+  _job: 17489128985
+  _time: 2025-09-05 09:31:24.156682469 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#325 has been 'issue-was-closed'.
+  issue: 325
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-04 14:56:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124535
+  _job: 17489128985
+  _time: 2025-09-05 09:31:24.999118033 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#338 has been 'issue-was-closed'.
+  issue: 338
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-18 08:44:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124536
+  _job: 17489128985
+  _time: 2025-09-05 09:31:25.942994015 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#345 has been 'issue-was-closed'.
+  issue: 345
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-24 05:24:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124537
+  _job: 17489128985
+  _time: 2025-09-05 09:31:26.803965515 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#350 has been 'issue-was-closed'.
+  issue: 350
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-24 09:13:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124538
+  _job: 17489128985
+  _time: 2025-09-05 09:31:27.605408020 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#372 has been 'issue-was-closed'.
+  issue: 372
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-09 12:54:00.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124539
+  _job: 17489128985
+  _time: 2025-09-05 09:31:28.444278709 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#373 has been 'issue-was-closed'.
+  issue: 373
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-05 20:50:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124540
+  _job: 17489128985
+  _time: 2025-09-05 09:31:29.363682004 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#375 has been 'issue-was-closed'.
+  issue: 375
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-07 15:45:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124541
+  _job: 17489128985
+  _time: 2025-09-05 09:31:30.196402235 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#380 has been 'issue-was-closed'.
+  issue: 380
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-15 14:12:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124542
+  _job: 17489128985
+  _time: 2025-09-05 09:31:31.031640696 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#397 has been 'issue-was-closed'.
+  issue: 397
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-11-30 04:49:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124543
+  _job: 17489128985
+  _time: 2025-09-05 09:31:32.475087274 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#412 has been 'issue-was-closed'.
+  issue: 412
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 04:27:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124544
+  _job: 17489128985
+  _time: 2025-09-05 09:31:33.140129317 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#416 has been 'issue-was-closed'.
+  issue: 416
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 07:16:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124545
+  _job: 17489128985
+  _time: 2025-09-05 09:31:33.819271410 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#419 has been 'issue-was-closed'.
+  issue: 419
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 10:31:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124546
+  _job: 17489128985
+  _time: 2025-09-05 09:31:34.461757165 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#421 has been 'issue-was-closed'.
+  issue: 421
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 13:14:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124547
+  _job: 17489128985
+  _time: 2025-09-05 09:31:35.084895317 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#428 has been 'issue-was-closed'.
+  issue: 428
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-20 02:17:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124548
+  _job: 17489128985
+  _time: 2025-09-05 09:31:35.669890135 Z
+  _version: 0.15.8/0.53.6
+  details: Apparently, zerocracy/judges-action#434 has been 'issue-was-closed'.
+  issue: 434
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-20 09:23:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 2124549
+  _job: 17489128985
+  _time: 2025-09-05 09:31:39.338424861 Z
+  _version: 0.15.8/0.53.6
+  latest: 804
+  repository: 799177290
+  what: issues-were-scanned
   where: github
