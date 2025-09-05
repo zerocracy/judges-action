@@ -44,26 +44,28 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
       next
     end
     type = json[:pull_request] ? 'pull' : 'issue'
-    f =
-      Fbe.if_absent do |n|
-        n.where = 'github'
-        n.what = "#{type}-was-opened"
-        n.repository = r.repository
-        n.issue = json[:number]
+    Fbe.fb.txn do |fbt|
+      f =
+        Fbe.if_absent(fb: fbt) do |n|
+          n.where = 'github'
+          n.what = "#{type}-was-opened"
+          n.repository = r.repository
+          n.issue = json[:number]
+        end
+      next if f.nil?
+      f.when = json[:created_at]
+      f.who = json.dig(:user, :id)
+      if type == 'pull'
+        ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+        if ref
+          f.branch = ref
+        else
+          f.stale = 'branch'
+        end
       end
-    next if f.nil?
-    f.when = json[:created_at]
-    f.who = json.dig(:user, :id)
-    if type == 'pull'
-      ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-      if ref
-        f.branch = ref
-      else
-        f.stale = 'branch'
-      end
+      f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+      $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     end
-    f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
-    $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     added += 1
   rescue Octokit::NotFound => e
     Jp.issue_was_lost('github', r.repository, i)
