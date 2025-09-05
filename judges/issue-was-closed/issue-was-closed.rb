@@ -51,18 +51,20 @@ Fbe.iterate do
       $loog.debug("Issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue
     end
-    nn =
-      Fbe.if_absent do |n|
-        n.where = 'github'
-        n.repository = repository
-        n.issue = issue
-        n.what = $judge
-      end
-    raise "Issue #{repo}##{issue} already closed" if nn.nil?
-    nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-    nn.who = json.dig(:closed_by, :id)
-    nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
-    $loog.info("It was found closed at #{Fbe.issue(nn)}")
+    Fbe.fb.txn do |fbt|
+      nn =
+        Fbe.if_absent(fb: fbt) do |n|
+          n.where = 'github'
+          n.repository = repository
+          n.issue = issue
+          n.what = $judge
+        end
+      raise "Issue #{repo}##{issue} already closed" if nn.nil?
+      nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
+      nn.who = json.dig(:closed_by, :id)
+      nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
+      $loog.info("It was found closed at #{Fbe.issue(nn)}")
+    end
     issue
   end
 end

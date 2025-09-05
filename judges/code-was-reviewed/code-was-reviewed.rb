@@ -42,24 +42,26 @@ Fbe.conclude do
       end
     reviews.each do |review|
       next if review.dig(:user, :id) == pr.dig(:user, :id)
-      n =
-        Fbe.if_absent do |nn|
-          nn.where = f.where
-          nn.repository = f.repository
-          nn.issue = f.issue
-          nn.what = $judge
-          nn.who = review.dig(:user, :id)
-          nn.when = review[:submitted_at]
-        end
-      next if n.nil?
-      n.hoc = pr[:additions] + pr[:deletions]
-      n.author = pr.dig(:user, :id)
-      n.comments = Fbe.octo.issue_comments(repo, f.issue).count
-      n.review_comments = Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
-      n.seconds = (review[:submitted_at] - pr[:created_at]).to_i
-      n.details = "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
-                  "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
-                  "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
+      Fbe.fb.txn do |fbt|
+        n =
+          Fbe.if_absent(fb: fbt) do |nn|
+            nn.where = f.where
+            nn.repository = f.repository
+            nn.issue = f.issue
+            nn.what = $judge
+            nn.who = review.dig(:user, :id)
+            nn.when = review[:submitted_at]
+          end
+        next if n.nil?
+        n.hoc = pr[:additions] + pr[:deletions]
+        n.author = pr.dig(:user, :id)
+        n.comments = Fbe.octo.issue_comments(repo, f.issue).count
+        n.review_comments = Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
+        n.seconds = (review[:submitted_at] - pr[:created_at]).to_i
+        n.details = "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
+                    "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
+                    "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
+      end
     end
   end
 end

@@ -54,27 +54,29 @@ require_relative '../../lib/issue_was_lost'
         Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
           next if Fbe.octo.off_quota?
           total += 1
-          f =
-            Fbe.if_absent do |ff|
-              ff.where = 'github'
-              ff.what = "#{type}-was-opened"
-              ff.repository = repository
-              ff.issue = json[:number]
-              issue = ff.issue
+          Fbe.fb.txn do |fbt|
+            f =
+              Fbe.if_absent(fb: fbt) do |ff|
+                ff.where = 'github'
+                ff.what = "#{type}-was-opened"
+                ff.repository = repository
+                ff.issue = json[:number]
+                issue = ff.issue
+              end
+            next if f.nil?
+            found += 1
+            f.when = json[:created_at]
+            f.who = json.dig(:user, :id)
+            if type == 'pull'
+              ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+              if ref
+                f.branch = ref
+              else
+                f.stale = 'branch'
+              end
             end
-          next if f.nil?
-          found += 1
-          f.when = json[:created_at]
-          f.who = json.dig(:user, :id)
-          if type == 'pull'
-            ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-            if ref
-              f.branch = ref
-            else
-              f.stale = 'branch'
-            end
+            f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
           end
-          f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
         end
         throw :"Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}"
       end
