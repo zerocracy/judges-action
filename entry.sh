@@ -26,10 +26,6 @@ if [ "${latest}" != "${VERSION}" ]; then
     echo "!!! It is strongly advised to upgrade."
 fi
 
-if [ "${INPUT_VERBOSE}" == 'true' ]; then
-    set -x
-fi
-
 if [ -z "$1" ]; then
     SELF=$(dirname "$0")
 else
