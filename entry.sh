@@ -2,7 +2,13 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+export PS4='+${BASH_SOURCE}:${LINENO}:'
+echo "INPUT_VERBOSE: ${INPUT_VERBOSE}"
 set -e -o pipefail
+
+if [ "${INPUT_VERBOSE}" == 'true' ]; then
+    set -x
+fi
 
 start=$(date +%s)
 
