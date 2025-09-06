@@ -5,10 +5,10 @@
   error: 'GET https://api.github.com/repos/yegor256/0rsk/actions/jobs/45949337491:
     500 - '
   inserted: 8
-  seconds: 1011.561956111
+  seconds: 924.075456952
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-06 10:36:06.182999097 Z
+  when: 2025-09-06 11:33:39.863619439 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -11083,6 +11083,7 @@
   _job: 32476
   _time: 2025-08-10 14:01:07.834968461 Z
   _version: 0.14.5/0.52.2/0.15.9
+  tombstone: 2025-09-06 10:37:03.459288440 Z
   total_active_contributors: 5
   total_commits: 4009
   total_contributors: 12
@@ -143645,7 +143646,7 @@
   review_comments: 0
   succeeded_builds: 14
   what: pull-was-merged
-  when: 2025-09-06 03:05:19.000000000 Z
+  when: &1214 2025-09-06 03:05:19.000000000 Z
   where: github
   who: 8086956
 - _id: 2127929
@@ -143780,62 +143781,6 @@
   when: 2025-09-06 04:58:30.000000000 Z
   where: github
   who: 29139614
-- _id: 2127938
-  _job: 17513278011
-  _time: 2025-09-06 10:19:29.363888049 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 54324757879
-  repository: 799177290
-  what: events-were-scanned
-  where: github
-- _id: 2127939
-  _job: 17513278011
-  _time: 2025-09-06 10:19:29.511873984 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 54330090457
-  repository: 820463873
-  what: events-were-scanned
-  where: github
-- _id: 2127940
-  _job: 17513278011
-  _time: 2025-09-06 10:23:37.159216954 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 0
-  repository: 820463873
-  what: labels-were-scanned
-  where: github
-- _id: 2127941
-  _job: 17513278011
-  _time: 2025-09-06 10:23:37.242754754 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 103
-  repository: 799113787
-  what: labels-were-scanned
-  where: github
-- _id: 2127942
-  _job: 17513278011
-  _time: 2025-09-06 10:23:37.323775971 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 90
-  repository: 798641472
-  what: labels-were-scanned
-  where: github
-- _id: 2127943
-  _job: 17513278011
-  _time: 2025-09-06 10:23:37.403819206 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 175
-  repository: 181044958
-  what: labels-were-scanned
-  where: github
-- _id: 2127944
-  _job: 17513278011
-  _time: 2025-09-06 10:23:37.480194679 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 909
-  repository: 799177290
-  what: labels-were-scanned
-  where: github
 - _id: 2127945
   _job: 17513278011
   _time: 2025-09-06 10:23:46.640731967 Z
@@ -144804,78 +144749,6 @@
   repository: 849726475
   what: min-issue-was-found
   where: github
-- _id: 2128026
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.210642842 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 2
-  repository: 974194993
-  what: min-pull-was-found
-  where: github
-- _id: 2128027
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.286389028 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 115
-  repository: 802720676
-  what: min-pull-was-found
-  where: github
-- _id: 2128028
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.362054663 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 104
-  repository: 849726475
-  what: min-pull-was-found
-  where: github
-- _id: 2128029
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.494616354 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 559
-  repository: 799177290
-  what: min-pull-was-found
-  where: github
-- _id: 2128030
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.565222665 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 199
-  repository: 798641472
-  what: min-pull-was-found
-  where: github
-- _id: 2128031
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.634859367 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 184
-  repository: 799113787
-  what: min-pull-was-found
-  where: github
-- _id: 2128032
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.724289870 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 90
-  repository: 181044958
-  what: min-pull-was-found
-  where: github
-- _id: 2128033
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.803208648 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 0
-  repository: 840215648
-  what: min-pull-was-found
-  where: github
-- _id: 2128034
-  _job: 17513278011
-  _time: 2025-09-06 10:26:00.883314715 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 194
-  repository: 820463873
-  what: min-pull-was-found
-  where: github
 - _id: 2128035
   _job: 17513278011
   _time: 2025-09-06 10:26:58.112239385 Z
@@ -145097,86 +144970,6 @@
   when: 2024-10-10 06:50:32.000000000 Z
   where: github
   who: 526301
-- _id: 2128052
-  _job: 17513278011
-  _time: 2025-09-06 10:27:54.350377214 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 144
-  repository: 181044958
-  what: assignees-were-scanned
-  where: github
-- _id: 2128053
-  _job: 17513278011
-  _time: 2025-09-06 10:27:54.432836279 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 0
-  repository: 799177290
-  what: assignees-were-scanned
-  where: github
-- _id: 2128054
-  _job: 17513278011
-  _time: 2025-09-06 10:27:54.507662015 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 80
-  repository: 799113787
-  what: assignees-were-scanned
-  where: github
-- _id: 2128055
-  _job: 17513278011
-  _time: 2025-09-06 10:27:54.608762390 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 80
-  repository: 798641472
-  what: assignees-were-scanned
-  where: github
-- _id: 2128056
-  _job: 17513278011
-  _time: 2025-09-06 10:30:24.205267845 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 152
-  repository: 802720676
-  what: types-were-scanned
-  where: github
-- _id: 2128057
-  _job: 17513278011
-  _time: 2025-09-06 10:30:24.293904812 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 711
-  repository: 799177290
-  what: types-were-scanned
-  where: github
-- _id: 2128058
-  _job: 17513278011
-  _time: 2025-09-06 10:30:24.377313881 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 80
-  repository: 798641472
-  what: types-were-scanned
-  where: github
-- _id: 2128059
-  _job: 17513278011
-  _time: 2025-09-06 10:30:24.449399023 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 131
-  repository: 820463873
-  what: types-were-scanned
-  where: github
-- _id: 2128060
-  _job: 17513278011
-  _time: 2025-09-06 10:30:24.549435950 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 243
-  repository: 799113787
-  what: types-were-scanned
-  where: github
-- _id: 2128061
-  _job: 17513278011
-  _time: 2025-09-06 10:30:24.620860450 Z
-  _version: 0.16.1/0.53.6/0.15.35
-  latest: 0
-  repository: 181044958
-  what: types-were-scanned
-  where: github
 - _id: 2128062
   _job: 17513278011
   _time: 2025-09-06 10:31:34.349387173 Z
@@ -145197,7 +144990,7 @@
   review_comments: 0
   succeeded_builds: 10
   what: pull-was-merged
-  when: 2025-09-06 07:04:46.000000000 Z
+  when: &1215 2025-09-06 07:04:46.000000000 Z
   where: github
   who: 526301
 - _id: 2128063
@@ -145205,6 +144998,7 @@
   _time: 2025-09-06 10:34:39.522734046 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/baza.rb#12 has been 'issue-was-closed'.
+  is_human: 1
   issue: 12
   repository: 840215648
   what: issue-was-closed
@@ -145216,6 +145010,7 @@
   _time: 2025-09-06 10:34:40.140181345 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#37 has been 'issue-was-closed'.
+  is_human: 0
   issue: 37
   repository: 820463873
   what: issue-was-closed
@@ -145227,6 +145022,7 @@
   _time: 2025-09-06 10:34:41.249455872 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#102 has been 'issue-was-closed'.
+  is_human: 0
   issue: 102
   repository: 799177290
   what: issue-was-closed
@@ -145238,6 +145034,7 @@
   _time: 2025-09-06 10:34:43.418718531 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#38 has been 'issue-was-closed'.
+  is_human: 1
   issue: 38
   repository: 820463873
   what: issue-was-closed
@@ -145249,6 +145046,7 @@
   _time: 2025-09-06 10:34:46.041040070 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#46 has been 'issue-was-closed'.
+  is_human: 1
   issue: 46
   repository: 820463873
   what: issue-was-closed
@@ -145260,6 +145058,7 @@
   _time: 2025-09-06 10:34:47.114654532 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#155 has been 'issue-was-closed'.
+  is_human: 1
   issue: 155
   repository: 799177290
   what: issue-was-closed
@@ -145271,6 +145070,7 @@
   _time: 2025-09-06 10:34:49.000517907 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#47 has been 'issue-was-closed'.
+  is_human: 1
   issue: 47
   repository: 820463873
   what: issue-was-closed
@@ -145282,6 +145082,7 @@
   _time: 2025-09-06 10:34:50.285094829 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#156 has been 'issue-was-closed'.
+  is_human: 1
   issue: 156
   repository: 799177290
   what: issue-was-closed
@@ -145293,6 +145094,7 @@
   _time: 2025-09-06 10:34:52.054899107 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#61 has been 'issue-was-closed'.
+  is_human: 1
   issue: 61
   repository: 820463873
   what: issue-was-closed
@@ -145304,6 +145106,7 @@
   _time: 2025-09-06 10:34:53.049479090 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#157 has been 'issue-was-closed'.
+  is_human: 1
   issue: 157
   repository: 799177290
   what: issue-was-closed
@@ -145315,6 +145118,7 @@
   _time: 2025-09-06 10:34:54.944483338 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#75 has been 'issue-was-closed'.
+  is_human: 1
   issue: 75
   repository: 820463873
   what: issue-was-closed
@@ -145326,6 +145130,7 @@
   _time: 2025-09-06 10:34:56.185476192 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#158 has been 'issue-was-closed'.
+  is_human: 1
   issue: 158
   repository: 799177290
   what: issue-was-closed
@@ -145337,6 +145142,7 @@
   _time: 2025-09-06 10:34:57.633849108 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#76 has been 'issue-was-closed'.
+  is_human: 1
   issue: 76
   repository: 820463873
   what: issue-was-closed
@@ -145348,6 +145154,7 @@
   _time: 2025-09-06 10:34:58.578186848 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#166 has been 'issue-was-closed'.
+  is_human: 1
   issue: 166
   repository: 799177290
   what: issue-was-closed
@@ -145359,6 +145166,7 @@
   _time: 2025-09-06 10:34:59.401901562 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, yegor256/0rsk#30 has been 'issue-was-closed'.
+  is_human: 1
   issue: 30
   repository: 181044958
   what: issue-was-closed
@@ -145370,6 +145178,7 @@
   _time: 2025-09-06 10:35:00.473749439 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#78 has been 'issue-was-closed'.
+  is_human: 1
   issue: 78
   repository: 820463873
   what: issue-was-closed
@@ -145381,6 +145190,7 @@
   _time: 2025-09-06 10:35:01.286255913 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#167 has been 'issue-was-closed'.
+  is_human: 1
   issue: 167
   repository: 799177290
   what: issue-was-closed
@@ -145392,6 +145202,7 @@
   _time: 2025-09-06 10:35:02.671400691 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#127 has been 'issue-was-closed'.
+  is_human: 1
   issue: 127
   repository: 820463873
   what: issue-was-closed
@@ -145403,6 +145214,7 @@
   _time: 2025-09-06 10:35:03.431003733 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#189 has been 'issue-was-closed'.
+  is_human: 1
   issue: 189
   repository: 799177290
   what: issue-was-closed
@@ -145414,6 +145226,7 @@
   _time: 2025-09-06 10:35:04.272738889 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, yegor256/0rsk#33 has been 'issue-was-closed'.
+  is_human: 1
   issue: 33
   repository: 181044958
   what: issue-was-closed
@@ -145425,6 +145238,7 @@
   _time: 2025-09-06 10:35:06.164214770 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#129 has been 'issue-was-closed'.
+  is_human: 1
   issue: 129
   repository: 820463873
   what: issue-was-closed
@@ -145436,6 +145250,7 @@
   _time: 2025-09-06 10:35:06.911813999 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#190 has been 'issue-was-closed'.
+  is_human: 1
   issue: 190
   repository: 799177290
   what: issue-was-closed
@@ -145447,6 +145262,7 @@
   _time: 2025-09-06 10:35:07.649380048 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, yegor256/0rsk#40 has been 'issue-was-closed'.
+  is_human: 1
   issue: 40
   repository: 181044958
   what: issue-was-closed
@@ -145458,6 +145274,7 @@
   _time: 2025-09-06 10:35:08.556732609 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#130 has been 'issue-was-closed'.
+  is_human: 1
   issue: 130
   repository: 820463873
   what: issue-was-closed
@@ -145469,6 +145286,7 @@
   _time: 2025-09-06 10:35:09.274091163 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#191 has been 'issue-was-closed'.
+  is_human: 1
   issue: 191
   repository: 799177290
   what: issue-was-closed
@@ -145480,6 +145298,7 @@
   _time: 2025-09-06 10:35:09.894722073 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, yegor256/0rsk#41 has been 'issue-was-closed'.
+  is_human: 1
   issue: 41
   repository: 181044958
   what: issue-was-closed
@@ -145491,6 +145310,7 @@
   _time: 2025-09-06 10:35:10.702115307 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#131 has been 'issue-was-closed'.
+  is_human: 1
   issue: 131
   repository: 820463873
   what: issue-was-closed
@@ -145502,6 +145322,7 @@
   _time: 2025-09-06 10:35:11.429164953 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#192 has been 'issue-was-closed'.
+  is_human: 1
   issue: 192
   repository: 799177290
   what: issue-was-closed
@@ -145513,6 +145334,7 @@
   _time: 2025-09-06 10:35:12.576997804 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/fbe#132 has been 'issue-was-closed'.
+  is_human: 1
   issue: 132
   repository: 820463873
   what: issue-was-closed
@@ -145524,6 +145346,7 @@
   _time: 2025-09-06 10:35:13.333931736 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#193 has been 'issue-was-closed'.
+  is_human: 1
   issue: 193
   repository: 799177290
   what: issue-was-closed
@@ -145535,6 +145358,7 @@
   _time: 2025-09-06 10:35:14.946126680 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#194 has been 'issue-was-closed'.
+  is_human: 1
   issue: 194
   repository: 799177290
   what: issue-was-closed
@@ -145546,6 +145370,7 @@
   _time: 2025-09-06 10:35:15.456648318 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, yegor256/0rsk#46 has been 'issue-was-closed'.
+  is_human: 1
   issue: 46
   repository: 181044958
   what: issue-was-closed
@@ -145557,6 +145382,7 @@
   _time: 2025-09-06 10:35:16.792103544 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#195 has been 'issue-was-closed'.
+  is_human: 1
   issue: 195
   repository: 799177290
   what: issue-was-closed
@@ -145568,6 +145394,7 @@
   _time: 2025-09-06 10:35:17.310568416 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, yegor256/0rsk#51 has been 'issue-was-closed'.
+  is_human: 1
   issue: 51
   repository: 181044958
   what: issue-was-closed
@@ -145579,6 +145406,7 @@
   _time: 2025-09-06 10:35:18.520867868 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#200 has been 'issue-was-closed'.
+  is_human: 1
   issue: 200
   repository: 799177290
   what: issue-was-closed
@@ -145590,6 +145418,7 @@
   _time: 2025-09-06 10:35:19.385757600 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/pages-action#138 has been 'issue-was-closed'.
+  is_human: 1
   issue: 138
   repository: 802720676
   what: issue-was-closed
@@ -145601,6 +145430,7 @@
   _time: 2025-09-06 10:35:20.211319630 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#201 has been 'issue-was-closed'.
+  is_human: 1
   issue: 201
   repository: 799177290
   what: issue-was-closed
@@ -145612,6 +145442,7 @@
   _time: 2025-09-06 10:35:21.100259517 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/pages-action#141 has been 'issue-was-closed'.
+  is_human: 1
   issue: 141
   repository: 802720676
   what: issue-was-closed
@@ -145623,6 +145454,7 @@
   _time: 2025-09-06 10:35:21.841821125 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#202 has been 'issue-was-closed'.
+  is_human: 1
   issue: 202
   repository: 799177290
   what: issue-was-closed
@@ -145634,6 +145466,7 @@
   _time: 2025-09-06 10:35:23.101707377 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#203 has been 'issue-was-closed'.
+  is_human: 1
   issue: 203
   repository: 799177290
   what: issue-was-closed
@@ -145645,6 +145478,7 @@
   _time: 2025-09-06 10:35:23.883678110 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/pages-action#151 has been 'issue-was-closed'.
+  is_human: 1
   issue: 151
   repository: 802720676
   what: issue-was-closed
@@ -145656,6 +145490,7 @@
   _time: 2025-09-06 10:35:24.631732667 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#209 has been 'issue-was-closed'.
+  is_human: 1
   issue: 209
   repository: 799177290
   what: issue-was-closed
@@ -145667,6 +145502,7 @@
   _time: 2025-09-06 10:35:25.420149182 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/pages-action#152 has been 'issue-was-closed'.
+  is_human: 1
   issue: 152
   repository: 802720676
   what: issue-was-closed
@@ -145678,6 +145514,7 @@
   _time: 2025-09-06 10:35:26.124891220 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#211 has been 'issue-was-closed'.
+  is_human: 0
   issue: 211
   repository: 799177290
   what: issue-was-closed
@@ -145689,6 +145526,7 @@
   _time: 2025-09-06 10:35:27.398391154 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#214 has been 'issue-was-closed'.
+  is_human: 1
   issue: 214
   repository: 799177290
   what: issue-was-closed
@@ -145700,6 +145538,7 @@
   _time: 2025-09-06 10:35:28.691192807 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#216 has been 'issue-was-closed'.
+  is_human: 1
   issue: 216
   repository: 799177290
   what: issue-was-closed
@@ -145711,6 +145550,7 @@
   _time: 2025-09-06 10:35:30.483942718 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#218 has been 'issue-was-closed'.
+  is_human: 0
   issue: 218
   repository: 799177290
   what: issue-was-closed
@@ -145722,6 +145562,7 @@
   _time: 2025-09-06 10:35:31.495560916 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#219 has been 'issue-was-closed'.
+  is_human: 1
   issue: 219
   repository: 799177290
   what: issue-was-closed
@@ -145733,6 +145574,7 @@
   _time: 2025-09-06 10:35:32.444523918 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#220 has been 'issue-was-closed'.
+  is_human: 1
   issue: 220
   repository: 799177290
   what: issue-was-closed
@@ -145744,6 +145586,7 @@
   _time: 2025-09-06 10:35:33.465839908 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#224 has been 'issue-was-closed'.
+  is_human: 1
   issue: 224
   repository: 799177290
   what: issue-was-closed
@@ -145755,6 +145598,7 @@
   _time: 2025-09-06 10:35:34.459462619 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#227 has been 'issue-was-closed'.
+  is_human: 1
   issue: 227
   repository: 799177290
   what: issue-was-closed
@@ -145766,6 +145610,7 @@
   _time: 2025-09-06 10:35:35.412871784 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#229 has been 'issue-was-closed'.
+  is_human: 1
   issue: 229
   repository: 799177290
   what: issue-was-closed
@@ -145777,6 +145622,7 @@
   _time: 2025-09-06 10:35:36.651464440 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#238 has been 'issue-was-closed'.
+  is_human: 1
   issue: 238
   repository: 799177290
   what: issue-was-closed
@@ -145788,6 +145634,7 @@
   _time: 2025-09-06 10:35:37.640806536 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#239 has been 'issue-was-closed'.
+  is_human: 1
   issue: 239
   repository: 799177290
   what: issue-was-closed
@@ -145799,6 +145646,7 @@
   _time: 2025-09-06 10:35:38.741957895 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#240 has been 'issue-was-closed'.
+  is_human: 1
   issue: 240
   repository: 799177290
   what: issue-was-closed
@@ -145810,6 +145658,7 @@
   _time: 2025-09-06 10:35:39.681725009 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#244 has been 'issue-was-closed'.
+  is_human: 1
   issue: 244
   repository: 799177290
   what: issue-was-closed
@@ -145821,6 +145670,7 @@
   _time: 2025-09-06 10:35:40.634372457 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#254 has been 'issue-was-closed'.
+  is_human: 1
   issue: 254
   repository: 799177290
   what: issue-was-closed
@@ -145832,6 +145682,7 @@
   _time: 2025-09-06 10:35:41.615678499 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#271 has been 'issue-was-closed'.
+  is_human: 1
   issue: 271
   repository: 799177290
   what: issue-was-closed
@@ -145843,6 +145694,7 @@
   _time: 2025-09-06 10:35:42.540938134 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#276 has been 'issue-was-closed'.
+  is_human: 1
   issue: 276
   repository: 799177290
   what: issue-was-closed
@@ -145854,6 +145706,7 @@
   _time: 2025-09-06 10:35:43.549944835 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#298 has been 'issue-was-closed'.
+  is_human: 1
   issue: 298
   repository: 799177290
   what: issue-was-closed
@@ -145865,6 +145718,7 @@
   _time: 2025-09-06 10:35:44.459042965 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#308 has been 'issue-was-closed'.
+  is_human: 1
   issue: 308
   repository: 799177290
   what: issue-was-closed
@@ -145876,6 +145730,7 @@
   _time: 2025-09-06 10:35:45.357110536 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#311 has been 'issue-was-closed'.
+  is_human: 1
   issue: 311
   repository: 799177290
   what: issue-was-closed
@@ -145887,6 +145742,7 @@
   _time: 2025-09-06 10:35:46.289627283 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#325 has been 'issue-was-closed'.
+  is_human: 1
   issue: 325
   repository: 799177290
   what: issue-was-closed
@@ -145898,6 +145754,7 @@
   _time: 2025-09-06 10:35:47.180359194 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#338 has been 'issue-was-closed'.
+  is_human: 1
   issue: 338
   repository: 799177290
   what: issue-was-closed
@@ -145909,6 +145766,7 @@
   _time: 2025-09-06 10:35:48.096389498 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#345 has been 'issue-was-closed'.
+  is_human: 1
   issue: 345
   repository: 799177290
   what: issue-was-closed
@@ -145920,6 +145778,7 @@
   _time: 2025-09-06 10:35:49.041960547 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#350 has been 'issue-was-closed'.
+  is_human: 1
   issue: 350
   repository: 799177290
   what: issue-was-closed
@@ -145931,6 +145790,7 @@
   _time: 2025-09-06 10:35:50.012246349 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#372 has been 'issue-was-closed'.
+  is_human: 1
   issue: 372
   repository: 799177290
   what: issue-was-closed
@@ -145942,6 +145802,7 @@
   _time: 2025-09-06 10:35:50.903196526 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#373 has been 'issue-was-closed'.
+  is_human: 1
   issue: 373
   repository: 799177290
   what: issue-was-closed
@@ -145953,6 +145814,7 @@
   _time: 2025-09-06 10:35:51.868764894 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#375 has been 'issue-was-closed'.
+  is_human: 1
   issue: 375
   repository: 799177290
   what: issue-was-closed
@@ -145964,6 +145826,7 @@
   _time: 2025-09-06 10:35:52.760653199 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#380 has been 'issue-was-closed'.
+  is_human: 1
   issue: 380
   repository: 799177290
   what: issue-was-closed
@@ -145975,6 +145838,7 @@
   _time: 2025-09-06 10:35:53.699908705 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#397 has been 'issue-was-closed'.
+  is_human: 1
   issue: 397
   repository: 799177290
   what: issue-was-closed
@@ -145986,6 +145850,7 @@
   _time: 2025-09-06 10:35:55.351725601 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#412 has been 'issue-was-closed'.
+  is_human: 1
   issue: 412
   repository: 799177290
   what: issue-was-closed
@@ -145997,6 +145862,7 @@
   _time: 2025-09-06 10:35:56.282034199 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#416 has been 'issue-was-closed'.
+  is_human: 1
   issue: 416
   repository: 799177290
   what: issue-was-closed
@@ -146008,6 +145874,7 @@
   _time: 2025-09-06 10:35:57.289546876 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#419 has been 'issue-was-closed'.
+  is_human: 1
   issue: 419
   repository: 799177290
   what: issue-was-closed
@@ -146019,6 +145886,7 @@
   _time: 2025-09-06 10:35:58.152223398 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#421 has been 'issue-was-closed'.
+  is_human: 1
   issue: 421
   repository: 799177290
   what: issue-was-closed
@@ -146030,6 +145898,7 @@
   _time: 2025-09-06 10:35:58.907377551 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#428 has been 'issue-was-closed'.
+  is_human: 1
   issue: 428
   repository: 799177290
   what: issue-was-closed
@@ -146041,6 +145910,7 @@
   _time: 2025-09-06 10:35:59.637491525 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#434 has been 'issue-was-closed'.
+  is_human: 1
   issue: 434
   repository: 799177290
   what: issue-was-closed
@@ -146052,17 +145922,727 @@
   _time: 2025-09-06 10:36:00.390105755 Z
   _version: 0.16.1/0.53.6/0.15.35
   details: Apparently, zerocracy/judges-action#440 has been 'issue-was-closed'.
+  is_human: 1
   issue: 440
   repository: 799177290
   what: issue-was-closed
   when: 2024-12-24 06:15:00.000000000 Z
   where: github
   who: 526301
-- _id: 2128141
-  _job: 17513278011
-  _time: 2025-09-06 10:36:03.403026018 Z
+- _id: 2128142
+  _job: 36370
+  _time: 2025-09-06 10:36:42.837865396 Z
   _version: 0.16.1/0.53.6/0.15.35
-  latest: 760
+  comments: 4
+  details: The pull request zerocracy/pages-action#370 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 6h7m of being in review and 4 comments.
+  hoc: 2
+  is_human: 0
+  issue: 370
+  merger: 8086956
+  repository: 802720676
+  review_comments: 0
+  seconds: 22025
+  what: code-was-contributed
+  when: *1214
+  where: github
+  who: 29139614
+- _id: 2128143
+  _job: 36370
+  _time: 2025-09-06 10:36:43.315217594 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  comments: 1
+  details: The pull request zerocracy/fbe#298 with 4 HoC created by @renovate[bot]
+    was merged by @yegor256 after 2h6m of being in review and 1 comments.
+  hoc: 4
+  is_human: 0
+  issue: 298
+  merger: 526301
+  repository: 820463873
+  review_comments: 0
+  seconds: 7576
+  what: code-was-contributed
+  when: *1215
+  where: github
+  who: 29139614
+- _id: 2128144
+  _job: 17513825307
+  _time: 2025-09-06 11:18:42.660171906 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 54325864499
+  repository: 799177290
+  what: events-were-scanned
+  where: github
+- _id: 2128145
+  _job: 17513825307
+  _time: 2025-09-06 11:18:42.775520237 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 54331677828
+  repository: 820463873
+  what: events-were-scanned
+  where: github
+- _id: 2128146
+  _job: 17513825307
+  _time: 2025-09-06 11:20:50.589164721 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 820463873
+  what: types-were-scanned
+  where: github
+- _id: 2128147
+  _job: 17513825307
+  _time: 2025-09-06 11:20:50.678146809 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 799177290
+  what: types-were-scanned
+  where: github
+- _id: 2128148
+  _job: 17513825307
+  _time: 2025-09-06 11:20:50.758531955 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 802720676
+  what: types-were-scanned
+  where: github
+- _id: 2128149
+  _job: 17513825307
+  _time: 2025-09-06 11:20:50.844123746 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 141
+  repository: 181044958
+  what: types-were-scanned
+  where: github
+- _id: 2128150
+  _job: 17513825307
+  _time: 2025-09-06 11:20:50.923154377 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 799113787
+  what: types-were-scanned
+  where: github
+- _id: 2128151
+  _job: 17513825307
+  _time: 2025-09-06 11:20:51.000802629 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 798641472
+  what: types-were-scanned
+  where: github
+- _id: 2128152
+  _job: 17513825307
+  _time: 2025-09-06 11:21:30.863194996 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
   repository: 799177290
   what: issues-were-scanned
   where: github
+- _id: 2128153
+  _job: 17513825307
+  _time: 2025-09-06 11:22:57.480194626 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/baza.rb#12.
+  is_human: 1
+  issue: 12
+  label: bug
+  repository: 840215648
+  what: label-was-attached
+  when: 2024-08-18 06:01:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128154
+  _job: 17513825307
+  _time: 2025-09-06 11:23:29.985851459 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#37.
+  is_human: 1
+  issue: 37
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-07-26 05:37:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128155
+  _job: 17513825307
+  _time: 2025-09-06 11:23:30.059739284 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#37.
+  is_human: 1
+  issue: 37
+  label: enhancement
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-07-26 05:37:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128156
+  _job: 17513825307
+  _time: 2025-09-06 11:23:31.203068955 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#38.
+  is_human: 1
+  issue: 38
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-07-26 06:51:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128157
+  _job: 17513825307
+  _time: 2025-09-06 11:23:35.493902830 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#46.
+  is_human: 1
+  issue: 46
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-07-30 05:08:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128158
+  _job: 17513825307
+  _time: 2025-09-06 11:23:39.098494305 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#138.
+  is_human: 1
+  issue: 138
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-09-26 01:48:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128159
+  _job: 17513825307
+  _time: 2025-09-06 11:23:40.044694088 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#141.
+  is_human: 1
+  issue: 141
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-09-26 08:56:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128160
+  _job: 17513825307
+  _time: 2025-09-06 11:23:40.913660130 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#151.
+  is_human: 1
+  issue: 151
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-10-10 01:55:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128161
+  _job: 17513825307
+  _time: 2025-09-06 11:23:42.309478638 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#152.
+  is_human: 1
+  issue: 152
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-10-10 06:50:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128162
+  _job: 17513825307
+  _time: 2025-09-06 11:23:49.124428144 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#75.
+  is_human: 1
+  issue: 75
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-08-18 11:29:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128163
+  _job: 17513825307
+  _time: 2025-09-06 11:23:49.786237227 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#76.
+  is_human: 1
+  issue: 76
+  label: enhancement
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-08-18 13:08:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128164
+  _job: 17513825307
+  _time: 2025-09-06 11:23:50.575455199 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#78.
+  is_human: 1
+  issue: 78
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-08-21 17:26:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128165
+  _job: 17513825307
+  _time: 2025-09-06 11:23:52.828611011 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#127.
+  is_human: 1
+  issue: 127
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-18 13:45:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128166
+  _job: 17513825307
+  _time: 2025-09-06 11:23:53.781810824 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#129.
+  is_human: 1
+  issue: 129
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-19 14:38:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128167
+  _job: 17513825307
+  _time: 2025-09-06 11:23:54.288001587 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#130.
+  is_human: 1
+  issue: 130
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-20 01:05:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128168
+  _job: 17513825307
+  _time: 2025-09-06 11:23:54.926127002 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#131.
+  is_human: 1
+  issue: 131
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-20 06:09:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128169
+  _job: 17513825307
+  _time: 2025-09-06 11:23:55.485618649 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#132.
+  is_human: 1
+  issue: 132
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-20 11:34:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 2128170
+  _job: 17513825307
+  _time: 2025-09-06 11:23:55.588611214 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 181044958
+  what: labels-were-scanned
+  where: github
+- _id: 2128171
+  _job: 17513825307
+  _time: 2025-09-06 11:23:55.676592466 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 799113787
+  what: labels-were-scanned
+  where: github
+- _id: 2128172
+  _job: 17513825307
+  _time: 2025-09-06 11:23:55.770054707 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 132
+  repository: 820463873
+  what: labels-were-scanned
+  where: github
+- _id: 2128173
+  _job: 17513825307
+  _time: 2025-09-06 11:23:55.852434653 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 798641472
+  what: labels-were-scanned
+  where: github
+- _id: 2128174
+  _job: 17513825307
+  _time: 2025-09-06 11:23:55.937949121 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 799177290
+  what: labels-were-scanned
+  where: github
+- _id: 2128175
+  _job: 17513825307
+  _time: 2025-09-06 11:28:17.670402621 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#102 was assigned to @yegorov by @yegor256.
+  issue: 102
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-10-08 23:41:37.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128176
+  _job: 17513825307
+  _time: 2025-09-06 11:28:32.194500467 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#155 was assigned to @yegorov by @yegor256.
+  issue: 155
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-05 05:55:27.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128177
+  _job: 17513825307
+  _time: 2025-09-06 11:28:33.460083636 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#156 was assigned to @yegorov by @yegor256.
+  issue: 156
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-07-29 18:47:59.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128178
+  _job: 17513825307
+  _time: 2025-09-06 11:28:34.694122191 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#157 was assigned to @yegorov by @yegor256.
+  issue: 157
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-07-28 18:46:08.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128179
+  _job: 17513825307
+  _time: 2025-09-06 11:28:36.116021576 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#158 was assigned to @yegorov by @yegor256.
+  issue: 158
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-07-26 04:13:57.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128180
+  _job: 17513825307
+  _time: 2025-09-06 11:28:38.007392128 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#166 was assigned to @yegorov by @yegor256.
+  issue: 166
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-06 00:28:00.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128181
+  _job: 17513825307
+  _time: 2025-09-06 11:28:38.934933162 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#167 was assigned to @yegorov by @yegor256.
+  issue: 167
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-11 13:18:29.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128182
+  _job: 17513825307
+  _time: 2025-09-06 11:28:39.911456531 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#189 was assigned to @suban05 by @yegor256.
+  issue: 189
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-25 15:58:09.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2128183
+  _job: 17513825307
+  _time: 2025-09-06 11:28:40.945704830 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#190 was assigned to @yegorov by @yegor256.
+  issue: 190
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-27 05:15:20.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128184
+  _job: 17513825307
+  _time: 2025-09-06 11:28:41.945980823 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#191 was assigned to @yegorov by @yegor256.
+  issue: 191
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-29 05:16:30.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128185
+  _job: 17513825307
+  _time: 2025-09-06 11:28:42.911951472 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#192 was assigned to @yegorov by @yegor256.
+  issue: 192
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-06 03:34:54.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128186
+  _job: 17513825307
+  _time: 2025-09-06 11:28:43.841313099 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#193 was assigned to @yegorov by @yegor256.
+  issue: 193
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-14 04:56:29.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128187
+  _job: 17513825307
+  _time: 2025-09-06 11:28:44.659758230 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#194 was assigned to @yegorov by @yegor256.
+  issue: 194
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-15 13:01:09.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128188
+  _job: 17513825307
+  _time: 2025-09-06 11:28:45.530423222 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#195 was assigned to @yegorov by @yegor256.
+  issue: 195
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-20 16:38:03.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128189
+  _job: 17513825307
+  _time: 2025-09-06 11:28:46.400659179 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#200 was assigned to @yegorov by @yegor256.
+  issue: 200
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-22 03:33:43.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128190
+  _job: 17513825307
+  _time: 2025-09-06 11:28:47.225213897 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#201 was assigned to @suban05 by @yegor256.
+  issue: 201
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-22 11:27:41.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2128191
+  _job: 17513825307
+  _time: 2025-09-06 11:28:47.996247870 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#202 was assigned to @yegorov by @yegor256.
+  issue: 202
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-23 19:22:25.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128192
+  _job: 17513825307
+  _time: 2025-09-06 11:28:48.738957231 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#203 was assigned to @yegorov by @yegor256.
+  issue: 203
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-09-26 00:45:51.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2128193
+  _job: 17513825307
+  _time: 2025-09-06 11:28:49.594112044 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  assigner: 526301
+  details: zerocracy/judges-action#209 was assigned to @suban05 by @yegor256.
+  issue: 209
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-01 05:57:08.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2128194
+  _job: 17513825307
+  _time: 2025-09-06 11:28:49.811858989 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 799113787
+  what: assignees-were-scanned
+  where: github
+- _id: 2128195
+  _job: 17513825307
+  _time: 2025-09-06 11:28:49.899206860 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 209
+  repository: 799177290
+  what: assignees-were-scanned
+  where: github
+- _id: 2128196
+  _job: 17513825307
+  _time: 2025-09-06 11:28:49.981480320 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 798641472
+  what: assignees-were-scanned
+  where: github
+- _id: 2128197
+  _job: 17513825307
+  _time: 2025-09-06 11:28:50.059212795 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 0
+  repository: 181044958
+  what: assignees-were-scanned
+  where: github
+- _id: 2128198
+  _job: 17513825307
+  _time: 2025-09-06 11:32:09.908580754 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 200
+  repository: 798641472
+  what: min-pull-was-found
+  where: github
+- _id: 2128199
+  _job: 17513825307
+  _time: 2025-09-06 11:32:09.985844617 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 7
+  repository: 974194993
+  what: min-pull-was-found
+  where: github
+- _id: 2128200
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.061888250 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 560
+  repository: 799177290
+  what: min-pull-was-found
+  where: github
+- _id: 2128201
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.138330608 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 158
+  repository: 802720676
+  what: min-pull-was-found
+  where: github
+- _id: 2128202
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.214296837 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 95
+  repository: 181044958
+  what: min-pull-was-found
+  where: github
+- _id: 2128203
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.289763803 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 207
+  repository: 820463873
+  what: min-pull-was-found
+  where: github
+- _id: 2128204
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.365263740 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 185
+  repository: 799113787
+  what: min-pull-was-found
+  where: github
+- _id: 2128205
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.452131774 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 11
+  repository: 840215648
+  what: min-pull-was-found
+  where: github
+- _id: 2128206
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.522707082 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  latest: 105
+  repository: 849726475
+  what: min-pull-was-found
+  where: github
+- _id: 2128207
+  _job: 17513825307
+  _time: 2025-09-06 11:32:10.557138091 Z
+  _version: 0.16.1/0.53.6/0.15.35
+  total_active_contributors: 6
+  total_commits: 6093
+  total_contributors: 18
+  total_files: 794
+  total_forks: 29
+  total_issues: 954
+  total_pulls: 1847
+  total_releases: 714
+  total_repositories: 9
+  total_stars: 78
+  what: dimensions-of-terrain
+  when: 2025-09-06 11:32:10.562630792 Z
