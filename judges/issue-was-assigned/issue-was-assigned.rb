@@ -10,7 +10,7 @@ require 'fbe/octo'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.iterate do
-  as 'assignees-were-scanned'
+  as 'assignees_were_scanned'
   by "(agg
     (and
       (gt issue $before)

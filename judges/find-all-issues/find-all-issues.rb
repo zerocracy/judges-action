@@ -28,7 +28,7 @@ require_relative '../../lib/issue_was_lost'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
-    as "min-#{type}-was-found"
+    as "min_#{type}_was_found"
     by "
       (agg
         (and

@@ -20,7 +20,7 @@ require 'joined'
 events = %w[issue_type_added issue_type_changed]
 
 Fbe.iterate do
-  as 'types-were-scanned'
+  as 'types_were_scanned'
   by "(agg
     (and
       (eq what 'issue-was-opened')

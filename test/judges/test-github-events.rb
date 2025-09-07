@@ -61,7 +61,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11))
     assert(fb.none?(event_type: 'CreateEvent'))
   end
 
@@ -586,7 +586,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_125))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_125))
     assert(fb.none?(event_type: 'IssuesEvent'))
   end
 
@@ -855,7 +855,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_124))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_124))
     assert(fb.none?(event_type: 'PullRequestReviewEvent'))
   end
 
@@ -1349,7 +1349,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 55_555))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 55_555))
   end
 
   def test_pull_request_event_with_comments
@@ -1498,7 +1498,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned'))
+    assert(fb.one?(what: 'iterate'))
     assert(fb.none?(what: 'git-was-pushed'))
   end
 
@@ -1529,7 +1529,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_111))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_111))
     assert(
       fb.one?(
         what: 'git-was-pushed', event_id: 11_111, when: Time.parse('2025-06-26 19:03:16 UTC'),
@@ -1571,7 +1571,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_122))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_122))
     assert(
       fb.one?(
         what: 'pull-was-opened', event_id: 11_122, when: Time.parse('2025-06-27 19:00:05 UTC'),
@@ -1610,7 +1610,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 11_123))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_123))
     assert(fb.none?(event_type: 'PullRequestEvent'))
   end
 
@@ -1754,7 +1754,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 22_222))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 22_222))
     assert(
       fb.one?(
         what: 'comment-was-posted', event_id: 22_222, when: Time.parse('2025-06-27 19:00:00 UTC'), issue: 789,
@@ -1792,7 +1792,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', repository: 42, latest: 22_223))
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 22_223))
     assert(fb.none?(event_type: 'IssueCommentEvent'))
   end
 
@@ -1836,7 +1836,7 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 3 }))
     assert_equal(4, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 14))
+    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 14))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 12))
@@ -1876,10 +1876,10 @@ class TestGithubEvents < Jp::Test
       ]
     )
     fb = Factbase.new
-    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, latest: 14, what: 'events-were-scanned')
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 14, what: 'iterate')
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 15))
+    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 15))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
     assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
     assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
@@ -1911,7 +1911,7 @@ class TestGithubEvents < Jp::Test
     fb.with(what: 'tag-was-created', event_type: 'CreateEvent', repository: 42, where: 'github', event_id: 15)
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 15))
+    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 15))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
   end
 
@@ -1955,10 +1955,10 @@ class TestGithubEvents < Jp::Test
       ]
     )
     fb = Factbase.new
-    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, latest: 12, what: 'events-were-scanned')
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 12, what: 'iterate')
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 12))
+    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 12))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
   end
 
@@ -2058,7 +2058,7 @@ class TestGithubEvents < Jp::Test
       load_it('github-events', fb)
     end
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'events-were-scanned', where: 'github', repository: 42, latest: 11_122))
+    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 11_122))
     assert(fb.one?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 456))
   end
 

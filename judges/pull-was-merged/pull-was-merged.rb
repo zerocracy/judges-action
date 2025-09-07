@@ -17,7 +17,7 @@ require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
 
 Fbe.iterate do
-  as 'merges-were-scanned'
+  as 'merges_were_scanned'
   by "(agg
     (and
       (eq repository $repository)

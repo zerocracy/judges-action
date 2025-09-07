@@ -24,7 +24,7 @@ require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 
 Fbe.iterate do
-  as 'events-were-scanned'
+  as 'events_were_scanned'
   by '(plus 0 $before)'
 
   def self.skip_event(json)

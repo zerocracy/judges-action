@@ -13,7 +13,7 @@ require 'fbe/who'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.iterate do
-  as 'issues-were-scanned'
+  as 'issues_were_scanned'
   by "(agg
     (and
       (gt issue $before)

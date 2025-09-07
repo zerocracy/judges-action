@@ -58,14 +58,16 @@ class TestFindAllIssues < Jp::Test
     WebMock.disable_net_connect!
     fb = Factbase.new
     fb.insert.then do |f|
+      f._id = 10
       f.issue = 880
       f.repository = 1579
       f.what = 'issue-was-opened'
       f.where = 'github'
     end
     fb.insert.then do |f|
-      f.what = 'min-issue-was-found'
-      f.latest = 0
+      f._id = 11
+      f.what = 'iterate'
+      f.min_issue_was_found = 0
       f.where = 'github'
       f.repository = 1579
     end
@@ -199,11 +201,10 @@ class TestFindAllIssues < Jp::Test
     end
     load_it('find-all-issues', fb)
     assert_equal(6, fb.query('(always)').each.to_a.size)
-    fb.query("(eq what 'min-issue-was-found')").each.to_a.first.then do |f|
-      assert_equal('min-issue-was-found', f.what)
+    fb.query("(eq what 'iterate')").each.to_a.first.then do |f|
       assert_equal('github', f.where)
       assert_equal(695, f.repository)
-      assert_equal(87, f.latest)
+      assert_equal(87, f.min_issue_was_found)
     end
     fs = fb.query("(eq what 'issue-was-opened')").each.to_a
     assert_equal(5, fs.count)

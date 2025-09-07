@@ -21,7 +21,7 @@ require_relative '../../lib/issue_was_lost'
 badges = %w[bug enhancement question]
 
 Fbe.iterate do
-  as 'labels-were-scanned'
+  as 'labels_were_scanned'
   by "(agg
     (and
       (eq what 'issue-was-opened')
