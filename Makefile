@@ -4,7 +4,7 @@
 .ONESHELL:
 .PHONY: clean test all entry rmi verify entries rubocop
 .SHELLFLAGS := -e -o pipefail -c
-SHELL := /bin/bash
+SHELL := bash
 
 export
 
