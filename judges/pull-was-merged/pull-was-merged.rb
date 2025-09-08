@@ -47,7 +47,7 @@ Fbe.iterate do
       (eq where 'github'))
     (min issue))"
   repeats 50
-  over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
+  over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
     json =
       begin

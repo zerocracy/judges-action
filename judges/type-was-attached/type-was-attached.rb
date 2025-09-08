@@ -38,7 +38,7 @@ Fbe.iterate do
       (eq where 'github'))
     (min issue))"
   repeats 64
-  over(timeout: ($options.timeout || 60) * 0.8) do |repository, issue|
+  over do |repository, issue|
     begin
       repo = Fbe.octo.repo_name_by_id(repository)
       Fbe.octo.issue_timeline(repo, issue).each do |te|
