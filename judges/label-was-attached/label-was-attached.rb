@@ -58,10 +58,10 @@ Fbe.iterate do
           n.where = 'github'
           n.repository = repository
           n.issue = issue
-          n.label = te[:label][:name]
           n.what = $judge
         end
-      raise "Label already attached to #{repo}##{issue}" if nn.nil?
+      raise "A label is already attached to #{repo}##{issue}" if nn.nil?
+      nn.label = badge
       nn.who = te[:actor][:id]
       nn.when = te[:created_at]
       nn.details =
