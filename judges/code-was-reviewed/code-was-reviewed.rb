@@ -37,7 +37,7 @@ Fbe.consider(
       Fbe.octo.pull_request_reviews(repo, f.issue)
     rescue Octokit::NotFound
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}")
-      Jp.issue_was_lost('github', f.repository, f.issue)
+      Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
     end
   reviews.each do |review|

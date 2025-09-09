@@ -43,7 +43,7 @@ Fbe.conclude do
         Fbe.octo.issue(repo, f.issue)
       rescue Octokit::NotFound => e
         $loog.info("The issue ##{f.issue} doesn't exist in #{repo}: #{e.message}")
-        Jp.issue_was_lost('github', f.repository, f.issue)
+        Jp.issue_was_lost(f.where, f.repository, f.issue)
         next
       end
     n.what = $judge

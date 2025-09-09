@@ -37,7 +37,7 @@ Fbe.consider(
       Fbe.octo.pull_request(repo, f.issue)
     rescue Octokit::NotFound => e
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
-      Jp.issue_was_lost('github', f.repository, f.issue)
+      Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
     end
   c = json[:review_comments]

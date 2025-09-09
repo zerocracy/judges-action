@@ -30,7 +30,7 @@ Fbe.consider(
       Fbe.octo.issue(repo, f.issue)
     rescue Octokit::NotFound => e
       $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
-      Jp.issue_was_lost('github', f.repository, f.issue)
+      Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
     end
   ref = json.dig(:pull_request, :head, :ref)
