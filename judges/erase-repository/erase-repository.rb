@@ -10,26 +10,23 @@
 
 require 'elapsed'
 require 'fbe/octo'
-require 'fbe/conclude'
+require 'fbe/consider'
 
 good = {}
 
-Fbe.conclude do
-  on '(and (eq where "github") (exists repository) (absent stale))'
-  consider do |f|
-    r = f.repository
-    if good[r].nil?
-      elapsed($loog) do
-        json = Fbe.octo.repository(r)
-        good[r] = true
-        throw :"GitHub repository ##{r} is found: #{json[:full_name]}"
-      rescue Octokit::NotFound
-        good[r] = false
-        throw :"GitHub repository ##{r} is not found"
-      end
+Fbe.consider('(and (eq where "github") (exists repository) (absent stale))') do |f|
+  r = f.repository
+  if good[r].nil?
+    elapsed($loog) do
+      json = Fbe.octo.repository(r)
+      good[r] = true
+      throw :"GitHub repository ##{r} is found: #{json[:full_name]}"
+    rescue Octokit::NotFound
+      good[r] = false
+      throw :"GitHub repository ##{r} is not found"
     end
-    f.stale = 'repository' unless good[r]
   end
+  f.stale = 'repository' unless good[r]
 end
 
 Fbe.octo.print_trace!
