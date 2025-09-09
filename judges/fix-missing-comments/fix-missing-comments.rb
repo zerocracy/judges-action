@@ -7,7 +7,7 @@
 # create missing [issue/pull]-was-opened fact
 
 require 'octokit'
-require 'fbe/conclude'
+require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
@@ -15,8 +15,8 @@ require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
 
-Fbe.conclude do
-  on "(and
+Fbe.consider(
+  "(and
     (or (eq what 'pull-was-merged') (eq what 'pull-was-closed'))
     (eq where 'github')
     (exists issue)
@@ -25,19 +25,18 @@ Fbe.conclude do
     (absent tombstone)
     (absent done)
     (absent comments))"
-  consider do |f|
-    repo = Fbe.octo.repo_name_by_id(f.repository)
-    json =
-      begin
-        Fbe.octo.pull_request(repo, f.issue)
-      rescue Octokit::NotFound
-        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-        Jp.issue_was_lost('github', f.repository, f.issue)
-        next
-      end
-    Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
-    $loog.info("Comments found for #{Fbe.issue(f)}: #{f.comments}")
-  end
+) do |f|
+  repo = Fbe.octo.repo_name_by_id(f.repository)
+  json =
+    begin
+      Fbe.octo.pull_request(repo, f.issue)
+    rescue Octokit::NotFound
+      $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
+      Jp.issue_was_lost('github', f.repository, f.issue)
+      next
+    end
+  Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
+  $loog.info("Comments found for #{Fbe.issue(f)}: #{f.comments}")
 end
 
 Fbe.octo.print_trace!

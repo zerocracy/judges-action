@@ -7,7 +7,7 @@
 # create missing [issue/pull]-was-opened fact
 
 require 'octokit'
-require 'fbe/conclude'
+require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
@@ -19,8 +19,8 @@ require 'fbe/who'
   'pull-was-closed' => :closed_by,
   'pull-was-merged' => :merged_by
 }.each do |w, a|
-  Fbe.conclude do
-    on "(and
+  Fbe.consider(
+    "(and
       (absent who)
       (eq what '#{w}')
       (exists issue)
@@ -29,24 +29,23 @@ require 'fbe/who'
       (absent tombstone)
       (absent done)
       (eq where 'github'))"
-    consider do |f|
-      repo = Fbe.octo.repo_name_by_id(f.repository)
-      begin
-        json = Fbe.octo.issue(repo, f.issue)
-      rescue Octokit::NotFound
-        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-        f.stale = 'issue'
-        $loog.info("#{Fbe.issue(f)} is lost")
-        next
-      end
-      who = json.dig(a, :id)
-      if who.nil?
-        f.stale = 'who'
-        $loog.info("Authorship is lost in #{Fbe.issue(f)}")
-      else
-        f.who = who
-        $loog.info("Authorship is restored in #{Fbe.issue(f)}: #{f.who}")
-      end
+  ) do |f|
+    repo = Fbe.octo.repo_name_by_id(f.repository)
+    begin
+      json = Fbe.octo.issue(repo, f.issue)
+    rescue Octokit::NotFound
+      $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
+      f.stale = 'issue'
+      $loog.info("#{Fbe.issue(f)} is lost")
+      next
+    end
+    who = json.dig(a, :id)
+    if who.nil?
+      f.stale = 'who'
+      $loog.info("Authorship is lost in #{Fbe.issue(f)}")
+    else
+      f.who = who
+      $loog.info("Authorship is restored in #{Fbe.issue(f)}: #{f.who}")
     end
   end
 end

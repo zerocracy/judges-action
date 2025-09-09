@@ -12,15 +12,15 @@
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/delete.rb Implementation of Fbe.delete
 
 require 'elapsed'
-require 'fbe/conclude'
+require 'fbe/consider'
 require 'fbe/fb'
 require 'fbe/octo'
 require_relative '../../lib/nick_of'
 
 seen = []
 
-Fbe.conclude do
-  on "(and
+Fbe.consider(
+  "(and
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '2 days'))
     (absent stale)
@@ -28,22 +28,21 @@ Fbe.conclude do
     (absent done)
     (exists who)
     (eq where 'github'))"
-  consider do |f|
-    next if seen.include?(f.who)
-    seen << f.who
-    elapsed($loog) do
-      nick = Jp.nick_of(f.who)
-      unless nick.nil?
-        $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
-        next
-      end
-      Fbe.fb.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who}))").delete!
-      done =
-        Fbe.fb.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
-          n.stale = 'who'
-        end
-      throw :"GitHub user ##{f.who} is gone, marked #{done} facts as stale"
+) do |f|
+  next if seen.include?(f.who)
+  seen << f.who
+  elapsed($loog) do
+    nick = Jp.nick_of(f.who)
+    unless nick.nil?
+      $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
+      next
     end
+    Fbe.fb.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who}))").delete!
+    done =
+      Fbe.fb.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
+        n.stale = 'who'
+      end
+    throw :"GitHub user ##{f.who} is gone, marked #{done} facts as stale"
   end
 end
 

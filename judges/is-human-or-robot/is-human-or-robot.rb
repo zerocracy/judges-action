@@ -12,10 +12,10 @@
 # @note Sets is_human=1 for humans and is_human=0 for bots
 
 require 'fbe/octo'
-require 'fbe/conclude'
+require 'fbe/consider'
 
-Fbe.conclude do
-  on '(and
+Fbe.consider(
+  '(and
     (absent is_human)
     (absent stale)
     (absent tombstone)
@@ -23,22 +23,21 @@ Fbe.conclude do
     (eq where "github")
     (exists what)
     (exists who))'
-  consider do |f|
-    begin
-      json = Fbe.octo.user(f.who)
-    rescue Octokit::NotFound => e
-      $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
-      f.stale = 'who'
-      next
-    end
-    type = json[:type]
-    if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
-      f.is_human = 0
-      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{f.what}")
-    else
-      f.is_human = 1
-      $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is not a bot, in #{f.what}")
-    end
+) do |f|
+  begin
+    json = Fbe.octo.user(f.who)
+  rescue Octokit::NotFound => e
+    $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
+    f.stale = 'who'
+    next
+  end
+  type = json[:type]
+  if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
+    f.is_human = 0
+    $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{f.what}")
+  else
+    f.is_human = 1
+    $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is not a bot, in #{f.what}")
   end
 end
 

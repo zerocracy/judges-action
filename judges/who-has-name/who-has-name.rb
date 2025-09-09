@@ -12,6 +12,7 @@
 # @note This judge runs periodically to ensure all users have up-to-date nicknames recorded
 
 require 'fbe/conclude'
+require 'fbe/consider'
 require 'fbe/delete'
 require 'fbe/delete_one'
 require 'fbe/fb'
@@ -49,8 +50,8 @@ Fbe.conclude do
   end
 end
 
-Fbe.conclude do
-  on "(and
+Fbe.consider(
+  "(and
     (eq what 'who-has-name')
     (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days'))
     (absent stale)
@@ -58,15 +59,14 @@ Fbe.conclude do
     (absent done)
     (exists who)
     (eq where 'github'))"
-  consider do |f|
-    nick = Jp.nick_of(f.who)
-    if nick.nil?
-      f.stale = 'who'
-      next
-    end
-    alive << f.who
-    Fbe.overwrite(f, 'name', nick)
+) do |f|
+  nick = Jp.nick_of(f.who)
+  if nick.nil?
+    f.stale = 'who'
+    next
   end
+  alive << f.who
+  Fbe.overwrite(f, 'name', nick)
 end
 
 Fbe.fb.query(
