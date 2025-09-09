@@ -63,7 +63,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
           f.stale = 'branch'
         end
       end
-      f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+      f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
       $loog.info("Lost #{type} #{Fbe.issue(f)} was found")
     end
     added += 1

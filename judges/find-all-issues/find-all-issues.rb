@@ -75,7 +75,7 @@ require_relative '../../lib/issue_was_lost'
                 f.stale = 'branch'
               end
             end
-            f.details = "The #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Fbe.who(f)}."
           end
         end
         throw :"Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}"

@@ -10,7 +10,12 @@ require_relative 'jp'
 # The issue was lost.
 def Jp.issue_was_lost(where, repository, issue)
   stale = Fbe.fb.query(
-    "(and (eq where '#{where}') (eq repository #{repository}) (eq issue #{issue}) (absent stale) (absent tombstone))"
+    "(and
+      (eq where '#{where}')
+      (eq repository #{repository})
+      (eq issue #{issue})
+      (absent stale)
+      (absent tombstone))"
   ).each { |f| f.stale = 'issue' }
   return if stale.positive?
   f =

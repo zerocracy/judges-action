@@ -211,7 +211,7 @@ class TestFindAllIssues < Jp::Test
     fs[-2].then do |f|
       assert_nil(f[:event_id])
       assert_nil(f[:event_type])
-      assert_equal('The issue foo/foo#42 has been opened by @yegor256.', f.details)
+      assert_equal('The issue foo/foo#42 has been earlier opened by @yegor256.', f.details)
       assert_equal(42, f.issue)
       assert_equal(695, f.repository)
       assert_equal('issue-was-opened', f.what)
@@ -222,7 +222,7 @@ class TestFindAllIssues < Jp::Test
     fs[-1].then do |f|
       assert_nil(f[:event_id])
       assert_nil(f[:event_type])
-      assert_equal('The issue foo/foo#45 has been opened by @yegor257.', f.details)
+      assert_equal('The issue foo/foo#45 has been earlier opened by @yegor257.', f.details)
       assert_equal(45, f.issue)
       assert_equal(695, f.repository)
       assert_equal('issue-was-opened', f.what)
