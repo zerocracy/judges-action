@@ -10,34 +10,28 @@
 
 require 'elapsed'
 require 'fbe/octo'
-require 'fbe/conclude'
+require 'fbe/consider'
 require_relative '../../lib/nick_of'
 
 good = Set.new
 
-Fbe.conclude do
-  on '(and (absent stale) (eq where "github") (exists who))'
-  consider do |f|
-    next if good.include?(f.who)
-    elapsed($loog) do
-      nick = Jp.nick_of(f.who)
-      if nick.nil?
-        f.stale = 'who'
-        throw :"GitHub user ##{f.who} is not found (stale)"
-      else
-        good.add(f.who)
-        throw :"GitHub user ##{f.who} (##{good.size}) is good: @#{nick}"
-      end
+Fbe.consider('(and (absent stale) (eq where "github") (exists who))') do |f|
+  next if good.include?(f.who)
+  elapsed($loog) do
+    nick = Jp.nick_of(f.who)
+    if nick.nil?
+      f.stale = 'who'
+      throw :"GitHub user ##{f.who} is not found (stale)"
+    else
+      good.add(f.who)
+      throw :"GitHub user ##{f.who} (##{good.size}) is good: @#{nick}"
     end
   end
 end
 
-Fbe.conclude do
-  on '(and (eq where "github") (exists who) (unique who) (eq stale "who"))'
-  consider do |f|
-    Fbe.fb.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
-      ff.stale = 'who'
-    end
+Fbe.consider('(and (eq where "github") (exists who) (unique who) (eq stale "who"))') do |f|
+  Fbe.consider("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))") do |ff|
+    ff.stale = 'who'
   end
 end
 
