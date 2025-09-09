@@ -32,7 +32,7 @@ Fbe.conclude do
     (unique repository issue)
     (empty
       (and
-        (eq where 'github')
+        (eq where $where)
         (eq repository $repository)
         (eq issue $issue)
         (eq what '#{$judge}'))))"

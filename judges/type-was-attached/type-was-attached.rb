@@ -34,7 +34,7 @@ Fbe.iterate do
           (eq repository $repository)
           (eq issue $issue)
           (eq what '#{$judge}')
-          (eq where 'github')))
+          (eq where $where)))
       (eq where 'github'))
     (min issue))"
   repeats 64

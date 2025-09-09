@@ -32,7 +32,7 @@ Fbe.iterate do
       (absent done)
       (empty
         (and
-          (eq where 'github')
+          (eq where $where)
           (eq repository $repository)
           (eq issue $issue)
           (eq what '#{$judge}')))

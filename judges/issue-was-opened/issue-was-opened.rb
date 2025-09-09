@@ -33,7 +33,7 @@ Fbe.conclude do
       (and
         (eq issue $issue)
         (eq repository $repository)
-        (eq where 'github')
+        (eq where $where)
         (eq what '#{$judge}'))))"
   follow 'where repository issue'
   draw do |n, f|
