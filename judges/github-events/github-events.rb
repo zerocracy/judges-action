@@ -268,6 +268,10 @@ Fbe.iterate do
     raise "#{who} doesn't have access to the #{rname} repository, maybe it's private"
   end
 
+  def self.stays_twice?(what, fields)
+    Fbe.fb.query("(and (eq what '#{what}') (unique #{fields.join(' ')}))").each.to_a.size > 1
+  end
+
   over do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
     $loog.debug("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
@@ -276,6 +280,15 @@ Fbe.iterate do
     detected = 0
     first = nil
     rstart = Time.now
+    uniques = {
+      'issue-was-opened' => %w[where repository issue who],
+      'issue-was-closed' => %w[where repository issue who],
+      'pull-was-opened' => %w[where repository issue who],
+      'pull-was-closed' => %w[where repository issue who],
+      'pull-was-merged' => %w[where repository issue who],
+      'label-was-attached' => %w[where repository issue label],
+      'type-was-attached' => %w[where repository issue type]
+    }
     Fbe.octo.repository_events(repository).each_with_index do |json, idx|
       if !$options.max_events.nil? && idx >= $options.max_events
         $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
@@ -296,17 +309,22 @@ Fbe.iterate do
           end
         if f.nil?
           $loog.debug("The event ##{id} just detected is already in the factbase")
-        else
-          fill_up_event(f, json)
-          if f['issue']
-            throw :rollback unless Fbe.fb.query(
-              "(and (eq what '#{f.where}') (eq repository #{f.repository}) (eq issue #{f.issue}) (exists done))"
-            ).each.empty?
-            throw :rollback if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
-          end
-          $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
-          detected += 1
+          next
         end
+        fill_up_event(f, json)
+        uniques.each { |w, ff| throw :rollback if stays_twice?(w, ff) }
+        if f['issue']
+          throw :rollback unless Fbe.fb.query(
+            "(and
+              (eq where '#{f.where}')
+              (eq repository #{f.repository})
+              (eq issue #{f.issue})
+              (exists done))"
+          ).each.empty?
+          throw :rollback if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
+        end
+        $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
+        detected += 1
       end
     end
     $loog.info("In #{rname}, detected #{detected} events out of #{total} scanned in #{rstart.ago}")
