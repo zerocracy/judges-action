@@ -274,7 +274,7 @@ Fbe.iterate do
 
   over do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
-    $loog.debug("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
+    $loog.info("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
     id = nil
     total = 0
     detected = 0
@@ -329,13 +329,13 @@ Fbe.iterate do
     end
     $loog.info("In #{rname}, detected #{detected} events out of #{total} scanned in #{rstart.ago}")
     if id.nil?
-      $loog.debug("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
+      $loog.info("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
       latest
     elsif id <= latest || latest.zero?
-      $loog.debug("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
+      $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
       first
     else
-      $loog.debug("Scanning of #{rname} wasn't completed in #{rstart.ago}, next time will try again until ##{latest}")
+      $loog.info("Scanning of #{rname} wasn't completed in #{rstart.ago}, next time will try again, from ##{latest}")
       latest
     end
   end
