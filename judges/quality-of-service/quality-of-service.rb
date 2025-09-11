@@ -15,7 +15,6 @@
 # @note Each supporting file with average_* prefix implements a specific metric calculation
 
 require 'fbe/consider'
-require 'fbe/octo'
 require 'fbe/regularly'
 require_relative '../../lib/incremate'
 
@@ -24,16 +23,16 @@ Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
 end
 
 Fbe.consider(
-  '(and
-    (eq what "quality-of-service")
+  "(and
+    (eq what '#{$judge}')
     (absent since)
-    (exists when))'
+    (exists when))"
 ) do |f|
   pmp = Fbe.fb.query("(and (eq what 'pmp') (eq area 'quality') (exists qos_days))").each.to_a.first
   f.since = f.when - (((!pmp.nil? && pmp['qos_days']&.first) || 28) * 24 * 60 * 60)
 end
 
-Fbe.consider('(and (eq what "quality-of-service") (exists since))') do |f|
+Fbe.consider("(and (eq what '#{$judge}') (exists since))") do |f|
   Jp.incremate(f, __dir__, 'average', avoid_duplicate: true)
 end
 
