@@ -335,8 +335,8 @@ Fbe.iterate do
       $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
       first
     else
-      $loog.info("Scanning of #{rname} wasn't completed in #{rstart.ago}, next time will try again, from ##{latest}")
-      latest
+      $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{id}")
+      id
     end
   end
 end
