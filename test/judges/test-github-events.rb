@@ -1932,7 +1932,7 @@ class TestGithubEvents < Jp::Test
     assert_equal(0, fb.all.size)
   end
 
-  def test_not_completed_scanning
+  def test_finished_scanning_with_saving_latest_event_id
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -1958,7 +1958,7 @@ class TestGithubEvents < Jp::Test
     fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 12, what: 'iterate')
     load_it('github-events', fb)
     assert_equal(2, fb.all.size)
-    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 12))
+    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 15))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
   end
 
