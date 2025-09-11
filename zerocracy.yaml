@@ -2,12 +2,13 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: A label is already attached to zerocracy/fbe#37
+  error: 'GET https://api.github.com/repos/zerocracy/pages-action/actions/jobs/50050214253:
+    502 - Server Error'
   inserted: 8
-  seconds: 1731.462841692
+  seconds: 1085.66892952
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-11 09:49:13.605763946 Z
+  when: 2025-09-11 10:37:58.015104201 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -5291,31 +5292,6 @@
   when: &132 2025-04-23 07:52:10.000000000 Z
   where: github
   who: 8086956
-- _id: 1662047
-  _job: 32476
-  _time: 2025-08-10 14:01:00.209312594 Z
-  _version: 0.14.5/0.52.2/0.15.9
-  since: 2025-04-20 14:05:42.219295916 Z
-  tombstone: 2025-09-03 09:41:13.267642949 Z
-  what: quantity-of-deliverables
-  when: 2025-04-27 14:05:42.219257855 Z
-- _id: 1662048
-  _job: 32476
-  _time: 2025-08-10 14:01:00.488979078 Z
-  _version: 0.14.5/0.52.2/0.15.9
-  tombstone: 2025-09-03 09:41:13.269831082 Z
-  total_active_contributors: 4
-  total_commits: 3929
-  total_contributors: 12
-  total_files: 519
-  total_forks: 19
-  total_issues: 553
-  total_pulls: 1009
-  total_releases: 439
-  total_repositories: 7
-  total_stars: 35
-  what: dimensions-of-terrain
-  when: 2025-04-28 07:47:49.882496143 Z
 - _id: 1662052
   _job: 32476
   _time: 2025-08-10 14:01:01.615403400 Z
@@ -6920,33 +6896,6 @@
   when: &167 2025-05-21 14:46:13.000000000 Z
   where: github
   who: 8086956
-- _id: 1663366
-  _job: 32480
-  _time: 2025-08-10 14:24:56.813096822 Z
-  _version: 0.14.5/0.52.2/0.15.9
-  average_backlog_size: 8.11111111111111
-  average_build_duration: 27.53369763205829
-  average_build_mttr: -25796
-  average_build_success_rate: 0.97632058287796
-  average_issue_lifetime: 1300540.8675213675
-  average_pull_files_size: 1.8068181818181819
-  average_pull_hoc_size: 107.3409090909091
-  average_pull_lifetime: 246633.15384615384
-  average_pull_rejection_rate: 0.12295081967213115
-  average_release_commits_size: 7.191489361702128
-  average_release_hoc_size: 173.79787234042553
-  average_release_interval: 53603.948453608245
-  average_review_size: 0.29345794392523367
-  average_review_time: 37484.72727272727
-  average_reviewers_per_pull: 0.22429906542056074
-  average_reviews_per_pull: 0.405607476635514
-  average_triage_time: 0
-  composite: 0.714
-  ffact: 1663210
-  since: 2025-04-20 15:06:19.574203431 Z
-  tombstone: 2025-09-03 09:41:13.271839655 Z
-  what: quality-of-service
-  when: 2025-04-27 15:06:19.574154630 Z
 - _id: 1663367
   _job: 32480
   _time: 2025-08-10 14:24:57.103401608 Z
@@ -136704,95 +136653,6 @@
   when: 2025-09-10 18:07:40.000000000 Z
   where: github
   who: 526301
-- _id: 2140683
-  _job: 37103
-  _time: 2025-09-10 18:44:52.299844732 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  anger: 2
-  area: hr
-  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\\\\\'t
-    obey the convention, a penalty is given to the author') (aka (let fee -12) (give
-    fee 'as a basis') 'deduct ${fee} points'))"
-  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
-    the team, the reporter receives a bonus') (aka (let bonus 12) (give bonus 'as
-    a basis') 'award ${bonus} points'))"
-  code_contribution_was_rewarded: "(award (explain 'When a code contribution is made,
-    the author receives a bonus') (in hoc 'the total number of hits-of-code in the
-    contribution') (in comments 'the total number of comments made by all reviewers')
-    (in reviews 'the number of reviews provided') (aka (let basis 16) (give basis
-    'as a basis') 'award ${basis} points') (aka (let hoc_k 0.05) (let hoc_threshold
-    200) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold)
-    (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max))
-    (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k}
-    points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-    but not more than ${hoc_max} points') (aka (let many_hoc_fee 8) (set penalty_for_hoc
-    (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc
-    'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${many_hoc_fee}
-    points if more than ${hoc_threshold} [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)')
-    (aka (let many_hoc_fee2 16) (let hoc_threshold2 800) (set penalty_for_hoc2 (if
-    (gte hoc hoc_threshold2) (times -1 many_hoc_fee2) 0)) (give penalty_for_hoc2 'for
-    way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${many_hoc_fee2}
-    points if more than ${hoc_threshold2} [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)')
-    (aka (let no_review_fee 16) (set penalty_for_no_review (if (eq reviews 0) (times
-    -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review')
-    'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k
-    0.2) (let comments_max -16) (let comments_min -4) (let comments_threshold 8) (set
-    bonus_for_comments (if (gt comments comments_threshold) (times comments (times
-    -1 comments_k)) 0)) (set bonus_for_comments (between bonus_for_comments comments_min
-    comments_max)) (give bonus_for_comments 'for too many (${comments} > ${comments_threshold})
-    comments that were made during review') 'deduct ${comments_k} points for every
-    comment above ${comments_threshold} made during review, but not more than ${comments_max}
-    points') (aka (let few_hoc_fee 8) (let hoc_needed 20) (set penalty_for_few_hoc
-    (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for
-    too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute
-    less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total)
-    max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4)
-    (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you
-    at least something') 'make sure the reward is not larger than ${max} points and
-    not smaller than ${min} points'))"
-  code_review_was_rewarded: |-
-    (award (explain 'An author of every code review receives a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 12) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 24) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.01) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let few_comments_fee 10) (let comments_needed 6) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 16) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 0.25) (let comments_max 8) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 8) (let hoc_needed 16) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
-  days_of_running_balance: 56
-  days_to_reward: 14
-  dud_was_punished: "(award (explain 'When an issue is submitted but then rejected
-    by the team, the reporter receives a penalty') (aka (let fee -16) (give fee 'as
-    a basis') 'deduct ${fee} points'))"
-  enhancement_suggestion_was_rewarded: "(award (explain 'When an enhancement is suggested
-    and accepted by the team, the reporter receives a bonus') (aka (let bonus 12)
-    (give bonus 'as a basis') 'award ${bonus} points'))"
-  long_pull_was_punished: "(award (explain 'Oversized pull requests get penalized')
-    (aka (let fee -8) (give fee 'as a basis') 'deduct ${fee} points'))"
-  master_punish_days: 4
-  published_release_was_rewarded: |-
-    (award (explain 'When a new release is published, everyone who contributed receives a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 24) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.01) (let hoc_max 24) (let hoc_min 4) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
-          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-          but not more than ${hoc_max} points') (aka (let max 32) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
-  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
-    default branch, they get a penalty') (aka (let fee -16) (give fee 'as a basis')
-    '${fee} points'))"
-  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
-    0.1 total_hoc_committed)"
-  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
-    who was assigned to it receives a bonus') (in hours 'how many hours it took to
-    resolve the bug') (in self '1 if the bug was reported and resolved by the same
-    person, otherwise zero') (set days (div hours 24)) (aka (let basis 8) (give basis
-    'as a basis') 'award ${basis} points') (aka (let b1 4) (let hours_threshold 24)
-    (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less
-    than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than
-    ${hours_threshold} hours') (aka (let self_fee 16) (set penalty_for_self (if (eq
-    self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug
-    reported by you earlier') 'deduct ${self_fee} points if they resolved the bug
-    earlier reported by themselves') (aka (let day_fee 1.0) (set b2 (times -1 (times
-    days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2
-    'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay,
-    but no more than ${days_fee_max} points') (aka (let max 16) (set over (if (gt
-    (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let
-    min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to
-    give you at least something') 'make sure the reward is not larger than ${max}
-    points and not smaller than ${min} points'))"
-  what: pmp
 - _id: 2140691
   _job: 17624450357
   _time: 2025-09-10 19:29:14.409463367 Z
@@ -136951,354 +136811,6 @@
   - 7.99257145124098
   what: learn-eva
   when: 2025-09-11 02:19:51.138900571 Z
-- _id: 2141497
-  _job: 17633072545
-  _time: 2025-09-11 03:47:04.753920726 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#214 has been 'issue-was-closed'.
-  issue: 214
-  repository: 799177290
-  tombstone: 2025-09-11 03:48:17.297952755 Z
-  what: issue-was-closed
-  when: 2024-08-21 15:35:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141498
-  _job: 17633072545
-  _time: 2025-09-11 03:47:06.928638762 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#224 has been 'issue-was-closed'.
-  issue: 224
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:19.360324383 Z
-  what: issue-was-closed
-  when: 2024-08-16 13:42:32.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141499
-  _job: 17633072545
-  _time: 2025-09-11 03:47:07.978569304 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#227 has been 'issue-was-closed'.
-  issue: 227
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:39.551265381 Z
-  what: issue-was-closed
-  when: 2024-10-03 10:19:58.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141500
-  _job: 17633072545
-  _time: 2025-09-11 03:47:08.972986646 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#238 has been 'issue-was-closed'.
-  issue: 238
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:39.337446971 Z
-  what: issue-was-closed
-  when: 2024-10-01 04:27:43.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141501
-  _job: 17633072545
-  _time: 2025-09-11 03:47:09.958728641 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#239 has been 'issue-was-closed'.
-  issue: 239
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:39.763055881 Z
-  what: issue-was-closed
-  when: 2024-10-04 10:14:03.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141502
-  _job: 17633072545
-  _time: 2025-09-11 03:47:10.976097922 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#240 has been 'issue-was-closed'.
-  issue: 240
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:19.599675283 Z
-  what: issue-was-closed
-  when: 2024-08-16 13:42:20.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141503
-  _job: 17633072545
-  _time: 2025-09-11 03:47:11.976868340 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#254 has been 'issue-was-closed'.
-  issue: 254
-  repository: 799177290
-  tombstone: 2025-09-11 03:48:16.500868486 Z
-  what: issue-was-closed
-  when: 2024-08-14 05:31:33.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141504
-  _job: 17633072545
-  _time: 2025-09-11 03:47:12.969826330 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#276 has been 'issue-was-closed'.
-  issue: 276
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:19.840890975 Z
-  what: issue-was-closed
-  when: 2024-08-16 13:42:08.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141505
-  _job: 17633072545
-  _time: 2025-09-11 03:47:13.977210467 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#298 has been 'issue-was-closed'.
-  issue: 298
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:20.573349704 Z
-  what: issue-was-closed
-  when: 2024-08-21 14:37:50.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141506
-  _job: 17633072545
-  _time: 2025-09-11 03:47:14.928138181 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#311 has been 'issue-was-closed'.
-  issue: 311
-  repository: 799177290
-  tombstone: 2025-09-11 03:48:17.835089402 Z
-  what: issue-was-closed
-  when: 2024-08-25 15:57:37.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141507
-  _job: 17633072545
-  _time: 2025-09-11 03:47:15.869728551 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#325 has been 'issue-was-closed'.
-  issue: 325
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:20.813671329 Z
-  what: issue-was-closed
-  when: 2024-09-04 14:56:33.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141508
-  _job: 17633072545
-  _time: 2025-09-11 03:47:16.779293592 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#338 has been 'issue-was-closed'.
-  issue: 338
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:38.912866845 Z
-  what: issue-was-closed
-  when: 2024-09-18 08:44:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141514
-  _job: 17633883348
-  _time: 2025-09-11 04:36:08.288835576 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#271 was assigned to @suban05 by @yegor256.
-  issue: 271
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:42.762498767 Z
-  what: issue-was-assigned
-  when: 2024-08-13 14:58:14.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2141515
-  _job: 17633883348
-  _time: 2025-09-11 04:36:12.931891287 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#276 was assigned to @yegorov by @yegor256.
-  issue: 276
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:19.840915113 Z
-  what: issue-was-assigned
-  when: 2024-08-13 17:05:17.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141516
-  _job: 17633883348
-  _time: 2025-09-11 04:36:19.779913899 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#298 was assigned to @yegor256 by @yegor256.
-  issue: 298
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:20.573374027 Z
-  what: issue-was-assigned
-  when: 2024-08-21 07:00:35.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141517
-  _job: 17633883348
-  _time: 2025-09-11 04:36:19.959918765 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#298 was assigned to @suban05 by @yegor256.
-  issue: 298
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:20.573394760 Z
-  what: issue-was-assigned
-  when: 2024-08-21 07:00:41.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2141518
-  _job: 17633883348
-  _time: 2025-09-11 04:36:30.853928036 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#325 was assigned to @yegorov by @yegor256.
-  issue: 325
-  repository: 799177290
-  tombstone: 2025-09-11 04:49:20.813695729 Z
-  what: issue-was-assigned
-  when: 2024-09-04 09:52:35.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141519
-  _job: 17633883348
-  _time: 2025-09-11 04:36:33.820078284 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#338 was assigned to @yegorov by @yegor256.
-  issue: 338
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:38.912894245 Z
-  what: issue-was-assigned
-  when: 2024-09-17 09:39:00.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141520
-  _job: 17633883348
-  _time: 2025-09-11 04:36:36.727277147 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#345 was assigned to @yegorov by @yegor256.
-  issue: 345
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:40.612405498 Z
-  what: issue-was-assigned
-  when: 2024-10-16 05:48:55.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141521
-  _job: 17633883348
-  _time: 2025-09-11 04:36:39.648169077 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#372 was assigned to @yegorov by @yegor256.
-  issue: 372
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:43.184246195 Z
-  what: issue-was-assigned
-  when: 2024-10-04 02:17:45.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141522
-  _job: 17633883348
-  _time: 2025-09-11 04:36:42.725001216 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#373 was assigned to @yegorov by @yegor256.
-  issue: 373
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:39.974245856 Z
-  what: issue-was-assigned
-  when: 2024-10-04 15:14:30.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141523
-  _job: 17633883348
-  _time: 2025-09-11 04:36:45.643829768 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#375 was assigned to @yegorov by @yegor256.
-  issue: 375
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:40.186551787 Z
-  what: issue-was-assigned
-  when: 2024-10-06 13:48:11.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141524
-  _job: 17633883348
-  _time: 2025-09-11 04:36:48.754534229 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#380 was assigned to @yegorov by @yegor256.
-  issue: 380
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:43.397996906 Z
-  what: issue-was-assigned
-  when: 2024-10-11 06:54:18.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141525
-  _job: 17633883348
-  _time: 2025-09-11 04:36:51.776299775 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  assigner: 526301
-  details: zerocracy/judges-action#397 was assigned to @yegorov by @yegor256.
-  issue: 397
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:40.822867857 Z
-  what: issue-was-assigned
-  when: 2024-11-02 13:55:43.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2141571
-  _job: 17633883348
-  _time: 2025-09-11 04:44:39.433056573 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#345 has been 'issue-was-closed'.
-  issue: 345
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:40.612435084 Z
-  what: issue-was-closed
-  when: 2024-10-24 05:24:45.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141574
-  _job: 17633883348
-  _time: 2025-09-11 04:44:43.434858776 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#373 has been 'issue-was-closed'.
-  issue: 373
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:39.974274013 Z
-  what: issue-was-closed
-  when: 2024-10-05 20:50:40.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141577
-  _job: 17633883348
-  _time: 2025-09-11 04:44:48.000142933 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#375 has been 'issue-was-closed'.
-  issue: 375
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:40.186580038 Z
-  what: issue-was-closed
-  when: 2024-10-07 15:45:29.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141579
-  _job: 17633883348
-  _time: 2025-09-11 04:44:52.067951631 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: Apparently, zerocracy/judges-action#397 has been 'issue-was-closed'.
-  issue: 397
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:40.822896787 Z
-  what: issue-was-closed
-  when: 2024-11-30 04:49:12.000000000 Z
-  where: github
-  who: 526301
 - _id: 2141610
   _job: 17634797339
   _time: 2025-09-11 05:34:20.518973310 Z
@@ -137341,150 +136853,6 @@
   repository: 799177290
   what: issue-was-opened
   when: 2025-09-11 05:41:28.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141636
-  _job: 17635883584
-  _time: 2025-09-11 06:37:59.196808004 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#440 has been earlier opened by @yegor256.
-  issue: 440
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:32.552971710 Z
-  what: issue-was-opened
-  when: 2024-12-24 05:57:13.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141637
-  _job: 17635883584
-  _time: 2025-09-11 06:37:59.818645296 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#434 has been earlier opened by @yegor256.
-  issue: 434
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:32.357332737 Z
-  what: issue-was-opened
-  when: 2024-12-20 08:53:18.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141638
-  _job: 17635883584
-  _time: 2025-09-11 06:37:59.978852858 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#428 has been earlier opened by @yegor256.
-  issue: 428
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:32.150981934 Z
-  what: issue-was-opened
-  when: 2024-12-20 00:59:03.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141639
-  _job: 17635883584
-  _time: 2025-09-11 06:38:00.273052304 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#421 has been earlier opened by @yegor256.
-  issue: 421
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:31.941364313 Z
-  what: issue-was-opened
-  when: 2024-12-19 12:58:30.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141640
-  _job: 17635883584
-  _time: 2025-09-11 06:38:00.754971084 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#419 has been earlier opened by @yegor256.
-  issue: 419
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:31.732810065 Z
-  what: issue-was-opened
-  when: 2024-12-19 10:08:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141641
-  _job: 17635883584
-  _time: 2025-09-11 06:38:01.250157087 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#416 has been earlier opened by @yegor256.
-  issue: 416
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:31.539168243 Z
-  what: issue-was-opened
-  when: 2024-12-19 06:50:11.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141642
-  _job: 17635883584
-  _time: 2025-09-11 06:38:01.450218981 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#412 has been earlier opened by @yegor256.
-  issue: 412
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:31.336482535 Z
-  what: issue-was-opened
-  when: 2024-12-18 12:08:21.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141643
-  _job: 17635883584
-  _time: 2025-09-11 06:38:02.875195548 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#350 has been earlier opened by @yegor256.
-  issue: 350
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:35.726283486 Z
-  what: issue-was-opened
-  when: 2024-09-24 02:43:05.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141644
-  _job: 17635883584
-  _time: 2025-09-11 06:38:03.390704520 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#325 has been earlier opened by @yegor256.
-  issue: 325
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:38.704968294 Z
-  what: issue-was-opened
-  when: 2024-09-04 09:35:18.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141645
-  _job: 17635883584
-  _time: 2025-09-11 06:38:04.022786237 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#298 has been earlier opened by @yegor256.
-  issue: 298
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:38.509560214 Z
-  what: issue-was-opened
-  when: 2024-08-20 13:45:55.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141646
-  _job: 17635883584
-  _time: 2025-09-11 06:38:04.299016960 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#276 has been earlier opened by @yegor256.
-  issue: 276
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:37.881792434 Z
-  what: issue-was-opened
-  when: 2024-08-13 16:36:46.000000000 Z
-  where: github
-  who: 526301
-- _id: 2141647
-  _job: 17635883584
-  _time: 2025-09-11 06:38:06.268919008 Z
-  _version: 0.16.3/0.53.6/0.15.39
-  details: The issue zerocracy/judges-action#240 has been earlier opened by @yegor256.
-  issue: 240
-  repository: 799177290
-  tombstone: 2025-09-11 06:51:37.675546415 Z
-  what: issue-was-opened
-  when: 2024-08-07 09:57:26.000000000 Z
   where: github
   who: 526301
 - _id: 2141648
@@ -139011,77 +138379,6 @@
   repository: 799113787
   what: tombstone
   where: github
-- _id: 2141950
-  _job: 37197
-  _time: 2025-09-11 08:43:17.047938955 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  issues:
-  - 2-3
-  - 15-16
-  - 24-26
-  - 33-35
-  - '37'
-  - '41'
-  - '60'
-  - 97-98
-  - '102'
-  - '113'
-  - 118-119
-  - '125'
-  - '130'
-  - '147'
-  - 155-158
-  - '163'
-  - 166-167
-  - '171'
-  - '175'
-  - '187'
-  - 189-195
-  - 200-203
-  - '209'
-  - '211'
-  - '214'
-  - 216-220
-  - '222'
-  - '224'
-  - '227'
-  - '229'
-  - '234'
-  - 238-240
-  - '244'
-  - '254'
-  - '271'
-  - 275-276
-  - '290'
-  - '298'
-  - '302'
-  - 307-308
-  - '311'
-  - '325'
-  - '328'
-  - '335'
-  - '338'
-  - '341'
-  - '345'
-  - '350'
-  - '356'
-  - 372-373
-  - '375'
-  - '380'
-  - '388'
-  - '397'
-  - '412'
-  - '416'
-  - '419'
-  - '421'
-  - '428'
-  - '434'
-  - 438-442
-  - '444'
-  - '850'
-  repository: 799177290
-  what: tombstone
-  where: github
 - _id: 2141951
   _job: 37197
   _time: 2025-09-11 08:43:19.808644009 Z
@@ -139465,59 +138762,6 @@
   when: 2024-07-14 11:24:48.000000000 Z
   where: github
   who: 526301
-- _id: 2141988
-  _job: 17640002427
-  _time: 2025-09-11 09:39:05.575024022 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  events_were_scanned: 3330601881
-  min_issue_was_found: 3
-  min_pull_was_found: 130
-  repository: 849726475
-  what: iterate
-  where: github
-- _id: 2141990
-  _job: 17640002427
-  _time: 2025-09-11 09:39:06.266632607 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  events_were_scanned: 3317861068
-  min_issue_was_found: 1
-  min_pull_was_found: 41
-  repository: 840215648
-  what: iterate
-  where: github
-- _id: 2141991
-  _job: 17640002427
-  _time: 2025-09-11 09:39:06.731754462 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  events_were_scanned: 4327198202
-  min_issue_was_found: 3
-  min_pull_was_found: 7
-  repository: 974194993
-  what: iterate
-  where: github
-- _id: 2141994
-  _job: 17640002427
-  _time: 2025-09-11 09:43:36.603756950 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  events_were_scanned: 3333529053
-  min_issue_was_found: 1
-  min_pull_was_found: 289
-  repository: 802720676
-  types_were_scanned: 152
-  what: iterate
-  where: github
-- _id: 2141995
-  _job: 17640002427
-  _time: 2025-09-11 09:43:36.780259574 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  events_were_scanned: 3336653860
-  labels_were_scanned: 0
-  min_issue_was_found: 1
-  min_pull_was_found: 178
-  repository: 820463873
-  types_were_scanned: 131
-  what: iterate
-  where: github
 - _id: 2141999
   _job: 17640002427
   _time: 2025-09-11 09:43:55.945308583 Z
@@ -139926,59 +139170,6 @@
   when: 2025-09-11 09:23:02.000000000 Z
   where: github
   who: 526301
-- _id: 2142033
-  _job: 17640002427
-  _time: 2025-09-11 09:47:36.145356945 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  assignees_were_scanned: 0
-  events_were_scanned: 3321262258
-  labels_were_scanned: 175
-  min_issue_was_found: 3
-  min_pull_was_found: 76
-  repository: 181044958
-  types_were_scanned: 141
-  what: iterate
-  where: github
-- _id: 2142034
-  _job: 17640002427
-  _time: 2025-09-11 09:47:36.338202155 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  assignees_were_scanned: 558
-  events_were_scanned: 4373960489
-  issues_were_scanned: 0
-  labels_were_scanned: 249
-  min_issue_was_found: 1
-  min_pull_was_found: 506
-  repository: 799177290
-  types_were_scanned: 293
-  what: iterate
-  where: github
-- _id: 2142035
-  _job: 17640002427
-  _time: 2025-09-11 09:47:36.508916038 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  assignees_were_scanned: 0
-  events_were_scanned: 4334247155
-  labels_were_scanned: 103
-  min_issue_was_found: 1
-  min_pull_was_found: 171
-  repository: 799113787
-  types_were_scanned: 230
-  what: iterate
-  where: github
-- _id: 2142036
-  _job: 17640002427
-  _time: 2025-09-11 09:47:36.700709669 Z
-  _version: 0.16.3/0.53.6/0.15.40
-  assignees_were_scanned: 0
-  events_were_scanned: 3318088089
-  labels_were_scanned: 90
-  min_issue_was_found: 1
-  min_pull_was_found: 288
-  repository: 798641472
-  types_were_scanned: 80
-  what: iterate
-  where: github
 - _id: 2142037
   _job: 17640002427
   _time: 2025-09-11 09:47:39.150002665 Z
@@ -140442,3 +139633,759 @@
   when: 2024-10-15 12:46:34.000000000 Z
   where: github
   who: 526301
+- _id: 2142079
+  _job: 37103
+  _time: 2025-09-11 09:49:38.683786670 Z
+  _version: 0.16.3/0.53.6
+  anger: 1
+  area: hr
+  bad_branch_name_was_punished: "(award (explain 'If a branch has a name that doesn\\\\\\'t
+    obey the convention, a penalty is given to the author') (aka (let fee -6) (give
+    fee 'as a basis') 'deduct ${fee} points'))"
+  bug_report_was_rewarded: "(award (explain 'When a bug is reported and accepted by
+    the team, the reporter receives a bonus') (aka (let bonus 18) (give bonus 'as
+    a basis') 'award ${bonus} points'))"
+  code_contribution_was_rewarded: "(award (explain 'When a code contribution is made,
+    the author receives a bonus') (in hoc 'the total number of hits-of-code in the
+    contribution') (in comments 'the total number of comments made by all reviewers')
+    (in reviews 'the number of reviews provided') (aka (let basis 24) (give basis
+    'as a basis') 'award ${basis} points') (aka (let hoc_k 0.075) (let hoc_threshold
+    133) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (if (lt hoc hoc_threshold)
+    (times hoc hoc_k) 0)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max))
+    (give bonus_for_hoc 'for the ${hoc} hits-of-code that you wrote') 'add ${hoc_k}
+    points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+    but not more than ${hoc_max} points') (aka (let many_hoc_fee 4) (set penalty_for_hoc
+    (if (gte hoc hoc_threshold) (times -1 many_hoc_fee) 0)) (give penalty_for_hoc
+    'for too many hits-of-code (${hoc} >= ${hoc_threshold})') 'deduct ${many_hoc_fee}
+    points if more than ${hoc_threshold} [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)')
+    (aka (let many_hoc_fee2 8) (let hoc_threshold2 533) (set penalty_for_hoc2 (if
+    (gte hoc hoc_threshold2) (times -1 many_hoc_fee2) 0)) (give penalty_for_hoc2 'for
+    way too many hits-of-code (${hoc} >= ${hoc_threshold2})') 'deduct ${many_hoc_fee2}
+    points if more than ${hoc_threshold2} [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html)')
+    (aka (let no_review_fee 8) (set penalty_for_no_review (if (eq reviews 0) (times
+    -1 no_review_fee) 0)) (give penalty_for_no_review 'for the lack of code review')
+    'deduct ${no_review_fee} points if there were no code review') (aka (let comments_k
+    0.1) (let comments_max -16) (let comments_min -4) (let comments_threshold 5) (set
+    bonus_for_comments (if (gt comments comments_threshold) (times comments (times
+    -1 comments_k)) 0)) (set bonus_for_comments (between bonus_for_comments comments_min
+    comments_max)) (give bonus_for_comments 'for too many (${comments} > ${comments_threshold})
+    comments that were made during review') 'deduct ${comments_k} points for every
+    comment above ${comments_threshold} made during review, but not more than ${comments_max}
+    points') (aka (let few_hoc_fee 4) (let hoc_needed 30) (set penalty_for_few_hoc
+    (if (lt hoc hoc_needed) (times -1 few_hoc_fee) 0)) (give penalty_for_few_hoc 'for
+    too few (${hoc}) hits-of-code') 'deduct ${few_hoc_fee} points if you contribute
+    less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total)
+    max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4)
+    (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you
+    at least something') 'make sure the reward is not larger than ${max} points and
+    not smaller than ${min} points'))"
+  code_review_was_rewarded: |-
+    (award (explain 'An author of every code review receives a bonus') (in hoc 'the total number of hits-of-code in the contribution') (in comments 'the total number of comments made by all reviewers') (in self '1 if the review was made for their own code contribution, otherwise zero') (aka (let basis 18) (give basis 'as a basis') 'award ${basis} points') (aka (let self_fee 12) (set penalty_for_self_review (if (eq self 1) (times -1 self_fee) 0)) (give penalty_for_self_review 'for reviewing your own contribution (which is a bad idea)') 'deduct ${self_fee} points if they reviewed their own contribution') (aka (let hoc_k 0.015) (let hoc_max 16) (let hoc_min 5) (set bonus_for_hoc (times hoc hoc_k)) (set bonus_for_hoc (between bonus_for_hoc hoc_min hoc_max)) (set bonus_for_hoc (if (eq self 1) 0 bonus_for_hoc)) (give bonus_for_hoc 'for the ${hoc} hits-of-code that you reviewed') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let few_comments_fee 5) (let comments_needed 9) (set penalty_for_few_comments (if (and (lt comments comments_needed) (not (eq comments 0))) (times -1 few_comments_fee) 0)) (give penalty_for_few_comments 'for very few (${comments}) comments') 'deduct ${few_comments_fee} points if there were less than ${comments_needed} comments made during review') (aka (let silence_fee 8) (set penalty_for_silence (if (eq comments 0) (times -1 silence_fee) 0)) (give penalty_for_silence 'for absolutely no comments posted') 'deduct ${silence_fee} points if there were absolutely no comments made during review') (aka (let comments_k 0.375) (let comments_max 8) (let comments_min 5) (set bonus_for_comments (times comments comments_k)) (set bonus_for_comments (between bonus_for_comments comments_min comments_max)) (set bonus_for_comments (if (eq self 1) 0 bonus_for_comments)) (give bonus_for_comments 'for the ${comments} comment(s) that you have made') 'add ${comments_k} points for each comment during the review, but not more than ${comments_max} points') (aka (let hoc_fee 4) (let hoc_needed 24) (set penalty_for_hoc (if (lt hoc hoc_needed) (times -1 hoc_fee) 0)) (give penalty_for_hoc 'for too few (${hoc}) hits-of-code') 'deduct ${hoc_fee} points if there were less than ${hoc_needed} hits-of-code') (aka (let max 24) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
+  days_of_running_balance: 56
+  days_to_reward: 14
+  dud_was_punished: "(award (explain 'When an issue is submitted but then rejected
+    by the team, the reporter receives a penalty') (aka (let fee -8) (give fee 'as
+    a basis') 'deduct ${fee} points'))"
+  enhancement_suggestion_was_rewarded: "(award (explain 'When an enhancement is suggested
+    and accepted by the team, the reporter receives a bonus') (aka (let bonus 18)
+    (give bonus 'as a basis') 'award ${bonus} points'))"
+  long_pull_was_punished: "(award (explain 'Oversized pull requests get penalized')
+    (aka (let fee -4) (give fee 'as a basis') 'deduct ${fee} points'))"
+  master_punish_days: 4
+  published_release_was_rewarded: |-
+    (award (explain 'When a new release is published, everyone who contributed receives a bonus') (in hoc 'how many hits-of-code are in the release') (in contributors 'how many people contributed to the release') (aka (let basis 36) (give basis 'as a basis') 'award ${basis} points') (aka (let hoc_k 0.015) (let hoc_max 24) (let hoc_min 4) (set b1 (times hoc hoc_k)) (set b1 (between b1 hoc_min hoc_max)) (give b1 'for ${hoc} hits-of-code') 'add ${hoc_k} points for each
+          [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+          but not more than ${hoc_max} points') (aka (let max 32) (set over (if (gt (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to give you at least something') 'make sure the reward is not larger than ${max} points and not smaller than ${min} points'))
+  push_to_master_was_punished: "(award (explain 'When someone pushes directly to the
+    default branch, they get a penalty') (aka (let fee -8) (give fee 'as a basis')
+    '${fee} points'))"
+  qod_composite: "(join 1 total_commits_pushed 8 total_issues_created 10 total_pulls_submitted
+    0.1 total_hoc_committed)"
+  resolved_bug_was_rewarded: "(award (explain 'When a bug is resolved, the person
+    who was assigned to it receives a bonus') (in hours 'how many hours it took to
+    resolve the bug') (in self '1 if the bug was reported and resolved by the same
+    person, otherwise zero') (set days (div hours 24)) (aka (let basis 12) (give basis
+    'as a basis') 'award ${basis} points') (aka (let b1 6) (let hours_threshold 16)
+    (set b1 (if (lt hours hours_threshold) b1 0)) (give b1 'for resolving it in less
+    than ${hours_threshold} hours') 'add ${b1} points if it was resolved in less than
+    ${hours_threshold} hours') (aka (let self_fee 8) (set penalty_for_self (if (eq
+    self 1) (times -1 self_fee) 0)) (give penalty_for_self 'for resolving the bug
+    reported by you earlier') 'deduct ${self_fee} points if they resolved the bug
+    earlier reported by themselves') (aka (let day_fee 0.5) (set b2 (times -1 (times
+    days day_fee))) (let days_fee_max -20) (set b2 (max b2 days_fee_max)) (give b2
+    'for ${days} days of delay') 'deduct ${day_fee} points for each day of delay,
+    but no more than ${days_fee_max} points') (aka (let max 16) (set over (if (gt
+    (total) max) (minus max (total)) 0)) (give over 'to not go over the cap') (let
+    min 4) (set least (if (lt (total) min) (minus min (total)) 0)) (give least 'to
+    give you at least something') 'make sure the reward is not larger than ${max}
+    points and not smaller than ${min} points'))"
+  what: pmp
+- _id: 2142080
+  _job: 37203
+  _time: 2025-09-11 09:51:25.915909759 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  issues:
+  - 2-3
+  - 15-16
+  - 24-26
+  - 33-35
+  - '37'
+  - '41'
+  - '60'
+  - 97-98
+  - '102'
+  - '113'
+  - 118-119
+  - '125'
+  - '130'
+  - '147'
+  - 155-158
+  - '163'
+  - 166-167
+  - '171'
+  - '175'
+  - '187'
+  - 189-195
+  - 200-203
+  - '209'
+  - '211'
+  - '214'
+  - 216-220
+  - '222'
+  - '224'
+  - '227'
+  - '229'
+  - '234'
+  - 238-240
+  - '244'
+  - '254'
+  - '271'
+  - 275-276
+  - '290'
+  - '298'
+  - '302'
+  - 307-308
+  - '311'
+  - '325'
+  - '328'
+  - '335'
+  - '338'
+  - '341'
+  - '345'
+  - '350'
+  - '356'
+  - 372-373
+  - '375'
+  - '380'
+  - '388'
+  - '397'
+  - '412'
+  - '416'
+  - '419'
+  - '421'
+  - '428'
+  - '434'
+  - 438-442
+  - '444'
+  - '850'
+  repository: 799177290
+  what: tombstone
+  where: github
+- _id: 2142081
+  _job: 17641470062
+  _time: 2025-09-11 10:25:56.765082673 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#38.
+  issue: 38
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-07-26 06:51:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142082
+  _job: 17641470062
+  _time: 2025-09-11 10:26:01.573237870 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#46.
+  issue: 46
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-07-30 05:08:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142083
+  _job: 17641470062
+  _time: 2025-09-11 10:26:05.702767157 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#138.
+  issue: 138
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-09-26 01:48:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142084
+  _job: 17641470062
+  _time: 2025-09-11 10:26:06.688796319 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#141.
+  issue: 141
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-09-26 08:56:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142085
+  _job: 17641470062
+  _time: 2025-09-11 10:26:07.649354263 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#151.
+  issue: 151
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-10-10 01:55:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142086
+  _job: 17641470062
+  _time: 2025-09-11 10:26:08.651964599 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/pages-action#152.
+  issue: 152
+  label: enhancement
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-10-10 06:50:32.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142087
+  _job: 17641470062
+  _time: 2025-09-11 10:26:16.829003029 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#75.
+  issue: 75
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-08-18 11:29:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142088
+  _job: 17641470062
+  _time: 2025-09-11 10:26:17.484985996 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/fbe#76.
+  issue: 76
+  label: enhancement
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-08-18 13:08:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142089
+  _job: 17641470062
+  _time: 2025-09-11 10:26:18.315243038 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#78.
+  issue: 78
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-08-21 17:26:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142090
+  _job: 17641470062
+  _time: 2025-09-11 10:26:20.772895152 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#127.
+  issue: 127
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-18 13:45:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142091
+  _job: 17641470062
+  _time: 2025-09-11 10:26:21.713424637 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#129.
+  issue: 129
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-19 14:38:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142092
+  _job: 17641470062
+  _time: 2025-09-11 10:26:22.233070198 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#130.
+  issue: 130
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-20 01:05:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142093
+  _job: 17641470062
+  _time: 2025-09-11 10:26:22.791299741 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#131.
+  issue: 131
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-20 06:09:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142094
+  _job: 17641470062
+  _time: 2025-09-11 10:26:23.444698214 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/fbe#132.
+  issue: 132
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: 2024-12-20 11:34:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142100
+  _job: 17641470062
+  _time: 2025-09-11 10:28:08.454274647 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  assigner: 526301
+  details: yegor256/0rsk#40 was assigned to @yegor256 by @yegor256.
+  issue: 40
+  repository: 181044958
+  what: issue-was-assigned
+  when: 2019-05-21 22:10:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142101
+  _job: 17641470062
+  _time: 2025-09-11 10:28:10.926033391 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  assigner: 526301
+  details: yegor256/0rsk#41 was assigned to @yegor256 by @yegor256.
+  issue: 41
+  repository: 181044958
+  what: issue-was-assigned
+  when: 2019-05-29 08:24:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142102
+  _job: 17641470062
+  _time: 2025-09-11 10:28:29.963605447 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  assigner: 526301
+  details: yegor256/judges#63 was assigned to @yegor256 by @yegor256.
+  issue: 63
+  repository: 799113787
+  what: issue-was-assigned
+  when: 2024-06-24 15:18:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142107
+  _job: 17641470062
+  _time: 2025-09-11 10:33:12.745824420 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#440 has been earlier opened by @yegor256.
+  issue: 440
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-24 05:57:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142108
+  _job: 17641470062
+  _time: 2025-09-11 10:33:13.459233138 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#434 has been earlier opened by @yegor256.
+  issue: 434
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-20 08:53:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142109
+  _job: 17641470062
+  _time: 2025-09-11 10:33:13.790291593 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#428 has been earlier opened by @yegor256.
+  issue: 428
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-20 00:59:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142110
+  _job: 17641470062
+  _time: 2025-09-11 10:33:14.081250195 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#421 has been earlier opened by @yegor256.
+  issue: 421
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-19 12:58:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142111
+  _job: 17641470062
+  _time: 2025-09-11 10:33:14.235011061 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#419 has been earlier opened by @yegor256.
+  issue: 419
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-19 10:08:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142112
+  _job: 17641470062
+  _time: 2025-09-11 10:33:14.388410501 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#416 has been earlier opened by @yegor256.
+  issue: 416
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-19 06:50:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142113
+  _job: 17641470062
+  _time: 2025-09-11 10:33:14.522763931 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#412 has been earlier opened by @yegor256.
+  issue: 412
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-12-18 12:08:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142114
+  _job: 17641470062
+  _time: 2025-09-11 10:33:16.314268868 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#350 has been earlier opened by @yegor256.
+  issue: 350
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-09-24 02:43:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142115
+  _job: 17641470062
+  _time: 2025-09-11 10:33:17.614082252 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#325 has been earlier opened by @yegor256.
+  issue: 325
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-09-04 09:35:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142116
+  _job: 17641470062
+  _time: 2025-09-11 10:33:21.527234513 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#298 has been earlier opened by @yegor256.
+  issue: 298
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-20 13:45:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142117
+  _job: 17641470062
+  _time: 2025-09-11 10:33:21.883104100 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#276 has been earlier opened by @yegor256.
+  issue: 276
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-13 16:36:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142118
+  _job: 17641470062
+  _time: 2025-09-11 10:33:24.431661345 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: The issue zerocracy/judges-action#240 has been earlier opened by @yegor256.
+  issue: 240
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-08-07 09:57:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142121
+  _job: 17641470062
+  _time: 2025-09-11 10:34:26.303556592 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  events_were_scanned: 3317861068
+  min_issue_was_found: 1
+  min_pull_was_found: 42
+  repository: 840215648
+  what: iterate
+  where: github
+- _id: 2142122
+  _job: 17641470062
+  _time: 2025-09-11 10:34:26.696598265 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  events_were_scanned: 4327198202
+  min_issue_was_found: 3
+  min_pull_was_found: 9
+  repository: 974194993
+  what: iterate
+  where: github
+- _id: 2142127
+  _job: 17641470062
+  _time: 2025-09-11 10:34:28.220713557 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  events_were_scanned: 3330601881
+  min_issue_was_found: 0
+  min_pull_was_found: 131
+  repository: 849726475
+  what: iterate
+  where: github
+- _id: 2142129
+  _job: 17641470062
+  _time: 2025-09-11 10:34:40.056741286 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#240 has been 'issue-was-closed'.
+  issue: 240
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142130
+  _job: 17641470062
+  _time: 2025-09-11 10:34:43.487160392 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#276 has been 'issue-was-closed'.
+  issue: 276
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-16 13:42:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142131
+  _job: 17641470062
+  _time: 2025-09-11 10:34:46.362508808 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#298 has been 'issue-was-closed'.
+  issue: 298
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-08-21 14:37:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142132
+  _job: 17641470062
+  _time: 2025-09-11 10:34:49.127872718 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#325 has been 'issue-was-closed'.
+  issue: 325
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-09-04 14:56:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142133
+  _job: 17641470062
+  _time: 2025-09-11 10:34:51.425296412 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#345 has been 'issue-was-closed'.
+  issue: 345
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-24 05:24:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142134
+  _job: 17641470062
+  _time: 2025-09-11 10:34:54.071585369 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#375 has been 'issue-was-closed'.
+  issue: 375
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-10-07 15:45:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142135
+  _job: 17641470062
+  _time: 2025-09-11 10:34:56.262855043 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#397 has been 'issue-was-closed'.
+  issue: 397
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-11-30 04:49:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142136
+  _job: 17641470062
+  _time: 2025-09-11 10:34:59.776102573 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#412 has been 'issue-was-closed'.
+  issue: 412
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 04:27:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142137
+  _job: 17641470062
+  _time: 2025-09-11 10:35:01.812565823 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#416 has been 'issue-was-closed'.
+  issue: 416
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 07:16:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142138
+  _job: 17641470062
+  _time: 2025-09-11 10:35:03.596254035 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#419 has been 'issue-was-closed'.
+  issue: 419
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 10:31:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142139
+  _job: 17641470062
+  _time: 2025-09-11 10:35:05.150633173 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#421 has been 'issue-was-closed'.
+  issue: 421
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-19 13:14:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142140
+  _job: 17641470062
+  _time: 2025-09-11 10:35:06.607958622 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#428 has been 'issue-was-closed'.
+  issue: 428
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-20 02:17:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142141
+  _job: 17641470062
+  _time: 2025-09-11 10:35:08.141202919 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#434 has been 'issue-was-closed'.
+  issue: 434
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-20 09:23:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142142
+  _job: 17641470062
+  _time: 2025-09-11 10:35:09.573969405 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  details: Apparently, zerocracy/judges-action#440 has been 'issue-was-closed'.
+  issue: 440
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-12-24 06:15:00.000000000 Z
+  where: github
+  who: 526301
+- _id: 2142143
+  _job: 17641470062
+  _time: 2025-09-11 10:37:52.771359678 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  events_were_scanned: 3336653860
+  labels_were_scanned: 137
+  min_issue_was_found: 1
+  min_pull_was_found: 179
+  repository: 820463873
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2142144
+  _job: 17641470062
+  _time: 2025-09-11 10:37:52.941626789 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  events_were_scanned: 3333529053
+  min_issue_was_found: 1
+  min_pull_was_found: 290
+  repository: 802720676
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2142145
+  _job: 17641470062
+  _time: 2025-09-11 10:37:53.175893943 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  assignees_were_scanned: 80
+  events_were_scanned: 3318088089
+  labels_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 289
+  repository: 798641472
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2142146
+  _job: 17641470062
+  _time: 2025-09-11 10:37:53.356313317 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  assignees_were_scanned: 144
+  events_were_scanned: 3321262258
+  labels_were_scanned: 0
+  min_issue_was_found: 3
+  min_pull_was_found: 82
+  repository: 181044958
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2142147
+  _job: 17641470062
+  _time: 2025-09-11 10:37:53.532897729 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  assignees_were_scanned: 79
+  events_were_scanned: 4334247155
+  labels_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 172
+  repository: 799113787
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2142148
+  _job: 17641470062
+  _time: 2025-09-11 10:37:53.717395198 Z
+  _version: 0.16.3/0.53.6/0.15.40
+  assignees_were_scanned: 0
+  events_were_scanned: 4373960489
+  issues_were_scanned: 0
+  labels_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 507
+  repository: 799177290
+  types_were_scanned: 651
+  what: iterate
+  where: github
