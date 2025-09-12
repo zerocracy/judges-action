@@ -36,11 +36,10 @@ require_relative 'jp'
 # @param [Boolean] avoid_duplicate When true, skip adding properties that already
 #   exist in the fact (default: false)
 # @return [nil] This method modifies the fact in-place and returns nil
-def Jp.incremate(fact, dir, prefix, timeout: ($options.timeout || 60) * 0.8, avoid_duplicate: false)
-  start = Time.now
+def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, start: $start)
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
-    unless fact[n].nil?
+    if fact[n]
       $loog.debug("#{n} is here: #{fact[n].first}")
       next
     end
@@ -48,8 +47,8 @@ def Jp.incremate(fact, dir, prefix, timeout: ($options.timeout || 60) * 0.8, avo
       $loog.info("No GitHub quota left, it is time to stop at #{n}")
       break
     end
-    if Time.now > start + timeout
-      $loog.info("We are doing this for too long (#{start.ago} > #{timeout}s), time to stop at #{n}")
+    if $options.lifetime && Time.now - start > $options.lifetime - 10
+      $loog.info("We are doing this for too long, time to stop at #{n}")
       break
     end
     $loog.info("Evaluating #{n}...")
@@ -60,7 +59,7 @@ def Jp.incremate(fact, dir, prefix, timeout: ($options.timeout || 60) * 0.8, avo
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
         fact.send("#{k}=", v)
       end
-      throw :"Collected #{n} (#{start.ago} total): [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]"
+      throw :"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]"
     end
   end
 end
