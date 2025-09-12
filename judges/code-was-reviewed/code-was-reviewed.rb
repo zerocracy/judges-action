@@ -45,12 +45,12 @@ Fbe.consider(
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
-          nn.where = f.where
-          nn.repository = f.repository
-          nn.issue = f.issue
-          nn.what = $judge
-          nn.who = review.dig(:user, :id)
           nn.when = review[:submitted_at]
+          nn.issue = f.issue
+          nn.who = review.dig(:user, :id)
+          nn.what = $judge
+          nn.repository = f.repository
+          nn.where = f.where
         end
       next if n.nil?
       n.hoc = pr[:additions] + pr[:deletions]

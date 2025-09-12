@@ -42,15 +42,15 @@ Fbe.iterate do
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|
-            n.where = 'github'
-            n.repository = repository
             n.issue = issue
-            n.what = $judge
             n.who = event.dig(:assignee, :id)
-            n.assigner = event.dig(:assigner, :id)
-            n.when = event[:created_at]
+            n.what = $judge
+            n.repository = repository
+            n.where = 'github'
           end
         raise "Assignee already exists in #{repo}##{issue}" if nn.nil?
+        nn.assigner = event.dig(:assigner, :id)
+        nn.when = event[:created_at]
         nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
         $loog.info("Assignee found for #{Fbe.issue(nn)} (fact ##{nn._id}): #{Fbe.who(nn)}")
       end

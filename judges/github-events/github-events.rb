@@ -304,8 +304,8 @@ Fbe.iterate do
       Fbe.fb.txn do |fbt|
         f =
           Fbe.if_absent(fb: fbt) do |n|
-            n.where = 'github'
             n.event_id = json[:id].to_i
+            n.where = 'github'
           end
         if f.nil?
           $loog.debug("The event ##{id} just detected is already in the factbase")

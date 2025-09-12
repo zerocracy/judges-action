@@ -53,21 +53,23 @@ Fbe.iterate do
       next unless te[:event] == 'labeled'
       badge = te[:label][:name]
       next unless badges.include?(badge)
-      nn =
-        Fbe.if_absent do |n|
-          n.where = 'github'
-          n.repository = repository
-          n.issue = issue
-          n.what = $judge
-        end
-      raise "A label is already attached to #{repo}##{issue}" if nn.nil?
-      nn.label = badge
-      nn.who = te[:actor][:id]
-      nn.when = te[:created_at]
-      nn.details =
-        "The '#{nn.label}' label was attached by @#{te[:actor][:login]} " \
-        "to the issue #{Fbe.issue(nn)}."
-      $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
+      Fbe.fb.txn do |fbt|
+        nn =
+          Fbe.if_absent(fb: fbt) do |n|
+            n.issue = issue
+            n.what = $judge
+            n.repository = repository
+            n.where = 'github'
+          end
+        raise "A label is already attached to #{repo}##{issue}" if nn.nil?
+        nn.label = badge
+        nn.who = te[:actor][:id]
+        nn.when = te[:created_at]
+        nn.details =
+          "The '#{nn.label}' label was attached by @#{te[:actor][:login]} " \
+          "to the issue #{Fbe.issue(nn)}."
+        $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
+      end
     end
     issue
   end

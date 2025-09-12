@@ -47,10 +47,10 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
     Fbe.fb.txn do |fbt|
       f =
         Fbe.if_absent(fb: fbt) do |n|
-          n.where = 'github'
+          n.issue = json[:number]
           n.what = "#{type}-was-opened"
           n.repository = r.repository
-          n.issue = json[:number]
+          n.where = 'github'
         end
       next if f.nil?
       f.when = json[:created_at]

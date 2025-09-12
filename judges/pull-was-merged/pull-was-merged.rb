@@ -64,14 +64,14 @@ Fbe.iterate do
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |n|
-          n.where = 'github'
-          n.repository = repository
           n.issue = issue
           n.what = "pull-was-#{json[:merged_at].nil? ? 'closed' : 'merged'}"
-          n.hoc = json[:additions] + json[:deletions]
-          n.branch = json[:head][:ref]
+          n.repository = repository
+          n.where = 'github'
         end
       raise "Pull already merged in #{repo}##{issue}" if nn.nil?
+      nn.hoc = json[:additions] + json[:deletions]
+      nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
       Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
       actor = Fbe.octo.issue(repo, issue)[:closed_by]

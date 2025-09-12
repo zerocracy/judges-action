@@ -58,8 +58,8 @@ require_relative '../../lib/issue_was_lost'
             f =
               Fbe.if_absent(fb: fbt) do |ff|
                 ff.issue = json[:number]
-                ff.repository = repository
                 ff.what = "#{type}-was-opened"
+                ff.repository = repository
                 ff.where = 'github'
                 issue = ff.issue
               end

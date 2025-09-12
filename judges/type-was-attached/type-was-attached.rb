@@ -51,21 +51,23 @@ Fbe.iterate do
           $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
           next
         end
-        nn =
-          Fbe.if_absent do |n|
-            n.where = 'github'
-            n.repository = repository
-            n.issue = issue
-            n.type = tee.dig('issue_type', 'name')
-            n.what = $judge
-          end
-        raise "Type already attached to #{repo}##{issue}" if nn.nil?
-        nn.who = tee.dig('actor', 'id')
-        nn.when = tee['created_at']
-        nn.details =
-          "The '#{nn.type}' type was attached by @#{tee.dig('actor', 'login')} " \
-          "to the issue #{Fbe.issue(nn)}."
-        $loog.info("Type attached to #{Fbe.issue(nn)} found: #{nn.type.inspect}")
+        Fbe.fb.txn do |fbt|
+          nn =
+            Fbe.if_absent(fb: fbt) do |n|
+              n.issue = issue
+              n.what = $judge
+              n.type = tee.dig('issue_type', 'name')
+              n.repository = repository
+              n.where = 'github'
+            end
+          raise "Type already attached to #{repo}##{issue}" if nn.nil?
+          nn.who = tee.dig('actor', 'id')
+          nn.when = tee['created_at']
+          nn.details =
+            "The '#{nn.type}' type was attached by @#{tee.dig('actor', 'login')} " \
+            "to the issue #{Fbe.issue(nn)}."
+          $loog.info("Type attached to #{Fbe.issue(nn)} found: #{nn.type.inspect}")
+        end
       end
     rescue Octokit::NotFound
       $loog.info("Can't find issue ##{issue} in repository ##{repository}")

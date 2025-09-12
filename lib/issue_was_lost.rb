@@ -20,10 +20,10 @@ def Jp.issue_was_lost(where, repository, issue)
   return if stale.positive?
   f =
     Fbe.if_absent do |n|
-      n.where = where
+      n.issue = issue
       n.what = 'issue-was-lost'
       n.repository = repository
-      n.issue = issue
+      n.where = where
     end
   raise "The issue ##{issue} was already lost" unless f
   f.stale = 'issue'
