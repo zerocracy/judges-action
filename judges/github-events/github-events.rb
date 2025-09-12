@@ -160,7 +160,7 @@ Fbe.iterate do
     when 'PullRequestReviewEvent'
       case json[:payload][:action]
       when 'created'
-        skip_event(json) if json[:payload][:pull_request][:user][:id].to_i == fact.who
+        skip_event(json) if json.dig(:payload, :pull_request, :user, :id).to_i == fact.who
         if Fbe.fb.query(
           "(and (eq repository #{fact.repository}) " \
           '(eq what "pull-was-reviewed") ' \
