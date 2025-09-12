@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - 'Judge quantity-of-deliverables stopped by timeout after 30m: execution expired'
+  - 'Judge find-all-issues stopped by timeout after 2m38s: execution expired'
   inserted: 8
-  seconds: 895.83231817
+  seconds: 2400.329933789
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-12 06:36:09.101633300 Z
+  when: 2025-09-12 07:59:27.009894888 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -5352,6 +5355,11 @@
   _version: 0.14.5/0.52.2/0.15.9
   since: 2025-04-22 14:07:32.154743547 Z
   tombstone: 2025-09-04 14:37:29.460719684 Z
+  total_builds_ran: 75170
+  total_issues_created: 179
+  total_pulls_submitted: 49
+  total_releases_published: 250
+  total_reviews_submitted: 544
   what: quantity-of-deliverables
   when: 2025-04-29 14:07:32.154700897 Z
 - _id: 1662069
@@ -138371,38 +138379,6 @@
   when: 2025-09-09 09:32:45.000000000 Z
   where: github
   who: 29139614
-- _id: 2143550
-  _job: 37319
-  _time: 2025-09-12 02:04:18.620122973 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  award: 6
-  comments: 4
-  details: It's time to reward @yegor256 for the code review in zerocracy/swarm-template#158,
-    the reward amount is 6.
-  greeting: "Hey there! \U0001F44B Nice job on the review, but we've got some room
-    for improvement. You snagged +6 points this time: +18 for showing up, but -8 because
-    we missed out on those valuable comments, and -4 for the low hit-of-code count
-    (only 2!). Remember, more comments can boost your points up to +8, and hitting
-    that 24 hits-of-code mark avoids the -4 deduction. Your balance is sitting pretty
-    at [+533](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) - keep
-    it up! Don't forget to check your [Zerocracy balance](https://www.zerocracy.com/)
-    too. Let's aim for more detailed reviews next time to max out those bonus points!
-    \U0001F4AA\n\n<!-- Thanks for the review! You've earned +6 points for this: +18
-    as a basis; -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.
-    \ Your running balance is [+533](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy balance](https://www.zerocracy.com/) too).
-    \ -->"
-  hoc: 2
-  href: https://github.com/zerocracy/swarm-template/issues/158/#issuecomment-3283735306
-  issue: 158
-  repository: 849726475
-  review_comments: 0
-  seconds: 24145
-  what: code-review-was-rewarded
-  when: 2025-09-12 02:04:18.638813505 Z
-  where: github
-  who: 526301
-  why: Reviewed code in zerocracy/swarm-template#158
 - _id: 2143626
   _job: 37324
   _time: 2025-09-12 02:49:37.876374973 Z
@@ -138494,6 +138470,7 @@
   details: The issue yegor256/factbase#106 has been earlier opened by @tank-bohr.
   issue: 106
   repository: 798641472
+  tombstone: 2025-09-12 06:37:50.088235591 Z
   what: issue-was-opened
   when: 2024-07-24 07:07:38.000000000 Z
   where: github
@@ -138516,6 +138493,7 @@
   details: The issue yegor256/0rsk#40 has been earlier opened by @g4s8.
   issue: 40
   repository: 181044958
+  tombstone: 2025-09-12 06:37:48.372755441 Z
   what: issue-was-opened
   when: 2019-05-21 10:04:52.000000000 Z
   where: github
@@ -138527,6 +138505,7 @@
   details: The issue yegor256/judges#127 has been earlier opened by @yegorov.
   issue: 127
   repository: 799113787
+  tombstone: 2025-09-12 06:37:49.113135861 Z
   what: issue-was-opened
   when: 2024-09-02 19:54:20.000000000 Z
   where: github
@@ -138538,6 +138517,7 @@
   details: The issue yegor256/judges#63 has been earlier opened by @davvd.
   issue: 63
   repository: 799113787
+  tombstone: 2025-09-12 06:37:50.686264110 Z
   what: issue-was-opened
   when: 2024-06-24 15:18:32.000000000 Z
   where: github
@@ -138549,6 +138529,7 @@
   details: The issue zerocracy/fbe#76 has been earlier opened by @yegor256.
   issue: 76
   repository: 820463873
+  tombstone: 2025-09-12 06:37:38.088130132 Z
   what: issue-was-opened
   when: 2024-08-18 13:08:42.000000000 Z
   where: github
@@ -138560,6 +138541,7 @@
   details: The issue zerocracy/fbe#75 has been earlier opened by @yegor256.
   issue: 75
   repository: 820463873
+  tombstone: 2025-09-12 06:37:37.231303482 Z
   what: issue-was-opened
   when: 2024-08-18 11:29:33.000000000 Z
   where: github
@@ -138571,6 +138553,7 @@
   details: The issue zerocracy/pages-action#152 has been earlier opened by @yegor256.
   issue: 152
   repository: 802720676
+  tombstone: 2025-09-12 06:37:46.290229451 Z
   what: issue-was-opened
   when: 2024-10-10 06:50:32.000000000 Z
   where: github
@@ -138593,6 +138576,7 @@
   details: The issue zerocracy/pages-action#141 has been earlier opened by @yegor256.
   issue: 141
   repository: 802720676
+  tombstone: 2025-09-12 06:37:41.589942582 Z
   what: issue-was-opened
   when: 2024-09-26 08:56:12.000000000 Z
   where: github
@@ -138637,6 +138621,7 @@
   details: The issue zerocracy/judges-action#325 has been earlier opened by @yegor256.
   issue: 325
   repository: 799177290
+  tombstone: 2025-09-12 06:37:39.533362982 Z
   what: issue-was-opened
   when: 2024-09-04 09:35:18.000000000 Z
   where: github
@@ -138659,6 +138644,7 @@
   details: The issue zerocracy/judges-action#298 has been earlier opened by @yegor256.
   issue: 298
   repository: 799177290
+  tombstone: 2025-09-12 06:37:39.007257262 Z
   what: issue-was-opened
   when: 2024-08-20 13:45:55.000000000 Z
   where: github
@@ -138670,6 +138656,7 @@
   details: The issue zerocracy/judges-action#276 has been earlier opened by @yegor256.
   issue: 276
   repository: 799177290
+  tombstone: 2025-09-12 06:37:36.696406772 Z
   what: issue-was-opened
   when: 2024-08-13 16:36:46.000000000 Z
   where: github
@@ -138703,6 +138690,7 @@
   details: The issue zerocracy/judges-action#240 has been earlier opened by @yegor256.
   issue: 240
   repository: 799177290
+  tombstone: 2025-09-12 06:37:35.790141282 Z
   what: issue-was-opened
   when: 2024-08-07 09:57:26.000000000 Z
   where: github
@@ -138861,66 +138849,6 @@
   where: github
   who: 526301
   why: Reviewed code in zerocracy/pages-action#373
-- _id: 2143720
-  _job: 37342
-  _time: 2025-09-12 04:36:26.714932267 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  award: 6
-  comments: 4
-  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#936,
-    the reward amount is 6.
-  greeting: "Thanks for your review! You've earned +6 points: +18 base, -8 (no comments),
-    -4 (only 2 hits-of-code, below 24 threshold). Remember, more comments (up to 8
-    points) and code (up to 16 points) can boost your reward next time! Your balance
-    is now [+539](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
-    Check your [Zerocracy balance](https://www.zerocracy.com/) too. \U0001F4BB\U0001F44D\n\n<!--
-    Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for
-    absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
-    balance is [+539](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy balance](https://www.zerocracy.com/) too).
-    \ -->"
-  hoc: 2
-  href: https://github.com/zerocracy/judges-action/issues/936/#issuecomment-3283735338
-  issue: 936
-  repository: 799177290
-  review_comments: 0
-  seconds: 1057899
-  what: code-review-was-rewarded
-  when: 2025-09-12 04:36:26.728988645 Z
-  where: github
-  who: 526301
-  why: Reviewed code in zerocracy/judges-action#936
-- _id: 2143721
-  _job: 37342
-  _time: 2025-09-12 04:36:30.316711142 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  award: 6
-  comments: 4
-  details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#375,
-    the reward amount is 6.
-  greeting: "Hey there! \U0001F44B Great job on the review, but we've got some room
-    for improvement. You snagged 6 points this time: 18 for the base, but we had to
-    deduct 8 because there weren't any comments (remember, those can boost your score!)
-    and 4 for the low hit-of-code count (only 2). Don't worry though, your total is
-    still a solid [+545](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)!
-    \U0001F4AA Next time, try adding some thoughtful comments and increasing your
-    code contribution - it could really bump up your bonus. Keep an eye on your [Zerocracy
-    balance](https://www.zerocracy.com/) too!\n\n<!-- Thanks for the review! You've
-    earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted;
-    -4 for too few (2) hits-of-code.  Your running balance is [+545](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy balance](https://www.zerocracy.com/) too).
-    \ -->"
-  hoc: 2
-  href: https://github.com/zerocracy/pages-action/issues/375/#issuecomment-3283735369
-  issue: 375
-  repository: 802720676
-  review_comments: 0
-  seconds: 9903
-  what: code-review-was-rewarded
-  when: 2025-09-12 04:36:30.358989628 Z
-  where: github
-  who: 526301
-  why: Reviewed code in zerocracy/pages-action#375
 - _id: 2143724
   _job: 17665324474
   _time: 2025-09-12 05:20:11.766511650 Z
@@ -138949,6 +138877,7 @@
   details: Apparently, yegor256/judges#63 has been 'issue-was-closed'.
   issue: 63
   repository: 799113787
+  tombstone: 2025-09-12 06:37:50.834915920 Z
   what: issue-was-closed
   when: 2024-06-28 14:06:47.000000000 Z
   where: github
@@ -138960,6 +138889,7 @@
   details: Apparently, zerocracy/judges-action#240 has been 'issue-was-closed'.
   issue: 240
   repository: 799177290
+  tombstone: 2025-09-12 06:37:35.927529082 Z
   what: issue-was-closed
   when: 2024-08-16 13:42:20.000000000 Z
   where: github
@@ -138993,6 +138923,7 @@
   details: Apparently, zerocracy/fbe#75 has been 'issue-was-closed'.
   issue: 75
   repository: 820463873
+  tombstone: 2025-09-12 06:37:37.406060002 Z
   what: issue-was-closed
   when: 2024-08-18 12:40:20.000000000 Z
   where: github
@@ -139004,6 +138935,7 @@
   details: Apparently, zerocracy/judges-action#276 has been 'issue-was-closed'.
   issue: 276
   repository: 799177290
+  tombstone: 2025-09-12 06:37:36.857660992 Z
   what: issue-was-closed
   when: 2024-08-16 13:42:08.000000000 Z
   where: github
@@ -139015,6 +138947,7 @@
   details: Apparently, yegor256/judges#127 has been 'issue-was-closed'.
   issue: 127
   repository: 799113787
+  tombstone: 2025-09-12 06:37:49.264496591 Z
   what: issue-was-closed
   when: 2024-09-04 08:08:50.000000000 Z
   where: github
@@ -139026,6 +138959,7 @@
   details: Apparently, zerocracy/fbe#76 has been 'issue-was-closed'.
   issue: 76
   repository: 820463873
+  tombstone: 2025-09-12 06:37:38.231390662 Z
   what: issue-was-closed
   when: 2024-08-19 06:16:46.000000000 Z
   where: github
@@ -139037,6 +138971,7 @@
   details: Apparently, zerocracy/judges-action#298 has been 'issue-was-closed'.
   issue: 298
   repository: 799177290
+  tombstone: 2025-09-12 06:37:39.143694212 Z
   what: issue-was-closed
   when: 2024-08-21 14:37:50.000000000 Z
   where: github
@@ -139059,6 +138994,7 @@
   details: Apparently, zerocracy/judges-action#325 has been 'issue-was-closed'.
   issue: 325
   repository: 799177290
+  tombstone: 2025-09-12 06:37:39.692258722 Z
   what: issue-was-closed
   when: 2024-09-04 14:56:33.000000000 Z
   where: github
@@ -139070,6 +139006,7 @@
   details: Apparently, yegor256/0rsk#40 has been 'issue-was-closed'.
   issue: 40
   repository: 181044958
+  tombstone: 2025-09-12 06:37:48.530512890 Z
   what: issue-was-closed
   when: 2019-05-22 05:28:19.000000000 Z
   where: github
@@ -139114,6 +139051,7 @@
   details: Apparently, zerocracy/pages-action#141 has been 'issue-was-closed'.
   issue: 141
   repository: 802720676
+  tombstone: 2025-09-12 06:37:41.750662742 Z
   what: issue-was-closed
   when: 2024-09-26 10:38:45.000000000 Z
   where: github
@@ -139136,6 +139074,7 @@
   details: Apparently, zerocracy/pages-action#152 has been 'issue-was-closed'.
   issue: 152
   repository: 802720676
+  tombstone: 2025-09-12 06:37:46.423703851 Z
   what: issue-was-closed
   when: 2024-10-15 12:46:34.000000000 Z
   where: github
@@ -139148,6 +139087,7 @@
   issue: 106
   label: bug
   repository: 798641472
+  tombstone: 2025-09-12 06:37:50.238170910 Z
   what: label-was-attached
   when: 2024-07-24 16:24:02.000000000 Z
   where: github
@@ -139172,6 +139112,7 @@
   issue: 127
   label: bug
   repository: 799113787
+  tombstone: 2025-09-12 06:37:49.525075111 Z
   what: label-was-attached
   when: 2024-09-03 08:52:30.000000000 Z
   where: github
@@ -139184,6 +139125,7 @@
   details: yegor256/judges#127 was assigned to @yegorov by @yegor256.
   issue: 127
   repository: 799113787
+  tombstone: 2025-09-12 06:37:49.679211711 Z
   what: issue-was-assigned
   when: 2024-09-03 08:52:33.000000000 Z
   where: github
@@ -139208,6 +139150,7 @@
   details: zerocracy/fbe#75 was assigned to @yegor256 by @yegor256.
   issue: 75
   repository: 820463873
+  tombstone: 2025-09-12 06:37:37.533666292 Z
   what: issue-was-assigned
   when: 2024-08-18 11:29:34.000000000 Z
   where: github
@@ -139220,6 +139163,7 @@
   details: zerocracy/fbe#76 was assigned to @yegor256 by @yegor256.
   issue: 76
   repository: 820463873
+  tombstone: 2025-09-12 06:37:38.429156542 Z
   what: issue-was-assigned
   when: 2024-08-18 13:08:42.000000000 Z
   where: github
@@ -139244,6 +139188,7 @@
   details: zerocracy/pages-action#141 was assigned to @yegor256 by @yegor256.
   issue: 141
   repository: 802720676
+  tombstone: 2025-09-12 06:37:41.909150182 Z
   what: issue-was-assigned
   when: 2024-09-26 08:56:12.000000000 Z
   where: github
@@ -139256,6 +139201,7 @@
   details: zerocracy/pages-action#152 was assigned to @yegor256 by @yegor256.
   issue: 152
   repository: 802720676
+  tombstone: 2025-09-12 06:37:46.577123031 Z
   what: issue-was-assigned
   when: 2024-10-10 06:50:32.000000000 Z
   where: github
@@ -139271,30 +139217,6 @@
   when: 2025-09-12 04:48:26.000000000 Z
   where: github
   who: 526301
-- _id: 2143814
-  _job: 17665324474
-  _time: 2025-09-12 05:27:42.035596197 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#254 has been earlier opened by @yegor256.
-  issue: 254
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:04.746465019 Z
-  what: issue-was-opened
-  when: 2024-08-10 07:20:39.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143815
-  _job: 17665324474
-  _time: 2025-09-12 05:27:44.596729254 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#229 has been earlier opened by @yegor256.
-  issue: 229
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:04.379821837 Z
-  what: issue-was-opened
-  when: 2024-08-05 07:42:29.000000000 Z
-  where: github
-  who: 526301
 - _id: 2143816
   _job: 17665324474
   _time: 2025-09-12 05:27:44.883724575 Z
@@ -139302,212 +139224,9 @@
   details: The issue zerocracy/judges-action#224 has been earlier opened by @yegor256.
   issue: 224
   repository: 799177290
+  tombstone: 2025-09-12 06:37:34.936893433 Z
   what: issue-was-opened
   when: 2024-08-03 16:58:19.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143817
-  _job: 17665324474
-  _time: 2025-09-12 05:27:45.473875247 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#218 has been earlier opened by @yegor256.
-  issue: 218
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:04.008991559 Z
-  what: issue-was-opened
-  when: 2024-08-02 14:33:03.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143818
-  _job: 17665324474
-  _time: 2025-09-12 05:27:45.999166922 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#214 has been earlier opened by @yegor256.
-  issue: 214
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:05.970629648 Z
-  what: issue-was-opened
-  when: 2024-08-02 03:38:48.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143819
-  _job: 17665324474
-  _time: 2025-09-12 05:27:46.150352423 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#211 has been earlier opened by @yegor256.
-  issue: 211
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:05.585035968 Z
-  what: issue-was-opened
-  when: 2024-08-01 09:59:48.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143820
-  _job: 17665324474
-  _time: 2025-09-12 05:27:46.299844033 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#209 has been earlier opened by @yegor256.
-  issue: 209
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:05.181908194 Z
-  what: issue-was-opened
-  when: 2024-08-01 05:21:49.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143821
-  _job: 17665324474
-  _time: 2025-09-12 05:27:46.571167388 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#203 has been earlier opened by @yegor256.
-  issue: 203
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:15.858914018 Z
-  what: issue-was-opened
-  when: 2024-07-30 06:00:59.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143822
-  _job: 17665324474
-  _time: 2025-09-12 05:27:46.776737573 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#202 has been earlier opened by @yegor256.
-  issue: 202
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:15.412377653 Z
-  what: issue-was-opened
-  when: 2024-07-30 05:58:26.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143823
-  _job: 17665324474
-  _time: 2025-09-12 05:27:46.953415197 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#201 has been earlier opened by @yegor256.
-  issue: 201
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:03.594372497 Z
-  what: issue-was-opened
-  when: 2024-07-30 05:35:24.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143824
-  _job: 17665324474
-  _time: 2025-09-12 05:27:47.118456673 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#200 has been earlier opened by @yegor256.
-  issue: 200
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:15.051501104 Z
-  what: issue-was-opened
-  when: 2024-07-30 05:34:21.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143825
-  _job: 17665324474
-  _time: 2025-09-12 05:27:47.445333372 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#195 has been earlier opened by @yegor256.
-  issue: 195
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:14.610175415 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:53:14.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143826
-  _job: 17665324474
-  _time: 2025-09-12 05:27:47.644107102 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#194 has been earlier opened by @yegor256.
-  issue: 194
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:14.249110863 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:51:09.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143827
-  _job: 17665324474
-  _time: 2025-09-12 05:27:47.813837187 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#193 has been earlier opened by @yegor256.
-  issue: 193
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:13.876396192 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:38:44.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143828
-  _job: 17665324474
-  _time: 2025-09-12 05:27:47.987191608 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#192 has been earlier opened by @yegor256.
-  issue: 192
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:13.436220370 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:31:30.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143829
-  _job: 17665324474
-  _time: 2025-09-12 05:27:48.144589372 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#191 has been earlier opened by @yegor256.
-  issue: 191
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:13.062562686 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:29:08.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143830
-  _job: 17665324474
-  _time: 2025-09-12 05:27:48.286876701 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#190 has been earlier opened by @yegor256.
-  issue: 190
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:12.632456054 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:27:43.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143831
-  _job: 17665324474
-  _time: 2025-09-12 05:27:48.468690832 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#189 has been earlier opened by @yegor256.
-  issue: 189
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:03.228593823 Z
-  what: issue-was-opened
-  when: 2024-07-30 01:25:39.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143832
-  _job: 17665324474
-  _time: 2025-09-12 05:27:49.099387605 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#167 has been earlier opened by @yegor256.
-  issue: 167
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:12.263277887 Z
-  what: issue-was-opened
-  when: 2024-07-28 14:13:58.000000000 Z
-  where: github
-  who: 526301
-- _id: 2143833
-  _job: 17665324474
-  _time: 2025-09-12 05:27:49.252719115 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  details: The issue zerocracy/judges-action#166 has been earlier opened by @yegor256.
-  issue: 166
-  repository: 799177290
-  tombstone: 2025-09-12 05:33:11.173482237 Z
-  what: issue-was-opened
-  when: 2024-07-28 14:12:38.000000000 Z
   where: github
   who: 526301
 - _id: 2143850
@@ -139867,77 +139586,6 @@
   when: *1290
   where: github
   who: 29139614
-- _id: 2143871
-  _job: 37367
-  _time: 2025-09-12 05:33:20.089826592 Z
-  _version: 0.16.3/0.53.6/0.15.41
-  issues:
-  - 2-3
-  - 15-16
-  - 24-26
-  - 33-35
-  - '37'
-  - '41'
-  - '60'
-  - 97-98
-  - '102'
-  - '113'
-  - 118-119
-  - '125'
-  - '130'
-  - '147'
-  - 155-158
-  - '163'
-  - 166-167
-  - '171'
-  - '175'
-  - '187'
-  - 189-195
-  - 200-203
-  - '209'
-  - '211'
-  - '214'
-  - 216-220
-  - '222'
-  - '224'
-  - '227'
-  - '229'
-  - '234'
-  - 238-240
-  - '244'
-  - '254'
-  - '271'
-  - 275-276
-  - '290'
-  - '298'
-  - '302'
-  - 307-308
-  - '311'
-  - '325'
-  - '328'
-  - '335'
-  - '338'
-  - '341'
-  - '345'
-  - '350'
-  - '356'
-  - 372-373
-  - '375'
-  - '380'
-  - '388'
-  - '397'
-  - '412'
-  - '416'
-  - '419'
-  - '421'
-  - '428'
-  - '434'
-  - 438-442
-  - '444'
-  - '850'
-  repository: 799177290
-  what: tombstone
-  where: github
 - _id: 2143872
   _job: 37367
   _time: 2025-09-12 05:33:22.641685554 Z
@@ -140019,6 +139667,7 @@
   details: The issue yegor256/0rsk#51 has been earlier opened by @apocryphe.
   issue: 51
   repository: 181044958
+  tombstone: 2025-09-12 06:37:25.598170964 Z
   what: issue-was-opened
   when: 2019-07-19 13:12:25.000000000 Z
   where: github
@@ -140030,6 +139679,7 @@
   details: The issue yegor256/0rsk#46 has been earlier opened by @apocryphe.
   issue: 46
   repository: 181044958
+  tombstone: 2025-09-12 06:37:26.170582644 Z
   what: issue-was-opened
   when: 2019-07-05 09:48:05.000000000 Z
   where: github
@@ -140041,6 +139691,7 @@
   details: The issue yegor256/0rsk#41 has been earlier opened by @agorlov.
   issue: 41
   repository: 181044958
+  tombstone: 2025-09-12 06:37:26.713063874 Z
   what: issue-was-opened
   when: 2019-05-26 10:39:18.000000000 Z
   where: github
@@ -140052,6 +139703,7 @@
   details: The issue yegor256/0rsk#33 has been earlier opened by @smallcreep.
   issue: 33
   repository: 181044958
+  tombstone: 2025-09-12 06:37:27.454385664 Z
   what: issue-was-opened
   when: 2019-05-15 08:57:37.000000000 Z
   where: github
@@ -140063,6 +139715,7 @@
   details: The issue yegor256/0rsk#32 has been earlier opened by @amihaiemil.
   issue: 32
   repository: 181044958
+  tombstone: 2025-09-12 06:37:29.174449394 Z
   what: issue-was-opened
   when: 2019-05-14 12:40:06.000000000 Z
   where: github
@@ -140074,6 +139727,7 @@
   details: The issue yegor256/0rsk#30 has been earlier opened by @g4s8.
   issue: 30
   repository: 181044958
+  tombstone: 2025-09-12 06:37:28.624827184 Z
   what: issue-was-opened
   when: 2019-05-14 09:11:01.000000000 Z
   where: github
@@ -140085,6 +139739,7 @@
   details: The issue yegor256/judges#158 has been earlier opened by @yegor256.
   issue: 158
   repository: 799113787
+  tombstone: 2025-09-12 06:37:08.788441907 Z
   what: issue-was-opened
   when: 2024-12-28 05:57:48.000000000 Z
   where: github
@@ -140096,6 +139751,7 @@
   details: The issue yegor256/judges#156 has been earlier opened by @yegor256.
   issue: 156
   repository: 799113787
+  tombstone: 2025-09-12 06:37:18.447217745 Z
   what: issue-was-opened
   when: 2024-12-24 05:36:01.000000000 Z
   where: github
@@ -140107,6 +139763,7 @@
   details: The issue yegor256/judges#155 has been earlier opened by @yegor256.
   issue: 155
   repository: 799113787
+  tombstone: 2025-09-12 06:37:17.753107145 Z
   what: issue-was-opened
   when: 2024-12-19 17:39:52.000000000 Z
   where: github
@@ -140118,6 +139775,7 @@
   details: The issue yegor256/judges#153 has been earlier opened by @yegor256.
   issue: 153
   repository: 799113787
+  tombstone: 2025-09-12 06:37:17.085093986 Z
   what: issue-was-opened
   when: 2024-12-19 08:24:16.000000000 Z
   where: github
@@ -140129,6 +139787,7 @@
   details: The issue yegor256/judges#84 has been earlier opened by @yegor256.
   issue: 84
   repository: 799113787
+  tombstone: 2025-09-12 06:37:22.349585545 Z
   what: issue-was-opened
   when: 2024-07-14 11:25:50.000000000 Z
   where: github
@@ -140140,6 +139799,7 @@
   details: The issue yegor256/judges#83 has been earlier opened by @yegor256.
   issue: 83
   repository: 799113787
+  tombstone: 2025-09-12 06:37:21.823988724 Z
   what: issue-was-opened
   when: 2024-07-14 11:24:48.000000000 Z
   where: github
@@ -140151,6 +139811,7 @@
   details: The issue zerocracy/judges-action#440 has been earlier opened by @yegor256.
   issue: 440
   repository: 799177290
+  tombstone: 2025-09-12 06:37:16.448449135 Z
   what: issue-was-opened
   when: 2024-12-24 05:57:13.000000000 Z
   where: github
@@ -140162,6 +139823,7 @@
   details: The issue zerocracy/judges-action#434 has been earlier opened by @yegor256.
   issue: 434
   repository: 799177290
+  tombstone: 2025-09-12 06:37:15.914856266 Z
   what: issue-was-opened
   when: 2024-12-20 08:53:18.000000000 Z
   where: github
@@ -140173,6 +139835,7 @@
   details: The issue zerocracy/judges-action#428 has been earlier opened by @yegor256.
   issue: 428
   repository: 799177290
+  tombstone: 2025-09-12 06:37:15.356664996 Z
   what: issue-was-opened
   when: 2024-12-20 00:59:03.000000000 Z
   where: github
@@ -140184,6 +139847,7 @@
   details: The issue zerocracy/judges-action#421 has been earlier opened by @yegor256.
   issue: 421
   repository: 799177290
+  tombstone: 2025-09-12 06:37:14.745974095 Z
   what: issue-was-opened
   when: 2024-12-19 12:58:30.000000000 Z
   where: github
@@ -140195,6 +139859,7 @@
   details: The issue zerocracy/judges-action#419 has been earlier opened by @yegor256.
   issue: 419
   repository: 799177290
+  tombstone: 2025-09-12 06:37:14.183903156 Z
   what: issue-was-opened
   when: 2024-12-19 10:08:19.000000000 Z
   where: github
@@ -140206,6 +139871,7 @@
   details: The issue zerocracy/judges-action#416 has been earlier opened by @yegor256.
   issue: 416
   repository: 799177290
+  tombstone: 2025-09-12 06:37:13.654160126 Z
   what: issue-was-opened
   when: 2024-12-19 06:50:11.000000000 Z
   where: github
@@ -140217,6 +139883,7 @@
   details: The issue zerocracy/judges-action#412 has been earlier opened by @yegor256.
   issue: 412
   repository: 799177290
+  tombstone: 2025-09-12 06:37:13.024704636 Z
   what: issue-was-opened
   when: 2024-12-18 12:08:21.000000000 Z
   where: github
@@ -140228,6 +139895,7 @@
   details: The issue zerocracy/judges-action#397 has been earlier opened by @yegor256.
   issue: 397
   repository: 799177290
+  tombstone: 2025-09-12 06:37:47.773777221 Z
   what: issue-was-opened
   when: 2024-10-24 05:24:10.000000000 Z
   where: github
@@ -140239,6 +139907,7 @@
   details: The issue zerocracy/judges-action#375 has been earlier opened by @yegor256.
   issue: 375
   repository: 799177290
+  tombstone: 2025-09-12 06:37:45.679072191 Z
   what: issue-was-opened
   when: 2024-10-05 21:05:50.000000000 Z
   where: github
@@ -140250,6 +139919,7 @@
   details: The issue zerocracy/judges-action#373 has been earlier opened by @yegor256.
   issue: 373
   repository: 799177290
+  tombstone: 2025-09-12 06:37:45.163976531 Z
   what: issue-was-opened
   when: 2024-10-04 10:41:16.000000000 Z
   where: github
@@ -140261,6 +139931,7 @@
   details: The issue zerocracy/judges-action#350 has been earlier opened by @yegor256.
   issue: 350
   repository: 799177290
+  tombstone: 2025-09-12 06:37:25.077498704 Z
   what: issue-was-opened
   when: 2024-09-24 02:43:05.000000000 Z
   where: github
@@ -140272,6 +139943,7 @@
   details: The issue zerocracy/judges-action#345 has been earlier opened by @yegor256.
   issue: 345
   repository: 799177290
+  tombstone: 2025-09-12 06:37:47.150464981 Z
   what: issue-was-opened
   when: 2024-09-23 03:54:44.000000000 Z
   where: github
@@ -140283,6 +139955,7 @@
   details: The issue zerocracy/judges-action#338 has been earlier opened by @yegor256.
   issue: 338
   repository: 799177290
+  tombstone: 2025-09-12 06:37:40.972985642 Z
   what: issue-was-opened
   when: 2024-09-16 13:59:55.000000000 Z
   where: github
@@ -140294,6 +139967,7 @@
   details: The issue zerocracy/judges-action#311 has been earlier opened by @yegor256.
   issue: 311
   repository: 799177290
+  tombstone: 2025-09-12 06:37:24.456219324 Z
   what: issue-was-opened
   when: 2024-08-23 20:54:29.000000000 Z
   where: github
@@ -140305,6 +139979,7 @@
   details: The issue zerocracy/judges-action#239 has been earlier opened by @yegor256.
   issue: 239
   repository: 799177290
+  tombstone: 2025-09-12 06:37:44.311780921 Z
   what: issue-was-opened
   when: 2024-08-07 08:38:46.000000000 Z
   where: github
@@ -140316,6 +139991,7 @@
   details: The issue zerocracy/judges-action#238 has been earlier opened by @yegor256.
   issue: 238
   repository: 799177290
+  tombstone: 2025-09-12 06:37:42.551351662 Z
   what: issue-was-opened
   when: 2024-08-07 08:37:47.000000000 Z
   where: github
@@ -140327,6 +140003,7 @@
   details: The issue zerocracy/judges-action#227 has been earlier opened by @yegor256.
   issue: 227
   repository: 799177290
+  tombstone: 2025-09-12 06:37:43.389005481 Z
   what: issue-was-opened
   when: 2024-08-05 06:08:04.000000000 Z
   where: github
@@ -140338,6 +140015,7 @@
   details: The issue zerocracy/judges-action#220 has been earlier opened by @yegor256.
   issue: 220
   repository: 799177290
+  tombstone: 2025-09-12 06:37:40.088936712 Z
   what: issue-was-opened
   when: 2024-08-03 13:19:45.000000000 Z
   where: github
@@ -140349,6 +140027,7 @@
   details: The issue zerocracy/judges-action#219 has been earlier opened by @suban05.
   issue: 219
   repository: 799177290
+  tombstone: 2025-09-12 06:37:52.454070160 Z
   what: issue-was-opened
   when: 2024-08-03 08:44:29.000000000 Z
   where: github
@@ -140360,6 +140039,7 @@
   details: The issue zerocracy/judges-action#217 has been earlier opened by @h1alexbel.
   issue: 217
   repository: 799177290
+  tombstone: 2025-09-12 06:37:06.998373707 Z
   what: issue-was-opened
   when: 2024-08-02 12:44:30.000000000 Z
   where: github
@@ -140371,6 +140051,7 @@
   details: The issue zerocracy/judges-action#216 has been earlier opened by @suban05.
   issue: 216
   repository: 799177290
+  tombstone: 2025-09-12 06:37:51.512381781 Z
   what: issue-was-opened
   when: 2024-08-02 11:01:24.000000000 Z
   where: github
@@ -140382,6 +140063,7 @@
   details: The issue zerocracy/judges-action#158 has been earlier opened by @yegor256.
   issue: 158
   repository: 799177290
+  tombstone: 2025-09-12 06:37:29.537395203 Z
   what: issue-was-opened
   when: 2024-07-24 05:13:55.000000000 Z
   where: github
@@ -140393,6 +140075,7 @@
   details: The issue zerocracy/judges-action#157 has been earlier opened by @yegor256.
   issue: 157
   repository: 799177290
+  tombstone: 2025-09-12 06:37:32.236982383 Z
   what: issue-was-opened
   when: 2024-07-24 05:12:26.000000000 Z
   where: github
@@ -140404,6 +140087,7 @@
   details: The issue zerocracy/judges-action#156 has been earlier opened by @yegor256.
   issue: 156
   repository: 799177290
+  tombstone: 2025-09-12 06:37:31.411994033 Z
   what: issue-was-opened
   when: 2024-07-24 05:11:01.000000000 Z
   where: github
@@ -140415,6 +140099,7 @@
   details: The issue zerocracy/judges-action#155 has been earlier opened by @yegor256.
   issue: 155
   repository: 799177290
+  tombstone: 2025-09-12 06:37:30.489260353 Z
   what: issue-was-opened
   when: 2024-07-24 05:03:21.000000000 Z
   where: github
@@ -140426,6 +140111,7 @@
   details: The issue zerocracy/judges-action#102 has been earlier opened by @yegor256.
   issue: 102
   repository: 799177290
+  tombstone: 2025-09-12 06:37:34.011435703 Z
   what: issue-was-opened
   when: 2024-07-15 12:23:01.000000000 Z
   where: github
@@ -140437,6 +140123,7 @@
   details: The issue zerocracy/fbe#132 has been earlier opened by @yegor256.
   issue: 132
   repository: 820463873
+  tombstone: 2025-09-12 06:37:09.528324387 Z
   what: issue-was-opened
   when: 2024-12-20 11:34:30.000000000 Z
   where: github
@@ -140448,6 +140135,7 @@
   details: The issue zerocracy/fbe#131 has been earlier opened by @yegor256.
   issue: 131
   repository: 820463873
+  tombstone: 2025-09-12 06:37:10.354369806 Z
   what: issue-was-opened
   when: 2024-12-20 06:09:16.000000000 Z
   where: github
@@ -140459,6 +140147,7 @@
   details: The issue zerocracy/fbe#130 has been earlier opened by @yegor256.
   issue: 130
   repository: 820463873
+  tombstone: 2025-09-12 06:37:11.271827326 Z
   what: issue-was-opened
   when: 2024-12-20 01:05:18.000000000 Z
   where: github
@@ -140470,6 +140159,7 @@
   details: The issue zerocracy/fbe#129 has been earlier opened by @yegor256.
   issue: 129
   repository: 820463873
+  tombstone: 2025-09-12 06:37:12.189804916 Z
   what: issue-was-opened
   when: 2024-12-19 14:38:21.000000000 Z
   where: github
@@ -140481,6 +140171,7 @@
   details: The issue zerocracy/fbe#127 has been earlier opened by @yegor256.
   issue: 127
   repository: 820463873
+  tombstone: 2025-09-12 06:37:07.744882517 Z
   what: issue-was-opened
   when: 2024-12-18 13:45:54.000000000 Z
   where: github
@@ -140492,6 +140183,7 @@
   details: The issue zerocracy/fbe#78 has been earlier opened by @yegor256.
   issue: 78
   repository: 820463873
+  tombstone: 2025-09-12 06:37:23.585691644 Z
   what: issue-was-opened
   when: 2024-08-21 17:26:06.000000000 Z
   where: github
@@ -140503,6 +140195,7 @@
   details: The issue zerocracy/fbe#61 has been earlier opened by @suban05.
   issue: 61
   repository: 820463873
+  tombstone: 2025-09-12 06:37:19.228109485 Z
   what: issue-was-opened
   when: 2024-08-12 04:37:27.000000000 Z
   where: github
@@ -140514,6 +140207,7 @@
   details: The issue zerocracy/fbe#47 has been earlier opened by @suban05.
   issue: 47
   repository: 820463873
+  tombstone: 2025-09-12 06:37:28.015666053 Z
   what: issue-was-opened
   when: 2024-07-30 13:51:41.000000000 Z
   where: github
@@ -140525,6 +140219,7 @@
   details: The issue zerocracy/fbe#46 has been earlier opened by @yegor256.
   issue: 46
   repository: 820463873
+  tombstone: 2025-09-12 06:37:33.171764713 Z
   what: issue-was-opened
   when: 2024-07-30 05:08:03.000000000 Z
   where: github
@@ -140536,6 +140231,7 @@
   details: The issue zerocracy/fbe#38 has been earlier opened by @yegor256.
   issue: 38
   repository: 820463873
+  tombstone: 2025-09-12 06:37:20.886225475 Z
   what: issue-was-opened
   when: 2024-07-26 06:51:37.000000000 Z
   where: github
@@ -140547,6 +140243,7 @@
   details: The issue zerocracy/fbe#37 has been earlier opened by @yegor256.
   issue: 37
   repository: 820463873
+  tombstone: 2025-09-12 06:37:19.894807365 Z
   what: issue-was-opened
   when: 2024-07-26 05:35:31.000000000 Z
   where: github
@@ -140558,6 +140255,7 @@
   details: The issue yegor256/factbase#98 has been earlier opened by @yegor256.
   issue: 98
   repository: 798641472
+  tombstone: 2025-09-12 06:37:22.886246634 Z
   what: issue-was-opened
   when: 2024-07-17 04:28:47.000000000 Z
   where: github
@@ -140601,6 +140299,7 @@
   details: zerocracy/fbe#37 was assigned to @suban05 by @yegor256.
   issue: 37
   repository: 820463873
+  tombstone: 2025-09-12 06:37:20.050216485 Z
   what: issue-was-assigned
   when: 2024-07-27 19:11:23.000000000 Z
   where: github
@@ -140613,6 +140312,7 @@
   details: zerocracy/fbe#38 was assigned to @suban05 by @yegor256.
   issue: 38
   repository: 820463873
+  tombstone: 2025-09-12 06:37:21.005156265 Z
   what: issue-was-assigned
   when: 2024-07-26 07:34:10.000000000 Z
   where: github
@@ -140625,6 +140325,7 @@
   details: zerocracy/judges-action#102 was assigned to @yegorov by @yegor256.
   issue: 102
   repository: 799177290
+  tombstone: 2025-09-12 06:37:34.165320283 Z
   what: issue-was-assigned
   when: 2024-10-08 23:41:37.000000000 Z
   where: github
@@ -140637,6 +140338,7 @@
   details: zerocracy/fbe#46 was assigned to @yegorov by @yegor256.
   issue: 46
   repository: 820463873
+  tombstone: 2025-09-12 06:37:33.306911233 Z
   what: issue-was-assigned
   when: 2024-07-31 05:00:45.000000000 Z
   where: github
@@ -140649,6 +140351,7 @@
   details: yegor256/0rsk#40 was assigned to @yegor256 by @yegor256.
   issue: 40
   repository: 181044958
+  tombstone: 2025-09-12 06:37:48.689468690 Z
   what: issue-was-assigned
   when: 2019-05-21 22:10:06.000000000 Z
   where: github
@@ -140661,6 +140364,7 @@
   details: yegor256/0rsk#41 was assigned to @yegor256 by @yegor256.
   issue: 41
   repository: 181044958
+  tombstone: 2025-09-12 06:37:26.857315573 Z
   what: issue-was-assigned
   when: 2019-05-29 08:24:31.000000000 Z
   where: github
@@ -140673,6 +140377,7 @@
   details: zerocracy/fbe#61 was assigned to @suban05 by @yegor256.
   issue: 61
   repository: 820463873
+  tombstone: 2025-09-12 06:37:19.367793375 Z
   what: issue-was-assigned
   when: 2024-08-12 05:28:53.000000000 Z
   where: github
@@ -140685,6 +140390,7 @@
   details: zerocracy/fbe#78 was assigned to @suban05 by @yegor256.
   issue: 78
   repository: 820463873
+  tombstone: 2025-09-12 06:37:23.744884545 Z
   what: issue-was-assigned
   when: 2024-08-21 17:28:39.000000000 Z
   where: github
@@ -140697,6 +140403,7 @@
   details: zerocracy/judges-action#155 was assigned to @yegorov by @yegor256.
   issue: 155
   repository: 799177290
+  tombstone: 2025-09-12 06:37:30.608057403 Z
   what: issue-was-assigned
   when: 2024-08-05 05:55:27.000000000 Z
   where: github
@@ -140709,6 +140416,7 @@
   details: zerocracy/fbe#127 was assigned to @yegor256 by @yegor256.
   issue: 127
   repository: 820463873
+  tombstone: 2025-09-12 06:37:07.985300326 Z
   what: issue-was-assigned
   when: 2024-12-18 13:45:54.000000000 Z
   where: github
@@ -140721,6 +140429,7 @@
   details: zerocracy/judges-action#156 was assigned to @yegorov by @yegor256.
   issue: 156
   repository: 799177290
+  tombstone: 2025-09-12 06:37:31.544153643 Z
   what: issue-was-assigned
   when: 2024-07-29 18:47:59.000000000 Z
   where: github
@@ -140733,6 +140442,7 @@
   details: zerocracy/judges-action#157 was assigned to @yegorov by @yegor256.
   issue: 157
   repository: 799177290
+  tombstone: 2025-09-12 06:37:32.397912583 Z
   what: issue-was-assigned
   when: 2024-07-28 18:46:08.000000000 Z
   where: github
@@ -140745,6 +140455,7 @@
   details: zerocracy/fbe#129 was assigned to @yegor256 by @yegor256.
   issue: 129
   repository: 820463873
+  tombstone: 2025-09-12 06:37:12.323791236 Z
   what: issue-was-assigned
   when: 2024-12-19 14:38:24.000000000 Z
   where: github
@@ -140757,6 +140468,7 @@
   details: zerocracy/judges-action#158 was assigned to @yegorov by @yegor256.
   issue: 158
   repository: 799177290
+  tombstone: 2025-09-12 06:37:29.708303173 Z
   what: issue-was-assigned
   when: 2024-07-26 04:13:57.000000000 Z
   where: github
@@ -140769,6 +140481,7 @@
   details: zerocracy/fbe#130 was assigned to @yegor256 by @yegor256.
   issue: 130
   repository: 820463873
+  tombstone: 2025-09-12 06:37:11.426743366 Z
   what: issue-was-assigned
   when: 2024-12-20 01:05:18.000000000 Z
   where: github
@@ -140781,6 +140494,7 @@
   details: zerocracy/fbe#131 was assigned to @yegor256 by @yegor256.
   issue: 131
   repository: 820463873
+  tombstone: 2025-09-12 06:37:10.508149106 Z
   what: issue-was-assigned
   when: 2024-12-20 06:09:16.000000000 Z
   where: github
@@ -140793,6 +140507,7 @@
   details: zerocracy/judges-action#216 was assigned to @yegor256 by @yegor256.
   issue: 216
   repository: 799177290
+  tombstone: 2025-09-12 06:37:51.689255920 Z
   what: issue-was-assigned
   when: 2024-08-02 11:55:14.000000000 Z
   where: github
@@ -140805,6 +140520,7 @@
   details: zerocracy/fbe#132 was assigned to @yegor256 by @yegor256.
   issue: 132
   repository: 820463873
+  tombstone: 2025-09-12 06:37:09.658635576 Z
   what: issue-was-assigned
   when: 2024-12-20 11:34:33.000000000 Z
   where: github
@@ -140817,6 +140533,7 @@
   details: yegor256/judges#63 was assigned to @yegor256 by @yegor256.
   issue: 63
   repository: 799113787
+  tombstone: 2025-09-12 06:37:51.096149301 Z
   what: issue-was-assigned
   when: 2024-06-24 15:18:56.000000000 Z
   where: github
@@ -140829,6 +140546,7 @@
   details: zerocracy/judges-action#217 was assigned to @yegor256 by @yegor256.
   issue: 217
   repository: 799177290
+  tombstone: 2025-09-12 06:37:07.185022856 Z
   what: issue-was-assigned
   when: 2024-08-02 13:51:34.000000000 Z
   where: github
@@ -140841,6 +140559,7 @@
   details: zerocracy/judges-action#219 was assigned to @yegor256 by @yegor256.
   issue: 219
   repository: 799177290
+  tombstone: 2025-09-12 06:37:52.633090780 Z
   what: issue-was-assigned
   when: 2024-08-03 10:19:50.000000000 Z
   where: github
@@ -140853,6 +140572,7 @@
   details: zerocracy/judges-action#220 was assigned to @yegorov by @yegor256.
   issue: 220
   repository: 799177290
+  tombstone: 2025-09-12 06:37:40.210734371 Z
   what: issue-was-assigned
   when: 2024-09-11 03:44:14.000000000 Z
   where: github
@@ -140865,6 +140585,7 @@
   details: zerocracy/judges-action#224 was assigned to @yegorov by @yegor256.
   issue: 224
   repository: 799177290
+  tombstone: 2025-09-12 06:37:35.099027042 Z
   what: issue-was-assigned
   when: 2024-08-05 05:55:11.000000000 Z
   where: github
@@ -140877,6 +140598,7 @@
   details: zerocracy/judges-action#227 was assigned to @yegorov by @yegor256.
   issue: 227
   repository: 799177290
+  tombstone: 2025-09-12 06:37:43.549160161 Z
   what: issue-was-assigned
   when: 2024-10-01 02:10:25.000000000 Z
   where: github
@@ -140889,6 +140611,7 @@
   details: zerocracy/judges-action#238 was assigned to @yegorov by @yegor256.
   issue: 238
   repository: 799177290
+  tombstone: 2025-09-12 06:37:42.684811222 Z
   what: issue-was-assigned
   when: 2024-09-27 07:37:40.000000000 Z
   where: github
@@ -140901,6 +140624,7 @@
   details: zerocracy/judges-action#239 was assigned to @yegorov by @yegor256.
   issue: 239
   repository: 799177290
+  tombstone: 2025-09-12 06:37:44.472850662 Z
   what: issue-was-assigned
   when: 2024-10-03 02:50:53.000000000 Z
   where: github
@@ -140913,6 +140637,7 @@
   details: zerocracy/judges-action#240 was assigned to @yegorov by @yegor256.
   issue: 240
   repository: 799177290
+  tombstone: 2025-09-12 06:37:36.075618943 Z
   what: issue-was-assigned
   when: 2024-08-07 19:36:47.000000000 Z
   where: github
@@ -140929,17 +140654,6 @@
   when: 2024-08-08 03:48:46.000000000 Z
   where: github
   who: 2566462
-- _id: 2143968
-  _job: 17666349843
-  _time: 2025-09-12 06:32:27.183961106 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54551623784
-  min_issue_was_found: 1
-  min_pull_was_found: 308
-  repository: 802720676
-  types_were_scanned: 152
-  what: iterate
-  where: github
 - _id: 2143974
   _job: 17666349843
   _time: 2025-09-12 06:32:45.593261648 Z
@@ -140948,6 +140662,7 @@
   issue: 98
   label: bug
   repository: 798641472
+  tombstone: 2025-09-12 06:37:23.048704254 Z
   what: label-was-attached
   when: 2024-07-17 04:28:55.000000000 Z
   where: github
@@ -140960,6 +140675,7 @@
   issue: 153
   label: enhancement
   repository: 799113787
+  tombstone: 2025-09-12 06:37:17.231767786 Z
   what: label-was-attached
   when: 2024-12-19 08:24:16.000000000 Z
   where: github
@@ -140972,6 +140688,7 @@
   issue: 155
   label: bug
   repository: 799113787
+  tombstone: 2025-09-12 06:37:17.913914775 Z
   what: label-was-attached
   when: 2024-12-19 17:39:52.000000000 Z
   where: github
@@ -140984,6 +140701,7 @@
   issue: 156
   label: enhancement
   repository: 799113787
+  tombstone: 2025-09-12 06:37:18.605255925 Z
   what: label-was-attached
   when: 2024-12-24 05:36:01.000000000 Z
   where: github
@@ -140996,6 +140714,7 @@
   issue: 158
   label: enhancement
   repository: 799113787
+  tombstone: 2025-09-12 06:37:08.951035496 Z
   what: label-was-attached
   when: 2024-12-28 05:57:48.000000000 Z
   where: github
@@ -141008,6 +140727,7 @@
   issue: 37
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:20.184134235 Z
   what: label-was-attached
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
@@ -141020,6 +140740,7 @@
   issue: 37
   label: enhancement
   repository: 820463873
+  tombstone: 2025-09-12 06:37:20.306125555 Z
   what: label-was-attached
   when: 2024-07-26 05:37:03.000000000 Z
   where: github
@@ -141032,6 +140753,7 @@
   issue: 38
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:21.168592614 Z
   what: label-was-attached
   when: 2024-07-26 06:51:37.000000000 Z
   where: github
@@ -141044,6 +140766,7 @@
   issue: 102
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:34.332575403 Z
   what: label-was-attached
   when: 2024-07-15 12:23:01.000000000 Z
   where: github
@@ -141056,6 +140779,7 @@
   issue: 46
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:33.428699433 Z
   what: label-was-attached
   when: 2024-07-30 05:08:03.000000000 Z
   where: github
@@ -141080,6 +140804,7 @@
   issue: 141
   label: bug
   repository: 802720676
+  tombstone: 2025-09-12 06:37:42.032060462 Z
   what: label-was-attached
   when: 2024-09-26 08:56:12.000000000 Z
   where: github
@@ -141104,6 +140829,7 @@
   issue: 152
   label: enhancement
   repository: 802720676
+  tombstone: 2025-09-12 06:37:46.707980111 Z
   what: label-was-attached
   when: 2024-10-10 06:50:32.000000000 Z
   where: github
@@ -141116,6 +140842,7 @@
   issue: 155
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:30.770614864 Z
   what: label-was-attached
   when: 2024-07-24 05:03:21.000000000 Z
   where: github
@@ -141128,6 +140855,7 @@
   issue: 156
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:31.694490723 Z
   what: label-was-attached
   when: 2024-07-24 05:11:01.000000000 Z
   where: github
@@ -141140,6 +140868,7 @@
   issue: 157
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:32.587400793 Z
   what: label-was-attached
   when: 2024-07-24 05:12:26.000000000 Z
   where: github
@@ -141152,6 +140881,7 @@
   issue: 158
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:29.936156193 Z
   what: label-was-attached
   when: 2024-07-24 05:13:55.000000000 Z
   where: github
@@ -141164,6 +140894,7 @@
   issue: 216
   label: bug
   repository: 799177290
+  tombstone: 2025-09-12 06:37:51.851630820 Z
   what: label-was-attached
   when: 2024-08-02 11:55:13.000000000 Z
   where: github
@@ -141176,6 +140907,7 @@
   issue: 217
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:07.331928167 Z
   what: label-was-attached
   when: 2024-08-02 13:51:33.000000000 Z
   where: github
@@ -141188,6 +140920,7 @@
   issue: 219
   label: bug
   repository: 799177290
+  tombstone: 2025-09-12 06:37:52.905512270 Z
   what: label-was-attached
   when: 2024-08-03 10:19:48.000000000 Z
   where: github
@@ -141200,6 +140933,7 @@
   issue: 75
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:37.692802292 Z
   what: label-was-attached
   when: 2024-08-18 11:29:34.000000000 Z
   where: github
@@ -141212,6 +140946,7 @@
   issue: 220
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:40.378615731 Z
   what: label-was-attached
   when: 2024-08-03 13:19:45.000000000 Z
   where: github
@@ -141224,6 +140959,7 @@
   issue: 76
   label: enhancement
   repository: 820463873
+  tombstone: 2025-09-12 06:37:38.594629642 Z
   what: label-was-attached
   when: 2024-08-18 13:08:42.000000000 Z
   where: github
@@ -141236,6 +140972,7 @@
   issue: 224
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:35.226526073 Z
   what: label-was-attached
   when: 2024-08-03 16:58:25.000000000 Z
   where: github
@@ -141248,6 +140985,7 @@
   issue: 78
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:23.885681545 Z
   what: label-was-attached
   when: 2024-08-21 17:26:06.000000000 Z
   where: github
@@ -141260,6 +140998,7 @@
   issue: 227
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:43.704210361 Z
   what: label-was-attached
   when: 2024-08-23 20:55:34.000000000 Z
   where: github
@@ -141272,6 +141011,7 @@
   issue: 238
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:42.806723502 Z
   what: label-was-attached
   when: 2024-08-07 08:37:47.000000000 Z
   where: github
@@ -141284,6 +141024,7 @@
   issue: 239
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-12 06:37:44.593357721 Z
   what: label-was-attached
   when: 2024-08-07 08:38:46.000000000 Z
   where: github
@@ -141296,6 +141037,7 @@
   issue: 240
   label: bug
   repository: 799177290
+  tombstone: 2025-09-12 06:37:36.223861562 Z
   what: label-was-attached
   when: 2024-08-07 09:57:26.000000000 Z
   where: github
@@ -141308,6 +141050,7 @@
   issue: 127
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:08.158350846 Z
   what: label-was-attached
   when: 2024-12-18 13:45:54.000000000 Z
   where: github
@@ -141332,6 +141075,7 @@
   issue: 129
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:12.478220206 Z
   what: label-was-attached
   when: 2024-12-19 14:38:26.000000000 Z
   where: github
@@ -141344,6 +141088,7 @@
   issue: 130
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:11.556125956 Z
   what: label-was-attached
   when: 2024-12-20 01:05:18.000000000 Z
   where: github
@@ -141356,6 +141101,7 @@
   issue: 131
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:10.732703656 Z
   what: label-was-attached
   when: 2024-12-20 06:09:16.000000000 Z
   where: github
@@ -141368,77 +141114,11 @@
   issue: 132
   label: bug
   repository: 820463873
+  tombstone: 2025-09-12 06:37:09.818333936 Z
   what: label-was-attached
   when: 2024-12-20 11:34:35.000000000 Z
   where: github
   who: 526301
-- _id: 2144010
-  _job: 17666349843
-  _time: 2025-09-12 06:34:36.665680670 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 252
-  events_were_scanned: 54573982098
-  issues_were_scanned: 0
-  labels_were_scanned: 252
-  min_issue_was_found: 1
-  min_pull_was_found: 530
-  repository: 799177290
-  types_were_scanned: 549
-  what: iterate
-  where: github
-- _id: 2144011
-  _job: 17666349843
-  _time: 2025-09-12 06:34:36.851234216 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 80
-  events_were_scanned: 54493750945
-  labels_were_scanned: 0
-  min_issue_was_found: 1
-  min_pull_was_found: 148
-  repository: 798641472
-  types_were_scanned: 0
-  what: iterate
-  where: github
-- _id: 2144012
-  _job: 17666349843
-  _time: 2025-09-12 06:34:37.046862912 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 144
-  events_were_scanned: 54362992640
-  issues_were_scanned: 0
-  labels_were_scanned: 0
-  min_issue_was_found: 3
-  min_pull_was_found: 126
-  repository: 181044958
-  types_were_scanned: 0
-  what: iterate
-  where: github
-- _id: 2144013
-  _job: 17666349843
-  _time: 2025-09-12 06:34:37.238892153 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 0
-  events_were_scanned: 54543751748
-  labels_were_scanned: 132
-  min_issue_was_found: 1
-  min_pull_was_found: 248
-  repository: 820463873
-  types_were_scanned: 0
-  what: iterate
-  where: github
-- _id: 2144014
-  _job: 17666349843
-  _time: 2025-09-12 06:34:37.427491766 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 79
-  events_were_scanned: 54329998638
-  labels_were_scanned: 0
-  min_issue_was_found: 1
-  min_pull_was_found: 211
-  repository: 799113787
-  types_were_scanned: 228
-  what: iterate
-  where: github
 - _id: 2144015
   _job: 17666349843
   _time: 2025-09-12 06:34:48.532616572 Z
@@ -141446,6 +141126,7 @@
   details: Apparently, zerocracy/fbe#37 has been 'issue-was-closed'.
   issue: 37
   repository: 820463873
+  tombstone: 2025-09-12 06:37:20.470088305 Z
   what: issue-was-closed
   when: 2024-07-29 18:58:43.000000000 Z
   where: github
@@ -141457,6 +141138,7 @@
   details: Apparently, zerocracy/judges-action#102 has been 'issue-was-closed'.
   issue: 102
   repository: 799177290
+  tombstone: 2025-09-12 06:37:34.471385583 Z
   what: issue-was-closed
   when: 2024-10-14 03:54:21.000000000 Z
   where: github
@@ -141468,6 +141150,7 @@
   details: Apparently, yegor256/factbase#98 has been 'issue-was-closed'.
   issue: 98
   repository: 798641472
+  tombstone: 2025-09-12 06:37:23.177123844 Z
   what: issue-was-closed
   when: 2024-08-22 16:28:42.000000000 Z
   where: github
@@ -141479,6 +141162,7 @@
   details: Apparently, zerocracy/fbe#38 has been 'issue-was-closed'.
   issue: 38
   repository: 820463873
+  tombstone: 2025-09-12 06:37:21.410123204 Z
   what: issue-was-closed
   when: 2024-07-27 05:31:58.000000000 Z
   where: github
@@ -141490,6 +141174,7 @@
   details: Apparently, yegor256/judges#83 has been 'issue-was-closed'.
   issue: 83
   repository: 799113787
+  tombstone: 2025-09-12 06:37:21.954895934 Z
   what: issue-was-closed
   when: 2024-08-05 06:09:09.000000000 Z
   where: github
@@ -141501,6 +141186,7 @@
   details: Apparently, zerocracy/fbe#46 has been 'issue-was-closed'.
   issue: 46
   repository: 820463873
+  tombstone: 2025-09-12 06:37:33.595171863 Z
   what: issue-was-closed
   when: 2024-08-16 13:41:49.000000000 Z
   where: github
@@ -141512,6 +141198,7 @@
   details: Apparently, yegor256/judges#84 has been 'issue-was-closed'.
   issue: 84
   repository: 799113787
+  tombstone: 2025-09-12 06:37:22.476018875 Z
   what: issue-was-closed
   when: 2024-08-18 11:12:44.000000000 Z
   where: github
@@ -141523,6 +141210,7 @@
   details: Apparently, zerocracy/judges-action#155 has been 'issue-was-closed'.
   issue: 155
   repository: 799177290
+  tombstone: 2025-09-12 06:37:30.894275133 Z
   what: issue-was-closed
   when: 2024-08-16 12:59:59.000000000 Z
   where: github
@@ -141534,6 +141222,7 @@
   details: Apparently, zerocracy/fbe#47 has been 'issue-was-closed'.
   issue: 47
   repository: 820463873
+  tombstone: 2025-09-12 06:37:28.168615563 Z
   what: issue-was-closed
   when: 2024-07-31 04:51:05.000000000 Z
   where: github
@@ -141545,6 +141234,7 @@
   details: Apparently, zerocracy/judges-action#156 has been 'issue-was-closed'.
   issue: 156
   repository: 799177290
+  tombstone: 2025-09-12 06:37:31.828523593 Z
   what: issue-was-closed
   when: 2024-08-16 12:59:50.000000000 Z
   where: github
@@ -141556,6 +141246,7 @@
   details: Apparently, zerocracy/fbe#61 has been 'issue-was-closed'.
   issue: 61
   repository: 820463873
+  tombstone: 2025-09-12 06:37:19.489303925 Z
   what: issue-was-closed
   when: 2024-08-14 15:38:32.000000000 Z
   where: github
@@ -141567,6 +141258,7 @@
   details: Apparently, zerocracy/judges-action#157 has been 'issue-was-closed'.
   issue: 157
   repository: 799177290
+  tombstone: 2025-09-12 06:37:32.771319063 Z
   what: issue-was-closed
   when: 2024-08-16 12:59:42.000000000 Z
   where: github
@@ -141578,6 +141270,7 @@
   details: Apparently, zerocracy/fbe#78 has been 'issue-was-closed'.
   issue: 78
   repository: 820463873
+  tombstone: 2025-09-12 06:37:24.045165694 Z
   what: issue-was-closed
   when: 2024-08-22 05:28:52.000000000 Z
   where: github
@@ -141589,6 +141282,7 @@
   details: Apparently, zerocracy/judges-action#158 has been 'issue-was-closed'.
   issue: 158
   repository: 799177290
+  tombstone: 2025-09-12 06:37:30.069703083 Z
   what: issue-was-closed
   when: 2024-07-29 04:17:48.000000000 Z
   where: github
@@ -141600,6 +141294,7 @@
   details: Apparently, yegor256/0rsk#30 has been 'issue-was-closed'.
   issue: 30
   repository: 181044958
+  tombstone: 2025-09-12 06:37:28.787792954 Z
   what: issue-was-closed
   when: 2019-05-15 20:00:50.000000000 Z
   where: github
@@ -141611,6 +141306,7 @@
   details: Apparently, zerocracy/fbe#127 has been 'issue-was-closed'.
   issue: 127
   repository: 820463873
+  tombstone: 2025-09-12 06:37:08.332271256 Z
   what: issue-was-closed
   when: 2024-12-18 13:55:47.000000000 Z
   where: github
@@ -141622,6 +141318,7 @@
   details: Apparently, yegor256/judges#153 has been 'issue-was-closed'.
   issue: 153
   repository: 799113787
+  tombstone: 2025-09-12 06:37:17.367039035 Z
   what: issue-was-closed
   when: 2024-12-19 08:36:17.000000000 Z
   where: github
@@ -141633,6 +141330,7 @@
   details: Apparently, zerocracy/judges-action#216 has been 'issue-was-closed'.
   issue: 216
   repository: 799177290
+  tombstone: 2025-09-12 06:37:52.027596230 Z
   what: issue-was-closed
   when: 2024-08-02 14:28:38.000000000 Z
   where: github
@@ -141644,6 +141342,7 @@
   details: Apparently, zerocracy/fbe#129 has been 'issue-was-closed'.
   issue: 129
   repository: 820463873
+  tombstone: 2025-09-12 06:37:12.616667816 Z
   what: issue-was-closed
   when: 2024-12-19 14:49:55.000000000 Z
   where: github
@@ -141655,6 +141354,7 @@
   details: Apparently, yegor256/judges#155 has been 'issue-was-closed'.
   issue: 155
   repository: 799113787
+  tombstone: 2025-09-12 06:37:18.052885965 Z
   what: issue-was-closed
   when: 2024-12-19 18:26:41.000000000 Z
   where: github
@@ -141666,6 +141366,7 @@
   details: Apparently, yegor256/0rsk#33 has been 'issue-was-closed'.
   issue: 33
   repository: 181044958
+  tombstone: 2025-09-12 06:37:27.610143314 Z
   what: issue-was-closed
   when: 2019-05-15 18:27:48.000000000 Z
   where: github
@@ -141677,6 +141378,7 @@
   details: Apparently, zerocracy/fbe#130 has been 'issue-was-closed'.
   issue: 130
   repository: 820463873
+  tombstone: 2025-09-12 06:37:11.715661896 Z
   what: issue-was-closed
   when: 2024-12-20 02:01:11.000000000 Z
   where: github
@@ -141688,6 +141390,7 @@
   details: Apparently, yegor256/judges#156 has been 'issue-was-closed'.
   issue: 156
   repository: 799113787
+  tombstone: 2025-09-12 06:37:18.825121095 Z
   what: issue-was-closed
   when: 2024-12-24 05:51:20.000000000 Z
   where: github
@@ -141699,6 +141402,7 @@
   details: Apparently, zerocracy/judges-action#219 has been 'issue-was-closed'.
   issue: 219
   repository: 799177290
+  tombstone: 2025-09-12 06:37:53.063872680 Z
   what: issue-was-closed
   when: 2024-08-03 10:52:19.000000000 Z
   where: github
@@ -141710,6 +141414,7 @@
   details: Apparently, yegor256/0rsk#41 has been 'issue-was-closed'.
   issue: 41
   repository: 181044958
+  tombstone: 2025-09-12 06:37:26.994090434 Z
   what: issue-was-closed
   when: 2019-05-29 09:00:20.000000000 Z
   where: github
@@ -141721,6 +141426,7 @@
   details: Apparently, zerocracy/fbe#131 has been 'issue-was-closed'.
   issue: 131
   repository: 820463873
+  tombstone: 2025-09-12 06:37:10.865330126 Z
   what: issue-was-closed
   when: 2024-12-20 07:08:12.000000000 Z
   where: github
@@ -141732,6 +141438,7 @@
   details: Apparently, yegor256/judges#158 has been 'issue-was-closed'.
   issue: 158
   repository: 799113787
+  tombstone: 2025-09-12 06:37:09.071989646 Z
   what: issue-was-closed
   when: 2024-12-28 06:30:23.000000000 Z
   where: github
@@ -141743,6 +141450,7 @@
   details: Apparently, zerocracy/judges-action#220 has been 'issue-was-closed'.
   issue: 220
   repository: 799177290
+  tombstone: 2025-09-12 06:37:40.537355352 Z
   what: issue-was-closed
   when: 2024-09-14 04:57:07.000000000 Z
   where: github
@@ -141754,6 +141462,7 @@
   details: Apparently, zerocracy/fbe#132 has been 'issue-was-closed'.
   issue: 132
   repository: 820463873
+  tombstone: 2025-09-12 06:37:09.955891446 Z
   what: issue-was-closed
   when: 2024-12-20 13:25:46.000000000 Z
   where: github
@@ -141765,6 +141474,7 @@
   details: Apparently, zerocracy/judges-action#224 has been 'issue-was-closed'.
   issue: 224
   repository: 799177290
+  tombstone: 2025-09-12 06:37:35.391199713 Z
   what: issue-was-closed
   when: 2024-08-16 13:42:32.000000000 Z
   where: github
@@ -141776,6 +141486,7 @@
   details: Apparently, zerocracy/judges-action#227 has been 'issue-was-closed'.
   issue: 227
   repository: 799177290
+  tombstone: 2025-09-12 06:37:43.836839942 Z
   what: issue-was-closed
   when: 2024-10-03 10:19:58.000000000 Z
   where: github
@@ -141787,6 +141498,7 @@
   details: Apparently, yegor256/0rsk#46 has been 'issue-was-closed'.
   issue: 46
   repository: 181044958
+  tombstone: 2025-09-12 06:37:26.306465744 Z
   what: issue-was-closed
   when: 2019-10-03 16:39:49.000000000 Z
   where: github
@@ -141798,6 +141510,7 @@
   details: Apparently, zerocracy/judges-action#238 has been 'issue-was-closed'.
   issue: 238
   repository: 799177290
+  tombstone: 2025-09-12 06:37:42.973409291 Z
   what: issue-was-closed
   when: 2024-10-01 04:27:43.000000000 Z
   where: github
@@ -141809,6 +141522,7 @@
   details: Apparently, yegor256/0rsk#51 has been 'issue-was-closed'.
   issue: 51
   repository: 181044958
+  tombstone: 2025-09-12 06:37:25.767778914 Z
   what: issue-was-closed
   when: 2019-07-28 10:29:21.000000000 Z
   where: github
@@ -141820,6 +141534,7 @@
   details: Apparently, zerocracy/judges-action#239 has been 'issue-was-closed'.
   issue: 239
   repository: 799177290
+  tombstone: 2025-09-12 06:37:44.763668291 Z
   what: issue-was-closed
   when: 2024-10-04 10:14:03.000000000 Z
   where: github
@@ -141831,6 +141546,7 @@
   details: Apparently, zerocracy/judges-action#311 has been 'issue-was-closed'.
   issue: 311
   repository: 799177290
+  tombstone: 2025-09-12 06:37:24.574320754 Z
   what: issue-was-closed
   when: 2024-08-25 15:57:37.000000000 Z
   where: github
@@ -141842,6 +141558,7 @@
   details: Apparently, zerocracy/judges-action#338 has been 'issue-was-closed'.
   issue: 338
   repository: 799177290
+  tombstone: 2025-09-12 06:37:41.098042302 Z
   what: issue-was-closed
   when: 2024-09-18 08:44:42.000000000 Z
   where: github
@@ -141853,6 +141570,7 @@
   details: Apparently, zerocracy/judges-action#345 has been 'issue-was-closed'.
   issue: 345
   repository: 799177290
+  tombstone: 2025-09-12 06:37:47.270834961 Z
   what: issue-was-closed
   when: 2024-10-24 05:24:45.000000000 Z
   where: github
@@ -141864,6 +141582,7 @@
   details: Apparently, zerocracy/judges-action#350 has been 'issue-was-closed'.
   issue: 350
   repository: 799177290
+  tombstone: 2025-09-12 06:37:25.196106494 Z
   what: issue-was-closed
   when: 2024-09-24 09:13:53.000000000 Z
   where: github
@@ -141875,6 +141594,7 @@
   details: Apparently, zerocracy/judges-action#373 has been 'issue-was-closed'.
   issue: 373
   repository: 799177290
+  tombstone: 2025-09-12 06:37:45.294970731 Z
   what: issue-was-closed
   when: 2024-10-05 20:50:40.000000000 Z
   where: github
@@ -141886,6 +141606,7 @@
   details: Apparently, zerocracy/judges-action#375 has been 'issue-was-closed'.
   issue: 375
   repository: 799177290
+  tombstone: 2025-09-12 06:37:45.833039491 Z
   what: issue-was-closed
   when: 2024-10-07 15:45:29.000000000 Z
   where: github
@@ -141897,6 +141618,7 @@
   details: Apparently, zerocracy/judges-action#397 has been 'issue-was-closed'.
   issue: 397
   repository: 799177290
+  tombstone: 2025-09-12 06:37:47.943775321 Z
   what: issue-was-closed
   when: 2024-11-30 04:49:12.000000000 Z
   where: github
@@ -141908,6 +141630,7 @@
   details: Apparently, zerocracy/judges-action#412 has been 'issue-was-closed'.
   issue: 412
   repository: 799177290
+  tombstone: 2025-09-12 06:37:13.184740306 Z
   what: issue-was-closed
   when: 2024-12-19 04:27:18.000000000 Z
   where: github
@@ -141919,6 +141642,7 @@
   details: Apparently, zerocracy/judges-action#416 has been 'issue-was-closed'.
   issue: 416
   repository: 799177290
+  tombstone: 2025-09-12 06:37:13.786288396 Z
   what: issue-was-closed
   when: 2024-12-19 07:16:48.000000000 Z
   where: github
@@ -141930,6 +141654,7 @@
   details: Apparently, zerocracy/judges-action#419 has been 'issue-was-closed'.
   issue: 419
   repository: 799177290
+  tombstone: 2025-09-12 06:37:14.344977146 Z
   what: issue-was-closed
   when: 2024-12-19 10:31:30.000000000 Z
   where: github
@@ -141941,6 +141666,7 @@
   details: Apparently, zerocracy/judges-action#421 has been 'issue-was-closed'.
   issue: 421
   repository: 799177290
+  tombstone: 2025-09-12 06:37:14.896797525 Z
   what: issue-was-closed
   when: 2024-12-19 13:14:14.000000000 Z
   where: github
@@ -141952,6 +141678,7 @@
   details: Apparently, zerocracy/judges-action#428 has been 'issue-was-closed'.
   issue: 428
   repository: 799177290
+  tombstone: 2025-09-12 06:37:15.518502975 Z
   what: issue-was-closed
   when: 2024-12-20 02:17:35.000000000 Z
   where: github
@@ -141963,6 +141690,7 @@
   details: Apparently, zerocracy/judges-action#434 has been 'issue-was-closed'.
   issue: 434
   repository: 799177290
+  tombstone: 2025-09-12 06:37:16.050336085 Z
   what: issue-was-closed
   when: 2024-12-20 09:23:56.000000000 Z
   where: github
@@ -141974,6 +141702,7 @@
   details: Apparently, zerocracy/judges-action#440 has been 'issue-was-closed'.
   issue: 440
   repository: 799177290
+  tombstone: 2025-09-12 06:37:16.608616245 Z
   what: issue-was-closed
   when: 2024-12-24 06:15:00.000000000 Z
   where: github
@@ -141987,5 +141716,330 @@
   repository: 799177290
   what: issue-was-closed
   when: 2025-09-12 05:46:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144065
+  _job: 37384
+  _time: 2025-09-12 06:36:58.054642438 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  award: 6
+  comments: 4
+  details: It's time to reward @yegor256 for the code review in zerocracy/swarm-template#158,
+    the reward amount is 6.
+  hoc: 2
+  href: https://github.com/zerocracy/swarm-template/issues/158/#issuecomment-3283735306
+  issue: 158
+  repository: 849726475
+  review_comments: 0
+  seconds: 24145
+  what: code-review-was-rewarded
+  when: 2025-09-12 02:04:18.638813505 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/swarm-template#158
+- _id: 2144066
+  _job: 37384
+  _time: 2025-09-12 06:36:58.384550258 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  award: 6
+  comments: 4
+  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#936,
+    the reward amount is 6.
+  hoc: 2
+  href: https://github.com/zerocracy/judges-action/issues/936/#issuecomment-3283735338
+  issue: 936
+  repository: 799177290
+  review_comments: 0
+  seconds: 1057899
+  what: code-review-was-rewarded
+  when: 2025-09-12 04:36:26.728988645 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/judges-action#936
+- _id: 2144067
+  _job: 37384
+  _time: 2025-09-12 06:36:58.696883788 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  award: 6
+  comments: 4
+  details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#375,
+    the reward amount is 6.
+  hoc: 2
+  href: https://github.com/zerocracy/pages-action/issues/375/#issuecomment-3283735369
+  issue: 375
+  repository: 802720676
+  review_comments: 0
+  seconds: 9903
+  what: code-review-was-rewarded
+  when: 2025-09-12 04:36:30.358989628 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/pages-action#375
+- _id: 2144068
+  _job: 37384
+  _time: 2025-09-12 06:36:59.804080408 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  issues:
+  - 2-3
+  - 15-16
+  - 24-26
+  - 33-35
+  - '37'
+  - '41'
+  - '60'
+  - 97-98
+  - '102'
+  - '113'
+  - 118-119
+  - '125'
+  - '130'
+  - '147'
+  - 155-158
+  - '163'
+  - 166-167
+  - '171'
+  - '175'
+  - '187'
+  - 189-195
+  - 200-203
+  - '209'
+  - '211'
+  - '214'
+  - 216-220
+  - '222'
+  - '224'
+  - '227'
+  - '229'
+  - '234'
+  - 238-240
+  - '244'
+  - '254'
+  - '271'
+  - 275-276
+  - '290'
+  - '298'
+  - '302'
+  - 307-308
+  - '311'
+  - '325'
+  - '328'
+  - '335'
+  - '338'
+  - '341'
+  - '345'
+  - '350'
+  - '356'
+  - 372-373
+  - '375'
+  - '380'
+  - '388'
+  - '397'
+  - '412'
+  - '416'
+  - '419'
+  - '421'
+  - '428'
+  - '434'
+  - 438-442
+  - '444'
+  - '850'
+  repository: 799177290
+  what: tombstone
+  where: github
+- _id: 2144071
+  _job: 17667523724
+  _time: 2025-09-12 07:50:29.796749519 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assigner: 526301
+  details: zerocracy/judges-action#271 was assigned to @suban05 by @yegor256.
+  issue: 271
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-08-13 14:58:14.000000000 Z
+  where: github
+  who: 88084038
+- _id: 2144072
+  _job: 17667523724
+  _time: 2025-09-12 07:50:40.397694774 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assigner: 526301
+  details: zerocracy/judges-action#372 was assigned to @yegorov by @yegor256.
+  issue: 372
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-10-04 02:17:45.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2144073
+  _job: 17667523724
+  _time: 2025-09-12 07:50:43.281935882 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assigner: 526301
+  details: zerocracy/judges-action#380 was assigned to @yegorov by @yegor256.
+  issue: 380
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2024-10-11 06:54:18.000000000 Z
+  where: github
+  who: 2566462
+- _id: 2144074
+  _job: 17667523724
+  _time: 2025-09-12 07:51:41.649069848 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assigner: 526301
+  details: zerocracy/judges-action#1029 was assigned to @yegor256 by @yegor256.
+  issue: 1029
+  repository: 799177290
+  what: issue-was-assigned
+  when: 2025-09-12 04:48:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144080
+  _job: 17667523724
+  _time: 2025-09-12 07:54:41.814231379 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54595472707
+  min_issue_was_found: 1
+  min_pull_was_found: 308
+  repository: 802720676
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2144085
+  _job: 17667523724
+  _time: 2025-09-12 07:54:58.857963300 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#271.
+  issue: 271
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-08-13 14:58:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144086
+  _job: 17667523724
+  _time: 2025-09-12 07:55:05.336943572 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#308.
+  issue: 308
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-08-22 09:28:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144087
+  _job: 17667523724
+  _time: 2025-09-12 07:55:09.029577768 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#372.
+  issue: 372
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-10-04 02:17:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144088
+  _job: 17667523724
+  _time: 2025-09-12 07:55:12.066996300 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#380.
+  issue: 380
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-10-09 13:07:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144089
+  _job: 17667523724
+  _time: 2025-09-12 07:55:44.874296262 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#1029.
+  issue: 1029
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2025-09-12 04:48:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144090
+  _job: 17667523724
+  _time: 2025-09-12 07:56:46.275505485 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 0
+  events_were_scanned: 54543751748
+  labels_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 248
+  repository: 820463873
+  types_were_scanned: 163
+  what: iterate
+  where: github
+- _id: 2144091
+  _job: 17667523724
+  _time: 2025-09-12 07:56:46.470942152 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 0
+  events_were_scanned: 54575011424
+  issues_were_scanned: 0
+  labels_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 530
+  repository: 799177290
+  types_were_scanned: 877
+  what: iterate
+  where: github
+- _id: 2144092
+  _job: 17667523724
+  _time: 2025-09-12 07:56:46.651337022 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 0
+  events_were_scanned: 54493750945
+  labels_were_scanned: 90
+  min_issue_was_found: 1
+  min_pull_was_found: 148
+  repository: 798641472
+  types_were_scanned: 80
+  what: iterate
+  where: github
+- _id: 2144093
+  _job: 17667523724
+  _time: 2025-09-12 07:56:46.891379403 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 0
+  events_were_scanned: 54362992640
+  issues_were_scanned: 0
+  labels_were_scanned: 175
+  min_issue_was_found: 3
+  min_pull_was_found: 126
+  repository: 181044958
+  types_were_scanned: 154
+  what: iterate
+  where: github
+- _id: 2144094
+  _job: 17667523724
+  _time: 2025-09-12 07:56:47.075187224 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 0
+  events_were_scanned: 54329998638
+  labels_were_scanned: 103
+  min_issue_was_found: 1
+  min_pull_was_found: 211
+  repository: 799113787
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2144095
+  _job: 17667523724
+  _time: 2025-09-12 07:58:16.093399206 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The issue zerocracy/baza.rb#145 has been earlier opened by @yegor256.
+  issue: 145
+  repository: 840215648
+  what: issue-was-opened
+  when: 2025-09-12 06:47:45.000000000 Z
   where: github
   who: 526301
