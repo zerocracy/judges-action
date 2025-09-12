@@ -37,6 +37,7 @@ require_relative 'jp'
 #   exist in the fact (default: false)
 # @return [nil] This method modifies the fact in-place and returns nil
 def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, start: $start)
+  t = Time.now
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
     if fact[n]
@@ -49,6 +50,10 @@ def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, start: $start)
     end
     if $options.lifetime && Time.now - start > $options.lifetime - 10
       $loog.info("We are doing this for too long, time to stop at #{n}")
+      break
+    end
+    if $options.timeout && Time.now - t > $options.timeout * 0.8
+      $loog.info("We are doing this for #{t.ago}, let's stop at #{n}")
       break
     end
     $loog.info("Evaluating #{n}...")
