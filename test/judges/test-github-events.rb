@@ -214,6 +214,57 @@ class TestGithubEvents < Jp::Test
               }
             }
           }
+        },
+        {
+          id: '40623323543',
+          type: 'PullRequestReviewEvent',
+          public: true,
+          created_at: '2024-07-31 12:45:09 UTC',
+          actor: {
+            id: 43,
+            login: 'test',
+            display_login: 'test',
+            gravatar_id: '',
+            url: 'https://api.github.com/users/yegor256'
+          },
+          repo: {
+            id: 42,
+            name: 'yegor256/judges',
+            url: 'https://api.github.com/repos/yegor256/judges'
+          },
+          payload: {
+            action: 'created',
+            review: {
+              id: 2_210_067_609,
+              node_id: 'PRR_kwDOL6GCO86DuvSZ',
+              user: {
+                login: 'test',
+                id: 526_200,
+                node_id: 'MDQ6VXNlcjUyNjMwMQ==',
+                type: 'User'
+              },
+              state: 'approved',
+              pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              author_association: 'NONE',
+              _links: {
+                html: {
+                  href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
+                },
+                pull_request: {
+                  href: 'https://api.github.com/repos/yegor256/judges/pulls/93'
+                }
+              }
+            },
+            pull_request: {
+              url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
+              id: 1_990_323_142,
+              node_id: 'PR_kwDOL6GCO852oevG',
+              number: 93,
+              state: 'open',
+              locked: false,
+              title: 'allows to push gizpped factbase'
+            }
+          }
         }
       ].to_json,
       headers: {
@@ -223,6 +274,12 @@ class TestGithubEvents < Jp::Test
     )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/43').to_return(
+      body: { id: 43, login: 'user' }.to_json, headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
       }
@@ -254,7 +311,8 @@ class TestGithubEvents < Jp::Test
     load_it('github-events', fb)
     f = fb.query('(eq what "pull-was-reviewed")').each.to_a
     assert_equal(42, f.first.who)
-    assert_nil(f[1])
+    assert_equal(43, f[1].who)
+    assert_nil(f[2])
   end
 
   def test_add_only_approved_pull_request_review_events
