@@ -3,10 +3,10 @@
   cycles: 1
   deleted: 8
   inserted: 8
-  seconds: 1034.681497465
+  seconds: 899.232823574
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-12 10:37:21.532657666 Z
+  when: 2025-09-12 11:34:12.145849207 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -141785,20 +141785,6 @@
   repository: 799177290
   what: tombstone
   where: github
-- _id: 2144303
-  _job: 37432
-  _time: 2025-09-12 09:22:26.736419731 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  ac: 2976
-  cost_of_qod: 2.4672273316911775
-  ev: 1727
-  pv: 2067
-  qod: 700
-  qod_per_day: 6.170142874475343
-  qod_per_sec: 5.971329376718357e-05
-  start: 2025-04-29 14:07:31.154700897 Z
-  what: earned-value
-  when: 2025-09-12 09:22:26.736631528 Z
 - _id: 2144308
   _job: 17671629620
   _time: 2025-09-12 10:21:32.990397660 Z
@@ -142980,112 +142966,606 @@
   when: 2025-09-12 09:54:14.000000000 Z
   where: github
   who: 526301
-- _id: 2144421
-  _job: 17671629620
-  _time: 2025-09-12 10:33:45.375033346 Z
+- _id: 2144433
+  _job: 37467
+  _time: 2025-09-12 10:39:23.596489013 Z
   _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54316795934
+  award: 12
+  comments: 2
+  details: It's time to reward @yegorov for the code contributed in zerocracy/judges-action#1022,
+    the reward amount is 12.
+  greeting: |-
+    Thank you for your contribution! We appreciate your effort, but there are a few areas for improvement. You've earned +12 points: +24 as a base, -8 for lack of code review, and -4 for submitting only 8 hits-of-code (below the 30 minimum). Please remember to request code reviews and aim for more substantial contributions in the future. [Keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) up the good work and strive for higher quality submissions. Your running balance is now [+133](https://zerocracy.github.io/judges-action/zerocracy-vitals.html). Don't forget to check your [Zerocracy balance](https://www.zerocracy.com/) as well.
+
+    <!-- Thanks for the contribution! You've earned +12 points for this: +24 as a basis; -8 for the lack of code review; -4 for too few (8) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running balance is [+133](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy balance](https://www.zerocracy.com/) too).  -->
+  hoc: 8
+  issue: 1022
+  receipt: receipt-#37811
+  repository: 799177290
+  review_comments: 0
+  seconds: 4459
+  what: code-contribution-was-rewarded
+  when: 2025-09-12 10:39:23.628584227 Z
+  where: github
+  who: 2566462
+  why: Contributed code in zerocracy/judges-action#1022
+- _id: 2144434
+  _job: 37467
+  _time: 2025-09-12 10:39:39.585883881 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  award: 6
+  comments: 4
+  details: It's time to reward @yegor256 for the code review in zerocracy/swarm-template#160,
+    the reward amount is 6.
+  greeting: "Thanks for your code review! Here's your reward breakdown: +18 base points,
+    -8 for no comments, -4 for only 2 hits-of-code (below 24 threshold). Total earned:
+    +6 points. Remember, more comments and hits-of-code can boost your rewards next
+    time! Your running balance is now [+551](https://zerocracy.github.io/judges-action/zerocracy-vitals.html).
+    Don't forget to check your [Zerocracy balance](https://www.zerocracy.com/) too.
+    Keep up the good work! \U0001F4BB\n\n<!-- Thanks for the review! You've earned
+    +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for
+    too few (2) hits-of-code.  Your running balance is [+551](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy balance](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 2
+  issue: 160
+  repository: 849726475
+  review_comments: 0
+  seconds: 26089
+  what: code-review-was-rewarded
+  when: 2025-09-12 10:39:39.606229540 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/swarm-template#160
+- _id: 2144435
+  _job: 37467
+  _time: 2025-09-12 10:42:05.453427040 Z
+  _version: 0.16.4/0.53.7/0.15.42
+  ac: 2994
+  cost_of_qod: 2.4672273316911775
+  ev: 1727
+  pv: 2068
+  qod: 700
+  qod_per_day: 6.170142874475343
+  qod_per_sec: 5.971329376718357e-05
+  start: 2025-04-29 14:07:31.154700897 Z
+  what: earned-value
+  when: 2025-09-12 10:42:05.453637751 Z
+- _id: 2144439
+  _job: 17672925581
+  _time: 2025-09-12 11:20:42.221890560 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  details: The missing pull zerocracy/judges-action#1030 has been opened by @github-actions[bot].
+  issue: 1030
+  repository: 799177290
+  what: pull-was-opened
+  when: 2025-09-12 05:35:50.000000000 Z
+  where: github
+  who: 41898282
+- _id: 2144440
+  _job: 17672925581
+  _time: 2025-09-12 11:20:43.539826145 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  details: The missing pull zerocracy/judges-action#1031 has been opened by @renovate[bot].
+  issue: 1031
+  repository: 799177290
+  what: pull-was-opened
+  when: 2025-09-12 05:43:39.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2144441
+  _job: 17672925581
+  _time: 2025-09-12 11:20:44.291005289 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  details: The missing pull zerocracy/judges-action#1032 has been opened by @github-actions[bot].
+  issue: 1032
+  repository: 799177290
+  what: pull-was-opened
+  when: 2025-09-12 05:50:25.000000000 Z
+  where: github
+  who: 41898282
+- _id: 2144442
+  _job: 17672925581
+  _time: 2025-09-12 11:20:45.006833766 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/baza.rb-0.x-lockfile
+  details: The missing pull zerocracy/judges-action#1033 has been opened by @renovate[bot].
+  issue: 1033
+  repository: 799177290
+  what: pull-was-opened
+  when: 2025-09-12 08:02:19.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2144453
+  _job: 17672925581
+  _time: 2025-09-12 11:25:19.858045602 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/factbase#98.
+  issue: 98
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2024-07-17 04:28:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144454
+  _job: 17672925581
+  _time: 2025-09-12 11:25:30.938565477 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/factbase#106.
+  issue: 106
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2024-07-24 16:24:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144455
+  _job: 17672925581
+  _time: 2025-09-12 11:25:43.416712599 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/judges#127.
+  issue: 127
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: 2024-09-03 08:52:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144456
+  _job: 17672925581
+  _time: 2025-09-12 11:25:47.546521421 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue yegor256/judges#153.
+  issue: 153
+  label: enhancement
+  repository: 799113787
+  what: label-was-attached
+  when: 2024-12-19 08:24:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144457
+  _job: 17672925581
+  _time: 2025-09-12 11:25:48.673544760 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/factbase#308.
+  issue: 308
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2025-09-12 09:08:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144458
+  _job: 17672925581
+  _time: 2025-09-12 11:25:49.560631214 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/judges#155.
+  issue: 155
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: 2024-12-19 17:39:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144459
+  _job: 17672925581
+  _time: 2025-09-12 11:25:51.640219244 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue yegor256/judges#156.
+  issue: 156
+  label: enhancement
+  repository: 799113787
+  what: label-was-attached
+  when: 2024-12-24 05:36:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144460
+  _job: 17672925581
+  _time: 2025-09-12 11:25:53.027275765 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue yegor256/judges#158.
+  issue: 158
+  label: enhancement
+  repository: 799113787
+  what: label-was-attached
+  when: 2024-12-28 05:57:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144461
+  _job: 17672925581
+  _time: 2025-09-12 11:26:01.798717832 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/judges#294.
+  issue: 294
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: 2025-09-12 09:59:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144462
+  _job: 17672925581
+  _time: 2025-09-12 11:26:13.054670630 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#102.
+  issue: 102
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-15 12:23:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144463
+  _job: 17672925581
+  _time: 2025-09-12 11:26:21.119981297 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#155.
+  issue: 155
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-24 05:03:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144464
+  _job: 17672925581
+  _time: 2025-09-12 11:26:22.148454529 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#156.
+  issue: 156
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-24 05:11:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144465
+  _job: 17672925581
+  _time: 2025-09-12 11:26:23.042849327 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#157.
+  issue: 157
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-24 05:12:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144466
+  _job: 17672925581
+  _time: 2025-09-12 11:26:23.760980462 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#158.
+  issue: 158
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-24 05:13:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144467
+  _job: 17672925581
+  _time: 2025-09-12 11:26:24.774797516 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#166.
+  issue: 166
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-28 14:12:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144468
+  _job: 17672925581
+  _time: 2025-09-12 11:26:25.441565244 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#167.
+  issue: 167
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-28 14:14:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144469
+  _job: 17672925581
+  _time: 2025-09-12 11:26:26.648579848 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#189.
+  issue: 189
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 01:25:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144470
+  _job: 17672925581
+  _time: 2025-09-12 11:26:27.582246344 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#190.
+  issue: 190
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 01:27:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144471
+  _job: 17672925581
+  _time: 2025-09-12 11:26:28.392528090 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#191.
+  issue: 191
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 01:29:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144472
+  _job: 17672925581
+  _time: 2025-09-12 11:26:29.180061498 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#192.
+  issue: 192
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 01:31:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144473
+  _job: 17672925581
+  _time: 2025-09-12 11:26:29.951999703 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#193.
+  issue: 193
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 01:38:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144474
+  _job: 17672925581
+  _time: 2025-09-12 11:26:30.760241184 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#194.
+  issue: 194
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 01:51:09.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144475
+  _job: 17672925581
+  _time: 2025-09-12 11:26:31.530674703 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#195.
+  issue: 195
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 01:53:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144476
+  _job: 17672925581
+  _time: 2025-09-12 11:26:32.801292046 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#200.
+  issue: 200
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 05:34:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144477
+  _job: 17672925581
+  _time: 2025-09-12 11:26:33.514329701 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#201.
+  issue: 201
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 05:35:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144478
+  _job: 17672925581
+  _time: 2025-09-12 11:26:34.325952478 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#202.
+  issue: 202
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 05:58:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144479
+  _job: 17672925581
+  _time: 2025-09-12 11:26:35.082691126 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'enhancement' label was attached by @yegor256 to the issue zerocracy/judges-action#203.
+  issue: 203
+  label: enhancement
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-07-30 06:00:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144480
+  _job: 17672925581
+  _time: 2025-09-12 11:26:35.788333371 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#209.
+  issue: 209
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-08-01 05:21:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144481
+  _job: 17672925581
+  _time: 2025-09-12 11:26:36.701979075 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/judges-action#211.
+  issue: 211
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: 2024-08-01 09:59:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144487
+  _job: 17672925581
+  _time: 2025-09-12 11:27:02.382954300 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: Apparently, yegor256/factbase#308 has been 'issue-was-closed'.
+  issue: 308
+  repository: 798641472
+  what: issue-was-closed
+  when: 2025-09-12 09:30:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144488
+  _job: 17672925581
+  _time: 2025-09-12 11:27:07.620138479 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: Apparently, yegor256/judges#293 has been 'issue-was-closed'.
+  issue: 293
+  repository: 799113787
+  what: issue-was-closed
+  when: 2025-09-12 09:46:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144489
+  _job: 17672925581
+  _time: 2025-09-12 11:27:08.905501690 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: Apparently, yegor256/judges#294 has been 'issue-was-closed'.
+  issue: 294
+  repository: 799113787
+  what: issue-was-closed
+  when: 2025-09-12 10:21:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 2144491
+  _job: 17672925581
+  _time: 2025-09-12 11:34:09.245202201 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 147
+  events_were_scanned: 54362992640
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   min_issue_was_found: 3
-  min_pull_was_found: 13
-  repository: 974194993
+  min_pull_was_found: 129
+  repository: 181044958
+  types_were_scanned: 0
   what: iterate
   where: github
-- _id: 2144422
-  _job: 17671629620
-  _time: 2025-09-12 10:33:45.551026290 Z
+- _id: 2144492
+  _job: 17672925581
+  _time: 2025-09-12 11:34:09.427544559 Z
   _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54539784682
+  assignees_were_scanned: 80
+  events_were_scanned: 54607717337
+  labels_were_scanned: 0
   min_issue_was_found: 1
-  min_pull_was_found: 72
+  min_pull_was_found: 152
+  repository: 798641472
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2144493
+  _job: 17672925581
+  _time: 2025-09-12 11:34:09.605781425 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54598579483
+  min_issue_was_found: 0
+  min_pull_was_found: 45
+  repository: 849726475
+  what: iterate
+  where: github
+- _id: 2144494
+  _job: 17672925581
+  _time: 2025-09-12 11:34:09.793581375 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 80
+  events_were_scanned: 54597076397
+  labels_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 221
+  repository: 799113787
+  types_were_scanned: 0
+  what: iterate
+  where: github
+- _id: 2144495
+  _job: 17672925581
+  _time: 2025-09-12 11:34:09.947215857 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54601141238
+  min_issue_was_found: 1
+  min_pull_was_found: 73
   repository: 840215648
   types_were_scanned: 0
   what: iterate
   where: github
-- _id: 2144426
-  _job: 17671629620
-  _time: 2025-09-12 10:33:47.483663025 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54598579483
-  min_issue_was_found: 3
-  min_pull_was_found: 44
-  repository: 849726475
-  what: iterate
-  where: github
-- _id: 2144427
-  _job: 17671629620
-  _time: 2025-09-12 10:37:19.441302589 Z
+- _id: 2144496
+  _job: 17672925581
+  _time: 2025-09-12 11:34:10.110123999 Z
   _version: 0.16.3/0.53.6/0.15.42
   assignees_were_scanned: 0
-  events_were_scanned: 54362992640
+  events_were_scanned: 54607571549
   issues_were_scanned: 0
-  labels_were_scanned: 160
-  min_issue_was_found: 3
-  min_pull_was_found: 128
-  repository: 181044958
-  types_were_scanned: 141
-  what: iterate
-  where: github
-- _id: 2144428
-  _job: 17671629620
-  _time: 2025-09-12 10:37:19.654195316 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 0
-  events_were_scanned: 54595471508
-  labels_were_scanned: 132
+  labels_were_scanned: 211
   min_issue_was_found: 1
-  min_pull_was_found: 254
-  repository: 820463873
-  types_were_scanned: 131
-  what: iterate
-  where: github
-- _id: 2144429
-  _job: 17671629620
-  _time: 2025-09-12 10:37:19.841386837 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 0
-  events_were_scanned: 54604872904
-  labels_were_scanned: 90
-  min_issue_was_found: 1
-  min_pull_was_found: 151
-  repository: 798641472
-  types_were_scanned: 80
-  what: iterate
-  where: github
-- _id: 2144430
-  _job: 17671629620
-  _time: 2025-09-12 10:37:20.033955054 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 858
-  events_were_scanned: 54605435230
-  issues_were_scanned: 0
-  labels_were_scanned: 0
-  min_issue_was_found: 1
-  min_pull_was_found: 533
+  min_pull_was_found: 536
   repository: 799177290
-  types_were_scanned: 200
+  types_were_scanned: 518
   what: iterate
   where: github
-- _id: 2144431
-  _job: 17671629620
-  _time: 2025-09-12 10:37:20.206107592 Z
+- _id: 2144497
+  _job: 17672925581
+  _time: 2025-09-12 11:34:10.286986374 Z
   _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 0
-  events_were_scanned: 54597076397
-  labels_were_scanned: 94
-  min_issue_was_found: 1
-  min_pull_was_found: 217
-  repository: 799113787
-  types_were_scanned: 228
+  events_were_scanned: 54316795934
+  min_issue_was_found: 3
+  min_pull_was_found: 14
+  repository: 974194993
   what: iterate
   where: github
-- _id: 2144432
-  _job: 17671629620
-  _time: 2025-09-12 10:37:20.389730342 Z
+- _id: 2144498
+  _job: 17672925581
+  _time: 2025-09-12 11:34:10.463098298 Z
   _version: 0.16.3/0.53.6/0.15.42
   events_were_scanned: 54598580708
   min_issue_was_found: 1
-  min_pull_was_found: 310
+  min_pull_was_found: 311
   repository: 802720676
+  types_were_scanned: 152
+  what: iterate
+  where: github
+- _id: 2144499
+  _job: 17672925581
+  _time: 2025-09-12 11:34:10.819550721 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 0
+  events_were_scanned: 54595471508
+  labels_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 257
+  repository: 820463873
   types_were_scanned: 0
   what: iterate
   where: github
