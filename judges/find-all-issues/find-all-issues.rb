@@ -57,10 +57,10 @@ require_relative '../../lib/issue_was_lost'
           Fbe.fb.txn do |fbt|
             f =
               Fbe.if_absent(fb: fbt) do |ff|
-                ff.where = 'github'
-                ff.what = "#{type}-was-opened"
-                ff.repository = repository
                 ff.issue = json[:number]
+                ff.repository = repository
+                ff.what = "#{type}-was-opened"
+                ff.where = 'github'
                 issue = ff.issue
               end
             next if f.nil?
