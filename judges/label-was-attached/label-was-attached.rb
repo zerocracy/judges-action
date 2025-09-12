@@ -57,12 +57,12 @@ Fbe.iterate do
         nn =
           Fbe.if_absent(fb: fbt) do |n|
             n.issue = issue
+            n.label = badge
             n.what = $judge
             n.repository = repository
             n.where = 'github'
           end
         raise "A label is already attached to #{repo}##{issue}" if nn.nil?
-        nn.label = badge
         nn.who = te[:actor][:id]
         nn.when = te[:created_at]
         nn.details =
