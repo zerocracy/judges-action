@@ -27,7 +27,7 @@ Fbe.consider(
     (absent since)
     (exists when))"
 ) do |f|
-  pmp = Fbe.fb.query("(and (eq what 'pmp') (eq area 'scope') (exists qod_days))").each.to_a.first
+  pmp = Fbe.fb.query("(and (eq what 'pmp') (eq area 'scope') (exists qod_days))").each.first
   f.since = f.when - (((!pmp.nil? && pmp['qod_days']&.first) || 28) * 24 * 60 * 60)
 end
 

@@ -8,7 +8,7 @@ require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
 
-stale = Fbe.fb.query("(and (eq stale 'who') (eq where 'github') (unique who))").each.to_a.map(&:who)
+stale = Fbe.fb.query("(and (eq stale 'who') (eq where 'github') (unique who))").each.map(&:who)
 stale.each do |who|
   break if Fbe.octo.off_quota?
   begin

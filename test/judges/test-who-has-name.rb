@@ -30,7 +30,7 @@ class TestWhoHasName < Jp::Test
     f.what = 'issue-was-opened'
     load_it('who-has-name', fb)
     assert_equal(2, fb.query('(always)').each.to_a.size)
-    assert_equal('lebowski', fb.query('(exists name)').each.to_a.first.name)
+    assert_equal('lebowski', fb.query('(exists name)').each.first.name)
   end
 
   def test_ignores_who_when_not_found

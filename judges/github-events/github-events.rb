@@ -48,7 +48,7 @@ Fbe.iterate do
   end
 
   def self.fetch_contributors(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last
+    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
     tag = fetch_tag(last, repo)
     contributors = Set.new
     if tag
@@ -66,7 +66,7 @@ Fbe.iterate do
   end
 
   def self.fetch_release_info(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last
+    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
     tag = fetch_tag(last, repo)
     tag ||= find_first_commit(repo)[:sha]
     info = {}
@@ -166,7 +166,7 @@ Fbe.iterate do
           '(eq what "pull-was-reviewed") ' \
           "(eq who #{fact.who}) " \
           "(eq issue #{json[:payload][:pull_request][:number]}))"
-        ).each.to_a.last
+        ).each.last
           skip_event(json)
         end
         skip_event(json) unless json[:payload][:review][:state] == 'approved'

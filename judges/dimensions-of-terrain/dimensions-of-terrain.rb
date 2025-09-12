@@ -20,7 +20,7 @@ f = Fbe.fb.query(
   "(and
     (eq what '#{$judge}')
     (gt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '1 days')))"
-).each.to_a.first
+).each.first
 if f.nil?
   f = Fbe.fb.insert
   f.what = $judge

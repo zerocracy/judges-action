@@ -184,7 +184,7 @@ class TestQuantityOfDeliverables < Jp::Test
     f.qod_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
-      f = fb.query('(eq what "quantity-of-deliverables")').each.to_a.first
+      f = fb.query('(eq what "quantity-of-deliverables")').each.first
       assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal(7, f.total_releases_published)
@@ -373,7 +373,7 @@ class TestQuantityOfDeliverables < Jp::Test
     f.qod_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
-      f = fb.query('(eq what "quantity-of-deliverables")').each.to_a.first
+      f = fb.query('(eq what "quantity-of-deliverables")').each.first
       assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal(5, f.total_reviews_submitted)
@@ -442,7 +442,7 @@ class TestQuantityOfDeliverables < Jp::Test
     f.qod_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
-      f = fb.query('(eq what "quantity-of-deliverables")').each.to_a.first
+      f = fb.query('(eq what "quantity-of-deliverables")').each.first
       assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal(3, f.total_builds_ran)

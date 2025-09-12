@@ -201,7 +201,7 @@ class TestFindAllIssues < Jp::Test
     end
     load_it('find-all-issues', fb)
     assert_equal(6, fb.query('(always)').each.to_a.size)
-    fb.query("(eq what 'iterate')").each.to_a.first.then do |f|
+    fb.query("(eq what 'iterate')").each.first.then do |f|
       assert_equal('github', f.where)
       assert_equal(695, f.repository)
       assert_equal(87, f.min_issue_was_found)

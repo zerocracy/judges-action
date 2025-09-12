@@ -321,7 +321,7 @@ class TestQualityOfService < Jp::Test
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(58.333, f.average_release_hoc_size)
@@ -419,7 +419,7 @@ class TestQualityOfService < Jp::Test
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_in_delta(3600, f.average_build_mttr)
     end
   end
@@ -528,7 +528,7 @@ class TestQualityOfService < Jp::Test
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_in_delta(97_200, f.average_build_mttr)
     end
   end
@@ -686,7 +686,7 @@ class TestQualityOfService < Jp::Test
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(18.4, f.average_pull_hoc_size)
@@ -1012,7 +1012,7 @@ class TestQualityOfService < Jp::Test
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(431_100, f.average_review_time)
@@ -1149,7 +1149,7 @@ class TestQualityOfService < Jp::Test
     )
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(81_000, f.average_triage_time)
@@ -1266,7 +1266,7 @@ class TestQualityOfService < Jp::Test
     end
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f1, f2, * = fb.query('(eq what "quality-of-service")').each.to_a.sort_by(&:when)
+      f1, f2, * = fb.query('(eq what "quality-of-service")').each.sort_by(&:when)
       assert_equal(Time.parse('2024-07-02 21:00:00 UTC'), f1.since)
       assert_equal(Time.parse('2024-07-09 21:00:00 UTC'), f1.when)
       assert_in_delta(121, f1.average_build_mttr)
@@ -1368,7 +1368,7 @@ class TestQualityOfService < Jp::Test
     end
     Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      fs = fb.query('(eq what "quality-of-service")').each.to_a.sort_by(&:_time)
+      fs = fb.query('(eq what "quality-of-service")').each.sort_by(&:_time)
       assert_equal(2, fs.size)
       f1, f2 = fs
       assert_nil(f1['since'])
@@ -1454,7 +1454,7 @@ class TestQualityOfService < Jp::Test
     end
     Time.stub(:now, Time.parse('2024-09-01 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-30 22:00:00 UTC'), f.when)
       refute_nil(f.average_release_commits_size)
@@ -1577,7 +1577,7 @@ class TestQualityOfService < Jp::Test
     end
     Time.stub(:now, Time.parse('2025-08-28 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f = fb.query('(eq what "quality-of-service")').each.to_a.first
+      f = fb.query('(eq what "quality-of-service")').each.first
       assert_in_delta(1.5714, f.average_backlog_size)
     end
   end

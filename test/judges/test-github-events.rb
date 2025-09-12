@@ -39,7 +39,7 @@ class TestGithubEvents < Jp::Test
     )
     fb = Factbase.new
     load_it('github-events', fb)
-    f = fb.query('(eq what "tag-was-created")').each.to_a.first
+    f = fb.query('(eq what "tag-was-created")').each.first
     refute_nil(f)
     assert_equal(42, f.who)
     assert_equal('foo', f.tag)
@@ -1413,7 +1413,7 @@ class TestGithubEvents < Jp::Test
   def test_pull_request_event_with_comments
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
-    f = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    f = fb.query('(eq what "pull-was-merged")').each.first
     assert_equal(4, f.comments)
     assert_equal(2, f.comments_to_code)
     assert_equal(2, f.comments_by_author)
@@ -1425,7 +1425,7 @@ class TestGithubEvents < Jp::Test
   def test_count_numbers_of_workflow_builds
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
-    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 42))').each.to_a.first
+    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 42))').each.first
     assert_equal(4, f.succeeded_builds)
     assert_equal(2, f.failed_builds)
   end
@@ -1437,7 +1437,7 @@ class TestGithubEvents < Jp::Test
       fb,
       Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true })
     )
-    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.to_a.first
+    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.first
     assert_nil(f)
   end
 

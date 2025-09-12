@@ -127,7 +127,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb,
                 Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe,foo/asd' }))
-        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal('dimensions-of-terrain', f.what)
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(3, f.total_repositories)
@@ -182,7 +182,7 @@ class TestDimensionsOfTerrain < Jp::Test
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
-        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(9, f.total_releases)
       end
@@ -254,7 +254,7 @@ class TestDimensionsOfTerrain < Jp::Test
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar' }))
-        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(20, f.total_stars)
         assert_equal(15, f.total_forks)
@@ -266,7 +266,7 @@ class TestDimensionsOfTerrain < Jp::Test
     WebMock.disable_net_connect!
     fb = Factbase.new
     load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
-    f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+    f = fb.query("(eq what 'dimensions-of-terrain')").each.first
     assert_equal(23, f.total_issues)
     assert_equal(19, f.total_pulls)
   end
@@ -276,7 +276,7 @@ class TestDimensionsOfTerrain < Jp::Test
     fb = Factbase.new
     load_it('dimensions-of-terrain', fb,
             Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true }))
-    f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+    f = fb.query("(eq what 'dimensions-of-terrain')").each.first
     assert_equal(1484, f.total_commits)
   end
 
@@ -407,7 +407,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb,
                 Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
-        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(7, f.total_files)
       end
     end
@@ -490,7 +490,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb,
                 Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
-        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(12, f.total_contributors)
       end
     end
@@ -652,7 +652,7 @@ class TestDimensionsOfTerrain < Jp::Test
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
-        f = fb.query("(eq what 'dimensions-of-terrain')").each.to_a.first
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(5, f.total_active_contributors)
       end
     end
