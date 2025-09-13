@@ -2,11 +2,13 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'GET https://api.github.com/repos/zerocracy/swarm-template/actions/runs/17686400422/timing:
+    502 - Server Error'
   inserted: 8
-  seconds: 1000.566197917
+  seconds: 2391.713174058
   version: 0.53.6
   what: judges-summary
-  when: 2025-09-13 13:37:02.963289026 Z
+  when: 2025-09-13 14:58:34.235091340 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -4673,8 +4675,12 @@
   _time: 2025-08-10 14:03:18.561948772 Z
   _version: 0.14.5/0.52.2/0.15.9
   since: 2025-05-02 15:09:21.955309562 Z
+  total_builds_ran: 73501
+  total_commits_pushed: 3024
+  total_hoc_committed: 134637
   total_issues_created: 178
   total_pulls_submitted: 45
+  total_releases_published: 245
   total_reviews_submitted: 545
   what: quantity-of-deliverables
   when: 2025-05-09 15:09:21.955257454 Z
@@ -117742,42 +117748,6 @@
   when: 2024-08-05 13:54:34.000000000 Z
   where: github
   who: 526301
-- _id: 2145473
-  _job: 17685132830
-  _time: 2025-09-12 20:33:27.032788882 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  details: The issue zerocracy/judges-action#18 has been earlier opened by @yegor256.
-  issue: 18
-  repository: 799177290
-  tombstone: 2025-09-12 23:56:55.396874532 Z
-  what: issue-was-opened
-  when: 2024-05-27 08:20:50.000000000 Z
-  where: github
-  who: 526301
-- _id: 2145474
-  _job: 17685132830
-  _time: 2025-09-12 20:33:27.786763093 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  details: The issue zerocracy/judges-action#7 has been earlier opened by @yegor256.
-  issue: 7
-  repository: 799177290
-  tombstone: 2025-09-12 23:56:53.376007453 Z
-  what: issue-was-opened
-  when: 2024-05-13 15:19:45.000000000 Z
-  where: github
-  who: 526301
-- _id: 2145475
-  _job: 17685132830
-  _time: 2025-09-12 20:33:27.943743903 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  details: The issue zerocracy/judges-action#6 has been earlier opened by @yegor256.
-  issue: 6
-  repository: 799177290
-  tombstone: 2025-09-12 23:56:52.510789179 Z
-  what: issue-was-opened
-  when: 2024-05-12 12:58:33.000000000 Z
-  where: github
-  who: 526301
 - _id: 2145476
   _job: 17685132830
   _time: 2025-09-12 20:33:28.233310631 Z
@@ -117789,97 +117759,6 @@
   when: 2024-05-11 13:45:30.000000000 Z
   where: github
   who: 526301
-- _id: 2145487
-  _job: 17685132830
-  _time: 2025-09-12 20:34:53.281804189 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#97 has been opened by @github-actions[bot].
-  issue: 97
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:08.541484405 Z
-  what: pull-was-opened
-  when: 2024-07-13 09:12:44.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145488
-  _job: 17685132830
-  _time: 2025-09-12 20:34:54.435989143 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#113 has been opened by @github-actions[bot].
-  issue: 113
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:08.857363035 Z
-  what: pull-was-opened
-  when: 2024-07-16 07:54:38.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145489
-  _job: 17685132830
-  _time: 2025-09-12 20:34:55.314250057 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/factbase-0.x-lockfile
-  details: The missing pull zerocracy/judges-action#119 has been opened by @renovate[bot].
-  issue: 119
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:09.139997740 Z
-  what: pull-was-opened
-  when: 2024-07-17 05:06:09.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145490
-  _job: 17685132830
-  _time: 2025-09-12 20:34:56.447096593 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#125 has been opened by @github-actions[bot].
-  issue: 125
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:09.450580108 Z
-  what: pull-was-opened
-  when: 2024-07-18 05:00:05.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145491
-  _job: 17685132830
-  _time: 2025-09-12 20:34:57.381151417 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#130 has been opened by @github-actions[bot].
-  issue: 130
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:09.769609920 Z
-  what: pull-was-opened
-  when: 2024-07-19 05:29:06.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145492
-  _job: 17685132830
-  _time: 2025-09-12 20:34:58.327665289 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#147 has been opened by @github-actions[bot].
-  issue: 147
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:10.077589067 Z
-  what: pull-was-opened
-  when: 2024-07-23 03:31:39.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145493
-  _job: 17685132830
-  _time: 2025-09-12 20:34:59.303144084 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#163 has been opened by @github-actions[bot].
-  issue: 163
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:10.394312577 Z
-  what: pull-was-opened
-  when: 2024-07-27 07:09:47.000000000 Z
-  where: github
-  who: 41898282
 - _id: 2145494
   _job: 37553
   _time: 2025-09-12 20:35:47.849035822 Z
@@ -118033,167 +117912,6 @@
   when: *1305
   where: github
   who: 2566462
-- _id: 2145505
-  _job: 17686276219
-  _time: 2025-09-12 21:20:14.732161935 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/judges-action#97 has been 'pull-was-closed'.
-  done: 2025-09-13 01:04:08.491997663 Z
-  failed_builds: 0
-  hoc: 2
-  issue: 97
-  repository: 799177290
-  succeeded_builds: 0
-  tombstone: 2025-09-13 02:36:50.631115869 Z
-  what: pull-was-closed
-  when: 2024-07-13 09:12:54.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145506
-  _job: 17686276219
-  _time: 2025-09-12 21:20:23.106773476 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/judges-action#113 has been 'pull-was-closed'.
-  done: 2025-09-13 01:04:08.776261138 Z
-  failed_builds: 0
-  hoc: 2
-  issue: 113
-  repository: 799177290
-  succeeded_builds: 0
-  tombstone: 2025-09-13 02:36:50.788277860 Z
-  what: pull-was-closed
-  when: 2024-07-16 07:54:53.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145507
-  _job: 17686276219
-  _time: 2025-09-12 21:20:27.938244291 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/factbase-0.x-lockfile
-  comments: 3
-  comments_appreciated: 1
-  comments_by_author: 0
-  comments_by_reviewers: 3
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/judges-action#119 has been 'pull-was-closed'.
-  done: 2025-09-13 01:04:09.092958499 Z
-  failed_builds: 0
-  hoc: 12
-  issue: 119
-  repository: 799177290
-  succeeded_builds: 0
-  tombstone: 2025-09-13 02:36:50.940814940 Z
-  what: pull-was-closed
-  when: 2024-07-22 14:57:04.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145508
-  _job: 17686276219
-  _time: 2025-09-12 21:20:33.286223410 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/judges-action#125 has been 'pull-was-closed'.
-  done: 2025-09-13 01:04:09.400527706 Z
-  failed_builds: 0
-  hoc: 2
-  issue: 125
-  repository: 799177290
-  succeeded_builds: 0
-  tombstone: 2025-09-13 02:36:51.160674032 Z
-  what: pull-was-closed
-  when: 2024-07-18 05:00:15.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145509
-  _job: 17686276219
-  _time: 2025-09-12 21:20:37.120403795 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/judges-action#130 has been 'pull-was-closed'.
-  done: 2025-09-13 01:04:09.718187957 Z
-  failed_builds: 0
-  hoc: 2
-  issue: 130
-  repository: 799177290
-  succeeded_builds: 0
-  tombstone: 2025-09-13 02:36:51.307965426 Z
-  what: pull-was-closed
-  when: 2024-07-19 05:29:20.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145510
-  _job: 17686276219
-  _time: 2025-09-12 21:20:41.264691582 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/judges-action#147 has been 'pull-was-closed'.
-  done: 2025-09-13 01:04:10.023863953 Z
-  failed_builds: 0
-  hoc: 2
-  issue: 147
-  repository: 799177290
-  succeeded_builds: 0
-  tombstone: 2025-09-13 02:36:51.449507529 Z
-  what: pull-was-closed
-  when: 2024-07-23 03:31:44.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145511
-  _job: 17686276219
-  _time: 2025-09-12 21:20:44.992704010 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/judges-action#163 has been 'pull-was-closed'.
-  done: 2025-09-13 01:04:10.339577063 Z
-  failed_builds: 0
-  hoc: 2
-  issue: 163
-  repository: 799177290
-  succeeded_builds: 0
-  tombstone: 2025-09-13 02:36:51.608648480 Z
-  what: pull-was-closed
-  when: 2024-07-27 07:09:54.000000000 Z
-  where: github
-  who: 41898282
 - _id: 2145522
   _job: 17686276219
   _time: 2025-09-12 21:29:54.592385125 Z
@@ -119464,305 +119182,6 @@
   when: 2024-12-19 12:58:51.000000000 Z
   where: github
   who: 526301
-- _id: 2145739
-  _job: 17688165729
-  _time: 2025-09-12 23:23:34.134176206 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#2 has been opened by @github-actions[bot].
-  issue: 2
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:11.610459468 Z
-  what: pull-was-opened
-  when: 2024-05-11 13:45:57.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145740
-  _job: 17688165729
-  _time: 2025-09-12 23:23:34.972862922 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/actions-checkout-digest
-  details: The missing pull zerocracy/judges-action#3 has been opened by @renovate[bot].
-  issue: 3
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:12.872427579 Z
-  what: pull-was-opened
-  when: 2024-05-11 13:45:59.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145741
-  _job: 17688165729
-  _time: 2025-09-12 23:23:35.883216246 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/factbase-0.x
-  details: The missing pull zerocracy/judges-action#15 has been opened by @renovate[bot].
-  issue: 15
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:13.878012325 Z
-  what: pull-was-opened
-  when: 2024-05-25 03:26:16.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145742
-  _job: 17688165729
-  _time: 2025-09-12 23:23:36.853313921 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x
-  details: The missing pull zerocracy/judges-action#16 has been opened by @renovate[bot].
-  issue: 16
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:14.476460442 Z
-  what: pull-was-opened
-  when: 2024-05-26 05:48:33.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145743
-  _job: 17688165729
-  _time: 2025-09-12 23:23:37.800315035 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/factbase-0.x-lockfile
-  details: The missing pull zerocracy/judges-action#24 has been opened by @renovate[bot].
-  issue: 24
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:15.131739842 Z
-  what: pull-was-opened
-  when: 2024-05-30 15:26:25.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145744
-  _job: 17688165729
-  _time: 2025-09-12 23:23:38.598542237 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/judges-action#25 has been opened by @renovate[bot].
-  issue: 25
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:15.733550150 Z
-  what: pull-was-opened
-  when: 2024-05-31 04:53:48.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145745
-  _job: 17688165729
-  _time: 2025-09-12 23:23:39.472622544 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/judges-action#26 has been opened by @renovate[bot].
-  issue: 26
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:16.630235468 Z
-  what: pull-was-opened
-  when: 2024-06-04 15:39:47.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145746
-  _job: 17688165729
-  _time: 2025-09-12 23:23:40.361101054 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#33 has been opened by @github-actions[bot].
-  issue: 33
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:17.223220532 Z
-  what: pull-was-opened
-  when: 2024-06-13 04:14:59.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145747
-  _job: 17688165729
-  _time: 2025-09-12 23:23:41.202311235 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/faraday-2.x
-  details: The missing pull zerocracy/judges-action#34 has been opened by @renovate[bot].
-  issue: 34
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:17.833826023 Z
-  what: pull-was-opened
-  when: 2024-06-18 11:36:03.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145748
-  _job: 17688165729
-  _time: 2025-09-12 23:23:42.098995122 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/factbase-0.x-lockfile
-  details: The missing pull zerocracy/judges-action#35 has been opened by @renovate[bot].
-  issue: 35
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:18.759201035 Z
-  what: pull-was-opened
-  when: 2024-06-18 16:19:25.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145749
-  _job: 17688165729
-  _time: 2025-09-12 23:23:42.941448232 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/actions-checkout-2.x
-  details: The missing pull zerocracy/judges-action#41 has been opened by @renovate[bot].
-  issue: 41
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:19.383507882 Z
-  what: pull-was-opened
-  when: 2024-06-29 15:06:15.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145750
-  _job: 17688165729
-  _time: 2025-09-12 23:23:43.921428013 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/zerocracy-pages-action-0.x
-  details: The missing pull zerocracy/judges-action#60 has been opened by @renovate[bot].
-  issue: 60
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:20.016281263 Z
-  what: pull-was-opened
-  when: 2024-07-06 09:44:29.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145751
-  _job: 17688165729
-  _time: 2025-09-12 23:23:44.843545473 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#118 has been opened by @github-actions[bot].
-  issue: 118
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:20.658756648 Z
-  what: pull-was-opened
-  when: 2024-07-16 12:06:56.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145752
-  _job: 17688165729
-  _time: 2025-09-12 23:23:45.710590883 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#171 has been opened by @github-actions[bot].
-  issue: 171
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:21.363476802 Z
-  what: pull-was-opened
-  when: 2024-07-28 16:29:06.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145753
-  _job: 17688165729
-  _time: 2025-09-12 23:23:46.638113612 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#175 has been opened by @github-actions[bot].
-  issue: 175
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:21.959104306 Z
-  what: pull-was-opened
-  when: 2024-07-29 09:27:29.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145754
-  _job: 17688165729
-  _time: 2025-09-12 23:23:47.481727340 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#187 has been opened by @github-actions[bot].
-  issue: 187
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:23.171268245 Z
-  what: pull-was-opened
-  when: 2024-07-29 19:06:25.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145755
-  _job: 17688165729
-  _time: 2025-09-12 23:23:48.335196171 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#222 has been opened by @github-actions[bot].
-  issue: 222
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:24.098606917 Z
-  what: pull-was-opened
-  when: 2024-08-03 13:22:45.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145756
-  _job: 17688165729
-  _time: 2025-09-12 23:23:49.198165676 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#234 has been opened by @github-actions[bot].
-  issue: 234
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:25.036441854 Z
-  what: pull-was-opened
-  when: 2024-08-05 14:36:00.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145757
-  _job: 17688165729
-  _time: 2025-09-12 23:23:50.274604230 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#275 has been opened by @github-actions[bot].
-  issue: 275
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:25.971834830 Z
-  what: pull-was-opened
-  when: 2024-08-13 15:18:56.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145758
-  _job: 17688165729
-  _time: 2025-09-12 23:23:51.223114659 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/zerocracy-pages-action-0.x
-  details: The missing pull zerocracy/judges-action#290 has been opened by @renovate[bot].
-  issue: 290
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:26.610205973 Z
-  what: pull-was-opened
-  when: 2024-08-16 19:45:26.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2145759
-  _job: 17688165729
-  _time: 2025-09-12 23:23:52.404044654 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#302 has been opened by @github-actions[bot].
-  issue: 302
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:27.238407033 Z
-  what: pull-was-opened
-  when: 2024-08-21 16:33:18.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145760
-  _job: 17688165729
-  _time: 2025-09-12 23:23:53.399446429 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/judges-action#307 has been opened by @github-actions[bot].
-  issue: 307
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:27.871208044 Z
-  what: pull-was-opened
-  when: 2024-08-22 07:03:48.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2145761
-  _job: 17688165729
-  _time: 2025-09-12 23:23:54.225099404 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/zerocracy-judges-action-0.x
-  details: The missing pull zerocracy/judges-action#328 has been opened by @renovate[bot].
-  issue: 328
-  repository: 799177290
-  tombstone: 2025-09-13 01:04:28.513007209 Z
-  what: pull-was-opened
-  when: 2024-09-04 17:28:02.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2145762
   _job: 17688165729
   _time: 2025-09-12 23:23:55.091319266 Z
@@ -123161,6 +122580,7 @@
   details: The missing pull zerocracy/judges-action#29 has been opened by @github-actions[bot].
   issue: 29
   repository: 799177290
+  tombstone: 2025-09-13 13:38:31.176748169 Z
   what: pull-was-opened
   when: 2024-06-06 12:48:57.000000000 Z
   where: github
@@ -123792,14 +123212,6 @@
   when: 2022-11-05 04:07:46.000000000 Z
   where: github
   who: 29139614
-- _id: 2146856
-  _job: 17691658954
-  _time: 2025-09-13 04:20:47.476603651 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54621247833
-  repository: 728758275
-  what: iterate
-  where: github
 - _id: 2146860
   _job: 17691658954
   _time: 2025-09-13 04:20:52.026566594 Z
@@ -123977,6 +123389,7 @@
   details: The missing pull zerocracy/judges-action#127 has been opened by @github-actions[bot].
   issue: 127
   repository: 799177290
+  tombstone: 2025-09-13 13:38:31.591629078 Z
   what: pull-was-opened
   when: 2024-07-18 14:47:48.000000000 Z
   where: github
@@ -129802,6 +129215,7 @@
   details: The missing pull zerocracy/judges-action#69 has been opened by @github-actions[bot].
   issue: 69
   repository: 799177290
+  tombstone: 2025-09-13 13:37:50.179123157 Z
   what: pull-was-opened
   when: 2024-07-06 19:08:48.000000000 Z
   where: github
@@ -129814,6 +129228,7 @@
   details: The missing pull zerocracy/judges-action#70 has been opened by @renovate[bot].
   issue: 70
   repository: 799177290
+  tombstone: 2025-09-13 13:37:51.060250159 Z
   what: pull-was-opened
   when: 2024-07-06 19:32:00.000000000 Z
   where: github
@@ -129826,6 +129241,7 @@
   details: The missing pull zerocracy/judges-action#72 has been opened by @github-actions[bot].
   issue: 72
   repository: 799177290
+  tombstone: 2025-09-13 13:37:51.862573089 Z
   what: pull-was-opened
   when: 2024-07-07 07:24:18.000000000 Z
   where: github
@@ -129838,6 +129254,7 @@
   details: The missing pull zerocracy/judges-action#81 has been opened by @github-actions[bot].
   issue: 81
   repository: 799177290
+  tombstone: 2025-09-13 13:37:52.662466954 Z
   what: pull-was-opened
   when: 2024-07-09 09:10:47.000000000 Z
   where: github
@@ -129850,6 +129267,7 @@
   details: The missing pull zerocracy/judges-action#85 has been opened by @github-actions[bot].
   issue: 85
   repository: 799177290
+  tombstone: 2025-09-13 13:37:53.461512886 Z
   what: pull-was-opened
   when: 2024-07-09 16:53:49.000000000 Z
   where: github
@@ -129862,6 +129280,7 @@
   details: The missing pull zerocracy/judges-action#129 has been opened by @yegor256.
   issue: 129
   repository: 799177290
+  tombstone: 2025-09-13 13:37:53.992363814 Z
   what: pull-was-opened
   when: 2024-07-19 05:20:30.000000000 Z
   where: github
@@ -129874,6 +129293,7 @@
   details: The missing pull zerocracy/judges-action#138 has been opened by @yegor256.
   issue: 138
   repository: 799177290
+  tombstone: 2025-09-13 13:37:54.869868993 Z
   what: pull-was-opened
   when: 2024-07-22 14:53:50.000000000 Z
   where: github
@@ -129886,6 +129306,7 @@
   details: The missing pull zerocracy/judges-action#143 has been opened by @yegor256.
   issue: 143
   repository: 799177290
+  tombstone: 2025-09-13 13:37:55.674851984 Z
   what: pull-was-opened
   when: 2024-07-22 19:24:30.000000000 Z
   where: github
@@ -129898,6 +129319,7 @@
   details: The missing pull zerocracy/judges-action#168 has been opened by @renovate[bot].
   issue: 168
   repository: 799177290
+  tombstone: 2025-09-13 13:37:56.477105566 Z
   what: pull-was-opened
   when: 2024-07-28 15:09:00.000000000 Z
   where: github
@@ -129910,6 +129332,7 @@
   details: The missing pull zerocracy/judges-action#172 has been opened by @yegorov.
   issue: 172
   repository: 799177290
+  tombstone: 2025-09-13 13:37:57.274904494 Z
   what: pull-was-opened
   when: 2024-07-28 18:34:57.000000000 Z
   where: github
@@ -129922,6 +129345,7 @@
   details: The missing pull zerocracy/judges-action#183 has been opened by @yegorov.
   issue: 183
   repository: 799177290
+  tombstone: 2025-09-13 13:37:58.104491959 Z
   what: pull-was-opened
   when: 2024-07-29 18:36:15.000000000 Z
   where: github
@@ -129934,6 +129358,7 @@
   details: The missing pull zerocracy/judges-action#205 has been opened by @yegorov.
   issue: 205
   repository: 799177290
+  tombstone: 2025-09-13 13:37:58.635355133 Z
   what: pull-was-opened
   when: 2024-07-30 18:50:18.000000000 Z
   where: github
@@ -129946,6 +129371,7 @@
   details: The missing pull zerocracy/judges-action#215 has been opened by @suban05.
   issue: 215
   repository: 799177290
+  tombstone: 2025-09-13 13:37:59.170243181 Z
   what: pull-was-opened
   when: 2024-08-02 06:45:08.000000000 Z
   where: github
@@ -129958,6 +129384,7 @@
   details: The missing pull zerocracy/judges-action#225 has been opened by @suban05.
   issue: 225
   repository: 799177290
+  tombstone: 2025-09-13 13:37:59.698990261 Z
   what: pull-was-opened
   when: 2024-08-04 06:17:09.000000000 Z
   where: github
@@ -129970,6 +129397,7 @@
   details: The missing pull zerocracy/judges-action#230 has been opened by @suban05.
   issue: 230
   repository: 799177290
+  tombstone: 2025-09-13 13:38:00.257215774 Z
   what: pull-was-opened
   when: 2024-08-05 10:42:56.000000000 Z
   where: github
@@ -129982,6 +129410,7 @@
   details: The missing pull zerocracy/judges-action#235 has been opened by @yegorov.
   issue: 235
   repository: 799177290
+  tombstone: 2025-09-13 13:38:00.789033211 Z
   what: pull-was-opened
   when: 2024-08-05 19:17:22.000000000 Z
   where: github
@@ -129994,6 +129423,7 @@
   details: The missing pull zerocracy/judges-action#236 has been opened by @yegorov.
   issue: 236
   repository: 799177290
+  tombstone: 2025-09-13 13:38:01.323832769 Z
   what: pull-was-opened
   when: 2024-08-05 20:03:23.000000000 Z
   where: github
@@ -130006,6 +129436,7 @@
   details: The missing pull zerocracy/judges-action#243 has been opened by @yegorov.
   issue: 243
   repository: 799177290
+  tombstone: 2025-09-13 13:38:01.884634447 Z
   what: pull-was-opened
   when: 2024-08-07 19:24:46.000000000 Z
   where: github
@@ -130018,6 +129449,7 @@
   details: The missing pull zerocracy/judges-action#245 has been opened by @yegorov.
   issue: 245
   repository: 799177290
+  tombstone: 2025-09-13 13:38:02.417890103 Z
   what: pull-was-opened
   when: 2024-08-08 11:27:38.000000000 Z
   where: github
@@ -135409,59 +134841,12 @@
   hoc: 2
   issue: 1038
   repository: 799177290
+  review_comments: 0
   succeeded_builds: 13
   what: pull-was-merged
   when: 2025-09-12 14:21:54.000000000 Z
   where: github
   who: 526301
-- _id: 2147823
-  _job: 17693437087
-  _time: 2025-09-13 07:34:19.088859491 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/factbase#93 has been opened by @renovate[bot].
-  issue: 93
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-07-10 01:14:50.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147824
-  _job: 17693437087
-  _time: 2025-09-13 07:34:19.783331229 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/factbase#94 has been opened by @renovate[bot].
-  issue: 94
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-07-12 09:12:10.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147825
-  _job: 17693437087
-  _time: 2025-09-13 07:34:20.574876139 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-7.x
-  details: The missing pull yegor256/factbase#121 has been opened by @renovate[bot].
-  issue: 121
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-09-02 19:32:41.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147826
-  _job: 17693437087
-  _time: 2025-09-13 07:34:21.292224678 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-7.x
-  details: The missing pull yegor256/factbase#122 has been opened by @renovate[bot].
-  issue: 122
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-09-03 14:13:42.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2147827
   _job: 17693437087
   _time: 2025-09-13 07:34:22.010367590 Z
@@ -135472,162 +134857,6 @@
   repository: 798641472
   what: pull-was-opened
   when: 2024-09-04 09:14:17.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147828
-  _job: 17693437087
-  _time: 2025-09-13 07:34:22.762983715 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/yard-0.x
-  details: The missing pull yegor256/factbase#124 has been opened by @renovate[bot].
-  issue: 124
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-09-04 09:14:26.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147829
-  _job: 17693437087
-  _time: 2025-09-13 07:34:23.510837021 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/factbase#125 has been opened by @renovate[bot].
-  issue: 125
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-09-07 12:55:48.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147830
-  _job: 17693437087
-  _time: 2025-09-13 07:34:24.235708598 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-performance-1.x
-  details: The missing pull yegor256/factbase#126 has been opened by @renovate[bot].
-  issue: 126
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-09-16 10:57:52.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147831
-  _job: 17693437087
-  _time: 2025-09-13 07:34:25.043772628 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/factbase#127 has been opened by @renovate[bot].
-  issue: 127
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-10-01 15:17:50.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147832
-  _job: 17693437087
-  _time: 2025-09-13 07:34:25.740461333 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/factbase#128 has been opened by @renovate[bot].
-  issue: 128
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-10-26 10:37:56.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147833
-  _job: 17693437087
-  _time: 2025-09-13 07:34:26.543322531 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull yegor256/factbase#129 has been opened by @renovate[bot].
-  issue: 129
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-10-31 10:44:59.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147834
-  _job: 17693437087
-  _time: 2025-09-13 07:34:27.282523247 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/yegor256-copyrights-action-0.x
-  details: The missing pull yegor256/factbase#130 has been opened by @renovate[bot].
-  issue: 130
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-11-04 19:18:14.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147835
-  _job: 17693437087
-  _time: 2025-09-13 07:34:27.977519971 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-7.x
-  details: The missing pull yegor256/factbase#131 has been opened by @renovate[bot].
-  issue: 131
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-11-09 12:58:52.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147836
-  _job: 17693437087
-  _time: 2025-09-13 07:34:28.742983487 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-performance-1.x
-  details: The missing pull yegor256/factbase#133 has been opened by @renovate[bot].
-  issue: 133
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-11-14 19:47:06.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147837
-  _job: 17693437087
-  _time: 2025-09-13 07:34:29.537969652 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull yegor256/factbase#134 has been opened by @renovate[bot].
-  issue: 134
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-11-21 22:48:18.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147838
-  _job: 17693437087
-  _time: 2025-09-13 07:34:30.244687029 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull yegor256/factbase#135 has been opened by @renovate[bot].
-  issue: 135
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-11-26 17:53:01.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147839
-  _job: 17693437087
-  _time: 2025-09-13 07:34:30.978805429 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull yegor256/factbase#136 has been opened by @renovate[bot].
-  issue: 136
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-12-03 11:47:38.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147840
-  _job: 17693437087
-  _time: 2025-09-13 07:34:31.714754488 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull yegor256/factbase#138 has been opened by @renovate[bot].
-  issue: 138
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-12-03 20:28:53.000000000 Z
   where: github
   who: 29139614
 - _id: 2147841
@@ -135642,186 +134871,6 @@
   when: 2024-12-04 05:52:34.000000000 Z
   where: github
   who: 41898282
-- _id: 2147842
-  _job: 17693437087
-  _time: 2025-09-13 07:34:33.305052118 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: benchmark-results-12154507330
-  details: The missing pull yegor256/factbase#140 has been opened by @github-actions[bot].
-  issue: 140
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-12-04 06:52:48.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2147843
-  _job: 17693437087
-  _time: 2025-09-13 07:34:34.012002536 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: benchmark-results
-  details: The missing pull yegor256/factbase#141 has been opened by @github-actions[bot].
-  issue: 141
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-12-04 08:00:05.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2147844
-  _job: 17693437087
-  _time: 2025-09-13 07:34:34.725007255 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: benchmark-results
-  details: The missing pull yegor256/factbase#142 has been opened by @github-actions[bot].
-  issue: 142
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-12-04 08:38:31.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2147845
-  _job: 17693437087
-  _time: 2025-09-13 07:34:35.413366477 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: benchmark-results
-  details: The missing pull yegor256/factbase#143 has been opened by @github-actions[bot].
-  issue: 143
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-12-04 08:44:40.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2147863
-  _job: 17693437087
-  _time: 2025-09-13 07:34:51.281762293 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-performance-1.x
-  details: The missing pull zerocracy/fbe#98 has been opened by @renovate[bot].
-  issue: 98
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-09-17 09:43:21.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147864
-  _job: 17693437087
-  _time: 2025-09-13 07:34:52.134520813 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/ubuntu-24.x
-  details: The missing pull zerocracy/fbe#107 has been opened by @renovate[bot].
-  issue: 107
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-09-26 22:54:21.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147865
-  _job: 17693437087
-  _time: 2025-09-13 07:34:53.123878507 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/webmock-3.x
-  details: The missing pull zerocracy/fbe#109 has been opened by @renovate[bot].
-  issue: 109
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-09-30 22:06:29.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147866
-  _job: 17693437087
-  _time: 2025-09-13 07:34:53.952585104 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull zerocracy/fbe#110 has been opened by @renovate[bot].
-  issue: 110
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-10-01 16:43:51.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147867
-  _job: 17693437087
-  _time: 2025-09-13 07:34:54.754358673 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/fbe#116 has been opened by @renovate[bot].
-  issue: 116
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-10-15 10:48:20.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147868
-  _job: 17693437087
-  _time: 2025-09-13 07:34:55.573906954 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull zerocracy/fbe#117 has been opened by @renovate[bot].
-  issue: 117
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-10-26 10:13:37.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147869
-  _job: 17693437087
-  _time: 2025-09-13 07:34:56.280875969 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/yegor256-copyrights-action-0.x
-  details: The missing pull zerocracy/fbe#119 has been opened by @renovate[bot].
-  issue: 119
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-11-04 21:45:46.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147870
-  _job: 17693437087
-  _time: 2025-09-13 07:34:57.062128720 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-7.x
-  details: The missing pull zerocracy/fbe#120 has been opened by @renovate[bot].
-  issue: 120
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-11-09 12:22:59.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147871
-  _job: 17693437087
-  _time: 2025-09-13 07:34:57.842221281 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/graphql-client-0.x-lockfile
-  details: The missing pull zerocracy/fbe#121 has been opened by @renovate[bot].
-  issue: 121
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-11-13 16:43:07.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147872
-  _job: 17693437087
-  _time: 2025-09-13 07:34:58.748816163 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-performance-1.x
-  details: The missing pull zerocracy/fbe#122 has been opened by @renovate[bot].
-  issue: 122
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-11-14 20:15:39.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2147873
-  _job: 17693437087
-  _time: 2025-09-13 07:34:59.687988400 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull zerocracy/fbe#123 has been opened by @renovate[bot].
-  issue: 123
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-11-21 23:05:06.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2147882
   _job: 17693437087
   _time: 2025-09-13 07:35:07.543762044 Z
@@ -137484,6 +136533,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#98 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:49.753451833 Z
   failed_builds: 0
   hoc: 6
   issue: 98
@@ -137505,6 +136555,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#69 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:50.109673949 Z
   failed_builds: 0
   hoc: 2
   issue: 69
@@ -137526,6 +136577,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#93 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:50.390187958 Z
   failed_builds: 0
   hoc: 6
   issue: 93
@@ -137547,6 +136599,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#107 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:50.663330740 Z
   failed_builds: 0
   hoc: 14
   issue: 107
@@ -137568,6 +136621,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#70 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:50.986401132 Z
   failed_builds: 0
   hoc: 2
   issue: 70
@@ -137589,6 +136643,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#94 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:51.266168340 Z
   failed_builds: 0
   hoc: 8
   issue: 94
@@ -137610,6 +136665,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#109 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:51.538865386 Z
   failed_builds: 0
   hoc: 8
   issue: 109
@@ -137631,6 +136687,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#72 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:51.807855916 Z
   failed_builds: 0
   hoc: 2
   issue: 72
@@ -137652,6 +136709,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#121 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:52.077230349 Z
   failed_builds: 0
   hoc: 14
   issue: 121
@@ -137673,6 +136731,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#110 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:52.343071046 Z
   failed_builds: 0
   hoc: 6
   issue: 110
@@ -137694,6 +136753,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#81 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:52.609039321 Z
   failed_builds: 0
   hoc: 2
   issue: 81
@@ -137715,6 +136775,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#122 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:52.875291324 Z
   failed_builds: 0
   hoc: 8
   issue: 122
@@ -137736,6 +136797,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#116 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:53.140929027 Z
   failed_builds: 0
   hoc: 6
   issue: 116
@@ -137757,6 +136819,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#85 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:53.407652353 Z
   failed_builds: 0
   hoc: 2
   issue: 85
@@ -137799,6 +136862,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#117 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:53.674428104 Z
   failed_builds: 0
   hoc: 8
   issue: 117
@@ -137820,6 +136884,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#129 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:53.939850376 Z
   failed_builds: 0
   hoc: 20
   issue: 129
@@ -137841,6 +136906,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#124 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:54.209646664 Z
   failed_builds: 0
   hoc: 6
   issue: 124
@@ -137862,6 +136928,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#119 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:54.550806752 Z
   failed_builds: 0
   hoc: 2
   issue: 119
@@ -137883,6 +136950,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#138 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:54.815876073 Z
   failed_builds: 0
   hoc: 167
   issue: 138
@@ -137904,6 +136972,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#125 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:55.083560250 Z
   failed_builds: 0
   hoc: 10
   issue: 125
@@ -137925,6 +136994,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#120 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:55.351653263 Z
   failed_builds: 0
   hoc: 42
   issue: 120
@@ -137946,6 +137016,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#143 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:55.619373051 Z
   failed_builds: 0
   hoc: 4
   issue: 143
@@ -137967,6 +137038,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#126 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:55.888770047 Z
   failed_builds: 0
   hoc: 6
   issue: 126
@@ -137988,6 +137060,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#121 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:56.155839417 Z
   failed_builds: 0
   hoc: 6
   issue: 121
@@ -138009,6 +137082,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#168 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:56.423318775 Z
   failed_builds: 0
   hoc: 2
   issue: 168
@@ -138030,6 +137104,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#127 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:56.690396784 Z
   failed_builds: 0
   hoc: 8
   issue: 127
@@ -138051,6 +137126,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#122 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:56.956332354 Z
   failed_builds: 0
   hoc: 12
   issue: 122
@@ -138072,6 +137148,7 @@
   comments_resolved: 0
   comments_to_code: 2
   details: Apparently, zerocracy/judges-action#172 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:57.223232147 Z
   failed_builds: 0
   hoc: 16
   issue: 172
@@ -138093,6 +137170,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#128 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:57.490409775 Z
   failed_builds: 0
   hoc: 6
   issue: 128
@@ -138114,6 +137192,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#123 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:57.760508369 Z
   failed_builds: 0
   hoc: 6
   issue: 123
@@ -138135,6 +137214,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#183 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:58.030535010 Z
   failed_builds: 0
   hoc: 10
   issue: 183
@@ -138156,6 +137236,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#129 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:58.316886495 Z
   failed_builds: 0
   hoc: 12
   issue: 129
@@ -138177,6 +137258,7 @@
   comments_resolved: 3
   comments_to_code: 10
   details: Apparently, zerocracy/judges-action#205 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:58.581557060 Z
   failed_builds: 0
   hoc: 12
   issue: 205
@@ -138198,6 +137280,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#130 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:58.848685041 Z
   failed_builds: 0
   hoc: 2
   issue: 130
@@ -138219,6 +137302,7 @@
   comments_resolved: 4
   comments_to_code: 8
   details: Apparently, zerocracy/judges-action#215 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:59.114923111 Z
   failed_builds: 1
   hoc: 326
   issue: 215
@@ -138240,6 +137324,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#131 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:59.381392041 Z
   failed_builds: 0
   hoc: 52
   issue: 131
@@ -138261,6 +137346,7 @@
   comments_resolved: 1
   comments_to_code: 2
   details: Apparently, zerocracy/judges-action#225 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:59.647380687 Z
   failed_builds: 0
   hoc: 167
   issue: 225
@@ -138282,6 +137368,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#133 has been 'pull-was-merged'.
+  done: 2025-09-13 13:37:59.914607697 Z
   failed_builds: 0
   hoc: 12
   issue: 133
@@ -138303,6 +137390,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#230 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:00.204852694 Z
   failed_builds: 1
   hoc: 54
   issue: 230
@@ -138324,6 +137412,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#134 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:00.468817051 Z
   failed_builds: 0
   hoc: 6
   issue: 134
@@ -138345,6 +137434,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#235 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:00.735858451 Z
   failed_builds: 0
   hoc: 15
   issue: 235
@@ -138366,6 +137456,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#135 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:01.004703857 Z
   failed_builds: 0
   hoc: 10
   issue: 135
@@ -138387,6 +137478,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#236 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:01.276010768 Z
   failed_builds: 0
   hoc: 4
   issue: 236
@@ -138408,6 +137500,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#136 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:01.566448979 Z
   failed_builds: 0
   hoc: 14
   issue: 136
@@ -138429,6 +137522,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#243 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:01.830773312 Z
   failed_builds: 0
   hoc: 161
   issue: 243
@@ -138450,6 +137544,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#138 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:02.098241044 Z
   failed_builds: 0
   hoc: 6
   issue: 138
@@ -138471,6 +137566,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/judges-action#245 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:02.365729403 Z
   failed_builds: 0
   hoc: 10
   issue: 245
@@ -138513,6 +137609,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#140 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:02.635866127 Z
   failed_builds: 0
   hoc: 148
   issue: 140
@@ -138534,6 +137631,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#141 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:02.929028277 Z
   failed_builds: 0
   hoc: 180
   issue: 141
@@ -138555,6 +137653,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#142 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:03.199530623 Z
   failed_builds: 0
   hoc: 26
   issue: 142
@@ -138576,6 +137675,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#143 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:03.468507564 Z
   failed_builds: 0
   hoc: 23
   issue: 143
@@ -138637,18 +137737,6 @@
   when: 2024-10-11 06:54:18.000000000 Z
   where: github
   who: 2566462
-- _id: 2148051
-  _job: 17694027264
-  _time: 2025-09-13 08:39:08.609850280 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/yegor256-copyrights-action-0.x
-  details: The missing pull yegor256/factbase#96 has been opened by @renovate[bot].
-  issue: 96
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-07-16 11:44:47.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2148052
   _job: 17694027264
   _time: 2025-09-13 08:39:20.610909009 Z
@@ -138821,6 +137909,7 @@
   details: The issue zerocracy/judges-action#375 has been earlier opened by @yegor256.
   issue: 375
   repository: 799177290
+  tombstone: 2025-09-13 13:38:42.709558291 Z
   what: issue-was-opened
   when: 2024-10-05 21:05:50.000000000 Z
   where: github
@@ -138832,6 +137921,7 @@
   details: The issue zerocracy/judges-action#373 has been earlier opened by @yegor256.
   issue: 373
   repository: 799177290
+  tombstone: 2025-09-13 13:38:41.853458709 Z
   what: issue-was-opened
   when: 2024-10-04 10:41:16.000000000 Z
   where: github
@@ -138843,6 +137933,7 @@
   details: The issue zerocracy/judges-action#350 has been earlier opened by @yegor256.
   issue: 350
   repository: 799177290
+  tombstone: 2025-09-13 13:38:41.086485259 Z
   what: issue-was-opened
   when: 2024-09-24 02:43:05.000000000 Z
   where: github
@@ -138854,6 +137945,7 @@
   details: The issue zerocracy/judges-action#345 has been earlier opened by @yegor256.
   issue: 345
   repository: 799177290
+  tombstone: 2025-09-13 13:38:40.240657604 Z
   what: issue-was-opened
   when: 2024-09-23 03:54:44.000000000 Z
   where: github
@@ -138865,6 +137957,7 @@
   details: The issue zerocracy/judges-action#338 has been earlier opened by @yegor256.
   issue: 338
   repository: 799177290
+  tombstone: 2025-09-13 13:38:39.400941659 Z
   what: issue-was-opened
   when: 2024-09-16 13:59:55.000000000 Z
   where: github
@@ -138876,6 +137969,7 @@
   details: The issue zerocracy/judges-action#325 has been earlier opened by @yegor256.
   issue: 325
   repository: 799177290
+  tombstone: 2025-09-13 13:38:34.529526314 Z
   what: issue-was-opened
   when: 2024-09-04 09:35:18.000000000 Z
   where: github
@@ -138887,6 +137981,7 @@
   details: The issue zerocracy/judges-action#311 has been earlier opened by @yegor256.
   issue: 311
   repository: 799177290
+  tombstone: 2025-09-13 13:38:38.632552378 Z
   what: issue-was-opened
   when: 2024-08-23 20:54:29.000000000 Z
   where: github
@@ -138898,6 +137993,7 @@
   details: The issue zerocracy/judges-action#254 has been earlier opened by @yegor256.
   issue: 254
   repository: 799177290
+  tombstone: 2025-09-13 13:38:33.683538690 Z
   what: issue-was-opened
   when: 2024-08-10 07:20:39.000000000 Z
   where: github
@@ -138909,6 +138005,7 @@
   details: The issue zerocracy/judges-action#239 has been earlier opened by @yegor256.
   issue: 239
   repository: 799177290
+  tombstone: 2025-09-13 13:38:37.842556667 Z
   what: issue-was-opened
   when: 2024-08-07 08:38:46.000000000 Z
   where: github
@@ -138920,6 +138017,7 @@
   details: The issue zerocracy/judges-action#238 has been earlier opened by @yegor256.
   issue: 238
   repository: 799177290
+  tombstone: 2025-09-13 13:38:36.986847333 Z
   what: issue-was-opened
   when: 2024-08-07 08:37:47.000000000 Z
   where: github
@@ -138931,6 +138029,7 @@
   details: The issue zerocracy/judges-action#227 has been earlier opened by @yegor256.
   issue: 227
   repository: 799177290
+  tombstone: 2025-09-13 13:38:36.200783090 Z
   what: issue-was-opened
   when: 2024-08-05 06:08:04.000000000 Z
   where: github
@@ -138942,6 +138041,7 @@
   details: The issue zerocracy/judges-action#220 has been earlier opened by @yegor256.
   issue: 220
   repository: 799177290
+  tombstone: 2025-09-13 13:38:35.376078479 Z
   what: issue-was-opened
   when: 2024-08-03 13:19:45.000000000 Z
   where: github
@@ -138953,6 +138053,7 @@
   details: The issue zerocracy/judges-action#214 has been earlier opened by @yegor256.
   issue: 214
   repository: 799177290
+  tombstone: 2025-09-13 13:38:32.838138462 Z
   what: issue-was-opened
   when: 2024-08-02 03:38:48.000000000 Z
   where: github
@@ -138964,6 +138065,7 @@
   details: The issue zerocracy/judges-action#209 has been earlier opened by @yegor256.
   issue: 209
   repository: 799177290
+  tombstone: 2025-09-13 13:38:31.989409349 Z
   what: issue-was-opened
   when: 2024-08-01 05:21:49.000000000 Z
   where: github
@@ -139293,6 +138395,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#96 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:03.739453102 Z
   failed_builds: 0
   hoc: 2
   issue: 96
@@ -139302,1014 +138405,6 @@
   when: 2024-07-16 12:43:31.000000000 Z
   where: github
   who: 8086956
-- _id: 2148145
-  _job: 17695215425
-  _time: 2025-09-13 10:50:50.129827759 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#18 has been opened by @renovate[bot].
-  issue: 18
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-02 13:09:18.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148146
-  _job: 17695215425
-  _time: 2025-09-13 10:50:51.281149330 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#19 has been opened by @renovate[bot].
-  issue: 19
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-02 20:05:53.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148147
-  _job: 17695215425
-  _time: 2025-09-13 10:50:52.544755184 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#20 has been opened by @renovate[bot].
-  issue: 20
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-03 10:18:42.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148148
-  _job: 17695215425
-  _time: 2025-09-13 10:50:53.496933518 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#21 has been opened by @renovate[bot].
-  issue: 21
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-03 10:58:00.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148149
-  _job: 17695215425
-  _time: 2025-09-13 10:50:54.384366629 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#22 has been opened by @renovate[bot].
-  issue: 22
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-03 14:54:37.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148150
-  _job: 17695215425
-  _time: 2025-09-13 10:50:55.361223723 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#130 has been opened by @renovate[bot].
-  issue: 130
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-17 07:47:03.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148151
-  _job: 17695215425
-  _time: 2025-09-13 10:50:56.318399574 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#132 has been opened by @renovate[bot].
-  issue: 132
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-17 23:11:20.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148152
-  _job: 17695215425
-  _time: 2025-09-13 10:50:57.223590740 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/pages-action#133 has been opened by @github-actions[bot].
-  issue: 133
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-23 04:26:11.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2148153
-  _job: 17695215425
-  _time: 2025-09-13 10:50:58.325615987 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#135 has been opened by @renovate[bot].
-  issue: 135
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-23 22:14:36.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148154
-  _job: 17695215425
-  _time: 2025-09-13 10:50:59.460380700 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#136 has been opened by @renovate[bot].
-  issue: 136
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-24 06:52:47.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148155
-  _job: 17695215425
-  _time: 2025-09-13 10:51:00.450876804 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#137 has been opened by @renovate[bot].
-  issue: 137
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-24 20:11:08.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148156
-  _job: 17695215425
-  _time: 2025-09-13 10:51:01.508144048 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/qbash-0.x
-  details: The missing pull zerocracy/pages-action#139 has been opened by @renovate[bot].
-  issue: 139
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-25 11:29:07.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148157
-  _job: 17695215425
-  _time: 2025-09-13 10:51:02.413616712 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/pages-action#140 has been opened by @github-actions[bot].
-  issue: 140
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-26 02:58:52.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2148158
-  _job: 17695215425
-  _time: 2025-09-13 10:51:03.280854649 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/pages-action#142 has been opened by @github-actions[bot].
-  issue: 142
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-26 10:37:34.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2148159
-  _job: 17695215425
-  _time: 2025-09-13 10:51:04.166662447 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#143 has been opened by @renovate[bot].
-  issue: 143
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-30 04:25:43.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148160
-  _job: 17695215425
-  _time: 2025-09-13 10:51:05.061600531 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#144 has been opened by @renovate[bot].
-  issue: 144
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-30 10:01:13.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148161
-  _job: 17695215425
-  _time: 2025-09-13 10:51:06.032636504 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/webmock-3.x
-  details: The missing pull zerocracy/pages-action#145 has been opened by @renovate[bot].
-  issue: 145
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-09-30 21:47:02.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148162
-  _job: 17695215425
-  _time: 2025-09-13 10:51:07.000693709 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/qbash-0.x
-  details: The missing pull zerocracy/pages-action#146 has been opened by @renovate[bot].
-  issue: 146
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-02 06:38:28.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148163
-  _job: 17695215425
-  _time: 2025-09-13 10:51:07.980723795 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/qbash-0.x
-  details: The missing pull zerocracy/pages-action#148 has been opened by @renovate[bot].
-  issue: 148
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-06 07:02:02.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148164
-  _job: 17695215425
-  _time: 2025-09-13 10:51:09.240169112 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/qbash-0.x
-  details: The missing pull zerocracy/pages-action#149 has been opened by @renovate[bot].
-  issue: 149
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-06 13:25:12.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148165
-  _job: 17695215425
-  _time: 2025-09-13 10:51:10.097094784 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#150 has been opened by @renovate[bot].
-  issue: 150
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-07 18:48:48.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148166
-  _job: 17695215425
-  _time: 2025-09-13 10:51:11.492452215 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#153 has been opened by @renovate[bot].
-  issue: 153
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-11 10:13:02.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148167
-  _job: 17695215425
-  _time: 2025-09-13 10:51:12.275187933 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/pages-action#155 has been opened by @github-actions[bot].
-  issue: 155
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-14 14:02:56.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2148168
-  _job: 17695215425
-  _time: 2025-09-13 10:51:13.206996309 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#156 has been opened by @renovate[bot].
-  issue: 156
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-14 14:03:05.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148169
-  _job: 17695215425
-  _time: 2025-09-13 10:51:14.183420488 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#157 has been opened by @renovate[bot].
-  issue: 157
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-14 14:03:11.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148170
-  _job: 17695215425
-  _time: 2025-09-13 10:51:15.040452910 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#159 has been opened by @renovate[bot].
-  issue: 159
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-14 19:49:14.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148171
-  _job: 17695215425
-  _time: 2025-09-13 10:51:15.931788520 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/pages-action#160 has been opened by @renovate[bot].
-  issue: 160
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-15 11:57:32.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148172
-  _job: 17695215425
-  _time: 2025-09-13 10:51:16.851327295 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/pages-action#161 has been opened by @github-actions[bot].
-  issue: 161
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-15 12:46:06.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2148173
-  _job: 17695215425
-  _time: 2025-09-13 10:51:17.822019536 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: version-up
-  details: The missing pull zerocracy/pages-action#163 has been opened by @github-actions[bot].
-  issue: 163
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-15 17:16:24.000000000 Z
-  where: github
-  who: 41898282
-- _id: 2148174
-  _job: 17695215425
-  _time: 2025-09-13 10:51:18.912641745 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/pages-action#164 has been opened by @renovate[bot].
-  issue: 164
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-10-31 11:56:08.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148175
-  _job: 17695215425
-  _time: 2025-09-13 10:51:19.841769069 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/yegor256-copyrights-action-0.x
-  details: The missing pull zerocracy/pages-action#165 has been opened by @renovate[bot].
-  issue: 165
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-11-04 19:35:49.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148176
-  _job: 17695215425
-  _time: 2025-09-13 10:51:20.634456311 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull zerocracy/pages-action#166 has been opened by @renovate[bot].
-  issue: 166
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-11-21 23:29:55.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148177
-  _job: 17695215425
-  _time: 2025-09-13 10:51:21.539050792 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/pages-action#167 has been opened by @renovate[bot].
-  issue: 167
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-11-26 16:52:37.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148178
-  _job: 17695215425
-  _time: 2025-09-13 10:51:22.497619495 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/pages-action#172 has been opened by @renovate[bot].
-  issue: 172
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-12-03 11:18:11.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148179
-  _job: 17695215425
-  _time: 2025-09-13 10:51:23.478237417 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull zerocracy/pages-action#173 has been opened by @renovate[bot].
-  issue: 173
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-12-03 21:04:43.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148180
-  _job: 17695215425
-  _time: 2025-09-13 10:51:24.363206511 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull zerocracy/pages-action#174 has been opened by @renovate[bot].
-  issue: 174
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-12-04 06:41:00.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148181
-  _job: 17695215425
-  _time: 2025-09-13 10:51:25.439601690 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/pages-action#175 has been opened by @renovate[bot].
-  issue: 175
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-12-12 15:27:09.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148182
-  _job: 17695215425
-  _time: 2025-09-13 10:51:26.763786350 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull yegor256/factbase#78 has been opened by @renovate[bot].
-  issue: 78
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-06-19 03:21:56.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148183
-  _job: 17695215425
-  _time: 2025-09-13 10:51:27.639517673 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-6.x
-  details: The missing pull yegor256/factbase#82 has been opened by @renovate[bot].
-  issue: 82
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-06-22 05:00:21.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148184
-  _job: 17695215425
-  _time: 2025-09-13 10:51:28.418072982 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull yegor256/factbase#88 has been opened by @renovate[bot].
-  issue: 88
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-06-29 22:32:42.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148185
-  _job: 17695215425
-  _time: 2025-09-13 10:51:29.319141942 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '100'
-  details: The missing pull yegor256/factbase#101 has been opened by @yegor256.
-  issue: 101
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-07-22 08:28:31.000000000 Z
-  where: github
-  who: 526301
-- _id: 2148186
-  _job: 17695215425
-  _time: 2025-09-13 10:51:30.385687498 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '100'
-  details: The missing pull yegor256/factbase#103 has been opened by @yegor256.
-  issue: 103
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-07-23 02:54:16.000000000 Z
-  where: github
-  who: 526301
-- _id: 2148187
-  _job: 17695215425
-  _time: 2025-09-13 10:51:31.293336309 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull yegor256/factbase#107 has been opened by @renovate[bot].
-  issue: 107
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-08-01 12:35:15.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148188
-  _job: 17695215425
-  _time: 2025-09-13 10:51:32.166809485 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/factbase#108 has been opened by @renovate[bot].
-  issue: 108
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-08-05 15:54:10.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148189
-  _job: 17695215425
-  _time: 2025-09-13 10:51:33.153087897 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull yegor256/factbase#111 has been opened by @renovate[bot].
-  issue: 111
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-08-14 04:22:53.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148190
-  _job: 17695215425
-  _time: 2025-09-13 10:51:33.956749835 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-6.x
-  details: The missing pull yegor256/factbase#112 has been opened by @renovate[bot].
-  issue: 112
-  repository: 798641472
-  what: pull-was-opened
-  when: 2024-08-15 15:21:23.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148191
-  _job: 17695215425
-  _time: 2025-09-13 10:51:35.899687315 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull yegor256/judges#60 has been opened by @renovate[bot].
-  issue: 60
-  repository: 799113787
-  what: pull-was-opened
-  when: 2024-06-19 03:19:03.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148192
-  _job: 17695215425
-  _time: 2025-09-13 10:51:36.722065290 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/judges#75 has been opened by @renovate[bot].
-  issue: 75
-  repository: 799113787
-  what: pull-was-opened
-  when: 2024-07-03 23:53:26.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148193
-  _job: 17695215425
-  _time: 2025-09-13 10:51:37.697951755 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: 83_zip_for_push
-  details: The missing pull yegor256/judges#93 has been opened by @tank-bohr.
-  issue: 93
-  repository: 799113787
-  what: pull-was-opened
-  when: 2024-07-27 03:44:43.000000000 Z
-  where: github
-  who: 1646020
-- _id: 2148194
-  _job: 17695215425
-  _time: 2025-09-13 10:51:38.846141587 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '94'
-  details: The missing pull yegor256/judges#95 has been opened by @yegor256.
-  issue: 95
-  repository: 799113787
-  what: pull-was-opened
-  when: 2024-07-28 19:19:42.000000000 Z
-  where: github
-  who: 526301
-- _id: 2148195
-  _job: 17695215425
-  _time: 2025-09-13 10:51:39.621150610 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '96'
-  details: The missing pull yegor256/judges#97 has been opened by @yegor256.
-  issue: 97
-  repository: 799113787
-  what: pull-was-opened
-  when: 2024-07-29 01:30:49.000000000 Z
-  where: github
-  who: 526301
-- _id: 2148196
-  _job: 17695215425
-  _time: 2025-09-13 10:51:40.557873739 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '99'
-  details: The missing pull yegor256/judges#100 has been opened by @yegor256.
-  issue: 100
-  repository: 799113787
-  what: pull-was-opened
-  when: 2024-07-31 14:42:35.000000000 Z
-  where: github
-  who: 526301
-- _id: 2148197
-  _job: 17695215425
-  _time: 2025-09-13 10:51:41.510135909 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull yegor256/judges#107 has been opened by @renovate[bot].
-  issue: 107
-  repository: 799113787
-  what: pull-was-opened
-  when: 2024-08-05 20:21:03.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148198
-  _job: 17695215425
-  _time: 2025-09-13 10:51:43.264424347 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: bugfix/38
-  details: The missing pull zerocracy/fbe#39 has been opened by @suban05.
-  issue: 39
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-07-26 20:13:48.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2148199
-  _job: 17695215425
-  _time: 2025-09-13 10:51:44.410288396 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: bugfix/37
-  details: The missing pull zerocracy/fbe#43 has been opened by @suban05.
-  issue: 43
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-07-29 12:50:26.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2148200
-  _job: 17695215425
-  _time: 2025-09-13 10:51:45.309462626 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: fix-build
-  details: The missing pull zerocracy/fbe#45 has been opened by @yegorov.
-  issue: 45
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-07-29 20:41:46.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2148202
-  _job: 17695215425
-  _time: 2025-09-13 10:51:46.883812566 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '156'
-  details: The missing pull zerocracy/fbe#48 has been opened by @yegorov.
-  issue: 48
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-07-30 18:48:38.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2148203
-  _job: 17695215425
-  _time: 2025-09-13 10:51:47.843874486 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '46'
-  details: The missing pull zerocracy/fbe#49 has been opened by @yegorov.
-  issue: 49
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-07-31 20:12:04.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2148204
-  _job: 17695215425
-  _time: 2025-09-13 10:51:48.744494518 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-rspec-3.x
-  details: The missing pull zerocracy/fbe#52 has been opened by @renovate[bot].
-  issue: 52
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-08-05 17:32:05.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148205
-  _job: 17695215425
-  _time: 2025-09-13 10:51:49.681586375 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '155'
-  details: The missing pull zerocracy/fbe#53 has been opened by @yegorov.
-  issue: 53
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-08-05 19:59:46.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2148206
-  _job: 17695215425
-  _time: 2025-09-13 10:51:50.607338363 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '240'
-  details: The missing pull zerocracy/fbe#60 has been opened by @yegorov.
-  issue: 60
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-08-11 11:15:03.000000000 Z
-  where: github
-  who: 2566462
-- _id: 2148208
-  _job: 17695215425
-  _time: 2025-09-13 10:51:51.944537189 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '61'
-  details: The missing pull zerocracy/fbe#66 has been opened by @suban05.
-  issue: 66
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-08-13 11:35:36.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2148209
-  _job: 17695215425
-  _time: 2025-09-13 10:51:52.876745975 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: 61_add_dependency
-  details: The missing pull zerocracy/fbe#68 has been opened by @suban05.
-  issue: 68
-  repository: 820463873
-  what: pull-was-opened
-  when: 2024-08-14 17:28:19.000000000 Z
-  where: github
-  who: 88084038
-- _id: 2148210
-  _job: 17695215425
-  _time: 2025-09-13 10:51:54.188189751 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/swarm-template#4 has been opened by @renovate[bot].
-  issue: 4
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-08-31 16:45:26.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148211
-  _job: 17695215425
-  _time: 2025-09-13 10:51:55.262966046 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#5 has been opened by @renovate[bot].
-  issue: 5
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-09-04 09:17:31.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148212
-  _job: 17695215425
-  _time: 2025-09-13 10:51:56.223879679 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#6 has been opened by @renovate[bot].
-  issue: 6
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-09-06 08:06:12.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148213
-  _job: 17695215425
-  _time: 2025-09-13 10:51:57.408209380 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#7 has been opened by @renovate[bot].
-  issue: 7
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-09-15 11:11:14.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148214
-  _job: 17695215425
-  _time: 2025-09-13 10:51:58.362273215 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#8 has been opened by @renovate[bot].
-  issue: 8
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-09-17 08:10:50.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148215
-  _job: 17695215425
-  _time: 2025-09-13 10:51:59.199457908 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#9 has been opened by @renovate[bot].
-  issue: 9
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-09-17 22:20:56.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148216
-  _job: 17695215425
-  _time: 2025-09-13 10:52:00.192702927 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#32 has been opened by @renovate[bot].
-  issue: 32
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-12-18 16:58:10.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148217
-  _job: 17695215425
-  _time: 2025-09-13 10:52:01.070013572 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#33 has been opened by @renovate[bot].
-  issue: 33
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-12-19 11:45:02.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148218
-  _job: 17695215425
-  _time: 2025-09-13 10:52:01.936735103 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#34 has been opened by @renovate[bot].
-  issue: 34
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-12-19 15:57:47.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148219
-  _job: 17695215425
-  _time: 2025-09-13 10:52:02.817370890 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/swarm-template#35 has been opened by @renovate[bot].
-  issue: 35
-  repository: 849726475
-  what: pull-was-opened
-  when: 2024-12-19 20:57:44.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148220
-  _job: 17695215425
-  _time: 2025-09-13 10:52:04.153568080 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull zerocracy/baza.rb#8 has been opened by @renovate[bot].
-  issue: 8
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-08-15 05:29:45.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148221
-  _job: 17695215425
-  _time: 2025-09-13 10:52:05.100360607 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-6.x
-  details: The missing pull zerocracy/baza.rb#9 has been opened by @renovate[bot].
-  issue: 9
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-08-15 17:37:27.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148222
-  _job: 17695215425
-  _time: 2025-09-13 10:52:05.980507082 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/minitest-5.x
-  details: The missing pull zerocracy/baza.rb#10 has been opened by @renovate[bot].
-  issue: 10
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-08-16 18:42:32.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148223
-  _job: 17695215425
-  _time: 2025-09-13 10:52:06.970757421 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: '12'
-  details: The missing pull zerocracy/baza.rb#13 has been opened by @tank-bohr.
-  issue: 13
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-08-17 19:51:14.000000000 Z
-  where: github
-  who: 1646020
-- _id: 2148224
-  _job: 17695215425
-  _time: 2025-09-13 10:52:07.871238219 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-1.x
-  details: The missing pull zerocracy/baza.rb#15 has been opened by @renovate[bot].
-  issue: 15
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-08-31 13:57:43.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148225
-  _job: 17695215425
-  _time: 2025-09-13 10:52:08.780113674 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-6.x
-  details: The missing pull zerocracy/baza.rb#16 has been opened by @renovate[bot].
-  issue: 16
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-09-02 13:10:04.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148226
-  _job: 17695215425
-  _time: 2025-09-13 10:52:09.790313814 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-7.x
-  details: The missing pull zerocracy/baza.rb#17 has been opened by @renovate[bot].
-  issue: 17
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-09-02 16:59:23.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148227
-  _job: 17695215425
-  _time: 2025-09-13 10:52:10.723703466 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rspec-rails-7.x
-  details: The missing pull zerocracy/baza.rb#18 has been opened by @renovate[bot].
-  issue: 18
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-09-03 12:32:45.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148228
-  _job: 17695215425
-  _time: 2025-09-13 10:52:11.688047407 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/yegor256-copyrights-action-0.x
-  details: The missing pull zerocracy/baza.rb#30 has been opened by @renovate[bot].
-  issue: 30
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-11-04 19:36:08.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148229
-  _job: 17695215425
-  _time: 2025-09-13 10:52:12.634547461 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/rubocop-performance-1.x
-  details: The missing pull zerocracy/baza.rb#32 has been opened by @renovate[bot].
-  issue: 32
-  repository: 840215648
-  what: pull-was-opened
-  when: 2024-11-14 20:16:31.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148234
-  _job: 17695215425
-  _time: 2025-09-13 10:52:16.735237119 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: dependabot/bundler/rack-2.0.8
-  details: The missing pull yegor256/0rsk#55 has been opened by @dependabot[bot].
-  issue: 55
-  repository: 181044958
-  what: pull-was-opened
-  when: 2019-12-19 18:25:38.000000000 Z
-  where: github
-  who: 49699333
 - _id: 2148235
   _job: 17695215425
   _time: 2025-09-13 10:52:27.839658362 Z
@@ -140725,6 +138820,7 @@
   details: Apparently, zerocracy/judges-action#209 has been 'issue-was-closed'.
   issue: 209
   repository: 799177290
+  tombstone: 2025-09-13 13:38:32.127680024 Z
   what: issue-was-closed
   when: 2024-08-16 13:42:02.000000000 Z
   where: github
@@ -140748,6 +138844,7 @@
   details: Apparently, zerocracy/judges-action#214 has been 'issue-was-closed'.
   issue: 214
   repository: 799177290
+  tombstone: 2025-09-13 13:38:32.971245871 Z
   what: issue-was-closed
   when: 2024-08-21 15:35:11.000000000 Z
   where: github
@@ -140795,6 +138892,7 @@
   details: Apparently, zerocracy/judges-action#220 has been 'issue-was-closed'.
   issue: 220
   repository: 799177290
+  tombstone: 2025-09-13 13:38:35.485772244 Z
   what: issue-was-closed
   when: 2024-09-14 04:57:07.000000000 Z
   where: github
@@ -140817,6 +138915,7 @@
   details: Apparently, zerocracy/judges-action#227 has been 'issue-was-closed'.
   issue: 227
   repository: 799177290
+  tombstone: 2025-09-13 13:38:36.327888606 Z
   what: issue-was-closed
   when: 2024-10-03 10:19:58.000000000 Z
   where: github
@@ -140839,6 +138938,7 @@
   details: Apparently, zerocracy/judges-action#238 has been 'issue-was-closed'.
   issue: 238
   repository: 799177290
+  tombstone: 2025-09-13 13:38:37.139396301 Z
   what: issue-was-closed
   when: 2024-10-01 04:27:43.000000000 Z
   where: github
@@ -140850,6 +138950,7 @@
   details: Apparently, zerocracy/judges-action#239 has been 'issue-was-closed'.
   issue: 239
   repository: 799177290
+  tombstone: 2025-09-13 13:38:37.991477831 Z
   what: issue-was-closed
   when: 2024-10-04 10:14:03.000000000 Z
   where: github
@@ -140872,6 +138973,7 @@
   details: Apparently, zerocracy/judges-action#254 has been 'issue-was-closed'.
   issue: 254
   repository: 799177290
+  tombstone: 2025-09-13 13:38:33.815122557 Z
   what: issue-was-closed
   when: 2024-08-14 05:31:33.000000000 Z
   where: github
@@ -140905,6 +139007,7 @@
   details: Apparently, zerocracy/judges-action#311 has been 'issue-was-closed'.
   issue: 311
   repository: 799177290
+  tombstone: 2025-09-13 13:38:38.760804197 Z
   what: issue-was-closed
   when: 2024-08-25 15:57:37.000000000 Z
   where: github
@@ -140916,6 +139019,7 @@
   details: Apparently, zerocracy/judges-action#325 has been 'issue-was-closed'.
   issue: 325
   repository: 799177290
+  tombstone: 2025-09-13 13:38:34.652134950 Z
   what: issue-was-closed
   when: 2024-09-04 14:56:33.000000000 Z
   where: github
@@ -140927,6 +139031,7 @@
   details: Apparently, zerocracy/judges-action#338 has been 'issue-was-closed'.
   issue: 338
   repository: 799177290
+  tombstone: 2025-09-13 13:38:39.538816503 Z
   what: issue-was-closed
   when: 2024-09-18 08:44:42.000000000 Z
   where: github
@@ -140938,6 +139043,7 @@
   details: Apparently, zerocracy/judges-action#345 has been 'issue-was-closed'.
   issue: 345
   repository: 799177290
+  tombstone: 2025-09-13 13:38:40.358559076 Z
   what: issue-was-closed
   when: 2024-10-24 05:24:45.000000000 Z
   where: github
@@ -140949,6 +139055,7 @@
   details: Apparently, zerocracy/judges-action#350 has been 'issue-was-closed'.
   issue: 350
   repository: 799177290
+  tombstone: 2025-09-13 13:38:41.210540549 Z
   what: issue-was-closed
   when: 2024-09-24 09:13:53.000000000 Z
   where: github
@@ -140960,6 +139067,7 @@
   details: Apparently, zerocracy/judges-action#373 has been 'issue-was-closed'.
   issue: 373
   repository: 799177290
+  tombstone: 2025-09-13 13:38:42.005208717 Z
   what: issue-was-closed
   when: 2024-10-05 20:50:40.000000000 Z
   where: github
@@ -140971,6 +139079,7 @@
   details: Apparently, zerocracy/judges-action#375 has been 'issue-was-closed'.
   issue: 375
   repository: 799177290
+  tombstone: 2025-09-13 13:38:42.856908610 Z
   what: issue-was-closed
   when: 2024-10-07 15:45:29.000000000 Z
   where: github
@@ -142367,42 +140476,6 @@
   when: 2024-10-10 06:50:32.000000000 Z
   where: github
   who: 526301
-- _id: 2148429
-  _job: 17695795712
-  _time: 2025-09-13 11:22:54.659875941 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#24 has been opened by @renovate[bot].
-  issue: 24
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-05 07:34:21.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148430
-  _job: 17695795712
-  _time: 2025-09-13 11:22:55.445405688 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#25 has been opened by @renovate[bot].
-  issue: 25
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-05 17:03:24.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2148431
-  _job: 17695795712
-  _time: 2025-09-13 11:22:56.097365202 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  branch: renovate/fbe-0.x-lockfile
-  details: The missing pull zerocracy/pages-action#28 has been opened by @renovate[bot].
-  issue: 28
-  repository: 802720676
-  what: pull-was-opened
-  when: 2024-07-06 12:15:57.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2148432
   _job: 17695795712
   _time: 2025-09-13 11:22:56.698818785 Z
@@ -142411,6 +140484,7 @@
   details: The missing pull zerocracy/pages-action#29 has been opened by @renovate[bot].
   issue: 29
   repository: 802720676
+  tombstone: 2025-09-13 13:38:17.721017785 Z
   what: pull-was-opened
   when: 2024-07-06 18:34:06.000000000 Z
   where: github
@@ -142423,6 +140497,7 @@
   details: The missing pull zerocracy/pages-action#32 has been opened by @renovate[bot].
   issue: 32
   repository: 802720676
+  tombstone: 2025-09-13 13:38:19.278554881 Z
   what: pull-was-opened
   when: 2024-07-08 07:24:24.000000000 Z
   where: github
@@ -142435,6 +140510,7 @@
   details: The missing pull zerocracy/pages-action#52 has been opened by @yegor256.
   issue: 52
   repository: 802720676
+  tombstone: 2025-09-13 13:38:20.429431368 Z
   what: pull-was-opened
   when: 2024-07-18 13:25:46.000000000 Z
   where: github
@@ -142675,6 +140751,7 @@
   issue: 209
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:32.248507848 Z
   what: label-was-attached
   when: 2024-08-01 05:21:49.000000000 Z
   where: github
@@ -142687,6 +140764,7 @@
   issue: 214
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-13 13:38:33.092878341 Z
   what: label-was-attached
   when: 2024-08-02 03:38:48.000000000 Z
   where: github
@@ -142712,6 +140790,7 @@
   issue: 220
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-13 13:38:35.630171530 Z
   what: label-was-attached
   when: 2024-08-03 13:19:45.000000000 Z
   where: github
@@ -142736,6 +140815,7 @@
   issue: 227
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-13 13:38:36.470792628 Z
   what: label-was-attached
   when: 2024-08-23 20:55:34.000000000 Z
   where: github
@@ -142764,6 +140844,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/0rsk#55 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:04.032458864 Z
   failed_builds: 0
   hoc: 6
   issue: 55
@@ -142785,6 +140866,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#18 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:04.299422143 Z
   failed_builds: 0
   hoc: 4
   issue: 18
@@ -142806,6 +140888,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#39 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:04.565556363 Z
   failed_builds: 0
   hoc: 23
   issue: 39
@@ -142827,6 +140910,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#4 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:04.833638010 Z
   failed_builds: 0
   hoc: 15
   issue: 4
@@ -142848,6 +140932,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#78 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:05.126356951 Z
   failed_builds: 0
   hoc: 6
   issue: 78
@@ -142869,6 +140954,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/judges#60 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:05.393178501 Z
   failed_builds: 0
   hoc: 6
   issue: 60
@@ -142890,6 +140976,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#8 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:05.666571118 Z
   failed_builds: 0
   hoc: 6
   issue: 8
@@ -142911,6 +140998,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#19 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:05.958674244 Z
   failed_builds: 0
   hoc: 2
   issue: 19
@@ -142932,6 +141020,7 @@
   comments_resolved: 0
   comments_to_code: 19
   details: Apparently, zerocracy/fbe#43 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:06.227421407 Z
   failed_builds: 0
   hoc: 200
   issue: 43
@@ -142953,6 +141042,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#5 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:06.499666862 Z
   failed_builds: 0
   hoc: 7
   issue: 5
@@ -142974,6 +141064,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#82 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:06.795130794 Z
   failed_builds: 0
   hoc: 6
   issue: 82
@@ -142995,6 +141086,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/judges#75 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:07.062967851 Z
   failed_builds: 0
   hoc: 6
   issue: 75
@@ -143016,6 +141108,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#9 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:07.335358276 Z
   failed_builds: 0
   hoc: 6
   issue: 9
@@ -143037,6 +141130,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#20 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:07.628768593 Z
   failed_builds: 0
   hoc: 2
   issue: 20
@@ -143058,6 +141152,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#45 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:07.896622046 Z
   failed_builds: 0
   hoc: 1
   issue: 45
@@ -143079,6 +141174,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#6 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:08.170069904 Z
   failed_builds: 0
   hoc: 9
   issue: 6
@@ -143100,6 +141196,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#88 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:08.468982698 Z
   failed_builds: 0
   hoc: 6
   issue: 88
@@ -143121,6 +141218,7 @@
   comments_resolved: 0
   comments_to_code: 12
   details: Apparently, yegor256/judges#93 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:08.740406455 Z
   failed_builds: 0
   hoc: 84
   issue: 93
@@ -143142,6 +141240,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#10 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:09.010796365 Z
   failed_builds: 0
   hoc: 6
   issue: 10
@@ -143163,6 +141262,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#21 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:09.309197784 Z
   failed_builds: 0
   hoc: 2
   issue: 21
@@ -143184,6 +141284,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#48 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:09.587273097 Z
   failed_builds: 1
   hoc: 69
   issue: 48
@@ -143205,6 +141306,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#7 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:09.876941673 Z
   failed_builds: 0
   hoc: 4
   issue: 7
@@ -143226,6 +141328,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#101 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:10.146629058 Z
   failed_builds: 0
   hoc: 318
   issue: 101
@@ -143247,6 +141350,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/judges#95 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:10.423960545 Z
   failed_builds: 0
   hoc: 93
   issue: 95
@@ -143268,6 +141372,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#13 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:10.725330068 Z
   failed_builds: 0
   hoc: 3
   issue: 13
@@ -143289,6 +141394,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#22 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:10.998508089 Z
   failed_builds: 0
   hoc: 2
   issue: 22
@@ -143310,6 +141416,7 @@
   comments_resolved: 0
   comments_to_code: 2
   details: Apparently, zerocracy/fbe#49 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:11.358415640 Z
   failed_builds: 0
   hoc: 17
   issue: 49
@@ -143331,6 +141438,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#8 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:11.643864333 Z
   failed_builds: 0
   hoc: 4
   issue: 8
@@ -143352,6 +141460,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#103 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:11.936311492 Z
   failed_builds: 0
   hoc: 22
   issue: 103
@@ -143373,6 +141482,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/judges#97 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:12.216554019 Z
   failed_builds: 0
   hoc: 146
   issue: 97
@@ -143394,6 +141504,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#15 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:12.489222622 Z
   failed_builds: 0
   hoc: 9
   issue: 15
@@ -143415,6 +141526,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#24 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:12.765838643 Z
   failed_builds: 0
   hoc: 2
   issue: 24
@@ -143436,6 +141548,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#52 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:13.043761513 Z
   failed_builds: 0
   hoc: 6
   issue: 52
@@ -143457,6 +141570,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#9 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:13.318020976 Z
   failed_builds: 0
   hoc: 2
   issue: 9
@@ -143478,6 +141592,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#107 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:13.596203265 Z
   failed_builds: 3
   hoc: 10
   issue: 107
@@ -143499,6 +141614,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/judges#100 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:13.868749510 Z
   failed_builds: 0
   hoc: 78
   issue: 100
@@ -143520,6 +141636,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#16 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:14.144938314 Z
   failed_builds: 0
   hoc: 10
   issue: 16
@@ -143541,6 +141658,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#25 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:14.420559294 Z
   failed_builds: 0
   hoc: 2
   issue: 25
@@ -143562,6 +141680,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#53 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:14.693849613 Z
   failed_builds: 0
   hoc: 24
   issue: 53
@@ -143583,6 +141702,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#32 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:14.970862914 Z
   failed_builds: 0
   hoc: 28
   issue: 32
@@ -143604,6 +141724,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#108 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:15.264233922 Z
   failed_builds: 3
   hoc: 6
   issue: 108
@@ -143625,6 +141746,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/judges#107 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:15.532226356 Z
   failed_builds: 0
   hoc: 6
   issue: 107
@@ -143646,6 +141768,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#17 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:15.876623291 Z
   failed_builds: 0
   hoc: 12
   issue: 17
@@ -143667,6 +141790,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#28 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:16.152379252 Z
   failed_builds: 0
   hoc: 2
   issue: 28
@@ -143688,6 +141812,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#60 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:16.426498743 Z
   failed_builds: 0
   hoc: 2
   issue: 60
@@ -143709,6 +141834,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#33 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:16.777931473 Z
   failed_builds: 0
   hoc: 32
   issue: 33
@@ -143730,6 +141856,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#111 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:17.067316525 Z
   failed_builds: 0
   hoc: 6
   issue: 111
@@ -143751,6 +141878,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#18 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:17.365160902 Z
   failed_builds: 0
   hoc: 8
   issue: 18
@@ -143772,6 +141900,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#29 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:17.662060499 Z
   failed_builds: 0
   hoc: 2
   issue: 29
@@ -143793,6 +141922,7 @@
   comments_resolved: 9
   comments_to_code: 13
   details: Apparently, zerocracy/fbe#66 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:17.970882165 Z
   failed_builds: 0
   hoc: 230
   issue: 66
@@ -143814,6 +141944,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#34 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:18.336302669 Z
   failed_builds: 0
   hoc: 2
   issue: 34
@@ -143835,6 +141966,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, yegor256/factbase#112 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:18.629943290 Z
   failed_builds: 0
   hoc: 8
   issue: 112
@@ -143856,6 +141988,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#30 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:18.925587814 Z
   failed_builds: 0
   hoc: 2
   issue: 30
@@ -143877,6 +142010,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#32 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:19.220192504 Z
   failed_builds: 0
   hoc: 2
   issue: 32
@@ -143898,6 +142032,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/fbe#68 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:19.495186351 Z
   failed_builds: 0
   hoc: 2
   issue: 68
@@ -143919,6 +142054,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/swarm-template#35 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:19.834097753 Z
   failed_builds: 0
   hoc: 2
   issue: 35
@@ -143940,6 +142076,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/baza.rb#32 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:20.101287400 Z
   failed_builds: 0
   hoc: 12
   issue: 32
@@ -143961,6 +142098,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#52 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:20.371923948 Z
   failed_builds: 0
   hoc: 8
   issue: 52
@@ -143982,6 +142120,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#130 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:20.642192679 Z
   failed_builds: 0
   hoc: 4
   issue: 130
@@ -144003,6 +142142,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#132 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:20.916664374 Z
   failed_builds: 0
   hoc: 2
   issue: 132
@@ -144024,6 +142164,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#133 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:21.251143489 Z
   failed_builds: 0
   hoc: 2
   issue: 133
@@ -144045,6 +142186,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#135 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:21.523342465 Z
   failed_builds: 0
   hoc: 2
   issue: 135
@@ -144066,6 +142208,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#136 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:21.792046532 Z
   failed_builds: 0
   hoc: 2
   issue: 136
@@ -144087,6 +142230,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#137 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:22.063227740 Z
   failed_builds: 0
   hoc: 2
   issue: 137
@@ -144108,6 +142252,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#139 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:22.337749482 Z
   failed_builds: 0
   hoc: 6
   issue: 139
@@ -144129,6 +142274,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#140 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:22.696347667 Z
   failed_builds: 0
   hoc: 2
   issue: 140
@@ -144150,6 +142296,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#142 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:22.964326811 Z
   failed_builds: 0
   hoc: 2
   issue: 142
@@ -144171,6 +142318,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#143 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:23.234991909 Z
   failed_builds: 0
   hoc: 2
   issue: 143
@@ -144192,6 +142340,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#144 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:23.507620761 Z
   failed_builds: 0
   hoc: 2
   issue: 144
@@ -144213,6 +142362,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#145 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:23.782612700 Z
   failed_builds: 0
   hoc: 8
   issue: 145
@@ -144234,6 +142384,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#146 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:24.123136148 Z
   failed_builds: 0
   hoc: 7
   issue: 146
@@ -144255,6 +142406,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#148 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:24.391678949 Z
   failed_builds: 0
   hoc: 6
   issue: 148
@@ -144276,6 +142428,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#149 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:24.661399587 Z
   failed_builds: 0
   hoc: 6
   issue: 149
@@ -144297,6 +142450,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#150 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:24.933192276 Z
   failed_builds: 0
   hoc: 4
   issue: 150
@@ -144318,6 +142472,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#153 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:25.208040803 Z
   failed_builds: 0
   hoc: 2
   issue: 153
@@ -144339,6 +142494,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#155 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:25.548456691 Z
   failed_builds: 0
   hoc: 2
   issue: 155
@@ -144360,6 +142516,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#156 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:25.826554183 Z
   failed_builds: 0
   hoc: 33
   issue: 156
@@ -144381,6 +142538,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#157 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:26.098902246 Z
   failed_builds: 0
   hoc: 22
   issue: 157
@@ -144402,6 +142560,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#159 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:26.368952414 Z
   failed_builds: 0
   hoc: 2
   issue: 159
@@ -144423,6 +142582,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#160 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:26.644496495 Z
   failed_builds: 0
   hoc: 6
   issue: 160
@@ -144444,6 +142604,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#161 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:26.982167245 Z
   failed_builds: 0
   hoc: 2
   issue: 161
@@ -144465,6 +142626,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#163 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:27.249725515 Z
   failed_builds: 0
   hoc: 2
   issue: 163
@@ -144486,6 +142648,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#164 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:27.518742999 Z
   failed_builds: 0
   hoc: 10
   issue: 164
@@ -144507,6 +142670,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#165 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:27.787353148 Z
   failed_builds: 0
   hoc: 2
   issue: 165
@@ -144528,6 +142692,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#166 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:28.059038200 Z
   failed_builds: 0
   hoc: 6
   issue: 166
@@ -144549,6 +142714,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#167 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:28.393593365 Z
   failed_builds: 0
   hoc: 16
   issue: 167
@@ -144570,6 +142736,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#172 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:28.660259369 Z
   failed_builds: 0
   hoc: 14
   issue: 172
@@ -144591,6 +142758,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#173 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:28.928675278 Z
   failed_builds: 0
   hoc: 6
   issue: 173
@@ -144612,6 +142780,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#174 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:29.200142788 Z
   failed_builds: 0
   hoc: 6
   issue: 174
@@ -144633,6 +142802,7 @@
   comments_resolved: 0
   comments_to_code: 0
   details: Apparently, zerocracy/pages-action#175 has been 'pull-was-merged'.
+  done: 2025-09-13 13:38:29.472842221 Z
   failed_builds: 0
   hoc: 6
   issue: 175
@@ -144657,16 +142827,6 @@
   when: *1354
   where: github
   who: 526301
-- _id: 2148572
-  _job: 37638
-  _time: 2025-09-13 11:44:27.437708447 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - 1-2
-  - 4-40
-  repository: 849726475
-  what: tombstone
-  where: github
 - _id: 2148576
   _job: 17696425560
   _time: 2025-09-13 12:22:16.415484132 Z
@@ -144675,6 +142835,7 @@
   issue: 238
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-13 13:38:37.314496416 Z
   what: label-was-attached
   when: 2024-08-07 08:37:47.000000000 Z
   where: github
@@ -144687,6 +142848,7 @@
   issue: 239
   label: enhancement
   repository: 799177290
+  tombstone: 2025-09-13 13:38:38.114561904 Z
   what: label-was-attached
   when: 2024-08-07 08:38:46.000000000 Z
   where: github
@@ -144711,6 +142873,7 @@
   issue: 254
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:33.936526212 Z
   what: label-was-attached
   when: 2024-08-10 07:20:51.000000000 Z
   where: github
@@ -144747,6 +142910,7 @@
   issue: 311
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:38.898869588 Z
   what: label-was-attached
   when: 2024-08-23 20:54:29.000000000 Z
   where: github
@@ -144759,6 +142923,7 @@
   issue: 325
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:34.799211144 Z
   what: label-was-attached
   when: 2024-09-04 09:35:18.000000000 Z
   where: github
@@ -144771,6 +142936,7 @@
   issue: 338
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:39.726366090 Z
   what: label-was-attached
   when: 2024-09-16 13:59:55.000000000 Z
   where: github
@@ -144783,6 +142949,7 @@
   issue: 345
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:40.508493798 Z
   what: label-was-attached
   when: 2024-09-23 03:54:51.000000000 Z
   where: github
@@ -144795,6 +142962,7 @@
   issue: 350
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:41.355236531 Z
   what: label-was-attached
   when: 2024-09-24 02:43:05.000000000 Z
   where: github
@@ -144807,6 +142975,7 @@
   issue: 373
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:42.180364460 Z
   what: label-was-attached
   when: 2024-10-04 10:41:16.000000000 Z
   where: github
@@ -144819,6 +142988,7 @@
   issue: 375
   label: bug
   repository: 799177290
+  tombstone: 2025-09-13 13:38:42.984187913 Z
   what: label-was-attached
   when: 2024-10-05 21:05:50.000000000 Z
   where: github
@@ -145252,6 +143422,7 @@
   details: zerocracy/judges-action#209 was assigned to @suban05 by @yegor256.
   issue: 209
   repository: 799177290
+  tombstone: 2025-09-13 13:38:32.415573375 Z
   what: issue-was-assigned
   when: 2024-08-01 05:57:08.000000000 Z
   where: github
@@ -145264,6 +143435,7 @@
   details: zerocracy/judges-action#214 was assigned to @suban05 by @yegor256.
   issue: 214
   repository: 799177290
+  tombstone: 2025-09-13 13:38:33.313684487 Z
   what: issue-was-assigned
   when: 2024-08-16 13:43:08.000000000 Z
   where: github
@@ -145276,6 +143448,7 @@
   details: zerocracy/judges-action#220 was assigned to @yegorov by @yegor256.
   issue: 220
   repository: 799177290
+  tombstone: 2025-09-13 13:38:35.773328201 Z
   what: issue-was-assigned
   when: 2024-09-11 03:44:14.000000000 Z
   where: github
@@ -145300,6 +143473,7 @@
   details: zerocracy/judges-action#227 was assigned to @yegorov by @yegor256.
   issue: 227
   repository: 799177290
+  tombstone: 2025-09-13 13:38:36.599212195 Z
   what: issue-was-assigned
   when: 2024-10-01 02:10:25.000000000 Z
   where: github
@@ -145440,136 +143614,6 @@
   total_reviews_submitted: 51
   what: quantity-of-deliverables
   when: 2025-09-13 12:35:20.794086522 Z
-- _id: 2148666
-  _job: 37643
-  _time: 2025-09-13 12:58:48.031265648 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - 1-4
-  - 6-20
-  - 22-92
-  - 94-114
-  - 116-150
-  - 152-183
-  - 185-187
-  - 189-313
-  - 315-404
-  - 406-409
-  - 411-423
-  - 425-436
-  - 438-442
-  - '444'
-  - '850'
-  repository: 799177290
-  what: tombstone
-  where: github
-- _id: 2148667
-  _job: 37643
-  _time: 2025-09-13 12:58:50.681658008 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - '1'
-  - 3-30
-  - 32-39
-  - 41-44
-  - 46-62
-  - 68-70
-  - 74-81
-  - 85-91
-  - 93-110
-  - 112-130
-  - 132-133
-  - 135-146
-  - 148-170
-  - 172-186
-  - '189'
-  repository: 802720676
-  what: tombstone
-  where: github
-- _id: 2148668
-  _job: 37643
-  _time: 2025-09-13 12:58:53.137703550 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - 1-2
-  - 4-10
-  - '23'
-  - 32-33
-  - 39-42
-  - 44-84
-  - 86-88
-  - 91-97
-  - 99-100
-  - 102-110
-  - 112-119
-  - 121-138
-  - 141-142
-  - 144-159
-  repository: 799113787
-  what: tombstone
-  where: github
-- _id: 2148669
-  _job: 37643
-  _time: 2025-09-13 12:58:54.253539591 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - 1-9
-  - 30-33
-  - 40-41
-  - '46'
-  - '51'
-  - '55'
-  - 57-58
-  - '60'
-  - 62-70
-  - 72-75
-  - 77-79
-  - '81'
-  - '83'
-  - 85-104
-  - 106-111
-  repository: 181044958
-  what: tombstone
-  where: github
-- _id: 2148670
-  _job: 37643
-  _time: 2025-09-13 12:58:55.048597190 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - 1-3
-  - 5-11
-  - 13-15
-  - '31'
-  - 43-44
-  - '56'
-  - 58-104
-  - 106-114
-  - 118-143
-  repository: 798641472
-  what: tombstone
-  where: github
-- _id: 2148671
-  _job: 37643
-  _time: 2025-09-13 12:58:56.280866883 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - '1'
-  - 3-12
-  - 16-23
-  - 26-132
-  repository: 820463873
-  what: tombstone
-  where: github
-- _id: 2148672
-  _job: 37643
-  _time: 2025-09-13 12:58:57.507648639 Z
-  _version: 0.16.4/0.53.8/0.15.42
-  issues:
-  - '1'
-  - 3-33
-  repository: 840215648
-  what: tombstone
-  where: github
 - _id: 2148673
   _job: 37643
   _time: 2025-09-13 12:59:36.159718830 Z
@@ -145663,6 +143707,7 @@
   details: zerocracy/judges-action#238 was assigned to @yegorov by @yegor256.
   issue: 238
   repository: 799177290
+  tombstone: 2025-09-13 13:38:37.465684299 Z
   what: issue-was-assigned
   when: 2024-09-27 07:37:40.000000000 Z
   where: github
@@ -145675,6 +143720,7 @@
   details: zerocracy/judges-action#239 was assigned to @yegorov by @yegor256.
   issue: 239
   repository: 799177290
+  tombstone: 2025-09-13 13:38:38.258643548 Z
   what: issue-was-assigned
   when: 2024-10-03 02:50:53.000000000 Z
   where: github
@@ -145699,6 +143745,7 @@
   details: zerocracy/judges-action#254 was assigned to @suban05 by @yegor256.
   issue: 254
   repository: 799177290
+  tombstone: 2025-09-13 13:38:34.122190163 Z
   what: issue-was-assigned
   when: 2024-08-10 09:21:53.000000000 Z
   where: github
@@ -145747,6 +143794,7 @@
   details: zerocracy/judges-action#311 was assigned to @suban05 by @yegor256.
   issue: 311
   repository: 799177290
+  tombstone: 2025-09-13 13:38:39.024948352 Z
   what: issue-was-assigned
   when: 2024-08-24 07:06:43.000000000 Z
   where: github
@@ -145759,6 +143807,7 @@
   details: zerocracy/judges-action#325 was assigned to @yegorov by @yegor256.
   issue: 325
   repository: 799177290
+  tombstone: 2025-09-13 13:38:34.946513956 Z
   what: issue-was-assigned
   when: 2024-09-04 09:52:35.000000000 Z
   where: github
@@ -145771,6 +143820,7 @@
   details: zerocracy/judges-action#338 was assigned to @yegorov by @yegor256.
   issue: 338
   repository: 799177290
+  tombstone: 2025-09-13 13:38:39.865037600 Z
   what: issue-was-assigned
   when: 2024-09-17 09:39:00.000000000 Z
   where: github
@@ -145783,6 +143833,7 @@
   details: zerocracy/judges-action#345 was assigned to @yegorov by @yegor256.
   issue: 345
   repository: 799177290
+  tombstone: 2025-09-13 13:38:40.627651179 Z
   what: issue-was-assigned
   when: 2024-10-16 05:48:55.000000000 Z
   where: github
@@ -145795,6 +143846,7 @@
   details: zerocracy/judges-action#350 was assigned to @suban05 by @yegor256.
   issue: 350
   repository: 799177290
+  tombstone: 2025-09-13 13:38:41.475870520 Z
   what: issue-was-assigned
   when: 2024-09-24 06:08:32.000000000 Z
   where: github
@@ -145807,6 +143859,7 @@
   details: zerocracy/judges-action#373 was assigned to @yegorov by @yegor256.
   issue: 373
   repository: 799177290
+  tombstone: 2025-09-13 13:38:42.326855630 Z
   what: issue-was-assigned
   when: 2024-10-04 15:14:30.000000000 Z
   where: github
@@ -145819,6 +143872,7 @@
   details: zerocracy/judges-action#375 was assigned to @yegorov by @yegor256.
   issue: 375
   repository: 799177290
+  tombstone: 2025-09-13 13:38:43.098171645 Z
   what: issue-was-assigned
   when: 2024-10-06 13:48:11.000000000 Z
   where: github
@@ -145925,37 +143979,6 @@
   when: 2024-06-24 15:18:32.000000000 Z
   where: github
   who: 6305016
-- _id: 2148714
-  _job: 17697117841
-  _time: 2025-09-13 13:32:56.373741524 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54637250049
-  min_issue_was_found: 0
-  min_pull_was_found: 66
-  repository: 849726475
-  what: iterate
-  where: github
-- _id: 2148715
-  _job: 17697117841
-  _time: 2025-09-13 13:32:56.862988685 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54643636266
-  min_issue_was_found: 3
-  min_pull_was_found: 20
-  repository: 974194993
-  what: iterate
-  where: github
-- _id: 2148716
-  _job: 17697117841
-  _time: 2025-09-13 13:32:57.343223430 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  events_were_scanned: 54602644782
-  min_issue_was_found: 1
-  min_pull_was_found: 123
-  repository: 840215648
-  types_were_scanned: 0
-  what: iterate
-  where: github
 - _id: 2148721
   _job: 17697117841
   _time: 2025-09-13 13:33:10.295674841 Z
@@ -146310,84 +144333,881 @@
   when: 2024-12-28 10:09:14.000000000 Z
   where: github
   who: 29139614
-- _id: 2148751
-  _job: 17697117841
-  _time: 2025-09-13 13:37:01.797578956 Z
-  _version: 0.16.3/0.53.6/0.15.42
-  assignees_were_scanned: 0
-  events_were_scanned: 54643459654
-  issues_were_scanned: 0
-  labels_were_scanned: 1010
-  merges_were_scanned: 0
-  min_issue_was_found: 1
-  min_pull_was_found: 568
+- _id: 2148757
+  _job: 37648
+  _time: 2025-09-13 13:39:09.508433653 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - 1-4
+  - 6-20
+  - 22-92
+  - 94-114
+  - 116-150
+  - 152-183
+  - 185-187
+  - 189-313
+  - 315-404
+  - 406-409
+  - 411-423
+  - 425-436
+  - 438-442
+  - '444'
+  - '850'
   repository: 799177290
+  what: tombstone
+  where: github
+- _id: 2148758
+  _job: 37648
+  _time: 2025-09-13 13:39:12.203604355 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - 1-3
+  - 5-11
+  - 13-15
+  - '31'
+  - 43-44
+  - '56'
+  - 58-104
+  - 106-114
+  - 118-143
+  repository: 798641472
+  what: tombstone
+  where: github
+- _id: 2148759
+  _job: 37648
+  _time: 2025-09-13 13:39:14.343926206 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - '1'
+  - 3-12
+  - 16-23
+  - 26-132
+  repository: 820463873
+  what: tombstone
+  where: github
+- _id: 2148760
+  _job: 37648
+  _time: 2025-09-13 13:39:15.877398566 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - '1'
+  - 3-30
+  - 32-39
+  - 41-44
+  - 46-62
+  - 68-70
+  - 74-81
+  - 85-91
+  - 93-110
+  - 112-130
+  - 132-133
+  - 135-146
+  - 148-170
+  - 172-186
+  - '189'
+  repository: 802720676
+  what: tombstone
+  where: github
+- _id: 2148761
+  _job: 37648
+  _time: 2025-09-13 13:39:18.508248751 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - 1-2
+  - 4-10
+  - '23'
+  - 32-33
+  - 39-42
+  - 44-84
+  - 86-88
+  - 91-97
+  - 99-100
+  - 102-110
+  - 112-119
+  - 121-138
+  - 141-142
+  - 144-159
+  repository: 799113787
+  what: tombstone
+  where: github
+- _id: 2148762
+  _job: 37648
+  _time: 2025-09-13 13:39:19.200022852 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - 1-2
+  - 4-40
+  repository: 849726475
+  what: tombstone
+  where: github
+- _id: 2148763
+  _job: 37648
+  _time: 2025-09-13 13:39:20.061533057 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - '1'
+  - 3-33
+  repository: 840215648
+  what: tombstone
+  where: github
+- _id: 2148764
+  _job: 37648
+  _time: 2025-09-13 13:39:20.921584874 Z
+  _version: 0.16.4/0.53.8/0.15.42
+  issues:
+  - 1-9
+  - 30-33
+  - 40-41
+  - '46'
+  - '51'
+  - '55'
+  - 57-58
+  - '60'
+  - 62-70
+  - 72-75
+  - 77-79
+  - '81'
+  - '83'
+  - 85-104
+  - 106-111
+  repository: 181044958
+  what: tombstone
+  where: github
+- _id: 2148766
+  _job: 17697753212
+  _time: 2025-09-13 14:19:02.257107389 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54636850450
+  repository: 728758275
+  what: iterate
+  where: github
+- _id: 2148767
+  _job: 17697753212
+  _time: 2025-09-13 14:48:07.161633233 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The issue zerocracy/judges-action#18 has been earlier opened by @yegor256.
+  issue: 18
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-05-27 08:20:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148768
+  _job: 17697753212
+  _time: 2025-09-13 14:48:08.481210712 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The issue zerocracy/judges-action#7 has been earlier opened by @yegor256.
+  issue: 7
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-05-13 15:19:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148769
+  _job: 17697753212
+  _time: 2025-09-13 14:48:08.647320775 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The issue zerocracy/judges-action#6 has been earlier opened by @yegor256.
+  issue: 6
+  repository: 799177290
+  what: issue-was-opened
+  when: 2024-05-12 12:58:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148773
+  _job: 17697753212
+  _time: 2025-09-13 14:49:43.836316380 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54637250049
+  min_issue_was_found: 3
+  min_pull_was_found: 67
+  repository: 849726475
+  what: iterate
+  where: github
+- _id: 2148777
+  _job: 17697753212
+  _time: 2025-09-13 14:49:45.255539145 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54643636266
+  min_issue_was_found: 3
+  min_pull_was_found: 0
+  repository: 974194993
+  what: iterate
+  where: github
+- _id: 2148778
+  _job: 17697753212
+  _time: 2025-09-13 14:49:45.756839421 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  events_were_scanned: 54602644782
+  min_issue_was_found: 1
+  min_pull_was_found: 124
+  repository: 840215648
   types_were_scanned: 0
   what: iterate
   where: github
-- _id: 2148752
-  _job: 17697117841
-  _time: 2025-09-13 13:37:01.996339171 Z
+- _id: 2148780
+  _job: 17697753212
+  _time: 2025-09-13 14:49:55.955709471 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: Apparently, zerocracy/judges-action#6 has been 'issue-was-closed'.
+  issue: 6
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-05-12 13:04:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148781
+  _job: 17697753212
+  _time: 2025-09-13 14:49:59.562678160 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: Apparently, zerocracy/judges-action#7 has been 'issue-was-closed'.
+  issue: 7
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-05-22 06:44:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148782
+  _job: 17697753212
+  _time: 2025-09-13 14:50:02.731067909 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: Apparently, zerocracy/judges-action#18 has been 'issue-was-closed'.
+  issue: 18
+  repository: 799177290
+  what: issue-was-closed
+  when: 2024-05-27 08:33:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148783
+  _job: 17697753212
+  _time: 2025-09-13 14:50:50.347826578 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: issue99
+  comments: 3
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#98 has been 'pull-was-closed'.
+  failed_builds: 0
+  hoc: 38
+  issue: 98
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-closed
+  when: 2024-07-15 18:10:09.000000000 Z
+  where: github
+  who: 94752702
+- _id: 2148784
+  _job: 17697753212
+  _time: 2025-09-13 14:51:07.683953003 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: '412'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#413 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 1597
+  issue: 413
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-19 04:05:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148785
+  _job: 17697753212
+  _time: 2025-09-13 14:51:16.292587393 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/fbe-0.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#414 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 20
+  issue: 414
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-18 14:52:27.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148786
+  _job: 17697753212
+  _time: 2025-09-13 14:51:32.866981979 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#415 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 415
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-19 04:27:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148787
+  _job: 17697753212
+  _time: 2025-09-13 14:51:36.188914921 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#417 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 417
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-19 07:28:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148788
+  _job: 17697753212
+  _time: 2025-09-13 14:51:39.517474505 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/judges-0.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#418 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 4
+  issue: 418
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-19 10:07:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148789
+  _job: 17697753212
+  _time: 2025-09-13 14:51:47.624600934 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#420 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 420
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-19 10:51:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148790
+  _job: 17697753212
+  _time: 2025-09-13 14:51:51.405993139 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#422 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 422
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-19 13:53:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148791
+  _job: 17697753212
+  _time: 2025-09-13 14:51:59.982707743 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#423 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 423
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-19 13:17:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148792
+  _job: 17697753212
+  _time: 2025-09-13 14:52:02.875007925 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#425 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 425
+  repository: 799177290
+  succeeded_builds: 16
+  what: pull-was-merged
+  when: 2024-12-20 03:56:00.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148793
+  _job: 17697753212
+  _time: 2025-09-13 14:52:14.783303912 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#426 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 426
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-19 15:15:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148794
+  _job: 17697753212
+  _time: 2025-09-13 14:52:17.903479853 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/judges-0.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#427 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 427
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-19 21:54:38.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148795
+  _job: 17697753212
+  _time: 2025-09-13 14:52:31.997516548 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#429 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 429
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-20 05:13:49.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148796
+  _job: 17697753212
+  _time: 2025-09-13 14:52:34.868172038 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#430 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 430
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-20 04:50:42.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148797
+  _job: 17697753212
+  _time: 2025-09-13 14:52:47.409544444 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/fbe-0.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#431 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 431
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-20 07:08:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148798
+  _job: 17697753212
+  _time: 2025-09-13 14:52:55.428711957 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#432 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 432
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-20 07:48:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148799
+  _job: 17697753212
+  _time: 2025-09-13 14:52:58.374365799 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#433 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 433
+  repository: 799177290
+  succeeded_builds: 16
+  what: pull-was-merged
+  when: 2024-12-20 09:30:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148800
+  _job: 17697753212
+  _time: 2025-09-13 14:53:09.795285849 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#435 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 435
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-20 09:30:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148801
+  _job: 17697753212
+  _time: 2025-09-13 14:53:12.259295269 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#436 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 436
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-20 09:58:15.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148802
+  _job: 17697753212
+  _time: 2025-09-13 14:53:25.457952532 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#438 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 438
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-24 03:03:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148803
+  _job: 17697753212
+  _time: 2025-09-13 14:53:28.088642407 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#439 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 439
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-24 01:00:59.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148804
+  _job: 17697753212
+  _time: 2025-09-13 14:53:41.165838741 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/zerocracy-judges-action-0.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#441 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 441
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-24 06:15:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148805
+  _job: 17697753212
+  _time: 2025-09-13 14:53:47.992196440 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: version-up
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#442 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 2
+  issue: 442
+  repository: 799177290
+  succeeded_builds: 0
+  what: pull-was-merged
+  when: 2024-12-24 06:15:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148806
+  _job: 17697753212
+  _time: 2025-09-13 14:53:50.380310488 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  branch: renovate/judges-0.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#444 has been 'pull-was-merged'.
+  failed_builds: 0
+  hoc: 9
+  issue: 444
+  repository: 799177290
+  succeeded_builds: 8
+  what: pull-was-merged
+  when: 2024-12-28 10:50:13.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2148807
+  _job: 17697753212
+  _time: 2025-09-13 14:55:38.969505137 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/factbase#106.
+  issue: 106
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2024-07-24 16:24:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148808
+  _job: 17697753212
+  _time: 2025-09-13 14:55:46.291591797 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue yegor256/judges#127.
+  issue: 127
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: 2024-09-03 08:52:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148809
+  _job: 17697753212
+  _time: 2025-09-13 14:56:22.435654401 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#138.
+  issue: 138
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-09-26 01:48:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148810
+  _job: 17697753212
+  _time: 2025-09-13 14:56:23.509682942 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  details: The 'bug' label was attached by @yegor256 to the issue zerocracy/pages-action#151.
+  issue: 151
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2024-10-10 01:55:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2148814
+  _job: 17697753212
+  _time: 2025-09-13 14:58:33.036945802 Z
   _version: 0.16.3/0.53.6/0.15.42
   assignees_were_scanned: 80
   events_were_scanned: 54608035165
-  labels_were_scanned: 90
+  labels_were_scanned: 0
   min_issue_was_found: 1
-  min_pull_was_found: 183
+  min_pull_was_found: 184
   repository: 798641472
-  types_were_scanned: 80
+  types_were_scanned: 195
   what: iterate
   where: github
-- _id: 2148753
-  _job: 17697117841
-  _time: 2025-09-13 13:37:02.172602387 Z
+- _id: 2148815
+  _job: 17697753212
+  _time: 2025-09-13 14:58:33.227906307 Z
   _version: 0.16.3/0.53.6/0.15.42
   assignees_were_scanned: 0
   events_were_scanned: 54627257457
   min_issue_was_found: 1
-  min_pull_was_found: 332
+  min_pull_was_found: 333
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 67
   what: iterate
   where: github
-- _id: 2148754
-  _job: 17697117841
-  _time: 2025-09-13 13:37:02.339550411 Z
+- _id: 2148816
+  _job: 17697753212
+  _time: 2025-09-13 14:58:33.427246352 Z
   _version: 0.16.3/0.53.6/0.15.42
   assignees_were_scanned: 0
   events_were_scanned: 54627202417
   labels_were_scanned: 0
   min_issue_was_found: 1
-  min_pull_was_found: 39
+  min_pull_was_found: 118
   repository: 820463873
-  types_were_scanned: 131
+  types_were_scanned: 214
   what: iterate
   where: github
-- _id: 2148755
-  _job: 17697117841
-  _time: 2025-09-13 13:37:02.537514194 Z
+- _id: 2148817
+  _job: 17697753212
+  _time: 2025-09-13 14:58:33.623117153 Z
   _version: 0.16.3/0.53.6/0.15.42
   assignees_were_scanned: 157
   events_were_scanned: 54362992640
   issues_were_scanned: 0
-  labels_were_scanned: 180
+  labels_were_scanned: 0
   merges_were_scanned: 0
   min_issue_was_found: 9
-  min_pull_was_found: 201
+  min_pull_was_found: 210
   repository: 181044958
-  types_were_scanned: 0
+  types_were_scanned: 43
   what: iterate
   where: github
-- _id: 2148756
-  _job: 17697117841
-  _time: 2025-09-13 13:37:02.711147576 Z
+- _id: 2148818
+  _job: 17697753212
+  _time: 2025-09-13 14:58:33.819062604 Z
   _version: 0.16.3/0.53.6/0.15.42
   assignees_were_scanned: 80
   events_were_scanned: 54610379280
-  labels_were_scanned: 103
+  labels_were_scanned: 0
   min_issue_was_found: 1
-  min_pull_was_found: 258
+  min_pull_was_found: 259
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 39
+  what: iterate
+  where: github
+- _id: 2148819
+  _job: 17697753212
+  _time: 2025-09-13 14:58:34.005896623 Z
+  _version: 0.16.3/0.53.6/0.15.42
+  assignees_were_scanned: 0
+  events_were_scanned: 54644388812
+  issues_were_scanned: 0
+  labels_were_scanned: 0
+  merges_were_scanned: 0
+  min_issue_was_found: 1
+  min_pull_was_found: 570
+  repository: 799177290
+  types_were_scanned: 103
   what: iterate
   where: github
