@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bazz
+input: []
+expected:
+  - /fb[count(f)=2]
+  - /fb/f[what='pull-was-opened' and repository='810' and issue='144' and where='github']
+  - /fb/f[what='iterate' and repository='810' and latest_issue_was_found='144' and where='github']
