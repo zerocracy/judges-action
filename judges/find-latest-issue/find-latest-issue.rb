@@ -30,7 +30,7 @@ Fbe.iterate do
       next if f.nil?
       f.when = json[:created_at]
       f.who = json.dig(:user, :id)
-      f.details = "The issue #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+      f.details = "The issue #{Fbe.issue(f)} is the first we found, opened by #{Fbe.who(f)}."
       $loog.info("The opening of #{Fbe.issue(f)} by #{Fbe.who(f)} was found")
     end
     json[:number]

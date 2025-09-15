@@ -39,7 +39,7 @@ class TestFindLatestIssue < Jp::Test
       fb.one?(
         what: 'issue-was-opened', issue: 547, repository: 42, where: 'github',
         who: 44, when: Time.parse('2025-09-14 20:03:16 UTC'),
-        details: 'The issue foo/foo#547 has been opened by @user.'
+        details: 'The issue foo/foo#547 is the first we found, opened by @user.'
       )
     )
     assert(fb.one?(what: 'iterate', latest_issue_was_found: 547, repository: 42, where: 'github'))
@@ -75,7 +75,7 @@ class TestFindLatestIssue < Jp::Test
       fb.one?(
         what: 'pull-was-opened', issue: 548, repository: 42, where: 'github',
         who: 44, when: Time.parse('2025-09-14 20:03:16 UTC'),
-        details: 'The issue foo/foo#548 has been opened by @user.'
+        details: 'The issue foo/foo#548 is the first we found, opened by @user.'
       )
     )
     assert(fb.one?(what: 'iterate', latest_issue_was_found: 548, repository: 42, where: 'github'))
