@@ -44,7 +44,6 @@ Fbe.conclude do
     end
     alive << f.who
     n.name = nick
-    n.what = $judge
     n.when = Time.now
     n.details = "We found out that the user ##{f.who} is known in GitHub as @#{nick}."
   end
