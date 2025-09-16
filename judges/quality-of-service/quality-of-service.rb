@@ -15,6 +15,7 @@
 # @note Each supporting file with average_* prefix implements a specific metric calculation
 
 require 'fbe/consider'
+require 'fbe/fb'
 require 'fbe/regularly'
 require_relative '../../lib/incremate'
 
