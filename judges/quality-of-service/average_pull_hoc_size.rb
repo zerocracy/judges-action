@@ -27,6 +27,8 @@ def average_pull_hoc_size(fact)
   end
   {
     average_pull_hoc_size: hocs.empty? ? 0 : hocs.sum.to_f / hocs.size,
-    average_pull_files_size: files.empty? ? 0 : files.sum.to_f / files.size
+    average_pull_files_size: files.empty? ? 0 : files.sum.to_f / files.size,
+    some_pull_hoc_size: hocs,
+    some_pull_files_size: files
   }
 end

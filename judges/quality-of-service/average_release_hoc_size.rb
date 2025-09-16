@@ -32,6 +32,8 @@ def average_release_hoc_size(fact)
   end
   {
     average_release_hoc_size: hocs.empty? ? 0 : hocs.sum.to_f / hocs.size,
-    average_release_commits_size: commits.empty? ? 0 : commits.sum.to_f / commits.size
+    average_release_commits_size: commits.empty? ? 0 : commits.sum.to_f / commits.size,
+    some_release_hoc_size: hocs,
+    some_release_commits_size: commits
   }
 end

@@ -14,7 +14,9 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def average_build_success_rate(fact)
   total = 0
+  sucs = []
   success = 0
+  durs = []
   duration = 0
   ttrs = []
   failed = {}
@@ -32,7 +34,9 @@ def average_build_success_rate(fact)
         failed.delete(workflow_id)
       end
       total += 1
+      sucs << (json[:conclusion] == 'success' ? 1 : 0)
       success += json[:conclusion] == 'success' ? 1 : 0
+      durs << run_duration
       duration += run_duration
       seen += 1
     end
@@ -40,6 +44,9 @@ def average_build_success_rate(fact)
   {
     average_build_success_rate: total.zero? ? 0 : success.to_f / total,
     average_build_duration: total.zero? ? 0 : duration.to_f / total,
-    average_build_mttr: ttrs.any? ? ttrs.sum / ttrs.size : 0
+    average_build_mttr: ttrs.any? ? ttrs.sum / ttrs.size : 0,
+    some_build_success_rate: sucs,
+    some_build_duration: durs,
+    some_build_mttr: ttrs
   }
 end

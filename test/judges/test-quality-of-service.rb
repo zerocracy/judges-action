@@ -325,7 +325,9 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(58.333, f.average_release_hoc_size)
+      assert_equal([52, 24, 99], f['some_release_hoc_size'])
       assert_in_delta(2.333, f.average_release_commits_size)
+      assert_equal([1, 2, 4], f['some_release_commits_size'])
     end
   end
 
@@ -421,6 +423,7 @@ class TestQualityOfService < Jp::Test
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_in_delta(3600, f.average_build_mttr)
+      assert_equal([3600, 3600], f['some_build_mttr'])
     end
   end
 
@@ -530,6 +533,7 @@ class TestQualityOfService < Jp::Test
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_in_delta(97_200, f.average_build_mttr)
+      assert_equal([97_200], f['some_build_mttr'])
     end
   end
 
@@ -690,7 +694,9 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(18.4, f.average_pull_hoc_size)
+      assert_equal([15, 3, 17, 37, 20], f['some_pull_hoc_size'])
       assert_in_delta(2.8, f.average_pull_files_size)
+      assert_equal([1, 2, 3, 4, 4], f['some_pull_files_size'])
     end
   end
 
@@ -1016,9 +1022,13 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(431_100, f.average_review_time)
+      assert_equal([505_800, 356_400], f['some_review_time'])
       assert_in_delta(3.333, f.average_review_size)
+      assert_equal([5, 0, 5], f['some_review_size'])
       assert_in_delta(1.666, f.average_reviewers_per_pull)
+      assert_equal([2, 3, 0], f['some_reviewers_per_pull'])
       assert_in_delta(3.666, f.average_reviews_per_pull)
+      assert_equal([3, 8, 0], f['some_reviews_per_pull'])
     end
   end
 
@@ -1153,6 +1163,7 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_in_delta(81_000, f.average_triage_time)
+      assert_equal([88_200, 7_200, 147_600], f['some_triage_time'])
     end
   end
 
@@ -1225,20 +1236,36 @@ class TestQualityOfService < Jp::Test
       f.when = Time.parse('2024-07-09 21:00:00 UTC')
       f.since = Time.parse('2024-07-02 21:00:00 UTC')
       f.average_release_hoc_size = 0
+      [].each { f.some_release_hoc_size = _1 }
       f.average_release_commits_size = 0
+      [].each { f.some_release_commits_size = _1 }
       f.average_triage_time = 0
+      [].each { f.some_triage_time = _1 }
       f.average_release_interval = 0
+      [].each { f.some_release_interval = _1 }
       f.average_backlog_size = 2.125
+      [1, 2, 3].each { f.some_backlog_size = _1 }
       f.average_issue_lifetime = 0
+      [43_200].each { f.some_issue_lifetime = _1 }
       f.average_pull_lifetime = 0
+      [90_000].each { f.some_pull_lifetime = _1 }
       f.average_build_success_rate = 1.0
+      [1, 2].each { f.some_build_success_rate = _1 }
       f.average_build_duration = 900.0
+      [900.0].each { f.some_build_duration = _1 }
       f.average_build_mttr = 121
+      [3, 2, 1].each { f.some_build_mttr = _1 }
       f.average_review_time = 10_800.0
+      [10_800].each { f.some_review_time = _1 }
       f.average_review_size = 0.0
+      [].each { f.some_review_size = _1 }
       f.average_reviewers_per_pull = 1.0
+      [1].each { f.some_reviewers_per_pull = _1 }
       f.average_reviews_per_pull = 1.0
+      [1].each { f.some_reviews_per_pull = _1 }
       f.average_pull_rejection_rate = 100
+      [100].each { f.some_merged_pulls = _1 }
+      [1].each { f.some_unmerged_pulls = _1 }
     end
     fb.insert.then do |f|
       f._id = 2
@@ -1248,21 +1275,37 @@ class TestQualityOfService < Jp::Test
       f.when = Time.parse('2024-07-09 22:00:00 UTC')
       f.since = Time.parse('2024-07-02 22:00:00 UTC')
       f.average_release_hoc_size = 0
+      [].each { f.some_release_hoc_size = _1 }
       f.average_release_commits_size = 0
+      [].each { f.some_release_commits_size = _1 }
       f.average_triage_time = 0
+      [].each { f.some_triage_time = _1 }
       f.average_release_interval = 0
+      [].each { f.some_release_interval = _1 }
       f.average_backlog_size = 2.125
+      [1, 2, 3].each { f.some_backlog_size = _1 }
       f.average_issue_lifetime = 0
+      [43_200].each { f.some_issue_lifetime = _1 }
       f.average_pull_lifetime = 0
+      [90_000].each { f.some_pull_lifetime = _1 }
       f.average_build_success_rate = 1.0
+      [1, 2].each { f.some_build_success_rate = _1 }
       f.average_build_duration = 900.0
+      [900.0].each { f.some_build_duration = _1 }
       f.average_build_mttr = 122
+      [3, 2, 2].each { f.some_build_mttr = _1 }
       f.average_review_time = 10_800.0
+      [10_800].each { f.some_review_time = _1 }
       f.average_review_size = 0.0
+      [].each { f.some_review_size = _1 }
       f.average_reviewers_per_pull = 1.0
+      [1].each { f.some_reviewers_per_pull = _1 }
       f.average_reviews_per_pull = 1.0
+      [1].each { f.some_reviews_per_pull = _1 }
       f.average_pull_hoc_size = 17.0
+      [17].each { f.some_pull_hoc_size = _1 }
       f.average_pull_files_size = 200
+      [200].each { f.some_pull_files_size = _1 }
     end
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
@@ -1270,15 +1313,25 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-07-02 21:00:00 UTC'), f1.since)
       assert_equal(Time.parse('2024-07-09 21:00:00 UTC'), f1.when)
       assert_in_delta(121, f1.average_build_mttr)
+      assert_equal([3, 2, 1], f1['some_build_mttr'])
       assert_in_delta(0, f1.average_pull_hoc_size)
+      assert_nil(f1['some_pull_hoc_size'])
       assert_in_delta(0, f1.average_pull_files_size)
+      assert_nil(f1['some_pull_files_size'])
       assert_in_delta(100, f1.average_pull_rejection_rate)
+      assert_equal([100], f1['some_merged_pulls'])
+      assert_equal([1], f1['some_unmerged_pulls'])
       assert_equal(Time.parse('2024-07-02 22:00:00 UTC'), f2.since)
       assert_equal(Time.parse('2024-07-09 22:00:00 UTC'), f2.when)
       assert_in_delta(122, f2.average_build_mttr)
+      assert_equal([3, 2, 2], f2['some_build_mttr'])
       assert_in_delta(17.0, f2.average_pull_hoc_size)
+      assert_equal([17], f2['some_pull_hoc_size'])
       assert_in_delta(200, f2.average_pull_files_size)
+      assert_equal([200], f2['some_pull_files_size'])
       assert_in_delta(0, f2.average_pull_rejection_rate)
+      assert_equal([100], f1['some_merged_pulls'])
+      assert_equal([1], f1['some_unmerged_pulls'])
     end
   end
 
@@ -1376,22 +1429,40 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f2.since)
       assert_equal(Time.parse('2024-08-09 22:00:00 UTC'), f2.when)
       refute_nil(f2.average_build_success_rate)
+      assert_equal([1], f2['some_build_success_rate'])
       refute_nil(f2.average_build_duration)
+      assert_equal([900], f2['some_build_duration'])
       refute_nil(f2.average_build_mttr)
+      assert_nil(f2['some_build_mttr'])
       refute_nil(f2.average_pull_hoc_size)
+      assert_equal([17], f2['some_pull_hoc_size'])
       refute_nil(f2.average_pull_files_size)
+      assert_equal([3], f2['some_pull_files_size'])
       refute_nil(f2.average_triage_time)
+      assert_nil(f2['some_triage_time'])
       refute_nil(f2.average_backlog_size)
+      refute_nil(f2['some_backlog_size'])
       refute_nil(f2.average_release_interval)
+      assert_nil(f2['some_release_interval'])
       refute_nil(f2.average_pull_rejection_rate)
+      assert_equal([2], f2['some_merged_pulls'])
+      assert_equal([1], f2['some_unmerged_pulls'])
       refute_nil(f2.average_issue_lifetime)
+      assert_nil(f2['some_issue_lifetime'])
       refute_nil(f2.average_pull_lifetime)
+      assert_nil(f2['some_pull_lifetime'])
       refute_nil(f2.average_review_time)
+      assert_equal([10_800], f2['some_review_time'])
       refute_nil(f2.average_review_size)
+      assert_equal([0], f2['some_review_size'])
       refute_nil(f2.average_reviewers_per_pull)
+      assert_equal([1], f2['some_reviewers_per_pull'])
       refute_nil(f2.average_reviews_per_pull)
+      assert_equal([1], f2['some_reviews_per_pull'])
       refute_nil(f2.average_release_hoc_size)
+      assert_nil(f2['some_release_hoc_size'])
       refute_nil(f2.average_release_commits_size)
+      assert_nil(f2['some_release_commits_size'])
     end
   end
 
@@ -1458,6 +1529,7 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-30 22:00:00 UTC'), f.when)
       refute_nil(f.average_release_commits_size)
+      assert_nil(f['some_release_commits_size'])
     end
   end
 
@@ -1579,6 +1651,7 @@ class TestQualityOfService < Jp::Test
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_in_delta(1.5714, f.average_backlog_size)
+      assert_equal([1, 2, 2, 2, 2, 1, 1], f['some_backlog_size'])
     end
   end
 

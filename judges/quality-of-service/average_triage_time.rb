@@ -34,5 +34,8 @@ def average_triage_time(fact)
       triage_times << (ff.when - issue[:created_at]) if ff
     end
   end
-  { average_triage_time: triage_times.empty? ? 0 : triage_times.sum.to_f / triage_times.size }
+  {
+    average_triage_time: triage_times.empty? ? 0 : triage_times.sum.to_f / triage_times.size,
+    some_triage_time: triage_times
+  }
 end

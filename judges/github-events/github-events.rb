@@ -229,7 +229,9 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'published'
         fact.what = 'release-published'
-        fact.who = json[:payload][:release][:author][:id]
+        if fact.all_properties.include?('who') && fact.who != json[:payload][:release][:author][:id]
+          Fbe.overwrite(fact, 'who', json[:payload][:release][:author][:id])
+        end
         fetch_contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(
           fact, fetch_release_info(fact, rname)

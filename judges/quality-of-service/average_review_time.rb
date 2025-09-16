@@ -33,6 +33,10 @@ def average_review_time(fact)
     average_review_time: review_times.empty? ? 0 : review_times.sum.to_f / review_times.size,
     average_review_size: review_comments.empty? ? 0 : review_comments.sum.to_f / review_comments.size,
     average_reviewers_per_pull: reviewers.empty? ? 0 : reviewers.sum.to_f / reviewers.size,
-    average_reviews_per_pull: reviews.empty? ? 0 : reviews.sum.to_f / reviews.size
+    average_reviews_per_pull: reviews.empty? ? 0 : reviews.sum.to_f / reviews.size,
+    some_review_time: review_times,
+    some_review_size: review_comments,
+    some_reviewers_per_pull: reviewers,
+    some_reviews_per_pull: reviews
   }
 end

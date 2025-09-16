@@ -32,6 +32,7 @@ def average_issue_lifetime(fact)
     end
     ages.compact!
     ret[prop] = ages.empty? ? 0 : ages.sum.to_f / ages.size
+    ret[prop.sub(/\Aaverage_/, 'some_')] = ages
   end
   ret
 end
