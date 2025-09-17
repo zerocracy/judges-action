@@ -6,13 +6,13 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Average issues
+# Some issues
 #
 # This function is called from the "quality-of-service.rb".
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_backlog_size(fact)
+def some_backlog_size(fact)
   issues = []
   Fbe.unmask_repos do |repo|
     (fact.since.utc.to_date..Time.now.utc.to_date).last(7).each do |date|
@@ -27,5 +27,5 @@ def average_backlog_size(fact)
       issues << count
     end
   end
-  { average_backlog_size: issues.empty? ? 0 : issues.sum.to_f / issues.size }
+  { some_backlog_size: issues }
 end

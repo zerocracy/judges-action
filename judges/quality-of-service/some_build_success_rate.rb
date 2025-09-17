@@ -12,10 +12,9 @@ require 'fbe/unmask_repos'
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_build_success_rate(fact)
-  total = 0
-  success = 0
-  duration = 0
+def some_build_success_rate(fact)
+  success = []
+  duration = []
   ttrs = []
   failed = {}
   Fbe.unmask_repos do |repo|
@@ -31,15 +30,14 @@ def average_build_success_rate(fact)
         ttrs << (completed - failed[workflow_id]).to_i
         failed.delete(workflow_id)
       end
-      total += 1
-      success += json[:conclusion] == 'success' ? 1 : 0
-      duration += run_duration
+      success << (json[:conclusion] == 'success' ? 1 : 0)
+      duration << run_duration
       seen += 1
     end
   end
   {
-    average_build_success_rate: total.zero? ? 0 : success.to_f / total,
-    average_build_duration: total.zero? ? 0 : duration.to_f / total,
-    average_build_mttr: ttrs.any? ? ttrs.sum / ttrs.size : 0
+    some_build_success_rate: success,
+    some_build_duration: duration,
+    some_build_mttr: ttrs
   }
 end

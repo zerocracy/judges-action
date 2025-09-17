@@ -6,13 +6,13 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Average HOC and number of files changed in recent merged PRs
+# Some HOC and number of files changed in recent merged PRs
 #
 # This function is called from the "quality-of-service.rb".
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_pull_hoc_size(fact)
+def some_pull_hoc_size(fact)
   hocs = []
   files = []
   Fbe.unmask_repos do |repo|
@@ -26,7 +26,7 @@ def average_pull_hoc_size(fact)
     end
   end
   {
-    average_pull_hoc_size: hocs.empty? ? 0 : hocs.sum.to_f / hocs.size,
-    average_pull_files_size: files.empty? ? 0 : files.sum.to_f / files.size
+    some_pull_hoc_size: hocs,
+    some_pull_files_size: files
   }
 end

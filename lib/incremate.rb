@@ -69,7 +69,7 @@ def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, start: $start)
       h = send(n, fact)
       h.each do |k, v|
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
-        fact.send("#{k}=", v)
+        Array(v).each { fact.send("#{k}=", _1) }
       end
       throw :"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]"
     end

@@ -12,7 +12,7 @@ require 'fbe/unmask_repos'
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_release_interval(fact)
+def some_release_interval(fact)
   dates = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.releases(repo).each do |json|
@@ -22,5 +22,7 @@ def average_release_interval(fact)
   end
   dates.sort!
   diffs = (1..(dates.size - 1)).map { |i| dates[i] - dates[i - 1] }
-  { average_release_interval: diffs.empty? ? 0 : diffs.sum / diffs.size }
+  {
+    some_release_interval: diffs
+  }
 end
