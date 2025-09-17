@@ -6,7 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Calculates the average lifetime of issues and pull requests in monitored GitHub repositories.
+# Fetch some lifetime of issues and pull requests in monitored GitHub repositories.
 # This function determines how long issues and PRs remain open before being closed by
 # measuring the time difference between creation and closure dates. Only includes
 # issues/PRs that were closed after the 'since' date specified in the fact object.
@@ -15,11 +15,11 @@ require 'fbe/unmask_repos'
 # helper to collect these specific metrics as part of repository quality assessment.
 #
 # @param [Factbase::Fact] fact The fact object containing the 'since' timestamp
-# @return [Hash] Map with average_issue_lifetime and average_pull_lifetime in seconds
+# @return [Hash] Map with some_issue_lifetime and some_pull_lifetime in seconds
 # @see ../quality-of-service.rb Main judge that calls this function
-def average_issue_lifetime(fact)
+def some_issue_lifetime(fact)
   ret = {}
-  { issue: 'average_issue_lifetime', pr: 'average_pull_lifetime' }.each do |type, prop|
+  { issue: 'some_issue_lifetime', pr: 'some_pull_lifetime' }.each do |type, prop|
     ages = []
     Fbe.unmask_repos do |repo|
       q = "repo:#{repo} type:#{type} closed:>#{fact.since.utc.iso8601[0..9]}"
@@ -31,8 +31,7 @@ def average_issue_lifetime(fact)
         end
     end
     ages.compact!
-    ret[prop] = ages.empty? ? 0 : ages.sum.to_f / ages.size
-    ret[prop.sub(/\Aaverage_/, 'some_')] = ages
+    ret[prop] = ages
   end
   ret
 end

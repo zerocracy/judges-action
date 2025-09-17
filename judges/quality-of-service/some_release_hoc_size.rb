@@ -12,7 +12,7 @@ require 'fbe/unmask_repos'
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_release_hoc_size(fact)
+def some_release_hoc_size(fact)
   repo_releases = {}
   hocs = []
   commits = []
@@ -31,8 +31,6 @@ def average_release_hoc_size(fact)
     end
   end
   {
-    average_release_hoc_size: hocs.empty? ? 0 : hocs.sum.to_f / hocs.size,
-    average_release_commits_size: commits.empty? ? 0 : commits.sum.to_f / commits.size,
     some_release_hoc_size: hocs,
     some_release_commits_size: commits
   }

@@ -7,13 +7,13 @@ require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Average triage time for issues
+# Some triage time for issues
 #
 # This function is called from the "quality-of-service.rb".
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_triage_time(fact)
+def some_triage_time(fact)
   triage_times = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues("repo:#{repo} type:issue created:>#{fact.since.utc.iso8601[0..9]}")[:items].each do |issue|
@@ -35,7 +35,6 @@ def average_triage_time(fact)
     end
   end
   {
-    average_triage_time: triage_times.empty? ? 0 : triage_times.sum.to_f / triage_times.size,
     some_triage_time: triage_times
   }
 end

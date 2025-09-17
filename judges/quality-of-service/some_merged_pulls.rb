@@ -6,24 +6,23 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Release intervals:
+# Some merged and unmerged PR
 #
 # This function is called from the "quality-of-service.rb".
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_release_interval(fact)
-  dates = []
+def some_merged_pulls(fact)
+  pulls = []
+  rejected = []
   Fbe.unmask_repos do |repo|
-    Fbe.octo.releases(repo).each do |json|
-      break if json[:published_at] < fact.since
-      dates << json[:published_at]
-    end
+    pulls << Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{fact.since.utc.iso8601[0..9]}")[:total_count]
+    rejected << Fbe.octo.search_issues(
+      "repo:#{repo} type:pr is:unmerged closed:>#{fact.since.utc.iso8601[0..9]}"
+    )[:total_count]
   end
-  dates.sort!
-  diffs = (1..(dates.size - 1)).map { |i| dates[i] - dates[i - 1] }
   {
-    average_release_interval: diffs.empty? ? 0 : diffs.sum / diffs.size,
-    some_release_interval: diffs
+    some_merged_pulls: pulls,
+    some_unmerged_pulls: rejected
   }
 end

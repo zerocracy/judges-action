@@ -6,13 +6,13 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Average review time, review comments, reviewers and reviews
+# Some review time, review comments, reviewers and reviews
 #
 # This function is called from the "quality-of-service.rb".
 #
 # @param [Factbase::Fact] fact The fact just under processing
 # @return [Hash] Map with keys as fact attributes and values as integers
-def average_review_time(fact)
+def some_review_time(fact)
   review_times = []
   review_comments = []
   reviewers = []
@@ -30,10 +30,6 @@ def average_review_time(fact)
     end
   end
   {
-    average_review_time: review_times.empty? ? 0 : review_times.sum.to_f / review_times.size,
-    average_review_size: review_comments.empty? ? 0 : review_comments.sum.to_f / review_comments.size,
-    average_reviewers_per_pull: reviewers.empty? ? 0 : reviewers.sum.to_f / reviewers.size,
-    average_reviews_per_pull: reviews.empty? ? 0 : reviews.sum.to_f / reviews.size,
     some_review_time: review_times,
     some_review_size: review_comments,
     some_reviewers_per_pull: reviewers,
