@@ -16,9 +16,11 @@ def some_merged_pulls(fact)
   pulls = []
   rejected = []
   Fbe.unmask_repos do |repo|
-    pulls << Fbe.octo.search_issues("repo:#{repo} type:pr closed:>#{fact.since.utc.iso8601[0..9]}")[:total_count]
+    pulls << Fbe.octo.search_issues(
+      "repo:#{repo} type:pr closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+    )[:total_count]
     rejected << Fbe.octo.search_issues(
-      "repo:#{repo} type:pr is:unmerged closed:>#{fact.since.utc.iso8601[0..9]}"
+      "repo:#{repo} type:pr is:unmerged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     )[:total_count]
   end
   {

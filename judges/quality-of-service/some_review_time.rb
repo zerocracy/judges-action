@@ -19,7 +19,7 @@ def some_review_time(fact)
   reviews = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues(
-      "repo:#{repo} type:pr is:merged closed:>#{fact.since.utc.iso8601[0..9]}"
+      "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     )[:items].each do |pr|
       pr_reviews = Fbe.octo.pull_request_reviews(repo, pr[:number])
       pr_review = pr_reviews.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }

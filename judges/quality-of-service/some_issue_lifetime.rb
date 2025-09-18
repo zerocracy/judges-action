@@ -22,7 +22,7 @@ def some_issue_lifetime(fact)
   { issue: 'some_issue_lifetime', pr: 'some_pull_lifetime' }.each do |type, prop|
     ages = []
     Fbe.unmask_repos do |repo|
-      q = "repo:#{repo} type:#{type} closed:>#{fact.since.utc.iso8601[0..9]}"
+      q = "repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
       ages +=
         Fbe.octo.search_issues(q)[:items].map do |json|
           next if json[:closed_at].nil?

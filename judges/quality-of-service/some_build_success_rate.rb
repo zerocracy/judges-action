@@ -19,7 +19,9 @@ def some_build_success_rate(fact)
   failed = {}
   Fbe.unmask_repos do |repo|
     seen = 0
-    Fbe.octo.repository_workflow_runs(repo, created: ">#{fact.since.utc.iso8601[0..9]}")[:workflow_runs].each do |json|
+    Fbe.octo.repository_workflow_runs(
+      repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+    )[:workflow_runs].each do |json|
       next if seen > 60 # should be enough
       workflow_id = json[:workflow_id]
       run_duration = (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
