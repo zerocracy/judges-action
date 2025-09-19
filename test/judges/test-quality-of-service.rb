@@ -31,7 +31,7 @@ class TestQualityOfService < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100').to_return(
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-15T21:00:00Z..2024-08-12T21:00:00Z&per_page=100').to_return(
       status: 200,
       body: {
         workflow_runs: [
@@ -64,7 +64,11 @@ class TestQualityOfService < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-07-15').to_return(
+    stub_request(
+      :get,
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+    ).to_return(
       status: 200,
       body: {
         total_count: 1,
@@ -82,7 +86,11 @@ class TestQualityOfService < Jp::Test
         body: { total_count: 0, items: [] }
       )
     end
-    stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-15').to_return(
+    stub_request(
+      :get,
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+    ).to_return(
       status: 200,
       body: {
         total_count: 1,
@@ -92,7 +100,39 @@ class TestQualityOfService < Jp::Test
         'Content-Type': 'application/json'
       }
     )
-    stub_request(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-15').to_return(
+    stub_request(
+      :get,
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-15'
+    ).to_return(
+      status: 200,
+      body: {
+        total_count: 1,
+        items: []
+      }.to_json,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    )
+    stub_request(
+      :get,
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+    ).to_return(
+      status: 200,
+      body: {
+        total_count: 1,
+        items: []
+      }.to_json,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
+    )
+    stub_request(
+      :get,
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-15'
+    ).to_return(
       status: 200,
       body: {
         total_count: 1,
@@ -105,7 +145,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-07-15',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [
           {
@@ -140,7 +180,8 @@ class TestQualityOfService < Jp::Test
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-07-15',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -156,7 +197,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
     stub_github(
@@ -285,7 +326,13 @@ class TestQualityOfService < Jp::Test
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -301,16 +348,17 @@ class TestQualityOfService < Jp::Test
     end
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -396,7 +444,8 @@ class TestQualityOfService < Jp::Test
       ]
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [{ id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC') }]
@@ -408,7 +457,17 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -505,11 +564,21 @@ class TestQualityOfService < Jp::Test
       ]
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [{ id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC') }]
       }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
@@ -517,7 +586,8 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -540,7 +610,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
     stub_github(
@@ -548,9 +618,18 @@ class TestQualityOfService < Jp::Test
       body: []
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [{ number: 42, labels: [{ name: 'bug' }] }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
       }
     )
     stub_github(
@@ -569,14 +648,14 @@ class TestQualityOfService < Jp::Test
     end
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
       }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [
@@ -675,7 +754,8 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/18/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/20/comments?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -701,7 +781,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
     stub_github(
@@ -709,13 +789,22 @@ class TestQualityOfService < Jp::Test
       body: []
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [{ number: 42, labels: [{ name: 'bug' }] }]
       }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 2, incomplete_results: false,
         items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
@@ -730,14 +819,14 @@ class TestQualityOfService < Jp::Test
     end
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
       }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [
@@ -1001,7 +1090,8 @@ class TestQualityOfService < Jp::Test
       ]
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1029,12 +1119,22 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
       'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -1050,16 +1150,17 @@ class TestQualityOfService < Jp::Test
     end
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 4, incomplete_results: false,
         items: [
@@ -1190,7 +1291,13 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -1202,12 +1309,28 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-07-02',
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-07-02T22:00:00Z..2024-07-09T22:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-02T21:00:00Z..2024-07-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-02',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-02T22:00:00Z..2024-07-09T22:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1319,11 +1442,13 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 2, incomplete_results: false,
         items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
@@ -1331,8 +1456,15 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-07-02',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
@@ -1364,10 +1496,10 @@ class TestQualityOfService < Jp::Test
     end
     fb.insert.then do |f|
       f._id = 2
-      f._time = Time.parse('2024-08-09 22:00:00 UTC')
+      f._time = Time.parse('2024-08-09 21:00:00 UTC')
       f._version = '0.10.0/0.41.0/'
       f.what = 'quality-of-service'
-      f.when = Time.parse('2024-08-09 22:00:00 UTC')
+      f.when = Time.parse('2024-08-09 21:00:00 UTC')
     end
     Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
@@ -1376,8 +1508,8 @@ class TestQualityOfService < Jp::Test
       f1, f2 = fs
       assert_nil(f1['since'])
       assert_nil(f1['when'])
-      assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f2.since)
-      assert_equal(Time.parse('2024-08-09 22:00:00 UTC'), f2.when)
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f2.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f2.when)
       assert_equal([1], f2['some_build_success_rate'])
       assert_equal([900], f2['some_build_duration'])
       assert_nil(f2['some_build_mttr'])
@@ -1406,7 +1538,12 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-30T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_workflow_runs(
@@ -1435,6 +1572,10 @@ class TestQualityOfService < Jp::Test
         }
       }]
     )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-30T21:00:00Z&per_page=100',
+      body: { total_count: 1, workflow_runs: [] }
+    )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     (Date.parse('2024-08-10')..Date.parse('2024-09-01')).each do |date|
       stub_github(
@@ -1451,16 +1592,16 @@ class TestQualityOfService < Jp::Test
     end
     fb.insert.then do |f|
       f._id = 1
-      f._time = Time.parse('2024-08-30 22:00:00 UTC')
+      f._time = Time.parse('2024-08-30 21:00:00 UTC')
       f._version = '0.10.0/0.41.0/'
       f.what = 'quality-of-service'
-      f.when = Time.parse('2024-08-30 22:00:00 UTC')
+      f.when = Time.parse('2024-08-30 21:00:00 UTC')
     end
     Time.stub(:now, Time.parse('2024-09-01 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
-      assert_equal(Time.parse('2024-08-02 22:00:00 UTC'), f.since)
-      assert_equal(Time.parse('2024-08-30 22:00:00 UTC'), f.when)
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
+      assert_equal(Time.parse('2024-08-30 21:00:00 UTC'), f.when)
       assert_nil(f['some_release_commits_size'])
     end
   end
@@ -1547,11 +1688,17 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2025-08-21&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-08-21T21:00:00Z..2025-08-28T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2025-08-21',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2025-08-21T21:00:00Z..2025-08-28T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2025-08-21T21:00:00Z..2025-08-28T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -1560,16 +1707,17 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2025-08-21',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2025-08-21T21:00:00Z..2025-08-28T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2025-08-21',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2025-08-21T21:00:00Z..2025-08-28T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E2025-08-21',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2025-08-21T21:00:00Z..2025-08-28T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1590,7 +1738,7 @@ class TestQualityOfService < Jp::Test
 
   def stub_workflow_runs(workflow_runs)
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: {
         total_count: 1,
         workflow_runs:
@@ -1611,14 +1759,16 @@ class TestQualityOfService < Jp::Test
       }]
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-30T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [{ number: 42, labels: [{ name: 'bug' }] }]
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-30T21:00:00Z',
       body: {
         total_count: 2, incomplete_results: false,
         items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
@@ -1712,14 +1862,34 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
       }
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:%3E2024-08-02',
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-30T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-30T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [

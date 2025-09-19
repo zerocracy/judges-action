@@ -17,7 +17,7 @@ def some_pull_hoc_size(fact)
   files = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues(
-      "repo:#{repo} type:pr is:merged closed:>#{fact.since.utc.iso8601[0..9]}"
+      "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     )[:items].each do |json|
       Fbe.octo.pull_request(repo, json[:number]).then do |pull|
         hocs << (pull[:additions] + pull[:deletions])

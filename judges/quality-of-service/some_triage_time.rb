@@ -16,7 +16,9 @@ require 'fbe/unmask_repos'
 def some_triage_time(fact)
   triage_times = []
   Fbe.unmask_repos do |repo|
-    Fbe.octo.search_issues("repo:#{repo} type:issue created:>#{fact.since.utc.iso8601[0..9]}")[:items].each do |issue|
+    Fbe.octo.search_issues(
+      "repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+    )[:items].each do |issue|
       ff = Fbe.fb.query(
         "
         (and

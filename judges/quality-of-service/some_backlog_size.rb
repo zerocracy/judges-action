@@ -15,7 +15,7 @@ require 'fbe/unmask_repos'
 def some_backlog_size(fact)
   issues = []
   Fbe.unmask_repos do |repo|
-    (fact.since.utc.to_date..Time.now.utc.to_date).last(7).each do |date|
+    (fact.since.utc.to_date..fact.when.utc.to_date).last(7).each do |date|
       return {} if Fbe.octo.off_quota?
       count = 0
       Fbe.octo.search_issues(
