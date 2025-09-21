@@ -12,4 +12,6 @@ input:
     when: 2024-01-01T00:00:00
     since: 2023-12-24T00:00:00
 expected:
-  - /fb[count(f)=1]
+  - "/fb[count(f[what='quality-of-service' and \
+                 since='2023-12-24T00:00:00Z' and \
+                 when='2024-01-01T00:00:00Z'])=1]"

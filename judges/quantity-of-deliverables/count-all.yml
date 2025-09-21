@@ -14,9 +14,10 @@ input:
     qod_interval: 3
   -
     what: quantity-of-deliverables
+    since: 2023-12-25T00:00:00
     when: 2024-01-01T00:00:00
 expected:
-  - /fb[count(f)=3]
+  - /fb[count(f)=5]
   - /fb/f[what='quantity-of-deliverables']
   - /fb/f[when]
   - /fb/f[since]
@@ -25,5 +26,5 @@ expected:
   - /fb/f[total_issues_created != 0]
   - /fb/f[total_pulls_submitted != 0]
   - /fb/f[total_releases_published != 0]
-  - /fb/f[total_reviews_submitted = 0]
+  - /fb/f[total_reviews_submitted != 0]
   - /fb/f[total_builds_ran != 0]

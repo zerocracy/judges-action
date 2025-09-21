@@ -14,6 +14,8 @@ require_relative '../test__helper'
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
 class TestQualityOfService < Jp::Test
+  using SmartFactbase
+
   def test_runs_when_run_duration_ms_is_nil
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -1388,7 +1390,7 @@ class TestQualityOfService < Jp::Test
       [17].each { f.some_pull_hoc_size = _1 }
       [200].each { f.some_pull_files_size = _1 }
     end
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+    Time.stub(:now, Time.parse('2024-07-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f1, f2, * = fb.query('(eq what "quality-of-service")').each.sort_by(&:when)
       assert_equal(Time.parse('2024-07-02 21:00:00 UTC'), f1.since)
@@ -1499,6 +1501,7 @@ class TestQualityOfService < Jp::Test
       f._time = Time.parse('2024-08-09 21:00:00 UTC')
       f._version = '0.10.0/0.41.0/'
       f.what = 'quality-of-service'
+      f.since = Time.parse('2024-08-02 21:00:00 UTC')
       f.when = Time.parse('2024-08-09 21:00:00 UTC')
     end
     Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
@@ -1595,6 +1598,7 @@ class TestQualityOfService < Jp::Test
       f._time = Time.parse('2024-08-30 21:00:00 UTC')
       f._version = '0.10.0/0.41.0/'
       f.what = 'quality-of-service'
+      f.since = Time.parse('2024-08-02 21:00:00 UTC')
       f.when = Time.parse('2024-08-30 21:00:00 UTC')
     end
     Time.stub(:now, Time.parse('2024-09-01 21:00:00 UTC')) do
@@ -1731,6 +1735,77 @@ class TestQualityOfService < Jp::Test
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([1, 2, 2, 2, 2, 1, 1], f['some_backlog_size'])
+    end
+  end
+
+  def test_quality_of_service_fix_gap
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    %w[
+      2025-09-01T15:00:00Z..2025-09-10T15:00:00Z
+      2025-09-15T15:00:00Z..2025-09-25T15:00:00Z
+      2025-09-10T15:00:00Z..2025-09-15T15:00:00Z
+    ].each do |period|
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20closed:#{period}",
+        body: { total_count: 0, incomplete_results: false, items: [] }
+      )
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:#{period}",
+        body: { total_count: 0, incomplete_results: false, items: [] }
+      )
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:pr%20closed:#{period}",
+        body: { total_count: 0, incomplete_results: false, items: [] }
+      )
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:pr%20is:merged%20closed:#{period}",
+        body: { total_count: 0, incomplete_results: false, items: [] }
+      )
+      stub_github(
+        'https://api.github.com/search/issues?per_page=100&' \
+        "q=repo:foo/foo%20type:pr%20is:unmerged%20closed:#{period}",
+        body: { total_count: 0, incomplete_results: false, items: [] }
+      )
+      stub_github(
+        "https://api.github.com/repos/foo/foo/actions/runs?created=#{period}&per_page=100",
+        body: { total_count: 0, workflow_runs: [] }
+      )
+    end
+    %w[
+      2025-09-04 2025-09-05 2025-09-06 2025-09-07 2025-09-08 2025-09-09 2025-09-10
+      2025-09-19 2025-09-20 2025-09-21 2025-09-22 2025-09-23 2025-09-24 2025-09-25
+      2025-09-11 2025-09-12 2025-09-13 2025-09-14 2025-09-15
+    ].each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'quality-of-service',
+      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-10 15:00:00 UTC')
+    ).with(
+      _id: 2, what: 'quality-of-service',
+      since: Time.parse('2025-09-15 15:00:00 UTC'), when: Time.parse('2025-09-25 15:00:00 UTC')
+    )
+    Time.stub(:now, Time.parse('2025-09-22 15:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      assert(
+        fb.one?(
+          what: 'quality-of-service',
+          since: Time.parse('2025-09-10 15:00:00 UTC'),
+          when: Time.parse('2025-09-15 15:00:00 UTC')
+        )
+      )
     end
   end
 

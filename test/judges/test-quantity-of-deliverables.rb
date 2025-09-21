@@ -14,6 +14,8 @@ require_relative '../test__helper'
 # Copyright:: Copyright (c) 2024 Yegor Bugayenko
 # License:: MIT
 class TestQuantityOfDeliverables < Jp::Test
+  using SmartFactbase
+
   def test_counts_commits
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -446,6 +448,52 @@ class TestQuantityOfDeliverables < Jp::Test
       assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal(3, f.total_builds_ran)
+    end
+  end
+
+  def test_quantity_of_deliverables_fix_gap
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    %w[2025-09-01 2025-09-10 2025-09-15].each do |date|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/actions/runs?created=%3E#{date}&per_page=100",
+        body: {
+          total_count: 0,
+          workflow_runs: []
+        }
+      )
+      stub_github(
+        "https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E#{date}",
+        body: [{ pull_request: {} }]
+      )
+      stub_github(
+        "https://api.github.com/repos/foo/foo/commits?per_page=100&since=#{date}T15:00:00%2B00:00",
+        body: []
+      )
+    end
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'quantity-of-deliverables',
+      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-10 15:00:00 UTC')
+    ).with(
+      _id: 2, what: 'quantity-of-deliverables',
+      since: Time.parse('2025-09-15 15:00:00 UTC'), when: Time.parse('2025-09-25 15:00:00 UTC')
+    )
+    Time.stub(:now, Time.parse('2025-09-20 15:00:00 UTC')) do
+      load_it('quantity-of-deliverables', fb)
+      assert(
+        fb.one?(
+          what: 'quantity-of-deliverables',
+          since: Time.parse('2025-09-10 15:00:00 UTC'),
+          when: Time.parse('2025-09-15 15:00:00 UTC')
+        )
+      )
     end
   end
 end
