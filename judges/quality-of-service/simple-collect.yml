@@ -18,13 +18,13 @@ input:
     when: 2024-01-01T00:00:00
     since: 2023-12-24T00:00:00
 expected:
-  - /fb[count(f)=3]
+  - /fb[count(f[what='quality-of-service'])=4]
   - /fb/f[what='quality-of-service']
   - /fb/f[when]
   - /fb/f[since]
   - /fb/f[not(some_issue_lifetime)]
   - /fb/f[not(some_pull_lifetime)]
-  - /fb/f[some_release_interval]
+  - /fb/f[not(some_release_interval)]
   - /fb/f[some_build_success_rate]
   - /fb/f[some_build_duration]
   - /fb/f[some_backlog_size]
@@ -36,6 +36,6 @@ expected:
   - /fb/f[some_review_size]
   - /fb/f[some_reviewers_per_pull]
   - /fb/f[some_reviews_per_pull]
-  - /fb/f[some_release_hoc_size]
-  - /fb/f[some_release_commits_size]
+  - /fb/f[not(some_release_hoc_size)]
+  - /fb/f[not(some_release_commits_size)]
   - /fb/f[not(some_triage_time)]

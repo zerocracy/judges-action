@@ -16,25 +16,42 @@
 
 require 'fbe/consider'
 require 'fbe/fb'
-require 'fbe/regularly'
+require 'fbe/if_absent'
 require_relative '../../lib/incremate'
 
-Fbe.regularly('quality', 'qos_interval', 'qos_days') do |f|
-  Jp.incremate(f, __dir__, 'some')
+pmp = Fbe.fb.query("(and (eq what 'pmp') (eq area 'quality') (exists qos_days))").each.first
+days = pmp.nil? ? 28 : pmp['qos_days'].first
+last = Fbe.fb.query(
+  "(eq when
+     (agg
+       (eq what '#{$judge}')
+       (max when)))"
+).each.first
+if last.nil?
+  Fbe.fb.insert.then do |n|
+    n.what = $judge
+    n.when = Time.now.utc
+    n.since = n.when - (days * 24 * 60 * 60)
+  end
+elsif last.when < Time.now.utc - (days * 24 * 60 * 60)
+  Fbe.if_absent do |n|
+    n.what = $judge
+    n.since = last.when
+    n.when = n.since + (days * 24 * 60 * 60)
+  end
 end
-
-Fbe.consider(
-  "(and
-    (eq what '#{$judge}')
-    (absent since)
-    (exists when))"
-) do |f|
-  pmp = Fbe.fb.query("(and (eq what 'pmp') (eq area 'quality') (exists qos_days))").each.first
-  f.since = f.when - (((!pmp.nil? && pmp['qos_days']&.first) || 28) * 24 * 60 * 60)
+prev = nil
+Fbe.consider("(and (eq what '#{$judge}') (exists since) (exists when))") do |f|
+  if !prev.nil? && (f.since - prev.when).positive?
+    Fbe.if_absent do |n|
+      n.what = $judge
+      n.since = prev.when
+      n.when = f.since
+    end
+  end
+  prev = f
 end
-
-Fbe.consider("(and (eq what '#{$judge}') (exists since))") do |f|
+Fbe.consider("(and (eq what '#{$judge}') (exists since) (exists when))") do |f|
   Jp.incremate(f, __dir__, 'some', avoid_duplicate: true)
 end
-
 Fbe.octo.print_trace!
