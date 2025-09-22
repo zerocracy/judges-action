@@ -47,21 +47,21 @@ def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, epoch: $epoch || Tim
       $loog.info("No GitHub quota left, it is time to stop at #{n}")
       break
     end
-    if $options.lifetime && Time.now - epoch > $options.lifetime * 0.9
+    if $options.lifetime && Time.now.to_f - epoch.to_f > $options.lifetime * 0.9
       $loog.info("We are doing this for too long, time to stop at #{n}")
       break
     end
-    if $options.timeout && Time.now - kickoff > $options.timeout * 0.9
-      $loog.info("We are doing this for #{t.ago}, let's stop at #{n}")
+    if $options.timeout && Time.now.to_f - kickoff.to_f > $options.timeout * 0.9
+      $loog.info("We are doing this for #{kickoff.ago}, let's stop at #{n}")
       break
     end
     $loog.info(
       [
         "Starting to evaluate #{n}",
-        (", #{($options.lifetime - Time.now + epoch).seconds} of lifetime left" if $options.lifetime),
-        (", #{($options.timeout - Time.now + kickoff).seconds} of timeout left" if $options.timeout),
+        (", #{($options.lifetime - Time.now.to_f + epoch.to_f).seconds} of lifetime left" if $options.lifetime),
+        (", #{($options.timeout - Time.now.to_f + kickoff.to_f).seconds} of timeout left" if $options.timeout),
         '...'
-      ].zip.join(' ')
+      ].compact.join
     )
     require_relative rb
     elapsed($loog, level: Logger::INFO) do
