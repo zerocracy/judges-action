@@ -70,13 +70,15 @@ Fbe.iterate do
     tag = fetch_tag(last, repo)
     tag ||= find_first_commit(repo)[:sha]
     info = {}
-    Fbe.octo.compare(repo, tag, fact.tag).then do |json|
-      info[:commits] = json[:total_commits]
-      info[:hoc] = json[:files].sum { |f| f[:changes] }
-      info[:last_commit] = json[:commits].first[:sha]
+    comparison = Fbe.octo.compare(repo, tag, fact.tag)
+    if comparison
+      info[:commits] = comparison[:total_commits]
+      info[:hoc] = comparison[:files].map { |f| f[:changes] }.sum
+      first_commit = comparison[:commits].first
+      info[:last_commit] = first_commit[:sha] if first_commit
+    else
+      $loog.warn("Comparison result is nil for repo #{repo}, tag #{tag}, fact.tag #{fact.tag}")
     end
-    $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
-    info
   end
 
   def self.find_first_commit(repo)

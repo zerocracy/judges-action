@@ -10,6 +10,8 @@ require 'judges/options'
 require 'fbe'
 require 'fbe/github_graph'
 require_relative '../test__helper'
+require 'minitest/autorun'
+require 'webmock/minitest'
 
 # Test.
 # Author:: Yegor Bugayenko (yegor256@gmail.com)
@@ -2120,6 +2122,143 @@ class TestGithubEvents < Jp::Test
     assert(fb.one?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 456))
   end
 
+   def test_fetch_release_info_successful_comparison
+    mock_fb = Minitest::Mock.new
+    mock_result = Minitest::Mock.new
+    mock_result.expect(:each, [].to_enum)
+    mock_fb.expect(:query, mock_result, [String])
+    mock_octo = Minitest::Mock.new
+    comparison_data = {
+      total_commits: 3,
+      files: [
+        { changes: 10 },
+        { changes: 5 }
+      ],
+      commits: [
+        { sha: 'abc123def' }
+      ]
+    }
+    mock_octo.expect(:compare, comparison_data, ['owner/repo', 'v1.0.0', 'v2.0.0'])
+    Fbe.stub(:fb, mock_fb) do
+      Fbe.stub(:octo, mock_octo) do
+        fact = Minitest::Mock.new
+        fact.expect(:repository, 'test/repo')
+        fact.expect(:what, 'release')
+        fact.expect(:tag, 'v2.0.0')
+        Fbe::GithubGraph.stub(:fetch_tag, 'v1.0.0') do
+          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'initial' }) do
+            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')            
+            assert_equal 3, result[:commits]
+            assert_equal 15, result[:hoc]
+            assert_equal 'abc123def', result[:last_commit]
+          end
+        end
+      end
+    end
+    mock_fb.verify
+    mock_octo.verify
+  end
+
+  def test_fetch_release_info_nil_comparison
+    mock_fb = Minitest::Mock.new
+    mock_result = Minitest::Mock.new
+    mock_result.expect(:each, [].to_enum)
+    mock_fb.expect(:query, mock_result, [String])
+    mock_octo = Minitest::Mock.new
+    mock_octo.expect(:compare, nil, ['owner/repo', 'v1.0.0', 'v2.0.0'])
+    mock_logger = Minitest::Mock.new
+    mock_logger.expect(:warn, nil, ['Comparison result is nil for repo owner/repo, tag v1.0.0, fact.tag v2.0.0'])
+    Fbe.stub(:fb, mock_fb) do
+      Fbe.stub(:octo, mock_octo) do
+        fact = Minitest::Mock.new
+        fact.expect(:repository, 'test/repo')
+        fact.expect(:what, 'release')
+        fact.expect(:tag, 'v2.0.0')
+        Fbe::GithubGraph.stub(:fetch_tag, 'v1.0.0') do
+          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'initial' }) do
+            original_logger = $loog
+            $loog = mock_logger
+            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')
+            $loog = original_logger
+            assert_equal({}, result)
+            assert_nil result[:commits]
+            assert_nil result[:hoc]
+            assert_nil result[:last_commit]
+          end
+        end
+      end
+    end
+    mock_fb.verify
+    mock_octo.verify
+    mock_logger.verify
+  end
+
+  def test_fetch_release_info_fallback_to_first_commit
+    mock_fb = Minitest::Mock.new
+    mock_result = Minitest::Mock.new
+    mock_last = Minitest::Mock.new
+    mock_last.expect(:tag, nil)
+    mock_result.expect(:each, [mock_last].to_enum)
+    mock_fb.expect(:query, mock_result, [String])
+    mock_octo = Minitest::Mock.new
+    comparison_data = {
+      total_commits: 2,
+      files: [{ changes: 5 }],
+      commits: [{ sha: 'def456' }]
+    }
+    mock_octo.expect(:compare, comparison_data, ['owner/repo', 'fallback_sha', 'v2.0.0'])
+    Fbe.stub(:fb, mock_fb) do
+      Fbe.stub(:octo, mock_octo) do
+        fact = Minitest::Mock.new
+        fact.expect(:repository, 'test/repo')
+        fact.expect(:what, 'release')
+        fact.expect(:tag, 'v2.0.0')
+        Fbe::GithubGraph.stub(:fetch_tag, nil) do
+          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'fallback_sha' }) do
+            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')
+            assert_equal 2, result[:commits]
+            assert_equal 5, result[:hoc]
+            assert_equal 'def456', result[:last_commit]
+          end
+        end
+      end
+    end
+    mock_fb.verify
+    mock_octo.verify
+  end
+
+  def test_fetch_release_info_empty_commits_array
+    mock_fb = Minitest::Mock.new
+    mock_result = Minitest::Mock.new
+    mock_result.expect(:each, [].to_enum)
+    mock_fb.expect(:query, mock_result, [String])
+    mock_octo = Minitest::Mock.new
+    comparison_data = {
+      total_commits: 0,
+      files: [],
+      commits: []
+    }
+    mock_octo.expect(:compare, comparison_data, ['owner/repo', 'v1.0.0', 'v2.0.0'])
+    Fbe.stub(:fb, mock_fb) do
+      Fbe.stub(:octo, mock_octo) do
+        fact = Minitest::Mock.new
+        fact.expect(:repository, 'test/repo')
+        fact.expect(:what, 'release')
+        fact.expect(:tag, 'v2.0.0')
+        Fbe::GithubGraph.stub(:fetch_tag, 'v1.0.0') do
+          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'initial' }) do
+            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')
+            assert_equal 0, result[:commits]
+            assert_equal 0, result[:hoc]
+            assert_nil result[:last_commit]
+          end
+        end
+      end
+    end
+    mock_fb.verify
+    mock_octo.verify
+  end
+  
   private
 
   def stub_event(*json)
