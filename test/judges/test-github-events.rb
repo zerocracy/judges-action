@@ -2120,6 +2120,54 @@ class TestGithubEvents < Jp::Test
     assert(fb.one?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 456))
   end
 
+  def test_pull_request_event_captures_changed_files
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11126',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          number: 123,
+          pull_request: {
+            number: 123,
+            state: 'closed',
+            merged_at: Time.parse('2025-06-27 19:00:05 UTC'),
+            head: { ref: 'feature-branch', sha: 'abc123' },
+            additions: 10,
+            deletions: 5,
+            changed_files: 7
+          }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(eq what "pull-was-merged")').each.first
+    refute_nil(f)
+    assert_equal(7, f.files)
+    assert_equal(15, f.hoc)
+  end
+
   private
 
   def stub_event(*json)
