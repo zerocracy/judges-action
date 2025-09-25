@@ -2142,6 +2142,7 @@ class TestGithubEvents < Jp::Test
           action: 'closed',
           number: 123,
           pull_request: {
+            merged: true,
             number: 123,
             state: 'closed',
             merged_at: Time.parse('2025-06-27 19:00:05 UTC'),
