@@ -71,6 +71,7 @@ Fbe.iterate do
         end
       raise "Pull already merged in #{repo}##{issue}" if nn.nil?
       nn.hoc = json[:additions] + json[:deletions]
+      nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
       Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
