@@ -1632,7 +1632,7 @@ class TestGithubEvents < Jp::Test
     assert_equal(50, owner_push.who)
   end
 
-  def test_push_event_by_non_owner_sets_by_owner_to_zero
+  def test_push_event_by_non_owner_sets_by_owner_to_none
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -1660,7 +1660,7 @@ class TestGithubEvents < Jp::Test
     load_it('github-events', fb)
     contributor_push = fb.query('(and (eq what "git-was-pushed") (eq event_id 33333))').each.first
     refute_nil(contributor_push)
-    assert_equal(0, contributor_push.by_owner)
+    assert_nil(contributor_push['by_owner'])
     assert_equal(60, contributor_push.who)
   end
 
