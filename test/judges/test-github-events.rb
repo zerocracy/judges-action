@@ -1639,6 +1639,40 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_skip_fill_up_event_if_event_exists_in_factbase_by_given_uniques
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11122',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 456,
+          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    fb.with(what: 'pull-was-opened', repository: 42, where: 'github', who: 45, issue: 456)
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_122))
+    assert(fb.one?(what: 'pull-was-opened', where: 'github', repository: 42, who: 45, issue: 456))
+  end
+
   def test_skip_pull_request_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up

@@ -271,8 +271,18 @@ Fbe.iterate do
     raise "#{who} doesn't have access to the #{rname} repository, maybe it's private"
   end
 
-  def self.stays_twice?(what, fields)
-    Fbe.fb.query("(and (eq what '#{what}') (unique #{fields.join(' ')}))").each.to_a.size > 1
+  def self.stays_twice?(fb, fact, what, fields)
+    eqs =
+      fields.map { [_1, fact[_1]&.first] }.reject { _1.last.nil? }.map do |prop, value|
+        val =
+          case value
+          when String then "'#{value}'"
+          when Time then value.utc.iso8601
+          else value
+          end
+        "(eq #{prop} #{val})"
+      end
+    fb.query("(and (eq what '#{what}') #{eqs.join(' ')})").each.to_a.size > 1
   end
 
   over do |repository, latest|
@@ -315,7 +325,7 @@ Fbe.iterate do
           next
         end
         fill_up_event(f, json)
-        uniques.each { |w, ff| throw :rollback if stays_twice?(w, ff) }
+        uniques.each { |w, ff| throw :rollback if stays_twice?(fbt, f, w, ff) }
         if f['issue']
           throw :rollback unless Fbe.fb.query(
             "(and
