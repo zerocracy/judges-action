@@ -1600,6 +1600,70 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_push_event_by_owner_sets_by_owner_to_one
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 100, name: 'foo', full_name: 'foo/foo', default_branch: 'master', owner: { id: 50, login: 'foo' } }
+    )
+    stub_github(
+      'https://api.github.com/repositories/100',
+      body: { id: 100, name: 'foo', full_name: 'foo/foo' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/100/events?per_page=100',
+      body: [{
+        id: '22222',
+        type: 'PushEvent',
+        actor: { id: 50, login: 'foo' },
+        repo: { id: 100, name: 'foo/foo' },
+        payload: { push_id: 3000, ref: 'refs/heads/master', head: 'abc123def' },
+        created_at: '2025-06-27 10:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123def/pulls?per_page=100', body: [])
+    stub_github('https://api.github.com/user/50', body: { id: 50, login: 'foo' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    owner_push = fb.query('(and (eq what "git-was-pushed") (eq event_id 22222))').each.first
+    refute_nil(owner_push)
+    assert_equal(1, owner_push.by_owner)
+    assert_equal(50, owner_push.who)
+  end
+
+  def test_push_event_by_non_owner_sets_by_owner_to_zero
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 101, name: 'foo', full_name: 'foo/foo', default_branch: 'master', owner: { id: 50, login: 'foo' } }
+    )
+    stub_github(
+      'https://api.github.com/repositories/101',
+      body: { id: 101, name: 'foo', full_name: 'foo/foo' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/101/events?per_page=100',
+      body: [{
+        id: '33333',
+        type: 'PushEvent',
+        actor: { id: 60, login: 'contributor' },
+        repo: { id: 101, name: 'foo/foo' },
+        payload: { push_id: 4000, ref: 'refs/heads/master', head: 'def456ghi' },
+        created_at: '2025-06-27 11:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/def456ghi/pulls?per_page=100', body: [])
+    stub_github('https://api.github.com/user/60', body: { id: 60, login: 'contributor' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    contributor_push = fb.query('(and (eq what "git-was-pushed") (eq event_id 33333))').each.first
+    refute_nil(contributor_push)
+    assert_equal(0, contributor_push.by_owner)
+    assert_equal(60, contributor_push.who)
+  end
+
   def test_success_add_opened_pull_request_event_to_factbase
     WebMock.disable_net_connect!
     rate_limit_up

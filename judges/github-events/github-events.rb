@@ -114,8 +114,10 @@ Fbe.iterate do
       fact.push_id = json[:payload][:push_id]
       fact.ref = json[:payload][:ref]
       fact.commit = json[:payload][:head]
-      fact.default_branch = Fbe.octo.repository(rname)[:default_branch]
+      repo = Fbe.octo.repository(rname)
+      fact.default_branch = repo[:default_branch]
       fact.to_master = fact.default_branch == fact.ref.split('/')[2] ? 1 : 0
+      fact.by_owner = repo.dig(:owner, :id) == fact.who ? 1 : 0
       if fact.to_master.zero?
         $loog.debug("Push #{fact.commit} has been made to non-default branch '#{fact.default_branch}', ignoring it")
         skip_event(json)
