@@ -183,7 +183,6 @@ class TestQuantityOfDeliverables < Jp::Test
     f.what = 'pmp'
     f.area = 'scope'
     f.qod_days = 7
-    f.qod_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
       f = fb.query('(eq what "quantity-of-deliverables")').each.first
@@ -372,7 +371,6 @@ class TestQuantityOfDeliverables < Jp::Test
     f.what = 'pmp'
     f.area = 'scope'
     f.qod_days = 7
-    f.qod_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
       f = fb.query('(eq what "quantity-of-deliverables")').each.first
@@ -441,7 +439,6 @@ class TestQuantityOfDeliverables < Jp::Test
     f.what = 'pmp'
     f.area = 'scope'
     f.qod_days = 7
-    f.qod_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quantity-of-deliverables', fb)
       f = fb.query('(eq what "quantity-of-deliverables")').each.first
