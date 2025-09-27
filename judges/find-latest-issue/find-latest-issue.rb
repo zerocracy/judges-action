@@ -30,6 +30,14 @@ Fbe.iterate do
       next if f.nil?
       f.when = json[:created_at]
       f.who = json.dig(:user, :id)
+      if json[:pull_request]
+        ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+        if ref
+          f.branch = ref
+        else
+          f.stale = 'branch'
+        end
+      end
       f.details = "The issue #{Fbe.issue(f)} is the first we found, opened by #{Fbe.who(f)}."
       $loog.info("The opening of #{Fbe.issue(f)} by #{Fbe.who(f)} was found")
     end
