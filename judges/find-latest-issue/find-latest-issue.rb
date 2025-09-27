@@ -13,6 +13,7 @@ Fbe.iterate do
   as 'latest_issue_was_found'
   by '(plus 0 $before)'
   over do |repository, latest|
+    next latest if latest.positive?
     repo = Fbe.octo.repo_name_by_id(repository)
     json =
       Fbe.octo.with_disable_auto_paginate do |octo|
