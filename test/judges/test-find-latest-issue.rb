@@ -62,10 +62,18 @@ class TestFindLatestIssue < Jp::Test
           number: 548,
           title: 'Some title',
           user: { id: 44, login: 'user' },
-          pull_request: { merged_at: nil },
+          pull_request: { merged_at: '2025-09-14 20:03:16 UTC' },
           created_at: '2025-09-14 20:03:16 UTC'
         }
       ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/548',
+      body: {
+        id: 1234,
+        number: 548,
+        head: { ref: '547' }
+      }
     )
     stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
     fb = Factbase.new
@@ -74,7 +82,7 @@ class TestFindLatestIssue < Jp::Test
     assert(
       fb.one?(
         what: 'pull-was-opened', issue: 548, repository: 42, where: 'github',
-        who: 44, when: Time.parse('2025-09-14 20:03:16 UTC'),
+        who: 44, branch: '547', when: Time.parse('2025-09-14 20:03:16 UTC'),
         details: 'The issue foo/foo#548 is the first we found, opened by @user.'
       )
     )
