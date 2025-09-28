@@ -13,6 +13,7 @@ permissions:
   contents: write
 jobs:
   zerocracy:
+    if: github.repository_owner == 'zerocracy'
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     steps:
