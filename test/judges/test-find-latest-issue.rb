@@ -145,4 +145,23 @@ class TestFindLatestIssue < Jp::Test
     )
     assert(fb.one?(what: 'iterate', latest_issue_was_found: 547, repository: 42, where: 'github'))
   end
+
+  def test_if_find_latest_issue_already_found
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'issue-was-opened', issue: 547, repository: 42, where: 'github',
+      who: 44, when: Time.parse('2025-09-14 20:03:16 UTC'),
+      details: 'The issue foo/foo#547 has been opened by @user.'
+    ).with(
+      _id: 2, what: 'iterate', where: 'github', repository: 42, latest_issue_was_found: 547
+    )
+    load_it('find-latest-issue', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'iterate', latest_issue_was_found: 547, repository: 42, where: 'github'))
+  end
 end
