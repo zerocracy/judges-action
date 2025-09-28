@@ -17,8 +17,8 @@ You may ignore this, if all your repositories are public.
 
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
-(replace `foo` with the name of your team and `42` with anything
-between zero and `60`):
+(replace `foo` with the name of your team, `yegor256` with the name of the
+account owner, and `42` with anything between zero and `60`):
 
 ```yaml
 name: zerocracy
@@ -30,6 +30,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   zerocracy:
+    if: github.repository_owner == 'yegor256'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
@@ -38,7 +39,7 @@ jobs:
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.ZEROCRACY_PAT }}
-          repositories: yegor256/judges,yegor256/factbase,zerocracy/*
+          repositories: yegor256/foo
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.2.0
         with:
