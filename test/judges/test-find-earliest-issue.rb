@@ -48,9 +48,17 @@ class TestFindEarliestIssue < Jp::Test
       body: [
         {
           id: 123, number: 3, title: 'Some title', user: { id: 44, login: 'user' },
-          pull_request: { merged_at: nil }, created_at: '2025-09-27 06:03:16 UTC'
+          pull_request: { merged_at: '2025-09-27 07:03:00 UTC' }, created_at: '2025-09-27 06:03:16 UTC'
         }
       ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/3',
+      body: {
+        id: 1235,
+        number: 3,
+        head: { ref: '2' }
+      }
     )
     stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
     fb = Factbase.new
@@ -59,7 +67,7 @@ class TestFindEarliestIssue < Jp::Test
     assert(
       fb.one?(
         what: 'pull-was-opened', issue: 3, repository: 42, where: 'github',
-        who: 44, when: Time.parse('2025-09-27 06:03:16 UTC'),
+        who: 44, branch: '2', when: Time.parse('2025-09-27 06:03:16 UTC'),
         details: 'The issue foo/foo#3 is the earliest we found, opened by @user.'
       )
     )
