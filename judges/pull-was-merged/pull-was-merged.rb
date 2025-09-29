@@ -83,7 +83,7 @@ Fbe.iterate do
       end
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
-      $loog.debug("Just found out that #{Fbe.issue(nn)} has been '#{nn.what}'")
+      $loog.info("Just found out that #{Fbe.issue(nn)} has been '#{nn.what}'")
     end
     issue
   end
