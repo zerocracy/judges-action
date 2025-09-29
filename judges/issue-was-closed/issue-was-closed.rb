@@ -40,13 +40,14 @@ Fbe.iterate do
   repeats 64
   over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
-    begin
-      json = Fbe.octo.issue(repo, issue)
-    rescue Octokit::NotFound => e
-      $loog.info("The issue #{repo}##{issue} doesn't exist: #{e.message}")
-      Jp.issue_was_lost('github', repository, issue)
-      next issue
-    end
+    json =
+      begin
+        Fbe.octo.issue(repo, issue)
+      rescue Octokit::NotFound => e
+        $loog.info("The issue #{repo}##{issue} doesn't exist: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
+      end
     unless json[:state] == 'closed'
       $loog.debug("Issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue

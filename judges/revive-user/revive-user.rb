@@ -3,23 +3,23 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/consider'
 require 'fbe/delete_one'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
 
-stale = Fbe.fb.query("(and (eq stale 'who') (eq where 'github') (unique who))").each.map(&:who)
-stale.each do |who|
-  break if Fbe.octo.off_quota?
-  begin
-    json = Fbe.octo.user(who)
-    $loog.info("The user ##{who} is not stale, it is @#{json[:login]}")
-    Fbe.fb.query("(and (eq stale 'who') (eq who #{who}))").each do |f|
-      Fbe.delete_one(f, 'stale', 'who')
+Fbe.consider("(and (eq stale 'who') (eq where 'github') (unique who))") do |f|
+  json =
+    begin
+      Fbe.octo.user(f.who)
+    rescue Octokit::NotFound => e
+      $loog.info("The user ##{f.who} is still stale: #{e.message}")
+      next
     end
-  rescue Octokit::NotFound => e
-    $loog.info("The user ##{f.who} is still stale: #{e.message}")
-    next
+  $loog.info("The user ##{f.who} is not stale, it is @#{json[:login]}")
+  Fbe.fb.query("(and (eq stale 'who') (eq who #{f.who}))").each do |f1|
+    Fbe.delete_one(f1, 'stale', 'who')
   end
 end
 

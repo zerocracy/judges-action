@@ -36,7 +36,14 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (unique repository))'
   added = 0
   checked = 0
   missing.take(200).each do |i|
-    json = Fbe.octo.issue(repo, i)
+    json =
+      begin
+        Fbe.octo.issue(repo, i)
+      rescue Octokit::NotFound => e
+        $loog.info("The issue #{repo}##{i} doesn't exist: #{e.message}")
+        Jp.issue_was_lost('github', repository, i)
+        next
+      end
     checked += 1
     if json[:number].nil?
       $loog.warn("Apparently, the JSON for the issue ##{i} doesn't have 'number' field")
