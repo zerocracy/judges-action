@@ -605,6 +605,98 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_quality_of_service_some_build_mttr_check_negative_mttr_values
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_workflow_runs(
+      [
+        {
+          id: 45,
+          name: 'test',
+          head_branch: 'master',
+          head_sha: 'abc125',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'failure',
+          workflow_id: 102,
+          created_at: '2024-08-08T12:00:00Z',
+          updated_at: '2024-08-08T12:10:00Z',
+          run_started_at: '2024-08-08T12:00:00Z',
+          repository: { full_name: 'foo/foo' }
+        },
+        {
+          id: 44,
+          name: 'test',
+          head_branch: 'master',
+          head_sha: 'abc125',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 102,
+          created_at: '2024-08-08T11:00:00Z',
+          updated_at: '2024-08-08T11:10:00Z',
+          run_started_at: '2024-08-08T11:00:00Z',
+          repository: { full_name: 'foo/foo' }
+        },
+        {
+          id: 43,
+          name: 'test',
+          head_branch: 'master',
+          head_sha: 'abc125',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'failure',
+          workflow_id: 102,
+          created_at: '2024-08-08T10:00:00Z',
+          updated_at: '2024-08-08T10:10:00Z',
+          run_started_at: '2024-08-08T10:00:00Z',
+          repository: { full_name: 'foo/foo' }
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ id: 50, number: 12, title: 'Awesome 12', created_at: Time.parse('2024-08-20 22:00:00 UTC') }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [{ id: 22_449_326, submitted_at: Time.parse('2024-08-21 22:00:00 UTC') }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
+    f.qos_interval = 3
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_equal([3600], f['some_build_mttr'])
+    end
+  end
+
   def test_quality_of_service_some_hocs_and_files
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(

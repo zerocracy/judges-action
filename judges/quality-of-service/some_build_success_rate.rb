@@ -18,14 +18,17 @@ def some_build_success_rate(fact)
   ttrs = []
   failed = {}
   Fbe.unmask_repos do |repo|
-    seen = 0
-    Fbe.octo.repository_workflow_runs(
-      repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
-    )[:workflow_runs].each do |json|
-      next if seen > 60 # should be enough
+    workflow_runs =
+      Fbe.octo.repository_workflow_runs(
+        repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+      )[:workflow_runs].first(60).map do |json|
+        run_duration = (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
+        { json: json, run_duration: run_duration, completed: json[:run_started_at] + run_duration }
+      end
+    workflow_runs.sort_by! { _1[:completed] }
+    workflow_runs.each do |item|
+      item => { json:, run_duration:, completed: }
       workflow_id = json[:workflow_id]
-      run_duration = (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
-      completed = json[:run_started_at] + run_duration
       if json[:conclusion] == 'failure' && failed[workflow_id].nil?
         failed[workflow_id] = completed
       elsif json[:conclusion] == 'success' && failed[workflow_id]
@@ -34,7 +37,6 @@ def some_build_success_rate(fact)
       end
       success << (json[:conclusion] == 'success' ? 1 : 0)
       duration << run_duration
-      seen += 1
     end
   end
   {
