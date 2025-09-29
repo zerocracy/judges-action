@@ -23,6 +23,7 @@ Fbe.consider(
     (absent tombstone)
     (absent done)
     (eq where 'github')
+    (unique where repository issue)
     (empty
       (and
         (eq issue $issue)
@@ -45,7 +46,6 @@ Fbe.consider(
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
-          nn.when = review[:submitted_at]
           nn.issue = f.issue
           nn.who = review.dig(:user, :id)
           nn.what = $judge
@@ -53,6 +53,7 @@ Fbe.consider(
           nn.where = f.where
         end
       next if n.nil?
+      n.when = review[:submitted_at]
       n.hoc = pr[:additions] + pr[:deletions]
       n.author = pr.dig(:user, :id)
       n.comments = Fbe.octo.issue_comments(repo, f.issue).count

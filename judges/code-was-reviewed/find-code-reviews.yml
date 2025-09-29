@@ -22,5 +22,6 @@ input:
     who: 555
     when: 2025-08-28T20:00:40Z
 expected:
-  - /fb[count(f)=4]
-  - /fb[count(f[what='code-was-reviewed' and repository='680' and issue='29'])=2]
+  - /fb[count(f)=3]
+  - /fb/f[what='code-was-reviewed' and repository='680' and issue='29']
+  - /fb[count(f[what='code-was-reviewed' and repository='680' and issue='29'])=1]
