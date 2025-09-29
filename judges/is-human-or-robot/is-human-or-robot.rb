@@ -24,13 +24,14 @@ Fbe.consider(
     (exists what)
     (exists who))'
 ) do |f|
-  begin
-    json = Fbe.octo.user(f.who)
-  rescue Octokit::NotFound, Octokit::Deprecated => e
-    $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
-    f.stale = 'who'
-    next
-  end
+  json =
+    begin
+      Fbe.octo.user(f.who)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
+      f.stale = 'who'
+      next
+    end
   type = json[:type]
   location = "#{f.what}#{Fbe.issue(f) if f['issue']}"
   if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
