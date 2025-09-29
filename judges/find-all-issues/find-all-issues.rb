@@ -42,7 +42,7 @@ require_relative '../../lib/issue_was_lost'
       after =
         begin
           Fbe.octo.issue(repo, issue)[:created_at]
-        rescue Octokit::NotFound => e
+        rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
           Jp.issue_was_lost('github', repository, issue)
           next 0

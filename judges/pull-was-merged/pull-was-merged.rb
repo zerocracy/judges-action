@@ -52,7 +52,7 @@ Fbe.iterate do
     json =
       begin
         Fbe.octo.pull_request(repo, issue)
-      rescue Octokit::NotFound => e
+      rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue

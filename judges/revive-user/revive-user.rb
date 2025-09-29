@@ -13,7 +13,7 @@ Fbe.consider("(and (eq stale 'who') (eq where 'github') (unique who))") do |f|
   json =
     begin
       Fbe.octo.user(f.who)
-    rescue Octokit::NotFound => e
+    rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("The user ##{f.who} is still stale: #{e.message}")
       next
     end

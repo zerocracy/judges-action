@@ -33,7 +33,7 @@ Fbe.iterate do
     events =
       begin
         Fbe.octo.issue_events(repo, issue).select { |e| e[:event] == 'assigned' }
-      rescue Octokit::NotFound => e
+      rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Not found issue events for issue ##{issue} in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue

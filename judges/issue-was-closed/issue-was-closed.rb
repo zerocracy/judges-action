@@ -43,7 +43,7 @@ Fbe.iterate do
     json =
       begin
         Fbe.octo.issue(repo, issue)
-      rescue Octokit::NotFound => e
+      rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("The issue #{repo}##{issue} doesn't exist: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
