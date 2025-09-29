@@ -57,7 +57,7 @@ Fbe.conclude do
       n.stale = 'branch'
     end
     n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.debug("The opening for #{Fbe.issue(n)} was found")
+    $loog.info("The opening for #{Fbe.issue(n)} was found")
   end
 end
 
