@@ -11,7 +11,8 @@ require_relative '../../lib/issue_was_lost'
 
 Fbe.iterate do
   as 'assignees_were_scanned'
-  by "(agg
+  sort_by 'issue'
+  by "
     (and
       (gt issue $before)
       (eq what 'issue-was-opened')
@@ -25,8 +26,7 @@ Fbe.iterate do
           (eq repository $repository)
           (eq what '#{$judge}')
           (eq where $where)))
-      (eq where 'github'))
-    (min issue))"
+      (eq where 'github'))"
   repeats 64
   over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
