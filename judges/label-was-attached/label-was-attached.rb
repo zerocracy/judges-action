@@ -62,7 +62,10 @@ Fbe.iterate do
             n.repository = repository
             n.where = 'github'
           end
-        raise "A label #{badge.inspect} is already attached to #{repo}##{issue}" if nn.nil?
+      if nn.nil?
+                $loog.info("Label #{badge.inspect} is already attached to #{repo}###{issue}, skipping")
+                next
+      end
         nn.who = te[:actor][:id]
         nn.when = te[:created_at]
         nn.details =
