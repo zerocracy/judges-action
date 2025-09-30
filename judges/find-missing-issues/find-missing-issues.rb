@@ -41,7 +41,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         Fbe.octo.issue(repo, i)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("The issue #{repo}##{i} doesn't exist: #{e.message}")
-        Jp.issue_was_lost('github', repository, i)
+        Jp.issue_was_lost('github', r.repository, i)
         next
       end
     checked += 1
