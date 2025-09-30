@@ -29,14 +29,13 @@ require_relative '../../lib/issue_was_lost'
 %w[issue pull].each do |type|
   Fbe.iterate do
     as "min_#{type}_was_found"
+    sort_by 'issue'
     by "
-      (agg
-        (and
-          (eq what '#{type}-was-opened')
-          (eq repository $repository)
-          (gt issue $before)
-          (eq where 'github'))
-        (min issue))"
+      (and
+        (eq what '#{type}-was-opened')
+        (eq repository $repository)
+        (gt issue $before)
+        (eq where 'github'))"
     over do |repository, issue|
       repo = Fbe.octo.repo_name_by_id(repository)
       after =

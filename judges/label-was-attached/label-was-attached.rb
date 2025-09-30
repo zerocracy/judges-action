@@ -22,7 +22,8 @@ badges = %w[bug enhancement question]
 
 Fbe.iterate do
   as 'labels_were_scanned'
-  by "(agg
+  sort_by 'issue'
+  by "
     (and
       (eq what 'issue-was-opened')
       (gt issue $before)
@@ -36,8 +37,7 @@ Fbe.iterate do
           (eq repository $repository)
           (eq issue $issue)
           (eq what '#{$judge}')))
-      (eq where 'github'))
-    (min issue))"
+      (eq where 'github'))"
   repeats 64
   over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)

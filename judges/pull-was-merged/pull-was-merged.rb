@@ -18,7 +18,8 @@ require_relative '../../lib/pull_request'
 
 Fbe.iterate do
   as 'merges_were_scanned'
-  by "(agg
+  sort_by 'issue'
+  by "
     (and
       (eq repository $repository)
       (gt issue $before)
@@ -44,8 +45,7 @@ Fbe.iterate do
       (absent stale)
       (absent tombstone)
       (absent done)
-      (eq where 'github'))
-    (min issue))"
+      (eq where 'github'))"
   repeats 50
   over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
