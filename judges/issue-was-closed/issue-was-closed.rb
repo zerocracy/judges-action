@@ -68,7 +68,7 @@ Fbe.iterate do
       else
         nn.stale = 'who'
       end
-      nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
+      nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("It was found closed at #{Fbe.issue(nn)}")
     end
     issue

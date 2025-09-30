@@ -1594,7 +1594,7 @@ class TestGithubEvents < Jp::Test
         event_type: 'PushEvent', repository: 42, who: 43, push_id: 2412, ref: 'refs/heads/master',
         commit: 'f5d59b035', default_branch: 'master', to_master: 1,
         details:
-          "A new Git push #2412 has arrived to foo/foo, made by @yegor256 (default branch is 'master'), " \
+          'A new Git push #2412 has arrived to foo/foo, made by @yegor256 (default branch is "master"), ' \
           'not associated with any pull request.'
       )
     )

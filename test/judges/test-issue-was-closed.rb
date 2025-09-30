@@ -59,7 +59,7 @@ class TestIssueWasClosed < Jp::Test
         where: 'github',
         when: Time.parse('2025-07-10 10:00:00 UTC'),
         who: 222_111,
-        details: "Apparently, foo/foo#52 has been 'issue-was-closed'."
+        details: 'Apparently, foo/foo#52 has been "issue-was-closed".'
       )
     )
   end

@@ -64,7 +64,7 @@ Fbe.iterate do
           nn.who = tee.dig('actor', 'id')
           nn.when = tee['created_at']
           nn.details =
-            "The '#{nn.type}' type was attached by @#{tee.dig('actor', 'login')} " \
+            "The #{nn.type.inspect} type was attached by @#{tee.dig('actor', 'login')} " \
             "to the issue #{Fbe.issue(nn)}."
           $loog.info("Type attached to #{Fbe.issue(nn)} found: #{nn.type.inspect}")
         end

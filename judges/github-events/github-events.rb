@@ -119,17 +119,17 @@ Fbe.iterate do
       fact.to_master = fact.default_branch == fact.ref.split('/')[2] ? 1 : 0
       fact.by_owner = 1 if repo.dig(:owner, :id) == fact.who
       if fact.to_master.zero?
-        $loog.debug("Push #{fact.commit} has been made to non-default branch '#{fact.default_branch}', ignoring it")
+        $loog.debug("Push #{fact.commit} to non-default branch #{fact.default_branch.inspect}, ignoring it")
         skip_event(json)
       end
       pulls = Fbe.octo.commit_pulls(rname, fact.commit)
       unless pulls.empty?
-        $loog.debug("Push #{fact.commit} has been made inside #{pulls.size} pull request(s), ignoring it")
+        $loog.debug("Push #{fact.commit} inside #{pulls.size} pull request(s), ignoring it")
         skip_event(json)
       end
       fact.details =
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{rname}, " \
-        "made by #{Fbe.who(fact)} (default branch is '#{fact.default_branch}'), " \
+        "made by #{Fbe.who(fact)} (default branch is #{fact.default_branch.inspect}), " \
         'not associated with any pull request.'
       $loog.debug("New PushEvent ##{json[:payload][:push_id]} recorded")
 
@@ -240,7 +240,7 @@ Fbe.iterate do
           fact, fetch_release_info(fact, rname)
         )
         fact.details =
-          "A new release '#{json[:payload][:release][:name]}' has been published " \
+          "A new release #{json[:payload][:release][:name].inspect} has been published " \
           "in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Release published by #{Fbe.who(fact)}")
       else
@@ -253,7 +253,7 @@ Fbe.iterate do
         fact.what = 'tag-was-created'
         fact.tag = json[:payload][:ref]
         fact.details =
-          "A new tag '#{fact.tag}' has been created " \
+          "A new tag #{fact.tag.inspect} has been created " \
           "in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Tag #{fact.tag.inspect} created by #{Fbe.who(fact)}")
       else
