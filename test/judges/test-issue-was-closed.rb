@@ -63,4 +63,24 @@ class TestIssueWasClosed < Jp::Test
       )
     )
   end
+
+  def test_multiple_facts_with_identical_repository_and_issue
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, title: 'some title 44', state: 'closed',
+        closed_at: Time.parse('2025-10-01 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'bug-was-accepted', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert(fb.one?(what: 'issue-was-closed', repository: 42, issue: 44, where: 'github'))
+  end
 end
