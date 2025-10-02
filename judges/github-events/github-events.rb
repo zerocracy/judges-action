@@ -78,7 +78,7 @@ Fbe.iterate do
         info[:last_commit] = json[:commits].first[:sha]
       end
     rescue Octokit::NotFound
-      $loog.debug("Compare API returned 404 for #{repo} between #{tag} and #{fact.tag}")
+      $loog.info("Compare API returned 404 for #{repo} between #{tag} and #{fact.tag}")
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
