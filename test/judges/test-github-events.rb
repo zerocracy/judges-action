@@ -2306,16 +2306,21 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/contributors?per_page=100',
-      body: [
-        { login: 'yegor256', id: 526_301 }
-      ]
+      body: [{ login: 'yegor256', id: 526_301 }]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/commits?per_page=100',
       body: [{ sha: 'abc123def456' }]
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100')
-      .to_return(status: 404, body: '', headers: { 'Content-Type': 'application/json' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      status: 404,
+      body: {
+        message: 'Not Found',
+        documentation_url: 'https://docs.github.com/rest/commits/commits#compare-two-commits',
+        status: '404'
+      }
+    )
     stub_github(
       'https://api.github.com/user/8086956',
       body: { login: 'rultor', id: 8_086_956 }
