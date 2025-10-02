@@ -33,7 +33,7 @@ Fbe.consider(
       next
     end
   type = json[:type]
-  location = "#{f.what}#{Fbe.issue(f) if f['issue']}"
+  location = "#{f.what} at #{Fbe.issue(f) if f['issue']}"
   if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
     f.is_human = 0
     $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{location}")
