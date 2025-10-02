@@ -70,10 +70,15 @@ Fbe.iterate do
     tag = fetch_tag(last, repo)
     tag ||= find_first_commit(repo)[:sha]
     info = {}
-    Fbe.octo.compare(repo, tag, fact.tag).then do |json|
-      info[:commits] = json[:total_commits]
-      info[:hoc] = json[:files].sum { |f| f[:changes] }
-      info[:last_commit] = json[:commits].first[:sha]
+    begin
+      Fbe.octo.compare(repo, tag, fact.tag).then do |json|
+        return info if json.nil?
+        info[:commits] = json[:total_commits]
+        info[:hoc] = json[:files].sum { |f| f[:changes] }
+        info[:last_commit] = json[:commits].first[:sha]
+      end
+    rescue Octokit::NotFound
+      $loog.debug("Compare API returned 404 for #{repo} between #{tag} and #{fact.tag}")
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
