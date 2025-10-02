@@ -2267,6 +2267,71 @@ class TestGithubEvents < Jp::Test
     assert_equal(15, f.hoc)
   end
 
+  def test_release_event_with_nil_compare_response
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?per_page=100',
+      body: [{ sha: 'abc123def456' }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      status: 404,
+      body: {
+        message: 'Not Found',
+        documentation_url: 'https://docs.github.com/rest/commits/commits#compare-two-commits',
+        status: '404'
+      }
+    )
+    stub_github(
+      'https://api.github.com/user/8086956',
+      body: { login: 'rultor', id: 8_086_956 }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    assert_equal([526_301], f.first[:contributors])
+  end
+
   private
 
   def stub_event(*json)
