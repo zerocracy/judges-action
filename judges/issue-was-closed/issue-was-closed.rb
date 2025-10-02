@@ -27,6 +27,7 @@ Fbe.iterate do
         (eq what 'bug-report-was-rewarded')
         (eq what 'enhancement-suggestion-was-rewarded'))
       (eq repository $repository)
+      (unique repository issue)
       (absent stale)
       (absent tombstone)
       (absent done)
