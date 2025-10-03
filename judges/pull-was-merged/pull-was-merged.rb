@@ -24,6 +24,7 @@ Fbe.iterate do
     (and
       (eq repository $repository)
       (gt issue $before)
+      (unique repository issue)
       (empty
         (and
           (eq repository $repository)
