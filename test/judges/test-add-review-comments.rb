@@ -114,7 +114,7 @@ class TestAddReviewComments < Jp::Test
     stub_github(
       'https://api.github.com/rate_limit',
       body: {
-        rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
+        rate: { limit: 600, remaining: 590, reset: 1_728_464_472, used: 1, resource: 'core' }
       }
     )
   end
