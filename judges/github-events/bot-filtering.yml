@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+input: []
+options:
+  testing: true
+  max_events: 20
+  repositories: yegor256/judges
+  bots: torvalds
+expected:
+  - /fb[count(f) != 0]
+  - /fb/f[what='iterate']
+  - /fb[not(f[who='888'])]
+  - /fb[not(f[who='42'])]

@@ -36,6 +36,25 @@ Fbe.iterate do
     raise Factbase::Rollback
   end
 
+  def self.ignored_bot?(fact)
+    return false unless fact.all_properties.include?('who')
+    return false unless $options.respond_to?(:bots)
+    return false if $options.bots.nil? || $options.bots.empty?
+    begin
+      user = Fbe.octo.user(fact.who)
+      login = user[:login]
+      ignored_bots = $options.bots.split(',').map(&:strip)
+      if ignored_bots.include?(login)
+        $loog.debug("Ignoring event from bot user @#{login} (##{fact.who})")
+        return true
+      end
+      false
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.debug("Could not fetch user ##{fact.who} for bot check: #{e.message}")
+      false
+    end
+  end
+
   def self.fetch_tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
     if tag.nil? && fact&.all_properties&.include?('release_id')
@@ -111,6 +130,7 @@ Fbe.iterate do
     fact.event_type = json[:type]
     fact.repository = json[:repo][:id].to_i
     fact.who = json[:actor][:id].to_i if json[:actor]
+    skip_event(json) if ignored_bot?(fact)
     rname = Fbe.octo.repo_name_by_id(fact.repository)
 
     case json[:type]
@@ -223,6 +243,7 @@ Fbe.iterate do
         fact.comment_id = json[:payload][:comment][:id]
         fact.comment_body = json[:payload][:comment][:body]
         fact.who = json[:payload][:comment][:user][:id]
+        skip_event(json) if ignored_bot?(fact)
         fact.details =
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
           "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
@@ -240,6 +261,7 @@ Fbe.iterate do
         if fact.all_properties.include?('who') && fact.who != json[:payload][:release][:author][:id]
           Fbe.overwrite(fact, 'who', json[:payload][:release][:author][:id])
         end
+        skip_event(json) if ignored_bot?(fact)
         fetch_contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(
           fact, fetch_release_info(fact, rname)

@@ -23,9 +23,11 @@ env "GITHUB_WORKSPACE=$(pwd)" \
   'INPUT_TOKEN=something' \
   'INPUT_DRY-RUN=true' \
   'INPUT_GITHUB-TOKEN=THETOKEN' \
+  'INPUT_BOTS=test-bot,another-bot' \
   "${SELF}/entry.sh" 2>&1 | tee log.txt
 
 test -e "${name}.fb"
 grep " --option=foo42=bar" 'log.txt'
 grep " --option=foo4444=bar" 'log.txt'
 grep " --option=x88=hello world!" 'log.txt'
+grep " --option=bots=test-bot,another-bot" 'log.txt'
