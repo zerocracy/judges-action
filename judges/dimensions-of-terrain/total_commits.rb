@@ -15,10 +15,12 @@ require 'fbe/unmask_repos'
 # @return [Hash] Map with keys as fact attributes and values as integers
 def total_commits(_fact)
   commits = 0
+  repos = []
   Fbe.unmask_repos do |repo|
     json = Fbe.octo.repository(repo)
     next if json[:size].zero?
-    commits += Fbe.github_graph.total_commits(*repo.split('/'), json[:default_branch])
+    repos << [*repo.split('/'), json[:default_branch]]
   end
+  commits = Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } unless repos.empty?
   { total_commits: commits }
 end
