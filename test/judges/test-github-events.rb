@@ -2395,8 +2395,7 @@ class TestGithubEvents < Jp::Test
       body: []
     )
     fb = Factbase.new
-    options = Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => '0pdd,rultor' })
-    load_it('github-events', fb, options)
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => '0pdd,rultor' }))
     assert_equal(2, fb.all.size)
     assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_001))
     assert(fb.one?(what: 'git-was-pushed', who: 1003))
@@ -2442,8 +2441,7 @@ class TestGithubEvents < Jp::Test
       body: []
     )
     fb = Factbase.new
-    options = Judges::Options.new({ 'repositories' => 'foo/foo' })
-    load_it('github-events', fb, options)
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo' }))
     assert_equal(2, fb.all.size)
     assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_004))
     assert(fb.one?(what: 'git-was-pushed', who: 1001))
