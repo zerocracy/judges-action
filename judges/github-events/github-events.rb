@@ -243,7 +243,6 @@ Fbe.iterate do
         fact.comment_id = json[:payload][:comment][:id]
         fact.comment_body = json[:payload][:comment][:body]
         fact.who = json[:payload][:comment][:user][:id]
-        skip_event(json) if ignored_bot?(fact)
         fact.details =
           "A new comment ##{json[:payload][:comment][:id]} has been posted " \
           "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
@@ -261,7 +260,6 @@ Fbe.iterate do
         if fact.all_properties.include?('who') && fact.who != json[:payload][:release][:author][:id]
           Fbe.overwrite(fact, 'who', json[:payload][:release][:author][:id])
         end
-        skip_event(json) if ignored_bot?(fact)
         fetch_contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(
           fact, fetch_release_info(fact, rname)
