@@ -27,6 +27,8 @@ Fbe.iterate do
   as 'events_were_scanned'
   by '(plus 0 $before)'
 
+  @ignored_bots_cache = nil
+
   def self.skip_event(json)
     t = Time.parse(json[:created_at].iso8601)
     $loog.debug(
@@ -40,11 +42,11 @@ Fbe.iterate do
     return false unless fact.all_properties.include?('who')
     return false unless $options.respond_to?(:bots)
     return false if $options.bots.nil? || $options.bots.empty?
+    @ignored_bots_cache ||= $options.bots.split(',').map(&:strip)
     begin
       user = Fbe.octo.user(fact.who)
       login = user[:login]
-      ignored_bots = $options.bots.split(',').map(&:strip)
-      if ignored_bots.include?(login)
+      if @ignored_bots_cache.include?(login)
         $loog.debug("Ignoring event from bot user @#{login} (##{fact.who})")
         return true
       end
