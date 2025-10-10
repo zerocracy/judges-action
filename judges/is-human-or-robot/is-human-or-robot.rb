@@ -40,7 +40,7 @@ Fbe.consider(
   location = "#{f.what} at #{Fbe.issue(f) if f['issue']}"
   @configured_bots ||=
     if $options.respond_to?(:bots) && !$options.bots.nil? && !$options.bots.empty?
-      $options.bots.split(',').map(&:strip)
+      $options.bots.split(',').map(&:strip).reject(&:empty?)
     else
       []
     end
