@@ -16,6 +16,8 @@
 require 'fbe/octo'
 require 'fbe/consider'
 
+@configured_bots = nil
+
 Fbe.consider(
   '(and
     (absent is_human)
@@ -36,11 +38,13 @@ Fbe.consider(
     end
   type = json[:type]
   location = "#{f.what} at #{Fbe.issue(f) if f['issue']}"
-  configured_bots = []
-  if $options.respond_to?(:bots) && !$options.bots.nil? && !$options.bots.empty?
-    configured_bots = $options.bots.split(',').map(&:strip)
-  end
-  if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd' || configured_bots.include?(json[:login])
+  @configured_bots ||=
+    if $options.respond_to?(:bots) && !$options.bots.nil? && !$options.bots.empty?
+      $options.bots.split(',').map(&:strip)
+    else
+      []
+    end
+  if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd' || @configured_bots.include?(json[:login])
     f.is_human = 0
     $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{location}")
   else
