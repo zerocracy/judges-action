@@ -56,7 +56,7 @@ class TestIsHumanOrRobot < Jp::Test
       .with(where: 'github', what: 'issue-was-opened', who: 16, name: '0pdd')
       .with(where: 'github', what: 'issue-was-opened', who: 17, name: 'other_bot')
       .with(where: 'github', what: 'issue-was-opened', who: 18, name: 'user4')
-    load_it('is-human-or-robot', fb)
+    load_it('is-human-or-robot', fb, Judges::Options.new({ 'bots' => '0pdd,rultor' }))
     assert_equal(9, fb.all.size)
     assert_equal(2, fb.picks(is_human: 1).size)
     assert_equal(4, fb.picks(is_human: 0).size)

@@ -94,6 +94,7 @@ The following options are expected by the plugin
 * `lifetime` (optional) is how many minutes the entire update can take
 * `cycles` (optional) is a number of update cycles to run
 * `sqlite-cache` (optional) is a path of SQLite database file with HTTP cache
+* `bots` (optional) is a comma-separated list of GitHub user logins to mark as bots
 
 The following `k=v` pairs inside the `options` may be important:
 
