@@ -36,7 +36,6 @@ Fbe.iterate do
     raise Factbase::Rollback
   end
 
-
   def self.fetch_tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
     if tag.nil? && fact&.all_properties&.include?('release_id')

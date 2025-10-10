@@ -2332,7 +2332,6 @@ class TestGithubEvents < Jp::Test
     assert_equal([526_301], f.first[:contributors])
   end
 
-
   private
 
   def stub_event(*json)
