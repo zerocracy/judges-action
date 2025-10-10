@@ -27,8 +27,6 @@ Fbe.iterate do
   as 'events_were_scanned'
   by '(plus 0 $before)'
 
-  @ignored_bots = nil
-
   def self.skip_event(json)
     t = Time.parse(json[:created_at].iso8601)
     $loog.debug(
@@ -38,24 +36,6 @@ Fbe.iterate do
     raise Factbase::Rollback
   end
 
-  def self.ignored_bot?(fact)
-    return false unless fact.all_properties.include?('who')
-    return false unless $options.respond_to?(:bots)
-    return false if $options.bots.nil? || $options.bots.empty?
-    @ignored_bots ||= $options.bots.split(',').map(&:strip)
-    begin
-      user = Fbe.octo.user(fact.who)
-      login = user[:login]
-      if @ignored_bots.include?(login)
-        $loog.debug("Ignoring event from bot user @#{login} (##{fact.who})")
-        return true
-      end
-      false
-    rescue Octokit::NotFound, Octokit::Deprecated => e
-      $loog.debug("Could not fetch user ##{fact.who} for bot check: #{e.message}")
-      false
-    end
-  end
 
   def self.fetch_tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
@@ -132,7 +112,6 @@ Fbe.iterate do
     fact.event_type = json[:type]
     fact.repository = json[:repo][:id].to_i
     fact.who = json[:actor][:id].to_i if json[:actor]
-    skip_event(json) if ignored_bot?(fact)
     rname = Fbe.octo.repo_name_by_id(fact.repository)
 
     case json[:type]

@@ -5,11 +5,13 @@
 
 # Judge that identifies whether a GitHub user is a human or a bot.
 # Examines GitHub users found in the factbase, determines if they are
-# humans or bots based on GitHub user type, and special cases for known
-# bots like 'rultor' and '0pdd'. Records the result in the factbase.
+# humans or bots based on GitHub user type, special cases for known
+# bots like 'rultor' and '0pdd', and configurable bot list from options.
+# Records the result in the factbase.
 #
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/conclude.rb Implementation of Fbe.conclude
 # @note Sets is_human=1 for humans and is_human=0 for bots
+# @note Configurable bot usernames can be provided via $options.bots (comma-separated)
 
 require 'fbe/octo'
 require 'fbe/consider'
@@ -34,7 +36,11 @@ Fbe.consider(
     end
   type = json[:type]
   location = "#{f.what} at #{Fbe.issue(f) if f['issue']}"
-  if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd'
+  configured_bots = []
+  if $options.respond_to?(:bots) && !$options.bots.nil? && !$options.bots.empty?
+    configured_bots = $options.bots.split(',').map(&:strip)
+  end
+  if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd' || configured_bots.include?(json[:login])
     f.is_human = 0
     $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{location}")
   else

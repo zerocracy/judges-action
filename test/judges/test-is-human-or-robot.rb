@@ -68,4 +68,21 @@ class TestIsHumanOrRobot < Jp::Test
     assert(fb.one?(where: 'github', who: 17, name: 'other_bot', is_human: 0))
     assert(fb.one?(where: 'github', who: 18, name: 'user4', is_human: 1))
   end
+
+  def test_identify_configured_bots_as_bots
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/20', body: { login: 'custom-bot', id: 20, type: 'User' })
+    stub_github('https://api.github.com/user/21', body: { login: 'another-bot', id: 21, type: 'User' })
+    stub_github('https://api.github.com/user/22', body: { login: 'human-user', id: 22, type: 'User' })
+    fb = Factbase.new
+    fb.with(where: 'github', what: 'issue-was-opened', who: 20, name: 'custom-bot')
+      .with(where: 'github', what: 'issue-was-opened', who: 21, name: 'another-bot')
+      .with(where: 'github', what: 'issue-was-opened', who: 22, name: 'human-user')
+    load_it('is-human-or-robot', fb, Judges::Options.new({ 'bots' => 'custom-bot,another-bot' }))
+    assert_equal(3, fb.all.size)
+    assert(fb.one?(where: 'github', who: 20, name: 'custom-bot', is_human: 0))
+    assert(fb.one?(where: 'github', who: 21, name: 'another-bot', is_human: 0))
+    assert(fb.one?(where: 'github', who: 22, name: 'human-user', is_human: 1))
+  end
 end
