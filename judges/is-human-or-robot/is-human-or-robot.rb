@@ -44,7 +44,7 @@ Fbe.consider(
     else
       []
     end
-  if type == 'Bot' || json[:login] == 'rultor' || json[:login] == '0pdd' || @configured_bots.include?(json[:login])
+  if type == 'Bot' || @configured_bots.include?(json[:login])
     f.is_human = 0
     $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{location}")
   else
