@@ -70,14 +70,15 @@ Fbe.iterate do
     tag = fetch_tag(last, repo)
     tag ||= find_first_commit(repo)[:sha]
     info = {}
-    comparison = Fbe.octo.compare(repo, tag, fact.tag)
-    if comparison
-      info[:commits] = comparison[:total_commits]
-      info[:hoc] = comparison[:files].map { |f| f[:changes] }.sum
-      first_commit = comparison[:commits].first
-      info[:last_commit] = first_commit[:sha] if first_commit
-    else
-      $loog.warn("Comparison result is nil for repo #{repo}, tag #{tag}, fact.tag #{fact.tag}")
+    begin
+      Fbe.octo.compare(repo, tag, fact.tag).then do |json|
+        return info if json.nil?
+        info[:commits] = json[:total_commits]
+        info[:hoc] = json[:files].sum { |f| f[:changes] }
+        info[:last_commit] = json[:commits].first[:sha]
+      end
+    rescue Octokit::NotFound
+      $loog.info("Compare API returned 404 for #{repo} between #{tag} and #{fact.tag}")
     end
   end
 
@@ -116,20 +117,22 @@ Fbe.iterate do
       fact.push_id = json[:payload][:push_id]
       fact.ref = json[:payload][:ref]
       fact.commit = json[:payload][:head]
-      fact.default_branch = Fbe.octo.repository(rname)[:default_branch]
+      repo = Fbe.octo.repository(rname)
+      fact.default_branch = repo[:default_branch]
       fact.to_master = fact.default_branch == fact.ref.split('/')[2] ? 1 : 0
+      fact.by_owner = 1 if repo.dig(:owner, :id) == fact.who
       if fact.to_master.zero?
-        $loog.debug("Push #{fact.commit} has been made to non-default branch '#{fact.default_branch}', ignoring it")
+        $loog.debug("Push #{fact.commit} to non-default branch #{fact.default_branch.inspect}, ignoring it")
         skip_event(json)
       end
       pulls = Fbe.octo.commit_pulls(rname, fact.commit)
       unless pulls.empty?
-        $loog.debug("Push #{fact.commit} has been made inside #{pulls.size} pull request(s), ignoring it")
+        $loog.debug("Push #{fact.commit} inside #{pulls.size} pull request(s), ignoring it")
         skip_event(json)
       end
       fact.details =
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{rname}, " \
-        "made by #{Fbe.who(fact)} (default branch is '#{fact.default_branch}'), " \
+        "made by #{Fbe.who(fact)} (default branch is #{fact.default_branch.inspect}), " \
         'not associated with any pull request.'
       $loog.debug("New PushEvent ##{json[:payload][:push_id]} recorded")
 
@@ -146,6 +149,7 @@ Fbe.iterate do
       when 'closed'
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = pl[:additions] + pl[:deletions]
+        fact.files = pl[:changed_files] unless pl[:changed_files].nil?
         Jp.fill_fact_by_hash(fact, Jp.comments_info(pl, repo: rname))
         Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(pl, repo: rname))
         fact.branch = pl[:head][:ref]
@@ -239,7 +243,7 @@ Fbe.iterate do
           fact, fetch_release_info(fact, rname)
         )
         fact.details =
-          "A new release '#{json[:payload][:release][:name]}' has been published " \
+          "A new release #{json[:payload][:release][:name].inspect} has been published " \
           "in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Release published by #{Fbe.who(fact)}")
       else
@@ -252,7 +256,7 @@ Fbe.iterate do
         fact.what = 'tag-was-created'
         fact.tag = json[:payload][:ref]
         fact.details =
-          "A new tag '#{fact.tag}' has been created " \
+          "A new tag #{fact.tag.inspect} has been created " \
           "in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Tag #{fact.tag.inspect} created by #{Fbe.who(fact)}")
       else
@@ -272,8 +276,18 @@ Fbe.iterate do
     raise "#{who} doesn't have access to the #{rname} repository, maybe it's private"
   end
 
-  def self.stays_twice?(what, fields)
-    Fbe.fb.query("(and (eq what '#{what}') (unique #{fields.join(' ')}))").each.to_a.size > 1
+  def self.stays_twice?(fb, fact, what, fields)
+    eqs =
+      fields.map { [_1, fact[_1]&.first] }.reject { _1.last.nil? }.map do |prop, value|
+        val =
+          case value
+          when String then "'#{value}'"
+          when Time then value.utc.iso8601
+          else value
+          end
+        "(eq #{prop} #{val})"
+      end
+    fb.query("(and (eq what '#{what}') #{eqs.join(' ')})").each.to_a.size > 1
   end
 
   over do |repository, latest|
@@ -316,7 +330,7 @@ Fbe.iterate do
           next
         end
         fill_up_event(f, json)
-        uniques.each { |w, ff| throw :rollback if stays_twice?(w, ff) }
+        uniques.each { |w, ff| throw :rollback if stays_twice?(fbt, f, w, ff) }
         if f['issue']
           throw :rollback unless Fbe.fb.query(
             "(and

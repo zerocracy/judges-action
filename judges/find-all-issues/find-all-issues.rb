@@ -29,20 +29,19 @@ require_relative '../../lib/issue_was_lost'
 %w[issue pull].each do |type|
   Fbe.iterate do
     as "min_#{type}_was_found"
+    sort_by 'issue'
     by "
-      (agg
-        (and
-          (eq what '#{type}-was-opened')
-          (eq repository $repository)
-          (gt issue $before)
-          (eq where 'github'))
-        (min issue))"
+      (and
+        (eq what '#{type}-was-opened')
+        (eq repository $repository)
+        (gt issue $before)
+        (eq where 'github'))"
     over do |repository, issue|
       repo = Fbe.octo.repo_name_by_id(repository)
       after =
         begin
           Fbe.octo.issue(repo, issue)[:created_at]
-        rescue Octokit::NotFound => e
+        rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
           Jp.issue_was_lost('github', repository, issue)
           next 0
@@ -58,8 +57,8 @@ require_relative '../../lib/issue_was_lost'
             f =
               Fbe.if_absent(fb: fbt) do |ff|
                 ff.issue = json[:number]
-                ff.what = "#{type}-was-opened"
                 ff.repository = repository
+                ff.what = "#{type}-was-opened"
                 ff.where = 'github'
                 issue = ff.issue
               end

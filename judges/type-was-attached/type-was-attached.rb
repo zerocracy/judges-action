@@ -21,7 +21,8 @@ events = %w[issue_type_added issue_type_changed]
 
 Fbe.iterate do
   as 'types_were_scanned'
-  by "(agg
+  sort_by 'issue'
+  by "
     (and
       (eq what 'issue-was-opened')
       (gt issue $before)
@@ -35,8 +36,7 @@ Fbe.iterate do
           (eq issue $issue)
           (eq what '#{$judge}')
           (eq where $where)))
-      (eq where 'github'))
-    (min issue))"
+      (eq where 'github'))"
   repeats 64
   over do |repository, issue|
     begin
@@ -64,7 +64,7 @@ Fbe.iterate do
           nn.who = tee.dig('actor', 'id')
           nn.when = tee['created_at']
           nn.details =
-            "The '#{nn.type}' type was attached by @#{tee.dig('actor', 'login')} " \
+            "The #{nn.type.inspect} type was attached by @#{tee.dig('actor', 'login')} " \
             "to the issue #{Fbe.issue(nn)}."
           $loog.info("Type attached to #{Fbe.issue(nn)} found: #{nn.type.inspect}")
         end

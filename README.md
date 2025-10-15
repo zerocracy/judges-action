@@ -17,8 +17,8 @@ You may ignore this, if all your repositories are public.
 
 Then, add this `zerocracy.yml` file to your GitHub repository
 at the `.github/workflows/` directory
-(replace `foo` with the name of your team and `42` with anything
-between zero and `60`):
+(replace `foo` with the name of your team, `yegor256` with the name of the
+account owner, and `42` with anything between zero and `60`):
 
 ```yaml
 name: zerocracy
@@ -30,15 +30,16 @@ concurrency:
   cancel-in-progress: false
 jobs:
   zerocracy:
+    if: github.repository_owner == 'yegor256'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.15.43
+      - uses: zerocracy/judges-action@0.15.51
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.ZEROCRACY_PAT }}
-          repositories: yegor256/judges,yegor256/factbase,zerocracy/*
+          repositories: yegor256/foo
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.2.0
         with:
@@ -93,6 +94,7 @@ The following options are expected by the plugin
 * `lifetime` (optional) is how many minutes the entire update can take
 * `cycles` (optional) is a number of update cycles to run
 * `sqlite-cache` (optional) is a path of SQLite database file with HTTP cache
+* `bots` (optional) is a comma-separated list of GitHub user logins to mark as bots
 
 The following `k=v` pairs inside the `options` may be important:
 

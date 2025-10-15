@@ -149,6 +149,20 @@ if [ "${github_token_found}" == "false" ]; then
     exit 1
 fi
 
+bots_found=false
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=bots="* ]]; then
+        bots_found=true
+        break
+    fi
+done
+if [ "${bots_found}" == "false" ]; then
+    if [ -n "$(printenv "INPUT_BOTS")" ]; then
+        echo "The 'bots' plugin parameter is set, using it"
+        options+=("--option=bots=$(printenv "INPUT_BOTS")");
+    fi
+fi
+
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     echo "We are in 'dry' mode; skipping 'pull'"

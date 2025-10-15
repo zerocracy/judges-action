@@ -13,11 +13,12 @@ permissions:
   contents: write
 jobs:
   zerocracy:
+    if: github.repository_owner == 'zerocracy'
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     steps:
       - uses: actions/checkout@v5
-      - uses: zerocracy/judges-action@0.15.43
+      - uses: zerocracy/judges-action@0.15.51
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.PAT }}
@@ -29,7 +30,7 @@ jobs:
           options: |
             sqlite_cache_maxvsize=100K
             sqlite_cache_maxsize=100Mb
-      - uses: zerocracy/pages-action@0.2.0
+      - uses: zerocracy/pages-action@0.3.1
         with:
           verbose: true
           github-token: ${{ secrets.PAT }}

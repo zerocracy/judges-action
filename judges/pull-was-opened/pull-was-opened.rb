@@ -42,7 +42,7 @@ Fbe.conclude do
     json =
       begin
         Fbe.octo.issue(repo, f.issue)
-      rescue Octokit::NotFound => e
+      rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
         next issue
@@ -57,7 +57,7 @@ Fbe.conclude do
       n.stale = 'branch'
     end
     n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.debug("The opening for #{Fbe.issue(n)} was found")
+    $loog.info("The opening for #{Fbe.issue(n)} was found")
   end
 end
 

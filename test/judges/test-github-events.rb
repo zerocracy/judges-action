@@ -1596,10 +1596,74 @@ class TestGithubEvents < Jp::Test
         event_type: 'PushEvent', repository: 42, who: 43, push_id: 2412, ref: 'refs/heads/master',
         commit: 'f5d59b035', default_branch: 'master', to_master: 1,
         details:
-          "A new Git push #2412 has arrived to foo/foo, made by @yegor256 (default branch is 'master'), " \
+          'A new Git push #2412 has arrived to foo/foo, made by @yegor256 (default branch is "master"), ' \
           'not associated with any pull request.'
       )
     )
+  end
+
+  def test_push_event_by_owner_sets_by_owner_to_one
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 100, name: 'foo', full_name: 'foo/foo', default_branch: 'master', owner: { id: 50, login: 'foo' } }
+    )
+    stub_github(
+      'https://api.github.com/repositories/100',
+      body: { id: 100, name: 'foo', full_name: 'foo/foo' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/100/events?per_page=100',
+      body: [{
+        id: '22222',
+        type: 'PushEvent',
+        actor: { id: 50, login: 'foo' },
+        repo: { id: 100, name: 'foo/foo' },
+        payload: { push_id: 3000, ref: 'refs/heads/master', head: 'abc123def' },
+        created_at: '2025-06-27 10:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123def/pulls?per_page=100', body: [])
+    stub_github('https://api.github.com/user/50', body: { id: 50, login: 'foo' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    owner_push = fb.query('(and (eq what "git-was-pushed") (eq event_id 22222))').each.first
+    refute_nil(owner_push)
+    assert_equal(1, owner_push.by_owner)
+    assert_equal(50, owner_push.who)
+  end
+
+  def test_push_event_by_non_owner_sets_by_owner_to_none
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 101, name: 'foo', full_name: 'foo/foo', default_branch: 'master', owner: { id: 50, login: 'foo' } }
+    )
+    stub_github(
+      'https://api.github.com/repositories/101',
+      body: { id: 101, name: 'foo', full_name: 'foo/foo' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/101/events?per_page=100',
+      body: [{
+        id: '33333',
+        type: 'PushEvent',
+        actor: { id: 60, login: 'contributor' },
+        repo: { id: 101, name: 'foo/foo' },
+        payload: { push_id: 4000, ref: 'refs/heads/master', head: 'def456ghi' },
+        created_at: '2025-06-27 11:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/def456ghi/pulls?per_page=100', body: [])
+    stub_github('https://api.github.com/user/60', body: { id: 60, login: 'contributor' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    contributor_push = fb.query('(and (eq what "git-was-pushed") (eq event_id 33333))').each.first
+    refute_nil(contributor_push)
+    assert_nil(contributor_push['by_owner'])
+    assert_equal(60, contributor_push.who)
   end
 
   def test_success_add_opened_pull_request_event_to_factbase
@@ -1639,6 +1703,40 @@ class TestGithubEvents < Jp::Test
         details: 'The pull request foo/foo#456 has been opened by @user.'
       )
     )
+  end
+
+  def test_skip_fill_up_event_if_event_exists_in_factbase_by_given_uniques
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11122',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 456,
+          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    fb.with(what: 'pull-was-opened', repository: 42, where: 'github', who: 45, issue: 456)
+    load_it('github-events', fb)
+    assert_equal(2, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_122))
+    assert(fb.one?(what: 'pull-was-opened', where: 'github', repository: 42, who: 45, issue: 456))
   end
 
   def test_skip_pull_request_event_with_unknown_payload_action
@@ -2122,143 +2220,120 @@ class TestGithubEvents < Jp::Test
     assert(fb.one?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 456))
   end
 
-   def test_fetch_release_info_successful_comparison
-    mock_fb = Minitest::Mock.new
-    mock_result = Minitest::Mock.new
-    mock_result.expect(:each, [].to_enum)
-    mock_fb.expect(:query, mock_result, [String])
-    mock_octo = Minitest::Mock.new
-    comparison_data = {
-      total_commits: 3,
-      files: [
-        { changes: 10 },
-        { changes: 5 }
-      ],
-      commits: [
-        { sha: 'abc123def' }
-      ]
-    }
-    mock_octo.expect(:compare, comparison_data, ['owner/repo', 'v1.0.0', 'v2.0.0'])
-    Fbe.stub(:fb, mock_fb) do
-      Fbe.stub(:octo, mock_octo) do
-        fact = Minitest::Mock.new
-        fact.expect(:repository, 'test/repo')
-        fact.expect(:what, 'release')
-        fact.expect(:tag, 'v2.0.0')
-        Fbe::GithubGraph.stub(:fetch_tag, 'v1.0.0') do
-          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'initial' }) do
-            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')            
-            assert_equal 3, result[:commits]
-            assert_equal 15, result[:hoc]
-            assert_equal 'abc123def', result[:last_commit]
-          end
-        end
-      end
+  def test_pull_request_event_captures_changed_files
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '11126',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          number: 123,
+          pull_request: {
+            merged: true,
+            number: 123,
+            state: 'closed',
+            merged_at: Time.parse('2025-06-27 19:00:05 UTC'),
+            head: { ref: 'feature-branch', sha: 'abc123' },
+            additions: 10,
+            deletions: 5,
+            changed_files: 7
+          }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
     end
-    mock_fb.verify
-    mock_octo.verify
+    f = fb.query('(eq what "pull-was-merged")').each.first
+    refute_nil(f)
+    assert_equal(7, f.files)
+    assert_equal(15, f.hoc)
   end
 
-  def test_fetch_release_info_nil_comparison
-    mock_fb = Minitest::Mock.new
-    mock_result = Minitest::Mock.new
-    mock_result.expect(:each, [].to_enum)
-    mock_fb.expect(:query, mock_result, [String])
-    mock_octo = Minitest::Mock.new
-    mock_octo.expect(:compare, nil, ['owner/repo', 'v1.0.0', 'v2.0.0'])
-    mock_logger = Minitest::Mock.new
-    mock_logger.expect(:warn, nil, ['Comparison result is nil for repo owner/repo, tag v1.0.0, fact.tag v2.0.0'])
-    Fbe.stub(:fb, mock_fb) do
-      Fbe.stub(:octo, mock_octo) do
-        fact = Minitest::Mock.new
-        fact.expect(:repository, 'test/repo')
-        fact.expect(:what, 'release')
-        fact.expect(:tag, 'v2.0.0')
-        Fbe::GithubGraph.stub(:fetch_tag, 'v1.0.0') do
-          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'initial' }) do
-            original_logger = $loog
-            $loog = mock_logger
-            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')
-            $loog = original_logger
-            assert_equal({}, result)
-            assert_nil result[:commits]
-            assert_nil result[:hoc]
-            assert_nil result[:last_commit]
-          end
-        end
-      end
-    end
-    mock_fb.verify
-    mock_octo.verify
-    mock_logger.verify
+  def test_release_event_with_nil_compare_response
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?per_page=100',
+      body: [{ sha: 'abc123def456' }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      status: 404,
+      body: {
+        message: 'Not Found',
+        documentation_url: 'https://docs.github.com/rest/commits/commits#compare-two-commits',
+        status: '404'
+      }
+    )
+    stub_github(
+      'https://api.github.com/user/8086956',
+      body: { login: 'rultor', id: 8_086_956 }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    assert_equal([526_301], f.first[:contributors])
   end
 
-  def test_fetch_release_info_fallback_to_first_commit
-    mock_fb = Minitest::Mock.new
-    mock_result = Minitest::Mock.new
-    mock_last = Minitest::Mock.new
-    mock_last.expect(:tag, nil)
-    mock_result.expect(:each, [mock_last].to_enum)
-    mock_fb.expect(:query, mock_result, [String])
-    mock_octo = Minitest::Mock.new
-    comparison_data = {
-      total_commits: 2,
-      files: [{ changes: 5 }],
-      commits: [{ sha: 'def456' }]
-    }
-    mock_octo.expect(:compare, comparison_data, ['owner/repo', 'fallback_sha', 'v2.0.0'])
-    Fbe.stub(:fb, mock_fb) do
-      Fbe.stub(:octo, mock_octo) do
-        fact = Minitest::Mock.new
-        fact.expect(:repository, 'test/repo')
-        fact.expect(:what, 'release')
-        fact.expect(:tag, 'v2.0.0')
-        Fbe::GithubGraph.stub(:fetch_tag, nil) do
-          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'fallback_sha' }) do
-            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')
-            assert_equal 2, result[:commits]
-            assert_equal 5, result[:hoc]
-            assert_equal 'def456', result[:last_commit]
-          end
-        end
-      end
-    end
-    mock_fb.verify
-    mock_octo.verify
-  end
-
-  def test_fetch_release_info_empty_commits_array
-    mock_fb = Minitest::Mock.new
-    mock_result = Minitest::Mock.new
-    mock_result.expect(:each, [].to_enum)
-    mock_fb.expect(:query, mock_result, [String])
-    mock_octo = Minitest::Mock.new
-    comparison_data = {
-      total_commits: 0,
-      files: [],
-      commits: []
-    }
-    mock_octo.expect(:compare, comparison_data, ['owner/repo', 'v1.0.0', 'v2.0.0'])
-    Fbe.stub(:fb, mock_fb) do
-      Fbe.stub(:octo, mock_octo) do
-        fact = Minitest::Mock.new
-        fact.expect(:repository, 'test/repo')
-        fact.expect(:what, 'release')
-        fact.expect(:tag, 'v2.0.0')
-        Fbe::GithubGraph.stub(:fetch_tag, 'v1.0.0') do
-          Fbe::GithubGraph.stub(:find_first_commit, { sha: 'initial' }) do
-            result = Fbe::GithubGraph.fetch_release_info(fact, 'owner/repo')
-            assert_equal 0, result[:commits]
-            assert_equal 0, result[:hoc]
-            assert_nil result[:last_commit]
-          end
-        end
-      end
-    end
-    mock_fb.verify
-    mock_octo.verify
-  end
-  
   private
 
   def stub_event(*json)

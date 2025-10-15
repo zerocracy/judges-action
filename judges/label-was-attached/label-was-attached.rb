@@ -22,7 +22,8 @@ badges = %w[bug enhancement question]
 
 Fbe.iterate do
   as 'labels_were_scanned'
-  by "(agg
+  sort_by 'issue'
+  by "
     (and
       (eq what 'issue-was-opened')
       (gt issue $before)
@@ -36,15 +37,14 @@ Fbe.iterate do
           (eq repository $repository)
           (eq issue $issue)
           (eq what '#{$judge}')))
-      (eq where 'github'))
-    (min issue))"
+      (eq where 'github'))"
   repeats 64
   over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
     events =
       begin
         Fbe.octo.issue_timeline(repo, issue)
-      rescue Octokit::NotFound => e
+      rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next
@@ -62,11 +62,14 @@ Fbe.iterate do
             n.repository = repository
             n.where = 'github'
           end
-        raise "A label is already attached to #{repo}##{issue}" if nn.nil?
+        if nn.nil?
+          $loog.warn("A label #{badge.inspect} is already attached to #{repo}##{issue}")
+          next
+        end
         nn.who = te[:actor][:id]
         nn.when = te[:created_at]
         nn.details =
-          "The '#{nn.label}' label was attached by @#{te[:actor][:login]} " \
+          "The #{nn.label.inspect} label was attached by @#{te[:actor][:login]} " \
           "to the issue #{Fbe.issue(nn)}."
         $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
       end

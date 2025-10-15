@@ -53,3 +53,7 @@ inputs:
     description: 'Path of the SQLite file with the cache of HTTP requests'
     required: false
     default: 'http-cache.sqlite'
+  bots:
+    description: 'Comma-separated list of GitHub user logins to ignore'
+    required: false
+    default: '0pdd,rultor'

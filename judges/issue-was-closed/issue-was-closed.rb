@@ -14,7 +14,8 @@ require_relative '../../lib/issue_was_lost'
 
 Fbe.iterate do
   as 'issues_were_scanned'
-  by "(agg
+  sort_by 'issue'
+  by "
     (and
       (gt issue $before)
       (or
@@ -26,6 +27,7 @@ Fbe.iterate do
         (eq what 'bug-report-was-rewarded')
         (eq what 'enhancement-suggestion-was-rewarded'))
       (eq repository $repository)
+      (unique repository issue)
       (absent stale)
       (absent tombstone)
       (absent done)
@@ -35,18 +37,18 @@ Fbe.iterate do
           (eq repository $repository)
           (eq what 'issue-was-closed')
           (eq where $where)))
-      (eq where 'github'))
-    (min issue))"
+      (eq where 'github'))"
   repeats 64
   over do |repository, issue|
     repo = Fbe.octo.repo_name_by_id(repository)
-    begin
-      json = Fbe.octo.issue(repo, issue)
-    rescue Octokit::NotFound => e
-      $loog.info("The issue #{repo}##{issue} doesn't exist: #{e.message}")
-      Jp.issue_was_lost('github', repository, issue)
-      next issue
-    end
+    json =
+      begin
+        Fbe.octo.issue(repo, issue)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("The issue #{repo}##{issue} doesn't exist: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
+      end
     unless json[:state] == 'closed'
       $loog.debug("Issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue
@@ -67,7 +69,7 @@ Fbe.iterate do
       else
         nn.stale = 'who'
       end
-      nn.details = "Apparently, #{Fbe.issue(nn)} has been '#{nn.what}'."
+      nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("It was found closed at #{Fbe.issue(nn)}")
     end
     issue

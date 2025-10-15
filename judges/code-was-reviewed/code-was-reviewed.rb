@@ -23,6 +23,7 @@ Fbe.consider(
     (absent tombstone)
     (absent done)
     (eq where 'github')
+    (unique where repository issue)
     (empty
       (and
         (eq issue $issue)
@@ -45,7 +46,6 @@ Fbe.consider(
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
-          nn.when = review[:submitted_at]
           nn.issue = f.issue
           nn.who = review.dig(:user, :id)
           nn.what = $judge
@@ -53,14 +53,17 @@ Fbe.consider(
           nn.where = f.where
         end
       next if n.nil?
+      n.when = review[:submitted_at]
       n.hoc = pr[:additions] + pr[:deletions]
       n.author = pr.dig(:user, :id)
       n.comments = Fbe.octo.issue_comments(repo, f.issue).count
       n.review_comments = Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
       n.seconds = (review[:submitted_at] - pr[:created_at]).to_i
-      n.details = "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
-                  "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
-                  "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
+      n.details =
+        "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
+        "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
+        "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
+      $loog.info("The #{Fbe.issue(n)} was reviewed by #{Fbe.who(n)} with #{n.review_comments} comments")
     end
   end
 end

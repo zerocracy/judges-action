@@ -31,14 +31,15 @@ require 'fbe/who'
       (eq where 'github'))"
   ) do |f|
     repo = Fbe.octo.repo_name_by_id(f.repository)
-    begin
-      json = Fbe.octo.issue(repo, f.issue)
-    rescue Octokit::NotFound
-      $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-      f.stale = 'issue'
-      $loog.info("#{Fbe.issue(f)} is lost")
-      next
-    end
+    json =
+      begin
+        Fbe.octo.issue(repo, f.issue)
+      rescue Octokit::NotFound
+        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
+        f.stale = 'issue'
+        $loog.info("#{Fbe.issue(f)} is lost")
+        next
+      end
     who = json.dig(a, :id)
     if who.nil?
       f.stale = 'who'

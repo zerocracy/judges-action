@@ -28,7 +28,7 @@ Fbe.consider(
   json =
     begin
       Fbe.octo.issue(repo, f.issue)
-    rescue Octokit::NotFound => e
+    rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next

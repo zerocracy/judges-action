@@ -21,10 +21,10 @@ def Jp.comments_info(pr, repo: nil)
   {
     comments: (pr[:comments] || 0) + (pr[:review_comments] || 0),
     comments_to_code: ccomments.count,
-    comments_by_author: ccomments.count { |c| c[:user][:id] == uid } +
-      icomments.count { |c| c[:user][:id] == uid },
+    comments_by_author: ccomments.count { |c| c.dig(:user, :id) == uid } +
+      icomments.count { |c| c.dig(:user, :id) == uid },
     comments_by_reviewers: ccomments.count { |c| c.dig(:user, :id) != uid } +
-      icomments.count { |c| c[:user][:id] != uid },
+      icomments.count { |c| c.dig(:user, :id) != uid },
     comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
     comments_resolved: Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
   }
