@@ -1737,6 +1737,41 @@ class TestGithubEvents < Jp::Test
     assert(fb.one?(what: 'pull-was-opened', where: 'github', repository: 42, who: 45, issue: 456))
   end
 
+  def test_skip_duplicate_opened_pull_request_event_without_who
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '55950772790',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 187,
+          pull_request: { number: 187, head: { ref: 'fix-bug', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-10-16 19:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    fb.with(
+      _id: 1, branch: 'fix-bug', details: 'The missing pull foo/foo#187 has been opened by @user.',
+      issue: 187, repository: 42, what: 'pull-was-opened', when: '2025-10-16T19:00:00Z', where: 'github'
+    )
+    load_it('github-events', fb)
+    assert(fb.one?(what: 'pull-was-opened', where: 'github', repository: 42, issue: 187))
+  end
+
   def test_skip_pull_request_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up
