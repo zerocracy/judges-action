@@ -2302,6 +2302,81 @@ class TestGithubEvents < Jp::Test
     assert_equal(15, f.hoc)
   end
 
+  def test_closed_pull_request_event_with_nil_additions_or_deletions
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11126',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
+            number: 123,
+            pull_request: {
+              merged: true,
+              number: 123,
+              state: 'closed',
+              merged_at: Time.parse('2025-06-27 19:00:05 UTC'),
+              head: { ref: 'feature-branch', sha: 'abc123' },
+              additions: nil,
+              deletions: 5,
+              changed_files: 7
+            }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        },
+        {
+          id: '11125',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
+            number: 122,
+            pull_request: {
+              merged: true,
+              number: 122,
+              state: 'closed',
+              merged_at: Time.parse('2025-06-26 19:00:05 UTC'),
+              head: { ref: 'feature-branch', sha: 'abc123' },
+              additions: 7,
+              deletions: nil,
+              changed_files: 7
+            }
+          },
+          created_at: '2025-06-26 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/122/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/122/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f1, f2 = fb.query('(eq what "pull-was-merged")').each.to_a
+    refute_nil(f1)
+    assert_equal(5, f1.hoc)
+    refute_nil(f2)
+    assert_equal(7, f2.hoc)
+  end
+
   def test_release_event_with_nil_compare_response
     WebMock.disable_net_connect!
     rate_limit_up
