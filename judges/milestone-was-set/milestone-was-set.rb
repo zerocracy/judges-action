@@ -44,6 +44,8 @@ Fbe.iterate do
       $loog.debug("New milestone ##{json[:number]} set by #{Fbe.who(fact)}")
     when 'closed'
       fact.what = 'milestone-was-closed'
+      fact.title = json[:title]
+      fact.description = json[:description]
       fact.closed_at = Time.parse(json[:closed_at].iso8601) if json[:closed_at]
       fact.details =
         "The milestone ##{json[:number]} '#{json[:title]}' has been closed " \
