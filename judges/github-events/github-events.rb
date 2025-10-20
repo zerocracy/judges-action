@@ -155,6 +155,14 @@ Fbe.iterate do
         Jp.fill_fact_by_hash(fact, Jp.comments_info(pl, repo: rname))
         Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(pl, repo: rname))
         fact.branch = pl[:head][:ref]
+        review =
+          begin
+            Fbe.octo.pull_request_reviews(rname, fact.issue).first
+          rescue Octokit::NotFound
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
+            nil
+          end
+        fact.review = review[:submitted_at] if review
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \

@@ -84,6 +84,8 @@ Fbe.iterate do
         nn.stale = 'who'
       end
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
+      review = Fbe.octo.pull_request_reviews(repo, issue).first
+      nn.review = review[:submitted_at] if review
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("Just found out that #{Fbe.issue(nn)} has been #{nn.what.inspect}")
     end
