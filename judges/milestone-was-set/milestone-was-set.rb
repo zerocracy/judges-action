@@ -18,10 +18,10 @@ Fbe.iterate do
   as 'milestones_were_scanned'
   by '(plus 0 $before)'
 
-  def self.skip_milestone(json)
+  def self.skip_milestone(json, rname = nil)
+    repo = rname || json.dig(:repository, :full_name) || 'unknown'
     $loog.debug(
-      "Milestone ##{json[:number]} (#{json[:title]}) " \
-        "in #{json[:repository][:full_name]} ignored"
+      "Milestone ##{json[:number]} (#{json[:title]}) in #{repo} ignored"
     )
     raise Factbase::Rollback
   end
@@ -52,7 +52,7 @@ Fbe.iterate do
           "in #{rname} by #{Fbe.who(fact)}."
       $loog.debug("Milestone ##{json[:number]} closed by #{Fbe.who(fact)}")
     else
-      skip_milestone(json)
+      skip_milestone(json, rname)
     end
   end
 
@@ -62,25 +62,24 @@ Fbe.iterate do
         (eq repository #{fact.repository})
         (eq milestone #{fact.milestone})
         (eq what '#{fact.what}')
-        (eq milestone_event_id #{fact.milestone_event_id})
+        (eq milestone_event_id '#{fact.milestone_event_id}')
         (eq where 'github'))"
     ).each.any?
   end
 
   over do |repository, latest|
-    rname = Fbe.octo.repo_name_by_id(repository)
+    rname = repository.to_s.include?('/') ? repository : Fbe.octo.repo_name_by_id(repository)
     $loog.debug("Starting to scan milestones in repository #{rname} (##{repository}), the latest scan was at #{latest}...")
     id = nil
     total = 0
     detected = 0
-    first = nil
     rstart = Time.now
     milestones = Fbe.octo.milestones(rname, state: 'all')
     milestones.each do |milestone|
       total += 1
       updated_time = Time.parse(milestone[:updated_at].iso8601).to_i
       id = updated_time
-      first = id if first.nil?
+      id = [id, updated_time].compact.max
       if updated_time <= latest
         $loog.debug("Milestone ##{milestone[:number]} (updated #{updated_time}) is not newer than #{latest}, skipping")
         next
@@ -97,7 +96,7 @@ Fbe.iterate do
           fill_up_milestone(f, milestone, repository, rname)
           if milestone_seen_already?(f)
             $loog.debug("Milestone ##{milestone[:number]} #{f.what} already recorded, skipping")
-            skip_milestone(milestone)
+            skip_milestone(milestone, rname)
           end
           $loog.info("Detected new milestone event ##{milestone[:number]} (updated #{updated_time}) in #{rname}: #{milestone[:title]}")
           detected += 1
