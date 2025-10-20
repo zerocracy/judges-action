@@ -21,7 +21,7 @@ Fbe.iterate do
   def self.skip_milestone(json)
     $loog.debug(
       "Milestone ##{json[:number]} (#{json[:title]}) " \
-      "in #{json[:repository][:full_name]} ignored"
+        "in #{json[:repository][:full_name]} ignored"
     )
     raise Factbase::Rollback
   end
@@ -30,25 +30,25 @@ Fbe.iterate do
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.milestone = json[:number]
     fact.repository = repo_id
-    fact.who = json[:creator][:id].to_i if json[:creator]    
+    fact.who = json[:creator][:id].to_i if json[:creator]
     case json[:state]
     when 'open'
       fact.what = 'milestone-was-set'
       fact.deadline = json[:due_on] ? Time.parse(json[:due_on].iso8601) : nil
       fact.title = json[:title]
-      fact.description = json[:description]      
+      fact.description = json[:description]
       fact.details =
         "A new milestone ##{json[:number]} '#{json[:title]}' has been set " \
-        "in #{rname} by #{Fbe.who(fact)} " \
-        "#{fact.deadline ? "with deadline #{fact.deadline}" : 'without a deadline'}."
-      $loog.debug("New milestone ##{json[:number]} set by #{Fbe.who(fact)}")      
+          "in #{rname} by #{Fbe.who(fact)} " \
+          "#{fact.deadline ? "with deadline #{fact.deadline}" : 'without a deadline'}."
+      $loog.debug("New milestone ##{json[:number]} set by #{Fbe.who(fact)}")
     when 'closed'
       fact.what = 'milestone-was-closed'
       fact.closed_at = Time.parse(json[:closed_at].iso8601) if json[:closed_at]
       fact.details =
         "The milestone ##{json[:number]} '#{json[:title]}' has been closed " \
-        "in #{rname} by #{Fbe.who(fact)}."
-      $loog.debug("Milestone ##{json[:number]} closed by #{Fbe.who(fact)}")        
+          "in #{rname} by #{Fbe.who(fact)}."
+      $loog.debug("Milestone ##{json[:number]} closed by #{Fbe.who(fact)}")
     else
       skip_milestone(json)
     end
@@ -67,13 +67,13 @@ Fbe.iterate do
 
   over(timeout: ($options.timeout || 60) * 0.8) do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
-    $loog.debug("Starting to scan milestones in repository #{rname} (##{repository}), the latest scan was at #{latest}...")    
+    $loog.debug("Starting to scan milestones in repository #{rname} (##{repository}), the latest scan was at #{latest}...")
     id = nil
     total = 0
     detected = 0
     first = nil
     rstart = Time.now
-    milestones = Fbe.octo.milestones(rname, state: 'all')    
+    milestones = Fbe.octo.milestones(rname, state: 'all')
     milestones.each do |milestone|
       total += 1
       updated_time = Time.parse(milestone[:updated_at].iso8601).to_i
@@ -102,7 +102,7 @@ Fbe.iterate do
         end
       end
     end
-    $loog.info("In #{rname}, detected #{detected} milestone events out of #{total} scanned in #{rstart.ago}")    
+    $loog.info("In #{rname}, detected #{detected} milestone events out of #{total} scanned in #{rstart.ago}")
     if id.nil?
       $loog.debug("No new milestones found in #{rname} in #{rstart.ago}, the latest timestamp remains ##{latest}")
       latest
