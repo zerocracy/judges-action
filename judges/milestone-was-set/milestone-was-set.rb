@@ -62,7 +62,7 @@ Fbe.iterate do
         (eq repository #{fact.repository})
         (eq milestone #{fact.milestone})
         (eq what '#{fact.what}')
-        (not (eq milestone_event_id #{fact.milestone_event_id}))
+        (eq milestone_event_id #{fact.milestone_event_id})
         (eq where 'github'))"
     ).each.any?
   end
