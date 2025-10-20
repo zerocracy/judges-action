@@ -65,7 +65,7 @@ Fbe.iterate do
     ).each.any?
   end
 
-  over(timeout: ($options.timeout || 60) * 0.8) do |repository, latest|
+  over do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
     $loog.debug("Starting to scan milestones in repository #{rname} (##{repository}), the latest scan was at #{latest}...")
     id = nil
