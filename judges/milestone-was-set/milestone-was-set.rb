@@ -15,7 +15,7 @@ require 'fbe/who'
 require_relative '../../lib/fill_fact'
 
 Fbe.iterate do
-  as 'milestones-were-scanned'
+  as 'milestones_were_scanned'
   by '(plus 0 $before)'
 
   def self.skip_milestone(json)
