@@ -1,6 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:best-practices"
   ]
+  // @todo #1115:30min Add minimumReleaseAge configuration to renovate.json
+  //  to avoid immediately pulling possibly malicious or unstable releases.
+  //  Set it to some amount of days.
+  //  See docs: https://docs.renovatebot.com/configuration-options/#minimumreleaseage
+  // @todo #1115:30min Group related dependencies into a single pull request to save time reviewing dozens of small updates.
+  //  See docs: https://docs.renovatebot.com/configuration-options/#group
 }
