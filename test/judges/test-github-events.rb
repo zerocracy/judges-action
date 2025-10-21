@@ -1902,6 +1902,7 @@ class TestGithubEvents < Jp::Test
         created_at: Time.parse('2025-05-04 03:46:04 UTC')
       }
     )
+    stub_github('https://api.github.com/repos/bar/bar/pulls/305/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/issues/305/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100',
@@ -2197,6 +2198,7 @@ class TestGithubEvents < Jp::Test
         }
       ]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/456/reviews?per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/old_foo/issues/456/comments?per_page=100',
       status: 302,
@@ -2288,6 +2290,7 @@ class TestGithubEvents < Jp::Test
         created_at: '2025-06-27 19:00:05 UTC'
       }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
@@ -2361,8 +2364,10 @@ class TestGithubEvents < Jp::Test
       ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/122/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/122/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/122/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
@@ -2375,6 +2380,60 @@ class TestGithubEvents < Jp::Test
     assert_equal(5, f1.hoc)
     refute_nil(f2)
     assert_equal(7, f2.hoc)
+  end
+
+  def test_closed_pull_request_with_exist_review
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11126',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
+            number: 123,
+            pull_request: {
+              merged: true,
+              number: 123,
+              state: 'closed',
+              merged_at: Time.parse('2025-10-20 19:00:05 UTC'),
+              head: { ref: 'feature-branch', sha: 'abc123' },
+              additions: nil,
+              deletions: 5,
+              changed_files: 7
+            }
+          },
+          created_at: '2025-10-20 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100',
+      body: [{ id: 123, user: { id: 142, login: 'user2' }, submitted_at: '2025-06-26 05:05:46 UTC' }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    refute_nil(f)
+    assert_equal(Time.parse('2025-06-26 05:05:46 UTC'), f.review)
   end
 
   def test_release_event_with_nil_compare_response
