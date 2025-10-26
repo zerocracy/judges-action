@@ -2501,6 +2501,29 @@ class TestGithubEvents < Jp::Test
     assert_equal([526_301], f.first[:contributors])
   end
 
+  def test_write_supervision_log_if_raise_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: 11,
+        created_at: 'wrong date',
+        actor: { id: 42 },
+        type: 'CreateEvent',
+        repo: { id: 42 },
+        payload: { ref_type: 'unknown', ref: 'foo' }
+      }
+    )
+    loog = Loog::Buffer.new
+    assert_raises(NoMethodError) do
+      load_it('github-events', Factbase.new, loog:)
+    end
+    loog.to_s.then do |s|
+      assert_match('"repo": "foo/foo"', s)
+      assert_match('"created_at": "wrong date"', s)
+    end
+  end
+
   private
 
   def stub_event(*json)
