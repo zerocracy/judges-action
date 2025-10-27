@@ -18,7 +18,7 @@ def total_commits(_fact)
   repos = []
   Fbe.unmask_repos do |repo|
     json = Fbe.octo.repository(repo)
-    next if json[:size].zero?
+    next if json[:size].nil? || json[:size].zero?
     repos << [*repo.split('/'), json[:default_branch]]
   end
   commits = Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } unless repos.empty?

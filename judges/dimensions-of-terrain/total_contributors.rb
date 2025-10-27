@@ -20,7 +20,8 @@ require 'fbe/unmask_repos'
 def total_contributors(_fact)
   contributors = Set.new
   Fbe.unmask_repos do |repo|
-    next if Fbe.octo.repository(repo)[:size].zero?
+    json = Fbe.octo.repository(repo)
+    next if json[:size].nil? || json[:size].zero?
     Fbe.octo.contributors(repo).each do |contributor|
       contributors << contributor[:id]
     end
