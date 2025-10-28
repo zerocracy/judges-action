@@ -43,13 +43,13 @@ class Jp::Test < Minitest::Test
     )
   end
 
-  def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }))
+  def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }), loog: nil)
     $fb = fb
     $global = {}
     $local = {}
     $judge = judge
     $options = options
-    $loog = ENV['RACK_RUN'] ? Loog::NULL : Loog::VERBOSE
+    $loog = loog || (ENV['RACK_RUN'] ? Loog::NULL : Loog::VERBOSE)
     $epoch = Time.now
     $kickoff = Time.now
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
