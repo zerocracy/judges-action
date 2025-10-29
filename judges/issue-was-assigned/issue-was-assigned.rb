@@ -19,6 +19,7 @@ Fbe.iterate do
       (gt issue $before)
       (eq what 'issue-was-opened')
       (eq repository $repository)
+      (absent unassigned)
       (absent stale)
       (absent tombstone)
       (absent done)
