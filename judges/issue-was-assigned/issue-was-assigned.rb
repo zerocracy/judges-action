@@ -19,7 +19,6 @@ Fbe.iterate do
       (gt issue $before)
       (eq what 'issue-was-opened')
       (eq repository $repository)
-      (absent unassigned)
       (absent stale)
       (absent tombstone)
       (absent done)
@@ -28,7 +27,8 @@ Fbe.iterate do
           (eq issue $issue)
           (eq repository $repository)
           (eq what '#{$judge}')
-          (eq where $where)))
+          (eq where $where)
+          (absent unassigned)))
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
