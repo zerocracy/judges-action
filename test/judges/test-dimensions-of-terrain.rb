@@ -274,8 +274,16 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_commits
     WebMock.disable_net_connect!
     fb = Factbase.new
-    load_it('dimensions-of-terrain', fb,
-            Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true }))
+    load_it(
+      'dimensions-of-terrain',
+      fb,
+      Judges::Options.new(
+        {
+          'repositories' => 'foo/foo,yegor256/empty-repo,yegor256/nil-size-repo',
+          'testing' => true
+        }
+      )
+    )
     f = fb.query("(eq what 'dimensions-of-terrain')").each.first
     assert_equal(1484, f.total_commits)
   end
