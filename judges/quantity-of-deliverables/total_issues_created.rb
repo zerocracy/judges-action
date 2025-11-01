@@ -17,6 +17,7 @@ def total_issues_created(fact)
   pulls = 0
   Fbe.unmask_repos do |repo|
     Fbe.octo.list_issues(repo, since: ">#{fact.since.utc.iso8601[0..9]}").each do |json|
+      next if json.is_a?(Array)
       issues += 1
       pulls += 1 unless json[:pull_request].nil?
     end

@@ -357,4 +357,50 @@ class TestQuantityOfDeliverables < Jp::Test
       end
     end
   end
+
+  def test_quantity_of_deliverables_if_wrong_issue_item
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github(
+      'https://api.github.com/user/42',
+      body: { id: 42, login: 'torvalds' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00',
+      body: []
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15',
+      body: [
+        {
+          pull_request: {}
+        },
+        []
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
+        load_it('quantity-of-deliverables', fb)
+        f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
+        assert_equal(1, f.first.total_issues_created)
+        assert_equal(1, f.first.total_pulls_submitted)
+      end
+    end
+  end
 end
