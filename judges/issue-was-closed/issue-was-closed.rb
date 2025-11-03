@@ -12,6 +12,8 @@ require 'fbe/octo'
 require 'fbe/who'
 require_relative '../../lib/issue_was_lost'
 
+badges = %w[bug enhancement question]
+
 Fbe.iterate do
   as 'issues_were_scanned'
   sort_by 'issue'
@@ -71,6 +73,39 @@ Fbe.iterate do
       end
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("It was found closed at #{Fbe.issue(nn)}")
+    end
+    events =
+      begin
+        Fbe.octo.issue_timeline(repo, issue)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next
+      end
+    events.each do |te|
+      next unless te[:event] == 'labeled'
+      badge = te[:label][:name]
+      next unless badges.include?(badge)
+      Fbe.fb.txn do |fbt|
+        nn =
+          Fbe.if_absent(fb: fbt) do |n|
+            n.issue = issue
+            n.label = badge
+            n.what = 'label-was-attached'
+            n.repository = repository
+            n.where = 'github'
+          end
+        if nn.nil?
+          $loog.warn("A label #{badge.inspect} is already attached to #{repo}##{issue}")
+          next
+        end
+        nn.who = te[:actor][:id]
+        nn.when = te[:created_at]
+        nn.details =
+          "Seemingly, the #{nn.label.inspect} label was attached by @#{te[:actor][:login]} " \
+          "to the issue #{Fbe.issue(nn)}."
+        $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
+      end
     end
     issue
   end

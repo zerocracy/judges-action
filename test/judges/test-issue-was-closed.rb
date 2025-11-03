@@ -38,6 +38,7 @@ class TestIssueWasClosed < Jp::Test
         closed_by: { login: 'user1', id: 222_111 }
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github')
@@ -77,10 +78,106 @@ class TestIssueWasClosed < Jp::Test
         closed_by: { login: 'user1', id: 222_111 }
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'bug-was-accepted', repository: 42, issue: 44, where: 'github')
     load_it('issue-was-closed', fb)
     assert(fb.one?(what: 'issue-was-closed', repository: 42, issue: 44, where: 'github'))
+  end
+
+  def test_find_closed_issues_with_labels
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52',
+      body: {
+        number: 52, title: 'some title 52', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
+      body: [
+        {
+          id: 195,
+          actor: { id: 421, login: 'user' },
+          event: 'labeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert_equal(1, fb.picks(what: 'issue-was-opened').size)
+    assert_equal(1, fb.picks(what: 'label-was-attached').size)
+    assert(
+      fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
+    )
+  end
+
+  def test_find_closed_issues_without_labels
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52',
+      body: {
+        number: 52, title: 'some title 52', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
+      body: []
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert_equal(1, fb.picks(what: 'issue-was-opened').size)
+    assert_equal(0, fb.picks(what: 'label-was-attached').size)
+  end
+
+  def test_find_closed_issues_with_labels_and_exists_labels_fact
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52',
+      body: {
+        number: 52, title: 'some title 52', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
+      body: [
+        {
+          id: 195,
+          actor: { id: 421, login: 'user' },
+          event: 'labeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
+      .with(_id: 2, what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
+    load_it('issue-was-closed', fb)
+    assert_equal(1, fb.picks(what: 'issue-was-opened').size)
+    assert_equal(1, fb.picks(what: 'label-was-attached').size)
+    assert(
+      fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
+    )
   end
 end
