@@ -78,13 +78,12 @@ Fbe.iterate do
       begin
         Fbe.octo.issue_timeline(repo, issue)
       rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
-        Jp.issue_was_lost('github', repository, issue)
-        next
+        $loog.warn("Can't fetch timeline for #{repo}##{issue}: #{e.message}")
+        next issue
       end
     events.each do |te|
       next unless te[:event] == 'labeled'
-      badge = te[:label][:name]
+      badge = te.dig(:label, :name)
       next unless badges.include?(badge)
       Fbe.fb.txn do |fbt|
         nn =
@@ -99,10 +98,10 @@ Fbe.iterate do
           $loog.warn("A label #{badge.inspect} is already attached to #{repo}##{issue}")
           next
         end
-        nn.who = te[:actor][:id]
+        nn.who = te.dig(:actor, :id)
         nn.when = te[:created_at]
         nn.details =
-          "Seemingly, the #{nn.label.inspect} label was attached by @#{te[:actor][:login]} " \
+          "Seemingly, the #{nn.label.inspect} label was attached by @#{te.dig(:actor, :login)} " \
           "to the issue #{Fbe.issue(nn)}."
         $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
       end
