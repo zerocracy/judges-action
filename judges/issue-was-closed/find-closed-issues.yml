@@ -30,5 +30,6 @@ input:
     who: 4444
     when: 2025-07-18T20:50:50Z
 expected:
-  - /fb[count(f)=4]
+  - /fb[count(f)=5]
   - /fb/f[what='issue-was-closed' and where='github' and issue=142 and repository=680]
+  - /fb/f[what='label-was-attached' and where='github' and issue=142 and repository=680]
