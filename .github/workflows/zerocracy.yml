@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 55
     steps:
       - uses: actions/checkout@v5
-      - uses: zerocracy/judges-action@0.15.51
+      - uses: zerocracy/judges-action@9cca8a932e04eb97ef3c765d137ff8aff3e95273 # 0.16.1
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.PAT }}
@@ -30,13 +30,13 @@ jobs:
           options: |
             sqlite_cache_maxvsize=100K
             sqlite_cache_maxsize=100Mb
-      - uses: zerocracy/pages-action@0.3.1
+      - uses: zerocracy/pages-action@0.5.2
         with:
           verbose: true
           github-token: ${{ secrets.PAT }}
           factbase: zerocracy.fb
           output: pages
-      - uses: JamesIves/github-pages-deploy-action@v4.7.3
+      - uses: JamesIves/github-pages-deploy-action@4a3abc783e1a24aeb44c16e869ad83caf6b4cc23 # v4.7.4
         with:
           folder: pages
           clean: false

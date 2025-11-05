@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+# yamllint disable rule:line-length
+name: Update Repository Version
+description: Fetches the latest tag from a GitHub repository and updates README.md
+inputs:
+  owner:
+    description: Repository owner
+    required: true
+  repo:
+    description: Repository name
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/github-script@v8
+      with:
+        script: |
+          const { data: tags } = await github.rest.repos.listTags({
+            owner: '${{ inputs.owner }}',
+            repo: '${{ inputs.repo }}'
+          });
+          const latest = tags[0]?.name;
+          if (!latest) {
+            core.setFailed('No tags found for ${{ inputs.owner }}/${{ inputs.repo }}');
+            return;
+          }
+          const fs = require('fs');
+          let readme = fs.readFileSync('README.md', 'utf8');
+          readme = readme.replace(new RegExp('${{ inputs.repo }}@.+$', 'gm'), `${{ inputs.repo }}@${latest}`);
+          fs.writeFileSync('README.md', readme);
+          core.info(`Updated ${{ inputs.repo }} to ${latest}`);

@@ -1739,6 +1739,41 @@ class TestGithubEvents < Jp::Test
     assert(fb.one?(what: 'pull-was-opened', where: 'github', repository: 42, who: 45, issue: 456))
   end
 
+  def test_skip_duplicate_opened_pull_request_event_without_who
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [{
+        id: '55950772790',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 187,
+          pull_request: { number: 187, head: { ref: 'fix-bug', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-10-16 19:00:00 UTC'
+      }]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    fb.with(
+      _id: 1, branch: 'fix-bug', details: 'The missing pull foo/foo#187 has been opened by @user.',
+      issue: 187, repository: 42, what: 'pull-was-opened', when: '2025-10-16T19:00:00Z', where: 'github'
+    )
+    load_it('github-events', fb)
+    assert(fb.one?(what: 'pull-was-opened', where: 'github', repository: 42, issue: 187))
+  end
+
   def test_skip_pull_request_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up
@@ -1869,6 +1904,7 @@ class TestGithubEvents < Jp::Test
         created_at: Time.parse('2025-05-04 03:46:04 UTC')
       }
     )
+    stub_github('https://api.github.com/repos/bar/bar/pulls/305/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/issues/305/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100',
@@ -2164,6 +2200,7 @@ class TestGithubEvents < Jp::Test
         }
       ]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/456/reviews?per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/old_foo/issues/456/comments?per_page=100',
       status: 302,
@@ -2255,6 +2292,7 @@ class TestGithubEvents < Jp::Test
         created_at: '2025-06-27 19:00:05 UTC'
       }]
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
@@ -2267,6 +2305,137 @@ class TestGithubEvents < Jp::Test
     refute_nil(f)
     assert_equal(7, f.files)
     assert_equal(15, f.hoc)
+  end
+
+  def test_closed_pull_request_event_with_nil_additions_or_deletions
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11126',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
+            number: 123,
+            pull_request: {
+              merged: true,
+              number: 123,
+              state: 'closed',
+              merged_at: Time.parse('2025-06-27 19:00:05 UTC'),
+              head: { ref: 'feature-branch', sha: 'abc123' },
+              additions: nil,
+              deletions: 5,
+              changed_files: 7
+            }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        },
+        {
+          id: '11125',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
+            number: 122,
+            pull_request: {
+              merged: true,
+              number: 122,
+              state: 'closed',
+              merged_at: Time.parse('2025-06-26 19:00:05 UTC'),
+              head: { ref: 'feature-branch', sha: 'abc123' },
+              additions: 7,
+              deletions: nil,
+              changed_files: 7
+            }
+          },
+          created_at: '2025-06-26 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/122/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/122/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/122/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f1, f2 = fb.query('(eq what "pull-was-merged")').each.to_a
+    refute_nil(f1)
+    assert_equal(5, f1.hoc)
+    refute_nil(f2)
+    assert_equal(7, f2.hoc)
+  end
+
+  def test_closed_pull_request_with_exist_review
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11126',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
+            number: 123,
+            pull_request: {
+              merged: true,
+              number: 123,
+              state: 'closed',
+              merged_at: Time.parse('2025-10-20 19:00:05 UTC'),
+              head: { ref: 'feature-branch', sha: 'abc123' },
+              additions: nil,
+              deletions: 5,
+              changed_files: 7
+            }
+          },
+          created_at: '2025-10-20 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100',
+      body: [{ id: 123, user: { id: 142, login: 'user2' }, submitted_at: '2025-06-26 05:05:46 UTC' }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    refute_nil(f)
+    assert_equal(Time.parse('2025-06-26 05:05:46 UTC'), f.review)
   end
 
   def test_release_event_with_nil_compare_response
@@ -2332,6 +2501,29 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(1, f.count)
     assert_equal([526_301], f.first[:contributors])
+  end
+  
+  def test_write_supervision_log_if_raise_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: 11,
+        created_at: 'wrong date',
+        actor: { id: 42 },
+        type: 'CreateEvent',
+        repo: { id: 42 },
+        payload: { ref_type: 'unknown', ref: 'foo' }
+      }
+    )
+    loog = Loog::Buffer.new
+    assert_raises(NoMethodError) do
+      load_it('github-events', Factbase.new, loog:)
+    end
+    loog.to_s.then do |s|
+      assert_match('"repo": "foo/foo"', s)
+      assert_match('"created_at": "wrong date"', s)
+    end
   end
 
   if defined?(Fbe::GithubGraph)
@@ -2473,6 +2665,8 @@ class TestGithubEvents < Jp::Test
    end
   end
   
+ 
+
   private
 
   def stub_event(*json)

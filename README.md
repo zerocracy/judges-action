@@ -3,6 +3,7 @@
 [![DevOps By Rultor.com](https://www.rultor.com/b/zerocracy/judges-action)](https://www.rultor.com/p/zerocracy/judges-action)
 
 [![make](https://github.com/zerocracy/judges-action/actions/workflows/make.yml/badge.svg)](https://github.com/zerocracy/judges-action/actions/workflows/make.yml)
+[![discipline](https://zerocracy.github.io/judges-action/zerocracy-badge.svg)](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
 [![Hits-of-Code](https://hitsofcode.com/github/zerocracy/judges-action)](https://hitsofcode.com/view/github/zerocracy/judges-action)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/zerocracy/judges-action/blob/master/LICENSE.txt)
 
@@ -35,13 +36,13 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.15.51
+      - uses: zerocracy/judges-action@0.16.1
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.ZEROCRACY_PAT }}
           repositories: yegor256/foo
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.2.0
+      - uses: zerocracy/pages-action@0.5.2
         with:
           github-token: ${{ secrets.ZEROCRACY_PAT }}
           factbase: foo.fb
