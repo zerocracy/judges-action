@@ -28,9 +28,9 @@ jobs:
           lifetime: 40
           cycles: 1
           options: |
-            sqlite_cache_maxvsize=100K
-            sqlite_cache_maxsize=100Mb
-      - uses: zerocracy/pages-action@0.5.2
+            sqlite_cache_maxvsize=200K
+            sqlite_cache_maxsize=200Mb
+      - uses: zerocracy/pages-action@0.5.3
         with:
           verbose: true
           github-token: ${{ secrets.PAT }}
