@@ -21,7 +21,12 @@ setup_test_env() {
     return 1
   fi
 
-  declare -g "${name}=$(LC_ALL=C tr -dc '[:lower:]' </dev/urandom | head -c 16 || true)"
+  random_name=$({ LC_ALL=C tr -dc '[:lower:]' </dev/urandom || test $? -eq 141; } | head -c 16)
+  if [ -z "${random_name}" ]; then
+    echo "Failed to generate random name" >&2
+    return 1
+  fi
+  declare -g "${name}=${random_name}"
 
   BUNDLE_GEMFILE="${SELF}/Gemfile"
   export BUNDLE_GEMFILE
