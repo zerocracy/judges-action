@@ -3,6 +3,8 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+set -e -o pipefail
+
 img=$1
 
 (

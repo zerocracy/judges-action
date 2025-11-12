@@ -2,6 +2,8 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+set -e -o pipefail
+
 SELF=$1
 
 source "${SELF}/makes/setup-test-env.sh"
