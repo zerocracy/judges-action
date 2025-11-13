@@ -39,4 +39,4 @@ target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock
 	docker build -t judges-action -q "$$(pwd)" > "$@"
 
 clean:
-	rm -f target
+	rm -rf target
