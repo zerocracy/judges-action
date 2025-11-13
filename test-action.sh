@@ -13,7 +13,7 @@ img=$1
     echo 'max_events=3'
 ) > target/opts.txt
 
-name=$({ LC_ALL=C tr -dc '[:lower:]' </dev/urandom || test $? -eq 141; } | head -c 16)
+name=$({ LC_ALL=C tr -dc '[:lower:]' </dev/urandom 2>/dev/null || test $? -eq 141; } | head -c 16)
 if [ -z "${name}" ]; then
     echo "Failed to generate random name" >&2
     exit 1
