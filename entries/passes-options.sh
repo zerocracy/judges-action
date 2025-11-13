@@ -17,7 +17,7 @@ opts=$(cat << 'EOF'
 EOF
 )
 
-run_entry_script success \
+run_entry_script ${SELF} success \
   "GITHUB_WORKSPACE=$(pwd)" \
   "INPUT_FACTBASE=${name}.fb" \
   "INPUT_CYCLES=1" \

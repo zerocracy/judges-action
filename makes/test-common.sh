@@ -6,14 +6,16 @@
 # Provides reusable functions to reduce code duplication across test scripts
 
 # Run the entry script with given environment variables and capture output
-# Usage: run_entry_script <expected_result> <env_var1> <env_var2> ...
-# where expected_result is either "success" or "failure"
+# Usage: run_entry_script <self> <expected_result> <env_var1> <env_var2> ...
+# where self is the path to the script directory (usually $SELF)
+# and expected_result is either "success" or "failure"
 run_entry_script() {
-    local expected_result=$1
-    shift
+    local self=$1
+    local expected_result=$2
+    shift 2
 
     set +e
-    env "$@" "${SELF}/entry.sh" 2>&1 | tee log.txt
+    env "$@" "${self}/entry.sh" 2>&1 | tee log.txt
     local exit_code=$?
     set -e
 
