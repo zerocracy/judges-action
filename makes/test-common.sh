@@ -11,12 +11,12 @@
 run_entry_script() {
     local expected_result=$1
     shift
-    
+
     set +e
     env "$@" "${SELF}/entry.sh" 2>&1 | tee log.txt
     local exit_code=$?
     set -e
-    
+
     if [ "$expected_result" = "success" ]; then
         if [ $exit_code -ne 0 ]; then
             echo "ERROR: judges-action script failed with exit code $exit_code, but should succeed" >&2
@@ -48,7 +48,7 @@ factbase_exists() {
 # Check that a pattern exists in the log
 # Usage: log_contains <pattern> [error_message]
 log_contains() {
-    local pattern=$1    
+    local pattern=$1
     grep "$pattern" log.txt || {
         echo "ERROR: Expected pattern '$pattern' not found in log.txt" >&2
         if [ -n "${2:-}" ]; then
@@ -61,7 +61,7 @@ log_contains() {
 # Check that a pattern does NOT exist in the log
 # Usage: log_not_contains <pattern> [error_message]
 log_not_contains() {
-    local pattern=$1    
+    local pattern=$1
     if grep -q "$pattern" log.txt; then
         echo "ERROR: Unexpected pattern '$pattern' found in log.txt" >&2
         if [ -n "${2:-}" ]; then
