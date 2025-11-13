@@ -10,7 +10,7 @@ source "${SELF}/makes/setup-test-env.sh"
 source "${SELF}/makes/test-common.sh"
 setup_test_env "${SELF}" name
 
-run_entry_script ${SELF} failure \
+run_entry_script "${SELF}" failure \
   "GITHUB_WORKSPACE=$(pwd)" \
   "INPUT_DRY-RUN=true" \
   "INPUT_FACTBASE=${name}.fb" \
