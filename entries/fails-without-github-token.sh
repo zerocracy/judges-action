@@ -27,5 +27,13 @@ if [ $exit_code -eq 0 ]; then
     exit 1
 fi
 
-test -e "${name}.fb"
-grep 'We stop here' log.txt
+test -e "${name}.fb" || {
+    echo "ERROR: Expected factbase file '${name}.fb' was not created" >&2
+    exit 1
+}
+
+grep 'We stop here' log.txt || {
+    echo "ERROR: Expected pattern 'We stop here' not found in log.txt" >&2
+    echo "This indicates the script did not stop early due to missing GitHub token as expected" >&2
+    exit 1
+}

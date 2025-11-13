@@ -16,6 +16,7 @@ opts=$(cat << 'EOF'
 EOF
 )
 
+set +e
 env "GITHUB_WORKSPACE=$(pwd)" \
   "INPUT_FACTBASE=${name}.fb" \
   'INPUT_CYCLES=1' \
@@ -27,9 +28,40 @@ env "GITHUB_WORKSPACE=$(pwd)" \
   'INPUT_GITHUB-TOKEN=THETOKEN' \
   'INPUT_BOTS=test-bot,another-bot' \
   "${SELF}/entry.sh" 2>&1 | tee log.txt
+exit_code=$?
+set -e
 
-test -e "${name}.fb"
-grep " --option=foo42=bar" 'log.txt'
-grep " --option=foo4444=bar" 'log.txt'
-grep " --option=x88=hello world!" 'log.txt'
-grep " --option=bots=test-bot,another-bot" 'log.txt'
+if [ $exit_code -ne 0 ]; then
+    echo "ERROR: judges-action script failed with exit code $exit_code, but should succeed with --quiet flag enabled" >&2
+    echo "Check log.txt for details of the failure" >&2
+    exit 1
+fi
+
+test -e "${name}.fb" || {
+    echo "ERROR: Expected factbase file '${name}.fb' was not created" >&2
+    exit 1
+}
+
+grep " --option=foo42=bar" 'log.txt' || {
+    echo "ERROR: Expected option 'foo42=bar' not found in log.txt" >&2
+    echo "This indicates custom options from INPUT_OPTIONS are not being processed correctly" >&2
+    exit 1
+}
+
+grep " --option=foo4444=bar" 'log.txt' || {
+    echo "ERROR: Expected option 'foo4444=bar' not found in log.txt" >&2
+    echo "This indicates custom options from INPUT_OPTIONS are not being processed correctly" >&2
+    exit 1
+}
+
+grep " --option=x88=hello world!" 'log.txt' || {
+    echo "ERROR: Expected option 'x88=hello world!' not found in log.txt" >&2
+    echo "This indicates custom options with spaces are not being processed correctly" >&2
+    exit 1
+}
+
+grep " --option=bots=test-bot,another-bot" 'log.txt' || {
+    echo "ERROR: Expected bots option 'bots=test-bot,another-bot' not found in log.txt" >&2
+    echo "This indicates INPUT_BOTS parameter is not being processed correctly" >&2
+    exit 1
+}

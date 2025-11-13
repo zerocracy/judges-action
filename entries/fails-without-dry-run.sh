@@ -28,6 +28,19 @@ if [ $exit_code -ne 0 ]; then
     exit 1
 fi
 
-test -e "${name}.fb"
-grep '(#0) at judges' log.txt
-grep 'in --fail-fast mode' log.txt
+test -e "${name}.fb" || {
+    echo "ERROR: Expected factbase file '${name}.fb' was not created" >&2
+    exit 1
+}
+
+grep '(#0) at judges' log.txt || {
+    echo "ERROR: Expected pattern '(#0) at judges' not found in log.txt" >&2
+    echo "This indicates judges were not executed as expected" >&2
+    exit 1
+}
+
+grep 'in --fail-fast mode' log.txt || {
+    echo "ERROR: Expected pattern 'in --fail-fast mode' not found in log.txt" >&2
+    echo "This indicates fail-fast behavior was not triggered as expected" >&2
+    exit 1
+}
