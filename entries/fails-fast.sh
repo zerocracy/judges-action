@@ -21,6 +21,7 @@ run_entry_script success \
   "INPUT_VERBOSE=true" \
   "INPUT_TOKEN=ZRCY-00000000-0000-0000-0000-000000000000"
 
+factbase_exists "${name}"
 log_not_contains \
   "in --fail-fast mode" \
   "This script tests with INPUT_FAIL-FAST=false, so fail-fast mode should NOT be active"
