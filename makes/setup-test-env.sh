@@ -21,12 +21,15 @@ setup_test_env() {
     return 1
   fi
 
-  random_name=$({ LC_ALL=C tr -dc '[:lower:]' </dev/urandom 2>/dev/null || test $? -eq 141; } | head -c 16)
-  if [ -z "${random_name}" ]; then
+  # Generate random name, ignoring SIGPIPE errors from tr when head closes the pipe
+  generated=$(LC_ALL=C tr -dc '[:lower:]' </dev/urandom 2>/dev/null | head -c 16) || true
+
+  if [ -z "${generated}" ]; then
     echo "Failed to generate random name" >&2
     return 1
   fi
-  declare -g "${name}=${random_name}"
+
+  declare -g "${name}=${generated}"
 
   BUNDLE_GEMFILE="${SELF}/Gemfile"
   export BUNDLE_GEMFILE

@@ -13,7 +13,9 @@ img=$1
     echo 'max_events=3'
 ) > target/opts.txt
 
-name=$({ LC_ALL=C tr -dc '[:lower:]' </dev/urandom 2>/dev/null || test $? -eq 141; } | head -c 16)
+# Generate random name, ignoring SIGPIPE errors from tr when head closes the pipe
+name=$(LC_ALL=C tr -dc '[:lower:]' </dev/urandom 2>/dev/null | head -c 16) || true
+
 if [ -z "${name}" ]; then
     echo "Failed to generate random name" >&2
     exit 1
