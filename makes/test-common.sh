@@ -49,7 +49,7 @@ factbase_exists() {
 # Usage: log_contains <pattern> [error_message]
 log_contains() {
     local pattern=$1
-    grep "$pattern" log.txt || {
+    grep -F "$pattern" log.txt || {
         echo "ERROR: Expected pattern '$pattern' not found in log.txt" >&2
         if [ -n "${2:-}" ]; then
             echo "ERROR: $2" >&2
@@ -62,7 +62,7 @@ log_contains() {
 # Usage: log_not_contains <pattern> [error_message]
 log_not_contains() {
     local pattern=$1
-    if grep -q "$pattern" log.txt; then
+    if grep -qF "$pattern" log.txt; then
         echo "ERROR: Unexpected pattern '$pattern' found in log.txt" >&2
         if [ -n "${2:-}" ]; then
             echo "ERROR: $2" >&2
