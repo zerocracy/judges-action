@@ -2,19 +2,24 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+set -e -o pipefail
+
 SELF=$1
 
 source "${SELF}/makes/setup-test-env.sh"
+source "${SELF}/makes/test-common.sh"
 setup_test_env "${SELF}" name
 
-(env "GITHUB_WORKSPACE=$(pwd)" \
-  'INPUT_DRY-RUN=true' \
+run_entry_script "${SELF}" failure \
+  "GITHUB_WORKSPACE=$(pwd)" \
+  "INPUT_DRY-RUN=true" \
   "INPUT_FACTBASE=${name}.fb" \
-  'INPUT_CYCLES=1' \
-  'INPUT_REPOSITORIES=yegor256/factbase' \
-  'INPUT_VERBOSE=false' \
-  'INPUT_TOKEN=something' \
-  "${SELF}/entry.sh" 2>&1 || true) | tee log.txt
+  "INPUT_CYCLES=1" \
+  "INPUT_REPOSITORIES=yegor256/factbase" \
+  "INPUT_VERBOSE=false" \
+  "INPUT_TOKEN=something"
 
-test -e "${name}.fb"
-grep 'We stop here' log.txt
+factbase_exists "${name}"
+log_contains \
+  "We stop here" \
+  "This indicates the script did not stop early due to missing GitHub token as expected"

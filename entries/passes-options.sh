@@ -2,9 +2,12 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
 # SPDX-License-Identifier: MIT
 
+set -e -o pipefail
+
 SELF=$1
 
 source "${SELF}/makes/setup-test-env.sh"
+source "${SELF}/makes/test-common.sh"
 setup_test_env "${SELF}" name
 
 opts=$(cat << 'EOF'
@@ -14,20 +17,28 @@ opts=$(cat << 'EOF'
 EOF
 )
 
-env "GITHUB_WORKSPACE=$(pwd)" \
+run_entry_script "${SELF}" success \
+  "GITHUB_WORKSPACE=$(pwd)" \
   "INPUT_FACTBASE=${name}.fb" \
-  'INPUT_CYCLES=1' \
-  'INPUT_REPOSITORIES=yegor256/factbase' \
+  "INPUT_CYCLES=1" \
+  "INPUT_REPOSITORIES=yegor256/factbase" \
   "INPUT_OPTIONS=${opts}" \
-  'INPUT_VERBOSE=false' \
-  'INPUT_TOKEN=something' \
-  'INPUT_DRY-RUN=true' \
-  'INPUT_GITHUB-TOKEN=THETOKEN' \
-  'INPUT_BOTS=test-bot,another-bot' \
-  "${SELF}/entry.sh" 2>&1 | tee log.txt
+  "INPUT_VERBOSE=false" \
+  "INPUT_TOKEN=something" \
+  "INPUT_DRY-RUN=true" \
+  "INPUT_GITHUB-TOKEN=THETOKEN" \
+  "INPUT_BOTS=test-bot,another-bot"
 
-test -e "${name}.fb"
-grep " --option=foo42=bar" 'log.txt'
-grep " --option=foo4444=bar" 'log.txt'
-grep " --option=x88=hello world!" 'log.txt'
-grep " --option=bots=test-bot,another-bot" 'log.txt'
+factbase_exists "${name}"
+log_contains \
+  " --option=foo42=bar" \
+  "This indicates custom options from INPUT_OPTIONS are not being processed correctly"
+log_contains \
+  " --option=foo4444=bar" \
+  "This indicates custom options from INPUT_OPTIONS are not being processed correctly"
+log_contains \
+  " --option=x88=hello world!" \
+  "This indicates custom options with spaces are not being processed correctly"
+log_contains \
+  " --option=bots=test-bot,another-bot" \
+  "This indicates INPUT_BOTS parameter is not being processed correctly"
