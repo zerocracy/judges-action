@@ -30,7 +30,7 @@ jobs:
           options: |
             sqlite_cache_maxvsize=200K
             sqlite_cache_maxsize=200Mb
-      - uses: zerocracy/pages-action@0.5.3
+      - uses: zerocracy/pages-action@0.6.1
         with:
           verbose: true
           github-token: ${{ secrets.PAT }}
