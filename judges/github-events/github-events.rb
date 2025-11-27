@@ -164,6 +164,7 @@ Fbe.iterate do
             nil
           end
         fact.review = review[:submitted_at] if review
+        # @todo #1189:60min We also need to add here 'suggestions' property to fact.
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
