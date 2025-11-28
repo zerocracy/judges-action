@@ -1902,6 +1902,10 @@ class TestGithubEvents < Jp::Test
         created_at: Time.parse('2025-05-04 03:46:04 UTC')
       }
     )
+    stub_github(
+      'https://api.github.com/repos/bar/bar/pulls/305',
+      body: { id: 50, number: 305, user: { id: 411, login: 'user' } }
+    )
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/issues/305/comments?per_page=100', body: [])
@@ -2198,6 +2202,10 @@ class TestGithubEvents < Jp::Test
         }
       ]
     )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/456',
+      body: { id: 50, number: 456, user: { id: 46, login: 'user2' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo/pulls/456/reviews?per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/old_foo/issues/456/comments?per_page=100',
@@ -2290,6 +2298,10 @@ class TestGithubEvents < Jp::Test
         created_at: '2025-06-27 19:00:05 UTC'
       }]
     )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: { id: 50, number: 123, user: { id: 46, login: 'user2' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
@@ -2364,6 +2376,14 @@ class TestGithubEvents < Jp::Test
       ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: { id: 50, number: 123, user: { id: 46, login: 'user2' } }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/122',
+      body: { id: 51, number: 122, user: { id: 46, login: 'user2' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
@@ -2382,7 +2402,7 @@ class TestGithubEvents < Jp::Test
     assert_equal(7, f2.hoc)
   end
 
-  def test_closed_pull_request_with_exist_review
+  def test_closed_pull_request_with_exist_review_and_code_suggestions
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -2421,8 +2441,41 @@ class TestGithubEvents < Jp::Test
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: { id: 50, number: 123, user: { id: 45, login: 'user' } }
+    )
+    stub_github(
       'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100',
-      body: [{ id: 123, user: { id: 142, login: 'user2' }, submitted_at: '2025-06-26 05:05:46 UTC' }]
+      body: [
+        { id: 123, user: { id: 46, login: 'user2' }, body: 'Great!', submitted_at: '2025-10-20 18:05:00 UTC' },
+        { id: 124, user: { id: 45, login: 'user' }, body: '', submitted_at: '2025-10-20 18:25:00 UTC' }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123/reviews/123/comments?per_page=100',
+      body: [
+        {
+          id: 22_100, pull_request_review_id: 123,
+          diff_hunk: '@@ -93,4 +93,65 @@ def some_func1...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
+          body: 'Some question1', created_at: '2025-10-20 18:06:00 UTC', user: { id: 46, login: 'user2' }
+        },
+        {
+          id: 22_101, pull_request_review_id: 123,
+          diff_hunk: '@@ -93,4 +93,65 @@ def some_func2...', path: 'lib/some/path/file2.rb', commit_id: '3e695',
+          body: 'Some question2', created_at: '2025-10-20 18:07:00 UTC', user: { id: 46, login: 'user2' }
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123/reviews/124/comments?per_page=100',
+      body: [
+        {
+          id: 22_103, pull_request_review_id: 124,
+          diff_hunk: '@@ -93,4 +93,65 @@ def some_func...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
+          body: 'Some answer1', created_at: '2025-10-20 15:25:00 UTC', user: { id: 45, login: 'user' },
+          in_reply_to_id: 22_100
+        }
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
@@ -2433,7 +2486,8 @@ class TestGithubEvents < Jp::Test
     end
     f = fb.query('(eq what "pull-was-merged")').each.to_a.first
     refute_nil(f)
-    assert_equal(Time.parse('2025-06-26 05:05:46 UTC'), f.review)
+    assert_equal(Time.parse('2025-10-20 18:05:00 UTC'), f.review)
+    assert_equal(2, f.suggestions)
   end
 
   def test_release_event_with_nil_compare_response

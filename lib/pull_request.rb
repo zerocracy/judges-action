@@ -76,3 +76,20 @@ def Jp.fetch_workflows(pr, repo: nil)
   end
   { succeeded_builds:, failed_builds: }
 end
+
+# Count code suggestions for pull request.
+# Author suggestions are not taken into account
+#
+# @param [String] repo Github repository (e.g.: 'org/repo')
+# @param [Integer] issue Number ID of the pull request
+# @param [Integer] author Github user ID, who create pull request
+# @return [Integer] count of suggestions
+def Jp.count_suggestions(repo, issue, author)
+  Fbe.octo.pull_request_reviews(repo, issue).sum do |review|
+    next 0 if review.dig(:user, :id) == author
+    Fbe.octo.pull_request_review_comments(repo, issue, review[:id]).sum do |comment|
+      next 0 if comment.dig(:user, :id) == author || !comment[:in_reply_to_id].nil?
+      1
+    end
+  end
+end
