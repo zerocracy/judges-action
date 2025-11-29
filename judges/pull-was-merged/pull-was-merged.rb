@@ -83,15 +83,7 @@ Fbe.iterate do
       else
         nn.stale = 'who'
       end
-      contributor = json.dig(:user, :id)
-      nn.suggestions =
-        Fbe.octo.pull_request_reviews(repo, issue).sum do |review|
-          next 0 if review.dig(:user, :id) == contributor
-          Fbe.octo.pull_request_review_comments(repo, issue, review[:id]).sum do |comment|
-            next 0 if comment.dig(:user, :id) == contributor || !comment[:in_reply_to_id].nil?
-            1
-          end
-        end
+      nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id))
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       review = Fbe.octo.pull_request_reviews(repo, issue).first
       nn.review = review[:submitted_at] if review

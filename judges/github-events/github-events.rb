@@ -164,7 +164,14 @@ Fbe.iterate do
             nil
           end
         fact.review = review[:submitted_at] if review
-        # @todo #1189:60min We also need to add here 'suggestions' property to fact.
+        author =
+          begin
+            Fbe.octo.pull_request(rname, fact.issue).dig(:user, :id)
+          rescue Octokit::NotFound
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
+            nil
+          end
+        fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
