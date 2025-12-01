@@ -23,6 +23,7 @@ require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
+require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
 
@@ -49,7 +50,7 @@ require_relative '../../lib/issue_was_lost'
       total = 0
       found = 0
       first = issue
-      elapsed($loog) do
+      elapsed($loog, level: Logger::INFO) do
         Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
           next if Fbe.octo.off_quota?
           total += 1
