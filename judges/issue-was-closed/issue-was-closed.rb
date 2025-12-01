@@ -10,6 +10,7 @@ require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
 badges = %w[bug enhancement question]
@@ -72,7 +73,7 @@ Fbe.iterate do
         nn.stale = 'who'
       end
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
-      $loog.info("It was found closed at #{Fbe.issue(nn)}")
+      $loog.info("It was found closed at #{Fbe.issue(nn)} #{nn.when.ago} ago")
     end
     events =
       begin
