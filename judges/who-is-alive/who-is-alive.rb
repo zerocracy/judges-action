@@ -15,6 +15,7 @@ require 'elapsed'
 require 'fbe/consider'
 require 'fbe/fb'
 require 'fbe/octo'
+require 'logger'
 require_relative '../../lib/nick_of'
 
 seen = []
@@ -31,7 +32,7 @@ Fbe.consider(
 ) do |f|
   next if seen.include?(f.who)
   seen << f.who
-  elapsed($loog) do
+  elapsed($loog, level: Logger::INFO) do
     nick = Jp.nick_of(f.who)
     unless nick.nil?
       $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")

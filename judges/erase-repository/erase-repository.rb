@@ -11,13 +11,14 @@
 require 'elapsed'
 require 'fbe/octo'
 require 'fbe/consider'
+require 'logger'
 
 good = {}
 
 Fbe.consider('(and (eq where "github") (exists repository) (absent stale))') do |f|
   r = f.repository
   if good[r].nil?
-    elapsed($loog) do
+    elapsed($loog, level: Logger::INFO) do
       json = Fbe.octo.repository(r)
       good[r] = true
       throw :"GitHub repository ##{r} is found: #{json[:full_name]}"

@@ -11,13 +11,14 @@
 require 'elapsed'
 require 'fbe/octo'
 require 'fbe/consider'
+require 'logger'
 require_relative '../../lib/nick_of'
 
 good = Set.new
 
 Fbe.consider('(and (absent stale) (eq where "github") (exists who))') do |f|
   next if good.include?(f.who)
-  elapsed($loog) do
+  elapsed($loog, level: Logger::INFO) do
     nick = Jp.nick_of(f.who)
     if nick.nil?
       f.stale = 'who'
