@@ -9,6 +9,7 @@ require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.iterate do
@@ -58,7 +59,7 @@ Fbe.iterate do
         nn.assigner = event.dig(:assigner, :id)
         nn.when = event[:created_at]
         nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
-        $loog.info("Assignee found for #{Fbe.issue(nn)} (fact ##{nn._id}): #{Fbe.who(nn)}")
+        $loog.info("The issue #{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} #{nn.when.ago} ago (fact ##{nn._id})")
       end
     end
     issue

@@ -8,6 +8,7 @@ require 'fbe/iterate'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
+require 'tago'
 
 Fbe.iterate do
   as 'earliest_issue_was_found'
@@ -40,7 +41,7 @@ Fbe.iterate do
         end
       end
       f.details = "The issue #{Fbe.issue(f)} is the earliest we found, opened by #{Fbe.who(f)}."
-      $loog.info("The opening of #{Fbe.issue(f)} by #{Fbe.who(f)} was found")
+      $loog.info("The issue #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
     end
     json[:number]
   end
