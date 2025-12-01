@@ -10,6 +10,8 @@ require 'fbe/octo'
 require 'fbe/conclude'
 require 'fbe/issue'
 require 'fbe/who'
+require 'octokit'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.conclude do
@@ -57,7 +59,7 @@ Fbe.conclude do
       n.stale = 'branch'
     end
     n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.info("The opening for #{Fbe.issue(n)} was found")
+    $loog.info("The pull #{Fbe.issue(n)} was opened #{n.when.ago} ago")
   end
 end
 

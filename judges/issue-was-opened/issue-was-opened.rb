@@ -10,6 +10,8 @@ require 'fbe/octo'
 require 'fbe/conclude'
 require 'fbe/issue'
 require 'fbe/who'
+require 'octokit'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.conclude do
@@ -50,7 +52,7 @@ Fbe.conclude do
     n.when = json[:created_at]
     n.who = json.dig(:user, :id)
     n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.info("The opening of #{Fbe.issue(n)} by #{Fbe.who(n)} was found")
+    $loog.info("The issue #{Fbe.issue(n)} was opened by #{Fbe.who(n)} #{n.when.ago} ago")
   end
 end
 

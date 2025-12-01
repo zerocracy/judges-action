@@ -13,6 +13,8 @@ require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/overwrite'
 require 'fbe/who'
+require 'octokit'
+require 'tago'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
@@ -88,7 +90,7 @@ Fbe.iterate do
       review = Fbe.octo.pull_request_reviews(repo, issue).first
       nn.review = review[:submitted_at] if review
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
-      $loog.info("Just found out that #{Fbe.issue(nn)} has been #{nn.what.inspect}")
+      $loog.info("The pull #{Fbe.issue(nn)} was #{nn.what.inspect} #{nn.when.ago} ago")
     end
     issue
   end

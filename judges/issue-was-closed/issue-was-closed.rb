@@ -10,6 +10,7 @@ require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
+require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
 
