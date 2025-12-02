@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 55
     steps:
-      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
       - uses: zerocracy/judges-action@d50af212481062c419fce789d2774a0f0cc37f46 # 0.16.2
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
