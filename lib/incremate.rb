@@ -5,6 +5,7 @@
 
 require 'elapsed'
 require 'fbe/octo'
+require 'fbe/over'
 require 'fbe/overwrite'
 require 'tago'
 require 'time'
@@ -43,18 +44,7 @@ def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, epoch: $epoch || Tim
       $loog.debug("#{n} is here: #{fact[n].first}")
       next
     end
-    if Fbe.octo.off_quota?
-      $loog.info("No GitHub quota left, it is time to stop at #{n}")
-      break
-    end
-    if $options.lifetime && Time.now.to_f - epoch.to_f > $options.lifetime * 0.9
-      $loog.info("We are doing this for too long, time to stop at #{n}")
-      break
-    end
-    if $options.timeout && Time.now.to_f - kickoff.to_f > $options.timeout * 0.9
-      $loog.info("We are doing this for #{kickoff.ago}, let's stop at #{n}")
-      break
-    end
+    break if Fbe.over?(epoch:, kickoff:)
     $loog.info(
       [
         "Starting to evaluate #{n}",

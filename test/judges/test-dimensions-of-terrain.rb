@@ -657,4 +657,26 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end
   end
+
+  def test_not_fill_props_if_quota_consumed
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":90}}', headers: { 'X-RateLimit-Remaining' => '90' } }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo' }))
+      f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+      refute_nil(f)
+      assert_nil(f['total_commits'])
+      assert_nil(f['total_releases'])
+      assert_nil(f['total_contributors'])
+      assert_nil(f['total_active_contributors'])
+      assert_nil(f['total_repositories'])
+      assert_nil(f['total_files'])
+      assert_nil(f['total_issues'])
+      assert_nil(f['total_pulls'])
+      assert_nil(f['total_forks'])
+    end
+  end
 end
