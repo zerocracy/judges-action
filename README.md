@@ -42,7 +42,7 @@ jobs:
           github-token: ${{ secrets.ZEROCRACY_PAT }}
           repositories: yegor256/foo
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.6.2
+      - uses: zerocracy/pages-action@0.6.3
         with:
           github-token: ${{ secrets.ZEROCRACY_PAT }}
           factbase: foo.fb
