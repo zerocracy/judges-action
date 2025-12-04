@@ -122,7 +122,7 @@ You need to have
   [Ruby] 3+,
   [Bundler],
   and
-  [GNU parallel] installed:
+  [GNU parallel] installed.
 
 Then, just run:
 
