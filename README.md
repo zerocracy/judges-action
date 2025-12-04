@@ -116,10 +116,15 @@ check its [own repository](https://github.com/zerocracy/pages-action).
 
 ## How to Contribute
 
-In order to test this action, just run (provided, you have
-[Ruby](https://www.ruby-lang.org/en/) 3+, [Bundler](https://bundler.io/),
-[GNU make](https://www.gnu.org/software/make/), and
-[GNU parallel](https://www.gnu.org/software/parallel/) installed):
+You need to have
+  [GNU Bash] 5+,
+  [GNU Make] 4+,
+  [Ruby] 3+,
+  [Bundler],
+  and
+  [GNU parallel] installed:
+
+Then, just run:
 
 ```bash
 bundle update
@@ -148,3 +153,8 @@ bundle exec ruby test/judges/test-dimensions-of-terrain.rb -n test_total_reposit
 [secrets]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions
 [ours]: https://github.com/zerocracy/judges-action/blob/master/.github/workflows/zerocracy.yml
 [PAT]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+[Ruby]: https://www.ruby-lang.org/en/
+[Bundler]: https://bundler.io/
+[GNU Parallel]: https://www.gnu.org/software/parallel/
+[GNU Make]: https://www.gnu.org/software/make/
+[GNU Bash]: https://www.gnu.org/software/bash/
