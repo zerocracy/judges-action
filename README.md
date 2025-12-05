@@ -7,19 +7,18 @@
 [![Hits-of-Code](https://hitsofcode.com/github/zerocracy/judges-action)](https://hitsofcode.com/view/github/zerocracy/judges-action)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/zerocracy/judges-action/blob/master/LICENSE.txt)
 
-First, get a free authentication token from
-[Zerocracy.com](https://www.zerocracy.com) and add it as
-`ZEROCRACY_TOKEN` [secret][secrets] to your repository.
+First, get a free authentication token from [Zerocracy.com] and add it as
+  `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
 
 Then, create a new [personal access token][PAT]
-and add it as a `ZEROCRACY_PAT` secret to your repository.
+  and add it as a `ZEROCRACY_PAT` secret to your repository.
 Don't forget to give it full "repository access".
 You may ignore this, if all your repositories are public.
 
 Then, add this `zerocracy.yml` file to your GitHub repository
-at the `.github/workflows/` directory
-(replace `foo` with the name of your team, `yegor256` with the name of the
-account owner, and `42` with anything between zero and `60`):
+  at the `.github/workflows/` directory
+  (replace `foo` with the name of your team, `yegor256` with the name of the
+  account owner, and `42` with anything between zero and `60`):
 
 ```yaml
 name: zerocracy
@@ -53,30 +52,31 @@ jobs:
 ```
 
 In the file, there is only one place that you should configure:
-the `repositories=...` should have a comma-separated list
-of repositories where your team works (instead of `...`).
+  the `repositories=...` should have a comma-separated list
+  of repositories where your team works (instead of `...`).
 If you have more than one repository in your product, list them here.
 The CI job must only be added to one of them.
 
-Once the file is added, GitHub will start running this job hourly,
-collecting information about most important activities of
-your programmers. The plugin will give them awards for good things
-they do (like fixing bugs) and will also punish them (by deducting points)
-for bad things (like stale pull requests).
+Once the file is added, GitHub starts running this job hourly,
+  collecting information about most important activities of
+  your programmers.
+The plugin gives them awards for good things
+  they do (like fixing bugs) and also punishes them (by deducting points)
+  for bad things (like stale pull requests).
 
-The plugin will also generate a summary `foo.html` file, which will
-be automatically deployed to the `gh-pages` branch. You can configure
-your GitHub repository to render the branch as a static website via
-[GitHub Pages](https://pages.github.com/). Thus,
-the summary page will be updated hourly and you will see
-who is the best performer in your team, similar to
-[what we see](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-in our team.
+The plugin also generates a summary `foo.html` file, which
+  is automatically deployed to the `gh-pages` branch.
+You can configure your GitHub repository to render the branch
+  as a static website via [GitHub Pages].
+Thus, the summary page is updated hourly and you see
+  who is _subjectively_ the best performer in your team, similar to
+  [what we see](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+  in our team.
 
 ## Configuration
 
 The following options are expected by the plugin
-(see how we [configure][ours] it):
+  (see how we [configure][ours] it):
 
 * `token` (mandatory) is an authentication token from
   [Zerocracy.com](https://www.zerocracy.com)
@@ -135,7 +135,7 @@ This should build a new Docker image named `judges-action`
   and then run the entire cycle
   inside a new Docker container.
 Obviously, you need to have [Docker] installed.
-The Docker image will be deleted by the end of the build
+The Docker image is deleted by the end of the build
   (either success or failure).
 
 In order to run "live" tests of some judges, do this:
@@ -160,3 +160,5 @@ bundle exec ruby test/judges/test-dimensions-of-terrain.rb -n test_total_reposit
 [GNU Make]: https://www.gnu.org/software/make/
 [GNU Bash]: https://www.gnu.org/software/bash/
 [Docker]: https://docs.docker.com/get-docker/
+[GitHub Pages]: https://pages.github.com/
+[Zerocracy.com]: https://www.zerocracy.com
