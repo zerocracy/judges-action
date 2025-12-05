@@ -54,7 +54,7 @@ Fbe.iterate do
         next issue
       end
     unless json[:state] == 'closed'
-      $loog.debug("Issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
+      $loog.debug("The issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue
     end
     Fbe.fb.txn do |fbt|
@@ -74,7 +74,7 @@ Fbe.iterate do
         nn.stale = 'who'
       end
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
-      $loog.info("It was found closed at #{Fbe.issue(nn)} #{nn.when.ago} ago")
+      $loog.info("The issue #{Fbe.issue(nn)} found closed #{nn.when.ago} ago")
     end
     events =
       begin
