@@ -7,6 +7,7 @@ require 'fbe/fb'
 require 'fbe/iterate'
 require 'fbe/issue'
 require 'fbe/octo'
+require 'fbe/tombstone'
 require 'fbe/who'
 require 'tago'
 
@@ -21,10 +22,12 @@ Fbe.iterate do
         octo.list_issues(repo, state: :all, sort: :created, direction: :asc, page: 1, per_page: 1).first
       end
     next latest if json.nil?
+    i = json[:number]
+    next if Fbe::Tombstone.new.has?('github', repository, i)
     Fbe.fb.txn do |fbt|
       f =
         Fbe.if_absent(fb: fbt) do |ff|
-          ff.issue = json[:number]
+          ff.issue = i
           ff.what = "#{json[:pull_request].nil? ? 'issue' : 'pull'}-was-opened"
           ff.repository = repository
           ff.where = 'github'
