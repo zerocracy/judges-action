@@ -15,19 +15,24 @@ require 'logger'
 
 good = {}
 
-Fbe.consider('(and (eq where "github") (exists repository) (absent stale))') do |f|
+Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').each do |f|
   r = f.repository
-  if good[r].nil?
-    elapsed($loog, level: Logger::INFO) do
-      json = Fbe.octo.repository(r)
-      good[r] = true
-      throw :"GitHub repository ##{r} is found: #{json[:full_name]}"
-    rescue Octokit::NotFound
-      good[r] = false
-      throw :"GitHub repository ##{r} is not found"
-    end
+  next unless good[r].nil?
+  elapsed($loog, level: Logger::INFO) do
+    json = Fbe.octo.repository(r)
+    good[r] = true
+    throw :"GitHub repository ##{r} is found: #{json[:full_name]}"
+  rescue Octokit::NotFound
+    good[r] = false
+    throw :"GitHub repository ##{r} is not found"
   end
-  f.stale = 'repository' unless good[r]
+end
+
+good.each do |repo, ok|
+  next if ok
+  Fbe.fb.query("(and (eq where 'github') (eq repository #{repo}) (absent stale))").each do |f|
+    f.stale = 'repository'
+  end
 end
 
 Fbe.octo.print_trace!
