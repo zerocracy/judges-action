@@ -5,12 +5,12 @@
 
 source 'https://rubygems.org'
 
-gem 'base64', '~>0.2'
-gem 'baza.rb', '~>0.9'
+gem 'base64', '~>0.3'
+gem 'baza.rb', '~>0.11'
 gem 'decoor', '~>0.1'
-gem 'factbase', '~>0.15'
-gem 'fbe', '~>0.27'
-gem 'judges', '~>0.53'
+gem 'factbase', '~>0.17'
+gem 'fbe', '~>0.41'
+gem 'judges', '~>0.57'
 gem 'minitest', '~>5.25', require: false
 gem 'minitest-reporters', '~>1.7', require: false
 gem 'online', '~>0.0'

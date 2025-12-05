@@ -100,19 +100,19 @@ The following options are expected by the plugin
 The following `k=v` pairs inside the `options` may be important:
 
 * `github_token=...` is a default GitHub token, usually to be set to
-`${{ secrets.GITHUB_TOKEN }}`
+  `${{ secrets.GITHUB_TOKEN }}`
 * `repositories=..` is a comma-separated list of masks that
-determine the repositories to manage, where
-`yegor256/*` means all repos of the user,
-`yegor256/judges` means a specific repo,
-and
-`-yegor256/judges` means an exclusion of the repo from the list.
+  determine the repositories to manage, where
+  `yegor256/*` means all repos of the user,
+  `yegor256/judges` means a specific repo,
+  and
+  `-yegor256/judges` means an exclusion of the repo from the list.
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxsize=10K` is the maximum size of a single HTTP entry to cache
 
 The `zerocracy/pages-action` plugin is responsible for rendering
-the summary HTML page: its configuration is not explained here,
-check its [own repository](https://github.com/zerocracy/pages-action).
+  the summary HTML page: its configuration is not explained here,
+  check its [own repository](https://github.com/zerocracy/pages-action).
 
 ## How to Contribute
 
@@ -132,10 +132,11 @@ make
 ```
 
 This should build a new Docker image named `judges-action`
-and then run the entire cycle
-inside a new Docker container. Obviously, you need to have
-[Docker](https://docs.docker.com/get-docker/) installed. The Docker image
-will be deleted by the end of the build (either success or failure).
+  and then run the entire cycle
+  inside a new Docker container.
+Obviously, you need to have [Docker] installed.
+The Docker image will be deleted by the end of the build
+  (either success or failure).
 
 In order to run "live" tests of some judges, do this:
 
@@ -158,3 +159,4 @@ bundle exec ruby test/judges/test-dimensions-of-terrain.rb -n test_total_reposit
 [GNU Parallel]: https://www.gnu.org/software/parallel/
 [GNU Make]: https://www.gnu.org/software/make/
 [GNU Bash]: https://www.gnu.org/software/bash/
+[Docker]: https://docs.docker.com/get-docker/

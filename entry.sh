@@ -217,6 +217,7 @@ ${JUDGES} "${gopts[@]}" --hello update \
     --timeout "${timeout}" \
     --lib "${SELF}/lib" \
     --max-cycles "${cycles}" \
+    --statistics \
     "${options[@]}" \
     "${ALL_JUDGES}" \
     "${fb}"
