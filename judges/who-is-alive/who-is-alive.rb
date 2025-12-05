@@ -32,12 +32,12 @@ Fbe.consider(
 ) do |f|
   next if seen.include?(f.who)
   seen << f.who
+  nick = Jp.nick_of(f.who)
+  unless nick.nil?
+    $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
+    next
+  end
   elapsed($loog, level: Logger::INFO) do
-    nick = Jp.nick_of(f.who)
-    unless nick.nil?
-      $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
-      next
-    end
     Fbe.fb.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who}))").delete!
     done =
       Fbe.fb.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
