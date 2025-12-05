@@ -23,6 +23,7 @@ require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
+require 'joined'
 require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
@@ -47,13 +48,13 @@ require_relative '../../lib/issue_was_lost'
           Jp.issue_was_lost('github', repository, issue)
           next 0
         end
-      total = 0
-      found = 0
+      seen = []
+      found = []
       first = issue
       elapsed($loog, level: Logger::INFO) do
         Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
           next if Fbe.octo.off_quota?
-          total += 1
+          seen << json[:number]
           Fbe.fb.txn do |fbt|
             f =
               Fbe.if_absent(fb: fbt) do |ff|
@@ -64,7 +65,7 @@ require_relative '../../lib/issue_was_lost'
                 issue = ff.issue
               end
             next if f.nil?
-            found += 1
+            found << f.issue
             f.when = json[:created_at]
             f.who = json.dig(:user, :id)
             if type == 'pull'
@@ -79,7 +80,11 @@ require_relative '../../lib/issue_was_lost'
             $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
           end
         end
-        throw :"Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}"
+        m =
+          "Checked #{seen.count} #{type}s in #{repo} (#{seen.joined(max: 8)}), " \
+          "from #{first} to #{issue}, " \
+          "#{found} (#{found.joined(max: 8)})"
+        throw m.to_sym
       end
       issue
     end
