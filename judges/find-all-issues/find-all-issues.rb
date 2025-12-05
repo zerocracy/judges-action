@@ -76,6 +76,7 @@ require_relative '../../lib/issue_was_lost'
               end
             end
             f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Fbe.who(f)}."
+            $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
           end
         end
         throw :"Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}"
