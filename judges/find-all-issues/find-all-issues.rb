@@ -86,7 +86,7 @@ require_relative '../../lib/issue_was_lost'
         m =
           "Checked #{seen.count} #{type}s in #{repo} (#{seen.joined(max: 8)}) created >= #{after.iso8601[0..9]}; " \
           "from ##{first} to ##{issue}; " \
-          "found #{found} (#{found.joined(max: 8)})"
+          "found #{found.count} (#{found.joined(max: 8)})"
         throw m.to_sym
       end
       issue

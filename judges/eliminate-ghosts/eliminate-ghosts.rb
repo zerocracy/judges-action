@@ -15,13 +15,14 @@ require 'logger'
 require_relative '../../lib/nick_of'
 
 good = Set.new
+bad = Set.new
 
-Fbe.consider('(and (absent stale) (eq where "github") (exists who))') do |f|
-  next if good.include?(f.who)
+Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f|
+  next if good.include?(f.who) || bad.include?(f.who)
   elapsed($loog, level: Logger::INFO) do
     nick = Jp.nick_of(f.who)
     if nick.nil?
-      f.stale = 'who'
+      bad.add(f.who)
       throw :"GitHub user ##{f.who} is not found (stale)"
     else
       good.add(f.who)
@@ -30,8 +31,14 @@ Fbe.consider('(and (absent stale) (eq where "github") (exists who))') do |f|
   end
 end
 
-Fbe.consider('(and (eq where "github") (exists who) (unique who) (eq stale "who"))') do |f|
-  Fbe.consider("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))") do |ff|
+bad.each do |u|
+  Fbe.fb.query("(and (absent stale) (eq where 'github') (eq who #{u}))").each do |f|
+    f.stale = 'who'
+  end
+end
+
+Fbe.fb.query('(and (eq where "github") (exists who) (unique who) (eq stale "who"))').each do |f|
+  Fbe.fb.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))") do |ff|
     ff.stale = 'who'
   end
 end
