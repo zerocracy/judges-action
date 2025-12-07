@@ -32,7 +32,6 @@ jobs:
             sqlite_cache_maxsize=200Mb
       - uses: zerocracy/pages-action@0.6.3
         with:
-          verbose: true
           github-token: ${{ secrets.PAT }}
           factbase: zerocracy.fb
           output: pages
