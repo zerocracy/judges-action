@@ -218,6 +218,7 @@ ${JUDGES} "${gopts[@]}" --hello update \
     --lib "${SELF}/lib" \
     --max-cycles "${cycles}" \
     --statistics \
+    --churn=churn.txt \
     "${options[@]}" \
     "${ALL_JUDGES}" \
     "${fb}"
@@ -246,6 +247,7 @@ else
         --timeout=0 \
         "--owner=${owner}" \
         "--meta=workflow_url:${owner}" \
+        "--meta=churn:$(cat churn.txt)" \
         "--meta=vitals_url:${VITALS_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
         "--meta=action_version:${action_version}" \
