@@ -19,6 +19,7 @@ bad = Set.new
 
 Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f|
   next if good.include?(f.who) || bad.include?(f.who)
+  next if Fbe.octo.off_quota?
   elapsed($loog, level: Logger::INFO) do
     nick = Jp.nick_of(f.who)
     if nick.nil?
