@@ -16,14 +16,15 @@
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
 # @see https://github.com/yegor256/fbe/blob/master/lib/fbe/if_absent.rb Implementation of Fbe.if_absent
 
-require 'time'
 require 'fbe/consider'
 require 'fbe/fb'
-require 'fbe/octo'
 require 'fbe/if_absent'
-require 'fbe/who'
 require 'fbe/issue'
+require 'fbe/octo'
+require 'fbe/tombstone'
+require 'fbe/who'
 require 'tago'
+require 'time'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
@@ -37,6 +38,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
   added = 0
   checked = 0
   missing.take(200).each do |i|
+    next if Fbe::Tombstone.new.has?('github', r.repository, i)
     json =
       begin
         Fbe.octo.issue(repo, i)
