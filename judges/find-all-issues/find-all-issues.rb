@@ -83,10 +83,14 @@ require_relative '../../lib/issue_was_lost'
             $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
           end
         end
-        m =
-          "Checked #{seen.count} #{type}s in #{repo} (#{seen.joined(max: 8)}) created >= #{after.iso8601[0..9]}; " \
-          "from ##{first} to ##{issue}; " \
-          "found #{found.count} (#{found.joined(max: 8)})"
+        m = [
+          "Checked #{seen.count} #{type}s in #{repo}",
+          ("(#{seen.joined(max: 8)})" unless seen.empty?),
+          "created >= #{after.iso8601[0..9]};",
+          "from ##{first} to ##{issue};",
+          'found',
+          (found.empty? ? 'nothing' : "#{found.count} (#{found.joined(max: 8)})")
+        ].compact.join(' ')
         throw m.to_sym
       end
       issue
