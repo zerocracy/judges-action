@@ -74,7 +74,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         end
       end
       f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
-      $loog.info("Lost #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
+      $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end
     added += 1
   end
