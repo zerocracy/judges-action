@@ -183,22 +183,21 @@ Fbe.iterate do
       end
 
     when 'PullRequestReviewEvent'
+      fact.issue = json.dig(:payload, :pull_request, :number)
       case json[:payload][:action]
       when 'created'
-        skip_event(json) if json.dig(:payload, :pull_request, :user, :id).to_i == fact.who
+        pull = Fbe.octo.pull_request(rname, fact.issue)
+        skip_event(json) if pull.dig(:user, :id).to_i == fact.who
         if Fbe.fb.query(
           "(and (eq repository #{fact.repository}) " \
           '(eq what "pull-was-reviewed") ' \
           "(eq who #{fact.who}) " \
-          "(eq issue #{json[:payload][:pull_request][:number]}))"
+          "(eq issue #{fact.issue}))"
         ).each.last
           skip_event(json)
         end
-        skip_event(json) unless json[:payload][:review][:state] == 'approved'
-
-        fact.issue = json[:payload][:pull_request][:number]
+        skip_event(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
-        pull = Fbe.octo.pull_request(rname, fact.issue)
         fact.hoc = pull[:additions] + pull[:deletions]
         fact.comments = pull[:comments] + pull[:review_comments]
         fact.review_comments = pull[:review_comments]

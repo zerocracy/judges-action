@@ -129,7 +129,6 @@ class TestGithubEvents < Jp::Test
               },
               state: 'approved',
               pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
-              author_association: 'OWNER',
               _links: {
                 html: {
                   href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
@@ -142,18 +141,9 @@ class TestGithubEvents < Jp::Test
             pull_request: {
               url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
               id: 1_990_323_142,
-              node_id: 'PR_kwDOL6GCO852oevG',
               number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase',
-              user: {
-                login: 'test',
-                id: 526_200,
-                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
-                type: 'User',
-                site_admin: false
-              }
+              head: { ref: '93', sha: 'e50388', repo: { id: 41, name: 'judges' } },
+              base: { ref: 'master', sha: 'b33151', repo: { id: 42, name: 'judges' } }
             }
           }
         },
@@ -187,7 +177,6 @@ class TestGithubEvents < Jp::Test
               },
               state: 'approved',
               pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
-              author_association: 'NONE',
               _links: {
                 html: {
                   href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
@@ -200,18 +189,9 @@ class TestGithubEvents < Jp::Test
             pull_request: {
               url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
               id: 1_990_323_142,
-              node_id: 'PR_kwDOL6GCO852oevG',
               number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase',
-              user: {
-                login: 'test',
-                id: 526_200,
-                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
-                type: 'User',
-                site_admin: false
-              }
+              head: { ref: '93', sha: 'e50388', repo: { id: 41, name: 'judges' } },
+              base: { ref: 'master', sha: 'b33151', repo: { id: 42, name: 'judges' } }
             }
           }
         },
@@ -245,7 +225,6 @@ class TestGithubEvents < Jp::Test
               },
               state: 'approved',
               pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
-              author_association: 'NONE',
               _links: {
                 html: {
                   href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
@@ -258,11 +237,9 @@ class TestGithubEvents < Jp::Test
             pull_request: {
               url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
               id: 1_990_323_142,
-              node_id: 'PR_kwDOL6GCO852oevG',
               number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase'
+              head: { ref: '93', sha: 'e50388', repo: { id: 41, name: 'judges' } },
+              base: { ref: 'master', sha: 'b33151', repo: { id: 42, name: 'judges' } }
             }
           }
         }
@@ -294,6 +271,12 @@ class TestGithubEvents < Jp::Test
       .to_return(
         status: 200,
         body: {
+          user: {
+            login: 'test',
+            id: 526_200,
+            node_id: 'MDQ6VXNlcjUyNjMwMQ==',
+            type: 'User'
+          },
           default_branch: 'master',
           additions: 1,
           deletions: 1,
@@ -356,21 +339,11 @@ class TestGithubEvents < Jp::Test
                 id: 42,
                 type: 'User'
               },
-              state: 'approved',
-              author_association: 'OWNER'
+              state: 'approved'
             },
             pull_request: {
               id: 1_990_323_142,
-              number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase',
-              user: {
-                login: 'test',
-                id: 526_200,
-                type: 'User',
-                site_admin: false
-              }
+              number: 93
             }
           }
         },
@@ -397,21 +370,11 @@ class TestGithubEvents < Jp::Test
                 id: 43,
                 type: 'User'
               },
-              state: 'commented',
-              author_association: 'NONE'
+              state: 'commented'
             },
             pull_request: {
               id: 1_990_323_142,
-              number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase',
-              user: {
-                login: 'test',
-                id: 526_200,
-                type: 'User',
-                site_admin: false
-              }
+              number: 93
             }
           }
         }
@@ -443,6 +406,12 @@ class TestGithubEvents < Jp::Test
       .to_return(
         status: 200,
         body: {
+          user: {
+            login: 'test',
+            id: 526_200,
+            type: 'User',
+            site_admin: false
+          },
           default_branch: 'master',
           additions: 1,
           deletions: 1,
@@ -695,7 +664,6 @@ class TestGithubEvents < Jp::Test
               },
               state: 'approved',
               pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
-              author_association: 'OWNER',
               _links: {
                 html: {
                   href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
@@ -708,18 +676,7 @@ class TestGithubEvents < Jp::Test
             pull_request: {
               url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
               id: 1_990_323_142,
-              node_id: 'PR_kwDOL6GCO852oevG',
-              number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase',
-              user: {
-                login: 'test',
-                id: 526_200,
-                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
-                type: 'User',
-                site_admin: false
-              }
+              number: 93
             }
           }
         },
@@ -753,7 +710,6 @@ class TestGithubEvents < Jp::Test
               },
               state: 'approved',
               pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
-              author_association: 'OWNER',
               _links: {
                 html: {
                   href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
@@ -766,18 +722,7 @@ class TestGithubEvents < Jp::Test
             pull_request: {
               url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
               id: 1_990_323_142,
-              node_id: 'PR_kwDOL6GCO852oevG',
-              number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase',
-              user: {
-                login: 'test',
-                id: 526_200,
-                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
-                type: 'User',
-                site_admin: false
-              }
+              number: 93
             }
           }
         },
@@ -811,7 +756,6 @@ class TestGithubEvents < Jp::Test
               },
               state: 'approved',
               pull_request_url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
-              author_association: 'OWNER',
               _links: {
                 html: {
                   href: 'https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609'
@@ -824,18 +768,7 @@ class TestGithubEvents < Jp::Test
             pull_request: {
               url: 'https://api.github.com/repos/yegor256/judges/pulls/93',
               id: 1_990_323_155,
-              node_id: 'PR_kwDOL6GCO852oevG',
-              number: 93,
-              state: 'open',
-              locked: false,
-              title: 'allows to push gizpped factbase',
-              user: {
-                login: 'test',
-                id: 526_200,
-                node_id: 'MDQ6VXNlcjE2NDYwMjA=',
-                type: 'User',
-                site_admin: false
-              }
+              number: 93
             }
           }
         }
@@ -861,6 +794,13 @@ class TestGithubEvents < Jp::Test
       .to_return(
         status: 200,
         body: {
+          user: {
+            login: 'test',
+            id: 526_200,
+            node_id: 'MDQ6VXNlcjE2NDYwMjA=',
+            type: 'User',
+            site_admin: false
+          },
           default_branch: 'master',
           additions: 1,
           deletions: 1,
@@ -1808,6 +1748,8 @@ class TestGithubEvents < Jp::Test
   def test_prevent_creation_of_duplicate_facts_upon_multiple_pr_closures
     WebMock.disable_net_connect!
     rate_limit_up
+    # @todo #1195:60min Similarly, this PR needs to check for the presence of fields
+    # and add additional calls to Github API
     stub_event(
       {
         id: '123123111',
