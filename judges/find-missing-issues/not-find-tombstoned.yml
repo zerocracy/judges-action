@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+input:
+  -
+    what: issue-was-opened
+    where: github
+    when: 2024-10-10T15:00:00Z
+    repository: 700
+    issue: 141
+  -
+    what: issue-was-opened
+    where: github
+    when: 2024-10-11T15:00:00Z
+    repository: 700
+    issue: 143
+  -
+    where: github
+    what: tombstone
+    repository: 700
+    issues: ['142', '788-789']
+expected:
+  - /fb[count(f)=3]

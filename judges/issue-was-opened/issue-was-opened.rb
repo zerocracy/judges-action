@@ -9,6 +9,7 @@
 require 'fbe/octo'
 require 'fbe/conclude'
 require 'fbe/issue'
+require 'fbe/tombstone'
 require 'fbe/who'
 require 'octokit'
 require 'tago'
