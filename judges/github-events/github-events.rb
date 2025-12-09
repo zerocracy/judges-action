@@ -140,16 +140,23 @@ Fbe.iterate do
       $loog.debug("New PushEvent ##{json[:payload][:push_id]} recorded")
 
     when 'PullRequestEvent'
-      pl = json[:payload][:pull_request]
-      fact.issue = pl[:number]
+      fact.issue = json.dig(:payload, :pull_request, :number)
       case json[:payload][:action]
       when 'opened'
         fact.what = 'pull-was-opened'
-        fact.branch = pl[:head][:ref]
+        fact.branch = json.dig(:payload, :pull_request, :head, :ref)
         fact.details =
           "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("New PR #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       when 'closed'
+        pl =
+          begin
+            Fbe.octo.pull_request(rname, fact.issue)
+          rescue Octokit::NotFound
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
+            nil
+          end
+        skip_event(json) if pl.nil?
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = (pl[:additions] || 0) + (pl[:deletions] || 0)
         fact.files = pl[:changed_files] unless pl[:changed_files].nil?
@@ -164,13 +171,7 @@ Fbe.iterate do
             nil
           end
         fact.review = review[:submitted_at] if review
-        author =
-          begin
-            Fbe.octo.pull_request(rname, fact.issue).dig(:user, :id)
-          rescue Octokit::NotFound
-            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
-            nil
-          end
+        author = pl.dig(:user, :id)
         fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
