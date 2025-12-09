@@ -64,7 +64,10 @@ Fbe.consider(
         "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
         "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
       $loog.info(
-        "The pull #{Fbe.issue(n)} was reviewed by #{Fbe.who(n)} #{n.when.ago} ago (#{n.review_comments} comments)"
+        [
+          "The pull #{Fbe.issue(n)} was reviewed by #{Fbe.who(n)} #{n.when.ago} ago:",
+          "#{n.review_comments} review comments, #{n.seconds} seconds, #{n.comments} comments"
+        ].join(' ')
       )
     end
   end
