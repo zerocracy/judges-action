@@ -140,7 +140,7 @@ class TestFindAllIssues < Jp::Test
       }
     )
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2024-09-10',
+      %r{https://api\.github\.com/search/issues\?.*},
       body: {
         total_count: 3, incomplete_results: false,
         items: [

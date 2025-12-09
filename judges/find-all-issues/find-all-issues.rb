@@ -83,6 +83,7 @@ require_relative '../../lib/issue_was_lost'
             $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
           end
         end
+        issue = first if issue < first
         m = [
           "Checked #{seen.count} #{type}s in #{repo}",
           ("(#{seen.joined(max: 8)})" unless seen.empty?),
