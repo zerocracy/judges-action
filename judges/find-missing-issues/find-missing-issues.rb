@@ -23,6 +23,7 @@ require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/tombstone'
 require 'fbe/who'
+require 'joined'
 require 'tago'
 require 'time'
 require_relative '../../lib/issue_was_lost'
@@ -37,7 +38,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
   next if issues.empty?
   must = (issues.min..issues.max).to_a
   missing = must - issues
-  added = 0
+  added = []
   checked = 0
   missing.take(200).each do |i|
     next if ts.has?('github', r.repository, i)
@@ -79,12 +80,18 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
       $loog.info("The #{type} #{Fbe.issue(f)} is not tombstoned among #{ts.issues('github', r.repository).count}")
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end
-    added += 1
+    added << i
   end
   if missing.empty?
     $loog.info("No missing issues in #{repo}")
   else
-    $loog.info("Checked #{checked} out of #{missing.count} missing issues in #{repo}, #{added} facts added")
+    $loog.info(
+      [
+        "Checked #{checked} out of #{missing.count} missing issues",
+        "in #{repo}, #{added.count} facts added:",
+        added.joined(max: 8)
+      ].join(' ')
+    )
   end
 end
 
