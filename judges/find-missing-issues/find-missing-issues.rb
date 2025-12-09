@@ -39,8 +39,8 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
   must = (issues.min..issues.max).to_a
   missing = must - issues
   added = []
-  checked = 0
-  missing.take(200).each do |i|
+  checked = []
+  missing.each do |i|
     next if ts.has?('github', r.repository, i)
     json =
       begin
@@ -50,7 +50,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         Jp.issue_was_lost('github', r.repository, i)
         next
       end
-    checked += 1
+    checked << i
     if json[:number].nil?
       $loog.warn("Apparently, the JSON for the issue ##{i} doesn't have 'number' field")
       Jp.issue_was_lost('github', r.repository, i)
@@ -81,13 +81,14 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end
     added << i
+    break if added.size > 16
   end
   if missing.empty?
     $loog.info("No missing issues in #{repo}")
   else
     $loog.info(
       [
-        "Checked #{checked} out of #{missing.count} missing issues",
+        "Checked #{checked.size} out of #{missing.count} missing issues",
         "in #{repo}, #{added.count} facts added:",
         added.joined(max: 8)
       ].join(' ')
