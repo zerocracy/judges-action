@@ -1351,10 +1351,7 @@ class TestGithubEvents < Jp::Test
   end
 
   def test_pull_request_event_with_comments
-    skip('Need to solve a puzzle')
     fb = Factbase.new
-    # @todo #1195:60min In tests that don't use stubs, you need to fix it in the fake object `Fbe::FakeOctokit`
-    # https://github.com/zerocracy/fbe/blob/3cd6e0aa9d21438d39a1a8cb41d8ea01cedb451f/lib/fbe/octo.rb#L1149
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
     f = fb.query('(eq what "pull-was-merged")').each.first
     assert_equal(4, f.comments)
