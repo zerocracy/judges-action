@@ -23,39 +23,8 @@ class TestQuantityOfDeliverables < Jp::Test
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
     stub_github(
-      'https://api.github.com/user/42',
-      body: { id: 42, login: 'torvalds' }
-    )
-    stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00',
-      body: [
-        {
-          sha: 'bcb3cd5c2a6f3daebe1a2ab16a195a0bf2609943'
-        },
-        {
-          sha: '0d705c564abc9e5088f00310c42b82bc9f192a3d'
-        }
-      ]
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits/bcb3cd5c2a6f3daebe1a2ab16a195a0bf2609943',
-      body: {
-        stats: {
-          total: 10
-        }
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits/0d705c564abc9e5088f00310c42b82bc9f192a3d',
-      body: {
-        stats: {
-          total: 10
-        }
-      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15',
@@ -69,7 +38,6 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
     )
-    stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
@@ -79,8 +47,8 @@ class TestQuantityOfDeliverables < Jp::Test
       Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
         load_it('quantity-of-deliverables', fb)
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
-        assert_equal(2, f.first.total_commits_pushed)
-        assert_equal(20, f.first.total_hoc_committed)
+        assert_equal(29, f.first.total_commits_pushed)
+        assert_equal(1857, f.first.total_hoc_committed)
         assert_equal(1, f.first.total_issues_created)
         assert_equal(1, f.first.total_pulls_submitted)
       end
@@ -93,17 +61,8 @@ class TestQuantityOfDeliverables < Jp::Test
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
     stub_github(
-      'https://api.github.com/user/42',
-      body: { id: 42, login: 'torvalds' }
-    )
-    stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits?per_page=100&since=2024-07-15T21:00:00%2B00:00',
-      status: 409,
-      body: []
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15',
@@ -117,7 +76,6 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
     )
-    stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100',
       body: { total_count: 0, workflow_runs: [] }

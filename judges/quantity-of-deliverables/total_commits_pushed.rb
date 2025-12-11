@@ -17,9 +17,10 @@ def total_commits_pushed(fact)
   hoc = 0
   Fbe.unmask_repos do |repo|
     next if Fbe.octo.repository(repo)[:size].zero?
-    Fbe.octo.commits_since(repo, fact.since).each do |json|
-      commits += 1
-      hoc += Fbe.octo.commit(repo, json[:sha])[:stats][:total]
+    owner, name = repo.split('/')
+    Fbe.github_graph.total_commits_pushed(owner, name, fact.since).then do |json|
+      commits += json['commits']
+      hoc += json['hoc']
     end
   end
   {

@@ -19,6 +19,8 @@ require 'fbe/unmask_repos'
 def total_builds_ran(fact)
   total =
     Fbe.unmask_repos.sum do |repo|
+      # @todo #1223:60min Just like in this issue, you need to try to replace this
+      # `Fbe.octo.repository_workflow_runs` REST API method with a similar one in GraphQL
       Fbe.octo.repository_workflow_runs(repo, created: ">#{fact.since.utc.iso8601[0..9]}")[:total_count]
     end
   { total_builds_ran: total }
