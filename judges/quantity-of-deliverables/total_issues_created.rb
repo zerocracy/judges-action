@@ -19,6 +19,7 @@ def total_issues_created(fact)
     # @todo #1223:60min Just like in this issue, you need to try to replace this
     # `Fbe.octo.list_issues` REST API method with a similar one in GraphQL
     Fbe.octo.list_issues(repo, since: ">#{fact.since.utc.iso8601[0..9]}").each do |json|
+      next if json.is_a?(Array)
       issues += 1
       pulls += 1 unless json[:pull_request].nil?
     end
