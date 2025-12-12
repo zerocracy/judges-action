@@ -27,14 +27,6 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15',
-      body: [
-        {
-          pull_request: {}
-        }
-      ]
-    )
-    stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
     )
@@ -49,8 +41,8 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(29, f.first.total_commits_pushed)
         assert_equal(1857, f.first.total_hoc_committed)
-        assert_equal(1, f.first.total_issues_created)
-        assert_equal(1, f.first.total_pulls_submitted)
+        assert_equal(25, f.first.total_issues_created)
+        assert_equal(8, f.first.total_pulls_submitted)
       end
     end
   end
@@ -63,14 +55,6 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues?per_page=100&since=%3E2024-07-15',
-      body: [
-        {
-          pull_request: {}
-        }
-      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
@@ -87,8 +71,8 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(0, f.first.total_commits_pushed)
         assert_equal(0, f.first.total_hoc_committed)
-        assert_equal(1, f.first.total_issues_created)
-        assert_equal(1, f.first.total_pulls_submitted)
+        assert_equal(25, f.first.total_issues_created)
+        assert_equal(8, f.first.total_pulls_submitted)
       end
     end
   end
