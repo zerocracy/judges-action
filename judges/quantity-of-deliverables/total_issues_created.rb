@@ -16,11 +16,10 @@ def total_issues_created(fact)
   issues = 0
   pulls = 0
   Fbe.unmask_repos do |repo|
-    # @todo #1223:60min Just like in this issue, you need to try to replace this
-    # `Fbe.octo.list_issues` REST API method with a similar one in GraphQL
-    Fbe.octo.list_issues(repo, since: ">#{fact.since.utc.iso8601[0..9]}").each do |json|
-      issues += 1
-      pulls += 1 unless json[:pull_request].nil?
+    owner, name = repo.split('/')
+    Fbe.github_graph.total_issues_created(owner, name, fact.since).then do |json|
+      issues += json['issues'] + json['pulls']
+      pulls += json['pulls']
     end
   end
   {
