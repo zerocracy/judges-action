@@ -231,4 +231,46 @@ class TestFindAllIssues < Jp::Test
       assert_equal(526_302, f.who)
     end
   end
+
+  def test_end_of_iteration_leave_old_marker_instead_reset_to_zero
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } }]
+      }
+    )
+    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.repository = 991
+      f.what = 'iterate'
+      f.where = 'github'
+      f.min_issue_was_found = 44
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f.issue = 44
+      f.repository = 991
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    fb.insert.then do |f|
+      f._id = 3
+      f.issue = 45
+      f.repository = 991
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    assert_equal(3, fb.size)
+    refute_equal(0, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
+    assert_equal(45, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
+  end
 end
