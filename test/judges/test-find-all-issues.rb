@@ -273,4 +273,30 @@ class TestFindAllIssues < Jp::Test
     refute_equal(0, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
     assert_equal(45, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
+
+  def test_when_issue_response_has_empty_created_at
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/11', body: { created_at: nil })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.repository = 991
+      f.what = 'iterate'
+      f.where = 'github'
+      f.min_issue_was_found = 5
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f.issue = 11
+      f.repository = 991
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    assert_equal(2, fb.size)
+    assert_equal(5, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
+  end
 end

@@ -49,6 +49,10 @@ require_relative '../../lib/issue_was_lost'
           Jp.issue_was_lost('github', repository, issue)
           next 0
         end
+      if after.nil?
+        $loog.info("The #{type} ##{issue} in #{repo} return empty created_at field")
+        next 0
+      end
       seen = []
       found = []
       first = issue
