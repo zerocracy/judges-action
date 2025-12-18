@@ -31,7 +31,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -61,7 +61,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: [{ id: 1, draft: false, published_at: Time.parse('2024-08-01 21:00:00 UTC') }]
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -87,7 +87,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -125,7 +125,7 @@ class TestQuantityOfDeliverables < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=1',
       body: {
         total_count: 0,
         workflow_runs: []
@@ -167,7 +167,7 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls?per_page=100&state=all', body: [])
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=100',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=1',
       body: {
         total_count: 3,
         workflow_runs: [
@@ -178,24 +178,6 @@ class TestQuantityOfDeliverables < Jp::Test
             event: 'dynamic',
             status: 'completed',
             conclusion: 'success',
-            workflow_id: 141
-          },
-          {
-            id: 708,
-            display_title: 'some title',
-            run_number: 2612,
-            event: 'schedule',
-            status: 'completed',
-            conclusion: 'success',
-            workflow_id: 141
-          },
-          {
-            id: 705,
-            display_title: 'some title',
-            run_number: 2610,
-            event: 'push',
-            status: 'completed',
-            conclusion: 'failure',
             workflow_id: 141
           }
         ]
@@ -228,7 +210,7 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     %w[2025-09-01 2025-09-10 2025-09-15].each do |date|
       stub_github(
-        "https://api.github.com/repos/foo/foo/actions/runs?created=%3E#{date}&per_page=100",
+        "https://api.github.com/repos/foo/foo/actions/runs?created=%3E#{date}&per_page=1",
         body: {
           total_count: 0,
           workflow_runs: []
