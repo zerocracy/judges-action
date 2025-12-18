@@ -26,7 +26,7 @@ end
 
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
-Minitest.load :minitest_reporter
+# Minitest.load :minitest_reporter
 
 require 'judges/options'
 require 'loog'
