@@ -19,11 +19,8 @@ require 'fbe/unmask_repos'
 def total_releases_published(fact)
   total =
     Fbe.unmask_repos.sum do |repo|
-      # @todo #1223:60min Just like in this issue, you need to try to replace this
-      # `Fbe.octo.releases` REST API method with a similar one in GraphQL
-      Fbe.octo.releases(repo).count do |json|
-        !json[:draft] && json[:published_at] && json[:published_at] > fact.since
-      end
+      owner, name = repo.split('/')
+      Fbe.github_graph.total_releases_published(owner, name, fact.since)['releases']
     end
   { total_releases_published: total }
 end
