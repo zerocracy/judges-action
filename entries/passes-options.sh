@@ -42,3 +42,6 @@ log_contains \
 log_contains \
   " --option=bots=test-bot,another-bot" \
   "This indicates INPUT_BOTS parameter is not being processed correctly"
+log_contains \
+  " --option=sqlite_cache_min_age=3600" \
+  "This indicates sqlite_cache_min_age option with default value is not being processed correctly"
