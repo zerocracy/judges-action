@@ -163,6 +163,17 @@ if [ "${bots_found}" == "false" ]; then
     fi
 fi
 
+cache_min_age=false
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=sqlite_cache_min_age="* ]]; then
+        cache_min_age=true
+        break
+    fi
+done
+if [ "${cache_min_age}" == "false" ]; then
+    options+=("--option=sqlite_cache_min_age=3600");
+fi
+
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     echo "We are in 'dry' mode; skipping 'pull'"
