@@ -5,7 +5,7 @@ FROM ruby:3.4
 
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
-LABEL "version"="0.0.0"
+LABEL "version"="0.17.8"
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y curl=* jq=* \
