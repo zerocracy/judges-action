@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+runs: 3
+options:
+  TODAY: 2023-03-18T00:00:00
+  repositories: yegor256/judges
+  testing: true
+input:
+  -
+    _id: 1
+    what: pmp
+    area: scope
+    qod_days: 10
+  -
+    _id: 2
+    what: quantity-of-deliverables
+    since: 2023-01-10T00:00:00
+    when: 2023-01-11T00:00:00
+  -
+    _id: 3
+    what: quantity-of-deliverables
+    since: 2023-01-11T00:00:00
+    when: 2023-01-13T00:00:00
+  -
+    _id: 4
+    what: quantity-of-deliverables
+    since: 2023-01-13T00:00:00
+    when: 2023-01-18T00:00:00
+expected:
+  - /fb[count(f)=4]
