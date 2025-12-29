@@ -27,7 +27,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-11&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -53,7 +53,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-15&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-11&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new

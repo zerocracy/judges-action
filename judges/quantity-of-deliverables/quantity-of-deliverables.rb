@@ -15,10 +15,10 @@
 
 require 'fbe/consider'
 require 'fbe/if_absent'
+require 'fbe/pmp'
 require_relative '../../lib/incremate'
 
-pmp = Fbe.fb.query("(and (eq what 'pmp') (eq area 'scope') (exists qod_days))").each.first
-days = pmp.nil? ? 28 : pmp['qod_days'].first
+days = Fbe.pmp.scope.qod_days
 last = Fbe.fb.query(
   "(eq when
      (agg

@@ -33,7 +33,7 @@ class TestQualityOfService < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-15T21:00:00Z..2024-08-12T21:00:00Z&per_page=100').to_return(
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=100').to_return(
       status: 200,
       body: {
         workflow_runs: [
@@ -69,7 +69,7 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+      'q=repo:foo/foo%20type:issue%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
       body: {
@@ -91,7 +91,7 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+      'q=repo:foo/foo%20type:pr%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
       body: {
@@ -104,7 +104,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_request(
       :get,
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-15'
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-11'
     ).to_return(
       status: 200,
       body: {
@@ -118,7 +118,7 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
       body: {
@@ -133,7 +133,7 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-15'
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-11'
     ).to_return(
       status: 200,
       body: {
@@ -147,7 +147,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [
           {
@@ -183,7 +183,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
