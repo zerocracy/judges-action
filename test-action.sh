@@ -22,6 +22,7 @@ if [ -z "${name}" ]; then
 fi
 
 docker run --rm \
+    -e "SKIP_VERSION_CHECKING=true" \
     -e "GITHUB_WORKSPACE=/tmp" \
     -e "GITHUB_REPOSITORY=zerocracy/judges-action" \
     -e "GITHUB_REPOSITORY_OWNER=zerocracy" \

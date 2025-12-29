@@ -10,14 +10,15 @@ VERSION=0.0.0
 
 echo "The 'judges-action' ${VERSION} is running"
 
-latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-
-if [ "${latest}" != "${VERSION}" ]; then
-    echo "!!! The latest version of the judges-action plugin available in"
-    echo "!!! its GitHub repository is ${latest}: https://github.com/zerocracy/judges-action."
-    echo "!!! However, you are using a different version: ${VERSION}."
-    echo "!!! This will most likely lead to runtime issues and maybe even data corruption."
-    echo "!!! It is strongly advised to upgrade."
+if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
+    latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
+    if [ "${latest}" != "${VERSION}" ]; then
+        echo "!!! The latest version of the judges-action plugin available in"
+        echo "!!! its GitHub repository is ${latest}: https://github.com/zerocracy/judges-action."
+        echo "!!! However, you are using a different version: ${VERSION}."
+        echo "!!! This will most likely lead to runtime issues and maybe even data corruption."
+        echo "!!! It is strongly advised to upgrade."
+    fi
 fi
 
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
@@ -243,11 +244,15 @@ else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
 
-action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
-    action_version=${VERSION}
+if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
+    action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
+    if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
+        action_version=${VERSION}
+    else
+        action_version="${VERSION}!${action_version}"
+    fi
 else
-    action_version="${VERSION}!${action_version}"
+    action_version=${VERSION}
 fi
 
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
