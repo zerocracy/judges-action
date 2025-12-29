@@ -36,7 +36,8 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: Time.parse(ENV['TODAY']
     gaps << { since: prev.when, when: f.since } if f.since > prev.when
     prev = f
   end
-  gaps.reject { |g| facts.find { |f| g[:since] < f.when && g[:when] > f.since } }.each do |g|
+  large = gaps.reject { |g| g[:when] - g[:since] < slice }
+  large.reject { |g| facts.find { |f| g[:since] < f.when && g[:when] > f.since } }.each do |g|
     Fbe.fb.insert.then do |n|
       n.what = judge
       n.since = g[:since]

@@ -48,24 +48,22 @@ class TestCoverQo < Minitest::Test
 
   def test_fills_gap_between_two_facts
     fb = Factbase.new
-    now = Time.parse('2025-01-20 12:00:00 UTC')
+    now = Time.parse('2025-01-30 12:00:00 UTC')
     f1 = fb.insert
     f1.what = 'test-judge'
     f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-10 12:00:00 UTC')
+    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
     f2 = fb.insert
     f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-15 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-20 12:00:00 UTC')
+    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
+    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
-      Time.stub(:now, now) do
-        Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL)
-      end
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
       assert_equal(3, facts.size, 'gap fact inserted between two facts')
       gap = facts[1]
-      assert_equal(Time.parse('2025-01-10 12:00:00 UTC').to_i, gap.since.to_i)
-      assert_equal(Time.parse('2025-01-15 12:00:00 UTC').to_i, gap.when.to_i)
+      assert_equal(Time.parse('2025-01-05 12:00:00 UTC').to_i, gap.since.to_i)
+      assert_equal(Time.parse('2025-01-20 12:00:00 UTC').to_i, gap.when.to_i)
     end
   end
 
@@ -91,29 +89,27 @@ class TestCoverQo < Minitest::Test
 
   def test_fills_multiple_gaps
     fb = Factbase.new
-    now = Time.parse('2025-01-30 12:00:00 UTC')
+    now = Time.parse('2025-03-01 12:00:00 UTC')
     f1 = fb.insert
     f1.what = 'test-judge'
     f1.since = Time.parse('2025-01-01 12:00:00 UTC')
     f1.when = Time.parse('2025-01-05 12:00:00 UTC')
     f2 = fb.insert
     f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-10 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-15 12:00:00 UTC')
+    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
+    f2.when = Time.parse('2025-01-25 12:00:00 UTC')
     f3 = fb.insert
     f3.what = 'test-judge'
-    f3.since = Time.parse('2025-01-20 12:00:00 UTC')
-    f3.when = Time.parse('2025-01-30 12:00:00 UTC')
+    f3.since = Time.parse('2025-02-15 12:00:00 UTC')
+    f3.when = Time.parse('2025-03-01 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
-      Time.stub(:now, now) do
-        Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL)
-      end
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
       assert_equal(5, facts.size, 'two gap facts inserted for two gaps')
       assert_equal(Time.parse('2025-01-05 12:00:00 UTC').to_i, facts[1].since.to_i)
-      assert_equal(Time.parse('2025-01-10 12:00:00 UTC').to_i, facts[1].when.to_i)
-      assert_equal(Time.parse('2025-01-15 12:00:00 UTC').to_i, facts[3].since.to_i)
-      assert_equal(Time.parse('2025-01-20 12:00:00 UTC').to_i, facts[3].when.to_i)
+      assert_equal(Time.parse('2025-01-20 12:00:00 UTC').to_i, facts[1].when.to_i)
+      assert_equal(Time.parse('2025-01-25 12:00:00 UTC').to_i, facts[3].since.to_i)
+      assert_equal(Time.parse('2025-02-15 12:00:00 UTC').to_i, facts[3].when.to_i)
     end
   end
 
@@ -172,18 +168,18 @@ class TestCoverQo < Minitest::Test
     now = Time.parse('2025-01-30 12:00:00 UTC')
     f2 = fb.insert
     f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-15 12:00:00 UTC')
+    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
     f2.when = Time.parse('2025-01-30 12:00:00 UTC')
     f1 = fb.insert
     f1.what = 'test-judge'
     f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-10 12:00:00 UTC')
+    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
       assert_equal(3, facts.size, 'gap filled even when facts inserted out of order')
-      assert_equal(Time.parse('2025-01-10 12:00:00 UTC').to_i, facts[1].since.to_i)
-      assert_equal(Time.parse('2025-01-15 12:00:00 UTC').to_i, facts[1].when.to_i)
+      assert_equal(Time.parse('2025-01-05 12:00:00 UTC').to_i, facts[1].since.to_i)
+      assert_equal(Time.parse('2025-01-20 12:00:00 UTC').to_i, facts[1].when.to_i)
     end
   end
 
@@ -211,7 +207,7 @@ class TestCoverQo < Minitest::Test
 
   def test_adds_fresh_fact_and_fills_historical_gaps
     fb = Factbase.new
-    now = Time.parse('2025-02-01 12:00:00 UTC')
+    now = Time.parse('2025-02-15 12:00:00 UTC')
     slice = 10 * 24 * 60 * 60
     stale = now - slice - (5 * 24 * 60 * 60)
     f1 = fb.insert
@@ -220,7 +216,7 @@ class TestCoverQo < Minitest::Test
     f1.when = Time.parse('2025-01-05 12:00:00 UTC')
     f2 = fb.insert
     f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-10 12:00:00 UTC')
+    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
     f2.when = stale
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
@@ -323,7 +319,7 @@ class TestCoverQo < Minitest::Test
     end
   end
 
-  def test_handles_many_small_gaps
+  def test_skips_many_small_gaps_below_slice
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
     base = Time.parse('2025-01-01 12:00:00 UTC')
@@ -335,10 +331,9 @@ class TestCoverQo < Minitest::Test
       f.when = base + (i * 3 * day) + day
     end
     Fbe.stub(:fb, fb) do
-      Jp.cover_qo(30, judge: 'test-judge', loog: Loog::NULL, today: now)
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
-      count = facts.size
-      assert_operator(count, :>=, 18, "expected at least 18 facts, got #{count}")
+      assert_equal(10, facts.size, 'no small gaps filled when all are below slice')
     end
   end
 
@@ -361,6 +356,60 @@ class TestCoverQo < Minitest::Test
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
       assert_equal(3, facts.size, 'no gap inserted when enclosed by larger fact')
+    end
+  end
+
+  def test_skips_gap_smaller_than_slice
+    fb = Factbase.new
+    now = Time.parse('2025-01-30 12:00:00 UTC')
+    f1 = fb.insert
+    f1.what = 'test-judge'
+    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
+    f1.when = Time.parse('2025-01-10 12:00:00 UTC')
+    f2 = fb.insert
+    f2.what = 'test-judge'
+    f2.since = Time.parse('2025-01-15 12:00:00 UTC')
+    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a
+      assert_equal(2, facts.size, 'gap of 5 days not filled when slice is 10 days')
+    end
+  end
+
+  def test_fills_gap_equal_to_slice
+    fb = Factbase.new
+    now = Time.parse('2025-01-30 12:00:00 UTC')
+    f1 = fb.insert
+    f1.what = 'test-judge'
+    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
+    f1.when = Time.parse('2025-01-10 12:00:00 UTC')
+    f2 = fb.insert
+    f2.what = 'test-judge'
+    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
+    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a
+      assert_equal(3, facts.size, 'gap of exactly 10 days filled when slice is 10 days')
+    end
+  end
+
+  def test_fills_gap_larger_than_slice
+    fb = Factbase.new
+    now = Time.parse('2025-01-30 12:00:00 UTC')
+    f1 = fb.insert
+    f1.what = 'test-judge'
+    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
+    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
+    f2 = fb.insert
+    f2.what = 'test-judge'
+    f2.since = Time.parse('2025-01-25 12:00:00 UTC')
+    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a
+      assert_equal(3, facts.size, 'gap of 20 days filled when slice is 10 days')
     end
   end
 end

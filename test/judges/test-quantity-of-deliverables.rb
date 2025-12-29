@@ -179,7 +179,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
-    %w[2025-09-01 2025-09-10 2025-09-15].each do |date|
+    %w[2025-09-01 2025-09-05 2025-09-15].each do |date|
       stub_github(
         "https://api.github.com/repos/foo/foo/actions/runs?created=%3E#{date}&per_page=1",
         body: {
@@ -189,9 +189,13 @@ class TestQuantityOfDeliverables < Jp::Test
       )
     end
     fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'scope'
+    f.qod_days = 7
     fb.with(
       _id: 1, what: 'quantity-of-deliverables',
-      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-10 15:00:00 UTC')
+      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-05 15:00:00 UTC')
     ).with(
       _id: 2, what: 'quantity-of-deliverables',
       since: Time.parse('2025-09-15 15:00:00 UTC'), when: Time.parse('2025-09-25 15:00:00 UTC')
@@ -202,7 +206,7 @@ class TestQuantityOfDeliverables < Jp::Test
         assert(
           fb.one?(
             what: 'quantity-of-deliverables',
-            since: Time.parse('2025-09-10 15:00:00 UTC'),
+            since: Time.parse('2025-09-05 15:00:00 UTC'),
             when: Time.parse('2025-09-15 15:00:00 UTC')
           )
         )

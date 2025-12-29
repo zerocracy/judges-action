@@ -1836,9 +1836,9 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     %w[
-      2025-09-01T15:00:00Z..2025-09-10T15:00:00Z
+      2025-09-01T15:00:00Z..2025-09-05T15:00:00Z
       2025-09-15T15:00:00Z..2025-09-25T15:00:00Z
-      2025-09-10T15:00:00Z..2025-09-15T15:00:00Z
+      2025-09-05T15:00:00Z..2025-09-15T15:00:00Z
     ].each do |period|
       stub_github(
         'https://api.github.com/search/issues?per_page=100&' \
@@ -1871,9 +1871,9 @@ class TestQualityOfService < Jp::Test
       )
     end
     %w[
-      2025-09-04 2025-09-05 2025-09-06 2025-09-07 2025-09-08 2025-09-09 2025-09-10
+      2025-09-01 2025-09-02 2025-09-03 2025-09-04 2025-09-05
       2025-09-19 2025-09-20 2025-09-21 2025-09-22 2025-09-23 2025-09-24 2025-09-25
-      2025-09-11 2025-09-12 2025-09-13 2025-09-14 2025-09-15
+      2025-09-06 2025-09-07 2025-09-08 2025-09-09 2025-09-10 2025-09-11 2025-09-12 2025-09-13 2025-09-14 2025-09-15
     ].each do |date|
       stub_github(
         'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
@@ -1882,9 +1882,13 @@ class TestQualityOfService < Jp::Test
       )
     end
     fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
     fb.with(
       _id: 1, what: 'quality-of-service',
-      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-10 15:00:00 UTC')
+      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-05 15:00:00 UTC')
     ).with(
       _id: 2, what: 'quality-of-service',
       since: Time.parse('2025-09-15 15:00:00 UTC'), when: Time.parse('2025-09-25 15:00:00 UTC')
@@ -1894,7 +1898,7 @@ class TestQualityOfService < Jp::Test
       assert(
         fb.one?(
           what: 'quality-of-service',
-          since: Time.parse('2025-09-10 15:00:00 UTC'),
+          since: Time.parse('2025-09-05 15:00:00 UTC'),
           when: Time.parse('2025-09-15 15:00:00 UTC')
         )
       )
