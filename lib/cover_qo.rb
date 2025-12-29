@@ -8,35 +8,40 @@ require 'fbe/if_absent'
 require_relative 'jp'
 
 # Make sure the entire timeline is covered by Qo facts.
-def Jp.cover_qo(days, judge: $judge)
-  last = Fbe.fb.query(
-    "(eq when
-       (agg
-         (eq what '#{judge}')
-         (max when)))"
-  ).each.first
+def Jp.cover_qo(days, judge: $judge, loog: $loog, today: Time.parse(ENV['TODAY'] || Time.now.utc.iso8601))
+  slice = days * 24 * 60 * 60
+  facts = Fbe.fb.query("(and (eq what '#{judge}') (exists since) (exists when))").each.to_a.sort_by(&:since)
+  last = facts.map(&:when).max
   if last.nil?
     Fbe.fb.insert.then do |n|
       n.what = judge
-      n.when = Time.now.utc
-      n.since = n.when - (days * 24 * 60 * 60)
+      n.when = today
+      n.since = n.when - slice
+      loog.info("First #{judge} inserted: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
     end
-  elsif last.when < Time.now.utc - (days * 24 * 60 * 60)
-    Fbe.if_absent do |n|
+    return
+  end
+  if last && last < today - slice
+    Fbe.fb.insert.then do |n|
       n.what = judge
-      n.since = last.when
-      n.when = n.since + (days * 24 * 60 * 60)
+      n.since = last
+      n.when = today
+      loog.info("Fresh #{judge} added: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
+      facts << n
     end
   end
-  prev = nil
-  Fbe.consider("(and (eq what '#{judge}') (exists since) (exists when))") do |f|
-    if !prev.nil? && (f.since - prev.when).positive?
-      Fbe.if_absent do |n|
-        n.what = judge
-        n.since = prev.when
-        n.when = f.since
-      end
-    end
+  prev = facts.min_by(&:since)
+  gaps = []
+  facts.each do |f|
+    gaps << { since: prev.when, when: f.since } if f.since > prev.when
     prev = f
+  end
+  gaps.reject { |g| facts.find { |f| g[:since] < f.when && g[:when] > f.since } }.each do |g|
+    Fbe.fb.insert.then do |n|
+      n.what = judge
+      n.since = g[:since]
+      n.when = g[:when]
+      loog.info("Missing gap of #{judge} filled up: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
+    end
   end
 end

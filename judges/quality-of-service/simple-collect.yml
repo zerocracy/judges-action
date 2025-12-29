@@ -18,7 +18,7 @@ input:
     when: 2024-01-01T00:00:00
     since: 2023-12-24T00:00:00
 expected:
-  - /fb[count(f[what='quality-of-service'])=4]
+  - /fb[count(f[what='quality-of-service'])=2]
   - /fb/f[what='quality-of-service']
   - /fb/f[when]
   - /fb/f[since]
