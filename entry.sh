@@ -13,7 +13,7 @@ echo "The 'judges-action' ${VERSION} is running"
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
     set +e
     set +o pipefail
-    latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name' 2>/dev/null) || ""
+    latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name' 2>/dev/null)
     rc=$?
     set -e -o pipefail
     if [ $rc -ne 0 ] || [ -z "${latest}" ]; then
