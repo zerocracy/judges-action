@@ -11,8 +11,16 @@ VERSION=0.0.0
 echo "The 'judges-action' ${VERSION} is running"
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-    if [ "${latest}" != "${VERSION}" ]; then
+    set +e
+    set +o pipefail
+    latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name' 2>/dev/null) || ""
+    rc=$?
+    set -e -o pipefail
+    if [ $rc -ne 0 ] || [ -z "${latest}" ]; then
+        echo "!!! Could not fetch the latest version from GitHub."
+        echo "!!! Disabling version checking for the rest of the script."
+        SKIP_VERSION_CHECKING=true
+    elif [ "${latest}" != "${VERSION}" ]; then
         echo "!!! The latest version of the judges-action plugin available in"
         echo "!!! its GitHub repository is ${latest}: https://github.com/zerocracy/judges-action."
         echo "!!! However, you are using a different version: ${VERSION}."
