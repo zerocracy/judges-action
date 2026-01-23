@@ -35,13 +35,13 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
-      - uses: zerocracy/judges-action@0.17.9
+      - uses: zerocracy/judges-action@0.17.10
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.ZEROCRACY_PAT }}
           repositories: yegor256/foo
           factbase: foo.fb
-      - uses: zerocracy/pages-action@0.6.3
+      - uses: zerocracy/pages-action@0.6.4
         with:
           github-token: ${{ secrets.ZEROCRACY_PAT }}
           factbase: foo.fb
