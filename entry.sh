@@ -11,13 +11,9 @@ VERSION=0.0.0
 echo "The 'judges-action' ${VERSION} is running"
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    set +e
-    set +o pipefail
     resp=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
-    latest=$(echo -n "$resp" | jq -r '.tag_name')
-    rc=$?
-    set -e -o pipefail
-    if [ "$rc" -ne 0 ] || [ -z "${latest}" ] || [ "${latest}" == "null" ]; then
+    latest=$(echo -n "$resp" | jq -Rs "try (fromjson | .tag_name) catch empty")
+    if [ -z "${latest}" ]; then
         echo "!!! Could not fetch the latest version from GitHub."
         echo "!!! GitHub returned: "
         echo "$resp"
