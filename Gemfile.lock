@@ -20,7 +20,7 @@ GEM
     ast (2.4.3)
     backtrace (0.4.1)
     base64 (0.3.0)
-    baza.rb (0.12.0)
+    baza.rb (0.14.3)
       backtrace (~> 0.4)
       elapsed (~> 0.2)
       faraday (~> 2.13)
@@ -42,14 +42,14 @@ GEM
     decoor (0.1.0)
     docile (1.4.1)
     drb (2.2.3)
-    elapsed (0.2.2)
+    elapsed (0.3.1)
       loog (~> 0.6)
       tago (~> 0.1)
     ellipsized (0.3.0)
     ethon (0.18.0)
       ffi (>= 1.15.0)
       logger
-    factbase (0.19.3)
+    factbase (0.19.6)
       backtrace (~> 0.4)
       decoor (~> 0.1)
       ellipsized (~> 0.3)
@@ -60,7 +60,7 @@ GEM
       others (~> 0.1)
       tago (~> 0.1)
       yaml (~> 0.3)
-    faraday (2.14.0)
+    faraday (2.14.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -103,7 +103,7 @@ GEM
     filesize (0.2.0)
     gli (2.22.2)
       ostruct
-    graphql (2.5.18)
+    graphql (2.5.19)
       base64
       fiber-storage
       logger
@@ -114,14 +114,15 @@ GEM
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     intercepted (0.2.0)
-    iri (0.11.7)
+    iri (0.11.8)
     joined (0.4.0)
     json (2.18.1)
-    judges (0.59.0)
+    judges (0.60.0)
       backtrace (~> 0.4)
       baza.rb (~> 0.10)
       concurrent-ruby (~> 1.2)
       elapsed (~> 0.2)
+      ellipsized (~> 0.3)
       factbase (~> 0.16)
       gli (~> 2.21)
       iri (~> 0.11)
@@ -140,7 +141,7 @@ GEM
       bigdecimal
       strscan (>= 3.1.1)
     logger (1.7.0)
-    loog (0.7.2)
+    loog (0.8.0)
       ellipsized
       logger (~> 1.0)
     minitest (5.27.0)
@@ -176,7 +177,7 @@ GEM
       racc
     prism (1.9.0)
     public_suffix (7.0.2)
-    qbash (0.6.0)
+    qbash (0.7.2)
       backtrace (> 0)
       elapsed (> 0)
       loog (> 0)
@@ -187,7 +188,7 @@ GEM
     regexp_parser (2.11.3)
     retries (0.0.5)
     rexml (3.4.4)
-    rubocop (1.84.1)
+    rubocop (1.84.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -230,7 +231,7 @@ GEM
     sqlite3 (2.9.0-x64-mingw-ucrt)
     sqlite3 (2.9.0-x86_64-linux-gnu)
     strscan (3.1.7)
-    tago (0.6.0)
+    tago (0.7.0)
     timeout (0.6.0)
     total (0.4.2)
     typhoeus (1.4.1)
