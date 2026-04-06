@@ -6,7 +6,6 @@
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
 class TestFindEarliestIssue < Jp::Test
   using SmartFactbase
 

@@ -3,9 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors pull-was-merged or pull-was-closed facts with exists repository
-# and issue properties and create missing code-was-reviewed fact.
-
 require 'fbe/octo'
 require 'fbe/consider'
 require 'fbe/issue'

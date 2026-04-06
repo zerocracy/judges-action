@@ -6,12 +6,6 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Total number of code reviews in all repositories from since
-#
-# This function is called from the "quantity-of-deliverables.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_reviews_submitted(fact)
   total = 0
   Fbe.unmask_repos.each do |repo|

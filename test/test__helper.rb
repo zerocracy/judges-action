@@ -26,7 +26,6 @@ end
 
 require 'minitest/reporters'
 Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
-# Minitest.load :minitest_reporter
 
 require 'judges/options'
 require 'loog'
@@ -35,7 +34,6 @@ require 'webmock/minitest'
 require_relative '../lib/jp'
 require_relative 'smart_factbase'
 
-# Parent class for all tests.
 class Jp::Test < Minitest::Test
   def rate_limit_up
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(

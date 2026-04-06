@@ -6,12 +6,6 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Number of issues and pull requests created:
-#
-# This function is called from the "quantity-of-deliverables.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_issues_created(fact)
   issues = 0
   pulls = 0

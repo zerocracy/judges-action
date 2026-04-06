@@ -7,7 +7,6 @@ require 'factbase'
 require 'fbe/github_graph'
 require_relative '../test__helper'
 
-# Test.
 class TestPullWasMerged < Jp::Test
   using SmartFactbase
 
@@ -95,7 +94,6 @@ class TestPullWasMerged < Jp::Test
       'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
       body: []
     )
-    # stub_github('https://api.github.com/repos/foo/foo/issues/comments/100/reactions', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/100/reactions', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }

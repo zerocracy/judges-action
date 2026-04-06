@@ -6,10 +6,6 @@
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2025 Yegor Bugayenko
-# License:: MIT
 class TestIsHumanOrRobot < Jp::Test
   using SmartFactbase
 

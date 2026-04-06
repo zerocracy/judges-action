@@ -7,10 +7,6 @@ require 'fbe/octo'
 require 'fbe/github_graph'
 require_relative 'jp'
 
-# Collects number of many kind of comments from pull request
-#
-# @param [Sawyer::Resource] pr The pull request
-# @return [Hash] number of many kind of comments
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
@@ -30,12 +26,6 @@ def Jp.comments_info(pr, repo: nil)
   }
 end
 
-# Calculate total number of reactions on comments of issue and pull request excluding the author of the comment
-#
-# @param [Sawyer::Resource] pr The pull request
-# @param [Array<Sawyer::Resource>] issue_comments Array of comments from issue
-# @param [Array<Sawyer::Resource>] code_comments Array of comments for pull request
-# @return [Integer] sum of the number of reactions to comments issue and pull request comments
 def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   issue_appreciations =
@@ -51,10 +41,6 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   issue_appreciations + code_appreciations
 end
 
-# Fetch info about success and failure builds from pull request
-#
-# @param [Sawyer::Resource] pr The pull request
-# @return [Hash] count of success/failure builds
 def Jp.fetch_workflows(pr, repo: nil)
   succeeded_builds = 0
   failed_builds = 0
@@ -77,13 +63,6 @@ def Jp.fetch_workflows(pr, repo: nil)
   { succeeded_builds:, failed_builds: }
 end
 
-# Count code suggestions for pull request.
-# Author suggestions are not taken into account
-#
-# @param [String] repo Github repository (e.g.: 'org/repo')
-# @param [Integer] issue Number ID of the pull request
-# @param [Integer] author Github user ID, who create pull request
-# @return [Integer] count of suggestions
 def Jp.count_suggestions(repo, issue, author)
   Fbe.octo.pull_request_reviews(repo, issue).sum do |review|
     next 0 if review.dig(:user, :id) == author

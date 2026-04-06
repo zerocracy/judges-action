@@ -11,10 +11,6 @@ require 'fbe'
 require 'fbe/github_graph'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
 class TestGithubEvents < Jp::Test
   using SmartFactbase
 
@@ -981,7 +977,6 @@ class TestGithubEvents < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-
     stub_request(
       :get,
       'https://api.github.com/repos/zerocracy/fbe/compare/' \

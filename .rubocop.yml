@@ -38,6 +38,8 @@ Layout/EmptyLineAfterGuardClause:
   Enabled: false
 Layout/CaseIndentation:
   Enabled: false
+Style/Documentation:
+  Enabled: false
 Naming/MethodParameterName:
   MinNameLength: 2
 Layout/MultilineAssignmentLayout:
@@ -45,6 +47,7 @@ Layout/MultilineAssignmentLayout:
 Minitest/EmptyLineBeforeAssertionMethods:
   Enabled: false
 plugins:
+  - rubocop-elegant
   - rubocop-rake
   - rubocop-minitest
   - rubocop-performance

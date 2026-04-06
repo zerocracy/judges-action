@@ -6,10 +6,6 @@
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2025 Yegor Bugayenko
-# License:: MIT
 class TestAddReviewComments < Jp::Test
   def test_sets_review_comments_when_missing
     WebMock.disable_net_connect!

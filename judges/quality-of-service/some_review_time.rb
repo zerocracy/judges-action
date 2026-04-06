@@ -6,12 +6,6 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Some review time, review comments, reviewers and reviews
-#
-# This function is called from the "quality-of-service.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def some_review_time(fact)
   review_times = []
   review_comments = []

@@ -7,7 +7,6 @@ require 'fbe/fb'
 require 'fbe/tombstone'
 require_relative 'jp'
 
-# The issue was lost.
 def Jp.issue_was_lost(where, repository, issue)
   stale =
     Fbe.fb.query(

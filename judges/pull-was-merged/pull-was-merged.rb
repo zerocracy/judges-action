@@ -3,8 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors pulls which were closed or merged.
-
 require 'fbe/conclude'
 require 'fbe/delete'
 require 'fbe/github_graph'

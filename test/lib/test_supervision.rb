@@ -6,7 +6,6 @@
 require_relative '../../lib/supervision'
 require_relative '../test__helper'
 
-# Test.
 class TestSupervision < Minitest::Test
   def test_supervision
     $loog = Loog::Buffer.new

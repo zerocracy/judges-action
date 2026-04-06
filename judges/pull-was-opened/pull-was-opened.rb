@@ -3,9 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors ns with exists repository and issue properties and
-# create missing pull-was-opened n.
-
 require 'fbe/octo'
 require 'fbe/conclude'
 require 'fbe/issue'

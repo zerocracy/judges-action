@@ -3,8 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors open issue and create missing issue-was-assigned facts.
-
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'

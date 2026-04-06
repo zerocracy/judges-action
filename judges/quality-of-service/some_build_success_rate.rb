@@ -6,12 +6,6 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Workflow runs:
-#
-# This function is called from the "quality-of-service.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def some_build_success_rate(fact)
   success = []
   duration = []

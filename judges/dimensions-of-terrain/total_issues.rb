@@ -6,12 +6,6 @@
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
 
-# Total number of issues and pull requests for all repos
-#
-# This function is called from the "dimensions-of-terrain.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_issues(_fact)
   issues = 0
   pulls = 0

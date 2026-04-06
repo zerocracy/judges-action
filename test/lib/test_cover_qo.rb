@@ -9,7 +9,6 @@ require 'minitest/mock'
 require_relative '../../lib/cover_qo'
 require_relative '../test__helper'
 
-# Test for cover_qo method.
 class TestCoverQo < Minitest::Test
   def test_inserts_first_fact_when_none_exist
     fb = Factbase.new

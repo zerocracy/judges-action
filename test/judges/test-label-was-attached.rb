@@ -6,7 +6,6 @@
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
 class TestLabelWasAttached < Jp::Test
   using SmartFactbase
 
@@ -34,7 +33,6 @@ class TestLabelWasAttached < Jp::Test
         }
       ]
     )
-
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
     load_it('label-was-attached', fb)

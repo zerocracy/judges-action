@@ -3,11 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that collects review comments count for pull requests.
-# For pull requests that have been reviewed or merged but do not have
-# a review_comments count recorded, this judge fetches the count from GitHub
-# and stores it in the factbase.
-
 require 'octokit'
 require 'fbe/octo'
 require 'fbe/consider'

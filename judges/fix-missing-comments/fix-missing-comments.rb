@@ -3,9 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors facts with exists repository and issue properties and
-# create missing [issue/pull]-was-opened fact
-
 require 'octokit'
 require 'fbe/consider'
 require 'fbe/issue'

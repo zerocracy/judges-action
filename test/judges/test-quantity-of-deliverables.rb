@@ -10,10 +10,6 @@ require 'judges/options'
 require 'loog'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
 class TestQuantityOfDeliverables < Jp::Test
   using SmartFactbase
 

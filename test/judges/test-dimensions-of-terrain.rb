@@ -11,7 +11,6 @@ require 'judges/options'
 require 'loog'
 require_relative '../test__helper'
 
-# Test.
 class TestDimensionsOfTerrain < Jp::Test
   def test_total_repositories
     WebMock.disable_net_connect!

@@ -9,7 +9,6 @@ require 'judges/options'
 require 'loog'
 require_relative '../test__helper'
 
-# Test.
 class TestFindAllIssues < Jp::Test
   def test_find_all_issues_without_issues_in_fb
     WebMock.disable_net_connect!

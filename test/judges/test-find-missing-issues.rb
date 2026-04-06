@@ -6,7 +6,6 @@
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
 class TestFindMissingIssues < Jp::Test
   using SmartFactbase
 

@@ -3,15 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors and records GitHub repository events into the factbase.
-# Fetches events from GitHub repositories like push events, pull request events,
-# issue events, release events, etc., and records them with detailed metadata
-# in the factbase for analytics and tracking purposes.
-#
-# @note Limited to running for 5 minutes maximum to prevent excessive API usage
-# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
-# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/if_absent.rb Implementation of Fbe.if_absent
-
 require 'tago'
 require 'fbe/octo'
 require 'fbe/github_graph'
@@ -113,7 +104,6 @@ Fbe.iterate do
     fact.repository = json[:repo][:id].to_i
     fact.who = json[:actor][:id].to_i if json[:actor]
     rname = Fbe.octo.repo_name_by_id(fact.repository)
-
     case json[:type]
     when 'PushEvent'
       fact.what = 'git-was-pushed'
@@ -138,7 +128,6 @@ Fbe.iterate do
         "made by #{Fbe.who(fact)} (default branch is #{fact.default_branch.inspect}), " \
         'not associated with any pull request.'
       $loog.debug("New PushEvent ##{json[:payload][:push_id]} recorded")
-
     when 'PullRequestEvent'
       fact.issue = json.dig(:payload, :pull_request, :number)
       case json[:payload][:action]
@@ -182,7 +171,6 @@ Fbe.iterate do
       else
         skip_event(json)
       end
-
     when 'PullRequestReviewEvent'
       fact.issue = json.dig(:payload, :pull_request, :number)
       case json[:payload][:action]
@@ -212,7 +200,6 @@ Fbe.iterate do
       else
         skip_event(json)
       end
-
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
       case json[:payload][:action]
@@ -230,9 +217,8 @@ Fbe.iterate do
         skip_event(json)
       end
       skip_event(json) if issue_seen_already?(fact)
-
     when 'IssueCommentEvent'
-      skip_event(json) # this event is not needed for now
+      skip_event(json)
       fact.issue = json[:payload][:issue][:number]
       case json[:payload][:action]
       when 'created'
@@ -247,7 +233,6 @@ Fbe.iterate do
       else
         skip_event(json)
       end
-
     when 'ReleaseEvent'
       fact.release = json[:payload][:release][:id]
       fact.tag = json[:payload][:release][:tag_name]
@@ -268,7 +253,6 @@ Fbe.iterate do
       else
         skip_event(json)
       end
-
     when 'CreateEvent'
       case json[:payload][:ref_type]
       when 'tag'
@@ -281,7 +265,6 @@ Fbe.iterate do
       else
         skip_event(json)
       end
-
     else
       skip_event(json)
     end

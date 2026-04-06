@@ -3,11 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that removes references to deleted GitHub repositories from the factbase.
-# Checks all records containing repository references against the GitHub API,
-# and if a repository no longer exists (returns 404), removes the repository reference
-# from the factbase record to maintain data integrity.
-
 require 'elapsed'
 require 'fbe/octo'
 require 'fbe/consider'

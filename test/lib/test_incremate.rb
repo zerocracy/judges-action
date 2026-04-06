@@ -8,7 +8,6 @@ require 'factbase'
 require_relative '../../lib/incremate'
 require_relative '../test__helper'
 
-# Test.
 class TestIncremate < Minitest::Test
   def test_incremate
     WebMock.disable_net_connect!
@@ -18,7 +17,7 @@ class TestIncremate < Minitest::Test
     )
     $global = {}
     $local = {}
-    $loog = Loog::VERBOSE # Loog::NULL
+    $loog = Loog::VERBOSE
     $options = Judges::Options.new({ 'lifetime' => 100, 'timeout' => 100 })
     Dir.mktmpdir do |dir|
       File.write(File.expand_path('some_property.rb', dir), <<~RUBY)

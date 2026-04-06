@@ -6,17 +6,6 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Fetch some lifetime of issues and pull requests in monitored GitHub repositories.
-# This function determines how long issues and PRs remain open before being closed by
-# measuring the time difference between creation and closure dates. Only includes
-# issues/PRs that were closed after the 'since' date specified in the fact object.
-#
-# This function is called from the "quality-of-service.rb" using the incremate
-# helper to collect these specific metrics as part of repository quality assessment.
-#
-# @param [Factbase::Fact] fact The fact object containing the 'since' timestamp
-# @return [Hash] Map with some_issue_lifetime and some_pull_lifetime in seconds
-# @see ../quality-of-service.rb Main judge that calls this function
 def some_issue_lifetime(fact)
   ret = {}
   { issue: 'some_issue_lifetime', pr: 'some_pull_lifetime' }.each do |type, prop|

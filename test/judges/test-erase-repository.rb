@@ -6,10 +6,6 @@
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2025 Yegor Bugayenko
-# License:: MIT
 class TestEraseRepository < Jp::Test
   def test_erase_not_found_repository
     WebMock.disable_net_connect!
