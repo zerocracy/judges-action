@@ -273,6 +273,67 @@ class TestDimensionsOfTerrain < Jp::Test
     assert_equal(1484, f.total_commits)
   end
 
+  def test_total_commits_with_nil_size_repo
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo',
+        full_name: 'foo/foo',
+        private: false,
+        created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+        size: 19_366,
+        stargazers_count: 1,
+        forks: 1,
+        default_branch: 'master'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/nil-size',
+      body: {
+        name: 'nil-size',
+        full_name: 'foo/nil-size',
+        private: false,
+        created_at: Time.parse('2024-07-10 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-22 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-22 20:22:51 UTC'),
+        size: nil,
+        stargazers_count: 0,
+        forks: 0,
+        default_branch: 'master'
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/nil-size/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/nil-size%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb,
+                Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
+      end
+    end
+  end
+
   def test_total_files
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
