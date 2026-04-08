@@ -331,6 +331,7 @@ class TestDimensionsOfTerrain < Jp::Test
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(2, f.total_repositories)
+        assert_equal(1484, f.total_commits)
         assert_equal(0, f.total_files)
         assert_equal(0, f.total_contributors)
       end
