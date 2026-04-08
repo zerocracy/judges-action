@@ -330,6 +330,9 @@ class TestDimensionsOfTerrain < Jp::Test
                 Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
+        assert_equal(2, f.total_repositories)
+        assert_equal(0, f.total_files)
+        assert_equal(0, f.total_contributors)
       end
     end
   end
