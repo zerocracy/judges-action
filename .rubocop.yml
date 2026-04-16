@@ -8,47 +8,10 @@ AllCops:
   TargetRubyVersion: 3.2
   SuggestExtensions: false
   NewCops: enable
-Naming/FileName:
-  Regex: '^[a-z0-9\-._]*$'
-Style/GlobalVars:
-  Enabled: false
-Metrics/ParameterLists:
-  Enabled: false
-Metrics/MethodLength:
-  Enabled: false
-Lint/NestedMethodDefinition:
-  Enabled: false
-Gemspec/RequiredRubyVersion:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
-Layout/MultilineMethodCallIndentation:
-  Enabled: false
-Metrics/AbcSize:
-  Enabled: false
-Metrics/BlockLength:
-  Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Metrics/PerceivedComplexity:
-  Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Layout/CaseIndentation:
-  Enabled: false
-Style/Documentation:
-  Enabled: false
-Naming/MethodParameterName:
-  MinNameLength: 2
-Layout/MultilineAssignmentLayout:
-  Enabled: true
-Minitest/EmptyLineBeforeAssertionMethods:
-  Enabled: false
 plugins:
   - rubocop-elegant
   - rubocop-rake
   - rubocop-minitest
   - rubocop-performance
-require: []
+Naming/FileName:
+  Regex: '^[a-z0-9\-._]*$'
