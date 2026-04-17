@@ -7,25 +7,25 @@ require 'fbe/octo'
 require 'fbe/unmask_repos'
 
 def some_review_time(fact)
-  review_times = []
-  review_comments = []
+  times = []
+  sizes = []
   reviewers = []
   reviews = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues(
       "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     )[:items].each do |pr|
-      pr_reviews = Fbe.octo.pull_request_reviews(repo, pr[:number])
-      pr_review = pr_reviews.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
-      review_times << Integer(pr[:pull_request][:merged_at] - pr_review[:submitted_at]) if pr_review
-      review_comments << Fbe.octo.review_comments(repo, pr[:number]).size
-      reviewers << pr_reviews.map { |r| r.dig(:user, :id) }.uniq.size
-      reviews << pr_reviews.size
+      all = Fbe.octo.pull_request_reviews(repo, pr[:number])
+      first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
+      times << Integer(pr[:pull_request][:merged_at] - first[:submitted_at]) if first
+      sizes << Fbe.octo.review_comments(repo, pr[:number]).size
+      reviewers << all.map { |r| r.dig(:user, :id) }.uniq.size
+      reviews << all.size
     end
   end
   {
-    some_review_time: review_times,
-    some_review_size: review_comments,
+    some_review_time: times,
+    some_review_size: sizes,
     some_reviewers_per_pull: reviewers,
     some_reviews_per_pull: reviews
   }

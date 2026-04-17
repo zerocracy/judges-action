@@ -28,22 +28,22 @@ end
 
 def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
-  issue_appreciations =
+  issued =
     issue_comments.sum do |comment|
       Fbe.octo.issue_comment_reactions(repo, comment[:id])
          .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
     end
-  code_appreciations =
+  coded =
     code_comments.sum do |comment|
       Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
          .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
     end
-  issue_appreciations + code_appreciations
+  issued + coded
 end
 
 def Jp.fetch_workflows(pr, repo: nil)
-  succeeded_builds = 0
-  failed_builds = 0
+  succeeded = 0
+  failed = 0
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
   Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))[:check_runs].each do |run|
@@ -52,12 +52,12 @@ def Jp.fetch_workflows(pr, repo: nil)
     next unless workflow[:event] == 'pull_request'
     case workflow[:conclusion]
     when 'success'
-      succeeded_builds += 1
+      succeeded += 1
     when 'failure'
-      failed_builds += 1
+      failed += 1
     end
   end
-  { succeeded_builds:, failed_builds: }
+  { succeeded_builds: succeeded, failed_builds: failed }
 end
 
 def Jp.count_suggestions(repo, issue, author)

@@ -20,11 +20,45 @@ Style/GlobalVars:
 Style/TopLevelMethodDefinition:
   Enabled: false
 Elegant/GoodMethodName:
-  Enabled: false
+  AllowedNames:
+    - total_active_contributors
+    - total_commits
+    - total_contributors
+    - total_files
+    - total_issues
+    - total_releases
+    - total_repositories
+    - total_stars
+    - some_backlog_size
+    - some_build_success_rate
+    - some_issue_lifetime
+    - some_merged_pulls
+    - some_pull_hoc_size
+    - some_release_hoc_size
+    - some_release_interval
+    - some_review_time
+    - some_triage_time
+    - total_builds_ran
+    - total_commits_pushed
+    - total_issues_created
+    - total_releases_published
+    - total_reviews_submitted
+    - cover_qo
+    - fill_fact_by_hash
+    - issue_was_lost
+    - nick_of
+    - comments_info
+    - count_appreciated_comments
+    - fetch_workflows
+    - count_suggestions
+    - stub_event
+    - stub_workflow_runs
+    - insert_label_was_attached_fact
+    - rate_limit_up
+    - load_it
+    - stub_github
 Elegant/GoodVariableName:
-  Enabled: false
-Minitest/EmptyLineBeforeAssertionMethods:
-  Enabled: false
+  Enabled: true
 Metrics/MethodLength:
   Enabled: false
 Metrics/AbcSize:
@@ -39,5 +73,3 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 Naming/MethodParameterName:
   MinNameLength: 2
-Style/RedundantException:
-  Enabled: false

@@ -19,13 +19,13 @@ Fbe.iterate do
   as 'events_were_scanned'
   by '(plus 0 $before)'
 
-  def self.skip_event(json)
+  def self.skip(json)
     t = Time.parse(json[:created_at].iso8601)
     $loog.debug("Event ##{json[:id]} (#{json[:type]}) in #{json[:repo][:name]} ignored (#{t.ago} ago)")
     raise(Factbase::Rollback)
   end
 
-  def self.fetch_tag(fact, repo)
+  def self.tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
     if tag.nil? && fact&.all_properties&.include?('release_id')
       tag = Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release_id}").fetch(:tag_name, nil)
@@ -34,44 +34,44 @@ Fbe.iterate do
     tag
   end
 
-  def self.fetch_contributors(fact, repo)
+  def self.contributors(fact, repo)
     last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
-    tag = fetch_tag(last, repo)
-    contributors = Set.new
-    if tag
-      Fbe.octo.compare(repo, tag, fact.tag)[:commits].each do |commit|
-        author_id = commit.dig(:author, :id)
-        contributors << author_id if author_id
+    since = tag(last, repo)
+    list = Set.new
+    if since
+      Fbe.octo.compare(repo, since, fact.tag)[:commits].each do |commit|
+        author = commit.dig(:author, :id)
+        list << author if author
       end
     else
       Fbe.octo.contributors(repo).each do |contributor|
-        contributors << contributor[:id]
+        list << contributor[:id]
       end
     end
-    $loog.debug("The repository ##{fact.repository} has #{contributors.count} contributors")
-    contributors.to_a
+    $loog.debug("The repository ##{fact.repository} has #{list.count} contributors")
+    list.to_a
   end
 
-  def self.fetch_release_info(fact, repo)
+  def self.info(fact, repo)
     last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
-    tag = fetch_tag(last, repo)
-    tag ||= find_first_commit(repo)[:sha]
+    since = tag(last, repo)
+    since ||= earliest(repo)[:sha]
     info = {}
     begin
-      Fbe.octo.compare(repo, tag, fact.tag).then do |json|
+      Fbe.octo.compare(repo, since, fact.tag).then do |json|
         return info if json.nil?
         info[:commits] = json[:total_commits]
         info[:hoc] = json[:files].sum { |f| f[:changes] }
         info[:last_commit] = json[:commits].first[:sha]
       end
     rescue Octokit::NotFound
-      $loog.info("Compare API returned 404 for #{repo} between #{tag} and #{fact.tag}")
+      $loog.info("Compare API returned 404 for #{repo} between #{since} and #{fact.tag}")
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
   end
 
-  def self.find_first_commit(repo)
+  def self.earliest(repo)
     commits = Fbe.octo.commits(repo)
     last = commits.last
     while commits.size != 1
@@ -82,7 +82,7 @@ Fbe.iterate do
     last
   end
 
-  def self.issue_seen_already?(fact)
+  def self.seen?(fact)
     Fbe.fb.query(
       "(and
         (eq repository #{fact.repository})
@@ -93,7 +93,7 @@ Fbe.iterate do
     ).each.any?
   end
 
-  def self.fill_up_event(fact, json)
+  def self.fill(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
     fact.repository = Integer(json[:repo][:id])
@@ -111,12 +111,12 @@ Fbe.iterate do
       fact.by_owner = 1 if repo.dig(:owner, :id) == fact.who
       if fact.to_master.zero?
         $loog.debug("Push #{fact.commit} to non-default branch #{fact.default_branch.inspect}, ignoring it")
-        skip_event(json)
+        skip(json)
       end
       pulls = Fbe.octo.commit_pulls(rname, fact.commit)
       unless pulls.empty?
         $loog.debug("Push #{fact.commit} inside #{pulls.size} pull request(s), ignoring it")
-        skip_event(json)
+        skip(json)
       end
       fact.details =
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{rname}, " \
@@ -139,7 +139,7 @@ Fbe.iterate do
             $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
             nil
           end
-        skip_event(json) if pl.nil?
+        skip(json) if pl.nil?
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = (pl[:additions] || 0) + (pl[:deletions] || 0)
         fact.files = pl[:changed_files] unless pl[:changed_files].nil?
@@ -160,26 +160,26 @@ Fbe.iterate do
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
-        skip_event(json) if issue_seen_already?(fact)
+        skip(json) if seen?(fact)
         $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       else
-        skip_event(json)
+        skip(json)
       end
     when 'PullRequestReviewEvent'
       fact.issue = json.dig(:payload, :pull_request, :number)
       case json[:payload][:action]
       when 'created'
         pull = Fbe.octo.pull_request(rname, fact.issue)
-        skip_event(json) if Integer(pull.dig(:user, :id)) == fact.who
+        skip(json) if Integer(pull.dig(:user, :id)) == fact.who
         if Fbe.fb.query(
           "(and (eq repository #{fact.repository}) " \
           '(eq what "pull-was-reviewed") ' \
           "(eq who #{fact.who}) " \
           "(eq issue #{fact.issue}))"
         ).each.last
-          skip_event(json)
+          skip(json)
         end
-        skip_event(json) unless json.dig(:payload, :review, :state) == 'approved'
+        skip(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
         fact.hoc = pull[:additions] + pull[:deletions]
         fact.comments = pull[:comments] + pull[:review_comments]
@@ -192,7 +192,7 @@ Fbe.iterate do
           "with #{fact.hoc} HoC and #{fact.comments} comments."
         $loog.debug("PR #{Fbe.issue(fact)} was reviewed by #{Fbe.who(fact)}")
       else
-        skip_event(json)
+        skip(json)
       end
     when 'IssuesEvent'
       fact.issue = json[:payload][:issue][:number]
@@ -206,11 +206,11 @@ Fbe.iterate do
         fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("Issue #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       else
-        skip_event(json)
+        skip(json)
       end
-      skip_event(json) if issue_seen_already?(fact)
+      skip(json) if seen?(fact)
     when 'IssueCommentEvent'
-      skip_event(json)
+      skip(json)
       fact.issue = json[:payload][:issue][:number]
       case json[:payload][:action]
       when 'created'
@@ -223,7 +223,7 @@ Fbe.iterate do
           "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
         $loog.debug("Issue comment posted to #{Fbe.issue(fact)} by #{Fbe.who(fact)}")
       else
-        skip_event(json)
+        skip(json)
       end
     when 'ReleaseEvent'
       fact.release = json[:payload][:release][:id]
@@ -234,14 +234,14 @@ Fbe.iterate do
         if fact.all_properties.include?('who') && fact.who != json[:payload][:release][:author][:id]
           Fbe.overwrite(fact, 'who', json[:payload][:release][:author][:id])
         end
-        fetch_contributors(fact, rname).each { |c| fact.contributors = c }
-        Jp.fill_fact_by_hash(fact, fetch_release_info(fact, rname))
+        contributors(fact, rname).each { |c| fact.contributors = c }
+        Jp.fill_fact_by_hash(fact, info(fact, rname))
         fact.details =
           "A new release #{json[:payload][:release][:name].inspect} has been published " \
           "in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Release published by #{Fbe.who(fact)}")
       else
-        skip_event(json)
+        skip(json)
       end
     when 'CreateEvent'
       case json[:payload][:ref_type]
@@ -251,10 +251,10 @@ Fbe.iterate do
         fact.details = "A new tag #{fact.tag.inspect} has been created in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Tag #{fact.tag.inspect} created by #{Fbe.who(fact)}")
       else
-        skip_event(json)
+        skip(json)
       end
     else
-      skip_event(json)
+      skip(json)
     end
   rescue Octokit::Forbidden
     who =
@@ -266,7 +266,7 @@ Fbe.iterate do
     raise(RuntimeError, "#{who} doesn't have access to the #{rname} repository, maybe it's private")
   end
 
-  def self.stays_twice?(fb, fact, what, fields)
+  def self.twice?(fb, fact, what, fields)
     eqs =
       fields.map { [_1, fact[_1]&.first] }.reject { _1.last.nil? }.map do |prop, value|
         val =
@@ -323,8 +323,8 @@ Fbe.iterate do
             $loog.debug("The event ##{id} just detected is already in the factbase")
             next
           end
-          fill_up_event(f, json)
-          uniques.each { |w, ff| throw :rollback if stays_twice?(fbt, f, w, ff) }
+          fill(f, json)
+          uniques.each { |w, ff| throw :rollback if twice?(fbt, f, w, ff) }
           if f['issue']
             throw :rollback unless Fbe.fb.query(
               "(and

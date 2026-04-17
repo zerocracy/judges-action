@@ -1522,10 +1522,10 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/user/50', body: { id: 50, login: 'foo' })
     fb = Factbase.new
     load_it('github-events', fb)
-    owner_push = fb.query('(and (eq what "git-was-pushed") (eq event_id 22222))').each.first
-    refute_nil(owner_push)
-    assert_equal(1, owner_push.by_owner)
-    assert_equal(50, owner_push.who)
+    push = fb.query('(and (eq what "git-was-pushed") (eq event_id 22222))').each.first
+    refute_nil(push)
+    assert_equal(1, push.by_owner)
+    assert_equal(50, push.who)
   end
 
   def test_push_event_by_non_owner_sets_by_owner_to_none
@@ -1551,10 +1551,10 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/user/60', body: { id: 60, login: 'contributor' })
     fb = Factbase.new
     load_it('github-events', fb)
-    contributor_push = fb.query('(and (eq what "git-was-pushed") (eq event_id 33333))').each.first
-    refute_nil(contributor_push)
-    assert_nil(contributor_push['by_owner'])
-    assert_equal(60, contributor_push.who)
+    push = fb.query('(and (eq what "git-was-pushed") (eq event_id 33333))').each.first
+    refute_nil(push)
+    assert_nil(push['by_owner'])
+    assert_equal(60, push.who)
   end
 
   def test_success_add_opened_pull_request_event_to_factbase
@@ -2260,11 +2260,11 @@ class TestGithubEvents < Jp::Test
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       load_it('github-events', fb)
     end
-    f1, f2 = fb.query('(eq what "pull-was-merged")').each.to_a
-    refute_nil(f1)
-    assert_equal(5, f1.hoc)
-    refute_nil(f2)
-    assert_equal(7, f2.hoc)
+    first, second = fb.query('(eq what "pull-was-merged")').each.to_a
+    refute_nil(first)
+    assert_equal(5, first.hoc)
+    refute_nil(second)
+    assert_equal(7, second.hoc)
   end
 
   def test_closed_pull_request_with_exist_review_and_code_suggestions

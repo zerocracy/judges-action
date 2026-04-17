@@ -48,14 +48,14 @@ class TestCoverQo < Minitest::Test
   def test_fills_gap_between_two_facts
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-05 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-20 12:00:00 UTC')
+    b.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
@@ -69,14 +69,14 @@ class TestCoverQo < Minitest::Test
   def test_does_not_add_when_facts_are_contiguous
     fb = Factbase.new
     now = Time.parse('2025-01-20 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-10 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-10 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-20 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-10 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-10 12:00:00 UTC')
+    b.when = Time.parse('2025-01-20 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Time.stub(:now, now) do
         Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL)
@@ -89,18 +89,18 @@ class TestCoverQo < Minitest::Test
   def test_fills_multiple_gaps
     fb = Factbase.new
     now = Time.parse('2025-03-01 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-25 12:00:00 UTC')
-    f3 = fb.insert
-    f3.what = 'test-judge'
-    f3.since = Time.parse('2025-02-15 12:00:00 UTC')
-    f3.when = Time.parse('2025-03-01 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-05 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-20 12:00:00 UTC')
+    b.when = Time.parse('2025-01-25 12:00:00 UTC')
+    c = fb.insert
+    c.what = 'test-judge'
+    c.since = Time.parse('2025-02-15 12:00:00 UTC')
+    c.when = Time.parse('2025-03-01 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
@@ -147,14 +147,14 @@ class TestCoverQo < Minitest::Test
   def test_handles_overlapping_facts_without_duplicate_gaps
     fb = Factbase.new
     now = Time.parse('2025-01-25 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-15 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-10 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-25 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-15 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-10 12:00:00 UTC')
+    b.when = Time.parse('2025-01-25 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
@@ -165,14 +165,14 @@ class TestCoverQo < Minitest::Test
   def test_sorts_facts_correctly_when_inserted_out_of_order
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-20 12:00:00 UTC')
+    b.when = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-05 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
@@ -185,18 +185,18 @@ class TestCoverQo < Minitest::Test
   def test_skips_gap_when_covered_by_overlapping_fact
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-03 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-20 12:00:00 UTC')
-    f3 = fb.insert
-    f3.what = 'test-judge'
-    f3.since = Time.parse('2025-01-15 12:00:00 UTC')
-    f3.when = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-05 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-03 12:00:00 UTC')
+    b.when = Time.parse('2025-01-20 12:00:00 UTC')
+    c = fb.insert
+    c.what = 'test-judge'
+    c.since = Time.parse('2025-01-15 12:00:00 UTC')
+    c.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
@@ -209,14 +209,14 @@ class TestCoverQo < Minitest::Test
     now = Time.parse('2025-02-15 12:00:00 UTC')
     slice = 10 * 24 * 60 * 60
     stale = now - slice - (5 * 24 * 60 * 60)
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
-    f2.when = stale
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-05 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-20 12:00:00 UTC')
+    b.when = stale
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
@@ -257,14 +257,14 @@ class TestCoverQo < Minitest::Test
     fb = Factbase.new
     now = Time.parse('2025-01-20 12:00:00 UTC')
     boundary = Time.parse('2025-01-10 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = boundary
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = boundary
-    f2.when = now
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = boundary
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = boundary
+    b.when = now
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
@@ -339,18 +339,18 @@ class TestCoverQo < Minitest::Test
   def test_does_not_insert_gap_when_fully_enclosed_by_larger_fact
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
-    f3 = fb.insert
-    f3.what = 'test-judge'
-    f3.since = Time.parse('2025-01-20 12:00:00 UTC')
-    f3.when = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-05 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-01 12:00:00 UTC')
+    b.when = Time.parse('2025-01-30 12:00:00 UTC')
+    c = fb.insert
+    c.what = 'test-judge'
+    c.since = Time.parse('2025-01-20 12:00:00 UTC')
+    c.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
@@ -361,14 +361,14 @@ class TestCoverQo < Minitest::Test
   def test_skips_gap_smaller_than_slice
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-10 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-15 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-10 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-15 12:00:00 UTC')
+    b.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
@@ -379,14 +379,14 @@ class TestCoverQo < Minitest::Test
   def test_fills_gap_equal_to_slice
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-10 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-20 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-10 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-20 12:00:00 UTC')
+    b.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
@@ -397,14 +397,14 @@ class TestCoverQo < Minitest::Test
   def test_fills_gap_larger_than_slice
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
-    f1 = fb.insert
-    f1.what = 'test-judge'
-    f1.since = Time.parse('2025-01-01 12:00:00 UTC')
-    f1.when = Time.parse('2025-01-05 12:00:00 UTC')
-    f2 = fb.insert
-    f2.what = 'test-judge'
-    f2.since = Time.parse('2025-01-25 12:00:00 UTC')
-    f2.when = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-01 12:00:00 UTC')
+    a.when = Time.parse('2025-01-05 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-25 12:00:00 UTC')
+    b.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
