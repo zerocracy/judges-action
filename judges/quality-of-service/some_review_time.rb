@@ -19,7 +19,9 @@ def some_review_time(fact)
       first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
       times << Integer(pr[:pull_request][:merged_at] - first[:submitted_at]) if first
       sizes << Fbe.octo.review_comments(repo, pr[:number]).size
-      reviewers << all.map { |r| r.dig(:user, :id) }.uniq.size
+      users = all.map { |r| r.dig(:user, :id) }
+      users.uniq!
+      reviewers << users.size
       reviews << all.size
     end
   end

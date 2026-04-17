@@ -12,10 +12,12 @@ def some_build_success_rate(fact)
   ttrs = []
   failed = {}
   Fbe.unmask_repos do |repo|
-    runs =
+    workflows =
       Fbe.octo.repository_workflow_runs(
         repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
-      )[:workflow_runs].first(60).map do |json|
+      )[:workflow_runs].first(60)
+    runs =
+      workflows.map do |json|
         secs = (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
         { json: json, secs: secs, completed: json[:run_started_at] + secs }
       end

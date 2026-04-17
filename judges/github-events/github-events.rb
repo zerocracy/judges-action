@@ -267,8 +267,10 @@ Fbe.iterate do
   end
 
   def self.twice?(fb, fact, what, fields)
+    pairs = fields.map { [_1, fact[_1]&.first] }
+    pairs.reject! { _1.last.nil? }
     eqs =
-      fields.map { [_1, fact[_1]&.first] }.reject { _1.last.nil? }.map do |prop, value|
+      pairs.map do |prop, value|
         val =
           case value
           when String then "'#{value}'"

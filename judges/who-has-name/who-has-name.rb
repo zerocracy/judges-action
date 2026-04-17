@@ -61,12 +61,13 @@ Fbe.consider(
   Fbe.overwrite(f, 'name', nick)
 end
 
+alive.uniq!
 Fbe.fb.query(
   "(and
     (exists _id)
     (eq stale 'who')
     (exists who)
-    (or #{alive.uniq.map { |u| "(eq who #{u})" }.join}))"
+    (or #{alive.map { |u| "(eq who #{u})" }.join}))"
 ).each do |f|
   next unless f.stale == 'who'
 
