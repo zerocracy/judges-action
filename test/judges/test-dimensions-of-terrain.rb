@@ -326,8 +326,7 @@ class TestDimensionsOfTerrain < Jp::Test
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
-        load_it('dimensions-of-terrain', fb,
-                Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(2, f.total_repositories)
