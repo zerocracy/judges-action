@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
-# SPDX-License-Identifier: MIT
-
-require 'octokit'
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
+# SPDX-License-Identifier: MIT
+
+require 'octokit'
 
 {
   'issue-was-opened' => :user,

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
+require 'fbe/consider'
+require 'fbe/issue'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/consider'
-require 'fbe/issue'
 require 'fbe/who'
 require_relative '../../lib/issue_was_lost'
 
@@ -40,6 +40,7 @@ Fbe.consider(
     end
   reviews.each do |review|
     next if review.dig(:user, :id) == pr.dig(:user, :id)
+
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
@@ -50,12 +51,13 @@ Fbe.consider(
           nn.where = f.where
         end
       next if n.nil?
+
       n.when = review[:submitted_at]
       n.hoc = pr[:additions] + pr[:deletions]
       n.author = pr.dig(:user, :id)
       n.comments = Fbe.octo.issue_comments(repo, f.issue).count
       n.review_comments = Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
-      n.seconds = (review[:submitted_at] - pr[:created_at]).to_i
+      n.seconds = Integer(review[:submitted_at] - pr[:created_at])
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
         "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \

@@ -12,8 +12,8 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
       SimpleCov::Formatter::CoberturaFormatter
     ]
   )
-  SimpleCov.minimum_coverage 80
-  SimpleCov.minimum_coverage_by_file 10
+  SimpleCov.minimum_coverage(80)
+  SimpleCov.minimum_coverage_by_file(10)
   SimpleCov.start do
     add_filter 'vendor/'
     add_filter 'target/'
@@ -25,7 +25,7 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
 end
 
 require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
+Minitest::Reporters.use!([Minitest::Reporters::SpecReporter.new])
 
 require 'judges/options'
 require 'loog'

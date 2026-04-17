@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
+require 'fbe/github_graph'
+require 'fbe/if_absent'
+require 'fbe/issue'
+require 'fbe/iterate'
+require 'fbe/octo'
+require 'fbe/tombstone'
+require 'fbe/who'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'tago'
-require 'fbe/octo'
-require 'fbe/github_graph'
-require 'fbe/iterate'
-require 'fbe/if_absent'
-require 'fbe/tombstone'
-require 'fbe/who'
-require 'fbe/issue'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 require_relative '../../lib/supervision'
@@ -21,19 +21,14 @@ Fbe.iterate do
 
   def self.skip_event(json)
     t = Time.parse(json[:created_at].iso8601)
-    $loog.debug(
-      "Event ##{json[:id]} (#{json[:type]}) " \
-      "in #{json[:repo][:name]} ignored (#{t.ago} ago)"
-    )
-    raise Factbase::Rollback
+    $loog.debug("Event ##{json[:id]} (#{json[:type]}) in #{json[:repo][:name]} ignored (#{t.ago} ago)")
+    raise(Factbase::Rollback)
   end
 
   def self.fetch_tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
     if tag.nil? && fact&.all_properties&.include?('release_id')
-      tag = Fbe.octo.release(
-        "https://api.github.com/repos/#{repo}/releases/#{fact.release_id}"
-      ).fetch(:tag_name, nil)
+      tag = Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release_id}").fetch(:tag_name, nil)
       $loog.debug("The release ##{fact.release_id} has this tag: #{tag.inspect}")
     end
     tag
@@ -101,8 +96,8 @@ Fbe.iterate do
   def self.fill_up_event(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
-    fact.repository = json[:repo][:id].to_i
-    fact.who = json[:actor][:id].to_i if json[:actor]
+    fact.repository = Integer(json[:repo][:id])
+    fact.who = Integer(json[:actor][:id]) if json[:actor]
     rname = Fbe.octo.repo_name_by_id(fact.repository)
     case json[:type]
     when 'PushEvent'
@@ -134,8 +129,7 @@ Fbe.iterate do
       when 'opened'
         fact.what = 'pull-was-opened'
         fact.branch = json.dig(:payload, :pull_request, :head, :ref)
-        fact.details =
-          "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
+        fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("New PR #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       when 'closed'
         pl =
@@ -176,7 +170,7 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'created'
         pull = Fbe.octo.pull_request(rname, fact.issue)
-        skip_event(json) if pull.dig(:user, :id).to_i == fact.who
+        skip_event(json) if Integer(pull.dig(:user, :id)) == fact.who
         if Fbe.fb.query(
           "(and (eq repository #{fact.repository}) " \
           '(eq what "pull-was-reviewed") ' \
@@ -205,13 +199,11 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'closed'
         fact.what = 'issue-was-closed'
-        fact.details =
-          "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
+        fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
         $loog.debug("Issue #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       when 'opened'
         fact.what = 'issue-was-opened'
-        fact.details =
-          "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
+        fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("Issue #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       else
         skip_event(json)
@@ -243,9 +235,7 @@ Fbe.iterate do
           Fbe.overwrite(fact, 'who', json[:payload][:release][:author][:id])
         end
         fetch_contributors(fact, rname).each { |c| fact.contributors = c }
-        Jp.fill_fact_by_hash(
-          fact, fetch_release_info(fact, rname)
-        )
+        Jp.fill_fact_by_hash(fact, fetch_release_info(fact, rname))
         fact.details =
           "A new release #{json[:payload][:release][:name].inspect} has been published " \
           "in #{rname} by #{Fbe.who(fact)}."
@@ -258,9 +248,7 @@ Fbe.iterate do
       when 'tag'
         fact.what = 'tag-was-created'
         fact.tag = json[:payload][:ref]
-        fact.details =
-          "A new tag #{fact.tag.inspect} has been created " \
-          "in #{rname} by #{Fbe.who(fact)}."
+        fact.details = "A new tag #{fact.tag.inspect} has been created in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Tag #{fact.tag.inspect} created by #{Fbe.who(fact)}")
       else
         skip_event(json)
@@ -275,7 +263,7 @@ Fbe.iterate do
       rescue Octokit::Forbidden
         'You'
       end
-    raise "#{who} doesn't have access to the #{rname} repository, maybe it's private"
+    raise(RuntimeError, "#{who} doesn't have access to the #{rname} repository, maybe it's private")
   end
 
   def self.stays_twice?(fb, fact, what, fields)
@@ -316,7 +304,7 @@ Fbe.iterate do
           break
         end
         total += 1
-        id = json[:id].to_i
+        id = Integer(json[:id])
         first = id if first.nil?
         if id <= latest
           $loog.debug(
@@ -328,7 +316,7 @@ Fbe.iterate do
         Fbe.fb.txn do |fbt|
           f =
             Fbe.if_absent(fb: fbt) do |n|
-              n.event_id = json[:id].to_i
+              n.event_id = Integer(json[:id])
               n.where = 'github'
             end
           if f.nil?

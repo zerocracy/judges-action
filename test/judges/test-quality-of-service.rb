@@ -4,9 +4,9 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'loog'
 require 'json'
 require 'judges/options'
+require 'loog'
 require_relative '../test__helper'
 
 class TestQualityOfService < Jp::Test
@@ -31,11 +31,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=100').to_return(
       status: 200,
-      body: {
-        workflow_runs: [
-          { id: 1, run_started_at: Time.now - rand(10_000) }
-        ]
-      }.to_json,
+      body: { workflow_runs: [{ id: 1, run_started_at: Time.now - rand(10_000) }] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -51,12 +47,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/releases?per_page=100').to_return(
       status: 200,
-      body: [
-        {
-          id: 1,
-          published_at: Time.now.to_s
-        }
-      ].to_json,
+      body: [{ id: 1, published_at: Time.now.to_s }].to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -68,10 +59,7 @@ class TestQualityOfService < Jp::Test
       'q=repo:foo/foo%20type:issue%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -90,10 +78,7 @@ class TestQualityOfService < Jp::Test
       'q=repo:foo/foo%20type:pr%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json'
       }
@@ -103,10 +88,7 @@ class TestQualityOfService < Jp::Test
       'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-11'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json'
       }
@@ -117,10 +99,7 @@ class TestQualityOfService < Jp::Test
       'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -132,10 +111,7 @@ class TestQualityOfService < Jp::Test
       'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-11'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -703,10 +679,7 @@ class TestQualityOfService < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
@@ -874,10 +847,7 @@ class TestQualityOfService < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
@@ -1326,12 +1296,8 @@ class TestQualityOfService < Jp::Test
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 40, when: Time.parse('2024-08-04 12:30:00 UTC'), label: 'bug'
     )
-    insert_label_was_attached_fact(
-      fb, where: 'github', repository: 42, issue: 42, label: 'bug'
-    )
-    insert_label_was_attached_fact(
-      fb, where: 'github', repository: 42, issue: 42, label: 'enhancement'
-    )
+    insert_label_was_attached_fact(fb, where: 'github', repository: 42, issue: 42, label: 'bug')
+    insert_label_was_attached_fact(fb, where: 'github', repository: 42, issue: 42, label: 'enhancement')
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 42, when: Time.parse('2024-08-04 19:00:00 UTC'), label: 'enhancement'
     )
@@ -2086,7 +2052,7 @@ class TestQualityOfService < Jp::Test
     fb.insert.then do |f|
       f.what = 'label-was-attached'
       %i[where repository issue when label].each do |prop|
-        f.send(:"#{prop}=", kwargs[prop]) unless kwargs[prop].nil?
+        f.__send__(:"#{prop}=", kwargs[prop]) unless kwargs[prop].nil?
       end
     end
   end

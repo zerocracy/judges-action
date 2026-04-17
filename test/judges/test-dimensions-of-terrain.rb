@@ -223,14 +223,8 @@ class TestDimensionsOfTerrain < Jp::Test
         default_branch: 'master'
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/bar/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/bar/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
       body: { sha: 'abc012345f', tree: [], truncated: false }
@@ -314,14 +308,8 @@ class TestDimensionsOfTerrain < Jp::Test
         default_branch: 'master'
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
-    stub_github(
-      'https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
       body: {
@@ -404,8 +392,7 @@ class TestDimensionsOfTerrain < Jp::Test
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
-        load_it('dimensions-of-terrain', fb,
-                Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(7, f.total_files)
       end
@@ -447,14 +434,8 @@ class TestDimensionsOfTerrain < Jp::Test
         default_branch: 'master'
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
-    stub_github(
-      'https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
       body: { sha: 'abc012345f', tree: [], truncated: false }
@@ -487,8 +468,7 @@ class TestDimensionsOfTerrain < Jp::Test
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
-        load_it('dimensions-of-terrain', fb,
-                Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(12, f.total_contributors)
       end
@@ -515,18 +495,12 @@ class TestDimensionsOfTerrain < Jp::Test
         default_branch: 'master'
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
       body: { sha: 'abc012345f', tree: [], truncated: false }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
       body: {

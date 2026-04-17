@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
+require 'fbe/consider'
+require 'fbe/octo'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'octokit'
-require 'fbe/octo'
-require 'fbe/consider'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.consider(

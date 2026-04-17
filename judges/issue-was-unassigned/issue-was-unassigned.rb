@@ -33,6 +33,7 @@ Fbe.consider(
         next
       end
     next if event.nil?
+
     f.unassigned = event[:created_at]
     $loog.info("Github user #{Fbe.who(f)} was unassigned in #{Fbe.issue(f)} #{f.unassigned.ago} ago")
   end

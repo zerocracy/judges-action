@@ -12,12 +12,8 @@ class TestFindLatestIssue < Jp::Test
   def test_find_latest_issue
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
-    stub_github(
-      'https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all',
       body: [
@@ -47,12 +43,8 @@ class TestFindLatestIssue < Jp::Test
   def test_find_latest_pull
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
-    stub_github(
-      'https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all',
       body: [
@@ -91,12 +83,8 @@ class TestFindLatestIssue < Jp::Test
   def test_not_found_latest_issue
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
-    stub_github(
-      'https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all',
       body: []
@@ -109,12 +97,8 @@ class TestFindLatestIssue < Jp::Test
   def test_if_latest_issue_exist
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
-    stub_github(
-      'https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all',
       body: [
@@ -148,9 +132,7 @@ class TestFindLatestIssue < Jp::Test
   def test_if_find_latest_issue_already_found
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     fb = Factbase.new
     fb.with(
       _id: 1, what: 'issue-was-opened', issue: 547, repository: 42, where: 'github',

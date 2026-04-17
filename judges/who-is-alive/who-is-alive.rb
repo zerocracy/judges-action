@@ -23,6 +23,7 @@ Fbe.consider(
     (eq where 'github'))"
 ) do |f|
   next if seen.include?(f.who)
+
   seen << f.who
   nick = Jp.nick_of(f.who)
   unless nick.nil?

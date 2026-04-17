@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+require 'factbase'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'judges/options'
-require 'factbase'
 require_relative '../../lib/incremate'
 require_relative '../test__helper'
 

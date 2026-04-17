@@ -6,8 +6,8 @@
 require 'fbe/consider'
 require 'fbe/octo'
 require 'fbe/pmp'
-require_relative '../../lib/incremate'
 require_relative '../../lib/cover_qo'
+require_relative '../../lib/incremate'
 
 days = Fbe.pmp.scope.qod_days
 Jp.cover_qo(days)

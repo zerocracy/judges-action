@@ -36,8 +36,6 @@ class TestLabelWasAttached < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
     load_it('label-was-attached', fb)
-    assert(
-      fb.one?(what: 'label-was-attached', repository: 42, issue: 44, where: 'github', label: 'bug', who: 421)
-    )
+    assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 44, where: 'github', label: 'bug', who: 421))
   end
 end

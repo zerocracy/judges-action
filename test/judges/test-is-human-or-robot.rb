@@ -12,10 +12,7 @@ class TestIsHumanOrRobot < Jp::Test
   def test_handles_missing_github_user_gracefully
     WebMock.disable_net_connect!
     id = 444
-    stub_github(
-      "https://api.github.com/user/#{id}",
-      body: {}, status: 404
-    )
+    stub_github("https://api.github.com/user/#{id}", body: {}, status: 404)
     stub_github(
       'https://api.github.com/rate_limit',
       body: {

@@ -5,9 +5,9 @@
 
 require 'os'
 require 'qbash'
-require 'rubygems'
 require 'rake'
 require 'rake/clean'
+require 'rubygems'
 require 'shellwords'
 
 ENV['RACK_RUN'] = 'true'
@@ -26,6 +26,7 @@ end
 desc 'Run them via Ruby, one by one'
 task :picks do
   next if OS.windows?
+
   %w[test lib].each do |d|
     Dir["#{d}/**/*.rb"].each do |f|
       qbash("bundle exec ruby #{Shellwords.escape(f)} -- --no-cov", stdout: $stdout)

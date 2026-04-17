@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+require 'fbe/consider'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/consider'
 
 @configured_bots = nil
 

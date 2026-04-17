@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
+require 'fbe/fb'
+require 'fbe/octo'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'time'
-require 'fbe/fb'
-require 'fbe/octo'
 require_relative '../../lib/incremate'
 
 f = Fbe.fb.query(

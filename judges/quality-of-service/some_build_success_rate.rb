@@ -26,7 +26,7 @@ def some_build_success_rate(fact)
       if json[:conclusion] == 'failure' && failed[workflow_id].nil?
         failed[workflow_id] = completed
       elsif json[:conclusion] == 'success' && failed[workflow_id]
-        ttrs << (completed - failed[workflow_id]).to_i
+        ttrs << Integer(completed - failed[workflow_id])
         failed.delete(workflow_id)
       end
       success << (json[:conclusion] == 'success' ? 1 : 0)

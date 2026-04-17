@@ -23,12 +23,14 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
     "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
   ).each.map(&:issue).uniq.sort
   next if issues.empty?
+
   must = (issues.min..issues.max).to_a
   missing = must - issues
   added = []
   checked = []
   missing.each do |i|
     next if ts.has?('github', r.repository, i)
+
     json =
       begin
         Fbe.octo.issue(repo, i)
@@ -53,6 +55,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
           n.where = 'github'
         end
       next if f.nil?
+
       f.when = json[:created_at]
       f.who = json.dig(:user, :id)
       if type == 'pull'

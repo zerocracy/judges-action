@@ -11,7 +11,7 @@ class TestSupervision < Minitest::Test
     $loog = Loog::Buffer.new
     assert_raises(RuntimeError) do
       Jp.supervision({ 'repo' => 'zerocracy/judges-action', 'issue' => 125 }) do
-        raise 'some error'
+        raise(RuntimeError, 'some error')
       end
     end
     $loog.to_s.then do |s|

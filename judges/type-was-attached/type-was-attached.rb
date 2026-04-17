@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
+require 'fbe/if_absent'
+require 'fbe/issue'
+require 'fbe/iterate'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/iterate'
-require 'fbe/if_absent'
-require 'fbe/issue'
 require 'joined'
 
 events = %w[issue_type_added issue_type_changed]
@@ -52,7 +52,8 @@ Fbe.iterate do
               n.repository = repository
               n.where = 'github'
             end
-          raise "Type already attached to #{repo}##{issue}" if nn.nil?
+          raise(RuntimeError, "Type already attached to #{repo}##{issue}") if nn.nil?
+
           nn.who = tee.dig('actor', 'id')
           nn.when = tee['created_at']
           nn.details =

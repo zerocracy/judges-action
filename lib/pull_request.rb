@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
+require 'fbe/github_graph'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/github_graph'
 require_relative 'jp'
 
 def Jp.comments_info(pr, repo: nil)
@@ -48,10 +48,7 @@ def Jp.fetch_workflows(pr, repo: nil)
   return {} if repo.nil?
   Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))[:check_runs].each do |run|
     next unless run[:app][:slug] == 'github-actions'
-    workflow = Fbe.octo.workflow_run(
-      repo,
-      Fbe.octo.workflow_run_job(repo, run[:id])[:run_id]
-    )
+    workflow = Fbe.octo.workflow_run(repo, Fbe.octo.workflow_run_job(repo, run[:id])[:run_id])
     next unless workflow[:event] == 'pull_request'
     case workflow[:conclusion]
     when 'success'

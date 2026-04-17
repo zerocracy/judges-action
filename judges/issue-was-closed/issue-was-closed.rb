@@ -63,7 +63,8 @@ Fbe.iterate do
           n.issue = issue
           n.what = $judge
         end
-      raise "Issue #{repo}##{issue} already closed" if nn.nil?
+      raise(RuntimeError, "Issue #{repo}##{issue} already closed") if nn.nil?
+
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       who = json.dig(:closed_by, :id)
       if who
@@ -83,8 +84,10 @@ Fbe.iterate do
       end
     events.each do |te|
       next unless te[:event] == 'labeled'
+
       badge = te.dig(:label, :name)
       next unless badges.include?(badge)
+
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
+require 'fbe/if_absent'
+require 'fbe/issue'
+require 'fbe/iterate'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/iterate'
-require 'fbe/if_absent'
-require 'fbe/issue'
 require_relative '../../lib/issue_was_lost'
 
 badges = %w[bug enhancement question]
@@ -42,8 +42,10 @@ Fbe.iterate do
       end
     events.each do |te|
       next unless te[:event] == 'labeled'
+
       badge = te[:label][:name]
       next unless badges.include?(badge)
+
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|

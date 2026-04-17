@@ -86,14 +86,8 @@ class TestPullWasMerged < Jp::Test
       }
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
-      body: [{ id: 100, user: nil }]
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [{ id: 100, user: nil }])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/100/reactions', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }
@@ -190,14 +184,8 @@ class TestPullWasMerged < Jp::Test
       body: [{ id: 123, user: { id: 142, login: 'user2' }, submitted_at: '2025-09-29 05:05:46 UTC' }]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/123/comments?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
-      body: []
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/100/reactions', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }
@@ -307,14 +295,8 @@ class TestPullWasMerged < Jp::Test
       ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/127/comments?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
-      body: []
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/100/reactions', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }

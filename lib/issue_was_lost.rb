@@ -25,7 +25,7 @@ def Jp.issue_was_lost(where, repository, issue)
       n.repository = repository
       n.where = where
     end
-  raise "The issue ##{issue} was already lost" unless f
+  raise(RuntimeError, "The issue ##{issue} was already lost") unless f
   f.stale = 'issue'
   f.when = Time.now
   Fbe::Tombstone.new.bury!(where, repository, issue)

@@ -46,9 +46,11 @@ require_relative '../../lib/issue_was_lost'
       elapsed($loog, level: Logger::INFO) do
         Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
           next if Fbe.octo.off_quota?
+
           i = json[:number]
           seen << i
           next if Fbe::Tombstone.new.has?('github', repository, i)
+
           Fbe.fb.txn do |fbt|
             f =
               Fbe.if_absent(fb: fbt) do |ff|
@@ -59,6 +61,7 @@ require_relative '../../lib/issue_was_lost'
                 issue = ff.issue
               end
             next if f.nil?
+
             found << f.issue
             f.when = json[:created_at]
             f.who = json.dig(:user, :id)

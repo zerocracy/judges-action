@@ -7,6 +7,6 @@ require_relative 'jp'
 
 def Jp.fill_fact_by_hash(fact, hash)
   hash.each do |prop, value|
-    fact.send(:"#{prop}=", value)
+    fact.__send__(:"#{prop}=", value)
   end
 end

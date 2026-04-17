@@ -14,10 +14,7 @@ class TestWhoHasName < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github(
-      'https://api.github.com/user/444',
-      body: { login: 'lebowski' }
-    )
+    stub_github('https://api.github.com/user/444', body: { login: 'lebowski' })
     fb = Factbase.new
     f = fb.insert
     f._id = 333
@@ -34,10 +31,7 @@ class TestWhoHasName < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github(
-      'https://api.github.com/user/444',
-      body: '', status: 404
-    )
+    stub_github('https://api.github.com/user/444', body: '', status: 404)
     fb = Factbase.new
     f = fb.insert
     f._id = 999

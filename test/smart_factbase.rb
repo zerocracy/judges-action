@@ -10,7 +10,7 @@ module SmartFactbase
     def with(**props)
       insert.then do |f|
         props.each do |prop, value|
-          f.send(:"#{prop}=", value)
+          f.__send__(:"#{prop}=", value)
         end
       end
       self

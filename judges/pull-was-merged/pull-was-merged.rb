@@ -71,7 +71,8 @@ Fbe.iterate do
           n.repository = repository
           n.where = 'github'
         end
-      raise "Pull already merged in #{repo}##{issue}" if nn.nil?
+      raise(RuntimeError, "Pull already merged in #{repo}##{issue}") if nn.nil?
+
       nn.hoc = json[:additions] + json[:deletions]
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
@@ -79,7 +80,7 @@ Fbe.iterate do
       Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
       actor = Fbe.octo.issue(repo, issue)[:closed_by]
       if actor
-        nn.who = actor[:id].to_i
+        nn.who = Integer(actor[:id])
       else
         nn.stale = 'who'
       end

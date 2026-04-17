@@ -4,11 +4,11 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'loog'
-require 'json'
-require 'judges/options'
 require 'fbe'
 require 'fbe/github_graph'
+require 'json'
+require 'judges/options'
+require 'loog'
 require_relative '../test__helper'
 
 class TestGithubEvents < Jp::Test
@@ -64,15 +64,7 @@ class TestGithubEvents < Jp::Test
   def test_skip_watch_event
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_event(
-      {
-        id: 42,
-        created_at: Time.now.to_s,
-        action: 'created',
-        type: 'WatchEvent',
-        repo: { id: 42 }
-      }
-    )
+    stub_event({ id: 42, created_at: Time.now.to_s, action: 'created', type: 'WatchEvent', repo: { id: 42 } })
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(1, fb.size)
@@ -933,25 +925,13 @@ class TestGithubEvents < Jp::Test
       body: { id: 820_463_873, name: 'fbe', full_name: 'zerocracy/fbe' }
     )
     stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/contributors?per_page=100').to_return(
-      body: [
-        {
-          login: 'yegor256',
-          id: 526_301
-        },
-        {
-          login: 'yegor512',
-          id: 526_302
-        }
-      ].to_json, headers: {
+      body: [{ login: 'yegor256', id: 526_301 }, { login: 'yegor512', id: 526_302 }].to_json, headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
       }
     )
     stub_request(:get, 'https://api.github.com/user/8086956').to_return(
-      body: {
-        login: 'rultor',
-        id: 8_086_956
-      }.to_json, headers: {
+      body: { login: 'rultor', id: 8_086_956 }.to_json, headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
       }
@@ -1103,10 +1083,7 @@ class TestGithubEvents < Jp::Test
         files: [{ additions: 15, deletions: 40, changes: 55 }]
       }
     )
-    stub_github(
-      'https://api.github.com/user/8086956',
-      body: { login: 'rultor', id: 8_086_956 }
-    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
     fb = Factbase.new
     fb.insert.then do |f|
       f.details = 'A new release was published in this repo by the crew: v0.0.2.'
@@ -1176,10 +1153,7 @@ class TestGithubEvents < Jp::Test
         { login: 'yegor512', id: 526_302 }
       ]
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits?per_page=100',
-      body: [{ sha: '4683257342e98cd94' }]
-    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: '4683257342e98cd94' }])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/4683257342e98cd94...0.0.3?per_page=100',
       body: {
@@ -1188,10 +1162,7 @@ class TestGithubEvents < Jp::Test
         files: [{ additions: 15, deletions: 40, changes: 55 }]
       }
     )
-    stub_github(
-      'https://api.github.com/user/8086956',
-      body: { login: 'rultor', id: 8_086_956 }
-    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
     fb = Factbase.new
     fb.insert.then do |f|
       f.details = 'The release v0.0.2 was published in the repo by the crew.'
@@ -1253,14 +1224,7 @@ class TestGithubEvents < Jp::Test
       'https://api.github.com/repositories/111',
       body: { id: 111, name: 'new_baz', full_name: 'foo/new_baz' }
     )
-    stub_github(
-      'https://api.github.com/user/29139614',
-      body: {
-        login: 'renovate[bot]',
-        id: 29_139_614,
-        type: 'Bot'
-      }
-    )
+    stub_github('https://api.github.com/user/29139614', body: { login: 'renovate[bot]', id: 29_139_614, type: 'Bot' })
     stub_github(
       'https://api.github.com/repos/foo/new_baz/contributors?per_page=100',
       body: [
@@ -1542,10 +1506,7 @@ class TestGithubEvents < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 100, name: 'foo', full_name: 'foo/foo', default_branch: 'master', owner: { id: 50, login: 'foo' } }
     )
-    stub_github(
-      'https://api.github.com/repositories/100',
-      body: { id: 100, name: 'foo', full_name: 'foo/foo' }
-    )
+    stub_github('https://api.github.com/repositories/100', body: { id: 100, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repositories/100/events?per_page=100',
       body: [{
@@ -1574,10 +1535,7 @@ class TestGithubEvents < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 101, name: 'foo', full_name: 'foo/foo', default_branch: 'master', owner: { id: 50, login: 'foo' } }
     )
-    stub_github(
-      'https://api.github.com/repositories/101',
-      body: { id: 101, name: 'foo', full_name: 'foo/foo' }
-    )
+    stub_github('https://api.github.com/repositories/101', body: { id: 101, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repositories/101/events?per_page=100',
       body: [{
@@ -2149,14 +2107,8 @@ class TestGithubEvents < Jp::Test
       'https://api.github.com/repos/foo/foo/issues/456/comments?per_page=100',
       body: [{ id: 313, user: { login: 'user123', id: 123 } }]
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/comments/313/reactions',
-      body: []
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/comments/213/reactions',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/comments/313/reactions', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/213/reactions', body: [])
     stub_github(
       'https://api.github.com/repos/foo/old_foo/commits/5c955da3b5a/check-runs?per_page=100',
       status: 302,
@@ -2443,10 +2395,7 @@ class TestGithubEvents < Jp::Test
       'https://api.github.com/repos/foo/foo/contributors?per_page=100',
       body: [{ login: 'yegor256', id: 526_301 }]
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits?per_page=100',
-      body: [{ sha: 'abc123def456' }]
-    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
       status: 404,
@@ -2456,10 +2405,7 @@ class TestGithubEvents < Jp::Test
         status: '404'
       }
     )
-    stub_github(
-      'https://api.github.com/user/8086956',
-      body: { login: 'rultor', id: 8_086_956 }
-    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
     fb = Factbase.new
     load_it('github-events', fb)
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a

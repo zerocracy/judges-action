@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: MIT
 
 require 'decoor'
-require 'fbe/github_graph'
 require 'factbase'
+require 'fbe/github_graph'
 require 'judges/options'
 require_relative '../test__helper'
 
@@ -112,9 +112,7 @@ class TestIssueWasClosed < Jp::Test
     load_it('issue-was-closed', fb)
     assert_equal(1, fb.picks(what: 'issue-was-opened').size)
     assert_equal(1, fb.picks(what: 'label-was-attached').size)
-    assert(
-      fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
-    )
+    assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
 
   def test_find_closed_issues_without_labels
@@ -130,10 +128,7 @@ class TestIssueWasClosed < Jp::Test
         closed_by: { login: 'user1', id: 222_111 }
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
     load_it('issue-was-closed', fb)
@@ -172,8 +167,6 @@ class TestIssueWasClosed < Jp::Test
     load_it('issue-was-closed', fb)
     assert_equal(1, fb.picks(what: 'issue-was-opened').size)
     assert_equal(1, fb.picks(what: 'label-was-attached').size)
-    assert(
-      fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
-    )
+    assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
 end

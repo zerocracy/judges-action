@@ -51,14 +51,7 @@ class TestFindEarliestIssue < Jp::Test
         }
       ]
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/3',
-      body: {
-        id: 1235,
-        number: 3,
-        head: { ref: '2' }
-      }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/3', body: { id: 1235, number: 3, head: { ref: '2' } })
     stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
     fb = Factbase.new
     load_it('find-earliest-issue', fb)

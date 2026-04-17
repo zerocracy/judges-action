@@ -12,14 +12,8 @@ class TestEraseRepository < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github(
-      'https://api.github.com/repositories/1234',
-      body: { id: 1234, name: 'foo', full_name: 'foo/foo' }
-    )
-    stub_github(
-      'https://api.github.com/repositories/1235',
-      body: { id: 1235, name: 'bar', full_name: 'foo/bar' }
-    )
+    stub_github('https://api.github.com/repositories/1234', body: { id: 1234, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/1235', body: { id: 1235, name: 'bar', full_name: 'foo/bar' })
     stub_github('https://api.github.com/repositories/404123', body: '', status: 404)
     stub_github('https://api.github.com/repositories/404124', body: '', status: 404)
     fb = Factbase.new

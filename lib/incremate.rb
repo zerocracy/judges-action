@@ -22,19 +22,19 @@ def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, epoch: $epoch || Tim
     $loog.info(
       [
         "Starting to evaluate #{n}",
-        (", #{($options.lifetime - Time.now.to_f + epoch.to_f).seconds} of lifetime left" if $options.lifetime),
-        (", #{($options.timeout - Time.now.to_f + kickoff.to_f).seconds} of timeout left" if $options.timeout),
+        (", #{($options.lifetime - Time.now.to_f + Float(epoch)).seconds} of lifetime left" if $options.lifetime),
+        (", #{($options.timeout - Time.now.to_f + Float(kickoff)).seconds} of timeout left" if $options.timeout),
         '...'
       ].compact.join
     )
-    require_relative rb
+    require_relative(rb)
     elapsed($loog, level: Logger::INFO) do
-      h = send(n, fact)
+      h = __send__(n, fact)
       h.each do |k, v|
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
-        Array(v).each { fact.send("#{k}=", _1) }
+        Array(v).each { fact.__send__("#{k}=", _1) }
       end
-      throw :"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]"
+      throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
   end
 end

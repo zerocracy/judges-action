@@ -69,6 +69,7 @@ Fbe.fb.query(
     (or #{alive.uniq.map { |u| "(eq who #{u})" }.join}))"
 ).each do |f|
   next unless f.stale == 'who'
+
   Fbe.delete_one(f, 'stale', 'who')
 end
 
