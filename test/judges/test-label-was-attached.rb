@@ -33,9 +33,16 @@ class TestLabelWasAttached < Jp::Test
         }
       ]
     )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45/timeline?per_page=100',
+      status: 404,
+      body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
+    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
     load_it('label-was-attached', fb)
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 44, where: 'github', label: 'bug', who: 421))
+    assert(fb.one?(what: 'issue-was-opened', repository: 42, issue: 45, where: 'github', stale: 'issue'))
   end
 end

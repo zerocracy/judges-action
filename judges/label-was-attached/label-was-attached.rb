@@ -38,7 +38,7 @@ Fbe.iterate do
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
-        next
+        next issue
       end
     events.each do |te|
       next unless te[:event] == 'labeled'
