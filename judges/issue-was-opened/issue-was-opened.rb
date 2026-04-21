@@ -17,6 +17,8 @@ Fbe.conclude do
     (or
       (eq what 'dud-was-closed')
       (eq what 'issue-was-closed')
+      (eq what 'issue-was-assigned')
+      (eq what 'label-was-attached')
       (eq what 'bug-was-accepted')
       (eq what 'bug-was-resolved')
       (eq what 'enhancement-suggestion-was-rewarded')
