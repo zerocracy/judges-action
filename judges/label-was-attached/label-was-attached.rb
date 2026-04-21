@@ -42,10 +42,8 @@ Fbe.iterate do
       end
     events.each do |te|
       next unless te[:event] == 'labeled'
-
       badge = te[:label][:name]
       next unless badges.include?(badge)
-
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|

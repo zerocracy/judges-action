@@ -40,7 +40,6 @@ Fbe.consider(
     end
   reviews.each do |review|
     next if review.dig(:user, :id) == pr.dig(:user, :id)
-
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
@@ -51,7 +50,6 @@ Fbe.consider(
           nn.where = f.where
         end
       next if n.nil?
-
       n.when = review[:submitted_at]
       n.hoc = pr[:additions] + pr[:deletions]
       n.author = pr.dig(:user, :id)

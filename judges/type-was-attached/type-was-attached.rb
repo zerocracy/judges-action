@@ -53,7 +53,6 @@ Fbe.iterate do
               n.where = 'github'
             end
           raise(RuntimeError, "Type already attached to #{repo}##{issue}") if nn.nil?
-
           nn.who = tee.dig('actor', 'id')
           nn.when = tee['created_at']
           nn.details =

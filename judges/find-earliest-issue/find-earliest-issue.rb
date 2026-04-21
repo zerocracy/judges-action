@@ -16,17 +16,14 @@ Fbe.iterate do
   by '(plus 0 $before)'
   over do |repository, latest|
     next latest if latest.positive?
-
     repo = Fbe.octo.repo_name_by_id(repository)
     json =
       Fbe.octo.with_disable_auto_paginate do |octo|
         octo.list_issues(repo, state: :all, sort: :created, direction: :asc, page: 1, per_page: 1).first
       end
     next latest if json.nil?
-
     i = json[:number]
     next if Fbe::Tombstone.new.has?('github', repository, i)
-
     Fbe.fb.txn do |fbt|
       f =
         Fbe.if_absent(fb: fbt) do |ff|
@@ -36,7 +33,6 @@ Fbe.iterate do
           ff.where = 'github'
         end
       next if f.nil?
-
       f.when = json[:created_at]
       f.who = json.dig(:user, :id)
       if json[:pull_request]

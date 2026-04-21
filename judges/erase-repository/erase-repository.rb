@@ -12,10 +12,8 @@ good = {}
 
 Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').each do |f|
   next if Fbe.octo.off_quota?
-
   r = f.repository
   next unless good[r].nil?
-
   elapsed($loog, level: Logger::INFO) do
     json = Fbe.octo.repository(r)
     good[r] = true
@@ -28,7 +26,6 @@ end
 
 good.each do |repo, ok|
   next if ok
-
   Fbe.fb.query("(and (eq where 'github') (eq repository #{repo}) (absent stale))").each do |f|
     f.stale = 'repository'
   end

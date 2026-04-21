@@ -18,13 +18,11 @@ require_relative '../../lib/supervision'
 Fbe.iterate do
   as 'events_were_scanned'
   by '(plus 0 $before)'
-
   def self.skip(json)
     t = Time.parse(json[:created_at].iso8601)
     $loog.debug("Event ##{json[:id]} (#{json[:type]}) in #{json[:repo][:name]} ignored (#{t.ago} ago)")
     raise(Factbase::Rollback)
   end
-
   def self.tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
     if tag.nil? && fact&.all_properties&.include?('release_id')
@@ -33,7 +31,6 @@ Fbe.iterate do
     end
     tag
   end
-
   def self.contributors(fact, repo)
     last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
     since = tag(last, repo)
@@ -51,7 +48,6 @@ Fbe.iterate do
     $loog.debug("The repository ##{fact.repository} has #{list.count} contributors")
     list.to_a
   end
-
   def self.info(fact, repo)
     last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
     since = tag(last, repo)
@@ -70,7 +66,6 @@ Fbe.iterate do
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
   end
-
   def self.earliest(repo)
     commits = Fbe.octo.commits(repo)
     last = commits.last
@@ -81,7 +76,6 @@ Fbe.iterate do
     $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last
   end
-
   def self.seen?(fact)
     Fbe.fb.query(
       "(and
@@ -92,7 +86,6 @@ Fbe.iterate do
         (eq where 'github'))"
     ).each.any?
   end
-
   def self.fill(fact, json)
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
@@ -265,7 +258,6 @@ Fbe.iterate do
       end
     raise(RuntimeError, "#{who} doesn't have access to the #{rname} repository, maybe it's private")
   end
-
   def self.twice?(fb, fact, what, fields)
     pairs = fields.map { [_1, fact[_1]&.first] }
     pairs.reject! { _1.last.nil? }
@@ -281,7 +273,6 @@ Fbe.iterate do
       end
     fb.query("(and (eq what '#{what}') #{eqs.join(' ')})").each.to_a.size > 1
   end
-
   over do |repository, latest|
     rname = Fbe.octo.repo_name_by_id(repository)
     $loog.info("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
