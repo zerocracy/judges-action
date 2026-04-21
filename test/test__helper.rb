@@ -30,6 +30,7 @@ Minitest::Reporters.use!([Minitest::Reporters::SpecReporter.new])
 require 'judges/options'
 require 'loog'
 require 'minitest/autorun'
+require 'minitest/mock'
 require 'webmock/minitest'
 require_relative '../lib/jp'
 require_relative 'smart_factbase'
