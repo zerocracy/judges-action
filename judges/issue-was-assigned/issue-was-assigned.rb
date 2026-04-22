@@ -39,6 +39,13 @@ Fbe.iterate do
         $loog.info("Not found issue events for issue ##{issue} in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue events for issue ##{issue} in #{repo}: " \
+          "#{e.class}: #{e.message}"
+        )
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
       end
     events.each do |event|
       Fbe.fb.txn do |fbt|

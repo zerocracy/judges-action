@@ -35,6 +35,13 @@ require_relative '../../lib/issue_was_lost'
           $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
           Jp.issue_was_lost('github', repository, issue)
           next 0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to #{type} ##{issue}, " \
+            "time to start from zero: #{e.class}: #{e.message}"
+          )
+          Jp.issue_was_lost('github', repository, issue)
+          next 0
         end
       if after.nil?
         $loog.info("The #{type} ##{issue} in #{repo} return empty created_at field")

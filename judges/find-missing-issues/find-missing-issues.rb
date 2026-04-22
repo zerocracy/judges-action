@@ -38,6 +38,10 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         $loog.info("The issue #{repo}##{i} doesn't exist: #{e.message}")
         Jp.issue_was_lost('github', r.repository, i)
         next
+      rescue Octokit::Forbidden => e
+        $loog.warn("[#{$judge}] Access forbidden to issue #{repo}##{i}: #{e.class}: #{e.message}")
+        Jp.issue_was_lost('github', r.repository, i)
+        next
       end
     checked << i
     if json[:number].nil?

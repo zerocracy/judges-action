@@ -58,6 +58,10 @@ Fbe.iterate do
         $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn("[#{$judge}] Access forbidden to pull ##{issue} in #{repo}: #{e.class}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
       end
     unless json[:state] == 'closed'
       $loog.debug("Pull #{repo}##{issue} is not closed: #{json[:state].inspect}")

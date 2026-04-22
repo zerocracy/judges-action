@@ -47,6 +47,10 @@ Fbe.conclude do
         $loog.info("The issue ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
         next
+      rescue Octokit::Forbidden => e
+        $loog.warn("[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
+        Jp.issue_was_lost(f.where, f.repository, f.issue)
+        next
       end
     n.what = $judge
     n.when = json[:created_at]

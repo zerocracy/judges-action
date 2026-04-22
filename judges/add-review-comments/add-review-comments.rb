@@ -26,12 +26,20 @@ Fbe.consider(
       $loog.info("Failed to find repository #{f.repository}: #{e.message}")
       f.stale = 'repository'
       next
+    rescue Octokit::Forbidden => e
+      $loog.warn("[#{$judge}] Access forbidden to repository #{f.repository}: #{e.class}: #{e.message}")
+      f.stale = 'repository'
+      next
     end
   json =
     begin
       Fbe.octo.pull_request(repo, f.issue)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
+      Jp.issue_was_lost(f.where, f.repository, f.issue)
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn("[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
     end

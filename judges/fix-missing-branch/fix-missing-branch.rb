@@ -29,6 +29,10 @@ Fbe.consider(
       $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
+    rescue Octokit::Forbidden => e
+      $loog.warn("[#{$judge}] Access forbidden to #{Fbe.issue(f)} in #{repo}: #{e.class}: #{e.message}")
+      Jp.issue_was_lost(f.where, f.repository, f.issue)
+      next
     end
   ref = json.dig(:pull_request, :head, :ref)
   if ref.nil?

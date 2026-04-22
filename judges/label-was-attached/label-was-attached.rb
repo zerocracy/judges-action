@@ -39,6 +39,13 @@ Fbe.iterate do
         $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue ##{issue} in repository ##{repository}: " \
+          "#{e.class}: #{e.message}"
+        )
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
       end
     events.each do |te|
       next unless te[:event] == 'labeled'

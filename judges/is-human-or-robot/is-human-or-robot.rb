@@ -4,6 +4,7 @@ require 'fbe/consider'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/issue'
 require 'fbe/octo'
 
 @bots = nil
@@ -23,6 +24,10 @@ Fbe.consider(
       Fbe.octo.user(f.who)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
+      f.stale = 'who'
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn("[#{$judge}] GitHub user ##{f.who} is not accessible: #{e.class}: #{e.message}")
       f.stale = 'who'
       next
     end
