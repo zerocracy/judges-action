@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require 'octokit'
 require_relative '../test__helper'
 
 class TestIsHumanOrRobot < Jp::Test
@@ -60,5 +61,21 @@ class TestIsHumanOrRobot < Jp::Test
     assert(fb.one?(where: 'github', who: 16, name: '0pdd', is_human: 0))
     assert(fb.one?(where: 'github', who: 17, name: 'other_bot', is_human: 0))
     assert(fb.one?(where: 'github', who: 18, name: 'user4', is_human: 1))
+  end
+
+  def test_propagates_forbidden_when_user_lookup_returns_403
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29139614, where: 'github')
+    exception = assert_raises(Octokit::Forbidden) do
+      load_it('is-human-or-robot', fb)
+    end
+    assert_match(/Resource not accessible by integration/, exception.message)
   end
 end
