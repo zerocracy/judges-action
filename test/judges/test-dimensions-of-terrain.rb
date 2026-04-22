@@ -716,12 +716,4 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_nil(f['total_forks'])
     end
   end
-
-  def test_dimensions_of_terrain_rescues_repo_forbidden_via_fbe_unmask_repos
-    skip('out-of-scope: fbe-side root cause — see specs/001-forbidden-rescue-verification/evidence.md §H5')
-  end
-
-  def test_dimensions_of_terrain_emits_metrics_for_good_repos_when_one_is_forbidden
-    skip('out-of-scope: fbe-side root cause — see specs/001-forbidden-rescue-verification/evidence.md §H5')
-  end
 end
