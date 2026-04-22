@@ -109,7 +109,7 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.has?(where: 'github', who: 333))
   end
 
-  def test_marks_user_stale_when_lookup_returns_403
+  def test_marks_user_stale_on_forbidden_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -118,8 +118,7 @@ class TestEliminateGhosts < Jp::Test
       body: { message: 'Resource not accessible by integration' }
     )
     fb = Factbase.new
-    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44,
-            who: 29_139_614, where: 'github')
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, who: 29_139_614, where: 'github')
     load_it('eliminate-ghosts', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)

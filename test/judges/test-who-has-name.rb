@@ -79,7 +79,7 @@ class TestWhoHasName < Jp::Test
     end
   end
 
-  def test_marks_fact_stale_when_user_lookup_returns_403
+  def test_marks_fact_stale_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -88,14 +88,10 @@ class TestWhoHasName < Jp::Test
       body: { message: 'Resource not accessible by integration' }
     )
     fb = Factbase.new
-    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44,
-            who: 29_139_614, where: 'github')
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
     load_it('who-has-name', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal(
-      'who', fact.stale,
-      'fact should be stale when GitHub responds 403 for the user lookup'
-    )
+    assert_equal('who', fact.stale, 'fact should be stale when GitHub responds 403 for the user lookup')
   end
 end

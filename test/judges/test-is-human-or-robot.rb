@@ -63,7 +63,7 @@ class TestIsHumanOrRobot < Jp::Test
     assert(fb.one?(where: 'github', who: 18, name: 'user4', is_human: 1))
   end
 
-  def test_marks_fact_stale_when_user_lookup_returns_403
+  def test_marks_fact_stale_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -76,22 +76,17 @@ class TestIsHumanOrRobot < Jp::Test
     load_it('is-human-or-robot', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal(
-      'who', fact.stale,
-      'fact should be stale when GitHub user lookup returns 403'
-    )
+    assert_equal('who', fact.stale, 'fact should be stale when GitHub user lookup returns 403')
   end
 
   def test_one_forbidden_user_does_not_abort_other_users
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/user/100',
-                body: { login: 'alice', id: 100, type: 'User' })
+    stub_github('https://api.github.com/user/100', body: { login: 'alice', id: 100, type: 'User' })
     stub_github('https://api.github.com/user/200',
                 status: 403,
                 body: { message: 'Resource not accessible by integration' })
-    stub_github('https://api.github.com/user/300',
-                body: { login: 'bob', id: 300, type: 'User' })
+    stub_github('https://api.github.com/user/300', body: { login: 'bob', id: 300, type: 'User' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', who: 100, where: 'github')
       .with(_id: 2, what: 'pull-was-merged', who: 200, where: 'github')
@@ -100,7 +95,9 @@ class TestIsHumanOrRobot < Jp::Test
     classified = fb.query('(exists is_human)').each.to_a
     staled = fb.query("(eq stale 'who')").each.to_a
     assert_equal(2, classified.size, 'both good users (100, 300) should be classified')
-    assert_equal([100, 300], classified.map(&:who).sort, 'classified facts should be the two non-403 users')
+    whos = classified.map(&:who)
+    whos.sort!
+    assert_equal([100, 300], whos, 'classified facts should be the two non-403 users')
     assert_equal(1, staled.size, 'the 403 user should be marked stale')
     assert_equal([200], staled.map(&:who), 'staled fact should be the 403 user')
   end

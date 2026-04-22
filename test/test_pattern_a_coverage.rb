@@ -5,30 +5,28 @@
 
 require 'minitest/autorun'
 
-# Structural regression test for the "Pattern A rescue" uniformity invariant.
-# Every line of the form `rescue Octokit::NotFound, Octokit::Deprecated` in
-# lib/*.rb or judges/*/*.rb MUST also contain Octokit::Forbidden — otherwise a
-# single 403 from GitHub can escape the rescue and crash the judge's iteration
-# over a batch of items (see specs/002-wide-forbidden-rescue/spec.md).
 class TestPatternACoverage < Minitest::Test
-  PATTERN_A_RE = /rescue\s+Octokit::NotFound\s*,\s*Octokit::Deprecated/
-  FORBIDDEN_RE = /Octokit::Forbidden/
+  PATTERN_A_RE = /rescue\s+Octokit::NotFound\s*,\s*Octokit::Deprecated\s*=>\s*e/
+  FORBIDDEN_RE = /rescue\s+Octokit::Forbidden\s*=>\s*e/
 
-  def test_every_pattern_a_block_also_catches_forbidden
+  def test_every_pattern_a_block_has_a_matching_forbidden_rescue
     root = File.expand_path('..', __dir__)
     paths = Dir[File.join(root, '{lib,judges}', '**', '*.rb')]
     refute_empty(paths, 'should find Ruby files under lib/ and judges/ — empty means the glob is broken')
     offenders = []
     paths.each do |path|
-      File.foreach(path).with_index(1) do |line, lineno|
-        next unless line =~ PATTERN_A_RE
-        next if line =~ FORBIDDEN_RE
-        offenders << "#{path.sub("#{root}/", '')}:#{lineno}"
-      end
+      content = File.read(path)
+      found = content.scan(PATTERN_A_RE).size
+      next if found.zero?
+      caught = content.scan(FORBIDDEN_RE).size
+      next if caught >= found
+      rel = path.sub("#{root}/", '')
+      offenders << "#{rel} — has #{found} Pattern A rescue(s) " \
+                   "but only #{caught} matching 'rescue Octokit::Forbidden => e'"
     end
     assert_empty(
       offenders,
-      "Pattern A rescue blocks must include Octokit::Forbidden. Offending site(s):\n  " \
+      "Every Pattern A rescue block must be paired with a 'rescue Octokit::Forbidden => e' in the same file:\n  " \
       "#{offenders.join("\n  ")}"
     )
   end

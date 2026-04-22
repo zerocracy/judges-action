@@ -3,11 +3,11 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-require_relative '../test__helper'
 require_relative '../../lib/nick_of'
+require_relative '../test__helper'
 
 class TestNickOf < Jp::Test
-  def test_returns_nil_when_user_lookup_returns_403
+  def test_returns_nil_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
