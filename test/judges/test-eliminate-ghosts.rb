@@ -108,4 +108,24 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.none?(where: 'github', who: 333, stale: 'who'))
     assert(fb.has?(where: 'github', who: 333))
   end
+
+  def test_marks_user_stale_when_lookup_returns_403
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44,
+            who: 29_139_614, where: 'github')
+    load_it('eliminate-ghosts', fb)
+    fact = fb.query('(eq who 29139614)').each.first
+    refute_nil(fact)
+    assert_equal(
+      'who', fact.stale,
+      'fact should be marked stale when user lookup returns 403 (403 → nick_of nil → eliminate-ghosts stale path)'
+    )
+  end
 end

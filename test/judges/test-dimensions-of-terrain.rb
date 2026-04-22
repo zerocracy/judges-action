@@ -716,4 +716,23 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_nil(f['total_forks'])
     end
   end
+
+  # The following two methods were moved here from the exploratory
+  # test-dimensions-of-terrain-forbidden.rb file that lived on
+  # feature/forbidden-rescue-verification. The underlying crash — one 403
+  # in an Fbe.unmask_repos warmup kills all metric computation for the
+  # cycle — is driven from inside the fbe gem (lib/fbe/unmask_repos.rb),
+  # not from judges-action. Fixing it requires a separate PR against fbe
+  # and is therefore out of scope for this PR (spec line 124–126 of
+  # specs/002-wide-forbidden-rescue/spec.md). The methods are kept here
+  # with `skip` guards so the TODO remains visible in `bundle exec rake
+  # test` output.
+
+  def test_dimensions_of_terrain_rescues_repo_403_via_fbe_unmask_repos
+    skip('out-of-scope: fbe-side root cause — see specs/001-forbidden-rescue-verification/evidence.md §H5')
+  end
+
+  def test_dimensions_of_terrain_emits_metrics_for_good_repos_when_one_is_forbidden
+    skip('out-of-scope: fbe-side root cause — see specs/001-forbidden-rescue-verification/evidence.md §H5')
+  end
 end

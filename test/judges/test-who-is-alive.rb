@@ -89,4 +89,24 @@ class TestWhoIsAlive < Jp::Test
       assert_equal(6, fb.all.size)
     end
   end
+
+  def test_handles_forbidden_user_lookup_without_raising
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'who-has-name', where: 'github', who: 29_139_614,
+      name: 'someone', when: Time.now - (3 * 86_400)
+    )
+    load_it('who-is-alive', fb)
+    assert_empty(
+      fb.query('(eq what "who-has-name")').each.to_a,
+      'who-is-alive should delete the who-has-name fact after 403 propagates through Jp.nick_of as nil'
+    )
+  end
 end

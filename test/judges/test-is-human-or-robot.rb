@@ -63,7 +63,7 @@ class TestIsHumanOrRobot < Jp::Test
     assert(fb.one?(where: 'github', who: 18, name: 'user4', is_human: 1))
   end
 
-  def test_propagates_forbidden_when_user_lookup_returns_403
+  def test_marks_fact_stale_when_user_lookup_returns_403
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -72,14 +72,17 @@ class TestIsHumanOrRobot < Jp::Test
       body: { message: 'Resource not accessible by integration' }
     )
     fb = Factbase.new
-    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29139614, where: 'github')
-    exception = assert_raises(Octokit::Forbidden) do
-      load_it('is-human-or-robot', fb)
-    end
-    assert_match(/Resource not accessible by integration/, exception.message)
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
+    load_it('is-human-or-robot', fb)
+    fact = fb.query('(eq who 29139614)').each.first
+    refute_nil(fact)
+    assert_equal(
+      'who', fact.stale,
+      'fact should be stale when GitHub user lookup returns 403'
+    )
   end
 
-  def test_one_forbidden_user_aborts_processing_of_other_users
+  def test_one_forbidden_user_does_not_abort_other_users
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/user/100',
@@ -90,21 +93,15 @@ class TestIsHumanOrRobot < Jp::Test
     stub_github('https://api.github.com/user/300',
                 body: { login: 'bob', id: 300, type: 'User' })
     fb = Factbase.new
-    # NOTE: issue field intentionally omitted — including it triggers a separate latent
-    # bug in is-human-or-robot.rb:30 (uses Fbe.issue without requiring 'fbe/issue').
-    # That bug is out of scope for this Forbidden-cascade verification.
     fb.with(_id: 1, what: 'pull-was-merged', who: 100, where: 'github')
       .with(_id: 2, what: 'pull-was-merged', who: 200, where: 'github')
       .with(_id: 3, what: 'pull-was-merged', who: 300, where: 'github')
-    assert_raises(Octokit::Forbidden) { load_it('is-human-or-robot', fb) }
+    load_it('is-human-or-robot', fb)
     classified = fb.query('(exists is_human)').each.to_a
-    # Empirical observation of cascade severity:
-    # 0 of 3 = bad-user-first kills everything (worst case)
-    # 1 or 2 of 3 = partial completion before crash
-    # 3 of 3 = no crash happened — would contradict assert_raises above
-    $stderr.puts "[cascade] is-human-or-robot classified #{classified.size}/3 users " \
-                 "before crash; whos=#{classified.map(&:who).inspect}"
-    refute_equal(3, classified.size,
-                 'all 3 classified means no crash — contradicts assert_raises above')
+    staled = fb.query("(eq stale 'who')").each.to_a
+    assert_equal(2, classified.size, 'both good users (100, 300) should be classified')
+    assert_equal([100, 300], classified.map(&:who).sort, 'classified facts should be the two non-403 users')
+    assert_equal(1, staled.size, 'the 403 user should be marked stale')
+    assert_equal([200], staled.map(&:who), 'staled fact should be the 403 user')
   end
 end
