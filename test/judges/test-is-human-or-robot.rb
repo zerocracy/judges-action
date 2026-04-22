@@ -78,4 +78,33 @@ class TestIsHumanOrRobot < Jp::Test
     end
     assert_match(/Resource not accessible by integration/, exception.message)
   end
+
+  def test_one_forbidden_user_aborts_processing_of_other_users
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/100',
+                body: { login: 'alice', id: 100, type: 'User' })
+    stub_github('https://api.github.com/user/200',
+                status: 403,
+                body: { message: 'Resource not accessible by integration' })
+    stub_github('https://api.github.com/user/300',
+                body: { login: 'bob', id: 300, type: 'User' })
+    fb = Factbase.new
+    # NOTE: issue field intentionally omitted — including it triggers a separate latent
+    # bug in is-human-or-robot.rb:30 (uses Fbe.issue without requiring 'fbe/issue').
+    # That bug is out of scope for this Forbidden-cascade verification.
+    fb.with(_id: 1, what: 'pull-was-merged', who: 100, where: 'github')
+      .with(_id: 2, what: 'pull-was-merged', who: 200, where: 'github')
+      .with(_id: 3, what: 'pull-was-merged', who: 300, where: 'github')
+    assert_raises(Octokit::Forbidden) { load_it('is-human-or-robot', fb) }
+    classified = fb.query('(exists is_human)').each.to_a
+    # Empirical observation of cascade severity:
+    # 0 of 3 = bad-user-first kills everything (worst case)
+    # 1 or 2 of 3 = partial completion before crash
+    # 3 of 3 = no crash happened — would contradict assert_raises above
+    $stderr.puts "[cascade] is-human-or-robot classified #{classified.size}/3 users " \
+                 "before crash; whos=#{classified.map(&:who).inspect}"
+    refute_equal(3, classified.size,
+                 'all 3 classified means no crash — contradicts assert_raises above')
+  end
 end

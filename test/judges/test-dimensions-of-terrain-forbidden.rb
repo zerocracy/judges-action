@@ -43,4 +43,35 @@ class TestDimensionsOfTerrainForbidden < Jp::Test
     end
     assert_match(/Resource not accessible by integration/, exception.message)
   end
+
+  def test_dimensions_of_terrain_aborts_before_any_metric_set
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        id: 42, full_name: 'foo/foo', name: 'foo', archived: false,
+        default_branch: 'main', size: 100, stargazers_count: 1, forks: 0,
+        open_issues_count: 0
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/private',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'dimensions-of-terrain', when: Time.now)
+    options = Judges::Options.new({ 'repositories' => 'foo/foo,foo/private' })
+    assert_raises(Octokit::Forbidden) do
+      load_it('dimensions-of-terrain', fb, options)
+    end
+    fact = fb.query("(eq what 'dimensions-of-terrain')").each.first
+    total_props = fact.all_properties.select { |p| p.to_s.start_with?('total_') }
+    assert_empty(
+      total_props,
+      "Expected no total_* props (judge should abort before any helper completes), " \
+      "but found: #{total_props.inspect}"
+    )
+  end
 end
