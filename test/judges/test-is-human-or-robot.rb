@@ -95,9 +95,9 @@ class TestIsHumanOrRobot < Jp::Test
     classified = fb.query('(exists is_human)').each.to_a
     staled = fb.query("(eq stale 'who')").each.to_a
     assert_equal(2, classified.size, 'both good users (100, 300) should be classified')
-    whos = classified.map(&:who)
-    whos.sort!
-    assert_equal([100, 300], whos, 'classified facts should be the two non-403 users')
+    ids = classified.map(&:who)
+    ids.sort!
+    assert_equal([100, 300], ids, 'classified facts should be the two non-403 users')
     assert_equal(1, staled.size, 'the 403 user should be marked stale')
     assert_equal([200], staled.map(&:who), 'staled fact should be the 403 user')
   end
