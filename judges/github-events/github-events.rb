@@ -66,8 +66,6 @@ Fbe.iterate do
     rescue Octokit::NotFound
       $loog.info("Compare API returned 404 for #{repo} between #{since} and #{fact.tag}")
     end
-    $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
-    info
   end
 
   def self.earliest(repo)
