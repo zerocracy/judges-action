@@ -83,6 +83,50 @@ class TestAddReviewComments < Jp::Test
     assert_nil(facts.first['review_comments'])
   end
 
+  def test_rescues_forbidden_on_repo_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repositories/42',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = 44
+    fact.repository = 42
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_equal('repository', f.stale, 'seed fact should get stale=repository when the repo lookup returns 403')
+  end
+
+  def test_rescues_forbidden_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = 44
+    fact.repository = 42
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_equal(
+      'issue', f.stale,
+      'Jp.issue_was_lost should mark the fact stale=issue when the pull lookup returns 403'
+    )
+  end
+
   def stub(repo, *pulls)
     pulls.each do |pl|
       stub_github(

@@ -169,4 +169,53 @@ class TestIssueWasClosed < Jp::Test
     assert_equal(1, fb.picks(what: 'label-was-attached').size)
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
+
+  def test_rescues_forbidden_on_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_equal('issue', f.stale, 'Jp.issue_was_lost should mark the fact stale=issue when issue lookup returns 403')
+  end
+
+  def test_rescues_forbidden_on_timeline_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, title: 'some title 44', state: 'closed',
+        closed_at: Time.parse('2025-10-01 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert(
+      fb.one?(what: 'issue-was-closed', repository: 42, issue: 44, where: 'github', who: 222_111),
+      'issue-was-closed fact should still be created — only timeline processing is skipped on 403'
+    )
+    assert_empty(
+      fb.query("(eq what 'label-was-attached')").each.to_a,
+      'no label-was-attached facts since timeline was inaccessible'
+    )
+  end
 end

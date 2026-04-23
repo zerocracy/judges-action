@@ -25,4 +25,23 @@ class TestFindMissingIssues < Jp::Test
     assert(fb.one?(what: 'issue-was-lost', where: 'github', issue: 45, repository: 42, stale: 'issue'))
     assert(fb.one?(what: 'tombstone', where: 'github', issues: '45', repository: 42))
   end
+
+  def test_rescues_forbidden_on_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 46, where: 'github')
+    load_it('find-missing-issues', fb)
+    assert(
+      fb.one?(what: 'issue-was-lost', where: 'github', issue: 45, repository: 42, stale: 'issue'),
+      'Jp.issue_was_lost should create an issue-was-lost fact on 403 (same recovery as NotFound)'
+    )
+  end
 end

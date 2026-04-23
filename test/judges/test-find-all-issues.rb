@@ -298,4 +298,34 @@ class TestFindAllIssues < Jp::Test
     assert_equal(2, fb.size)
     assert_equal(5, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
+
+  def test_rescues_forbidden_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
+    )
+    stub_github('https://api.github.com/repositories/695', body: { id: 695, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/87',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.issue = 87
+      f.repository = 695
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    fact = fb.query('(eq issue 87)').each.first
+    refute_nil(fact, 'seed fact should still be present after 403 rescue')
+    assert_equal(
+      'issue', fact.stale,
+      'Jp.issue_was_lost should mark the matching fact stale=issue on 403 (same recovery as NotFound)'
+    )
+  end
 end
