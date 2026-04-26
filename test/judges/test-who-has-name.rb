@@ -41,6 +41,14 @@ class TestWhoHasName < Jp::Test
     assert_equal(1, fb.query('(exists who)').each.to_a.size)
   end
 
+  def test_does_not_crash_when_all_users_resolved
+    WebMock.disable_net_connect!
+    rate_limit_up
+    fb = Factbase.new
+    load_it('who-has-name', fb)
+    assert_equal(0, fb.all.size)
+  end
+
   def test_overwrite_name_if_user_login_changed
     WebMock.disable_net_connect!
     rate_limit_up

@@ -62,15 +62,17 @@ Fbe.consider(
 end
 
 alive.uniq!
-Fbe.fb.query(
-  "(and
-    (exists _id)
-    (eq stale 'who')
-    (exists who)
-    (or #{alive.map { |u| "(eq who #{u})" }.join}))"
-).each do |f|
-  next unless f.stale == 'who'
-  Fbe.delete_one(f, 'stale', 'who')
+unless alive.empty?
+  Fbe.fb.query(
+    "(and
+      (exists _id)
+      (eq stale 'who')
+      (exists who)
+      (or #{alive.map { |u| "(eq who #{u})" }.join}))"
+  ).each do |f|
+    next unless f.stale == 'who'
+    Fbe.delete_one(f, 'stale', 'who')
+  end
 end
 
 Fbe.octo.print_trace!
