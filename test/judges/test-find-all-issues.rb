@@ -323,9 +323,9 @@ class TestFindAllIssues < Jp::Test
     load_it('find-all-issues', fb)
     fact = fb.query('(eq issue 87)').each.first
     refute_nil(fact, 'seed fact should still be present after 403 rescue')
-    assert_equal(
-      'issue', fact.stale,
-      'Jp.issue_was_lost should mark the matching fact stale=issue on 403 (same recovery as NotFound)'
+    assert_nil(
+      fact['stale'],
+      '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup'
     )
   end
 end

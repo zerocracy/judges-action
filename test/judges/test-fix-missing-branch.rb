@@ -24,6 +24,6 @@ class TestFixMissingBranch < Jp::Test
     load_it('fix-missing-branch', fb)
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
-    assert_equal('issue', f.stale, 'Jp.issue_was_lost should mark the fact stale=issue when issue lookup returns 403')
+    assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup')
   end
 end

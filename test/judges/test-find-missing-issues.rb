@@ -39,9 +39,9 @@ class TestFindMissingIssues < Jp::Test
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 46, where: 'github')
     load_it('find-missing-issues', fb)
-    assert(
-      fb.one?(what: 'issue-was-lost', where: 'github', issue: 45, repository: 42, stale: 'issue'),
-      'Jp.issue_was_lost should create an issue-was-lost fact on 403 (same recovery as NotFound)'
+    refute(
+      fb.one?(what: 'issue-was-lost', where: 'github', issue: 45, repository: 42),
+      '403 is transient — no issue-was-lost fact must be created; next cycle will retry the issue lookup'
     )
   end
 end

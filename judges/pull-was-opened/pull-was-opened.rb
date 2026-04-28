@@ -46,8 +46,10 @@ Fbe.conclude do
         Jp.issue_was_lost(f.where, f.repository, f.issue)
         throw(:rollback)
       rescue Octokit::Forbidden => e
-        $loog.warn("[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
-        Jp.issue_was_lost(f.where, f.repository, f.issue)
+        $loog.warn(
+          "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         throw(:rollback)
       end
     n.what = $judge
