@@ -1386,6 +1386,16 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-02T21:00:00Z..2024-07-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-02T22:00:00Z..2024-07-09T22:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-02T22:00:00Z..2024-07-09T22:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
@@ -1575,7 +1585,7 @@ class TestQualityOfService < Jp::Test
       assert_nil(second['some_triage_time'])
       refute_nil(second['some_backlog_size'])
       assert_nil(second['some_release_interval'])
-      assert_equal([2], second['some_merged_pulls'])
+      assert_equal([1], second['some_merged_pulls'])
       assert_equal([1], second['some_unmerged_pulls'])
       assert_nil(second['some_issue_lifetime'])
       assert_nil(second['some_pull_lifetime'])
