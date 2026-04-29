@@ -28,6 +28,17 @@ if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
     fi
 fi
 
+# Mask token values in CI logs before enabling bash tracing.
+# Without these workflow commands, "set -x" emits the full command line
+# including "--option=github_token=ghp_..." and "--token=ZRCY-..." into
+# Actions logs, which are readable by anyone with read access to the repo.
+if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
+    echo "::add-mask::$(printenv "INPUT_GITHUB-TOKEN")"
+fi
+if [ -n "${INPUT_TOKEN}" ]; then
+    echo "::add-mask::${INPUT_TOKEN}"
+fi
+
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
     set -x
 fi
