@@ -3,7 +3,7 @@
 ---
 runs: 3
 options:
-  TODAY: 2024-03-03T00:00:00
+  TODAY: 2025-12-01T00:00:00
   repositories: yegor256/judges
   testing: true
 input:
@@ -13,8 +13,8 @@ input:
     qod_days: 7
   -
     what: quantity-of-deliverables
-    since: 2023-12-25T00:00:00
-    when: 2024-01-01T00:00:00
+    since: 2025-09-28T00:00:00
+    when: 2025-10-05T00:00:00
 expected:
   - /fb[count(f)=3]
   - /fb/f[what='quantity-of-deliverables']
