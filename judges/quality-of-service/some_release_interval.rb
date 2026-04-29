@@ -5,12 +5,12 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/in_window_releases'
 
 def some_release_interval(fact)
   dates = []
   Fbe.unmask_repos do |repo|
-    Fbe.octo.releases(repo).each do |json|
-      break if json[:published_at] < fact.since || json[:published_at] > fact.when
+    Jp.in_window_releases(repo, fact.since, fact.when) do |json|
       dates << json[:published_at]
     end
   end
