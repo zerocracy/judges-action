@@ -332,7 +332,7 @@ class TestPullWasMerged < Jp::Test
     load_it('pull-was-merged', fb)
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
-    assert_equal('issue', f.stale, 'Jp.issue_was_lost should mark the fact stale=issue when pull lookup returns 403')
+    assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the pull lookup')
   end
 
   def test_rescues_not_found_on_pull_request_lookup

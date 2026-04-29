@@ -27,8 +27,10 @@ Fbe.consider(
       f.stale = 'repository'
       next
     rescue Octokit::Forbidden => e
-      $loog.warn("[#{$judge}] Access forbidden to repository #{f.repository}: #{e.class}: #{e.message}")
-      f.stale = 'repository'
+      $loog.warn(
+        "[#{$judge}] Access forbidden to repository #{f.repository} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
       next
     end
   json =
@@ -39,8 +41,10 @@ Fbe.consider(
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
     rescue Octokit::Forbidden => e
-      $loog.warn("[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
-      Jp.issue_was_lost(f.where, f.repository, f.issue)
+      $loog.warn(
+        "[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
       next
     end
   c = json[:review_comments]

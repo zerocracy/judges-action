@@ -39,8 +39,10 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         Jp.issue_was_lost('github', r.repository, i)
         next
       rescue Octokit::Forbidden => e
-        $loog.warn("[#{$judge}] Access forbidden to issue #{repo}##{i}: #{e.class}: #{e.message}")
-        Jp.issue_was_lost('github', r.repository, i)
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue #{repo}##{i} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         next
       end
     checked << i

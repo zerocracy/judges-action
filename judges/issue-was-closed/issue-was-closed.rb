@@ -51,8 +51,10 @@ Fbe.iterate do
         Jp.issue_was_lost('github', repository, issue)
         next issue
       rescue Octokit::Forbidden => e
-        $loog.warn("[#{$judge}] Access forbidden to issue #{repo}##{issue}: #{e.class}: #{e.message}")
-        Jp.issue_was_lost('github', repository, issue)
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue #{repo}##{issue} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         next issue
       end
     unless json[:state] == 'closed'

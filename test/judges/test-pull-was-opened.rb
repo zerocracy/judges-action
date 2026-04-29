@@ -23,8 +23,12 @@ class TestPullWasOpened < Jp::Test
     fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
     load_it('pull-was-opened', fb)
     assert(
+      fb.one?(what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github'),
+      'seed fact must remain in factbase'
+    )
+    refute(
       fb.one?(what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github', stale: 'issue'),
-      'Jp.issue_was_lost should mark the fact stale=issue when issue lookup returns 403'
+      '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup'
     )
   end
 end
