@@ -55,7 +55,7 @@ Fbe.iterate do
       begin
         Fbe.octo.pull_request(repo, issue)
       rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+        $loog.info("The pull ##{issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
       rescue Octokit::Forbidden => e
