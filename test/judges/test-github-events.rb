@@ -1003,10 +1003,12 @@ class TestGithubEvents < Jp::Test
       }
     )
     fb = Factbase.new
-    load_it('github-events', fb)
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
     f = fb.query('(and (eq repository 820463873) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
-    assert_equal([526_301, 526_302], f.first[:contributors])
+    assert_equal([42, 43, 526_301], f.first[:contributors])
     assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
     assert_equal(2, f.first.commits)
     assert_equal(22, f.first.hoc)
@@ -1097,7 +1099,9 @@ class TestGithubEvents < Jp::Test
       f.where = 'github'
       f.who = 526_301
     end
-    load_it('github-events', fb)
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_nil(f.first[:tag])
@@ -1175,12 +1179,14 @@ class TestGithubEvents < Jp::Test
       f.where = 'github'
       f.who = 526_301
     end
-    load_it('github-events', fb)
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_nil(f.first[:tag])
     assert_nil(f.first[:release_id])
-    assert_equal([526_301, 526_302], f.last[:contributors])
+    assert_equal([42, 43, 526_301], f.last[:contributors])
   end
 
   def test_event_for_renamed_repository
@@ -2407,10 +2413,12 @@ class TestGithubEvents < Jp::Test
     )
     stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
     fb = Factbase.new
-    load_it('github-events', fb)
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(1, f.count)
-    assert_equal([526_301], f.first[:contributors])
+    assert_equal([42, 43, 526_301], f.first[:contributors])
   end
 
   def test_write_supervision_log_if_raise_error

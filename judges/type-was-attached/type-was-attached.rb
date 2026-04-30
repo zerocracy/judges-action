@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'fbe/github_graph'
 require 'fbe/if_absent'
 require 'fbe/issue'
 require 'fbe/iterate'
@@ -9,7 +10,7 @@ require 'fbe/iterate'
 require 'fbe/octo'
 require 'joined'
 
-events = %w[issue_type_added issue_type_changed]
+events = %w[IssueTypeAddedEvent IssueTypeChangedEvent]
 
 Fbe.iterate do
   as 'types_were_scanned'
@@ -33,14 +34,16 @@ Fbe.iterate do
   over do |repository, issue|
     begin
       repo = Fbe.octo.repo_name_by_id(repository)
-      Fbe.octo.issue_timeline(repo, issue).each do |te|
-        unless events.include?(te[:event])
+      Fbe.octo.issue(repo, issue)
+      owner, name = repo.split('/')
+      Fbe.github_graph.issue_timeline_items(owner, name, issue).each do |te|
+        unless events.include?(te['__typename'])
           $loog.debug("No #{events.joined} events at #{repo}##{issue}")
           next
         end
-        tee = Fbe.github_graph.issue_type_event(te[:node_id])
+        tee = Fbe.github_graph.issue_type_event(te['id'])
         if tee.nil?
-          $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
+          $loog.debug("Can't fetch event by node ID #{te['id']}")
           next
         end
         Fbe.fb.txn do |fbt|

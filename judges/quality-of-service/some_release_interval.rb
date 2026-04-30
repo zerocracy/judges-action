@@ -3,15 +3,16 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
 def some_release_interval(fact)
   dates = []
   Fbe.unmask_repos do |repo|
-    Fbe.octo.releases(repo).each do |json|
-      break if json[:published_at] < fact.since || json[:published_at] > fact.when
-      dates << json[:published_at]
+    owner, name = repo.split('/')
+    Fbe.github_graph.releases_in_window(owner, name, fact.since, fact.when).each do |json|
+      dates << json['publishedAt']
     end
   end
   dates.sort!
