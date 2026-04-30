@@ -183,7 +183,7 @@ class TestDimensionsOfTerrain < Jp::Test
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
-        assert_equal(9, f.total_releases)
+        assert_equal(7, f.total_releases)
       end
     end
   end
@@ -332,7 +332,7 @@ class TestDimensionsOfTerrain < Jp::Test
         assert_equal(2, f.total_repositories)
         assert_equal(1484, f.total_commits)
         assert_equal(0, f.total_files)
-        assert_equal(0, f.total_contributors)
+        assert_equal(3, f.total_contributors)
       end
     end
   end
@@ -534,7 +534,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(12, f.total_contributors)
+        assert_equal(3, f.total_contributors)
       end
     end
   end

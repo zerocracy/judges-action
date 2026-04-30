@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require 'fbe/github_graph'
 require 'json'
 require 'judges/options'
 require 'loog'
@@ -160,7 +161,9 @@ class TestQualityOfService < Jp::Test
     )
     fb = Factbase.new
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
     end
   end
 
@@ -341,8 +344,19 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    fake = Fbe::Graph::Fake.new
+    fake.define_singleton_method(:releases_in_window) do |_owner, _name, _since, _to|
+      [
+        { 'tagName' => '0.0.5', 'publishedAt' => Time.parse('2024-08-06 07:30:40 UTC') },
+        { 'tagName' => '0.0.4', 'publishedAt' => Time.parse('2024-08-05 21:30:40 UTC') },
+        { 'tagName' => '0.0.3', 'publishedAt' => Time.parse('2024-08-05 15:30:40 UTC') },
+        { 'tagName' => '0.0.2', 'publishedAt' => Time.parse('2024-08-04 21:30:40 UTC') }
+      ]
+    end
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, fake) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
@@ -451,7 +465,9 @@ class TestQualityOfService < Jp::Test
     f.qos_days = 7
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([3600, 3600], f['some_build_mttr'])
     end
@@ -571,7 +587,9 @@ class TestQualityOfService < Jp::Test
     f.qos_days = 7
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([97_200], f['some_build_mttr'])
     end
@@ -663,7 +681,9 @@ class TestQualityOfService < Jp::Test
     f.qos_days = 7
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([3600], f['some_build_mttr'])
     end
@@ -828,7 +848,9 @@ class TestQualityOfService < Jp::Test
     f.qos_days = 7
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
@@ -1161,7 +1183,9 @@ class TestQualityOfService < Jp::Test
     f.qos_days = 7
     f.qos_interval = 3
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
@@ -1305,7 +1329,9 @@ class TestQualityOfService < Jp::Test
       fb, where: 'github', repository: 42, issue: 45, when: Time.parse('2024-08-06 11:00:00 UTC'), label: 'enhancement'
     )
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
@@ -1445,7 +1471,9 @@ class TestQualityOfService < Jp::Test
       [200].each { f.some_pull_files_size = _1 }
     end
     Time.stub(:now, Time.parse('2024-07-09 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       first, second, * = fb.query('(eq what "quality-of-service")').each.sort_by(&:when)
       assert_equal(Time.parse('2024-07-02 21:00:00 UTC'), first.since)
       assert_equal(Time.parse('2024-07-09 21:00:00 UTC'), first.when)
@@ -1559,7 +1587,9 @@ class TestQualityOfService < Jp::Test
       f.when = Time.parse('2024-08-09 21:00:00 UTC')
     end
     Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       fs = fb.query('(eq what "quality-of-service")').each.sort_by(&:_time)
       assert_equal(2, fs.size)
       first, second = fs
@@ -1656,7 +1686,9 @@ class TestQualityOfService < Jp::Test
       f.when = Time.parse('2024-08-30 21:00:00 UTC')
     end
     Time.stub(:now, Time.parse('2024-09-01 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-30 21:00:00 UTC'), f.when)
@@ -1786,7 +1818,9 @@ class TestQualityOfService < Jp::Test
       f.qos_interval = 3
     end
     Time.stub(:now, Time.parse('2025-08-28 21:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([1, 2, 2, 2, 2, 1, 1], f['some_backlog_size'])
     end
@@ -1856,7 +1890,9 @@ class TestQualityOfService < Jp::Test
       since: Time.parse('2025-09-15 15:00:00 UTC'), when: Time.parse('2025-09-25 15:00:00 UTC')
     )
     Time.stub(:now, Time.parse('2025-09-22 15:00:00 UTC')) do
-      load_it('quality-of-service', fb)
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+        load_it('quality-of-service', fb)
+      end
       assert(
         fb.one?(
           what: 'quality-of-service',

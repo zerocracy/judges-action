@@ -43,9 +43,8 @@ Fbe.iterate do
         list << author if author
       end
     else
-      Fbe.octo.contributors(repo).each do |contributor|
-        list << contributor[:id]
-      end
+      owner, name = repo.split('/')
+      list.merge(Fbe.github_graph.distinct_contributors(owner, name))
     end
     $loog.debug("The repository ##{fact.repository} has #{list.count} contributors")
     list.to_a

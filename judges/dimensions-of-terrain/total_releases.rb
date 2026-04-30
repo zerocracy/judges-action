@@ -3,15 +3,15 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
 def total_releases(_fact)
   total = 0
   Fbe.unmask_repos do |repo|
-    Fbe.octo.releases(repo).each do |_|
-      total += 1
-    end
+    owner, name = repo.split('/')
+    total += Fbe.github_graph.releases_count(owner, name)['releases']
   end
   { total_releases: total }
 end
