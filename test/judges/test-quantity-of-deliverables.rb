@@ -121,7 +121,7 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query('(eq what "quantity-of-deliverables")').each.first
         assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
         assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
-        assert_equal(0, f.total_reviews_submitted)
+        assert_equal(4, f.total_reviews_submitted)
       end
     end
   end
@@ -179,9 +179,9 @@ class TestQuantityOfDeliverables < Jp::Test
       %w[2025-09-01 2025-09-05],
       %w[2025-09-05 2025-09-15],
       %w[2025-09-15 2025-09-25]
-    ].each do |since, whn|
+    ].each do |since, upper|
       stub_github(
-        "https://api.github.com/repos/foo/foo/actions/runs?created=#{since}..#{whn}&per_page=1",
+        "https://api.github.com/repos/foo/foo/actions/runs?created=#{since}..#{upper}&per_page=1",
         body: {
           total_count: 0,
           workflow_runs: []
