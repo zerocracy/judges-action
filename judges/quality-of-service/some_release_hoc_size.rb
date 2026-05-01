@@ -12,7 +12,8 @@ def some_release_hoc_size(fact)
   commits = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.releases(repo).each do |json|
-      break if json[:published_at] < fact.since || json[:published_at] > fact.when
+      next if json[:published_at] > fact.when
+      break if json[:published_at] < fact.since
       (grouped[repo] ||= []) << json
     end
   end
