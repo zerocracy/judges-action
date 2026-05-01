@@ -178,6 +178,15 @@ class TestQualityOfService < Jp::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [
         {
+          id: 173_480,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.6', target_commitish: 'master',
+          name: 'Release 6', draft: false, prerelease: false,
+          created_at: Time.parse('2024-08-15 07:30:14 UTC'),
+          published_at: Time.parse('2024-08-15 07:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
           id: 173_470,
           author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
           tag_name: '0.0.5', target_commitish: 'master',
@@ -1386,6 +1395,11 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-02T22:00:00Z..2024-07-09T22:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-02T22:00:00Z..2024-07-09T22:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
@@ -1512,6 +1526,19 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
@@ -1575,7 +1602,7 @@ class TestQualityOfService < Jp::Test
       assert_nil(second['some_triage_time'])
       refute_nil(second['some_backlog_size'])
       assert_nil(second['some_release_interval'])
-      assert_equal([2], second['some_merged_pulls'])
+      assert_equal([1], second['some_merged_pulls'])
       assert_equal([1], second['some_unmerged_pulls'])
       assert_nil(second['some_issue_lifetime'])
       assert_nil(second['some_pull_lifetime'])

@@ -23,7 +23,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-11&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -49,7 +49,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-07-11&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -75,7 +75,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -104,7 +104,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
       body: {
         total_count: 0,
         workflow_runs: []
@@ -136,7 +136,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=%3E2024-08-02&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
       body: {
         total_count: 3,
         workflow_runs: [
@@ -175,9 +175,13 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
-    %w[2025-09-01 2025-09-05 2025-09-15].each do |date|
+    [
+      %w[2025-09-01 2025-09-05],
+      %w[2025-09-05 2025-09-15],
+      %w[2025-09-15 2025-09-25]
+    ].each do |since, upper|
       stub_github(
-        "https://api.github.com/repos/foo/foo/actions/runs?created=%3E#{date}&per_page=1",
+        "https://api.github.com/repos/foo/foo/actions/runs?created=#{since}..#{upper}&per_page=1",
         body: {
           total_count: 0,
           workflow_runs: []
