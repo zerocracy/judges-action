@@ -47,7 +47,7 @@ def Jp.fetch_workflows(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
   Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))[:check_runs].each do |run|
-    next unless run[:app][:slug] == 'github-actions'
+    next unless run.dig(:app, :slug) == 'github-actions'
     workflow = Fbe.octo.workflow_run(repo, Fbe.octo.workflow_run_job(repo, run[:id])[:run_id])
     next unless workflow[:event] == 'pull_request'
     case workflow[:conclusion]
