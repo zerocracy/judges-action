@@ -104,7 +104,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-29..2025-10-06&per_page=1',
       body: {
         total_count: 0,
         workflow_runs: []
@@ -116,12 +116,47 @@ class TestQuantityOfDeliverables < Jp::Test
     f.area = 'scope'
     f.qod_days = 7
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
-      Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      Time.stub(:now, Time.parse('2025-10-06 21:00:00 UTC')) do
         load_it('quantity-of-deliverables', fb)
         f = fb.query('(eq what "quantity-of-deliverables")').each.first
-        assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
-        assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+        assert_equal(Time.parse('2025-09-30 00:00:00 +03:00'), f.since)
+        assert_equal(Time.parse('2025-10-06 21:00:00 UTC'), f.when)
         assert_equal(4, f.total_reviews_submitted)
+      end
+    end
+  end
+
+  def test_quantity_of_deliverables_total_reviews_submitted_excludes_after_when
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-26..2025-10-03&per_page=1',
+      body: {
+        total_count: 0,
+        workflow_runs: []
+      }
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'scope'
+    f.qod_days = 7
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2025-10-03 00:00:00 UTC')) do
+        load_it('quantity-of-deliverables', fb)
+        f = fb.query('(eq what "quantity-of-deliverables")').each.first
+        assert_equal(
+          2, f.total_reviews_submitted,
+          'reviews submitted on 2025-10-03 15:58:42 UTC and 2025-10-04 15:58:42 UTC ' \
+          'must be excluded (after fact.when 2025-10-03 00:00:00 UTC); ' \
+          'only the two 2025-10-02 reviews should be counted'
+        )
       end
     end
   end

@@ -22,7 +22,8 @@ def total_reviews_submitted(fact)
     end
     until queue.empty?
       pulls = Fbe.github_graph.pull_request_reviews(owner, name, pulls: queue.shift(10))
-      total += pulls.sum { |pull| pull['reviews'].count { |r| r['submitted_at'] > fact.since } }
+      window = ->(r) { r['submitted_at'] > fact.since && r['submitted_at'] <= fact.when }
+      total += pulls.sum { |p| p['reviews'].count(&window) }
       pulls.select { _1['reviews_has_next_page'] }.each do |p|
         queue.push([p['number'], p['reviews_next_cursor']])
       end
