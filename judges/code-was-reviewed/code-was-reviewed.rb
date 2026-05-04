@@ -29,7 +29,20 @@ Fbe.consider(
         (eq what '#{$judge}'))))"
 ) do |f|
   repo = Fbe.octo.repo_name_by_id(f.repository)
-  pr = Fbe.octo.pull_request(repo, f.issue)
+  pr =
+    begin
+      Fbe.octo.pull_request(repo, f.issue)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+      Jp.issue_was_lost(f.where, f.repository, f.issue)
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   reviews =
     begin
       Fbe.octo.pull_request_reviews(repo, f.issue)
