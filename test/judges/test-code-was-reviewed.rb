@@ -67,4 +67,45 @@ class TestCodeWasReviewed < Jp::Test
       )
     )
   end
+
+  def test_rescues_not_found_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/77',
+      status: 404,
+      body: { message: 'Not Found', documentation_url: 'https://docs.github.com/...' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 77, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 77, stale: 'issue'),
+      'expected the sibling pull-was-closed fact to be marked stale by Jp.issue_was_lost ' \
+      'after the unrescued 404 on Fbe.octo.pull_request'
+    )
+  end
+
+  def test_rescues_forbidden_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/88',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 88, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'issue-was-lost', where: 'github', repository: 42, issue: 88),
+      'forbidden error must not produce an issue-was-lost tombstone'
+    )
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 88, stale: 'issue'),
+      'forbidden error must leave the original fact untouched'
+    )
+  end
 end
