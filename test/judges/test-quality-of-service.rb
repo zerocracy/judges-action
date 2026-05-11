@@ -1286,6 +1286,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_min_triage_seconds = 60
     end
     insert_label_was_attached_fact(
       fb, where: 'gitlab', repository: 42, issue: 40, when: Time.parse('2024-08-04 11:10:00 UTC'), label: 'bug'
@@ -1319,6 +1320,366 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal([88_200, 7_200, 147_600], f['some_triage_time'])
+    end
+  end
+
+  def test_quality_of_service_some_triage_time_filters_auto_labels
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_700,
+            number: 50,
+            title: 'Issue 50',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+      f.qos_min_triage_seconds = 60
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 50, when: Time.parse('2024-08-04 12:00:01 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 50, when: Time.parse('2024-08-04 14:00:00 UTC'), label: 'enhancement'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_nil(f['some_triage_time'])
+    end
+  end
+
+  def test_quality_of_service_some_triage_time_threshold_is_configurable
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_701,
+            number: 51,
+            title: 'Issue 51',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+      f.qos_min_triage_seconds = 7_200
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 51, when: Time.parse('2024-08-04 13:00:00 UTC'), label: 'bug'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_nil(f['some_triage_time'])
+    end
+  end
+
+  def test_quality_of_service_some_triage_time_uses_default_threshold
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_710,
+            number: 60,
+            title: 'Issue 60',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          },
+          {
+            id: 2_544_140_711,
+            number: 61,
+            title: 'Issue 61',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 60, when: Time.parse('2024-08-04 12:00:59 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 61, when: Time.parse('2024-08-04 12:01:00 UTC'), label: 'bug'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_equal([60.0], f['some_triage_time'])
+    end
+  end
+
+  def test_quality_of_service_some_triage_time_mixes_kept_and_filtered
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_720,
+            number: 70,
+            title: 'Issue 70',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          },
+          {
+            id: 2_544_140_721,
+            number: 71,
+            title: 'Issue 71',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_651, name: 'enhancement', description: 'New feature or request' }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+      f.qos_min_triage_seconds = 60
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 70, when: Time.parse('2024-08-04 12:00:01 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 71, when: Time.parse('2024-08-04 14:00:00 UTC'), label: 'enhancement'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_equal([7_200.0], f['some_triage_time'])
     end
   end
 

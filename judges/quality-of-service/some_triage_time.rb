@@ -5,9 +5,11 @@
 
 require 'fbe/fb'
 require 'fbe/octo'
+require 'fbe/pmp'
 require 'fbe/unmask_repos'
 
 def some_triage_time(fact)
+  threshold = Fbe.pmp.quality.qos_min_triage_seconds.value || 60
   times = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.search_issues(
@@ -27,7 +29,10 @@ def some_triage_time(fact)
           (eq where 'github'))
         "
       ).each.min_by(&:when)
-      times << (ff.when - issue[:created_at]) if ff
+      next unless ff
+      delta = ff.when - issue[:created_at]
+      next if delta < threshold
+      times << delta
     end
   end
   {
