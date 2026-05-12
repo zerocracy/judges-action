@@ -109,6 +109,18 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.has?(where: 'github', who: 333))
   end
 
+  def test_marks_sibling_facts_stale_when_one_fact_already_stale_for_good_user
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/777', body: { login: 'user777', id: 777, type: 'User' })
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', who: 777, what: 'something-a', stale: 'who')
+      .with(_id: 2, where: 'github', who: 777, what: 'something-b')
+      .with(_id: 3, where: 'github', who: 777, what: 'something-c')
+    load_it('eliminate-ghosts', fb)
+    assert_equal(3, fb.picks(where: 'github', who: 777, stale: 'who').count)
+  end
+
   def test_marks_user_stale_on_forbidden_lookup
     WebMock.disable_net_connect!
     rate_limit_up
