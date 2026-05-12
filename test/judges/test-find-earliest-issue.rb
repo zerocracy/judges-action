@@ -128,4 +128,62 @@ class TestFindEarliestIssue < Jp::Test
     assert_equal(2, fb.all.size)
     assert(fb.one?(what: 'iterate', earliest_issue_was_found: 3, repository: 42, where: 'github'))
   end
+
+  def test_rescues_not_found_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=asc&page=1&per_page=1&sort=created&state=all',
+      body: [
+        {
+          id: 123, number: 3, title: 'Some title', user: { id: 44, login: 'user' },
+          pull_request: { merged_at: '2025-09-27 07:03:00 UTC' }, created_at: '2025-09-27 06:03:16 UTC'
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/3',
+      status: 404,
+      body: {
+        message: 'Not Found',
+        documentation_url: 'https://docs.github.com/rest/pulls/pulls#get-a-pull-request',
+        status: '404'
+      }
+    )
+    fb = Factbase.new
+    load_it('find-earliest-issue', fb)
+    assert(
+      fb.one?(what: 'iterate', earliest_issue_was_found: 3, repository: 42, where: 'github'),
+      'cursor must advance to the issue number after a 404 on Fbe.octo.pull_request'
+    )
+  end
+
+  def test_rescues_forbidden_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=asc&page=1&per_page=1&sort=created&state=all',
+      body: [
+        {
+          id: 123, number: 3, title: 'Some title', user: { id: 44, login: 'user' },
+          pull_request: { merged_at: '2025-09-27 07:03:00 UTC' }, created_at: '2025-09-27 06:03:16 UTC'
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/3',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    load_it('find-earliest-issue', fb)
+    refute(
+      fb.one?(what: 'issue-was-lost', where: 'github', repository: 42, issue: 3),
+      'forbidden error must not produce an issue-was-lost tombstone'
+    )
+  end
 end
