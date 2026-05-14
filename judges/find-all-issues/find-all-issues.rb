@@ -69,7 +69,20 @@ require_relative '../../lib/issue_was_lost'
             f.when = json[:created_at]
             f.who = json.dig(:user, :id)
             if type == 'pull'
-              ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+              ref =
+                begin
+                  Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+                rescue Octokit::NotFound, Octokit::Deprecated => e
+                  $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+                  Jp.issue_was_lost(f.where, f.repository, f.issue)
+                  next
+                rescue Octokit::Forbidden => e
+                  $loog.warn(
+                    "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+                    "(transient, will retry next cycle): #{e.class}: #{e.message}"
+                  )
+                  next
+                end
               if ref
                 f.branch = ref
               else
