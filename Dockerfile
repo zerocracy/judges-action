@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-FROM ruby:4.0@sha256:695fa7949aaea223b36719d7d3eca2fa6e00fe730c55a376423ed9fef00533ee
+FROM ruby:4.0@sha256:92d1d5b687305a5e1d8405f2f499f538b3ed41e6c230e36bba1927965fe46728
 
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
