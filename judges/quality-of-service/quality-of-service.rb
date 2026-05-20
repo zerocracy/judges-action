@@ -10,7 +10,7 @@ require_relative '../../lib/cover_qo'
 require_relative '../../lib/incremate'
 
 days = Fbe.pmp.quality.qos_days
-pause = Fbe.pmp.quality.qos_pause_seconds.value || 5
+pause = Fbe.pmp.quality.qos_pause_seconds.value || 0
 Jp.cover_qo(days)
 Fbe.consider("(and (eq what '#{$judge}') (exists since) (exists when))") do |f|
   Jp.incremate(f, __dir__, 'some', avoid_duplicate: true, pause:)
