@@ -12,6 +12,7 @@ def some_review_time(fact)
   reviewers = []
   reviews = []
   Fbe.unmask_repos do |repo|
+    return {} if Fbe.octo.off_quota?
     Fbe.octo.search_issues(
       "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     )[:items].each do |pr|

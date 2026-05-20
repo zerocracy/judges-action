@@ -12,6 +12,7 @@ def some_triage_time(fact)
   threshold = Fbe.pmp.quality.qos_min_triage_seconds.value || 60
   times = []
   Fbe.unmask_repos do |repo|
+    return {} if Fbe.octo.off_quota?
     Fbe.octo.search_issues(
       "repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     )[:items].each do |issue|
