@@ -12,6 +12,6 @@ require_relative '../../lib/incremate'
 days = Fbe.pmp.quality.qos_days
 Jp.cover_qo(days)
 Fbe.consider("(and (eq what '#{$judge}') (exists since) (exists when))") do |f|
-  Jp.incremate(f, __dir__, 'some', avoid_duplicate: true)
+  Jp.incremate(f, __dir__, 'some', avoid_duplicate: true, pause: 5)
 end
 Fbe.octo.print_trace!
