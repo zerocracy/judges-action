@@ -206,7 +206,7 @@ fi
 
 sqlite=$(printenv "INPUT_SQLITE-CACHE" || true)
 if [ -n "${sqlite}" ]; then
-    sqlite=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
+    sqlite=$(realpath "$( [[ ${sqlite} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
     options+=("--option=sqlite_cache=${sqlite}");
     echo "Using SQLite for HTTP caching: ${sqlite}"
     ${JUDGES} "${gopts[@]}" download \
