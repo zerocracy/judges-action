@@ -48,7 +48,7 @@ Fbe.iterate do
       end
     events.each do |te|
       next unless te[:event] == 'labeled'
-      badge = te[:label][:name]
+      badge = te.dig(:label, :name)
       next unless badges.include?(badge)
       Fbe.fb.txn do |fbt|
         nn =
@@ -63,10 +63,16 @@ Fbe.iterate do
           $loog.warn("A label #{badge.inspect} is already attached to #{repo}##{issue}")
           next
         end
-        nn.who = te[:actor][:id]
+        who = te.dig(:actor, :id)
+        if who
+          nn.who = who
+        else
+          nn.stale = 'who'
+        end
         nn.when = te[:created_at]
+        actor = te.dig(:actor, :login)
         nn.details =
-          "The #{nn.label.inspect} label was attached by @#{te[:actor][:login]} " \
+          "The #{nn.label.inspect} label was attached by #{actor ? "@#{actor}" : 'an unknown actor'} " \
           "to the issue #{Fbe.issue(nn)}."
         $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
       end
