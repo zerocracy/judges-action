@@ -13,4 +13,9 @@ class TestDockerfile < Minitest::Test
     assert_match(/\bbundle\s+config\s+set\s+deployment\s+true\b/, dockerfile)
     assert_match(/\bbundle\s+install\b/, dockerfile)
   end
+
+  def test_makefile_runs_judges_through_bundle
+    makefile = File.read(File.join(__dir__, '..', 'Makefile'))
+    assert_match(/\bbundle\s+exec\s+judges\s+test\b/, makefile)
+  end
 end
