@@ -297,46 +297,48 @@ Fbe.iterate do
       'label-was-attached' => %w[where repository issue label],
       'type-was-attached' => %w[where repository issue type]
     }
-    Fbe.octo.repository_events(repository).each_with_index do |json, idx|
-      Jp.supervision({ 'repo' => rname, 'json' => json.to_h }) do
-        if !$options.max_events.nil? && idx >= $options.max_events
-          $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
-          break
-        end
-        total += 1
-        id = Integer(json[:id])
-        first = id if first.nil?
-        if id <= latest
-          $loog.debug(
-            "The event_id ##{id} (no.#{idx}) is not larger than ##{latest}, " \
-            "good stop in #{json[:repo][:name]}"
-          )
-          break
-        end
-        Fbe.fb.txn do |fbt|
-          f =
-            Fbe.if_absent(fb: fbt) do |n|
-              n.event_id = Integer(json[:id])
-              n.where = 'github'
+    catch(:done) do
+      Fbe.octo.repository_events(repository).each_with_index do |json, idx|
+        Jp.supervision({ 'repo' => rname, 'json' => json.to_h }) do
+          if !$options.max_events.nil? && idx >= $options.max_events
+            $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
+            throw :done
+          end
+          total += 1
+          id = Integer(json[:id])
+          first = id if first.nil?
+          if id <= latest
+            $loog.debug(
+              "The event_id ##{id} (no.#{idx}) is not larger than ##{latest}, " \
+              "good stop in #{json[:repo][:name]}"
+            )
+            throw :done
+          end
+          Fbe.fb.txn do |fbt|
+            f =
+              Fbe.if_absent(fb: fbt) do |n|
+                n.event_id = Integer(json[:id])
+                n.where = 'github'
+              end
+            if f.nil?
+              $loog.debug("The event ##{id} just detected is already in the factbase")
+              next
             end
-          if f.nil?
-            $loog.debug("The event ##{id} just detected is already in the factbase")
-            next
+            fill(f, json)
+            uniques.each { |w, ff| throw :rollback if twice?(fbt, f, w, ff) }
+            if f['issue']
+              throw :rollback unless Fbe.fb.query(
+                "(and
+                  (eq where '#{f.where}')
+                  (eq repository #{f.repository})
+                  (eq issue #{f.issue})
+                  (exists done))"
+              ).each.empty?
+              throw :rollback if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
+            end
+            $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
+            detected += 1
           end
-          fill(f, json)
-          uniques.each { |w, ff| throw :rollback if twice?(fbt, f, w, ff) }
-          if f['issue']
-            throw :rollback unless Fbe.fb.query(
-              "(and
-                (eq where '#{f.where}')
-                (eq repository #{f.repository})
-                (eq issue #{f.issue})
-                (exists done))"
-            ).each.empty?
-            throw :rollback if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
-          end
-          $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
-          detected += 1
         end
       end
     end
