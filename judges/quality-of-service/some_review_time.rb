@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'octokit'
 
 def some_review_time(fact)
   times = []
@@ -15,10 +16,22 @@ def some_review_time(fact)
     Fbe.octo.search_issues(
       "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     )[:items].each do |pr|
-      all = Fbe.octo.pull_request_reviews(repo, pr[:number])
+      all, csize =
+        begin
+          [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
+          next
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to pull ##{pr[:number]} in #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
       first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
       times << Integer(pr[:pull_request][:merged_at] - first[:submitted_at]) if first
-      sizes << Fbe.octo.review_comments(repo, pr[:number]).size
+      sizes << csize
       users = all.map { |r| r.dig(:user, :id) }
       users.uniq!
       reviewers << users.size
