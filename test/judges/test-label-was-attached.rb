@@ -116,6 +116,55 @@ class TestLabelWasAttached < Jp::Test
     )
   end
 
+  def test_ignores_labeled_event_without_label_payload
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      body: [
+        {
+          id: 100,
+          actor: { id: 421, login: 'alice' },
+          event: 'labeled',
+          created_at: '2025-09-30 06:00:00 UTC',
+          label: nil
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('label-was-attached', fb)
+    assert_equal(0, fb.query("(eq what 'label-was-attached')").each.to_a.size)
+  end
+
+  def test_attaches_label_without_actor_payload
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      body: [
+        {
+          id: 100,
+          actor: nil,
+          event: 'labeled',
+          created_at: '2025-09-30 06:00:00 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('label-was-attached', fb)
+    f = fb.query("(and (eq what 'label-was-attached') (eq label 'bug'))").each.first
+    refute_nil(f)
+    assert_nil(f['who'])
+    assert_equal(['who'], f['stale'])
+  end
+
   def test_marks_stale_when_timeline_returns_not_found
     WebMock.disable_net_connect!
     rate_limit_up
