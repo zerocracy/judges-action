@@ -8,6 +8,7 @@ require 'fbe/who'
 # SPDX-License-Identifier: MIT
 
 require 'octokit'
+require_relative '../../lib/issue_was_lost'
 
 {
   'issue-was-opened' => :user,
@@ -31,10 +32,15 @@ require 'octokit'
     json =
       begin
         Fbe.octo.issue(repo, f.issue)
-      rescue Octokit::NotFound
-        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-        f.stale = 'issue'
-        $loog.info("#{Fbe.issue(f)} is lost")
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost(f.where, f.repository, f.issue)
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to #{Fbe.issue(f)} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         next
       end
     who = json.dig(a, :id)
