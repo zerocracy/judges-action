@@ -25,9 +25,15 @@ Fbe.consider(
   json =
     begin
       Fbe.octo.pull_request(repo, f.issue)
-    rescue Octokit::NotFound
-      $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to #{Fbe.issue(f)} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
       next
     end
   f.hoc = json[:additions] + json[:deletions]
