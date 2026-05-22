@@ -15,7 +15,7 @@ RUN apt-get update \
 WORKDIR /action
 COPY Gemfile /action
 COPY Gemfile.lock /action
-RUN bundle update --gemfile=/action/Gemfile
+RUN bundle install --deployment
 
 COPY judges /action/judges
 COPY lib /action/lib
