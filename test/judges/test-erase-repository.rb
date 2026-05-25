@@ -59,4 +59,38 @@ class TestEraseRepository < Jp::Test
     assert_equal(1, fb.query('(and (eq where "gitlab") (exists repository))').each.to_a.size)
     assert_equal(1, fb.query('(and (eq where "gitlab") (absent repository))').each.to_a.size)
   end
+
+  def test_erase_deprecated_repository
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repositories/410123', body: '', status: 410)
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.where = 'github'
+      f.repository = 410_123
+    end
+    load_it('erase-repository', fb)
+    assert_equal(1, fb.query('(exists stale)').each.to_a.size)
+    assert_equal('repository', fb.query('(exists stale)').each.to_a.first.stale)
+  end
+
+  def test_forbidden_repository_is_not_erased
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repositories/403123', body: '', status: 403)
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.where = 'github'
+      f.repository = 403_123
+    end
+    load_it('erase-repository', fb)
+    assert_equal(0, fb.query('(exists stale)').each.to_a.size)
+    assert_equal(1, fb.query('(and (eq where "github") (exists repository) (absent stale))').each.to_a.size)
+  end
 end
