@@ -186,4 +186,31 @@ class TestFindEarliestIssue < Jp::Test
       'forbidden error must not produce an issue-was-lost tombstone'
     )
   end
+
+  def test_rescues_deprecated_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=asc&page=1&per_page=1&sort=created&state=all',
+      body: [
+        {
+          id: 123, number: 4, title: 'Some title', user: { id: 44, login: 'user' },
+          pull_request: { merged_at: '2025-09-27 07:03:00 UTC' }, created_at: '2025-09-27 06:03:16 UTC'
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/4',
+      status: 410,
+      body: { message: 'Gone', documentation_url: 'https://docs.github.com/rest/using-the-rest-api' }
+    )
+    fb = Factbase.new
+    load_it('find-earliest-issue', fb)
+    assert(
+      fb.one?(what: 'iterate', earliest_issue_was_found: 4, repository: 42, where: 'github'),
+      'cursor must advance to the issue number after a 410 on Fbe.octo.pull_request'
+    )
+  end
 end
