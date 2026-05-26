@@ -2413,6 +2413,128 @@ class TestGithubEvents < Jp::Test
     assert_equal([526_301], f.first[:contributors])
   end
 
+  def test_release_event_rescues_forbidden_contributors_and_compare
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '101',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_001,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    refute_includes(f.first.all_properties, 'contributors')
+    refute_includes(f.first.all_properties, 'commits')
+    refute_includes(f.first.all_properties, 'hoc')
+  end
+
+  def test_release_event_rescues_deprecated_release_compare
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '102',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_002,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '1.1.0',
+            name: 'v1.1.0',
+            created_at: Time.parse('2024-12-01T00:51:39Z'),
+            published_at: Time.parse('2024-12-01T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-12-01T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.9.0...1.1.0?per_page=100',
+      status: 410,
+      body: { message: 'Git Repository is empty.' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.details = 'A previous release was published in this repo.'
+      f.event_id = 100
+      f.event_type = 'ReleaseEvent'
+      f.repository = 42
+      f.tag = '0.9.0'
+      f.what = 'release-published'
+      f.when = Time.parse('2024-11-29 00:52:08 UTC')
+      f.where = 'github'
+      f.who = 526_301
+    end
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(2, f.count)
+    assert_equal('1.1.0', f.last.tag)
+    refute_includes(f.last.all_properties, 'contributors')
+    refute_includes(f.last.all_properties, 'commits')
+    refute_includes(f.last.all_properties, 'hoc')
+  end
+
   def test_write_supervision_log_if_raise_error
     WebMock.disable_net_connect!
     rate_limit_up
