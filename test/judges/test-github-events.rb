@@ -2211,6 +2211,33 @@ class TestGithubEvents < Jp::Test
     assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_127))
   end
 
+  def test_rescues_deprecated_on_closed_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11130',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      status: 410,
+      body: { message: 'Gone', documentation_url: 'https://docs.github.com/rest/using-the-rest-api' }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_130))
+  end
+
   def test_rescues_forbidden_on_closed_pull_request_reviews_lookup
     WebMock.disable_net_connect!
     rate_limit_up
