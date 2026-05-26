@@ -15,7 +15,7 @@ RUN apt-get update \
 WORKDIR /action
 COPY Gemfile /action
 COPY Gemfile.lock /action
-RUN bundle update --gemfile=/action/Gemfile
+RUN bundle config set frozen true && bundle install --gemfile=/action/Gemfile
 
 COPY judges /action/judges
 COPY lib /action/lib
