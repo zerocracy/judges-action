@@ -134,8 +134,14 @@ Fbe.iterate do
         pl =
           begin
             Fbe.octo.pull_request(rname, fact.issue)
-          rescue Octokit::NotFound
-            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
+            nil
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
             nil
           end
         skip(json) if pl.nil?
@@ -148,8 +154,14 @@ Fbe.iterate do
         review =
           begin
             Fbe.octo.pull_request_reviews(rname, fact.issue).first
-          rescue Octokit::NotFound
-            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
+            nil
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
             nil
           end
         fact.review = review[:submitted_at] if review
