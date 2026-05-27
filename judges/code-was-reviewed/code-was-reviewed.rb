@@ -7,6 +7,7 @@ require 'fbe/issue'
 
 require 'fbe/octo'
 require 'fbe/who'
+require 'octokit'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.consider(
@@ -46,9 +47,15 @@ Fbe.consider(
   reviews =
     begin
       Fbe.octo.pull_request_reviews(repo, f.issue)
-    rescue Octokit::NotFound
-      $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}")
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to reviews for pull ##{f.issue} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
       next
     end
   reviews.each do |review|
