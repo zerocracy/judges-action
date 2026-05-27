@@ -13,45 +13,29 @@ def total_reviews_submitted(fact)
     owner, name = repo.split('/')
     cursor = nil
     queue = []
-    subtotal = 0
-    skip = false
-    safe =
-      lambda do |&block|
-        block.call
-      rescue Octokit::Forbidden, GraphQL::Client::Error, Net::OpenTimeout, Net::ReadTimeout, SocketError,
-             Errno::ECONNRESET, Errno::ETIMEDOUT => e
-        $loog.warn(
-          "[#{$judge}] Can't count reviews submitted in #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        nil
-      end
     loop do
-      json = safe.call { Fbe.github_graph.pull_requests_with_reviews(owner, name, fact.since, cursor:) }
-      if json.nil?
-        skip = true
-        break
-      end
+      json = Fbe.github_graph.pull_requests_with_reviews(owner, name, fact.since, cursor:)
       json['pulls_with_reviews'].each do |p|
         queue.push([p['number'], nil])
       end
       break unless json['has_next_page']
       cursor = json['next_cursor']
     end
-    next if skip
     until queue.empty?
-      pulls = safe.call { Fbe.github_graph.pull_request_reviews(owner, name, pulls: queue.shift(10)) }
-      if pulls.nil?
-        skip = true
-        break
-      end
+      pulls = Fbe.github_graph.pull_request_reviews(owner, name, pulls: queue.shift(10))
       window = ->(r) { r['submitted_at'] > fact.since && r['submitted_at'] <= fact.when }
-      subtotal += pulls.sum { |p| p['reviews'].count(&window) }
+      total += pulls.sum { |p| p['reviews'].count(&window) }
       pulls.select { _1['reviews_has_next_page'] }.each do |p|
         queue.push([p['number'], p['reviews_next_cursor']])
       end
     end
-    total += subtotal unless skip
+  rescue GraphQL::Client::Error, Octokit::Forbidden, Net::OpenTimeout, Net::ReadTimeout,
+         SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    $loog.warn(
+      "[#{$judge}] Can't count submitted reviews in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   { total_reviews_submitted: total }
 end

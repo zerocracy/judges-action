@@ -13,6 +13,46 @@ require_relative '../test__helper'
 class TestQuantityOfDeliverables < Jp::Test
   using SmartFactbase
 
+  def reviewgraph(repo, call, err)
+    graph = Fbe::Graph::Fake.new
+    pulls = graph.method(:pull_requests_with_reviews)
+    reviews = graph.method(:pull_request_reviews)
+    graph.define_singleton_method(:pull_requests_with_reviews) do |owner, name, since, cursor:|
+      raise(err) if repo == "#{owner}/#{name}" && call == :pulls
+      pulls.call(owner, name, since, cursor:)
+    end
+    graph.define_singleton_method(:pull_request_reviews) do |owner, name, pulls:|
+      raise(err) if repo == "#{owner}/#{name}" && call == :reviews
+      reviews.call(owner, name, pulls:)
+    end
+    graph
+  end
+
+  def directreviews(repos, graph)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    repos.each_with_index do |repo, idx|
+      stub_github(
+        "https://api.github.com/repos/#{repo}",
+        body: { id: 100 + idx, full_name: repo, open_issues: 0, archived: false, size: 100 }
+      )
+    end
+    $global = {}
+    $local = {}
+    $judge = 'quantity-of-deliverables'
+    $options = Judges::Options.new({ 'repositories' => repos.join(',') })
+    $loog = Loog::NULL
+    $epoch = Time.parse('2025-10-06 21:00:00 UTC')
+    $kickoff = $epoch
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-09-30 00:00:00 +03:00')
+    fact.when = Time.parse('2025-10-06 21:00:00 UTC')
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_reviews_submitted.rb'))
+      total_reviews_submitted(fact)
+    end
+  end
+
   def test_counts_commits
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -161,66 +201,19 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_reviews_submitted_skips_repo_when_pull_list_graph_fails
-    WebMock.disable_net_connect!
-    graph = Class.new(Fbe::Graph::Fake) do
-      define_method(:pull_requests_with_reviews) do |_owner, name, _since, **|
-        raise(GraphQL::Client::Error, 'GraphQL failed') if name == 'bad'
-        {
-          'pulls_with_reviews' => [{ 'id' => 'good', 'number' => 7 }],
-          'has_next_page' => false,
-          'next_cursor' => nil
-        }
-      end
-      define_method(:pull_request_reviews) do |_owner, _name, **|
-        [
-          {
-            'id' => 'good',
-            'number' => 7,
-            'reviews' => [{ 'id' => 'review', 'submitted_at' => Time.parse('2025-10-02 12:58:42 UTC') }],
-            'reviews_has_next_page' => false,
-            'reviews_next_cursor' => nil
-          }
-        ]
-      end
-    end.new
-    assert_equal({ total_reviews_submitted: 1 }, total_reviews_with_graph('foo/bad,foo/good', graph))
+  def test_quantity_of_deliverables_total_reviews_submitted_skips_pull_list_failure
+    graph = reviewgraph('foo/bad', :pulls, GraphQL::Client::Error.new('GraphQL failed'))
+    assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
   end
 
-  def test_total_reviews_submitted_skips_repo_when_review_page_graph_fails
-    WebMock.disable_net_connect!
-    graph = Class.new(Fbe::Graph::Fake) do
-      define_method(:pull_requests_with_reviews) do |_owner, _name, _since, **|
-        {
-          'pulls_with_reviews' => [{ 'id' => 'some', 'number' => 7 }],
-          'has_next_page' => false,
-          'next_cursor' => nil
-        }
-      end
-      define_method(:pull_request_reviews) do |_owner, name, **|
-        raise(GraphQL::Client::Error, 'GraphQL failed') if name == 'bad'
-        [
-          {
-            'id' => 'good',
-            'number' => 7,
-            'reviews' => [{ 'id' => 'review', 'submitted_at' => Time.parse('2025-10-02 12:58:42 UTC') }],
-            'reviews_has_next_page' => false,
-            'reviews_next_cursor' => nil
-          }
-        ]
-      end
-    end.new
-    assert_equal({ total_reviews_submitted: 1 }, total_reviews_with_graph('foo/bad,foo/good', graph))
+  def test_quantity_of_deliverables_total_reviews_submitted_skips_reviews_failure
+    graph = reviewgraph('foo/bad', :reviews, GraphQL::Client::Error.new('GraphQL failed'))
+    assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
   end
 
-  def test_total_reviews_submitted_does_not_swallow_local_graph_bug
-    WebMock.disable_net_connect!
-    graph = Class.new(Fbe::Graph::Fake) do
-      define_method(:pull_requests_with_reviews) do |_owner, _name, _since, **|
-        raise(NoMethodError, 'local bug')
-      end
-    end.new
-    assert_raises(NoMethodError) { total_reviews_with_graph('foo/bad', graph) }
+  def test_quantity_of_deliverables_total_reviews_submitted_keeps_code_errors_visible
+    graph = reviewgraph('foo/bad', :pulls, NoMethodError.new('bad fake'))
+    assert_raises(NoMethodError) { directreviews(%w[foo/bad], graph) }
   end
 
   def test_quantity_of_deliverables_total_builds_ran
@@ -310,28 +303,4 @@ class TestQuantityOfDeliverables < Jp::Test
       end
     end
   end
-
-  private
-
-  # rubocop:disable Elegant/GoodMethodName
-  def total_reviews_with_graph(repositories, graph)
-    rate_limit_up
-    repositories.split(',').each do |repo|
-      stub_github(
-        "https://api.github.com/repos/#{repo}",
-        body: { id: repo.hash.abs, full_name: repo, archived: false, open_issues: 0, size: 100 }
-      )
-    end
-    $judge = 'quantity-of-deliverables'
-    $global = {}
-    $local = {}
-    $loog = Loog::NULL
-    $options = Judges::Options.new({ 'repositories' => repositories })
-    fact = Struct.new(:since, :when).new(Time.parse('2025-09-30 00:00:00 UTC'), Time.parse('2025-10-06 21:00:00 UTC'))
-    Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_reviews_submitted.rb'))
-      total_reviews_submitted(fact)
-    end
-  end
-  # rubocop:enable Elegant/GoodMethodName
 end
