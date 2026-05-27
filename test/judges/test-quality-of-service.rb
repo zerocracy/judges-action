@@ -466,6 +466,39 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_quality_of_service_skips_unfinished_workflow_runs
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    timed = []
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 42, status: 'in_progress', conclusion: nil, workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          },
+          {
+            id: 43, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T11:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      timed << id
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([43], timed)
+        assert_equal([1], metrics[:some_build_success_rate])
+        assert_equal([900], metrics[:some_build_duration])
+      end
+    end
+  end
+
   def test_quality_of_service_some_build_mttr_when_failure_several_times_in_a_row
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
