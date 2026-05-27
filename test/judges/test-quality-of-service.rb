@@ -2305,6 +2305,37 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_quality_of_service_stops_backlog_searches_after_search_quota_is_consumed
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $global = {}
+    $local = {}
+    $judge = 'quality-of-service'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
+    url =
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-22%20(closed:%3E=2025-08-22%20OR%20state:open)'
+    stub_github(
+      url,
+      body: { total_count: 0, items: [] },
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '0' }
+    )
+    load(File.join(__dir__, '../../judges/quality-of-service/some_backlog_size.rb'))
+    Jp.qoreset
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'quality-of-service'
+      f.since = Time.parse('2025-08-21 21:00:00 UTC')
+      f.when = Time.parse('2025-08-28 21:00:00 UTC')
+      assert_equal({}, some_backlog_size(f))
+    end
+    assert_requested(:get, url, times: 1)
+  end
+
   def test_quality_of_service_fix_gap
     WebMock.disable_net_connect!
     rate_limit_up
