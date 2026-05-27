@@ -38,12 +38,12 @@ Fbe.iterate do
     since = tag(last, repo)
     list = Set.new
     if since
-      Fbe.octo.compare(repo, since, fact.tag)[:commits].each do |commit|
+      (comparison(repo, since, fact.tag) || {}).fetch(:commits, []).each do |commit|
         author = commit.dig(:author, :id)
         list << author if author
       end
     else
-      Fbe.octo.contributors(repo).each do |contributor|
+      allcontributors(repo).each do |contributor|
         list << contributor[:id]
       end
     end
@@ -56,18 +56,40 @@ Fbe.iterate do
     since = tag(last, repo)
     since ||= earliest(repo)[:sha]
     info = {}
-    begin
-      Fbe.octo.compare(repo, since, fact.tag).then do |json|
-        return info if json.nil?
-        info[:commits] = json[:total_commits]
-        info[:hoc] = json[:files].sum { |f| f[:changes] }
-        info[:last_commit] = json[:commits].first[:sha]
-      end
-    rescue Octokit::NotFound
-      $loog.info("Compare API returned 404 for #{repo} between #{since} and #{fact.tag}")
+    comparison(repo, since, fact.tag).then do |json|
+      return info if json.nil?
+      info[:commits] = json[:total_commits]
+      info[:hoc] = json[:files].sum { |f| f[:changes] }
+      info[:last_commit] = json[:commits].first[:sha]
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
+  end
+
+  def self.comparison(repo, since, tag)
+    Fbe.octo.compare(repo, since, tag)
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Compare API failed for #{repo} between #{since} and #{tag}: #{e.message}")
+    nil
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to compare #{repo} between #{since} and #{tag} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    nil
+  end
+
+  def self.allcontributors(repo)
+    Fbe.octo.contributors(repo)
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Contributors API failed for #{repo}: #{e.message}")
+    []
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to contributors in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    []
   end
 
   def self.earliest(repo)
@@ -134,8 +156,14 @@ Fbe.iterate do
         pl =
           begin
             Fbe.octo.pull_request(rname, fact.issue)
-          rescue Octokit::NotFound
-            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
+            nil
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
             nil
           end
         skip(json) if pl.nil?
@@ -148,8 +176,14 @@ Fbe.iterate do
         review =
           begin
             Fbe.octo.pull_request_reviews(rname, fact.issue).first
-          rescue Octokit::NotFound
-            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}")
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
+            nil
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
             nil
           end
         fact.review = review[:submitted_at] if review

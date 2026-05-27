@@ -107,10 +107,16 @@ Fbe.iterate do
           $loog.warn("A label #{badge.inspect} is already attached to #{repo}##{issue}")
           next
         end
-        nn.who = te.dig(:actor, :id)
+        who = te.dig(:actor, :id)
+        if who
+          nn.who = who
+        else
+          nn.stale = 'who'
+        end
         nn.when = te[:created_at]
+        actor = te.dig(:actor, :login)
         nn.details =
-          "Seemingly, the #{nn.label.inspect} label was attached by @#{te.dig(:actor, :login)} " \
+          "Seemingly, the #{nn.label.inspect} label was attached by #{actor ? "@#{actor}" : 'an unknown actor'} " \
           "to the issue #{Fbe.issue(nn)}."
         $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
       end

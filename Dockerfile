@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-FROM ruby:4.0@sha256:f30806f0d42bd9fb2fc45a3f3fe11963bc863adbb12a96605030f8667404e7a7
+FROM ruby:4.0@sha256:bd5075f77ac998fa5b61e37842717d1a29482b0e02ab74e2a2a8ae371d121b32
 
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
@@ -15,8 +15,7 @@ RUN apt-get update \
 WORKDIR /action
 COPY Gemfile /action
 COPY Gemfile.lock /action
-RUN bundle config set deployment true \
-    && bundle install
+RUN bundle config set frozen true && bundle install --gemfile=/action/Gemfile
 
 COPY judges /action/judges
 COPY lib /action/lib

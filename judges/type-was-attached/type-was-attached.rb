@@ -67,10 +67,16 @@ Fbe.iterate do
             n.where = 'github'
           end
         raise(RuntimeError, "Type already attached to #{repo}##{issue}") if nn.nil?
-        nn.who = tee.dig('actor', 'id')
+        who = tee.dig('actor', 'id')
+        if who
+          nn.who = who
+        else
+          nn.stale = 'who'
+        end
         nn.when = tee['created_at']
+        actor = tee.dig('actor', 'login')
         nn.details =
-          "The #{nn.type.inspect} type was attached by @#{tee.dig('actor', 'login')} " \
+          "The #{nn.type.inspect} type was attached by #{actor ? "@#{actor}" : 'an unknown actor'} " \
           "to the issue #{Fbe.issue(nn)}."
         $loog.info("Type attached to #{Fbe.issue(nn)} found: #{nn.type.inspect}")
       end

@@ -60,8 +60,8 @@ def Jp.fetch_workflows(pr, repo: nil)
   { succeeded_builds: succeeded, failed_builds: failed }
 end
 
-def Jp.count_suggestions(repo, issue, author)
-  Fbe.octo.pull_request_reviews(repo, issue).sum do |review|
+def Jp.count_suggestions(repo, issue, author, reviews = nil)
+  (reviews || Fbe.octo.pull_request_reviews(repo, issue)).sum do |review|
     next 0 if review.dig(:user, :id) == author
     Fbe.octo.pull_request_review_comments(repo, issue, review[:id]).sum do |comment|
       next 0 if comment.dig(:user, :id) == author || !comment[:in_reply_to_id].nil?

@@ -2184,6 +2184,110 @@ class TestGithubEvents < Jp::Test
     assert_equal(15, f.hoc)
   end
 
+  def test_rescues_forbidden_on_closed_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11127',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_127))
+  end
+
+  def test_rescues_deprecated_on_closed_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11130',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      status: 410,
+      body: { message: 'Gone', documentation_url: 'https://docs.github.com/rest/using-the-rest-api' }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_130))
+  end
+
+  def test_rescues_forbidden_on_closed_pull_request_reviews_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11128',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: {
+        id: 50, number: 123, user: { id: 46, login: 'user2' },
+        head: { ref: 'feature-branch', sha: 'abc123' },
+        merged: true, state: 'closed', merged_at: Time.parse('2025-06-27 19:00:05 UTC'),
+        additions: 10, deletions: 5
+      }
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100')
+      .to_return(
+        {
+          status: 403,
+          body: { message: 'Resource not accessible by integration' }.to_json,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+        },
+        {
+          body: [].to_json,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+        }
+      )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(eq what "pull-was-merged")').each.first
+    refute_nil(f)
+    assert_nil(f['review'])
+  end
+
   def test_closed_pull_request_event_with_nil_additions_or_deletions
     WebMock.disable_net_connect!
     rate_limit_up
@@ -2411,6 +2515,128 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(1, f.count)
     assert_equal([526_301], f.first[:contributors])
+  end
+
+  def test_release_event_rescues_forbidden_contributors_and_compare
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '101',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_001,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    refute_includes(f.first.all_properties, 'contributors')
+    refute_includes(f.first.all_properties, 'commits')
+    refute_includes(f.first.all_properties, 'hoc')
+  end
+
+  def test_release_event_rescues_deprecated_release_compare
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '102',
+        type: 'ReleaseEvent',
+        actor: {
+          id: 8_086_956,
+          login: 'rultor',
+          display_login: 'rultor'
+        },
+        repo: {
+          id: 42,
+          name: 'foo/foo',
+          url: 'https://api.github.com/repos/foo/foo'
+        },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_002,
+            author: {
+              login: 'rultor',
+              id: 8_086_956,
+              type: 'User',
+              site_admin: false
+            },
+            tag_name: '1.1.0',
+            name: 'v1.1.0',
+            created_at: Time.parse('2024-12-01T00:51:39Z'),
+            published_at: Time.parse('2024-12-01T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-12-01T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.9.0...1.1.0?per_page=100',
+      status: 410,
+      body: { message: 'Git Repository is empty.' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.details = 'A previous release was published in this repo.'
+      f.event_id = 100
+      f.event_type = 'ReleaseEvent'
+      f.repository = 42
+      f.tag = '0.9.0'
+      f.what = 'release-published'
+      f.when = Time.parse('2024-11-29 00:52:08 UTC')
+      f.where = 'github'
+      f.who = 526_301
+    end
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(2, f.count)
+    assert_equal('1.1.0', f.last.tag)
+    refute_includes(f.last.all_properties, 'contributors')
+    refute_includes(f.last.all_properties, 'commits')
+    refute_includes(f.last.all_properties, 'hoc')
   end
 
   def test_write_supervision_log_if_raise_error

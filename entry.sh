@@ -12,7 +12,7 @@ echo "The 'judges-action' ${VERSION} is running"
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
     resp=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
-    latest=$(echo -n "$resp" | jq -Rs "try (fromjson | .tag_name) catch empty")
+    latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name) catch empty")
     if [ -z "${latest}" ]; then
         echo "!!! Could not fetch the latest version from GitHub."
         echo "!!! GitHub returned: "
