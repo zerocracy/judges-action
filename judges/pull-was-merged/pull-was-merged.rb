@@ -69,6 +69,34 @@ Fbe.iterate do
       $loog.debug("Pull #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue
     end
+    actor =
+      begin
+        Fbe.octo.issue(repo, issue)[:closed_by]
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("The issue ##{issue} doesn't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue ##{issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      end
+    reviews =
+      begin
+        Fbe.octo.pull_request_reviews(repo, issue)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("The reviews of pull ##{issue} don't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to reviews of pull ##{issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      end
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |n|
@@ -83,15 +111,14 @@ Fbe.iterate do
       nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
       Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
-      actor = Fbe.octo.issue(repo, issue)[:closed_by]
       if actor
         nn.who = Integer(actor[:id])
       else
         nn.stale = 'who'
       end
-      nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id))
+      nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-      review = Fbe.octo.pull_request_reviews(repo, issue).first
+      review = reviews.first
       nn.review = review[:submitted_at] if review
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("The pull #{Fbe.issue(nn)} was #{nn.what.inspect} #{nn.when.ago} ago")
