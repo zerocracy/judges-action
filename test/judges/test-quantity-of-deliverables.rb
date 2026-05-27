@@ -161,6 +161,68 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_total_reviews_submitted_skips_repo_when_pull_list_graph_fails
+    WebMock.disable_net_connect!
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:pull_requests_with_reviews) do |_owner, name, _since, **|
+        raise(GraphQL::Client::Error, 'GraphQL failed') if name == 'bad'
+        {
+          'pulls_with_reviews' => [{ 'id' => 'good', 'number' => 7 }],
+          'has_next_page' => false,
+          'next_cursor' => nil
+        }
+      end
+      define_method(:pull_request_reviews) do |_owner, _name, **|
+        [
+          {
+            'id' => 'good',
+            'number' => 7,
+            'reviews' => [{ 'id' => 'review', 'submitted_at' => Time.parse('2025-10-02 12:58:42 UTC') }],
+            'reviews_has_next_page' => false,
+            'reviews_next_cursor' => nil
+          }
+        ]
+      end
+    end.new
+    assert_equal({ total_reviews_submitted: 1 }, total_reviews_with_graph('foo/bad,foo/good', graph))
+  end
+
+  def test_total_reviews_submitted_skips_repo_when_review_page_graph_fails
+    WebMock.disable_net_connect!
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:pull_requests_with_reviews) do |_owner, _name, _since, **|
+        {
+          'pulls_with_reviews' => [{ 'id' => 'some', 'number' => 7 }],
+          'has_next_page' => false,
+          'next_cursor' => nil
+        }
+      end
+      define_method(:pull_request_reviews) do |_owner, name, **|
+        raise(GraphQL::Client::Error, 'GraphQL failed') if name == 'bad'
+        [
+          {
+            'id' => 'good',
+            'number' => 7,
+            'reviews' => [{ 'id' => 'review', 'submitted_at' => Time.parse('2025-10-02 12:58:42 UTC') }],
+            'reviews_has_next_page' => false,
+            'reviews_next_cursor' => nil
+          }
+        ]
+      end
+    end.new
+    assert_equal({ total_reviews_submitted: 1 }, total_reviews_with_graph('foo/bad,foo/good', graph))
+  end
+
+  def test_total_reviews_submitted_does_not_swallow_local_graph_bug
+    WebMock.disable_net_connect!
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:pull_requests_with_reviews) do |_owner, _name, _since, **|
+        raise(NoMethodError, 'local bug')
+      end
+    end.new
+    assert_raises(NoMethodError) { total_reviews_with_graph('foo/bad', graph) }
+  end
+
   def test_quantity_of_deliverables_total_builds_ran
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -248,4 +310,28 @@ class TestQuantityOfDeliverables < Jp::Test
       end
     end
   end
+
+  private
+
+  # rubocop:disable Elegant/GoodMethodName
+  def total_reviews_with_graph(repositories, graph)
+    rate_limit_up
+    repositories.split(',').each do |repo|
+      stub_github(
+        "https://api.github.com/repos/#{repo}",
+        body: { id: repo.hash.abs, full_name: repo, archived: false, open_issues: 0, size: 100 }
+      )
+    end
+    $judge = 'quantity-of-deliverables'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => repositories })
+    fact = Struct.new(:since, :when).new(Time.parse('2025-09-30 00:00:00 UTC'), Time.parse('2025-10-06 21:00:00 UTC'))
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_reviews_submitted.rb'))
+      total_reviews_submitted(fact)
+    end
+  end
+  # rubocop:enable Elegant/GoodMethodName
 end
