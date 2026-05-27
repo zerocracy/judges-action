@@ -10,6 +10,7 @@ require 'fbe/who'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
 
+repos = {}
 Fbe.iterate do
   as 'assignees_were_scanned'
   sort_by 'issue'
@@ -31,7 +32,7 @@ Fbe.iterate do
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo = repos[repository] ||= Fbe.octo.repo_name_by_id(repository)
     events =
       begin
         Fbe.octo.issue_events(repo, issue).select { |e| e[:event] == 'assigned' }

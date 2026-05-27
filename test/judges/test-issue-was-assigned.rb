@@ -4,10 +4,32 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require 'fbe/octo'
 require_relative '../test__helper'
 
 class TestIssueWasAssigned < Jp::Test
   using SmartFactbase
+
+  def test_reuses_repository_name_lookup_per_repository
+    calls = Hash.new(0)
+    octo = Object.new
+    octo.define_singleton_method(:repo_name_by_id) do |repository|
+      calls[repository] += 1
+      'foo/foo'
+    end
+    octo.define_singleton_method(:repo_id_by_name) { |_repo| 42 }
+    octo.define_singleton_method(:issue_events) { |_repo, _issue| [] }
+    octo.define_singleton_method(:repository) { |_repo| { id: 42, full_name: 'foo/foo', archived: false } }
+    octo.define_singleton_method(:off_quota?) { |*| false }
+    octo.define_singleton_method(:print_trace!) { nil }
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:octo, octo) do
+      load_it('issue-was-assigned', fb)
+    end
+    assert_equal({ 42 => 1 }, calls)
+  end
 
   def test_not_found_issue_events
     WebMock.disable_net_connect!
