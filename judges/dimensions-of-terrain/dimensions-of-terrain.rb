@@ -9,7 +9,7 @@ require 'time'
 require_relative '../../lib/incremate'
 require_relative 'octo_guard'
 
-$terrainguard = TerrainOctoGuard.new
+$terrainguard = Jp::TerrainOctoGuard.new
 
 f = Fbe.fb.query(
   "(and
