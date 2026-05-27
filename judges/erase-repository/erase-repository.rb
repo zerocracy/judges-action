@@ -7,6 +7,7 @@ require 'elapsed'
 require 'fbe/consider'
 require 'fbe/octo'
 require 'logger'
+require 'octokit'
 
 good = {}
 
@@ -18,9 +19,14 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').eac
     json = Fbe.octo.repository(r)
     good[r] = true
     throw(:"GitHub repository ##{r} is found: #{json[:full_name]}")
-  rescue Octokit::NotFound
+  rescue Octokit::NotFound, Octokit::Deprecated => e
     good[r] = false
-    throw(:"GitHub repository ##{r} is not found")
+    throw(:"GitHub repository ##{r} is not found: #{e.message}")
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to GitHub repository ##{r} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
   end
 end
 
