@@ -2184,6 +2184,110 @@ class TestGithubEvents < Jp::Test
     assert_equal(15, f.hoc)
   end
 
+  def test_rescues_forbidden_on_closed_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11127',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_127))
+  end
+
+  def test_rescues_deprecated_on_closed_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11130',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      status: 410,
+      body: { message: 'Gone', documentation_url: 'https://docs.github.com/rest/using-the-rest-api' }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_130))
+  end
+
+  def test_rescues_forbidden_on_closed_pull_request_reviews_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11128',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: {
+        id: 50, number: 123, user: { id: 46, login: 'user2' },
+        head: { ref: 'feature-branch', sha: 'abc123' },
+        merged: true, state: 'closed', merged_at: Time.parse('2025-06-27 19:00:05 UTC'),
+        additions: 10, deletions: 5
+      }
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100')
+      .to_return(
+        {
+          status: 403,
+          body: { message: 'Resource not accessible by integration' }.to_json,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+        },
+        {
+          body: [].to_json,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+        }
+      )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(eq what "pull-was-merged")').each.first
+    refute_nil(f)
+    assert_nil(f['review'])
+  end
+
   def test_closed_pull_request_event_with_nil_additions_or_deletions
     WebMock.disable_net_connect!
     rate_limit_up
