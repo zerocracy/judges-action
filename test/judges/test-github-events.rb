@@ -1955,6 +1955,63 @@ class TestGithubEvents < Jp::Test
     assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
   end
 
+  def test_max_events_guard_fires_once
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: 6.downto(1).map do |id|
+        {
+          id:, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      end
+    )
+    fb = Factbase.new
+    loog = Loog::Buffer.new
+    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 2 }), loog:)
+    assert_equal(1, loog.to_s.scan('Already scanned').size)
+  end
+
+  def test_latest_id_guard_fires_once
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: 15.downto(10).map do |id|
+        {
+          id:, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      end
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 13, what: 'iterate')
+    loog = Loog::Buffer.new
+    load_it('github-events', fb, loog:)
+    assert_equal(1, loog.to_s.scan('good stop').size)
+  end
+
   def test_skip_fill_up_if_event_exists_in_factbase
     WebMock.disable_net_connect!
     rate_limit_up
