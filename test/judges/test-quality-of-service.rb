@@ -196,6 +196,15 @@ class TestQualityOfService < Jp::Test
           assets: [], body: 'Some description', mentions_count: 4
         },
         {
+          id: 173_465,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.nil', target_commitish: 'master',
+          name: 'Draft Release', draft: true, prerelease: false,
+          created_at: Time.parse('2024-08-06 00:30:14 UTC'),
+          published_at: nil,
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
           id: 173_460,
           author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
           tag_name: '0.0.4', target_commitish: 'master',
@@ -355,6 +364,7 @@ class TestQualityOfService < Jp::Test
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_equal([64_800, 21_600, 36_000], f['some_release_interval'])
       assert_equal([52, 24, 99], f['some_release_hoc_size'])
       assert_equal([1, 2, 4], f['some_release_commits_size'])
     end
