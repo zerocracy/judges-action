@@ -52,4 +52,43 @@ class TestPullRequest < Jp::Test
     result = Jp.fetch_workflows(pr)
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
+
+  def test_counts_reactions_when_reaction_user_is_nil
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/101/reactions',
+      body: [
+        { user: nil },
+        { user: { id: 42 } }
+      ]
+    )
+    count = Jp.count_appreciated_comments(
+      { base: { repo: { full_name: 'foo/foo' } } },
+      [{ id: 101, user: { id: 7 } }],
+      []
+    )
+    assert_equal(2, count)
+  end
+
+  def test_counts_reactions_when_comment_user_is_nil
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/comments/202/reactions',
+      body: [
+        { user: { id: 42 } },
+        { user: nil }
+      ]
+    )
+    pr = { base: { repo: { full_name: 'foo/foo' } } }
+    count = Jp.count_appreciated_comments(pr, [], [{ id: 202, user: nil }])
+    assert_equal(1, count)
+  end
 end

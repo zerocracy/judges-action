@@ -31,12 +31,12 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   issued =
     issue_comments.sum do |comment|
       Fbe.octo.issue_comment_reactions(repo, comment[:id])
-         .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
+         .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
     end
   coded =
     code_comments.sum do |comment|
       Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
-         .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
+         .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
     end
   issued + coded
 end
