@@ -80,7 +80,8 @@ Fbe.iterate do
   end
 
   def self.allcontributors(repo)
-    Fbe.octo.contributors(repo)
+    list = Fbe.octo.contributors(repo)
+    list.is_a?(Array) ? list : []
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Contributors API failed for #{repo}: #{e.message}")
     []
