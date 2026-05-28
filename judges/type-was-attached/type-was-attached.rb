@@ -47,6 +47,7 @@ Fbe.iterate do
         )
         next issue
       end
+    next issue unless timeline.is_a?(Array)
     timeline.each do |te|
       unless events.include?(te[:event])
         $loog.debug("No #{events.joined} events at #{repo}##{issue}")

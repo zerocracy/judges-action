@@ -9,7 +9,9 @@ require 'fbe/unmask_repos'
 def total_releases(_fact)
   total = 0
   Fbe.unmask_repos do |repo|
-    Fbe.octo.releases(repo).each do |_|
+    releases = Fbe.octo.releases(repo)
+    next unless releases.is_a?(Array)
+    releases.each do |_|
       total += 1
     end
   end
