@@ -10,6 +10,7 @@ def some_release_interval(fact)
   dates = []
   Fbe.unmask_repos do |repo|
     Fbe.octo.releases(repo).each do |json|
+      next if json[:published_at].nil?
       next if json[:published_at] > fact.when
       break if json[:published_at] < fact.since
       dates << json[:published_at]
