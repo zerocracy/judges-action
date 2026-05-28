@@ -38,8 +38,8 @@ require_relative 'smart_factbase'
 class Jp::Test < Minitest::Test
   def rate_limit_up
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
-      headers: { 'X-RateLimit-Remaining' => '999' }
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
     )
   end
 
