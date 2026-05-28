@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
@@ -28,6 +29,13 @@ def total_reviews_submitted(fact)
         queue.push([p['number'], p['reviews_next_cursor']])
       end
     end
+  rescue GraphQL::Client::Error, Octokit::Forbidden, Net::OpenTimeout, Net::ReadTimeout,
+         SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    $loog.warn(
+      "[#{$judge}] Can't count submitted reviews in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   { total_reviews_submitted: total }
 end

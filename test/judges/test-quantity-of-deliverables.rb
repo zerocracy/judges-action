@@ -14,6 +14,46 @@ require_relative '../test__helper'
 class TestQuantityOfDeliverables < Jp::Test
   using SmartFactbase
 
+  def reviewgraph(repo, call, err)
+    graph = Fbe::Graph::Fake.new
+    pulls = graph.method(:pull_requests_with_reviews)
+    reviews = graph.method(:pull_request_reviews)
+    graph.define_singleton_method(:pull_requests_with_reviews) do |owner, name, since, cursor:|
+      raise(err) if repo == "#{owner}/#{name}" && call == :pulls
+      pulls.call(owner, name, since, cursor:)
+    end
+    graph.define_singleton_method(:pull_request_reviews) do |owner, name, pulls:|
+      raise(err) if repo == "#{owner}/#{name}" && call == :reviews
+      reviews.call(owner, name, pulls:)
+    end
+    graph
+  end
+
+  def directreviews(repos, graph)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    repos.each_with_index do |repo, idx|
+      stub_github(
+        "https://api.github.com/repos/#{repo}",
+        body: { id: 100 + idx, full_name: repo, open_issues: 0, archived: false, size: 100 }
+      )
+    end
+    $global = {}
+    $local = {}
+    $judge = 'quantity-of-deliverables'
+    $options = Judges::Options.new({ 'repositories' => repos.join(',') })
+    $loog = Loog::NULL
+    $epoch = Time.parse('2025-10-06 21:00:00 UTC')
+    $kickoff = $epoch
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-09-30 00:00:00 +03:00')
+    fact.when = Time.parse('2025-10-06 21:00:00 UTC')
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_reviews_submitted.rb'))
+      total_reviews_submitted(fact)
+    end
+  end
+
   def test_counts_commits
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -244,6 +284,21 @@ class TestQuantityOfDeliverables < Jp::Test
         )
       end
     end
+  end
+
+  def test_quantity_of_deliverables_total_reviews_submitted_skips_pull_list_failure
+    graph = reviewgraph('foo/bad', :pulls, GraphQL::Client::Error.new('GraphQL failed'))
+    assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
+  end
+
+  def test_quantity_of_deliverables_total_reviews_submitted_skips_reviews_failure
+    graph = reviewgraph('foo/bad', :reviews, GraphQL::Client::Error.new('GraphQL failed'))
+    assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
+  end
+
+  def test_quantity_of_deliverables_total_reviews_submitted_keeps_code_errors_visible
+    graph = reviewgraph('foo/bad', :pulls, NoMethodError.new('bad fake'))
+    assert_raises(NoMethodError) { directreviews(%w[foo/bad], graph) }
   end
 
   def test_quantity_of_deliverables_total_builds_ran
