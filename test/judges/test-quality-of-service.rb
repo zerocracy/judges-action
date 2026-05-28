@@ -359,6 +359,7 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    f.qos_pause_seconds = 0
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
@@ -469,6 +470,7 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    f.qos_pause_seconds = 0
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
@@ -622,6 +624,7 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    f.qos_pause_seconds = 0
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
@@ -714,6 +717,7 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    f.qos_pause_seconds = 0
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
@@ -879,6 +883,7 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    f.qos_pause_seconds = 0
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
@@ -1212,6 +1217,7 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    f.qos_pause_seconds = 0
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
@@ -1339,6 +1345,7 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
+    f.qos_pause_seconds = 0
     Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
@@ -1454,6 +1461,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
       f.qos_min_triage_seconds = 60
     end
     insert_label_was_attached_fact(
@@ -1562,6 +1570,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
       f.qos_min_triage_seconds = 60
     end
     insert_label_was_attached_fact(
@@ -1648,6 +1657,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
       f.qos_min_triage_seconds = 7_200
     end
     insert_label_was_attached_fact(
@@ -1741,6 +1751,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
     end
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 60, when: Time.parse('2024-08-04 12:00:59 UTC'), label: 'bug'
@@ -1836,6 +1847,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
       f.qos_min_triage_seconds = 60
     end
     insert_label_was_attached_fact(
@@ -1938,6 +1950,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
     end
     fb.insert.then do |f|
       f._id = 1
@@ -2099,6 +2112,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
     end
     fb.insert.then do |f|
       f._id = 1
@@ -2202,6 +2216,7 @@ class TestQualityOfService < Jp::Test
       f.what = 'pmp'
       f.area = 'quality'
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
     end
     fb.insert.then do |f|
       f._id = 1
@@ -2340,6 +2355,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_pause_seconds = 0
     end
     Time.stub(:now, Time.parse('2025-08-28 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
