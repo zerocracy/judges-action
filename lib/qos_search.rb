@@ -33,7 +33,13 @@ def Jp.qosearch(query, **)
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
     return
   end
-  Fbe.octo.search_issues(query, **)
+  Fbe.octo.search_issues(query, **).tap do
+    origin = octo.instance_eval { @o }.instance_variable_get(:@origin).instance_variable_get(:@origin)
+    if origin.respond_to?(:last_response)
+      left = origin.last_response&.headers&.fetch('x-ratelimit-remaining', nil)
+      @offquota = true if left && Integer(left, 10).zero?
+    end
+  end
 rescue Octokit::TooManyRequests => e
   @offquota = true
   $loog.warn("[#{$judge}] GitHub Search API quota exhausted, stopping QoS search calls: #{e.message}")
