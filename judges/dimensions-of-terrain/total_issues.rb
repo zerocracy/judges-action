@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/github_graph'
-require 'fbe/unmask_repos'
 
 def total_issues(_fact)
   issues = 0

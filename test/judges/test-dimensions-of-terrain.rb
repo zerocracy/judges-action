@@ -831,4 +831,127 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_nil(f['total_forks'])
     end
   end
+
+  def test_skips_inaccessible_repositories
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stubbadrepo('foo/missing', 404)
+    stubbadrepo('foo/gone', 410)
+    stubbadrepo('foo/forbidden', 403)
+    stubrepo('foo/foo')
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it(
+          'dimensions-of-terrain',
+          fb,
+          Judges::Options.new({ 'repositories' => 'foo/missing,foo/gone,foo/forbidden,foo/foo' })
+        )
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        assert_equal(1, f.total_repositories)
+        assert_equal(2, f.total_releases)
+        assert_equal(3, f.total_stars)
+        assert_equal(4, f.total_forks)
+        assert_equal(2, f.total_files)
+        assert_equal(2, f.total_contributors)
+        assert_equal(2, f.total_active_contributors)
+        assert_equal(1484, f.total_commits)
+      end
+    end
+  end
+
+  def test_skips_inaccessible_dimension_calls
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stubflakyrepo('foo/flaky', 403)
+    stubrepo('foo/foo')
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/flaky,foo/foo' }))
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        assert_equal(2, f.total_repositories)
+        assert_equal(2, f.total_releases)
+        assert_equal(6, f.total_stars)
+        assert_equal(8, f.total_forks)
+        assert_equal(2, f.total_files)
+        assert_equal(2, f.total_contributors)
+        assert_equal(2, f.total_active_contributors)
+        assert_equal(2968, f.total_commits)
+        assert_equal(46, f.total_issues)
+        assert_equal(38, f.total_pulls)
+      end
+    end
+  end
+
+  private
+
+  def stubbadrepo(repo, status)
+    body = { message: "Repository unavailable with status #{status}" }
+    stub_github("https://api.github.com/repos/#{repo}", status:, body:)
+    stub_github("https://api.github.com/repos/#{repo}/releases?per_page=100", status:, body:)
+    stub_github(
+      "https://api.github.com/search/commits?per_page=100&q=repo:#{repo}%20author-date:%3E2024-08-30",
+      status:,
+      body:
+    )
+  end
+
+  def stubflakyrepo(repo, status)
+    stub_github("https://api.github.com/repos/#{repo}", body: repojson(repo))
+    body = { message: "Repository endpoint unavailable with status #{status}" }
+    stub_github("https://api.github.com/repos/#{repo}/releases?per_page=100", status:, body:)
+    stub_github("https://api.github.com/repos/#{repo}/git/trees/master?recursive=true", status:, body:)
+    stub_github("https://api.github.com/repos/#{repo}/contributors?per_page=100", status:, body:)
+    stub_github(
+      "https://api.github.com/search/commits?per_page=100&q=repo:#{repo}%20author-date:%3E2024-08-30",
+      status:,
+      body:
+    )
+  end
+
+  def stubrepo(repo)
+    stub_github("https://api.github.com/repos/#{repo}", body: repojson(repo))
+    stub_github("https://api.github.com/repos/#{repo}/releases?per_page=100", body: [{ id: 50 }, { id: 44 }])
+    stub_github(
+      "https://api.github.com/repos/#{repo}/git/trees/master?recursive=true",
+      body: {
+        sha: '492072971ad3c8644a191f',
+        tree: [
+          { path: 'README.md', mode: '100644', type: 'blob', sha: '8011ad43c37edbaf1969417b94' },
+          { path: 'lib', mode: '040000', type: 'tree', sha: '438682e07e45ccbf9ca58f294a' },
+          { path: 'lib/foo.rb', mode: '100644', type: 'blob', sha: 'ffed2deef2383d6f685489b289' }
+        ],
+        truncated: false
+      }
+    )
+    stub_github(
+      "https://api.github.com/repos/#{repo}/contributors?per_page=100",
+      body: [{ id: 526_301 }, { id: 526_302 }]
+    )
+    stub_github(
+      "https://api.github.com/search/commits?per_page=100&q=repo:#{repo}%20author-date:%3E2024-08-30",
+      body: {
+        total_count: 2,
+        incomplete_results: false,
+        items: [{ author: { id: 526_301 } }, { author: { id: 526_302 } }]
+      }
+    )
+  end
+
+  def repojson(repo)
+    {
+      name: 'foo',
+      full_name: repo,
+      private: false,
+      created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+      updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+      pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+      size: 19_366,
+      stargazers_count: 3,
+      forks: 4,
+      default_branch: 'master',
+      archived: false
+    }
+  end
 end

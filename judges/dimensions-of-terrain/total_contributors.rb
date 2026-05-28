@@ -4,14 +4,14 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/unmask_repos'
 
 def total_contributors(_fact)
   contributors = Set.new
-  Fbe.unmask_repos do |repo|
-    json = Fbe.octo.repository(repo)
+  TerrainOcto.repos do |repo|
+    json = TerrainOcto.safe(repo, 'repository') { Fbe.octo.repository(repo) }
+    next if json.nil?
     next if json[:size].nil? || json[:size].zero?
-    list = Fbe.octo.contributors(repo)
+    list = TerrainOcto.safe(repo, 'contributors') { Fbe.octo.contributors(repo) }
     next unless list.is_a?(Array)
     list.each do |contributor|
       contributors << contributor[:id]

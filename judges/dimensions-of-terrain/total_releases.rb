@@ -4,12 +4,11 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/unmask_repos'
 
 def total_releases(_fact)
   total = 0
-  Fbe.unmask_repos do |repo|
-    releases = Fbe.octo.releases(repo)
+  TerrainOcto.repos do |repo|
+    releases = TerrainOcto.safe(repo, 'releases') { Fbe.octo.releases(repo) }
     next unless releases.is_a?(Array)
     releases.each do |_|
       total += 1

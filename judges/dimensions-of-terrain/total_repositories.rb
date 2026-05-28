@@ -4,12 +4,13 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/unmask_repos'
 
 def total_repositories(_fact)
   total = 0
-  Fbe.unmask_repos do |repo|
-    total += 1 unless Fbe.octo.repository(repo)[:archived]
+  TerrainOcto.repos do |repo|
+    json = TerrainOcto.safe(repo, 'repository') { Fbe.octo.repository(repo) }
+    next if json.nil?
+    total += 1 unless json[:archived]
   end
   { total_repositories: total }
 end

@@ -4,16 +4,16 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/unmask_repos'
 
 def total_files(_fact)
   files = 0
-  Fbe.unmask_repos do |repo|
-    info = Fbe.octo.repository(repo)
+  TerrainOcto.repos do |repo|
+    info = TerrainOcto.safe(repo, 'repository') { Fbe.octo.repository(repo) }
+    next if info.nil?
     next if info[:size].nil? || info[:size].zero?
-    Fbe.octo.tree(repo, info[:default_branch], recursive: true).then do |json|
-      files += json[:tree].count { |item| item[:type] == 'blob' }
-    end
+    json = TerrainOcto.safe(repo, 'tree') { Fbe.octo.tree(repo, info[:default_branch], recursive: true) }
+    next if json.nil?
+    files += json[:tree].count { |item| item[:type] == 'blob' }
   end
   { total_files: files }
 end

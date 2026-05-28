@@ -7,6 +7,7 @@ require 'fbe/octo'
 
 require 'time'
 require_relative '../../lib/incremate'
+require_relative 'octo_rescue'
 
 f = Fbe.fb.query(
   "(and
