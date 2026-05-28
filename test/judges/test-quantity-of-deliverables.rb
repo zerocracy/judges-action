@@ -5,6 +5,7 @@
 
 require 'factbase'
 require 'fbe/github_graph'
+require 'fbe/unmask_repos'
 require 'json'
 require 'judges/options'
 require 'loog'
@@ -61,6 +62,90 @@ class TestQuantityOfDeliverables < Jp::Test
         assert_equal(0, f.first.total_hoc_committed)
         assert_equal(25, f.first.total_issues_created)
         assert_equal(8, f.first.total_pulls_submitted)
+      end
+    end
+  end
+
+  def test_total_commits_pushed_skips_unavailable_repositories
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/missing', status: 404, body: { message: 'Not Found' })
+    stub_github('https://api.github.com/repos/foo/blocked', status: 403, body: { message: 'Forbidden' })
+    stub_github(
+      'https://api.github.com/repos/foo/good',
+      body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 }
+    )
+    graph = Object.new
+    graph.define_singleton_method(:total_commits_pushed) do |_owner, name, _since|
+      { 'commits' => name.length, 'hoc' => name.length * 100 }
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    unmask = proc { |&block| %w[foo/missing foo/blocked foo/good].each { |repo| block.call(repo) } }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        assert_equal({ total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact))
+      end
+    end
+  end
+
+  def test_total_commits_pushed_skips_transient_graph_failures
+    WebMock.disable_net_connect!
+    rate_limit_up
+    %w[bad good].each do |name|
+      stub_github(
+        "https://api.github.com/repos/foo/#{name}",
+        body: { id: 42, full_name: "foo/#{name}", open_issues: 0, size: 100 }
+      )
+    end
+    graph = Object.new
+    graph.define_singleton_method(:total_commits_pushed) do |owner, name, _since|
+      repo = "#{owner}/#{name}"
+      raise(Net::OpenTimeout, 'timeout') if repo == 'foo/bad'
+      { 'commits' => name.length, 'hoc' => name.length * 100 }
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    unmask = proc { |&block| %w[foo/bad foo/good].each { |repo| block.call(repo) } }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        assert_equal({ total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact))
+      end
+    end
+  end
+
+  def test_total_commits_pushed_keeps_code_errors_visible
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/bad',
+      body: { id: 42, full_name: 'foo/bad', open_issues: 0, size: 100 }
+    )
+    graph = Object.new
+    graph.define_singleton_method(:total_commits_pushed) do |_owner, _name, _since|
+      raise(NoMethodError, 'unexpected')
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    unmask = proc { |&block| block.call('foo/bad') }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        assert_raises(NoMethodError) { total_commits_pushed(fact) }
       end
     end
   end
