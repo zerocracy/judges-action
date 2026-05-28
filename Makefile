@@ -15,7 +15,7 @@ rubocop:
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --disable live --lib /action/lib /action/judges'
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges'
 	echo "$$?" > target/test.exit
 
 entry: target/docker-image.txt
