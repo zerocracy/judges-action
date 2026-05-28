@@ -20,6 +20,5 @@ jobs:
         with:
           ruby-version: 4.0.5
           bundler-cache: true
-      - run: gem install rubocop:1.63.5
       - run: sudo apt-get update && sudo apt-get install -y parallel
       - run: make

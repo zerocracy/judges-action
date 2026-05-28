@@ -10,6 +10,9 @@ export
 
 all: rubocop test entry rmi verify entries
 
+rubocop:
+	bundle exec rubocop
+
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
 	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --disable live --lib /action/lib /action/judges'
