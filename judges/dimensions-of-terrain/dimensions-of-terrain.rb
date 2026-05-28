@@ -7,7 +7,9 @@ require 'fbe/octo'
 
 require 'time'
 require_relative '../../lib/incremate'
-require_relative 'octo_rescue'
+require_relative 'octo_guard'
+
+$terrainguard = TerrainOctoGuard.new
 
 f = Fbe.fb.query(
   "(and

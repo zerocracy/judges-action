@@ -6,10 +6,11 @@
 require 'fbe/octo'
 
 def total_stars(_fact)
+  guard = $terrainguard
   stars = 0
   forks = 0
-  TerrainOcto.repos do |repo|
-    json = TerrainOcto.safe(repo, 'repository') { Fbe.octo.repository(repo) }
+  guard.eachrepo do |repo|
+    json = guard.repository(repo)
     next if json.nil?
     stars += json[:stargazers_count]
     forks += json[:forks]

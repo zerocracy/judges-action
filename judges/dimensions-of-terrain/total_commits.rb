@@ -7,10 +7,11 @@ require 'fbe/github_graph'
 require 'fbe/octo'
 
 def total_commits(_fact)
+  guard = $terrainguard
   commits = 0
   repos = []
-  TerrainOcto.repos do |repo|
-    json = TerrainOcto.safe(repo, 'repository') { Fbe.octo.repository(repo) }
+  guard.eachrepo do |repo|
+    json = guard.repository(repo)
     next if json.nil?
     next if json[:size].nil? || json[:size].zero?
     repos << [*repo.split('/'), json[:default_branch]]

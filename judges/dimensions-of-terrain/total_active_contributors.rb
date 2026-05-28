@@ -6,10 +6,11 @@
 require 'fbe/octo'
 
 def total_active_contributors(fact)
+  guard = $terrainguard
   seen = Set.new
   since = (fact.when - (30 * 24 * 60 * 60)).iso8601[0..9]
-  TerrainOcto.repos do |repo|
-    json = TerrainOcto.safe(repo, 'commit search') { Fbe.octo.search_commits("repo:#{repo} author-date:>#{since}") }
+  guard.eachrepo do |repo|
+    json = guard.searchcommits(repo, since)
     next if json.nil?
     json[:items].each do |commit|
       author = commit.dig(:author, :id)

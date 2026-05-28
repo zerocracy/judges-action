@@ -6,9 +6,10 @@
 require 'fbe/octo'
 
 def total_releases(_fact)
+  guard = $terrainguard
   total = 0
-  TerrainOcto.repos do |repo|
-    releases = TerrainOcto.safe(repo, 'releases') { Fbe.octo.releases(repo) }
+  guard.eachrepo do |repo|
+    releases = guard.releases(repo)
     next unless releases.is_a?(Array)
     releases.each do |_|
       total += 1

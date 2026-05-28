@@ -6,9 +6,10 @@
 require 'fbe/octo'
 
 def total_repositories(_fact)
+  guard = $terrainguard
   total = 0
-  TerrainOcto.repos do |repo|
-    json = TerrainOcto.safe(repo, 'repository') { Fbe.octo.repository(repo) }
+  guard.eachrepo do |repo|
+    json = guard.repository(repo)
     next if json.nil?
     total += 1 unless json[:archived]
   end

@@ -6,12 +6,13 @@
 require 'fbe/octo'
 
 def total_contributors(_fact)
+  guard = $terrainguard
   contributors = Set.new
-  TerrainOcto.repos do |repo|
-    json = TerrainOcto.safe(repo, 'repository') { Fbe.octo.repository(repo) }
+  guard.eachrepo do |repo|
+    json = guard.repository(repo)
     next if json.nil?
     next if json[:size].nil? || json[:size].zero?
-    list = TerrainOcto.safe(repo, 'contributors') { Fbe.octo.contributors(repo) }
+    list = guard.contributors(repo)
     next unless list.is_a?(Array)
     list.each do |contributor|
       contributors << contributor[:id]
