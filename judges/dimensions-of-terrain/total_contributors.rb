@@ -11,7 +11,9 @@ def total_contributors(_fact)
   Fbe.unmask_repos do |repo|
     json = Fbe.octo.repository(repo)
     next if json[:size].nil? || json[:size].zero?
-    Fbe.octo.contributors(repo).each do |contributor|
+    list = Fbe.octo.contributors(repo)
+    next unless list.is_a?(Array)
+    list.each do |contributor|
       contributors << contributor[:id]
     end
   end

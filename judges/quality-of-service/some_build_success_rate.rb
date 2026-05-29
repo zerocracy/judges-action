@@ -15,7 +15,7 @@ def some_build_success_rate(fact)
     workflows =
       Fbe.octo.repository_workflow_runs(
         repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
-      )[:workflow_runs].first(60)
+      )[:workflow_runs].select { |json| json[:status] == 'completed' && !json[:conclusion].nil? }.first(60)
     runs =
       workflows.map do |json|
         secs = (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000

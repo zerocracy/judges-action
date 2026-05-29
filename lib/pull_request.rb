@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'fbe/github_graph'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/github_graph'
 require 'fbe/octo'
 require_relative 'jp'
 
@@ -31,12 +31,12 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   issued =
     issue_comments.sum do |comment|
       Fbe.octo.issue_comment_reactions(repo, comment[:id])
-         .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
+         .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
     end
   coded =
     code_comments.sum do |comment|
       Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
-         .count { |reaction| reaction[:user][:id] != comment[:user][:id] }
+         .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
     end
   issued + coded
 end

@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
+# SPDX-License-Identifier: MIT
+
 require 'fbe/github_graph'
 require 'fbe/if_absent'
 require 'fbe/issue'
@@ -7,9 +10,6 @@ require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/tombstone'
 require 'fbe/who'
-# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
-# SPDX-License-Identifier: MIT
-
 require 'tago'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
@@ -80,7 +80,8 @@ Fbe.iterate do
   end
 
   def self.allcontributors(repo)
-    Fbe.octo.contributors(repo)
+    list = Fbe.octo.contributors(repo)
+    list.is_a?(Array) ? list : []
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Contributors API failed for #{repo}: #{e.message}")
     []

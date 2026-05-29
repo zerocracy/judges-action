@@ -47,8 +47,8 @@ inputs:
     default: 15
   cycles:
     description: 'How many update cycles to run (keep it under 10)'
-    required: true
-    default: 1
+    required: false
+    default: 2
   sqlite-cache:
     description: 'Path of the SQLite file with the cache of HTTP requests'
     required: false

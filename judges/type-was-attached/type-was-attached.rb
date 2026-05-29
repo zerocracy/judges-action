@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require 'fbe/if_absent'
-require 'fbe/issue'
-require 'fbe/iterate'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/if_absent'
+require 'fbe/issue'
+require 'fbe/iterate'
 require 'fbe/octo'
 require 'joined'
 require_relative '../../lib/issue_was_lost'
@@ -47,6 +47,7 @@ Fbe.iterate do
         )
         next issue
       end
+    next issue unless timeline.is_a?(Array)
     timeline.each do |te|
       unless events.include?(te[:event])
         $loog.debug("No #{events.joined} events at #{repo}##{issue}")

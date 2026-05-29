@@ -196,6 +196,15 @@ class TestQualityOfService < Jp::Test
           assets: [], body: 'Some description', mentions_count: 4
         },
         {
+          id: 173_465,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.nil', target_commitish: 'master',
+          name: 'Draft Release', draft: true, prerelease: false,
+          created_at: Time.parse('2024-08-06 00:30:14 UTC'),
+          published_at: nil,
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
           id: 173_460,
           author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
           tag_name: '0.0.4', target_commitish: 'master',
@@ -355,6 +364,7 @@ class TestQualityOfService < Jp::Test
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_equal([64_800, 21_600, 36_000], f['some_release_interval'])
       assert_equal([52, 24, 99], f['some_release_hoc_size'])
       assert_equal([1, 2, 4], f['some_release_commits_size'])
     end
@@ -463,6 +473,39 @@ class TestQualityOfService < Jp::Test
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([3600, 3600], f['some_build_mttr'])
+    end
+  end
+
+  def test_quality_of_service_skips_unfinished_workflow_runs
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    timed = []
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 42, status: 'in_progress', conclusion: nil, workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          },
+          {
+            id: 43, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T11:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      timed << id
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([43], timed)
+        assert_equal([1], metrics[:some_build_success_rate])
+        assert_equal([900], metrics[:some_build_duration])
+      end
     end
   end
 
@@ -2307,7 +2350,10 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_stops_backlog_searches_after_search_quota_is_consumed
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 0, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
     $global = {}
     $local = {}
     $judge = 'quality-of-service'
@@ -2319,11 +2365,6 @@ class TestQualityOfService < Jp::Test
     url =
       'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
       'q=repo:foo/foo%20type:issue%20created:*..2025-08-22%20(closed:%3E=2025-08-22%20OR%20state:open)'
-    stub_github(
-      url,
-      body: { total_count: 0, items: [] },
-      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '0' }
-    )
     load(File.join(__dir__, '../../judges/quality-of-service/some_backlog_size.rb'))
     Jp.qoreset
     fb = Factbase.new
@@ -2333,7 +2374,7 @@ class TestQualityOfService < Jp::Test
       f.when = Time.parse('2025-08-28 21:00:00 UTC')
       assert_equal({}, some_backlog_size(f))
     end
-    assert_requested(:get, url, times: 1)
+    assert_not_requested(:get, url)
   end
 
   def test_quality_of_service_fix_gap
