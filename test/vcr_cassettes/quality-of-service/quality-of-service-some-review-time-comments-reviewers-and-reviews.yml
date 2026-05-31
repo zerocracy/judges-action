@@ -1,0 +1,513 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/rate_limit
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"rate":{"remaining":222}}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":0,"workflow_runs":[]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/releases?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":1,"incomplete_results":false,"items":[{"number":42,"labels":[{"name":"bug"}]}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":2,"incomplete_results":false,"items":[{"id":42,"number":10,"title":"Awesome
+        10"},{"id":43,"number":11,"title":"Awesome 11"}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":2,"incomplete_results":false,"items":[{"id":42,"number":10,"title":"Awesome
+        10"},{"id":43,"number":11,"title":"Awesome 11"}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?advanced_search=true&per_page=100&
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":0,"items":[]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":1,"incomplete_results":false,"items":[{"id":42,"number":10,"title":"Awesome
+        10"}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":1,"incomplete_results":false,"items":[{"id":50,"number":12,"title":"Awesome
+        12","created_at":"2024-08-20 22:00:00 UTC","pull_request":{"merged_at":"2024-08-27
+        18:30:00 UTC"}},{"id":51,"number":14,"title":"Awesome 14","created_at":"2024-08-23
+        12:00:00 UTC","pull_request":{"merged_at":"2024-08-27 18:30:00 UTC"}},{"id":52,"number":16,"title":"Awesome
+        16","created_at":"2024-08-25 12:00:00 UTC","pull_request":{"merged_at":"2024-08-27
+        18:30:00 UTC"}}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/12
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":50,"number":12,"additions":10,"deletions":5,"changed_files":1}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/14
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":51,"number":14,"additions":10,"deletions":5,"changed_files":1}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/16
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":52,"number":16,"additions":10,"deletions":5,"changed_files":1}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"id":22449328,"body":"Some text 3","user":{"login":"yegor256","id":526301,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":null},{"id":22449327,"body":"Some
+        text 2","user":{"login":"yegor257","id":526302,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-22
+        10:00:00 UTC"},{"id":22449326,"body":"Some text 1","user":{"login":"yegor257","id":526302,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-21
+        22:00:00 UTC"}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/14/reviews?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"id":22449329,"body":"Some text 1","user":{"login":"yegor257","id":526302,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-23
+        15:30:00 UTC"},{"id":22449330,"body":"Some text 2","user":{"login":"rultor","id":526303,"type":"Bot"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR"},{"id":22449331,"body":"Some
+        text 3","user":{"login":"yegor256","id":526301,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-23
+        17:30:00 UTC"},{"id":22449335,"body":"Some text 4","user":{"login":"yegor256","id":526301,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-23
+        18:30:00 UTC"},{"id":22449336,"body":"Some text 5","user":{"login":"rultor","id":526303,"type":"Bot"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-23
+        19:30:00 UTC"},{"id":22449337,"body":"Some text 6","user":{"login":"yegor257","id":526302,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-23
+        20:30:00 UTC"},{"id":22449338,"body":"Some text 7","user":{"login":"yegor256","id":526301,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-23
+        21:30:00 UTC"},{"id":22449339,"body":"Some text 8","user":{"login":"yegor256","id":526301,"type":"User"},"state":"CHANGES_REQUESTED","author_association":"CONTRIBUTOR","submitted_at":"2024-08-23
+        22:30:00 UTC"}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/16/reviews?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"pull_request_review_id":22687249,"id":17361949,"diff_hunk":"@@ -427,4
+        +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"yegor256","id":526301,"type":"User"},"body":"Some
+        comment 1","created_at":"2024-09-05 10:31:06 UTC","updated_at":"2024-09-05
+        10:33:04 UTC","author_association":"MEMBER"},{"pull_request_review_id":22687503,"id":17361950,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 2","created_at":"2024-09-05 11:40:00 UTC","updated_at":"2024-09-05
+        11:41:05 UTC","author_association":"CONTRIBUTOR"},{"pull_request_review_id":22687543,"id":17361955,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 3","created_at":"2024-09-05 15:55:07 UTC","updated_at":"2024-09-05
+        15:55:07 UTC","author_association":"CONTRIBUTOR"},{"pull_request_review_id":22687563,"id":17361960,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 4","created_at":"2024-09-05 16:40:00 UTC","updated_at":"2024-09-05
+        16:41:05 UTC","author_association":"CONTRIBUTOR"},{"pull_request_review_id":22687573,"id":17361970,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 5","created_at":"2024-09-05 17:55:07 UTC","updated_at":"2024-09-05
+        17:55:07 UTC","author_association":"CONTRIBUTOR"}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/14/comments?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/16/comments?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"pull_request_review_id":22687505,"id":17371800,"diff_hunk":"@@ -427,4
+        +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"yegor256","id":526301,"type":"User"},"body":"Some
+        comment 1","created_at":"2024-09-05 10:31:06 UTC","updated_at":"2024-09-05
+        10:33:04 UTC","author_association":"MEMBER"},{"pull_request_review_id":22687607,"id":17371810,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 2","created_at":"2024-09-05 11:40:00 UTC","updated_at":"2024-09-05
+        11:41:05 UTC","author_association":"CONTRIBUTOR"},{"pull_request_review_id":22687617,"id":17371820,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 3","created_at":"2024-09-05 12:40:00 UTC","updated_at":"2024-09-05
+        12:41:05 UTC","author_association":"CONTRIBUTOR"},{"pull_request_review_id":22687627,"id":17371820,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 4","created_at":"2024-09-05 13:40:00 UTC","updated_at":"2024-09-05
+        13:41:05 UTC","author_association":"CONTRIBUTOR"},{"pull_request_review_id":22687637,"id":17371830,"diff_hunk":"@@
+        -427,4 +481,107 @@ def example\n","path":"test/example.rb","commit_id":"11e3a0dd2d1","user":{"login":"Yegorov","id":123234123,"type":"User"},"body":"Some
+        comment 5","created_at":"2024-09-05 14:40:00 UTC","updated_at":"2024-09-05
+        14:41:05 UTC","author_association":"CONTRIBUTOR"}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":0,"incomplete_results":false,"items":[]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT

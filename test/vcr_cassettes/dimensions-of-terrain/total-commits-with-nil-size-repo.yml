@@ -1,0 +1,237 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/rate_limit
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"rate":{"remaining":222}}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"name":"foo","full_name":"foo/foo","private":false,"created_at":"2024-07-11
+        20:35:25 UTC","updated_at":"2024-09-23 07:23:36 UTC","pushed_at":"2024-09-23
+        20:22:51 UTC","size":19366,"stargazers_count":1,"forks":1,"default_branch":"master"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/nil-size
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"name":"nil-size","full_name":"foo/nil-size","private":false,"created_at":"2024-07-10
+        20:35:25 UTC","updated_at":"2024-09-22 07:23:36 UTC","pushed_at":"2024-09-22
+        20:22:51 UTC","size":null,"stargazers_count":0,"forks":0,"default_branch":"master"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/releases?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/nil-size/releases?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/git/trees/master?recursive=true
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"sha":"abc012345f","tree":[],"truncated":false}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/contributors?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":0,"incomplete_results":false,"items":[]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/commits?per_page=100&q=repo:foo/nil-size%20author-date:%3E2024-08-30
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":0,"incomplete_results":false,"items":[]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT

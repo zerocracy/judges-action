@@ -1,0 +1,173 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42/events?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"40623323541","type":"PullRequestReviewEvent","public":true,"created_at":"2024-07-31
+        12:45:09 UTC","actor":{"id":42,"login":"yegor256","display_login":"yegor256","gravatar_id":"","url":"https://api.github.com/users/yegor256"},"repo":{"id":42,"name":"yegor256/judges","url":"https://api.github.com/repos/yegor256/judges"},"payload":{"action":"created","review":{"id":2210067609,"node_id":"PRR_kwDOL6GCO86DuvSZ","user":{"login":"yegor256","id":42,"node_id":"MDQ6VXNlcjUyNjMwMQ==","type":"User"},"state":"approved","pull_request_url":"https://api.github.com/repos/yegor256/judges/pulls/93","_links":{"html":{"href":"https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609"},"pull_request":{"href":"https://api.github.com/repos/yegor256/judges/pulls/93"}}},"pull_request":{"url":"https://api.github.com/repos/yegor256/judges/pulls/93","id":1990323142,"number":93}}},{"id":"40623323542","type":"PullRequestReviewEvent","public":true,"created_at":"2024-07-31
+        12:46:09 UTC","actor":{"id":42,"login":"yegor256","display_login":"yegor256","gravatar_id":"","url":"https://api.github.com/users/yegor256"},"repo":{"id":42,"name":"yegor256/judges","url":"https://api.github.com/repos/yegor256/judges"},"payload":{"action":"created","review":{"id":2210067609,"node_id":"PRR_kwDOL6GCO86DuvSZ","user":{"login":"yegor256","id":42,"node_id":"MDQ6VXNlcjUyNjMwMQ==","type":"User"},"state":"approved","pull_request_url":"https://api.github.com/repos/yegor256/judges/pulls/93","_links":{"html":{"href":"https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609"},"pull_request":{"href":"https://api.github.com/repos/yegor256/judges/pulls/93"}}},"pull_request":{"url":"https://api.github.com/repos/yegor256/judges/pulls/93","id":1990323142,"number":93}}},{"id":"40623323550","type":"PullRequestReviewEvent","public":true,"created_at":"2024-07-31
+        12:45:09 UTC","actor":{"id":55,"login":"Yegorov","display_login":"yegorov","gravatar_id":"","url":"https://api.github.com/users/yegorov"},"repo":{"id":42,"name":"yegor256/judges","url":"https://api.github.com/repos/yegor256/judges"},"payload":{"action":"created","review":{"id":2210067609,"node_id":"PRR_kwDOL6GCO86DuvSZ","user":{"login":"yegorov","id":42,"node_id":"MDQ6VXNlcjUyNjMwMQ==","type":"User"},"state":"approved","pull_request_url":"https://api.github.com/repos/yegor256/judges/pulls/93","_links":{"html":{"href":"https://github.com/yegor256/judges/pull/93#pullrequestreview-2210067609"},"pull_request":{"href":"https://api.github.com/repos/yegor256/judges/pulls/93"}}},"pull_request":{"url":"https://api.github.com/repos/yegor256/judges/pulls/93","id":1990323155,"number":93}}}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"login":"torvalds"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/55
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":55,"login":"torvalds"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/pulls/93
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"user":{"login":"test","id":526200,"node_id":"MDQ6VXNlcjE2NDYwMjA=","type":"User","site_admin":false},"default_branch":"master","additions":1,"deletions":1,"comments":1,"review_comments":2,"commits":2,"changed_files":3}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT

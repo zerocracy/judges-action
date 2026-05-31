@@ -1,0 +1,160 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":695,"name":"foo","full_name":"foo/foo","created_at":"2024-07-11
+        20:35:25 UTC"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/695
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":695,"name":"foo","full_name":"foo/foo","created_at":"2024-07-11
+        20:35:25 UTC"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo/issues/87
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":2564855709,"number":87,"title":"Issue 87","created_at":"2024-09-10
+        15:00:00 UTC"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2024-09-10
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":3,"incomplete_results":false,"items":[{"number":42,"title":"Issue
+        42","user":{"login":"yegor256","id":526301,"type":"User","site_admin":false},"created_at":"2024-09-04
+        17:00:00 UTC"},{"number":45,"title":"Issue 45","user":{"login":"yegor257","id":526302,"type":"User","site_admin":false},"created_at":"2024-09-04
+        18:00:00 UTC"},{"number":87,"title":"Issue 87","user":{"login":"bar","id":257964,"type":"User","site_admin":false},"created_at":"2024-09-10
+        15:00:00 UTC"}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2024-09-10
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_count":3,"incomplete_results":false,"items":[{"number":42,"title":"Issue
+        42","user":{"login":"yegor256","id":526301,"type":"User","site_admin":false},"created_at":"2024-09-04
+        17:00:00 UTC"},{"number":45,"title":"Issue 45","user":{"login":"yegor257","id":526302,"type":"User","site_admin":false},"created_at":"2024-09-04
+        18:00:00 UTC"},{"number":87,"title":"Issue 87","user":{"login":"bar","id":257964,"type":"User","site_admin":false},"created_at":"2024-09-10
+        15:00:00 UTC"}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/526301
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"login":"yegor256","id":526301,"type":"User","site_admin":false}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/526302
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"login":"yegor257","id":526302,"type":"User","site_admin":false}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT

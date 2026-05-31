@@ -1,0 +1,153 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repositories/111/events?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"4321000","type":"ReleaseEvent","actor":{"id":29139614,"login":"renovate[bot]"},"repo":{"id":111,"name":"foo/old_baz"},"payload":{"action":"published","release":{"id":178368,"tag_name":"v1.2.3","name":"Release
+        v1.2.3","author":{"id":29139614,"login":"renovate[bot]"}}},"created_at":"2024-11-01
+        12:30:15 UTC"}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/new_baz
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":111,"name":"new_baz","full_name":"foo/new_baz"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/111
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":111,"name":"new_baz","full_name":"foo/new_baz"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/29139614
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"login":"renovate[bot]","id":29139614,"type":"Bot"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/new_baz/contributors?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"login":"yegor256","id":526301}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/new_baz/releases/20000
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":20000,"tag_name":"v1.2.2","target_commitish":"master","name":"Release
+        v1.2.2","draft":false,"prerelease":false,"created_at":"2024-10-31 21:45:00
+        UTC","published_at":"2024-10-31 21:45:00 UTC","body":"Release v1.2.2"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/new_baz/compare/v1.2.2...v1.2.3?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_commits":2,"commits":[{"sha":"2aa49900e720bd792e9"},{"sha":"1bbb36f67e5b97246b1"}],"files":[{"additions":7,"deletions":4,"changes":11},{"additions":2,"deletions":0,"changes":2},{"additions":0,"deletions":7,"changes":7}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT

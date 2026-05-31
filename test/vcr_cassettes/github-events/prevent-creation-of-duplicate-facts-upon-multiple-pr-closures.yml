@@ -1,0 +1,306 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42/events?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: |-
+        [{
+                id: '123123111',
+                type: 'PullRequestEvent',
+                actor: { id: 411, login: 'user' },
+                repo: { id: 43, name: 'bar', full_name: 'bar/bar' },
+                payload: {
+                  action: 'closed',
+                  number: 305,
+                  pull_request: {
+                    id: 249_156, number: 305,
+                    head: {
+                      label: 'foo:origin/master', ref: 'origin/master', sha: '42b24481',
+                      user: { id: 411, login: 'user' },
+                      repo: { id: 42,  name: 'foo', full_name: 'foo/foo' }
+                    },
+                    base: {
+                      label: 'bar:master', ref: 'master', sha: '9f4767929',
+                      user: { id: 422, login: 'user2' },
+                      repo: { id: 43,  name: 'bar', full_name: 'bar/bar' }
+                    }
+                  }
+                },
+                public: true,
+                created_at: Time.parse('2025-05-04 03:46:04 UTC')
+              },
+              {
+                id: '123123222',
+                type: 'PullRequestEvent',
+                actor: { id: 411, login: 'user' },
+                repo: { id: 43, name: 'bar', full_name: 'bar/bar' },
+                payload: {
+                  action: 'closed',
+                  number: 305,
+                  pull_request: {
+                    id: 249_156, number: 305,
+                    head: {
+                      label: 'foo:origin/master', ref: 'origin/master', sha: '42b24481',
+                      user: { id: 411, login: 'user' },
+                      repo: { id: 42,  name: 'foo', full_name: 'foo/foo' }
+                    },
+                    base: {
+                      label: 'bar:master', ref: 'master', sha: '9f4767929',
+                      user: { id: 422, login: 'user2' },
+                      repo: { id: 43,  name: 'bar', full_name: 'bar/bar' }
+                    }
+                  }
+                },
+                public: true,
+                created_at: Time.parse('2025-05-04 03:46:04 UTC')
+              }]
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/bar/bar/pulls/305
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":50,"number":305,"user":{"id":411,"login":"user"},"head":{"label":"foo:origin/master","ref":"origin/master","sha":"42b24481"},"state":"closed","title":"some
+        title","body":"some body","created_at":"2025-04-30 13:52:28 UTC","updated_at":"2025-05-03
+        11:36:34 UTC","closed_at":"2025-05-03 11:36:33 UTC","merged_at":null,"author_association":"CONTRIBUTOR","auto_merge":null,"active_lock_reason":null,"merged":false,"mergeable":null,"rebaseable":null,"mergeable_state":"unknown","merged_by":null,"comments":3,"review_comments":0,"maintainer_can_modify":false,"commits":1,"additions":2,"deletions":2,"changed_files":2}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/bar/bar/pulls/305/reviews?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/bar/bar/pulls/305/comments?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/bar/bar/issues/305/comments?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: "[]"
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"check_runs":[]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/411
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":411,"login":"user"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/43
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":43,"name":"bar","full_name":"bar/bar"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT

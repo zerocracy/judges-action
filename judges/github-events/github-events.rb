@@ -174,22 +174,22 @@ Fbe.iterate do
         Jp.fill_fact_by_hash(fact, Jp.comments_info(pl, repo: rname))
         Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(pl, repo: rname))
         fact.branch = pl[:head][:ref]
-        review =
+        reviews =
           begin
-            Fbe.octo.pull_request_reviews(rname, fact.issue).first
+            Fbe.octo.pull_request_reviews(rname, fact.issue)
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
-            nil
+            []
           rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
-            nil
+            []
           end
-        fact.review = review[:submitted_at] if review
+        fact.review = reviews.first[:submitted_at] if reviews.any?
         author = pl.dig(:user, :id)
-        fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
+        fact.suggestions = Jp.count_suggestions(rname, fact.issue, author, reviews) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
