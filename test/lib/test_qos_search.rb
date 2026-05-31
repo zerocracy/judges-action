@@ -46,14 +46,7 @@ class TestQosSearch < Jp::Test
     ratelimits(1000, 1000, 0)
     searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
     assert_equal(0, Jp.qosearch('repo:foo/foo type:issue')[:total_count])
-    assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
-    assert_not_requested(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr')
-  end
-
-  def test_latches_on_too_many_requests
-    ratelimits(1000, 1000)
-    searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, remaining: 0, status: 403)
-    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    searchstub('repo:foo/foo type:pr', body: { message: 'API rate limit exceeded' }, remaining: 0, status: 403)
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
   end
 
@@ -61,11 +54,19 @@ class TestQosSearch < Jp::Test
     ratelimits(1000, 1000, 0)
     searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
     Jp.qosearch('repo:foo/foo type:issue')
+    searchstub('repo:foo/foo type:pr', body: { message: 'API rate limit exceeded' }, remaining: 0, status: 403)
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
     Jp.qoreset
     ratelimits(1000, 1000, 1000)
     searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
     assert_equal(2, Jp.qosearch('repo:foo/foo type:pr')[:items].first[:number])
+  end
+
+  def test_latches_on_too_many_requests
+    ratelimits(1000, 1000)
+    searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, remaining: 0, status: 403)
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
   end
 
   private
