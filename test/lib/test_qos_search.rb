@@ -71,7 +71,7 @@ class TestQosSearch < Jp::Test
 
   private
 
-  def rate_limits(*remaining)
+  def rate_limits(*remaining) # rubocop:disable Elegant/GoodMethodName
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       *remaining.map do |left|
         {
