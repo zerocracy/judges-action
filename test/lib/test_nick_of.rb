@@ -8,16 +8,12 @@ require_relative '../test__helper'
 
 class TestNickOf < Jp::Test
   def test_returns_nil_on_forbidden_user_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     $options = Judges::Options.new({})
     $global = {}
     $loog = Loog::NULL
-    assert_nil(Jp.nick_of(29_139_614, loog: Loog::NULL))
+    VCR.use_cassette('lib/nick-of/forbidden-user-lookup') do
+      assert_nil(Jp.nick_of(29_139_614, loog: Loog::NULL))
+    end
   end
 end
