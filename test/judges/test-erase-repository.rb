@@ -42,6 +42,7 @@ class TestEraseRepository < Jp::Test
       f._id = 7
       f.where = 'gitlab'
     end
+    rate_limit_up
     VCR.use_cassette('erase-repository/erase-not-found-repository') do
       load_it('erase-repository', fb)
     end
@@ -61,6 +62,7 @@ class TestEraseRepository < Jp::Test
       f.where = 'github'
       f.repository = 410_123
     end
+    rate_limit_up
     VCR.use_cassette('erase-repository/erase-deprecated-repository') do
       load_it('erase-repository', fb)
     end
@@ -75,6 +77,7 @@ class TestEraseRepository < Jp::Test
       f.where = 'github'
       f.repository = 403_123
     end
+    rate_limit_up
     VCR.use_cassette('erase-repository/forbidden-repository-is-not-erased') do
       load_it('erase-repository', fb)
     end

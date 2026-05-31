@@ -54,6 +54,7 @@ class TestEliminateGhosts < Jp::Test
       f._id = 9
       f.where = 'gitlab'
     end
+    rate_limit_up
     VCR.use_cassette('eliminate-ghosts/delete-who-if-user-not-found') do
       load_it('eliminate-ghosts', fb)
     end
@@ -80,6 +81,7 @@ class TestEliminateGhosts < Jp::Test
       .with(_id: 10, where: 'github', who: 555, what: 'something-j', stale: 'who')
       .with(_id: 11, where: 'github', who: 555, what: 'something-k', stale: 'who')
       .with(_id: 12, where: 'github', who: 555, what: 'something-l', stale: 'who')
+    rate_limit_up
     VCR.use_cassette('eliminate-ghosts/process-unique-users-first-and-set-stale-property-later-for-other-facts') do
       load_it('eliminate-ghosts', fb)
     end

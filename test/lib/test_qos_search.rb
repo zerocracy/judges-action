@@ -45,6 +45,7 @@ class TestQosSearch < Jp::Test
   end
 
   def test_latches_after_zero_remaining_search_quota
+    rate_limit_up
     VCR.use_cassette('lib/qos-search/latches-after-zero-remaining-search-quota') do
       result = Jp.qosearch('repo:foo/foo type:issue')
       assert_equal(0, result[:total_count])
@@ -60,6 +61,7 @@ class TestQosSearch < Jp::Test
   end
 
   def test_qoreset_clears_the_latch
+    rate_limit_up
     VCR.use_cassette('lib/qos-search/qoreset-clears-latch') do
       Jp.qosearch('repo:foo/foo type:issue')
       Jp.qosearch('repo:foo/foo type:pr')
