@@ -13,28 +13,7 @@ class TestIssueWasClosed < Jp::Test
   using SmartFactbase
 
   def test_find_closed_issues
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/50',
-      body: { number: 50, title: 'some title 50', state: 'open' }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/51',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52',
-      body: {
-        number: 52, title: 'some title 52', state: 'closed',
-        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
-        closed_by: { login: 'user1', id: 222_111 }
-      }
-    )
-    stub_github('https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github')
@@ -45,7 +24,9 @@ class TestIssueWasClosed < Jp::Test
       .with(_id: 7, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
       .with(_id: 8, what: 'issue-was-opened', repository: 42, issue: 44, where: 'gitlab')
       .with(_id: 9, what: 'issue-was-closed', repository: 42, issue: 44, where: 'gitlab')
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/find-closed-issues') do
+      load_it('issue-was-closed', fb)
+    end
     assert_equal(6, fb.picks(what: 'issue-was-opened').size)
     assert_equal(4, fb.picks(what: 'issue-was-closed').size)
     assert(
@@ -62,142 +43,59 @@ class TestIssueWasClosed < Jp::Test
   end
 
   def test_multiple_facts_with_identical_repository_and_issue
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44',
-      body: {
-        number: 44, title: 'some title 44', state: 'closed',
-        closed_at: Time.parse('2025-10-01 10:00:00 UTC'),
-        closed_by: { login: 'user1', id: 222_111 }
-      }
-    )
-    stub_github('https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'bug-was-accepted', repository: 42, issue: 44, where: 'github')
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/multiple-facts-with-identical-repository-and-issue') do
+      load_it('issue-was-closed', fb)
+    end
     assert(fb.one?(what: 'issue-was-closed', repository: 42, issue: 44, where: 'github'))
   end
 
   def test_find_closed_issues_with_labels
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52',
-      body: {
-        number: 52, title: 'some title 52', state: 'closed',
-        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
-        closed_by: { login: 'user1', id: 222_111 }
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
-      body: [
-        {
-          id: 195,
-          actor: { id: 421, login: 'user' },
-          event: 'labeled',
-          created_at: '2025-09-30 06:14:38 UTC',
-          label: { name: 'bug', color: 'd73a4a' }
-        }
-      ]
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/find-closed-issues-with-labels') do
+      load_it('issue-was-closed', fb)
+    end
     assert_equal(1, fb.picks(what: 'issue-was-opened').size)
     assert_equal(1, fb.picks(what: 'label-was-attached').size)
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
 
   def test_find_closed_issues_without_labels
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52',
-      body: {
-        number: 52, title: 'some title 52', state: 'closed',
-        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
-        closed_by: { login: 'user1', id: 222_111 }
-      }
-    )
-    stub_github('https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/find-closed-issues-without-labels') do
+      load_it('issue-was-closed', fb)
+    end
     assert_equal(1, fb.picks(what: 'issue-was-opened').size)
     assert_equal(0, fb.picks(what: 'label-was-attached').size)
   end
 
   def test_find_closed_issues_with_labels_and_exists_labels_fact
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52',
-      body: {
-        number: 52, title: 'some title 52', state: 'closed',
-        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
-        closed_by: { login: 'user1', id: 222_111 }
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
-      body: [
-        {
-          id: 195,
-          actor: { id: 421, login: 'user' },
-          event: 'labeled',
-          created_at: '2025-09-30 06:14:38 UTC',
-          label: { name: 'bug', color: 'd73a4a' }
-        }
-      ]
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
       .with(_id: 2, what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/find-closed-issues-with-labels-and-exists-labels-fact') do
+      load_it('issue-was-closed', fb)
+    end
     assert_equal(1, fb.picks(what: 'issue-was-opened').size)
     assert_equal(1, fb.picks(what: 'label-was-attached').size)
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
 
   def test_marks_label_stale_on_who_when_timeline_actor_is_nil
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52',
-      body: {
-        number: 52, title: 'some title 52', state: 'closed',
-        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
-        closed_by: { login: 'user1', id: 222_111 }
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
-      body: [
-        {
-          id: 195,
-          actor: nil,
-          event: 'labeled',
-          created_at: '2025-09-30 06:14:38 UTC',
-          label: { name: 'bug', color: 'd73a4a' }
-        }
-      ]
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/marks-label-stale-on-who-when-timeline-actor-is-nil') do
+      load_it('issue-was-closed', fb)
+    end
     f = fb.query("(and (eq what 'label-was-attached') (eq label 'bug'))").each.first
     refute_nil(f)
     assert_nil(f['who'], 'who must not be set to nil for a deleted timeline actor')
@@ -206,44 +104,24 @@ class TestIssueWasClosed < Jp::Test
   end
 
   def test_rescues_forbidden_on_issue_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/rescues-forbidden-on-issue-lookup') do
+      load_it('issue-was-closed', fb)
+    end
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
     assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the lookup')
   end
 
   def test_rescues_forbidden_on_timeline_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44',
-      body: {
-        number: 44, title: 'some title 44', state: 'closed',
-        closed_at: Time.parse('2025-10-01 10:00:00 UTC'),
-        closed_by: { login: 'user1', id: 222_111 }
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
-    load_it('issue-was-closed', fb)
+    VCR.use_cassette('issue-was-closed/rescues-forbidden-on-timeline-lookup') do
+      load_it('issue-was-closed', fb)
+    end
     assert(
       fb.one?(what: 'issue-was-closed', repository: 42, issue: 44, where: 'github', who: 222_111),
       'issue-was-closed fact should still be created — only timeline processing is skipped on 403'

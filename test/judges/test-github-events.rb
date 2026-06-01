@@ -786,11 +786,48 @@ class TestGithubEvents < Jp::Test
 
   def test_rescues_forbidden_on_closed_pull_request_reviews_lookup
     rate_limit_up
+    stub_event(
+      {
+        id: 1,
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42 },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature', sha: 'abc123' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }
+    )
+    stub_request(:get, 'https://api.github.com/user/45').to_return(
+      body: { id: 45, login: 'user' }.to_json, headers: {
+        'Content-Type': 'application/json',
+        'X-RateLimit-Remaining' => '999'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: { number: 123, head: { ref: 'feature', sha: 'abc123' } }
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100').to_return(
+      { status: 403, body: { message: 'Resource not accessible by integration' }.to_json,
+        headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' } },
+      { status: 200, body: [].to_json,
+        headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100',
+                body: { total_count: 0, check_runs: [] })
     fb = Factbase.new
+    f = fb.insert
+    f.what = 'pull-was-merged'
+    f.repository = 42
+    f.issue = 123
+    f.where = 'github'
+    f.when = Time.parse('2025-06-27 19:00:05 UTC')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
-      VCR.use_cassette('github-events/rescues-forbidden-on-closed-pull-request-reviews-lookup') do
-        load_it('github-events', fb)
-      end
+      load_it('github-events', fb)
     end
     f = fb.query('(eq what "pull-was-merged")').each.first
     refute_nil(f)
