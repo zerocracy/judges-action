@@ -5,7 +5,7 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
   DisplayCopNames: true
-  TargetRubyVersion: 3.2
+  TargetRubyVersion: 4.0
   SuggestExtensions: false
   NewCops: enable
 plugins:
@@ -13,6 +13,8 @@ plugins:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-elegant
+Style/ItBlockParameter:
+  Enabled: false
 Naming/FileName:
   Regex: '^[a-z0-9\-._]*$'
 Style/GlobalVars:
