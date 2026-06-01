@@ -45,7 +45,7 @@ jobs:
       - name: Job Summary
         if: always()
         run: |
-          cat > $GITHUB_STEP_SUMMARY <<'EOF'
+          cat > "$GITHUB_STEP_SUMMARY" <<'EOF'
           ## zerocracy run
 
           | Info | |
@@ -55,12 +55,12 @@ jobs:
           | Status | ${{ job.status }} |
           EOF
           if [ -f summary.md ]; then
-            cat summary.md >> $GITHUB_STEP_SUMMARY
+            cat summary.md >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "_Detailed summary not available (no data from action container)._" >> $GITHUB_STEP_SUMMARY
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "_Detailed summary not available (no data from action container)._" >> "$GITHUB_STEP_SUMMARY"
           fi
       - name: Flag on failure
         if: failure() && github.repository_owner == 'zerocracy'
         run: |
-          echo ":x: Workflow run [#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) **failed**." >> $GITHUB_STEP_SUMMARY
+          echo ":x: Workflow run [#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) **failed**." >> "$GITHUB_STEP_SUMMARY"
