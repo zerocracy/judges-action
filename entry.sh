@@ -6,27 +6,7 @@ set -e -o pipefail
 
 start=$(date +%s)
 
-VERSION=0.0.0
-
-echo "The 'judges-action' ${VERSION} is running"
-
-if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    resp=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
-    latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name) catch empty")
-    if [ -z "${latest}" ]; then
-        echo "!!! Could not fetch the latest version from GitHub."
-        echo "!!! GitHub returned: "
-        echo "$resp"
-        echo "!!! Disabling version checking for the rest of the script."
-        SKIP_VERSION_CHECKING=true
-    elif [ "${latest}" != "${VERSION}" ]; then
-        echo "!!! The latest version of the judges-action plugin available in"
-        echo "!!! its GitHub repository is ${latest}: https://github.com/zerocracy/judges-action."
-        echo "!!! However, you are using a different version: ${VERSION}."
-        echo "!!! This will most likely lead to runtime issues and maybe even data corruption."
-        echo "!!! It is strongly advised to upgrade."
-    fi
-fi
+echo "The 'judges-action' is running"
 
 # Mask token values in CI logs before enabling bash tracing.
 # Without these workflow commands, "set -x" emits the full command line
@@ -123,7 +103,6 @@ if [ -n "${GITHUB_RUN_ID}" ]; then
     options+=("--option=job_id=${GITHUB_RUN_ID}")
 fi
 
-options+=("--option=action_version=${VERSION}")
 options+=("--option=vitals_url=${VITALS_URL}")
 if [ "$(printenv "INPUT_FAIL-FAST" || echo 'false')" == 'true' ]; then
     options+=("--fail-fast");
@@ -262,17 +241,6 @@ else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
 
-if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-    if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
-        action_version=${VERSION}
-    else
-        action_version="${VERSION}!${action_version}"
-    fi
-else
-    action_version=${VERSION}
-fi
-
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     echo "We are in 'dry' mode; skipping 'push'"
 else
@@ -284,7 +252,6 @@ else
         "--meta=churn:$(cat churn.txt)" \
         "--meta=vitals_url:${VITALS_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
-        "--meta=action_version:${action_version}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
