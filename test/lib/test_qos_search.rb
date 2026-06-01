@@ -43,9 +43,10 @@ class TestQosSearch < Jp::Test
   end
 
   def test_latches_after_zero_remaining_search_quota
-    ratelimits(1000, 1000, 0)
+    ratelimits(1000, 0)
     searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
     assert_equal(0, Jp.qosearch('repo:foo/foo type:issue')[:total_count])
+    $global[:octo] = nil
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
     assert_not_requested(:get, 'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr')
   end
@@ -58,12 +59,14 @@ class TestQosSearch < Jp::Test
   end
 
   def test_qoreset_clears_the_latch
-    ratelimits(1000, 1000, 0)
+    ratelimits(1000, 0)
     searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
     Jp.qosearch('repo:foo/foo type:issue')
+    $global[:octo] = nil
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
     Jp.qoreset
-    ratelimits(1000, 1000, 1000)
+    $global[:octo] = nil
+    ratelimits(1000, 1000)
     searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
     assert_equal(2, Jp.qosearch('repo:foo/foo type:pr')[:items].first[:number])
   end
@@ -74,7 +77,10 @@ class TestQosSearch < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       *remaining.map do |left|
         {
-          body: { rate: { remaining: left, limit: 1000 } }.to_json,
+          body: {
+            resources: { search: { remaining: left, limit: 30 } },
+            rate: { remaining: left, limit: 1000 }
+          }.to_json,
           headers: {
             'Content-Type' => 'application/json',
             'X-RateLimit-Remaining' => left.to_s
