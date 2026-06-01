@@ -23,7 +23,11 @@ def Jp.qosearch(query, **options)
   rescue NoMethodError => e
     raise unless e.name == :get
   end
-  left ||= octo.rate_limit.remaining
+  if left.nil?
+    @offquota = true
+    $loog.warn("[#{$judge}] GitHub Search API quota info unavailable, stopping search")
+    return
+  end
   if left.zero?
     @offquota = true
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
