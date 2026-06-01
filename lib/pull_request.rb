@@ -5,6 +5,7 @@
 
 require 'fbe/github_graph'
 require 'fbe/octo'
+require 'octokit'
 require_relative 'jp'
 
 def Jp.comments_info(pr, repo: nil)
@@ -46,9 +47,34 @@ def Jp.fetch_workflows(pr, repo: nil)
   failed = 0
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
-  Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))[:check_runs].each do |run|
+  runs = nil
+  begin
+    runs = Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))[:check_runs]
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Can't list check runs for #{repo}@#{pr.dig(:head, :sha)}: #{e.message}")
+    return { succeeded_builds: 0, failed_builds: 0 }
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to check runs in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    return { succeeded_builds: 0, failed_builds: 0 }
+  end
+  runs.each do |run|
     next unless run.dig(:app, :slug) == 'github-actions'
-    workflow = Fbe.octo.workflow_run(repo, Fbe.octo.workflow_run_job(repo, run[:id])[:run_id])
+    workflow =
+      begin
+        Fbe.octo.workflow_run(repo, Fbe.octo.workflow_run_job(repo, run[:id])[:run_id])
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Workflow run for job ##{run[:id]} not available in #{repo}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to workflow run for job ##{run[:id]} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     next unless workflow[:event] == 'pull_request'
     case workflow[:conclusion]
     when 'success'
