@@ -1846,30 +1846,32 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
@@ -2000,30 +2002,32 @@ class TestQualityOfService < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
@@ -2146,30 +2150,32 @@ class TestQualityOfService < Jp::Test
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-30T21:00:00Z&per_page=100',
@@ -2447,18 +2453,17 @@ class TestQualityOfService < Jp::Test
       }
     )
     workflow_runs.each do |run|
-      stub_github(
-        "https://api.github.com/repos/foo/foo/actions/runs/#{run[:id]}/timing",
-        body: { run_duration_ms: 900_000 }
-      )
+      stub_github("https://api.github.com/repos/foo/foo/actions/runs/#{run[:id]}/timing", body: { run_duration_ms: 900_000 })
     end
     stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: [{
-        node_id: 'RE_kwDOL6GCO84J7Cen', tag_name: '0.19.0', target_commitish: 'master',
-        name: 'just a fake name', draft: false, prerelease: false,
-        created_at: Time.now - rand(10_000), published_at: Time.now - rand(10_000), assets: []
-      }]
+      body: [
+        {
+          node_id: 'RE_kwDOL6GCO84J7Cen', tag_name: '0.19.0', target_commitish: 'master',
+          name: 'just a fake name', draft: false, prerelease: false,
+          created_at: Time.now - rand(10_000), published_at: Time.now - rand(10_000), assets: []
+        }
+      ]
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \

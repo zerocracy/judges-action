@@ -27,10 +27,7 @@ class TestIsHumanOrRobot < Jp::Test
     load_it('is-human-or-robot', fb)
     facts = fb.query("(eq who #{id})").each.to_a
     assert_equal(id, facts.first.who)
-    assert_equal(
-      "Can't find 'is_human' attribute out of [who, where]",
-      assert_raises(RuntimeError) { facts.first.is_human }.message
-    )
+    assert_equal("Can't find 'is_human' attribute out of [who, where]", assert_raises(RuntimeError) { facts.first.is_human }.message)
   end
 
   def test_identify_user_as_bot_or_human
@@ -66,11 +63,7 @@ class TestIsHumanOrRobot < Jp::Test
   def test_marks_fact_stale_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
+    stub_github('https://api.github.com/user/29139614', status: 403, body: { message: 'Resource not accessible by integration' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
     load_it('is-human-or-robot', fb)
@@ -83,9 +76,7 @@ class TestIsHumanOrRobot < Jp::Test
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/user/100', body: { login: 'alice', id: 100, type: 'User' })
-    stub_github('https://api.github.com/user/200',
-                status: 403,
-                body: { message: 'Resource not accessible by integration' })
+    stub_github('https://api.github.com/user/200', status: 403, body: { message: 'Resource not accessible by integration' })
     stub_github('https://api.github.com/user/300', body: { login: 'bob', id: 300, type: 'User' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', who: 100, where: 'github')

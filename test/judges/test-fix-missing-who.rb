@@ -33,11 +33,7 @@ class TestFixMissingWho < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/55',
-      status: 410,
-      body: { message: 'Issues are disabled for this repo' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/55', status: 410, body: { message: 'Issues are disabled for this repo' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 55, where: 'github')
     load_it('fix-missing-who', fb)

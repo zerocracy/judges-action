@@ -136,9 +136,6 @@ class TestIssueWasUnassigned < Jp::Test
     load_it('issue-was-unassigned', fb)
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
-    assert_nil(
-      f['stale'],
-      '403 is transient — fact must NOT be marked stale; next cycle will retry the events lookup'
-    )
+    assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the events lookup')
   end
 end

@@ -44,10 +44,7 @@ class TestTypeWasAttached < Jp::Test
     load_it('type-was-attached', fb)
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
-    assert_nil(
-      f['stale'],
-      '403 is transient — fact must NOT be marked stale; next cycle will retry the timeline lookup'
-    )
+    assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the timeline lookup')
   end
 
   def test_marks_stale_when_graphql_actor_is_nil

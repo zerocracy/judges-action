@@ -36,10 +36,7 @@ require_relative '../../lib/issue_was_lost'
           Jp.issue_was_lost('github', repository, issue)
           next 0
         rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to #{type} ##{issue} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
+          $loog.warn("[#{$judge}] Access forbidden to #{type} ##{issue} (transient, will retry next cycle): #{e.class}: #{e.message}")
           next 0
         end
       if after.nil?

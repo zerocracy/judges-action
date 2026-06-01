@@ -161,14 +161,8 @@ class TestFindAllIssues < Jp::Test
         ]
       }
     )
-    stub_github(
-      'https://api.github.com/user/526301',
-      body: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false }
-    )
-    stub_github(
-      'https://api.github.com/user/526302',
-      body: { login: 'yegor257', id: 526_301, type: 'User', site_admin: false }
-    )
+    stub_github('https://api.github.com/user/526301', body: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false })
+    stub_github('https://api.github.com/user/526302', body: { login: 'yegor257', id: 526_301, type: 'User', site_admin: false })
     fb = Factbase.new
     fb.insert.then do |f|
       f.details = 'The issue foo/foo#87 has been opened by @bar.'
@@ -320,10 +314,7 @@ class TestFindAllIssues < Jp::Test
       status: 404,
       body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/46',
-      body: { number: 46, head: { ref: 'feature/branch-survivor' } }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46', body: { number: 46, head: { ref: 'feature/branch-survivor' } })
     stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
@@ -334,10 +325,7 @@ class TestFindAllIssues < Jp::Test
     end
     load_it('find-all-issues', fb)
     survivor = fb.query("(and (eq issue 46) (eq what 'pull-was-opened'))").each.first
-    refute_nil(
-      survivor,
-      'the second pull must be recorded after the first raises 404 — paginated batch must not truncate on exception'
-    )
+    refute_nil(survivor, 'the second pull must be recorded after the first raises 404 — paginated batch must not truncate on exception')
     assert_equal('feature/branch-survivor', survivor.branch)
   end
 
@@ -357,15 +345,8 @@ class TestFindAllIssues < Jp::Test
         ]
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/46',
-      body: { number: 46, head: { ref: 'feature/branch-survivor' } }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/45', status: 403, body: { message: 'Resource not accessible by integration' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46', body: { number: 46, head: { ref: 'feature/branch-survivor' } })
     stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
@@ -408,9 +389,6 @@ class TestFindAllIssues < Jp::Test
     load_it('find-all-issues', fb)
     fact = fb.query('(eq issue 87)').each.first
     refute_nil(fact, 'seed fact should still be present after 403 rescue')
-    assert_nil(
-      fact['stale'],
-      '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup'
-    )
+    assert_nil(fact['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup')
   end
 end

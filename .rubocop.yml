@@ -60,6 +60,8 @@ Elegant/GoodMethodName:
     - stub_pull_was_merged_base
     - stub_pull_was_merged_issue
     - stub_pull_was_merged_success
+  Exclude:
+    - 'test/**/*'
 Metrics/MethodLength:
   Enabled: false
 Metrics/AbcSize:
@@ -74,3 +76,12 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 Naming/MethodParameterName:
   MinNameLength: 2
+Elegant/ClassInModule:
+  Exclude:
+    - 'test/**/*'
+Elegant/IndentationLadder:
+  Enabled: false
+Elegant/NoRedundantVariable:
+  Enabled: false
+Layout/LineLength:
+  Max: 140

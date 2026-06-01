@@ -68,10 +68,7 @@ class TestFindMissingIssues < Jp::Test
         user: { id: 44, login: 'user' }, created_at: '2025-09-27 06:04:16 UTC'
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/46',
-      body: { id: 999, number: 46, head: { ref: 'feature-x' } }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46', body: { id: 999, number: 46, head: { ref: 'feature-x' } })
     stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
@@ -94,11 +91,7 @@ class TestFindMissingIssues < Jp::Test
         user: { id: 44, login: 'user' }, created_at: '2025-09-27 06:03:16 UTC'
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/45', status: 403, body: { message: 'Resource not accessible by integration' })
     stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')

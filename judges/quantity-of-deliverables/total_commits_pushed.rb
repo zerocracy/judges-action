@@ -20,10 +20,7 @@ def total_commits_pushed(fact)
         $loog.info("#{repo} can't be inspected: #{e.class}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
+        $loog.warn("[#{$judge}] Access forbidden to #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
         next
       end
     next if repository[:size].zero?
@@ -35,10 +32,7 @@ def total_commits_pushed(fact)
       end
     rescue GraphQL::Client::Error, Octokit::Forbidden, Net::OpenTimeout, Net::ReadTimeout,
            SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
-      $loog.warn(
-        "[#{$judge}] Can't count pushed commits in #{repo} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
+      $loog.warn("[#{$judge}] Can't count pushed commits in #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
       next
     end
   end

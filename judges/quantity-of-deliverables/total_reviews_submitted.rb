@@ -31,10 +31,7 @@ def total_reviews_submitted(fact)
     end
   rescue GraphQL::Client::Error, Octokit::Forbidden, Net::OpenTimeout, Net::ReadTimeout,
          SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
-    $loog.warn(
-      "[#{$judge}] Can't count submitted reviews in #{repo} " \
-      "(transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
+    $loog.warn("[#{$judge}] Can't count submitted reviews in #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
     next
   end
   { total_reviews_submitted: total }

@@ -37,14 +37,9 @@ class TestPullWasMerged < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
-      body: [{ id: 100, user: nil }]
-    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [{ id: 100, user: nil }])
     stub_github('https://api.github.com/repos/foo/foo/issues/comments/100/reactions', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
@@ -89,9 +84,7 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [{ id: 100, user: nil }])
     stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/100/reactions', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
@@ -127,9 +120,7 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
     stub_github(
       'https://api.github.com/repos/foo/foo/issues/44',
       body: {
@@ -187,9 +178,7 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/100/reactions', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
@@ -298,9 +287,7 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/100/reactions', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
@@ -322,11 +309,7 @@ class TestPullWasMerged < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44', status: 403, body: { message: 'Resource not accessible by integration' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
     load_it('pull-was-merged', fb)
@@ -417,11 +400,7 @@ class TestPullWasMerged < Jp::Test
     rate_limit_up
     stub_pull_was_merged_base(44)
     stub_pull_was_merged_issue(44)
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
-      status: 410,
-      body: { message: 'Gone' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', status: 410, body: { message: 'Gone' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }

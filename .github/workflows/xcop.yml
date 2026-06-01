@@ -16,4 +16,5 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      - uses: g4s8/xcop-action@4e93f123cab886ca8e481a737ee586bc9f02d228 # master
+      - name: xcop
+        run: docker run --rm -v ${{ github.workspace }}:/work ruby:3.2-alpine sh -c "gem install xcop && xcop /work"

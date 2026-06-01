@@ -124,8 +124,7 @@ class TestDimensionsOfTerrain < Jp::Test
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
-        load_it('dimensions-of-terrain', fb,
-                Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe,foo/asd' }))
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe,foo/asd' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal('dimensions-of-terrain', f.what)
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
@@ -151,10 +150,7 @@ class TestDimensionsOfTerrain < Jp::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: { message: 'Not Found', documentation_url: 'https://docs.github.com/rest' }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
-      body: { sha: 'abc', tree: [], truncated: false }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/git/trees/master?recursive=true', body: { sha: 'abc', tree: [], truncated: false })
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
@@ -184,10 +180,7 @@ class TestDimensionsOfTerrain < Jp::Test
       }
     )
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
-      body: { sha: 'abc', tree: [], truncated: false }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/git/trees/master?recursive=true', body: { sha: 'abc', tree: [], truncated: false })
     stub_github(
       'https://api.github.com/repos/foo/foo/contributors?per_page=100',
       body: { message: 'Not Found', documentation_url: 'https://docs.github.com/rest' }
@@ -382,8 +375,7 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_commits
     WebMock.disable_net_connect!
     fb = Factbase.new
-    load_it('dimensions-of-terrain', fb,
-            Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true }))
+    load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true }))
     f = fb.query("(eq what 'dimensions-of-terrain')").each.first
     assert_equal(1484, f.total_commits)
   end

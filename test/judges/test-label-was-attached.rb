@@ -61,10 +61,7 @@ class TestLabelWasAttached < Jp::Test
     load_it('label-was-attached', fb)
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
-    assert_nil(
-      f['stale'],
-      '403 is transient — fact must NOT be marked stale; next cycle will retry the timeline lookup'
-    )
+    assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the timeline lookup')
   end
 
   def test_attaches_each_tracked_label_and_ignores_others
@@ -105,9 +102,7 @@ class TestLabelWasAttached < Jp::Test
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
     load_it('label-was-attached', fb)
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 44, where: 'github', label: 'bug', who: 421))
-    assert(
-      fb.one?(what: 'label-was-attached', repository: 42, issue: 44, where: 'github', label: 'enhancement', who: 421)
-    )
+    assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 44, where: 'github', label: 'enhancement', who: 421))
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 44, where: 'github', label: 'question', who: 422))
     assert_equal(
       0,

@@ -19,9 +19,7 @@ ts = Fbe::Tombstone.new
 
 Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
   repo = Fbe.octo.repo_name_by_id(r.repository)
-  issues = Fbe.fb.query(
-    "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
-  ).each.map(&:issue)
+  issues = Fbe.fb.query("(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))").each.map(&:issue)
   issues.uniq!
   issues.sort!
   next if issues.empty?
@@ -39,10 +37,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         Jp.issue_was_lost('github', r.repository, i)
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to issue #{repo}##{i} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
+        $loog.warn("[#{$judge}] Access forbidden to issue #{repo}##{i} (transient, will retry next cycle): #{e.class}: #{e.message}")
         next
       end
     checked << i
