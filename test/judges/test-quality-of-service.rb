@@ -14,7 +14,9 @@ class TestQualityOfService < Jp::Test
 
   def test_runs_when_run_duration_ms_is_nil
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_request(:get, 'https://api.github.com/user/42').to_return(
       body: { id: 42, login: 'torvalds' }.to_json, headers: {
         'Content-Type': 'application/json',
@@ -164,7 +166,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_release_hocs_size_and_commits_size
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
@@ -368,7 +372,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_build_mttr
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [
@@ -505,7 +511,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_build_mttr_when_failure_several_times_in_a_row
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [
@@ -623,7 +631,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_build_mttr_check_negative_mttr_values
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [
@@ -1475,7 +1485,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_triage_time_filters_auto_labels
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
@@ -1559,7 +1571,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_triage_time_threshold_is_configurable
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
@@ -1827,7 +1841,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_fill_up_abandoned_facts
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
       [{
@@ -2116,7 +2132,9 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since_and_absent_qos_days
     WebMock.disable_net_connect!
-    rate_limit_up
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
