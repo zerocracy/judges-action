@@ -17,6 +17,7 @@ class TestQosSearch < Jp::Test
     $loog = Loog::NULL
     $judge = 'test-qos-search'
     Jp.qoreset
+    $global[:octo] = nil
   end
 
   def teardown
@@ -36,11 +37,37 @@ class TestQosSearch < Jp::Test
     end
   end
 
+  def test_skips_search_when_core_quota_low
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 49, limit: 1000 } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '49' }
+    )
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert_not_requested(:get, %r{https://api\.github\.com/search/issues})
+  end
+
   def test_skips_search_when_already_off_quota
     rate_limits(49)
     VCR.use_cassette('lib/qos-search/skips-search-when-already-off-quota') do
       assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     end
+  end
+
+  def test_skips_search_when_search_quota_zero
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 0, limit: 30 } } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '1000' }
+    )
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert_not_requested(:get, %r{https://api\.github\.com/search/issues})
+  end
+
+  def test_skips_search_when_search_quota_missing
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '1000' }
+    )
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     assert_not_requested(:get, %r{https://api\.github\.com/search/issues})
   end
 
