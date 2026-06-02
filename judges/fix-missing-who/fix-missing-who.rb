@@ -9,6 +9,7 @@ require 'fbe/octo'
 require 'fbe/who'
 require 'octokit'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/repo_name_of'
 
 {
   'issue-was-opened' => %i[issue user],
@@ -28,7 +29,11 @@ require_relative '../../lib/issue_was_lost'
       (absent done)
       (eq where 'github'))"
   ) do |f|
-    repo = Fbe.octo.repo_name_by_id(f.repository)
+    repo, status = Jp.repo_name_of(f.repository)
+    if repo.nil?
+      Jp.issue_was_lost(f.where, f.repository, f.issue) if status == :lost
+      next
+    end
     json =
       begin
         Fbe.octo.public_send(api, repo, f.issue)

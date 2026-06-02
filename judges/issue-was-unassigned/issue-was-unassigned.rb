@@ -9,6 +9,7 @@ require 'fbe/octo'
 require 'fbe/who'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/repo_name_of'
 require_relative '../../lib/supervision'
 
 Fbe.consider(
@@ -21,7 +22,11 @@ Fbe.consider(
      (eq where 'github'))"
 ) do |f|
   Jp.supervision({ 'repository' => f.repository, 'issue' => f.issue }) do
-    repo = Fbe.octo.repo_name_by_id(f.repository)
+    repo, status = Jp.repo_name_of(f.repository)
+    if repo.nil?
+      Jp.issue_was_lost(f.where, f.repository, f.issue) if status == :lost
+      next
+    end
     event =
       begin
         Fbe.octo.issue_events(repo, f.issue).sort_by { _1[:created_at] }.find do |e|

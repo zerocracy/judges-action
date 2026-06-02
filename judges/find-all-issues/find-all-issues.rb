@@ -15,6 +15,7 @@ require 'joined'
 require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/repo_name_of'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
@@ -27,7 +28,11 @@ require_relative '../../lib/issue_was_lost'
         (gt issue $before)
         (eq where 'github'))"
     over do |repository, issue|
-      repo = Fbe.octo.repo_name_by_id(repository)
+      repo, status = Jp.repo_name_of(repository)
+      if repo.nil?
+        Jp.issue_was_lost('github', repository, issue) if status == :lost
+        next 0
+      end
       after =
         begin
           Fbe.octo.issue(repo, issue)[:created_at]

@@ -16,6 +16,7 @@ require 'tago'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
+require_relative '../../lib/repo_name_of'
 
 Fbe.iterate do
   as 'merges_were_scanned'
@@ -50,7 +51,11 @@ Fbe.iterate do
       (eq where 'github'))"
   repeats 50
   over do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo, status = Jp.repo_name_of(repository)
+    if repo.nil?
+      Jp.issue_was_lost('github', repository, issue) if status == :lost
+      next issue
+    end
     json =
       begin
         Fbe.octo.pull_request(repo, issue)

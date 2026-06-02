@@ -14,11 +14,13 @@ require 'joined'
 require 'tago'
 require 'time'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/repo_name_of'
 
 ts = Fbe::Tombstone.new
 
 Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
-  repo = Fbe.octo.repo_name_by_id(r.repository)
+  repo, _status = Jp.repo_name_of(r.repository)
+  next if repo.nil?
   issues = Fbe.fb.query(
     "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
   ).each.map(&:issue)

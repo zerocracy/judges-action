@@ -10,6 +10,7 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/repo_name_of'
 
 Fbe.conclude do
   on "(and
@@ -37,7 +38,11 @@ Fbe.conclude do
         (eq what '#{$judge}'))))"
   follow 'where repository issue'
   draw do |n, f|
-    repo = Fbe.octo.repo_name_by_id(f.repository)
+    repo, status = Jp.repo_name_of(f.repository)
+    if repo.nil?
+      Jp.issue_was_lost(f.where, f.repository, f.issue) if status == :lost
+      throw(:rollback)
+    end
     json =
       begin
         Fbe.octo.issue(repo, f.issue)

@@ -9,6 +9,7 @@ require 'fbe/iterate'
 require 'fbe/octo'
 require 'joined'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/repo_name_of'
 
 events = %w[issue_type_added issue_type_changed]
 
@@ -32,7 +33,11 @@ Fbe.iterate do
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo, status = Jp.repo_name_of(repository)
+    if repo.nil?
+      Jp.issue_was_lost('github', repository, issue) if status == :lost
+      next issue
+    end
     timeline =
       begin
         Fbe.octo.issue_timeline(repo, issue)

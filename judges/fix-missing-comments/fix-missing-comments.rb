@@ -11,6 +11,7 @@ require 'octokit'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
+require_relative '../../lib/repo_name_of'
 
 Fbe.consider(
   "(and
@@ -23,7 +24,11 @@ Fbe.consider(
     (absent done)
     (absent comments))"
 ) do |f|
-  repo = Fbe.octo.repo_name_by_id(f.repository)
+  repo, status = Jp.repo_name_of(f.repository)
+  if repo.nil?
+    Jp.issue_was_lost(f.where, f.repository, f.issue) if status == :lost
+    next
+  end
   json =
     begin
       Fbe.octo.pull_request(repo, f.issue)

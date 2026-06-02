@@ -12,13 +12,15 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/repo_name_of'
 
 Fbe.iterate do
   as 'latest_issue_was_found'
   by '(plus 0 $before)'
   over do |repository, latest|
     next latest if latest.positive?
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo, _status = Jp.repo_name_of(repository)
+    next latest if repo.nil?
     json =
       Fbe.octo.with_disable_auto_paginate do |octo|
         octo.list_issues(repo, state: :all, sort: :created, direction: :desc, page: 1, per_page: 1).first

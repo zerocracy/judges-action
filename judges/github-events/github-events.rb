@@ -13,6 +13,7 @@ require 'fbe/who'
 require 'tago'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
+require_relative '../../lib/repo_name_of'
 require_relative '../../lib/supervision'
 
 Fbe.iterate do
@@ -120,7 +121,8 @@ Fbe.iterate do
     fact.event_type = json[:type]
     fact.repository = Integer(json[:repo][:id])
     fact.who = Integer(json[:actor][:id]) if json[:actor]
-    rname = Fbe.octo.repo_name_by_id(fact.repository)
+    rname, _status = Jp.repo_name_of(fact.repository)
+    raise(Factbase::Rollback) if rname.nil?
     case json[:type]
     when 'PushEvent'
       fact.what = 'git-was-pushed'
@@ -316,7 +318,8 @@ Fbe.iterate do
     fb.query("(and (eq what '#{what}') #{eqs.join(' ')})").each.to_a.size > 1
   end
   over do |repository, latest|
-    rname = Fbe.octo.repo_name_by_id(repository)
+    rname, _status = Jp.repo_name_of(repository)
+    next latest if rname.nil?
     $loog.info("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
     id = nil
     total = 0
