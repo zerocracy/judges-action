@@ -67,8 +67,8 @@ class TestIncremate < Minitest::Test
       fb = Factbase.new
       f = fb.insert
       Jp.incremate(f, dir, 'some', max_per_fact: 2, epoch: time, kickoff: time)
-      set_count = %w[some_alpha some_beta some_gamma].count { |p| f[p] }
-      assert_equal(2, set_count, "exactly 2 of 3 properties should be set with max_per_fact=2, got #{set_count}")
+      cnt = %w[some_alpha some_beta some_gamma].count { |p| f[p] }
+      assert_equal(2, cnt, "exactly 2 of 3 properties should be set with max_per_fact=2, got #{cnt}")
     end
     $global = nil
     $local = nil
