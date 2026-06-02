@@ -4,16 +4,16 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/unmask_repos'
 
 def total_stars(_fact)
+  guard = $terrainguard
   stars = 0
   forks = 0
-  Fbe.unmask_repos do |repo|
-    Fbe.octo.repository(repo).then do |json|
-      stars += json[:stargazers_count]
-      forks += json[:forks]
-    end
+  guard.eachrepo do |repo|
+    json = guard.repository(repo)
+    next if json.nil?
+    stars += json[:stargazers_count]
+    forks += json[:forks]
   end
   { total_stars: stars, total_forks: forks }
 end

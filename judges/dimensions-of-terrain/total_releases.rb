@@ -4,12 +4,12 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/unmask_repos'
 
 def total_releases(_fact)
+  guard = $terrainguard
   total = 0
-  Fbe.unmask_repos do |repo|
-    releases = Fbe.octo.releases(repo)
+  guard.eachrepo do |repo|
+    releases = guard.releases(repo)
     next unless releases.is_a?(Array)
     releases.each do |_|
       total += 1

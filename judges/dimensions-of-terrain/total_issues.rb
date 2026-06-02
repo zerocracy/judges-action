@@ -4,12 +4,13 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/github_graph'
-require 'fbe/unmask_repos'
+require_relative 'octo_guard'
 
 def total_issues(_fact)
+  guard = Jp::TerrainOctoGuard.new
   issues = 0
   pulls = 0
-  Fbe.unmask_repos do |repo|
+  guard.eachrepo do |repo|
     json =
       begin
         Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
