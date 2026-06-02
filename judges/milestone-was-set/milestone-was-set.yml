@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/foo
+input:
+  -
+    _id: 1
+    what: issue-was-opened
+    where: github
+    repository: 680
+    issue: 42
+    who: 4444
+    when: 2025-05-27T23:54:44Z
+expected:
+  - /fb[count(f)=1]
+  - /fb/f[what='issue-was-opened' and issue=42 and repository=680]
