@@ -38,6 +38,19 @@ def Jp.comments_info(pr, repo: nil)
     end
   org, rname = repo.split('/')
   uid = pr.dig(:user, :id)
+  rconversations =
+    begin
+      Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
+    rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
+      0
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      0
+    end
   {
     comments: (pr[:comments] || 0) + (pr[:review_comments] || 0),
     comments_to_code: ccomments.count,
@@ -46,19 +59,7 @@ def Jp.comments_info(pr, repo: nil)
     comments_by_reviewers: ccomments.count { |c| c.dig(:user, :id) != uid } +
       icomments.count { |c| c.dig(:user, :id) != uid },
     comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
-    comments_resolved:
-      begin
-        Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
-      rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
-        0
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        0
-      end
+    comments_resolved: rconversations
   }
 end
 
