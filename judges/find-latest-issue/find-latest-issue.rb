@@ -20,8 +20,19 @@ Fbe.iterate do
     next latest if latest.positive?
     repo = Fbe.octo.repo_name_by_id(repository)
     json =
-      Fbe.octo.with_disable_auto_paginate do |octo|
-        octo.list_issues(repo, state: :all, sort: :created, direction: :desc, page: 1, per_page: 1).first
+      begin
+        Fbe.octo.with_disable_auto_paginate do |octo|
+          octo.list_issues(repo, state: :all, sort: :created, direction: :desc, page: 1, per_page: 1).first
+        end
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Issues not found for #{repo}: #{e.message}")
+        next latest
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issues in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next latest
       end
     next latest if json.nil?
     i = json[:number]
