@@ -1377,7 +1377,10 @@ class TestGithubEvents < Jp::Test
       assert_raises(RuntimeError) do
         load_it('github-events', fb)
       end
-    assert_equal("Failure in repository #42 at #0: @GithubUser doesn't have access to the foo/foo repository, maybe it's private", ex.message)
+    assert_equal(
+      "Failure in repository #42 at #0: @GithubUser doesn't have access to the foo/foo repository, maybe it's private",
+      ex.message
+    )
     assert_equal(0, fb.size)
   end
 
@@ -1426,7 +1429,10 @@ class TestGithubEvents < Jp::Test
       assert_raises(RuntimeError) do
         load_it('github-events', fb)
       end
-    assert_equal("Failure in repository #42 at #0: You doesn't have access to the foo/foo repository, maybe it's private", ex.message)
+    assert_equal(
+      "Failure in repository #42 at #0: You doesn't have access to the foo/foo repository, maybe it's private",
+      ex.message
+    )
     assert_equal(0, fb.size)
   end
 
