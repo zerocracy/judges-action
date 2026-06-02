@@ -59,8 +59,18 @@ class TestPullRequest < Jp::Test
     $options = Judges::Options.new({})
     $global = {}
     $loog = Loog::NULL
-    stub_github('https://api.github.com/repos/foo/foo/issues/comments/101/reactions', body: [{ user: nil }, { user: { id: 42 } }])
-    count = Jp.count_appreciated_comments({ base: { repo: { full_name: 'foo/foo' } } }, [{ id: 101, user: { id: 7 } }], [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/101/reactions',
+      body: [
+        { user: nil },
+        { user: { id: 42 } }
+      ]
+    )
+    count = Jp.count_appreciated_comments(
+      { base: { repo: { full_name: 'foo/foo' } } },
+      [{ id: 101, user: { id: 7 } }],
+      []
+    )
     assert_equal(2, count)
   end
 
@@ -70,7 +80,13 @@ class TestPullRequest < Jp::Test
     $options = Judges::Options.new({})
     $global = {}
     $loog = Loog::NULL
-    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/202/reactions', body: [{ user: { id: 42 } }, { user: nil }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/comments/202/reactions',
+      body: [
+        { user: { id: 42 } },
+        { user: nil }
+      ]
+    )
     pr = { base: { repo: { full_name: 'foo/foo' } } }
     count = Jp.count_appreciated_comments(pr, [], [{ id: 202, user: nil }])
     assert_equal(1, count)

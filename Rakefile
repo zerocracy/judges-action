@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'os'
 require 'qbash'
 require 'rake'
 require 'rake/clean'
@@ -24,7 +25,7 @@ end
 
 desc 'Run them via Ruby, one by one'
 task :picks do
-  next if RbConfig::CONFIG['host_os'].match?(/cygwin|mswin|mingw|bccwin|wince|emx/)
+  next if OS.windows?
   %w[test lib].each do |d|
     Dir["#{d}/**/*.rb"].each do |f|
       qbash("bundle exec ruby #{Shellwords.escape(f)} -- --no-cov", stdout: $stdout)

@@ -86,7 +86,10 @@ Fbe.iterate do
     $loog.info("Contributors API failed for #{repo}: #{e.message}")
     []
   rescue Octokit::Forbidden => e
-    $loog.warn("[#{$judge}] Access forbidden to contributors in #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
+    $loog.warn(
+      "[#{$judge}] Access forbidden to contributors in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
     []
   end
 
@@ -249,7 +252,9 @@ Fbe.iterate do
         fact.comment_id = json[:payload][:comment][:id]
         fact.comment_body = json[:payload][:comment][:body]
         fact.who = json[:payload][:comment][:user][:id]
-        fact.details = "A new comment ##{json[:payload][:comment][:id]} has been posted to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
+        fact.details =
+          "A new comment ##{json[:payload][:comment][:id]} has been posted " \
+          "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
         $loog.debug("Issue comment posted to #{Fbe.issue(fact)} by #{Fbe.who(fact)}")
       else
         skip(json)
@@ -265,7 +270,9 @@ Fbe.iterate do
         end
         contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(fact, info(fact, rname))
-        fact.details = "A new release #{json[:payload][:release][:name].inspect} has been published in #{rname} by #{Fbe.who(fact)}."
+        fact.details =
+          "A new release #{json[:payload][:release][:name].inspect} has been published " \
+          "in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Release published by #{Fbe.who(fact)}")
       else
         skip(json)
@@ -336,7 +343,10 @@ Fbe.iterate do
           id = Integer(json[:id])
           first = id if first.nil?
           if id <= latest
-            $loog.debug("The event_id ##{id} (no.#{idx}) is not larger than ##{latest}, good stop in #{json[:repo][:name]}")
+            $loog.debug(
+              "The event_id ##{id} (no.#{idx}) is not larger than ##{latest}, " \
+              "good stop in #{json[:repo][:name]}"
+            )
             throw :done
           end
           Fbe.fb.txn do |fbt|

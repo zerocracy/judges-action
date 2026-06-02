@@ -15,7 +15,10 @@ def total_issues(_fact)
         Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
       rescue GraphQL::Client::Error, Net::OpenTimeout, Net::ReadTimeout, SocketError,
              Errno::ECONNRESET, Errno::ETIMEDOUT => e
-        $loog.warn("[#{$judge}] Can't count issues and pulls in #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
+        $loog.warn(
+          "[#{$judge}] Can't count issues and pulls in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         next
       end
     issues += json['issues']

@@ -91,7 +91,11 @@ class TestCodeWasReviewed < Jp::Test
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/pulls/88', status: 403, body: { message: 'Resource not accessible by integration' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/88',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 88, where: 'github')
     load_it('code-was-reviewed', fb)
@@ -116,7 +120,11 @@ class TestCodeWasReviewed < Jp::Test
         created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
       }
     )
-    stub_github('https://api.github.com/repos/foo/foo/pulls/99/reviews?per_page=100', status: 410, body: { message: 'Gone' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/99/reviews?per_page=100',
+      status: 410,
+      body: { message: 'Gone' }
+    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 99, where: 'github')
     load_it('code-was-reviewed', fb)

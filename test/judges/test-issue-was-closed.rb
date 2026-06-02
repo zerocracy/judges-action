@@ -17,7 +17,10 @@ class TestIssueWasClosed < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/50', body: { number: 50, title: 'some title 50', state: 'open' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/50',
+      body: { number: 50, title: 'some title 50', state: 'open' }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/issues/51',
       status: 404,
@@ -245,6 +248,9 @@ class TestIssueWasClosed < Jp::Test
       fb.one?(what: 'issue-was-closed', repository: 42, issue: 44, where: 'github', who: 222_111),
       'issue-was-closed fact should still be created — only timeline processing is skipped on 403'
     )
-    assert_empty(fb.query("(eq what 'label-was-attached')").each.to_a, 'no label-was-attached facts since timeline was inaccessible')
+    assert_empty(
+      fb.query("(eq what 'label-was-attached')").each.to_a,
+      'no label-was-attached facts since timeline was inaccessible'
+    )
   end
 end

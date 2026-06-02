@@ -71,7 +71,10 @@ class TestFindEarliestIssue < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues?direction=asc&page=1&per_page=1&sort=created&state=all', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=asc&page=1&per_page=1&sort=created&state=all',
+      body: []
+    )
     fb = Factbase.new
     load_it('find-earliest-issue', fb)
     assert_equal(0, fb.all.size)
@@ -171,7 +174,11 @@ class TestFindEarliestIssue < Jp::Test
         }
       ]
     )
-    stub_github('https://api.github.com/repos/foo/foo/pulls/3', status: 403, body: { message: 'Resource not accessible by integration' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/3',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
     fb = Factbase.new
     load_it('find-earliest-issue', fb)
     refute(

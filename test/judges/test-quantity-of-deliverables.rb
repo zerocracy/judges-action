@@ -59,7 +59,10 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
@@ -82,7 +85,10 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
@@ -105,7 +111,10 @@ class TestQuantityOfDeliverables < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/missing', status: 404, body: { message: 'Not Found' })
     stub_github('https://api.github.com/repos/foo/blocked', status: 403, body: { message: 'Forbidden' })
-    stub_github('https://api.github.com/repos/foo/good', body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 })
+    stub_github(
+      'https://api.github.com/repos/foo/good',
+      body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 }
+    )
     graph = Object.new
     graph.define_singleton_method(:total_commits_pushed) do |_owner, name, _since|
       { 'commits' => name.length, 'hoc' => name.length * 100 }
@@ -129,7 +138,10 @@ class TestQuantityOfDeliverables < Jp::Test
     WebMock.disable_net_connect!
     rate_limit_up
     %w[bad good].each do |name|
-      stub_github("https://api.github.com/repos/foo/#{name}", body: { id: 42, full_name: "foo/#{name}", open_issues: 0, size: 100 })
+      stub_github(
+        "https://api.github.com/repos/foo/#{name}",
+        body: { id: 42, full_name: "foo/#{name}", open_issues: 0, size: 100 }
+      )
     end
     graph = Object.new
     graph.define_singleton_method(:total_commits_pushed) do |owner, name, _since|
@@ -155,7 +167,10 @@ class TestQuantityOfDeliverables < Jp::Test
   def test_total_commits_pushed_keeps_code_errors_visible
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/bad', body: { id: 42, full_name: 'foo/bad', open_issues: 0, size: 100 })
+    stub_github(
+      'https://api.github.com/repos/foo/bad',
+      body: { id: 42, full_name: 'foo/bad', open_issues: 0, size: 100 }
+    )
     graph = Object.new
     graph.define_singleton_method(:total_commits_pushed) do |_owner, _name, _since|
       raise(NoMethodError, 'unexpected')
@@ -180,7 +195,10 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
@@ -206,7 +224,10 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-29..2025-10-06&per_page=1',
       body: {
@@ -235,7 +256,10 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-26..2025-10-03&per_page=1',
       body: {
@@ -282,7 +306,10 @@ class TestQuantityOfDeliverables < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
       body: {
@@ -319,7 +346,10 @@ class TestQuantityOfDeliverables < Jp::Test
   def test_quantity_of_deliverables_fix_gap
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
     [
       %w[2025-09-01 2025-09-05],
       %w[2025-09-05 2025-09-15],

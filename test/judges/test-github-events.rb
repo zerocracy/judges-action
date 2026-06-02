@@ -575,23 +575,27 @@ class TestGithubEvents < Jp::Test
   def test_skip_issue_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11125',
-          type: 'IssuesEvent',
-          actor: { id: 45, login: 'user' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'unknown',
-            issue: { number: 123 }
-          },
-          created_at: '2025-06-27 19:00:05 UTC'
-        }
-      ]
+      body: [{
+        id: '11125',
+        type: 'IssuesEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown',
+          issue: { number: 123 }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -811,23 +815,27 @@ class TestGithubEvents < Jp::Test
   def test_skip_pull_request_review_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11124',
-          type: 'PullRequestReviewEvent',
-          actor: { id: 45, login: 'user' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'unknown',
-            pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
-          },
-          created_at: '2025-06-27 19:00:05 UTC'
-        }
-      ]
+      body: [{
+        id: '11124',
+        type: 'PullRequestReviewEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown',
+          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -912,7 +920,10 @@ class TestGithubEvents < Jp::Test
         }
       }
     )
-    stub_github('https://api.github.com/repositories/820463873', body: { id: 820_463_873, name: 'fbe', full_name: 'zerocracy/fbe' })
+    stub_github(
+      'https://api.github.com/repositories/820463873',
+      body: { id: 820_463_873, name: 'fbe', full_name: 'zerocracy/fbe' }
+    )
     stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/contributors?per_page=100').to_return(
       body: [{ login: 'yegor256', id: 526_301 }, { login: 'yegor512', id: 526_302 }].to_json, headers: {
         'Content-Type': 'application/json',
@@ -926,7 +937,10 @@ class TestGithubEvents < Jp::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?per_page=100').to_return(
-      body: [{ sha: '4683257342e98cd94becc2aa49900e720bd792e9' }, { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }].to_json,
+      body: [
+        { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
+        { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
+      ].to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -1202,10 +1216,24 @@ class TestGithubEvents < Jp::Test
         }
       ]
     )
-    stub_github('https://api.github.com/repos/foo/new_baz', body: { id: 111, name: 'new_baz', full_name: 'foo/new_baz' })
-    stub_github('https://api.github.com/repositories/111', body: { id: 111, name: 'new_baz', full_name: 'foo/new_baz' })
+    stub_github(
+      'https://api.github.com/repos/foo/new_baz',
+      body: { id: 111, name: 'new_baz', full_name: 'foo/new_baz' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/111',
+      body: { id: 111, name: 'new_baz', full_name: 'foo/new_baz' }
+    )
     stub_github('https://api.github.com/user/29139614', body: { login: 'renovate[bot]', id: 29_139_614, type: 'Bot' })
-    stub_github('https://api.github.com/repos/foo/new_baz/contributors?per_page=100', body: [{ login: 'yegor256', id: 526_301 }])
+    stub_github(
+      'https://api.github.com/repos/foo/new_baz/contributors?per_page=100',
+      body: [
+        {
+          login: 'yegor256',
+          id: 526_301
+        }
+      ]
+    )
     stub_github(
       'https://api.github.com/repos/foo/new_baz/releases/20000',
       body: {
@@ -1258,18 +1286,22 @@ class TestGithubEvents < Jp::Test
   def test_skip_release_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '55555', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
-          repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
-          payload: { action: 'unknown', release: { id: 178_368, tag_name: '1.2.3' } },
-          created_at: Time.parse('2025-06-27T00:52:08Z')
-        }
-      ]
+      body: [{
+        id: '55555', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: { action: 'unknown', release: { id: 178_368, tag_name: '1.2.3' } },
+        created_at: Time.parse('2025-06-27T00:52:08Z')
+      }]
     )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -1299,7 +1331,11 @@ class TestGithubEvents < Jp::Test
 
   def test_count_numbers_of_workflow_builds_only_from_github
     fb = Factbase.new
-    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true }))
+    load_it(
+      'github-events',
+      fb,
+      Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true })
+    )
     f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.first
     assert_nil(f)
   end
@@ -1307,20 +1343,24 @@ class TestGithubEvents < Jp::Test
   def test_no_have_access_to_resource_by_integration
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11111',
-          type: 'PushEvent',
-          actor: { id: 43, login: 'yegor256' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
-          created_at: '2025-05-05 19:03:16 UTC'
-        }
-      ]
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+        created_at: '2025-05-05 19:03:16 UTC'
+      }]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100',
@@ -1347,20 +1387,24 @@ class TestGithubEvents < Jp::Test
   def test_no_have_access_to_resource_by_integration_in_handle_exception
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11111',
-          type: 'PushEvent',
-          actor: { id: 43, login: 'yegor256' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
-          created_at: '2025-05-05 19:03:16 UTC'
-        }
-      ]
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+        created_at: '2025-05-05 19:03:16 UTC'
+      }]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100',
@@ -1385,27 +1429,34 @@ class TestGithubEvents < Jp::Test
       assert_raises(RuntimeError) do
         load_it('github-events', fb)
       end
-    assert_equal("Failure in repository #42 at #0: You doesn't have access to the foo/foo repository, maybe it's private", ex.message)
+    assert_equal(
+      "Failure in repository #42 at #0: You doesn't have access to the foo/foo repository, maybe it's private",
+      ex.message
+    )
     assert_equal(0, fb.size)
   end
 
   def test_skip_push_event_if_push_to_non_default_branch
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11111',
-          type: 'PushEvent',
-          actor: { id: 43, login: 'yegor256' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: { push_id: 2412, ref: 'refs/heads/develop', head: 'f5d59b035' },
-          created_at: '2025-06-26 19:25:00 UTC'
-        }
-      ]
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/develop', head: 'f5d59b035' },
+        created_at: '2025-06-26 19:25:00 UTC'
+      }]
     )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -1417,20 +1468,24 @@ class TestGithubEvents < Jp::Test
   def test_success_add_push_event_to_factbase
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11111',
-          type: 'PushEvent',
-          actor: { id: 43, login: 'yegor256' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
-          created_at: '2025-06-26 19:03:16 UTC'
-        }
-      ]
+      body: [{
+        id: '11111',
+        type: 'PushEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+        created_at: '2025-06-26 19:03:16 UTC'
+      }]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100', body: [])
     stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
@@ -1460,16 +1515,14 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repositories/100', body: { id: 100, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repositories/100/events?per_page=100',
-      body: [
-        {
-          id: '22222',
-          type: 'PushEvent',
-          actor: { id: 50, login: 'foo' },
-          repo: { id: 100, name: 'foo/foo' },
-          payload: { push_id: 3000, ref: 'refs/heads/master', head: 'abc123def' },
-          created_at: '2025-06-27 10:00:00 UTC'
-        }
-      ]
+      body: [{
+        id: '22222',
+        type: 'PushEvent',
+        actor: { id: 50, login: 'foo' },
+        repo: { id: 100, name: 'foo/foo' },
+        payload: { push_id: 3000, ref: 'refs/heads/master', head: 'abc123def' },
+        created_at: '2025-06-27 10:00:00 UTC'
+      }]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits/abc123def/pulls?per_page=100', body: [])
     stub_github('https://api.github.com/user/50', body: { id: 50, login: 'foo' })
@@ -1491,16 +1544,14 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repositories/101', body: { id: 101, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repositories/101/events?per_page=100',
-      body: [
-        {
-          id: '33333',
-          type: 'PushEvent',
-          actor: { id: 60, login: 'contributor' },
-          repo: { id: 101, name: 'foo/foo' },
-          payload: { push_id: 4000, ref: 'refs/heads/master', head: 'def456ghi' },
-          created_at: '2025-06-27 11:00:00 UTC'
-        }
-      ]
+      body: [{
+        id: '33333',
+        type: 'PushEvent',
+        actor: { id: 60, login: 'contributor' },
+        repo: { id: 101, name: 'foo/foo' },
+        payload: { push_id: 4000, ref: 'refs/heads/master', head: 'def456ghi' },
+        created_at: '2025-06-27 11:00:00 UTC'
+      }]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits/def456ghi/pulls?per_page=100', body: [])
     stub_github('https://api.github.com/user/60', body: { id: 60, login: 'contributor' })
@@ -1515,23 +1566,27 @@ class TestGithubEvents < Jp::Test
   def test_success_add_opened_pull_request_event_to_factbase
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11122',
-          type: 'PullRequestEvent',
-          actor: { id: 45, login: 'user' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'opened', number: 456,
-            pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
-          },
-          created_at: '2025-06-27 19:00:05 UTC'
-        }
-      ]
+      body: [{
+        id: '11122',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 456,
+          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1550,23 +1605,27 @@ class TestGithubEvents < Jp::Test
   def test_skip_fill_up_event_if_event_exists_in_factbase_by_given_uniques
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11122',
-          type: 'PullRequestEvent',
-          actor: { id: 45, login: 'user' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'opened', number: 456,
-            pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
-          },
-          created_at: '2025-06-27 19:00:05 UTC'
-        }
-      ]
+      body: [{
+        id: '11122',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 456,
+          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1580,23 +1639,27 @@ class TestGithubEvents < Jp::Test
   def test_skip_duplicate_opened_pull_request_event_without_who
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '55950772790',
-          type: 'PullRequestEvent',
-          actor: { id: 45, login: 'user' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'opened', number: 187,
-            pull_request: { number: 187, head: { ref: 'fix-bug', sha: '5c955da3b5a' } }
-          },
-          created_at: '2025-10-16 19:00:00 UTC'
-        }
-      ]
+      body: [{
+        id: '55950772790',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'opened', number: 187,
+          pull_request: { number: 187, head: { ref: 'fix-bug', sha: '5c955da3b5a' } }
+        },
+        created_at: '2025-10-16 19:00:00 UTC'
+      }]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1611,23 +1674,27 @@ class TestGithubEvents < Jp::Test
   def test_skip_pull_request_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11123',
-          type: 'PullRequestEvent',
-          actor: { id: 45, login: 'user' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'unknown', number: 123,
-            pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
-          },
-          created_at: '2025-06-27 19:00:05 UTC'
-        }
-      ]
+      body: [{
+        id: '11123',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown', number: 123,
+          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1722,7 +1789,8 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/issues/305/comments?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100', body: { check_runs: [] })
+    stub_github('https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100',
+                body: { check_runs: [] })
     stub_github('https://api.github.com/user/411', body: { id: 411, login: 'user' })
     stub_github('https://api.github.com/repositories/43', body: { id: 43,  name: 'bar', full_name: 'bar/bar' })
     fb = Factbase.new
@@ -1736,23 +1804,27 @@ class TestGithubEvents < Jp::Test
     skip('This type of event is not needed now')
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '22222',
-          type: 'IssueCommentEvent',
-          actor: { id: 43, login: 'yegor256' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'created', issue: { number: 789 },
-            comment: { id: 30_093, body: 'some text', user: { id: 43 } }
-          },
-          created_at: '2025-06-27 19:00:00 UTC'
-        }
-      ]
+      body: [{
+        id: '22222',
+        type: 'IssueCommentEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'created', issue: { number: 789 },
+          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+        },
+        created_at: '2025-06-27 19:00:00 UTC'
+      }]
     )
     stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
     fb = Factbase.new
@@ -1771,23 +1843,27 @@ class TestGithubEvents < Jp::Test
   def test_skip_issue_comment_event_with_unknown_payload_action
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '22223',
-          type: 'IssueCommentEvent',
-          actor: { id: 43, login: 'yegor256' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'unknown', issue: { number: 789 },
-            comment: { id: 30_093, body: 'some text', user: { id: 43 } }
-          },
-          created_at: '2025-06-27 19:00:00 UTC'
-        }
-      ]
+      body: [{
+        id: '22223',
+        type: 'IssueCommentEvent',
+        actor: { id: 43, login: 'yegor256' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'unknown', issue: { number: 789 },
+          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+        },
+        created_at: '2025-06-27 19:00:00 UTC'
+      }]
     )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -1799,8 +1875,14 @@ class TestGithubEvents < Jp::Test
   def test_stop_scanning_if_number_event_greater_than_max_events
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
@@ -1840,8 +1922,14 @@ class TestGithubEvents < Jp::Test
   def test_stop_scanning_if_event_id_less_or_eq_than_latest
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
@@ -1876,8 +1964,14 @@ class TestGithubEvents < Jp::Test
   def test_max_events_guard_fires_once
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
@@ -1898,8 +1992,14 @@ class TestGithubEvents < Jp::Test
   def test_latest_id_guard_fires_once
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
@@ -1921,8 +2021,14 @@ class TestGithubEvents < Jp::Test
   def test_skip_fill_up_if_event_exists_in_factbase
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
@@ -1945,8 +2051,14 @@ class TestGithubEvents < Jp::Test
   def test_empty_events
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/repositories/42/events?per_page=100', body: [])
     fb = Factbase.new
     load_it('github-events', fb)
@@ -1956,8 +2068,14 @@ class TestGithubEvents < Jp::Test
   def test_finished_scanning_with_saving_latest_event_id
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
@@ -1980,8 +2098,14 @@ class TestGithubEvents < Jp::Test
   def test_handle_pull_request_event_with_old_repo_name
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user1' })
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
@@ -2057,7 +2181,10 @@ class TestGithubEvents < Jp::Test
         documentation_url: 'https://docs.github.com/rest/guides/best-practices-for-using-the-rest-api#follow-redirects'
       }
     )
-    stub_github('https://api.github.com/repos/foo/foo/commits/5c955da3b5a/check-runs?per_page=100', body: { check_runs: [] })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/5c955da3b5a/check-runs?per_page=100',
+      body: { check_runs: [] }
+    )
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       load_it('github-events', fb)
@@ -2070,27 +2197,31 @@ class TestGithubEvents < Jp::Test
   def test_pull_request_event_captures_changed_files
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [
-        {
-          id: '11126',
-          type: 'PullRequestEvent',
-          actor: { id: 45, login: 'user' },
-          repo: { id: 42, name: 'foo/foo' },
-          payload: {
-            action: 'closed',
+      body: [{
+        id: '11126',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          number: 123,
+          pull_request: {
             number: 123,
-            pull_request: {
-              number: 123,
-              head: { ref: 'feature-branch', sha: 'abc123' }
-            }
-          },
-          created_at: '2025-06-27 19:00:05 UTC'
-        }
-      ]
+            head: { ref: 'feature-branch', sha: 'abc123' }
+          }
+        },
+        created_at: '2025-06-27 19:00:05 UTC'
+      }]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/123',
@@ -2223,8 +2354,14 @@ class TestGithubEvents < Jp::Test
   def test_closed_pull_request_event_with_nil_additions_or_deletions
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
       body: [
@@ -2300,8 +2437,14 @@ class TestGithubEvents < Jp::Test
   def test_closed_pull_request_with_exist_review_and_code_suggestions
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
       body: [
@@ -2415,7 +2558,10 @@ class TestGithubEvents < Jp::Test
         created_at: Time.parse('2024-11-30T00:52:08Z')
       }
     )
-    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [{ login: 'yegor256', id: 526_301 }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
     stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',

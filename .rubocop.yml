@@ -81,26 +81,24 @@ Elegant/ClassInModule:
     - 'test/**/*'
 Elegant/IndentationLadder:
   Exclude:
+    - 'test/**/*'
     - 'judges/dimensions-of-terrain/total_issues.rb'
+    - 'judges/github-events/github-events.rb'
     - 'judges/issue-was-unassigned/issue-was-unassigned.rb'
     - 'judges/quantity-of-deliverables/total_commits_pushed.rb'
     - 'judges/quantity-of-deliverables/total_reviews_submitted.rb'
     - 'lib/incremate.rb'
     - 'lib/pull_request.rb'
-    - 'test/**/*'
 Elegant/NoRedundantVariable:
   Exclude:
+    - 'test/**/*'
     - 'judges/dimensions-of-terrain/total_commits.rb'
     - 'judges/github-events/github-events.rb'
-    - 'judges/quality-of-service/some_issue_lifetime.rb'
-    - 'judges/quality-of-service/some_pull_hoc_size.rb'
-    - 'judges/quality-of-service/some_release_interval.rb'
-    - 'judges/quality-of-service/some_review_time.rb'
-    - 'judges/quality-of-service/some_triage_time.rb'
     - 'judges/quantity-of-deliverables/total_builds_ran.rb'
     - 'judges/quantity-of-deliverables/total_commits_pushed.rb'
     - 'judges/quantity-of-deliverables/total_releases_published.rb'
+    - 'lib/incremate.rb'
     - 'lib/pull_request.rb'
+Elegant/PairedBrackets:
+  Exclude:
     - 'test/**/*'
-Layout/LineLength:
-  Max: 140

@@ -10,7 +10,11 @@ class TestNickOf < Jp::Test
   def test_returns_nil_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/user/29139614', status: 403, body: { message: 'Resource not accessible by integration' })
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
     $options = Judges::Options.new({})
     $global = {}
     $loog = Loog::NULL

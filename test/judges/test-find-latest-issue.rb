@@ -58,7 +58,14 @@ class TestFindLatestIssue < Jp::Test
         }
       ]
     )
-    stub_github('https://api.github.com/repos/foo/foo/pulls/548', body: { id: 1234, number: 548, head: { ref: '547' } })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/548',
+      body: {
+        id: 1234,
+        number: 548,
+        head: { ref: '547' }
+      }
+    )
     stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
     fb = Factbase.new
     load_it('find-latest-issue', fb)
@@ -78,7 +85,10 @@ class TestFindLatestIssue < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all',
+      body: []
+    )
     fb = Factbase.new
     load_it('find-latest-issue', fb)
     assert_equal(0, fb.all.size)

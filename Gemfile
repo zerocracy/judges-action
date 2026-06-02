@@ -14,6 +14,7 @@ gem 'minitest', '~>6.0', require: false
 gem 'minitest-mock', '~>5.27', require: false
 gem 'minitest-reporters', '~>1.7', require: false
 gem 'online', '~>0.0'
+gem 'os', '~>1.1', require: false
 gem 'others', '~>0.1'
 gem 'qbash', '~>0.8'
 gem 'rake', '~>13.2'

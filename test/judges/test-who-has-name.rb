@@ -90,7 +90,11 @@ class TestWhoHasName < Jp::Test
   def test_marks_fact_stale_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/user/29139614', status: 403, body: { message: 'Resource not accessible by integration' })
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
     load_it('who-has-name', fb)

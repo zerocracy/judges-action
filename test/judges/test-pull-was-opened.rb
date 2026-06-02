@@ -22,7 +22,10 @@ class TestPullWasOpened < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
     load_it('pull-was-opened', fb)
-    assert(fb.one?(what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github'), 'seed fact must remain in factbase')
+    assert(
+      fb.one?(what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github'),
+      'seed fact must remain in factbase'
+    )
     refute(
       fb.one?(what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github', stale: 'issue'),
       '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup'
@@ -67,7 +70,11 @@ class TestPullWasOpened < Jp::Test
         created_at: Time.parse('2025-09-30 15:35:30 UTC')
       }
     )
-    stub_github('https://api.github.com/repos/foo/foo/pulls/44', status: 403, body: { message: 'Resource not accessible by integration' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
     load_it('pull-was-opened', fb)
