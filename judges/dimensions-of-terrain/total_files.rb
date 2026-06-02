@@ -14,6 +14,15 @@ def total_files(_fact)
     Fbe.octo.tree(repo, info[:default_branch], recursive: true).then do |json|
       files += json[:tree].count { |item| item[:type] == 'blob' }
     end
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Repository/tree not found for #{repo}: #{e.message}")
+    next
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to repository/tree in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   { total_files: files }
 end
