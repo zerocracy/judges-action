@@ -93,6 +93,38 @@ class TestMilestoneWasSet < Jp::Test
     assert_equal(1, fb.query("(eq what 'milestone-was-set')").each.to_a.size)
   end
 
+  def test_rescues_not_found_on_milestones_list
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
+      status: 404,
+      body: { message: 'Not Found' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('milestone-was-set', fb)
+    assert_empty(fb.query("(eq what 'milestone-was-set')").each.to_a)
+  end
+
+  def test_rescues_deprecated_on_milestones_list
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
+      status: 410,
+      body: { message: 'Gone' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('milestone-was-set', fb)
+    assert_empty(fb.query("(eq what 'milestone-was-set')").each.to_a)
+  end
+
   def test_rescues_forbidden_on_milestones_list
     WebMock.disable_net_connect!
     rate_limit_up
