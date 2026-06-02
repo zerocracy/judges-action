@@ -30,11 +30,29 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
     issue_comments.sum do |comment|
       Fbe.octo.issue_comment_reactions(repo, comment[:id])
          .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Issue comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
+      0
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "Access forbidden to issue comment ##{comment[:id]} reactions in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      0
     end
   coded =
     code_comments.sum do |comment|
       Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
          .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Code comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
+      0
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "Access forbidden to code comment ##{comment[:id]} reactions in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      0
     end
   issued + coded
 end
