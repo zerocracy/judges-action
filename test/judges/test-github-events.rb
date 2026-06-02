@@ -492,8 +492,7 @@ class TestGithubEvents < Jp::Test
     op.repository = 42
     op.issue = 1347
     load_it('github-events', fb)
-    f = fb.query('(eq what "issue-was-opened")').each.to_a
-    assert_equal(1, f.length)
+    assert_equal(1, fb.query('(eq what "issue-was-opened")').each.to_a.length)
   end
 
   def test_skip_issue_was_closed_event
@@ -568,8 +567,7 @@ class TestGithubEvents < Jp::Test
     op.repository = 42
     op.issue = 1347
     load_it('github-events', fb)
-    f = fb.query('(eq what "issue-was-closed")').each.to_a
-    assert_equal(1, f.length)
+    assert_equal(1, fb.query('(eq what "issue-was-closed")').each.to_a.length)
   end
 
   def test_skip_issue_event_on_unknown_action
@@ -1342,8 +1340,7 @@ class TestGithubEvents < Jp::Test
       fb,
       Judges::Options.new({ 'repositories' => 'zerocracy/judges-action', 'testing' => true })
     )
-    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.first
-    assert_nil(f)
+    assert_nil(fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.first)
   end
 
   def test_no_have_access_to_resource_by_integration
@@ -1385,7 +1382,10 @@ class TestGithubEvents < Jp::Test
       assert_raises(RuntimeError) do
         load_it('github-events', fb)
       end
-    assert_equal("@GithubUser doesn't have access to the foo/foo repository, maybe it's private", ex.message)
+    assert_equal(
+      "Failure in repository #42 at #0: @GithubUser doesn't have access to the foo/foo repository, maybe it's private",
+      ex.message
+    )
     assert_equal(0, fb.size)
   end
 
@@ -1436,7 +1436,10 @@ class TestGithubEvents < Jp::Test
       assert_raises(RuntimeError) do
         load_it('github-events', fb)
       end
-    assert_equal("You doesn't have access to the foo/foo repository, maybe it's private", ex.message)
+    assert_equal(
+      "Failure in repository #42 at #0: You doesn't have access to the foo/foo repository, maybe it's private",
+      ex.message
+    )
     assert_equal(0, fb.size)
   end
 
