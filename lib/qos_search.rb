@@ -38,4 +38,8 @@ rescue Octokit::TooManyRequests => e
   @offquota = true
   $loog.warn("[#{$judge}] GitHub Search API quota exhausted, stopping QoS search calls: #{e.message}")
   nil
+rescue Octokit::Unauthorized => e
+  @offquota = true
+  $loog.warn("[#{$judge}] GitHub API token seems to be invalid or expired, stopping QoS search calls: #{e.message}")
+  nil
 end
