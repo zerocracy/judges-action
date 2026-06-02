@@ -10,10 +10,47 @@ require_relative 'jp'
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
-  ccomments = Fbe.octo.pull_request_comments(repo, pr[:number])
-  icomments = Fbe.octo.issue_comments(repo, pr[:number])
+  ccomments =
+    begin
+      Fbe.octo.pull_request_comments(repo, pr[:number])
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("PR comments not found for #{repo}##{pr[:number]}: #{e.message}")
+      []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to PR comments for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      []
+    end
+  icomments =
+    begin
+      Fbe.octo.issue_comments(repo, pr[:number])
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Issue comments not found for #{repo}##{pr[:number]}: #{e.message}")
+      []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to issue comments for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      []
+    end
   org, rname = repo.split('/')
   uid = pr.dig(:user, :id)
+  rconversations =
+    begin
+      Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
+    rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
+      0
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      0
+    end
   {
     comments: (pr[:comments] || 0) + (pr[:review_comments] || 0),
     comments_to_code: ccomments.count,
@@ -22,7 +59,7 @@ def Jp.comments_info(pr, repo: nil)
     comments_by_reviewers: ccomments.count { |c| c.dig(:user, :id) != uid } +
       icomments.count { |c| c.dig(:user, :id) != uid },
     comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
-    comments_resolved: Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
+    comments_resolved: rconversations
   }
 end
 
