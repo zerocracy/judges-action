@@ -11,12 +11,12 @@ require 'octokit'
 require_relative '../../lib/issue_was_lost'
 
 {
-  'issue-was-opened' => :user,
-  'pull-was-opened' => :user,
-  'issue-was-closed' => :closed_by,
-  'pull-was-closed' => :closed_by,
-  'pull-was-merged' => :merged_by
-}.each do |w, a|
+  'issue-was-opened' => %i[issue user],
+  'pull-was-opened' => %i[issue user],
+  'issue-was-closed' => %i[issue closed_by],
+  'pull-was-closed' => %i[issue closed_by],
+  'pull-was-merged' => %i[pull_request merged_by]
+}.each do |w, (api, a)|
   Fbe.consider(
     "(and
       (absent who)
@@ -31,7 +31,7 @@ require_relative '../../lib/issue_was_lost'
     repo = Fbe.octo.repo_name_by_id(f.repository)
     json =
       begin
-        Fbe.octo.issue(repo, f.issue)
+        Fbe.octo.public_send(api, repo, f.issue)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
