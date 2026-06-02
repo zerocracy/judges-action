@@ -79,13 +79,15 @@ class TestIsHumanOrRobot < Jp::Test
     assert_equal('who', fact.stale, 'fact should be stale when GitHub user lookup returns 403')
   end
 
-  def test_one_forbidden_user_does_not_abort_other_users
+  def test_forbidden_user_does_not_abort_others
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/user/100', body: { login: 'alice', id: 100, type: 'User' })
-    stub_github('https://api.github.com/user/200',
-                status: 403,
-                body: { message: 'Resource not accessible by integration' })
+    stub_github(
+      'https://api.github.com/user/200',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
     stub_github('https://api.github.com/user/300', body: { login: 'bob', id: 300, type: 'User' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', who: 100, where: 'github')

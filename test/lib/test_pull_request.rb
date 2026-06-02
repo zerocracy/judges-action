@@ -8,7 +8,7 @@ require_relative '../../lib/pull_request'
 require_relative '../test__helper'
 
 class TestPullRequest < Jp::Test
-  def test_fetch_workflows_skips_check_runs_with_nil_app
+  def test_fetch_workflows_skips_nil_app_check_runs
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -92,7 +92,7 @@ class TestPullRequest < Jp::Test
     assert_equal(1, count)
   end
 
-  def test_fetch_workflows_returns_empty_on_not_found_check_runs
+  def test_fetch_workflows_empty_on_not_found_runs
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -105,7 +105,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_returns_empty_on_forbidden_check_runs
+  def test_fetch_workflows_empty_on_forbidden_runs
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -113,13 +113,15 @@ class TestPullRequest < Jp::Test
     $loog = Loog::NULL
     pr = { number: 44, head: { sha: 'aa123' }, base: { repo: { full_name: 'foo/foo' } } }
     stub_request(:get, 'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100')
-      .to_return(status: 403, body: '{"message": "Forbidden"}',
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        status: 403, body: '{"message": "Forbidden"}',
+        headers: { 'Content-Type' => 'application/json' }
+      )
     result = Jp.fetch_workflows(pr)
     assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_skips_run_on_not_found_workflow_run_job
+  def test_fetch_workflows_skips_not_found_run_job
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -137,8 +139,10 @@ class TestPullRequest < Jp::Test
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/1').to_return(status: 404, body: '')
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/2')
-      .to_return(body: { id: 2, run_id: 9002 }.to_json,
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        body: { id: 2, run_id: 9002 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs/9002',
       body: { id: 9002, event: 'pull_request', conclusion: 'success' }
@@ -147,7 +151,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_skips_run_on_forbidden_workflow_run_job
+  def test_fetch_workflows_skips_forbidden_run_job
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -164,11 +168,15 @@ class TestPullRequest < Jp::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/1')
-      .to_return(status: 403, body: '{"message": "Forbidden"}',
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        status: 403, body: '{"message": "Forbidden"}',
+        headers: { 'Content-Type' => 'application/json' }
+      )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/2')
-      .to_return(body: { id: 2, run_id: 9002 }.to_json,
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        body: { id: 2, run_id: 9002 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs/9002',
       body: { id: 9002, event: 'pull_request', conclusion: 'success' }
@@ -177,7 +185,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_skips_run_on_not_found_workflow_run
+  def test_fetch_workflows_skips_not_found_run
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -194,11 +202,15 @@ class TestPullRequest < Jp::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/1')
-      .to_return(body: { id: 1, run_id: 9001 }.to_json,
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        body: { id: 1, run_id: 9001 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/2')
-      .to_return(body: { id: 2, run_id: 9002 }.to_json,
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        body: { id: 2, run_id: 9002 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs/9001').to_return(status: 404, body: '')
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs/9002',
@@ -208,7 +220,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_skips_run_on_forbidden_workflow_run
+  def test_fetch_workflows_skips_forbidden_run
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -225,11 +237,15 @@ class TestPullRequest < Jp::Test
       }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/3')
-      .to_return(body: { id: 3, run_id: 9003 }.to_json,
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        body: { id: 3, run_id: 9003 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/4')
-      .to_return(body: { id: 4, run_id: 9004 }.to_json,
-                 headers: { 'Content-Type' => 'application/json' })
+      .to_return(
+        body: { id: 4, run_id: 9004 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
     stub_github('https://api.github.com/repos/foo/foo/actions/runs/9003', status: 403, body: { message: 'Forbidden' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs/9004',
@@ -239,7 +255,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 0, failed_builds: 1 }, result)
   end
 
-  def test_count_appreciated_comments_skips_issue_comment_on_octokit_not_found
+  def test_counts_appreciated_skips_issue_not_found
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -253,7 +269,7 @@ class TestPullRequest < Jp::Test
     assert_equal(1, count)
   end
 
-  def test_count_appreciated_comments_skips_issue_comment_on_octokit_forbidden
+  def test_counts_appreciated_skips_issue_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -266,7 +282,7 @@ class TestPullRequest < Jp::Test
     assert_equal(0, count)
   end
 
-  def test_count_appreciated_comments_skips_code_comment_on_octokit_not_found
+  def test_counts_appreciated_skips_code_not_found
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -280,7 +296,7 @@ class TestPullRequest < Jp::Test
     assert_equal(1, count)
   end
 
-  def test_count_appreciated_comments_skips_code_comment_on_octokit_forbidden
+  def test_counts_appreciated_skips_code_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})

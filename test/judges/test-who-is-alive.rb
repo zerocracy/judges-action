@@ -90,7 +90,7 @@ class TestWhoIsAlive < Jp::Test
     end
   end
 
-  def test_handles_forbidden_user_lookup_without_raising
+  def test_handles_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(

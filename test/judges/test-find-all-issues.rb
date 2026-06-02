@@ -74,7 +74,7 @@ class TestFindAllIssues < Jp::Test
     assert_equal(3, fb.size)
   end
 
-  def test_find_all_issues_with_not_found_min_issue_in_github
+  def test_find_all_issues_with_not_found_min
     WebMock.disable_net_connect!
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -231,7 +231,7 @@ class TestFindAllIssues < Jp::Test
     end
   end
 
-  def test_end_of_iteration_leave_old_marker_instead_reset_to_zero
+  def test_iteration_end_keeps_old_marker
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })

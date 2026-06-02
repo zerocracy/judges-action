@@ -19,8 +19,10 @@ Fbe.iterate do
   as 'events_were_scanned'
   by '(plus 0 $before)'
   def self.skip(json)
-    t = Time.parse(json[:created_at].iso8601)
-    $loog.debug("Event ##{json[:id]} (#{json[:type]}) in #{json[:repo][:name]} ignored (#{t.ago} ago)")
+    $loog.debug(
+      "Event ##{json[:id]} (#{json[:type]}) in #{json[:repo][:name]} " \
+      "ignored (#{Time.parse(json[:created_at].iso8601).ago} ago)"
+    )
     raise(Factbase::Rollback)
   end
 
@@ -34,8 +36,7 @@ Fbe.iterate do
   end
 
   def self.contributors(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
-    since = tag(last, repo)
+    since = tag(Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last, repo)
     list = Set.new
     if since
       (comparison(repo, since, fact.tag) || {}).fetch(:commits, []).each do |commit|
@@ -52,8 +53,7 @@ Fbe.iterate do
   end
 
   def self.info(fact, repo)
-    last = Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last
-    since = tag(last, repo)
+    since = tag(Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last, repo)
     since ||= earliest(repo)[:sha]
     info = {}
     comparison(repo, since, fact.tag).then do |json|

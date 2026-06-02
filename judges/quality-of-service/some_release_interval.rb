@@ -17,8 +17,7 @@ def some_release_interval(fact)
     end
   end
   dates.sort!
-  diffs = (1..(dates.size - 1)).map { |i| dates[i] - dates[i - 1] }
   {
-    some_release_interval: diffs
+    some_release_interval: (1..(dates.size - 1)).map { |i| dates[i] - dates[i - 1] }
   }
 end
