@@ -24,7 +24,7 @@ end
 
 desc 'Run them via Ruby, one by one'
 task :picks do
-  next if RbConfig::CONFIG['host_os'].match?(/mswin|mingw/)
+  next if RbConfig::CONFIG['host_os'].match?(/cygwin|mswin|mingw|bccwin|wince|emx/)
   %w[test lib].each do |d|
     Dir["#{d}/**/*.rb"].each do |f|
       qbash("bundle exec ruby #{Shellwords.escape(f)} -- --no-cov", stdout: $stdout)
