@@ -10,6 +10,7 @@ name: yamllint
   pull_request:
     branches:
       - master
+  workflow_call:
 jobs:
   yamllint:
     timeout-minutes: 15
