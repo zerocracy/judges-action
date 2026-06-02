@@ -53,6 +53,85 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
+  def test_fetch_workflows_rescues_not_found_on_check_runs
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    $judge = 'test-pull-request'
+    pr = { number: 66, head: { sha: 'cc789' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits/cc789/check-runs?per_page=100')
+      .to_return(status: 404, body: { message: 'Not Found' }.to_json, headers: { 'Content-Type' => 'application/json' })
+    result = Jp.fetch_workflows(pr)
+    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
+  end
+
+  def test_fetch_workflows_rescues_forbidden_on_check_runs
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    $judge = 'test-pull-request'
+    pr = { number: 77, head: { sha: 'dd012' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits/dd012/check-runs?per_page=100')
+      .to_return(status: 403, body: { message: 'Forbidden' }.to_json, headers: { 'Content-Type' => 'application/json' })
+    result = Jp.fetch_workflows(pr)
+    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
+  end
+
+  def test_fetch_workflows_skips_run_when_workflow_run_job_not_found
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    $judge = 'test-pull-request'
+    pr = { number: 88, head: { sha: 'ee345' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/ee345/check-runs?per_page=100',
+      body: {
+        check_runs: [
+          { id: 10, app: { slug: 'github-actions' } },
+          { id: 20, app: { slug: 'github-actions' } }
+        ]
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/10')
+      .to_return(status: 404, body: { message: 'Not Found' }.to_json, headers: { 'Content-Type' => 'application/json' })
+    stub_github('https://api.github.com/repos/foo/foo/actions/jobs/20', body: { id: 20, run_id: 7777 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs/7777',
+      body: { id: 7777, event: 'pull_request', conclusion: 'failure' }
+    )
+    result = Jp.fetch_workflows(pr)
+    assert_equal({ succeeded_builds: 0, failed_builds: 1 }, result)
+  end
+
+  def test_fetch_workflows_skips_run_when_workflow_run_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    $judge = 'test-pull-request'
+    pr = { number: 99, head: { sha: 'ff678' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/ff678/check-runs?per_page=100',
+      body: {
+        check_runs: [
+          { id: 30, app: { slug: 'github-actions' } }
+        ]
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/actions/jobs/30', body: { id: 30, run_id: 5555 })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs/5555')
+      .to_return(status: 403, body: { message: 'Forbidden' }.to_json, headers: { 'Content-Type' => 'application/json' })
+    result = Jp.fetch_workflows(pr)
+    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
+  end
+
   def test_counts_reactions_when_reaction_user_is_nil
     WebMock.disable_net_connect!
     rate_limit_up
