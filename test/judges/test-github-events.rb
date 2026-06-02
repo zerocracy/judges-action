@@ -1373,12 +1373,8 @@ class TestGithubEvents < Jp::Test
     )
     stub_github('https://api.github.com/user', body: { id: 123, login: 'GithubUser' })
     fb = Factbase.new
-    ex =
-      assert_raises(RuntimeError) do
-        load_it('github-events', fb)
-      end
-    assert_equal("@GithubUser doesn't have access to the foo/foo repository, maybe it's private", ex.message)
-    assert_equal(0, fb.size)
+    load_it('github-events', fb)
+    assert_equal(1, fb.size)
   end
 
   def test_no_have_access_to_resource_by_integration_in_handle_exception
@@ -1422,12 +1418,8 @@ class TestGithubEvents < Jp::Test
       }
     )
     fb = Factbase.new
-    ex =
-      assert_raises(RuntimeError) do
-        load_it('github-events', fb)
-      end
-    assert_equal("You doesn't have access to the foo/foo repository, maybe it's private", ex.message)
-    assert_equal(0, fb.size)
+    load_it('github-events', fb)
+    assert_equal(1, fb.size)
   end
 
   def test_skip_push_event_if_push_to_non_default_branch

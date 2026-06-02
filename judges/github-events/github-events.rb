@@ -290,14 +290,12 @@ Fbe.iterate do
     else
       skip(json)
     end
-  rescue Octokit::Forbidden
-    who =
-      begin
-        "@#{Fbe.octo.user[:login]}"
-      rescue Octokit::Forbidden
-        'You'
-      end
-    raise(RuntimeError, "#{who} doesn't have access to the #{rname} repository, maybe it's private")
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to #{rname} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    skip(json)
   end
 
   def self.twice?(fb, fact, what, fields)
