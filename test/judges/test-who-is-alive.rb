@@ -90,7 +90,7 @@ class TestWhoIsAlive < Jp::Test
     end
   end
 
-  def test_handles_forbidden_user_lookup
+  def test_keeps_fact_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -104,9 +104,9 @@ class TestWhoIsAlive < Jp::Test
       name: 'someone', when: Time.now - (3 * 86_400)
     )
     load_it('who-is-alive', fb)
-    assert_empty(
+    refute_empty(
       fb.query('(eq what "who-has-name")').each.to_a,
-      'who-is-alive should delete the who-has-name fact after 403 propagates through Jp.nick_of as nil'
+      'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'
     )
   end
 end
