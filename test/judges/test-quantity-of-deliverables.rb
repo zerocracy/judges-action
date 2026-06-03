@@ -190,7 +190,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_releases_published_skips_transient_graph_failures
+  def test_releases_published_skips_graph_failures
     WebMock.disable_net_connect!
     graph = Object.new
     graph.define_singleton_method(:total_releases_published) do |_owner, name, _since|
@@ -219,7 +219,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_releases_published_keeps_code_errors_visible
+  def test_releases_published_keeps_code_errors
     WebMock.disable_net_connect!
     graph = Object.new
     graph.define_singleton_method(:total_releases_published) do |_owner, _name, _since|
@@ -268,7 +268,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_quantity_of_deliverables_total_releases_published
+  def test_deliverables_total_releases
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
