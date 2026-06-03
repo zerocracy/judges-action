@@ -44,7 +44,7 @@ class TestAddReviewComments < Jp::Test
     assert_equal(1, facts.first.review_comments)
   end
 
-  def test_adds_review_comments_to_facts_without_review_comments
+  def test_adds_review_comments_to_bare_facts
     WebMock.disable_net_connect!
     pulls = [{ id: 93, comments: 2 }, { id: 94, comments: 1 }, { id: 95, comments: 4 }]
     repo = 42

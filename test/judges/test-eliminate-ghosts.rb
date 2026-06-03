@@ -78,7 +78,7 @@ class TestEliminateGhosts < Jp::Test
     assert_equal(1, fb.query('(and (eq where "gitlab") (absent who))').each.to_a.size)
   end
 
-  def test_process_unique_users_first_and_set_stale_property_later_for_other_facts
+  def test_sets_stale_property_after_unique_users
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -109,7 +109,7 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.has?(where: 'github', who: 333))
   end
 
-  def test_marks_sibling_facts_stale_when_one_fact_already_stale_for_good_user
+  def test_marks_sibling_facts_stale_for_good_user
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/user/777', body: { login: 'user777', id: 777, type: 'User' })
