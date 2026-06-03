@@ -38,7 +38,7 @@ Fbe.conclude do
           "[#{$judge}] Access forbidden to user ##{f.who} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        throw :rollback
+        throw(:rollback)
       end
     if nick.nil?
       f.stale = 'who'

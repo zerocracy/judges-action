@@ -25,7 +25,7 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
           "[#{$judge}] Access forbidden to user ##{f.who} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        throw :"GitHub user ##{f.who} is not accessible (transient)"
+        throw(:"GitHub user ##{f.who} is not accessible (transient)")
       end
     if nick.nil?
       bad.add(f.who)

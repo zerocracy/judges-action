@@ -24,11 +24,7 @@ class TestNickOf < Jp::Test
   def test_returns_nil_on_not_found_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 404,
-      body: { message: 'Not Found' }
-    )
+    stub_github('https://api.github.com/user/29139614', status: 404, body: { message: 'Not Found' })
     $options = Judges::Options.new({})
     $global = {}
     $loog = Loog::NULL
