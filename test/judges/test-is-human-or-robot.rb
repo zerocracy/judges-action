@@ -63,7 +63,7 @@ class TestIsHumanOrRobot < Jp::Test
     assert(fb.one?(where: 'github', who: 18, name: 'user4', is_human: 1))
   end
 
-  def test_marks_fact_stale_on_forbidden_user_lookup
+  def test_forbidden_user_lookup_leaves_fact_retriable
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -76,7 +76,16 @@ class TestIsHumanOrRobot < Jp::Test
     load_it('is-human-or-robot', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal('who', fact.stale, 'fact should be stale when GitHub user lookup returns 403')
+    assert_equal(
+      "Can't find 'stale' attribute out of [_id, what, repository, issue, who, where]",
+      assert_raises(RuntimeError) { fact.stale }.message,
+      'fact should not be marked stale on transient 403 so the next cycle can retry'
+    )
+    assert_equal(
+      "Can't find 'is_human' attribute out of [_id, what, repository, issue, who, where]",
+      assert_raises(RuntimeError) { fact.is_human }.message,
+      'is_human should remain absent when the 403 prevented classification'
+    )
   end
 
   def test_forbidden_user_does_not_abort_others
@@ -100,7 +109,13 @@ class TestIsHumanOrRobot < Jp::Test
     ids = classified.map(&:who)
     ids.sort!
     assert_equal([100, 300], ids, 'classified facts should be the two non-403 users')
-    assert_equal(1, staled.size, 'the 403 user should be marked stale')
-    assert_equal([200], staled.map(&:who), 'staled fact should be the 403 user')
+    assert_equal(0, staled.size, 'the 403 user must not be marked stale so the next cycle can retry')
+    forbidden = fb.query('(eq who 200)').each.first
+    refute_nil(forbidden)
+    assert_equal(
+      "Can't find 'is_human' attribute out of [_id, what, who, where]",
+      assert_raises(RuntimeError) { forbidden.is_human }.message,
+      'the 403 user should remain unclassified, ready for a retry'
+    )
   end
 end
