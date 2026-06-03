@@ -10,6 +10,7 @@ require 'fbe/delete_one'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
+require 'octokit'
 require_relative '../../lib/nick_of'
 
 alive = []
@@ -29,7 +30,16 @@ Fbe.conclude do
       (eq where $where))))"
   follow 'who where'
   draw do |n, f|
-    nick = Jp.nick_of(f.who)
+    nick =
+      begin
+        Jp.nick_of(f.who)
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to user ##{f.who} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw :rollback
+      end
     if nick.nil?
       f.stale = 'who'
       throw :rollback
@@ -52,7 +62,16 @@ Fbe.consider(
     (exists who)
     (eq where 'github'))"
 ) do |f|
-  nick = Jp.nick_of(f.who)
+  nick =
+    begin
+      Jp.nick_of(f.who)
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to user ##{f.who} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   if nick.nil?
     f.stale = 'who'
     next
