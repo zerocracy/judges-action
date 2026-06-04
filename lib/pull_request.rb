@@ -148,9 +148,35 @@ def Jp.fetch_workflows(pr, repo: nil)
 end
 
 def Jp.count_suggestions(repo, issue, author, reviews = nil)
-  (reviews || Fbe.octo.pull_request_reviews(repo, issue)).sum do |review|
+  found =
+    begin
+      reviews || Fbe.octo.pull_request_reviews(repo, issue)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Pull request reviews not found for #{repo}##{issue}: #{e.message}")
+      []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to pull request reviews for #{repo}##{issue} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      []
+    end
+  found.sum do |review|
     next 0 if review.dig(:user, :id) == author
-    Fbe.octo.pull_request_review_comments(repo, issue, review[:id]).sum do |comment|
+    comments =
+      begin
+        Fbe.octo.pull_request_review_comments(repo, issue, review[:id])
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Review comments not found for #{repo}##{issue} review ##{review[:id]}: #{e.message}")
+        []
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to review comments for #{repo}##{issue} review ##{review[:id]} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        []
+      end
+    comments.sum do |comment|
       next 0 if comment.dig(:user, :id) == author || !comment[:in_reply_to_id].nil?
       1
     end
