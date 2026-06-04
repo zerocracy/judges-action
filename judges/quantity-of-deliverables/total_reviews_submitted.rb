@@ -29,8 +29,8 @@ def total_reviews_submitted(fact)
         queue.push([p['number'], p['reviews_next_cursor']])
       end
     end
-  rescue GraphQL::Client::Error, Octokit::Forbidden, Net::OpenTimeout, Net::ReadTimeout,
-    SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+  rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden,
+    Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
     $loog.warn(
       "[#{$judge}] Can't count submitted reviews in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
