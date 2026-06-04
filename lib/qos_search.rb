@@ -11,7 +11,7 @@ def Jp.qoreset
   @offquota = false
 end
 
-def Jp.qosearch(query, **)
+def Jp.qosearch(query, kind: :issues, **)
   return if @offquota || Fbe.octo.off_quota?
   octo = Fbe.octo
   left = nil
@@ -33,7 +33,11 @@ def Jp.qosearch(query, **)
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
     return
   end
-  Fbe.octo.search_issues(query, **)
+  case kind
+  when :issues then Fbe.octo.search_issues(query, **)
+  when :commits then Fbe.octo.search_commits(query, **)
+  else raise(ArgumentError, "Unknown search kind: #{kind}")
+  end
 rescue Octokit::TooManyRequests => e
   @offquota = true
   $loog.warn("[#{$judge}] GitHub Search API quota exhausted, stopping QoS search calls: #{e.message}")
