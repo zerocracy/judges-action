@@ -181,4 +181,83 @@ class TestCodeWasReviewed < Jp::Test
       'forbidden reviews lookup must not abort later candidates in the same judge batch'
     )
   end
+
+  def test_rescues_not_found_on_issue_comments
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/55',
+      body: {
+        id: 55, number: 55, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 4, deletions: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/55/reviews?per_page=100',
+      body: [
+        { id: 60_001, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/55/comments?per_page=100',
+      status: 404,
+      body: { message: 'Not Found' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/55/reviews/60001/comments?per_page=100',
+      body: [
+        { id: 47_500, user: { id: 422, login: 'user2' } }
+      ]
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 55, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 55, who: 422, hoc: 5, comments: 0, review_comments: 1),
+      'not-found on issue_comments must record the fact with comments=0 and keep review_comments live'
+    )
+  end
+
+  def test_rescues_forbidden_on_review_comments
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/66',
+      body: {
+        id: 66, number: 66, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 6, deletions: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/66/reviews?per_page=100',
+      body: [
+        { id: 70_001, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/66/comments?per_page=100',
+      body: [
+        { id: 48_400, user: { id: 422, login: 'user2' } },
+        { id: 48_401, user: { id: 422, login: 'user2' } }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/66/reviews/70001/comments?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 66, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 66, who: 422, hoc: 8, comments: 2, review_comments: 0),
+      'forbidden on review comments must record the fact with review_comments=0 and keep comments live'
+    )
+  end
 end

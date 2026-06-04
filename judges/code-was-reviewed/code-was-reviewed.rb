@@ -73,8 +73,32 @@ Fbe.consider(
       n.when = review[:submitted_at]
       n.hoc = pr[:additions] + pr[:deletions]
       n.author = pr.dig(:user, :id)
-      n.comments = Fbe.octo.issue_comments(repo, f.issue).count
-      n.review_comments = Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
+      n.comments =
+        begin
+          Fbe.octo.issue_comments(repo, f.issue).count
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Issue comments not available for #{repo}##{f.issue}: #{e.message}")
+          0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
+        end
+      n.review_comments =
+        begin
+          Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Review comments not available for #{repo}##{f.issue} review ##{review[:id]}: #{e.message}")
+          0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} review ##{review[:id]} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
+        end
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
@@ -89,3 +113,5 @@ Fbe.consider(
     end
   end
 end
+
+Fbe.octo.print_trace!
