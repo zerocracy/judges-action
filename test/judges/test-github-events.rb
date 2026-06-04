@@ -585,17 +585,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11125',
-        type: 'IssuesEvent',
-        actor: { id: 45, login: 'user' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'unknown',
-          issue: { number: 123 }
-        },
-        created_at: '2025-06-27 19:00:05 UTC'
-      }]
+      body: [
+        {
+          id: '11125',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'unknown',
+            issue: { number: 123 }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -825,17 +827,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11124',
-        type: 'PullRequestReviewEvent',
-        actor: { id: 45, login: 'user' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'unknown',
-          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
-        },
-        created_at: '2025-06-27 19:00:05 UTC'
-      }]
+      body: [
+        {
+          id: '11124',
+          type: 'PullRequestReviewEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'unknown',
+            pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1296,12 +1300,14 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '55555', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
-        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
-        payload: { action: 'unknown', release: { id: 178_368, tag_name: '1.2.3' } },
-        created_at: Time.parse('2025-06-27T00:52:08Z')
-      }]
+      body: [
+        {
+          id: '55555', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
+          repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+          payload: { action: 'unknown', release: { id: 178_368, tag_name: '1.2.3' } },
+          created_at: Time.parse('2025-06-27T00:52:08Z')
+        }
+      ]
     )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -1353,14 +1359,16 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11111',
-        type: 'PushEvent',
-        actor: { id: 43, login: 'yegor256' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
-        created_at: '2025-05-05 19:03:16 UTC'
-      }]
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-05-05 19:03:16 UTC'
+        }
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100',
@@ -1397,14 +1405,16 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11111',
-        type: 'PushEvent',
-        actor: { id: 43, login: 'yegor256' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
-        created_at: '2025-05-05 19:03:16 UTC'
-      }]
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-05-05 19:03:16 UTC'
+        }
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100',
@@ -1449,14 +1459,16 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11111',
-        type: 'PushEvent',
-        actor: { id: 43, login: 'yegor256' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: { push_id: 2412, ref: 'refs/heads/develop', head: 'f5d59b035' },
-        created_at: '2025-06-26 19:25:00 UTC'
-      }]
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/develop', head: 'f5d59b035' },
+          created_at: '2025-06-26 19:25:00 UTC'
+        }
+      ]
     )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -1478,14 +1490,16 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11111',
-        type: 'PushEvent',
-        actor: { id: 43, login: 'yegor256' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
-        created_at: '2025-06-26 19:03:16 UTC'
-      }]
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-06-26 19:03:16 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100', body: [])
     stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
@@ -1515,14 +1529,16 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repositories/100', body: { id: 100, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repositories/100/events?per_page=100',
-      body: [{
-        id: '22222',
-        type: 'PushEvent',
-        actor: { id: 50, login: 'foo' },
-        repo: { id: 100, name: 'foo/foo' },
-        payload: { push_id: 3000, ref: 'refs/heads/master', head: 'abc123def' },
-        created_at: '2025-06-27 10:00:00 UTC'
-      }]
+      body: [
+        {
+          id: '22222',
+          type: 'PushEvent',
+          actor: { id: 50, login: 'foo' },
+          repo: { id: 100, name: 'foo/foo' },
+          payload: { push_id: 3000, ref: 'refs/heads/master', head: 'abc123def' },
+          created_at: '2025-06-27 10:00:00 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits/abc123def/pulls?per_page=100', body: [])
     stub_github('https://api.github.com/user/50', body: { id: 50, login: 'foo' })
@@ -1544,14 +1560,16 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repositories/101', body: { id: 101, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repositories/101/events?per_page=100',
-      body: [{
-        id: '33333',
-        type: 'PushEvent',
-        actor: { id: 60, login: 'contributor' },
-        repo: { id: 101, name: 'foo/foo' },
-        payload: { push_id: 4000, ref: 'refs/heads/master', head: 'def456ghi' },
-        created_at: '2025-06-27 11:00:00 UTC'
-      }]
+      body: [
+        {
+          id: '33333',
+          type: 'PushEvent',
+          actor: { id: 60, login: 'contributor' },
+          repo: { id: 101, name: 'foo/foo' },
+          payload: { push_id: 4000, ref: 'refs/heads/master', head: 'def456ghi' },
+          created_at: '2025-06-27 11:00:00 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits/def456ghi/pulls?per_page=100', body: [])
     stub_github('https://api.github.com/user/60', body: { id: 60, login: 'contributor' })
@@ -1576,17 +1594,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11122',
-        type: 'PullRequestEvent',
-        actor: { id: 45, login: 'user' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'opened', number: 456,
-          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
-        },
-        created_at: '2025-06-27 19:00:05 UTC'
-      }]
+      body: [
+        {
+          id: '11122',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'opened', number: 456,
+            pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1615,17 +1635,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11122',
-        type: 'PullRequestEvent',
-        actor: { id: 45, login: 'user' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'opened', number: 456,
-          pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
-        },
-        created_at: '2025-06-27 19:00:05 UTC'
-      }]
+      body: [
+        {
+          id: '11122',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'opened', number: 456,
+            pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1649,17 +1671,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '55950772790',
-        type: 'PullRequestEvent',
-        actor: { id: 45, login: 'user' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'opened', number: 187,
-          pull_request: { number: 187, head: { ref: 'fix-bug', sha: '5c955da3b5a' } }
-        },
-        created_at: '2025-10-16 19:00:00 UTC'
-      }]
+      body: [
+        {
+          id: '55950772790',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'opened', number: 187,
+            pull_request: { number: 187, head: { ref: 'fix-bug', sha: '5c955da3b5a' } }
+          },
+          created_at: '2025-10-16 19:00:00 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1684,17 +1708,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11123',
-        type: 'PullRequestEvent',
-        actor: { id: 45, login: 'user' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'unknown', number: 123,
-          pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
-        },
-        created_at: '2025-06-27 19:00:05 UTC'
-      }]
+      body: [
+        {
+          id: '11123',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'unknown', number: 123,
+            pull_request: { number: 123, head: { ref: '321', sha: 'a3b5a' } }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
     fb = Factbase.new
@@ -1789,8 +1815,10 @@ class TestGithubEvents < Jp::Test
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/reviews?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/pulls/305/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/bar/bar/issues/305/comments?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100',
-                body: { check_runs: [] })
+    stub_github(
+      'https://api.github.com/repos/bar/bar/commits/42b24481/check-runs?per_page=100',
+      body: { check_runs: [] }
+    )
     stub_github('https://api.github.com/user/411', body: { id: 411, login: 'user' })
     stub_github('https://api.github.com/repositories/43', body: { id: 43,  name: 'bar', full_name: 'bar/bar' })
     fb = Factbase.new
@@ -1814,17 +1842,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '22222',
-        type: 'IssueCommentEvent',
-        actor: { id: 43, login: 'yegor256' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'created', issue: { number: 789 },
-          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
-        },
-        created_at: '2025-06-27 19:00:00 UTC'
-      }]
+      body: [
+        {
+          id: '22222',
+          type: 'IssueCommentEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'created', issue: { number: 789 },
+            comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+          },
+          created_at: '2025-06-27 19:00:00 UTC'
+        }
+      ]
     )
     stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
     fb = Factbase.new
@@ -1853,17 +1883,19 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '22223',
-        type: 'IssueCommentEvent',
-        actor: { id: 43, login: 'yegor256' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'unknown', issue: { number: 789 },
-          comment: { id: 30_093, body: 'some text', user: { id: 43 } }
-        },
-        created_at: '2025-06-27 19:00:00 UTC'
-      }]
+      body: [
+        {
+          id: '22223',
+          type: 'IssueCommentEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'unknown', issue: { number: 789 },
+            comment: { id: 30_093, body: 'some text', user: { id: 43 } }
+          },
+          created_at: '2025-06-27 19:00:00 UTC'
+        }
+      ]
     )
     fb = Factbase.new
     load_it('github-events', fb)
@@ -2207,21 +2239,23 @@ class TestGithubEvents < Jp::Test
     )
     stub_github(
       'https://api.github.com/repositories/42/events?per_page=100',
-      body: [{
-        id: '11126',
-        type: 'PullRequestEvent',
-        actor: { id: 45, login: 'user' },
-        repo: { id: 42, name: 'foo/foo' },
-        payload: {
-          action: 'closed',
-          number: 123,
-          pull_request: {
+      body: [
+        {
+          id: '11126',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
             number: 123,
-            head: { ref: 'feature-branch', sha: 'abc123' }
-          }
-        },
-        created_at: '2025-06-27 19:00:05 UTC'
-      }]
+            pull_request: {
+              number: 123,
+              head: { ref: 'feature-branch', sha: 'abc123' }
+            }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/123',
