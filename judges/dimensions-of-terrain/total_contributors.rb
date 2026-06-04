@@ -9,9 +9,33 @@ require 'fbe/unmask_repos'
 def total_contributors(_fact)
   contributors = Set.new
   Fbe.unmask_repos do |repo|
-    json = Fbe.octo.repository(repo)
+    json =
+      begin
+        Fbe.octo.repository(repo)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository #{repo} not found: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     next if json[:size].nil? || json[:size].zero?
-    list = Fbe.octo.contributors(repo)
+    list =
+      begin
+        Fbe.octo.contributors(repo)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Contributors not found for #{repo}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to contributors for #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     next unless list.is_a?(Array)
     list.each do |contributor|
       contributors << contributor[:id]

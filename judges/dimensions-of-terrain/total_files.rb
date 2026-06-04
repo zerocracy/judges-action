@@ -9,11 +9,34 @@ require 'fbe/unmask_repos'
 def total_files(_fact)
   files = 0
   Fbe.unmask_repos do |repo|
-    info = Fbe.octo.repository(repo)
+    info =
+      begin
+        Fbe.octo.repository(repo)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository #{repo} not found: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     next if info[:size].nil? || info[:size].zero?
-    Fbe.octo.tree(repo, info[:default_branch], recursive: true).then do |json|
-      files += json[:tree].count { |item| item[:type] == 'blob' }
-    end
+    tree =
+      begin
+        Fbe.octo.tree(repo, info[:default_branch], recursive: true)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Tree not found for #{repo}@#{info[:default_branch]}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to tree for #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
+    files += tree[:tree].count { |item| item[:type] == 'blob' }
   end
   { total_files: files }
 end

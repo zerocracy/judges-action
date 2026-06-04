@@ -10,7 +10,19 @@ require 'fbe/unmask_repos'
 def total_commits(_fact)
   repos = []
   Fbe.unmask_repos do |repo|
-    json = Fbe.octo.repository(repo)
+    json =
+      begin
+        Fbe.octo.repository(repo)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository #{repo} not found: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     next if json[:size].nil? || json[:size].zero?
     repos << [*repo.split('/'), json[:default_branch]]
   end
