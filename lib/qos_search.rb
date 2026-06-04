@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'octokit'
 require_relative 'jp'
 
 def Jp.qoreset
