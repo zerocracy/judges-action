@@ -102,6 +102,15 @@ Fbe.iterate do
     end
     $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Commits not found for #{repo}: #{e.message}")
+    nil
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to commits for #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    nil
   end
 
   def self.seen?(fact)
