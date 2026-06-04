@@ -65,18 +65,11 @@ class TestQosSearch < Jp::Test
   end
 
   def test_latches_after_zero_remaining_search_quota
-    $global[:octo] = nil
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 30, limit: 30 } } }.to_json,
-      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '999' }
-    )
+    ratelimits(100)
     searchstub('repo:foo/foo type:issue', body: { total_count: 58, items: [{ number: 1 }] })
     assert_equal(58, Jp.qosearch('repo:foo/foo type:issue')[:total_count])
     $global[:octo] = nil
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 0, limit: 30 } } }.to_json,
-      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '999' }
-    )
+    ratelimits(0)
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
     assert_not_requested(:get, /type:pr/)
   end
@@ -89,19 +82,34 @@ class TestQosSearch < Jp::Test
   end
 
   def test_qoreset_clears_the_latch
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 0, limit: 30 } } }.to_json,
-      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '999' }
-    )
+    ratelimits(0)
+    searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     Jp.qoreset
     $global[:octo] = nil
-    rate_limit_up
+    ratelimits(1000)
     searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
     assert_equal(2, Jp.qosearch('repo:foo/foo type:pr')[:items].first[:number])
   end
 
   private
+
+  def ratelimits(*remaining)
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      *remaining.map do |left|
+        {
+          body: {
+            resources: { search: { remaining: left, limit: 30 } },
+            rate: { remaining: left, limit: 1000 }
+          }.to_json,
+          headers: {
+            'Content-Type' => 'application/json',
+            'X-RateLimit-Remaining' => left.to_s
+          }
+        }
+      end
+    )
+  end
 
   def searchstub(query, body:, remaining: 999, status: 200)
     stub_github(
