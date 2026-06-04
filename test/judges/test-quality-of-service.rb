@@ -549,7 +549,7 @@ class TestQualityOfService < Jp::Test
             id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T11:00:00Z')
           }
-     ]
+        ]
       }
     end
     octo.define_singleton_method(:workflow_run_usage) do |_, id|
@@ -579,7 +579,7 @@ class TestQualityOfService < Jp::Test
             id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T11:00:00Z')
           }
-     ]
+        ]
       }
     end
     octo.define_singleton_method(:workflow_run_usage) do |_, id|
@@ -595,7 +595,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_build_mttr_when_failure_several_times_in_a_row
+  def test_some_build_mttr_on_repeated_failures
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
