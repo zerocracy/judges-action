@@ -509,7 +509,93 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_some_build_mttr_on_repeated_failures
+  def test_skips_repo_on_not_found_workflow_runs
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::NotFound) }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_success_rate])
+      end
+    end
+  end
+
+  def test_skips_repo_on_forbidden_workflow_runs
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::Forbidden) }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_success_rate])
+      end
+    end
+  end
+
+  def test_skips_run_on_not_found_workflow_run_usage
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          },
+          {
+            id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T11:00:00Z')
+          }
+     ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      raise(Octokit::NotFound) if id == 1
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([900], metrics[:some_build_duration])
+      end
+    end
+  end
+
+  def test_skips_run_on_forbidden_workflow_run_usage
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          },
+          {
+            id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T11:00:00Z')
+          }
+     ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      raise(Octokit::Forbidden) if id == 1
+      { run_duration_ms: 600_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([600], metrics[:some_build_duration])
+      end
+    end
+  end
+
+  def test_quality_of_service_some_build_mttr_when_failure_several_times_in_a_row
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
