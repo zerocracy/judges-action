@@ -158,7 +158,7 @@ Fbe.iterate do
           begin
             Fbe.octo.pull_request(rname, fact.issue)
           rescue Octokit::NotFound, Octokit::Deprecated => e
-            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
+            $loog.info("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             nil
           rescue Octokit::Forbidden => e
             $loog.warn(
@@ -178,7 +178,7 @@ Fbe.iterate do
           begin
             Fbe.octo.pull_request_reviews(rname, fact.issue).first
           rescue Octokit::NotFound, Octokit::Deprecated => e
-            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
+            $loog.info("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             nil
           rescue Octokit::Forbidden => e
             $loog.warn(

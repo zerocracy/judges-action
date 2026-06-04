@@ -84,7 +84,7 @@ Fbe.iterate do
       begin
         Fbe.octo.issue_timeline(repo, issue)
       rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.warn("Can't fetch timeline for #{repo}##{issue}: #{e.message}")
+        $loog.info("Can't fetch timeline for #{repo}##{issue}: #{e.message}")
         next issue
       rescue Octokit::Forbidden => e
         $loog.warn("[#{$judge}] Access forbidden to timeline for #{repo}##{issue}: #{e.class}: #{e.message}")
