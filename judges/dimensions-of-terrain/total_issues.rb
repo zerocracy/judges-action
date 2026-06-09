@@ -13,7 +13,10 @@ def total_issues(_fact)
     json =
       begin
         Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
-      rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden,
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
+        next
+      rescue GraphQL::Client::Error, Octokit::Forbidden,
         Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(
           "[#{$judge}] Can't count issues and pulls in #{repo} " \
