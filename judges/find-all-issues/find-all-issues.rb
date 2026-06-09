@@ -62,7 +62,7 @@ require_relative '../../lib/issue_was_lost'
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
             []
-          rescue Octokit::TooManyRequests => e
+          rescue Octokit::TooManyRequests, Octokit::ClientError => e
             $loog.warn("[#{$judge}] Search API rate limit exceeded for #{repo}: #{e.message}")
             []
           end
