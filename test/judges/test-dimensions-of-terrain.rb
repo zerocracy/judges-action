@@ -659,6 +659,7 @@ class TestDimensionsOfTerrain < Jp::Test
   end
 
   def test_total_active_contributors
+    require_relative('../../lib/qos_search')
     Jp.qoreset
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
