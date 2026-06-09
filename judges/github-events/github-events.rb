@@ -370,7 +370,7 @@ Fbe.iterate do
       who =
         begin
           "@#{Fbe.octo.user[:login]}"
-        rescue Octokit::Forbidden
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden
           'You'
         end
       $loog.error("[#{$judge}] #{who} doesn't have access to the #{rname} repository, maybe it is private")
