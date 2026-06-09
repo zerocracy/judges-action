@@ -19,6 +19,10 @@ jobs:
         with:
           owner: ${{ github.repository_owner }}
           repo: judges-action
+      - uses: ./.github/actions/update-version
+        with:
+          owner: ${{ github.repository_owner }}
+          repo: pages-action
       - uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
         with:
           sign-commits: true
@@ -26,4 +30,5 @@ jobs:
           commit-message: 'new version in README'
           delete-branch: true
           title: 'New version in README'
+          assignees: yegor256
           base: master
