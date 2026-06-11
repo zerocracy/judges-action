@@ -4,11 +4,15 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'fbe/github_graph'
 require_relative '../test__helper'
 
 class TestTypeWasAttached < Jp::Test
   using SmartFactbase
+
+  def test_requires_github_graph_explicitly
+    source = File.read(File.join(__dir__, '../../judges/type-was-attached/type-was-attached.rb'))
+    assert_includes(source, "require 'fbe/github_graph'")
+  end
 
   def test_marks_stale_when_timeline_returns_not_found
     WebMock.disable_net_connect!
@@ -51,6 +55,7 @@ class TestTypeWasAttached < Jp::Test
   end
 
   def test_marks_stale_when_graphql_actor_is_nil
+    require('fbe/github_graph')
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
