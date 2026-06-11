@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
+require 'json'
 require 'octokit'
 require_relative 'jp'
 
@@ -33,7 +34,9 @@ def Jp.qosearch(query, **)
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
     return
   end
-  Fbe.octo.search_issues(query, **)
+  octo.search_issues(query, **).tap do
+    @offquota = true if octo.rate_limit.remaining.zero?
+  end
 rescue Octokit::TooManyRequests => e
   @offquota = true
   $loog.warn("[#{$judge}] GitHub Search API quota exhausted, stopping QoS search calls: #{e.message}")
