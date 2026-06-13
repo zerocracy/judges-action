@@ -15,7 +15,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_repositories
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      {
+        body: '{"rate":{"remaining":222},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '222' }
+      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -211,7 +214,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_releases
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      {
+        body: '{"rate":{"remaining":222},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '222' }
+      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -265,7 +271,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_stars_and_forks
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      {
+        body: '{"rate":{"remaining":222},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '222' }
+      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -395,7 +404,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_commits_with_nil_size_repo
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      {
+        body: '{"rate":{"remaining":222},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '222' }
+      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -459,7 +471,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_files
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      {
+        body: '{"rate":{"remaining":222},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '222' }
+      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -585,7 +600,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_contributors
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      {
+        body: '{"rate":{"remaining":222},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '222' }
+      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -663,8 +681,10 @@ class TestDimensionsOfTerrain < Jp::Test
     Jp.qoreset
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 222, limit: 1000 } }.to_json,
-      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '222' }
+      {
+        body: '{"rate":{"remaining":222},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '222' }
+      }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
@@ -820,7 +840,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_not_fill_props_if_quota_consumed
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":90}}', headers: { 'X-RateLimit-Remaining' => '90' } }
+      {
+        body: '{"rate":{"remaining":90},"resources":{"search":{"remaining":30,"limit":30}}}',
+        headers: { 'X-RateLimit-Remaining' => '90' }
+      }
     )
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
