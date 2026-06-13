@@ -449,11 +449,11 @@ class TestPullRequest < Jp::Test
     $loog = Loog::NULL
     stub_github('https://api.github.com/repos/foo/foo/pulls/4/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/4/comments?per_page=100', body: [])
-    graph_stub = Object.new
-    def graph_stub.resolved_conversations(*)
+    stub = Object.new
+    def stub.resolved_conversations(*)
       raise(GraphQL::Client::Error, 'test graphql error')
     end
-    Fbe.stub(:github_graph, graph_stub) do
+    Fbe.stub(:github_graph, stub) do
       pr = { number: 4, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
       info = Jp.comments_info(pr)
       refute_nil(info)
