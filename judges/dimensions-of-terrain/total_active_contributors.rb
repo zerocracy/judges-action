@@ -5,8 +5,8 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
-require_relative '../../lib/qos_search'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/qos_search'
 
 def total_active_contributors(fact)
   seen = Set.new
