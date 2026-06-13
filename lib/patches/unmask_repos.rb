@@ -7,7 +7,7 @@ require 'fbe/unmask_repos'
 
 module Fbe
   class << self
-    def unmask_repos(
+    def unmask_repos( # rubocop:disable Elegant/GoodMethodName
       options: $options, global: $global, loog: $loog, epoch: $epoch || Time.now, kickoff: $kickoff || Time.now,
       quota_aware: true, lifetime_aware: true, timeout_aware: true
     )
