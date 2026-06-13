@@ -87,7 +87,7 @@ class TestWhoHasName < Jp::Test
     end
   end
 
-  def test_marks_fact_stale_on_forbidden_user_lookup
+  def test_keeps_fact_active_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -100,6 +100,9 @@ class TestWhoHasName < Jp::Test
     load_it('who-has-name', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal('who', fact.stale, 'fact should be stale when GitHub responds 403 for the user lookup')
+    assert_nil(
+      fact['stale']&.first,
+      'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
+    )
   end
 end
