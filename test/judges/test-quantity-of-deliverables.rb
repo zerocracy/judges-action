@@ -190,7 +190,85 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_releases_published_skips_graph_failures
+    WebMock.disable_net_connect!
+    graph = Object.new
+    graph.define_singleton_method(:total_releases_published) do |_owner, name, _since|
+      raise(Net::OpenTimeout, 'timeout') if name == 'bad'
+      { 'releases' => name.length }
+    end
+    unmask =
+      lambda do |&block|
+        repos = ['foo/bad', 'foo/good']
+        if block
+          repos.each { |repo| block.call(repo) }
+        else
+          repos
+        end
+      end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_releases_published.rb'))
+        assert_equal({ total_releases_published: 4 }, total_releases_published(fact))
+      end
+    end
+  end
+
+  def test_releases_published_keeps_code_errors
+    WebMock.disable_net_connect!
+    graph = Object.new
+    graph.define_singleton_method(:total_releases_published) do |_owner, _name, _since|
+      raise(NoMethodError, 'unexpected')
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    unmask = proc { |&block| block.call('foo/bad') }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_releases_published.rb'))
+        assert_raises(NoMethodError) { total_releases_published(fact) }
+      end
+    end
+  end
+
   def test_total_releases_published
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'scope'
+    f.qod_days = 7
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+        load_it('quantity-of-deliverables', fb)
+        f = fb.query('(eq what "quantity-of-deliverables")').each.first
+        assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
+        assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+        assert_equal(7, f.total_releases_published)
+      end
+    end
+  end
+
+  def test_deliverables_total_releases
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
