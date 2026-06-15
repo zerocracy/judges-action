@@ -820,25 +820,39 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_skips_repo_on_releases_not_found
     WebMock.disable_net_connect!
     rate_limit_up
-    good = { name: 'good', full_name: 'foo/good', size: 1,
-             stargazers_count: 3, forks: 1, default_branch: 'master', archived: false }
-    bad = { name: 'bad', full_name: 'foo/bad', size: 1,
-            stargazers_count: 0, forks: 0, default_branch: 'master', archived: false }
+    good = {
+      name: 'good', full_name: 'foo/good', size: 1,
+      stargazers_count: 3, forks: 1, default_branch: 'master', archived: false
+    }
+    bad = {
+      name: 'bad', full_name: 'foo/bad', size: 1,
+      stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+    }
     stub_github('https://api.github.com/repos/foo/good', body: good)
     stub_github('https://api.github.com/repos/foo/bad', body: bad)
     stub_github('https://api.github.com/repos/foo/good/releases?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/foo/bad/releases?per_page=100',
-                status: 404, body: { message: 'Not Found' })
-    stub_github('https://api.github.com/repos/foo/good/git/trees/master?recursive=true',
-                body: { sha: 'a', tree: [], truncated: false })
-    stub_github('https://api.github.com/repos/foo/bad/git/trees/master?recursive=true',
-                body: { sha: 'b', tree: [], truncated: false })
+    stub_github(
+      'https://api.github.com/repos/foo/bad/releases?per_page=100',
+      status: 404, body: { message: 'Not Found' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/good/git/trees/master?recursive=true',
+      body: { sha: 'a', tree: [], truncated: false }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/bad/git/trees/master?recursive=true',
+      body: { sha: 'b', tree: [], truncated: false }
+    )
     stub_github('https://api.github.com/repos/foo/good/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/bad/contributors?per_page=100', body: [])
-    stub_github('https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30',
-                body: { total_count: 0, incomplete_results: false, items: [] })
-    stub_github('https://api.github.com/search/commits?per_page=100&q=repo:foo/bad%20author-date:%3E2024-08-30',
-                body: { total_count: 0, incomplete_results: false, items: [] })
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bad%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
@@ -853,22 +867,32 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_skips_repo_on_tree_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/good', body: {
-                  name: 'good', full_name: 'foo/good', size: 1,
-                  stargazers_count: 3, forks: 1, default_branch: 'master', archived: false
-                })
-    stub_github('https://api.github.com/repos/foo/bad', body: {
-                  name: 'bad', full_name: 'foo/bad', size: 1,
-                  stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
-                })
-    stub_github('https://api.github.com/repos/foo/bad/git/trees/master?recursive=true',
-                status: 403, body: { message: 'Forbidden' })
+    stub_github(
+      'https://api.github.com/repos/foo/good', body: {
+        name: 'good', full_name: 'foo/good', size: 1,
+        stargazers_count: 3, forks: 1, default_branch: 'master', archived: false
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/bad', body: {
+        name: 'bad', full_name: 'foo/bad', size: 1,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/bad/git/trees/master?recursive=true',
+      status: 403, body: { message: 'Forbidden' }
+    )
     stub_github('https://api.github.com/repos/foo/good/releases?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/bad/releases?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/foo/good/git/trees/master?recursive=true',
-                body: { sha: 'a', tree: [
-                  { path: 'f.rb', mode: '100644', type: 'blob', sha: 'b', size: 1 }
-                ], truncated: false })
+    stub_github(
+      'https://api.github.com/repos/foo/good/git/trees/master?recursive=true',
+      body: {
+        sha: 'a', tree: [
+        { path: 'f.rb', mode: '100644', type: 'blob', sha: 'b', size: 1 }
+      ], truncated: false
+      }
+    )
     stub_github('https://api.github.com/repos/foo/good/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/bad/contributors?per_page=100', body: [])
     stub_github(
