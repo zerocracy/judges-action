@@ -9,7 +9,7 @@ require_relative '../test__helper'
 class TestLabelWasAttached < Jp::Test
   using SmartFactbase
 
-  def test_label_was_attached_with_duplicate_labeled_event
+  def test_label_attached_with_duplicate_event
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -67,7 +67,7 @@ class TestLabelWasAttached < Jp::Test
     )
   end
 
-  def test_attaches_each_tracked_label_and_ignores_others
+  def test_attaches_tracked_labels_ignores_others
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })

@@ -13,7 +13,7 @@ require_relative 'jp'
 
 def Jp.incremate(
   fact, dir, prefix, avoid_duplicate: false, pause: 0,
-                 epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
+  epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
 )
   evaluated = 0
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|

@@ -8,6 +8,7 @@ require 'fbe/consider'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'logger'
+require 'octokit'
 require_relative '../../lib/nick_of'
 
 seen = []
@@ -24,7 +25,16 @@ Fbe.consider(
 ) do |f|
   next if seen.include?(f.who)
   seen << f.who
-  nick = Jp.nick_of(f.who)
+  nick =
+    begin
+      Jp.nick_of(f.who)
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to user ##{f.who} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   unless nick.nil?
     $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
     next

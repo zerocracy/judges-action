@@ -106,7 +106,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_commits_pushed_skips_unavailable_repositories
+  def test_total_commits_pushed_skips_unavailable
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/missing', status: 404, body: { message: 'Not Found' })
@@ -134,7 +134,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_commits_pushed_skips_transient_graph_failures
+  def test_total_commits_pushed_skips_graph_failures
     WebMock.disable_net_connect!
     rate_limit_up
     %w[bad good].each do |name|
@@ -164,7 +164,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_commits_pushed_keeps_code_errors_visible
+  def test_total_commits_pushed_keeps_code_errors
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -190,7 +190,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_quantity_of_deliverables_total_releases_published
+  def test_total_releases_published
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -219,7 +219,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted
+  def test_total_reviews_submitted
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -251,7 +251,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted_excludes_after_when
+  def test_total_reviews_submitted_excludes_after
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -286,17 +286,17 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted_skips_pull_list_failure
+  def test_total_reviews_submitted_skips_pull_list
     graph = reviewgraph('foo/bad', :pulls, GraphQL::Client::Error.new('GraphQL failed'))
     assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted_skips_reviews_failure
+  def test_total_reviews_submitted_skips_reviews
     graph = reviewgraph('foo/bad', :reviews, GraphQL::Client::Error.new('GraphQL failed'))
     assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted_keeps_code_errors_visible
+  def test_total_reviews_submitted_keeps_code_errors
     graph = reviewgraph('foo/bad', :pulls, NoMethodError.new('bad fake'))
     assert_raises(NoMethodError) { directreviews(%w[foo/bad], graph) }
   end

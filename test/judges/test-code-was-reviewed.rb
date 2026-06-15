@@ -62,8 +62,9 @@ class TestCodeWasReviewed < Jp::Test
       fb.one?(
         what: 'code-was-reviewed', where: 'github', repository: 42, issue: 44, who: 422, hoc: 17, author: 421,
         when: Time.parse('2025-09-02 10:39:20 UTC'), comments: 2, review_comments: 3, seconds: 68_630,
-        details: 'The pull request foo/foo#44 with 17 HoC created by @user1 ' \
-                 'was reviewed by @user2 after 19h3m and 3 comments.'
+        details:
+          'The pull request foo/foo#44 with 17 HoC created by @user1 ' \
+          'was reviewed by @user2 after 19h3m and 3 comments.'
       )
     )
   end
@@ -134,7 +135,7 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
-  def test_rescues_forbidden_on_reviews_lookup_and_continues
+  def test_rescues_forbidden_on_reviews_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })

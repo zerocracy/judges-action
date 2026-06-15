@@ -11,7 +11,7 @@ class TestPatternACoverage < Minitest::Test
   ANY_RESCUE_RE = /^\s*rescue\b/
   BLOCK_END_RE  = /^\s*end\b/
 
-  def test_every_pattern_a_block_has_an_adjacent_forbidden_rescue
+  def test_pattern_a_block_has_forbidden_rescue
     root = File.expand_path('..', __dir__)
     paths = Dir[File.join(root, '{lib,judges}', '**', '*.rb')]
     refute_empty(paths, 'should find Ruby files under lib/ and judges/')
@@ -37,8 +37,9 @@ class TestPatternACoverage < Minitest::Test
         end
         next if status == :found
         rel = path.sub("#{root}/", '')
-        offenders << "#{rel}:#{idx + 1} — Pattern A rescue has no adjacent " \
-                     "'rescue Octokit::Forbidden => e' in the same begin/rescue/end block"
+        offenders <<
+          "#{rel}:#{idx + 1} — Pattern A rescue has no adjacent " \
+          "'rescue Octokit::Forbidden => e' in the same begin/rescue/end block"
       end
     end
     assert_empty(

@@ -5,7 +5,7 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
   DisplayCopNames: true
-  TargetRubyVersion: 3.2
+  TargetRubyVersion: 4.0
   SuggestExtensions: false
   NewCops: enable
 plugins:
@@ -13,6 +13,8 @@ plugins:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-elegant
+Style/ItBlockParameter:
+  Enabled: false
 Naming/FileName:
   Regex: '^[a-z0-9\-._]*$'
 Style/GlobalVars:
@@ -20,6 +22,8 @@ Style/GlobalVars:
 Style/TopLevelMethodDefinition:
   Enabled: false
 Elegant/GoodMethodName:
+  Exclude:
+    - 'test/**/*'
   AllowedNames:
     - total_active_contributors
     - total_commits
@@ -79,26 +83,16 @@ Naming/MethodParameterName:
 Elegant/ClassInModule:
   Exclude:
     - 'test/**/*'
-Elegant/IndentationLadder:
-  Exclude:
-    - 'test/**/*'
-    - 'judges/dimensions-of-terrain/total_issues.rb'
-    - 'judges/github-events/github-events.rb'
-    - 'judges/issue-was-unassigned/issue-was-unassigned.rb'
-    - 'judges/quantity-of-deliverables/total_commits_pushed.rb'
-    - 'judges/quantity-of-deliverables/total_reviews_submitted.rb'
-    - 'lib/incremate.rb'
-    - 'lib/pull_request.rb'
+
+# Tests favor named intermediate values for clarity; github-events keeps the
+# forbidden-user lookup and query-builder results as named begin/rescue blocks,
+# which read clearer than inlined expressions.
 Elegant/NoRedundantVariable:
   Exclude:
     - 'test/**/*'
-    - 'judges/dimensions-of-terrain/total_commits.rb'
     - 'judges/github-events/github-events.rb'
-    - 'judges/quantity-of-deliverables/total_builds_ran.rb'
-    - 'judges/quantity-of-deliverables/total_commits_pushed.rb'
-    - 'judges/quantity-of-deliverables/total_releases_published.rb'
-    - 'lib/incremate.rb'
-    - 'lib/pull_request.rb'
-Elegant/PairedBrackets:
-  Exclude:
-    - 'test/**/*'
+
+# Align multi-line array literals (and multi-class rescue lists) with a fixed
+# 2-space step, matching Elegant/IndentationLadder instead of fighting it.
+Layout/ArrayAlignment:
+  EnforcedStyle: with_fixed_indentation
