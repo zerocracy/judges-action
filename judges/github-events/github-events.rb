@@ -29,7 +29,19 @@ Fbe.iterate do
   def self.tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
     if tag.nil? && fact&.all_properties&.include?('release_id')
-      tag = Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release_id}").fetch(:tag_name, nil)
+      tag =
+        begin
+          Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release_id}").fetch(:tag_name, nil)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Release ##{fact.release_id} not found in #{repo}: #{e.message}")
+          nil
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to release ##{fact.release_id} in #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          nil
+        end
       $loog.debug("The release ##{fact.release_id} has this tag: #{tag.inspect}")
     end
     tag
@@ -54,7 +66,7 @@ Fbe.iterate do
 
   def self.info(fact, repo)
     since = tag(Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last, repo)
-    since ||= earliest(repo)[:sha]
+    since ||= earliest(repo)&.[](:sha)
     info = {}
     comparison(repo, since, fact.tag).then do |json|
       return info if json.nil?
@@ -102,6 +114,15 @@ Fbe.iterate do
     end
     $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Commits not found for #{repo}: #{e.message}")
+    {}
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to commits for #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    {}
   end
 
   def self.seen?(fact)
@@ -120,14 +141,37 @@ Fbe.iterate do
     fact.event_type = json[:type]
     fact.repository = Integer(json[:repo][:id])
     fact.who = Integer(json[:actor][:id]) if json[:actor]
-    rname = Fbe.octo.repo_name_by_id(fact.repository)
+    begin
+      rname = Fbe.octo.repo_name_by_id(fact.repository)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Repository ##{fact.repository} not found by ID: #{e.message}")
+      return
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to repo name for ##{fact.repository} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      raise
+    end
     case json[:type]
     when 'PushEvent'
       fact.what = 'git-was-pushed'
       fact.push_id = json[:payload][:push_id]
       fact.ref = json[:payload][:ref]
       fact.commit = json[:payload][:head]
-      repo = Fbe.octo.repository(rname)
+      repo =
+        begin
+          Fbe.octo.repository(rname)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Repository #{rname} not found: #{e.message}")
+          skip(json)
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to #{rname} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          raise
+        end
       fact.default_branch = repo[:default_branch]
       fact.to_master = fact.default_branch == fact.ref.split('/')[2] ? 1 : 0
       fact.by_owner = 1 if repo.dig(:owner, :id) == fact.who
@@ -135,7 +179,19 @@ Fbe.iterate do
         $loog.debug("Push #{fact.commit} to non-default branch #{fact.default_branch.inspect}, ignoring it")
         skip(json)
       end
-      pulls = Fbe.octo.commit_pulls(rname, fact.commit)
+      pulls =
+        begin
+          Fbe.octo.commit_pulls(rname, fact.commit)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Commit pulls not found for #{rname}@#{fact.commit}: #{e.message}")
+          []
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to commit pulls in #{rname} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          raise
+        end
       unless pulls.empty?
         $loog.debug("Push #{fact.commit} inside #{pulls.size} pull request(s), ignoring it")
         skip(json)
@@ -203,7 +259,19 @@ Fbe.iterate do
       fact.issue = json.dig(:payload, :pull_request, :number)
       case json[:payload][:action]
       when 'created'
-        pull = Fbe.octo.pull_request(rname, fact.issue)
+        pull =
+          begin
+            Fbe.octo.pull_request(rname, fact.issue)
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
+            skip(json)
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
+            skip(json)
+          end
         skip(json) if Integer(pull.dig(:user, :id)) == fact.who
         if Fbe.fb.query(
           "(and (eq repository #{fact.repository}) " \
@@ -302,7 +370,7 @@ Fbe.iterate do
       who =
         begin
           "@#{Fbe.octo.user[:login]}"
-        rescue Octokit::Forbidden
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden
           'You'
         end
       $loog.error("[#{$judge}] #{who} doesn't have access to the #{rname} repository, maybe it is private")
@@ -326,7 +394,18 @@ Fbe.iterate do
     fb.query("(and (eq what '#{what}') #{eqs.join(' ')})").each.to_a.size > 1
   end
   over do |repository, latest|
-    rname = Fbe.octo.repo_name_by_id(repository)
+    begin
+      rname = Fbe.octo.repo_name_by_id(repository)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Repository ##{repository} not found by ID: #{e.message}")
+      next latest
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to repo name for ##{repository} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next latest
+    end
     $loog.info("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
     id = nil
     total = 0
@@ -343,7 +422,20 @@ Fbe.iterate do
       'type-was-attached' => %w[where repository issue type]
     }
     catch(:done) do
-      Fbe.octo.repository_events(repository).each_with_index do |json, idx|
+      events =
+        begin
+          Fbe.octo.repository_events(repository)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Events not found for repository ##{repository}: #{e.message}")
+          []
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to events for repository ##{repository} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          []
+        end
+      events.each_with_index do |json, idx|
         Jp.supervision({ 'repo' => rname, 'json' => json.to_h }) do
           if !$options.max_events.nil? && idx >= $options.max_events
             $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
