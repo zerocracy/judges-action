@@ -78,7 +78,7 @@ class TestEliminateGhosts < Jp::Test
     assert_equal(1, fb.query('(and (eq where "gitlab") (absent who))').each.to_a.size)
   end
 
-  def test_process_unique_users_first_and_set_stale_property_later_for_other_facts
+  def test_sets_stale_property_after_unique_users
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -109,7 +109,7 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.has?(where: 'github', who: 333))
   end
 
-  def test_marks_sibling_facts_stale_when_one_fact_already_stale_for_good_user
+  def test_marks_sibling_facts_stale_for_good_user
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/user/777', body: { login: 'user777', id: 777, type: 'User' })
@@ -121,7 +121,7 @@ class TestEliminateGhosts < Jp::Test
     assert_equal(3, fb.picks(where: 'github', who: 777, stale: 'who').count)
   end
 
-  def test_marks_user_stale_on_forbidden_lookup
+  def test_keeps_user_active_on_forbidden_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -134,9 +134,9 @@ class TestEliminateGhosts < Jp::Test
     load_it('eliminate-ghosts', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal(
-      'who', fact.stale,
-      'fact should be marked stale when user lookup returns 403 (403 → nick_of nil → eliminate-ghosts stale path)'
+    assert_nil(
+      fact['stale']&.first,
+      'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
     )
   end
 end

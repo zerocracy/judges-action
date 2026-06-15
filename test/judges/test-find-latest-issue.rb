@@ -204,6 +204,36 @@ class TestFindLatestIssue < Jp::Test
     )
   end
 
+  def test_rescues_not_found_on_list_issues
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all',
+      status: 404,
+      body: { message: 'Not Found' }
+    )
+    fb = Factbase.new
+    load_it('find-latest-issue', fb)
+    assert_equal(0, fb.all.size, 'no facts must be written when list_issues 404s')
+  end
+
+  def test_rescues_forbidden_on_list_issues
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=desc&page=1&per_page=1&sort=created&state=all',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    load_it('find-latest-issue', fb)
+    assert_equal(0, fb.all.size, 'no facts must be written when list_issues 403s — next cycle will retry')
+  end
+
   def test_rescues_forbidden_on_pull_request_lookup
     WebMock.disable_net_connect!
     rate_limit_up

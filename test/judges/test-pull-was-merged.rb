@@ -10,7 +10,7 @@ require_relative '../test__helper'
 class TestPullWasMerged < Jp::Test
   using SmartFactbase
 
-  def test_pull_was_merged_with_nil_user_in_issue_comments
+  def test_merged_with_nil_user_in_issue_comments
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -57,10 +57,17 @@ class TestPullWasMerged < Jp::Test
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
       )
+      refute_includes(
+        fb.query(
+          "(and (eq what 'pull-was-closed') (eq repository 42) (eq where 'github') (eq issue 44))"
+        ).each.first.all_properties,
+        'review',
+        'review should not be set when no reviews exist'
+      )
     end
   end
 
-  def test_pull_was_merged_with_nil_user_in_pull_request_comments
+  def test_merged_with_nil_user_in_pr_comments
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -107,7 +114,7 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
-  def test_pull_was_merged_with_multiple_facts_with_identical_repository_and_issue
+  def test_merged_with_multiple_facts_identical_repo
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
@@ -206,7 +213,7 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
-  def test_pull_was_merged_with_review_code_suggestions
+  def test_merged_with_review_code_suggestions
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -357,7 +364,7 @@ class TestPullWasMerged < Jp::Test
     assert_equal('issue', f.stale, 'Jp.issue_was_lost should mark the fact stale=issue when pull lookup returns 404')
   end
 
-  def test_rescues_forbidden_on_issue_lookup_and_continues
+  def test_rescues_forbidden_on_issue_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_pull_was_merged_success(45)
@@ -390,7 +397,7 @@ class TestPullWasMerged < Jp::Test
     assert(fb.none?(issue: 44, what: 'pull-was-merged'))
   end
 
-  def test_rescues_forbidden_on_reviews_lookup_and_continues
+  def test_rescues_forbidden_on_reviews_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_pull_was_merged_success(45)

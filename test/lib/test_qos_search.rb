@@ -29,7 +29,7 @@ class TestQosSearch < Jp::Test
     end
   end
 
-  def test_returns_search_results_while_quota_is_available
+  def test_returns_results_while_quota_available
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
     found = Jp.qosearch('repo:foo/foo type:issue')
