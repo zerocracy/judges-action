@@ -171,7 +171,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
         []
       rescue Octokit::Forbidden => e
         $loog.warn(
-          "[#{$judge}] Access forbidden to review comments for #{repo}##{issue} " \
+          "[#{$judge}] Access forbidden to review comments for #{repo}##{issue} review ##{review[:id]} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         []
