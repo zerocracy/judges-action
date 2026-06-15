@@ -10,6 +10,7 @@ name: typos
   pull_request:
     branches:
       - master
+  workflow_call:
 jobs:
   typos:
     timeout-minutes: 15
