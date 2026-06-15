@@ -10,8 +10,32 @@ require_relative 'jp'
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
-  ccomments = Fbe.octo.pull_request_comments(repo, pr[:number])
-  icomments = Fbe.octo.issue_comments(repo, pr[:number])
+  ccomments =
+    begin
+      Fbe.octo.pull_request_comments(repo, pr[:number])
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("PR comments not found for #{repo}##{pr[:number]}: #{e.message}")
+      []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to PR comments for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      []
+    end
+  icomments =
+    begin
+      Fbe.octo.issue_comments(repo, pr[:number])
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Issue comments not found for #{repo}##{pr[:number]}: #{e.message}")
+      []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to issue comments for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      []
+    end
   org, rname = repo.split('/')
   uid = pr.dig(:user, :id)
   {
@@ -22,7 +46,19 @@ def Jp.comments_info(pr, repo: nil)
     comments_by_reviewers: ccomments.count { |c| c.dig(:user, :id) != uid } +
       icomments.count { |c| c.dig(:user, :id) != uid },
     comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
-    comments_resolved: Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
+    comments_resolved:
+      begin
+        Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
+      rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
+        0
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        0
+      end
   }
 end
 
@@ -112,9 +148,35 @@ def Jp.fetch_workflows(pr, repo: nil)
 end
 
 def Jp.count_suggestions(repo, issue, author, reviews = nil)
-  (reviews || Fbe.octo.pull_request_reviews(repo, issue)).sum do |review|
+  found =
+    begin
+      reviews || Fbe.octo.pull_request_reviews(repo, issue)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Pull request reviews not found for #{repo}##{issue}: #{e.message}")
+      []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to pull request reviews for #{repo}##{issue} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      []
+    end
+  found.sum do |review|
     next 0 if review.dig(:user, :id) == author
-    Fbe.octo.pull_request_review_comments(repo, issue, review[:id]).sum do |comment|
+    comments =
+      begin
+        Fbe.octo.pull_request_review_comments(repo, issue, review[:id])
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Review comments not found for #{repo}##{issue} review ##{review[:id]}: #{e.message}")
+        []
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to review comments for #{repo}##{issue} review ##{review[:id]} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        []
+      end
+    comments.sum do |comment|
       next 0 if comment.dig(:user, :id) == author || !comment[:in_reply_to_id].nil?
       1
     end

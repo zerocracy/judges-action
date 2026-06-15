@@ -27,8 +27,10 @@ Fbe.consider(
       f.stale = 'who'
       next
     rescue Octokit::Forbidden => e
-      $loog.warn("[#{$judge}] GitHub user ##{f.who} is not accessible: #{e.class}: #{e.message}")
-      f.stale = 'who'
+      $loog.warn(
+        "[#{$judge}] GitHub user ##{f.who} is not accessible " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
       next
     end
   type = json[:type]

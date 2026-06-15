@@ -121,7 +121,7 @@ class TestEliminateGhosts < Jp::Test
     assert_equal(3, fb.picks(where: 'github', who: 777, stale: 'who').count)
   end
 
-  def test_marks_user_stale_on_forbidden_lookup
+  def test_keeps_user_active_on_forbidden_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -134,9 +134,9 @@ class TestEliminateGhosts < Jp::Test
     load_it('eliminate-ghosts', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal(
-      'who', fact.stale,
-      'fact should be marked stale when user lookup returns 403 (403 → nick_of nil → eliminate-ghosts stale path)'
+    assert_nil(
+      fact['stale']&.first,
+      'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
     )
   end
 end

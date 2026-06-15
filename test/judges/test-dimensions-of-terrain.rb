@@ -659,9 +659,12 @@ class TestDimensionsOfTerrain < Jp::Test
   end
 
   def test_total_active_contributors
+    require_relative('../../lib/qos_search')
+    Jp.qoreset
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 222, limit: 1000 } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '222' }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
