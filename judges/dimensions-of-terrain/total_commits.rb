@@ -6,12 +6,24 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
 def total_commits(_fact)
-  commits = 0
   repos = []
   Fbe.unmask_repos do |repo|
-    json = Fbe.octo.repository(repo)
+    json =
+      begin
+        Fbe.octo.repository(repo)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository #{repo} not found: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     next if json[:size].nil? || json[:size].zero?
     repos << [*repo.split('/'), json[:default_branch]]
   rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -24,6 +36,5 @@ def total_commits(_fact)
     )
     next
   end
-  commits = Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } unless repos.empty?
-  { total_commits: commits }
+  { total_commits: repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } }
 end

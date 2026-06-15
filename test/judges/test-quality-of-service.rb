@@ -164,7 +164,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_release_hocs_size_and_commits_size
+  def test_some_release_hocs_size_and_commits_size
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -476,7 +476,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_skips_unfinished_workflow_runs
+  def test_skips_unfinished_workflow_runs
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     timed = []
     octo = Object.new
@@ -509,7 +509,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_build_mttr_when_failure_several_times_in_a_row
+  def test_some_build_mttr_on_repeated_failures
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -629,7 +629,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_build_mttr_check_negative_mttr_values
+  def test_some_build_mttr_rejects_negative_values
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -887,7 +887,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_review_time_comments_reviewers_and_reviews
+  def test_some_review_time_with_comments_reviews
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -1220,7 +1220,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_some_review_time_survives_not_found_on_one_pr_in_the_batch
+  def test_some_review_time_survives_not_found_pr
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -1483,7 +1483,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_triage_time_filters_auto_labels
+  def test_some_triage_time_filters_auto_labels
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -1569,7 +1569,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_triage_time_threshold_is_configurable
+  def test_some_triage_time_threshold_configurable
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -1652,7 +1652,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_triage_time_uses_default_threshold
+  def test_some_triage_time_uses_default_threshold
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -1745,7 +1745,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_triage_time_mixes_kept_and_filtered
+  def test_some_triage_time_mixes_kept_and_filtered
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -1846,30 +1846,32 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
@@ -1995,35 +1997,37 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since
+  def test_fill_up_abandoned_facts_with_absent_since
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
@@ -2130,7 +2134,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since_and_absent_qos_days
+  def test_fill_up_abandoned_facts_absent_qos_days
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -2146,30 +2150,32 @@ class TestQualityOfService < Jp::Test
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-30T21:00:00Z&per_page=100',
@@ -2332,7 +2338,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_stops_backlog_searches_after_search_quota_is_consumed
+  def test_stops_backlog_searches_on_quota_consumed
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       body: { resources: { search: { remaining: 0, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
@@ -2454,11 +2460,13 @@ class TestQualityOfService < Jp::Test
     end
     stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: [{
-        node_id: 'RE_kwDOL6GCO84J7Cen', tag_name: '0.19.0', target_commitish: 'master',
-        name: 'just a fake name', draft: false, prerelease: false,
-        created_at: Time.now - rand(10_000), published_at: Time.now - rand(10_000), assets: []
-      }]
+      body: [
+        {
+          node_id: 'RE_kwDOL6GCO84J7Cen', tag_name: '0.19.0', target_commitish: 'master',
+          name: 'just a fake name', draft: false, prerelease: false,
+          created_at: Time.now - rand(10_000), published_at: Time.now - rand(10_000), assets: []
+        }
+      ]
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \

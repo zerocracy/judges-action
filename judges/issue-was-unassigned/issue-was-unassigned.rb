@@ -13,12 +13,12 @@ require_relative '../../lib/supervision'
 
 Fbe.consider(
   "(and
-     (eq what 'issue-was-assigned')
-     (absent unassigned)
-     (absent stale)
-     (absent tombstone)
-     (absent done)
-     (eq where 'github'))"
+    (eq what 'issue-was-assigned')
+    (absent unassigned)
+    (absent stale)
+    (absent tombstone)
+    (absent done)
+    (eq where 'github'))"
 ) do |f|
   Jp.supervision({ 'repository' => f.repository, 'issue' => f.issue }) do
     repo = Fbe.octo.repo_name_by_id(f.repository)
