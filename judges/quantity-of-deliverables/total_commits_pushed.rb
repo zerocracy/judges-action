@@ -13,28 +13,35 @@ def total_commits_pushed(fact)
   commits = 0
   hoc = 0
   Fbe.unmask_repos do |repo|
-    repository =
-      begin
-        Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("#{repo} can't be inspected: #{e.class}: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
-    next if repository[:size].zero?
+    begin
+      next if Fbe.octo.repository(repo)[:size].zero?
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("#{repo} can't be inspected: #{e.class}: #{e.message}")
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
     owner, name = repo.split('/')
     begin
       Fbe.github_graph.total_commits_pushed(owner, name, fact.since).then do |json|
         commits += json['commits']
         hoc += json['hoc']
       end
-    rescue GraphQL::Client::Error, Octokit::Forbidden, Net::OpenTimeout, Net::ReadTimeout,
-           SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Can't count pushed commits in #{repo}: #{e.message}")
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to pushed commits in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    rescue GraphQL::Client::Error,
+      Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn(
         "[#{$judge}] Can't count pushed commits in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

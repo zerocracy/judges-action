@@ -144,7 +144,7 @@ class TestCoverQo < Minitest::Test
     end
   end
 
-  def test_handles_overlapping_facts_without_duplicate_gaps
+  def test_handles_overlapping_facts_no_dup_gaps
     fb = Factbase.new
     now = Time.parse('2025-01-25 12:00:00 UTC')
     a = fb.insert
@@ -162,7 +162,7 @@ class TestCoverQo < Minitest::Test
     end
   end
 
-  def test_sorts_facts_correctly_when_inserted_out_of_order
+  def test_sorts_facts_inserted_out_of_order
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
     b = fb.insert
@@ -284,7 +284,7 @@ class TestCoverQo < Minitest::Test
     end
   end
 
-  def test_does_not_add_when_fact_exactly_at_slice_boundary
+  def test_skips_fact_exactly_at_slice_boundary
     fb = Factbase.new
     now = Time.parse('2025-01-20 12:00:00 UTC')
     slice = 10 * 24 * 60 * 60
@@ -300,7 +300,7 @@ class TestCoverQo < Minitest::Test
     end
   end
 
-  def test_adds_fresh_fact_when_just_past_slice_boundary
+  def test_adds_fresh_fact_past_slice_boundary
     fb = Factbase.new
     now = Time.parse('2025-01-20 12:00:00 UTC')
     slice = 10 * 24 * 60 * 60
@@ -336,7 +336,7 @@ class TestCoverQo < Minitest::Test
     end
   end
 
-  def test_does_not_insert_gap_when_fully_enclosed_by_larger_fact
+  def test_skips_gap_enclosed_by_larger_fact
     fb = Factbase.new
     now = Time.parse('2025-01-30 12:00:00 UTC')
     a = fb.insert

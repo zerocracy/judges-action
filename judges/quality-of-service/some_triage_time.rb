@@ -14,8 +14,7 @@ def some_triage_time(fact)
   times = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    q = "repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
-    found = Jp.qosearch(q)
+    found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |issue|
       ff = Fbe.fb.query(
