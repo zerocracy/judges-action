@@ -11,7 +11,7 @@ require_relative '../../lib/incremate'
 require_relative '../../lib/qos_search'
 
 days = Fbe.pmp.quality.qos_days
-pause = Fbe.pmp.quality.qos_pause_seconds.value || 0
+pause = Fbe.pmp.quality.qos_pause_seconds.value || 5
 Jp.qoreset
 Jp.cover_qo(days)
 Fbe.consider("(and (eq what '#{$judge}') (exists since) (exists when))") do |f|
