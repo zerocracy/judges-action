@@ -375,4 +375,40 @@ class TestPullRequest < Jp::Test
       assert_equal(0, info[:comments_by_reviewers])
     end
   end
+
+  def test_resolved_graphql_error_returns_zero
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/4/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/4/comments?per_page=100', body: [])
+    graph = Object.new
+    graph.define_singleton_method(:resolved_conversations) { |_o, _r, _p| raise(GraphQL::Client::Error, 'test') }
+    Fbe.stub(:github_graph, graph) do
+      pr = { number: 4, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(0, info[:comments_resolved])
+    end
+  end
+
+  def test_resolved_forbidden_returns_zero
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/5/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/5/comments?per_page=100', body: [])
+    graph = Object.new
+    graph.define_singleton_method(:resolved_conversations) do |_o, _r, _p|
+      raise(Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden'))
+    end
+    Fbe.stub(:github_graph, graph) do
+      pr = { number: 5, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(0, info[:comments_resolved])
+    end
+  end
 end
