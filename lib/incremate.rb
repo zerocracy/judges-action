@@ -13,6 +13,7 @@ require_relative 'jp'
 
 def Jp.incremate(
   fact, dir, prefix, avoid_duplicate: false, pause: 0,
+  max_per_fact: nil,
   epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
 )
   evaluated = 0
@@ -45,5 +46,6 @@ def Jp.incremate(
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
     evaluated += 1
+    break if max_per_fact && evaluated >= max_per_fact
   end
 end
