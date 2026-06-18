@@ -17,8 +17,7 @@ def some_triage_time(fact)
     found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |issue|
-      # rubocop:disable Elegant/NoRedundantVariable -- cannot inline due to nested string interpolation
-      rid =
+      rid = # rubocop:disable Elegant/NoRedundantVariable
         begin
           Fbe.octo.repo_id_by_name(repo)
         rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -26,12 +25,11 @@ def some_triage_time(fact)
           next
         rescue Octokit::Forbidden => e
           $loog.warn(
-            "[#{$judge}] Access forbidden to repository lookup for #{repo} " \
+            "[#{$judge}] Access forbidden to #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           next
         end
-      # rubocop:enable Elegant/NoRedundantVariable
       ff = Fbe.fb.query(
         "
         (and

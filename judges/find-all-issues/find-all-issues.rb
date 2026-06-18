@@ -15,6 +15,7 @@ require 'joined'
 require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/qos_search'
 
 %w[issue pull].each do |type|
   Fbe.iterate do

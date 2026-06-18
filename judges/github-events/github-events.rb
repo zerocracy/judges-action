@@ -48,7 +48,9 @@ Fbe.iterate do
   end
 
   def self.contributors(fact, repo)
-    since = tag(Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last, repo)
+    since = tag(
+      Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last, repo
+    )
     list = Set.new
     if since
       (comparison(repo, since, fact.tag) || {}).fetch(:commits, []).each do |commit|
@@ -65,7 +67,9 @@ Fbe.iterate do
   end
 
   def self.info(fact, repo)
-    since = tag(Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.last, repo)
+    since = tag(
+      Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last, repo
+    )
     since ||= earliest(repo)&.[](:sha)
     info = {}
     comparison(repo, since, fact.tag).then do |json|
@@ -278,7 +282,7 @@ Fbe.iterate do
           '(eq what "pull-was-reviewed") ' \
           "(eq who #{fact.who}) " \
           "(eq issue #{fact.issue}))"
-        ).each.last
+        ).each.any?
           skip(json)
         end
         skip(json) unless json.dig(:payload, :review, :state) == 'approved'
@@ -470,7 +474,7 @@ Fbe.iterate do
                   (eq repository #{f.repository})
                   (eq issue #{f.issue})
                   (exists done))"
-              ).each.empty?
+              ).each.none?
               throw :rollback if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
             end
             $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")

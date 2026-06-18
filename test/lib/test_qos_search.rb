@@ -101,6 +101,51 @@ class TestQosSearch < Jp::Test
     assert_equal(2, Jp.qosearch('repo:foo/foo type:pr')[:items].first[:number])
   end
 
+  def test_caps_search_calls_per_window
+    rate_limit_up
+    Jp::SEARCH_WINDOW_BUDGET.times do
+      searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    end
+    Jp::SEARCH_WINDOW_BUDGET.times do
+      refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    end
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+  end
+
+  def test_resets_budget_after_window_elapses
+    rate_limit_up
+    Jp::SEARCH_WINDOW_BUDGET.times do
+      searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    end
+    Jp::SEARCH_WINDOW_BUDGET.times do
+      refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    end
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    Jp.instance_variable_set(:@swstart, Time.now - Jp::SEARCH_WINDOW_SECONDS - 1)
+    $global[:octo] = nil
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 2 }] })
+    refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
+  end
+
+  def test_stops_after_too_many_requests_respects_window
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, status: 403)
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert_equal(1, Jp.instance_variable_get(:@scount))
+    assert(Jp.instance_variable_get(:@offquota))
+    Jp.qoreset
+    $global[:octo] = nil
+    rate_limit_up
+    Jp::SEARCH_WINDOW_BUDGET.times do
+      searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    end
+    Jp::SEARCH_WINDOW_BUDGET.times do
+      refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    end
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+  end
+
   private
 
   def searchstub(query, body:, remaining: 999, status: 200)

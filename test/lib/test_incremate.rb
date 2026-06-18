@@ -37,6 +37,45 @@ class TestIncremate < Minitest::Test
     $options = nil
   end
 
+  def test_incremate_respects_max_per_fact
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $loog = Loog::VERBOSE
+    $options = Judges::Options.new({ 'lifetime' => 100, 'timeout' => 100 })
+    Dir.mktmpdir do |dir|
+      File.write(File.expand_path('some_alpha.rb', dir), <<~RUBY)
+        def some_alpha(_f)
+          { some_alpha: 1 }
+        end
+      RUBY
+      File.write(File.expand_path('some_beta.rb', dir), <<~RUBY)
+        def some_beta(_f)
+          { some_beta: 2 }
+        end
+      RUBY
+      File.write(File.expand_path('some_gamma.rb', dir), <<~RUBY)
+        def some_gamma(_f)
+          { some_gamma: 3 }
+        end
+      RUBY
+      time = Time.now - 60
+      fb = Factbase.new
+      f = fb.insert
+      Jp.incremate(f, dir, 'some', max_per_fact: 2, epoch: time, kickoff: time)
+      cnt = %w[some_alpha some_beta some_gamma].count { |p| f[p] }
+      assert_equal(2, cnt, "exactly 2 of 3 properties should be set with max_per_fact=2, got #{cnt}")
+    end
+    $global = nil
+    $local = nil
+    $loog = nil
+    $options = nil
+  end
+
   def test_incremate_pauses_between_evaluations
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(

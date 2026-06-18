@@ -29,7 +29,7 @@ class TestIsHumanOrRobot < Jp::Test
     assert_equal(id, facts.first.who)
     assert_equal(
       "Can't find 'is_human' attribute out of [who, where]",
-      assert_raises(RuntimeError) { facts.first.is_human }.message
+      assert_raises(ArgumentError) { facts.first.is_human }.message
     )
   end
 
@@ -78,12 +78,12 @@ class TestIsHumanOrRobot < Jp::Test
     refute_nil(fact)
     assert_equal(
       "Can't find 'stale' attribute out of [_id, what, repository, issue, who, where]",
-      assert_raises(RuntimeError) { fact.stale }.message,
+      assert_raises(ArgumentError) { fact.stale }.message,
       'fact should not be marked stale on transient 403 so the next cycle can retry'
     )
     assert_equal(
       "Can't find 'is_human' attribute out of [_id, what, repository, issue, who, where]",
-      assert_raises(RuntimeError) { fact.is_human }.message,
+      assert_raises(ArgumentError) { fact.is_human }.message,
       'is_human should remain absent when the 403 prevented classification'
     )
   end
@@ -114,7 +114,7 @@ class TestIsHumanOrRobot < Jp::Test
     refute_nil(forbidden)
     assert_equal(
       "Can't find 'is_human' attribute out of [_id, what, who, where]",
-      assert_raises(RuntimeError) { forbidden.is_human }.message,
+      assert_raises(ArgumentError) { forbidden.is_human }.message,
       'the 403 user should remain unclassified, ready for a retry'
     )
   end

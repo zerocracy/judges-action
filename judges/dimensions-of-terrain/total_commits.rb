@@ -24,6 +24,15 @@ def total_commits(_fact)
     end
     next if json[:size].nil? || json[:size].zero?
     repos << [*repo.split('/'), json[:default_branch]]
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Repository not found for #{repo}: #{e.message}")
+    next
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to repository #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   {
     total_commits:
