@@ -309,7 +309,7 @@ class TestPullRequest < Jp::Test
     assert_equal(0, count)
   end
 
-  def test_comments_info_skips_pull_request_comments_on_not_found
+  def test_skips_pr_comments_on_not_found
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -332,7 +332,7 @@ class TestPullRequest < Jp::Test
     end
   end
 
-  def test_comments_info_skips_issue_comments_on_forbidden
+  def test_skips_issue_comments_on_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -352,7 +352,7 @@ class TestPullRequest < Jp::Test
     end
   end
 
-  def test_comments_info_returns_zeros_on_both_comments_forbidden
+  def test_returns_zeros_on_both_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})

@@ -57,6 +57,13 @@ class TestPullWasMerged < Jp::Test
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
       )
+      refute_includes(
+        fb.query(
+          "(and (eq what 'pull-was-closed') (eq repository 42) (eq where 'github') (eq issue 44))"
+        ).each.first.all_properties,
+        'review',
+        'review should not be set when no reviews exist'
+      )
     end
   end
 

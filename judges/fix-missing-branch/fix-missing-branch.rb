@@ -24,7 +24,7 @@ Fbe.consider(
   repo = Fbe.octo.repo_name_by_id(f.repository)
   json =
     begin
-      Fbe.octo.issue(repo, f.issue)
+      Fbe.octo.pull_request(repo, f.issue)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
@@ -36,7 +36,7 @@ Fbe.consider(
       )
       next
     end
-  ref = json.dig(:pull_request, :head, :ref)
+  ref = json.dig(:head, :ref)
   if ref.nil?
     f.stale = 'branch'
     $loog.info("Branch is lost in #{Fbe.issue(f)}")
