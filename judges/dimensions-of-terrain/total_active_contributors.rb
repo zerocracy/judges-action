@@ -13,7 +13,10 @@ def total_active_contributors(fact)
   Fbe.unmask_repos do |repo|
     commits =
       begin
-        Jp.qosearch("repo:#{repo} author-date:>#{(fact.when - (30 * 24 * 60 * 60)).iso8601[0..9]}", kind: :commits)
+        Jp.qosearch(
+          "repo:#{repo} author-date:>#{(fact.when - (30 * 24 * 60 * 60)).iso8601[0..9]}",
+          method: :search_commits
+        )
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Commits not found for #{repo}: #{e.message}")
         next
