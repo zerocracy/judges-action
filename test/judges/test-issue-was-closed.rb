@@ -61,7 +61,7 @@ class TestIssueWasClosed < Jp::Test
     )
   end
 
-  def test_multiple_facts_with_identical_repository_and_issue
+  def test_multiple_facts_with_identical_repo
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -136,7 +136,7 @@ class TestIssueWasClosed < Jp::Test
     assert_equal(0, fb.picks(what: 'label-was-attached').size)
   end
 
-  def test_find_closed_issues_with_labels_and_exists_labels_fact
+  def test_find_closed_issues_with_labels_fact
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -170,7 +170,7 @@ class TestIssueWasClosed < Jp::Test
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
 
-  def test_marks_label_stale_on_who_when_timeline_actor_is_nil
+  def test_marks_label_stale_on_nil_timeline_actor
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })

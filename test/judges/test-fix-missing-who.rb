@@ -45,4 +45,22 @@ class TestFixMissingWho < Jp::Test
     refute_nil(f)
     assert_equal('issue', f['stale'].first, '410 is permanent — fact must be marked stale via Jp.issue_was_lost')
   end
+
+  def test_reads_merged_by_from_pull_endpoint
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/66',
+      body: { number: 66, merged_by: { id: 7, login: 'merger' } }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 66, where: 'github')
+    load_it('fix-missing-who', fb)
+    f = fb.query('(eq issue 66)').each.first
+    refute_nil(f)
+    assert_equal(7, f['who'].first, 'merged_by.id from pulls endpoint must be assigned to who')
+    assert_nil(f['stale'], 'fact must not be marked stale when merged_by is present on the pull payload')
+  end
 end

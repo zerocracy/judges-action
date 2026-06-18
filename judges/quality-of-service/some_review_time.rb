@@ -15,8 +15,7 @@ def some_review_time(fact)
   reviews = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    q = "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
-    found = Jp.qosearch(q)
+    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |pr|
       all, csize =

@@ -124,8 +124,10 @@ class TestDimensionsOfTerrain < Jp::Test
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
-        load_it('dimensions-of-terrain', fb,
-                Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe,foo/asd' }))
+        load_it(
+          'dimensions-of-terrain', fb,
+          Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe,foo/asd' })
+        )
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal('dimensions-of-terrain', f.what)
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
@@ -359,7 +361,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_total_issues_does_not_swallow_local_graph_bug
+  def test_total_issues_keeps_local_graph_bug
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/bad', body: { full_name: 'foo/bad', archived: false })
@@ -382,8 +384,10 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_commits
     WebMock.disable_net_connect!
     fb = Factbase.new
-    load_it('dimensions-of-terrain', fb,
-            Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true }))
+    load_it(
+      'dimensions-of-terrain', fb,
+      Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true })
+    )
     f = fb.query("(eq what 'dimensions-of-terrain')").each.first
     assert_equal(1484, f.total_commits)
   end
@@ -655,9 +659,12 @@ class TestDimensionsOfTerrain < Jp::Test
   end
 
   def test_total_active_contributors
+    require_relative('../../lib/qos_search')
+    Jp.qoreset
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 222, limit: 1000 } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '222' }
     )
     stub_github(
       'https://api.github.com/repos/foo/foo',
