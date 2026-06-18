@@ -15,7 +15,9 @@ def total_repositories(_fact)
     $loog.info("Repository #{repo} not found: #{e.message}")
     next
   rescue Octokit::Forbidden => e
-    $loog.warn("[#{$judge}] Access forbidden to #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
+    $loog.warn(
+      "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
     next
   end
   { total_repositories: total }

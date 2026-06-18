@@ -6,6 +6,7 @@ set -e -o pipefail
 
 start=$(date +%s)
 
+# This value is modified by the .rultor.yml script:
 VERSION=0.0.0
 
 echo "The 'judges-action' ${VERSION} is running"
@@ -287,4 +288,29 @@ else
         "--meta=action_version:${action_version}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
+fi
+
+if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
+    churn_val=$(cat churn.txt 2>/dev/null || echo '0i/0d/0a')
+    fb_size=$(ruby -e "require 'factbase'; puts Factbase.new.open('${fb}').size" 2>/dev/null || echo '0')
+    title="judges-action ${action_version} did ${churn_val} to ${fb_size} facts"
+    echo "Updating workflow run title to: ${title}"
+    curl -s -X PATCH \
+        -H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")" \
+        -H "Accept: application/vnd.github+json" \
+        "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+        -d "$(jq -n --arg t "${title}" '{"display_title": $t}')" > /dev/null || \
+        echo "Failed to update workflow run title (non-critical)"
+    {
+        echo "## zerocracy run"
+        echo ""
+        echo "| Metric | Value |"
+        echo "|--------|-------|"
+        echo "| Version | ${action_version} |"
+        echo "| Churn | ${churn_val} |"
+        echo "| Facts | ${fb_size} |"
+        echo "| Duration | $(($(date +%s) - start))s |"
+        echo "| Owner | ${owner} |"
+        echo "| Vitals | [View](${VITALS_URL}) |"
+    } > "${GITHUB_WORKSPACE}/summary.md" 2>/dev/null || true
 fi

@@ -92,7 +92,10 @@ class TestFindAllIssues < Jp::Test
     stub_github(
       'https://api.github.com/rate_limit',
       body: {
-        resources: { core: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' } },
+        resources: {
+          core: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' },
+          search: { remaining: 30, limit: 30 }
+        },
         rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
       }
     )

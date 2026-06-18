@@ -376,6 +376,71 @@ class TestPullRequest < Jp::Test
     end
   end
 
+  def test_count_suggestions_with_provided_reviews
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    reviews = [{ id: 10, user: { id: 100 } }, { id: 20, user: { id: 200 } }, { id: 30, user: { id: 300 } }]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/1/reviews/10/comments?per_page=100',
+      body: [
+        { id: 1, user: { id: 100 }, in_reply_to_id: nil },
+        { id: 2, user: { id: 300 }, in_reply_to_id: nil },
+        { id: 3, user: { id: 100 }, in_reply_to_id: 1 }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/1/reviews/20/comments?per_page=100',
+      body: [
+        { id: 4, user: { id: 200 }, in_reply_to_id: nil }
+      ]
+    )
+    count = Jp.count_suggestions('foo/foo', 1, 300, reviews)
+    assert_equal(2, count)
+  end
+
+  def test_count_suggestions_skips_author_reviews
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    reviews = [{ id: 40, user: { id: 400 } }, { id: 50, user: { id: 500 } }]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/2/reviews/40/comments?per_page=100',
+      body: [
+        { id: 5, user: { id: 400 }, in_reply_to_id: nil }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/2/reviews/50/comments?per_page=100',
+      body: [
+        { id: 6, user: { id: 500 }, in_reply_to_id: nil }
+      ]
+    )
+    count = Jp.count_suggestions('foo/foo', 2, 500, reviews)
+    assert_equal(1, count)
+  end
+
+  def test_count_suggestions_returns_zero_when_no_suggestions
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    reviews = [{ id: 60, user: { id: 600 } }]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/3/reviews/60/comments?per_page=100',
+      body: [
+        { id: 7, user: { id: 600 }, in_reply_to_id: 5 }
+      ]
+    )
+    count = Jp.count_suggestions('foo/foo', 3, 700, reviews)
+    assert_equal(0, count)
+  end
+
   def test_resolved_graphql_error_returns_zero
     WebMock.disable_net_connect!
     rate_limit_up
