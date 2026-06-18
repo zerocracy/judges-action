@@ -7,6 +7,7 @@ require 'elapsed'
 require 'fbe/consider'
 require 'fbe/octo'
 require 'logger'
+require 'octokit'
 require_relative '../../lib/nick_of'
 
 good = Set.new
@@ -16,7 +17,16 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
   next if good.include?(f.who) || bad.include?(f.who)
   next if Fbe.octo.off_quota?
   elapsed($loog, level: Logger::INFO) do
-    nick = Jp.nick_of(f.who)
+    nick =
+      begin
+        Jp.nick_of(f.who)
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to user ##{f.who} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:"GitHub user ##{f.who} is not accessible (transient)")
+      end
     if nick.nil?
       bad.add(f.who)
       throw :"GitHub user ##{f.who} is not found (stale)"
