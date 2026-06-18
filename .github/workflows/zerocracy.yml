@@ -3,14 +3,17 @@
 ---
 # yamllint disable rule:line-length
 name: zerocracy
+run-name: zerocracy run #${{ github.run_id }}
 'on':
   schedule:
     - cron: '*/30 * * * *'
+  workflow_dispatch:
 concurrency:
   group: zerocracy
   cancel-in-progress: false
 permissions:
   contents: write
+  actions: write
 jobs:
   zerocracy:
     if: github.repository_owner == 'zerocracy'
@@ -39,3 +42,25 @@ jobs:
         with:
           folder: pages
           clean: false
+      - name: Job Summary
+        if: always()
+        run: |
+          cat > "$GITHUB_STEP_SUMMARY" <<'EOF'
+          ## zerocracy run
+
+          | Info | |
+          |------|---|
+          | Run | [#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) attempt **${{ github.run_attempt }}** |
+          | Timestamp | $(date -u) |
+          | Status | ${{ job.status }} |
+          EOF
+          if [ -f summary.md ]; then
+            cat summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "_Detailed summary not available (no data from action container)._" >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Flag on failure
+        if: failure() && github.repository_owner == 'zerocracy'
+        run: |
+          echo ":x: Workflow run [#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) **failed**." >> "$GITHUB_STEP_SUMMARY"
