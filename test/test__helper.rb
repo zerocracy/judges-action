@@ -49,7 +49,7 @@ class Jp::Test < Minitest::Test
     $local = {}
     $judge = judge
     $options = options
-    $loog = loog || (ENV['RACK_RUN'] ? Loog::NULL : Loog::VERBOSE)
+    $loog = loog || (ENV['RAKE_RUN'] ? Loog::NULL : Loog::VERBOSE)
     $epoch = Time.now
     $kickoff = Time.now
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
