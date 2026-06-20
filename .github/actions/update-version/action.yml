@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 ---
 # yamllint disable rule:line-length
@@ -14,7 +14,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/github-script@v8
+    - uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
       with:
         script: |
           const { data: tags } = await github.rest.repos.listTags({

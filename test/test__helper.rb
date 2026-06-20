@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'simplecov'
@@ -12,8 +12,8 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
       SimpleCov::Formatter::CoberturaFormatter
     ]
   )
-  SimpleCov.minimum_coverage 80
-  SimpleCov.minimum_coverage_by_file 10
+  SimpleCov.minimum_coverage(80)
+  SimpleCov.minimum_coverage_by_file(10)
   SimpleCov.start do
     add_filter 'vendor/'
     add_filter 'target/'
@@ -25,21 +25,21 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
 end
 
 require 'minitest/reporters'
-Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new]
+Minitest::Reporters.use!([Minitest::Reporters::SpecReporter.new])
 
 require 'judges/options'
 require 'loog'
 require 'minitest/autorun'
+require 'minitest/mock'
 require 'webmock/minitest'
 require_relative '../lib/jp'
 require_relative 'smart_factbase'
 
-# Parent class for all tests.
 class Jp::Test < Minitest::Test
   def rate_limit_up
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
-      headers: { 'X-RateLimit-Remaining' => '999' }
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
     )
   end
 

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
-
-# Judge that monitors issues which were closed.
 
 require 'fbe/if_absent'
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
+require 'octokit'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
 badges = %w[bug enhancement question]
@@ -50,9 +50,15 @@ Fbe.iterate do
         $loog.info("The issue #{repo}##{issue} doesn't exist: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue #{repo}##{issue} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
       end
     unless json[:state] == 'closed'
-      $loog.debug("Issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
+      $loog.debug("The issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue
     end
     Fbe.fb.txn do |fbt|
@@ -63,7 +69,7 @@ Fbe.iterate do
           n.issue = issue
           n.what = $judge
         end
-      raise "Issue #{repo}##{issue} already closed" if nn.nil?
+      raise(RuntimeError, "Issue #{repo}##{issue} already closed") if nn.nil?
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       who = json.dig(:closed_by, :id)
       if who
@@ -72,13 +78,16 @@ Fbe.iterate do
         nn.stale = 'who'
       end
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
-      $loog.info("It was found closed at #{Fbe.issue(nn)}")
+      $loog.info("The issue #{Fbe.issue(nn)} found closed #{nn.when.ago} ago")
     end
     events =
       begin
         Fbe.octo.issue_timeline(repo, issue)
       rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.warn("Can't fetch timeline for #{repo}##{issue}: #{e.message}")
+        $loog.info("Can't fetch timeline for #{repo}##{issue}: #{e.message}")
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn("[#{$judge}] Access forbidden to timeline for #{repo}##{issue}: #{e.class}: #{e.message}")
         next issue
       end
     events.each do |te|
@@ -98,10 +107,16 @@ Fbe.iterate do
           $loog.warn("A label #{badge.inspect} is already attached to #{repo}##{issue}")
           next
         end
-        nn.who = te.dig(:actor, :id)
+        who = te.dig(:actor, :id)
+        if who
+          nn.who = who
+        else
+          nn.stale = 'who'
+        end
         nn.when = te[:created_at]
+        actor = te.dig(:actor, :login)
         nn.details =
-          "Seemingly, the #{nn.label.inspect} label was attached by @#{te.dig(:actor, :login)} " \
+          "Seemingly, the #{nn.label.inspect} label was attached by #{actor ? "@#{actor}" : 'an unknown actor'} " \
           "to the issue #{Fbe.issue(nn)}."
         $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
       end

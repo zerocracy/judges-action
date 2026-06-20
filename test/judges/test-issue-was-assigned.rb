@@ -1,17 +1,35 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require 'fbe/octo'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
 class TestIssueWasAssigned < Jp::Test
   using SmartFactbase
+
+  def test_reuses_repo_name_lookup_per_repo
+    calls = Hash.new(0)
+    octo = Object.new
+    octo.define_singleton_method(:repo_name_by_id) do |repository|
+      calls[repository] += 1
+      'foo/foo'
+    end
+    octo.define_singleton_method(:repo_id_by_name) { |_repo| 42 }
+    octo.define_singleton_method(:issue_events) { |_repo, _issue| [] }
+    octo.define_singleton_method(:repository) { |_repo| { id: 42, full_name: 'foo/foo', archived: false } }
+    octo.define_singleton_method(:off_quota?) { |*| false }
+    octo.define_singleton_method(:print_trace!) { nil }
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:octo, octo) do
+      load_it('issue-was-assigned', fb)
+    end
+    assert_equal({ 42 => 1 }, calls)
+  end
 
   def test_not_found_issue_events
     WebMock.disable_net_connect!
@@ -83,6 +101,27 @@ class TestIssueWasAssigned < Jp::Test
         what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 421,
         assigner: 422, details: 'foo/foo#44 was assigned to @user1 by @user2.'
       )
+    )
+  end
+
+  def test_rescues_forbidden_on_issue_events_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-assigned', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_nil(
+      f['stale'],
+      '403 is transient — fact must NOT be marked stale; next cycle will retry the events lookup'
     )
   end
 end

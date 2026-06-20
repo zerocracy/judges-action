@@ -1,20 +1,7 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
-
-# Judge that finds and records all issues in GitHub repositories.
-# Iterates through repositories, identifies existing issues by searching GitHub,
-# and records them in the factbase with metadata about when they were opened
-# and by whom. Used to ensure a complete record of issues in the monitored repos.
-#
-# We have this script because "github-events.rb" is unreliable - it may miss.
-# some issues, due to GitHub limitations. GitHub doesn't allow us to scan the
-# entire history of all events, only the last 1000. Moreover, there could be
-# connectivity problems.
-#
-# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/iterate.rb Implementation of Fbe.iterate
-# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/if_absent.rb Implementation of Fbe.if_absent
 
 require 'elapsed'
 require 'fbe/fb'
@@ -22,9 +9,13 @@ require 'fbe/if_absent'
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
+require 'fbe/tombstone'
 require 'fbe/who'
+require 'joined'
+require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/qos_search'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
@@ -45,29 +36,70 @@ require_relative '../../lib/issue_was_lost'
           $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
           Jp.issue_was_lost('github', repository, issue)
           next 0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to #{type} ##{issue} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next 0
         end
-      total = 0
-      found = 0
+      if after.nil?
+        $loog.info("The #{type} ##{issue} in #{repo} return empty created_at field")
+        next 0
+      end
+      seen = []
+      found = []
       first = issue
-      elapsed($loog) do
-        Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
+      elapsed($loog, level: Logger::INFO) do
+        items =
+          begin
+            Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items]
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.info("No issues found for #{repo}: #{e.message}")
+            []
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to search issues for #{repo} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
+            []
+          rescue Octokit::TooManyRequests, Octokit::ClientError => e
+            $loog.warn("[#{$judge}] Search API rate limit exceeded for #{repo}: #{e.message}")
+            []
+          end
+        items.each do |json|
           next if Fbe.octo.off_quota?
-          total += 1
+          i = json[:number]
+          seen << i
+          next if Fbe::Tombstone.new.has?('github', repository, i)
           Fbe.fb.txn do |fbt|
             f =
               Fbe.if_absent(fb: fbt) do |ff|
-                ff.issue = json[:number]
+                ff.issue = i
                 ff.repository = repository
                 ff.what = "#{type}-was-opened"
                 ff.where = 'github'
                 issue = ff.issue
               end
             next if f.nil?
-            found += 1
+            found << f.issue
             f.when = json[:created_at]
             f.who = json.dig(:user, :id)
             if type == 'pull'
-              ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+              ref =
+                begin
+                  Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+                rescue Octokit::NotFound, Octokit::Deprecated => e
+                  $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+                  Jp.issue_was_lost(f.where, f.repository, f.issue)
+                  next
+                rescue Octokit::Forbidden => e
+                  $loog.warn(
+                    "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+                    "(transient, will retry next cycle): #{e.class}: #{e.message}"
+                  )
+                  next
+                end
               if ref
                 f.branch = ref
               else
@@ -75,9 +107,19 @@ require_relative '../../lib/issue_was_lost'
               end
             end
             f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Fbe.who(f)}."
+            $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
           end
         end
-        throw :"Checked #{total} #{type}s in #{repo}, from #{first} to #{issue}, found #{found}"
+        issue = first if issue < first
+        m = [
+          "Checked #{seen.count} #{type}s in #{repo}",
+          ("(#{seen.joined(max: 8)})" unless seen.empty?),
+          "created >= #{after.iso8601[0..9]};",
+          "from ##{first} to ##{issue};",
+          'found',
+          (found.empty? ? 'nothing' : "#{found.count} (#{found.joined(max: 8)})")
+        ].compact.join(' ')
+        throw m.to_sym
       end
       issue
     end

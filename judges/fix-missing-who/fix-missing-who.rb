@@ -1,24 +1,22 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors facts with exists repository and issue properties and
-# create missing [issue/pull]-was-opened fact
-
-require 'octokit'
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
+require 'octokit'
+require_relative '../../lib/issue_was_lost'
 
 {
-  'issue-was-opened' => :user,
-  'pull-was-opened' => :user,
-  'issue-was-closed' => :closed_by,
-  'pull-was-closed' => :closed_by,
-  'pull-was-merged' => :merged_by
-}.each do |w, a|
+  'issue-was-opened' => %i[issue user],
+  'pull-was-opened' => %i[issue user],
+  'issue-was-closed' => %i[issue closed_by],
+  'pull-was-closed' => %i[issue closed_by],
+  'pull-was-merged' => %i[pull_request merged_by]
+}.each do |w, (api, a)|
   Fbe.consider(
     "(and
       (absent who)
@@ -33,11 +31,16 @@ require 'fbe/who'
     repo = Fbe.octo.repo_name_by_id(f.repository)
     json =
       begin
-        Fbe.octo.issue(repo, f.issue)
-      rescue Octokit::NotFound
-        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}")
-        f.stale = 'issue'
-        $loog.info("#{Fbe.issue(f)} is lost")
+        Fbe.octo.public_send(api, repo, f.issue)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("#{Fbe.issue(f)} doesn't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost(f.where, f.repository, f.issue)
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to #{Fbe.issue(f)} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         next
       end
     who = json.dig(a, :id)

@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require 'loog'
 require 'json'
 require 'judges/options'
+require 'loog'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
 class TestQualityOfService < Jp::Test
   using SmartFactbase
 
@@ -33,13 +29,9 @@ class TestQualityOfService < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-15T21:00:00Z..2024-08-12T21:00:00Z&per_page=100').to_return(
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=100').to_return(
       status: 200,
-      body: {
-        workflow_runs: [
-          { id: 1, run_started_at: Time.now - rand(10_000) }
-        ]
-      }.to_json,
+      body: { workflow_runs: [{ id: 1, run_started_at: Time.now - rand(10_000) }] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -55,12 +47,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/releases?per_page=100').to_return(
       status: 200,
-      body: [
-        {
-          id: 1,
-          published_at: Time.now.to_s
-        }
-      ].to_json,
+      body: [{ id: 1, published_at: Time.now.to_s }].to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -69,13 +56,10 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+      'q=repo:foo/foo%20type:issue%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -91,26 +75,20 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+      'q=repo:foo/foo%20type:pr%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json'
       }
     )
     stub_request(
       :get,
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-15'
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-07-11'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json'
       }
@@ -118,13 +96,10 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z'
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -133,13 +108,10 @@ class TestQualityOfService < Jp::Test
     stub_request(
       :get,
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-15'
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:%3E2024-07-11'
     ).to_return(
       status: 200,
-      body: {
-        total_count: 1,
-        items: []
-      }.to_json,
+      body: { total_count: 1, items: [] }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -147,7 +119,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z',
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false, items: [
           {
@@ -183,7 +155,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-07-15T21:00:00Z..2024-08-12T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -192,7 +164,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_release_hocs_size_and_commits_size
+  def test_some_release_hocs_size_and_commits_size
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -206,12 +178,30 @@ class TestQualityOfService < Jp::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [
         {
+          id: 173_480,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.6', target_commitish: 'master',
+          name: 'Release 6', draft: false, prerelease: false,
+          created_at: Time.parse('2024-08-15 07:30:14 UTC'),
+          published_at: Time.parse('2024-08-15 07:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
           id: 173_470,
           author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
           tag_name: '0.0.5', target_commitish: 'master',
           name: 'Release 5', draft: false, prerelease: false,
           created_at: Time.parse('2024-08-06 07:30:14 UTC'),
           published_at: Time.parse('2024-08-06 07:30:40 UTC'),
+          assets: [], body: 'Some description', mentions_count: 4
+        },
+        {
+          id: 173_465,
+          author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+          tag_name: '0.0.nil', target_commitish: 'master',
+          name: 'Draft Release', draft: true, prerelease: false,
+          created_at: Time.parse('2024-08-06 00:30:14 UTC'),
+          published_at: nil,
           assets: [], body: 'Some description', mentions_count: 4
         },
         {
@@ -374,6 +364,7 @@ class TestQualityOfService < Jp::Test
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
+      assert_equal([64_800, 21_600, 36_000], f['some_release_interval'])
       assert_equal([52, 24, 99], f['some_release_hoc_size'])
       assert_equal([1, 2, 4], f['some_release_commits_size'])
     end
@@ -485,7 +476,40 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_build_mttr_when_failure_several_times_in_a_row
+  def test_skips_unfinished_workflow_runs
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    timed = []
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 42, status: 'in_progress', conclusion: nil, workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          },
+          {
+            id: 43, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T11:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      timed << id
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([43], timed)
+        assert_equal([1], metrics[:some_build_success_rate])
+        assert_equal([900], metrics[:some_build_duration])
+      end
+    end
+  end
+
+  def test_some_build_mttr_on_repeated_failures
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -605,7 +629,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_build_mttr_check_negative_mttr_values
+  def test_some_build_mttr_rejects_negative_values
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -699,18 +723,13 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_hocs_and_files
     WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
+    rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
@@ -868,20 +887,15 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_quality_of_service_some_review_time_comments_reviewers_and_reviews
+  def test_some_review_time_with_comments_reviews
     WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
+    rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
       body: { total_count: 0, workflow_runs: [] }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
@@ -1206,11 +1220,132 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_review_time_survives_not_found_pr
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ number: 42, labels: [{ name: 'bug' }] }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false, items: [{ id: 42, number: 10, title: 'Awesome 10' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 3, incomplete_results: false,
+        items: [
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            created_at: Time.parse('2024-08-20 22:00:00 UTC'),
+            pull_request: { merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+          },
+          {
+            id: 51, number: 14, title: 'Awesome 14',
+            created_at: Time.parse('2024-08-23 12:00:00 UTC'),
+            pull_request: { merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+          },
+          {
+            id: 52, number: 16, title: 'Awesome 16',
+            created_at: Time.parse('2024-08-25 12:00:00 UTC'),
+            pull_request: { merged_at: Time.parse('2024-08-27 18:30:00 UTC') }
+          }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12',
+      body: { id: 50, number: 12, additions: 10, deletions: 5, changed_files: 1 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/14',
+      body: { id: 51, number: 14, additions: 10, deletions: 5, changed_files: 1 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/16',
+      body: { id: 52, number: 16, additions: 10, deletions: 5, changed_files: 1 }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
+      body: [
+        {
+          id: 22_449_326,
+          body: 'Some text 1',
+          user: { login: 'yegor257', id: 526_302, type: 'User' },
+          state: 'CHANGES_REQUESTED',
+          author_association: 'CONTRIBUTOR',
+          submitted_at: Time.parse('2024-08-21 22:00:00 UTC')
+        }
+      ]
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/14/reviews?per_page=100').to_return(
+      status: 404,
+      body: { message: 'Not Found' }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/16/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/16/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
+    f.qos_interval = 3
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_equal([505_800], f['some_review_time'])
+      assert_equal([0, 0], f['some_review_size'])
+      assert_equal([1, 0], f['some_reviewers_per_pull'])
+      assert_equal([1, 0], f['some_reviews_per_pull'])
+    end
+  end
+
   def test_quality_of_service_some_triage_time
     WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
+    rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
@@ -1311,6 +1446,7 @@ class TestQualityOfService < Jp::Test
       f.area = 'quality'
       f.qos_days = 7
       f.qos_interval = 3
+      f.qos_min_triage_seconds = 60
     end
     insert_label_was_attached_fact(
       fb, where: 'gitlab', repository: 42, issue: 40, when: Time.parse('2024-08-04 11:10:00 UTC'), label: 'bug'
@@ -1330,12 +1466,8 @@ class TestQualityOfService < Jp::Test
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 40, when: Time.parse('2024-08-04 12:30:00 UTC'), label: 'bug'
     )
-    insert_label_was_attached_fact(
-      fb, where: 'github', repository: 42, issue: 42, label: 'bug'
-    )
-    insert_label_was_attached_fact(
-      fb, where: 'github', repository: 42, issue: 42, label: 'enhancement'
-    )
+    insert_label_was_attached_fact(fb, where: 'github', repository: 42, issue: 42, label: 'bug')
+    insert_label_was_attached_fact(fb, where: 'github', repository: 42, issue: 42, label: 'enhancement')
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 42, when: Time.parse('2024-08-04 19:00:00 UTC'), label: 'enhancement'
     )
@@ -1351,6 +1483,362 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_triage_time_filters_auto_labels
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_700,
+            number: 50,
+            title: 'Issue 50',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+      f.qos_min_triage_seconds = 60
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 50, when: Time.parse('2024-08-04 12:00:01 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 50, when: Time.parse('2024-08-04 14:00:00 UTC'), label: 'enhancement'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_nil(f['some_triage_time'])
+    end
+  end
+
+  def test_some_triage_time_threshold_configurable
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_701,
+            number: 51,
+            title: 'Issue 51',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+      f.qos_min_triage_seconds = 7_200
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 51, when: Time.parse('2024-08-04 13:00:00 UTC'), label: 'bug'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_nil(f['some_triage_time'])
+    end
+  end
+
+  def test_some_triage_time_uses_default_threshold
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_710,
+            number: 60,
+            title: 'Issue 60',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          },
+          {
+            id: 2_544_140_711,
+            number: 61,
+            title: 'Issue 61',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 60, when: Time.parse('2024-08-04 12:00:59 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 61, when: Time.parse('2024-08-04 12:01:00 UTC'), label: 'bug'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_equal([60.0], f['some_triage_time'])
+    end
+  end
+
+  def test_some_triage_time_mixes_kept_and_filtered
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_720,
+            number: 70,
+            title: 'Issue 70',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          },
+          {
+            id: 2_544_140_721,
+            number: 71,
+            title: 'Issue 71',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_651, name: 'enhancement', description: 'New feature or request' }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+      f.qos_min_triage_seconds = 60
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 70, when: Time.parse('2024-08-04 12:00:01 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 71, when: Time.parse('2024-08-04 14:00:00 UTC'), label: 'enhancement'
+    )
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      f = fb.query('(eq what "quality-of-service")').each.first
+      assert_equal([7_200.0], f['some_triage_time'])
+    end
+  end
+
   def test_quality_of_service_fill_up_abandoned_facts
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -1358,30 +1846,32 @@ class TestQualityOfService < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
@@ -1420,6 +1910,11 @@ class TestQualityOfService < Jp::Test
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
       'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-02T21:00:00Z..2024-07-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-07-02T22:00:00Z..2024-07-09T22:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -1484,55 +1979,55 @@ class TestQualityOfService < Jp::Test
     end
     Time.stub(:now, Time.parse('2024-07-09 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
-      f1, f2, * = fb.query('(eq what "quality-of-service")').each.sort_by(&:when)
-      assert_equal(Time.parse('2024-07-02 21:00:00 UTC'), f1.since)
-      assert_equal(Time.parse('2024-07-09 21:00:00 UTC'), f1.when)
-      assert_equal([3, 2, 1], f1['some_build_mttr'])
-      assert_nil(f1['some_pull_hoc_size'])
-      assert_nil(f1['some_pull_files_size'])
-      assert_equal([100], f1['some_merged_pulls'])
-      assert_equal([1], f1['some_unmerged_pulls'])
-      assert_equal(Time.parse('2024-07-02 22:00:00 UTC'), f2.since)
-      assert_equal(Time.parse('2024-07-09 22:00:00 UTC'), f2.when)
-      assert_equal([3, 2, 2], f2['some_build_mttr'])
-      assert_equal([17], f2['some_pull_hoc_size'])
-      assert_equal([200], f2['some_pull_files_size'])
-      assert_equal([100], f1['some_merged_pulls'])
-      assert_equal([1], f1['some_unmerged_pulls'])
+      first, second, * = fb.query('(eq what "quality-of-service")').each.sort_by(&:when)
+      assert_equal(Time.parse('2024-07-02 21:00:00 UTC'), first.since)
+      assert_equal(Time.parse('2024-07-09 21:00:00 UTC'), first.when)
+      assert_equal([3, 2, 1], first['some_build_mttr'])
+      assert_nil(first['some_pull_hoc_size'])
+      assert_nil(first['some_pull_files_size'])
+      assert_equal([100], first['some_merged_pulls'])
+      assert_equal([1], first['some_unmerged_pulls'])
+      assert_equal(Time.parse('2024-07-02 22:00:00 UTC'), second.since)
+      assert_equal(Time.parse('2024-07-09 22:00:00 UTC'), second.when)
+      assert_equal([3, 2, 2], second['some_build_mttr'])
+      assert_equal([17], second['some_pull_hoc_size'])
+      assert_equal([200], second['some_pull_files_size'])
+      assert_equal([100], first['some_merged_pulls'])
+      assert_equal([1], first['some_unmerged_pulls'])
     end
   end
 
-  def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since
+  def test_fill_up_abandoned_facts_with_absent_since
     WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
+    rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
@@ -1546,6 +2041,19 @@ class TestQualityOfService < Jp::Test
       body: {
         total_count: 2, incomplete_results: false,
         items: [{ id: 42, number: 10, title: 'Awesome 10' }, { id: 43, number: 11, title: 'Awesome 11' }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [
+          {
+            id: 50, number: 12, title: 'Awesome 12',
+            pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') }
+          }
+        ]
       }
     )
     stub_github(
@@ -1600,33 +2108,33 @@ class TestQualityOfService < Jp::Test
       load_it('quality-of-service', fb)
       fs = fb.query('(eq what "quality-of-service")').each.sort_by(&:_time)
       assert_equal(2, fs.size)
-      f1, f2 = fs
-      assert_nil(f1['since'])
-      assert_nil(f1['when'])
-      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f2.since)
-      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f2.when)
-      assert_equal([1], f2['some_build_success_rate'])
-      assert_equal([900], f2['some_build_duration'])
-      assert_nil(f2['some_build_mttr'])
-      assert_equal([17], f2['some_pull_hoc_size'])
-      assert_equal([3], f2['some_pull_files_size'])
-      assert_nil(f2['some_triage_time'])
-      refute_nil(f2['some_backlog_size'])
-      assert_nil(f2['some_release_interval'])
-      assert_equal([2], f2['some_merged_pulls'])
-      assert_equal([1], f2['some_unmerged_pulls'])
-      assert_nil(f2['some_issue_lifetime'])
-      assert_nil(f2['some_pull_lifetime'])
-      assert_equal([10_800], f2['some_review_time'])
-      assert_equal([0], f2['some_review_size'])
-      assert_equal([1], f2['some_reviewers_per_pull'])
-      assert_equal([1], f2['some_reviews_per_pull'])
-      assert_nil(f2['some_release_hoc_size'])
-      assert_nil(f2['some_release_commits_size'])
+      first, second = fs
+      assert_nil(first['since'])
+      assert_nil(first['when'])
+      assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), second.since)
+      assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), second.when)
+      assert_equal([1], second['some_build_success_rate'])
+      assert_equal([900], second['some_build_duration'])
+      assert_nil(second['some_build_mttr'])
+      assert_equal([17], second['some_pull_hoc_size'])
+      assert_equal([3], second['some_pull_files_size'])
+      assert_nil(second['some_triage_time'])
+      refute_nil(second['some_backlog_size'])
+      assert_nil(second['some_release_interval'])
+      assert_equal([1], second['some_merged_pulls'])
+      assert_equal([1], second['some_unmerged_pulls'])
+      assert_nil(second['some_issue_lifetime'])
+      assert_nil(second['some_pull_lifetime'])
+      assert_equal([10_800], second['some_review_time'])
+      assert_equal([0], second['some_review_size'])
+      assert_equal([1], second['some_reviewers_per_pull'])
+      assert_equal([1], second['some_reviews_per_pull'])
+      assert_nil(second['some_release_hoc_size'])
+      assert_nil(second['some_release_commits_size'])
     end
   end
 
-  def test_quality_of_service_fill_up_abandoned_facts_with_exists_when_and_absent_since_and_absent_qos_days
+  def test_fill_up_abandoned_facts_absent_qos_days
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
@@ -1642,30 +2150,32 @@ class TestQualityOfService < Jp::Test
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_workflow_runs(
-      [{
-        id: 42,
-        name: 'copyrights',
-        head_branch: 'master',
-        head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
-        event: 'push',
-        status: 'completed',
-        conclusion: 'success',
-        workflow_id: 42,
-        created_at: Time.now - rand(10_000),
-        updated_at: Time.now - rand(10_000) + 100,
-        run_started_at: Time.now - rand(10_000),
-        repository: {
-          id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
-          owner: { login: 'foo', id: 526_301, site_admin: false },
+      [
+        {
+          id: 42,
+          name: 'copyrights',
+          head_branch: 'master',
+          head_sha: '7d34c53e6743944dbf6fc729b1066bcbb3b18443',
+          event: 'push',
+          status: 'completed',
+          conclusion: 'success',
+          workflow_id: 42,
           created_at: Time.now - rand(10_000),
-          updated_at: Time.now - rand(10_000),
-          pushed_at: Time.now - rand(10_000),
-          size: 470, stargazers_count: 1, watchers_count: 1,
-          language: 'Ruby', forks_count: 0, archived: false,
-          open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
-          visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          updated_at: Time.now - rand(10_000) + 100,
+          run_started_at: Time.now - rand(10_000),
+          repository: {
+            id: 1, full_name: 'foo/foo', default_branch: 'master', private: false,
+            owner: { login: 'foo', id: 526_301, site_admin: false },
+            created_at: Time.now - rand(10_000),
+            updated_at: Time.now - rand(10_000),
+            pushed_at: Time.now - rand(10_000),
+            size: 470, stargazers_count: 1, watchers_count: 1,
+            language: 'Ruby', forks_count: 0, archived: false,
+            open_issues_count: 6, license: { key: 'mit', name: 'MIT License' },
+            visibility: 'public', forks: 0, open_issues: 6, watchers: 1
+          }
         }
-      }]
+      ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-30T21:00:00Z&per_page=100',
@@ -1704,9 +2214,7 @@ class TestQualityOfService < Jp::Test
 
   def test_quality_of_service_some_backlog_size
     WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
+    rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
@@ -1830,15 +2338,44 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_stops_backlog_searches_on_quota_consumed
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 0, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $judge = 'quality-of-service'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
+    url =
+      'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:*..2025-08-22%20(closed:%3E=2025-08-22%20OR%20state:open)'
+    load(File.join(__dir__, '../../judges/quality-of-service/some_backlog_size.rb'))
+    Jp.qoreset
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'quality-of-service'
+      f.since = Time.parse('2025-08-21 21:00:00 UTC')
+      f.when = Time.parse('2025-08-28 21:00:00 UTC')
+      assert_equal({}, some_backlog_size(f))
+    end
+    assert_not_requested(:get, url)
+  end
+
   def test_quality_of_service_fix_gap
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     %w[
-      2025-09-01T15:00:00Z..2025-09-10T15:00:00Z
+      2025-09-01T15:00:00Z..2025-09-05T15:00:00Z
       2025-09-15T15:00:00Z..2025-09-25T15:00:00Z
-      2025-09-10T15:00:00Z..2025-09-15T15:00:00Z
+      2025-09-05T15:00:00Z..2025-09-15T15:00:00Z
     ].each do |period|
       stub_github(
         'https://api.github.com/search/issues?per_page=100&' \
@@ -1871,9 +2408,9 @@ class TestQualityOfService < Jp::Test
       )
     end
     %w[
-      2025-09-04 2025-09-05 2025-09-06 2025-09-07 2025-09-08 2025-09-09 2025-09-10
+      2025-09-01 2025-09-02 2025-09-03 2025-09-04 2025-09-05
       2025-09-19 2025-09-20 2025-09-21 2025-09-22 2025-09-23 2025-09-24 2025-09-25
-      2025-09-11 2025-09-12 2025-09-13 2025-09-14 2025-09-15
+      2025-09-06 2025-09-07 2025-09-08 2025-09-09 2025-09-10 2025-09-11 2025-09-12 2025-09-13 2025-09-14 2025-09-15
     ].each do |date|
       stub_github(
         'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
@@ -1882,9 +2419,13 @@ class TestQualityOfService < Jp::Test
       )
     end
     fb = Factbase.new
+    f = fb.insert
+    f.what = 'pmp'
+    f.area = 'quality'
+    f.qos_days = 7
     fb.with(
       _id: 1, what: 'quality-of-service',
-      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-10 15:00:00 UTC')
+      since: Time.parse('2025-09-01 15:00:00 UTC'), when: Time.parse('2025-09-05 15:00:00 UTC')
     ).with(
       _id: 2, what: 'quality-of-service',
       since: Time.parse('2025-09-15 15:00:00 UTC'), when: Time.parse('2025-09-25 15:00:00 UTC')
@@ -1894,7 +2435,7 @@ class TestQualityOfService < Jp::Test
       assert(
         fb.one?(
           what: 'quality-of-service',
-          since: Time.parse('2025-09-10 15:00:00 UTC'),
+          since: Time.parse('2025-09-05 15:00:00 UTC'),
           when: Time.parse('2025-09-15 15:00:00 UTC')
         )
       )
@@ -1919,11 +2460,13 @@ class TestQualityOfService < Jp::Test
     end
     stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
-      body: [{
-        node_id: 'RE_kwDOL6GCO84J7Cen', tag_name: '0.19.0', target_commitish: 'master',
-        name: 'just a fake name', draft: false, prerelease: false,
-        created_at: Time.now - rand(10_000), published_at: Time.now - rand(10_000), assets: []
-      }]
+      body: [
+        {
+          node_id: 'RE_kwDOL6GCO84J7Cen', tag_name: '0.19.0', target_commitish: 'master',
+          name: 'just a fake name', draft: false, prerelease: false,
+          created_at: Time.now - rand(10_000), published_at: Time.now - rand(10_000), assets: []
+        }
+      ]
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
@@ -2086,7 +2629,7 @@ class TestQualityOfService < Jp::Test
     fb.insert.then do |f|
       f.what = 'label-was-attached'
       %i[where repository issue when label].each do |prop|
-        f.send(:"#{prop}=", kwargs[prop]) unless kwargs[prop].nil?
+        f.__send__(:"#{prop}=", kwargs[prop]) unless kwargs[prop].nil?
       end
     end
   end

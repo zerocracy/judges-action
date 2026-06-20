@@ -1,51 +1,96 @@
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 ---
 AllCops:
   Exclude:
     - 'vendor/**/*'
   DisplayCopNames: true
-  TargetRubyVersion: 3.2
+  TargetRubyVersion: 4.0
   SuggestExtensions: false
   NewCops: enable
+plugins:
+  - rubocop-rake
+  - rubocop-minitest
+  - rubocop-performance
+  - rubocop-elegant
+Style/ItBlockParameter:
+  Enabled: false
 Naming/FileName:
   Regex: '^[a-z0-9\-._]*$'
 Style/GlobalVars:
   Enabled: false
-Metrics/ParameterLists:
+Style/TopLevelMethodDefinition:
   Enabled: false
+Elegant/GoodMethodName:
+  Exclude:
+    - 'test/**/*'
+  AllowedNames:
+    - total_active_contributors
+    - total_commits
+    - total_contributors
+    - total_files
+    - total_issues
+    - total_releases
+    - total_repositories
+    - total_stars
+    - some_backlog_size
+    - some_build_success_rate
+    - some_issue_lifetime
+    - some_merged_pulls
+    - some_pull_hoc_size
+    - some_release_hoc_size
+    - some_release_interval
+    - some_review_time
+    - some_triage_time
+    - total_builds_ran
+    - total_commits_pushed
+    - total_issues_created
+    - total_releases_published
+    - total_reviews_submitted
+    - cover_qo
+    - fill_fact_by_hash
+    - issue_was_lost
+    - nick_of
+    - comments_info
+    - count_appreciated_comments
+    - fetch_workflows
+    - count_suggestions
+    - stub_event
+    - stub_workflow_runs
+    - insert_label_was_attached_fact
+    - rate_limit_up
+    - load_it
+    - stub_github
+    - stub_pull_was_merged_base
+    - stub_pull_was_merged_issue
+    - stub_pull_was_merged_success
 Metrics/MethodLength:
-  Enabled: false
-Lint/NestedMethodDefinition:
-  Enabled: false
-Gemspec/RequiredRubyVersion:
-  Enabled: false
-Style/ClassAndModuleChildren:
-  Enabled: false
-Layout/MultilineMethodCallIndentation:
   Enabled: false
 Metrics/AbcSize:
   Enabled: false
 Metrics/BlockLength:
   Enabled: false
-Metrics/CyclomaticComplexity:
-  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/PerceivedComplexity:
   Enabled: false
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-Layout/CaseIndentation:
+Metrics/CyclomaticComplexity:
   Enabled: false
 Naming/MethodParameterName:
   MinNameLength: 2
-Layout/MultilineAssignmentLayout:
-  Enabled: true
-Minitest/EmptyLineBeforeAssertionMethods:
-  Enabled: false
-plugins:
-  - rubocop-rake
-  - rubocop-minitest
-  - rubocop-performance
-require: []
+Elegant/ClassInModule:
+  Exclude:
+    - 'test/**/*'
+
+# Tests favor named intermediate values for clarity; github-events keeps the
+# forbidden-user lookup and query-builder results as named begin/rescue blocks,
+# which read clearer than inlined expressions.
+Elegant/NoRedundantVariable:
+  Exclude:
+    - 'test/**/*'
+    - 'judges/github-events/github-events.rb'
+
+# Align multi-line array literals (and multi-class rescue lists) with a fixed
+# 2-space step, matching Elegant/IndentationLadder instead of fighting it.
+Layout/ArrayAlignment:
+  EnforcedStyle: with_fixed_indentation

@@ -1,15 +1,7 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
-
-# Judge that retrieves GitHub usernames (nicks) for users in the factbase.
-# Finds users in the factbase who don't have a name recorded yet,
-# retrieves their GitHub nickname, and stores it in the factbase.
-# It also updates nicknames for existing records that are more than 5 days old.
-#
-# @see ../../lib/nick_of.rb Implementation of the nick retrieval logic
-# @note This judge runs periodically to ensure all users have up-to-date nicknames recorded
 
 require 'fbe/conclude'
 require 'fbe/consider'
@@ -18,6 +10,7 @@ require 'fbe/delete_one'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/overwrite'
+require 'octokit'
 require_relative '../../lib/nick_of'
 
 alive = []
@@ -37,7 +30,16 @@ Fbe.conclude do
       (eq where $where))))"
   follow 'who where'
   draw do |n, f|
-    nick = Jp.nick_of(f.who)
+    nick =
+      begin
+        Jp.nick_of(f.who)
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to user ##{f.who} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
+      end
     if nick.nil?
       f.stale = 'who'
       throw :rollback
@@ -60,7 +62,16 @@ Fbe.consider(
     (exists who)
     (eq where 'github'))"
 ) do |f|
-  nick = Jp.nick_of(f.who)
+  nick =
+    begin
+      Jp.nick_of(f.who)
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to user ##{f.who} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   if nick.nil?
     f.stale = 'who'
     next
@@ -69,15 +80,18 @@ Fbe.consider(
   Fbe.overwrite(f, 'name', nick)
 end
 
-Fbe.fb.query(
-  "(and
-    (exists _id)
-    (eq stale 'who')
-    (exists who)
-    (or #{alive.uniq.map { |u| "(eq who #{u})" }.join}))"
-).each do |f|
-  next unless f.stale == 'who'
-  Fbe.delete_one(f, 'stale', 'who')
+alive.uniq!
+unless alive.empty?
+  Fbe.fb.query(
+    "(and
+      (exists _id)
+      (eq stale 'who')
+      (exists who)
+      (or #{alive.map { |u| "(eq who #{u})" }.join}))"
+  ).each do |f|
+    next unless f.stale == 'who'
+    Fbe.delete_one(f, 'stale', 'who')
+  end
 end
 
 Fbe.octo.print_trace!

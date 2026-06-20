@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
+
+set -e -o pipefail
 
 img=$1
 
@@ -11,9 +13,16 @@ img=$1
     echo 'max_events=3'
 ) > target/opts.txt
 
-name=$(LC_ALL=C tr -dc '[:lower:]' </dev/urandom | head -c 16 || true)
+# Generate random name, ignoring SIGPIPE errors from tr when head closes the pipe
+name=$(LC_ALL=C tr -dc '[:lower:]' </dev/urandom 2>/dev/null | head -c 16) || true
+
+if [ -z "${name}" ]; then
+    echo "Failed to generate random name" >&2
+    exit 1
+fi
 
 docker run --rm \
+    -e "SKIP_VERSION_CHECKING=true" \
     -e "GITHUB_WORKSPACE=/tmp" \
     -e "GITHUB_REPOSITORY=zerocracy/judges-action" \
     -e "GITHUB_REPOSITORY_OWNER=zerocracy" \

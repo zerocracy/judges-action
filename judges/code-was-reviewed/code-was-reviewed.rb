@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors pull-was-merged or pull-was-closed facts with exists repository
-# and issue properties and create missing code-was-reviewed fact.
-
-require 'fbe/octo'
 require 'fbe/consider'
 require 'fbe/issue'
+require 'fbe/octo'
 require 'fbe/who'
+require 'octokit'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.consider(
@@ -32,13 +30,32 @@ Fbe.consider(
         (eq what '#{$judge}'))))"
 ) do |f|
   repo = Fbe.octo.repo_name_by_id(f.repository)
-  pr = Fbe.octo.pull_request(repo, f.issue)
+  pr =
+    begin
+      Fbe.octo.pull_request(repo, f.issue)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+      Jp.issue_was_lost(f.where, f.repository, f.issue)
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   reviews =
     begin
       Fbe.octo.pull_request_reviews(repo, f.issue)
-    rescue Octokit::NotFound
-      $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}")
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to reviews for pull ##{f.issue} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
       next
     end
   reviews.each do |review|
@@ -56,14 +73,43 @@ Fbe.consider(
       n.when = review[:submitted_at]
       n.hoc = pr[:additions] + pr[:deletions]
       n.author = pr.dig(:user, :id)
-      n.comments = Fbe.octo.issue_comments(repo, f.issue).count
-      n.review_comments = Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
-      n.seconds = (review[:submitted_at] - pr[:created_at]).to_i
+      n.comments =
+        begin
+          Fbe.octo.issue_comments(repo, f.issue).count
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
+          0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
+        end
+      n.review_comments =
+        begin
+          Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
+          0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
+        end
+      n.seconds = Integer(review[:submitted_at] - pr[:created_at])
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
         "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
         "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
-      $loog.info("The #{Fbe.issue(n)} was reviewed by #{Fbe.who(n)} with #{n.review_comments} comments")
+      $loog.info(
+        [
+          "The pull #{Fbe.issue(n)} was reviewed by #{Fbe.who(n)} #{n.when.ago} ago:",
+          "#{n.review_comments} review comments, #{n.seconds} seconds, #{n.comments} comments"
+        ].join(' ')
+      )
     end
   end
 end

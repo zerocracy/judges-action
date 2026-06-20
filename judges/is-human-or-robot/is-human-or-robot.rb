@@ -1,21 +1,13 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that identifies whether a GitHub user is a human or a bot.
-# Examines GitHub users found in the factbase, determines if they are
-# humans or bots based on GitHub user type and a configurable bot list
-# from options. Records the result in the factbase.
-#
-# @see https://github.com/yegor256/fbe/blob/master/lib/fbe/conclude.rb Implementation of Fbe.conclude
-# @note Sets is_human=1 for humans and is_human=0 for bots
-# @note Configurable bot usernames can be provided via $options.bots (comma-separated)
-
-require 'fbe/octo'
 require 'fbe/consider'
+require 'fbe/issue'
+require 'fbe/octo'
 
-@configured_bots = nil
+@bots = nil
 
 Fbe.consider(
   '(and
@@ -34,16 +26,24 @@ Fbe.consider(
       $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
       f.stale = 'who'
       next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] GitHub user ##{f.who} is not accessible " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
     end
   type = json[:type]
   location = "#{f.what} at #{Fbe.issue(f) if f['issue']}"
-  @configured_bots ||=
+  @bots ||=
     if $options.respond_to?(:bots) && !$options.bots.nil? && !$options.bots.empty?
-      $options.bots.split(',').map(&:strip).reject(&:empty?)
+      names = $options.bots.split(',').map(&:strip)
+      names.reject!(&:empty?)
+      names
     else
       []
     end
-  if type == 'Bot' || @configured_bots.include?(json[:login])
+  if type == 'Bot' || @bots.include?(json[:login])
     f.is_human = 0
     $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{location}")
   else

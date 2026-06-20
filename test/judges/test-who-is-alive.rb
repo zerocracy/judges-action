@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
 class TestWhoIsAlive < Jp::Test
   using SmartFactbase
 
@@ -92,5 +88,25 @@ class TestWhoIsAlive < Jp::Test
       load_it('who-is-alive', fb)
       assert_equal(6, fb.all.size)
     end
+  end
+
+  def test_keeps_fact_on_forbidden_user_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'who-has-name', where: 'github', who: 29_139_614,
+      name: 'someone', when: Time.now - (3 * 86_400)
+    )
+    load_it('who-is-alive', fb)
+    refute_empty(
+      fb.query('(eq what "who-has-name")').each.to_a,
+      'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'
+    )
   end
 end

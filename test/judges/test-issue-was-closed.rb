@@ -1,18 +1,14 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'decoor'
-require 'fbe/github_graph'
 require 'factbase'
+require 'fbe/github_graph'
 require 'judges/options'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2025 Yegor Bugayenko
-# License:: MIT
 class TestIssueWasClosed < Jp::Test
   using SmartFactbase
 
@@ -65,7 +61,7 @@ class TestIssueWasClosed < Jp::Test
     )
   end
 
-  def test_multiple_facts_with_identical_repository_and_issue
+  def test_multiple_facts_with_identical_repo
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -116,9 +112,7 @@ class TestIssueWasClosed < Jp::Test
     load_it('issue-was-closed', fb)
     assert_equal(1, fb.picks(what: 'issue-was-opened').size)
     assert_equal(1, fb.picks(what: 'label-was-attached').size)
-    assert(
-      fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
-    )
+    assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
 
   def test_find_closed_issues_without_labels
@@ -134,10 +128,7 @@ class TestIssueWasClosed < Jp::Test
         closed_by: { login: 'user1', id: 222_111 }
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
-      body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
     load_it('issue-was-closed', fb)
@@ -145,7 +136,7 @@ class TestIssueWasClosed < Jp::Test
     assert_equal(0, fb.picks(what: 'label-was-attached').size)
   end
 
-  def test_find_closed_issues_with_labels_and_exists_labels_fact
+  def test_find_closed_issues_with_labels_fact
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -176,8 +167,90 @@ class TestIssueWasClosed < Jp::Test
     load_it('issue-was-closed', fb)
     assert_equal(1, fb.picks(what: 'issue-was-opened').size)
     assert_equal(1, fb.picks(what: 'label-was-attached').size)
+    assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
+  end
+
+  def test_marks_label_stale_on_nil_timeline_actor
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52',
+      body: {
+        number: 52, title: 'some title 52', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
+      body: [
+        {
+          id: 195,
+          actor: nil,
+          event: 'labeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
+    load_it('issue-was-closed', fb)
+    f = fb.query("(and (eq what 'label-was-attached') (eq label 'bug'))").each.first
+    refute_nil(f)
+    assert_nil(f['who'], 'who must not be set to nil for a deleted timeline actor')
+    assert_equal(['who'], f['stale'], 'a deleted timeline actor must mark the fact stale on who')
+    assert_match(/an unknown actor/, f['details'].first)
+  end
+
+  def test_rescues_forbidden_on_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the lookup')
+  end
+
+  def test_rescues_forbidden_on_timeline_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, title: 'some title 44', state: 'closed',
+        closed_at: Time.parse('2025-10-01 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
     assert(
-      fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421)
+      fb.one?(what: 'issue-was-closed', repository: 42, issue: 44, where: 'github', who: 222_111),
+      'issue-was-closed fact should still be created — only timeline processing is skipped on 403'
+    )
+    assert_empty(
+      fb.query("(eq what 'label-was-attached')").each.to_a,
+      'no label-was-attached facts since timeline was inaccessible'
     )
   end
 end

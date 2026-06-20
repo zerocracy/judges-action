@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 ---
 name: checkmake
@@ -14,5 +14,5 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
-      - uses: Uno-Takashi/checkmake-action@v2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+      - uses: Uno-Takashi/checkmake-action@bc11ee86274ceaf5710dbcd80871d7cd7ecc78ce # v2

@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 ---
 options:
@@ -6,6 +6,10 @@ options:
   repositories: yegor256/judges
   testing: true
 input:
+  -
+    what: pmp
+    area: quality
+    qos_pause_seconds: 0
   -
     _id: 1
     what: quality-of-service

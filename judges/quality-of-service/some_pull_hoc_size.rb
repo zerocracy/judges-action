@@ -1,28 +1,35 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/qos_search'
 
-# Some HOC and number of files changed in recent merged PRs
-#
-# This function is called from the "quality-of-service.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def some_pull_hoc_size(fact)
   hocs = []
   files = []
   Fbe.unmask_repos do |repo|
-    Fbe.octo.search_issues(
-      "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
-    )[:items].each do |json|
-      Fbe.octo.pull_request(repo, json[:number]).then do |pull|
-        hocs << (pull[:additions] + pull[:deletions])
-        files << pull[:changed_files]
-      end
+    return {} if Fbe.octo.off_quota?
+    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    return {} if found.nil?
+    found[:items].each do |json|
+      pull =
+        begin
+          Fbe.octo.pull_request(repo, json[:number])
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Pull request ##{json[:number]} not found in #{repo}: #{e.message}")
+          next
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to pull request ##{json[:number]} in #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      hocs << (pull[:additions] + pull[:deletions])
+      files << pull[:changed_files]
     end
   end
   {

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors facts with exists repository and issue properties and
-# create missing issue-was-opened fact.
-
-require 'fbe/octo'
 require 'fbe/conclude'
 require 'fbe/issue'
+require 'fbe/octo'
+require 'fbe/tombstone'
 require 'fbe/who'
+require 'octokit'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.conclude do
@@ -17,6 +17,8 @@ Fbe.conclude do
     (or
       (eq what 'dud-was-closed')
       (eq what 'issue-was-closed')
+      (eq what 'issue-was-assigned')
+      (eq what 'label-was-attached')
       (eq what 'bug-was-accepted')
       (eq what 'bug-was-resolved')
       (eq what 'enhancement-suggestion-was-rewarded')
@@ -44,13 +46,19 @@ Fbe.conclude do
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("The issue ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
-        next
+        throw(:rollback)
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
       end
     n.what = $judge
     n.when = json[:created_at]
     n.who = json.dig(:user, :id)
     n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.info("The opening of #{Fbe.issue(n)} by #{Fbe.who(n)} was found")
+    $loog.info("The issue #{Fbe.issue(n)} was opened by #{Fbe.who(n)} #{n.when.ago} ago")
   end
 end
 

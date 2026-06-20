@@ -1,26 +1,46 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/qos_search'
 
-# Total number of unique active contributors to all repos
-#
-# This function is called from the "dimensions-of-terrain.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_active_contributors(fact)
-  active_contributors = Set.new
+  seen = Set.new
   Fbe.unmask_repos do |repo|
-    Fbe.octo.search_commits(
-      "repo:#{repo} author-date:>#{(fact.when - (30 * 24 * 60 * 60)).iso8601[0..9]}"
-    )[:items].each do |commit|
-      author_id = commit.dig(:author, :id)
-      active_contributors << author_id unless author_id.nil?
+    commits =
+      begin
+        Jp.qosearch(
+          "repo:#{repo} author-date:>#{(fact.when - (30 * 24 * 60 * 60)).iso8601[0..9]}",
+          method: :search_commits
+        )
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Commits not found for #{repo}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to commit search for #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
+    next if commits.nil?
+    commits[:items].each do |commit|
+      author = commit.dig(:author, :id)
+      seen << author unless author.nil?
     end
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Search commits not found for #{repo}: #{e.message}")
+    next
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to search commits in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
-  { total_active_contributors: active_contributors.count }
+  { total_active_contributors: seen.count }
 end

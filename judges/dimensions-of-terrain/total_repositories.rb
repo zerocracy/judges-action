@@ -1,21 +1,24 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
-# Total number of repositories in the project.
-#
-# This function is called from the "dimensions-of-terrain.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_repositories(_fact)
   total = 0
   Fbe.unmask_repos do |repo|
     total += 1 unless Fbe.octo.repository(repo)[:archived]
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Repository #{repo} not found: #{e.message}")
+    next
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   { total_repositories: total }
 end

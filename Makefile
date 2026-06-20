@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 .ONESHELL:
@@ -10,9 +10,12 @@ export
 
 all: rubocop test entry rmi verify entries
 
+rubocop:
+	bundle exec rubocop
+
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'judges test --disable live --lib /action/lib /action/judges'
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges'
 	echo "$$?" > target/test.exit
 
 entry: target/docker-image.txt
@@ -39,4 +42,4 @@ target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock
 	docker build -t judges-action -q "$$(pwd)" > "$@"
 
 clean:
-	rm -f target
+	rm -rf target

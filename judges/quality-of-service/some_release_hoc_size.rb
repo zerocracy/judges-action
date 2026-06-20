@@ -1,33 +1,53 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Release hoc and commit size
-#
-# This function is called from the "quality-of-service.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def some_release_hoc_size(fact)
-  repo_releases = {}
+  grouped = {}
   hocs = []
   commits = []
   Fbe.unmask_repos do |repo|
-    Fbe.octo.releases(repo).each do |json|
-      break if json[:published_at] < fact.since || json[:published_at] > fact.when
-      (repo_releases[repo] ||= []) << json
+    releases =
+      begin
+        Fbe.octo.releases(repo)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Releases not found for #{repo}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to releases for #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
+    releases.each do |json|
+      next if json[:published_at].nil?
+      next if json[:published_at] > fact.when
+      break if json[:published_at] < fact.since
+      (grouped[repo] ||= []) << json
     end
   end
-  repo_releases.each do |repo, releases|
+  grouped.each do |repo, releases|
     releases.reverse.each_cons(2) do |first, last|
-      Fbe.octo.compare(repo, first[:tag_name], last[:tag_name]).then do |json|
-        hocs << json[:files].sum { |file| file[:changes] }
-        commits << json[:total_commits]
-      end
+      compare =
+        begin
+          Fbe.octo.compare(repo, first[:tag_name], last[:tag_name])
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Compare not found for #{repo}@#{first[:tag_name]}..#{last[:tag_name]}: #{e.message}")
+          next
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to compare for #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      hocs << compare[:files].sum { |file| file[:changes] }
+      commits << compare[:total_commits]
     end
   end
   {

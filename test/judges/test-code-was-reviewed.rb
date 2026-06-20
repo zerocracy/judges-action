@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2025 Yegor Bugayenko
-# License:: MIT
 class TestCodeWasReviewed < Jp::Test
   using SmartFactbase
 
@@ -66,9 +62,123 @@ class TestCodeWasReviewed < Jp::Test
       fb.one?(
         what: 'code-was-reviewed', where: 'github', repository: 42, issue: 44, who: 422, hoc: 17, author: 421,
         when: Time.parse('2025-09-02 10:39:20 UTC'), comments: 2, review_comments: 3, seconds: 68_630,
-        details: 'The pull request foo/foo#44 with 17 HoC created by @user1 ' \
-                 'was reviewed by @user2 after 19h3m and 3 comments.'
+        details:
+          'The pull request foo/foo#44 with 17 HoC created by @user1 ' \
+          'was reviewed by @user2 after 19h3m and 3 comments.'
       )
+    )
+  end
+
+  def test_rescues_not_found_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/77',
+      status: 404,
+      body: { message: 'Not Found', documentation_url: 'https://docs.github.com/...' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 77, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 77, stale: 'issue'),
+      'expected the sibling pull-was-closed fact to be marked stale by Jp.issue_was_lost ' \
+      'after the unrescued 404 on Fbe.octo.pull_request'
+    )
+  end
+
+  def test_rescues_forbidden_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/88',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 88, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'issue-was-lost', where: 'github', repository: 42, issue: 88),
+      'forbidden error must not produce an issue-was-lost tombstone'
+    )
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 88, stale: 'issue'),
+      'forbidden error must leave the original fact untouched'
+    )
+  end
+
+  def test_rescues_deprecated_on_reviews_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/99',
+      body: {
+        id: 99, number: 99, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/99/reviews?per_page=100',
+      status: 410,
+      body: { message: 'Gone' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 99, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 99, stale: 'issue'),
+      'deprecated reviews lookup must mark the sibling pull fact stale through Jp.issue_was_lost'
+    )
+  end
+
+  def test_rescues_forbidden_on_reviews_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/99',
+      body: {
+        id: 99, number: 99, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/99/reviews?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/100',
+      body: {
+        id: 100, number: 100, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 3, deletions: 4
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/100/reviews?per_page=100',
+      body: [
+        { id: 50_100, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/100/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/100/reviews/50100/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: {  id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: {  id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 99, where: 'github')
+      .with(_id: 2, what: 'pull-was-closed', repository: 42, issue: 100, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 99, stale: 'issue'),
+      'forbidden reviews lookup must leave the original pull fact untouched'
+    )
+    assert(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 100, who: 422, hoc: 7, author: 421),
+      'forbidden reviews lookup must not abort later candidates in the same judge batch'
     )
   end
 end

@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
 class TestWhoHasName < Jp::Test
   using SmartFactbase
 
@@ -18,10 +14,7 @@ class TestWhoHasName < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github(
-      'https://api.github.com/user/444',
-      body: { login: 'lebowski' }
-    )
+    stub_github('https://api.github.com/user/444', body: { login: 'lebowski' })
     fb = Factbase.new
     f = fb.insert
     f._id = 333
@@ -38,10 +31,7 @@ class TestWhoHasName < Jp::Test
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
     )
-    stub_github(
-      'https://api.github.com/user/444',
-      body: '', status: 404
-    )
+    stub_github('https://api.github.com/user/444', body: '', status: 404)
     fb = Factbase.new
     f = fb.insert
     f._id = 999
@@ -49,6 +39,14 @@ class TestWhoHasName < Jp::Test
     f.where = 'github'
     load_it('who-has-name', fb)
     assert_equal(1, fb.query('(exists who)').each.to_a.size)
+  end
+
+  def test_does_not_crash_when_all_users_resolved
+    WebMock.disable_net_connect!
+    rate_limit_up
+    fb = Factbase.new
+    load_it('who-has-name', fb)
+    assert_equal(0, fb.all.size)
   end
 
   def test_overwrite_name_if_user_login_changed
@@ -87,5 +85,24 @@ class TestWhoHasName < Jp::Test
       assert(fb.one?(what: 'who-has-name', where: 'github', who: 13, name: 'user3'))
       assert(fb.one?(what: 'who-has-name', where: 'github', who: 14, name: 'user4'))
     end
+  end
+
+  def test_keeps_fact_active_on_forbidden_user_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
+    load_it('who-has-name', fb)
+    fact = fb.query('(eq who 29139614)').each.first
+    refute_nil(fact)
+    assert_nil(
+      fact['stale']&.first,
+      'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
+    )
   end
 end

@@ -1,17 +1,12 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Total number of code reviews in all repositories from since
-#
-# This function is called from the "quantity-of-deliverables.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_reviews_submitted(fact)
   total = 0
   Fbe.unmask_repos.each do |repo|
@@ -28,11 +23,28 @@ def total_reviews_submitted(fact)
     end
     until queue.empty?
       pulls = Fbe.github_graph.pull_request_reviews(owner, name, pulls: queue.shift(10))
-      total += pulls.sum { |pull| pull['reviews'].count { |r| r['submitted_at'] > fact.since } }
+      window = ->(r) { r['submitted_at'] > fact.since && r['submitted_at'] <= fact.when }
+      total += pulls.sum { |p| p['reviews'].count(&window) }
       pulls.select { _1['reviews_has_next_page'] }.each do |p|
         queue.push([p['number'], p['reviews_next_cursor']])
       end
     end
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Can't count submitted reviews in #{repo}: #{e.message}")
+    next
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to submitted reviews in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
+  rescue GraphQL::Client::Error,
+    Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    $loog.warn(
+      "[#{$judge}] Can't count submitted reviews in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   { total_reviews_submitted: total }
 end

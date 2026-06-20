@@ -1,26 +1,52 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-require 'fbe/octo'
 require 'fbe/github_graph'
+require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
-# Total number of commits for all repos.
-#
-# This function is called from the "dimensions-of-terrain.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_commits(_fact)
-  commits = 0
   repos = []
   Fbe.unmask_repos do |repo|
-    json = Fbe.octo.repository(repo)
-    next if json[:size].zero?
+    begin
+      json = Fbe.octo.repository(repo)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Repository #{repo} not found: #{e.message}")
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
+    next if json[:size].nil? || json[:size].zero?
     repos << [*repo.split('/'), json[:default_branch]]
+  rescue Octokit::NotFound, Octokit::Deprecated => e
+    $loog.info("Repository not found for #{repo}: #{e.message}")
+    next
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to repository #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
-  commits = Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } unless repos.empty?
-  { total_commits: commits }
+  {
+    total_commits:
+    begin
+      repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] }
+    rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Can't count total commits: #{e.message}")
+      0
+    rescue Octokit::Forbidden => e
+      $loog.warn("[#{$judge}] Can't count total commits (transient, will retry next cycle): #{e.class}: #{e.message}")
+      0
+    rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      $loog.warn("[#{$judge}] Network error counting commits: #{e.message}")
+      0
+    end
+  }
 end

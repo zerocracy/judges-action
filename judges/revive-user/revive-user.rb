@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/consider'
@@ -15,6 +15,9 @@ Fbe.consider("(and (eq stale 'who') (eq where 'github') (unique who))") do |f|
       Fbe.octo.user(f.who)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("The user ##{f.who} is still stale: #{e.message}")
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn("[#{$judge}] The user ##{f.who} is still stale (access forbidden): #{e.class}: #{e.message}")
       next
     end
   $loog.info("The user ##{f.who} is not stale, it is @#{json[:login]}")

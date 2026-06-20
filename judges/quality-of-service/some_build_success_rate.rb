@@ -1,42 +1,62 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Workflow runs:
-#
-# This function is called from the "quality-of-service.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def some_build_success_rate(fact)
   success = []
   duration = []
   ttrs = []
   failed = {}
   Fbe.unmask_repos do |repo|
-    workflow_runs =
-      Fbe.octo.repository_workflow_runs(
-        repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
-      )[:workflow_runs].first(60).map do |json|
-        run_duration = (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
-        { json: json, run_duration: run_duration, completed: json[:run_started_at] + run_duration }
+    workflows =
+      begin
+        Fbe.octo.repository_workflow_runs(
+          repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+        )[:workflow_runs]
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Workflow runs not found for #{repo}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
       end
-    workflow_runs.sort_by! { _1[:completed] }
-    workflow_runs.each do |item|
-      item => { json:, run_duration:, completed: }
-      workflow_id = json[:workflow_id]
-      if json[:conclusion] == 'failure' && failed[workflow_id].nil?
-        failed[workflow_id] = completed
-      elsif json[:conclusion] == 'success' && failed[workflow_id]
-        ttrs << (completed - failed[workflow_id]).to_i
-        failed.delete(workflow_id)
+    wfs = workflows.select { |json| json[:status] == 'completed' && !json[:conclusion].nil? }.first(60)
+    runs =
+      wfs.map do |json|
+        secs =
+          begin
+            (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
+            0
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
+            0
+          end
+        { json: json, secs: secs, completed: json[:run_started_at] + secs }
+      end
+    runs.sort_by! { _1[:completed] }
+    runs.each do |item|
+      item => { json:, secs:, completed: }
+      wid = json[:workflow_id]
+      if json[:conclusion] == 'failure' && failed[wid].nil?
+        failed[wid] = completed
+      elsif json[:conclusion] == 'success' && failed[wid]
+        ttrs << Integer(completed - failed[wid])
+        failed.delete(wid)
       end
       success << (json[:conclusion] == 'success' ? 1 : 0)
-      duration << run_duration
+      duration << secs
     end
   end
   {

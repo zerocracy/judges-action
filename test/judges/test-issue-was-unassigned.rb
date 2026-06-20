@@ -1,15 +1,11 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
 require_relative '../test__helper'
 
-# Test.
-# Author:: Yegor Bugayenko (yegor256@gmail.com)
-# Copyright:: Copyright (c) 2024 Yegor Bugayenko
-# License:: MIT
 class TestIssueWasUnassigned < Jp::Test
   using SmartFactbase
 
@@ -123,5 +119,26 @@ class TestIssueWasUnassigned < Jp::Test
     load_it('issue-was-unassigned', fb)
     assert_equal(1, fb.picks(what: 'issue-was-assigned').size)
     assert_equal(Time.parse('2025-10-05 23:55:00 UTC'), fb.pick(what: 'issue-was-assigned').unassigned)
+  end
+
+  def test_rescues_forbidden_on_issue_events_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 421)
+    load_it('issue-was-unassigned', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_nil(
+      f['stale'],
+      '403 is transient — fact must NOT be marked stale; next cycle will retry the events lookup'
+    )
   end
 end

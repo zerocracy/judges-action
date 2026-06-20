@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
-
-# Judge that monitors pulls which were closed or merged.
 
 require 'fbe/conclude'
 require 'fbe/delete'
@@ -13,6 +11,8 @@ require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/overwrite'
 require 'fbe/who'
+require 'octokit'
+require 'tago'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
@@ -55,14 +55,48 @@ Fbe.iterate do
       begin
         Fbe.octo.pull_request(repo, issue)
       rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
+        $loog.info("The pull ##{issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to pull ##{issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         next issue
       end
     unless json[:state] == 'closed'
       $loog.debug("Pull #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue
     end
+    actor =
+      begin
+        Fbe.octo.issue(repo, issue)[:closed_by]
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("The issue ##{issue} doesn't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue ##{issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      end
+    reviews =
+      begin
+        Fbe.octo.pull_request_reviews(repo, issue)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("The reviews of pull ##{issue} don't exist in #{repo}: #{e.message}")
+        Jp.issue_was_lost('github', repository, issue)
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to reviews of pull ##{issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      end
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |n|
@@ -71,23 +105,23 @@ Fbe.iterate do
           n.repository = repository
           n.where = 'github'
         end
-      raise "Pull already merged in #{repo}##{issue}" if nn.nil?
+      raise(RuntimeError, "Pull already merged in #{repo}##{issue}") if nn.nil?
       nn.hoc = json[:additions] + json[:deletions]
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
       Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
-      actor = Fbe.octo.issue(repo, issue)[:closed_by]
       if actor
-        nn.who = actor[:id].to_i
+        nn.who = Integer(actor[:id])
       else
         nn.stale = 'who'
       end
+      nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-      review = Fbe.octo.pull_request_reviews(repo, issue).first
+      review = reviews.first
       nn.review = review[:submitted_at] if review
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
-      $loog.info("Just found out that #{Fbe.issue(nn)} has been #{nn.what.inspect}")
+      $loog.info("The pull #{Fbe.issue(nn)} was #{nn.what.inspect} #{nn.when.ago} ago")
     end
     issue
   end

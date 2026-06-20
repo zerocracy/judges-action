@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 ---
 name: 'judges-action'
@@ -6,7 +6,7 @@ description: 'Scan a few GitHub repositories and build a Factbase'
 author: 'Yegor Bugayenko <yegor256@gmail.com>'
 runs:
   using: 'docker'
-  image: 'docker://yegor256/judges-action:latest'
+  image: 'Dockerfile'
 inputs:
   token:
     description: 'Authentication token from www.zerocracy.com'
@@ -47,8 +47,8 @@ inputs:
     default: 15
   cycles:
     description: 'How many update cycles to run (keep it under 10)'
-    required: true
-    default: 1
+    required: false
+    default: 2
   sqlite-cache:
     description: 'Path of the SQLite file with the cache of HTTP requests'
     required: false

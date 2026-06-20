@@ -1,25 +1,24 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
-
-# Judge that monitors issue-was-assigned facts and add unassigned property if needed.
 
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/supervision'
 
 Fbe.consider(
   "(and
-     (eq what 'issue-was-assigned')
-     (absent unassigned)
-     (absent stale)
-     (absent tombstone)
-     (absent done)
-     (eq where 'github'))"
+    (eq what 'issue-was-assigned')
+    (absent unassigned)
+    (absent stale)
+    (absent tombstone)
+    (absent done)
+    (eq where 'github'))"
 ) do |f|
   Jp.supervision({ 'repository' => f.repository, 'issue' => f.issue }) do
     repo = Fbe.octo.repo_name_by_id(f.repository)
@@ -32,10 +31,16 @@ Fbe.consider(
         $loog.info("Not found issue events for issue ##{f.issue} in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', f.repository, f.issue)
         next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue events for issue ##{f.issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
       end
     next if event.nil?
     f.unassigned = event[:created_at]
-    $loog.info("Github user #{Fbe.who(f)} was unassigned in issue #{Fbe.issue(f)} at #{f.unassigned}")
+    $loog.info("Github user #{Fbe.who(f)} was unassigned in #{Fbe.issue(f)} #{f.unassigned.ago} ago")
   end
 end
 

@@ -1,23 +1,43 @@
 #!/usr/bin/env bash
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 set -e -o pipefail
 
 start=$(date +%s)
 
+# This value is modified by the .rultor.yml script:
 VERSION=0.0.0
 
 echo "The 'judges-action' ${VERSION} is running"
 
-latest=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
+if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
+    resp=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
+    latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name) catch empty")
+    if [ -z "${latest}" ]; then
+        echo "!!! Could not fetch the latest version from GitHub."
+        echo "!!! GitHub returned: "
+        echo "$resp"
+        echo "!!! Disabling version checking for the rest of the script."
+        SKIP_VERSION_CHECKING=true
+    elif [ "${latest}" != "${VERSION}" ]; then
+        echo "!!! The latest version of the judges-action plugin available in"
+        echo "!!! its GitHub repository is ${latest}: https://github.com/zerocracy/judges-action."
+        echo "!!! However, you are using a different version: ${VERSION}."
+        echo "!!! This will most likely lead to runtime issues and maybe even data corruption."
+        echo "!!! It is strongly advised to upgrade."
+    fi
+fi
 
-if [ "${latest}" != "${VERSION}" ]; then
-    echo "!!! The latest version of the judges-action plugin available in"
-    echo "!!! its GitHub repository is ${latest}: https://github.com/zerocracy/judges-action."
-    echo "!!! However, you are using a different version: ${VERSION}."
-    echo "!!! This will most likely lead to runtime issues and maybe even data corruption."
-    echo "!!! It is strongly advised to upgrade."
+# Mask token values in CI logs before enabling bash tracing.
+# Without these workflow commands, "set -x" emits the full command line
+# including "--option=github_token=ghp_..." and "--token=ZRCY-..." into
+# Actions logs, which are readable by anyone with read access to the repo.
+if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
+    echo "::add-mask::$(printenv "INPUT_GITHUB-TOKEN")"
+fi
+if [ -n "${INPUT_TOKEN}" ]; then
+    echo "::add-mask::${INPUT_TOKEN}"
 fi
 
 if [ "${INPUT_VERBOSE}" == 'true' ]; then
@@ -163,6 +183,17 @@ if [ "${bots_found}" == "false" ]; then
     fi
 fi
 
+cache_min_age=false
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=sqlite_cache_min_age="* ]]; then
+        cache_min_age=true
+        break
+    fi
+done
+if [ "${cache_min_age}" == "false" ]; then
+    options+=("--option=sqlite_cache_min_age=3600");
+fi
+
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     echo "We are in 'dry' mode; skipping 'pull'"
@@ -176,7 +207,7 @@ fi
 
 sqlite=$(printenv "INPUT_SQLITE-CACHE" || true)
 if [ -n "${sqlite}" ]; then
-    sqlite=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
+    sqlite=$(realpath "$( [[ ${sqlite} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
     options+=("--option=sqlite_cache=${sqlite}");
     echo "Using SQLite for HTTP caching: ${sqlite}"
     ${JUDGES} "${gopts[@]}" download \
@@ -217,6 +248,8 @@ ${JUDGES} "${gopts[@]}" --hello update \
     --timeout "${timeout}" \
     --lib "${SELF}/lib" \
     --max-cycles "${cycles}" \
+    --statistics \
+    --churn=churn.txt \
     "${options[@]}" \
     "${ALL_JUDGES}" \
     "${fb}"
@@ -230,11 +263,15 @@ else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
 
-action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
-    action_version=${VERSION}
+if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
+    action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
+    if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
+        action_version=${VERSION}
+    else
+        action_version="${VERSION}!${action_version}"
+    fi
 else
-    action_version="${VERSION}!${action_version}"
+    action_version=${VERSION}
 fi
 
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
@@ -245,9 +282,35 @@ else
         --timeout=0 \
         "--owner=${owner}" \
         "--meta=workflow_url:${owner}" \
+        "--meta=churn:$(cat churn.txt)" \
         "--meta=vitals_url:${VITALS_URL}" \
         "--meta=duration:$(($(date +%s) - start))" \
         "--meta=action_version:${action_version}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
+fi
+
+if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
+    churn_val=$(cat churn.txt 2>/dev/null || echo '0i/0d/0a')
+    fb_size=$(ruby -e "require 'factbase'; puts Factbase.new.open('${fb}').size" 2>/dev/null || echo '0')
+    title="judges-action ${action_version} did ${churn_val} to ${fb_size} facts"
+    echo "Updating workflow run title to: ${title}"
+    curl -s -X PATCH \
+        -H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")" \
+        -H "Accept: application/vnd.github+json" \
+        "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
+        -d "$(jq -n --arg t "${title}" '{"display_title": $t}')" > /dev/null || \
+        echo "Failed to update workflow run title (non-critical)"
+    {
+        echo "## zerocracy run"
+        echo ""
+        echo "| Metric | Value |"
+        echo "|--------|-------|"
+        echo "| Version | ${action_version} |"
+        echo "| Churn | ${churn_val} |"
+        echo "| Facts | ${fb_size} |"
+        echo "| Duration | $(($(date +%s) - start))s |"
+        echo "| Owner | ${owner} |"
+        echo "| Vitals | [View](${VITALS_URL}) |"
+    } > "${GITHUB_WORKSPACE}/summary.md" 2>/dev/null || true
 fi

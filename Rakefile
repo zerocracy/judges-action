@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'os'
 require 'qbash'
-require 'rubygems'
 require 'rake'
 require 'rake/clean'
+require 'rubygems'
 require 'shellwords'
 
 ENV['RACK_RUN'] = 'true'
@@ -28,7 +28,7 @@ task :picks do
   next if OS.windows?
   %w[test lib].each do |d|
     Dir["#{d}/**/*.rb"].each do |f|
-      qbash("bundle exec ruby #{Shellwords.escape(f)} -- --no-cov", log: $stdout)
+      qbash("bundle exec ruby #{Shellwords.escape(f)} -- --no-cov", stdout: $stdout)
     end
   end
 end

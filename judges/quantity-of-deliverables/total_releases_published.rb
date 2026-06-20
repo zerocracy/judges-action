@@ -1,27 +1,33 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
-# Calculates the total number of releases published across all monitored GitHub repositories.
-# This function counts only non-draft releases that were published after the specified 'since' date
-# in the fact object, allowing for time-based metrics collection.
-#
-# This function is called from the "quantity-of-deliverables.rb" using the incremate
-# helper to collect this specific metric as part of deliverables quantity analysis.
-#
-# @param [Factbase::Fact] fact The fact object containing the 'since' timestamp
-# @return [Hash] Map with total_releases_published count as key-value pair
-# @see ../quantity-of-deliverables.rb Main judge that calls this function
 def total_releases_published(fact)
-  total =
-    Fbe.unmask_repos.sum do |repo|
-      Fbe.octo.releases(repo).count do |json|
-        !json[:draft] && json[:published_at] && json[:published_at] > fact.since
-      end
+  releases = 0
+  Fbe.unmask_repos do |repo|
+    owner, name = repo.split('/')
+    begin
+      releases += Fbe.github_graph.total_releases_published(owner, name, fact.since)['releases']
+    rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Can't count releases in #{repo}: #{e.message}")
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Can't count releases in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      $loog.warn("[#{$judge}] Network error counting releases in #{repo}: #{e.message}")
+      next
     end
-  { total_releases_published: total }
+  end
+  {
+    total_releases_published: releases
+  }
 end

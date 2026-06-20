@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
-
-# Judge that monitors open issue and create missing issue-was-assigned facts.
 
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/who'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
+repos = {}
 Fbe.iterate do
   as 'assignees_were_scanned'
   sort_by 'issue'
@@ -32,13 +32,19 @@ Fbe.iterate do
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo = repos[repository] ||= Fbe.octo.repo_name_by_id(repository)
     events =
       begin
         Fbe.octo.issue_events(repo, issue).select { |e| e[:event] == 'assigned' }
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Not found issue events for issue ##{issue} in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue events for issue ##{issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
         next issue
       end
     events.each do |event|
@@ -58,7 +64,7 @@ Fbe.iterate do
         nn.assigner = event.dig(:assigner, :id)
         nn.when = event[:created_at]
         nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
-        $loog.info("Assignee found for #{Fbe.issue(nn)} (fact ##{nn._id}): #{Fbe.who(nn)}")
+        $loog.info("The issue #{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} #{nn.when.ago} ago (fact ##{nn._id})")
       end
     end
     issue

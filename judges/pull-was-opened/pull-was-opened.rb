@@ -1,15 +1,14 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
-# Judge that monitors ns with exists repository and issue properties and
-# create missing pull-was-opened n.
-
-require 'fbe/octo'
 require 'fbe/conclude'
 require 'fbe/issue'
+require 'fbe/octo'
 require 'fbe/who'
+require 'octokit'
+require 'tago'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.conclude do
@@ -45,19 +44,38 @@ Fbe.conclude do
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
-        next issue
+        throw(:rollback)
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
       end
     n.what = $judge
     n.when = json[:created_at]
     n.who = json.dig(:user, :id)
-    ref = Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+    ref =
+      begin
+        Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("The pull ##{f.issue} disappeared from #{repo} between issue and pull lookups: #{e.message}")
+        Jp.issue_was_lost(f.where, f.repository, f.issue)
+        throw(:rollback)
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
+      end
     if ref
       n.branch = ref
     else
       n.stale = 'branch'
     end
     n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.info("The opening for #{Fbe.issue(n)} was found")
+    $loog.info("The pull #{Fbe.issue(n)} was opened #{n.when.ago} ago")
   end
 end
 

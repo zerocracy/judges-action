@@ -1,22 +1,35 @@
 # frozen_string_literal: true
 
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
 
-# Total number of issues and pull requests for all repos
-#
-# This function is called from the "dimensions-of-terrain.rb".
-#
-# @param [Factbase::Fact] fact The fact just under processing
-# @return [Hash] Map with keys as fact attributes and values as integers
 def total_issues(_fact)
   issues = 0
   pulls = 0
   Fbe.unmask_repos do |repo|
-    json = Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
+    json =
+      begin
+        Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issues and pulls in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      rescue GraphQL::Client::Error,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        $loog.warn(
+          "[#{$judge}] Can't count issues and pulls in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     issues += json['issues']
     pulls += json['pulls']
   end

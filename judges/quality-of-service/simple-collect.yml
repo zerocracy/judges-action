@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright (c) 2024-2025 Zerocracy
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 ---
 runs: 3
@@ -12,13 +12,15 @@ input:
     area: quality
     qos_days: 7
     qos_interval: 3
+    qos_pause_seconds: 0
+    qos_max_per_fact: 7
   -
     _id: 1
     what: quality-of-service
     when: 2024-01-01T00:00:00
     since: 2023-12-24T00:00:00
 expected:
-  - /fb[count(f[what='quality-of-service'])=4]
+  - /fb[count(f[what='quality-of-service'])=2]
   - /fb/f[what='quality-of-service']
   - /fb/f[when]
   - /fb/f[since]
