@@ -80,7 +80,7 @@ The following options are expected by the plugin
 
 * `token` (mandatory) is an authentication token from
   [Zerocracy.com](https://www.zerocracy.com)
-* `options` (mandatory) is a list of `k=v` pairs, which are explained below
+* `options` (optional) is a list of `k=v` pairs, which are explained below
 * `factbase` (mandatory) is the path of the [Factbase][factbase] file
   (where everything is kept)
 * `repositories` (optional) is a comma-separated list of masks that
