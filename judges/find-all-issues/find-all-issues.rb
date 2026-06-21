@@ -53,7 +53,8 @@ require_relative '../../lib/qos_search'
       elapsed($loog, level: Logger::INFO) do
         items =
           begin
-            Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items]
+            json = Jp.qosearch("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")
+            json ? json[:items] : []
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("No issues found for #{repo}: #{e.message}")
             []
@@ -62,9 +63,6 @@ require_relative '../../lib/qos_search'
               "[#{$judge}] Access forbidden to search issues for #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
-            []
-          rescue Octokit::TooManyRequests, Octokit::ClientError => e
-            $loog.warn("[#{$judge}] Search API rate limit exceeded for #{repo}: #{e.message}")
             []
           end
         items.each do |json|
