@@ -92,7 +92,10 @@ class TestFindAllIssues < Jp::Test
     stub_github(
       'https://api.github.com/rate_limit',
       body: {
-        resources: { core: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' } },
+        resources: {
+          core: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' },
+          search: { remaining: 30, limit: 30 }
+        },
         rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
       }
     )
@@ -117,6 +120,7 @@ class TestFindAllIssues < Jp::Test
 
   def test_find_all_issues
     WebMock.disable_net_connect!
+    rate_limit_up
     stub_github(
       'https://api.github.com/repos/foo/foo',
       body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
@@ -129,13 +133,6 @@ class TestFindAllIssues < Jp::Test
       'https://api.github.com/repos/foo/foo/issues/87',
       body: {
         id: 2_564_855_709, number: 87, title: 'Issue 87', created_at: Time.parse('2024-09-10 15:00:00 UTC')
-      }
-    )
-    stub_github(
-      'https://api.github.com/rate_limit',
-      body: {
-        resources: { core: { limit: 999, remaining: 999, reset: 1_728_464_472, used: 1, resource: 'core' } },
-        rate: { limit: 999, remaining: 999, reset: 1_728_464_472, used: 1, resource: 'core' }
       }
     )
     stub_github(

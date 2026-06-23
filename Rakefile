@@ -10,7 +10,7 @@ require 'rake/clean'
 require 'rubygems'
 require 'shellwords'
 
-ENV['RACK_RUN'] = 'true'
+ENV['RAKE_RUN'] = 'true'
 
 task default: %i[clean test judges rubocop picks]
 

@@ -308,4 +308,172 @@ class TestPullRequest < Jp::Test
     count = Jp.count_appreciated_comments(pr, [], [{ id: 601, user: { id: 1 } }])
     assert_equal(0, count)
   end
+
+  def test_skips_pr_comments_on_not_found
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/1/comments?per_page=100',
+      status: 404, body: { message: 'Not Found' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/1/comments?per_page=100',
+      body: [{ id: 10, user: { id: 5 } }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/comments/10/reactions', body: [])
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 1, comments: 2, review_comments: 1, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      refute_nil(info)
+      assert_equal(0, info[:comments_to_code])
+    end
+  end
+
+  def test_skips_issue_comments_on_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/2/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/2/comments?per_page=100',
+      status: 403, body: { message: 'Forbidden' }
+    )
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 2, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      refute_nil(info)
+      assert_equal(0, info[:comments_by_reviewers])
+      assert_equal(0, info[:comments_by_author])
+    end
+  end
+
+  def test_returns_zeros_on_both_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/3/comments?per_page=100',
+      status: 403, body: { message: 'Forbidden' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/3/comments?per_page=100',
+      status: 403, body: { message: 'Forbidden' }
+    )
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 3, comments: 0, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      refute_nil(info)
+      assert_equal(0, info[:comments_to_code])
+      assert_equal(0, info[:comments_by_author])
+      assert_equal(0, info[:comments_by_reviewers])
+    end
+  end
+
+  def test_count_suggestions_with_provided_reviews
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    reviews = [{ id: 10, user: { id: 100 } }, { id: 20, user: { id: 200 } }, { id: 30, user: { id: 300 } }]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/1/reviews/10/comments?per_page=100',
+      body: [
+        { id: 1, user: { id: 100 }, in_reply_to_id: nil },
+        { id: 2, user: { id: 300 }, in_reply_to_id: nil },
+        { id: 3, user: { id: 100 }, in_reply_to_id: 1 }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/1/reviews/20/comments?per_page=100',
+      body: [
+        { id: 4, user: { id: 200 }, in_reply_to_id: nil }
+      ]
+    )
+    count = Jp.count_suggestions('foo/foo', 1, 300, reviews)
+    assert_equal(2, count)
+  end
+
+  def test_count_suggestions_skips_author_reviews
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    reviews = [{ id: 40, user: { id: 400 } }, { id: 50, user: { id: 500 } }]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/2/reviews/40/comments?per_page=100',
+      body: [
+        { id: 5, user: { id: 400 }, in_reply_to_id: nil }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/2/reviews/50/comments?per_page=100',
+      body: [
+        { id: 6, user: { id: 500 }, in_reply_to_id: nil }
+      ]
+    )
+    count = Jp.count_suggestions('foo/foo', 2, 500, reviews)
+    assert_equal(1, count)
+  end
+
+  def test_count_suggestions_returns_zero_when_no_suggestions
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    reviews = [{ id: 60, user: { id: 600 } }]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/3/reviews/60/comments?per_page=100',
+      body: [
+        { id: 7, user: { id: 600 }, in_reply_to_id: 5 }
+      ]
+    )
+    count = Jp.count_suggestions('foo/foo', 3, 700, reviews)
+    assert_equal(0, count)
+  end
+
+  def test_resolved_graphql_error_returns_zero
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/4/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/4/comments?per_page=100', body: [])
+    graph = Object.new
+    graph.define_singleton_method(:resolved_conversations) { |_o, _r, _p| raise(GraphQL::Client::Error, 'test') }
+    Fbe.stub(:github_graph, graph) do
+      pr = { number: 4, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(0, info[:comments_resolved])
+    end
+  end
+
+  def test_resolved_forbidden_returns_zero
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/5/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/5/comments?per_page=100', body: [])
+    graph = Object.new
+    graph.define_singleton_method(:resolved_conversations) do |_o, _r, _p|
+      raise(Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden'))
+    end
+    Fbe.stub(:github_graph, graph) do
+      pr = { number: 5, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(0, info[:comments_resolved])
+    end
+  end
 end
