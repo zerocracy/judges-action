@@ -13,7 +13,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
-      - uses: horw/issue-title-ai@e7deb68172571a7afe7784100d2b6548a45a5243 # v0.1.7b
+      - uses: horw/issue-title-ai@2221301dec59c2a3cb3498227702cb6efb5c9d4d # v0.1.8b
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}

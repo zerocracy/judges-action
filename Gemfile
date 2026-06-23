@@ -5,11 +5,10 @@
 
 source 'https://rubygems.org'
 
-gem 'base64', '~>0.3'
 gem 'baza.rb', '~>0.11'
 gem 'decoor', '~>0.1'
 gem 'factbase', '~>0.17'
-gem 'fbe', '~>0.41'
+gem 'fbe', '~>0.48'
 gem 'judges', '~>0.57'
 gem 'minitest', '~>6.0', require: false
 gem 'minitest-mock', '~>5.27', require: false
@@ -17,7 +16,7 @@ gem 'minitest-reporters', '~>1.7', require: false
 gem 'online', '~>0.0'
 gem 'os', '~>1.1', require: false
 gem 'others', '~>0.1'
-gem 'qbash', '~>0.4'
+gem 'qbash', '~>0.8'
 gem 'rake', '~>13.2'
 gem 'rubocop', '~>1.75', require: false
 gem 'rubocop-elegant', '~>0.5', require: false
