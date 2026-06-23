@@ -536,6 +536,7 @@ class TestQualityOfService < Jp::Test
   end
 
   def test_skips_run_on_not_found_workflow_run_usage
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:repository_workflow_runs) do |*|
@@ -560,12 +561,13 @@ class TestQualityOfService < Jp::Test
     Fbe.stub(:octo, octo) do
       Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
         metrics = some_build_success_rate(fact)
-        assert_equal([900], metrics[:some_build_duration])
+        assert_equal([0, 900], metrics[:some_build_duration])
       end
     end
   end
 
   def test_skips_run_on_forbidden_workflow_run_usage
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:repository_workflow_runs) do |*|
@@ -590,7 +592,7 @@ class TestQualityOfService < Jp::Test
     Fbe.stub(:octo, octo) do
       Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
         metrics = some_build_success_rate(fact)
-        assert_equal([600], metrics[:some_build_duration])
+        assert_equal([0, 600], metrics[:some_build_duration])
       end
     end
   end
