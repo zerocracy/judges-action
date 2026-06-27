@@ -9,6 +9,11 @@ require_relative 'jp'
 def Jp.supervision(context, loog: $loog)
   yield
 rescue StandardError => e
-  loog.error("Additional context for '#{e.class}: #{e.message}':\n#{JSON.pretty_generate(context)}")
+  begin
+    info = JSON.pretty_generate(context)
+  rescue StandardError => je
+    info = "Failed to serialize context: #{je.message}\n#{context.inspect}"
+  end
+  loog.error("Additional context for '#{e.class}: #{e.message}':\n#{info}")
   raise
 end
