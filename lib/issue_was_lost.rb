@@ -17,7 +17,7 @@ def Jp.issue_was_lost(where, repository, issue)
       (absent stale)
       (absent tombstone))"
     ).each { |f| f.stale = 'issue' }
-  return if stale.any?
+  return if stale.positive?
   f =
     Fbe.if_absent do |n|
       n.issue = issue
