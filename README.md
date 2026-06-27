@@ -110,6 +110,15 @@ The following `k=v` pairs inside the `options` may be important:
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
 
+### Environment Variables
+
+The following environment variables are recognized by the Docker entry point:
+
+* `SKIP_VERSION_CHECKING` (optional, default is unset) if set to `true`,
+  skips the version compatibility check against GitHub releases. Useful for
+  development, testing with a non-release build, air-gapped environments,
+  or faster CI when version checking is not critical.
+
 The `zerocracy/pages-action` plugin is responsible for rendering
   the summary HTML page: its configuration is not explained here,
   check its [own repository](https://github.com/zerocracy/pages-action).
