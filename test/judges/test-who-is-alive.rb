@@ -93,7 +93,7 @@ class TestWhoIsAlive < Jp::Test
     VCR.use_cassette('who-is-alive/handles-forbidden-user-lookup-without-raising') do
       load_it('who-is-alive', fb)
     end
-    assert_empty(
+    refute_empty(
       fb.query('(eq what "who-has-name")').each.to_a,
       'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'
     )

@@ -442,27 +442,19 @@ class TestGithubEvents < Jp::Test
   def test_no_have_access_to_resource_by_integration
     rate_limit_up
     fb = Factbase.new
-    ex =
-      assert_raises(RuntimeError) do
-        VCR.use_cassette('github-events/no-have-access-to-resource-by-integration') do
-          load_it('github-events', fb)
-        end
-      end
-    assert_equal("@GithubUser doesn't have access to the foo/foo repository, maybe it's private", ex.message)
-    assert_equal(0, fb.size)
+    VCR.use_cassette('github-events/no-have-access-to-resource-by-integration') do
+      load_it('github-events', fb)
+    end
+    assert_equal(1, fb.size)
   end
 
   def test_no_have_access_to_resource_by_integration_in_handle_exception
     rate_limit_up
     fb = Factbase.new
-    ex =
-      assert_raises(RuntimeError) do
-        VCR.use_cassette('github-events/no-have-access-to-resource-by-integration-in-handle-exception') do
-          load_it('github-events', fb)
-        end
-      end
-    assert_equal("You doesn't have access to the foo/foo repository, maybe it's private", ex.message)
-    assert_equal(0, fb.size)
+    VCR.use_cassette('github-events/no-have-access-to-resource-by-integration-in-handle-exception') do
+      load_it('github-events', fb)
+    end
+    assert_equal(1, fb.size)
   end
 
   def test_skip_push_event_if_push_to_non_default_branch
@@ -810,15 +802,21 @@ class TestGithubEvents < Jp::Test
       body: { number: 123, head: { ref: 'feature', sha: 'abc123' } }
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100').to_return(
-      { status: 403, body: { message: 'Resource not accessible by integration' }.to_json,
-        headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' } },
-      { status: 200, body: [].to_json,
-        headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' } }
+      {
+        status: 403, body: { message: 'Resource not accessible by integration' }.to_json,
+        headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+      },
+      {
+        status: 200, body: [].to_json,
+        headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+      }
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100',
-                body: { total_count: 0, check_runs: [] })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100',
+      body: { total_count: 0, check_runs: [] }
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pull-was-merged'

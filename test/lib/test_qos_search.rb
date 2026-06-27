@@ -145,12 +145,26 @@ class TestQosSearch < Jp::Test
 
   private
 
-  def rate_limits(*remaining) # rubocop:disable Elegant/GoodMethodName
+  def searchstub(query, body:, remaining: 999, status: 200)
+    stub_github(
+      "https://api.github.com/search/issues?per_page=100&q=#{query.gsub(' ', '%20')}",
+      body:,
+      status:,
+      headers: {
+        'Content-Type' => 'application/json',
+        'X-RateLimit-Remaining' => remaining.to_s
+      }
+    )
+  end
+
+  def rate_limits(*remaining)
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       *remaining.map do |left|
         {
-          body: { resources: { search: { remaining: left, limit: 1000 } },
-                  rate: { remaining: left, limit: 1000 } }.to_json,
+          body: {
+            resources: { search: { remaining: left, limit: 1000 } },
+            rate: { remaining: left, limit: 1000 }
+          }.to_json,
           headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => left.to_s }
         }
       end
