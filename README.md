@@ -109,6 +109,8 @@ The following `k=v` pairs inside the `options` may be important:
   `-yegor256/judges` means an exclusion of the repo from the list.
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
+* `sqlite_cache_min_age=3600` is the minimum age in seconds before a
+  cached HTTP response is considered stale (default is 3600, i.e. 1 hour)
 
 ### Environment Variables
 
