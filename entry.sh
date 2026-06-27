@@ -233,7 +233,12 @@ lifetime=$((lifetime * 60))
 echo "The update will run for up to ${lifetime} seconds"
 
 cycles=${INPUT_CYCLES}
-if [ -z "${cycles}" ]; then
+if [ -n "${cycles}" ]; then
+    if ! [[ "${cycles}" =~ ^[0-9]+$ ]]; then
+        echo "INPUT_CYCLES must be a positive integer, got: ${cycles}" >&2
+        exit 1
+    fi
+else
     cycles=2
 fi
 echo "The total number of cycles to run is ${cycles}"
