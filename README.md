@@ -107,6 +107,8 @@ The following `k=v` pairs inside the `options` may be important:
   `yegor256/judges` means a specific repo,
   and
   `-yegor256/judges` means an exclusion of the repo from the list.
+* `max_missing=17` is the maximum number of missing issues backfilled
+  per judge cycle (see `find-missing-issues` judge)
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
 
