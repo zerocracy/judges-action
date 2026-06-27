@@ -28,12 +28,11 @@ def Jp.qosearch(query, method: :search_issues, **)
   end
   octo = Fbe.octo
   left = nil
-  begin
+  if octo.respond_to?(:get)
     json = octo.get('/rate_limit')
     json = JSON.parse(json, symbolize_names: true) if json.is_a?(String)
     left = json.dig(:resources, :search, :remaining)
-  rescue NoMethodError => e
-    raise unless e.name == :get
+  else
     left = octo.rate_limit.remaining
   end
   if left.nil?
