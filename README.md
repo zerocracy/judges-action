@@ -81,8 +81,8 @@ The following options are expected by the plugin
 * `token` (mandatory) is an authentication token from
   [Zerocracy.com](https://www.zerocracy.com)
 * `options` (optional) is a list of `k=v` pairs, which are explained below
-* `factbase` (mandatory) is the path of the [Factbase][factbase] file
-  (where everything is kept)
+* `factbase` (optional, default is `default.fb`) is the path of the
+  [Factbase][factbase] file (where everything is kept)
 * `repositories` (optional) is a comma-separated list of masks that
   determine the repositories to manage, where
   `yegor256/*` means all repos of the user,
