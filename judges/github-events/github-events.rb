@@ -315,22 +315,6 @@ Fbe.iterate do
         skip(json)
       end
       skip(json) if seen?(fact)
-    when 'IssueCommentEvent'
-      skip(json)
-      fact.issue = json[:payload][:issue][:number]
-      case json[:payload][:action]
-      when 'created'
-        fact.what = 'comment-was-posted'
-        fact.comment_id = json[:payload][:comment][:id]
-        fact.comment_body = json[:payload][:comment][:body]
-        fact.who = json[:payload][:comment][:user][:id]
-        fact.details =
-          "A new comment ##{json[:payload][:comment][:id]} has been posted " \
-          "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
-        $loog.debug("Issue comment posted to #{Fbe.issue(fact)} by #{Fbe.who(fact)}")
-      else
-        skip(json)
-      end
     when 'ReleaseEvent'
       fact.release = json[:payload][:release][:id]
       fact.tag = json[:payload][:release][:tag_name]
