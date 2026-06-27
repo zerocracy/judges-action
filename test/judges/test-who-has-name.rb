@@ -85,6 +85,9 @@ class TestWhoHasName < Jp::Test
     end
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal('who', fact.stale, 'fact should be stale when GitHub responds 403 for the user lookup')
+    assert_nil(
+      fact['stale']&.first,
+      'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
+    )
   end
 end

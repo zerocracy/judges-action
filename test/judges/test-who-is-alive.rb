@@ -95,7 +95,7 @@ class TestWhoIsAlive < Jp::Test
     end
     assert_empty(
       fb.query('(eq what "who-has-name")').each.to_a,
-      'who-is-alive should delete the who-has-name fact after 403 propagates through Jp.nick_of as nil'
+      'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'
     )
   end
 end

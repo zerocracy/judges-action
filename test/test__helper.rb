@@ -35,6 +35,7 @@ require 'minitest/mock'
 require 'vcr'
 require 'webmock/minitest'
 require_relative '../lib/jp'
+require_relative '../lib/qos_search'
 require_relative 'smart_factbase'
 
 WebMock.disable_net_connect!
@@ -59,9 +60,10 @@ class Jp::Test < Minitest::Test
     $fb = fb
     $global = {}
     $local = {}
+    Jp.qoreset
     $judge = judge
     $options = options
-    $loog = loog || (ENV['RACK_RUN'] ? Loog::NULL : Loog::VERBOSE)
+    $loog = loog || (ENV['RAKE_RUN'] ? Loog::NULL : Loog::VERBOSE)
     $epoch = Time.now
     $kickoff = Time.now
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))

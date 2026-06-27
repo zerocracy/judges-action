@@ -234,17 +234,17 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted_skips_pull_list_failure
+  def test_total_reviews_submitted_skips_pull_list
     graph = reviewgraph('foo/bad', :pulls, GraphQL::Client::Error.new('GraphQL failed'))
     assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted_skips_reviews_failure
+  def test_total_reviews_submitted_skips_reviews
     graph = reviewgraph('foo/bad', :reviews, GraphQL::Client::Error.new('GraphQL failed'))
     assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
   end
 
-  def test_quantity_of_deliverables_total_reviews_submitted_keeps_code_errors_visible
+  def test_total_reviews_submitted_keeps_code_errors
     graph = reviewgraph('foo/bad', :pulls, NoMethodError.new('bad fake'))
     assert_raises(NoMethodError) { directreviews(%w[foo/bad], graph) }
   end

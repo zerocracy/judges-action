@@ -11,8 +11,11 @@ require 'tago'
 require 'time'
 require_relative 'jp'
 
-def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, pause: 0,
-                 epoch: $epoch || Time.now, kickoff: $kickoff || Time.now)
+def Jp.incremate(
+  fact, dir, prefix, avoid_duplicate: false, pause: 0,
+  max_per_fact: nil,
+  epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
+)
   evaluated = 0
   Dir[File.join(dir, "#{prefix}_*.rb")].shuffle.each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
@@ -43,5 +46,6 @@ def Jp.incremate(fact, dir, prefix, avoid_duplicate: false, pause: 0,
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
     evaluated += 1
+    break if max_per_fact && evaluated >= max_per_fact
   end
 end

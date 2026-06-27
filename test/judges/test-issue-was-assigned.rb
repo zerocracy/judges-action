@@ -10,7 +10,7 @@ require_relative '../test__helper'
 class TestIssueWasAssigned < Jp::Test
   using SmartFactbase
 
-  def test_reuses_repository_name_lookup_per_repository
+  def test_reuses_repo_name_lookup_per_repo
     calls = Hash.new(0)
     octo = Object.new
     octo.define_singleton_method(:repo_name_by_id) do |repository|

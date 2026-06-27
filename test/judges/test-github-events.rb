@@ -426,7 +426,7 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, f.failed_builds)
   end
 
-  def test_count_numbers_of_workflow_builds_only_from_github
+  def test_counts_workflow_builds_from_github
     fb = Factbase.new
     VCR.use_cassette('github-events/count-numbers-of-workflow-builds-only-from-github') do
       load_it(
@@ -636,7 +636,7 @@ class TestGithubEvents < Jp::Test
     assert_equal(1, fb.query('(eq what "pull-was-closed")').each.to_a.size)
   end
 
-  def test_success_add_created_issue_comment_event_to_factbase
+  def test_adds_created_issue_comment_event
     skip('This type of event is not needed now')
     rate_limit_up
     fb = Factbase.new

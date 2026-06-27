@@ -15,6 +15,7 @@ require 'joined'
 require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/qos_search'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
@@ -50,7 +51,21 @@ require_relative '../../lib/issue_was_lost'
       found = []
       first = issue
       elapsed($loog, level: Logger::INFO) do
-        Fbe.octo.search_issues("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")[:items].each do |json|
+        items =
+          begin
+            json = Jp.qosearch("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")
+            json ? json[:items] : []
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.info("No issues found for #{repo}: #{e.message}")
+            []
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to search issues for #{repo} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
+            []
+          end
+        items.each do |json|
           next if Fbe.octo.off_quota?
           i = json[:number]
           seen << i
