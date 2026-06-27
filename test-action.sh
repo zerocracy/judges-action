@@ -21,7 +21,7 @@ if [ -z "${name}" ]; then
     exit 1
 fi
 
-docker run --rm \
+docker run --rm --network=none \
     -e "SKIP_VERSION_CHECKING=true" \
     -e "GITHUB_WORKSPACE=/tmp" \
     -e "GITHUB_REPOSITORY=zerocracy/judges-action" \
