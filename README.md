@@ -109,6 +109,11 @@ The following `k=v` pairs inside the `options` may be important:
   `-yegor256/judges` means an exclusion of the repo from the list.
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
+* `sqlite_cache_min_age=3600` is the minimum value, in seconds, that is forced
+  onto the `max-age` directive of the `Cache-Control` header of every cached
+  HTTP response, so that GitHub API entries stay valid in the cache for at
+  least this long even when GitHub returns a shorter `max-age`; `entry.sh`
+  injects this default when the option is not supplied
 
 The `zerocracy/pages-action` plugin is responsible for rendering
   the summary HTML page: its configuration is not explained here,
