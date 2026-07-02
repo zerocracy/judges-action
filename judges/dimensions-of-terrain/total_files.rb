@@ -37,7 +37,7 @@ def total_files(_fact)
         )
         next
       end
-    files += tree[:tree].count { |item| item[:type] == 'blob' }
+    files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
   end
   { total_files: files }
 end

@@ -597,6 +597,56 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_files_skips_repo_with_missing_tree_key
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/good', body: {
+        name: 'good', full_name: 'foo/good', size: 1,
+        stargazers_count: 3, forks: 1, default_branch: 'master', archived: false
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/malformed', body: {
+        name: 'malformed', full_name: 'foo/malformed', size: 1,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/good/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/malformed/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/good/git/trees/master?recursive=true',
+      body: {
+        sha: 'a', tree: [
+        { path: 'f.rb', mode: '100644', type: 'blob', sha: 'b', size: 1 }
+      ], truncated: false
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/malformed/git/trees/master?recursive=true',
+      body: { sha: 'a', truncated: false }
+    )
+    stub_github('https://api.github.com/repos/foo/good/contributors?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/malformed/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/malformed%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/good,foo/malformed' }))
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        refute_nil(f)
+        assert_equal(1, f.total_files)
+      end
+    end
+  end
+
   def test_total_contributors
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
