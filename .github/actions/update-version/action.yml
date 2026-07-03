@@ -28,7 +28,12 @@ runs:
           }
           const fs = require('fs');
           let readme = fs.readFileSync('README.md', 'utf8');
-          const escaped = '${{ inputs.repo }}'.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          readme = readme.replace(new RegExp(escaped + '@.+$', 'gm'), `${{ inputs.repo }}@${latest}`);
+          const repo = '${{ inputs.repo }}';
+          if (!/^[a-zA-Z0-9_.-]+$/.test(repo)) {
+            core.setFailed('Invalid repo name: ' + repo);
+            return;
+          }
+          const escaped = repo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          readme = readme.replace(new RegExp(escaped + '@.+$', 'gm'), () => repo + '@' + latest);
           fs.writeFileSync('README.md', readme);
           core.info(`Updated ${{ inputs.repo }} to ${latest}`);
