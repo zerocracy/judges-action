@@ -108,7 +108,7 @@ def Jp.fetch_workflows(pr, repo: nil)
     )
     return { succeeded_builds: 0, failed_builds: 0 }
   end
-  entries[:check_runs].each do |run|
+  (entries[:check_runs] || []).each do |run|
     next unless run.dig(:app, :slug) == 'github-actions'
     rid =
       begin

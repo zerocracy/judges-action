@@ -36,7 +36,7 @@ def Jp.incremate(
         '...'
       ].compact.join
     )
-    require_relative(rb)
+    require(rb)
     elapsed($loog, level: Logger::INFO) do
       h = __send__(n, fact)
       h.each do |k, v|
