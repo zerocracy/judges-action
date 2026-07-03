@@ -11,8 +11,12 @@ VERSION=0.0.0
 
 echo "The 'judges-action' ${VERSION} is running"
 
+auth_args=()
+if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
+    auth_args=(-H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")")
+fi
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    resp=$(curl --silent -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
+    resp=$(curl --silent "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
     latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name) catch empty")
     if [ -z "${latest}" ]; then
         echo "!!! Could not fetch the latest version from GitHub."
@@ -210,10 +214,14 @@ if [ -n "${sqlite}" ]; then
     sqlite=$(realpath "$( [[ ${sqlite} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
     options+=("--option=sqlite_cache=${sqlite}");
     echo "Using SQLite for HTTP caching: ${sqlite}"
-    ${JUDGES} "${gopts[@]}" download \
-        "--token=${INPUT_TOKEN}" \
-        "--owner=${owner}" \
-        "${name}" "${sqlite}"
+    if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
+        ${JUDGES} "${gopts[@]}" download \
+            "--token=${INPUT_TOKEN}" \
+            "--owner=${owner}" \
+            "${name}" "${sqlite}"
+    else
+        echo "We are in 'dry' mode; skipping SQLite download"
+    fi
 else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
@@ -233,7 +241,12 @@ lifetime=$((lifetime * 60))
 echo "The update will run for up to ${lifetime} seconds"
 
 cycles=${INPUT_CYCLES}
-if [ -z "${cycles}" ]; then
+if [ -n "${cycles}" ]; then
+    if ! [[ "${cycles}" =~ ^[0-9]+$ ]]; then
+        echo "INPUT_CYCLES must be a positive integer, got: ${cycles}" >&2
+        exit 1
+    fi
+else
     cycles=2
 fi
 echo "The total number of cycles to run is ${cycles}"
@@ -254,17 +267,19 @@ ${JUDGES} "${gopts[@]}" --hello update \
     "${ALL_JUDGES}" \
     "${fb}"
 
-if [ -e "${sqlite}" ]; then
+if [ -e "${sqlite}" ] && [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
     ${JUDGES} "${gopts[@]}" upload \
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${sqlite}"
+elif [ -e "${sqlite}" ]; then
+    echo "We are in 'dry' mode; skipping SQLite upload"
 else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
+    action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL "${auth_args[@]}" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
     if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
         action_version=${VERSION}
     else
