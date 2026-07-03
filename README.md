@@ -104,6 +104,9 @@ The following `k=v` pairs inside the `options` may be important:
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
 
+Note: `action_version` and `vitals_url` are automatically populated
+  by the entry point and should not be set manually.
+
 The `zerocracy/pages-action` plugin is responsible for rendering
   the summary HTML page: its configuration is not explained here,
   check its [own repository](https://github.com/zerocracy/pages-action).
