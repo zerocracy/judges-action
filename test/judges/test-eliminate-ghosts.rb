@@ -10,20 +10,6 @@ class TestEliminateGhosts < Jp::Test
   using SmartFactbase
 
   def test_delete_who_if_user_not_found
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github(
-      'https://api.github.com/user/526301',
-      body: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false }
-    )
-    stub_github(
-      'https://api.github.com/user/526302',
-      body: { login: 'yegor257', id: 526_302, type: 'User', site_admin: false }
-    )
-    stub_github('https://api.github.com/user/404001', body: '', status: 404)
-    stub_github('https://api.github.com/user/404002', body: '', status: 404)
     fb = Factbase.new
     fb.insert.then do |f|
       f._id = 1
@@ -68,7 +54,10 @@ class TestEliminateGhosts < Jp::Test
       f._id = 9
       f.where = 'gitlab'
     end
-    load_it('eliminate-ghosts', fb)
+    rate_limit_up
+    VCR.use_cassette('eliminate-ghosts/delete-who-if-user-not-found') do
+      load_it('eliminate-ghosts', fb)
+    end
     assert_equal(7, fb.query('(exists who)').each.to_a.size)
     assert_equal(2, fb.query('(and (exists who) (exists stale))').each.to_a.size)
     assert_equal(2, fb.query('(absent who)').each.to_a.size)
@@ -78,15 +67,7 @@ class TestEliminateGhosts < Jp::Test
     assert_equal(1, fb.query('(and (eq where "gitlab") (absent who))').each.to_a.size)
   end
 
-  def test_sets_stale_property_after_unique_users
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/user/111', body: {}, status: 404)
-    stub_github('https://api.github.com/user/222', body: {}, status: 404)
-    stub_github('https://api.github.com/user/333', body: { login: 'user333', id: 333, type: 'User' })
-    stub_github('https://api.github.com/user/444', body: {}, status: 404)
+  def test_process_unique_users_first_and_set_stale_property_later_for_other_facts
     fb = Factbase.new
     fb.with(_id: 1, where: 'github', who: 111, what: 'something-a')
       .with(_id: 2, where: 'github', who: 111, what: 'something-b')
@@ -100,7 +81,10 @@ class TestEliminateGhosts < Jp::Test
       .with(_id: 10, where: 'github', who: 555, what: 'something-j', stale: 'who')
       .with(_id: 11, where: 'github', who: 555, what: 'something-k', stale: 'who')
       .with(_id: 12, where: 'github', who: 555, what: 'something-l', stale: 'who')
-    load_it('eliminate-ghosts', fb)
+    rate_limit_up
+    VCR.use_cassette('eliminate-ghosts/process-unique-users-first-and-set-stale-property-later-for-other-facts') do
+      load_it('eliminate-ghosts', fb)
+    end
     assert_equal(2, fb.picks(where: 'github', who: 111, stale: 'who').count)
     assert_equal(3, fb.picks(where: 'github', who: 222, stale: 'who').count)
     assert_equal(2, fb.picks(where: 'github', who: 444, stale: 'who').count)
@@ -109,29 +93,25 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.has?(where: 'github', who: 333))
   end
 
-  def test_marks_sibling_facts_stale_for_good_user
-    WebMock.disable_net_connect!
+  def test_marks_sibling_facts_stale_when_one_fact_already_stale_for_good_user
     rate_limit_up
-    stub_github('https://api.github.com/user/777', body: { login: 'user777', id: 777, type: 'User' })
     fb = Factbase.new
     fb.with(_id: 1, where: 'github', who: 777, what: 'something-a', stale: 'who')
       .with(_id: 2, where: 'github', who: 777, what: 'something-b')
       .with(_id: 3, where: 'github', who: 777, what: 'something-c')
-    load_it('eliminate-ghosts', fb)
+    VCR.use_cassette('eliminate-ghosts/marks-sibling-facts-stale-when-one-fact-already-stale-for-good-user') do
+      load_it('eliminate-ghosts', fb)
+    end
     assert_equal(3, fb.picks(where: 'github', who: 777, stale: 'who').count)
   end
 
-  def test_keeps_user_active_on_forbidden_lookup
-    WebMock.disable_net_connect!
+  def test_marks_user_stale_on_forbidden_lookup
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, who: 29_139_614, where: 'github')
-    load_it('eliminate-ghosts', fb)
+    VCR.use_cassette('eliminate-ghosts/marks-user-stale-on-forbidden-lookup') do
+      load_it('eliminate-ghosts', fb)
+    end
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
     assert_nil(

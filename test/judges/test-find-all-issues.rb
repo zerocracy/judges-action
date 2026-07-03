@@ -11,36 +11,18 @@ require_relative '../test__helper'
 
 class TestFindAllIssues < Jp::Test
   def test_find_all_issues_without_issues_in_fb
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
     fb = Factbase.new
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/find-all-issues-without-issues-in-fb') do
+      load_it('find-all-issues', fb)
+    end
     fs = fb.query('(always)').each.to_a
     assert_equal(0, fs.count)
     assert_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
   end
 
   def test_restores_one_missing_fact
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
-    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
-    stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04',
-      body: {
-        total_count: 2, incomplete_results: false,
-        items: [
-          { number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } },
-          { number: 46, created_at: Time.parse('2025-05-05'), user: { id: 4242 } }
-        ]
-      }
-    )
-    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
       f.issue = 45
@@ -48,13 +30,14 @@ class TestFindAllIssues < Jp::Test
       f.what = 'issue-was-opened'
       f.where = 'github'
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/restores-one-missing-fact') do
+      load_it('find-all-issues', fb)
+    end
     assert_equal(3, fb.size)
     refute_empty(fb.query('(eq issue 46)').each.to_a)
   end
 
   def test_restarts_after_zero
-    WebMock.disable_net_connect!
     fb = Factbase.new
     fb.insert.then do |f|
       f._id = 10
@@ -70,35 +53,13 @@ class TestFindAllIssues < Jp::Test
       f.where = 'github'
       f.repository = 1579
     end
-    load_it('find-all-issues', fb, Judges::Options.new({ 'testing' => true, 'repositories' => 'yegor256/factbase' }))
+    VCR.use_cassette('find-all-issues/restarts-after-zero') do
+      load_it('find-all-issues', fb, Judges::Options.new({ 'testing' => true, 'repositories' => 'yegor256/factbase' }))
+    end
     assert_equal(3, fb.size)
   end
 
-  def test_find_all_issues_with_not_found_min
-    WebMock.disable_net_connect!
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
-    stub_github(
-      'https://api.github.com/repositories/695',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/87',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
-    )
-    stub_github(
-      'https://api.github.com/rate_limit',
-      body: {
-        resources: {
-          core: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' },
-          search: { remaining: 30, limit: 30 }
-        },
-        rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
-      }
-    )
+  def test_find_all_issues_with_not_found_min_issue_in_github
     fb = Factbase.new
     fb.insert.then do |f|
       f.details = 'The issue foo/foo#87 has been opened by @bar.'
@@ -112,60 +73,16 @@ class TestFindAllIssues < Jp::Test
       f.where = 'github'
       f.who = 257_964
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/find-all-issues-with-not-found-min-issue-in-github') do
+      load_it('find-all-issues', fb)
+    end
     fs = fb.query('(always)').each.to_a
     assert_equal(1, fs.count)
     refute_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
   end
 
   def test_find_all_issues
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
-    stub_github(
-      'https://api.github.com/repositories/695',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/87',
-      body: {
-        id: 2_564_855_709, number: 87, title: 'Issue 87', created_at: Time.parse('2024-09-10 15:00:00 UTC')
-      }
-    )
-    stub_github(
-      %r{https://api\.github\.com/search/issues\?.*},
-      body: {
-        total_count: 3, incomplete_results: false,
-        items: [
-          {
-            id: 2_544_140_680, number: 42, title: 'Issue 42',
-            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
-            created_at: Time.parse('2024-09-04 17:00:00 UTC')
-          },
-          {
-            id: 2_544_140_685, number: 45, title: 'Issue 45',
-            user: { login: 'yegor257', id: 526_302, type: 'User', site_admin: false },
-            created_at: Time.parse('2024-09-04 18:00:00 UTC')
-          },
-          {
-            id: 2_564_855_709, number: 87, title: 'Issue 87',
-            user: { login: 'bar', id: 257_964, type: 'User', site_admin: false },
-            created_at: Time.parse('2024-09-10 15:00:00 UTC')
-          }
-        ]
-      }
-    )
-    stub_github(
-      'https://api.github.com/user/526301',
-      body: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false }
-    )
-    stub_github(
-      'https://api.github.com/user/526302',
-      body: { login: 'yegor257', id: 526_301, type: 'User', site_admin: false }
-    )
     fb = Factbase.new
     fb.insert.then do |f|
       f.details = 'The issue foo/foo#87 has been opened by @bar.'
@@ -195,7 +112,9 @@ class TestFindAllIssues < Jp::Test
       f.where = 'gitlab'
       f.who = 257_962
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/find-all-issues') do
+      load_it('find-all-issues', fb)
+    end
     assert_equal(6, fb.query('(always)').each.to_a.size)
     fb.query("(eq what 'iterate')").each.first.then do |f|
       assert_equal('github', f.where)
@@ -228,20 +147,8 @@ class TestFindAllIssues < Jp::Test
     end
   end
 
-  def test_iteration_end_keeps_old_marker
-    WebMock.disable_net_connect!
+  def test_end_of_iteration_leave_old_marker_instead_reset_to_zero
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
-    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
-    stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04',
-      body: {
-        total_count: 2, incomplete_results: false,
-        items: [{ number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } }]
-      }
-    )
-    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
       f._id = 1
@@ -264,18 +171,16 @@ class TestFindAllIssues < Jp::Test
       f.what = 'issue-was-opened'
       f.where = 'github'
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/end-of-iteration-leave-old-marker-instead-reset-to-zero') do
+      load_it('find-all-issues', fb)
+    end
     assert_equal(3, fb.size)
     refute_equal(0, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
     assert_equal(45, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
 
   def test_when_issue_response_has_empty_created_at
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
-    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/11', body: { created_at: nil })
     fb = Factbase.new
     fb.insert.then do |f|
       f._id = 1
@@ -291,37 +196,15 @@ class TestFindAllIssues < Jp::Test
       f.what = 'issue-was-opened'
       f.where = 'github'
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/when-issue-response-has-empty-created-at') do
+      load_it('find-all-issues', fb)
+    end
     assert_equal(2, fb.size)
     assert_equal(5, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
 
   def test_paginated_pulls_continue_after_not_found
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
-    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
-    stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
-      body: {
-        total_count: 2, incomplete_results: false,
-        items: [
-          { number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } },
-          { number: 46, created_at: Time.parse('2025-05-05'), user: { id: 4242 } }
-        ]
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/46',
-      body: { number: 46, head: { ref: 'feature/branch-survivor' } }
-    )
-    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
       f.issue = 45
@@ -329,7 +212,9 @@ class TestFindAllIssues < Jp::Test
       f.what = 'pull-was-opened'
       f.where = 'github'
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/paginated-pulls-continue-after-not-found') do
+      load_it('find-all-issues', fb)
+    end
     survivor = fb.query("(and (eq issue 46) (eq what 'pull-was-opened'))").each.first
     refute_nil(
       survivor,
@@ -339,31 +224,7 @@ class TestFindAllIssues < Jp::Test
   end
 
   def test_paginated_pulls_continue_after_forbidden
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
-    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
-    stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
-      body: {
-        total_count: 2, incomplete_results: false,
-        items: [
-          { number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } },
-          { number: 46, created_at: Time.parse('2025-05-05'), user: { id: 4242 } }
-        ]
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/46',
-      body: { number: 46, head: { ref: 'feature/branch-survivor' } }
-    )
-    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
       f.issue = 45
@@ -371,7 +232,9 @@ class TestFindAllIssues < Jp::Test
       f.what = 'pull-was-opened'
       f.where = 'github'
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/paginated-pulls-continue-after-forbidden') do
+      load_it('find-all-issues', fb)
+    end
     survivor = fb.query("(and (eq issue 46) (eq what 'pull-was-opened'))").each.first
     refute_nil(survivor, 'the second pull must be recorded after the first hits transient forbidden')
     assert_equal('feature/branch-survivor', survivor.branch)
@@ -382,18 +245,7 @@ class TestFindAllIssues < Jp::Test
   end
 
   def test_rescues_forbidden_issue_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
-    stub_github('https://api.github.com/repositories/695', body: { id: 695, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/87',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.insert.then do |f|
       f._id = 1
@@ -402,7 +254,9 @@ class TestFindAllIssues < Jp::Test
       f.what = 'issue-was-opened'
       f.where = 'github'
     end
-    load_it('find-all-issues', fb)
+    VCR.use_cassette('find-all-issues/rescues-forbidden-issue-lookup') do
+      load_it('find-all-issues', fb)
+    end
     fact = fb.query('(eq issue 87)').each.first
     refute_nil(fact, 'seed fact should still be present after 403 rescue')
     assert_nil(

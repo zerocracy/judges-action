@@ -10,11 +10,7 @@ class TestWhoIsAlive < Jp::Test
   using SmartFactbase
 
   def test_finds_dead_users
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/user/444', status: 404, body: '')
+    rate_limit_up
     fb = Factbase.new
     f = fb.insert
     f._id = 1
@@ -23,19 +19,15 @@ class TestWhoIsAlive < Jp::Test
     f.who = 444
     f.where = 'github'
     f.name = 'jack'
-    load_it('who-is-alive', fb)
+    VCR.use_cassette('who-is-alive/finds-dead-users') do
+      load_it('who-is-alive', fb)
+    end
     assert_empty(fb.query('(exists who)').each.to_a)
     assert_empty(fb.query('(eq what "who-has-name")').each.to_a)
   end
 
   def test_add_stale_prop_for_not_found_users
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/10',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com/rest', status: '404' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, where: 'github', who: 10, name: 'user0')
       .with(_id: 2, where: 'github', who: 11, name: 'user1')
@@ -54,7 +46,9 @@ class TestWhoIsAlive < Jp::Test
         when: Time.parse('2025-06-23 20:00:00 UTC')
       )
     Time.stub(:now, Time.parse('2025-06-25 22:00:00 UTC')) do
-      load_it('who-is-alive', fb)
+      VCR.use_cassette('who-is-alive/add-stale-prop-for-not-found-users') do
+        load_it('who-is-alive', fb)
+      end
       assert_equal(6, fb.all.size)
       assert(fb.none?(what: 'who-has-name', where: 'github', who: 10, name: 'user0'))
       assert_equal('who', fb.pick(where: 'github', who: 10, name: 'user0').stale)
@@ -64,10 +58,7 @@ class TestWhoIsAlive < Jp::Test
   end
 
   def test_skip_if_user_is_alive
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/user/10', body: { login: 'user0', id: 10, type: 'User' })
-    stub_github('https://api.github.com/user/11', body: { login: 'user1', id: 11, type: 'User' })
     fb = Factbase.new
     fb.with(_id: 1, where: 'github', who: 10, name: 'user0')
       .with(_id: 2, where: 'github', who: 11, name: 'user1')
@@ -85,25 +76,23 @@ class TestWhoIsAlive < Jp::Test
         when: Time.parse('2025-06-23 20:00:00 UTC')
       )
     Time.stub(:now, Time.parse('2025-06-25 22:00:00 UTC')) do
-      load_it('who-is-alive', fb)
+      VCR.use_cassette('who-is-alive/skip-if-user-is-alive') do
+        load_it('who-is-alive', fb)
+      end
       assert_equal(6, fb.all.size)
     end
   end
 
-  def test_keeps_fact_on_forbidden_user_lookup
-    WebMock.disable_net_connect!
+  def test_handles_forbidden_user_lookup_without_raising
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(
       _id: 1, what: 'who-has-name', where: 'github', who: 29_139_614,
       name: 'someone', when: Time.now - (3 * 86_400)
     )
-    load_it('who-is-alive', fb)
+    VCR.use_cassette('who-is-alive/handles-forbidden-user-lookup-without-raising') do
+      load_it('who-is-alive', fb)
+    end
     refute_empty(
       fb.query('(eq what "who-has-name")').each.to_a,
       'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'

@@ -10,39 +10,34 @@ class TestWhoHasName < Jp::Test
   using SmartFactbase
 
   def test_finds_name
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/user/444', body: { login: 'lebowski' })
+    rate_limit_up
     fb = Factbase.new
     f = fb.insert
     f._id = 333
     f.who = 444
     f.where = 'github'
     f.what = 'issue-was-opened'
-    load_it('who-has-name', fb)
+    VCR.use_cassette('who-has-name/finds-name') do
+      load_it('who-has-name', fb)
+    end
     assert_equal(2, fb.query('(always)').each.to_a.size)
     assert_equal('lebowski', fb.query('(exists name)').each.first.name)
   end
 
   def test_ignores_who_when_not_found
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/user/444', body: '', status: 404)
+    rate_limit_up
     fb = Factbase.new
     f = fb.insert
     f._id = 999
     f.who = 444
     f.where = 'github'
-    load_it('who-has-name', fb)
+    VCR.use_cassette('who-has-name/ignores-who-when-not-found') do
+      load_it('who-has-name', fb)
+    end
     assert_equal(1, fb.query('(exists who)').each.to_a.size)
   end
 
   def test_does_not_crash_when_all_users_resolved
-    WebMock.disable_net_connect!
     rate_limit_up
     fb = Factbase.new
     load_it('who-has-name', fb)
@@ -50,15 +45,7 @@ class TestWhoHasName < Jp::Test
   end
 
   def test_overwrite_name_if_user_login_changed
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/user/12', body: { login: 'user22', id: 12, type: 'User' })
-    stub_github('https://api.github.com/user/13', body: { login: 'user3', id: 13, type: 'User' })
-    stub_github(
-      'https://api.github.com/user/14',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com/rest', status: '404' }
-    )
     fb = Factbase.new
     fb.with(
       _id: 1, what: 'who-has-name', where: 'github', who: 10, name: 'user0',
@@ -77,7 +64,9 @@ class TestWhoHasName < Jp::Test
       when: Time.parse('2025-06-15 20:00:00 UTC')
     )
     Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
-      load_it('who-has-name', fb)
+      VCR.use_cassette('who-has-name/overwrite-name-if-user-login-changed') do
+        load_it('who-has-name', fb)
+      end
       assert_equal(5, fb.all.size)
       assert(fb.one?(what: 'who-has-name', where: 'github', who: 10, name: 'user0', stale: 'who'))
       assert(fb.one?(what: 'who-has-name', where: 'github', who: 11, name: 'user1'))
@@ -87,17 +76,13 @@ class TestWhoHasName < Jp::Test
     end
   end
 
-  def test_keeps_fact_active_on_forbidden_user_lookup
-    WebMock.disable_net_connect!
+  def test_marks_fact_stale_on_forbidden_user_lookup
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
-    load_it('who-has-name', fb)
+    VCR.use_cassette('who-has-name/marks-fact-stale-on-forbidden-user-lookup') do
+      load_it('who-has-name', fb)
+    end
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
     assert_nil(

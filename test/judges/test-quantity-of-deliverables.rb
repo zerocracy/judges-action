@@ -55,22 +55,13 @@ class TestQuantityOfDeliverables < Jp::Test
   end
 
   def test_counts_commits
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
-      body: { total_count: 0, workflow_runs: [] }
-    )
+    rate_limit_up
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
-        load_it('quantity-of-deliverables', fb)
+        VCR.use_cassette('quantity-of-deliverables/counts-commits') do
+          load_it('quantity-of-deliverables', fb)
+        end
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(29, f.first.total_commits_pushed)
         assert_equal(1857, f.first.total_hoc_committed)
@@ -81,22 +72,13 @@ class TestQuantityOfDeliverables < Jp::Test
   end
 
   def test_processes_empty_repository
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
-      body: { total_count: 0, workflow_runs: [] }
-    )
+    rate_limit_up
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
-        load_it('quantity-of-deliverables', fb)
+        VCR.use_cassette('quantity-of-deliverables/processes-empty-repository') do
+          load_it('quantity-of-deliverables', fb)
+        end
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(0, f.first.total_commits_pushed)
         assert_equal(0, f.first.total_hoc_committed)
@@ -106,8 +88,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_commits_pushed_skips_unavailable
-    WebMock.disable_net_connect!
+  def test_total_commits_pushed_skips_unavailable_repositories
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/missing', status: 404, body: { message: 'Not Found' })
     stub_github('https://api.github.com/repos/foo/blocked', status: 403, body: { message: 'Forbidden' })
@@ -161,8 +142,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_commits_pushed_skips_graph_failures
-    WebMock.disable_net_connect!
+  def test_total_commits_pushed_skips_transient_graph_failures
     rate_limit_up
     %w[bad good].each do |name|
       stub_github(
@@ -191,8 +171,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_commits_pushed_keeps_code_errors
-    WebMock.disable_net_connect!
+  def test_total_commits_pushed_keeps_code_errors_visible
     rate_limit_up
     stub_github(
       'https://api.github.com/repos/foo/bad',
@@ -217,19 +196,8 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_releases_published
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
-      body: { total_count: 0, workflow_runs: [] }
-    )
+  def test_quantity_of_deliverables_total_releases_published
+    rate_limit_up
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -237,7 +205,9 @@ class TestQuantityOfDeliverables < Jp::Test
     f.qod_days = 7
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-        load_it('quantity-of-deliverables', fb)
+        VCR.use_cassette('quantity-of-deliverables/quantity-of-deliverables-total-releases-published') do
+          load_it('quantity-of-deliverables', fb)
+        end
         f = fb.query('(eq what "quantity-of-deliverables")').each.first
         assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
         assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
@@ -246,22 +216,8 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_reviews_submitted
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-29..2025-10-06&per_page=1',
-      body: {
-        total_count: 0,
-        workflow_runs: []
-      }
-    )
+  def test_quantity_of_deliverables_total_reviews_submitted
+    rate_limit_up
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -269,7 +225,9 @@ class TestQuantityOfDeliverables < Jp::Test
     f.qod_days = 7
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2025-10-06 21:00:00 UTC')) do
-        load_it('quantity-of-deliverables', fb)
+        VCR.use_cassette('quantity-of-deliverables/quantity-of-deliverables-total-reviews-submitted') do
+          load_it('quantity-of-deliverables', fb)
+        end
         f = fb.query('(eq what "quantity-of-deliverables")').each.first
         assert_equal(Time.parse('2025-09-30 00:00:00 +03:00'), f.since)
         assert_equal(Time.parse('2025-10-06 21:00:00 UTC'), f.when)
@@ -278,22 +236,8 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_reviews_submitted_excludes_after
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-26..2025-10-03&per_page=1',
-      body: {
-        total_count: 0,
-        workflow_runs: []
-      }
-    )
+  def test_quantity_of_deliverables_total_reviews_submitted_excludes_after_when
+    rate_limit_up
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -301,7 +245,11 @@ class TestQuantityOfDeliverables < Jp::Test
     f.qod_days = 7
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2025-10-03 00:00:00 UTC')) do
-        load_it('quantity-of-deliverables', fb)
+        VCR.use_cassette(
+          'quantity-of-deliverables/quantity-of-deliverables-total-reviews-submitted-excludes-after-when'
+        ) do
+          load_it('quantity-of-deliverables', fb)
+        end
         f = fb.query('(eq what "quantity-of-deliverables")').each.first
         assert_equal(
           2, f.total_reviews_submitted,
@@ -329,31 +277,7 @@ class TestQuantityOfDeliverables < Jp::Test
   end
 
   def test_quantity_of_deliverables_total_builds_ran
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
-      body: {
-        total_count: 3,
-        workflow_runs: [
-          {
-            id: 710,
-            display_title: 'some title',
-            run_number: 2615,
-            event: 'dynamic',
-            status: 'completed',
-            conclusion: 'success',
-            workflow_id: 141
-          }
-        ]
-      }
-    )
+    rate_limit_up
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -361,7 +285,9 @@ class TestQuantityOfDeliverables < Jp::Test
     f.qod_days = 7
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
-        load_it('quantity-of-deliverables', fb)
+        VCR.use_cassette('quantity-of-deliverables/quantity-of-deliverables-total-builds-ran') do
+          load_it('quantity-of-deliverables', fb)
+        end
         f = fb.query('(eq what "quantity-of-deliverables")').each.first
         assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
         assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
@@ -371,7 +297,6 @@ class TestQuantityOfDeliverables < Jp::Test
   end
 
   def test_quantity_of_deliverables_fix_gap
-    WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
       'https://api.github.com/repos/foo/foo',

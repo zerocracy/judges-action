@@ -11,18 +11,12 @@ class TestTypeWasAttached < Jp::Test
   using SmartFactbase
 
   def test_marks_stale_when_timeline_returns_not_found
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
-    load_it('type-was-attached', fb)
+    VCR.use_cassette('type-was-attached/marks-stale-when-timeline-returns-not-found') do
+      load_it('type-was-attached', fb)
+    end
     assert(
       fb.one?(what: 'issue-was-opened', repository: 42, issue: 44, where: 'github', stale: 'issue'),
       '404 is permanent — issue must be marked stale via Jp.issue_was_lost'
@@ -30,18 +24,12 @@ class TestTypeWasAttached < Jp::Test
   end
 
   def test_rescues_forbidden_on_timeline_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
-    load_it('type-was-attached', fb)
+    VCR.use_cassette('type-was-attached/rescues-forbidden-on-timeline-lookup') do
+      load_it('type-was-attached', fb)
+    end
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
     assert_nil(
@@ -51,21 +39,7 @@ class TestTypeWasAttached < Jp::Test
   end
 
   def test_marks_stale_when_graphql_actor_is_nil
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
-      body: [
-        {
-          id: 100,
-          event: 'issue_type_added',
-          node_id: 'ITAE_orphan_actor',
-          created_at: '2025-09-30 06:14:38 UTC'
-        }
-      ]
-    )
     fake = Fbe::Graph::Fake.new
     fake.define_singleton_method(:issue_type_event) do |_node_id|
       {
@@ -79,7 +53,9 @@ class TestTypeWasAttached < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
     Fbe.stub(:github_graph, fake) do
-      load_it('type-was-attached', fb)
+      VCR.use_cassette('type-was-attached/marks-stale-when-graphql-actor-is-nil') do
+        load_it('type-was-attached', fb)
+      end
     end
     f = fb.query("(eq what 'type-was-attached')").each.first
     refute_nil(f, 'the fact must still be created when the actor is deleted')

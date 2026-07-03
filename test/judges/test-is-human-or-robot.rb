@@ -11,20 +11,14 @@ class TestIsHumanOrRobot < Jp::Test
   using SmartFactbase
 
   def test_handles_missing_github_user_gracefully
-    WebMock.disable_net_connect!
     id = 444
-    stub_github("https://api.github.com/user/#{id}", body: {}, status: 404)
-    stub_github(
-      'https://api.github.com/rate_limit',
-      body: {
-        rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
-      }
-    )
     fb = Factbase.new
     fact = fb.insert
     fact.who = id
     fact.where = 'github'
-    load_it('is-human-or-robot', fb)
+    VCR.use_cassette('is-human-or-robot/handles-missing-github-user-gracefully') do
+      load_it('is-human-or-robot', fb)
+    end
     facts = fb.query("(eq who #{id})").each.to_a
     assert_equal(id, facts.first.who)
     assert_equal(
@@ -34,12 +28,7 @@ class TestIsHumanOrRobot < Jp::Test
   end
 
   def test_identify_user_as_bot_or_human
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/user/15', body: { login: 'rultor', id: 15, type: 'User' })
-    stub_github('https://api.github.com/user/16', body: { login: '0pdd', id: 16, type: 'User' })
-    stub_github('https://api.github.com/user/17', body: { login: 'other_bot', id: 17, type: 'Bot' })
-    stub_github('https://api.github.com/user/18', body: { login: 'user4', id: 18, type: 'User' })
     fb = Factbase.new
     fb.with(where: 'github', what: 'issue-was-opened', who: 10, name: 'user0', stale: 'who')
       .with(where: 'github', name: 'user1')
@@ -50,7 +39,9 @@ class TestIsHumanOrRobot < Jp::Test
       .with(where: 'github', what: 'issue-was-opened', who: 16, name: '0pdd')
       .with(where: 'github', what: 'issue-was-opened', who: 17, name: 'other_bot')
       .with(where: 'github', what: 'issue-was-opened', who: 18, name: 'user4')
-    load_it('is-human-or-robot', fb, Judges::Options.new({ 'bots' => '0pdd,rultor' }))
+    VCR.use_cassette('is-human-or-robot/identify-user-as-bot-or-human') do
+      load_it('is-human-or-robot', fb, Judges::Options.new({ 'bots' => '0pdd,rultor' }))
+    end
     assert_equal(9, fb.all.size)
     assert_equal(2, fb.picks(is_human: 1).size)
     assert_equal(4, fb.picks(is_human: 0).size)
@@ -63,17 +54,13 @@ class TestIsHumanOrRobot < Jp::Test
     assert(fb.one?(where: 'github', who: 18, name: 'user4', is_human: 1))
   end
 
-  def test_forbidden_user_lookup_leaves_fact_retriable
-    WebMock.disable_net_connect!
+  def test_marks_fact_stale_on_forbidden_user_lookup
     rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
-    load_it('is-human-or-robot', fb)
+    VCR.use_cassette('is-human-or-robot/marks-fact-stale-on-forbidden-user-lookup') do
+      load_it('is-human-or-robot', fb)
+    end
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
     assert_equal(
@@ -88,21 +75,15 @@ class TestIsHumanOrRobot < Jp::Test
     )
   end
 
-  def test_forbidden_user_does_not_abort_others
-    WebMock.disable_net_connect!
+  def test_one_forbidden_user_does_not_abort_other_users
     rate_limit_up
-    stub_github('https://api.github.com/user/100', body: { login: 'alice', id: 100, type: 'User' })
-    stub_github(
-      'https://api.github.com/user/200',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
-    stub_github('https://api.github.com/user/300', body: { login: 'bob', id: 300, type: 'User' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', who: 100, where: 'github')
       .with(_id: 2, what: 'pull-was-merged', who: 200, where: 'github')
       .with(_id: 3, what: 'pull-was-merged', who: 300, where: 'github')
-    load_it('is-human-or-robot', fb)
+    VCR.use_cassette('is-human-or-robot/one-forbidden-user-does-not-abort-other-users') do
+      load_it('is-human-or-robot', fb)
+    end
     classified = fb.query('(exists is_human)').each.to_a
     staled = fb.query("(eq stale 'who')").each.to_a
     assert_equal(2, classified.size, 'both good users (100, 300) should be classified')

@@ -18,6 +18,7 @@ unless SimpleCov.running || ARGV.include?('--no-cov')
     add_filter 'vendor/'
     add_filter 'target/'
     add_filter 'test/smart_factbase.rb'
+    add_filter(%r{\b_[^/]*\.rb$})
     track_files 'judges/**/*.rb'
     track_files 'lib/**/*.rb'
     track_files '*.rb'
@@ -31,10 +32,21 @@ require 'judges/options'
 require 'loog'
 require 'minitest/autorun'
 require 'minitest/mock'
+require 'vcr'
 require 'webmock/minitest'
 require_relative '../lib/jp'
 require_relative '../lib/qos_search'
 require_relative 'smart_factbase'
+
+WebMock.disable_net_connect!
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'test/vcr_cassettes'
+  config.hook_into(:webmock)
+  config.ignore_request { |request| request.uri.include?('/rate_limit') }
+  config.allow_http_connections_when_no_cassette = true
+  config.default_cassette_options = { record: :none, match_requests_on: %i[method uri], allow_playback_repeats: true }
+end
 
 class Jp::Test < Minitest::Test
   def rate_limit_up

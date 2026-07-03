@@ -1,0 +1,254 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/foo/foo
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":42,"full_name":"foo/foo"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/42/events?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"1","type":"ReleaseEvent","actor":{"id":8086956,"login":"rultor","display_login":"rultor"},"repo":{"id":820463873,"name":"zerocracy/fbe","url":"https://api.github.com/repos/zerocracy/fbe"},"payload":{"action":"published","release":{"id":123,"author":{"login":"rultor","id":8086956,"type":"User","site_admin":false},"tag_name":"0.0.1","created_at":"2024-08-05T00:51:39Z","published_at":"2024-08-05T00:52:07Z"}},"public":true,"created_at":"2024-08-05T00:52:08Z","org":{"id":24234201,"login":"zerocracy"}},{"id":"5","type":"ReleaseEvent","actor":{"id":8086956,"login":"rultor","display_login":"rultor"},"repo":{"id":820463873,"name":"zerocracy/fbe","url":"https://api.github.com/repos/zerocracy/fbe"},"payload":{"action":"published","release":{"id":124,"author":{"login":"rultor","id":8086956,"type":"User","site_admin":false},"tag_name":"0.0.5","created_at":"2024-08-01T00:51:39Z","published_at":"2024-08-01T00:52:07Z"}},"public":true,"created_at":"2024-08-01T00:52:08Z","org":{"id":24234201,"login":"zerocracy"}}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repositories/820463873
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"id":820463873,"name":"fbe","full_name":"zerocracy/fbe"}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/zerocracy/fbe/contributors?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"login":"yegor256","id":526301},{"login":"yegor512","id":526302}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/zerocracy/fbe/commits?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"sha":"4683257342e98cd94becc2aa49900e720bd792e9"},{"sha":"69a28ba1122af281936371bbb36f67e5b97246b1"}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/zerocracy/fbe/commits?per_page=100&sha=69a28ba1122af281936371bbb36f67e5b97246b1
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '[{"sha":"69a28ba1122af281936371bbb36f67e5b97246b1"}]'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/zerocracy/fbe/compare/69a28ba1122af281936371bbb36f67e5b97246b1...0.0.1?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_commits":2,"commits":[{"sha":"4683257342e98cd94becc2aa49900e720bd792e9"},{"sha":"69a28ba1122af281936371bbb36f67e5b97246b1"}],"files":[{"additions":5,"deletions":0,"changes":5},{"additions":5,"deletions":5,"changes":10},{"additions":0,"deletions":7,"changes":7}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/repos/zerocracy/fbe/compare/0.0.1...0.0.5?per_page=100
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"total_commits":4,"commits":[{"sha":"a50489ead5e8aa6","author":{"login":"Yegorov","id":2566462}},{"sha":"b50489ead5e8aa7","author":{"login":"Yegorov64","id":2566463}},{"sha":"c50489ead5e8aa8","author":{"login":"Yegorov128","id":2566464}},{"sha":"d50489ead5e8aa9","author":{"login":"Yegorov","id":2566462}},{"sha":"e50489ead5e8aa9","author":null},{"sha":"e60489ead5e8aa9"},{"sha":"e70489ead5e8aa9","author":{"login":"NoUser"}}],"files":[{"additions":15,"deletions":40,"changes":55},{"additions":20,"deletions":5,"changes":25},{"additions":0,"deletions":10,"changes":10}]}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT
+- request:
+    method: get
+    uri: https://api.github.com/user/8086956
+    body:
+      encoding: UTF-8
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      Content-Type:
+      - application/json
+      X-RateLimit-Remaining:
+      - '999'
+    body:
+      encoding: UTF-8
+      string: '{"login":"rultor","id":8086956}'
+    http_version: '1.1'
+  recorded_at: Mon, 01 Jan 2024 00:00:00 GMT

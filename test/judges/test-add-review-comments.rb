@@ -8,7 +8,6 @@ require_relative '../test__helper'
 
 class TestAddReviewComments < Jp::Test
   def test_sets_review_comments_when_missing
-    WebMock.disable_net_connect!
     pl = { id: 93, comments: 2 }
     repo = 42
     stub(repo, pl)
@@ -19,14 +18,15 @@ class TestAddReviewComments < Jp::Test
     fact.issue = pl[:id]
     fact.repository = repo
     fact.where = 'github'
-    load_it('add-review-comments', fb)
+    VCR.use_cassette('add-review-comments/sets-review-comments-when-missing') do
+      load_it('add-review-comments', fb)
+    end
     facts = fb.query("(eq what \"#{what}\")").each.to_a
     assert_equal(pl[:id], facts.first.issue)
     assert_equal(2, facts.first.review_comments)
   end
 
   def test_does_not_overwrite_existing_review_comments
-    WebMock.disable_net_connect!
     pl = { id: 93, comments: 2 }
     repo = 42
     stub(repo, pl)
@@ -38,14 +38,15 @@ class TestAddReviewComments < Jp::Test
     fact.repository = repo
     fact.where = 'github'
     fact.review_comments = 1
-    load_it('add-review-comments', fb)
+    VCR.use_cassette('add-review-comments/does-not-overwrite-existing-review-comments') do
+      load_it('add-review-comments', fb)
+    end
     facts = fb.query("(eq what \"#{what}\")").each.to_a
     assert_equal(pl[:id], facts.first.issue)
     assert_equal(1, facts.first.review_comments)
   end
 
-  def test_adds_review_comments_to_bare_facts
-    WebMock.disable_net_connect!
+  def test_adds_review_comments_to_facts_without_review_comments
     pulls = [{ id: 93, comments: 2 }, { id: 94, comments: 1 }, { id: 95, comments: 4 }]
     repo = 42
     stub(repo, *pulls)
@@ -58,7 +59,9 @@ class TestAddReviewComments < Jp::Test
       fact.repository = repo
       fact.where = 'github'
     end
-    load_it('add-review-comments', fb)
+    VCR.use_cassette('add-review-comments/adds-review-comments-to-facts-without-review-comments') do
+      load_it('add-review-comments', fb)
+    end
     facts = fb.query("(eq what \"#{what}\")").each.to_a
     facts.each do |f|
       assert_equal(pulls.find { |pl| pl[:id] == f.issue }[:comments], f.review_comments)
@@ -66,7 +69,6 @@ class TestAddReviewComments < Jp::Test
   end
 
   def test_handles_not_found_repo
-    WebMock.disable_net_connect!
     pl = { id: 93, comments: 2 }
     repo = 90
     stub(repo, pl)
@@ -77,27 +79,25 @@ class TestAddReviewComments < Jp::Test
     fact.issue = pl[:id]
     fact.repository = repo
     fact.where = 'github'
-    load_it('add-review-comments', fb)
+    VCR.use_cassette('add-review-comments/handles-not-found-repo') do
+      load_it('add-review-comments', fb)
+    end
     facts = fb.query("(eq what '#{what}')").each.to_a
     assert_equal(pl[:id], facts.first.issue)
     assert_nil(facts.first['review_comments'])
   end
 
   def test_rescues_forbidden_on_repo_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repositories/42',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fact = fb.insert
     fact.what = 'pull-was-reviewed'
     fact.issue = 44
     fact.repository = 42
     fact.where = 'github'
-    load_it('add-review-comments', fb)
+    VCR.use_cassette('add-review-comments/rescues-forbidden-on-repo-lookup') do
+      load_it('add-review-comments', fb)
+    end
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
     assert_nil(
@@ -107,21 +107,16 @@ class TestAddReviewComments < Jp::Test
   end
 
   def test_rescues_forbidden_on_pull_request_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fact = fb.insert
     fact.what = 'pull-was-reviewed'
     fact.issue = 44
     fact.repository = 42
     fact.where = 'github'
-    load_it('add-review-comments', fb)
+    VCR.use_cassette('add-review-comments/rescues-forbidden-on-pull-request-lookup') do
+      load_it('add-review-comments', fb)
+    end
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
     assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; pull lookup will retry next cycle')

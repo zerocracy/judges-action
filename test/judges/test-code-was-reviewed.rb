@@ -10,53 +10,15 @@ class TestCodeWasReviewed < Jp::Test
   using SmartFactbase
 
   def test_find_absent_code_was_reviewed_facts
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44',
-      body: {
-        id: 50, number: 44, user: { id: 421, login: 'user' },
-        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
-      body: [
-        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
-      ]
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
-      body: [
-        { id: 48_119, user: { id: 421, login: 'user' } },
-        { id: 48_120, user: { id: 422, login: 'user2' } }
-      ]
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44/reviews/49111/comments?per_page=100',
-      body: [
-        { id: 47_120, user: { id: 422, login: 'user2' } },
-        { id: 47_121, user: { id: 422, login: 'user2' } },
-        { id: 47_122, user: { id: 422, login: 'user2' } }
-      ]
-    )
-    stub_github('https://api.github.com/user/421', body: {  id: 421, login: 'user1' })
-    stub_github('https://api.github.com/user/422', body: {  id: 422, login: 'user2' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      body: {
-        id: 50, number: 45, user: { id: 421, login: 'user' },
-        created_at: Time.parse('2025-09-02 17:05:30 UTC'), additions: 2, deletions: 8
-      }
-    )
-    stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 40, where: 'github')
       .with(_id: 2, what: 'code-was-reviewed', repository: 42, issue: 40, where: 'github')
       .with(_id: 3, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
       .with(_id: 4, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
-    load_it('code-was-reviewed', fb)
+    VCR.use_cassette('code-was-reviewed/find-absent-code-was-reviewed-facts') do
+      load_it('code-was-reviewed', fb)
+    end
     assert_equal(5, fb.all.size)
     assert(
       fb.one?(
@@ -70,17 +32,12 @@ class TestCodeWasReviewed < Jp::Test
   end
 
   def test_rescues_not_found_on_pull_request_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/77',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com/...' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 77, where: 'github')
-    load_it('code-was-reviewed', fb)
+    VCR.use_cassette('code-was-reviewed/rescues-not-found-on-pull-request-lookup') do
+      load_it('code-was-reviewed', fb)
+    end
     assert(
       fb.one?(what: 'pull-was-closed', repository: 42, issue: 77, stale: 'issue'),
       'expected the sibling pull-was-closed fact to be marked stale by Jp.issue_was_lost ' \
@@ -89,17 +46,12 @@ class TestCodeWasReviewed < Jp::Test
   end
 
   def test_rescues_forbidden_on_pull_request_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/88',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 88, where: 'github')
-    load_it('code-was-reviewed', fb)
+    VCR.use_cassette('code-was-reviewed/rescues-forbidden-on-pull-request-lookup') do
+      load_it('code-was-reviewed', fb)
+    end
     refute(
       fb.one?(what: 'issue-was-lost', where: 'github', repository: 42, issue: 88),
       'forbidden error must not produce an issue-was-lost tombstone'
@@ -111,67 +63,26 @@ class TestCodeWasReviewed < Jp::Test
   end
 
   def test_rescues_deprecated_on_reviews_lookup
-    WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/99',
-      body: {
-        id: 99, number: 99, user: { id: 421, login: 'user' },
-        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/99/reviews?per_page=100',
-      status: 410,
-      body: { message: 'Gone' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 99, where: 'github')
-    load_it('code-was-reviewed', fb)
+    VCR.use_cassette('code-was-reviewed/rescues-deprecated-on-reviews-lookup') do
+      load_it('code-was-reviewed', fb)
+    end
     assert(
       fb.one?(what: 'pull-was-closed', repository: 42, issue: 99, stale: 'issue'),
       'deprecated reviews lookup must mark the sibling pull fact stale through Jp.issue_was_lost'
     )
   end
 
-  def test_rescues_forbidden_on_reviews_lookup
-    WebMock.disable_net_connect!
+  def test_rescues_forbidden_on_reviews_lookup_and_continues
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/99',
-      body: {
-        id: 99, number: 99, user: { id: 421, login: 'user' },
-        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/99/reviews?per_page=100',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/100',
-      body: {
-        id: 100, number: 100, user: { id: 421, login: 'user' },
-        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 3, deletions: 4
-      }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/100/reviews?per_page=100',
-      body: [
-        { id: 50_100, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
-      ]
-    )
-    stub_github('https://api.github.com/repos/foo/foo/issues/100/comments?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/foo/foo/pulls/100/reviews/50100/comments?per_page=100', body: [])
-    stub_github('https://api.github.com/user/421', body: {  id: 421, login: 'user1' })
-    stub_github('https://api.github.com/user/422', body: {  id: 422, login: 'user2' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 99, where: 'github')
       .with(_id: 2, what: 'pull-was-closed', repository: 42, issue: 100, where: 'github')
-    load_it('code-was-reviewed', fb)
+    VCR.use_cassette('code-was-reviewed/rescues-forbidden-on-reviews-lookup-and-continues') do
+      load_it('code-was-reviewed', fb)
+    end
     refute(
       fb.one?(what: 'pull-was-closed', repository: 42, issue: 99, stale: 'issue'),
       'forbidden reviews lookup must leave the original pull fact untouched'
