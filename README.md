@@ -101,12 +101,6 @@ The following `k=v` pairs inside the `options` may be important:
 
 * `github_token=...` is a default GitHub token, usually to be set to
   `${{ secrets.GITHUB_TOKEN }}`
-* `repositories=..` is a comma-separated list of masks that
-  determine the repositories to manage, where
-  `yegor256/*` means all repos of the user,
-  `yegor256/judges` means a specific repo,
-  and
-  `-yegor256/judges` means an exclusion of the repo from the list.
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
 
