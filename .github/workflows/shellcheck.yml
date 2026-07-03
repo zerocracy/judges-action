@@ -10,10 +10,15 @@ name: shellcheck
   pull_request:
     branches:
       - master
+permissions:
+  contents: read
+
 jobs:
   shellcheck:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
       - uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca # master

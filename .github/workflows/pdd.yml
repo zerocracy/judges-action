@@ -11,10 +11,15 @@ name: pdd
     branches:
       - master
   workflow_call:
+permissions:
+  contents: read
+
 jobs:
   pdd:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
       - uses: volodya-lombrozo/pdd-action@69842b56627431c5f232f5ea2dc2fca82f409c54 # master
