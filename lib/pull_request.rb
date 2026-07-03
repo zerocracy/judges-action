@@ -108,34 +108,40 @@ def Jp.fetch_workflows(pr, repo: nil)
     )
     return { succeeded_builds: 0, failed_builds: 0 }
   end
+  @_job_cache ||= {}
+  @_wf_cache ||= {}
   (entries[:check_runs] || []).each do |run|
     next unless run.dig(:app, :slug) == 'github-actions'
     rid =
-      begin
-        Fbe.octo.workflow_run_job(repo, run[:id])[:run_id]
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Workflow run job not found for #{repo} job ##{run[:id]}: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to workflow run job for #{repo} job ##{run[:id]} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+      @_job_cache[run[:id]] ||=
+        begin
+          Fbe.octo.workflow_run_job(repo, run[:id])[:run_id]
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Workflow run job not found for #{repo} job ##{run[:id]}: #{e.message}")
+          nil
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to workflow run job for #{repo} job ##{run[:id]} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          nil
+        end
+    next unless rid
     workflow =
-      begin
-        Fbe.octo.workflow_run(repo, rid)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Workflow run not found for #{repo} run ##{rid}: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to workflow run for #{repo} run ##{rid} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+      @_wf_cache[rid] ||=
+        begin
+          Fbe.octo.workflow_run(repo, rid)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Workflow run not found for #{repo} run ##{rid}: #{e.message}")
+          nil
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to workflow run for #{repo} run ##{rid} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          nil
+        end
+    next unless workflow
     next unless workflow[:event] == 'pull_request'
     case workflow[:conclusion]
     when 'success'
