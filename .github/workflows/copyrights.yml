@@ -11,10 +11,15 @@ name: copyrights
     branches:
       - master
   workflow_call:
+permissions:
+  contents: read
+
 jobs:
   copyrights:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+        with:
+          persist-credentials: false
       - uses: yegor256/copyrights-action@597733b4b433341822e601cbe3316fd45031fec8 # 0.0.12
