@@ -14,7 +14,8 @@ def total_commits_pushed(fact)
   hoc = 0
   Fbe.unmask_repos do |repo|
     begin
-      next if Fbe.octo.repository(repo)[:size].zero?
+      json = Fbe.octo.repository(repo)
+      next if json[:size].nil? || json[:size].zero?
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("#{repo} can't be inspected: #{e.class}: #{e.message}")
       next
