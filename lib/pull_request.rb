@@ -97,7 +97,7 @@ def Jp.fetch_workflows(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
   begin
-    entries = Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))
+    entries = Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha), per_page: 100)
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Check runs not found for #{repo}@#{pr.dig(:head, :sha)}: #{e.message}")
     return { succeeded_builds: 0, failed_builds: 0 }
