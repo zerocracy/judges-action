@@ -8,6 +8,10 @@ require 'fbe/tombstone'
 require_relative 'jp'
 
 def Jp.issue_was_lost(where, repository, issue)
+  where = where.to_s
+  raise(ArgumentError, "Invalid 'where': #{where.inspect}") if where.include?("'")
+  repository = Integer(repository)
+  issue = Integer(issue)
   stale =
     Fbe.fb.query(
       "(and
