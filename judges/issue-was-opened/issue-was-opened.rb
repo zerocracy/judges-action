@@ -43,11 +43,11 @@ Fbe.conclude do
     json =
       begin
         Fbe.octo.issue(repo, f.issue)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("The issue ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
         throw(:rollback)
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

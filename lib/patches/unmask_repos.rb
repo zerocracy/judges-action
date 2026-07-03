@@ -42,10 +42,10 @@ module Fbe
       end
       repos.reject! do |repo|
         octo.repository(repo)[:archived]
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         false
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

@@ -13,10 +13,10 @@ def total_commits(_fact)
   Fbe.unmask_repos do |repo|
     begin
       json = Fbe.octo.repository(repo)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Repository #{repo} not found: #{e.message}")
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
       )
@@ -24,10 +24,10 @@ def total_commits(_fact)
     end
     next if json[:size].nil? || json[:size].zero?
     repos << [*repo.split('/'), json[:default_branch]]
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Repository not found for #{repo}: #{e.message}")
     next
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
     $loog.warn(
       "[#{$judge}] Access forbidden to repository #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -41,7 +41,7 @@ def total_commits(_fact)
     rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Can't count total commits: #{e.message}")
       0
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn("[#{$judge}] Can't count total commits (transient, will retry next cycle): #{e.class}: #{e.message}")
       0
     rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e

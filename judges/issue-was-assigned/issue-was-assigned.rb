@@ -36,11 +36,11 @@ Fbe.iterate do
     events =
       begin
         Fbe.octo.issue_events(repo, issue).select { |e| e[:event] == 'assigned' }
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Not found issue events for issue ##{issue} in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue events for issue ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

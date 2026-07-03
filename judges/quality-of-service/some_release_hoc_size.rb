@@ -14,10 +14,10 @@ def some_release_hoc_size(fact)
     releases =
       begin
         Fbe.octo.releases(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Releases not found for #{repo}: #{e.message}")
         next
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -36,10 +36,10 @@ def some_release_hoc_size(fact)
       compare =
         begin
           Fbe.octo.compare(repo, first[:tag_name], last[:tag_name])
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Compare not found for #{repo}@#{first[:tag_name]}..#{last[:tag_name]}: #{e.message}")
           next
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to compare for #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

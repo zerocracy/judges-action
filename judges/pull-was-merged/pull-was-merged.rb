@@ -54,11 +54,11 @@ Fbe.iterate do
     json =
       begin
         Fbe.octo.pull_request(repo, issue)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("The pull ##{issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to pull ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -72,11 +72,11 @@ Fbe.iterate do
     actor =
       begin
         Fbe.octo.issue(repo, issue)[:closed_by]
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("The issue ##{issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -86,11 +86,11 @@ Fbe.iterate do
     reviews =
       begin
         Fbe.octo.pull_request_reviews(repo, issue)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("The reviews of pull ##{issue} don't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to reviews of pull ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

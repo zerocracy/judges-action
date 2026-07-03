@@ -16,10 +16,10 @@ def total_commits_pushed(fact)
     begin
       json = Fbe.octo.repository(repo)
       next if json[:size].nil? || json[:size].zero?
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("#{repo} can't be inspected: #{e.class}: #{e.message}")
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -32,10 +32,10 @@ def total_commits_pushed(fact)
         commits += json['commits']
         hoc += json['hoc']
       end
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Can't count pushed commits in #{repo}: #{e.message}")
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to pushed commits in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

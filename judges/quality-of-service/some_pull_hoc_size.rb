@@ -18,10 +18,10 @@ def some_pull_hoc_size(fact)
       pull =
         begin
           Fbe.octo.pull_request(repo, json[:number])
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Pull request ##{json[:number]} not found in #{repo}: #{e.message}")
           next
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to pull request ##{json[:number]} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

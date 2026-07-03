@@ -22,11 +22,11 @@ Fbe.consider(
   json =
     begin
       Fbe.octo.user(f.who)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
       f.stale = 'who'
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] GitHub user ##{f.who} is not accessible " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

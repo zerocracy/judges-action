@@ -32,10 +32,10 @@ Fbe.iterate do
       tag =
         begin
           Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release_id}").fetch(:tag_name, nil)
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Release ##{fact.release_id} not found in #{repo}: #{e.message}")
           nil
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to release ##{fact.release_id} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -84,10 +84,10 @@ Fbe.iterate do
 
   def self.comparison(repo, since, tag)
     Fbe.octo.compare(repo, since, tag)
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Compare API failed for #{repo} between #{since} and #{tag}: #{e.message}")
     nil
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
     $loog.warn(
       "[#{$judge}] Access forbidden to compare #{repo} between #{since} and #{tag} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -98,10 +98,10 @@ Fbe.iterate do
   def self.allcontributors(repo)
     list = Fbe.octo.contributors(repo)
     list.is_a?(Array) ? list : []
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Contributors API failed for #{repo}: #{e.message}")
     []
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
     $loog.warn(
       "[#{$judge}] Access forbidden to contributors in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -118,10 +118,10 @@ Fbe.iterate do
     end
     $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Commits not found for #{repo}: #{e.message}")
     nil
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
     $loog.warn(
       "[#{$judge}] Access forbidden to commits for #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -147,10 +147,10 @@ Fbe.iterate do
     fact.who = Integer(json[:actor][:id]) if json[:actor]
     begin
       rname = Fbe.octo.repo_name_by_id(fact.repository)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Repository ##{fact.repository} not found by ID: #{e.message}")
       return
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repo name for ##{fact.repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -166,10 +166,10 @@ Fbe.iterate do
       repo =
         begin
           Fbe.octo.repository(rname)
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Repository #{rname} not found: #{e.message}")
           skip(json)
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to #{rname} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -186,10 +186,10 @@ Fbe.iterate do
       pulls =
         begin
           Fbe.octo.commit_pulls(rname, fact.commit)
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Commit pulls not found for #{rname}@#{fact.commit}: #{e.message}")
           []
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to commit pulls in #{rname} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -217,10 +217,10 @@ Fbe.iterate do
         pl =
           begin
             Fbe.octo.pull_request(rname, fact.issue)
-          rescue Octokit::NotFound, Octokit::Deprecated => e
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             nil
-          rescue Octokit::Forbidden => e
+          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
             $loog.warn(
               "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -237,10 +237,10 @@ Fbe.iterate do
         review =
           begin
             Fbe.octo.pull_request_reviews(rname, fact.issue).first
-          rescue Octokit::NotFound, Octokit::Deprecated => e
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             nil
-          rescue Octokit::Forbidden => e
+          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
             $loog.warn(
               "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -266,10 +266,10 @@ Fbe.iterate do
         pull =
           begin
             Fbe.octo.pull_request(rname, fact.issue)
-          rescue Octokit::NotFound, Octokit::Deprecated => e
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             skip(json)
-          rescue Octokit::Forbidden => e
+          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
             $loog.warn(
               "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -362,7 +362,7 @@ Fbe.iterate do
     else
       skip(json)
     end
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
     if $global[:forbidden_repos]&.include?(rname)
       $loog.warn(
         "[#{$judge}] Access forbidden to #{rname} " \
@@ -400,10 +400,10 @@ Fbe.iterate do
   over do |repository, latest|
     begin
       rname = Fbe.octo.repo_name_by_id(repository)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Repository ##{repository} not found by ID: #{e.message}")
       next latest
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repo name for ##{repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -429,10 +429,10 @@ Fbe.iterate do
       events =
         begin
           Fbe.octo.repository_events(repository)
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Events not found for repository ##{repository}: #{e.message}")
           []
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to events for repository ##{repository} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

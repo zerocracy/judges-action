@@ -33,11 +33,11 @@ Fbe.consider(
   pr =
     begin
       Fbe.octo.pull_request(repo, f.issue)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -47,11 +47,11 @@ Fbe.consider(
   reviews =
     begin
       Fbe.octo.pull_request_reviews(repo, f.issue)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to reviews for pull ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -76,10 +76,10 @@ Fbe.consider(
       n.comments =
         begin
           Fbe.octo.issue_comments(repo, f.issue).count
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
           0
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -89,10 +89,10 @@ Fbe.consider(
       n.review_comments =
         begin
           Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
           0
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

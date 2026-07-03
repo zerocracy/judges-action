@@ -19,10 +19,10 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').eac
     json = Fbe.octo.repository(r)
     good[r] = true
     throw(:"GitHub repository ##{r} is found: #{json[:full_name]}")
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     good[r] = false
     throw(:"GitHub repository ##{r} is not found: #{e.message}")
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
     $loog.warn(
       "[#{$judge}] Access forbidden to GitHub repository ##{r} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"

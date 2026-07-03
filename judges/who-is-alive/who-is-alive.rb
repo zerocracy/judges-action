@@ -28,7 +28,7 @@ Fbe.consider(
   nick =
     begin
       Jp.nick_of(f.who)
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to user ##{f.who} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

@@ -22,11 +22,11 @@ Fbe.consider(
   repo =
     begin
       Fbe.octo.repo_name_by_id(f.repository)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Failed to find repository #{f.repository}: #{e.message}")
       f.stale = 'repository'
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repository #{f.repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -36,11 +36,11 @@ Fbe.consider(
   json =
     begin
       Fbe.octo.pull_request(repo, f.issue)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

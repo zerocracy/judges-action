@@ -27,11 +27,11 @@ Fbe.consider(
         Fbe.octo.issue_events(repo, f.issue).sort_by { _1[:created_at] }.find do |e|
           e[:event] == 'unassigned' && e.dig(:assignee, :id) == f.who && e[:created_at] > f.when
         end
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Not found issue events for issue ##{f.issue} in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', f.repository, f.issue)
         next
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue events for issue ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
