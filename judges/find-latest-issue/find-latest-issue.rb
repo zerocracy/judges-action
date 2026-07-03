@@ -36,7 +36,7 @@ Fbe.iterate do
       end
     next latest if json.nil?
     i = json[:number]
-    next if Fbe::Tombstone.new.has?('github', repository, i)
+    next latest if Fbe::Tombstone.new.has?('github', repository, i)
     Fbe.fb.txn do |fbt|
       f =
         Fbe.if_absent(fb: fbt) do |ff|

@@ -82,8 +82,8 @@ The following action inputs are set via `with:` in your workflow YAML
   [Zerocracy.com](https://www.zerocracy.com)
 * `options` (optional) is a list of `k=v` pairs for advanced tuning,
   explained below
-* `factbase` (mandatory) is the path of the [Factbase][factbase] file
-  (where everything is kept)
+* `factbase` (optional, default is `default.fb`) is the path of the
+  [Factbase][factbase] file (where everything is kept)
 * `repositories` (optional) is a comma-separated list of masks that
   determine the repositories to manage, where
   `yegor256/*` means all repos of the user,
@@ -102,20 +102,25 @@ The following action inputs are set via `with:` in your workflow YAML
 
 The dedicated action inputs above take precedence when a parameter
   is also configurable via `options` (the k=v pairs below exist for
-  backward compatibility and advanced scenarios):
+  backward compatibility and advanced tuning):
 
-* `github_token=...` is a default GitHub token (alternative to
-  `github-token` action input), usually to be set to
-  `${{ secrets.GITHUB_TOKEN }}`
-* `repositories=..` is a comma-separated list of masks (alternative to
-  `repositories` action input), where
-  `yegor256/*` means all repos of the user,
-  `yegor256/judges` means a specific repo,
-  and
-  `-yegor256/judges` means an exclusion of the repo from the list.
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
   (these two are only available as k=v pairs)
+* `sqlite_cache_min_age=3600` is the minimum age in seconds before a
+  cached HTTP response is considered stale (default is 3600, i.e. 1 hour)
+
+### Environment Variables
+
+The following environment variables are recognized by the Docker entry point:
+
+* `SKIP_VERSION_CHECKING` (optional, default is unset) if set to `true`,
+  skips the version compatibility check against GitHub releases. Useful for
+  development, testing with a non-release build, air-gapped environments,
+  or faster CI when version checking is not critical.
+
+Note: `action_version` and `vitals_url` are automatically populated
+  by the entry point and should not be set manually.
 
 The `zerocracy/pages-action` plugin is responsible for rendering
   the summary HTML page: its configuration is not explained here,

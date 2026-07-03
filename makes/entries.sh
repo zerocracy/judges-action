@@ -30,4 +30,4 @@ export -f run_test
 export base
 
 find "${base}/entries" -name '*.sh' -exec basename {} \; | \
-    parallel --halt now,fail=1 --line-buffer run_test
+    parallel --line-buffer run_test

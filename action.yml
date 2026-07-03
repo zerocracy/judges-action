@@ -24,7 +24,7 @@ inputs:
   verbose:
     description: 'Log as much debug information as possible'
     required: false
-    default: false
+    default: 'false'
   factbase:
     description: 'Path of the factbase file (also the name of the job in Zerocracy)'
     required: true
@@ -36,7 +36,7 @@ inputs:
   dry-run:
     description: 'Skip all judges, make no changes to the factbase'
     required: false
-    default: false
+    default: 'false'
   timeout:
     description: 'The number of minutes to spend on each judge'
     required: false
