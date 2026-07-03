@@ -47,16 +47,20 @@ def Jp.comments_info(pr, repo: nil)
       icomments.count { |c| c.dig(:user, :id) != uid },
     comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
     comments_resolved:
-      begin
-        Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
-      rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
-        0
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
+      if Fbe.github_graph
+        begin
+          Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
+        rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
+          0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
+        end
+      else
         0
       end
   }
