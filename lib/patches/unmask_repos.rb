@@ -27,10 +27,19 @@ module Fbe
         re = Fbe.mask_to_regex(mask)
         org = mask.split('/')[0]
         list =
-          begin
-            octo.organization_repositories(org, type: 'all')
-          rescue Octokit::NotFound
-            octo.repositories(org)
+          if org == '*'
+            octo.repositories
+          else
+            begin
+              octo.organization_repositories(org, type: 'all')
+            rescue Octokit::NotFound, Octokit::Forbidden, Octokit::Unauthorized,
+              Octokit::ServerError, Octokit::TooManyRequests => e
+              $loog.warn("[#{$judge}] Failed to list repos for org #{org}: #{e.class}: #{e.message}")
+              octo.repositories(org)
+            rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+              $loog.warn("[#{$judge}] Network error listing repos for org #{org}: #{e.message}")
+              octo.repositories(org)
+            end
           end
         list.each do |r|
           repos << r[:full_name] if re.match?(r[:full_name])
@@ -45,11 +54,15 @@ module Fbe
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         false
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::Unauthorized => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        false
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Transient error checking #{repo}: #{e.class}: #{e.message}")
         false
       end
       raise(Fbe::Error, "No repos found matching: #{options.repositories.inspect}") if repos.empty?
@@ -57,7 +70,12 @@ module Fbe
       loog.debug("Scanning #{repos.size} repositories: #{repos.joined}...")
       repos.each do |repo|
         octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden # rubocop:disable Lint/SuppressedException
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.debug("[#{$judge}] Repository #{repo} not found: #{e.message}")
+      rescue Octokit::Forbidden, Octokit::Unauthorized, Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] Repository #{repo} temporarily unavailable: #{e.class}: #{e.message}")
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error checking #{repo}: #{e.message}")
       end
       return repos unless block_given?
       repos.each do |repo|
