@@ -52,4 +52,13 @@ rescue Octokit::TooManyRequests => e
   @offquota = true
   $loog.warn("[#{$judge}] GitHub Search API quota exhausted, stopping search calls: #{e.message}")
   nil
+rescue Octokit::Unauthorized, Octokit::Forbidden => e
+  $loog.warn("[#{$judge}] Search API access denied: #{e.class}: #{e.message}")
+  nil
+rescue Octokit::ServerError => e
+  $loog.warn("[#{$judge}] Search API server error (transient): #{e.class}: #{e.message}")
+  nil
+rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+  $loog.warn("[#{$judge}] Network error during search (transient): #{e.class}: #{e.message}")
+  nil
 end
