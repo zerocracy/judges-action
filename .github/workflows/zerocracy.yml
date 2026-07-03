@@ -25,6 +25,7 @@ jobs:
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.PAT }}
+          # WARNING: zerocracy/* wildcard covers ALL org repos — review when adding new repos
           repositories: yegor256/judges,yegor256/factbase,zerocracy/*,yegor256/0rsk
           factbase: zerocracy.fb
           timeout: 15

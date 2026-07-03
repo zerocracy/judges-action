@@ -21,4 +21,7 @@ COPY judges /action/judges
 COPY lib /action/lib
 COPY entry.sh /action
 
+# Runs as root by design — the container needs to write to the
+# mounted GITHUB_WORKSPACE volume which is owned by the runner uid.
+# Switching to a non-root user would break workspace write access.
 ENTRYPOINT ["/action/entry.sh", "/action"]

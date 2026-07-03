@@ -5,6 +5,7 @@
 docker:
   image: yegor256/ruby
 assets:
+  # WARNING: cross-repo asset reference — supply chain risk (trusted from yegor256/home)
   docker-password: yegor256/home#assets/docker-password
 install: |
   sudo apt-get -y update
