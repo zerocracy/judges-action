@@ -109,6 +109,7 @@ require_relative '../../lib/qos_search'
           end
         end
         issue = first if issue < first
+        issue += 1 if seen.empty? && issue <= first
         m = [
           "Checked #{seen.count} #{type}s in #{repo}",
           ("(#{seen.joined(max: 8)})" unless seen.empty?),
