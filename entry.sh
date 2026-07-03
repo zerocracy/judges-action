@@ -214,10 +214,14 @@ if [ -n "${sqlite}" ]; then
     sqlite=$(realpath "$( [[ ${sqlite} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
     options+=("--option=sqlite_cache=${sqlite}");
     echo "Using SQLite for HTTP caching: ${sqlite}"
-    ${JUDGES} "${gopts[@]}" download \
-        "--token=${INPUT_TOKEN}" \
-        "--owner=${owner}" \
-        "${name}" "${sqlite}"
+    if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
+        ${JUDGES} "${gopts[@]}" download \
+            "--token=${INPUT_TOKEN}" \
+            "--owner=${owner}" \
+            "${name}" "${sqlite}"
+    else
+        echo "We are in 'dry' mode; skipping SQLite download"
+    fi
 else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
@@ -263,11 +267,13 @@ ${JUDGES} "${gopts[@]}" --hello update \
     "${ALL_JUDGES}" \
     "${fb}"
 
-if [ -e "${sqlite}" ]; then
+if [ -e "${sqlite}" ] && [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
     ${JUDGES} "${gopts[@]}" upload \
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${sqlite}"
+elif [ -e "${sqlite}" ]; then
+    echo "We are in 'dry' mode; skipping SQLite upload"
 else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
