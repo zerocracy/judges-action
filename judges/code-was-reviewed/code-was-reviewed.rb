@@ -71,7 +71,7 @@ Fbe.consider(
         end
       next if n.nil?
       n.when = review[:submitted_at]
-      n.hoc = pr[:additions] + pr[:deletions]
+      n.hoc = (pr[:additions] || 0) + (pr[:deletions] || 0)
       n.author = pr.dig(:user, :id)
       n.comments =
         begin
@@ -99,7 +99,7 @@ Fbe.consider(
           )
           0
         end
-      n.seconds = Integer(review[:submitted_at] - pr[:created_at])
+      n.seconds = Integer(review[:submitted_at] - pr[:created_at]) if pr[:created_at] && review[:submitted_at]
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
         "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \

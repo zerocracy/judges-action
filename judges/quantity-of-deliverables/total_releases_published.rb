@@ -12,7 +12,7 @@ def total_releases_published(fact)
   Fbe.unmask_repos do |repo|
     owner, name = repo.split('/')
     begin
-      releases += Fbe.github_graph.total_releases_published(owner, name, fact.since)['releases']
+      releases += Fbe.github_graph.total_releases_published(owner, name, fact.since)['releases'] || 0
     rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Can't count releases in #{repo}: #{e.message}")
       next
