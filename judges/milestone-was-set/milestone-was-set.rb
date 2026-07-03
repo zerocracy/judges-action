@@ -17,19 +17,21 @@ Fbe.consider(
     (absent tombstone))'
 ) do |f|
   repo = Fbe.octo.repo_name_by_id(f.repository)
+  @_milestones ||= {}
   milestones =
-    begin
-      Fbe.octo.list_milestones(repo, state: 'all')
-    rescue Octokit::NotFound, Octokit::Deprecated => e
-      $loog.info("Can't list milestones for #{repo}: #{e.message}")
-      next
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to milestones in #{repo} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
-      next
-    end
+    @_milestones[repo] ||=
+      begin
+        Fbe.octo.list_milestones(repo, state: 'all')
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Can't list milestones for #{repo}: #{e.message}")
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to milestones in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
   milestones.each do |m|
     Fbe.fb.txn do |fbt|
       nn =
