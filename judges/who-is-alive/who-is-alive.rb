@@ -42,12 +42,11 @@ Fbe.consider(
   elapsed($loog, level: Logger::INFO) do
     Fbe.fb.txn do |fbt|
       fbt.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who}))").delete!
-      done =
-        fbt.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
-          n.stale = 'who'
-        end
-      throw :"GitHub user ##{f.who} is gone, marked #{done} facts as stale"
+      fbt.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
+        n.stale = 'who'
+      end
     end
+    throw :"GitHub user ##{f.who} is gone"
   end
 end
 
