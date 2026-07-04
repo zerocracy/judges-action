@@ -17,6 +17,18 @@ def total_builds_ran(fact)
             per_page: 1
           )[:total_count]
         end
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Workflow runs not found for #{repo}: #{e.message}")
+        0
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        0
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] GitHub API rate limit exceeded for #{repo}: #{e.message}")
+        0
       end
   }
 end
