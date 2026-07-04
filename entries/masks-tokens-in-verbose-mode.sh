@@ -36,3 +36,7 @@ log_contains "::add-mask::${github_token}" \
   "::add-mask:: workflow command for INPUT_GITHUB-TOKEN must be emitted before bash tracing"
 log_contains "::add-mask::${zerocracy_token}" \
   "::add-mask:: workflow command for INPUT_TOKEN must be emitted before bash tracing"
+log_not_contains "${github_token}" \
+  "raw github_token must not appear in log without ::add-mask::"
+log_not_contains "${zerocracy_token}" \
+  "raw zerocracy_token must not appear in log without ::add-mask::"
