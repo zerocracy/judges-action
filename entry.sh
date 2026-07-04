@@ -143,6 +143,7 @@ ${JUDGES} "${gopts[@]}" eval \
 
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
+    trap 'rm -rf "$ALL_JUDGES"' EXIT INT TERM
     options+=("--no-expect-judges")
 else
     ALL_JUDGES=${SELF}/judges
