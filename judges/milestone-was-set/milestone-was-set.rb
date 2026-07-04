@@ -17,9 +17,9 @@ Fbe.consider(
     (absent tombstone))'
 ) do |f|
   repo = Fbe.octo.repo_name_by_id(f.repository)
-  @_milestones ||= {}
+  @milestones ||= {}
   milestones =
-    @_milestones[repo] ||=
+    @milestones[repo] ||=
       begin
         Fbe.octo.list_milestones(repo, state: 'all')
       rescue Octokit::NotFound, Octokit::Deprecated => e
