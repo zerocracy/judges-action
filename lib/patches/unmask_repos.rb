@@ -78,7 +78,7 @@ module Fbe
       rescue Octokit::Forbidden => e
         $loog.warn("[#{$judge}] Repository #{repo} temporarily unavailable: #{e.class}: #{e.message}")
       rescue Octokit::Unauthorized, Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] Repository #{repo} temporarily unavailable: #{e.class}: #{e.message}")
+        $loog.warn("[#{$judge}] Repository #{repo} access issue: #{e.class}: #{e.message}")
       rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
         $loog.warn("[#{$judge}] Network error checking #{repo}: #{e.message}")
       end
