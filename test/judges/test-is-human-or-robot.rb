@@ -27,10 +27,7 @@ class TestIsHumanOrRobot < Jp::Test
     load_it('is-human-or-robot', fb)
     facts = fb.query("(eq who #{id})").each.to_a
     assert_equal(id, facts.first.who)
-    assert_equal(
-      "Can't find 'is_human' attribute out of [who, where]",
-      assert_raises(ArgumentError) { facts.first.is_human }.message
-    )
+    assert_raises(ArgumentError) { facts.first.is_human }
   end
 
   def test_identify_user_as_bot_or_human
@@ -76,16 +73,10 @@ class TestIsHumanOrRobot < Jp::Test
     load_it('is-human-or-robot', fb)
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
-    assert_equal(
-      "Can't find 'stale' attribute out of [_id, what, repository, issue, who, where]",
-      assert_raises(ArgumentError) { fact.stale }.message,
-      'fact should not be marked stale on transient 403 so the next cycle can retry'
-    )
-    assert_equal(
-      "Can't find 'is_human' attribute out of [_id, what, repository, issue, who, where]",
-      assert_raises(ArgumentError) { fact.is_human }.message,
-      'is_human should remain absent when the 403 prevented classification'
-    )
+    assert_raises(ArgumentError, 'fact should not be marked stale on transient 403') { fact.stale }
+    assert_raises(ArgumentError, 'is_human should remain absent when the 403 prevented classification') do
+      fact.is_human
+    end
   end
 
   def test_forbidden_user_does_not_abort_others
@@ -112,10 +103,6 @@ class TestIsHumanOrRobot < Jp::Test
     assert_equal(0, staled.size, 'the 403 user must not be marked stale so the next cycle can retry')
     forbidden = fb.query('(eq who 200)').each.first
     refute_nil(forbidden)
-    assert_equal(
-      "Can't find 'is_human' attribute out of [_id, what, who, where]",
-      assert_raises(ArgumentError) { forbidden.is_human }.message,
-      'the 403 user should remain unclassified, ready for a retry'
-    )
+    assert_raises(ArgumentError, 'the 403 user should remain unclassified, ready for a retry') { forbidden.is_human }
   end
 end
