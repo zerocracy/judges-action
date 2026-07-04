@@ -24,7 +24,7 @@ def some_review_time(fact)
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
           next
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to pull ##{pr[:number]} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

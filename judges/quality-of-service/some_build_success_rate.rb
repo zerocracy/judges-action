@@ -20,7 +20,7 @@ def some_build_success_rate(fact)
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Workflow runs not found for #{repo}: #{e.message}")
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -36,7 +36,7 @@ def some_build_success_rate(fact)
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
             0
-          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+          rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"

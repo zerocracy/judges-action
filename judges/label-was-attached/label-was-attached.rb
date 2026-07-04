@@ -39,7 +39,7 @@ Fbe.iterate do
         $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue ##{issue} in repository ##{repository} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

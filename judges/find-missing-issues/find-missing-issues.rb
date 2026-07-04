@@ -38,7 +38,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         $loog.info("The issue #{repo}##{i} doesn't exist: #{e.message}")
         Jp.issue_was_lost('github', r.repository, i)
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue #{repo}##{i} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -71,7 +71,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
             $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
             Jp.issue_was_lost(f.where, f.repository, f.issue)
             next
-          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+          rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"

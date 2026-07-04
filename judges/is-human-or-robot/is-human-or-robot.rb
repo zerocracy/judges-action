@@ -26,7 +26,7 @@ Fbe.consider(
       $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
       f.stale = 'who'
       next
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] GitHub user ##{f.who} is not accessible " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

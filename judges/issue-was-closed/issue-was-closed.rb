@@ -50,7 +50,7 @@ Fbe.iterate do
         $loog.info("The issue #{repo}##{issue} doesn't exist: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue #{repo}##{issue} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -86,7 +86,7 @@ Fbe.iterate do
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Can't fetch timeline for #{repo}##{issue}: #{e.message}")
         next issue
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn("[#{$judge}] Access forbidden to timeline for #{repo}##{issue}: #{e.class}: #{e.message}")
         next issue
       end

@@ -20,7 +20,7 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
     nick =
       begin
         Jp.nick_of(f.who)
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to user ##{f.who} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

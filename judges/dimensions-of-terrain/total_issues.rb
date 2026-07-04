@@ -16,7 +16,7 @@ def total_issues(_fact)
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issues and pulls in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

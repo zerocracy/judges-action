@@ -16,7 +16,7 @@ Fbe.consider("(and (eq stale 'who') (eq where 'github') (unique who))") do |f|
     rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("The user ##{f.who} is still stale: #{e.message}")
       next
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn("[#{$judge}] The user ##{f.who} is still stale (access forbidden): #{e.class}: #{e.message}")
       next
     end

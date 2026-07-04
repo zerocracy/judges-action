@@ -16,7 +16,7 @@ def total_releases_published(fact)
     rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Can't count releases in #{repo}: #{e.message}")
       next
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Can't count releases in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

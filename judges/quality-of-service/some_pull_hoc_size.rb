@@ -21,7 +21,7 @@ def some_pull_hoc_size(fact)
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Pull request ##{json[:number]} not found in #{repo}: #{e.message}")
           next
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to pull request ##{json[:number]} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

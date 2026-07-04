@@ -35,7 +35,7 @@ Fbe.iterate do
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Release ##{fact.release_id} not found in #{repo}: #{e.message}")
           nil
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to release ##{fact.release_id} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -87,7 +87,7 @@ Fbe.iterate do
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Compare API failed for #{repo} between #{since} and #{tag}: #{e.message}")
     nil
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to compare #{repo} between #{since} and #{tag} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -101,7 +101,7 @@ Fbe.iterate do
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Contributors API failed for #{repo}: #{e.message}")
     []
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to contributors in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -121,7 +121,7 @@ Fbe.iterate do
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Commits not found for #{repo}: #{e.message}")
     nil
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to commits for #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -150,7 +150,7 @@ Fbe.iterate do
     rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Repository ##{fact.repository} not found by ID: #{e.message}")
       return
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repo name for ##{fact.repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -169,7 +169,7 @@ Fbe.iterate do
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Repository #{rname} not found: #{e.message}")
           skip(json)
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to #{rname} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -189,7 +189,7 @@ Fbe.iterate do
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Commit pulls not found for #{rname}@#{fact.commit}: #{e.message}")
           []
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to commit pulls in #{rname} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -220,7 +220,7 @@ Fbe.iterate do
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             nil
-          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+          rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -240,7 +240,7 @@ Fbe.iterate do
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             nil
-          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+          rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -269,7 +269,7 @@ Fbe.iterate do
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.warn("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
             skip(json)
-          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+          rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -362,7 +362,7 @@ Fbe.iterate do
     else
       skip(json)
     end
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     if $global[:forbidden_repos]&.include?(rname)
       $loog.warn(
         "[#{$judge}] Access forbidden to #{rname} " \
@@ -403,7 +403,7 @@ Fbe.iterate do
     rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Repository ##{repository} not found by ID: #{e.message}")
       next latest
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repo name for ##{repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -432,7 +432,7 @@ Fbe.iterate do
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Events not found for repository ##{repository}: #{e.message}")
           []
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to events for repository ##{repository} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

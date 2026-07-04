@@ -16,7 +16,7 @@ def total_releases(_fact)
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Releases not found for #{repo}: #{e.message}")
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -30,7 +30,7 @@ def total_releases(_fact)
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Releases not found for #{repo}: #{e.message}")
     next
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to releases in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"

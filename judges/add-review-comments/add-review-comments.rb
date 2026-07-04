@@ -26,7 +26,7 @@ Fbe.consider(
       $loog.info("Failed to find repository #{f.repository}: #{e.message}")
       f.stale = 'repository'
       next
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repository #{f.repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -40,7 +40,7 @@ Fbe.consider(
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

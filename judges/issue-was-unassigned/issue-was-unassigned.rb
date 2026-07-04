@@ -31,7 +31,7 @@ Fbe.consider(
         $loog.info("Not found issue events for issue ##{f.issue} in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', f.repository, f.issue)
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue events for issue ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

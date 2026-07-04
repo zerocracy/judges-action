@@ -36,7 +36,7 @@ require_relative '../../lib/qos_search'
           $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
           Jp.issue_was_lost('github', repository, issue)
           next 0
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to #{type} ##{issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -58,7 +58,7 @@ require_relative '../../lib/qos_search'
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("No issues found for #{repo}: #{e.message}")
             []
-          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+          rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to search issues for #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -91,7 +91,7 @@ require_relative '../../lib/qos_search'
                   $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
                   Jp.issue_was_lost(f.where, f.repository, f.issue)
                   next
-                rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+                rescue Octokit::Forbidden => e
                   $loog.warn(
                     "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
                     "(transient, will retry next cycle): #{e.class}: #{e.message}"

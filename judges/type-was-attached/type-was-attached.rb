@@ -41,7 +41,7 @@ Fbe.iterate do
         $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue ##{issue} in repository ##{repository} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -60,7 +60,7 @@ Fbe.iterate do
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Event type by node ID #{te[:node_id]} not found: #{e.message}")
           next
-        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+        rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to event type by node ID #{te[:node_id]} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

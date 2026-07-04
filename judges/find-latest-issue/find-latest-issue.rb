@@ -27,7 +27,7 @@ Fbe.iterate do
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Issues list not available for #{repo}: #{e.message}")
         next latest
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issues list for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -56,7 +56,7 @@ Fbe.iterate do
             $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
             Jp.issue_was_lost(f.where, f.repository, f.issue)
             next i
-          rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+          rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"

@@ -45,7 +45,7 @@ Fbe.conclude do
         $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
         throw(:rollback)
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -62,7 +62,7 @@ Fbe.conclude do
         $loog.info("The pull ##{f.issue} disappeared from #{repo} between issue and pull lookups: #{e.message}")
         Jp.issue_was_lost(f.where, f.repository, f.issue)
         throw(:rollback)
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

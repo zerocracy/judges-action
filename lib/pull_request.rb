@@ -16,7 +16,7 @@ def Jp.comments_info(pr, repo: nil)
     rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("PR comments not found for #{repo}##{pr[:number]}: #{e.message}")
       []
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to PR comments for #{repo}##{pr[:number]} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -29,7 +29,7 @@ def Jp.comments_info(pr, repo: nil)
     rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Issue comments not found for #{repo}##{pr[:number]}: #{e.message}")
       []
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to issue comments for #{repo}##{pr[:number]} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -52,7 +52,7 @@ def Jp.comments_info(pr, repo: nil)
       rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
         0
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -70,7 +70,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Issue comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "Access forbidden to issue comment ##{comment[:id]} reactions in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -82,7 +82,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Code comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "Access forbidden to code comment ##{comment[:id]} reactions in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -101,7 +101,7 @@ def Jp.fetch_workflows(pr, repo: nil)
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Check runs not found for #{repo}@#{pr.dig(:head, :sha)}: #{e.message}")
     return { succeeded_builds: 0, failed_builds: 0 }
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to check runs for #{repo}@#{pr.dig(:head, :sha)} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -116,7 +116,7 @@ def Jp.fetch_workflows(pr, repo: nil)
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Workflow run job not found for #{repo} job ##{run[:id]}: #{e.message}")
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to workflow run job for #{repo} job ##{run[:id]} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -129,7 +129,7 @@ def Jp.fetch_workflows(pr, repo: nil)
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Workflow run not found for #{repo} run ##{rid}: #{e.message}")
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to workflow run for #{repo} run ##{rid} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -154,7 +154,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
     rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Pull request reviews not found for #{repo}##{issue}: #{e.message}")
       []
-    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+    rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to pull request reviews for #{repo}##{issue} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -169,7 +169,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
       rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Review comments not found for #{repo}##{issue} review ##{review[:id]}: #{e.message}")
         []
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to review comments for #{repo}##{issue} review ##{review[:id]} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

@@ -18,7 +18,7 @@ def total_issues_created(fact)
       rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Issues count not available for #{repo}: #{e.message}")
         next
-      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issues count for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

@@ -32,7 +32,7 @@ def total_reviews_submitted(fact)
   rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Can't count submitted reviews in #{repo}: #{e.message}")
     next
-  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
+  rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to submitted reviews in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
