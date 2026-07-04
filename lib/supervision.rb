@@ -12,7 +12,12 @@ rescue StandardError => e
   begin
     info = JSON.pretty_generate(context)
   rescue StandardError => je
-    info = "Failed to serialize context: #{je.message}\n#{context.inspect}"
+    info =
+      begin
+        "Failed to serialize context: #{je.message}\n#{context.inspect}"
+      rescue StandardError
+        "Failed to serialize context: #{je.message}"
+      end
   end
   loog.error("Additional context for '#{e.class}: #{e.message}':\n#{info}")
   raise
