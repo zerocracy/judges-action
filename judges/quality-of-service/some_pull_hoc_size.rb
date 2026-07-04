@@ -28,7 +28,7 @@ def some_pull_hoc_size(fact)
           )
           next
         end
-      hocs << (pull[:additions] + pull[:deletions])
+      hocs << ((pull[:additions] || 0) + (pull[:deletions] || 0))
       files << pull[:changed_files]
     end
   end
