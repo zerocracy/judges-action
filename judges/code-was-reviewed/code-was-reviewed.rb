@@ -71,7 +71,7 @@ Fbe.consider(
         end
       next if n.nil?
       n.when = review[:submitted_at]
-      n.hoc = pr[:additions] + pr[:deletions]
+      n.hoc = (pr[:additions] || 0) + (pr[:deletions] || 0)
       n.author = pr.dig(:user, :id)
       n.comments =
         begin

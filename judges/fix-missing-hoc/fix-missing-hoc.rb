@@ -36,7 +36,7 @@ Fbe.consider(
       )
       next
     end
-  f.hoc = json[:additions] + json[:deletions]
+  f.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
   $loog.info("Hoc found for #{Fbe.issue(f)}: #{f.hoc}")
 end
 
