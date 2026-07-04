@@ -64,9 +64,9 @@ end
 
 def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
-  @_reactions ||= {}
+  @reactions ||= {}
   issue_comments.sum do |comment|
-    @_reactions[comment[:id]] ||=
+    @reactions[comment[:id]] ||=
       Fbe.octo.issue_comment_reactions(repo, comment[:id])
         .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
   rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -79,7 +79,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
     )
     0
   end + code_comments.sum do |comment|
-    @_reactions[comment[:id]] ||=
+    @reactions[comment[:id]] ||=
       Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
         .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
   rescue Octokit::NotFound, Octokit::Deprecated => e
