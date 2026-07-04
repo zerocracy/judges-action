@@ -18,5 +18,5 @@ rescue Octokit::Forbidden => e
     "[Jp.nick_of] The user ##{who} is not accessible in GitHub " \
     "(transient, will retry next cycle): #{e.class}: #{e.message}"
   )
-  nil
+  raise
 end
