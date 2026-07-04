@@ -46,7 +46,7 @@ Fbe.consider(
     end
   reviews =
     begin
-      Fbe.octo.pull_request_reviews(repo, f.issue, per_page: 100)
+      Fbe.octo.pull_request_reviews(repo, f.issue)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)

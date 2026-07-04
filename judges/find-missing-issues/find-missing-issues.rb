@@ -19,16 +19,16 @@ ts = Fbe::Tombstone.new
 
 Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
   repo = Fbe.octo.repo_name_by_id(r.repository)
-  issue_numbers = Fbe.fb.query(
+  issues = Fbe.fb.query(
     "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
   ).each.map(&:issue)
-  issue_numbers.uniq!
-  issue_numbers.sort!
-  next if issue_numbers.empty?
-  existing = issue_numbers.to_set
+  issues.uniq!
+  issues.sort!
+  next if issues.empty?
+  existing = issues.to_set
   added = []
   checked = []
-  (issue_numbers.min..issue_numbers.max).each do |i|
+  (issues.min..issues.max).each do |i|
     next if existing.include?(i)
     next if ts.has?('github', r.repository, i)
     json =
@@ -91,13 +91,13 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
     added << i
     break if added.size > 16
   end
-  if (issue_numbers.max - issue_numbers.min + 1) == issue_numbers.size
+  if (issues.max - issues.min + 1) == issues.size
     $loog.info("No missing issues in #{repo}")
   else
-    missing_count = (issue_numbers.max - issue_numbers.min + 1) - issue_numbers.size
+    missed = (issues.max - issues.min + 1) - issues.size
     $loog.info(
       [
-        "Checked #{checked.size} out of #{missing_count} missing issues",
+        "Checked #{checked.size} out of #{missed} missing issues",
         "in #{repo}, #{added.count} facts added:",
         added.joined(max: 8)
       ].join(' ')
