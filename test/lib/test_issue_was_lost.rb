@@ -39,14 +39,12 @@ class TestIssueWasLost < Minitest::Test
     end
   end
 
-  def test_raises_on_second_call_for_same_issue
+  def test_graceful_on_second_call_for_same_issue
     fb = Factbase.new
     Fbe.stub(:fb, fb) do
       $loog = Loog::NULL
       Jp.issue_was_lost('github', 42, 123)
-      assert_raises(RuntimeError, 'second call for the same (where, repository, issue) must raise') do
-        Jp.issue_was_lost('github', 42, 123)
-      end
+      Jp.issue_was_lost('github', 42, 123)
     end
   end
 
