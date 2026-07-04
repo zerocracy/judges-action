@@ -44,8 +44,9 @@ def Jp.qosearch(query, method: :search_issues, **)
       json = JSON.parse(json, symbolize_names: true) if json.is_a?(String)
       left = json.dig(:resources, :search, :remaining)
     end
+  else
+    left = octo.rate_limit.remaining
   end
-  left ||= octo.rate_limit.remaining
   if left.nil?
     @offquota = true
     @offquotatime = Time.now
