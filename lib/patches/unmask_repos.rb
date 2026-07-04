@@ -54,11 +54,14 @@ module Fbe
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         false
-      rescue Octokit::Forbidden, Octokit::Unauthorized => e
+      rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        false
+      rescue Octokit::Unauthorized => e
+        $loog.warn("[#{$judge}] Access unauthorized to #{repo}: #{e.message}")
         false
       rescue Octokit::TooManyRequests, Octokit::ServerError,
         Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
@@ -72,7 +75,9 @@ module Fbe
         octo.repository(repo)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.debug("[#{$judge}] Repository #{repo} not found: #{e.message}")
-      rescue Octokit::Forbidden, Octokit::Unauthorized, Octokit::TooManyRequests => e
+      rescue Octokit::Forbidden => e
+        $loog.warn("[#{$judge}] Repository #{repo} temporarily unavailable: #{e.class}: #{e.message}")
+      rescue Octokit::Unauthorized, Octokit::TooManyRequests => e
         $loog.warn("[#{$judge}] Repository #{repo} temporarily unavailable: #{e.class}: #{e.message}")
       rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
         $loog.warn("[#{$judge}] Network error checking #{repo}: #{e.message}")
