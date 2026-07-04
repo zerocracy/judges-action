@@ -87,7 +87,13 @@ Fbe.iterate do
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Compare API failed for #{repo} between #{since} and #{tag}: #{e.message}")
     nil
-  rescue Octokit::Conflict, Octokit::Forbidden => e
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to compare #{repo} between #{since} and #{tag} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    nil
+  rescue Octokit::Conflict => e
     $loog.warn(
       "[#{$judge}] Compare API conflict for #{repo} between #{since} and #{tag} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
