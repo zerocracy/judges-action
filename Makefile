@@ -36,7 +36,7 @@ verify:
 	e2=$$(cat target/entry.exit)
 	test "$${e2}" = "0"
 
-target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock
+target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock $(wildcard lib/*.rb) $(wildcard judges/*/*.rb)
 	mkdir -p "$$(dirname $@)"
 	docker build -t judges-action "$$(pwd)"
 	docker build -t judges-action -q "$$(pwd)" > "$@"
