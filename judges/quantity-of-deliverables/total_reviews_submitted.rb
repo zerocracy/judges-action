@@ -29,7 +29,7 @@ def total_reviews_submitted(fact)
         queue.push([p['number'], p['reviews_next_cursor']])
       end
     end
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Can't count submitted reviews in #{repo}: #{e.message}")
     next
   rescue Octokit::Forbidden => e

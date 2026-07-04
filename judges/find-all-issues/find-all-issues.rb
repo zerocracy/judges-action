@@ -32,7 +32,7 @@ require_relative '../../lib/qos_search'
       after =
         begin
           Fbe.octo.issue(repo, issue)[:created_at]
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
           Jp.issue_was_lost('github', repository, issue)
           next 0
@@ -55,7 +55,7 @@ require_relative '../../lib/qos_search'
           begin
             json = Jp.qosearch("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")
             json ? json[:items] : []
-          rescue Octokit::NotFound, Octokit::Deprecated => e
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("No issues found for #{repo}: #{e.message}")
             []
           rescue Octokit::Forbidden => e
@@ -87,7 +87,7 @@ require_relative '../../lib/qos_search'
               ref =
                 begin
                   Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-                rescue Octokit::NotFound, Octokit::Deprecated => e
+                rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
                   $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
                   Jp.issue_was_lost(f.where, f.repository, f.issue)
                   next

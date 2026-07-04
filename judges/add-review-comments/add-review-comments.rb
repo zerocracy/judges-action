@@ -22,7 +22,7 @@ Fbe.consider(
   repo =
     begin
       Fbe.octo.repo_name_by_id(f.repository)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Failed to find repository #{f.repository}: #{e.message}")
       f.stale = 'repository'
       next
@@ -36,7 +36,7 @@ Fbe.consider(
   json =
     begin
       Fbe.octo.pull_request(repo, f.issue)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next

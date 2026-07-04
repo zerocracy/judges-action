@@ -13,7 +13,7 @@ def total_files(_fact)
     info =
       begin
         Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
       rescue Octokit::Forbidden => e
@@ -27,7 +27,7 @@ def total_files(_fact)
     tree =
       begin
         Fbe.octo.tree(repo, info[:default_branch], recursive: true)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Tree not found for #{repo}@#{info[:default_branch]}: #{e.message}")
         next
       rescue Octokit::Forbidden => e

@@ -13,7 +13,7 @@ def total_issues(_fact)
     json =
       begin
         Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
         next
       rescue Octokit::Forbidden => e

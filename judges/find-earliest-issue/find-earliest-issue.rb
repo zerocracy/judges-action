@@ -24,7 +24,7 @@ Fbe.iterate do
         Fbe.octo.with_disable_auto_paginate do |octo|
           octo.list_issues(repo, state: :all, sort: :created, direction: :asc, page: 1, per_page: 1).first
         end
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Issues list not available for #{repo}: #{e.message}")
         next latest
       rescue Octokit::Forbidden => e
@@ -52,7 +52,7 @@ Fbe.iterate do
         ref =
           begin
             Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-          rescue Octokit::NotFound, Octokit::Deprecated => e
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
             Jp.issue_was_lost(f.where, f.repository, f.issue)
             next i

@@ -21,7 +21,7 @@ def some_review_time(fact)
       all, csize =
         begin
           [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
           next
         rescue Octokit::Forbidden => e

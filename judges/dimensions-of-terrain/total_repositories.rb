@@ -11,7 +11,7 @@ def total_repositories(_fact)
   total = 0
   Fbe.unmask_repos do |repo|
     total += 1 unless Fbe.octo.repository(repo)[:archived]
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Repository #{repo} not found: #{e.message}")
     next
   rescue Octokit::Forbidden => e

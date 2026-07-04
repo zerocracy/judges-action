@@ -10,7 +10,7 @@ def Jp.nick_of(who, loog: $loog)
   n = Fbe.octo.user_name_by_id(who)
   loog.debug("User ##{who} is actually @#{n}")
   n
-rescue Octokit::NotFound, Octokit::Deprecated => e
+rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
   loog.info("The user ##{who} is absent in GitHub: #{e.message}")
   nil
 rescue Octokit::Forbidden => e

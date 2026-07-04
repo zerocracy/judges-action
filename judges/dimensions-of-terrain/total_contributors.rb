@@ -13,7 +13,7 @@ def total_contributors(_fact)
     json =
       begin
         Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
       rescue Octokit::Forbidden => e
@@ -27,7 +27,7 @@ def total_contributors(_fact)
     list =
       begin
         Fbe.octo.contributors(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Contributors not found for #{repo}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
@@ -41,7 +41,7 @@ def total_contributors(_fact)
     list.each do |contributor|
       contributors << contributor[:id]
     end
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Repository/contributors info not found for #{repo}: #{e.message}")
     next
   rescue Octokit::Forbidden => e

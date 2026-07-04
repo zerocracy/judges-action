@@ -13,7 +13,7 @@ def Jp.comments_info(pr, repo: nil)
   ccomments =
     begin
       Fbe.octo.pull_request_comments(repo, pr[:number])
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("PR comments not found for #{repo}##{pr[:number]}: #{e.message}")
       []
     rescue Octokit::Forbidden => e
@@ -26,7 +26,7 @@ def Jp.comments_info(pr, repo: nil)
   icomments =
     begin
       Fbe.octo.issue_comments(repo, pr[:number])
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Issue comments not found for #{repo}##{pr[:number]}: #{e.message}")
       []
     rescue Octokit::Forbidden => e
@@ -67,7 +67,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   issue_comments.sum do |comment|
     Fbe.octo.issue_comment_reactions(repo, comment[:id])
       .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Issue comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
   rescue Octokit::Forbidden => e
@@ -79,7 +79,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   end + code_comments.sum do |comment|
     Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
       .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Code comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
   rescue Octokit::Forbidden => e
@@ -98,7 +98,7 @@ def Jp.fetch_workflows(pr, repo: nil)
   return {} if repo.nil?
   begin
     entries = Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
     $loog.info("Check runs not found for #{repo}@#{pr.dig(:head, :sha)}: #{e.message}")
     return { succeeded_builds: 0, failed_builds: 0 }
   rescue Octokit::Forbidden => e
@@ -113,7 +113,7 @@ def Jp.fetch_workflows(pr, repo: nil)
     rid =
       begin
         Fbe.octo.workflow_run_job(repo, run[:id])[:run_id]
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Workflow run job not found for #{repo} job ##{run[:id]}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
@@ -126,7 +126,7 @@ def Jp.fetch_workflows(pr, repo: nil)
     workflow =
       begin
         Fbe.octo.workflow_run(repo, rid)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Workflow run not found for #{repo} run ##{rid}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
@@ -151,7 +151,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
   found =
     begin
       reviews || Fbe.octo.pull_request_reviews(repo, issue)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Pull request reviews not found for #{repo}##{issue}: #{e.message}")
       []
     rescue Octokit::Forbidden => e
@@ -166,7 +166,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
     comments =
       begin
         Fbe.octo.pull_request_review_comments(repo, issue, review[:id])
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Review comments not found for #{repo}##{issue} review ##{review[:id]}: #{e.message}")
         []
       rescue Octokit::Forbidden => e

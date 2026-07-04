@@ -35,7 +35,7 @@ Fbe.iterate do
     events =
       begin
         Fbe.octo.issue_timeline(repo, issue)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Can't find issue ##{issue} in repository ##{repository}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue

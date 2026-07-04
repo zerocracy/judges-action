@@ -20,7 +20,7 @@ def some_triage_time(fact)
       rid = # rubocop:disable Elegant/NoRedundantVariable
         begin
           Fbe.octo.repo_id_by_name(repo)
-        rescue Octokit::NotFound, Octokit::Deprecated => e
+        rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
           $loog.info("Repository #{repo} not found: #{e.message}")
           next
         rescue Octokit::Forbidden => e

@@ -34,7 +34,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
     json =
       begin
         Fbe.octo.issue(repo, i)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("The issue #{repo}##{i} doesn't exist: #{e.message}")
         Jp.issue_was_lost('github', r.repository, i)
         next
@@ -67,7 +67,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         ref =
           begin
             Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-          rescue Octokit::NotFound, Octokit::Deprecated => e
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
             $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
             Jp.issue_was_lost(f.where, f.repository, f.issue)
             next

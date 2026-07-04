@@ -12,7 +12,7 @@ def some_release_interval(fact)
     releases =
       begin
         Fbe.octo.releases(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Releases not found for #{repo}: #{e.message}")
         next
       rescue Octokit::Forbidden => e

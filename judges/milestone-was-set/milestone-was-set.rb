@@ -20,7 +20,7 @@ Fbe.consider(
   milestones =
     begin
       Fbe.octo.list_milestones(repo, state: 'all')
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
       $loog.info("Can't list milestones for #{repo}: #{e.message}")
       next
     rescue Octokit::Forbidden => e

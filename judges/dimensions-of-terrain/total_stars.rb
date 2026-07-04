@@ -14,7 +14,7 @@ def total_stars(_fact)
     json =
       begin
         Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::TooManyRequests => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
       rescue Octokit::Forbidden => e
