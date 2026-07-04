@@ -41,7 +41,7 @@ Fbe.consider(
   end
   elapsed($loog, level: Logger::INFO) do
     Fbe.fb.txn do |fbt|
-      fbt.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who})").delete!
+      fbt.query("(and (eq where 'github') (eq what 'who-has-name') (eq who #{f.who}))").delete!
       done =
         fbt.query("(and (eq where 'github') (eq who #{f.who}))").each do |n|
           n.stale = 'who'
