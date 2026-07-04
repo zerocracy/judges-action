@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
+require 'set'
 require_relative 'jp'
 
 Jp::SEARCH_WINDOW_SECONDS = 60
