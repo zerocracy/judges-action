@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
       - uses: zerocracy/judges-action@0.17.17
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
@@ -45,7 +45,7 @@ jobs:
         with:
           github-token: ${{ secrets.ZEROCRACY_PAT }}
           factbase: foo.fb
-      - uses: JamesIves/github-pages-deploy-action@v4.6.0
+      - uses: JamesIves/github-pages-deploy-action@ec9c88baef04b842ca6f0a132fd61c762aa6c1b0 # v4.6.0
         with:
           folder: pages
           clean: false
