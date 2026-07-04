@@ -19,7 +19,7 @@ jobs:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           days-to-scan: 30
           skip-label: 'good-title'
-          auto-update: true
+          auto-update: false
           max-issues: 10
           model: gpt-4
           verbose: true
