@@ -121,7 +121,7 @@ class TestQosSearch < Jp::Test
       refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
     end
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
-    Jp.instance_variable_set(:@swstart, Time.now - Jp::SEARCH_WINDOW_SECONDS - 1)
+    Jp.instance_variable_set(:@swstart, { $judge => Time.now - Jp::SEARCH_WINDOW_SECONDS - 1 })
     $global[:octo] = nil
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 2 }] })
@@ -132,8 +132,8 @@ class TestQosSearch < Jp::Test
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, status: 403)
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
-    assert_equal(1, Jp.instance_variable_get(:@scount))
-    assert(Jp.instance_variable_get(:@offquota))
+    assert_equal(1, Jp.instance_variable_get(:@scount)[$judge])
+    assert(Jp.instance_variable_get(:@offquota)[$judge])
     Jp.qoreset
     $global[:octo] = nil
     rate_limit_up
