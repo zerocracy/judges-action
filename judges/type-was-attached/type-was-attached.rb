@@ -83,7 +83,10 @@ Fbe.iterate do
             n.repository = repository
             n.where = 'github'
           end
-        raise(RuntimeError, "Type already attached to #{repo}##{issue}") if nn.nil?
+        if nn.nil?
+          $loog.warn("Type already attached to #{repo}##{issue}, skipping duplicate")
+          next
+        end
         who = tee.dig('actor', 'id')
         if who
           nn.who = who

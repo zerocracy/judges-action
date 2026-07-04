@@ -69,7 +69,10 @@ Fbe.iterate do
           n.issue = issue
           n.what = $judge
         end
-      raise(RuntimeError, "Issue #{repo}##{issue} already closed") if nn.nil?
+      if nn.nil?
+        $loog.warn("Issue #{repo}##{issue} already closed, skipping duplicate")
+        next issue
+      end
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       who = json.dig(:closed_by, :id)
       if who
