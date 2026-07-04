@@ -14,13 +14,13 @@ rubocop:
 	bundle exec rubocop
 
 test: target/docker-image.txt
-	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges'
-	echo "$$?" > target/test.exit
+	img=$$(cat target/docker-image.txt); \
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges' || rc=$$?; \
+	echo "$${rc:-0}" > target/test.exit
 
 entry: target/docker-image.txt
-	./test-action.sh "$$(cat $<)"
-	echo "$$?" > target/entry.exit
+	./test-action.sh "$$(cat $<)" || rc=$$?; \
+	echo "$${rc:-0}" > target/entry.exit
 
 rmi: target/docker-image.txt
 	img=$$(cat $<)
