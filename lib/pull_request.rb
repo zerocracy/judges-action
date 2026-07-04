@@ -108,12 +108,11 @@ def Jp.fetch_workflows(pr, repo: nil)
     )
     return { succeeded_builds: 0, failed_builds: 0 }
   end
-  @job_cache ||= {}
-  @wf_cache ||= {}
+  @wcache ||= {}
   (entries[:check_runs] || []).each do |run|
     next unless run.dig(:app, :slug) == 'github-actions'
     rid =
-      @job_cache[run[:id]] ||=
+      @wcache[run[:id]] ||=
         begin
           Fbe.octo.workflow_run_job(repo, run[:id])[:run_id]
         rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -128,7 +127,7 @@ def Jp.fetch_workflows(pr, repo: nil)
         end
     next unless rid
     workflow =
-      @wf_cache[rid] ||=
+      @wcache[rid] ||=
         begin
           Fbe.octo.workflow_run(repo, rid)
         rescue Octokit::NotFound, Octokit::Deprecated => e
