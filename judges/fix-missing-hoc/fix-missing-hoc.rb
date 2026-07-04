@@ -35,6 +35,12 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError => e
+      $loog.warn(
+        "[#{$judge}] Transient error fetching #{Fbe.issue(f)} in #{repo} " \
+        "(will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
     end
   f.hoc = json[:additions] + json[:deletions]
   $loog.info("Hoc found for #{Fbe.issue(f)}: #{f.hoc}")
