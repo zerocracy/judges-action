@@ -5,8 +5,8 @@
 
 if Object.const_defined?('Fbe::FakeOctokit')
   Fbe::FakeOctokit.class_eval do
-    def list_milestones(repo, state: 'open')
-      $loog.info("FakeOctokit#list_milestones(#{repo}, state: #{state}) called — returning []")
+    def list_milestones(repo, _options = {})
+      $loog.info("FakeOctokit#list_milestones(#{repo}) called — returning []")
       []
     end
   end
