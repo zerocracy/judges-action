@@ -27,6 +27,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').eac
       "[#{$judge}] Access forbidden to GitHub repository ##{r} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
+    good[r] = true
   end
 end
 
