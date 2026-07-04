@@ -11,12 +11,18 @@ Jp::SEARCH_WINDOW_BUDGET = 25
 
 def Jp.qoreset
   @offquota = false
+  @offquota_at = nil
   @scount = 0
   @swstart = nil
 end
 
 def Jp.qosearch(query, method: :search_issues, **)
-  return if @offquota || Fbe.octo.off_quota?
+  if @offquota
+    return if @offquota_at && (Time.now - @offquota_at) < Jp::SEARCH_WINDOW_SECONDS
+    @offquota = false
+    @offquota_at = nil
+  end
+  return if Fbe.octo.off_quota?
   now = Time.now
   if @swstart.nil? || (now - @swstart) >= Jp::SEARCH_WINDOW_SECONDS
     @swstart = now
@@ -38,11 +44,13 @@ def Jp.qosearch(query, method: :search_issues, **)
   end
   if left.nil?
     @offquota = true
+    @offquota_at = Time.now
     $loog.warn("[#{$judge}] GitHub Search API quota info unavailable, stopping search calls")
     return
   end
   if left.zero?
     @offquota = true
+    @offquota_at = Time.now
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
     return
   end
@@ -50,6 +58,7 @@ def Jp.qosearch(query, method: :search_issues, **)
   Fbe.octo.__send__(method, query, **)
 rescue Octokit::TooManyRequests => e
   @offquota = true
+  @offquota_at = Time.now
   $loog.warn("[#{$judge}] GitHub Search API quota exhausted, stopping search calls: #{e.message}")
   nil
 end
