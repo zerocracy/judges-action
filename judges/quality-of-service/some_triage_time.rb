@@ -45,6 +45,7 @@ def some_triage_time(fact)
         "
       ).each.min_by(&:when)
       next unless ff
+      next unless issue[:created_at]
       delta = ff.when - issue[:created_at]
       next if delta < threshold
       times << delta
