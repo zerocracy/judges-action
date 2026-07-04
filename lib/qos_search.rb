@@ -47,6 +47,7 @@ def Jp.qosearch(query, method: :search_issues, **)
     return
   end
   @scount += 1
+  raise("Unsafe search method: #{method}") unless %i[search_issues search_code].include?(method)
   Fbe.octo.__send__(method, query, **)
 rescue Octokit::TooManyRequests => e
   @offquota = true
