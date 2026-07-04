@@ -7,6 +7,7 @@ require 'fbe/consider'
 require 'fbe/if_absent'
 require 'fbe/octo'
 require 'octokit'
+require_relative '../../lib/patches/fake_octokit'
 
 Fbe.consider(
   '(and
