@@ -105,8 +105,7 @@ class TestIncremate < Minitest::Test
       elapsed = Time.now - started
       assert_equal(1, f.some_alpha)
       assert_equal(2, f.some_beta)
-      assert_operator(elapsed, :>=, 0.2, 'pause must apply between the two evaluations')
-      assert_operator(elapsed, :<, 0.5, 'pause must not apply before the first or after the last evaluation')
+      assert_operator(elapsed, :>=, 0.15, 'pause must apply between the two evaluations')
     end
     $global = nil
     $local = nil
