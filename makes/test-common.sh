@@ -67,7 +67,7 @@ file_exists() {
 # Outputs all messages to stderr with "ERROR:" prefix and exits with code 1
 die() {
     for msg in "$@"; do
-        echo "ERROR: $msg" >&2
+        echo "ERROR: $msg" >&2 || true
     done
     exit 1
 }
