@@ -129,7 +129,10 @@ Fbe.iterate do
           n.repository = repository
           n.where = 'github'
         end
-      raise(RuntimeError, "Pull already merged in #{repo}##{issue}") if nn.nil?
+      if nn.nil?
+        $loog.warn("Pull already merged in #{repo}##{issue}, skipping duplicate")
+        next issue
+      end
       nn.hoc = json[:additions] + json[:deletions]
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
