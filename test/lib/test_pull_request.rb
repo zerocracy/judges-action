@@ -450,7 +450,7 @@ class TestPullRequest < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/4/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/4/comments?per_page=100', body: [])
     graph = Object.new
-    graph.define_singleton_method(:query) { |_q| raise(GraphQL::Client::Error, 'test') }
+    graph.define_singleton_method(:resolved_conversations) { |_o, _r, _p| raise(GraphQL::Client::Error, 'test') }
     Fbe.stub(:github_graph, graph) do
       pr = { number: 4, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
       info = Jp.comments_info(pr)
@@ -467,7 +467,7 @@ class TestPullRequest < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/5/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/5/comments?per_page=100', body: [])
     graph = Object.new
-    graph.define_singleton_method(:query) do |_q|
+    graph.define_singleton_method(:resolved_conversations) do |_o, _r, _p|
       raise(Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden'))
     end
     Fbe.stub(:github_graph, graph) do

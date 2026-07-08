@@ -1324,7 +1324,7 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, f.comments_by_author)
     assert_equal(2, f.comments_by_reviewers)
     assert_equal(4, f.comments_appreciated)
-    assert_equal(0, f.comments_resolved)
+    assert_equal(1, f.comments_resolved)
   end
 
   def test_count_numbers_of_workflow_builds

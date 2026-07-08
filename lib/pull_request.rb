@@ -48,34 +48,7 @@ def Jp.comments_info(pr, repo: nil)
     comments_appreciated: Jp.count_appreciated_comments(pr, icomments, ccomments, repo:),
     comments_resolved:
       begin
-        total = 0
-        cursor = nil
-        loop do
-          data = Fbe.github_graph.query(
-            <<~GRAPHQL
-              {
-                repository(owner: "#{org}", name: "#{rname}") {
-                  pullRequest(number: #{pr[:number]}) {
-                    reviewThreads(first: 100#{%(, after: "#{cursor}") if cursor}) {
-                      pageInfo {
-                        hasNextPage
-                        endCursor
-                      }
-                      nodes {
-                        isResolved
-                      }
-                    }
-                  }
-                }
-              }
-            GRAPHQL
-          )&.to_h&.dig('repository', 'pullRequest', 'reviewThreads')
-          break if data.nil? || data['nodes'].nil?
-          total += data['nodes'].count { |n| n['isResolved'] }
-          break unless data.dig('pageInfo', 'hasNextPage')
-          cursor = data.dig('pageInfo', 'endCursor')
-        end
-        total
+        Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
       rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
         0
