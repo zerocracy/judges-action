@@ -29,8 +29,8 @@ def total_commits_pushed(fact)
     owner, name = repo.split('/')
     begin
       Fbe.github_graph.total_commits_pushed(owner, name, fact.since).then do |json|
-        commits += json['commits'] || 0
-        hoc += json['hoc'] || 0
+        commits += json['commits']
+        hoc += json['hoc']
       end
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Can't count pushed commits in #{repo}: #{e.message}")
