@@ -19,4 +19,10 @@ rescue Octokit::Forbidden => e
     "(transient, will retry next cycle): #{e.class}: #{e.message}"
   )
   raise
+rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+  Octokit::Conflict, Octokit::UnprocessableEntity,
+  Net::OpenTimeout, Net::ReadTimeout, SocketError,
+  Errno::ECONNRESET, Errno::ETIMEDOUT => e
+  loog.warn("[Jp.nick_of] Transient error fetching user ##{who} in GitHub (fail fast): #{e.class}: #{e.message}")
+  raise
 end
