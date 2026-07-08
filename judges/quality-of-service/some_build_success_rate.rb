@@ -26,6 +26,9 @@ def some_build_success_rate(fact)
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError,
+        Errno::ECONNRESET, Errno::ETIMEDOUT
+        raise
       end
     wfs = workflows.select { |json| json[:status] == 'completed' && !json[:conclusion].nil? }.first(60)
     runs =
@@ -42,6 +45,9 @@ def some_build_success_rate(fact)
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
             0
+          rescue Net::OpenTimeout, Net::ReadTimeout, SocketError,
+            Errno::ECONNRESET, Errno::ETIMEDOUT
+            raise
           end
         { json: json, secs: secs, completed: json[:run_started_at] + secs }
       end
