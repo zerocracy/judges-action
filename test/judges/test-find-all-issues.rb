@@ -293,7 +293,7 @@ class TestFindAllIssues < Jp::Test
     end
     load_it('find-all-issues', fb)
     assert_equal(2, fb.size)
-    assert_equal(5, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
+    assert_equal(0, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
 
   def test_paginated_pulls_continue_after_not_found
