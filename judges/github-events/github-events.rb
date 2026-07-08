@@ -276,7 +276,7 @@ Fbe.iterate do
             )
             skip(json)
           end
-        skip(json) if Integer(pull.dig(:user, :id)) == fact.who
+        skip(json) if pull.dig(:user, :id)&.then { |id| Integer(id) } == fact.who
         if Fbe.fb.query(
           "(and (eq repository #{fact.repository}) " \
           '(eq what "pull-was-reviewed") ' \
