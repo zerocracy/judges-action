@@ -20,6 +20,12 @@ def total_builds_ran(fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Workflow runs not found for #{repo}: #{e.message}")
         0
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
       end
   }
 end
