@@ -49,7 +49,34 @@ def Jp.comments_info(pr, repo: nil)
     comments_resolved:
       begin
         if Fbe.github_graph
-          Fbe.github_graph.resolved_conversations(org, rname, pr[:number]).count
+          total = 0
+          cursor = nil
+          loop do
+            data = Fbe.github_graph.query(
+              <<~GRAPHQL
+                {
+                  repository(owner: "#{org}", name: "#{rname}") {
+                    pullRequest(number: #{pr[:number]}) {
+                      reviewThreads(first: 100#{%(, after: "#{cursor}") if cursor}) {
+                        pageInfo {
+                          hasNextPage
+                          endCursor
+                        }
+                        nodes {
+                          isResolved
+                        }
+                      }
+                    }
+                  }
+                }
+              GRAPHQL
+            )&.to_h&.dig('repository', 'pullRequest', 'reviewThreads')
+            break if data.nil? || data['nodes'].nil?
+            total += data['nodes'].count { |n| n['isResolved'] }
+            break unless data.dig('pageInfo', 'hasNextPage')
+            cursor = data.dig('pageInfo', 'endCursor')
+          end
+          total
         else
           0
         end
