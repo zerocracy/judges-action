@@ -7,7 +7,16 @@ require 'fbe/fb'
 require 'fbe/if_absent'
 require_relative 'jp'
 
-def Jp.cover_qo(days, judge: $judge, loog: $loog, today: Time.parse(ENV['TODAY'] || Time.now.utc.iso8601))
+def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
+  today ||=
+    begin
+      v = ENV.fetch('TODAY', nil)
+      if v.nil? || v.empty?
+        Time.now.utc
+      else
+        Time.parse(v)
+      end
+    end
   slice = days * 24 * 60 * 60
   facts = Fbe.fb.query("(and (eq what '#{judge}') (exists since) (exists when))").each.to_a.sort_by(&:since)
   last = facts.map(&:when).max
