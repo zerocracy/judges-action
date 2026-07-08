@@ -99,7 +99,7 @@ Fbe.consider(
           )
           0
         end
-      n.seconds = Integer(review[:submitted_at] - pr[:created_at]) if pr[:created_at] && review[:submitted_at]
+      n.seconds = Integer(review[:submitted_at] - pr[:created_at])
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
         "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
