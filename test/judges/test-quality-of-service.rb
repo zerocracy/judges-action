@@ -2442,6 +2442,40 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_pull_hoc_size_handles_nil_additions_or_deletions
+    load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:search_issues) do |*|
+      {
+        total_count: 2, incomplete_results: false,
+        items: [
+          { id: 42, number: 10, title: 'PR 10', pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') } },
+          { id: 43, number: 11, title: 'PR 11', pull_request: { merged_at: Time.parse('2024-08-23 18:30:00 UTC') } }
+        ]
+      }
+    end
+    octo.define_singleton_method(:pull_request) do |_repo, number|
+      case number
+      when 10 then { id: 42, number: 10, additions: nil, deletions: 5, changed_files: 1 }
+      when 11 then { id: 43, number: 11, additions: 10, deletions: nil, changed_files: 2 }
+      end
+    end
+    octo.define_singleton_method(:pull_request_reviews) { |*| [] }
+    octo.define_singleton_method(:pull_request_review_comments) { |*| [] }
+    octo.define_singleton_method(:off_quota?) { false }
+    rl = Object.new
+    rl.define_singleton_method(:remaining) { 30 }
+    octo.define_singleton_method(:rate_limit) { rl }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_pull_hoc_size(fact)
+        assert_equal([5, 10], metrics[:some_pull_hoc_size])
+        assert_equal([1, 2], metrics[:some_pull_files_size])
+      end
+    end
+  end
+
   private
 
   def stub_workflow_runs(workflow_runs)
