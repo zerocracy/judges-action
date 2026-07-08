@@ -7,7 +7,7 @@ require_relative '../../lib/nick_of'
 require_relative '../test__helper'
 
 class TestNickOf < Jp::Test
-  def test_raises_on_forbidden_user_lookup
+  def test_propagates_error_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -18,16 +18,16 @@ class TestNickOf < Jp::Test
     $options = Judges::Options.new({})
     $global = {}
     $loog = Loog::NULL
-    assert_raises(Octokit::Forbidden) { Jp.nick_of(29_139_614, loog: Loog::NULL) }
+    assert_raises(Fbe::Error) { Jp.nick_of(29_139_614, loog: Loog::NULL) }
   end
 
-  def test_returns_nil_on_not_found_user_lookup
+  def test_propagates_error_on_not_found_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/user/29139614', status: 404, body: { message: 'Not Found' })
     $options = Judges::Options.new({})
     $global = {}
     $loog = Loog::NULL
-    assert_nil(Jp.nick_of(29_139_614, loog: Loog::NULL))
+    assert_raises(Fbe::Error) { Jp.nick_of(29_139_614, loog: Loog::NULL) }
   end
 end

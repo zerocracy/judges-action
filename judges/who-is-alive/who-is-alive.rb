@@ -28,12 +28,19 @@ Fbe.consider(
   nick =
     begin
       Jp.nick_of(f.who)
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to user ##{f.who} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
-      next
+    rescue Fbe::Error => e
+      case e.cause
+      when Octokit::Forbidden
+        $loog.warn(
+          "[#{$judge}] Access forbidden to user ##{f.who} " \
+          "(transient, will retry next cycle): #{e.cause.class}: #{e.cause.message}"
+        )
+        next
+      when Octokit::NotFound
+        nil
+      else
+        raise
+      end
     end
   unless nick.nil?
     $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
