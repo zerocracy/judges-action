@@ -9,7 +9,7 @@ It's impossible to set `run-name` to a value that depends on job results, becaus
 
 **Example desired output:**
 
-```
+```text
 judges-action 0.17.17 did 8i/18d/42a to 3839 facts
 ```
 
@@ -59,5 +59,5 @@ update the variable and immediately reflect the change in `run-name`.
 
 ## Related
 
-- GitHub Community Discussion: https://github.com/orgs/community/discussions/11396
-- Feature request: https://github.com/actions/starter-workflows/issues/2289
+- GitHub Community Discussion: <https://github.com/orgs/community/discussions/11396>
+- Feature request: <https://github.com/actions/starter-workflows/issues/2289>
