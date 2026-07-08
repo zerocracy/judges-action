@@ -21,7 +21,7 @@ class TestIssueWasAssigned < Jp::Test
     octo.define_singleton_method(:issue_events) { |_repo, _issue| [] }
     octo.define_singleton_method(:repository) { |_repo| { id: 42, full_name: 'foo/foo', archived: false } }
     octo.define_singleton_method(:off_quota?) { |*| false }
-    octo.define_singleton_method(:print_trace!) { nil }
+    octo.define_singleton_method(:print_trace!) { '' }
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
