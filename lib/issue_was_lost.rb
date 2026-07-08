@@ -25,7 +25,10 @@ def Jp.issue_was_lost(where, repository, issue)
       n.repository = repository
       n.where = where
     end
-  raise(RuntimeError, "The issue ##{issue} was already lost") unless f
+  unless f
+    $loog.warn("The issue ##{issue} was already lost")
+    return
+  end
   f.stale = 'issue'
   f.when = Time.now
   Fbe::Tombstone.new.bury!(where, repository, issue)
