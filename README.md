@@ -11,7 +11,7 @@ First, get a free authentication token from [Zerocracy.com] and add it as
   `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
 
 Then, create a new [personal access token][PAT]
-  and add it as a `ZEROCRACY_PAT` secret to your repository.
+  and add it as a `PAT` secret to your repository.
 Don't forget to give it full "repository access".
 You may ignore this, if all your repositories are public.
 
@@ -38,12 +38,12 @@ jobs:
       - uses: zerocracy/judges-action@0.17.17
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
-          github-token: ${{ secrets.ZEROCRACY_PAT }}
+          github-token: ${{ secrets.PAT }}
           repositories: yegor256/foo
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.7.0
         with:
-          github-token: ${{ secrets.ZEROCRACY_PAT }}
+          github-token: ${{ secrets.PAT }}
           factbase: foo.fb
       - uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
