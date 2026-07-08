@@ -64,6 +64,14 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
+      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError,
+        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching pull ##{issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
       end
     unless json[:state] == 'closed'
       $loog.debug("Pull #{repo}##{issue} is not closed: #{json[:state].inspect}")
@@ -82,6 +90,14 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
+      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError,
+        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching issue ##{issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
       end
     reviews =
       begin
@@ -94,6 +110,14 @@ Fbe.iterate do
         $loog.warn(
           "[#{$judge}] Access forbidden to reviews of pull ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError,
+        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching reviews of pull ##{issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
       end

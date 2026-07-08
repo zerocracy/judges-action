@@ -43,6 +43,14 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      Net::OpenTimeout, Net::ReadTimeout, SocketError,
+      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      $loog.warn(
+        "[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} " \
+        "(will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
     end
   reviews =
     begin
@@ -55,6 +63,14 @@ Fbe.consider(
       $loog.warn(
         "[#{$judge}] Access forbidden to reviews for pull ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      Net::OpenTimeout, Net::ReadTimeout, SocketError,
+      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      $loog.warn(
+        "[#{$judge}] Transient error fetching reviews for pull ##{f.issue} in #{repo} " \
+        "(will retry next cycle): #{e.class}: #{e.message}"
       )
       next
     end
@@ -85,6 +101,14 @@ Fbe.consider(
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           0
+        rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+          Net::OpenTimeout, Net::ReadTimeout, SocketError,
+          Errno::ECONNRESET, Errno::ETIMEDOUT => e
+          $loog.warn(
+            "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
+            "(will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
         end
       n.review_comments =
         begin
@@ -96,6 +120,14 @@ Fbe.consider(
           $loog.warn(
             "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
+        rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+          Net::OpenTimeout, Net::ReadTimeout, SocketError,
+          Errno::ECONNRESET, Errno::ETIMEDOUT => e
+          $loog.warn(
+            "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
+            "(will retry next cycle): #{e.class}: #{e.message}"
           )
           0
         end
