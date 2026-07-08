@@ -1432,6 +1432,53 @@ class TestGithubEvents < Jp::Test
     assert_equal(1, fb.size)
   end
 
+  def test_logs_forbidden_repo_access_error_only_once
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '22222',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2413, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-05-05 19:04:16 UTC'
+        },
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-05-05 19:03:16 UTC'
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration', status: '403' }
+    )
+    stub_github('https://api.github.com/user', body: { id: 123, login: 'GithubUser' })
+    fb = Factbase.new
+    buf = Loog::Buffer.new
+    load_it('github-events', fb, loog: buf)
+    assert_equal(
+      1, buf.to_s.scan("doesn't have access").size,
+      'a forbidden repository cannot log its access error more than once per run'
+    )
+  end
+
   def test_skip_push_event_to_non_default_branch
     WebMock.disable_net_connect!
     rate_limit_up
