@@ -11,7 +11,7 @@ First, get a free authentication token from [Zerocracy.com] and add it as
   `ZEROCRACY_TOKEN` [secret][secrets] to your repository.
 
 Then, create a new [personal access token][PAT]
-  and add it as a `PAT` secret to your repository.
+  and add it as a `ZEROCRACY_PAT` secret to your repository.
 Don't forget to give it full "repository access".
 You may ignore this, if all your repositories are public.
 
@@ -38,12 +38,12 @@ jobs:
       - uses: zerocracy/judges-action@0.17.17
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
-          github-token: ${{ secrets.PAT }}
+          github-token: ${{ secrets.ZEROCRACY_PAT }}
           repositories: yegor256/foo
           factbase: foo.fb
       - uses: zerocracy/pages-action@0.7.0
         with:
-          github-token: ${{ secrets.PAT }}
+          github-token: ${{ secrets.ZEROCRACY_PAT }}
           factbase: foo.fb
       - uses: JamesIves/github-pages-deploy-action@ec9c88baef04b842ca6f0a132fd61c762aa6c1b0 # v4.6.0
         with:
@@ -119,15 +119,6 @@ The following environment variables are recognized by the Docker entry point:
 
 Note: `action_version` and `vitals_url` are automatically populated
   by the entry point and should not be set manually.
-
-### Environment Variables
-
-The following environment variables are recognized by the Docker entry point:
-
-* `SKIP_VERSION_CHECKING` (optional, default is unset) if set to `true`,
-  skips the version compatibility check against GitHub releases. Useful for
-  development, testing with a non-release build, air-gapped environments,
-  or faster CI when version checking is not critical.
 
 The `zerocracy/pages-action` plugin is responsible for rendering
   the summary HTML page: its configuration is not explained here,
