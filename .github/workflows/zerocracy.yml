@@ -10,7 +10,7 @@ run-name: zerocracy run #${{ github.run_id }}
   workflow_dispatch:
 concurrency:
   group: zerocracy
-  cancel-in-progress: false
+  cancel-in-progress: true
 permissions:
   contents: write
   actions: write
