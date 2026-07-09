@@ -2444,6 +2444,7 @@ class TestQualityOfService < Jp::Test
 
   def test_some_pull_hoc_size_handles_nil_additions_or_deletions
     load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
+    Jp.qoreset
     octo = Object.new
     octo.define_singleton_method(:search_issues) do |*|
       {
