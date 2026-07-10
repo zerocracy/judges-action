@@ -5,7 +5,7 @@ FROM ruby:4.0@sha256:d07ce5b3f4dc2246980d6d5bcd1e9e54ea62445b2b531ea1819112c69bf
 
 LABEL "repository"="https://github.com/zerocracy/judges-action"
 LABEL "maintainer"="Yegor Bugayenko"
-LABEL "version"="0.0.0"
+LABEL "version"="0.17.19"
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y curl=* jq=* \
