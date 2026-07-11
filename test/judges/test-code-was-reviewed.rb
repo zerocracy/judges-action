@@ -87,8 +87,7 @@ class TestCodeWasReviewed < Jp::Test
         { id: 61_002, user: { id: 423, login: 'user3' }, submitted_at: Time.parse('2025-09-02 11:00:00 UTC') }
       ]
     )
-    comments_stub =
-      stub_github('https://api.github.com/repos/foo/foo/issues/60/comments?per_page=100', body: [])
+    stub = stub_github('https://api.github.com/repos/foo/foo/issues/60/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/60/reviews/61001/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/60/reviews/61002/comments?per_page=100', body: [])
     stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
@@ -97,9 +96,7 @@ class TestCodeWasReviewed < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 60, where: 'github')
     load_it('code-was-reviewed', fb)
-    assert_requested(
-      comments_stub, times: 1
-    )
+    assert_requested(stub, times: 1)
   end
 
   def test_rescues_not_found_on_pull_request_lookup
