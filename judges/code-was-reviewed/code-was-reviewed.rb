@@ -74,6 +74,7 @@ Fbe.consider(
       )
       next
     end
+  count = nil
   reviews.each do |review|
     next if review.dig(:user, :id) == pr.dig(:user, :id)
     Fbe.fb.txn do |fbt|
@@ -89,7 +90,7 @@ Fbe.consider(
       n.when = review[:submitted_at]
       n.hoc = pr[:additions] + pr[:deletions]
       n.author = pr.dig(:user, :id)
-      n.comments =
+      count ||=
         begin
           Fbe.octo.issue_comments(repo, f.issue).count
         rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -110,6 +111,7 @@ Fbe.consider(
           )
           0
         end
+      n.comments = count
       n.review_comments =
         begin
           Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
