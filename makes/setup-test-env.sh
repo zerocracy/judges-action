@@ -29,7 +29,7 @@ setup_test_env() {
     return 1
   fi
 
-  declare -g "${name}=${generated}"
+  printf -v "${name}" '%s' "${generated}"
 
   BUNDLE_GEMFILE="${SELF}/Gemfile"
   export BUNDLE_GEMFILE
