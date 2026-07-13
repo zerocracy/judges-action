@@ -33,7 +33,22 @@ Fbe.iterate do
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo =
+      begin
+        Fbe.octo.repo_name_by_id(repository)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository ##{repository} not found: #{e.message}")
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to repository ##{repository} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error resolving repo ##{repository} (transient): #{e.class}: #{e.message}")
+        next issue
+      end
     timeline =
       begin
         Fbe.octo.issue_timeline(repo, issue)
@@ -46,6 +61,9 @@ Fbe.iterate do
           "[#{$judge}] Access forbidden to issue ##{issue} in repository ##{repository} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next issue
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error fetching timeline for ##{issue} (transient): #{e.class}: #{e.message}")
         next issue
       end
     next issue unless timeline.is_a?(Array)
@@ -68,6 +86,9 @@ Fbe.iterate do
           next
         rescue GraphQL::Client::Error => e
           $loog.warn("[#{$judge}] GraphQL error fetching event type by node ID #{te[:node_id]}: #{e.message}")
+          next
+        rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+          $loog.warn("[#{$judge}] Network error fetching event type (transient): #{e.class}: #{e.message}")
           next
         end
       if tee.nil?
