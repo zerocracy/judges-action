@@ -32,6 +32,12 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::AbuseDetected => e
+      $loog.warn(
+        "[#{$judge}] Repository access abuse detected for #{f.repository} " \
+        "(will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
     end
   json =
     begin
@@ -44,6 +50,12 @@ Fbe.consider(
       $loog.warn(
         "[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    rescue Octokit::AbuseDetected => e
+      $loog.warn(
+        "[#{$judge}] Issue access abuse detected for #{repo}##{f.issue} " \
+        "(will retry next cycle): #{e.class}: #{e.message}"
       )
       next
     end
