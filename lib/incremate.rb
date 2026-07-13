@@ -36,19 +36,14 @@ def Jp.incremate(
         '...'
       ].compact.join
     )
-    begin
-      require(rb)
-      elapsed($loog, level: Logger::INFO) do
-        h = __send__(n, fact)
-        h.each do |k, v|
-          next if avoid_duplicate && fact.all_properties.include?(k.to_s)
-          Array(v).each { fact.__send__("#{k}=", _1) }
-        end
-        throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
+    require(rb)
+    elapsed($loog, level: Logger::INFO) do
+      h = __send__(n, fact)
+      h.each do |k, v|
+        next if avoid_duplicate && fact.all_properties.include?(k.to_s)
+        Array(v).each { fact.__send__("#{k}=", _1) }
       end
-    rescue StandardError => e
-      $loog.warn("[#{$judge}] Failed to evaluate #{n} in #{dir}: #{e.class}: #{e.message}")
-      next
+      throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
     evaluated += 1
     break if max_per_fact && evaluated >= max_per_fact
