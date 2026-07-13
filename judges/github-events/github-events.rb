@@ -93,6 +93,12 @@ Fbe.iterate do
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
     nil
+  rescue Octokit::Conflict => e
+    $loog.warn(
+      "[#{$judge}] Compare API conflict for #{repo} between #{since} and #{tag} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    nil
   end
 
   def self.allcontributors(repo)
