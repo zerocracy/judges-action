@@ -40,8 +40,6 @@ def Jp.qosearch(query, method: :search_issues, **)
   rescue NoMethodError => e
     raise unless e.name == :get
     left = octo.rate_limit.remaining
-  rescue StandardError => e
-    $loog.info("Can't fetch /rate_limit: #{e.message}")
   end
   if json
     json = JSON.parse(json, symbolize_names: true) if json.is_a?(String)
