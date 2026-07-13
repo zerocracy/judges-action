@@ -422,6 +422,7 @@ Fbe.iterate do
       'pull-was-opened' => %w[where repository issue],
       'pull-was-closed' => %w[where repository issue who],
       'pull-was-merged' => %w[where repository issue who],
+      'pull-was-reviewed' => %w[where repository issue who],
       'label-was-attached' => %w[where repository issue label],
       'type-was-attached' => %w[where repository issue type]
     }
