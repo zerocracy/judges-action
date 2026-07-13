@@ -7,7 +7,7 @@ set -e -o pipefail
 start=$(date +%s)
 
 # This value is modified by the .rultor.yml script:
-VERSION=0.0.0
+VERSION=0.17.20
 
 echo "The 'judges-action' ${VERSION} is running"
 
