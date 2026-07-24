@@ -25,11 +25,11 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
   issues.uniq!
   issues.sort!
   next if issues.empty?
-  must = (issues.min..issues.max).to_a
-  missing = must - issues
+  existing = issues.to_set
   added = []
   checked = []
-  missing.each do |i|
+  (issues.min..issues.max).each do |i|
+    next if existing.include?(i)
     next if ts.has?('github', r.repository, i)
     json =
       begin
@@ -91,12 +91,13 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
     added << i
     break if added.size > 16
   end
-  if missing.empty?
+  if (issues.max - issues.min + 1) == issues.size
     $loog.info("No missing issues in #{repo}")
   else
+    missed = (issues.max - issues.min + 1) - issues.size
     $loog.info(
       [
-        "Checked #{checked.size} out of #{missing.count} missing issues",
+        "Checked #{checked.size} out of #{missed} missing issues",
         "in #{repo}, #{added.count} facts added:",
         added.joined(max: 8)
       ].join(' ')
