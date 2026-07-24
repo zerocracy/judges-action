@@ -75,12 +75,13 @@ Thus, the summary page is updated hourly and you see
 
 ## Configuration
 
-The following options are expected by the plugin
+The following action inputs are set via `with:` in your workflow YAML
   (see how we [configure][ours] it):
 
 * `token` (mandatory) is an authentication token from
   [Zerocracy.com](https://www.zerocracy.com)
-* `options` (optional) is a list of `k=v` pairs, which are explained below
+* `options` (optional) is a list of `k=v` pairs for advanced tuning,
+  explained below
 * `factbase` (optional, default is `default.fb`) is the path of the
   [Factbase][factbase] file (where everything is kept)
 * `repositories` (optional) is a comma-separated list of masks that
@@ -99,12 +100,13 @@ The following options are expected by the plugin
 * `sqlite-cache` (optional) is a path of SQLite database file with HTTP cache
 * `bots` (optional) is a comma-separated list of GitHub user logins to mark as bots
 
-The following `k=v` pairs inside the `options` may be important:
+The dedicated action inputs above take precedence when a parameter
+  is also configurable via `options` (the k=v pairs below exist for
+  backward compatibility and advanced tuning):
 
-* `github_token=...` is a default GitHub token, usually to be set to
-  `${{ secrets.GITHUB_TOKEN }}`
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
+  (these two are only available as k=v pairs)
 * `sqlite_cache_min_age=3600` is the minimum age in seconds before a
   cached HTTP response is considered stale (default is 3600, i.e. 1 hour)
 
