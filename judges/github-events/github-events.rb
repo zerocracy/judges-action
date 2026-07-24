@@ -395,7 +395,7 @@ Fbe.iterate do
       pairs.map do |prop, value|
         val =
           case value
-          when String then "'#{value}'"
+          when String then "'#{value.gsub("'", "\\\\'")}'"
           when Time then value.utc.iso8601
           else value
           end
