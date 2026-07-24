@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'octokit'
 
 def some_build_success_rate(fact)
   success = []
