@@ -116,11 +116,14 @@ Fbe.iterate do
   end
 
   def self.earliest(repo)
-    commits = Fbe.octo.commits(repo)
-    last = commits.last
-    while commits.size != 1
-      commits = Fbe.octo.commits(repo, sha: last[:sha])
+    page = 1
+    last = nil
+    loop do
+      raise(Fbe::Error, "Too many pages for commits of ##{repo}") if page > 100
+      commits = Fbe.octo.commits(repo, per_page: 100, page: page)
+      break if commits.empty?
       last = commits.last
+      page += 1
     end
     $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last

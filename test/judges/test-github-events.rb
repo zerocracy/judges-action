@@ -940,7 +940,7 @@ class TestGithubEvents < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?per_page=100').to_return(
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?page=1&per_page=100').to_return(
       body: [
         { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
         { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
@@ -950,12 +950,8 @@ class TestGithubEvents < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(
-      :get,
-      'https://api.github.com/repos/zerocracy/fbe/commits?' \
-      'per_page=100&sha=69a28ba1122af281936371bbb36f67e5b97246b1'
-    ).to_return(
-      body: [{ sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }].to_json,
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?page=2&per_page=100').to_return(
+      body: [].to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -1157,7 +1153,11 @@ class TestGithubEvents < Jp::Test
         { login: 'yegor512', id: 526_302 }
       ]
     )
-    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: '4683257342e98cd94' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits?page=1&per_page=100',
+      body: [{ sha: '4683257342e98cd94' }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?page=2&per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/4683257342e98cd94...0.0.3?per_page=100',
       body: {
@@ -2629,7 +2629,8 @@ class TestGithubEvents < Jp::Test
       'https://api.github.com/repos/foo/foo/contributors?per_page=100',
       body: [{ login: 'yegor256', id: 526_301 }]
     )
-    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits?page=1&per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits?page=2&per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
       status: 404,
@@ -2689,7 +2690,8 @@ class TestGithubEvents < Jp::Test
       status: 403,
       body: { message: 'Resource not accessible by integration' }
     )
-    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits?page=1&per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits?page=2&per_page=100', body: [])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
       status: 403,
