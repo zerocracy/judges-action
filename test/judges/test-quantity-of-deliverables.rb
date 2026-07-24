@@ -370,6 +370,26 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_total_builds_ran_skips_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      status: 403, body: { message: 'Forbidden' }
+    )
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, ['foo/blocked']) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      assert_equal({ total_builds_ran: 0 }, total_builds_ran(fact))
+    end
+  end
+
   def test_quantity_of_deliverables_fix_gap
     WebMock.disable_net_connect!
     rate_limit_up
