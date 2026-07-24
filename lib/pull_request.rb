@@ -95,9 +95,11 @@ end
 
 def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
+  @reactions ||= {}
   issue_comments.sum do |comment|
-    Fbe.octo.issue_comment_reactions(repo, comment[:id])
-      .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
+    @reactions[comment[:id]] ||=
+      Fbe.octo.issue_comment_reactions(repo, comment[:id])
+        .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Issue comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
@@ -108,8 +110,9 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
     )
     0
   end + code_comments.sum do |comment|
-    Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
-      .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
+    @reactions[comment[:id]] ||=
+      Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
+        .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Code comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
