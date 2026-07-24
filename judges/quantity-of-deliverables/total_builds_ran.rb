@@ -25,7 +25,7 @@ def total_builds_ran(fact)
           "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        next 0
       end
   }
 end
