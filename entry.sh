@@ -105,16 +105,12 @@ VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${n
 
 declare -a options=()
 while IFS= read -r o; do
-    s=$(echo "${o}" | xargs)
+    s=$(echo "${o}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
     if [ "${s}" = "" ]; then
         continue
     fi
     k=$(echo "${s} "| cut -f1 -d '=')
     v=$(echo "${s}" | cut -f2- -d '=')
-    if [[ "${k}" == vitals_url ]]; then
-        VITALS_URL="${v}"
-        continue
-    fi
     options+=("--option=${k}=${v}");
 done <<< "${INPUT_OPTIONS}"
 if [ -z "${INPUT_REPOSITORIES}" ]; then
