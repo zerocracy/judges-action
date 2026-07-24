@@ -9,10 +9,10 @@ setup_test_env() {
   set -ex -o pipefail
 
   local SELF=$1
-  local var_name=$2
+  local name=$2
 
-  if [ -z "${SELF:-}" ] || [ -z "${var_name:-}" ]; then
-    echo "missing required arguments: SELF='${SELF:-}' name='${var_name:-}'" >&2
+  if [ -z "${SELF:-}" ] || [ -z "${name:-}" ]; then
+    echo "missing required arguments: SELF='${SELF:-}' name='${name:-}'" >&2
     return 1
   fi
 
@@ -29,7 +29,7 @@ setup_test_env() {
     return 1
   fi
 
-  printf -v "${var_name}" '%s' "${generated}"
+  printf -v "${name}" '%s' "${generated}"
 
   BUNDLE_GEMFILE="${SELF}/Gemfile"
   export BUNDLE_GEMFILE
