@@ -2783,7 +2783,7 @@ class TestGithubEvents < Jp::Test
       }
     )
     loog = Loog::Buffer.new
-    assert_raises(NoMethodError) do
+    assert_raises(Fbe::Error) do
       load_it('github-events', Factbase.new, loog:)
     end
     loog.to_s.then do |s|
