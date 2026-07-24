@@ -101,8 +101,8 @@ The following options are expected by the plugin
 
 The following `k=v` pairs inside the `options` may be important:
 
-* `github_token=...` is a default GitHub token, usually to be set to
-  `${{ secrets.GITHUB_TOKEN }}`
+* `max_missing=17` is the maximum number of missing issues backfilled
+  per judge cycle (see `find-missing-issues` judge)
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
 * `sqlite_cache_min_age=3600` is the minimum age in seconds before a
