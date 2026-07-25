@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 893.744633293
+  seconds: 765.010800086
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-25 17:34:29.736212803 Z
+  when: 2026-07-25 17:59:25.611730341 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17159,50 +17160,6 @@
   when: 2025-11-12 07:50:59.000000000 Z
   where: github
   who: 33164517
-- _id: 2496014
-  _job: 48771
-  _time: 2025-11-12 08:49:34.391690647 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  award: 20
-  comments: 2
-  details: It's time to reward @svmukhin for the code contributed in yegor256/judges#313,
-    the reward amount is 20.
-  hoc: 12
-  href: https://github.com/yegor256/judges/issues/313/#issuecomment-3520533418
-  is_human: 1
-  issue: 313
-  receipt: receipt-#48805
-  repository: 799113787
-  review_comments: 0
-  seconds: 92785
-  tombstone: 2026-07-25 11:56:45.717977707 Z
-  what: code-contribution-was-rewarded
-  when: 2025-11-11 16:58:56.145142479 Z
-  where: github
-  who: 33164517
-  why: Contributed code in yegor256/judges#313
-- _id: 2496015
-  _job: 48771
-  _time: 2025-11-12 08:49:34.725069014 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  award: 24
-  comments: 6
-  details: It's time to reward @svmukhin for the code contributed in yegor256/judges#315,
-    the reward amount is 24.
-  hoc: 55
-  href: https://github.com/yegor256/judges/issues/315/#issuecomment-3520533475
-  is_human: 1
-  issue: 315
-  receipt: receipt-#48806
-  repository: 799113787
-  review_comments: 0
-  seconds: 66047
-  tombstone: 2026-07-25 09:30:16.489693228 Z
-  what: code-contribution-was-rewarded
-  when: 2025-11-11 16:59:02.568501153 Z
-  where: github
-  who: 33164517
-  why: Contributed code in yegor256/judges#315
 - _id: 2496102
   _job: 19292404083
   _time: 2025-11-12 09:22:15.166908284 Z
@@ -246961,7 +246918,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 656
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12264790509
   issues_were_scanned: 644
@@ -246971,14 +246928,14 @@
   min_issue_was_found: 619
   min_pull_was_found: 676
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 620
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 421
   earliest_issue_was_found: 1
   events_were_scanned: 12282567868
   issues_were_scanned: 400
@@ -246988,7 +246945,7 @@
   min_issue_was_found: 404
   min_pull_was_found: 422
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 402
   what: iterate
   where: github
 - _id: 2629843
@@ -247419,7 +247376,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12282277831
   issues_were_scanned: 558
@@ -247429,7 +247386,7 @@
   min_issue_was_found: 577
   min_pull_was_found: 598
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 576
   what: iterate
   where: github
 - _id: 2629882
@@ -248073,7 +248030,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 654
   earliest_issue_was_found: 1
   events_were_scanned: 15685063498
   issues_were_scanned: 665
@@ -248083,7 +248040,7 @@
   min_issue_was_found: 636
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 632
   what: iterate
   where: github
 - _id: 2629938
@@ -248285,7 +248242,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 397
   min_issue_was_found: 364
   min_pull_was_found: 397
   repository: 181044958
@@ -248296,17 +248253,17 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1442
   earliest_issue_was_found: 1
-  events_were_scanned: 15796470415
+  events_were_scanned: 15801830369
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1334
   min_pull_was_found: 1837
   repository: 799177290
-  types_were_scanned: 1521
+  types_were_scanned: 1683
   what: iterate
   where: github
 - _id: 2630036
@@ -248330,7 +248287,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1309
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15414294720
   issues_were_scanned: 1266
@@ -248340,7 +248297,7 @@
   min_issue_was_found: 980
   min_pull_was_found: 1315
   repository: 728758275
-  types_were_scanned: 1000
+  types_were_scanned: 1229
   what: iterate
   where: github
 - _id: 2630038
