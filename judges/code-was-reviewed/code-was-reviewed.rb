@@ -43,7 +43,7 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
-    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+    rescue Octokit::Unauthorized, Octokit::ServerError,
       Net::OpenTimeout, Net::ReadTimeout, SocketError,
       Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn(
@@ -65,7 +65,7 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
-    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+    rescue Octokit::Unauthorized, Octokit::ServerError,
       Net::OpenTimeout, Net::ReadTimeout, SocketError,
       Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn(
@@ -102,7 +102,7 @@ Fbe.consider(
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           0
-        rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        rescue Octokit::Unauthorized, Octokit::ServerError,
           Net::OpenTimeout, Net::ReadTimeout, SocketError,
           Errno::ECONNRESET, Errno::ETIMEDOUT => e
           $loog.warn(
@@ -124,7 +124,7 @@ Fbe.consider(
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           0
-        rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        rescue Octokit::Unauthorized, Octokit::ServerError,
           Net::OpenTimeout, Net::ReadTimeout, SocketError,
           Errno::ECONNRESET, Errno::ETIMEDOUT => e
           $loog.warn(
