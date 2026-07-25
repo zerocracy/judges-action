@@ -7,7 +7,7 @@ require 'minitest/autorun'
 
 class TestPatternACoverage < Minitest::Test
   PATTERN_A_RE = /^(\s*)rescue\s+Octokit::NotFound\s*,\s*Octokit::Deprecated\s*=>\s*e/
-  FORBIDDEN_RE = /^\s*rescue\s+Octokit::Forbidden\s*=>\s*e/
+  FORBIDDEN_RE = /^\s*rescue\s+Octokit::Forbidden\b/
   ANY_RESCUE_RE = /^\s*rescue\b/
   BLOCK_END_RE  = /^\s*end\b/
 
