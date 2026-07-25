@@ -17,7 +17,7 @@ def total_stars(_fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

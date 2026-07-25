@@ -58,7 +58,7 @@ Fbe.iterate do
         $loog.info("The pull ##{issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to pull ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -84,7 +84,7 @@ Fbe.iterate do
         $loog.info("The issue ##{issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issue ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -106,7 +106,7 @@ Fbe.iterate do
         $loog.info("The reviews of pull ##{issue} don't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to reviews of pull ##{issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"

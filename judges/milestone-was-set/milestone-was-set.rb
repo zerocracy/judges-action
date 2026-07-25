@@ -24,7 +24,7 @@ Fbe.consider(
       $loog.info("Failed to find repository #{f.repository}: #{e.message}")
       f.stale = 'repository'
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repository #{f.repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -37,7 +37,7 @@ Fbe.consider(
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Can't list milestones for #{repo}: #{e.message}")
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to milestones in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"

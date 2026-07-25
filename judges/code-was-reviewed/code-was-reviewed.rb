@@ -37,7 +37,7 @@ Fbe.consider(
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -59,7 +59,7 @@ Fbe.consider(
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to reviews for pull ##{f.issue} in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -96,7 +96,7 @@ Fbe.consider(
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
           0
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -118,7 +118,7 @@ Fbe.consider(
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
           0
-        rescue Octokit::Forbidden => e
+        rescue Octokit::Forbidden, Octokit::TooManyRequests => e
           $loog.warn(
             "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"

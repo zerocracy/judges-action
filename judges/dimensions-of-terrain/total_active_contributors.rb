@@ -20,7 +20,7 @@ def total_active_contributors(fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Commits not found for #{repo}: #{e.message}")
         next
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::TooManyRequests => e
         $loog.warn(
           "[#{$judge}] Access forbidden to commit search for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -35,7 +35,7 @@ def total_active_contributors(fact)
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Search commits not found for #{repo}: #{e.message}")
     next
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::TooManyRequests => e
     $loog.warn(
       "[#{$judge}] Access forbidden to search commits in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"

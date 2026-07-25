@@ -19,7 +19,7 @@ def total_commits_pushed(fact)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("#{repo} can't be inspected: #{e.class}: #{e.message}")
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -35,7 +35,7 @@ def total_commits_pushed(fact)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Can't count pushed commits in #{repo}: #{e.message}")
       next
-    rescue Octokit::Forbidden => e
+    rescue Octokit::Forbidden, Octokit::TooManyRequests => e
       $loog.warn(
         "[#{$judge}] Access forbidden to pushed commits in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
