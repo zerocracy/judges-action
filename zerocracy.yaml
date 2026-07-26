@@ -4,10 +4,10 @@
   deleted: 8
   error: deadlock; recursive locking
   inserted: 8
-  seconds: 1080.874865529
+  seconds: 1080.230494715
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-26 02:33:50.607240213 Z
+  when: 2026-07-26 04:01:11.027129797 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -246920,9 +246920,9 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 656
   earliest_issue_was_found: 1
-  events_were_scanned: 12264790509
+  events_were_scanned: 12303000991
   issues_were_scanned: 644
   labels_were_scanned: 0
   latest_issue_was_found: 315
@@ -246937,7 +246937,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 421
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12282567868
   issues_were_scanned: 400
@@ -247378,7 +247378,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 589
   earliest_issue_was_found: 1
   events_were_scanned: 12282277831
   issues_were_scanned: 558
@@ -248032,7 +248032,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 654
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15685063498
   issues_were_scanned: 665
@@ -248244,7 +248244,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 397
+  merges_were_scanned: 0
   min_issue_was_found: 364
   min_pull_was_found: 397
   repository: 181044958
@@ -248255,11 +248255,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1719
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 15817957635
+  events_were_scanned: 12303101483
   issues_were_scanned: 1702
-  labels_were_scanned: 1679
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1334
@@ -248289,7 +248289,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1053
+  assignees_were_scanned: 1309
   earliest_issue_was_found: 1
   events_were_scanned: 15414294720
   issues_were_scanned: 1266
@@ -277873,3 +277873,64 @@
     The average monthly zents/points ratio (0.72) is decreasing (R=0.52).
   what: assessment
   when: 2026-07-25 22:49:39.073127567 Z
+- _id: 2631387
+  _job: 30186584622
+  _time: 2026-07-26 03:43:33.880238355 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: fix-sprintf-nil-format
+  details: The pull request yegor256/factbase#689 has been opened by @say-5.
+  event_id: 12303000991
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 689
+  repository: 798641472
+  what: pull-was-opened
+  when: 2026-07-26 03:23:55.000000000 Z
+  where: github
+  who: 240962040
+- _id: 2631388
+  _job: 30186584622
+  _time: 2026-07-26 03:44:25.401556646 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '686'
+  details: The missing pull yegor256/factbase#687 has been opened by @morphqdd.
+  issue: 687
+  repository: 798641472
+  what: pull-was-opened
+  when: 2026-07-24 09:35:28.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2631389
+  _job: 30186584622
+  _time: 2026-07-26 03:44:26.538933507 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue yegor256/factbase#688 has been opened by @morphqdd.
+  issue: 688
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-07-24 18:19:26.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2631390
+  _job: 30186584622
+  _time: 2026-07-26 03:45:03.162803396 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '686'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#687 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 10
+  issue: 687
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-07-24 12:35:28.000000000 Z
+  where: github
+  who: 526301
