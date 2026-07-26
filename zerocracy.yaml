@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 925.111763213
+  seconds: 736.918566665
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-26 16:33:34.370439652 Z
+  when: 2026-07-26 16:58:55.137071709 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -16968,28 +16969,6 @@
   when: 2025-11-12 08:53:57.000000000 Z
   where: github
   who: 526301
-- _id: 2497818
-  _job: 48829
-  _time: 2025-11-12 16:52:08.526660600 Z
-  _version: 0.16.8/0.55.0/0.16.1
-  award: 20
-  comments: 1
-  details: It's time to reward @volodya-lombrozo for the code contributed in yegor256/factbase#371,
-    the reward amount is 20.
-  hoc: 8
-  href: https://github.com/yegor256/factbase/issues/371/#issuecomment-3522670674
-  is_human: 1
-  issue: 371
-  receipt: receipt-#48887
-  repository: 798641472
-  review_comments: 0
-  seconds: 599
-  tombstone: 2026-07-25 13:04:29.156089130 Z
-  what: code-contribution-was-rewarded
-  when: 2025-11-12 15:57:52.047264087 Z
-  where: github
-  who: 51804353
-  why: Contributed code in yegor256/factbase#371
 - _id: 2497947
   _job: 19307606605
   _time: 2025-11-12 18:22:13.458513569 Z
@@ -245996,7 +245975,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 660
   earliest_issue_was_found: 1
   events_were_scanned: 12305773971
   issues_were_scanned: 644
@@ -246006,14 +245985,14 @@
   min_issue_was_found: 619
   min_pull_was_found: 676
   repository: 798641472
-  types_were_scanned: 627
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 421
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12282567868
   issues_were_scanned: 400
@@ -246023,7 +246002,7 @@
   min_issue_was_found: 404
   min_pull_was_found: 422
   repository: 840215648
-  types_were_scanned: 402
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -246454,7 +246433,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 589
   earliest_issue_was_found: 1
   events_were_scanned: 12282277831
   issues_were_scanned: 558
@@ -246464,7 +246443,7 @@
   min_issue_was_found: 577
   min_pull_was_found: 598
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 576
   what: iterate
   where: github
 - _id: 2629882
@@ -247108,7 +247087,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 655
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15685063498
   issues_were_scanned: 665
@@ -247118,7 +247097,7 @@
   min_issue_was_found: 636
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 633
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629938
@@ -247320,7 +247299,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 397
+  merges_were_scanned: 0
   min_issue_was_found: 364
   min_pull_was_found: 397
   repository: 181044958
@@ -247331,17 +247310,17 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1719
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 15859731535
+  events_were_scanned: 15863952432
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1334
   min_pull_was_found: 1837
   repository: 799177290
-  types_were_scanned: 1337
+  types_were_scanned: 1521
   what: iterate
   where: github
 - _id: 2630036
@@ -247365,7 +247344,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1054
   earliest_issue_was_found: 1
   events_were_scanned: 15414294720
   issues_were_scanned: 1266
@@ -247375,7 +247354,7 @@
   min_issue_was_found: 980
   min_pull_was_found: 1315
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1001
   what: iterate
   where: github
 - _id: 2630038
