@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 391.484167075
+  seconds: 950.038762967
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-27 22:53:39.846500886 Z
+  when: 2026-07-27 23:37:01.959495733 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -243989,7 +243990,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 660
   earliest_issue_was_found: 1
   events_were_scanned: 15886129690
   issues_were_scanned: 644
@@ -243999,14 +244000,14 @@
   min_issue_was_found: 619
   min_pull_was_found: 676
   repository: 798641472
-  types_were_scanned: 630
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 421
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368253439
   issues_were_scanned: 400
@@ -244016,7 +244017,7 @@
   min_issue_was_found: 404
   min_pull_was_found: 422
   repository: 840215648
-  types_were_scanned: 402
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -244447,7 +244448,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 589
   earliest_issue_was_found: 1
   events_were_scanned: 12368200698
   issues_were_scanned: 558
@@ -244457,7 +244458,7 @@
   min_issue_was_found: 577
   min_pull_was_found: 598
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 576
   what: iterate
   where: github
 - _id: 2629882
@@ -245101,7 +245102,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 656
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368233182
   issues_were_scanned: 665
@@ -245111,7 +245112,7 @@
   min_issue_was_found: 636
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 634
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629938
@@ -245313,7 +245314,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 411
+  merges_were_scanned: 0
   min_issue_was_found: 364
   min_pull_was_found: 397
   repository: 181044958
@@ -245324,17 +245325,17 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1719
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 15970547431
+  events_were_scanned: 15972509399
   issues_were_scanned: 1702
-  labels_were_scanned: 1679
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1334
   min_pull_was_found: 1837
   repository: 799177290
-  types_were_scanned: 1337
+  types_were_scanned: 1521
   what: iterate
   where: github
 - _id: 2630036
@@ -245358,7 +245359,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1086
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368139359
   issues_were_scanned: 1266
@@ -245368,7 +245369,7 @@
   min_issue_was_found: 980
   min_pull_was_found: 1315
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1004
   what: iterate
   where: github
 - _id: 2630038
@@ -276807,7 +276808,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-07-25 00:57:35.000000000 Z
+  when: &2649 2026-07-25 00:57:35.000000000 Z
   where: github
   who: 29139614
 - _id: 2631483
@@ -276826,3 +276827,22 @@
   total_stars: 141
   what: dimensions-of-terrain
   when: 2026-07-27 22:50:05.253674554 Z
+- _id: 2631484
+  _job: 84223
+  _time: 2026-07-27 22:54:21.418572868 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 0
+  details: The pull request zerocracy/zerocracy-mcp-server#108 with 16 HoC created
+    by @renovate[bot] was merged by @renovate[bot] after 1h47m of being in review
+    and 0 comments.
+  hoc: 16
+  is_human: 0
+  issue: 108
+  merger: 29139614
+  repository: 974194993
+  review_comments: 0
+  seconds: 6426
+  what: code-was-contributed
+  when: *2649
+  where: github
+  who: 29139614
