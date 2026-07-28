@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 449.597619906
+  seconds: 1080.77526718
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-28 06:28:51.683189272 Z
+  when: 2026-07-28 07:41:17.500175746 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -238809,6 +238810,7 @@
   - 18.81431908580087
   - 18.81431908580087
   - 7.493794201676737
+  - 7.493794201676737
   qod_per_day:
   - 5.261714286182081
   - 3.5025714287953895
@@ -239567,8 +239569,9 @@
   - 9.015318855003988
   - 9.015318855003988
   - 6.080779383775181
+  - 6.080779383775181
   what: learn-eva
-  when: 2026-07-27 22:12:20.823686531 Z
+  when: 2026-07-28 06:32:05.977214130 Z
 - _id: 2629381
   _job: 80835
   _time: 2026-07-07 15:47:33.754402190 Z
@@ -243533,7 +243536,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 660
   earliest_issue_was_found: 1
   events_were_scanned: 15886129690
   issues_were_scanned: 644
@@ -243550,7 +243553,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 421
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368253439
   issues_were_scanned: 400
@@ -243991,7 +243994,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 589
   earliest_issue_was_found: 1
   events_were_scanned: 12368200698
   issues_were_scanned: 558
@@ -244645,7 +244648,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 656
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368233182
   issues_were_scanned: 665
@@ -244857,7 +244860,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 411
+  merges_were_scanned: 0
   min_issue_was_found: 364
   min_pull_was_found: 397
   repository: 181044958
@@ -244868,11 +244871,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1719
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 12393262552
+  events_were_scanned: 15995726315
   issues_were_scanned: 1702
-  labels_were_scanned: 1679
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1334
@@ -244902,7 +244905,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1086
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368139359
   issues_were_scanned: 1266
@@ -276455,6 +276458,25 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-07-28 04:40:44.000000000 Z
+  when: &2645 2026-07-28 04:40:44.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2631489
+  _job: 84246
+  _time: 2026-07-28 06:29:31.090748654 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 0
+  details: The pull request zerocracy/zerocracy-mcp-server#110 with 47 HoC created
+    by @renovate[bot] was merged by @renovate[bot] after 6h35m of being in review
+    and 0 comments.
+  hoc: 47
+  is_human: 0
+  issue: 110
+  merger: 29139614
+  repository: 974194993
+  review_comments: 0
+  seconds: 23753
+  what: code-was-contributed
+  when: *2645
   where: github
   who: 29139614
