@@ -1,13 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
-  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1080.77526718
+  seconds: 1082.054900009
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-28 07:41:17.500175746 Z
+  when: 2026-07-28 08:34:54.836508641 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -76465,6 +76464,7 @@
   _job: 23397378889
   _time: 2026-03-22 06:31:25.732898598 Z
   _version: 0.19.9/0.60.1/0.17.15
+  tombstone: 2026-07-28 07:42:00.200948092 Z
   total_active_contributors: 8
   total_commits: 13641
   total_contributors: 30
@@ -236840,7 +236840,7 @@
   earliest_issue_was_found: 1
   events_were_scanned: 15988542141
   issues_were_scanned: 68
-  labels_were_scanned: 0
+  labels_were_scanned: 83
   latest_issue_was_found: 20
   merges_were_scanned: 0
   min_issue_was_found: 3
@@ -243254,7 +243254,7 @@
   earliest_issue_was_found: 1
   events_were_scanned: 15700056582
   issues_were_scanned: 232
-  labels_were_scanned: 0
+  labels_were_scanned: 254
   latest_issue_was_found: 170
   merges_were_scanned: 0
   min_issue_was_found: 230
@@ -243523,7 +243523,7 @@
   earliest_issue_was_found: 1
   events_were_scanned: 15414373037
   issues_were_scanned: 22
-  labels_were_scanned: 0
+  labels_were_scanned: 42
   latest_issue_was_found: 1
   merges_were_scanned: 0
   min_issue_was_found: 40
@@ -243540,13 +243540,13 @@
   earliest_issue_was_found: 1
   events_were_scanned: 15886129690
   issues_were_scanned: 644
-  labels_were_scanned: 0
+  labels_were_scanned: 537
   latest_issue_was_found: 315
   merges_were_scanned: 0
   min_issue_was_found: 619
   min_pull_was_found: 676
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 630
   what: iterate
   where: github
 - _id: 2629842
@@ -243563,7 +243563,7 @@
   min_issue_was_found: 404
   min_pull_was_found: 422
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 402
   what: iterate
   where: github
 - _id: 2629843
@@ -243998,13 +243998,13 @@
   earliest_issue_was_found: 1
   events_were_scanned: 12368200698
   issues_were_scanned: 558
-  labels_were_scanned: 0
+  labels_were_scanned: 581
   latest_issue_was_found: 317
   merges_were_scanned: 0
   min_issue_was_found: 577
   min_pull_was_found: 598
   repository: 820463873
-  types_were_scanned: 576
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -244652,13 +244652,13 @@
   earliest_issue_was_found: 1
   events_were_scanned: 12368233182
   issues_were_scanned: 665
-  labels_were_scanned: 0
+  labels_were_scanned: 675
   latest_issue_was_found: 386
   merges_were_scanned: 0
   min_issue_was_found: 636
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 634
   what: iterate
   where: github
 - _id: 2629938
@@ -244858,7 +244858,7 @@
   earliest_issue_was_found: 1
   events_were_scanned: 12368977733
   issues_were_scanned: 370
-  labels_were_scanned: 0
+  labels_were_scanned: 156
   latest_issue_was_found: 237
   merges_were_scanned: 0
   min_issue_was_found: 364
@@ -244871,17 +244871,17 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1655
   earliest_issue_was_found: 1
-  events_were_scanned: 15995726315
+  events_were_scanned: 12400514238
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1692
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1334
   min_pull_was_found: 1837
   repository: 799177290
-  types_were_scanned: 1530
+  types_were_scanned: 1688
   what: iterate
   where: github
 - _id: 2630036
@@ -244915,7 +244915,7 @@
   min_issue_was_found: 980
   min_pull_was_found: 1315
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1004
   what: iterate
   where: github
 - _id: 2630038
@@ -276480,3 +276480,26 @@
   when: *2645
   where: github
   who: 29139614
+- _id: 2631490
+  _job: 30341639546
+  _time: 2026-07-28 08:27:47.229205061 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: 1602-document-sqlite-cache-min-age
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#1614 has been "pull-was-closed".
+  failed_builds: 0
+  files: 1
+  hoc: 5
+  issue: 1614
+  repository: 799177290
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-closed
+  when: 2026-07-28 08:20:20.000000000 Z
+  where: github
+  who: 526301
