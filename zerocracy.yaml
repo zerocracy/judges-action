@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 638.738550644
+  seconds: 1080.608122935
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-29 15:46:58.992238590 Z
+  when: 2026-07-29 16:46:13.793358562 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -236292,6 +236293,7 @@
   - 7.493794201676737
   - 7.493794201676737
   - 7.493794201676737
+  - 7.493794201676737
   qod_per_day:
   - 5.261714286182081
   - 3.5025714287953895
@@ -237054,8 +237056,9 @@
   - 6.080779383775181
   - 6.080779383775181
   - 6.080779383775181
+  - 6.080779383775181
   what: learn-eva
-  when: 2026-07-29 07:10:52.672489539 Z
+  when: 2026-07-29 15:49:07.812599800 Z
 - _id: 2629381
   _job: 80835
   _time: 2026-07-07 15:47:33.754402190 Z
@@ -241021,7 +241024,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 661
   earliest_issue_was_found: 1
   events_were_scanned: 15886129690
   issues_were_scanned: 644
@@ -241038,9 +241041,9 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 421
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 12368253439
+  events_were_scanned: 12483907344
   issues_were_scanned: 400
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -241480,7 +241483,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 589
   earliest_issue_was_found: 1
   events_were_scanned: 12368200698
   issues_were_scanned: 558
@@ -242134,7 +242137,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 656
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368233182
   issues_were_scanned: 665
@@ -242346,7 +242349,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 411
+  merges_were_scanned: 0
   min_issue_was_found: 370
   min_pull_was_found: 397
   repository: 181044958
@@ -242357,11 +242360,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1719
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16130388110
+  events_were_scanned: 16141062186
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1337
@@ -242391,7 +242394,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1110
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16077276741
   issues_were_scanned: 1266
@@ -274859,3 +274862,18 @@
     The average monthly zents/points ratio (0.71) is decreasing (R=0.57).
   what: assessment
   when: 2026-07-28 23:38:15.887414929 Z
+- _id: 2631499
+  _job: 30470764870
+  _time: 2026-07-29 16:28:18.817557251 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/ruby-on-rails-packages
+  details: The pull request zerocracy/baza.rb#433 has been opened by @renovate[bot].
+  event_id: 12483907344
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 433
+  repository: 840215648
+  what: pull-was-opened
+  when: 2026-07-29 15:35:11.000000000 Z
+  where: github
+  who: 29139614
