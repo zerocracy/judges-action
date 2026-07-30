@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 609.968845996
+  seconds: 1080.525119459
   version: 0.61.1
   what: judges-summary
-  when: 2026-07-30 22:31:14.861142818 Z
+  when: 2026-07-30 23:07:27.278551113 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -240628,7 +240629,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 661
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15886129690
   issues_were_scanned: 644
@@ -240645,7 +240646,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 421
   earliest_issue_was_found: 1
   events_were_scanned: 12491868533
   issues_were_scanned: 400
@@ -241087,7 +241088,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12368200698
   issues_were_scanned: 558
@@ -241741,7 +241742,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 656
   earliest_issue_was_found: 1
   events_were_scanned: 16244104504
   issues_were_scanned: 665
@@ -241953,7 +241954,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 411
   min_issue_was_found: 398
   min_pull_was_found: 397
   repository: 181044958
@@ -241964,11 +241965,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1655
+  assignees_were_scanned: 1719
   earliest_issue_was_found: 1
-  events_were_scanned: 16256056068
+  events_were_scanned: 16260437110
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1359
@@ -241998,9 +241999,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1111
   earliest_issue_was_found: 1
-  events_were_scanned: 16257197471
+  events_were_scanned: 16260611196
   issues_were_scanned: 1266
   labels_were_scanned: 0
   latest_issue_was_found: 888
@@ -274650,3 +274651,22 @@
   where: github
   who: 526301
   why: Pushed 1cadd072f to the default branch 'master' in zerocracy/baza
+- _id: 2631510
+  _job: 30588406846
+  _time: 2026-07-30 22:49:56.401320801 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  commit: 735419e4033d22b6f27f9c09adf1d91a70121546
+  default_branch: master
+  details: 'A new Git push #38566946065 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 16260611196
+  event_type: PushEvent
+  is_human: 1
+  push_id: 38566946065
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-07-30 22:38:08.000000000 Z
+  where: github
+  who: 526301
