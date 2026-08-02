@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 1080.659634701
+  seconds: 1080.863979729
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-02 06:39:36.781122859 Z
+  when: 2026-08-02 07:38:25.751012132 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -161419,25 +161419,6 @@
   when: 2026-06-03 05:38:02.000000000 Z
   where: github
   who: 29139614
-- _id: 2619839
-  _job: 26866392323
-  _time: 2026-06-03 05:54:16.301690700 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  commit: c554c614ea7eaaf7ec8ee657cf00a05e9bbc5b19
-  default_branch: master
-  details: 'A new Git push #35037419818 has arrived to zerocracy/pages-action, made
-    by @yegor256 (default branch is "master"), not associated with any pull request.'
-  event_id: 12747839131
-  event_type: PushEvent
-  is_human: 1
-  push_id: 35037419818
-  ref: refs/heads/master
-  repository: 802720676
-  to_master: 1
-  what: git-was-pushed
-  when: 2026-06-03 05:36:49.000000000 Z
-  where: github
-  who: 526301
 - _id: 2619854
   _job: 26866392323
   _time: 2026-06-03 05:57:28.848063210 Z
@@ -237875,7 +237856,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 232
+  min_issue_was_found: 233
   min_pull_was_found: 97
   repository: 849726475
   types_were_scanned: 0
@@ -238164,7 +238145,7 @@
   min_issue_was_found: 672
   min_pull_was_found: 676
   repository: 798641472
-  types_were_scanned: 648
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629842
@@ -238173,7 +238154,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 421
   earliest_issue_was_found: 1
-  events_were_scanned: 16445548436
+  events_were_scanned: 12649594601
   issues_were_scanned: 400
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -238181,7 +238162,7 @@
   min_issue_was_found: 289
   min_pull_was_found: 422
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 402
   what: iterate
   where: github
 - _id: 2629843
@@ -238615,7 +238596,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16445599840
+  events_were_scanned: 12649594137
   issues_were_scanned: 558
   labels_were_scanned: 0
   latest_issue_was_found: 317
@@ -238623,7 +238604,7 @@
   min_issue_was_found: 620
   min_pull_was_found: 598
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 576
   what: iterate
   where: github
 - _id: 2629882
@@ -239277,7 +239258,7 @@
   min_issue_was_found: 687
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 634
   what: iterate
   where: github
 - _id: 2629938
@@ -239444,7 +239425,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 98
+  min_issue_was_found: 140
   min_pull_was_found: 473
   repository: 799113787
   types_were_scanned: 0
@@ -239490,9 +239471,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1719
+  assignees_were_scanned: 1442
   earliest_issue_was_found: 1
-  events_were_scanned: 16445489766
+  events_were_scanned: 16451072223
   issues_were_scanned: 1702
   labels_were_scanned: 1679
   latest_issue_was_found: 1073
@@ -239500,7 +239481,7 @@
   min_issue_was_found: 1425
   min_pull_was_found: 1837
   repository: 799177290
-  types_were_scanned: 1864
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -239534,7 +239515,7 @@
   min_issue_was_found: 1076
   min_pull_was_found: 1315
   repository: 728758275
-  types_were_scanned: 1284
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -272371,3 +272352,51 @@
   when: 2026-08-02 05:24:58.000000000 Z
   where: github
   who: 526301
+- _id: 2631523
+  _job: 84821
+  _time: 2026-08-02 06:40:16.065994498 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  award: -8
+  commit: 796427f7ade12c4e18d5258b2aa633d71bdadb5c
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/fbe, the penalty amount is -8.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -8 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running score is [+664](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/commit/796427f7ade12c4e18d5258b2aa633d71bdadb5c/#commitcomment-194657510
+  is_human: 1
+  repository: 820463873
+  what: push-to-master-was-punished
+  when: 2026-08-02 06:40:16.067968373 Z
+  where: github
+  who: 526301
+  why: Pushed 796427f7a to the default branch 'master' in zerocracy/fbe
+- _id: 2631524
+  _job: 84821
+  _time: 2026-08-02 06:40:16.637598316 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  award: -8
+  commit: 9b050fe6316905976e6014db9eeabf6c84fe7488
+  default_branch: master
+  details: It's time to punish @yegor256 for pushing to the default branch 'master'
+    in zerocracy/baza.rb, the penalty amount is -8.
+  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
+    to push directly to the default branch `master`. You''ve earned -8 points. Next
+    time, create a new branch, push your changes over there, then make a pull request
+    and merge it. Even if you are flying solo, contributing via pull requests is a
+    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
+    Your running score is [+656](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/baza.rb/commit/9b050fe6316905976e6014db9eeabf6c84fe7488/#commitcomment-194657512
+  is_human: 1
+  repository: 840215648
+  what: push-to-master-was-punished
+  when: 2026-08-02 06:40:16.639574451 Z
+  where: github
+  who: 526301
+  why: Pushed 9b050fe63 to the default branch 'master' in zerocracy/baza.rb
