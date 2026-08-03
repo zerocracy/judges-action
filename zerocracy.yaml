@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 684.518466369
+  seconds: 1080.806015233
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-03 17:43:49.224679202 Z
+  when: 2026-08-03 18:49:36.009812508 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -236406,7 +236407,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 671
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12675168412
   issues_were_scanned: 644
@@ -236423,9 +236424,9 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 421
   earliest_issue_was_found: 1
-  events_were_scanned: 12677999523
+  events_were_scanned: 16602003781
   issues_were_scanned: 400
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -236442,7 +236443,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 15878034613
+  events_were_scanned: 16601281981
   latest_issue_was_found: 115
   merges_were_scanned: 0
   min_issue_was_found: 0
@@ -236865,7 +236866,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12649594137
   issues_were_scanned: 558
@@ -237519,7 +237520,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 659
   earliest_issue_was_found: 1
   events_were_scanned: 16517646289
   issues_were_scanned: 665
@@ -237731,7 +237732,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 411
   min_issue_was_found: 151
   min_pull_was_found: 397
   repository: 181044958
@@ -237742,11 +237743,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1655
+  assignees_were_scanned: 1719
   earliest_issue_was_found: 1
-  events_were_scanned: 16593249708
+  events_were_scanned: 16600438741
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1451
@@ -237761,7 +237762,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 11347463318
+  events_were_scanned: 16596441549
   issues_were_scanned: 5
   labels_were_scanned: 0
   latest_issue_was_found: 2
@@ -237776,7 +237777,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1122
   earliest_issue_was_found: 1
   events_were_scanned: 12561837188
   issues_were_scanned: 1266
@@ -268558,7 +268559,7 @@
   - 0
   - 0
   what: quality-of-service
-  when: 2026-07-27 17:47:26.769404515 Z
+  when: &2576 2026-07-27 17:47:26.769404515 Z
 - _id: 2631412
   _job: 30292200062
   _time: 2026-07-27 18:07:27.031340664 Z
@@ -270794,6 +270795,8 @@
   _job: 30837084843
   _time: 2026-08-03 17:32:35.196607538 Z
   _version: 0.19.16/0.61.1/0.17.21
+  composite: 32.272
+  ffact: 163490
   since: *2575
   total_builds_ran: 1964
   total_commits_pushed: 17
@@ -270804,3 +270807,25 @@
   total_reviews_submitted: 7
   what: quantity-of-deliverables
   when: 2026-08-03 17:32:35.178102160 Z
+- _id: 2631534
+  _job: 30841576889
+  _time: 2026-08-03 18:31:59.313118382 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/crate-ci-typos-1.x
+  details: The pull request zerocracy/baza.rb#435 has been opened by @renovate[bot].
+  event_id: 12714607282
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 435
+  repository: 840215648
+  what: pull-was-opened
+  when: 2026-08-03 18:08:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2631535
+  _job: 30841576889
+  _time: 2026-08-03 18:49:35.868774942 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  since: *2576
+  what: quality-of-service
+  when: 2026-08-03 18:49:35.849142115 Z
