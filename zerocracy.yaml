@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1092.951120804
+  seconds: 1080.203801002
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-03 05:27:45.912901832 Z
+  when: 2026-08-03 06:54:39.305892132 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -232138,6 +232139,7 @@
   - 7.493794201676737
   - 7.493794201676737
   - 7.493794201676737
+  - 7.493794201676737
   qod_per_day:
   - 5.261714286182081
   - 3.5025714287953895
@@ -232913,8 +232915,9 @@
   - 6.080779383775181
   - 6.080779383775181
   - 6.080779383775181
+  - 6.080779383775181
   what: learn-eva
-  when: 2026-08-02 21:07:15.065894018 Z
+  when: 2026-08-03 05:30:42.989627903 Z
 - _id: 2629381
   _job: 80835
   _time: 2026-07-07 15:47:33.754402190 Z
@@ -236877,7 +236880,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 671
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12675168412
   issues_were_scanned: 644
@@ -236894,9 +236897,9 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 421
   earliest_issue_was_found: 1
-  events_were_scanned: 12675635962
+  events_were_scanned: 12677999523
   issues_were_scanned: 400
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -237336,7 +237339,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12649594137
   issues_were_scanned: 558
@@ -237990,7 +237993,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 659
   earliest_issue_was_found: 1
   events_were_scanned: 16517646289
   issues_were_scanned: 665
@@ -238202,7 +238205,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 411
   min_issue_was_found: 151
   min_pull_was_found: 397
   repository: 181044958
@@ -238213,11 +238216,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1442
   earliest_issue_was_found: 1
-  events_were_scanned: 16524380232
+  events_were_scanned: 16531380069
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1451
@@ -238247,7 +238250,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1122
   earliest_issue_was_found: 1
   events_were_scanned: 12561837188
   issues_were_scanned: 1266
@@ -271212,12 +271215,38 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 0
   issue: 434
   repository: 840215648
   review: 2026-08-03 03:34:48.000000000 Z
+  review_comments: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
   when: 2026-08-03 03:52:55.000000000 Z
   where: github
   who: 8086956
+- _id: 2631531
+  _job: 84967
+  _time: 2026-08-03 05:28:20.124270032 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  award: 6
+  comments: 2
+  details: It's time to reward @yegor256 for the code review in zerocracy/baza.rb#434,
+    the reward amount is 6.
+  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
+    -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
+    score is [+694](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 2
+  href: https://github.com/zerocracy/baza.rb/issues/434/#issuecomment-5162655554
+  is_human: 1
+  issue: 434
+  repository: 840215648
+  review_comments: 0
+  seconds: 6975
+  what: code-review-was-rewarded
+  when: 2026-08-03 05:28:20.130010908 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/baza.rb#434
