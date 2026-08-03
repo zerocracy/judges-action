@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1081.9495125
+  seconds: 1080.23392383
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-03 02:33:40.020942696 Z
+  when: 2026-08-03 04:01:06.020376671 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -237223,7 +237224,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 15887741474
+  events_were_scanned: 16521810376
   issues_were_scanned: 80
   labels_were_scanned: 0
   latest_issue_was_found: 141
@@ -237255,7 +237256,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 671
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16516798463
   issues_were_scanned: 644
@@ -237272,9 +237273,9 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 421
   earliest_issue_was_found: 1
-  events_were_scanned: 12671892100
+  events_were_scanned: 12674943332
   issues_were_scanned: 400
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -237714,7 +237715,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12649594137
   issues_were_scanned: 558
@@ -238368,7 +238369,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 659
   earliest_issue_was_found: 1
   events_were_scanned: 16517646289
   issues_were_scanned: 665
@@ -238580,7 +238581,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 411
   min_issue_was_found: 151
   min_pull_was_found: 397
   repository: 181044958
@@ -238591,11 +238592,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1655
+  assignees_were_scanned: 1719
   earliest_issue_was_found: 1
-  events_were_scanned: 16515752174
+  events_were_scanned: 16519096522
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1451
@@ -238625,7 +238626,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1122
   earliest_issue_was_found: 1
   events_were_scanned: 12561837188
   issues_were_scanned: 1266
@@ -271336,27 +271337,6 @@
   total_stars: 141
   what: dimensions-of-terrain
   when: 2026-07-31 23:51:36.167330631 Z
-- _id: 2631516
-  _job: 84666
-  _time: 2026-08-01 01:19:41.223822281 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average reward per task (14.4 points) is increasing (R=0.13).
-    The average punishment per task (7.0 points) is decreasing (R=-0.15).
-    The average number of builds per week (3833.0) is increasing (R=0.55).
-    The average number of commits per week (101.0) is staying still.
-    The average bugs accepted per month (42.0) is increasing (R=0.54).
-    The average monthly punishment (305 points) is increasing (R=0.58).
-    The average monthly wage (17.4 points) is decreasing (R=-0.23).
-    The average issue cycle time (1w3d) is staying still.
-    The average pull cycle time (1w1d) is increasing (R=0.13).
-    The average number of releases per month (5.9) is increasing (R=0.39).
-    The average monthly turnover (12.0 developers) is increasing (R=0.71).
-    The average weekly cost of HoC (1.50 points) is decreasing (R=-0.34).
-    The average monthly zents/points ratio (0.71) is decreasing (R=0.59).
-  what: assessment
-  when: 2026-08-01 01:19:41.245635508 Z
 - _id: 2631517
   _job: 30723937916
   _time: 2026-08-01 23:54:42.678004726 Z
@@ -271537,3 +271517,44 @@
   when: 2026-08-03 01:38:34.000000000 Z
   where: github
   who: 29139614
+- _id: 2631527
+  _job: 84947
+  _time: 2026-08-03 02:34:10.462297547 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  analyzers: 18
+  text: |-
+    The average reward per task (14.4 points) is increasing (R=0.14).
+    The average punishment per task (7.0 points) is decreasing (R=-0.14).
+    The average number of builds per week (3833.0) is increasing (R=0.55).
+    The average number of commits per week (101.0) is staying still.
+    The average bugs accepted per month (41.0) is increasing (R=0.54).
+    The average monthly punishment (273 points) is increasing (R=0.19).
+    The average monthly wage (17.4 points) is decreasing (R=-0.21).
+    The average issue cycle time (1w3d) is staying still.
+    The average pull cycle time (1w1d) is increasing (R=0.12).
+    The average number of releases per month (5.9) is increasing (R=0.39).
+    The average monthly turnover (13.0 developers) is increasing (R=0.78).
+    The average weekly cost of HoC (1.52 points) is decreasing (R=-0.36).
+    The average monthly zents/points ratio (0.71) is decreasing (R=0.62).
+  what: assessment
+  when: 2026-08-03 02:34:10.481469087 Z
+- _id: 2631528
+  _job: 30782446197
+  _time: 2026-08-03 03:43:44.963002737 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 2
+  commits: 1
+  details: The pull request zerocracy/baza.rb#434 has been reviewed by @yegor256 with
+    2 HoC and 2 comments.
+  event_id: 12674797291
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 434
+  repository: 840215648
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-08-03 03:34:49.000000000 Z
+  where: github
+  who: 526301
