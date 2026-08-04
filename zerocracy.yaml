@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1081.256461224
+  seconds: 832.077398715
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-04 11:34:37.216641887 Z
+  when: 2026-08-04 12:24:51.266536718 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -16880,24 +16881,6 @@
   when: 2025-11-21 02:23:22.000000000 Z
   where: github
   who: 526301
-- _id: 2527435
-  _job: 50188
-  _time: 2025-11-21 13:00:32.980149338 Z
-  _version: 0.16.8/0.57.1/0.16.1
-  award: 18
-  details: It's time to reward @aidarkdev for the bug reported in zerocracy/pages-action#436,
-    the reward amount is 18.
-  href: https://github.com/zerocracy/pages-action/issues/436/#issuecomment-3562700492
-  is_human: 1
-  issue: 436
-  receipt: receipt-#50118
-  repository: 802720676
-  tombstone: 2026-08-04 06:41:11.286705010 Z
-  what: bug-report-was-rewarded
-  when: 2025-11-21 11:01:19.588010108 Z
-  where: github
-  who: 161327834
-  why: Reported bug in zerocracy/pages-action#436
 - _id: 2527443
   _job: 19571812028
   _time: 2025-11-21 13:23:39.639039321 Z
@@ -235329,7 +235312,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 671
   earliest_issue_was_found: 1
   events_were_scanned: 12741379913
   issues_were_scanned: 644
@@ -235339,14 +235322,14 @@
   min_issue_was_found: 4
   min_pull_was_found: 676
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 655
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 421
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12735549485
   issues_were_scanned: 400
@@ -235356,7 +235339,7 @@
   min_issue_was_found: 327
   min_pull_was_found: 422
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 402
   what: iterate
   where: github
 - _id: 2629843
@@ -235788,9 +235771,9 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 589
   earliest_issue_was_found: 1
-  events_were_scanned: 12649594137
+  events_were_scanned: 16679507968
   issues_were_scanned: 558
   labels_were_scanned: 0
   latest_issue_was_found: 317
@@ -235798,7 +235781,7 @@
   min_issue_was_found: 630
   min_pull_was_found: 598
   repository: 820463873
-  types_were_scanned: 526
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -236442,7 +236425,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 661
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16604868725
   issues_were_scanned: 665
@@ -236452,7 +236435,7 @@
   min_issue_was_found: 63
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 608
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629938
@@ -236650,32 +236633,32 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16605600014
+  events_were_scanned: 16677888567
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 411
+  merges_were_scanned: 0
   min_issue_was_found: 151
   min_pull_was_found: 397
   repository: 181044958
-  types_were_scanned: 268
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1442
+  assignees_were_scanned: 1655
   earliest_issue_was_found: 1
-  events_were_scanned: 16670348038
+  events_were_scanned: 16680533313
   issues_were_scanned: 1702
-  labels_were_scanned: 1679
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1451
   min_pull_was_found: 1837
   repository: 799177290
-  types_were_scanned: 1736
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -236699,7 +236682,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1122
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12561837188
   issues_were_scanned: 1266
@@ -236709,7 +236692,7 @@
   min_issue_was_found: 1108
   min_pull_was_found: 1315
   repository: 728758275
-  types_were_scanned: 1209
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -271234,3 +271217,18 @@
   where: github
   who: 526301
   why: Reviewed code in yegor256/factbase#691
+- _id: 2631558
+  _job: 30907888838
+  _time: 2026-08-04 12:11:07.608990570 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/rubocop-1.x-lockfile
+  details: The pull request zerocracy/fbe#631 has been opened by @renovate[bot].
+  event_id: 12754176803
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 631
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-04 11:06:09.000000000 Z
+  where: github
+  who: 29139614
