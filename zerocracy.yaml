@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 1080.613642353
+  seconds: 1080.181765789
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-04 05:48:04.733902435 Z
+  when: 2026-08-04 06:39:44.725454984 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -74862,20 +74862,6 @@
   repository: 181044958
   what: pull-was-opened
   when: 2026-03-27 01:32:56.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2608186
-  _job: 23761112348
-  _time: 2026-03-30 18:36:15.051180643 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  branch: renovate/actions-checkout-6.x
-  details: The missing pull yegor256/0rsk#255 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 255
-  repository: 181044958
-  tombstone: 2026-08-04 03:18:10.491485822 Z
-  what: pull-was-opened
-  when: 2025-11-20 16:54:31.000000000 Z
   where: github
   who: 29139614
 - _id: 2608187
@@ -226876,7 +226862,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 12735202827
+  events_were_scanned: 12739441525
   issues_were_scanned: 2
   labels_were_scanned: 0
   latest_issue_was_found: 2
@@ -230174,7 +230160,7 @@
   - 238-241
   - 243-244
   - 246-248
-  - 250-254
+  - 250-255
   repository: 181044958
   what: tombstone
   where: github
@@ -237164,9 +237150,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1442
+  assignees_were_scanned: 1719
   earliest_issue_was_found: 1
-  events_were_scanned: 16639660345
+  events_were_scanned: 16647381507
   issues_were_scanned: 1702
   labels_were_scanned: 1679
   latest_issue_was_found: 1073
@@ -237174,7 +237160,7 @@
   min_issue_was_found: 1451
   min_pull_was_found: 1837
   repository: 799177290
-  types_were_scanned: 1683
+  types_were_scanned: 1337
   what: iterate
   where: github
 - _id: 2630036
@@ -237208,7 +237194,7 @@
   min_issue_was_found: 1108
   min_pull_was_found: 1315
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1250
   what: iterate
   where: github
 - _id: 2630038
@@ -255241,26 +255227,6 @@
   when: 2026-04-30 03:40:17.000000000 Z
   where: github
   who: 526301
-- _id: 2630845
-  _job: 29292535703
-  _time: 2026-07-13 23:36:42.661789854 Z
-  _version: 0.19.16/0.61.0/0.17.20
-  author: 29139614
-  comments: 3
-  details: The pull request yegor256/0rsk#255 with 24 HoC created by @renovate[bot]
-    was reviewed by @yegor256 after 10h0m and 0 comments.
-  done: 2026-08-04 03:18:10.472216189 Z
-  hoc: 24
-  is_human: 1
-  issue: 255
-  repository: 181044958
-  review_comments: 0
-  seconds: 36034
-  tombstone: 2026-08-04 03:18:21.290312601 Z
-  what: code-was-reviewed
-  when: 2025-11-21 02:55:05.000000000 Z
-  where: github
-  who: 526301
 - _id: 2630846
   _job: 29292535703
   _time: 2026-07-13 23:36:43.988332145 Z
@@ -271656,7 +271622,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-08-04 03:49:05.000000000 Z
+  when: &2575 2026-08-04 03:49:05.000000000 Z
   where: github
   who: 8086956
 - _id: 2631553
@@ -271675,5 +271641,65 @@
   seconds: 28599
   what: code-was-reviewed
   when: *2574
+  where: github
+  who: 526301
+- _id: 2631554
+  _job: 85070
+  _time: 2026-08-04 05:48:59.077574380 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 3
+  details: The pull request yegor256/factbase#691 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 9h12m of being in review and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 691
+  merger: 8086956
+  repository: 798641472
+  review_comments: 0
+  seconds: 33124
+  what: code-was-contributed
+  when: *2575
+  where: github
+  who: 29139614
+- _id: 2631555
+  _job: 85070
+  _time: 2026-08-04 05:49:01.873722752 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  award: 6
+  comments: 2
+  details: It's time to reward @yegor256 for the code review in zerocracy/sales-deck#35,
+    the reward amount is 6.
+  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
+    -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
+    score is [+700](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 2
+  href: https://github.com/zerocracy/sales-deck/issues/35/#issuecomment-5175134635
+  is_human: 1
+  issue: 35
+  repository: 1090089359
+  review_comments: 0
+  seconds: 28599
+  what: code-review-was-rewarded
+  when: 2026-08-04 05:49:01.878893832 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/sales-deck#35
+- _id: 2631556
+  _job: 30883664673
+  _time: 2026-08-04 06:28:12.131751393 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/factbase#691 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 8h54m and 0 comments.
+  hoc: 2
+  is_human: 1
+  issue: 691
+  repository: 798641472
+  review_comments: 0
+  seconds: 32093
+  what: code-was-reviewed
+  when: 2026-08-04 03:31:54.000000000 Z
   where: github
   who: 526301
