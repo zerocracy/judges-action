@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 656.864692766
+  seconds: 1080.715328914
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-05 10:29:06.216010328 Z
+  when: 2026-08-05 11:33:44.202632897 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -233616,7 +233617,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 671
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12803852896
   issues_were_scanned: 644
@@ -233633,9 +233634,9 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 421
   earliest_issue_was_found: 1
-  events_were_scanned: 16788710598
+  events_were_scanned: 12814460614
   issues_were_scanned: 400
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -234075,9 +234076,9 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16679507968
+  events_were_scanned: 16794043683
   issues_were_scanned: 558
   labels_were_scanned: 0
   latest_issue_was_found: 317
@@ -234729,7 +234730,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 661
   earliest_issue_was_found: 1
   events_were_scanned: 16694906551
   issues_were_scanned: 665
@@ -234941,7 +234942,7 @@
   issues_were_scanned: 370
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 411
   min_issue_was_found: 151
   min_pull_was_found: 397
   repository: 181044958
@@ -234952,11 +234953,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1442
   earliest_issue_was_found: 1
-  events_were_scanned: 16785320713
+  events_were_scanned: 16797573856
   issues_were_scanned: 1702
-  labels_were_scanned: 0
+  labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1451
@@ -234986,7 +234987,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1122
   earliest_issue_was_found: 1
   events_were_scanned: 12561837188
   issues_were_scanned: 1266
@@ -269716,7 +269717,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-08-05 09:23:17.000000000 Z
+  when: &2572 2026-08-05 09:23:17.000000000 Z
   where: github
   who: 8086956
 - _id: 2631569
@@ -269737,3 +269738,69 @@
   when: *2571
   where: github
   who: 526301
+- _id: 2631570
+  _job: 85218
+  _time: 2026-08-05 10:29:35.773836998 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 2
+  details: The pull request zerocracy/baza.rb#436 with 6 HoC created by @renovate[bot]
+    was merged by @rultor after 19h8m of being in review and 2 comments.
+  hoc: 6
+  is_human: 0
+  issue: 436
+  merger: 8086956
+  repository: 840215648
+  review_comments: 0
+  seconds: 68916
+  what: code-was-contributed
+  when: *2572
+  where: github
+  who: 29139614
+- _id: 2631571
+  _job: 85218
+  _time: 2026-08-05 10:29:38.700031872 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  award: 6
+  comments: 2
+  details: It's time to reward @yegor256 for the code review in zerocracy/baza.rb#436,
+    the reward amount is 6.
+  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
+    -8 for absolutely no comments posted; -4 for too few (6) hits-of-code.  Your running
+    score is [+587](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 6
+  href: https://github.com/zerocracy/baza.rb/issues/436/#issuecomment-5190629581
+  is_human: 1
+  issue: 436
+  repository: 840215648
+  review_comments: 0
+  seconds: 68432
+  what: code-review-was-rewarded
+  when: 2026-08-05 10:29:38.717008061 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/baza.rb#436
+- _id: 2631572
+  _job: 31000658927
+  _time: 2026-08-05 11:18:33.983291648 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/rubocop-1.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/fbe#631 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 8
+  issue: 631
+  repository: 820463873
+  review: 2026-08-05 09:25:40.000000000 Z
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-05 09:34:16.000000000 Z
+  where: github
+  who: 8086956
