@@ -1,12 +1,30 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
+  error:
+  - 'Failure in repository #805238060 at #26: SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443
+    state=error: certificate verify failed (self-signed certificate)'
+  - 'SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443 state=error: certificate
+    verify failed (self-signed certificate)'
+  - 'Failure in repository #798641472 at #116: SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443
+    state=error: certificate verify failed (self-signed certificate)'
+  - 'Failure in repository #799177290 at #1706: SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443
+    state=error: certificate verify failed (self-signed certificate)'
+  - deadlock; recursive locking
+  - 'Failure in repository #799177290 at #1478: SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443
+    state=error: certificate verify failed (self-signed certificate)'
+  - 'SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443 state=error: certificate
+    verify failed (self-signed certificate)'
+  - 'Failure in repository #974194993 at #28: SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443
+    state=error: certificate verify failed (self-signed certificate)'
+  - 'SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443 state=error: certificate
+    verify failed (self-signed certificate)'
   inserted: 8
-  seconds: 1080.547706825
+  seconds: 618.877209972
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-10 17:03:39.694453429 Z
+  when: 2026-08-10 17:27:08.662499408 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17101,27 +17119,6 @@
   when: 2025-11-27 06:39:58.000000000 Z
   where: github
   who: 526301
-- _id: 2559010
-  _job: 50954
-  _time: 2025-11-27 17:56:40.868242133 Z
-  _version: 0.16.8/0.57.1/0.16.1!0.16.2
-  award: 6
-  comments: 3
-  details: It's time to reward @yegor256 for the code review in zerocracy/swarm-template#192,
-    the reward amount is 6.
-  hoc: 2
-  href: https://github.com/zerocracy/swarm-template/issues/192/#issuecomment-3586744916
-  is_human: 1
-  issue: 192
-  repository: 849726475
-  review_comments: 0
-  seconds: 40350
-  tombstone: 2026-08-10 09:20:41.188072312 Z
-  what: code-review-was-rewarded
-  when: 2025-11-27 16:43:47.312235412 Z
-  where: github
-  who: 526301
-  why: Reviewed code in zerocracy/swarm-template#192
 - _id: 2559788
   _job: 50958
   _time: 2025-11-27 18:57:41.054577667 Z
@@ -219233,14 +219230,14 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12991230953
-  issues_were_scanned: 2
+  issues_were_scanned: 30
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 2
   min_pull_was_found: 1
   repository: 1090089359
-  types_were_scanned: 0
+  types_were_scanned: 30
   what: iterate
   where: github
 - _id: 2628882
@@ -221449,17 +221446,17 @@
   _job: 28847027752
   _time: 2026-07-07 06:49:02.159109197 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 47
   earliest_issue_was_found: 1
   events_were_scanned: 17250924701
-  issues_were_scanned: 68
+  issues_were_scanned: 78
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 63
+  min_issue_was_found: 67
   min_pull_was_found: 11
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 27
   what: iterate
   where: github
 - _id: 2629220
@@ -223461,6 +223458,7 @@
   - 0.37183936539414975
   - 0.37183936539414975
   - 0.37183936539414975
+  - 0.37183936539414975
   qod_per_day:
   - 5.261714286182081
   - 3.5025714287953895
@@ -224257,8 +224255,9 @@
   - 4.609803703086086
   - 4.609803703086086
   - 4.609803703086086
+  - 4.609803703086086
   what: learn-eva
-  when: 2026-08-10 08:51:13.860347144 Z
+  when: 2026-08-10 17:06:33.757064536 Z
 - _id: 2629381
   _job: 80835
   _time: 2026-07-07 15:47:33.754402190 Z
@@ -225123,17 +225122,17 @@
   _job: 28895308818
   _time: 2026-07-07 20:14:10.841003262 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 27
   earliest_issue_was_found: 1
   events_were_scanned: 17195691623
-  issues_were_scanned: 39
+  issues_were_scanned: 47
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 36
+  min_issue_was_found: 37
   min_pull_was_found: 79
   repository: 1236759415
-  types_were_scanned: 0
+  types_were_scanned: 11
   what: iterate
   where: github
 - _id: 2629477
@@ -227940,17 +227939,17 @@
   _job: 28942503745
   _time: 2026-07-08 12:32:05.116979411 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 234
   earliest_issue_was_found: 1
   events_were_scanned: 13016512826
-  issues_were_scanned: 232
+  issues_were_scanned: 233
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 264
+  min_issue_was_found: 283
   min_pull_was_found: 97
   repository: 849726475
-  types_were_scanned: 0
+  types_were_scanned: 223
   what: iterate
   where: github
 - _id: 2629820
@@ -228195,31 +228194,31 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16969805068
-  issues_were_scanned: 80
+  issues_were_scanned: 91
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 32
+  min_issue_was_found: 34
   min_pull_was_found: 94
   repository: 805238060
-  types_were_scanned: 0
+  types_were_scanned: 30
   what: iterate
   where: github
 - _id: 2629837
   _job: 28953721970
   _time: 2026-07-08 15:19:34.341111974 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 42
   earliest_issue_was_found: 1
   events_were_scanned: 13038248894
-  issues_were_scanned: 22
+  issues_were_scanned: 27
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 58
-  min_pull_was_found: 1
+  min_issue_was_found: 65
+  min_pull_was_found: 9
   repository: 1084843345
-  types_were_scanned: 0
+  types_were_scanned: 27
   what: iterate
   where: github
 - _id: 2629840
@@ -228229,31 +228228,31 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 12919311945
-  issues_were_scanned: 644
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 315
   merges_were_scanned: 0
-  min_issue_was_found: 4
-  min_pull_was_found: 676
+  min_issue_was_found: 116
+  min_pull_was_found: 678
   repository: 798641472
-  types_were_scanned: 656
+  types_were_scanned: 672
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 421
+  assignees_were_scanned: 290
   earliest_issue_was_found: 1
   events_were_scanned: 12952959278
-  issues_were_scanned: 400
+  issues_were_scanned: 415
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 327
-  min_pull_was_found: 422
+  min_issue_was_found: 337
+  min_pull_was_found: 424
   repository: 840215648
-  types_were_scanned: 402
+  types_were_scanned: 423
   what: iterate
   where: github
 - _id: 2629843
@@ -228263,10 +228262,11 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16952469896
+  issues_were_scanned: 3
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
-  min_pull_was_found: 0
+  min_issue_was_found: 3
+  min_pull_was_found: 61
   repository: 857659265
   types_were_scanned: 0
   what: iterate
@@ -228688,14 +228688,14 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 13044526101
-  issues_were_scanned: 558
+  issues_were_scanned: 577
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 630
-  min_pull_was_found: 598
+  min_issue_was_found: 633
+  min_pull_was_found: 599
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 361
   what: iterate
   where: github
 - _id: 2629882
@@ -229339,17 +229339,17 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 673
+  assignees_were_scanned: 460
   earliest_issue_was_found: 1
   events_were_scanned: 16967686842
-  issues_were_scanned: 665
+  issues_were_scanned: 675
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 63
+  min_issue_was_found: 65
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 72
   what: iterate
   where: github
 - _id: 2629938
@@ -229509,17 +229509,17 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 393
   earliest_issue_was_found: 1
   events_were_scanned: 12986227330
-  issues_were_scanned: 454
+  issues_were_scanned: 472
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 340
-  min_pull_was_found: 473
+  min_issue_was_found: 341
+  min_pull_was_found: 474
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 304
   what: iterate
   where: github
 - _id: 2630021
@@ -229545,34 +229545,34 @@
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 141
   earliest_issue_was_found: 1
   events_were_scanned: 12986393067
-  issues_were_scanned: 370
+  issues_were_scanned: 395
   labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 412
-  min_issue_was_found: 151
-  min_pull_was_found: 397
+  min_issue_was_found: 152
+  min_pull_was_found: 399
   repository: 181044958
-  types_were_scanned: 0
+  types_were_scanned: 16
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1476
   earliest_issue_was_found: 1
   events_were_scanned: 13056212634
-  issues_were_scanned: 1702
+  issues_were_scanned: 1703
   labels_were_scanned: 1679
   latest_issue_was_found: 1073
   merges_were_scanned: 0
-  min_issue_was_found: 1451
-  min_pull_was_found: 1837
+  min_issue_was_found: 1454
+  min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1685
+  types_were_scanned: 1691
   what: iterate
   where: github
 - _id: 2630036
@@ -229582,12 +229582,12 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16596441549
-  issues_were_scanned: 5
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
   min_issue_was_found: 0
-  min_pull_was_found: 1
+  min_pull_was_found: 9
   repository: 1081929119
   types_were_scanned: 0
   what: iterate
@@ -229596,17 +229596,17 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1141
+  assignees_were_scanned: 709
   earliest_issue_was_found: 1
   events_were_scanned: 16994619176
-  issues_were_scanned: 1266
+  issues_were_scanned: 1273
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1108
-  min_pull_was_found: 1315
+  min_issue_was_found: 1111
+  min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1258
+  types_were_scanned: 1269
   what: iterate
   where: github
 - _id: 2630038
@@ -265541,3 +265541,15 @@
   when: 2026-08-10 13:10:25.000000000 Z
   where: github
   who: 125282851
+- _id: 2631641
+  _job: 31413119173
+  _time: 2026-08-10 17:22:06.654627986 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#675 has been "issue-was-closed".
+  is_human: 1
+  issue: 675
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:21:04.000000000 Z
+  where: github
+  who: 526301
