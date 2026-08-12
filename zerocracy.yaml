@@ -2,11 +2,20 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - 'Failure in repository #802720676 at #610: SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443
+    state=error: certificate verify failed (self-signed certificate)'
+  - 'SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443 state=error: certificate
+    verify failed (self-signed certificate)'
+  - 'SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443 state=error: certificate
+    verify failed (self-signed certificate)'
+  - 'Failure in repository #728758275 at #683: SSL_connect returned=1 errno=0 peeraddr=172.182.252.137:443
+    state=error: certificate verify failed (self-signed certificate)'
   inserted: 8
-  seconds: 763.692726673
+  seconds: 919.605979246
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-12 08:14:24.840358281 Z
+  when: 2026-08-12 09:07:41.982023781 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17200,27 +17209,6 @@
   when: 2025-11-28 21:33:45.000000000 Z
   where: github
   who: 2566462
-- _id: 2569804
-  _job: 51214
-  _time: 2025-11-29 09:20:33.277241068 Z
-  _version: 0.16.8/0.57.1/0.16.1!0.16.2
-  award: 6
-  comments: 3
-  details: It's time to reward @yegor256 for the code review in yegor256/factbase#429,
-    the reward amount is 6.
-  hoc: 6
-  href: https://github.com/yegor256/factbase/issues/429/#issuecomment-3591488265
-  is_human: 1
-  issue: 429
-  repository: 798641472
-  review_comments: 0
-  seconds: 56819
-  tombstone: 2026-08-12 03:30:02.562938353 Z
-  what: code-review-was-rewarded
-  when: 2025-11-29 08:00:00.853455064 Z
-  where: github
-  who: 526301
-  why: Reviewed code in yegor256/factbase#429
 - _id: 2571001
   _job: 51245
   _time: 2025-11-29 15:01:06.811685540 Z
@@ -218593,7 +218581,7 @@
   min_issue_was_found: 67
   min_pull_was_found: 11
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 62
   what: iterate
   where: github
 - _id: 2629220
@@ -222277,7 +222265,7 @@
   min_issue_was_found: 44
   min_pull_was_found: 79
   repository: 1236759415
-  types_were_scanned: 0
+  types_were_scanned: 39
   what: iterate
   where: github
 - _id: 2629477
@@ -225095,7 +225083,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 97
   repository: 849726475
-  types_were_scanned: 0
+  types_were_scanned: 259
   what: iterate
   where: github
 - _id: 2629820
@@ -225364,14 +225352,14 @@
   min_issue_was_found: 66
   min_pull_was_found: 9
   repository: 1084843345
-  types_were_scanned: 0
+  types_were_scanned: 58
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 599
   earliest_issue_was_found: 1
   events_were_scanned: 17436463716
   issues_were_scanned: 4
@@ -225381,16 +225369,16 @@
   min_issue_was_found: 116
   min_pull_was_found: 678
   repository: 798641472
-  types_were_scanned: 656
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 355
   earliest_issue_was_found: 1
-  events_were_scanned: 13134707193
+  events_were_scanned: 13155223363
   issues_were_scanned: 416
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -225398,7 +225386,7 @@
   min_issue_was_found: 337
   min_pull_was_found: 424
   repository: 840215648
-  types_were_scanned: 404
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -225831,7 +225819,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17440269365
   issues_were_scanned: 577
@@ -225841,7 +225829,7 @@
   min_issue_was_found: 634
   min_pull_was_found: 599
   repository: 820463873
-  types_were_scanned: 576
+  types_were_scanned: 620
   what: iterate
   where: github
 - _id: 2629882
@@ -226485,7 +226473,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 608
   earliest_issue_was_found: 1
   events_were_scanned: 17432491636
   issues_were_scanned: 675
@@ -226495,7 +226483,7 @@
   min_issue_was_found: 67
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 656
+  types_were_scanned: 691
   what: iterate
   where: github
 - _id: 2629938
@@ -226665,7 +226653,7 @@
   min_issue_was_found: 343
   min_pull_was_found: 474
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 400
   what: iterate
   where: github
 - _id: 2630021
@@ -226691,34 +226679,34 @@
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 207
   earliest_issue_was_found: 1
   events_were_scanned: 17437363049
   issues_were_scanned: 395
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 412
   min_issue_was_found: 152
   min_pull_was_found: 399
   repository: 181044958
-  types_were_scanned: 0
+  types_were_scanned: 156
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1719
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17456395156
+  events_were_scanned: 17462836633
   issues_were_scanned: 1703
-  labels_were_scanned: 0
+  labels_were_scanned: 1680
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1686
+  types_were_scanned: 1706
   what: iterate
   where: github
 - _id: 2630036
@@ -226742,7 +226730,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 992
   earliest_issue_was_found: 1
   events_were_scanned: 17438955027
   issues_were_scanned: 1273
@@ -226752,7 +226740,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 640
   what: iterate
   where: github
 - _id: 2630038
@@ -262993,10 +262981,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#1852,
     the reward amount is 6.
-  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
-    -8 for absolutely no comments posted; -4 for too few (8) hits-of-code.  Your running
-    score is [+288](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 8
   href: https://github.com/zerocracy/judges-action/issues/1852/#issuecomment-5263865242
   is_human: 1
@@ -263009,3 +262993,43 @@
   where: github
   who: 526301
   why: Reviewed code in zerocracy/judges-action#1852
+- _id: 2631661
+  _job: 31580224896
+  _time: 2026-08-12 08:52:54.321041581 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 1
+  commits: 1
+  details: The pull request zerocracy/baza.rb#429 has been reviewed by @yegor256 with
+    6 HoC and 1 comments.
+  event_id: 13155098773
+  event_type: PullRequestReviewEvent
+  files: 2
+  hoc: 6
+  is_human: 1
+  issue: 429
+  repository: 840215648
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-08-12 08:48:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631662
+  _job: 31580224896
+  _time: 2026-08-12 08:52:55.777278006 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 2
+  commits: 1
+  details: The pull request zerocracy/baza.rb#431 has been reviewed by @yegor256 with
+    2 HoC and 2 comments.
+  event_id: 13155095519
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 431
+  repository: 840215648
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-08-12 08:48:02.000000000 Z
+  where: github
+  who: 526301
