@@ -1,12 +1,15 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - deadlock; recursive locking
   inserted: 8
-  seconds: 1080.330744187
+  seconds: 837.571835538
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-12 10:39:35.687522113 Z
+  when: 2026-08-12 11:00:54.770645221 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -220579,6 +220582,7 @@
   - 2.646669607410675
   - 2.646669607410675
   - 2.646669607410675
+  - 2.646669607410675
   qod_per_day:
   - 5.261714286182081
   - 3.5025714287953895
@@ -221380,8 +221384,9 @@
   - 3.88127540737794
   - 3.88127540737794
   - 3.88127540737794
+  - 3.88127540737794
   what: learn-eva
-  when: 2026-08-12 02:33:32.727712936 Z
+  when: 2026-08-12 10:43:03.003031432 Z
 - _id: 2629381
   _job: 80835
   _time: 2026-07-07 15:47:33.754402190 Z
@@ -226687,9 +226692,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1655
   earliest_issue_was_found: 1
-  events_were_scanned: 17469212369
+  events_were_scanned: 17473606689
   issues_were_scanned: 1703
   labels_were_scanned: 1680
   latest_issue_was_found: 1073
@@ -226697,7 +226702,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1527
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -226731,7 +226736,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1043
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -263124,7 +263129,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-08-12 09:04:41.000000000 Z
+  when: &2515 2026-08-12 09:04:41.000000000 Z
   where: github
   who: 8086956
 - _id: 2631668
@@ -263150,6 +263155,42 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-08-12 08:56:11.000000000 Z
+  when: &2516 2026-08-12 08:56:11.000000000 Z
   where: github
   who: 8086956
+- _id: 2631669
+  _job: 86556
+  _time: 2026-08-12 10:40:35.338314566 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 4
+  details: The pull request zerocracy/baza.rb#429 with 6 HoC created by @renovate[bot]
+    was merged by @rultor after 4w of being in review and 4 comments.
+  hoc: 6
+  is_human: 0
+  issue: 429
+  merger: 8086956
+  repository: 840215648
+  review_comments: 0
+  seconds: 2460123
+  what: code-was-contributed
+  when: *2515
+  where: github
+  who: 29139614
+- _id: 2631670
+  _job: 86556
+  _time: 2026-08-12 10:40:36.008271233 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  comments: 4
+  details: The pull request zerocracy/baza.rb#431 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 3w1d of being in review and 4 comments.
+  hoc: 2
+  is_human: 0
+  issue: 431
+  merger: 8086956
+  repository: 840215648
+  review_comments: 0
+  seconds: 1937175
+  what: code-was-contributed
+  when: *2516
+  where: github
+  who: 29139614
