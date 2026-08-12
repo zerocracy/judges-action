@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1082.9361171
+  seconds: 680.192677497
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-12 13:04:12.603929878 Z
+  when: 2026-08-12 13:39:27.353717151 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17200,28 +17201,6 @@
   when: 2025-11-28 21:33:45.000000000 Z
   where: github
   who: 2566462
-- _id: 2571001
-  _job: 51245
-  _time: 2025-11-29 15:01:06.811685540 Z
-  _version: 0.16.8/0.57.1/0.16.1!0.16.2
-  award: 20
-  comments: 1
-  details: It's time to reward @volodya-lombrozo for the code contributed in yegor256/factbase#427,
-    the reward amount is 20.
-  hoc: 137
-  href: https://github.com/yegor256/factbase/issues/427/#issuecomment-3591696873
-  is_human: 1
-  issue: 427
-  receipt: receipt-#51143
-  repository: 798641472
-  review_comments: 0
-  seconds: 1411
-  tombstone: 2026-08-10 15:37:57.063129936 Z
-  what: code-contribution-was-rewarded
-  when: 2025-11-29 13:00:44.917625907 Z
-  where: github
-  who: 51804353
-  why: Contributed code in yegor256/factbase#427
 - _id: 2571434
   _job: 19787581918
   _time: 2025-11-29 18:21:13.394653640 Z
@@ -218572,7 +218551,7 @@
   min_issue_was_found: 67
   min_pull_was_found: 11
   repository: 974194993
-  types_were_scanned: 42
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -222258,7 +222237,7 @@
   min_issue_was_found: 44
   min_pull_was_found: 79
   repository: 1236759415
-  types_were_scanned: 20
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629477
@@ -225076,7 +225055,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 97
   repository: 849726475
-  types_were_scanned: 228
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629820
@@ -225328,7 +225307,7 @@
   min_issue_was_found: 34
   min_pull_was_found: 94
   repository: 805238060
-  types_were_scanned: 67
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629837
@@ -225345,7 +225324,7 @@
   min_issue_was_found: 66
   min_pull_was_found: 9
   repository: 1084843345
-  types_were_scanned: 31
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629840
@@ -225362,7 +225341,7 @@
   min_issue_was_found: 116
   min_pull_was_found: 678
   repository: 798641472
-  types_were_scanned: 445
+  types_were_scanned: 656
   what: iterate
   where: github
 - _id: 2629842
@@ -225379,7 +225358,7 @@
   min_issue_was_found: 337
   min_pull_was_found: 424
   repository: 840215648
-  types_were_scanned: 228
+  types_were_scanned: 404
   what: iterate
   where: github
 - _id: 2629843
@@ -225822,7 +225801,7 @@
   min_issue_was_found: 634
   min_pull_was_found: 599
   repository: 820463873
-  types_were_scanned: 586
+  types_were_scanned: 576
   what: iterate
   where: github
 - _id: 2629882
@@ -226476,7 +226455,7 @@
   min_issue_was_found: 67
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 678
+  types_were_scanned: 656
   what: iterate
   where: github
 - _id: 2629938
@@ -226646,7 +226625,7 @@
   min_issue_was_found: 343
   min_pull_was_found: 474
   repository: 799113787
-  types_were_scanned: 341
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630021
@@ -226682,16 +226661,16 @@
   min_issue_was_found: 152
   min_pull_was_found: 399
   repository: 181044958
-  types_were_scanned: 61
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1655
   earliest_issue_was_found: 1
-  events_were_scanned: 17478699482
+  events_were_scanned: 17483027888
   issues_were_scanned: 1703
   labels_were_scanned: 1680
   latest_issue_was_found: 1073
@@ -226699,7 +226678,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1362
+  types_were_scanned: 1696
   what: iterate
   where: github
 - _id: 2630036
@@ -226733,7 +226712,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1287
+  types_were_scanned: 1043
   what: iterate
   where: github
 - _id: 2630038
