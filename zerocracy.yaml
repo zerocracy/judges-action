@@ -2,11 +2,12 @@
 - added: 8
   cycles: 2
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1080.450513556
+  seconds: 872.65399232
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-14 03:35:08.880718601 Z
+  when: 2026-08-14 04:27:46.169984432 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -225827,7 +225828,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1445
+  assignees_were_scanned: 1720
   earliest_issue_was_found: 1
   events_were_scanned: 13266148473
   issues_were_scanned: 1703
@@ -225837,7 +225838,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1687
+  types_were_scanned: 1345
   what: iterate
   where: github
 - _id: 2630036
@@ -225871,7 +225872,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1258
+  types_were_scanned: 1043
   what: iterate
   where: github
 - _id: 2630038
@@ -262431,5 +262432,29 @@
   _job: 31766287665
   _time: 2026-08-14 03:35:08.727790410 Z
   _version: 0.19.16/0.61.1/0.17.21
+  total_active_contributors: 6
+  total_commits: 17075
+  total_contributors: 55
+  total_files: 2370
+  total_forks: 165
+  total_issues: 2145
+  total_pulls: 5361
+  total_releases: 877
+  total_repositories: 18
+  total_stars: 141
   what: dimensions-of-terrain
   when: 2026-08-14 03:35:08.737250548 Z
+- _id: 2631678
+  _job: 86826
+  _time: 2026-08-14 03:36:55.196047932 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  ac: 35886
+  cost_of_qod: 3.430802388182628
+  ev: 11071
+  pv: 139595
+  qod: 3227
+  qod_per_day: 86.28509330285111
+  qod_per_sec: 7.922180980305608e-05
+  start: *766
+  what: earned-value
+  when: 2026-08-14 03:36:55.196242710 Z
