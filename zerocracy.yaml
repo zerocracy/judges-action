@@ -1,12 +1,21 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
+  error:
+  - Failed to open TCP connection to api.github.com:443 (user specified timeout for
+    140.82.114.5:443)
+  - 'Failure in repository #849726475 at #211: Failed to open TCP connection to api.github.com:443
+    (user specified timeout for 140.82.114.5:443)'
+  - Failed to open TCP connection to api.github.com:443 (user specified timeout for
+    140.82.113.6:443)
+  - 'Failure in repository #974194993 at #68: Failed to open TCP connection to api.github.com:443
+    (user specified timeout for 140.82.114.5:443)'
   inserted: 8
-  seconds: 725.985444958
+  seconds: 863.446079903
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-14 20:21:26.146651260 Z
+  when: 2026-08-14 20:54:55.408603298 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -214915,7 +214924,7 @@
   min_issue_was_found: 2
   min_pull_was_found: 1
   repository: 1090089359
-  types_were_scanned: 0
+  types_were_scanned: 2
   what: iterate
   where: github
 - _id: 2628882
@@ -217127,14 +217136,14 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17678661748
-  issues_were_scanned: 78
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
   min_issue_was_found: 67
   min_pull_was_found: 11
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 3
   what: iterate
   where: github
 - _id: 2629220
@@ -220826,14 +220835,14 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17195691623
-  issues_were_scanned: 50
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
   min_issue_was_found: 44
   min_pull_was_found: 79
   repository: 1236759415
-  types_were_scanned: 0
+  types_were_scanned: 4
   what: iterate
   where: github
 - _id: 2629477
@@ -223645,14 +223654,14 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17436085471
-  issues_were_scanned: 233
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
   min_issue_was_found: 0
   min_pull_was_found: 97
   repository: 849726475
-  types_were_scanned: 0
+  types_were_scanned: 3
   what: iterate
   where: github
 - _id: 2629820
@@ -223897,14 +223906,14 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17680360917
-  issues_were_scanned: 91
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
   min_issue_was_found: 34
   min_pull_was_found: 94
   repository: 805238060
-  types_were_scanned: 0
+  types_were_scanned: 4
   what: iterate
   where: github
 - _id: 2629837
@@ -223914,48 +223923,48 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 13038248894
-  issues_were_scanned: 27
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
   min_issue_was_found: 66
   min_pull_was_found: 9
   repository: 1084843345
-  types_were_scanned: 0
+  types_were_scanned: 4
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 677
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17436463716
-  issues_were_scanned: 4
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 315
   merges_were_scanned: 0
   min_issue_was_found: 116
   min_pull_was_found: 678
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 4
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 438
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 13307515283
-  issues_were_scanned: 416
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
   min_issue_was_found: 337
   min_pull_was_found: 424
   repository: 840215648
-  types_were_scanned: 415
+  types_were_scanned: 416
   what: iterate
   where: github
 - _id: 2629843
@@ -223971,7 +223980,7 @@
   min_issue_was_found: 3
   min_pull_was_found: 61
   repository: 857659265
-  types_were_scanned: 0
+  types_were_scanned: 3
   what: iterate
   where: github
 - _id: 2629845
@@ -224388,17 +224397,17 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 589
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17440269365
-  issues_were_scanned: 577
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 634
+  min_issue_was_found: 635
   min_pull_was_found: 599
   repository: 820463873
-  types_were_scanned: 576
+  types_were_scanned: 578
   what: iterate
   where: github
 - _id: 2629882
@@ -225042,17 +225051,17 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 675
   earliest_issue_was_found: 1
   events_were_scanned: 17675980686
-  issues_were_scanned: 675
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
   min_issue_was_found: 67
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 2
   what: iterate
   where: github
 - _id: 2629938
@@ -225215,14 +225224,14 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17678652436
-  issues_were_scanned: 472
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
   min_issue_was_found: 343
   min_pull_was_found: 474
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 3
   what: iterate
   where: github
 - _id: 2630021
@@ -225251,31 +225260,31 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17437363049
-  issues_were_scanned: 395
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 412
-  min_issue_was_found: 152
+  merges_were_scanned: 0
+  min_issue_was_found: 156
   min_pull_was_found: 399
   repository: 181044958
-  types_were_scanned: 0
+  types_were_scanned: 11
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1448
+  assignees_were_scanned: 1658
   earliest_issue_was_found: 1
   events_were_scanned: 17683356194
-  issues_were_scanned: 1703
-  labels_were_scanned: 1683
+  issues_were_scanned: 0
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1354
+  types_were_scanned: 1357
   what: iterate
   where: github
 - _id: 2630036
@@ -225285,31 +225294,31 @@
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16596441549
-  issues_were_scanned: 5
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
   min_issue_was_found: 0
   min_pull_was_found: 9
   repository: 1081929119
-  types_were_scanned: 0
+  types_were_scanned: 5
   what: iterate
   where: github
 - _id: 2630037
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1141
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17682920244
-  issues_were_scanned: 1273
+  issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1053
+  types_were_scanned: 1054
   what: iterate
   where: github
 - _id: 2630038
@@ -262032,3 +262041,267 @@
   where: github
   who: 526301
   why: Reviewed code in zerocracy/baza.rb#439
+- _id: 2631688
+  _job: 31838882344
+  _time: 2026-08-14 20:54:26.420379257 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1706 has been "issue-was-closed".
+  issue: 1706
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-13 18:47:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631689
+  _job: 31838882344
+  _time: 2026-08-14 20:54:26.912478416 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, yegor256/factbase#116 has been "issue-was-closed".
+  issue: 116
+  repository: 798641472
+  what: issue-was-closed
+  when: 2026-06-14 15:50:07.000000000 Z
+  where: github
+  who: 24456188
+- _id: 2631690
+  _job: 31838882344
+  _time: 2026-08-14 20:54:32.187090967 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#677 has been "issue-was-closed".
+  issue: 677
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:20:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631691
+  _job: 31838882344
+  _time: 2026-08-14 20:54:34.375360155 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#678 has been "issue-was-closed".
+  issue: 678
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:15:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631692
+  _job: 31838882344
+  _time: 2026-08-14 20:54:35.780983987 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/fbe#597 has been "issue-was-closed".
+  issue: 597
+  repository: 820463873
+  what: issue-was-closed
+  when: 2026-07-08 08:47:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631693
+  _job: 31838882344
+  _time: 2026-08-14 20:54:36.868431592 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#679 has been "issue-was-closed".
+  issue: 679
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:20:22.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631694
+  _job: 31838882344
+  _time: 2026-08-14 20:54:38.083178545 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#680 has been "issue-was-closed".
+  issue: 680
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:20:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631695
+  _job: 31838882344
+  _time: 2026-08-14 20:54:39.592761458 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/baza#1317 has been "issue-was-closed".
+  issue: 1317
+  repository: 728758275
+  what: issue-was-closed
+  when: 2026-07-12 19:51:48.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2631696
+  _job: 31838882344
+  _time: 2026-08-14 20:54:40.099351643 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1717 has been "issue-was-closed".
+  issue: 1717
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-13 18:28:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631697
+  _job: 31838882344
+  _time: 2026-08-14 20:54:40.744155911 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#682 has been "issue-was-closed".
+  issue: 682
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:19:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631698
+  _job: 31838882344
+  _time: 2026-08-14 20:54:41.236330976 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1719 has been "issue-was-closed".
+  issue: 1719
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-13 18:31:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631699
+  _job: 31838882344
+  _time: 2026-08-14 20:54:42.011954114 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#683 has been "issue-was-closed".
+  issue: 683
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:21:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631700
+  _job: 31838882344
+  _time: 2026-08-14 20:54:42.441305067 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1720 has been "issue-was-closed".
+  issue: 1720
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-13 18:30:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631701
+  _job: 31838882344
+  _time: 2026-08-14 20:54:43.325695073 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#684 has been "issue-was-closed".
+  issue: 684
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:19:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631702
+  _job: 31838882344
+  _time: 2026-08-14 20:54:43.852242529 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1721 has been "issue-was-closed".
+  issue: 1721
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-24 04:58:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631703
+  _job: 31838882344
+  _time: 2026-08-14 20:54:44.545021342 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#685 has been "issue-was-closed".
+  issue: 685
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:19:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631704
+  _job: 31838882344
+  _time: 2026-08-14 20:54:44.987098120 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1723 has been "issue-was-closed".
+  issue: 1723
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-13 19:17:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631705
+  _job: 31838882344
+  _time: 2026-08-14 20:54:45.721292996 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#686 has been "issue-was-closed".
+  issue: 686
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:18:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631706
+  _job: 31838882344
+  _time: 2026-08-14 20:54:46.700206030 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#687 has been "issue-was-closed".
+  issue: 687
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:21:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631707
+  _job: 31838882344
+  _time: 2026-08-14 20:54:47.153200708 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1728 has been "issue-was-closed".
+  issue: 1728
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-09 18:37:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631708
+  _job: 31838882344
+  _time: 2026-08-14 20:54:47.657885401 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/pages-action#691 has been "issue-was-closed".
+  issue: 691
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-07-13 18:17:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631709
+  _job: 31838882344
+  _time: 2026-08-14 20:54:50.794761226 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1839 has been "issue-was-closed".
+  issue: 1839
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-10 13:04:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631710
+  _job: 31838882344
+  _time: 2026-08-14 20:54:51.695193225 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1857 has been "issue-was-closed".
+  issue: 1857
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-24 12:36:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2631711
+  _job: 31838882344
+  _time: 2026-08-14 20:54:52.215701218 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: Apparently, zerocracy/judges-action#1859 has been "issue-was-closed".
+  issue: 1859
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-07-24 12:35:59.000000000 Z
+  where: github
+  who: 526301
