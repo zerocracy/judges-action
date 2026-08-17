@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 246.293521003
+  seconds: 1055.353023194
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-17 21:42:31.222628965 Z
+  when: 2026-08-17 22:21:43.914614217 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17088,46 +17089,6 @@
   when: 2025-12-04 21:03:18.000000000 Z
   where: github
   who: 113470971
-- _id: 2585219
-  _job: 19945788142
-  _time: 2025-12-04 22:20:59.069041586 Z
-  _version: 0.16.8/0.57.2/0.16.2
-  branch: 332-ellipsized
-  comments: 0
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 1
-  comments_resolved: 0
-  comments_to_code: 0
-  details: The pull request yegor256/judges#342 has been closed by @codeninja-ru,
-    with 0 HoC and 0 comments.
-  event_id: 5105556855
-  event_type: PullRequestEvent
-  failed_builds: 3
-  hoc: 0
-  is_human: 1
-  issue: 342
-  repository: 799113787
-  succeeded_builds: 9
-  what: pull-was-closed
-  when: 2025-12-04 21:26:53.000000000 Z
-  where: github
-  who: 836361
-- _id: 2585220
-  _job: 19945788142
-  _time: 2025-12-04 22:21:15.091458043 Z
-  _version: 0.16.8/0.57.2/0.16.2
-  branch: 332-ellipsized
-  details: The pull request yegor256/judges#342 has been opened by @codeninja-ru.
-  event_id: 5105397111
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 342
-  repository: 799113787
-  what: pull-was-opened
-  when: 2025-12-04 21:26:53.000000000 Z
-  where: github
-  who: 836361
 - _id: 2585732
   _job: 19965757321
   _time: 2025-12-05 14:21:03.092926533 Z
@@ -217916,6 +217877,7 @@
   - 299-302
   - 305-331
   - 333-339
+  - '342'
   repository: 799113787
   what: tombstone
   where: github
@@ -221037,7 +220999,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 677
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17848088641
   issues_were_scanned: 0
@@ -221047,7 +221009,7 @@
   min_issue_was_found: 116
   min_pull_was_found: 678
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 660
   what: iterate
   where: github
 - _id: 2629842
@@ -221064,7 +221026,7 @@
   min_issue_was_found: 337
   min_pull_was_found: 424
   repository: 840215648
-  types_were_scanned: 416
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -221497,7 +221459,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 589
   earliest_issue_was_found: 1
   events_were_scanned: 13351371769
   issues_were_scanned: 0
@@ -221507,7 +221469,7 @@
   min_issue_was_found: 635
   min_pull_was_found: 599
   repository: 820463873
-  types_were_scanned: 576
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -222151,7 +222113,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 684
   earliest_issue_was_found: 1
   events_were_scanned: 17799786791
   issues_were_scanned: 0
@@ -222161,7 +222123,7 @@
   min_issue_was_found: 67
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 680
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629938
@@ -222363,7 +222325,7 @@
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 412
+  merges_were_scanned: 0
   min_issue_was_found: 156
   min_pull_was_found: 399
   repository: 181044958
@@ -222374,17 +222336,17 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1451
   earliest_issue_was_found: 1
   events_were_scanned: 17967255282
   issues_were_scanned: 0
-  labels_were_scanned: 1684
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 0
+  types_were_scanned: 1359
   what: iterate
   where: github
 - _id: 2630036
@@ -222408,7 +222370,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1153
   earliest_issue_was_found: 1
   events_were_scanned: 17682920244
   issues_were_scanned: 0
@@ -222418,7 +222380,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1086
+  types_were_scanned: 1273
   what: iterate
   where: github
 - _id: 2630038
