@@ -3,10 +3,10 @@
   cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 405.241350354
+  seconds: 1080.950500826
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-17 08:17:58.377171686 Z
+  when: 2026-08-17 09:02:26.617374824 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -221340,7 +221340,7 @@
   min_issue_was_found: 116
   min_pull_was_found: 678
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 660
   what: iterate
   where: github
 - _id: 2629842
@@ -221357,7 +221357,7 @@
   min_issue_was_found: 337
   min_pull_was_found: 424
   repository: 840215648
-  types_were_scanned: 416
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -221800,7 +221800,7 @@
   min_issue_was_found: 635
   min_pull_was_found: 599
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 576
   what: iterate
   where: github
 - _id: 2629882
@@ -222454,7 +222454,7 @@
   min_issue_was_found: 67
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 675
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629938
@@ -222616,7 +222616,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17812448164
+  events_were_scanned: 13385124382
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
@@ -222667,9 +222667,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1659
+  assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17901042717
+  events_were_scanned: 17909066425
   issues_were_scanned: 0
   labels_were_scanned: 1684
   latest_issue_was_found: 1073
@@ -222677,7 +222677,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 0
+  types_were_scanned: 1359
   what: iterate
   where: github
 - _id: 2630036
@@ -222711,7 +222711,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1266
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -260387,3 +260387,47 @@
     The average monthly zents/points ratio (0.63) is staying still.
   what: assessment
   when: 2026-08-17 07:34:32.052289121 Z
+- _id: 2631755
+  _job: 32011678279
+  _time: 2026-08-17 08:45:09.330870170 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/rubocop-performance-1.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#491 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  is_human: 0
+  issue: 491
+  repository: 799113787
+  review: 2026-08-17 08:33:22.000000000 Z
+  review_comments: 0
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-17 08:42:36.000000000 Z
+  where: github
+  who: 8086956
+- _id: 2631756
+  _job: 32011678279
+  _time: 2026-08-17 08:49:47.011204101 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/judges#491 with 4 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 23h35m and 0 comments.
+  hoc: 4
+  is_human: 1
+  issue: 491
+  repository: 799113787
+  review_comments: 0
+  seconds: 84901
+  what: code-was-reviewed
+  when: 2026-08-17 08:33:22.000000000 Z
+  where: github
+  who: 526301
