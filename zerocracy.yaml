@@ -2,11 +2,12 @@
 - added: 8
   cycles: 2
   deleted: 8
+  error: end of file reached
   inserted: 8
-  seconds: 676.258489424
+  seconds: 494.771909313
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-21 15:19:39.276470424 Z
+  when: 2026-08-21 15:50:39.256447035 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17332,19 +17333,6 @@
   when: 2025-12-08 15:41:32.000000000 Z
   where: github
   who: 8086956
-- _id: 2592102
-  _job: 20034943832
-  _time: 2025-12-08 16:41:07.786989699 Z
-  _version: 0.17.1/0.58.0/0.17.1
-  branch: '1195'
-  details: The missing pull zerocracy/judges-action#1219 has been opened by @yegorov.
-  is_human: 1
-  issue: 1219
-  repository: 799177290
-  what: pull-was-opened
-  when: 2025-12-08 14:58:27.000000000 Z
-  where: github
-  who: 2566462
 - _id: 2592115
   _job: 20038355954
   _time: 2025-12-08 18:22:19.612599044 Z
@@ -17459,6 +17447,7 @@
   review_comments: 0
   succeeded_builds: 13
   suggestions: 0
+  tombstone: 2026-08-21 15:21:09.013660320 Z
   what: pull-was-merged
   when: &193 2025-12-08 15:41:30.000000000 Z
   where: github
@@ -17576,6 +17565,7 @@
   repository: 799177290
   review_comments: 0
   seconds: 2583
+  tombstone: 2026-08-21 15:21:09.015437051 Z
   what: code-was-contributed
   when: *193
   where: github
@@ -17612,19 +17602,6 @@
   when: 2025-12-08 21:46:08.000000000 Z
   where: github
   who: 29139614
-- _id: 2592332
-  _job: 20044688849
-  _time: 2025-12-08 22:39:03.330279606 Z
-  _version: 0.17.1/0.58.0/0.17.1
-  branch: '574'
-  details: The missing pull zerocracy/baza#1036 has been opened by @yegor256.
-  is_human: 1
-  issue: 1036
-  repository: 728758275
-  what: pull-was-opened
-  when: 2025-12-08 14:57:33.000000000 Z
-  where: github
-  who: 526301
 - _id: 2592333
   _job: 20044688849
   _time: 2025-12-08 22:39:04.553097036 Z
@@ -17661,6 +17638,7 @@
   review_comments: 11
   succeeded_builds: 17
   suggestions: 11
+  tombstone: 2026-08-21 15:21:09.038972906 Z
   what: pull-was-merged
   when: &194 2025-12-08 18:42:56.000000000 Z
   where: github
@@ -17704,6 +17682,7 @@
   repository: 728758275
   review_comments: 11
   seconds: 13523
+  tombstone: 2026-08-21 15:21:09.040741003 Z
   what: code-was-contributed
   when: *194
   where: github
@@ -19314,42 +19293,6 @@
   when: *217
   where: github
   who: 29139614
-- _id: 2593545
-  _job: 20081668817
-  _time: 2025-12-09 23:56:03.358552481 Z
-  _version: 0.17.1/0.58.1/0.17.3
-  author: 2566462
-  comments: 5
-  details: The pull request zerocracy/judges-action#1219 with 137 HoC created by @yegorov
-    was reviewed by @coderabbitai[bot] after 0h7m and 0 comments.
-  hoc: 137
-  is_human: 0
-  issue: 1219
-  repository: 799177290
-  review_comments: 0
-  seconds: 430
-  what: code-was-reviewed
-  when: 2025-12-08 15:05:36.000000000 Z
-  where: github
-  who: 136622811
-- _id: 2593546
-  _job: 20081668817
-  _time: 2025-12-09 23:56:05.211590852 Z
-  _version: 0.17.1/0.58.1/0.17.3
-  author: 526301
-  comments: 7
-  details: The pull request zerocracy/baza#1036 with 2271 HoC created by @yegor256
-    was reviewed by @copilot after 0h13m and 11 comments.
-  hoc: 2271
-  is_human: 0
-  issue: 1036
-  repository: 728758275
-  review_comments: 11
-  seconds: 782
-  what: code-was-reviewed
-  when: 2025-12-08 15:10:35.000000000 Z
-  where: github
-  who: 175728472
 - _id: 2593653
   _job: 20084534135
   _time: 2025-12-10 02:22:19.684624551 Z
@@ -21781,6 +21724,7 @@
   repository: 799177290
   review_comments: 0
   seconds: 2583
+  tombstone: 2026-08-21 15:21:09.017213678 Z
   what: code-contribution-was-rewarded
   when: 2025-12-10 22:57:49.596051203 Z
   where: github
@@ -21801,6 +21745,7 @@
   repository: 728758275
   review_comments: 11
   seconds: 13523
+  tombstone: 2026-08-21 15:21:09.042433610 Z
   what: code-contribution-was-rewarded
   when: 2025-12-10 22:57:54.833273369 Z
   where: github
@@ -213232,7 +213177,7 @@
   - '1064'
   - 1066-1159
   - 1162-1172
-  - 1174-1218
+  - 1174-1219
   repository: 799177290
   what: tombstone
   where: github
@@ -213740,7 +213685,7 @@
   - 1006-1007
   - 1009-1017
   - 1019-1032
-  - 1034-1035
+  - 1034-1036
   repository: 728758275
   what: tombstone
   where: github
@@ -217835,9 +217780,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1660
   earliest_issue_was_found: 1
-  events_were_scanned: 13649895818
+  events_were_scanned: 18408206128
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 1073
@@ -217845,7 +217790,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1381
+  types_were_scanned: 1699
   what: iterate
   where: github
 - _id: 2630036
@@ -217879,7 +217824,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1295
+  types_were_scanned: 1117
   what: iterate
   where: github
 - _id: 2630038
