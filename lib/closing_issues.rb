@@ -58,5 +58,5 @@ end
 
 def Jp.fill_hijacks(fact, closing, author)
   closing.values.reduce(Set.new, :merge).each { |who| fact.assignee = who }
-  fact.hijacks = closing.count { |_, whos| !whos.empty? && !whos.include?(author) }
+  fact.hijacks = closing.count { |_, assignees| !assignees.empty? && !assignees.include?(author) }
 end
