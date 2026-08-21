@@ -13,6 +13,7 @@ require 'fbe/overwrite'
 require 'fbe/who'
 require 'octokit'
 require 'tago'
+require_relative '../../lib/closing_issues'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
@@ -121,11 +122,20 @@ Fbe.iterate do
         )
         next issue
       end
+    merged = !json[:merged_at].nil?
+    closing = merged ? Jp.closing_issues(repo, issue) : {}
+    if closing.nil?
+      $loog.warn(
+        "[#{$judge}] The closing issues of pull ##{issue} in #{repo} are unknown " \
+        '(transient, will retry next cycle)'
+      )
+      next issue
+    end
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |n|
           n.issue = issue
-          n.what = "pull-was-#{json[:merged_at].nil? ? 'closed' : 'merged'}"
+          n.what = "pull-was-#{merged ? 'merged' : 'closed'}"
           n.repository = repository
           n.where = 'github'
         end
@@ -144,6 +154,12 @@ Fbe.iterate do
         nn.stale = 'who'
       end
       nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
+      if merged
+        Jp.fill_hijacks(nn, closing, json.dig(:user, :id))
+        if nn.hijacks.positive?
+          $loog.info("The pull #{Fbe.issue(nn)} closes #{nn.hijacks} issue(s) assigned to somebody else")
+        end
+      end
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       review = reviews.first
       nn.review = review[:submitted_at] if review

@@ -436,7 +436,162 @@ class TestPullWasMerged < Jp::Test
     assert(fb.none?(issue: 44, what: 'pull-was-merged'))
   end
 
+  def test_records_hijack_when_closed_issue_belongs_to_another_user
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, stub_closing_issues({ 40 => [7_001] })) do
+      load_it('pull-was-merged', fb)
+      assert(
+        fb.one?(issue: 44, what: 'pull-was-merged', repository: 42, where: 'github', assignee: 7_001, hijacks: 1),
+        'the hijacked issue and its assignee are not recorded on the merged pull'
+      )
+    end
+  end
+
+  def test_records_every_assignee_of_every_hijacked_issue
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, stub_closing_issues({ 40 => [7_001], 41 => [7_002, 7_003] })) do
+      load_it('pull-was-merged', fb)
+      assert_equal(
+        [7_001, 7_002, 7_003],
+        fb.pick(issue: 44, what: 'pull-was-merged')['assignee'],
+        'the assignees of both hijacked issues are not all recorded'
+      )
+    end
+  end
+
+  def test_forgives_pull_that_closes_issue_assigned_to_its_own_author
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, stub_closing_issues({ 40 => [7_001, 421] })) do
+      load_it('pull-was-merged', fb)
+      assert(
+        fb.one?(issue: 44, what: 'pull-was-merged', repository: 42, where: 'github', hijacks: 0),
+        'an author who is among the assignees is punished anyway'
+      )
+    end
+  end
+
+  def test_forgives_pull_that_closes_issue_assigned_to_nobody
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, stub_closing_issues({ 40 => [] })) do
+      load_it('pull-was-merged', fb)
+      assert(
+        fb.one?(issue: 44, what: 'pull-was-merged', repository: 42, where: 'github', hijacks: 0),
+        'an unassigned issue is treated as a hijack'
+      )
+    end
+  end
+
+  def test_leaves_assignee_absent_when_closed_issue_has_none
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, stub_closing_issues({ 40 => [] })) do
+      load_it('pull-was-merged', fb)
+      refute_includes(
+        fb.pick(issue: 44, what: 'pull-was-merged').all_properties,
+        'assignee',
+        'an assignee is invented for an issue that has none'
+      )
+    end
+  end
+
+  def test_counts_no_hijacks_when_pull_closes_no_issue
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('pull-was-merged', fb)
+      assert(
+        fb.one?(issue: 44, what: 'pull-was-merged', repository: 42, where: 'github', hijacks: 0),
+        'a pull request that closes nothing is not counted as clean'
+      )
+    end
+  end
+
+  def test_skips_merged_pull_when_closing_issues_cannot_be_read
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    graph =
+      Class.new(Fbe::Graph::Fake) do
+        define_method(:query) do |qry|
+          next {} unless qry.include?('closingIssuesReferences')
+          raise(Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden'))
+        end
+      end.new
+    Fbe.stub(:github_graph, graph) do
+      load_it('pull-was-merged', fb)
+      assert(
+        fb.none?(issue: 44, what: 'pull-was-merged'),
+        'a merged pull with unreadable closing issues is recorded without a hijack count'
+      )
+    end
+  end
+
+  def test_ignores_closing_issues_of_pull_that_was_not_merged
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_base(44, merged: false)
+    stub_pull_was_merged_issue(44)
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, stub_closing_issues({ 40 => [7_001] })) do
+      load_it('pull-was-merged', fb)
+      refute_includes(
+        fb.pick(issue: 44, what: 'pull-was-closed').all_properties,
+        'hijacks',
+        'a pull request that was closed without merging is judged for hijacking'
+      )
+    end
+  end
+
   private
+
+  def stub_closing_issues(issues)
+    Class.new(Fbe::Graph::Fake) do
+      define_method(:query) do |qry|
+        next {} unless qry.include?('closingIssuesReferences')
+        {
+          'repository' => {
+            'pullRequest' => {
+              'closingIssuesReferences' => {
+                'pageInfo' => { 'hasNextPage' => false, 'endCursor' => nil },
+                'nodes' => issues.map do |number, ids|
+                  { 'number' => number, 'assignees' => { 'nodes' => ids.map { |id| { 'databaseId' => id } } } }
+                end
+              }
+            }
+          }
+        }
+      end
+    end.new
+  end
 
   def stub_pull_was_merged_success(issue)
     stub_pull_was_merged_base(issue)
@@ -447,14 +602,14 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
   end
 
-  def stub_pull_was_merged_base(issue)
+  def stub_pull_was_merged_base(issue, merged: true)
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github(
       "https://api.github.com/repos/foo/foo/pulls/#{issue}",
       body: {
         id: 50, number: issue, user: { id: 421, login: 'user' }, state: 'closed',
-        merged_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        merged_at: merged ? Time.parse('2025-09-30 18:00:00 UTC') : nil,
         closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
         created_at: Time.parse('2025-09-30 15:35:30 UTC'),
         additions: 12, deletions: 5, changed_files: 1,
