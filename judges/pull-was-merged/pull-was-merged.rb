@@ -126,10 +126,9 @@ Fbe.iterate do
     closing = merged ? Jp.closing_issues(repo, issue) : {}
     if closing.nil?
       $loog.warn(
-        "[#{$judge}] The closing issues of pull ##{issue} in #{repo} are unknown " \
-        '(transient, will retry next cycle)'
+        "[#{$judge}] The closing issues of pull ##{issue} in #{repo} are unknown, " \
+        'the hijacking of this pull stays unjudged until the next cycle'
       )
-      next issue
     end
     Fbe.fb.txn do |fbt|
       nn =
@@ -154,7 +153,7 @@ Fbe.iterate do
         nn.stale = 'who'
       end
       nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
-      if merged
+      if merged && !closing.nil?
         Jp.fill_hijacks(nn, closing, json.dig(:user, :id))
         if nn.hijacks.positive?
           $loog.info("The pull #{Fbe.issue(nn)} closes #{nn.hijacks} issue(s) assigned to somebody else")

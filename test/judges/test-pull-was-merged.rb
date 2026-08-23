@@ -528,24 +528,33 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
-  def test_skips_merged_pull_when_closing_issues_cannot_be_read
+  def test_records_merged_pull_when_closing_issues_cannot_be_read
     WebMock.disable_net_connect!
     rate_limit_up
     stub_pull_was_merged_success(44)
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
-    graph =
-      Class.new(Fbe::Graph::Fake) do
-        define_method(:query) do |qry|
-          next {} unless qry.include?('closingIssuesReferences')
-          raise(Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden'))
-        end
-      end.new
-    Fbe.stub(:github_graph, graph) do
+    Fbe.stub(:github_graph, stub_broken_closing_issues) do
       load_it('pull-was-merged', fb)
       assert(
-        fb.none?(issue: 44, what: 'pull-was-merged'),
-        'a merged pull with unreadable closing issues is recorded without a hijack count'
+        fb.one?(issue: 44, what: 'pull-was-merged', repository: 42, where: 'github'),
+        'a merged pull is forgotten only because its closing issues are unreadable'
+      )
+    end
+  end
+
+  def test_leaves_hijacks_unknown_when_closing_issues_cannot_be_read
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, stub_broken_closing_issues) do
+      load_it('pull-was-merged', fb)
+      refute_includes(
+        fb.pick(issue: 44, what: 'pull-was-merged').all_properties,
+        'hijacks',
+        'a merged pull with unreadable closing issues is guessed to be clean'
       )
     end
   end
@@ -572,6 +581,15 @@ class TestPullWasMerged < Jp::Test
   end
 
   private
+
+  def stub_broken_closing_issues
+    Class.new(Fbe::Graph::Fake) do
+      define_method(:query) do |qry|
+        next {} unless qry.include?('closingIssuesReferences')
+        raise(Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden'))
+      end
+    end.new
+  end
 
   def stub_closing_issues(issues)
     Class.new(Fbe::Graph::Fake) do
