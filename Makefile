@@ -15,12 +15,10 @@ rubocop:
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges'
-	echo "$$?" > target/test.exit
+	( set +e; docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges'; echo "$$?" > target/test.exit )
 
 entry: target/docker-image.txt
-	./test-action.sh "$$(cat $<)"
-	echo "$$?" > target/entry.exit
+	( set +e; ./test-action.sh "$$(cat $<)"; echo "$$?" > target/entry.exit )
 
 rmi: target/docker-image.txt
 	img=$$(cat $<)
