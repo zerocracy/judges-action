@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 789.104829456
+  seconds: 909.841942123
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-26 07:29:49.685318840 Z
+  when: 2026-08-26 07:59:54.335643415 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -60643,6 +60643,7 @@
   composite: 103.864
   ffact: 163490
   since: *612
+  tombstone: 2026-08-26 07:30:34.501852648 Z
   total_builds_ran: 3573
   total_commits_pushed: 130
   total_hoc_committed: 8518
@@ -60682,6 +60683,7 @@
   _job: 24653034667
   _time: 2026-04-20 07:06:29.086165774 Z
   _version: 0.19.9/0.60.1/0.17.15
+  tombstone: 2026-08-26 07:30:34.507244498 Z
   total_active_contributors: 6
   total_commits: 13944
   total_contributors: 31
@@ -62619,6 +62621,7 @@
   - 0
   - 0
   - 0
+  tombstone: 2026-08-26 07:30:34.512089408 Z
   what: quality-of-service
   when: &628 2026-04-20 07:15:50.000000000 Z
 - _id: 2610223
@@ -96162,19 +96165,9 @@
   is_human: 1
   issue: 466
   repository: 820463873
+  stale: who
   what: pull-was-opened
   when: 2026-05-19 07:24:09.000000000 Z
-  where: github
-  who: 240962040
-- _id: 2615871
-  _job: 26082945251
-  _time: 2026-05-19 07:35:18.608797857 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  details: 'We found out that the user #240962040 is known in GitHub as @say-5.'
-  is_human: 1
-  name: say-5
-  what: who-has-name
-  when: 2026-05-19 07:35:18.612456395 Z
   where: github
   who: 240962040
 - _id: 2615872
@@ -96227,6 +96220,7 @@
   is_human: 1
   issue: 466
   repository: 820463873
+  stale: who
   what: bad-branch-name-was-punished
   when: 2026-05-19 07:50:22.149496600 Z
   where: github
@@ -96419,6 +96413,7 @@
   is_human: 1
   issue: 279
   repository: 840215648
+  stale: who
   what: pull-was-opened
   when: 2026-05-19 21:27:05.000000000 Z
   where: github
@@ -96453,6 +96448,7 @@
   is_human: 1
   issue: 279
   repository: 840215648
+  stale: who
   what: bad-branch-name-was-punished
   when: 2026-05-19 22:54:18.049753955 Z
   where: github
@@ -99359,6 +99355,7 @@
   issue: 279
   repository: 840215648
   review: 2026-05-20 04:14:22.000000000 Z
+  stale: who
   succeeded_builds: 20
   suggestions: 0
   what: pull-was-closed
@@ -101571,6 +101568,7 @@
   is_human: 1
   issue: 284
   repository: 840215648
+  stale: who
   what: pull-was-opened
   when: 2026-05-21 02:06:31.000000000 Z
   where: github
@@ -111461,6 +111459,7 @@
   repository: 820463873
   review_comments: 0
   seconds: 535405
+  stale: who
   what: code-was-contributed
   when: *1032
   where: github
@@ -112580,6 +112579,7 @@
   repository: 820463873
   review_comments: 0
   seconds: 535405
+  stale: who
   what: code-contribution-was-rewarded
   when: 2026-05-26 03:39:36.034102904 Z
   where: github
@@ -196833,6 +196833,7 @@
   is_human: 1
   issue: 1739
   repository: 799177290
+  stale: who
   what: pull-was-opened
   when: 2026-07-02 10:17:59.000000000 Z
   where: github
@@ -209255,9 +209256,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1467
+  assignees_were_scanned: 1729
   earliest_issue_was_found: 1
-  events_were_scanned: 18923419984
+  events_were_scanned: 18928484307
   issues_were_scanned: 0
   labels_were_scanned: 1690
   latest_issue_was_found: 1073
@@ -209265,7 +209266,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1409
+  types_were_scanned: 1709
   what: iterate
   where: github
 - _id: 2630036
@@ -209299,7 +209300,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1314
+  types_were_scanned: 1122
   what: iterate
   where: github
 - _id: 2630038
@@ -215167,6 +215168,7 @@
   issue: 1739
   repository: 799177290
   review_comments: 0
+  stale: issue
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -218160,6 +218162,7 @@
   repository: 799177290
   review_comments: 0
   seconds: 85650
+  stale: who
   what: code-was-contributed
   when: *2122
   where: github
@@ -219721,6 +219724,7 @@
   repository: 799177290
   review_comments: 0
   seconds: 85650
+  stale: who
   what: code-contribution-was-rewarded
   when: 2026-07-10 17:23:19.841886941 Z
   where: github
@@ -230612,31 +230616,6 @@
   when: 2026-07-17 05:31:04.000000000 Z
   where: github
   who: 29139614
-- _id: 2631032
-  _job: 29562433922
-  _time: 2026-07-17 07:15:41.331335348 Z
-  _version: 0.19.16/0.61.0/0.17.20
-  commits: 13
-  contributors:
-  - 33578155
-  - 104617579
-  - 8086956
-  details: A new release "Fbe::Iterate#over turns any Octokit error into \"no implicit
-    conversion of Symbol into Integer\" (iterate.rb:333)" has been published in zerocracy/fbe
-    by @rultor.
-  event_id: 11915998868
-  event_type: ReleaseEvent
-  hoc: 360
-  is_human: 0
-  last_commit: 94fc6a5a0efd9e272de9607dc092e7979f5bc6f2
-  release: 355526228
-  repository: 820463873
-  tag: 0.49.1
-  tombstone: 2026-08-18 07:28:18.942022635 Z
-  what: release-published
-  when: 2026-07-17 07:14:44.000000000 Z
-  where: github
-  who: 8086956
 - _id: 2631033
   _job: 29562433922
   _time: 2026-07-17 07:15:43.319064998 Z
@@ -235424,6 +235403,9 @@
   is_human: 1
   issue: 626
   repository: 820463873
+  stale:
+  - issue
+  - who
   what: pull-was-opened
   when: 2026-07-18 20:57:47.000000000 Z
   where: github
@@ -238685,6 +238667,9 @@
   is_human: 1
   issue: 689
   repository: 798641472
+  stale:
+  - issue
+  - who
   what: pull-was-opened
   when: 2026-07-26 03:23:55.000000000 Z
   where: github
@@ -238751,6 +238736,9 @@
   is_human: 1
   issue: 689
   repository: 798641472
+  stale:
+  - issue
+  - who
   what: bad-branch-name-was-punished
   when: 2026-07-26 04:01:57.380359747 Z
   where: github
@@ -247318,6 +247306,7 @@
   issue: 284
   repository: 840215648
   review: 2026-05-22 20:12:11.000000000 Z
+  stale: who
   succeeded_builds: 20
   suggestions: 0
   what: pull-was-closed
