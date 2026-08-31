@@ -109,7 +109,7 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.has?(where: 'github', who: 333))
   end
 
-  def test_marks_sibling_facts_stale_for_good_user
+  def test_keeps_sibling_facts_of_a_live_user
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/user/777', body: { login: 'user777', id: 777, type: 'User' })
@@ -118,7 +118,24 @@ class TestEliminateGhosts < Jp::Test
       .with(_id: 2, where: 'github', who: 777, what: 'something-b')
       .with(_id: 3, where: 'github', who: 777, what: 'something-c')
     load_it('eliminate-ghosts', fb)
-    assert_equal(3, fb.picks(where: 'github', who: 777, stale: 'who').count)
+    assert_equal(
+      1, fb.picks(where: 'github', who: 777, stale: 'who').count,
+      'A user answering GitHub in this very run cannot have the rest of its facts retired'
+    )
+  end
+
+  def test_marks_a_fact_that_is_stale_for_another_reason
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/888', body: {}, status: 404)
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', who: 888, what: 'something-a', stale: 'repository')
+      .with(_id: 2, where: 'github', who: 888, what: 'something-b')
+    load_it('eliminate-ghosts', fb)
+    assert_equal(
+      1, fb.query("(and (eq who 888) (eq stale 'repository') (eq stale 'who'))").each.to_a.size,
+      'A fact stale for another reason cannot stay invisible to revive-user when its user is gone'
+    )
   end
 
   def test_keeps_user_active_on_forbidden_lookup
