@@ -17,8 +17,6 @@ require_relative '../../lib/issue_was_lost'
 
 ts = Fbe::Tombstone.new
 
-MAX_MISSING = Integer($options.max_missing || 17)
-
 Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
   repo =
     begin
@@ -104,7 +102,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end
     added << i
-    break if added.size >= MAX_MISSING
+    break if added.size >= Integer($options.max_missing || 17)
   end
   if missing.empty?
     $loog.info("No missing issues in #{repo}")
