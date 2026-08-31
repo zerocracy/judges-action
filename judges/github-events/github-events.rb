@@ -262,6 +262,16 @@ Fbe.iterate do
           "with #{fact.hoc} HoC and #{fact.comments} comments."
         skip(json) if seen?(fact)
         $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
+      when 'reopened'
+        Fbe.fb.query(
+          "(and
+            (eq where 'github')
+            (eq repository #{fact.repository})
+            (eq issue #{fact.issue})
+            (eq what 'pull-was-closed'))"
+        ).delete!
+        $loog.info("The pull #{Fbe.issue(fact)} was reopened, its closure is forgotten")
+        skip(json)
       else
         skip(json)
       end
