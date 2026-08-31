@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 1014.741491555
+  seconds: 399.787661579
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-31 02:56:53.773812562 Z
+  when: 2026-08-31 03:08:25.320687318 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17530,21 +17530,6 @@
   when: 2025-12-17 09:57:35.000000000 Z
   where: github
   who: 29139614
-- _id: 2598411
-  _job: 20305951800
-  _time: 2025-12-17 14:20:48.540376329 Z
-  _version: 0.19.2/0.58.1/0.17.6
-  branch: renovate/rubocop-1.x-lockfile
-  details: The pull request zerocracy/fbe#372 has been opened by @renovate[bot].
-  event_id: 5361433187
-  event_type: PullRequestEvent
-  is_human: 0
-  issue: 372
-  repository: 820463873
-  what: pull-was-opened
-  when: 2025-12-17 13:46:07.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2598417
   _job: 20305951800
   _time: 2025-12-17 14:24:15.831170518 Z
@@ -17734,26 +17719,6 @@
   when: 2025-12-18 03:06:55.000000000 Z
   where: github
   who: 29139614
-- _id: 2598562
-  _job: 20325962714
-  _time: 2025-12-18 04:24:12.580323255 Z
-  _version: 0.19.2/0.58.1/0.17.6
-  comments: 4
-  commits: 1
-  details: The pull request zerocracy/fbe#372 has been reviewed by @yegor256 with
-    6 HoC and 4 comments.
-  event_id: 5375244484
-  event_type: PullRequestReviewEvent
-  files: 1
-  hoc: 6
-  is_human: 1
-  issue: 372
-  repository: 820463873
-  review_comments: 0
-  what: pull-was-reviewed
-  when: 2025-12-18 02:56:47.000000000 Z
-  where: github
-  who: 526301
 - _id: 2598563
   _job: 20325962714
   _time: 2025-12-18 04:24:39.365730518 Z
@@ -17791,6 +17756,7 @@
   review_comments: 0
   succeeded_builds: 10
   suggestions: 0
+  tombstone: 2026-08-31 02:58:16.417204832 Z
   what: pull-was-merged
   when: &189 2025-12-18 03:05:44.000000000 Z
   where: github
@@ -17873,24 +17839,6 @@
   when: &192 2025-12-18 03:31:39.000000000 Z
   where: github
   who: 8086956
-- _id: 2598579
-  _job: 20325962714
-  _time: 2025-12-18 04:39:43.650731253 Z
-  _version: 0.19.2/0.58.1/0.17.6
-  author: 29139614
-  comments: 4
-  details: The pull request zerocracy/fbe#372 with 6 HoC created by @renovate[bot]
-    was reviewed by @yegor256 after 13h10m and 0 comments.
-  hoc: 6
-  is_human: 1
-  issue: 372
-  repository: 820463873
-  review_comments: 0
-  seconds: 47438
-  what: code-was-reviewed
-  when: 2025-12-18 02:56:45.000000000 Z
-  where: github
-  who: 526301
 - _id: 2598580
   _job: 20325962714
   _time: 2025-12-18 04:39:45.112871231 Z
@@ -17972,6 +17920,7 @@
   repository: 820463873
   review_comments: 0
   seconds: 47977
+  tombstone: 2026-08-31 02:58:16.419625050 Z
   what: code-was-contributed
   when: *189
   where: github
@@ -18113,6 +18062,7 @@
   repository: 820463873
   review_comments: 0
   seconds: 47438
+  tombstone: 2026-08-31 02:58:16.422226677 Z
   what: code-review-was-rewarded
   when: 2025-12-18 04:43:47.277575566 Z
   where: github
@@ -187390,25 +187340,6 @@
   when: 2026-07-02 04:56:37.000000000 Z
   where: github
   who: 526301
-- _id: 2627670
-  _job: 28570857478
-  _time: 2026-07-02 06:45:40.017860205 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  commit: 88986a15963bbb0117bf5ce25500d1b08c7db2b2
-  default_branch: master
-  details: 'A new Git push #36492137512 has arrived to zerocracy/baza, made by @yegor256
-    (default branch is "master"), not associated with any pull request.'
-  event_id: 14203199677
-  event_type: PushEvent
-  is_human: 1
-  push_id: 36492137512
-  ref: refs/heads/master
-  repository: 728758275
-  to_master: 1
-  what: git-was-pushed
-  when: 2026-07-02 02:16:02.000000000 Z
-  where: github
-  who: 526301
 - _id: 2627672
   _job: 28570857478
   _time: 2026-07-02 06:46:08.233222277 Z
@@ -196752,7 +196683,7 @@
   - 3-159
   - 161-340
   - 342-360
-  - 362-371
+  - 362-372
   repository: 820463873
   what: tombstone
   where: github
@@ -207117,7 +207048,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1731
+  assignees_were_scanned: 1472
   earliest_issue_was_found: 1
   events_were_scanned: 19489161292
   issues_were_scanned: 0
@@ -207127,7 +207058,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1425
+  types_were_scanned: 1713
   what: iterate
   where: github
 - _id: 2630036
@@ -207161,7 +207092,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1317
   what: iterate
   where: github
 - _id: 2630038
