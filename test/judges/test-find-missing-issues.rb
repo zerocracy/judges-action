@@ -109,4 +109,17 @@ class TestFindMissingIssues < Jp::Test
       '403 is transient — no issue-was-lost fact must be created on pull_request 403; next cycle will retry'
     )
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('find-missing-issues', fb)
+    assert(
+      fb.one?(what: 'issue-was-opened', repository: 42, stale: 'repository'),
+      'The fact of a vanished repository must be marked stale instead of aborting the judge'
+    )
+  end
 end

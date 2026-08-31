@@ -183,4 +183,18 @@ class TestLabelWasAttached < Jp::Test
       '404 is permanent — issue must be marked stale via Jp.issue_was_lost'
     )
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('label-was-attached', fb)
+    assert_empty(
+      fb.query("(eq what 'label-was-attached')").each.to_a,
+      'A vanished repository must produce no facts and must not abort the judge'
+    )
+  end
 end

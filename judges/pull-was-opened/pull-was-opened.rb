@@ -37,7 +37,19 @@ Fbe.conclude do
         (eq what '#{$judge}'))))"
   follow 'where repository issue'
   draw do |n, f|
-    repo = Fbe.octo.repo_name_by_id(f.repository)
+    repo =
+      begin
+        Fbe.octo.repo_name_by_id(f.repository)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Failed to find repository #{f.repository}: #{e.message}")
+        throw(:rollback)
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to repository #{f.repository} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
+      end
     json =
       begin
         Fbe.octo.issue(repo, f.issue)

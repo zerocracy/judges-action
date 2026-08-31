@@ -410,4 +410,23 @@ class TestFindAllIssues < Jp::Test
       '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup'
     )
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.issue = 44
+      f.repository = 42
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    assert_equal(
+      1, fb.query("(eq what 'issue-was-opened')").each.to_a.size,
+      'A vanished repository must add no issues and must not abort the judge'
+    )
+  end
 end

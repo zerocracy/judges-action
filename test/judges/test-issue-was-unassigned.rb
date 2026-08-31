@@ -141,4 +141,17 @@ class TestIssueWasUnassigned < Jp::Test
       '403 is transient — fact must NOT be marked stale; next cycle will retry the events lookup'
     )
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 421)
+    load_it('issue-was-unassigned', fb)
+    assert(
+      fb.one?(what: 'issue-was-assigned', repository: 42, stale: 'repository', who: 421),
+      'The fact of a vanished repository must be marked stale instead of aborting the judge'
+    )
+  end
 end

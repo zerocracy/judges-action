@@ -28,7 +28,19 @@ require_relative '../../lib/qos_search'
         (gt issue $before)
         (eq where 'github'))"
     over do |repository, issue|
-      repo = Fbe.octo.repo_name_by_id(repository)
+      repo =
+        begin
+          Fbe.octo.repo_name_by_id(repository)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Repository ##{repository} not found: #{e.message}")
+          next issue
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to repository ##{repository} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next issue
+        end
       after =
         begin
           Fbe.octo.issue(repo, issue)[:created_at]

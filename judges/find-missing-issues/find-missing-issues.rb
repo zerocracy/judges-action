@@ -18,7 +18,20 @@ require_relative '../../lib/issue_was_lost'
 ts = Fbe::Tombstone.new
 
 Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
-  repo = Fbe.octo.repo_name_by_id(r.repository)
+  repo =
+    begin
+      Fbe.octo.repo_name_by_id(r.repository)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Failed to find repository #{r.repository}: #{e.message}")
+      r.stale = 'repository'
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to repository #{r.repository} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   issues = Fbe.fb.query(
     "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
   ).each.map(&:issue)

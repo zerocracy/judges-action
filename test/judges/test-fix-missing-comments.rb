@@ -27,4 +27,17 @@ class TestFixMissingComments < Jp::Test
     assert_nil(f['stale'], '403 must retry without marking stale')
     assert_nil(f['comments'], '403 must leave comments absent until retry')
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    load_it('fix-missing-comments', fb)
+    assert(
+      fb.one?(what: 'pull-was-merged', repository: 42, stale: 'repository'),
+      'The fact of a vanished repository must be marked stale instead of aborting the judge'
+    )
+  end
 end
