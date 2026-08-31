@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'Failure in repository #798641472 at #617: end of file reached'
   inserted: 8
-  seconds: 1080.675194483
+  seconds: 1080.511582202
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-31 17:19:42.779686021 Z
+  when: 2026-08-31 19:19:33.706078628 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -204771,7 +204772,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 616
   earliest_issue_was_found: 1
   events_were_scanned: 14148224821
   issues_were_scanned: 0
@@ -204788,7 +204789,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 356
   earliest_issue_was_found: 1
   events_were_scanned: 19558053667
   issues_were_scanned: 0
@@ -205233,7 +205234,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14153772252
+  events_were_scanned: 19572342813
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
@@ -205887,7 +205888,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14150224384
+  events_were_scanned: 19565165119
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
@@ -206091,11 +206092,11 @@
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 207
   earliest_issue_was_found: 1
   events_were_scanned: 19272711165
   issues_were_scanned: 0
-  labels_were_scanned: 416
+  labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 0
   min_issue_was_found: 156
@@ -206108,11 +206109,11 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1667
+  assignees_were_scanned: 1604
   earliest_issue_was_found: 1
-  events_were_scanned: 19561335138
+  events_were_scanned: 19570734344
   issues_were_scanned: 0
-  labels_were_scanned: 1683
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
   merges_were_scanned: 0
   min_issue_was_found: 1454
@@ -206142,7 +206143,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1317
   earliest_issue_was_found: 1
   events_were_scanned: 19243605506
   issues_were_scanned: 0
@@ -244210,14 +244211,14 @@
   total_releases_published: 0
   total_reviews_submitted: 9
   what: quantity-of-deliverables
-  when: 2026-08-24 18:06:27.223979946 Z
+  when: &2435 2026-08-24 18:06:27.223979946 Z
 - _id: 2631792
   _job: 32763945185
   _time: 2026-08-24 18:56:08.238184970 Z
   _version: 0.19.16/0.61.1/0.17.21
   since: *2345
   what: quality-of-service
-  when: 2026-08-24 18:56:08.224768771 Z
+  when: &2436 2026-08-24 18:56:08.224768771 Z
 - _id: 2631793
   _job: 32799808550
   _time: 2026-08-25 02:03:00.309983939 Z
@@ -250372,157 +250373,8 @@
   who: 526301
   why: Contributed code in zerocracy/judges-action#1914
 - _id: 2632163
-  _job: 33417195838
-  _time: 2026-08-31 17:01:57.121863270 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  details: The issue zerocracy/fbe#651 has been opened by @thayorns.
-  event_id: 14153772252
-  event_type: IssuesEvent
-  is_human: 1
-  issue: 651
-  repository: 820463873
-  what: issue-was-opened
-  when: 2026-08-31 17:00:56.000000000 Z
-  where: github
-  who: 96509556
-- _id: 2632164
-  _job: 33417195838
-  _time: 2026-08-31 17:01:59.095232524 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '641'
-  details: The pull request zerocracy/fbe#650 has been opened by @morphqdd.
-  event_id: 14147996013
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 650
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 15:02:43.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632165
-  _job: 33417195838
-  _time: 2026-08-31 17:01:59.777404828 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '633'
-  details: The pull request zerocracy/fbe#649 has been opened by @morphqdd.
-  event_id: 14147194312
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 649
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:47:02.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632166
-  _job: 33417195838
-  _time: 2026-08-31 17:02:00.061585681 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '632'
-  details: The pull request zerocracy/fbe#648 has been opened by @morphqdd.
-  event_id: 14147162487
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 648
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:46:25.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632167
-  _job: 33417195838
-  _time: 2026-08-31 17:02:00.355276280 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '635'
-  details: The pull request zerocracy/fbe#647 has been opened by @morphqdd.
-  event_id: 14147142861
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 647
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:46:02.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632168
-  _job: 33417195838
-  _time: 2026-08-31 17:02:00.750539230 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '634'
-  details: The pull request zerocracy/fbe#646 has been opened by @morphqdd.
-  event_id: 14147121029
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 646
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:45:37.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632169
-  _job: 33417195838
-  _time: 2026-08-31 17:02:01.191808901 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '629'
-  details: The pull request zerocracy/fbe#645 has been opened by @morphqdd.
-  event_id: 14147091329
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 645
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:45:02.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632170
-  _job: 33417195838
-  _time: 2026-08-31 17:02:01.470715797 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '620'
-  details: The pull request zerocracy/fbe#644 has been opened by @morphqdd.
-  event_id: 14147066106
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 644
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:44:33.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632171
-  _job: 33417195838
-  _time: 2026-08-31 17:02:01.749086375 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '630'
-  details: The pull request zerocracy/fbe#643 has been opened by @morphqdd.
-  event_id: 14147050602
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 643
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:44:15.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632172
-  _job: 33417195838
-  _time: 2026-08-31 17:02:02.076815036 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '619'
-  details: The pull request zerocracy/fbe#642 has been opened by @morphqdd.
-  event_id: 14147035362
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 642
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-08-31 14:43:57.000000000 Z
-  where: github
-  who: 125282851
-- _id: 2632173
-  _job: 33417195838
-  _time: 2026-08-31 17:02:15.963740045 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:01:51.841371890 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1923 has been opened by @0pdd.
   event_id: 14151850970
@@ -250534,9 +250386,9 @@
   when: 2026-08-31 16:20:24.000000000 Z
   where: github
   who: 24456188
-- _id: 2632174
-  _job: 33417195838
-  _time: 2026-08-31 17:02:16.516047945 Z
+- _id: 2632164
+  _job: 33428150683
+  _time: 2026-08-31 19:01:52.525853988 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1663-dsl-injection-twice
   comments: 5
@@ -250561,9 +250413,9 @@
   when: 2026-08-31 16:19:21.000000000 Z
   where: github
   who: 33578155
-- _id: 2632175
-  _job: 33417195838
-  _time: 2026-08-31 17:02:35.794472547 Z
+- _id: 2632165
+  _job: 33428150683
+  _time: 2026-08-31 19:02:08.472840669 Z
   _version: 0.19.16/0.61.1/0.17.21
   commits: 56
   contributors:
@@ -250589,9 +250441,9 @@
   when: 2026-08-31 16:16:45.000000000 Z
   where: github
   who: 8086956
-- _id: 2632176
-  _job: 33417195838
-  _time: 2026-08-31 17:02:37.139969757 Z
+- _id: 2632166
+  _job: 33428150683
+  _time: 2026-08-31 19:02:09.696057959 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: version-up
   details: The pull request zerocracy/judges-action#1934 has been opened by @github-actions[bot].
@@ -250604,9 +250456,9 @@
   when: 2026-08-31 16:13:50.000000000 Z
   where: github
   who: 41898282
-- _id: 2632177
-  _job: 33417195838
-  _time: 2026-08-31 17:02:38.297442318 Z
+- _id: 2632167
+  _job: 33428150683
+  _time: 2026-08-31 19:02:10.834315684 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1912 has been closed by @yegor256.
   event_id: 14149440188
@@ -250618,9 +250470,9 @@
   when: 2026-08-31 15:31:25.000000000 Z
   where: github
   who: 526301
-- _id: 2632178
-  _job: 33417195838
-  _time: 2026-08-31 17:02:41.374587101 Z
+- _id: 2632168
+  _job: 33428150683
+  _time: 2026-08-31 19:02:14.175941636 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1904'
   details: The pull request zerocracy/judges-action#1933 has been opened by @thayorns.
@@ -250633,9 +250485,9 @@
   when: 2026-08-31 15:09:04.000000000 Z
   where: github
   who: 96509556
-- _id: 2632179
-  _job: 33417195838
-  _time: 2026-08-31 17:02:42.513393040 Z
+- _id: 2632169
+  _job: 33428150683
+  _time: 2026-08-31 19:02:15.683558737 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1676-toomanyrequests-rescue
   comments: 26
@@ -250661,9 +250513,9 @@
   when: 2026-08-31 15:01:38.000000000 Z
   where: github
   who: 33578155
-- _id: 2632180
-  _job: 33417195838
-  _time: 2026-08-31 17:03:03.450548465 Z
+- _id: 2632170
+  _job: 33428150683
+  _time: 2026-08-31 19:02:33.523352437 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1702-regex-injection
   comments: 4
@@ -250688,9 +250540,9 @@
   when: 2026-08-31 14:59:13.000000000 Z
   where: github
   who: 33578155
-- _id: 2632181
-  _job: 33417195838
-  _time: 2026-08-31 17:03:16.743640869 Z
+- _id: 2632171
+  _job: 33428150683
+  _time: 2026-08-31 19:02:45.642609551 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1572 has been closed by @yegor256.
   event_id: 14147830400
@@ -250702,9 +250554,9 @@
   when: 2026-08-31 14:59:31.000000000 Z
   where: github
   who: 526301
-- _id: 2632182
-  _job: 33417195838
-  _time: 2026-08-31 17:03:17.004694958 Z
+- _id: 2632172
+  _job: 33428150683
+  _time: 2026-08-31 19:02:45.979117053 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1568 has been closed by @yegor256.
   event_id: 14147827896
@@ -250716,9 +250568,9 @@
   when: 2026-08-31 14:59:28.000000000 Z
   where: github
   who: 526301
-- _id: 2632183
-  _job: 33417195838
-  _time: 2026-08-31 17:03:18.140387083 Z
+- _id: 2632173
+  _job: 33428150683
+  _time: 2026-08-31 19:02:47.063953406 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1703-replacement-injection
   comments: 3
@@ -250743,9 +250595,9 @@
   when: 2026-08-31 14:57:35.000000000 Z
   where: github
   who: 33578155
-- _id: 2632184
-  _job: 33417195838
-  _time: 2026-08-31 17:03:31.666763421 Z
+- _id: 2632174
+  _job: 33428150683
+  _time: 2026-08-31 19:02:58.521920784 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1662-dsl-injection
   comments: 3
@@ -250770,9 +250622,9 @@
   when: 2026-08-31 06:37:54.000000000 Z
   where: github
   who: 33578155
-- _id: 2632185
-  _job: 33417195838
-  _time: 2026-08-31 17:03:44.560502388 Z
+- _id: 2632175
+  _job: 33428150683
+  _time: 2026-08-31 19:03:11.206531741 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1912'
   comments: 3
@@ -250797,9 +250649,9 @@
   when: 2026-08-31 14:49:44.000000000 Z
   where: github
   who: 96509556
-- _id: 2632186
-  _job: 33417195838
-  _time: 2026-08-31 17:03:59.356546386 Z
+- _id: 2632176
+  _job: 33428150683
+  _time: 2026-08-31 19:03:23.327166711 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1686-vitals-url-hardening
   comments: 4
@@ -250824,9 +250676,9 @@
   when: 2026-08-31 14:53:11.000000000 Z
   where: github
   who: 33578155
-- _id: 2632187
-  _job: 33417195838
-  _time: 2026-08-31 17:04:14.391126478 Z
+- _id: 2632177
+  _job: 33428150683
+  _time: 2026-08-31 19:03:35.006340182 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1897 has been closed by @yegor256.
   event_id: 14147460839
@@ -250838,9 +250690,9 @@
   when: 2026-08-31 14:52:18.000000000 Z
   where: github
   who: 526301
-- _id: 2632188
-  _job: 33417195838
-  _time: 2026-08-31 17:04:14.977920843 Z
+- _id: 2632178
+  _job: 33428150683
+  _time: 2026-08-31 19:03:35.653326214 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1905 has been closed by @yegor256.
   event_id: 14147440682
@@ -250852,9 +250704,9 @@
   when: 2026-08-31 14:51:54.000000000 Z
   where: github
   who: 526301
-- _id: 2632189
-  _job: 33417195838
-  _time: 2026-08-31 17:04:15.977844927 Z
+- _id: 2632179
+  _job: 33428150683
+  _time: 2026-08-31 19:03:36.736151687 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1906 has been closed by @yegor256.
   event_id: 14147430997
@@ -250866,9 +250718,9 @@
   when: 2026-08-31 14:51:43.000000000 Z
   where: github
   who: 526301
-- _id: 2632190
-  _job: 33417195838
-  _time: 2026-08-31 17:04:16.269471920 Z
+- _id: 2632180
+  _job: 33428150683
+  _time: 2026-08-31 19:03:37.326380668 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1911'
   details: The pull request zerocracy/judges-action#1932 has been opened by @yegor256.
@@ -250881,9 +250733,9 @@
   when: 2026-08-31 14:51:39.000000000 Z
   where: github
   who: 526301
-- _id: 2632191
-  _job: 33417195838
-  _time: 2026-08-31 17:04:16.649276496 Z
+- _id: 2632181
+  _job: 33428150683
+  _time: 2026-08-31 19:03:37.787581878 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1903 has been closed by @yegor256.
   event_id: 14147410523
@@ -250895,9 +250747,9 @@
   when: 2026-08-31 14:51:19.000000000 Z
   where: github
   who: 526301
-- _id: 2632192
-  _job: 33417195838
-  _time: 2026-08-31 17:04:16.952927850 Z
+- _id: 2632182
+  _job: 33428150683
+  _time: 2026-08-31 19:03:38.320886708 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1668-dsl-injection-cover-qo
   comments: 3
@@ -250922,9 +250774,9 @@
   when: 2026-08-31 14:50:32.000000000 Z
   where: github
   who: 33578155
-- _id: 2632193
-  _job: 33417195838
-  _time: 2026-08-31 17:04:30.278569277 Z
+- _id: 2632183
+  _job: 33428150683
+  _time: 2026-08-31 19:03:49.552146641 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1911 has been closed by @yegor256.
   event_id: 14147330483
@@ -250936,9 +250788,9 @@
   when: 2026-08-31 14:49:44.000000000 Z
   where: github
   who: 526301
-- _id: 2632194
-  _job: 33417195838
-  _time: 2026-08-31 17:04:30.568136110 Z
+- _id: 2632184
+  _job: 33428150683
+  _time: 2026-08-31 19:03:50.031889484 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1909 has been closed by @yegor256.
   event_id: 14147230888
@@ -250950,9 +250802,9 @@
   when: 2026-08-31 14:47:46.000000000 Z
   where: github
   who: 526301
-- _id: 2632195
-  _job: 33417195838
-  _time: 2026-08-31 17:04:30.889712236 Z
+- _id: 2632185
+  _job: 33428150683
+  _time: 2026-08-31 19:03:50.369020537 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1910 has been closed by @yegor256.
   event_id: 14147230818
@@ -250964,9 +250816,9 @@
   when: 2026-08-31 14:47:46.000000000 Z
   where: github
   who: 526301
-- _id: 2632196
-  _job: 33417195838
-  _time: 2026-08-31 17:04:31.212922048 Z
+- _id: 2632186
+  _job: 33428150683
+  _time: 2026-08-31 19:03:50.712455088 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1678-cursor-stuck-empty-results
   comments: 3
@@ -250991,9 +250843,9 @@
   when: 2026-08-31 14:45:14.000000000 Z
   where: github
   who: 33578155
-- _id: 2632197
-  _job: 33417195838
-  _time: 2026-08-31 17:04:44.321286875 Z
+- _id: 2632187
+  _job: 33428150683
+  _time: 2026-08-31 19:04:02.817052231 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1912'
   details: The pull request zerocracy/judges-action#1931 has been opened by @thayorns.
@@ -251006,9 +250858,9 @@
   when: 2026-08-31 14:46:12.000000000 Z
   where: github
   who: 96509556
-- _id: 2632198
-  _job: 33417195838
-  _time: 2026-08-31 17:04:44.995567358 Z
+- _id: 2632188
+  _job: 33428150683
+  _time: 2026-08-31 19:04:03.184419606 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1911'
   details: The pull request zerocracy/judges-action#1930 has been opened by @thayorns.
@@ -251021,9 +250873,9 @@
   when: 2026-08-31 14:43:42.000000000 Z
   where: github
   who: 96509556
-- _id: 2632199
-  _job: 33417195838
-  _time: 2026-08-31 17:04:45.467073295 Z
+- _id: 2632189
+  _job: 33428150683
+  _time: 2026-08-31 19:04:03.626553184 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1903'
   details: The pull request zerocracy/judges-action#1929 has been opened by @morphqdd.
@@ -251036,9 +250888,9 @@
   when: 2026-08-31 14:42:41.000000000 Z
   where: github
   who: 125282851
-- _id: 2632200
-  _job: 33417195838
-  _time: 2026-08-31 17:04:45.727570066 Z
+- _id: 2632190
+  _job: 33428150683
+  _time: 2026-08-31 19:04:04.142870189 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1651-memory-fix
   comments: 3
@@ -251063,9 +250915,9 @@
   when: 2026-08-31 14:42:29.000000000 Z
   where: github
   who: 33578155
-- _id: 2632201
-  _job: 33417195838
-  _time: 2026-08-31 17:04:59.361631385 Z
+- _id: 2632191
+  _job: 33428150683
+  _time: 2026-08-31 19:04:15.884368929 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1905'
   details: The pull request zerocracy/judges-action#1928 has been opened by @morphqdd.
@@ -251078,9 +250930,9 @@
   when: 2026-08-31 14:42:22.000000000 Z
   where: github
   who: 125282851
-- _id: 2632202
-  _job: 33417195838
-  _time: 2026-08-31 17:04:59.654230861 Z
+- _id: 2632192
+  _job: 33428150683
+  _time: 2026-08-31 19:04:16.157986749 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1906'
   details: The pull request zerocracy/judges-action#1927 has been opened by @morphqdd.
@@ -251093,9 +250945,9 @@
   when: 2026-08-31 14:42:03.000000000 Z
   where: github
   who: 125282851
-- _id: 2632203
-  _job: 33417195838
-  _time: 2026-08-31 17:04:59.941945093 Z
+- _id: 2632193
+  _job: 33428150683
+  _time: 2026-08-31 19:04:16.503231153 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1708-die-set-e
   comments: 5
@@ -251120,9 +250972,9 @@
   when: 2026-08-31 14:40:56.000000000 Z
   where: github
   who: 33578155
-- _id: 2632204
-  _job: 33417195838
-  _time: 2026-08-31 17:05:13.698032350 Z
+- _id: 2632194
+  _job: 33428150683
+  _time: 2026-08-31 19:04:28.141000646 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1899'
   details: The pull request zerocracy/judges-action#1926 has been opened by @morphqdd.
@@ -251135,9 +250987,9 @@
   when: 2026-08-31 14:41:32.000000000 Z
   where: github
   who: 125282851
-- _id: 2632205
-  _job: 33417195838
-  _time: 2026-08-31 17:05:14.107998267 Z
+- _id: 2632195
+  _job: 33428150683
+  _time: 2026-08-31 19:04:28.572407539 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1898'
   details: The pull request zerocracy/judges-action#1925 has been opened by @morphqdd.
@@ -251150,9 +251002,9 @@
   when: 2026-08-31 14:40:56.000000000 Z
   where: github
   who: 125282851
-- _id: 2632206
-  _job: 33417195838
-  _time: 2026-08-31 17:05:14.870860698 Z
+- _id: 2632196
+  _job: 33428150683
+  _time: 2026-08-31 19:04:29.316379784 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1897'
   details: The pull request zerocracy/judges-action#1924 has been opened by @morphqdd.
@@ -251165,9 +251017,9 @@
   when: 2026-08-31 14:40:06.000000000 Z
   where: github
   who: 125282851
-- _id: 2632207
-  _job: 33417195838
-  _time: 2026-08-31 17:05:15.337457356 Z
+- _id: 2632197
+  _job: 33428150683
+  _time: 2026-08-31 19:04:29.762384378 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1707-set-leak
   comments: 8
@@ -251193,9 +251045,9 @@
   when: 2026-08-31 06:37:46.000000000 Z
   where: github
   who: 33578155
-- _id: 2632208
-  _job: 33417195838
-  _time: 2026-08-31 17:05:32.266372854 Z
+- _id: 2632198
+  _job: 33428150683
+  _time: 2026-08-31 19:04:43.117562025 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1696 has been closed by @yegor256.
   event_id: 14146552193
@@ -251207,9 +251059,9 @@
   when: 2026-08-31 14:34:31.000000000 Z
   where: github
   who: 526301
-- _id: 2632209
-  _job: 33417195838
-  _time: 2026-08-31 17:05:32.779766069 Z
+- _id: 2632199
+  _job: 33428150683
+  _time: 2026-08-31 19:04:43.866008671 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1695 has been closed by @yegor256.
   event_id: 14146548134
@@ -251221,9 +251073,9 @@
   when: 2026-08-31 14:34:26.000000000 Z
   where: github
   who: 526301
-- _id: 2632210
-  _job: 33417195838
-  _time: 2026-08-31 17:05:33.089095374 Z
+- _id: 2632200
+  _job: 33428150683
+  _time: 2026-08-31 19:04:44.155033464 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1577-remove-github-token-kv
   comments: 3
@@ -251248,9 +251100,9 @@
   when: 2026-08-31 14:32:49.000000000 Z
   where: github
   who: 33578155
-- _id: 2632211
-  _job: 33417195838
-  _time: 2026-08-31 17:06:02.404321472 Z
+- _id: 2632201
+  _job: 33428150683
+  _time: 2026-08-31 19:05:02.924894242 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1922 has been opened by @yegor256.
   event_id: 14146440816
@@ -251262,9 +251114,9 @@
   when: 2026-08-31 14:32:22.000000000 Z
   where: github
   who: 526301
-- _id: 2632212
-  _job: 33417195838
-  _time: 2026-08-31 17:06:03.575563542 Z
+- _id: 2632202
+  _job: 33428150683
+  _time: 2026-08-31 19:05:03.920325169 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1909'
   details: The pull request zerocracy/judges-action#1921 has been opened by @yegor256.
@@ -251277,9 +251129,9 @@
   when: 2026-08-31 14:31:22.000000000 Z
   where: github
   who: 526301
-- _id: 2632213
-  _job: 33417195838
-  _time: 2026-08-31 17:06:04.324663200 Z
+- _id: 2632203
+  _job: 33428150683
+  _time: 2026-08-31 19:05:04.499400400 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1902 has been closed by @yegor256.
   event_id: 14146191632
@@ -251291,9 +251143,9 @@
   when: 2026-08-31 14:27:30.000000000 Z
   where: github
   who: 526301
-- _id: 2632214
-  _job: 33417195838
-  _time: 2026-08-31 17:06:05.940153684 Z
+- _id: 2632204
+  _job: 33428150683
+  _time: 2026-08-31 19:05:06.378271922 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/hadolint-hadolint-action-3.x
   details: The pull request zerocracy/judges-action#1920 has been opened by @renovate[bot].
@@ -251306,9 +251158,9 @@
   when: 2026-08-31 14:22:56.000000000 Z
   where: github
   who: 29139614
-- _id: 2632215
-  _job: 33417195838
-  _time: 2026-08-31 17:06:07.111163131 Z
+- _id: 2632205
+  _job: 33428150683
+  _time: 2026-08-31 19:05:07.329235492 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1902'
   details: The pull request zerocracy/judges-action#1919 has been opened by @yegor256.
@@ -251321,9 +251173,9 @@
   when: 2026-08-31 14:12:40.000000000 Z
   where: github
   who: 526301
-- _id: 2632216
-  _job: 33417195838
-  _time: 2026-08-31 17:06:07.455491999 Z
+- _id: 2632206
+  _job: 33428150683
+  _time: 2026-08-31 19:05:07.646430853 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1901 has been closed by @yegor256.
   event_id: 14145169577
@@ -251335,9 +251187,9 @@
   when: 2026-08-31 14:07:38.000000000 Z
   where: github
   who: 526301
-- _id: 2632217
-  _job: 33417195838
-  _time: 2026-08-31 17:06:07.870253965 Z
+- _id: 2632207
+  _job: 33428150683
+  _time: 2026-08-31 19:05:07.924366613 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1900 has been closed by @yegor256.
   event_id: 14145169167
@@ -251349,9 +251201,9 @@
   when: 2026-08-31 14:07:37.000000000 Z
   where: github
   who: 526301
-- _id: 2632218
-  _job: 33417195838
-  _time: 2026-08-31 17:06:08.255203183 Z
+- _id: 2632208
+  _job: 33428150683
+  _time: 2026-08-31 19:05:08.350198957 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1664-n1-reactions
   comments: 3
@@ -251376,9 +251228,9 @@
   when: 2026-08-31 06:37:22.000000000 Z
   where: github
   who: 33578155
-- _id: 2632219
-  _job: 33417195838
-  _time: 2026-08-31 17:06:23.152804191 Z
+- _id: 2632209
+  _job: 33428150683
+  _time: 2026-08-31 19:05:20.921900459 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1900'
   details: The pull request zerocracy/judges-action#1918 has been opened by @yegor256.
@@ -251391,9 +251243,9 @@
   when: 2026-08-31 14:01:50.000000000 Z
   where: github
   who: 526301
-- _id: 2632220
-  _job: 33417195838
-  _time: 2026-08-31 17:06:23.452777938 Z
+- _id: 2632210
+  _job: 33428150683
+  _time: 2026-08-31 19:05:21.204956983 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1661-infinite-loop-earliest
   comments: 15
@@ -251419,9 +251271,9 @@
   when: 2026-08-31 13:59:08.000000000 Z
   where: github
   who: 33578155
-- _id: 2632221
-  _job: 33417195838
-  _time: 2026-08-31 17:06:41.668705673 Z
+- _id: 2632211
+  _job: 33428150683
+  _time: 2026-08-31 19:05:35.160134191 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue zerocracy/judges-action#1907 has been closed by @yegor256.
   event_id: 14144646086
@@ -251433,9 +251285,9 @@
   when: 2026-08-31 13:57:21.000000000 Z
   where: github
   who: 526301
-- _id: 2632222
-  _job: 33417195838
-  _time: 2026-08-31 17:06:42.256712080 Z
+- _id: 2632212
+  _job: 33428150683
+  _time: 2026-08-31 19:05:35.819033858 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1907'
   details: The pull request zerocracy/judges-action#1917 has been opened by @yegor256.
@@ -251448,9 +251300,9 @@
   when: 2026-08-31 13:52:46.000000000 Z
   where: github
   who: 526301
-- _id: 2632223
-  _job: 33417195838
-  _time: 2026-08-31 17:06:43.509798492 Z
+- _id: 2632213
+  _job: 33428150683
+  _time: 2026-08-31 19:05:37.186163609 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1855b
   details: The pull request zerocracy/judges-action#1916 has been opened by @yegor256.
@@ -251463,9 +251315,158 @@
   when: 2026-08-31 13:33:07.000000000 Z
   where: github
   who: 526301
+- _id: 2632214
+  _job: 33428150683
+  _time: 2026-08-31 19:05:44.432120161 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/fbe#651 has been opened by @thayorns.
+  event_id: 14153772252
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 651
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-08-31 17:00:56.000000000 Z
+  where: github
+  who: 96509556
+- _id: 2632215
+  _job: 33428150683
+  _time: 2026-08-31 19:05:46.226110816 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '641'
+  details: The pull request zerocracy/fbe#650 has been opened by @morphqdd.
+  event_id: 14147996013
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 650
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 15:02:43.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632216
+  _job: 33428150683
+  _time: 2026-08-31 19:05:46.713234520 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '633'
+  details: The pull request zerocracy/fbe#649 has been opened by @morphqdd.
+  event_id: 14147194312
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 649
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:47:02.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632217
+  _job: 33428150683
+  _time: 2026-08-31 19:05:47.034322890 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '632'
+  details: The pull request zerocracy/fbe#648 has been opened by @morphqdd.
+  event_id: 14147162487
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 648
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:46:25.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632218
+  _job: 33428150683
+  _time: 2026-08-31 19:05:47.308077980 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '635'
+  details: The pull request zerocracy/fbe#647 has been opened by @morphqdd.
+  event_id: 14147142861
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 647
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:46:02.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632219
+  _job: 33428150683
+  _time: 2026-08-31 19:05:47.627275852 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '634'
+  details: The pull request zerocracy/fbe#646 has been opened by @morphqdd.
+  event_id: 14147121029
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 646
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:45:37.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632220
+  _job: 33428150683
+  _time: 2026-08-31 19:05:47.943445488 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '629'
+  details: The pull request zerocracy/fbe#645 has been opened by @morphqdd.
+  event_id: 14147091329
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 645
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:45:02.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632221
+  _job: 33428150683
+  _time: 2026-08-31 19:05:48.226479869 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '620'
+  details: The pull request zerocracy/fbe#644 has been opened by @morphqdd.
+  event_id: 14147066106
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 644
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:44:33.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632222
+  _job: 33428150683
+  _time: 2026-08-31 19:05:48.585658568 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '630'
+  details: The pull request zerocracy/fbe#643 has been opened by @morphqdd.
+  event_id: 14147050602
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 643
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:44:15.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632223
+  _job: 33428150683
+  _time: 2026-08-31 19:05:49.080792092 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '619'
+  details: The pull request zerocracy/fbe#642 has been opened by @morphqdd.
+  event_id: 14147035362
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 642
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-08-31 14:43:57.000000000 Z
+  where: github
+  who: 125282851
 - _id: 2632224
-  _job: 33417195838
-  _time: 2026-08-31 17:06:48.548262288 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:05:54.815568124 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '503'
   details: The pull request yegor256/judges#511 has been opened by @morphqdd.
@@ -251479,8 +251480,8 @@
   where: github
   who: 125282851
 - _id: 2632225
-  _job: 33417195838
-  _time: 2026-08-31 17:06:49.883492193 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:05:56.317037279 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '504'
   details: The pull request yegor256/judges#510 has been opened by @morphqdd.
@@ -251494,8 +251495,8 @@
   where: github
   who: 125282851
 - _id: 2632226
-  _job: 33417195838
-  _time: 2026-08-31 17:06:50.207847957 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:05:56.663159663 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '502'
   details: The pull request yegor256/judges#509 has been opened by @morphqdd.
@@ -251509,8 +251510,8 @@
   where: github
   who: 125282851
 - _id: 2632227
-  _job: 33417195838
-  _time: 2026-08-31 17:06:50.527928580 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:05:56.976984201 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '501'
   details: The pull request yegor256/judges#508 has been opened by @morphqdd.
@@ -251524,8 +251525,8 @@
   where: github
   who: 125282851
 - _id: 2632228
-  _job: 33417195838
-  _time: 2026-08-31 17:06:51.603456440 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:05:57.785688390 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue yegor256/judges#505 has been closed by @yegor256.
   event_id: 14147284538
@@ -251538,8 +251539,8 @@
   where: github
   who: 526301
 - _id: 2632229
-  _job: 33417195838
-  _time: 2026-08-31 17:06:52.493237815 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:05:58.653482092 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue yegor256/judges#98 has been closed by @yegor256.
   event_id: 14146552802
@@ -251552,8 +251553,8 @@
   where: github
   who: 526301
 - _id: 2632230
-  _job: 33417195838
-  _time: 2026-08-31 17:06:52.763151580 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:05:58.982996316 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The issue yegor256/judges#289 has been closed by @yegor256.
   event_id: 14146545207
@@ -251566,8 +251567,22 @@
   where: github
   who: 526301
 - _id: 2632231
-  _job: 33417195838
-  _time: 2026-08-31 17:07:52.741902156 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:06:06.069523644 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  since: *2435
+  total_builds_ran: 3985
+  total_commits_pushed: 47
+  total_hoc_committed: 2190
+  total_issues_created: 93
+  total_pulls_submitted: 67
+  total_releases_published: 1
+  total_reviews_submitted: 26
+  what: quantity-of-deliverables
+  when: 2026-08-31 19:06:06.047505684 Z
+- _id: 2632232
+  _job: 33428150683
+  _time: 2026-08-31 19:08:01.606673098 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 676-csscheck-branch-filter
   comments: 3
@@ -251588,32 +251603,9 @@
   when: 2026-08-31 14:34:39.000000000 Z
   where: github
   who: 526301
-- _id: 2632232
-  _job: 33417195838
-  _time: 2026-08-31 17:08:38.174896640 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  branch: '289'
-  comments: 1
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 0
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, yegor256/judges#500 has been "pull-was-merged".
-  failed_builds: 0
-  files: 2
-  hoc: 26
-  issue: 500
-  repository: 799113787
-  succeeded_builds: 12
-  suggestions: 0
-  what: pull-was-merged
-  when: 2026-08-31 14:34:21.000000000 Z
-  where: github
-  who: 526301
 - _id: 2632233
-  _job: 33417195838
-  _time: 2026-08-31 17:08:49.927567478 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:08:38.698281125 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1572-doc-job-id
   comments: 3
@@ -251635,31 +251627,31 @@
   where: github
   who: 526301
 - _id: 2632234
-  _job: 33417195838
-  _time: 2026-08-31 17:09:09.663773416 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:08:49.499425062 Z
   _version: 0.19.16/0.61.1/0.17.21
-  branch: '98'
+  branch: '289'
   comments: 1
   comments_appreciated: 0
   comments_by_author: 1
   comments_by_reviewers: 0
   comments_resolved: 0
   comments_to_code: 0
-  details: Apparently, yegor256/judges#506 has been "pull-was-merged".
+  details: Apparently, yegor256/judges#500 has been "pull-was-merged".
   failed_builds: 0
   files: 2
-  hoc: 42
-  issue: 506
+  hoc: 26
+  issue: 500
   repository: 799113787
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-08-31 14:34:18.000000000 Z
+  when: 2026-08-31 14:34:21.000000000 Z
   where: github
   who: 526301
 - _id: 2632235
-  _job: 33417195838
-  _time: 2026-08-31 17:09:22.313540058 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:09:04.080319330 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1568-readme-options-clarify
   comments: 16
@@ -251682,8 +251674,31 @@
   where: github
   who: 526301
 - _id: 2632236
-  _job: 33417195838
-  _time: 2026-08-31 17:09:45.397144856 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:09:18.276604117 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '98'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#506 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 42
+  issue: 506
+  repository: 799113787
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-31 14:34:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632237
+  _job: 33428150683
+  _time: 2026-08-31 19:09:32.467485465 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '505'
   comments: 0
@@ -251704,9 +251719,9 @@
   when: 2026-08-31 14:48:48.000000000 Z
   where: github
   who: 526301
-- _id: 2632237
-  _job: 33417195838
-  _time: 2026-08-31 17:10:27.507394968 Z
+- _id: 2632238
+  _job: 33428150683
+  _time: 2026-08-31 19:10:03.430078248 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1695'
   comments: 2
@@ -251727,9 +251742,9 @@
   when: 2026-08-31 14:34:25.000000000 Z
   where: github
   who: 526301
-- _id: 2632238
-  _job: 33417195838
-  _time: 2026-08-31 17:10:43.167750924 Z
+- _id: 2632239
+  _job: 33428150683
+  _time: 2026-08-31 19:10:15.937004403 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1696'
   comments: 2
@@ -251750,9 +251765,9 @@
   when: 2026-08-31 14:34:29.000000000 Z
   where: github
   who: 526301
-- _id: 2632239
-  _job: 33417195838
-  _time: 2026-08-31 17:10:58.930589159 Z
+- _id: 2632240
+  _job: 33428150683
+  _time: 2026-08-31 19:10:28.416610272 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '760'
   comments: 3
@@ -251773,9 +251788,9 @@
   when: 2026-08-31 14:34:34.000000000 Z
   where: github
   who: 526301
-- _id: 2632240
-  _job: 33417195838
-  _time: 2026-08-31 17:11:17.736622029 Z
+- _id: 2632241
+  _job: 33428150683
+  _time: 2026-08-31 19:10:43.004652766 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1855'
   comments: 0
@@ -251797,9 +251812,9 @@
   when: 2026-08-31 13:29:19.000000000 Z
   where: github
   who: 526301
-- _id: 2632241
-  _job: 33417195838
-  _time: 2026-08-31 17:11:33.099485430 Z
+- _id: 2632242
+  _job: 33428150683
+  _time: 2026-08-31 19:10:55.005323309 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: 1855b
   comments: 0
@@ -251821,9 +251836,9 @@
   when: 2026-08-31 13:43:36.000000000 Z
   where: github
   who: 526301
-- _id: 2632242
-  _job: 33417195838
-  _time: 2026-08-31 17:11:50.075732983 Z
+- _id: 2632243
+  _job: 33428150683
+  _time: 2026-08-31 19:11:07.075532595 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1907'
   comments: 0
@@ -251845,9 +251860,9 @@
   when: 2026-08-31 13:57:19.000000000 Z
   where: github
   who: 526301
-- _id: 2632243
-  _job: 33417195838
-  _time: 2026-08-31 17:12:05.667959451 Z
+- _id: 2632244
+  _job: 33428150683
+  _time: 2026-08-31 19:11:19.291285352 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1900'
   comments: 0
@@ -251869,9 +251884,9 @@
   when: 2026-08-31 14:07:36.000000000 Z
   where: github
   who: 526301
-- _id: 2632244
-  _job: 33417195838
-  _time: 2026-08-31 17:12:21.282045214 Z
+- _id: 2632245
+  _job: 33428150683
+  _time: 2026-08-31 19:11:32.097413324 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1902'
   comments: 0
@@ -251893,9 +251908,9 @@
   when: 2026-08-31 14:27:28.000000000 Z
   where: github
   who: 526301
-- _id: 2632245
-  _job: 33417195838
-  _time: 2026-08-31 17:12:36.762714301 Z
+- _id: 2632246
+  _job: 33428150683
+  _time: 2026-08-31 19:11:45.515616027 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: renovate/hadolint-hadolint-action-3.x
   comments: 0
@@ -251916,9 +251931,9 @@
   when: 2026-08-31 14:53:59.000000000 Z
   where: github
   who: 526301
-- _id: 2632246
-  _job: 33417195838
-  _time: 2026-08-31 17:12:50.948614753 Z
+- _id: 2632247
+  _job: 33428150683
+  _time: 2026-08-31 19:11:57.436304691 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1909'
   comments: 1
@@ -251940,9 +251955,9 @@
   when: 2026-08-31 14:47:44.000000000 Z
   where: github
   who: 526301
-- _id: 2632247
-  _job: 33417195838
-  _time: 2026-08-31 17:13:05.263042306 Z
+- _id: 2632248
+  _job: 33428150683
+  _time: 2026-08-31 19:12:09.560423151 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1897'
   comments: 0
@@ -251963,9 +251978,9 @@
   when: 2026-08-31 14:52:17.000000000 Z
   where: github
   who: 526301
-- _id: 2632248
-  _job: 33417195838
-  _time: 2026-08-31 17:13:21.371742155 Z
+- _id: 2632249
+  _job: 33428150683
+  _time: 2026-08-31 19:12:23.405649031 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1906'
   comments: 0
@@ -251986,9 +252001,9 @@
   when: 2026-08-31 14:51:41.000000000 Z
   where: github
   who: 526301
-- _id: 2632249
-  _job: 33417195838
-  _time: 2026-08-31 17:13:34.750405373 Z
+- _id: 2632250
+  _job: 33428150683
+  _time: 2026-08-31 19:12:34.747803656 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1905'
   comments: 0
@@ -252009,9 +252024,9 @@
   when: 2026-08-31 14:51:53.000000000 Z
   where: github
   who: 526301
-- _id: 2632250
-  _job: 33417195838
-  _time: 2026-08-31 17:13:48.571298996 Z
+- _id: 2632251
+  _job: 33428150683
+  _time: 2026-08-31 19:12:45.411544278 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1903'
   comments: 0
@@ -252032,9 +252047,9 @@
   when: 2026-08-31 14:51:17.000000000 Z
   where: github
   who: 526301
-- _id: 2632251
-  _job: 33417195838
-  _time: 2026-08-31 17:14:02.908885468 Z
+- _id: 2632252
+  _job: 33428150683
+  _time: 2026-08-31 19:12:56.700717227 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1911'
   comments: 1
@@ -252055,9 +252070,9 @@
   when: 2026-08-31 14:49:42.000000000 Z
   where: github
   who: 526301
-- _id: 2632252
-  _job: 33417195838
-  _time: 2026-08-31 17:14:16.492889077 Z
+- _id: 2632253
+  _job: 33428150683
+  _time: 2026-08-31 19:13:07.683803185 Z
   _version: 0.19.16/0.61.1/0.17.21
   branch: '1911'
   comments: 2
@@ -252079,9 +252094,9 @@
   when: 2026-08-31 15:31:23.000000000 Z
   where: github
   who: 526301
-- _id: 2632253
-  _job: 33417195838
-  _time: 2026-08-31 17:17:59.329925228 Z
+- _id: 2632254
+  _job: 33428150683
+  _time: 2026-08-31 19:15:51.322942611 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#576.
   issue: 576
@@ -252091,9 +252106,9 @@
   when: 2026-08-31 14:27:11.000000000 Z
   where: github
   who: 526301
-- _id: 2632254
-  _job: 33417195838
-  _time: 2026-08-31 17:18:04.438758130 Z
+- _id: 2632255
+  _job: 33428150683
+  _time: 2026-08-31 19:15:56.196538115 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#577.
   issue: 577
@@ -252103,21 +252118,9 @@
   when: 2026-08-31 14:27:09.000000000 Z
   where: github
   who: 526301
-- _id: 2632255
-  _job: 33417195838
-  _time: 2026-08-31 17:18:11.635879281 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#472.
-  issue: 472
-  label: bug
-  repository: 799113787
-  what: label-was-attached
-  when: 2026-08-31 14:23:41.000000000 Z
-  where: github
-  who: 526301
 - _id: 2632256
-  _job: 33417195838
-  _time: 2026-08-31 17:18:14.923621694 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:16:05.486521550 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#579.
   issue: 579
@@ -252128,8 +252131,20 @@
   where: github
   who: 526301
 - _id: 2632257
-  _job: 33417195838
-  _time: 2026-08-31 17:18:19.704400233 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:16:06.099232194 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#472.
+  issue: 472
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: 2026-08-31 14:23:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632258
+  _job: 33428150683
+  _time: 2026-08-31 19:16:10.490167040 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#580.
   issue: 580
@@ -252139,9 +252154,9 @@
   when: 2026-08-31 14:27:07.000000000 Z
   where: github
   who: 526301
-- _id: 2632258
-  _job: 33417195838
-  _time: 2026-08-31 17:18:23.888997531 Z
+- _id: 2632259
+  _job: 33428150683
+  _time: 2026-08-31 19:16:15.191034505 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#581.
   issue: 581
@@ -252151,9 +252166,9 @@
   when: 2026-08-31 14:27:06.000000000 Z
   where: github
   who: 526301
-- _id: 2632259
-  _job: 33417195838
-  _time: 2026-08-31 17:18:25.356571395 Z
+- _id: 2632260
+  _job: 33428150683
+  _time: 2026-08-31 19:16:19.415084740 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#501.
   issue: 501
@@ -252163,9 +252178,9 @@
   when: 2026-08-31 14:23:40.000000000 Z
   where: github
   who: 526301
-- _id: 2632260
-  _job: 33417195838
-  _time: 2026-08-31 17:18:29.440046156 Z
+- _id: 2632261
+  _job: 33428150683
+  _time: 2026-08-31 19:16:23.345204147 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#502.
   issue: 502
@@ -252175,21 +252190,9 @@
   when: 2026-08-31 14:23:39.000000000 Z
   where: github
   who: 526301
-- _id: 2632261
-  _job: 33417195838
-  _time: 2026-08-31 17:18:33.977054915 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#503.
-  issue: 503
-  label: bug
-  repository: 799113787
-  what: label-was-attached
-  when: 2026-08-31 14:23:38.000000000 Z
-  where: github
-  who: 526301
 - _id: 2632262
-  _job: 33417195838
-  _time: 2026-08-31 17:18:35.545357918 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:16:25.889449662 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/pages-action#676.
   issue: 676
@@ -252200,8 +252203,20 @@
   where: github
   who: 526301
 - _id: 2632263
-  _job: 33417195838
-  _time: 2026-08-31 17:18:38.481719892 Z
+  _job: 33428150683
+  _time: 2026-08-31 19:16:27.640848228 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#503.
+  issue: 503
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: 2026-08-31 14:23:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632264
+  _job: 33428150683
+  _time: 2026-08-31 19:16:31.739936274 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#504.
   issue: 504
@@ -252211,9 +252226,9 @@
   when: 2026-08-31 14:23:37.000000000 Z
   where: github
   who: 526301
-- _id: 2632264
-  _job: 33417195838
-  _time: 2026-08-31 17:18:58.118417785 Z
+- _id: 2632265
+  _job: 33428150683
+  _time: 2026-08-31 19:16:49.147434662 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#616.
   issue: 616
@@ -252223,9 +252238,9 @@
   when: 2026-08-31 14:27:04.000000000 Z
   where: github
   who: 526301
-- _id: 2632265
-  _job: 33417195838
-  _time: 2026-08-31 17:19:00.959137576 Z
+- _id: 2632266
+  _job: 33428150683
+  _time: 2026-08-31 19:16:52.190906392 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#619.
   issue: 619
@@ -252235,9 +252250,9 @@
   when: 2026-08-31 14:27:02.000000000 Z
   where: github
   who: 526301
-- _id: 2632266
-  _job: 33417195838
-  _time: 2026-08-31 17:19:04.004691403 Z
+- _id: 2632267
+  _job: 33428150683
+  _time: 2026-08-31 19:16:54.652014799 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#620.
   issue: 620
@@ -252247,9 +252262,9 @@
   when: 2026-08-31 14:27:01.000000000 Z
   where: github
   who: 526301
-- _id: 2632267
-  _job: 33417195838
-  _time: 2026-08-31 17:19:06.452046154 Z
+- _id: 2632268
+  _job: 33428150683
+  _time: 2026-08-31 19:16:56.934765977 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#629.
   issue: 629
@@ -252259,9 +252274,9 @@
   when: 2026-08-31 14:26:59.000000000 Z
   where: github
   who: 526301
-- _id: 2632268
-  _job: 33417195838
-  _time: 2026-08-31 17:19:08.823433357 Z
+- _id: 2632269
+  _job: 33428150683
+  _time: 2026-08-31 19:16:59.106771713 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#630.
   issue: 630
@@ -252271,9 +252286,9 @@
   when: 2026-08-31 14:26:58.000000000 Z
   where: github
   who: 526301
-- _id: 2632269
-  _job: 33417195838
-  _time: 2026-08-31 17:19:11.405355374 Z
+- _id: 2632270
+  _job: 33428150683
+  _time: 2026-08-31 19:17:01.229956441 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#632.
   issue: 632
@@ -252283,9 +252298,9 @@
   when: 2026-08-31 14:26:56.000000000 Z
   where: github
   who: 526301
-- _id: 2632270
-  _job: 33417195838
-  _time: 2026-08-31 17:19:13.260753411 Z
+- _id: 2632271
+  _job: 33428150683
+  _time: 2026-08-31 19:17:02.632561320 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "enhancement" label was attached by @yegor256 to the issue zerocracy/pages-action#700.
   issue: 700
@@ -252295,9 +252310,9 @@
   when: 2026-08-31 14:25:12.000000000 Z
   where: github
   who: 526301
-- _id: 2632271
-  _job: 33417195838
-  _time: 2026-08-31 17:19:13.885894619 Z
+- _id: 2632272
+  _job: 33428150683
+  _time: 2026-08-31 19:17:03.866480337 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#633.
   issue: 633
@@ -252307,9 +252322,9 @@
   when: 2026-08-31 14:26:55.000000000 Z
   where: github
   who: 526301
-- _id: 2632272
-  _job: 33417195838
-  _time: 2026-08-31 17:19:15.517858107 Z
+- _id: 2632273
+  _job: 33428150683
+  _time: 2026-08-31 19:17:05.973176029 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#634.
   issue: 634
@@ -252319,9 +252334,9 @@
   when: 2026-08-31 14:26:54.000000000 Z
   where: github
   who: 526301
-- _id: 2632273
-  _job: 33417195838
-  _time: 2026-08-31 17:19:17.600909146 Z
+- _id: 2632274
+  _job: 33428150683
+  _time: 2026-08-31 19:17:07.707782939 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#635.
   issue: 635
@@ -252331,9 +252346,9 @@
   when: 2026-08-31 14:26:53.000000000 Z
   where: github
   who: 526301
-- _id: 2632274
-  _job: 33417195838
-  _time: 2026-08-31 17:19:19.323099954 Z
+- _id: 2632275
+  _job: 33428150683
+  _time: 2026-08-31 19:17:09.478936884 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#640.
   issue: 640
@@ -252343,9 +252358,9 @@
   when: 2026-08-31 14:26:52.000000000 Z
   where: github
   who: 526301
-- _id: 2632275
-  _job: 33417195838
-  _time: 2026-08-31 17:19:21.559535965 Z
+- _id: 2632276
+  _job: 33428150683
+  _time: 2026-08-31 19:17:11.468603846 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#641.
   issue: 641
@@ -252355,9 +252370,16 @@
   when: 2026-08-31 14:26:50.000000000 Z
   where: github
   who: 526301
-- _id: 2632276
-  _job: 33417195838
-  _time: 2026-08-31 17:19:42.648656960 Z
+- _id: 2632277
+  _job: 33428150683
+  _time: 2026-08-31 19:19:33.511580739 Z
   _version: 0.19.16/0.61.1/0.17.21
   what: dimensions-of-terrain
-  when: 2026-08-31 17:19:42.659625412 Z
+  when: 2026-08-31 19:19:33.527252174 Z
+- _id: 2632278
+  _job: 33428150683
+  _time: 2026-08-31 19:19:33.573817325 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  since: *2436
+  what: quality-of-service
+  when: 2026-08-31 19:19:33.552748210 Z
