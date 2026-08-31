@@ -11,6 +11,8 @@ name: actionlint
     branches:
       - master
   workflow_call:
+permissions:
+  contents: read
 jobs:
   actionlint:
     timeout-minutes: 15

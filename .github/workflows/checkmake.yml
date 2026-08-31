@@ -9,6 +9,8 @@ name: checkmake
   pull_request:
     branches:
       - master
+permissions:
+  contents: read
 jobs:
   checkmake:
     timeout-minutes: 15

@@ -11,6 +11,8 @@ name: typos
     branches:
       - master
   workflow_call:
+permissions:
+  contents: read
 jobs:
   typos:
     timeout-minutes: 15

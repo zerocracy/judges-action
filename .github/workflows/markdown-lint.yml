@@ -6,6 +6,8 @@ name: markdown-lint
 'on':
   push:
   workflow_call:
+permissions:
+  contents: read
 jobs:
   markdown-lint:
     timeout-minutes: 15

@@ -6,6 +6,8 @@ name: titles
 'on':
   issues:
     types: [opened]
+permissions:
+  issues: write
 jobs:
   titles:
     timeout-minutes: 15
