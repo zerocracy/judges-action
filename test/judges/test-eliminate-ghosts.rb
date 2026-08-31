@@ -156,4 +156,19 @@ class TestEliminateGhosts < Jp::Test
       'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_looks_up_forbidden_user_once_per_run
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub = stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, who: 29_139_614, where: 'github')
+      .with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 44, who: 29_139_614, where: 'github')
+    load_it('eliminate-ghosts', fb)
+    assert_requested(stub, times: 1)
+  end
 end

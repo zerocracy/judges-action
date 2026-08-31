@@ -12,9 +12,10 @@ require_relative '../../lib/nick_of'
 
 good = Set.new
 bad = Set.new
+forbidden = Set.new
 
 Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f|
-  next if good.include?(f.who) || bad.include?(f.who)
+  next if good.include?(f.who) || bad.include?(f.who) || forbidden.include?(f.who)
   next if Fbe.octo.off_quota?
   elapsed($loog, level: Logger::INFO) do
     nick =
@@ -23,6 +24,7 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
       rescue Fbe::Error => e
         case e.cause
         when Octokit::Forbidden
+          forbidden.add(f.who)
           $loog.warn(
             "[#{$judge}] Access forbidden to user ##{f.who} " \
             "(transient, will retry next cycle): #{e.cause.class}: #{e.cause.message}"
