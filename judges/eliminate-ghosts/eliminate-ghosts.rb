@@ -46,16 +46,17 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
   end
 end
 
-bad.each do |u|
-  Fbe.fb.query("(and (not (eq stale 'who')) (eq where 'github') (eq who #{u}))").each do |f|
-    f.stale = 'who'
+Fbe.fb.txn do |fbt|
+  bad.each do |u|
+    fbt.query("(and (not (eq stale 'who')) (eq where 'github') (eq who #{u}))").each do |f|
+      f.stale = 'who'
+    end
   end
-end
-
-Fbe.fb.query('(and (eq where "github") (exists who) (unique who) (eq stale "who"))').each do |f|
-  next if good.include?(f.who)
-  Fbe.fb.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
-    ff.stale = 'who'
+  fbt.query('(and (eq where "github") (exists who) (unique who) (eq stale "who"))').each do |f|
+    next if good.include?(f.who)
+    fbt.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
+      ff.stale = 'who'
+    end
   end
 end
 
