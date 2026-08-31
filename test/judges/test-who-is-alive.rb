@@ -4,17 +4,13 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestWhoIsAlive < Jp::Test
   using SmartFactbase
 
   def test_finds_dead_users
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/user/444', status: 404, body: '')
     fb = Factbase.new
     f = fb.insert
     f._id = 1
@@ -23,7 +19,12 @@ class TestWhoIsAlive < Jp::Test
     f.who = 444
     f.where = 'github'
     f.name = 'jack'
-    load_it('who-is-alive', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } },
+      'GET /user/444' => 404
+    ).run do
+      load_it('who-is-alive', fb)
+    end
     assert_empty(fb.query('(exists who)').each.to_a)
     assert_empty(fb.query('(eq what "who-has-name")').each.to_a)
   end
