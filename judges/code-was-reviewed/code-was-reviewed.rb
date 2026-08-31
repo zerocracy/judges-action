@@ -17,6 +17,7 @@ Fbe.consider(
       (eq what 'pull-was-closed'))
     (exists repository)
     (exists issue)
+    (absent reviews)
     (absent stale)
     (absent tombstone)
     (absent done)
@@ -87,6 +88,7 @@ Fbe.consider(
       )
       next
     end
+  f.reviews = reviews.count
   count = nil
   reviews.each do |review|
     next if review.dig(:user, :id) == pr.dig(:user, :id)
