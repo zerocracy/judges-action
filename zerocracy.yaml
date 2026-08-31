@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 767.470085192
+  seconds: 1080.542978678
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-31 12:55:37.974573628 Z
+  when: 2026-08-31 13:19:34.490378569 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -204781,7 +204781,7 @@
   min_issue_was_found: 116
   min_pull_was_found: 678
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 677
   what: iterate
   where: github
 - _id: 2629842
@@ -204798,7 +204798,7 @@
   min_issue_was_found: 337
   min_pull_was_found: 424
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 416
   what: iterate
   where: github
 - _id: 2629843
@@ -205241,7 +205241,7 @@
   min_issue_was_found: 635
   min_pull_was_found: 599
   repository: 820463873
-  types_were_scanned: 583
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -205895,7 +205895,7 @@
   min_issue_was_found: 67
   min_pull_was_found: 0
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 680
   what: iterate
   where: github
 - _id: 2629938
@@ -206108,9 +206108,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1667
   earliest_issue_was_found: 1
-  events_were_scanned: 14139032188
+  events_were_scanned: 14142107087
   issues_were_scanned: 0
   labels_were_scanned: 1702
   latest_issue_was_found: 1073
@@ -206118,7 +206118,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1425
+  types_were_scanned: 1649
   what: iterate
   where: github
 - _id: 2630036
@@ -206152,7 +206152,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1319
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -249756,10 +249756,384 @@
   _time: 2026-08-31 12:49:20.634735906 Z
   _version: 0.19.16/0.61.1/0.17.21
   details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#505.
+  is_human: 1
   issue: 505
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-08-31 12:32:02.000000000 Z
+  when: &2431 2026-08-31 12:32:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632124
+  _job: 89478
+  _time: 2026-08-31 12:56:47.589428136 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#505 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 505
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *2431
+  where: github
+  who: 526301
+- _id: 2632125
+  _job: 33394609864
+  _time: 2026-08-31 13:07:42.309600636 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '1855'
+  details: The pull request zerocracy/judges-action#1915 has been opened by @yegor256.
+  event_id: 14141600717
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1915
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-08-31 12:56:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632126
+  _job: 33394609864
+  _time: 2026-08-31 13:07:42.977358178 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1666 has been closed by @yegor256.
+  event_id: 14141211807
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1666
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-08-31 12:48:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632127
+  _job: 33394609864
+  _time: 2026-08-31 13:07:43.464822779 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1731 has been closed by @yegor256.
+  event_id: 14141140242
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1731
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-08-31 12:47:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632128
+  _job: 33394609864
+  _time: 2026-08-31 13:07:44.607916728 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '1666'
+  details: The pull request zerocracy/judges-action#1914 has been opened by @yegor256.
+  event_id: 14141129794
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1914
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-08-31 12:47:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632129
+  _job: 33394609864
+  _time: 2026-08-31 13:07:45.226753170 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1663 has been closed by @yegor256.
+  event_id: 14140956380
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1663
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-08-31 12:43:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632130
+  _job: 33394609864
+  _time: 2026-08-31 13:07:45.749421391 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '1663'
+  details: The pull request zerocracy/judges-action#1913 has been opened by @yegor256.
+  event_id: 14140599265
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1913
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-08-31 12:36:00.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632131
+  _job: 33394609864
+  _time: 2026-08-31 13:07:46.054832451 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1729 has been closed by @yegor256.
+  event_id: 14140381547
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1729
+  repository: 799177290
+  what: issue-was-closed
+  when: 2026-08-31 12:31:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632132
+  _job: 33394609864
+  _time: 2026-08-31 13:07:46.461141034 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1911 has been opened by @thayorns.
+  event_id: 14140077476
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1911
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 12:25:03.000000000 Z
+  where: github
+  who: 96509556
+- _id: 2632133
+  _job: 33394609864
+  _time: 2026-08-31 13:07:47.162569676 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1910 has been opened by @thayorns.
+  event_id: 14140067754
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1910
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 12:24:51.000000000 Z
+  where: github
+  who: 96509556
+- _id: 2632134
+  _job: 33394609864
+  _time: 2026-08-31 13:07:48.302858925 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1899 has been opened by @morphqdd.
+  event_id: 14139047590
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1899
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 12:03:33.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632135
+  _job: 33394609864
+  _time: 2026-08-31 13:07:53.009843694 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1897 has been opened by @morphqdd.
+  issue: 1897
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:12:21.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632136
+  _job: 33394609864
+  _time: 2026-08-31 13:07:53.480576917 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1898 has been opened by @morphqdd.
+  issue: 1898
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:12:22.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632137
+  _job: 33394609864
+  _time: 2026-08-31 13:07:53.945545293 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1900 has been opened by @morphqdd.
+  issue: 1900
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:12:45.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632138
+  _job: 33394609864
+  _time: 2026-08-31 13:07:54.433721243 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1901 has been opened by @morphqdd.
+  issue: 1901
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:13:04.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632139
+  _job: 33394609864
+  _time: 2026-08-31 13:07:54.962957754 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1902 has been opened by @morphqdd.
+  issue: 1902
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:13:06.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632140
+  _job: 33394609864
+  _time: 2026-08-31 13:07:55.410691394 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1903 has been opened by @morphqdd.
+  issue: 1903
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:13:27.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632141
+  _job: 33394609864
+  _time: 2026-08-31 13:07:55.885162270 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1904 has been opened by @morphqdd.
+  issue: 1904
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:13:28.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632142
+  _job: 33394609864
+  _time: 2026-08-31 13:07:56.385643254 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1905 has been opened by @morphqdd.
+  issue: 1905
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:13:52.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632143
+  _job: 33394609864
+  _time: 2026-08-31 13:07:56.849496760 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1906 has been opened by @morphqdd.
+  issue: 1906
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:13:53.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2632144
+  _job: 33394609864
+  _time: 2026-08-31 13:07:57.316665864 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1907 has been opened by @thayorns.
+  issue: 1907
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 11:22:17.000000000 Z
+  where: github
+  who: 96509556
+- _id: 2632145
+  _job: 33394609864
+  _time: 2026-08-31 13:07:57.839659167 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: renovate/rubocop-1.x-lockfile
+  details: The missing pull zerocracy/judges-action#1908 has been opened by @renovate[bot].
+  issue: 1908
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-08-31 11:45:06.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2632146
+  _job: 33394609864
+  _time: 2026-08-31 13:07:59.440401925 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1909 has been opened by @thayorns.
+  issue: 1909
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 12:24:35.000000000 Z
+  where: github
+  who: 96509556
+- _id: 2632147
+  _job: 33394609864
+  _time: 2026-08-31 13:07:59.965700833 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1912 has been opened by @thayorns.
+  issue: 1912
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 12:25:14.000000000 Z
+  where: github
+  who: 96509556
+- _id: 2632148
+  _job: 33394609864
+  _time: 2026-08-31 13:08:28.573811368 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '1729'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#1893 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 82
+  issue: 1893
+  repository: 799177290
+  review: 2026-08-31 09:34:13.000000000 Z
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-31 12:31:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632149
+  _job: 33394609864
+  _time: 2026-08-31 13:08:50.426840416 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '1663'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#1913 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 112
+  issue: 1913
+  repository: 799177290
+  review: 2026-08-31 12:36:06.000000000 Z
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-31 12:43:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 2632150
+  _job: 33394609864
+  _time: 2026-08-31 13:09:01.837992544 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  branch: '1666'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#1914 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 12
+  issue: 1914
+  repository: 799177290
+  review: 2026-08-31 12:47:10.000000000 Z
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-08-31 12:48:30.000000000 Z
   where: github
   who: 526301
