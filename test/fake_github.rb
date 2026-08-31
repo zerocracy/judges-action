@@ -8,6 +8,7 @@ require 'octokit'
 require 'socket'
 require_relative '../lib/jp'
 
+# rubocop:disable Elegant/NoComments
 # @todo #760:60min Move the rest of the tests onto this server.
 #  Thirty four files under `test/` still build their GitHub with
 #  `stub_request` and `stub_github`, about a hundred and ten stubs in all,
@@ -17,6 +18,7 @@ require_relative '../lib/jp'
 #  last one is moved, `stub_github` and `rate_limit_up` go from
 #  `test/test__helper.rb`, the `webmock` gem goes from the `Gemfile`, and
 #  `require 'webmock/minitest'` goes with it.
+# rubocop:enable Elegant/NoComments
 class Jp::FakeGithub
   def initialize(routes = {})
     @routes = routes
