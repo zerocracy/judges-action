@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<fb version="0.19.6" size="4881630">
+<fb version="0.19.6" size="4911922">
   <f>
     <added t="I">8</added>
-    <cycles t="I">1</cycles>
+    <cycles t="I">2</cycles>
     <deleted t="I">8</deleted>
+    <error t="S">deadlock; recursive locking</error>
     <inserted t="I">8</inserted>
-    <seconds t="F">868.2352535</seconds>
+    <seconds t="F">537.14565573</seconds>
     <version t="S">0.61.1</version>
     <what t="S">judges-summary</what>
-    <when t="T">2026-08-31T20:46:52Z</when>
+    <when t="T">2026-08-31T21:10:35Z</when>
   </f>
   <f>
     <_id t="I">163490</_id>
@@ -20011,22 +20012,6 @@
     <who t="I">8086956</who>
   </f>
   <f>
-    <_id t="I">2599482</_id>
-    <_job t="I">20489041590</_job>
-    <_time t="T">2025-12-24T15:26:11Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.6</_version>
-    <branch t="S">1232</branch>
-    <details t="S">The missing pull zerocracy/judges-action#1253 has been opened by @yegorov.</details>
-    <is_human t="I">1</is_human>
-    <issue t="I">1253</issue>
-    <repository t="I">799177290</repository>
-    <tombstone t="T">2026-08-31T20:21:40Z</tombstone>
-    <what t="S">pull-was-opened</what>
-    <when t="T">2025-12-18T19:47:40Z</when>
-    <where t="S">github</where>
-    <who t="I">2566462</who>
-  </f>
-  <f>
     <_id t="I">2599483</_id>
     <_job t="I">20489041590</_job>
     <_time t="T">2025-12-24T15:26:12Z</_time>
@@ -20245,26 +20230,6 @@
     <when t="T">2025-12-23T08:57:52Z</when>
     <where t="S">github</where>
     <who t="I">526301</who>
-  </f>
-  <f>
-    <_id t="I">2599514</_id>
-    <_job t="I">20489988607</_job>
-    <_time t="T">2025-12-24T16:38:01Z</_time>
-    <_version t="S">0.19.2/0.58.1/0.17.6</_version>
-    <author t="I">2566462</author>
-    <comments t="I">2</comments>
-    <details t="S">The pull request zerocracy/judges-action#1253 with 75 HoC created by @yegorov was reviewed by @coderabbitai[bot] after 0h20m and 0 comments.</details>
-    <done t="T">2026-08-31T20:21:40Z</done>
-    <hoc t="I">75</hoc>
-    <is_human t="I">0</is_human>
-    <issue t="I">1253</issue>
-    <repository t="I">799177290</repository>
-    <review_comments t="I">0</review_comments>
-    <seconds t="I">1231</seconds>
-    <what t="S">code-was-reviewed</what>
-    <when t="T">2025-12-18T20:08:11Z</when>
-    <where t="S">github</where>
-    <who t="I">136622811</who>
   </f>
   <f>
     <_id t="I">2599515</_id>
@@ -67219,6 +67184,7 @@
     <qod_per_day t="F">26.9537452089075</qod_per_day>
     <qod_per_sec t="F">0.00011439215865395355</qod_per_sec>
     <start t="T">2025-04-29T14:07:31Z</start>
+    <tombstone t="T">2026-08-31T20:48:55Z</tombstone>
     <what t="S">earned-value</what>
     <when t="T">2026-04-25T20:30:06Z</when>
   </f>
@@ -216223,7 +216189,7 @@
       <v t="S">1066-1159</v>
       <v t="S">1162-1172</v>
       <v t="S">1174-1240</v>
-      <v t="S">1242-1252</v>
+      <v t="S">1242-1253</v>
     </issues>
     <repository t="I">799177290</repository>
     <what t="S">tombstone</what>
@@ -221175,9 +221141,9 @@
     <_job t="I">29025041680</_job>
     <_time t="T">2026-07-09T14:23:40Z</_time>
     <_version t="S">0.19.9/0.60.2/0.17.17</_version>
-    <assignees_were_scanned t="I">0</assignees_were_scanned>
+    <assignees_were_scanned t="I">1667</assignees_were_scanned>
     <earliest_issue_was_found t="I">1</earliest_issue_was_found>
-    <events_were_scanned t="I">14160751141</events_were_scanned>
+    <events_were_scanned t="I">19580338163</events_were_scanned>
     <issues_were_scanned t="I">0</issues_were_scanned>
     <labels_were_scanned t="I">1702</labels_were_scanned>
     <latest_issue_was_found t="I">1073</latest_issue_was_found>
@@ -221185,7 +221151,7 @@
     <min_issue_was_found t="I">1454</min_issue_was_found>
     <min_pull_was_found t="I">1838</min_pull_was_found>
     <repository t="I">799177290</repository>
-    <types_were_scanned t="I">1527</types_were_scanned>
+    <types_were_scanned t="I">1898</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -221223,7 +221189,7 @@
     <min_issue_was_found t="I">1111</min_issue_was_found>
     <min_pull_was_found t="I">1316</min_pull_was_found>
     <repository t="I">728758275</repository>
-    <types_were_scanned t="I">1128</types_were_scanned>
+    <types_were_scanned t="I">0</types_were_scanned>
     <what t="S">iterate</what>
     <where t="S">github</where>
   </f>
@@ -248706,6 +248672,10 @@
       <v t="I">2</v>
       <v t="I">0</v>
     </some_reviews_per_pull>
+    <some_triage_time>
+      <v t="F">4158823.0</v>
+      <v t="F">4158825.0</v>
+    </some_triage_time>
     <some_unmerged_pulls>
       <v t="I">2</v>
       <v t="I">2</v>
@@ -257394,6 +257364,10 @@
       <v t="I">4</v>
       <v t="I">2</v>
     </some_pull_hoc_size>
+    <some_pull_lifetime>
+      <v t="F">23753.0</v>
+      <v t="F">10770.0</v>
+    </some_pull_lifetime>
     <some_review_size>
       <v t="I">0</v>
       <v t="I">0</v>
@@ -272293,6 +272267,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @vasilevnstas for the enhancement suggested in zerocracy/pages-action#700, the reward amount is 18.</details>
     <greeting t="S">Thanks for suggesting an enhancement! You've earned +18 points. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) bugs too. Your running score is [+106](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/pages-action/issues/700/#issuecomment-5484358979</href>
     <is_human t="I">1</is_human>
     <issue t="I">700</issue>
     <repository t="I">802720676</repository>
@@ -272310,6 +272285,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @sdghsdkjlas27-dotcom for the bug reported in zerocracy/fbe#576, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+234](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/576/#issuecomment-5484359422</href>
     <is_human t="I">1</is_human>
     <issue t="I">576</issue>
     <repository t="I">820463873</repository>
@@ -272327,6 +272303,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @sdghsdkjlas27-dotcom for the bug reported in zerocracy/fbe#577, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+252](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/577/#issuecomment-5484359705</href>
     <is_human t="I">1</is_human>
     <issue t="I">577</issue>
     <repository t="I">820463873</repository>
@@ -272344,8 +272321,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @sdghsdkjlas27-dotcom for the bug reported in zerocracy/fbe#579, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+270](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/579/#issuecomment-5484360037</href>
     <is_human t="I">1</is_human>
     <issue t="I">579</issue>
+    <receipt t="S">receipt-#89320</receipt>
     <repository t="I">820463873</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:38Z</when>
@@ -272361,8 +272340,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @vasilevnstas for the bug reported in yegor256/judges#472, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+124](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/yegor256/judges/issues/472/#issuecomment-5484360418</href>
     <is_human t="I">1</is_human>
     <issue t="I">472</issue>
+    <receipt t="S">receipt-#89319</receipt>
     <repository t="I">799113787</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:39Z</when>
@@ -272378,8 +272359,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @sdghsdkjlas27-dotcom for the bug reported in zerocracy/fbe#580, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+288](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/580/#issuecomment-5484360691</href>
     <is_human t="I">1</is_human>
     <issue t="I">580</issue>
+    <receipt t="S">receipt-#89318</receipt>
     <repository t="I">820463873</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:39Z</when>
@@ -272395,8 +272378,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @sdghsdkjlas27-dotcom for the bug reported in zerocracy/fbe#581, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+306](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/581/#issuecomment-5484360981</href>
     <is_human t="I">1</is_human>
     <issue t="I">581</issue>
+    <receipt t="S">receipt-#89317</receipt>
     <repository t="I">820463873</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:39Z</when>
@@ -272412,8 +272397,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in yegor256/judges#501, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+56](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/yegor256/judges/issues/501/#issuecomment-5484361221</href>
     <is_human t="I">1</is_human>
     <issue t="I">501</issue>
+    <receipt t="S">receipt-#89316</receipt>
     <repository t="I">799113787</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:40Z</when>
@@ -272429,6 +272416,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in yegor256/judges#502, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+74](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/yegor256/judges/issues/502/#issuecomment-5484361479</href>
     <is_human t="I">1</is_human>
     <issue t="I">502</issue>
     <repository t="I">799113787</repository>
@@ -272446,6 +272434,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @sdghsdkjlas27-dotcom for the bug reported in zerocracy/pages-action#676, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+324](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/pages-action/issues/676/#issuecomment-5484361763</href>
     <is_human t="I">1</is_human>
     <issue t="I">676</issue>
     <repository t="I">802720676</repository>
@@ -272463,6 +272452,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in yegor256/judges#503, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+92](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/yegor256/judges/issues/503/#issuecomment-5484362050</href>
     <is_human t="I">1</is_human>
     <issue t="I">503</issue>
     <repository t="I">799113787</repository>
@@ -272480,8 +272470,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in yegor256/judges#504, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+110](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/yegor256/judges/issues/504/#issuecomment-5484362287</href>
     <is_human t="I">1</is_human>
     <issue t="I">504</issue>
+    <receipt t="S">receipt-#89323</receipt>
     <repository t="I">799113787</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:41Z</when>
@@ -272497,8 +272489,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/fbe#616, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+128](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/616/#issuecomment-5484362613</href>
     <is_human t="I">1</is_human>
     <issue t="I">616</issue>
+    <receipt t="S">receipt-#89322</receipt>
     <repository t="I">820463873</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:41Z</when>
@@ -272514,8 +272508,10 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/fbe#619, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+146](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/619/#issuecomment-5484362861</href>
     <is_human t="I">1</is_human>
     <issue t="I">619</issue>
+    <receipt t="S">receipt-#89321</receipt>
     <repository t="I">820463873</repository>
     <what t="S">bug-report-was-rewarded</what>
     <when t="T">2026-08-31T20:20:41Z</when>
@@ -272531,6 +272527,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/fbe#620, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+164](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/620/#issuecomment-5484363144</href>
     <is_human t="I">1</is_human>
     <issue t="I">620</issue>
     <repository t="I">820463873</repository>
@@ -272548,6 +272545,7 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <award t="I">18</award>
     <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/fbe#629, the reward amount is 18.</details>
     <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+182](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <href t="S">https://github.com/zerocracy/fbe/issues/629/#issuecomment-5484363469</href>
     <is_human t="I">1</is_human>
     <issue t="I">629</issue>
     <repository t="I">820463873</repository>
@@ -272862,5 +272860,679 @@ The average monthly zents/points ratio (0.69) is decreasing (R=0.38).</text>
     <where t="S">github</where>
     <who t="I">96509556</who>
     <why t="S">Submitted dud in zerocracy/judges-action#1912</why>
+  </f>
+  <f>
+    <_id t="I">2632407</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:42Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the enhancement suggested in zerocracy/judges-action#1898, the reward amount is 18.</details>
+    <greeting t="S">Thanks for suggesting an enhancement! You've earned +18 points. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) bugs too. Your running score is [+252](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1898</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">enhancement-suggestion-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:42Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Suggested enhancement in zerocracy/judges-action#1898</why>
+  </f>
+  <f>
+    <_id t="I">2632408</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:42Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the enhancement suggested in zerocracy/judges-action#1904, the reward amount is 18.</details>
+    <greeting t="S">Thanks for suggesting an enhancement! You've earned +18 points. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) bugs too. Your running score is [+270](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1904</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">enhancement-suggestion-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:42Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Suggested enhancement in zerocracy/judges-action#1904</why>
+  </f>
+  <f>
+    <_id t="I">2632409</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:43Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1897, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+288](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1897</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:43Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1897</why>
+  </f>
+  <f>
+    <_id t="I">2632410</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:43Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1899, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+306](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1899</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:43Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1899</why>
+  </f>
+  <f>
+    <_id t="I">2632411</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:44Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1902, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+324](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1902</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:44Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1902</why>
+  </f>
+  <f>
+    <_id t="I">2632412</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:44Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1903, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+342](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1903</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:44Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1903</why>
+  </f>
+  <f>
+    <_id t="I">2632413</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:44Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1905, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+360](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1905</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:44Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1905</why>
+  </f>
+  <f>
+    <_id t="I">2632414</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:44Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1906, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+378](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1906</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:44Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1906</why>
+  </f>
+  <f>
+    <_id t="I">2632415</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:45Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1909, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [-4](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1909</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:45Z</when>
+    <where t="S">github</where>
+    <who t="I">96509556</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1909</why>
+  </f>
+  <f>
+    <_id t="I">2632416</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:45Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1910, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+14](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1910</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:45Z</when>
+    <where t="S">github</where>
+    <who t="I">96509556</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1910</why>
+  </f>
+  <f>
+    <_id t="I">2632417</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:45Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1911, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+32](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1911</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:45Z</when>
+    <where t="S">github</where>
+    <who t="I">96509556</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1911</why>
+  </f>
+  <f>
+    <_id t="I">2632418</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:46Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">18</award>
+    <details t="S">It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1912, the reward amount is 18.</details>
+    <greeting t="S">Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+50](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <is_human t="I">1</is_human>
+    <issue t="I">1912</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">bug-report-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:46Z</when>
+    <where t="S">github</where>
+    <who t="I">96509556</who>
+    <why t="S">Reported bug in zerocracy/judges-action#1912</why>
+  </f>
+  <f>
+    <_id t="I">2632419</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:46Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">3</comments>
+    <details t="S">It's time to reward @vasilevnstas for the code contributed in zerocracy/pages-action#702, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (4) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+144](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">702</issue>
+    <repository t="I">802720676</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">4993190</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:46Z</when>
+    <where t="S">github</where>
+    <who t="I">33578155</who>
+    <why t="S">Contributed code in zerocracy/pages-action#702</why>
+  </f>
+  <f>
+    <_id t="I">2632420</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:47Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">3</comments>
+    <details t="S">It's time to reward @vasilevnstas for the code contributed in zerocracy/judges-action#1745, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (4) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+164](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">4</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1745</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">5080428</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:47Z</when>
+    <where t="S">github</where>
+    <who t="I">33578155</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1745</why>
+  </f>
+  <f>
+    <_id t="I">2632421</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:47Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">1</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in yegor256/judges#500, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (26) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+398](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">26</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">500</issue>
+    <repository t="I">799113787</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">11719</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:47Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in yegor256/judges#500</why>
+  </f>
+  <f>
+    <_id t="I">2632422</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:47Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">16</comments>
+    <details t="S">It's time to reward @vasilevnstas for the code contributed in zerocracy/judges-action#1746, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (19) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+184](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">19</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1746</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">12</review_comments>
+    <seconds t="I">5080368</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:47Z</when>
+    <where t="S">github</where>
+    <who t="I">33578155</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1746</why>
+  </f>
+  <f>
+    <_id t="I">2632423</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:48Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">24</award>
+    <comments t="I">1</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in yegor256/judges#506, the reward amount is 24.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+422](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">42</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">506</issue>
+    <repository t="I">799113787</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">11208</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:48Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in yegor256/judges#506</why>
+  </f>
+  <f>
+    <_id t="I">2632424</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:48Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in yegor256/judges#507, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (27) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+442](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">27</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">507</issue>
+    <repository t="I">799113787</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">5859</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:48Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in yegor256/judges#507</why>
+  </f>
+  <f>
+    <_id t="I">2632425</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:48Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">24</award>
+    <comments t="I">2</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1894, the reward amount is 24.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+466](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">33</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1894</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">14689</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:48Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1894</why>
+  </f>
+  <f>
+    <_id t="I">2632426</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:49Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">24</award>
+    <comments t="I">2</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1895, the reward amount is 24.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+490](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">32</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1895</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">14630</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:49Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1895</why>
+  </f>
+  <f>
+    <_id t="I">2632427</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:49Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">24</award>
+    <comments t="I">3</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1896, the reward amount is 24.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +24 points for this: +24 as a basis; +7 for the 101 hits-of-code that you wrote; -8 to not go over the cap. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+514](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">101</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1896</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">14401</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:49Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1896</why>
+  </f>
+  <f>
+    <_id t="I">2632428</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:49Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">16</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1915, the reward amount is 16.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +16 points for this: +24 as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+424](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">41</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1915</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">1949</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:49Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1915</why>
+  </f>
+  <f>
+    <_id t="I">2632429</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:50Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">16</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1916, the reward amount is 16.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +16 points for this: +24 as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+440](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">43</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1916</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">629</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1916</why>
+  </f>
+  <f>
+    <_id t="I">2632430</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:50Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">16</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1917, the reward amount is 16.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +16 points for this: +24 as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+456](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">33</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1917</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">273</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1917</why>
+  </f>
+  <f>
+    <_id t="I">2632431</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:50Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">23</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1918, the reward amount is 23.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +23 points for this: +24 as a basis; +6 for the 88 hits-of-code that you wrote; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+479](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">88</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1918</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">346</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:50Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1918</why>
+  </f>
+  <f>
+    <_id t="I">2632432</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:51Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">16</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1919, the reward amount is 16.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +16 points for this: +24 as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+495](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">40</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1919</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">888</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1919</why>
+  </f>
+  <f>
+    <_id t="I">2632433</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:51Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">12</award>
+    <comments t="I">1</comments>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1921, the reward amount is 12.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +12 points for this: +24 as a basis; -8 for the lack of code review; -4 for too few (28) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+507](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">28</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1921</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">982</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:51Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1921</why>
+  </f>
+  <f>
+    <_id t="I">2632434</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:51Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1924, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (7) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+534](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">7</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1924</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">731</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:51Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1924</why>
+  </f>
+  <f>
+    <_id t="I">2632435</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:52Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1927, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (13) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+554](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">13</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1927</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">578</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:52Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1927</why>
+  </f>
+  <f>
+    <_id t="I">2632436</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:52Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1928, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (6) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+574](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">6</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1928</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">571</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:52Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1928</why>
+  </f>
+  <f>
+    <_id t="I">2632437</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:52Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">0</comments>
+    <details t="S">It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1929, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (2) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+594](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">2</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1929</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">516</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:52Z</when>
+    <where t="S">github</where>
+    <who t="I">125282851</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1929</why>
+  </f>
+  <f>
+    <_id t="I">2632438</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:52Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">20</award>
+    <comments t="I">1</comments>
+    <details t="S">It's time to reward @thayorns for the code contributed in zerocracy/judges-action#1930, the reward amount is 20.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (19) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+70](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">19</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1930</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">360</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:52Z</when>
+    <where t="S">github</where>
+    <who t="I">96509556</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1930</why>
+  </f>
+  <f>
+    <_id t="I">2632439</_id>
+    <_job t="I">89745</_job>
+    <_time t="T">2026-08-31T20:48:53Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21!0.17.22</_version>
+    <award t="I">16</award>
+    <comments t="I">2</comments>
+    <details t="S">It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1932, the reward amount is 16.</details>
+    <greeting t="S">Thanks for the contribution! You've earned +16 points for this: +24 as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+523](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too). </greeting>
+    <hoc t="I">34</hoc>
+    <is_human t="I">1</is_human>
+    <issue t="I">1932</issue>
+    <repository t="I">799177290</repository>
+    <review_comments t="I">0</review_comments>
+    <seconds t="I">2384</seconds>
+    <what t="S">code-contribution-was-rewarded</what>
+    <when t="T">2026-08-31T20:48:53Z</when>
+    <where t="S">github</where>
+    <who t="I">526301</who>
+    <why t="S">Contributed code in zerocracy/judges-action#1932</why>
+  </f>
+  <f>
+    <_id t="I">2632440</_id>
+    <_job t="I">33439054394</_job>
+    <_time t="T">2026-08-31T21:04:37Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <details t="S">The issue zerocracy/judges-action#1936 has been opened by @thayorns.</details>
+    <event_id t="I">14163183947</event_id>
+    <event_type t="S">IssuesEvent</event_type>
+    <is_human t="I">1</is_human>
+    <issue t="I">1936</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2026-08-31T20:21:47Z</when>
+    <where t="S">github</where>
+    <who t="I">96509556</who>
+  </f>
+  <f>
+    <_id t="I">2632441</_id>
+    <_job t="I">33439054394</_job>
+    <_time t="T">2026-08-31T21:04:47Z</_time>
+    <_version t="S">0.19.16/0.61.1/0.17.21</_version>
+    <details t="S">The missing issue zerocracy/judges-action#1935 has been opened by @thayorns.</details>
+    <issue t="I">1935</issue>
+    <repository t="I">799177290</repository>
+    <what t="S">issue-was-opened</what>
+    <when t="T">2026-08-31T20:21:22Z</when>
+    <where t="S">github</where>
+    <who t="I">96509556</who>
   </f>
 </fb>

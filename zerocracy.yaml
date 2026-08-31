@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 868.2352535
+  seconds: 537.14565573
   version: 0.61.1
   what: judges-summary
-  when: 2026-08-31 20:46:52.623956242 Z
+  when: 2026-08-31 21:10:35.577187407 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18481,20 +18482,6 @@
   when: &196 2025-12-24 14:50:50.000000000 Z
   where: github
   who: 8086956
-- _id: 2599482
-  _job: 20489041590
-  _time: 2025-12-24 15:26:11.559241890 Z
-  _version: 0.19.2/0.58.1/0.17.6
-  branch: '1232'
-  details: The missing pull zerocracy/judges-action#1253 has been opened by @yegorov.
-  is_human: 1
-  issue: 1253
-  repository: 799177290
-  tombstone: 2026-08-31 20:21:40.418959331 Z
-  what: pull-was-opened
-  when: 2025-12-18 19:47:40.000000000 Z
-  where: github
-  who: 2566462
 - _id: 2599483
   _job: 20489041590
   _time: 2025-12-24 15:26:12.281259753 Z
@@ -18693,25 +18680,6 @@
   when: 2025-12-23 08:57:52.000000000 Z
   where: github
   who: 526301
-- _id: 2599514
-  _job: 20489988607
-  _time: 2025-12-24 16:38:01.973027271 Z
-  _version: 0.19.2/0.58.1/0.17.6
-  author: 2566462
-  comments: 2
-  details: The pull request zerocracy/judges-action#1253 with 75 HoC created by @yegorov
-    was reviewed by @coderabbitai[bot] after 0h20m and 0 comments.
-  done: 2026-08-31 20:21:40.399324823 Z
-  hoc: 75
-  is_human: 0
-  issue: 1253
-  repository: 799177290
-  review_comments: 0
-  seconds: 1231
-  what: code-was-reviewed
-  when: 2025-12-18 20:08:11.000000000 Z
-  where: github
-  who: 136622811
 - _id: 2599515
   _job: 20489988607
   _time: 2025-12-24 16:38:03.187299815 Z
@@ -62160,6 +62128,7 @@
   qod_per_day: 26.9537452089075
   qod_per_sec: 0.00011439215865395355
   start: &741 2025-04-29 14:07:31.154700897 Z
+  tombstone: 2026-08-31 20:48:55.103076295 Z
   what: earned-value
   when: 2026-04-25 20:30:06.802657421 Z
 - _id: 2611345
@@ -201275,7 +201244,7 @@
   - 1066-1159
   - 1162-1172
   - 1174-1240
-  - 1242-1252
+  - 1242-1253
   repository: 799177290
   what: tombstone
   where: github
@@ -205880,9 +205849,9 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1667
   earliest_issue_was_found: 1
-  events_were_scanned: 14160751141
+  events_were_scanned: 19580338163
   issues_were_scanned: 0
   labels_were_scanned: 1702
   latest_issue_was_found: 1073
@@ -205890,7 +205859,7 @@
   min_issue_was_found: 1454
   min_pull_was_found: 1838
   repository: 799177290
-  types_were_scanned: 1527
+  types_were_scanned: 1898
   what: iterate
   where: github
 - _id: 2630036
@@ -205924,7 +205893,7 @@
   min_issue_was_found: 1111
   min_pull_was_found: 1316
   repository: 728758275
-  types_were_scanned: 1128
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -231768,6 +231737,9 @@
   - 2
   - 2
   - 0
+  some_triage_time:
+  - 4158823.0
+  - 4158825.0
   some_unmerged_pulls:
   - 2
   - 2
@@ -239933,6 +239905,9 @@
   - 4
   - 4
   - 2
+  some_pull_lifetime:
+  - 23753.0
+  - 10770.0
   some_review_size:
   - 0
   - 0
@@ -253692,6 +253667,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     bugs too. Your running score is [+106](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/pages-action/issues/700/#issuecomment-5484358979
   is_human: 1
   issue: 700
   repository: 802720676
@@ -253714,6 +253690,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+234](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/576/#issuecomment-5484359422
   is_human: 1
   issue: 576
   repository: 820463873
@@ -253736,6 +253713,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+252](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/577/#issuecomment-5484359705
   is_human: 1
   issue: 577
   repository: 820463873
@@ -253758,8 +253736,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+270](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/579/#issuecomment-5484360037
   is_human: 1
   issue: 579
+  receipt: receipt-#89320
   repository: 820463873
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:38.886287114 Z
@@ -253780,8 +253760,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+124](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/yegor256/judges/issues/472/#issuecomment-5484360418
   is_human: 1
   issue: 472
+  receipt: receipt-#89319
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:39.169283248 Z
@@ -253802,8 +253784,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+288](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/580/#issuecomment-5484360691
   is_human: 1
   issue: 580
+  receipt: receipt-#89318
   repository: 820463873
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:39.472530077 Z
@@ -253824,8 +253808,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+306](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/581/#issuecomment-5484360981
   is_human: 1
   issue: 581
+  receipt: receipt-#89317
   repository: 820463873
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:39.756740242 Z
@@ -253846,8 +253832,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+56](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/yegor256/judges/issues/501/#issuecomment-5484361221
   is_human: 1
   issue: 501
+  receipt: receipt-#89316
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:40.048814481 Z
@@ -253868,6 +253856,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+74](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/yegor256/judges/issues/502/#issuecomment-5484361479
   is_human: 1
   issue: 502
   repository: 799113787
@@ -253890,6 +253879,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+324](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/pages-action/issues/676/#issuecomment-5484361763
   is_human: 1
   issue: 676
   repository: 802720676
@@ -253912,6 +253902,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+92](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/yegor256/judges/issues/503/#issuecomment-5484362050
   is_human: 1
   issue: 503
   repository: 799113787
@@ -253934,8 +253925,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+110](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/yegor256/judges/issues/504/#issuecomment-5484362287
   is_human: 1
   issue: 504
+  receipt: receipt-#89323
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:41.187928454 Z
@@ -253956,8 +253949,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+128](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/616/#issuecomment-5484362613
   is_human: 1
   issue: 616
+  receipt: receipt-#89322
   repository: 820463873
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:41.470740429 Z
@@ -253978,8 +253973,10 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+146](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/619/#issuecomment-5484362861
   is_human: 1
   issue: 619
+  receipt: receipt-#89321
   repository: 820463873
   what: bug-report-was-rewarded
   when: 2026-08-31 20:20:41.756219430 Z
@@ -254000,6 +253997,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+164](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/620/#issuecomment-5484363144
   is_human: 1
   issue: 620
   repository: 820463873
@@ -254022,6 +254020,7 @@
     to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
     it. Your running score is [+182](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/issues/629/#issuecomment-5484363469
   is_human: 1
   issue: 629
   repository: 820463873
@@ -254426,3 +254425,773 @@
   where: github
   who: 96509556
   why: Submitted dud in zerocracy/judges-action#1912
+- _id: 2632407
+  _job: 89745
+  _time: 2026-08-31 20:48:42.187274844 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the enhancement suggested in zerocracy/judges-action#1898,
+    the reward amount is 18.
+  greeting: 'Thanks for suggesting an enhancement! You''ve earned +18 points. If you
+    find anything else in the repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    bugs too. Your running score is [+252](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1898
+  repository: 799177290
+  what: enhancement-suggestion-was-rewarded
+  when: 2026-08-31 20:48:42.189195447 Z
+  where: github
+  who: 125282851
+  why: Suggested enhancement in zerocracy/judges-action#1898
+- _id: 2632408
+  _job: 89745
+  _time: 2026-08-31 20:48:42.801860263 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the enhancement suggested in zerocracy/judges-action#1904,
+    the reward amount is 18.
+  greeting: 'Thanks for suggesting an enhancement! You''ve earned +18 points. If you
+    find anything else in the repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    bugs too. Your running score is [+270](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1904
+  repository: 799177290
+  what: enhancement-suggestion-was-rewarded
+  when: 2026-08-31 20:48:42.803953053 Z
+  where: github
+  who: 125282851
+  why: Suggested enhancement in zerocracy/judges-action#1904
+- _id: 2632409
+  _job: 89745
+  _time: 2026-08-31 20:48:43.266496125 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1897,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+288](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1897
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:43.268368008 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#1897
+- _id: 2632410
+  _job: 89745
+  _time: 2026-08-31 20:48:43.639087530 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1899,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+306](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1899
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:43.641027817 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#1899
+- _id: 2632411
+  _job: 89745
+  _time: 2026-08-31 20:48:44.053560668 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1902,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+324](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1902
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:44.055353592 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#1902
+- _id: 2632412
+  _job: 89745
+  _time: 2026-08-31 20:48:44.343504082 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1903,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+342](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1903
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:44.345401792 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#1903
+- _id: 2632413
+  _job: 89745
+  _time: 2026-08-31 20:48:44.632064781 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1905,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+360](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1905
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:44.633882425 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#1905
+- _id: 2632414
+  _job: 89745
+  _time: 2026-08-31 20:48:44.938547335 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#1906,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+378](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1906
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:44.940429302 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#1906
+- _id: 2632415
+  _job: 89745
+  _time: 2026-08-31 20:48:45.218632913 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1909,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [-4](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1909
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:45.220462325 Z
+  where: github
+  who: 96509556
+  why: Reported bug in zerocracy/judges-action#1909
+- _id: 2632416
+  _job: 89745
+  _time: 2026-08-31 20:48:45.643392536 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1910,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+14](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1910
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:45.645323108 Z
+  where: github
+  who: 96509556
+  why: Reported bug in zerocracy/judges-action#1910
+- _id: 2632417
+  _job: 89745
+  _time: 2026-08-31 20:48:45.933046665 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1911,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+32](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1911
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:45.934964923 Z
+  where: github
+  who: 96509556
+  why: Reported bug in zerocracy/judges-action#1911
+- _id: 2632418
+  _job: 89745
+  _time: 2026-08-31 20:48:46.217785921 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 18
+  details: It's time to reward @thayorns for the bug reported in zerocracy/judges-action#1912,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+50](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 1912
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-08-31 20:48:46.219672132 Z
+  where: github
+  who: 96509556
+  why: Reported bug in zerocracy/judges-action#1912
+- _id: 2632419
+  _job: 89745
+  _time: 2026-08-31 20:48:46.725359797 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 3
+  details: It's time to reward @vasilevnstas for the code contributed in zerocracy/pages-action#702,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (4) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+144](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 4
+  is_human: 1
+  issue: 702
+  repository: 802720676
+  review_comments: 0
+  seconds: 4993190
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:46.735234837 Z
+  where: github
+  who: 33578155
+  why: Contributed code in zerocracy/pages-action#702
+- _id: 2632420
+  _job: 89745
+  _time: 2026-08-31 20:48:47.050452271 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 3
+  details: It's time to reward @vasilevnstas for the code contributed in zerocracy/judges-action#1745,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (4) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+164](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 4
+  is_human: 1
+  issue: 1745
+  repository: 799177290
+  review_comments: 0
+  seconds: 5080428
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:47.055608789 Z
+  where: github
+  who: 33578155
+  why: Contributed code in zerocracy/judges-action#1745
+- _id: 2632421
+  _job: 89745
+  _time: 2026-08-31 20:48:47.356829783 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 1
+  details: It's time to reward @morphqdd for the code contributed in yegor256/judges#500,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (26) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+398](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 26
+  is_human: 1
+  issue: 500
+  repository: 799113787
+  review_comments: 0
+  seconds: 11719
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:47.363812392 Z
+  where: github
+  who: 125282851
+  why: Contributed code in yegor256/judges#500
+- _id: 2632422
+  _job: 89745
+  _time: 2026-08-31 20:48:47.798546290 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 16
+  details: It's time to reward @vasilevnstas for the code contributed in zerocracy/judges-action#1746,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (19) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+184](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 19
+  is_human: 1
+  issue: 1746
+  repository: 799177290
+  review_comments: 12
+  seconds: 5080368
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:47.803857975 Z
+  where: github
+  who: 33578155
+  why: Contributed code in zerocracy/judges-action#1746
+- _id: 2632423
+  _job: 89745
+  _time: 2026-08-31 20:48:48.095402622 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 24
+  comments: 1
+  details: It's time to reward @morphqdd for the code contributed in yegor256/judges#506,
+    the reward amount is 24.
+  greeting: 'Thanks for the contribution! You''ve earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+422](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 42
+  is_human: 1
+  issue: 506
+  repository: 799113787
+  review_comments: 0
+  seconds: 11208
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:48.101781977 Z
+  where: github
+  who: 125282851
+  why: Contributed code in yegor256/judges#506
+- _id: 2632424
+  _job: 89745
+  _time: 2026-08-31 20:48:48.402876722 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 0
+  details: It's time to reward @morphqdd for the code contributed in yegor256/judges#507,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (27) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+442](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 27
+  is_human: 1
+  issue: 507
+  repository: 799113787
+  review_comments: 0
+  seconds: 5859
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:48.408102695 Z
+  where: github
+  who: 125282851
+  why: Contributed code in yegor256/judges#507
+- _id: 2632425
+  _job: 89745
+  _time: 2026-08-31 20:48:48.698823325 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 24
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1894,
+    the reward amount is 24.
+  greeting: 'Thanks for the contribution! You''ve earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+466](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 33
+  is_human: 1
+  issue: 1894
+  repository: 799177290
+  review_comments: 0
+  seconds: 14689
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:48.704795120 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#1894
+- _id: 2632426
+  _job: 89745
+  _time: 2026-08-31 20:48:49.021091065 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 24
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1895,
+    the reward amount is 24.
+  greeting: 'Thanks for the contribution! You''ve earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+490](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 32
+  is_human: 1
+  issue: 1895
+  repository: 799177290
+  review_comments: 0
+  seconds: 14630
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:49.030207138 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#1895
+- _id: 2632427
+  _job: 89745
+  _time: 2026-08-31 20:48:49.327785782 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 24
+  comments: 3
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1896,
+    the reward amount is 24.
+  greeting: 'Thanks for the contribution! You''ve earned +24 points for this: +24
+    as a basis; +7 for the 101 hits-of-code that you wrote; -8 to not go over the
+    cap. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+514](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 101
+  is_human: 1
+  issue: 1896
+  repository: 799177290
+  review_comments: 0
+  seconds: 14401
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:49.332976018 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#1896
+- _id: 2632428
+  _job: 89745
+  _time: 2026-08-31 20:48:49.620684343 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 16
+  comments: 0
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1915,
+    the reward amount is 16.
+  greeting: 'Thanks for the contribution! You''ve earned +16 points for this: +24
+    as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+424](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 41
+  is_human: 1
+  issue: 1915
+  repository: 799177290
+  review_comments: 0
+  seconds: 1949
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:49.627523788 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/judges-action#1915
+- _id: 2632429
+  _job: 89745
+  _time: 2026-08-31 20:48:50.046121304 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 16
+  comments: 0
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1916,
+    the reward amount is 16.
+  greeting: 'Thanks for the contribution! You''ve earned +16 points for this: +24
+    as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+440](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 43
+  is_human: 1
+  issue: 1916
+  repository: 799177290
+  review_comments: 0
+  seconds: 629
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:50.051481821 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/judges-action#1916
+- _id: 2632430
+  _job: 89745
+  _time: 2026-08-31 20:48:50.416861932 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 16
+  comments: 0
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1917,
+    the reward amount is 16.
+  greeting: 'Thanks for the contribution! You''ve earned +16 points for this: +24
+    as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+456](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 33
+  is_human: 1
+  issue: 1917
+  repository: 799177290
+  review_comments: 0
+  seconds: 273
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:50.423146498 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/judges-action#1917
+- _id: 2632431
+  _job: 89745
+  _time: 2026-08-31 20:48:50.735765630 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 23
+  comments: 0
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1918,
+    the reward amount is 23.
+  greeting: 'Thanks for the contribution! You''ve earned +23 points for this: +24
+    as a basis; +6 for the 88 hits-of-code that you wrote; -8 for the lack of code
+    review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+479](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 88
+  is_human: 1
+  issue: 1918
+  repository: 799177290
+  review_comments: 0
+  seconds: 346
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:50.745116890 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/judges-action#1918
+- _id: 2632432
+  _job: 89745
+  _time: 2026-08-31 20:48:51.091942344 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 16
+  comments: 0
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1919,
+    the reward amount is 16.
+  greeting: 'Thanks for the contribution! You''ve earned +16 points for this: +24
+    as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+495](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 40
+  is_human: 1
+  issue: 1919
+  repository: 799177290
+  review_comments: 0
+  seconds: 888
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:51.096996731 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/judges-action#1919
+- _id: 2632433
+  _job: 89745
+  _time: 2026-08-31 20:48:51.399159516 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 12
+  comments: 1
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1921,
+    the reward amount is 12.
+  greeting: 'Thanks for the contribution! You''ve earned +12 points for this: +24
+    as a basis; -8 for the lack of code review; -4 for too few (28) hits-of-code.
+    Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them
+    coming. Your running score is [+507](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 28
+  is_human: 1
+  issue: 1921
+  repository: 799177290
+  review_comments: 0
+  seconds: 982
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:51.405292521 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/judges-action#1921
+- _id: 2632434
+  _job: 89745
+  _time: 2026-08-31 20:48:51.720801523 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 0
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1924,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (7) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+534](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 7
+  is_human: 1
+  issue: 1924
+  repository: 799177290
+  review_comments: 0
+  seconds: 731
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:51.726027527 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#1924
+- _id: 2632435
+  _job: 89745
+  _time: 2026-08-31 20:48:52.019176926 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 0
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1927,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (13) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+554](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 13
+  is_human: 1
+  issue: 1927
+  repository: 799177290
+  review_comments: 0
+  seconds: 578
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:52.024397838 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#1927
+- _id: 2632436
+  _job: 89745
+  _time: 2026-08-31 20:48:52.309828689 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 0
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1928,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (6) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+574](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 6
+  is_human: 1
+  issue: 1928
+  repository: 799177290
+  review_comments: 0
+  seconds: 571
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:52.315977136 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#1928
+- _id: 2632437
+  _job: 89745
+  _time: 2026-08-31 20:48:52.653929359 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 0
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#1929,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (2) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+594](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 2
+  is_human: 1
+  issue: 1929
+  repository: 799177290
+  review_comments: 0
+  seconds: 516
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:52.663195474 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#1929
+- _id: 2632438
+  _job: 89745
+  _time: 2026-08-31 20:48:52.958272289 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 20
+  comments: 1
+  details: It's time to reward @thayorns for the code contributed in zerocracy/judges-action#1930,
+    the reward amount is 20.
+  greeting: 'Thanks for the contribution! You''ve earned +20 points for this: +24
+    as a basis; -4 for too few (19) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+70](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 19
+  is_human: 1
+  issue: 1930
+  repository: 799177290
+  review_comments: 0
+  seconds: 360
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:52.963417980 Z
+  where: github
+  who: 96509556
+  why: Contributed code in zerocracy/judges-action#1930
+- _id: 2632439
+  _job: 89745
+  _time: 2026-08-31 20:48:53.242843693 Z
+  _version: 0.19.16/0.61.1/0.17.21!0.17.22
+  award: 16
+  comments: 2
+  details: It's time to reward @yegor256 for the code contributed in zerocracy/judges-action#1932,
+    the reward amount is 16.
+  greeting: 'Thanks for the contribution! You''ve earned +16 points for this: +24
+    as a basis; -8 for the lack of code review. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+523](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 34
+  is_human: 1
+  issue: 1932
+  repository: 799177290
+  review_comments: 0
+  seconds: 2384
+  what: code-contribution-was-rewarded
+  when: 2026-08-31 20:48:53.248710489 Z
+  where: github
+  who: 526301
+  why: Contributed code in zerocracy/judges-action#1932
+- _id: 2632440
+  _job: 33439054394
+  _time: 2026-08-31 21:04:37.295919858 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The issue zerocracy/judges-action#1936 has been opened by @thayorns.
+  event_id: 14163183947
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1936
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 20:21:47.000000000 Z
+  where: github
+  who: 96509556
+- _id: 2632441
+  _job: 33439054394
+  _time: 2026-08-31 21:04:47.814246687 Z
+  _version: 0.19.16/0.61.1/0.17.21
+  details: The missing issue zerocracy/judges-action#1935 has been opened by @thayorns.
+  issue: 1935
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-08-31 20:21:22.000000000 Z
+  where: github
+  who: 96509556
