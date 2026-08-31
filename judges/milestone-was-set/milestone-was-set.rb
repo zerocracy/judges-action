@@ -44,7 +44,16 @@ Fbe.consider(
       )
       next
     end
+  known =
+    Fbe.fb.query(
+      "(and
+        (eq what '#{$judge}')
+        (eq where 'github')
+        (eq repository #{f.repository})
+        (exists milestone))"
+    ).each.map(&:milestone)
   milestones.each do |m|
+    next if known.include?(m[:number])
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |nnn|
