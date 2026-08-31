@@ -40,4 +40,21 @@ class TestFixMissingHoc < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_dont_crash_when_pull_has_no_hoc
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: { id: 50, number: 44, state: 'closed', changed_files: 1 }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    load_it('fix-missing-hoc', fb)
+    assert_equal(
+      0, fb.pick(issue: 44).hoc,
+      'A pull request that reports no additions and no deletions cannot abort the judge'
+    )
+  end
 end

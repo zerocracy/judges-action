@@ -224,4 +224,34 @@ class TestCodeWasReviewed < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_dont_crash_when_pull_has_no_hoc
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/49111/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert_equal(
+      0, fb.pick(what: 'code-was-reviewed', issue: 44).hoc,
+      'A pull request that reports no additions and no deletions cannot abort the judge'
+    )
+  end
 end

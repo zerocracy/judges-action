@@ -145,7 +145,7 @@ Fbe.iterate do
         $loog.warn("Pull already merged in #{repo}##{issue}, skipping duplicate")
         next issue
       end
-      nn.hoc = json[:additions] + json[:deletions]
+      nn.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
