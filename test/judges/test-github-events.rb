@@ -2862,6 +2862,44 @@ class TestGithubEvents < Jp::Test
     end
   end
 
+  def test_dont_crash_when_reviewed_pull_has_no_hoc
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '40623323543',
+          type: 'PullRequestReviewEvent',
+          actor: { id: 42, login: 'torvalds' },
+          repo: { id: 42, name: 'foo/foo' },
+          created_at: '2025-07-31 12:45:09 UTC',
+          payload: {
+            action: 'created',
+            review: { id: 2_210_067_609, user: { id: 42, login: 'torvalds' }, state: 'approved' },
+            pull_request: { id: 1_990_323_142, number: 93 }
+          }
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93',
+      body: {
+        number: 93, user: { id: 526_200, login: 'test' },
+        comments: 1, review_comments: 2, commits: 2, changed_files: 3
+      }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(
+      0, fb.query('(eq what "pull-was-reviewed")').each.to_a.first.hoc,
+      'A reviewed pull request that reports no additions and no deletions cannot abort the judge'
+    )
+  end
+
   private
 
   def stub_event(*json)
