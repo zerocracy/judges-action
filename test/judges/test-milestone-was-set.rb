@@ -164,4 +164,46 @@ class TestMilestoneWasSet < Jp::Test
     load_it('milestone-was-set', fb)
     assert_empty(fb.query("(eq what 'milestone-was-set')").each.to_a)
   end
+
+  def test_dont_warn_about_known_milestones
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
+      body: [
+        { number: 1, title: 'v1.0', created_at: '2024-01-15T10:00:00Z', creator: { id: 888 } },
+        { number: 2, title: 'v2.0', created_at: '2024-06-01T08:00:00Z', creator: { id: 999 } }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'milestone-was-set', repository: 42, milestone: 1, where: 'github')
+      .with(_id: 2, what: 'milestone-was-set', repository: 42, milestone: 2, where: 'github')
+    loog = Loog::Buffer.new
+    load_it('milestone-was-set', fb, loog:)
+    assert_empty(
+      loog.to_s.scan('already in the factbase'),
+      'Milestones already in the factbase cannot be re-checked and warned about on every cycle'
+    )
+  end
+
+  def test_adds_only_the_unknown_milestone
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
+      body: [
+        { number: 1, title: 'v1.0', created_at: '2024-01-15T10:00:00Z', creator: { id: 888 } },
+        { number: 2, title: 'v2.0', created_at: '2024-06-01T08:00:00Z', creator: { id: 999 } }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'milestone-was-set', repository: 42, milestone: 1, where: 'github')
+    load_it('milestone-was-set', fb)
+    assert(
+      fb.one?(what: 'milestone-was-set', repository: 42, milestone: 2, who: 999),
+      'A milestone missing from the factbase cannot stay missing when its neighbours are known'
+    )
+  end
 end
