@@ -14,6 +14,7 @@ require 'tago'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 require_relative '../../lib/supervision'
+require_relative '../../lib/twice'
 
 Fbe.iterate do
   as 'events_were_scanned'
@@ -381,22 +382,6 @@ Fbe.iterate do
     end
     skip(json)
   end
-
-  def self.twice?(fb, fact, what, fields)
-    pairs = fields.map { [_1, fact[_1]&.first] }
-    pairs.reject! { _1.last.nil? }
-    eqs =
-      pairs.map do |prop, value|
-        val =
-          case value
-          when String then "'#{value.gsub("'", "\\\\'")}'"
-          when Time then value.utc.iso8601
-          else value
-          end
-        "(eq #{prop} #{val})"
-      end
-    fb.query("(and (eq what '#{what}') #{eqs.join(' ')})").each.to_a.size > 1
-  end
   over do |repository, latest|
     begin
       rname = Fbe.octo.repo_name_by_id(repository)
@@ -466,7 +451,7 @@ Fbe.iterate do
               next
             end
             fill(f, json)
-            uniques.each { |w, ff| throw :rollback if twice?(fbt, f, w, ff) }
+            uniques.each { |w, ff| throw :rollback if Jp.twice?(fbt, f, w, ff) }
             if f['issue']
               throw :rollback unless Fbe.fb.query(
                 "(and
