@@ -28,9 +28,18 @@ module Fbe
         org = mask.split('/')[0]
         list =
           begin
-            octo.organization_repositories(org, type: 'all')
-          rescue Octokit::NotFound
-            octo.repositories(org)
+            begin
+              octo.organization_repositories(org, type: 'all')
+            rescue Octokit::NotFound
+              octo.repositories(org)
+            end
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden, Octokit::Unauthorized,
+            Octokit::ServerError, Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+            loog.warn(
+              "[#{$judge}] Cannot list the repositories of #{org.inspect}, " \
+              "skipping the #{mask.inspect} mask (will retry next cycle): #{e.class}: #{e.message}"
+            )
+            next
           end
         list.each do |r|
           repos << r[:full_name] if re.match?(r[:full_name])
