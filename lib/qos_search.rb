@@ -27,7 +27,6 @@ def Jp.qosearch(query, method: :search_issues, **)
     @offquota[jg] = false
     @offquotatime[jg] = nil
   end
-  return if Fbe.octo.off_quota?
   now = Time.now
   if @swstart[jg].nil? || (now - @swstart[jg]) >= Jp::SEARCH_WINDOW_SECONDS
     @swstart[jg] = now
