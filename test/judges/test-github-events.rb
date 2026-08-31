@@ -940,21 +940,15 @@ class TestGithubEvents < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
-    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?per_page=100').to_return(
-      body: [
-        { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
-        { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
-      ].to_json,
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?per_page=1').to_return(
+      body: [{ sha: '4683257342e98cd94becc2aa49900e720bd792e9' }].to_json,
       headers: {
         'Content-Type': 'application/json',
-        'X-RateLimit-Remaining' => '999'
+        'X-RateLimit-Remaining' => '999',
+        'Link' => '<https://api.github.com/repos/zerocracy/fbe/commits?per_page=1&page=2>; rel="last"'
       }
     )
-    stub_request(
-      :get,
-      'https://api.github.com/repos/zerocracy/fbe/commits?' \
-      'per_page=100&sha=69a28ba1122af281936371bbb36f67e5b97246b1'
-    ).to_return(
+    stub_request(:get, 'https://api.github.com/repos/zerocracy/fbe/commits?per_page=1&page=2').to_return(
       body: [{ sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }].to_json,
       headers: {
         'Content-Type': 'application/json',
@@ -1157,7 +1151,7 @@ class TestGithubEvents < Jp::Test
         { login: 'yegor512', id: 526_302 }
       ]
     )
-    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: '4683257342e98cd94' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: '4683257342e98cd94' }])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/4683257342e98cd94...0.0.3?per_page=100',
       body: {
@@ -2699,7 +2693,7 @@ class TestGithubEvents < Jp::Test
       'https://api.github.com/repos/foo/foo/contributors?per_page=100',
       body: [{ login: 'yegor256', id: 526_301 }]
     )
-    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
       status: 404,
@@ -2759,7 +2753,7 @@ class TestGithubEvents < Jp::Test
       status: 403,
       body: { message: 'Resource not accessible by integration' }
     )
-    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
       status: 403,
@@ -2897,6 +2891,48 @@ class TestGithubEvents < Jp::Test
     assert_equal(
       0, fb.query('(eq what "pull-was-reviewed")').each.to_a.first.hoc,
       'A reviewed pull request that reports no additions and no deletions cannot abort the judge'
+    )
+  end
+
+  def test_release_event_when_repository_has_no_commits
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '102',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_002,
+            author: { login: 'rultor', id: 8_086_956, type: 'User' },
+            tag_name: '3.0.0', name: 'v3.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/...3.0.0?per_page=100',
+      status: 404, body: { message: 'Not Found' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(
+      1, fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a.size,
+      'A repository without a single commit cannot abort the scanning of its events'
     )
   end
 

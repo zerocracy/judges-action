@@ -116,15 +116,20 @@ Fbe.iterate do
   end
 
   def self.earliest(repo)
-    commits = Fbe.octo.commits(repo)
-    last = commits.last
-    while commits.size != 1
-      commits = Fbe.octo.commits(repo, sha: last[:sha])
-      last = commits.last
+    last =
+      Fbe.octo.with_disable_auto_paginate do |octo|
+        page = octo.commits(repo, per_page: 1)
+        rel = octo.last_response.rels[:last]
+        page = rel.get.data unless rel.nil?
+        page.last
+      end
+    if last.nil?
+      $loog.info("No commits found in #{repo}")
+    else
+      $loog.debug("The repo ##{repo} has this last commit: #{last}")
     end
-    $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Conflict => e
     $loog.info("Commits not found for #{repo}: #{e.message}")
     nil
   rescue Octokit::Forbidden => e
