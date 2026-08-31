@@ -10,6 +10,8 @@ name: hadolint
   pull_request:
     branches:
       - master
+permissions:
+  contents: read
 jobs:
   hadolint:
     timeout-minutes: 15

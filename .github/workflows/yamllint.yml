@@ -11,6 +11,8 @@ name: yamllint
     branches:
       - master
   workflow_call:
+permissions:
+  contents: read
 jobs:
   yamllint:
     timeout-minutes: 15

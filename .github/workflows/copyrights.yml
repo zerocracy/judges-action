@@ -11,6 +11,8 @@ name: copyrights
     branches:
       - master
   workflow_call:
+permissions:
+  contents: read
 jobs:
   copyrights:
     timeout-minutes: 15
