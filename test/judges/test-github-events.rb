@@ -1861,6 +1861,76 @@ class TestGithubEvents < Jp::Test
     assert_equal(1, fb.query('(eq what "pull-was-closed")').each.to_a.size)
   end
 
+  def test_reopened_pull_drops_its_stale_closure
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11128',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'reopened', number: 456,
+            pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    fb.with(what: 'pull-was-closed', where: 'github', repository: 42, issue: 456, who: 45)
+    load_it('github-events', fb)
+    assert(
+      fb.none?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 456),
+      'The closure of a reopened pull cannot stay in the factbase'
+    )
+  end
+
+  def test_reopened_pull_leaves_no_event_fact
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11129',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'reopened', number: 456,
+            pull_request: { number: 456, head: { ref: '487', sha: '5c955da3b5a' } }
+          },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert(fb.none?(event_id: 11_129), 'A reopening event cannot leave a fact behind')
+  end
+
   def test_adds_created_issue_comment_event
     skip('This type of event is not needed now')
     WebMock.disable_net_connect!
