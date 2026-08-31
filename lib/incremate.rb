@@ -17,7 +17,7 @@ def Jp.incremate(
   epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
 )
   evaluated = 0
-  Dir[File.join(dir, "#{prefix}_*.rb")].sort.each do |rb|
+  Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
     if fact[n]
       $loog.debug("#{n} is here: #{fact[n].first}")
