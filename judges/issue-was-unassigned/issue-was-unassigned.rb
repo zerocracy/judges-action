@@ -18,6 +18,15 @@ Fbe.consider(
     (absent stale)
     (absent tombstone)
     (absent done)
+    (empty
+      (and
+        (or
+          (eq what 'issue-was-closed')
+          (eq what 'pull-was-merged')
+          (eq what 'pull-was-closed'))
+        (eq issue $issue)
+        (eq repository $repository)
+        (eq where $where)))
     (eq where 'github'))"
 ) do |f|
   Jp.supervision({ 'repository' => f.repository, 'issue' => f.issue }) do
