@@ -138,16 +138,18 @@ else
     echo "Since 'fail-fast' is not set to 'true', we will run all judges even if some of them fail"
 fi
 
-${JUDGES} "${gopts[@]}" eval \
-    "${fb}" \
-    "\$fb.query(\"(eq what 'judges-summary')\").delete!"
-
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
     trap 'rm -rf "$ALL_JUDGES"' EXIT INT TERM
     options+=("--no-expect-judges")
+    summary=off
+    echo "We are in 'dry' mode; keeping the summary facts of the factbase intact"
 else
     ALL_JUDGES=${SELF}/judges
+    summary=add
+    ${JUDGES} "${gopts[@]}" eval \
+        "${fb}" \
+        "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 fi
 
 github_token_found=false
@@ -256,7 +258,7 @@ echo "The total number of cycles to run is ${cycles}"
 ${JUDGES} "${gopts[@]}" --hello update \
     --no-log \
     --quiet \
-    --summary=add \
+    "--summary=${summary}" \
     --shuffle=aaa \
     --boost=github-events \
     --lifetime "${lifetime}" \
