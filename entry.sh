@@ -16,8 +16,8 @@ if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
     auth_args=(-H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")")
 fi
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    resp=$(curl --silent "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
-    latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name) catch empty")
+    resp=$(curl --silent "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
+    latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name // empty) catch empty")
     if [ -z "${latest}" ]; then
         echo "!!! Could not fetch the latest version from GitHub."
         echo "!!! GitHub returned: "
@@ -281,11 +281,12 @@ else
 fi
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL "${auth_args[@]}" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-    if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
+    resp=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL "${auth_args[@]}" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
+    latest=$(echo -n "${resp}" | jq -Rrs "try (fromjson | .tag_name // empty) catch empty")
+    if [ -z "${latest}" ] || [ "${latest}" == "${VERSION}" ]; then
         action_version=${VERSION}
     else
-        action_version="${VERSION}!${action_version}"
+        action_version="${VERSION}!${latest}"
     fi
 else
     action_version=${VERSION}
