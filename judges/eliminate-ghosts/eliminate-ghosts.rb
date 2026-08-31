@@ -5,6 +5,7 @@
 
 require 'elapsed'
 require 'fbe/consider'
+require 'fbe/fb'
 require 'fbe/octo'
 require 'logger'
 require 'octokit'
@@ -44,15 +45,19 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
   end
 end
 
-bad.each do |u|
-  Fbe.fb.query("(and (absent stale) (eq where 'github') (eq who #{u}))").each do |f|
-    f.stale = 'who'
+Fbe.fb.txn do |fbt|
+  bad.each do |u|
+    fbt.query("(and (absent stale) (eq where 'github') (eq who #{u}))").each do |f|
+      f.stale = 'who'
+    end
   end
 end
 
-Fbe.fb.query('(and (eq where "github") (exists who) (unique who) (eq stale "who"))').each do |f|
-  Fbe.fb.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
-    ff.stale = 'who'
+Fbe.fb.txn do |fbt|
+  fbt.query('(and (eq where "github") (exists who) (unique who) (eq stale "who"))').each do |f|
+    fbt.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
+      ff.stale = 'who'
+    end
   end
 end
 
