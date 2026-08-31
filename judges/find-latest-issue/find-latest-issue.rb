@@ -18,7 +18,19 @@ Fbe.iterate do
   by '(plus 0 $before)'
   over do |repository, latest|
     next latest if latest.positive?
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo =
+      begin
+        Fbe.octo.repo_name_by_id(repository)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository ##{repository} not found: #{e.message}")
+        next latest
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to repository ##{repository} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next latest
+      end
     json =
       begin
         Fbe.octo.with_disable_auto_paginate do |octo|

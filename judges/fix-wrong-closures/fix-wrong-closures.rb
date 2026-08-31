@@ -24,7 +24,19 @@ Fbe.iterate do
       (absent done))"
   repeats 50
   over do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo =
+      begin
+        Fbe.octo.repo_name_by_id(repository)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository ##{repository} not found: #{e.message}")
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to repository ##{repository} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      end
     json =
       begin
         Fbe.octo.pull_request(repo, issue)

@@ -49,4 +49,17 @@ class TestFixMissingBranch < Jp::Test
     msg = '403 is transient — fact must NOT be marked stale; next cycle will retry the pull_request lookup'
     assert_nil(f['stale'], msg)
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('fix-missing-branch', fb)
+    assert(
+      fb.one?(what: 'pull-was-opened', repository: 42, stale: 'repository'),
+      'The fact of a vanished repository must be marked stale instead of aborting the judge'
+    )
+  end
 end

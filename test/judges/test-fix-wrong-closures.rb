@@ -72,4 +72,18 @@ class TestFixWrongClosures < Jp::Test
       'The closure of a pull that stays closed cannot be forgotten'
     )
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('fix-wrong-closures', fb)
+    assert(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 44),
+      'A vanished repository must not delete the closure and must not abort the judge'
+    )
+  end
 end

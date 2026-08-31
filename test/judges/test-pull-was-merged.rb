@@ -436,6 +436,20 @@ class TestPullWasMerged < Jp::Test
     assert(fb.none?(issue: 44, what: 'pull-was-merged'))
   end
 
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('pull-was-merged', fb)
+    assert_empty(
+      fb.query("(eq what 'pull-was-merged')").each.to_a,
+      'A vanished repository must produce no facts and must not abort the judge'
+    )
+  end
+
   private
 
   def stub_pull_was_merged_success(issue)
