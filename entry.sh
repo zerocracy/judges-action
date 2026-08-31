@@ -105,7 +105,8 @@ VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${n
 
 declare -a options=()
 while IFS= read -r o; do
-    s=$(echo "${o}" | xargs)
+    s="${o#"${o%%[![:space:]]*}"}"
+    s="${s%"${s##*[![:space:]]}"}"
     if [ "${s}" = "" ]; then
         continue
     fi
