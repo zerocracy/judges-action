@@ -138,6 +138,21 @@ class TestEliminateGhosts < Jp::Test
     )
   end
 
+  def test_writes_the_stale_flags_in_one_transaction
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/999', body: {}, status: 404)
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', who: 999, what: 'something-a')
+      .with(_id: 2, where: 'github', who: 999, what: 'something-b')
+    loog = Loog::Buffer.new
+    load_it('eliminate-ghosts', fb, loog:)
+    assert_includes(
+      loog.to_s, 'Txn #',
+      'The stale flags of a ghost cannot be written one by one, outside a transaction'
+    )
+  end
+
   def test_keeps_user_active_on_forbidden_lookup
     WebMock.disable_net_connect!
     rate_limit_up
