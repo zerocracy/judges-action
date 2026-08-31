@@ -104,9 +104,9 @@ The dedicated action inputs above take precedence when a parameter
   is also configurable via `options` (the k=v pairs below exist for
   backward compatibility and advanced scenarios):
 
-* `github_token=...` is a default GitHub token (alternative to
-  `github-token` action input), usually to be set to
-  `${{ secrets.GITHUB_TOKEN }}`
+* `github_token=...` is a default GitHub token, usually to be set to
+  `${{ secrets.GITHUB_TOKEN }}`; it takes precedence over the
+  `github-token` action input when both are set
 * `repositories=..` is a comma-separated list of masks (alternative to
   `repositories` action input), where
   `yegor256/*` means all repos of the user,
