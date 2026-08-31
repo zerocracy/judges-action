@@ -22,6 +22,14 @@ class TestUnmaskRepos < Jp::Test
     )
   end
 
+  def test_fetches_every_repository_once
+    rate_limit_up
+    stub = stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
+    $loog = Loog::NULL
+    Fbe.unmask_repos(options: Judges::Options.new({ 'repositories' => 'bar/bar' }), global: {}, loog: Loog::NULL)
+    assert_requested(stub, times: 1, message: 'a repository cannot be fetched more than once per expansion')
+  end
+
   def test_skips_the_mask_when_organization_listing_is_forbidden
     rate_limit_up
     stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 403)

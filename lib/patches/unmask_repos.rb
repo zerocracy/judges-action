@@ -64,10 +64,6 @@ module Fbe
       raise(Fbe::Error, "No repos found matching: #{options.repositories.inspect}") if repos.empty?
       repos.shuffle!
       loog.debug("Scanning #{repos.size} repositories: #{repos.joined}...")
-      repos.each do |repo|
-        octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden # rubocop:disable Lint/SuppressedException
-      end
       return repos unless block_given?
       repos.each do |repo|
         break if Fbe.over?(global:, options:, loog:, epoch:, kickoff:, quota_aware:, lifetime_aware:, timeout_aware:)
