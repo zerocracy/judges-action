@@ -477,6 +477,7 @@ class TestQualityOfService < Jp::Test
   end
 
   def test_skips_unfinished_workflow_runs
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     timed = []
     octo = Object.new
@@ -510,6 +511,7 @@ class TestQualityOfService < Jp::Test
   end
 
   def test_skips_repo_on_not_found_workflow_runs
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::NotFound) }
@@ -523,6 +525,7 @@ class TestQualityOfService < Jp::Test
   end
 
   def test_skips_repo_on_forbidden_workflow_runs
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::Forbidden) }
@@ -2531,6 +2534,7 @@ class TestQualityOfService < Jp::Test
   end
 
   def test_some_pull_hoc_size_handles_nil_additions_or_deletions
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
     Jp.qoreset
     octo = Object.new
