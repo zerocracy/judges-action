@@ -128,8 +128,8 @@ The following environment variables are recognized by the Docker entry point:
   development, testing with a non-release build, air-gapped environments,
   or faster CI when version checking is not critical.
 
-Note: `action_version` and `vitals_url` are automatically populated
-  by the entry point and should not be set manually.
+Note: `job_id`, `action_version`, and `vitals_url` are automatically
+  populated by the entry point and should not be set manually.
 
 The `zerocracy/pages-action` plugin is responsible for rendering
   the summary HTML page: its configuration is not explained here,
