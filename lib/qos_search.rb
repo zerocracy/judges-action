@@ -44,6 +44,9 @@ def Jp.qosearch(query, method: :search_issues, **)
   rescue NoMethodError => e
     raise unless e.name == :get
     left = octo.rate_limit.remaining
+  rescue Fbe::OffQuota => e
+    $loog.info("[#{jg}] Not searching, the quota is spent: #{e.message}")
+    return
   end
   if json
     json = JSON.parse(json, symbolize_names: true) if json.is_a?(String)
