@@ -206,4 +206,14 @@ class TestMilestoneWasSet < Jp::Test
       'A milestone missing from the factbase cannot stay missing when its neighbours are known'
     )
   end
+
+  def test_scans_a_repository_in_testing_mode
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('milestone-was-set', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
+    assert_empty(
+      fb.query("(eq what 'milestone-was-set')").each.to_a,
+      'The judge cannot break when the GitHub client is faked'
+    )
+  end
 end
