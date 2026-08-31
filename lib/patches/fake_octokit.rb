@@ -6,7 +6,7 @@
 require 'fbe/octo'
 
 class Fbe::FakeOctokit
-  def list_milestones(_repo, **)
+  def list_milestones(_repo, _options = {})
     []
   end
 end
