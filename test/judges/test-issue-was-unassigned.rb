@@ -9,6 +9,40 @@ require_relative '../test__helper'
 class TestIssueWasUnassigned < Jp::Test
   using SmartFactbase
 
+  def test_stops_watching_a_closed_issue
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub = stub_github('https://api.github.com/repos/foo/foo/issues/44/events?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 421,
+      when: Time.parse('2025-10-01 19:05:00 UTC')
+    ).with(
+      _id: 2, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github',
+      when: Time.parse('2025-10-05 19:05:00 UTC')
+    )
+    load_it('issue-was-unassigned', fb)
+    assert_not_requested(stub, message: 'a closed issue cannot be watched for unassignment any more')
+  end
+
+  def test_stops_watching_a_merged_pull
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub = stub_github('https://api.github.com/repos/foo/foo/issues/45/events?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'issue-was-assigned', repository: 42, issue: 45, where: 'github', who: 421,
+      when: Time.parse('2025-10-01 19:05:00 UTC')
+    ).with(
+      _id: 2, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github',
+      when: Time.parse('2025-10-05 19:05:00 UTC')
+    )
+    load_it('issue-was-unassigned', fb)
+    assert_not_requested(stub, message: 'a merged pull cannot be watched for unassignment any more')
+  end
+
   def test_not_found_issue_events
     WebMock.disable_net_connect!
     rate_limit_up
