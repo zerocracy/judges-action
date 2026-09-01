@@ -88,8 +88,10 @@ Fbe.consider(
       )
       next
     end
-  f.reviews = reviews.count
-  next if pr.dig(:user, :id).nil?
+  if pr.dig(:user, :id).nil?
+    f.reviews = reviews.count
+    next
+  end
   count = nil
   reviews.each do |review|
     next if review.dig(:user, :id).nil?
@@ -163,6 +165,7 @@ Fbe.consider(
       )
     end
   end
+  f.reviews = reviews.count
 end
 
 Fbe.octo.print_trace!
