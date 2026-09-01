@@ -8,7 +8,7 @@ require 'minitest/autorun'
 class TestPatternACoverage < Minitest::Test
   PATTERN_A_RE = /^(\s*)rescue\s+Octokit::NotFound\s*,\s*Octokit::Deprecated\s*=>\s*e/
   FORBIDDEN_RE = /^\s*rescue\s+Octokit::Forbidden\s*=>\s*e/
-  BLOCK_END_RE  = /^\s*end\b/
+  BLOCK_END_RE = /^\s*end\b/
 
   def test_pattern_a_block_has_forbidden_rescue
     root = File.expand_path('..', __dir__)
@@ -30,7 +30,7 @@ class TestPatternACoverage < Minitest::Test
           if nxt =~ FORBIDDEN_RE && ni == indent
             status = :found
             break
-          elsif nxt =~ BLOCK_END_RE
+          elsif BLOCK_END_RE.match?(nxt)
             break
           end
         end
