@@ -27,7 +27,6 @@ def Jp.qosearch(query, method: :search_issues, **)
     @offquota[jg] = false
     @offquotatime[jg] = nil
   end
-  return if Fbe.octo.off_quota?
   now = Time.now
   if @swstart[jg].nil? || (now - @swstart[jg]) >= Jp::SEARCH_WINDOW_SECONDS
     @swstart[jg] = now
@@ -45,6 +44,9 @@ def Jp.qosearch(query, method: :search_issues, **)
   rescue NoMethodError => e
     raise unless e.name == :get
     left = octo.rate_limit.remaining
+  rescue Fbe::OffQuota => e
+    $loog.info("[#{jg}] Not searching, the quota is spent: #{e.message}")
+    return
   end
   if json
     json = JSON.parse(json, symbolize_names: true) if json.is_a?(String)
