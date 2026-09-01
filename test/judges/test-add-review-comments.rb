@@ -60,6 +60,7 @@ class TestAddReviewComments < Jp::Test
     end
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what \"#{what}\")").each.to_a
+    assert_equal(pulls.size, facts.size)
     facts.each do |f|
       assert_equal(pulls.find { |pl| pl[:id] == f.issue }[:comments], f.review_comments)
     end
