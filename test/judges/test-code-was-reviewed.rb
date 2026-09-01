@@ -282,24 +282,17 @@ class TestCodeWasReviewed < Jp::Test
         { id: 49_112, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
       ]
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: []
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44/reviews/49112/comments?per_page=100', body: []
-    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/49112/comments?per_page=100', body: [])
     stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
     stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
     load_it('code-was-reviewed', fb)
-    assert(
-      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 44, who: 422),
-      'a review left by a live account must be credited even when a deleted account reviewed too'
-    )
-    refute(
-      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 44, who: nil),
-      'a review left by a deleted account cannot produce a fact'
+    assert_equal(
+      [422],
+      fb.picks(what: 'code-was-reviewed', repository: 42, issue: 44).map(&:who),
+      'a review left by a deleted account produced a fact or the live reviewer was not credited'
     )
   end
 
