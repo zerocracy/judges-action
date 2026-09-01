@@ -270,24 +270,46 @@ class TestCodeWasReviewed < Jp::Test
     stub_github('https://api.github.com/repositories/42', status: 500, body: { message: 'Internal Server Error' })
     stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'foo/bar' })
     stub_github(
-      'https://api.github.com/repos/foo/bar/pulls/44',
+      'https://api.github.com/repos/foo/bar/pulls/55',
       body: {
-        id: 50, number: 44, user: { id: 421, login: 'user' },
+        id: 60, number: 55, user: { id: 421, login: 'user' },
         created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
       }
     )
-    stub_github('https://api.github.com/repos/foo/bar/pulls/44/reviews?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/bar/pulls/55/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/bar/issues/55/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/bar/pulls/55/reviews/49111/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
-      .with(_id: 2, what: 'pull-was-closed', repository: 43, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-closed', repository: 43, issue: 55, where: 'github')
     load_it('code-was-reviewed', fb)
     refute(
       fb.one?(what: 'pull-was-closed', repository: 42, issue: 44, stale: 'repository'),
       'a transient server error on the repository lookup must not mark the fact stale'
     )
     assert(
-      fb.one?(what: 'code-was-reviewed', repository: 43, issue: 44),
+      fb.one?(what: 'code-was-reviewed', repository: 43, issue: 55, who: 422, author: 421),
       'a transient server error on one repository lookup must not abort later candidates in the same batch'
+    )
+  end
+
+  def test_rescues_unauthorized_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', status: 401, body: { message: 'Bad credentials' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 44, stale: 'repository'),
+      'an unauthorized error on the repository lookup must not mark the fact stale'
     )
   end
 
