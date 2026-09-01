@@ -30,7 +30,7 @@ class TestPatternACoverage < Minitest::Test
           if nxt =~ FORBIDDEN_RE && ni == indent
             status = :found
             break
-          elsif nxt =~ BLOCK_END_RE
+          elsif BLOCK_END_RE.match?(nxt)
             break
           end
         end
