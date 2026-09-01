@@ -83,6 +83,19 @@ class TestAddReviewComments < Jp::Test
     assert_equal('repository', facts.first['stale'].first)
   end
 
+  def test_skips_fact_already_marked_stale
+    WebMock.disable_net_connect!
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = 93
+    fact.repository = 90
+    fact.where = 'github'
+    fact.stale = 'repository'
+    load_it('add-review-comments', fb)
+    assert_nil(fb.query('(eq issue 93)').each.first['review_comments'])
+  end
+
   def test_rescues_forbidden_on_repo_lookup
     WebMock.disable_net_connect!
     rate_limit_up
