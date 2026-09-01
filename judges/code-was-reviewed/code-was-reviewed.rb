@@ -88,7 +88,7 @@ Fbe.consider(
       )
       next
     end
-  f.reviews = reviews.count
+  f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
   count = nil
   reviews.each do |review|
     next if review.dig(:user, :id) == pr.dig(:user, :id)
