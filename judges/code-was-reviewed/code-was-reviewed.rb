@@ -89,8 +89,10 @@ Fbe.consider(
       next
     end
   f.reviews = reviews.count
+  next if pr.dig(:user, :id).nil?
   count = nil
   reviews.each do |review|
+    next if review.dig(:user, :id).nil?
     next if review.dig(:user, :id) == pr.dig(:user, :id)
     Fbe.fb.txn do |fbt|
       n =
