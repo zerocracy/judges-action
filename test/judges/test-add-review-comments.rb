@@ -85,6 +85,7 @@ class TestAddReviewComments < Jp::Test
 
   def test_skips_fact_already_marked_stale
     WebMock.disable_net_connect!
+    rate_limit_up
     fb = Factbase.new
     fact = fb.insert
     fact.what = 'pull-was-reviewed'
@@ -99,11 +100,7 @@ class TestAddReviewComments < Jp::Test
   def test_marks_stale_on_deprecated_repo
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repositories/91',
-      status: 410,
-      body: { message: 'Repository access blocked' }
-    )
+    stub_github('https://api.github.com/repositories/91', status: 410, body: { message: 'Repository access blocked' })
     fb = Factbase.new
     fact = fb.insert
     fact.what = 'pull-was-reviewed'
