@@ -29,12 +29,12 @@ class TestPatternACoverage < Minitest::Test
           ni = nxt[/\A\s*/].length
           next if ni > indent
           break if ni < indent
-          if nxt =~ FORBIDDEN_RE
+          if FORBIDDEN_RE.match?(nxt)
             status = :found
             break
           end
-          break if nxt =~ BLOCK_END_RE
-          break unless nxt =~ ANY_RESCUE_RE
+          break if BLOCK_END_RE.match?(nxt)
+          break unless ANY_RESCUE_RE.match?(nxt)
         end
         next if status == :found
         rel = path.sub("#{root}/", '')
