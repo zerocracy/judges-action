@@ -8,7 +8,6 @@ require 'minitest/autorun'
 class TestPatternACoverage < Minitest::Test
   PATTERN_A_RE = /^(\s*)rescue\s+Octokit::NotFound\s*,\s*Octokit::Deprecated\s*=>\s*e/
   FORBIDDEN_RE = /^\s*rescue\s+Octokit::Forbidden\s*=>\s*e/
-  ANY_RESCUE_RE = /^\s*rescue\b/
   BLOCK_END_RE  = /^\s*end\b/
 
   def test_pattern_a_block_has_forbidden_rescue
@@ -31,20 +30,20 @@ class TestPatternACoverage < Minitest::Test
           if nxt =~ FORBIDDEN_RE && ni == indent
             status = :found
             break
-          elsif nxt =~ ANY_RESCUE_RE || nxt =~ BLOCK_END_RE
+          elsif nxt =~ BLOCK_END_RE
             break
           end
         end
         next if status == :found
         rel = path.sub("#{root}/", '')
         offenders <<
-          "#{rel}:#{idx + 1} — Pattern A rescue has no adjacent " \
+          "#{rel}:#{idx + 1} — Pattern A rescue has no " \
           "'rescue Octokit::Forbidden => e' in the same begin/rescue/end block"
       end
     end
     assert_empty(
       offenders,
-      "Every Pattern A rescue must be immediately followed by a Forbidden rescue at the same indent:\n  " \
+      "Every Pattern A rescue must share its block with a Forbidden rescue at the same indent:\n  " \
       "#{offenders.join("\n  ")}"
     )
   end
