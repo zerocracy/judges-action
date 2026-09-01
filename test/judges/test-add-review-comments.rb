@@ -80,7 +80,7 @@ class TestAddReviewComments < Jp::Test
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what '#{what}')").each.to_a
     assert_equal(pl[:id], facts.first.issue)
-    assert_nil(facts.first['review_comments'])
+    assert_equal('repository', facts.first['stale'].first)
   end
 
   def test_rescues_forbidden_on_repo_lookup
