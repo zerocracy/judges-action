@@ -290,9 +290,9 @@ class TestCodeWasReviewed < Jp::Test
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
     load_it('code-was-reviewed', fb)
     n = fb.query('(eq what "code-was-reviewed")').each.first
-    refute(n.nil?, 'a code-was-reviewed fact must still exist for the reviewer')
-    refute(
-      n.all_properties.include?('comments'),
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    refute_includes(
+      n.all_properties, 'comments',
       'a forbidden issue-comments fetch cannot invent a zero comment count'
     )
   end
@@ -324,9 +324,9 @@ class TestCodeWasReviewed < Jp::Test
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
     load_it('code-was-reviewed', fb)
     n = fb.query('(eq what "code-was-reviewed")').each.first
-    refute(n.nil?, 'a code-was-reviewed fact must still exist for the reviewer')
-    refute(
-      n.all_properties.include?('review_comments'),
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    refute_includes(
+      n.all_properties, 'review_comments',
       'a forbidden review-comments fetch cannot invent a zero comment count'
     )
   end
