@@ -264,6 +264,33 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
+  def test_rescues_server_error_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', status: 500, body: { message: 'Internal Server Error' })
+    stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'foo/bar' })
+    stub_github(
+      'https://api.github.com/repos/foo/bar/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/bar/pulls/44/reviews?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-closed', repository: 43, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 44, stale: 'repository'),
+      'a transient server error on the repository lookup must not mark the fact stale'
+    )
+    assert(
+      fb.one?(what: 'code-was-reviewed', repository: 43, issue: 44),
+      'a transient server error on one repository lookup must not abort later candidates in the same batch'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
