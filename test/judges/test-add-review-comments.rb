@@ -80,7 +80,55 @@ class TestAddReviewComments < Jp::Test
     load_it('add-review-comments', fb)
     facts = fb.query("(eq what '#{what}')").each.to_a
     assert_equal(pl[:id], facts.first.issue)
-    assert_nil(facts.first['review_comments'])
+    assert_equal('repository', facts.first['stale'].first)
+  end
+
+  def test_skips_fact_already_marked_stale
+    WebMock.disable_net_connect!
+    rate_limit_up
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = 93
+    fact.repository = 90
+    fact.where = 'github'
+    fact.stale = 'repository'
+    load_it('add-review-comments', fb)
+    assert_nil(fb.query('(eq issue 93)').each.first['review_comments'])
+  end
+
+  def test_marks_stale_on_deprecated_repo
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/91', status: 410, body: { message: 'Repository access blocked' })
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = 93
+    fact.repository = 91
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    assert_equal('repository', fb.query('(eq issue 93)').each.first['stale'].first)
+  end
+
+  def test_leaves_other_facts_unaffected_by_stale_repo
+    WebMock.disable_net_connect!
+    good = { id: 94, comments: 3 }
+    stub(42, good)
+    stub_github('https://api.github.com/repositories/91', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    lost = fb.insert
+    lost.what = 'pull-was-reviewed'
+    lost.issue = 93
+    lost.repository = 91
+    lost.where = 'github'
+    found = fb.insert
+    found.what = 'pull-was-reviewed'
+    found.issue = good[:id]
+    found.repository = 42
+    found.where = 'github'
+    load_it('add-review-comments', fb)
+    assert_equal(good[:comments], fb.query("(eq issue #{good[:id]})").each.first.review_comments)
   end
 
   def test_rescues_forbidden_on_repo_lookup
