@@ -91,7 +91,9 @@ Fbe.consider(
   f.reviews = reviews.count
   count = nil
   reviews.each do |review|
-    next if review.dig(:user, :id) == pr.dig(:user, :id)
+    reviewer = review.dig(:user, :id)
+    next if reviewer.nil?
+    next if reviewer == pr.dig(:user, :id)
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
