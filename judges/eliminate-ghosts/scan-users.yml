@@ -27,8 +27,19 @@ input:
     _id: 6
     where: github
     who: 404_002
+  -
+    _id: 7
+    where: github
+    who: 777_777
+    stale: repository
+  -
+    _id: 8
+    where: github
+    who: 777_777
+    stale: who
 expected:
-  - /fb[count(f)=6]
+  - /fb[count(f)=8]
+  - /fb/f[_id=7 and stale='who']
   - /fb/f[_id=1 and who=526301 and not(stale)]
   - /fb/f[_id=2 and who and stale]
   - /fb/f[_id=3 and who=404001 and not(stale)]
