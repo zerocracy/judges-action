@@ -39,7 +39,7 @@ input:
     stale: who
 expected:
   - /fb[count(f)=8]
-  - /fb/f[_id=7 and stale='who']
+  - /fb/f[_id=7 and stale/v='who']
   - /fb/f[_id=1 and who=526301 and not(stale)]
   - /fb/f[_id=2 and who and stale]
   - /fb/f[_id=3 and who=404001 and not(stale)]
