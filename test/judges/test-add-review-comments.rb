@@ -128,6 +128,60 @@ class TestAddReviewComments < Jp::Test
     assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; pull lookup will retry next cycle')
   end
 
+  def test_sets_review_comments_for_merged_pulls
+    WebMock.disable_net_connect!
+    pl = { id: 96, comments: 5 }
+    repo = 42
+    stub(repo, pl)
+    what = 'pull-was-merged'
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = what
+    fact.issue = pl[:id]
+    fact.repository = repo
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    facts = fb.query("(eq what \"#{what}\")").each.to_a
+    assert_equal(1, facts.size)
+    assert_equal(
+      pl[:comments], facts.first.review_comments,
+      "the 'pull-was-merged' branch of the judge's 'or' term is not picked up"
+    )
+  end
+
+  def test_sets_zero_review_comments
+    WebMock.disable_net_connect!
+    pl = { id: 97, comments: 0 }
+    repo = 42
+    stub(repo, pl)
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = pl[:id]
+    fact.repository = repo
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    f = fb.query("(eq issue #{pl[:id]})").each.first
+    refute_nil(f['review_comments'], "a pull with no review comments must get 'review_comments' set to zero")
+    assert_equal(0, f.review_comments)
+  end
+
+  def test_ignores_facts_from_other_platforms
+    WebMock.disable_net_connect!
+    pl = { id: 98, comments: 3 }
+    repo = 42
+    stub(repo, pl)
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = pl[:id]
+    fact.repository = repo
+    fact.where = 'gitlab'
+    load_it('add-review-comments', fb)
+    f = fb.query("(eq issue #{pl[:id]})").each.first
+    assert_nil(f['review_comments'], "the fact about ##{pl[:id]} is not from GitHub, the judge must not touch it")
+  end
+
   def stub(repo, *pulls)
     pulls.each do |pl|
       stub_github(
