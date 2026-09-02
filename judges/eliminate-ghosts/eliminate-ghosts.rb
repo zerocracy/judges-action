@@ -52,7 +52,7 @@ Fbe.fb.txn do |fbt|
       f.stale = 'who'
     end
   end
-  fbt.query('(and (eq where "github") (exists who) (unique who) (eq stale "who"))').each do |f|
+  fbt.query('(and (eq where "github") (exists who) (eq stale "who") (unique who))').each do |f|
     next if good.include?(f.who)
     fbt.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
       ff.stale = 'who'
