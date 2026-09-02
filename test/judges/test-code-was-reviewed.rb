@@ -99,6 +99,37 @@ class TestCodeWasReviewed < Jp::Test
     assert_requested(stub, times: 1)
   end
 
+  def test_reviews_count_excludes_self_reviews
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/70',
+      body: {
+        id: 70, number: 70, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/70/reviews?per_page=100',
+      body: [
+        { id: 71_001, user: { id: 421, login: 'user' }, submitted_at: Time.parse('2025-09-02 09:00:00 UTC') },
+        { id: 71_002, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:00:00 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/70/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/70/reviews/71002/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 70, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 70, where: 'github', reviews: 1),
+      'a self-review must not be counted in the reviews property'
+    )
+  end
+
   def test_marks_a_pull_without_reviews_as_checked
     WebMock.disable_net_connect!
     rate_limit_up
@@ -123,19 +154,21 @@ class TestCodeWasReviewed < Jp::Test
   def test_skips_a_pull_that_was_already_checked
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      body: {
-        id: 45, number: 45, user: { id: 421, login: 'user' },
-        created_at: Time.parse('2025-09-02 17:05:30 UTC'), additions: 2, deletions: 8
-      }
-    )
     stub = stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github', reviews: 0)
     load_it('code-was-reviewed', fb)
     assert_not_requested(stub, message: 'a pull that was checked already cannot be fetched again')
+  end
+
+  def test_skips_a_pull_that_is_already_stale
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub = stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github', stale: 'repository')
+    load_it('code-was-reviewed', fb)
+    assert_not_requested(stub, message: 'a pull already marked stale cannot be fetched again')
   end
 
   def test_rescues_not_found_on_pull_request_lookup
@@ -261,6 +294,33 @@ class TestCodeWasReviewed < Jp::Test
     assert(
       fb.one?(what: 'pull-was-closed', repository: 42, stale: 'repository'),
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
+    )
+  end
+
+  def test_does_not_record_a_review_from_a_deleted_account
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/70',
+      body: {
+        id: 70, number: 70, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/70/reviews?per_page=100',
+      body: [
+        { id: 71_001, user: nil, submitted_at: Time.parse('2025-09-02 10:00:00 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 70, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 70),
+      'a review submitted by a deleted account has no id to attribute it to and must not be recorded'
     )
   end
 

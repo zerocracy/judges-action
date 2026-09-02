@@ -52,6 +52,23 @@ class TestIssueWasLost < Minitest::Test
     end
   end
 
+  def test_buries_issue_that_had_a_prior_fact
+    fb = Factbase.new
+    f = fb.insert
+    f.where = 'github'
+    f.repository = 42
+    f.issue = 7
+    f.what = 'pull-was-opened'
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      Jp.issue_was_lost('github', 42, 7)
+      assert(
+        Fbe::Tombstone.new(fb: fb).has?('github', 42, 7),
+        'an issue whose prior fact was marked stale must be buried too'
+      )
+    end
+  end
+
   def test_buries_issue_in_the_tombstone
     fb = Factbase.new
     Fbe.stub(:fb, fb) do
