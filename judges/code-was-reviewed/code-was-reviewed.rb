@@ -51,7 +51,10 @@ Fbe.consider(
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::Unauthorized, Octokit::ServerError,
+    rescue Octokit::Unauthorized => e
+      $loog.error("[#{$judge}] Not authorized to fetch pull ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
+      next
+    rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
       Net::OpenTimeout, Net::ReadTimeout, SocketError,
       Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn(
@@ -73,7 +76,12 @@ Fbe.consider(
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::Unauthorized, Octokit::ServerError,
+    rescue Octokit::Unauthorized => e
+      $loog.error(
+        "[#{$judge}] Not authorized to fetch reviews for pull ##{f.issue} in #{repo}: #{e.class}: #{e.message}"
+      )
+      next
+    rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
       Net::OpenTimeout, Net::ReadTimeout, SocketError,
       Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn(
@@ -88,10 +96,12 @@ Fbe.consider(
       )
       next
     end
-  f.reviews = reviews.count
+  f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
   count = nil
   reviews.each do |review|
-    next if review.dig(:user, :id) == pr.dig(:user, :id)
+    reviewer = review.dig(:user, :id)
+    next if reviewer.nil?
+    next if reviewer == pr.dig(:user, :id)
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
@@ -111,7 +121,12 @@ Fbe.consider(
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
           0
-        rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::Unauthorized, Octokit::ServerError,
+        rescue Octokit::Unauthorized => e
+          $loog.error(
+            "[#{$judge}] Not authorized to fetch issue comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
+          )
+          0
+        rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
           Net::OpenTimeout, Net::ReadTimeout, SocketError,
           Errno::ECONNRESET, Errno::ETIMEDOUT => e
           $loog.warn(
@@ -133,7 +148,12 @@ Fbe.consider(
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
           0
-        rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::Unauthorized, Octokit::ServerError,
+        rescue Octokit::Unauthorized => e
+          $loog.error(
+            "[#{$judge}] Not authorized to fetch review comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
+          )
+          0
+        rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
           Net::OpenTimeout, Net::ReadTimeout, SocketError,
           Errno::ECONNRESET, Errno::ETIMEDOUT => e
           $loog.warn(

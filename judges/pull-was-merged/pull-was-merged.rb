@@ -77,7 +77,10 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      rescue Octokit::Unauthorized => e
+        $loog.error("[#{$judge}] Not authorized to fetch pull ##{issue} in #{repo}: #{e.class}: #{e.message}")
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
         Net::OpenTimeout, Net::ReadTimeout, SocketError,
         Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(
@@ -103,7 +106,10 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      rescue Octokit::Unauthorized => e
+        $loog.error("[#{$judge}] Not authorized to fetch issue ##{issue} in #{repo}: #{e.class}: #{e.message}")
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
         Net::OpenTimeout, Net::ReadTimeout, SocketError,
         Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(
@@ -125,7 +131,12 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      rescue Octokit::Unauthorized => e
+        $loog.error(
+          "[#{$judge}] Not authorized to fetch reviews of pull ##{issue} in #{repo}: #{e.class}: #{e.message}"
+        )
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
         Net::OpenTimeout, Net::ReadTimeout, SocketError,
         Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(
