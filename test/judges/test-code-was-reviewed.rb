@@ -297,6 +297,33 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
+  def test_does_not_record_a_review_from_a_deleted_account
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/70',
+      body: {
+        id: 70, number: 70, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/70/reviews?per_page=100',
+      body: [
+        { id: 71_001, user: nil, submitted_at: Time.parse('2025-09-02 10:00:00 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 70, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 70),
+      'a review submitted by a deleted account has no id to attribute it to and must not be recorded'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
