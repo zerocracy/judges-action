@@ -1,21 +1,13 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
-  error:
-  - 'Failure in repository #798641472 at #689: The fact doesn''t match the "(and \n#
-    MIT License\n#\n# Copyrigh..." rule: [ _id: [2633318], _job: [33645887855], _time:
-    [2026-09-02 15:10:04.021914662 UTC], _version: ["0.19.16/0.61.1/0.17.22"], issue:
-    [689] ]'
-  - 'Failure in repository #820463873 at #626: The fact doesn''t match the "(and \n#
-    MIT License\n#\n# Copyrigh..." rule: [ _id: [2633320], _job: [33645887855], _time:
-    [2026-09-02 15:17:00.000897688 UTC], _version: ["0.19.16/0.61.1/0.17.22"], issue:
-    [626] ]'
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 882.49744622
+  seconds: 918.350545907
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-02 15:17:32.906221349 Z
+  when: 2026-09-02 15:51:15.297303420 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -192505,7 +192497,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 2
+  min_issue_was_found: 30
   min_pull_was_found: 14
   repository: 1090089359
   types_were_scanned: 0
@@ -194733,7 +194725,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 25
+  min_issue_was_found: 26
   min_pull_was_found: 66
   repository: 974194993
   types_were_scanned: 0
@@ -198503,7 +198495,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 54
+  min_issue_was_found: 57
   min_pull_was_found: 52
   repository: 1236759415
   types_were_scanned: 0
@@ -201253,7 +201245,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 211
+  min_issue_was_found: 212
   min_pull_was_found: 239
   repository: 849726475
   types_were_scanned: 0
@@ -201506,7 +201498,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 24
+  min_issue_was_found: 25
   min_pull_was_found: 155
   repository: 805238060
   types_were_scanned: 0
@@ -201523,7 +201515,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 4
   min_pull_was_found: 54
   repository: 1084843345
   types_were_scanned: 0
@@ -201533,18 +201525,18 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 701
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14279130196
+  events_were_scanned: 19764258202
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 315
   merges_were_scanned: 0
-  min_issue_was_found: 709
+  min_issue_was_found: 710
   min_pull_was_found: 687
   repository: 798641472
-  types_were_scanned: 677
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629842
@@ -201559,10 +201551,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 339
+  min_issue_was_found: 341
   min_pull_was_found: 217
   repository: 840215648
-  types_were_scanned: 416
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -201576,7 +201568,7 @@
   issues_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 128
   repository: 857659265
   types_were_scanned: 0
@@ -201997,7 +201989,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 600
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14273655113
@@ -202005,10 +201997,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 587
+  min_issue_was_found: 588
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 584
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -202654,7 +202646,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 684
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14284034172
@@ -202662,10 +202654,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 738
+  min_issue_was_found: 739
   min_pull_was_found: 531
   repository: 802720676
-  types_were_scanned: 681
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -202803,12 +202795,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14281645212
+  events_were_scanned: 14291305630
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 528
+  min_issue_was_found: 529
   min_pull_was_found: 512
   repository: 799113787
   types_were_scanned: 0
@@ -202837,36 +202829,36 @@
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19760569306
+  events_were_scanned: 19764336266
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 0
-  min_issue_was_found: 205
+  min_issue_was_found: 206
   min_pull_was_found: 167
   repository: 181044958
-  types_were_scanned: 447
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1472
-  closures_were_checked: 0
+  assignees_were_scanned: 1667
+  closures_were_checked: 1639
   earliest_issue_was_found: 1
-  events_were_scanned: 19760363064
+  events_were_scanned: 19762977605
   issues_were_scanned: 0
-  labels_were_scanned: 1702
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
-  min_issue_was_found: 1345
+  min_issue_was_found: 1347
   min_pull_was_found: 1881
   repository: 799177290
-  types_were_scanned: 0
+  types_were_scanned: 1442
   what: iterate
   where: github
 - _id: 2630036
@@ -202880,7 +202872,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 5
   min_pull_was_found: 0
   repository: 1081929119
   types_were_scanned: 0
@@ -202890,7 +202882,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1188
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19756330734
@@ -202898,10 +202890,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 137
+  min_issue_was_found: 140
   min_pull_was_found: 1073
   repository: 728758275
-  types_were_scanned: 1142
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -250451,27 +250443,6 @@
   when: 2026-08-31 13:11:09.000000000 Z
   where: github
   who: 125282851
-- _id: 2632159
-  _job: 89540
-  _time: 2026-08-31 14:41:33.923483559 Z
-  _version: 0.19.16/0.61.1/0.17.21
-  analyzers: 18
-  text: |-
-    The average reward per task (14.4 points) is increasing (R=0.10).
-    The average punishment per task (7.0 points) is staying still.
-    The average number of builds per week (3780.5) is decreasing (R=-0.17).
-    The average number of commits per week (89.9) is decreasing (R=-0.66).
-    The average bugs accepted per month (41.0) is increasing (R=0.36).
-    The average monthly punishment (262 points) is increasing (R=0.28).
-    The average monthly wage (17.0 points) is increasing (R=0.45).
-    The average issue cycle time (2w) is increasing (R=0.49).
-    The average pull cycle time (1w) is increasing (R=0.17).
-    The average number of releases per month (5.5) is staying still.
-    The average monthly turnover (12.0 developers) is increasing (R=0.78).
-    The average weekly cost of HoC (1.24 points) is staying still.
-    The average monthly zents/points ratio (0.69) is decreasing (R=0.38).
-  what: assessment
-  when: 2026-08-31 14:41:33.944636359 Z
 - _id: 2632160
   _job: 89540
   _time: 2026-08-31 14:41:38.334789075 Z
@@ -269124,19 +269095,54 @@
   where: github
   who: 526301
 - _id: 2633318
-  _job: 33645887855
-  _time: 2026-09-02 15:10:04.021914662 Z
+  _job: 90233
+  _time: 2026-09-02 15:18:05.684256619 Z
   _version: 0.19.16/0.61.1/0.17.22
-  issue: 689
+  analyzers: 18
+  text: |-
+    The average reward per task (14.8 points) is increasing (R=0.18).
+    The average punishment per task (7.0 points) is staying still.
+    The average number of builds per week (3828.9) is decreasing (R=-0.20).
+    The average number of commits per week (85.6) is decreasing (R=-0.66).
+    The average bugs accepted per month (49.0) is increasing (R=0.49).
+    The average monthly punishment (243 points) is increasing (R=0.10).
+    The average monthly wage (17.0 points) is increasing (R=0.54).
+    The average issue cycle time (2w) is increasing (R=0.44).
+    The average pull cycle time (1w1d) is increasing (R=0.23).
+    The average number of releases per month (5.5) is staying still.
+    The average monthly turnover (12.0 developers) is increasing (R=0.65).
+    The average weekly cost of HoC (1.20 points) is decreasing (R=-0.22).
+    The average monthly zents/points ratio (0.73) is decreasing (R=0.72).
+  what: assessment
+  when: 2026-09-02 15:18:05.705808904 Z
 - _id: 2633319
-  _job: 33645887855
-  _time: 2026-09-02 15:10:04.787908561 Z
+  _job: 90233
+  _time: 2026-09-02 15:18:10.722468054 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  award: 6
+  comments: 4
+  details: It's time to reward @yegor256 for the code review in yegor256/judges#512,
+    the reward amount is 6.
+  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
+    -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
+    score is [+561](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 2
+  href: https://github.com/yegor256/judges/issues/512/#issuecomment-5511898501
+  is_human: 1
+  issue: 512
+  repository: 799113787
+  review_comments: 0
+  seconds: 31545
+  what: code-review-was-rewarded
+  when: 2026-09-02 15:18:10.726957178 Z
+  where: github
+  who: 526301
+  why: Reviewed code in yegor256/judges#512
+- _id: 2633320
+  _job: 33649459351
+  _time: 2026-09-02 15:51:03.714920221 Z
   _version: 0.19.16/0.61.1/0.17.22
   since: *2709
   what: quality-of-service
   when: *2710
-- _id: 2633320
-  _job: 33645887855
-  _time: 2026-09-02 15:17:00.000897688 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  issue: 626
