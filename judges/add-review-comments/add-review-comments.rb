@@ -38,6 +38,14 @@ Fbe.consider(
         "(will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::Unauthorized, Octokit::ServerError,
+      Net::OpenTimeout, Net::ReadTimeout, SocketError,
+      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      $loog.warn(
+        "[#{$judge}] Transient error fetching repository #{f.repository} " \
+        "(will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
     end
   json =
     begin
@@ -55,6 +63,14 @@ Fbe.consider(
     rescue Octokit::AbuseDetected => e
       $loog.warn(
         "[#{$judge}] Issue access abuse detected for #{repo}##{f.issue} " \
+        "(will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    rescue Octokit::Unauthorized, Octokit::ServerError,
+      Net::OpenTimeout, Net::ReadTimeout, SocketError,
+      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      $loog.warn(
+        "[#{$judge}] Transient error fetching issue ##{f.issue} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
       )
       next
