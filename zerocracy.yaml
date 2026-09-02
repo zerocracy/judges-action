@@ -2,15 +2,20 @@
 - added: 8
   cycles: 2
   deleted: 8
-  error: 'Failure in repository #798641472 at #689: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2633285], _job: [33633147998],
-    _time: [2026-09-02 13:06:12.485788691 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
-    issue: [689] ]'
+  error:
+  - 'Failure in repository #820463873 at #626: The fact doesn''t match the "(and \n#
+    MIT License\n#\n# Copyrigh..." rule: [ _id: [2633298], _job: [33636381801], _time:
+    [2026-09-02 13:39:49.910236952 UTC], _version: ["0.19.16/0.61.1/0.17.22"], issue:
+    [626] ]'
+  - 'Failure in repository #798641472 at #689: The fact doesn''t match the "(and \n#
+    MIT License\n#\n# Copyrigh..." rule: [ _id: [2633309], _job: [33636381801], _time:
+    [2026-09-02 13:44:28.417695797 UTC], _version: ["0.19.16/0.61.1/0.17.22"], issue:
+    [689] ]'
   inserted: 8
-  seconds: 1098.73810777
+  seconds: 662.552090375
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-02 13:19:53.011118981 Z
+  when: 2026-09-02 13:45:01.253678003 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -58834,7 +58839,7 @@
   - 0
   tombstone: 2026-08-26 07:30:34.512089408 Z
   what: quality-of-service
-  when: &2707 2026-04-20 07:15:50.000000000 Z
+  when: &2708 2026-04-20 07:15:50.000000000 Z
 - _id: 2610223
   _job: 68745
   _time: 2026-04-20 07:30:10.721990672 Z
@@ -72565,7 +72570,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   composite: 0.69
   ffact: 1663210
-  since: &2708 2026-04-27 07:24:28.000000000 Z
+  since: &2709 2026-04-27 07:24:28.000000000 Z
   some_backlog_size:
   - 2
   - 2
@@ -192500,8 +192505,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 2
-  min_pull_was_found: 11
+  min_issue_was_found: 0
+  min_pull_was_found: 13
   repository: 1090089359
   types_were_scanned: 0
   what: iterate
@@ -194728,8 +194733,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 81
-  min_pull_was_found: 61
+  min_issue_was_found: 84
+  min_pull_was_found: 64
   repository: 974194993
   types_were_scanned: 0
   what: iterate
@@ -198498,7 +198503,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 37
+  min_issue_was_found: 44
   min_pull_was_found: 46
   repository: 1236759415
   types_were_scanned: 0
@@ -201248,8 +201253,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 258
-  min_pull_was_found: 237
+  min_issue_was_found: 264
+  min_pull_was_found: 238
   repository: 849726475
   types_were_scanned: 0
   what: iterate
@@ -201501,8 +201506,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 68
-  min_pull_was_found: 153
+  min_issue_was_found: 84
+  min_pull_was_found: 154
   repository: 805238060
   types_were_scanned: 0
   what: iterate
@@ -201518,7 +201523,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 50
+  min_issue_was_found: 58
   min_pull_was_found: 53
   repository: 1084843345
   types_were_scanned: 0
@@ -201536,7 +201541,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 315
   merges_were_scanned: 0
-  min_issue_was_found: 694
+  min_issue_was_found: 701
   min_pull_was_found: 687
   repository: 798641472
   types_were_scanned: 677
@@ -201554,8 +201559,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 316
-  min_pull_was_found: 215
+  min_issue_was_found: 325
+  min_pull_was_found: 216
   repository: 840215648
   types_were_scanned: 416
   what: iterate
@@ -202000,7 +202005,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 581
+  min_issue_was_found: 583
   min_pull_was_found: 625
   repository: 820463873
   types_were_scanned: 584
@@ -202657,8 +202662,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 686
-  min_pull_was_found: 528
+  min_issue_was_found: 691
+  min_pull_was_found: 529
   repository: 802720676
   types_were_scanned: 681
   what: iterate
@@ -202803,8 +202808,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 521
-  min_pull_was_found: 508
+  min_issue_was_found: 524
+  min_pull_was_found: 509
   repository: 799113787
   types_were_scanned: 0
   what: iterate
@@ -202832,7 +202837,7 @@
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14279126661
@@ -202840,17 +202845,17 @@
   labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 0
-  min_issue_was_found: 183
+  min_issue_was_found: 195
   min_pull_was_found: 164
   repository: 181044958
-  types_were_scanned: 0
+  types_were_scanned: 447
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1667
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19752938651
@@ -202858,10 +202863,10 @@
   labels_were_scanned: 1702
   latest_issue_was_found: 1073
   merges_were_scanned: 0
-  min_issue_was_found: 1334
+  min_issue_was_found: 1337
   min_pull_was_found: 1877
   repository: 799177290
-  types_were_scanned: 1960
+  types_were_scanned: 1442
   what: iterate
   where: github
 - _id: 2630036
@@ -202876,7 +202881,7 @@
   latest_issue_was_found: 2
   merges_were_scanned: 0
   min_issue_was_found: 0
-  min_pull_was_found: 17
+  min_pull_was_found: 0
   repository: 1081929119
   types_were_scanned: 0
   what: iterate
@@ -202893,8 +202898,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1314
-  min_pull_was_found: 1072
+  min_issue_was_found: 1319
+  min_pull_was_found: 1073
   repository: 728758275
   types_were_scanned: 1142
   what: iterate
@@ -267960,21 +267965,9 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-09-02 12:41:10.000000000 Z
+  when: &2707 2026-09-02 12:41:10.000000000 Z
   where: github
   who: 8086956
-- _id: 2633285
-  _job: 33633147998
-  _time: 2026-09-02 13:06:12.485788691 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  issue: 689
-- _id: 2633286
-  _job: 33633147998
-  _time: 2026-09-02 13:06:13.589558509 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  since: *2707
-  what: quality-of-service
-  when: *2708
 - _id: 2633287
   _job: 33633147998
   _time: 2026-09-02 13:10:19.225954919 Z
@@ -267994,9 +267987,252 @@
   issue: 512
   repository: 799113787
   review: 2026-09-02 03:14:03.000000000 Z
+  review_comments: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
   when: 2026-09-02 13:02:11.000000000 Z
   where: github
   who: 8086956
+- _id: 2633288
+  _job: 90222
+  _time: 2026-09-02 13:20:36.195420798 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  comments: 4
+  details: The pull request yegor256/judges#522 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 6h10m of being in review and 4 comments.
+  hoc: 2
+  is_human: 0
+  issue: 522
+  merger: 8086956
+  repository: 799113787
+  review_comments: 0
+  seconds: 22231
+  what: code-was-contributed
+  when: *2707
+  where: github
+  who: 29139614
+- _id: 2633289
+  _job: 33636381801
+  _time: 2026-09-02 13:37:03.761205954 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#449 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 449
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:33:41.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633290
+  _job: 33636381801
+  _time: 2026-09-02 13:37:04.071705220 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#448 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 448
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:33:40.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633291
+  _job: 33636381801
+  _time: 2026-09-02 13:37:04.281503587 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#447 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 447
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:33:39.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633292
+  _job: 33636381801
+  _time: 2026-09-02 13:37:04.652899688 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#446 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 446
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:33:05.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633293
+  _job: 33636381801
+  _time: 2026-09-02 13:37:04.935729760 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#445 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 445
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:33:03.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633294
+  _job: 33636381801
+  _time: 2026-09-02 13:37:05.146712084 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#444 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 444
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:33:02.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633295
+  _job: 33636381801
+  _time: 2026-09-02 13:37:05.420781997 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#443 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 443
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:32:29.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633296
+  _job: 33636381801
+  _time: 2026-09-02 13:37:05.630567480 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#442 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 442
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:32:28.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633297
+  _job: 33636381801
+  _time: 2026-09-02 13:37:05.837479653 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#441 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 441
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-02 13:32:27.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633298
+  _job: 33636381801
+  _time: 2026-09-02 13:39:49.910236952 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 626
+- _id: 2633299
+  _job: 33636381801
+  _time: 2026-09-02 13:39:51.180985577 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  since: *2708
+  what: quality-of-service
+  when: *2709
+- _id: 2633300
+  _job: 33636381801
+  _time: 2026-09-02 13:41:51.728302721 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#745 has been earlier opened by @morphqdd.
+  issue: 745
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:40:55.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633301
+  _job: 33636381801
+  _time: 2026-09-02 13:41:51.998579642 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#744 has been earlier opened by @morphqdd.
+  issue: 744
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:40:53.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633302
+  _job: 33636381801
+  _time: 2026-09-02 13:41:52.234851335 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#743 has been earlier opened by @morphqdd.
+  issue: 743
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:40:52.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633303
+  _job: 33636381801
+  _time: 2026-09-02 13:41:52.444980238 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#742 has been earlier opened by @morphqdd.
+  issue: 742
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:40:22.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633304
+  _job: 33636381801
+  _time: 2026-09-02 13:41:52.676948495 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#741 has been earlier opened by @morphqdd.
+  issue: 741
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:40:21.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633305
+  _job: 33636381801
+  _time: 2026-09-02 13:41:52.941250326 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#740 has been earlier opened by @morphqdd.
+  issue: 740
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:40:19.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633306
+  _job: 33636381801
+  _time: 2026-09-02 13:41:53.153960902 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#739 has been earlier opened by @morphqdd.
+  issue: 739
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:39:46.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633307
+  _job: 33636381801
+  _time: 2026-09-02 13:41:53.362696533 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#738 has been earlier opened by @morphqdd.
+  issue: 738
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:39:45.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633308
+  _job: 33636381801
+  _time: 2026-09-02 13:41:53.612912061 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#737 has been earlier opened by @morphqdd.
+  issue: 737
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-02 13:39:43.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633309
+  _job: 33636381801
+  _time: 2026-09-02 13:44:28.417695797 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 689
