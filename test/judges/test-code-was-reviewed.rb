@@ -123,19 +123,21 @@ class TestCodeWasReviewed < Jp::Test
   def test_skips_a_pull_that_was_already_checked
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      body: {
-        id: 45, number: 45, user: { id: 421, login: 'user' },
-        created_at: Time.parse('2025-09-02 17:05:30 UTC'), additions: 2, deletions: 8
-      }
-    )
     stub = stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github', reviews: 0)
     load_it('code-was-reviewed', fb)
     assert_not_requested(stub, message: 'a pull that was checked already cannot be fetched again')
+  end
+
+  def test_skips_a_pull_that_is_already_stale
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub = stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github', stale: 'repository')
+    load_it('code-was-reviewed', fb)
+    assert_not_requested(stub, message: 'a pull already marked stale cannot be fetched again')
   end
 
   def test_rescues_not_found_on_pull_request_lookup
