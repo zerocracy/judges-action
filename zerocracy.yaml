@@ -2,20 +2,15 @@
 - added: 8
   cycles: 2
   deleted: 8
-  error:
-  - 'Failure in repository #820463873 at #626: The fact doesn''t match the "(and \n#
-    MIT License\n#\n# Copyrigh..." rule: [ _id: [2633298], _job: [33636381801], _time:
-    [2026-09-02 13:39:49.910236952 UTC], _version: ["0.19.16/0.61.1/0.17.22"], issue:
-    [626] ]'
-  - 'Failure in repository #798641472 at #689: The fact doesn''t match the "(and \n#
-    MIT License\n#\n# Copyrigh..." rule: [ _id: [2633309], _job: [33636381801], _time:
-    [2026-09-02 13:44:28.417695797 UTC], _version: ["0.19.16/0.61.1/0.17.22"], issue:
-    [689] ]'
+  error: 'Failure in repository #820463873 at #626: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2633312], _job: [33639255543],
+    _time: [2026-09-02 14:06:24.552917247 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    issue: [626] ]'
   inserted: 8
-  seconds: 662.552090375
+  seconds: 1108.613358252
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-02 13:45:01.253678003 Z
+  when: 2026-09-02 14:20:20.894819661 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -58839,7 +58834,7 @@
   - 0
   tombstone: 2026-08-26 07:30:34.512089408 Z
   what: quality-of-service
-  when: &2708 2026-04-20 07:15:50.000000000 Z
+  when: &2709 2026-04-20 07:15:50.000000000 Z
 - _id: 2610223
   _job: 68745
   _time: 2026-04-20 07:30:10.721990672 Z
@@ -72570,7 +72565,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   composite: 0.69
   ffact: 1663210
-  since: &2709 2026-04-27 07:24:28.000000000 Z
+  since: &2710 2026-04-27 07:24:28.000000000 Z
   some_backlog_size:
   - 2
   - 2
@@ -192505,7 +192500,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 2
   min_pull_was_found: 13
   repository: 1090089359
   types_were_scanned: 0
@@ -194733,7 +194728,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 84
+  min_issue_was_found: 85
   min_pull_was_found: 64
   repository: 974194993
   types_were_scanned: 0
@@ -198503,8 +198498,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 44
-  min_pull_was_found: 46
+  min_issue_was_found: 47
+  min_pull_was_found: 49
   repository: 1236759415
   types_were_scanned: 0
   what: iterate
@@ -201253,7 +201248,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 264
+  min_issue_was_found: 283
   min_pull_was_found: 238
   repository: 849726475
   types_were_scanned: 0
@@ -201506,7 +201501,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 84
+  min_issue_was_found: 91
   min_pull_was_found: 154
   repository: 805238060
   types_were_scanned: 0
@@ -201523,7 +201518,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 58
+  min_issue_was_found: 60
   min_pull_was_found: 53
   repository: 1084843345
   types_were_scanned: 0
@@ -201541,10 +201536,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 315
   merges_were_scanned: 0
-  min_issue_was_found: 701
+  min_issue_was_found: 702
   min_pull_was_found: 687
   repository: 798641472
-  types_were_scanned: 677
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629842
@@ -201559,10 +201554,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 325
+  min_issue_was_found: 327
   min_pull_was_found: 216
   repository: 840215648
-  types_were_scanned: 416
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -201576,8 +201571,8 @@
   issues_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
-  min_pull_was_found: 124
+  min_issue_was_found: 3
+  min_pull_was_found: 125
   repository: 857659265
   types_were_scanned: 0
   what: iterate
@@ -202005,10 +202000,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 583
+  min_issue_was_found: 584
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 584
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -202657,15 +202652,15 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14259321817
+  events_were_scanned: 14284034172
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 691
+  min_issue_was_found: 700
   min_pull_was_found: 529
   repository: 802720676
-  types_were_scanned: 681
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -202808,8 +202803,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 524
-  min_pull_was_found: 509
+  min_issue_was_found: 525
+  min_pull_was_found: 510
   repository: 799113787
   types_were_scanned: 0
   what: iterate
@@ -202840,33 +202835,33 @@
   assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14279126661
+  events_were_scanned: 19760569306
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 0
-  min_issue_was_found: 195
+  min_issue_was_found: 202
   min_pull_was_found: 164
   repository: 181044958
-  types_were_scanned: 447
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 0
+  assignees_were_scanned: 1667
+  closures_were_checked: 1639
   earliest_issue_was_found: 1
-  events_were_scanned: 19752938651
+  events_were_scanned: 19760363064
   issues_were_scanned: 0
-  labels_were_scanned: 1702
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
-  min_issue_was_found: 1337
+  min_issue_was_found: 1340
   min_pull_was_found: 1877
   repository: 799177290
-  types_were_scanned: 1442
+  types_were_scanned: 1655
   what: iterate
   where: github
 - _id: 2630036
@@ -202880,7 +202875,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 5
   min_pull_was_found: 0
   repository: 1081929119
   types_were_scanned: 0
@@ -202898,10 +202893,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1319
+  min_issue_was_found: 1320
   min_pull_was_found: 1073
   repository: 728758275
-  types_were_scanned: 1142
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -243594,6 +243589,823 @@
   _time: 2026-08-24 18:56:08.238184970 Z
   _version: 0.19.16/0.61.1/0.17.21
   since: *2339
+  some_build_duration:
+  - 29
+  - 22
+  - 33
+  - 27
+  - 31
+  - 23
+  - 25
+  - 27
+  - 27
+  - 28
+  - 35
+  - 29
+  - 26
+  - 29
+  - 32
+  - 25
+  - 27
+  - 21
+  - 31
+  - 31
+  - 28
+  - 29
+  - 29
+  - 27
+  - 34
+  - 22
+  - 23
+  - 30
+  - 26
+  - 23
+  - 27
+  - 26
+  - 31
+  - 31
+  - 32
+  - 27
+  - 30
+  - 27
+  - 25
+  - 23
+  - 22
+  - 26
+  - 28
+  - 32
+  - 27
+  - 24
+  - 25
+  - 23
+  - 29
+  - 28
+  - 28
+  - 24
+  - 29
+  - 30
+  - 28
+  - 33
+  - 25
+  - 33
+  - 30
+  - 24
+  - 27
+  - 33
+  - 30
+  - 28
+  - 49
+  - 33
+  - 27
+  - 24
+  - 28
+  - 28
+  - 34
+  - 29
+  - 30
+  - 30
+  - 30
+  - 25
+  - 25
+  - 42
+  - 25
+  - 29
+  - 31
+  - 32
+  - 34
+  - 27
+  - 33
+  - 32
+  - 31
+  - 32
+  - 28
+  - 50
+  - 31
+  - 31
+  - 33
+  - 35
+  - 30
+  - 31
+  - 33
+  - 36
+  - 26
+  - 10
+  - 9
+  - 9
+  - 11
+  - 11
+  - 12
+  - 13
+  - 16
+  - 19
+  - 19
+  - 24
+  - 24
+  - 28
+  - 30
+  - 32
+  - 38
+  - 125
+  - 191
+  - 326
+  - 30
+  - 26
+  - 8
+  - 9
+  - 11
+  - 11
+  - 13
+  - 20
+  - 24
+  - 33
+  - 43
+  - 87
+  - 10
+  - 13
+  - 14
+  - 16
+  - 16
+  - 21
+  - 33
+  - 35
+  - 81
+  - 83
+  - 29
+  - 32
+  - 25
+  - 25
+  - 29
+  - 22
+  - 44
+  - 26
+  - 28
+  - 32
+  - 33
+  - 29
+  - 27
+  - 25
+  - 27
+  - 26
+  - 38
+  - 26
+  - 23
+  - 26
+  - 29
+  - 24
+  - 39
+  - 28
+  - 32
+  - 31
+  - 27
+  - 25
+  - 30
+  - 25
+  - 33
+  - 24
+  - 25
+  - 31
+  - 22
+  - 24
+  - 33
+  - 25
+  - 30
+  - 28
+  - 26
+  - 34
+  - 28
+  - 24
+  - 36
+  - 26
+  - 27
+  - 27
+  - 29
+  - 22
+  - 22
+  - 22
+  - 30
+  - 23
+  - 25
+  - 23
+  - 26
+  - 29
+  - 29
+  - 27
+  - 8
+  - 10
+  - 10
+  - 12
+  - 13
+  - 13
+  - 13
+  - 15
+  - 21
+  - 26
+  - 36
+  - 45
+  - 9
+  - 9
+  - 9
+  - 10
+  - 17
+  - 17
+  - 24
+  - 29
+  - 143
+  - 9
+  - 10
+  - 12
+  - 12
+  - 13
+  - 18
+  - 26
+  - 30
+  - 131
+  - 135
+  - 22
+  - 32
+  - 34
+  - 31
+  - 33
+  - 21
+  - 25
+  - 24
+  - 28
+  - 26
+  - 21
+  - 24
+  - 27
+  - 34
+  - 32
+  - 27
+  - 23
+  - 35
+  - 28
+  - 28
+  - 27
+  - 24
+  - 22
+  - 27
+  - 26
+  - 25
+  - 22
+  - 26
+  - 22
+  - 27
+  - 25
+  - 27
+  - 25
+  - 32
+  - 25
+  - 27
+  - 29
+  - 25
+  - 27
+  - 30
+  - 117
+  - 26
+  - 27
+  - 26
+  - 24
+  - 27
+  - 31
+  - 25
+  - 30
+  - 30
+  - 29
+  - 23
+  - 25
+  - 21
+  - 27
+  - 35
+  - 28
+  - 32
+  - 25
+  - 25
+  - 7
+  - 7
+  - 10
+  - 10
+  - 13
+  - 14
+  - 15
+  - 26
+  - 34
+  - 157
+  - 9
+  - 9
+  - 11
+  - 11
+  - 11
+  - 12
+  - 19
+  - 26
+  - 29
+  - 306
+  - 9
+  - 9
+  - 11
+  - 11
+  - 12
+  - 15
+  - 19
+  - 23
+  - 30
+  - 91
+  - 292
+  - 7
+  - 7
+  - 8
+  - 8
+  - 14
+  - 15
+  - 24
+  - 25
+  - 32
+  - 90
+  - 167
+  - 43
+  - 553
+  - 48
+  - 1164
+  - 48
+  - 608
+  - 45
+  - 1311
+  - 48
+  - 969
+  - 46
+  - 1015
+  - 99
+  - 584
+  - 55
+  - 1325
+  - 95
+  - 993
+  - 59
+  - 668
+  - 52
+  - 1061
+  - 59
+  - 774
+  - 46
+  - 9
+  - 11
+  - 11
+  - 12
+  - 12
+  - 13
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 18
+  - 18
+  - 19
+  - 20
+  - 23
+  - 33
+  - 35
+  - 92
+  - 111
+  - 1297
+  - 43
+  - 779
+  - 38
+  - 1300
+  - 45
+  - 978
+  some_build_mttr: 3752
+  some_build_success_rate:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_review_size:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  some_review_time:
+  - 1039
+  - 1992
+  - 2371
+  - 2533
+  - 970
+  - 556
+  some_reviewers_per_pull:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  some_reviews_per_pull:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   what: quality-of-service
   when: &2430 2026-08-24 18:56:08.224768771 Z
 - _id: 2631793
@@ -267991,7 +268803,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-09-02 13:02:11.000000000 Z
+  when: &2708 2026-09-02 13:02:11.000000000 Z
   where: github
   who: 8086956
 - _id: 2633288
@@ -268120,23 +268932,12 @@
   when: 2026-09-02 13:32:27.000000000 Z
   where: github
   who: 125282851
-- _id: 2633298
-  _job: 33636381801
-  _time: 2026-09-02 13:39:49.910236952 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  issue: 626
-- _id: 2633299
-  _job: 33636381801
-  _time: 2026-09-02 13:39:51.180985577 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  since: *2708
-  what: quality-of-service
-  when: *2709
 - _id: 2633300
   _job: 33636381801
   _time: 2026-09-02 13:41:51.728302721 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#745 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 745
   repository: 802720676
   what: issue-was-opened
@@ -268148,6 +268949,7 @@
   _time: 2026-09-02 13:41:51.998579642 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#744 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 744
   repository: 802720676
   what: issue-was-opened
@@ -268159,6 +268961,7 @@
   _time: 2026-09-02 13:41:52.234851335 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#743 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 743
   repository: 802720676
   what: issue-was-opened
@@ -268170,6 +268973,7 @@
   _time: 2026-09-02 13:41:52.444980238 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#742 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 742
   repository: 802720676
   what: issue-was-opened
@@ -268181,6 +268985,7 @@
   _time: 2026-09-02 13:41:52.676948495 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#741 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 741
   repository: 802720676
   what: issue-was-opened
@@ -268192,6 +268997,7 @@
   _time: 2026-09-02 13:41:52.941250326 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#740 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 740
   repository: 802720676
   what: issue-was-opened
@@ -268203,6 +269009,7 @@
   _time: 2026-09-02 13:41:53.153960902 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#739 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 739
   repository: 802720676
   what: issue-was-opened
@@ -268214,6 +269021,7 @@
   _time: 2026-09-02 13:41:53.362696533 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#738 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 738
   repository: 802720676
   what: issue-was-opened
@@ -268225,6 +269033,7 @@
   _time: 2026-09-02 13:41:53.612912061 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#737 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 737
   repository: 802720676
   what: issue-was-opened
@@ -268232,7 +269041,72 @@
   where: github
   who: 125282851
 - _id: 2633309
-  _job: 33636381801
-  _time: 2026-09-02 13:44:28.417695797 Z
+  _job: 90225
+  _time: 2026-09-02 13:45:36.319955710 Z
   _version: 0.19.16/0.61.1/0.17.22
-  issue: 689
+  comments: 4
+  details: The pull request yegor256/judges#512 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 18h33m of being in review and 4 comments.
+  hoc: 2
+  is_human: 0
+  issue: 512
+  merger: 8086956
+  repository: 799113787
+  review_comments: 0
+  seconds: 66833
+  what: code-was-contributed
+  when: *2708
+  where: github
+  who: 29139614
+- _id: 2633310
+  _job: 33639255543
+  _time: 2026-09-02 14:03:19.335249262 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/rubocop-performance-1.x-lockfile
+  details: The missing pull zerocracy/pages-action#735 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 735
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-08-16 06:07:49.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2633311
+  _job: 33639255543
+  _time: 2026-09-02 14:03:20.690202818 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '734'
+  details: The missing pull zerocracy/pages-action#736 has been opened by @morphqdd.
+  is_human: 1
+  issue: 736
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-09-01 18:46:46.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2633312
+  _job: 33639255543
+  _time: 2026-09-02 14:06:24.552917247 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 626
+- _id: 2633313
+  _job: 33639255543
+  _time: 2026-09-02 14:06:25.111244517 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  since: *2709
+  what: quality-of-service
+  when: *2710
+- _id: 2633314
+  _job: 33639255543
+  _time: 2026-09-02 14:12:18.987081958 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The pull request yegor256/0rsk#450 has been opened by @renovate[bot].
+  event_id: 14284625900
+  event_type: PullRequestEvent
+  issue: 450
+  repository: 181044958
+  what: pull-was-opened
+  when: 2026-09-02 13:50:15.000000000 Z
+  where: github
+  who: 29139614
