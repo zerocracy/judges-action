@@ -296,6 +296,7 @@ class TestCodeWasReviewed < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
   def test_does_not_record_a_review_from_a_deleted_account
     WebMock.disable_net_connect!
     rate_limit_up
