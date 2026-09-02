@@ -4,40 +4,41 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestFixMissingComments < Jp::Test
   using SmartFactbase
 
   def test_rescues_forbidden_on_pull_lookup
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
-    load_it('fix-missing-comments', fb)
-    f = fb.query('(eq issue 44)').each.first
-    refute_nil(f)
-    assert_nil(f['stale'], '403 must retry without marking stale')
-    assert_nil(f['comments'], '403 must leave comments absent until retry')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => [403, { message: 'Resource not accessible by integration' }]
+    ).run do
+      load_it('fix-missing-comments', fb)
+    end
+    assert_equal(
+      %w[_id issue repository what where], fb.pick(issue: 44).all_properties.sort,
+      'the fact changed after 403, while the pull request was never read and the next cycle must retry'
+    )
   end
 
   def test_rescues_not_found_on_repo_name_lookup
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
-    load_it('fix-missing-comments', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => [404, { message: 'Not Found' }]
+    ).run do
+      load_it('fix-missing-comments', fb)
+    end
     assert(
       fb.one?(what: 'pull-was-merged', repository: 42, stale: 'repository'),
-      'The fact of a vanished repository must be marked stale instead of aborting the judge'
+      'the fact of a vanished repository is not stale, while the judge must mark it instead of aborting'
     )
   end
 end
