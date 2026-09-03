@@ -370,6 +370,29 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_issues_skips_repo_on_fbe_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    %w[bad good].each do |name|
+      stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+    end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/bad,foo/good' })
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_issues_and_pulls) do |_owner, name|
+        raise(Fbe::Error, 'GitHub GraphQL query failed') if name == 'bad'
+        { 'issues' => 7, 'pulls' => 5 }
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      assert_equal({ total_issues: 7, total_pulls: 5 }, total_issues(nil))
+    end
+  end
+
   def test_total_issues_keeps_local_graph_bug
     WebMock.disable_net_connect!
     rate_limit_up
