@@ -1008,4 +1008,66 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_nil(f['total_forks'])
     end
   end
+
+  def test_dont_count_active_contributors_when_search_breaks
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      status: 500, body: { message: 'Internal server error' }
+    )
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    Jp.qoreset
+    Factbase.new.insert.then do |f|
+      f.what = 'dimensions-of-terrain'
+      f.when = Time.parse('2024-09-29 21:00:00 UTC')
+      assert_equal({}, total_active_contributors(f), 'active contributors are counted while the search is broken')
+    end
+  end
+
+  def test_dont_count_active_contributors_when_one_repo_search_fails
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/first,foo/second' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    stub_github('https://api.github.com/repos/foo/first', body: { id: 42, full_name: 'foo/first', archived: false })
+    stub_github('https://api.github.com/repos/foo/second', body: { id: 43, full_name: 'foo/second', archived: false })
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/first%20author-date:%3E2024-08-30',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ author: { login: 'yegor256', id: 526_301, type: 'User' } }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/second%20author-date:%3E2024-08-30',
+      status: 500, body: { message: 'Internal server error' }
+    )
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    Jp.qoreset
+    Factbase.new.insert.then do |f|
+      f.what = 'dimensions-of-terrain'
+      f.when = Time.parse('2024-09-29 21:00:00 UTC')
+      assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
+    end
+  end
 end
