@@ -1006,6 +1006,7 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_nil(f['total_issues'])
       assert_nil(f['total_pulls'])
       assert_nil(f['total_forks'])
+      assert_nil(f['total_stars'])
     end
   end
 end
