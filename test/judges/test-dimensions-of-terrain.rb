@@ -139,6 +139,26 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_repositories_does_not_refetch_repos_unmask_repos_already_checked
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { full_name: 'foo/foo', archived: false })
+    stub_github('https://api.github.com/repos/foo/bar', body: { full_name: 'foo/bar', archived: false })
+    stub_github('https://api.github.com/repos/foo/qwe', body: { full_name: 'foo/qwe', archived: true })
+    $fb = Factbase.new
+    $global = {}
+    $local = {}
+    Jp.qoreset
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_repositories.rb'))
+    total_repositories($fb.insert)
+    assert_requested(:get, 'https://api.github.com/repos/foo/foo', times: 1)
+  end
+
   def test_total_releases_skips_non_array_response
     WebMock.disable_net_connect!
     rate_limit_up
