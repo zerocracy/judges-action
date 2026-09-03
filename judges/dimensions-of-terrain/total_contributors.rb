@@ -39,7 +39,8 @@ def total_contributors(_fact)
       end
     next unless list.is_a?(Array)
     list.each do |contributor|
-      contributors << contributor[:id]
+      id = contributor[:id]
+      contributors << id unless id.nil?
     end
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Repository/contributors info not found for #{repo}: #{e.message}")
