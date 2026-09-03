@@ -16,6 +16,9 @@ def total_contributors(_fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        break
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
@@ -30,6 +33,9 @@ def total_contributors(_fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Contributors not found for #{repo}: #{e.message}")
         next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        break
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to contributors for #{repo} " \
@@ -44,6 +50,9 @@ def total_contributors(_fact)
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Repository/contributors info not found for #{repo}: #{e.message}")
     next
+  rescue Octokit::TooManyRequests => e
+    $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+    break
   rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to repository/contributors in #{repo} " \

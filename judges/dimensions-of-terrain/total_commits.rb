@@ -16,6 +16,9 @@ def total_commits(_fact)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Repository #{repo} not found: #{e.message}")
       next
+    rescue Octokit::TooManyRequests => e
+      $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+      break
     rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
@@ -27,6 +30,9 @@ def total_commits(_fact)
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Repository not found for #{repo}: #{e.message}")
     next
+  rescue Octokit::TooManyRequests => e
+    $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+    break
   rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to repository #{repo} " \

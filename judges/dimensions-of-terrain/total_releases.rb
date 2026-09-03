@@ -16,6 +16,9 @@ def total_releases(_fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Releases not found for #{repo}: #{e.message}")
         next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        break
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
@@ -30,6 +33,9 @@ def total_releases(_fact)
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Releases not found for #{repo}: #{e.message}")
     next
+  rescue Octokit::TooManyRequests => e
+    $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+    break
   rescue Octokit::Forbidden => e
     $loog.warn(
       "[#{$judge}] Access forbidden to releases in #{repo} " \

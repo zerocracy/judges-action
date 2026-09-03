@@ -984,6 +984,45 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_stops_scanning_repos_when_rate_limit_exhausted
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_request(:get, %r{^https://api\.github\.com/repos/foo/(alpha|beta)$}).to_return(
+      status: 403,
+      body: { message: 'API rate limit exceeded for installation ID 1' }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    stub_github('https://api.github.com/repos/foo/alpha/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/beta/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/alpha%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/beta%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    loog = Loog::Buffer.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/alpha,foo/beta' }), loog:)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        refute_nil(f)
+        assert_equal(0, f.total_stars)
+        assert_equal(0, f.total_repositories)
+      end
+    end
+    assert_equal(
+      5, loog.to_s.scan('API rate limit exhausted, stopping the scan').count,
+      'a rate limit hit on the first repository must stop the scan instead of moving on to the next repository'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
+  end
+
   def test_not_fill_props_if_quota_consumed
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(

@@ -16,6 +16,9 @@ def total_issues(_fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
         next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        break
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to issues and pulls in #{repo} " \
