@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/postpone'
 
 def total_contributors(_fact)
   contributors = Set.new
@@ -17,11 +18,7 @@ def total_contributors(_fact)
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+        Jp.postpone(repo, e)
       end
     next if json[:size].nil? || json[:size].zero?
     list =
@@ -31,11 +28,7 @@ def total_contributors(_fact)
         $loog.info("Contributors not found for #{repo}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to contributors for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+        Jp.postpone(repo, e)
       end
     next unless list.is_a?(Array)
     list.each do |contributor|
@@ -45,11 +38,7 @@ def total_contributors(_fact)
     $loog.info("Repository/contributors info not found for #{repo}: #{e.message}")
     next
   rescue Octokit::Forbidden => e
-    $loog.warn(
-      "[#{$judge}] Access forbidden to repository/contributors in #{repo} " \
-      "(transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
-    next
+    Jp.postpone(repo, e)
   end
   { total_contributors: contributors.count }
 end

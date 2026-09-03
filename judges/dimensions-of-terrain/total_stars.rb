@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/postpone'
 
 def total_stars(_fact)
   stars = 0
@@ -18,11 +19,7 @@ def total_stars(_fact)
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+        Jp.postpone(repo, e)
       end
     stars += json[:stargazers_count] || 0
     forks += json[:forks] || 0

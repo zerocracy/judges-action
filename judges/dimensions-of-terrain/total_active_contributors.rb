@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/postpone'
 require_relative '../../lib/qos_search'
 
 def total_active_contributors(fact)
@@ -21,11 +22,7 @@ def total_active_contributors(fact)
         $loog.info("Commits not found for #{repo}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to commit search for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+        Jp.postpone(repo, e)
       end
     next if commits.nil?
     commits[:items].each do |commit|
@@ -36,11 +33,7 @@ def total_active_contributors(fact)
     $loog.info("Search commits not found for #{repo}: #{e.message}")
     next
   rescue Octokit::Forbidden => e
-    $loog.warn(
-      "[#{$judge}] Access forbidden to search commits in #{repo} " \
-      "(transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
-    next
+    Jp.postpone(repo, e)
   end
   { total_active_contributors: seen.count }
 end

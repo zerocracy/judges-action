@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/postpone'
 
 def total_files(_fact)
   files = 0
@@ -17,11 +18,7 @@ def total_files(_fact)
         $loog.info("Repository #{repo} not found: #{e.message}")
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+        Jp.postpone(repo, e)
       end
     next if info[:size].nil? || info[:size].zero?
     tree =
@@ -31,11 +28,7 @@ def total_files(_fact)
         $loog.info("Tree not found for #{repo}@#{info[:default_branch]}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to tree for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+        Jp.postpone(repo, e)
       end
     files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
   end

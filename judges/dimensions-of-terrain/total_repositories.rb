@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/postpone'
 
 def total_repositories(_fact)
   total = 0
@@ -15,10 +16,7 @@ def total_repositories(_fact)
     $loog.info("Repository #{repo} not found: #{e.message}")
     next
   rescue Octokit::Forbidden => e
-    $loog.warn(
-      "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
-    next
+    Jp.postpone(repo, e)
   end
   { total_repositories: total }
 end

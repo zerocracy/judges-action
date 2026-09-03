@@ -934,7 +934,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_skips_repo_on_tree_forbidden
+  def test_dont_fill_total_files_when_tree_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -979,7 +979,7 @@ class TestDimensionsOfTerrain < Jp::Test
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/good,foo/bad' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         refute_nil(f)
-        assert_equal(1, f.total_files)
+        assert_nil(f['total_files'], 'total files is not left unset when a tree is forbidden')
       end
     end
   end
