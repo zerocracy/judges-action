@@ -67,7 +67,7 @@ def Jp.qosearch(query, method: :search_issues, **)
   @scount[jg] += 1
   raise(RuntimeError, "Unsafe search method: #{method}") unless
     %i[search_issues search_code search_commits].include?(method)
-  Fbe.octo.__send__(method, query, **)
+  Fbe.octo.with_disable_auto_paginate { |octo| octo.__send__(method, query, **) }
 rescue Octokit::TooManyRequests, Fbe::OffQuota => e
   @offquota[jg] = true
   @offquotatime[jg] = Time.now

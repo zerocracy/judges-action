@@ -12,6 +12,10 @@ class FakeOffQuotaOcto
     { resources: { search: { remaining: 10, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }
   end
 
+  def with_disable_auto_paginate
+    yield(self)
+  end
+
   def search_issues(*_args, **_kwargs)
     raise(Fbe::OffQuota, 'off quota')
   end
@@ -45,6 +49,36 @@ class TestQosSearch < Jp::Test
     found = Jp.qosearch('repo:foo/foo type:issue')
     assert_equal(1, found[:total_count])
     assert_equal(1, found[:items].first[:number])
+  end
+
+  def test_does_not_follow_pagination_links
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue',
+      body: { total_count: 2, items: [{ number: 1 }] },
+      headers: {
+        'Content-Type' => 'application/json',
+        'X-RateLimit-Remaining' => '999',
+        'Link' => '<https://api.github.com/search/issues?page=2&per_page=100&q=repo:foo/foo%20type:issue>; rel="next"'
+      }
+    )
+    Jp.qosearch('repo:foo/foo type:issue')
+    assert_not_requested(:get, %r{https://api\.github\.com/search/issues\?page=2})
+  end
+
+  def test_does_not_follow_pagination_links_for_code_search
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/search/code?per_page=100&q=repo:foo/foo%20test',
+      body: { total_count: 2, items: [{ name: 'a.rb' }] },
+      headers: {
+        'Content-Type' => 'application/json',
+        'X-RateLimit-Remaining' => '999',
+        'Link' => '<https://api.github.com/search/code?page=2&per_page=100&q=repo:foo/foo%20test>; rel="next"'
+      }
+    )
+    Jp.qosearch('repo:foo/foo test', method: :search_code)
+    assert_not_requested(:get, %r{https://api\.github\.com/search/code\?page=2})
   end
 
   def test_skips_search_when_core_quota_low

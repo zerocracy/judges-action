@@ -2556,6 +2556,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:pull_request_reviews) { |*| [] }
     octo.define_singleton_method(:pull_request_review_comments) { |*| [] }
     octo.define_singleton_method(:off_quota?) { false }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
     rl = Object.new
     rl.define_singleton_method(:remaining) { 30 }
     octo.define_singleton_method(:rate_limit) { rl }
