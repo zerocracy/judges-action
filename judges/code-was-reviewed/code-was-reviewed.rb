@@ -95,7 +95,10 @@ Fbe.consider(
       )
       next
     end
-  f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
+  if pr.dig(:user, :id).nil?
+    f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
+    next
+  end
   count = nil
   reviews.each do |review|
     reviewer = review.dig(:user, :id)
@@ -178,6 +181,7 @@ Fbe.consider(
       )
     end
   end
+  f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
 end
 
 Fbe.octo.print_trace!
