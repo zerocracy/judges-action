@@ -125,19 +125,19 @@ Fbe.consider(
             "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::Unauthorized => e
           $loog.error(
             "[#{$judge}] Not authorized to fetch issue comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::TooManyRequests, Octokit::ServerError,
           Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         end
       n.comments = count
       n.review_comments =
@@ -151,19 +151,19 @@ Fbe.consider(
             "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::Unauthorized => e
           $loog.error(
             "[#{$judge}] Not authorized to fetch review comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::TooManyRequests, Octokit::ServerError,
           Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         end
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
       n.details =

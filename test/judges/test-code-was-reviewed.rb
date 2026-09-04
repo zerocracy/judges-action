@@ -395,6 +395,73 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
+  def test_leaves_comments_unset_when_issue_comments_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    n = fb.query('(eq what "code-was-reviewed")').each.first
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    refute_includes(
+      n.all_properties, 'comments',
+      'a forbidden issue-comments fetch cannot invent a zero comment count'
+    )
+  end
+
+  def test_leaves_review_comments_unset_when_review_comments_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews/49111/comments?per_page=100',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    n = fb.query('(eq what "code-was-reviewed")').each.first
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    refute_includes(
+      n.all_properties, 'review_comments',
+      'a forbidden review-comments fetch cannot invent a zero comment count'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
