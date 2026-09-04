@@ -39,7 +39,8 @@ def total_contributors(_fact)
       end
     next unless list.is_a?(Array)
     list.each do |contributor|
-      contributors << contributor[:id]
+      id = contributor[:id]
+      contributors << id unless id.nil?
     end
   end
   { total_contributors: contributors.count }
