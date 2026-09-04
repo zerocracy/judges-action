@@ -395,6 +395,67 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
+  def test_skips_a_review_by_a_deleted_account
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: nil, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') },
+        { id: 49_112, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/49112/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 44, who: 422),
+      'a review left by a live account must be credited even when a deleted account reviewed too'
+    )
+    assert_equal(
+      1, fb.query("(and (eq what 'code-was-reviewed') (eq repository 42) (eq issue 44))").each.to_a.size,
+      'a review left by a deleted account cannot produce a fact'
+    )
+  end
+
+  def test_skips_reviews_of_a_pull_authored_by_a_deleted_account
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: nil,
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 44),
+      'a pull authored by a deleted account cannot credit its reviewers'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
