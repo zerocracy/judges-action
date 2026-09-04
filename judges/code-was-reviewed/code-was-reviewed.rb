@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
@@ -55,8 +56,7 @@ Fbe.consider(
       $loog.error("[#{$judge}] Not authorized to fetch pull ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
       next
     rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
-      Net::OpenTimeout, Net::ReadTimeout, SocketError,
-      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      Faraday::TimeoutError, Faraday::ConnectionFailed => e
       $loog.warn(
         "[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
@@ -82,8 +82,7 @@ Fbe.consider(
       )
       next
     rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
-      Net::OpenTimeout, Net::ReadTimeout, SocketError,
-      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      Faraday::TimeoutError, Faraday::ConnectionFailed => e
       $loog.warn(
         "[#{$judge}] Transient error fetching reviews for pull ##{f.issue} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
@@ -127,8 +126,7 @@ Fbe.consider(
           )
           0
         rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
-          Net::OpenTimeout, Net::ReadTimeout, SocketError,
-          Errno::ECONNRESET, Errno::ETIMEDOUT => e
+          Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
@@ -154,8 +152,7 @@ Fbe.consider(
           )
           0
         rescue Octokit::TooManyRequests, Octokit::AbuseDetected, Octokit::ServerError,
-          Net::OpenTimeout, Net::ReadTimeout, SocketError,
-          Errno::ECONNRESET, Errno::ETIMEDOUT => e
+          Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"

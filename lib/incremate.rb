@@ -12,7 +12,7 @@ require 'time'
 require_relative 'jp'
 
 def Jp.incremate(
-  fact, dir, prefix, avoid_duplicate: false, pause: 0,
+  fact, dir, prefix, avoid_duplicate: true, pause: 0,
   max_per_fact: nil,
   epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
 )
@@ -40,8 +40,12 @@ def Jp.incremate(
     elapsed($loog, level: Logger::INFO) do
       h = __send__(n, fact)
       h.each do |k, v|
+        next if k.to_s == n
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
         Array(v).each { fact.__send__("#{k}=", _1) }
+      end
+      if h.key?(n.to_sym) && !(avoid_duplicate && fact.all_properties.include?(n))
+        Array(h[n.to_sym]).each { fact.__send__("#{n}=", _1) }
       end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
