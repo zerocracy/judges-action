@@ -18,7 +18,10 @@ def Jp.issue_was_lost(where, repository, issue)
       (absent tombstone))"
     ).each { |f| f.stale = 'issue' }
   Fbe::Tombstone.new.bury!(where, repository, issue)
-  return if stale.positive?
+  if stale.positive?
+    $loog.info("The issue ##{issue} was marked as lost, #{stale} facts marked as stale")
+    return
+  end
   f =
     Fbe.if_absent do |n|
       n.issue = issue
@@ -32,5 +35,5 @@ def Jp.issue_was_lost(where, repository, issue)
   end
   f.stale = 'issue'
   f.when = Time.now
-  $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
+  $loog.info("The issue ##{issue} was marked as lost")
 end
