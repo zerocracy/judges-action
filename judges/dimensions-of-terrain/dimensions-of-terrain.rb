@@ -7,16 +7,9 @@ require 'fbe/fb'
 require 'fbe/octo'
 require 'time'
 require_relative '../../lib/incremate'
+require_relative '../../lib/today'
 
-today =
-  begin
-    v = ENV.fetch('TODAY', nil)
-    if v.nil? || v.empty?
-      Time.now.utc
-    else
-      Time.parse(v)
-    end
-  end
+today = Jp.today
 f = Fbe.fb.query(
   "(and
     (eq what '#{$judge}')
