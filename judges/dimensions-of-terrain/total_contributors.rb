@@ -39,17 +39,9 @@ def total_contributors(_fact)
       end
     next unless list.is_a?(Array)
     list.each do |contributor|
-      contributors << contributor[:id]
+      id = contributor[:id]
+      contributors << id unless id.nil?
     end
-  rescue Octokit::NotFound, Octokit::Deprecated => e
-    $loog.info("Repository/contributors info not found for #{repo}: #{e.message}")
-    next
-  rescue Octokit::Forbidden => e
-    $loog.warn(
-      "[#{$judge}] Access forbidden to repository/contributors in #{repo} " \
-      "(transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
-    next
   end
   { total_contributors: contributors.count }
 end
