@@ -10,6 +10,7 @@ require 'fbe/overwrite'
 require 'tago'
 require 'time'
 require_relative 'jp'
+require_relative 'postpone'
 
 def Jp.incremate(
   fact, dir, prefix, avoid_duplicate: true, pause: 0,
@@ -38,7 +39,7 @@ def Jp.incremate(
     )
     require(rb)
     elapsed($loog, level: Logger::INFO) do
-      h = __send__(n, fact)
+      h = Jp.measured { __send__(n, fact) }
       h.each do |k, v|
         next if k.to_s == n
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)

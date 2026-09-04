@@ -6,6 +6,7 @@
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/postpone'
 
 def total_issues(_fact)
   issues = 0
@@ -17,6 +18,8 @@ def total_issues(_fact)
       rescue Fbe::Error => e
         $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
         next
+      rescue Octokit::Forbidden => e
+        Jp.postpone(repo, e)
       rescue GraphQL::Client::Error,
         Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(

@@ -7,6 +7,7 @@ require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
+require_relative '../../lib/postpone'
 
 def total_commits(_fact)
   repos = []
@@ -17,10 +18,7 @@ def total_commits(_fact)
       $loog.info("Repository #{repo} not found: #{e.message}")
       next
     rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
-      next
+      Jp.postpone(repo, e)
     end
     next if json[:size].nil? || json[:size].zero?
     next if json[:default_branch].nil?
@@ -33,6 +31,8 @@ def total_commits(_fact)
     rescue GraphQL::Client::Error, Fbe::Error => e
       $loog.info("Can't count total commits: #{e.message}")
       0
+    rescue Octokit::Forbidden => e
+      Jp.postpone(repos.map { _1.first(2).join('/') }.join(', '), e)
     rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn("[#{$judge}] Network error counting commits: #{e.message}")
       0
