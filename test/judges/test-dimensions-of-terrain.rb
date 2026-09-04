@@ -1058,6 +1058,74 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_active_contributors_skips_capped_search_result
+    require_relative('../../lib/qos_search')
+    Jp.qoreset
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo', full_name: 'foo/foo', private: false, size: 1,
+        stargazers_count: 1, forks: 1, default_branch: 'master'
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: { total_count: 1000, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        assert_nil(f['total_active_contributors'])
+      end
+    end
+  end
+
+  def test_total_active_contributors_counts_result_just_under_ceiling
+    require_relative('../../lib/qos_search')
+    Jp.qoreset
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo', full_name: 'foo/foo', private: false, size: 1,
+        stargazers_count: 1, forks: 1, default_branch: 'master'
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: {
+        total_count: 999,
+        incomplete_results: false,
+        items: [{ author: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false } }]
+      }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        assert_equal(1, f.total_active_contributors)
+      end
+    end
+  end
+
   def test_skips_repo_on_releases_not_found
     WebMock.disable_net_connect!
     rate_limit_up
