@@ -18,25 +18,21 @@ def total_commits(_fact)
       $loog.info("Repository #{repo} not found: #{e.message}")
       next
     rescue Octokit::Forbidden => e
-      Jp.postpone(repos.map { _1.first(2).join('/') }.join(', '), e)
+      Jp.postpone(repo, e)
     end
     next if json[:size].nil? || json[:size].zero?
+    next if json[:default_branch].nil?
     repos << [*repo.split('/'), json[:default_branch]]
-  rescue Octokit::NotFound, Octokit::Deprecated => e
-    $loog.info("Repository not found for #{repo}: #{e.message}")
-    next
-  rescue Octokit::Forbidden => e
-    Jp.postpone(repo, e)
   end
   {
     total_commits:
     begin
       repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] }
-    rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+    rescue GraphQL::Client::Error, Fbe::Error => e
       $loog.info("Can't count total commits: #{e.message}")
       0
     rescue Octokit::Forbidden => e
-      Jp.postpone(repo, e)
+      Jp.postpone(repos.map { _1.first(2).join('/') }.join(', '), e)
     rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn("[#{$judge}] Network error counting commits: #{e.message}")
       0

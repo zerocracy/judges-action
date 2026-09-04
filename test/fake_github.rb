@@ -9,13 +9,13 @@ require 'socket'
 require_relative '../lib/jp'
 
 # rubocop:disable Elegant/NoComments
-# @todo #1923:60min Move the rest of the tests onto this server.
-#  Thirty three files under `test/` still build their GitHub with
-#  `stub_request` and `stub_github`, over a thousand stubs in all, the
-#  heaviest being `test/judges/test-quality-of-service.rb` with two
-#  hundred and fifty three. Each of them should declare its routes through
-#  `Jp::FakeGithub` instead, one file at a time, so that a reviewer can
-#  follow every step. When the last one is moved, `stub_github` and
+# @todo #1996:60min Move the rest of the tests onto this server.
+#  Twenty nine files under `test/` still build their GitHub with
+#  `stub_request` and `stub_github`, one thousand one hundred and ninety six
+#  stubs in all, the heaviest being `test/judges/test-quality-of-service.rb`
+#  with two hundred and fifty three. Each of them should declare its routes
+#  through `Jp::FakeGithub` instead, one file at a time, so that a reviewer
+#  can follow every step. When the last one is moved, `stub_github` and
 #  `rate_limit_up` go from `test/test__helper.rb`, the `webmock` gem goes
 #  from the `Gemfile`, and `require 'webmock/minitest'` goes with it.
 # rubocop:enable Elegant/NoComments

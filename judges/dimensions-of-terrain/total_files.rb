@@ -10,6 +10,7 @@ require_relative '../../lib/postpone'
 
 def total_files(_fact)
   files = 0
+  truncated = false
   Fbe.unmask_repos do |repo|
     info =
       begin
@@ -30,7 +31,13 @@ def total_files(_fact)
       rescue Octokit::Forbidden => e
         Jp.postpone(repo, e)
       end
+    if tree[:truncated]
+      $loog.info("Tree for #{repo}@#{info[:default_branch]} is truncated, skipping total_files")
+      truncated = true
+      break
+    end
     files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
   end
+  return {} if truncated
   { total_files: files }
 end

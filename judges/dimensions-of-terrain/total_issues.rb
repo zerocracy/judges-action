@@ -5,6 +5,7 @@
 
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 require_relative '../../lib/postpone'
 
 def total_issues(_fact)
@@ -14,7 +15,7 @@ def total_issues(_fact)
     json =
       begin
         Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Fbe::Error => e
         $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
         next
       rescue Octokit::Forbidden => e

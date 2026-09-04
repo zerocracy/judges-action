@@ -212,6 +212,77 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
+  def test_rescues_read_timeout_on_pull_request_lookup
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/91').to_raise(Net::ReadTimeout)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 91, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 91, stale: 'issue'),
+      'a transient read timeout must leave the original fact untouched'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
+  end
+
+  def test_rescues_socket_error_on_reviews_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/92',
+      body: {
+        id: 92, number: 92, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/92/reviews?per_page=100').to_raise(SocketError)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 92, where: 'github')
+    load_it('code-was-reviewed', fb)
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 92, stale: 'issue'),
+      'a transient socket error must leave the original fact untouched'
+    )
+  end
+
+  def test_rescues_connection_reset_on_issue_comments_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93',
+      body: {
+        id: 93, number: 93, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93/reviews?per_page=100',
+      body: [
+        { id: 49_222, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_request(
+      :get, 'https://api.github.com/repos/foo/foo/issues/93/comments?per_page=100'
+    ).to_raise(Errno::ECONNRESET)
+    stub_github('https://api.github.com/repos/foo/foo/pulls/93/reviews/49222/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 93, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert_equal(
+      0, fb.pick(what: 'code-was-reviewed', issue: 93).comments,
+      'a transient connection reset while counting issue comments must fall back to zero'
+    )
+  end
+
   def test_rescues_deprecated_on_reviews_lookup
     WebMock.disable_net_connect!
     rate_limit_up

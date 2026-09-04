@@ -24,16 +24,11 @@ def total_active_contributors(fact)
       rescue Octokit::Forbidden => e
         Jp.postpone(repo, e)
       end
-    next if commits.nil?
+    return {} if commits.nil?
     commits[:items].each do |commit|
       author = commit.dig(:author, :id)
       seen << author unless author.nil?
     end
-  rescue Octokit::NotFound, Octokit::Deprecated => e
-    $loog.info("Search commits not found for #{repo}: #{e.message}")
-    next
-  rescue Octokit::Forbidden => e
-    Jp.postpone(repo, e)
   end
   { total_active_contributors: seen.count }
 end

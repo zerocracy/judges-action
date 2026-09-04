@@ -4,39 +4,41 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestIssueWasOpened < Jp::Test
   using SmartFactbase
 
   def test_rescues_forbidden_on_issue_lookup
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github')
-    load_it('issue-was-opened', fb)
-    f = fb.query('(eq issue 44)').each.first
-    refute_nil(f)
-    assert_nil(f['stale'], '403 is transient — fact must NOT be marked stale; next cycle will retry the lookup')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/issues/44' => [403, { message: 'Resource not accessible by integration' }]
+    ).run do
+      load_it('issue-was-opened', fb)
+    end
+    assert_nil(
+      fb.pick(issue: 44)['stale'],
+      'the fact is stale after a transient 403, while the next cycle must retry the lookup'
+    )
   end
 
   def test_rescues_not_found_on_repo_name_lookup
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github')
-    load_it('issue-was-opened', fb)
-    assert_empty(
-      fb.query("(eq what 'issue-was-opened')").each.to_a,
-      'A vanished repository must produce no facts and must not abort the judge'
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => [404, { message: 'Not Found' }]
+    ).run do
+      load_it('issue-was-opened', fb)
+    end
+    assert(
+      fb.none?(what: 'issue-was-opened'),
+      'a vanished repository produced facts, while the judge must make none and not abort'
     )
   end
 end

@@ -24,11 +24,6 @@ def total_releases(_fact)
     releases.each do |_|
       total += 1
     end
-  rescue Octokit::NotFound, Octokit::Deprecated => e
-    $loog.info("Releases not found for #{repo}: #{e.message}")
-    next
-  rescue Octokit::Forbidden => e
-    Jp.postpone(repo, e)
   end
   { total_releases: total }
 end
