@@ -25,15 +25,6 @@ def total_releases(_fact)
       end
     next unless releases.is_a?(Array)
     total += releases.count
-  rescue Octokit::NotFound, Octokit::Deprecated => e
-    $loog.info("Releases not found for #{repo}: #{e.message}")
-    next
-  rescue Octokit::Forbidden => e
-    $loog.warn(
-      "[#{$judge}] Access forbidden to releases in #{repo} " \
-      "(transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
-    next
   end
   { total_releases: total }
 end
