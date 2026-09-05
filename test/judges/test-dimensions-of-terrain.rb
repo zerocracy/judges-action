@@ -139,6 +139,26 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_repositories_does_not_refetch_repos_unmask_repos_already_checked
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { full_name: 'foo/foo', archived: false })
+    stub_github('https://api.github.com/repos/foo/bar', body: { full_name: 'foo/bar', archived: false })
+    stub_github('https://api.github.com/repos/foo/qwe', body: { full_name: 'foo/qwe', archived: true })
+    $fb = Factbase.new
+    $global = {}
+    $local = {}
+    Jp.qoreset
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_repositories.rb'))
+    total_repositories($fb.insert)
+    assert_requested(:get, 'https://api.github.com/repos/foo/foo', times: 1)
+  end
+
   def test_total_releases_skips_non_array_response
     WebMock.disable_net_connect!
     rate_limit_up
@@ -370,6 +390,29 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_issues_skips_repo_on_fbe_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    %w[bad good].each do |name|
+      stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+    end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/bad,foo/good' })
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_issues_and_pulls) do |_owner, name|
+        raise(Fbe::Error, 'GitHub GraphQL query failed') if name == 'bad'
+        { 'issues' => 7, 'pulls' => 5 }
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      assert_equal({ total_issues: 7, total_pulls: 5 }, total_issues(nil))
+    end
+  end
+
   def test_total_issues_keeps_local_graph_bug
     WebMock.disable_net_connect!
     rate_limit_up
@@ -465,6 +508,61 @@ class TestDimensionsOfTerrain < Jp::Test
         assert_equal(0, f.total_files)
         assert_equal(0, f.total_contributors)
       end
+    end
+  end
+
+  def test_total_commits_skips_repo_with_missing_default_branch
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/nobranch', body: {
+        name: 'nobranch', full_name: 'foo/nobranch', size: 1,
+        stargazers_count: 0, forks: 0, default_branch: nil, archived: false
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/nobranch/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/nobranch/git/trees/?recursive=true',
+      status: 404, body: { message: 'Not Found' }
+    )
+    stub_github('https://api.github.com/repos/foo/nobranch/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/nobranch%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/nobranch' }))
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        refute_nil(f)
+        assert_equal(0, f.total_commits)
+      end
+    end
+  end
+
+  def test_total_commits_rescues_fbe_error_from_graph
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/bad', body: {
+        name: 'bad', full_name: 'foo/bad', size: 1,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/bad' })
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_commits) do |*_args, **_kwargs|
+        raise(Fbe::Error, "Repository 'foo/bad' or branch 'master' not found")
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+      assert_equal({ total_commits: 0 }, total_commits(nil))
     end
   end
 
@@ -647,6 +745,40 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_files_skips_property_when_tree_truncated
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/big', body: {
+        name: 'big', full_name: 'foo/big', size: 1,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/big/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/big/git/trees/master?recursive=true',
+      body: {
+        sha: 'a', tree: [
+        { path: 'f.rb', mode: '100644', type: 'blob', sha: 'b', size: 1 }
+      ], truncated: true
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/big/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/big%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/big' }))
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        refute_nil(f)
+        assert_nil(f['total_files'])
+      end
+    end
+  end
+
   def test_total_contributors
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -722,6 +854,45 @@ class TestDimensionsOfTerrain < Jp::Test
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(12, f.total_contributors)
+      end
+    end
+  end
+
+  def test_total_contributors_skips_entries_without_id
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: {
+        name: 'foo', full_name: 'foo/foo', private: false,
+        created_at: Time.parse('2024-07-11 20:35:25 UTC'),
+        updated_at: Time.parse('2024-09-23 07:23:36 UTC'),
+        pushed_at: Time.parse('2024-09-23 20:22:51 UTC'),
+        size: 1, stargazers_count: 1, forks: 1, default_branch: 'master'
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
+      body: { sha: 'abc', tree: [], truncated: false }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [
+        { login: 'user1', id: 2_476_362, type: 'User', contributions: 120 },
+        { login: 'ghost', type: 'User', contributions: 1 }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb)
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        assert_equal(1, f.total_contributors)
       end
     end
   end
@@ -984,40 +1155,30 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_stops_scanning_repos_when_rate_limit_exhausted
+  def test_total_releases_stops_scanning_when_rate_limit_exhausted
     rackenv = ENV.fetch('RACK_ENV', nil)
     ENV['RACK_ENV'] = 'test'
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_request(:get, %r{^https://api\.github\.com/repos/foo/(alpha|beta)$}).to_return(
-      status: 403,
-      body: { message: 'API rate limit exceeded for installation ID 1' }.to_json,
-      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
-    )
-    stub_github('https://api.github.com/repos/foo/alpha/releases?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/foo/beta/releases?per_page=100', body: [])
-    stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/alpha%20author-date:%3E2024-08-30',
-      body: { total_count: 0, incomplete_results: false, items: [] }
-    )
-    stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/beta%20author-date:%3E2024-08-30',
-      body: { total_count: 0, incomplete_results: false, items: [] }
-    )
-    fb = Factbase.new
-    loog = Loog::Buffer.new
-    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
-      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
-        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/alpha,foo/beta' }), loog:)
-        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        refute_nil(f)
-        assert_equal(0, f.total_stars)
-        assert_equal(0, f.total_repositories)
+    stubs =
+      %w[alpha beta].map do |name|
+        stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+        stub_request(:get, %r{^https://api\.github\.com/repos/foo/#{name}/releases}).to_return(
+          status: 403,
+          body: { message: 'API rate limit exceeded for installation ID 1' }.to_json,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+        )
       end
-    end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/alpha,foo/beta' })
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_releases.rb'))
+    total_releases(nil)
     assert_equal(
-      5, loog.to_s.scan('API rate limit exhausted, stopping the scan').count,
-      'a rate limit hit on the first repository must stop the scan instead of moving on to the next repository'
+      1, stubs.count { |stub| WebMock::RequestRegistry.instance.times_executed(stub.request_pattern).positive? },
+      'an exhausted rate limit must stop the scan, not send the judge on to the next repository'
     )
   ensure
     rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
@@ -1045,6 +1206,69 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_nil(f['total_issues'])
       assert_nil(f['total_pulls'])
       assert_nil(f['total_forks'])
+      assert_nil(f['total_stars'])
+    end
+  end
+
+  def test_dont_count_active_contributors_when_search_breaks
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      status: 500, body: { message: 'Internal server error' }
+    )
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    Jp.qoreset
+    Factbase.new.insert.then do |f|
+      f.what = 'dimensions-of-terrain'
+      f.when = Time.parse('2024-09-29 21:00:00 UTC')
+      assert_equal({}, total_active_contributors(f), 'active contributors are counted while the search is broken')
+    end
+  end
+
+  def test_dont_count_active_contributors_when_one_repo_search_fails
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/first,foo/second' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    stub_github('https://api.github.com/repos/foo/first', body: { id: 42, full_name: 'foo/first', archived: false })
+    stub_github('https://api.github.com/repos/foo/second', body: { id: 43, full_name: 'foo/second', archived: false })
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/first%20author-date:%3E2024-08-30',
+      body: {
+        total_count: 1, incomplete_results: false,
+        items: [{ author: { login: 'yegor256', id: 526_301, type: 'User' } }]
+      }
+    )
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/second%20author-date:%3E2024-08-30',
+      status: 500, body: { message: 'Internal server error' }
+    )
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    Jp.qoreset
+    Factbase.new.insert.then do |f|
+      f.what = 'dimensions-of-terrain'
+      f.when = Time.parse('2024-09-29 21:00:00 UTC')
+      assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
     end
   end
 end

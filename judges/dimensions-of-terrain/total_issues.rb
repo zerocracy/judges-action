@@ -5,6 +5,7 @@
 
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
 def total_issues(_fact)
   issues = 0
@@ -13,17 +14,8 @@ def total_issues(_fact)
     json =
       begin
         Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Fbe::Error => e
         $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-        break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to issues and pulls in #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
         next
       rescue GraphQL::Client::Error,
         Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
