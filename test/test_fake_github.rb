@@ -21,6 +21,20 @@ class TestFakeGithub < Jp::Test
     end
   end
 
+  def test_serves_array_body_of_several_items
+    seed = Random.new_seed
+    random = Random.new(seed)
+    numbers = [random.rand(1_000_000), random.rand(1_000_000)]
+    Jp::FakeGithub.new(
+      'GET /repos/foo/foo/releases' => [{ id: numbers.first, name: '' }, { id: numbers.last, name: 'Ω' }]
+    ).run do
+      assert_equal(
+        numbers, Octokit::Client.new.releases('foo/foo').map { |release| release[:id] },
+        "the array body of two releases did not reach the client in the order declared, seed #{seed}"
+      )
+    end
+  end
+
   def test_serves_empty_array_body
     Jp::FakeGithub.new(
       'GET /repos/foo/foo/releases' => []
