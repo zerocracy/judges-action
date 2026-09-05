@@ -2,15 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Failure in repository #820463873 at #626: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634251], _job: [33954069117],
-    _time: [2026-09-05 08:10:39.534248939 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
-    issue: [626] ]'
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 678.389063778
+  seconds: 1103.355978314
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-05 08:12:40.104037129 Z
+  when: 2026-09-05 08:52:51.959269108 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -189898,7 +189895,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 0
   min_pull_was_found: 31
   repository: 1090089359
   types_were_scanned: 0
@@ -192088,7 +192085,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 120
+  min_issue_was_found: 123
   min_pull_was_found: 88
   repository: 974194993
   types_were_scanned: 0
@@ -192529,25 +192526,6 @@
   when: &1864 2026-07-07 07:38:56.000000000 Z
   where: github
   who: 125282851
-- _id: 2629243
-  _job: 28851141837
-  _time: 2026-07-07 08:07:12.997118656 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  commit: ddfd11b78937b6d4acd3a2090247f4bcbb036c21
-  default_branch: master
-  details: 'A new Git push #36760079515 has arrived to zerocracy/baza, made by @yegor256
-    (default branch is "master"), not associated with any pull request.'
-  event_id: 14470844251
-  event_type: PushEvent
-  is_human: 1
-  push_id: 36760079515
-  ref: refs/heads/master
-  repository: 728758275
-  to_master: 1
-  what: git-was-pushed
-  when: 2026-07-07 07:54:14.000000000 Z
-  where: github
-  who: 526301
 - _id: 2629259
   _job: 28851141837
   _time: 2026-07-07 08:23:01.576431403 Z
@@ -195865,7 +195843,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 15
+  min_issue_was_found: 17
   min_pull_was_found: 71
   repository: 1236759415
   types_were_scanned: 0
@@ -198616,7 +198594,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 234
+  min_issue_was_found: 254
   min_pull_was_found: 250
   repository: 849726475
   types_were_scanned: 0
@@ -198869,7 +198847,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 4
+  min_issue_was_found: 24
   min_pull_was_found: 104
   repository: 805238060
   types_were_scanned: 0
@@ -198886,7 +198864,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 38
+  min_issue_was_found: 39
   min_pull_was_found: 0
   repository: 1084843345
   types_were_scanned: 0
@@ -198896,7 +198874,7 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 701
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14476648966
@@ -198904,17 +198882,17 @@
   labels_were_scanned: 0
   latest_issue_was_found: 315
   merges_were_scanned: 0
-  min_issue_was_found: 621
+  min_issue_was_found: 627
   min_pull_was_found: 687
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 677
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14469624698
@@ -198922,10 +198900,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 298
+  min_issue_was_found: 299
   min_pull_was_found: 238
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 416
   what: iterate
   where: github
 - _id: 2629843
@@ -198939,7 +198917,7 @@
   issues_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 140
   repository: 857659265
   types_were_scanned: 0
@@ -199360,18 +199338,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 600
+  assignees_were_scanned: 748
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14474728467
+  events_were_scanned: 14476699328
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 723
+  min_issue_was_found: 724
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 584
+  types_were_scanned: 726
   what: iterate
   where: github
 - _id: 2629882
@@ -200017,7 +199995,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 684
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14468156902
@@ -200028,7 +200006,7 @@
   min_issue_was_found: 656
   min_pull_was_found: 546
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 681
   what: iterate
   where: github
 - _id: 2629939
@@ -200200,36 +200178,36 @@
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14475225586
+  events_were_scanned: 20111424994
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 0
-  min_issue_was_found: 141
+  min_issue_was_found: 146
   min_pull_was_found: 237
   repository: 181044958
-  types_were_scanned: 447
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1731
-  closures_were_checked: 1639
+  assignees_were_scanned: 1990
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14474317520
+  events_were_scanned: 14476709690
   issues_were_scanned: 0
-  labels_were_scanned: 1702
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
   merges_were_scanned: 0
-  min_issue_was_found: 1521
+  min_issue_was_found: 1522
   min_pull_was_found: 1913
   repository: 799177290
-  types_were_scanned: 1656
+  types_were_scanned: 1720
   what: iterate
   where: github
 - _id: 2630036
@@ -200243,7 +200221,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 5
+  min_issue_was_found: 20
   min_pull_was_found: 11
   repository: 1081929119
   types_were_scanned: 0
@@ -200253,7 +200231,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1188
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19853445604
@@ -200261,10 +200239,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1140
+  min_issue_was_found: 1141
   min_pull_was_found: 1087
   repository: 728758275
-  types_were_scanned: 1142
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -279657,6 +279635,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2006/#issuecomment-5548557158
   is_human: 1
   issue: 2006
+  receipt: receipt-#90135
   repository: 799177290
   review_comments: 0
   seconds: 84891
@@ -279677,6 +279656,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2008/#issuecomment-5548557334
   is_human: 1
   issue: 2008
+  receipt: receipt-#90136
   repository: 799177290
   review_comments: 0
   seconds: 84675
@@ -279697,6 +279677,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2009/#issuecomment-5548557516
   is_human: 1
   issue: 2009
+  receipt: receipt-#90137
   repository: 799177290
   review_comments: 0
   seconds: 84300
@@ -279717,6 +279698,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2011/#issuecomment-5548557677
   is_human: 1
   issue: 2011
+  receipt: receipt-#90138
   repository: 799177290
   review_comments: 0
   seconds: 84018
@@ -279737,6 +279719,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2012/#issuecomment-5548557838
   is_human: 1
   issue: 2012
+  receipt: receipt-#90139
   repository: 799177290
   review_comments: 0
   seconds: 83942
@@ -279757,6 +279740,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2013/#issuecomment-5548557984
   is_human: 1
   issue: 2013
+  receipt: receipt-#90140
   repository: 799177290
   review_comments: 0
   seconds: 83817
@@ -279777,6 +279761,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2014/#issuecomment-5548558102
   is_human: 1
   issue: 2014
+  receipt: receipt-#90141
   repository: 799177290
   review_comments: 0
   seconds: 83810
@@ -279797,6 +279782,7 @@
   href: https://github.com/zerocracy/pages-action/issues/756/#issuecomment-5548558268
   is_human: 1
   issue: 756
+  receipt: receipt-#90142
   repository: 802720676
   review_comments: 0
   seconds: 25281
@@ -282201,6 +282187,7 @@
   _time: 2026-09-05 08:07:52.848679558 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#753 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 753
   repository: 820463873
   what: issue-was-opened
@@ -282212,6 +282199,7 @@
   _time: 2026-09-05 08:07:53.138901318 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#752 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 752
   repository: 820463873
   what: issue-was-opened
@@ -282223,6 +282211,7 @@
   _time: 2026-09-05 08:07:53.363087620 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#751 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 751
   repository: 820463873
   what: issue-was-opened
@@ -282234,6 +282223,7 @@
   _time: 2026-09-05 08:07:53.558847358 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#750 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 750
   repository: 820463873
   what: issue-was-opened
@@ -282245,6 +282235,7 @@
   _time: 2026-09-05 08:07:53.785699497 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#749 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 749
   repository: 820463873
   what: issue-was-opened
@@ -282256,6 +282247,7 @@
   _time: 2026-09-05 08:07:54.038742514 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#748 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 748
   repository: 820463873
   what: issue-was-opened
@@ -282267,6 +282259,7 @@
   _time: 2026-09-05 08:07:54.238646165 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#747 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 747
   repository: 820463873
   what: issue-was-opened
@@ -282278,6 +282271,7 @@
   _time: 2026-09-05 08:07:54.474972050 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#746 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 746
   repository: 820463873
   what: issue-was-opened
@@ -282289,6 +282283,7 @@
   _time: 2026-09-05 08:07:54.721836942 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#745 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 745
   repository: 820463873
   what: issue-was-opened
@@ -282300,6 +282295,7 @@
   _time: 2026-09-05 08:07:54.919271112 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#744 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 744
   repository: 820463873
   what: issue-was-opened
@@ -282311,6 +282307,7 @@
   _time: 2026-09-05 08:09:35.251395900 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/judges-action#2037 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 2037
   repository: 799177290
   what: issue-was-opened
@@ -282322,6 +282319,7 @@
   _time: 2026-09-05 08:09:35.599064389 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/judges-action#2036 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 2036
   repository: 799177290
   what: issue-was-opened
@@ -282329,7 +282327,283 @@
   where: github
   who: 125282851
 - _id: 2634251
-  _job: 33954069117
-  _time: 2026-09-05 08:10:39.534248939 Z
+  _job: 33955564592
+  _time: 2026-09-05 08:34:50.835829635 Z
   _version: 0.19.16/0.61.1/0.17.22
-  issue: 626
+  details: The issue yegor256/0rsk#472 has been opened by @morphqdd.
+  event_id: 14476907921
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 472
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:11:51.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634252
+  _job: 33955564592
+  _time: 2026-09-05 08:34:51.251268125 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#471 has been opened by @morphqdd.
+  event_id: 14476900174
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 471
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:11:32.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634253
+  _job: 33955564592
+  _time: 2026-09-05 08:34:51.708130746 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#470 has been opened by @morphqdd.
+  event_id: 14476899334
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 470
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:11:30.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634254
+  _job: 33955564592
+  _time: 2026-09-05 08:34:52.096839335 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#469 has been opened by @morphqdd.
+  event_id: 14476886999
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 469
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:11:01.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634255
+  _job: 33955564592
+  _time: 2026-09-05 08:34:52.516881196 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#468 has been opened by @morphqdd.
+  event_id: 14476886491
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 468
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:11:00.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634256
+  _job: 33955564592
+  _time: 2026-09-05 08:34:52.875125035 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#467 has been opened by @morphqdd.
+  event_id: 14476876082
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 467
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:10:33.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634257
+  _job: 33955564592
+  _time: 2026-09-05 08:34:53.331662475 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#466 has been opened by @morphqdd.
+  event_id: 14476875526
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 466
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:10:31.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634258
+  _job: 33955564592
+  _time: 2026-09-05 08:34:53.669942274 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/0rsk#465 has been opened by @morphqdd.
+  event_id: 14476864637
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 465
+  repository: 181044958
+  what: issue-was-opened
+  when: 2026-09-05 08:10:02.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634259
+  _job: 33955564592
+  _time: 2026-09-05 08:44:16.236487588 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '717'
+  details: The missing pull zerocracy/fbe#731 has been opened by @morphqdd.
+  is_human: 1
+  issue: 731
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:22:30.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634260
+  _job: 33955564592
+  _time: 2026-09-05 08:44:17.601530921 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '718'
+  details: The missing pull zerocracy/fbe#732 has been opened by @morphqdd.
+  is_human: 1
+  issue: 732
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:23:34.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634261
+  _job: 33955564592
+  _time: 2026-09-05 08:44:18.725594565 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '719'
+  details: The missing pull zerocracy/fbe#733 has been opened by @morphqdd.
+  is_human: 1
+  issue: 733
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:23:46.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634262
+  _job: 33955564592
+  _time: 2026-09-05 08:44:20.103125655 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '720'
+  details: The missing pull zerocracy/fbe#734 has been opened by @morphqdd.
+  is_human: 1
+  issue: 734
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:25:26.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634263
+  _job: 33955564592
+  _time: 2026-09-05 08:44:21.896680089 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '721'
+  details: The missing pull zerocracy/fbe#735 has been opened by @morphqdd.
+  is_human: 1
+  issue: 735
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:27:11.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634264
+  _job: 33955564592
+  _time: 2026-09-05 08:44:23.292759601 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '722'
+  details: The missing pull zerocracy/fbe#736 has been opened by @morphqdd.
+  is_human: 1
+  issue: 736
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:28:26.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634265
+  _job: 33955564592
+  _time: 2026-09-05 08:44:24.726623894 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '723'
+  details: The missing pull zerocracy/fbe#737 has been opened by @morphqdd.
+  is_human: 1
+  issue: 737
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:29:22.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634266
+  _job: 33955564592
+  _time: 2026-09-05 08:44:25.935728010 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '724'
+  details: The missing pull zerocracy/fbe#738 has been opened by @morphqdd.
+  is_human: 1
+  issue: 738
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:30:12.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634267
+  _job: 33955564592
+  _time: 2026-09-05 08:44:27.023252123 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '726'
+  details: The missing pull zerocracy/fbe#739 has been opened by @morphqdd.
+  is_human: 1
+  issue: 739
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:32:42.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634268
+  _job: 33955564592
+  _time: 2026-09-05 08:44:28.309827929 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '727'
+  details: The missing pull zerocracy/fbe#740 has been opened by @morphqdd.
+  is_human: 1
+  issue: 740
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:33:15.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634269
+  _job: 33955564592
+  _time: 2026-09-05 08:44:29.436742896 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '728'
+  details: The missing pull zerocracy/fbe#741 has been opened by @morphqdd.
+  is_human: 1
+  issue: 741
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:34:03.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634270
+  _job: 33955564592
+  _time: 2026-09-05 08:44:31.000244237 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '729'
+  details: The missing pull zerocracy/fbe#742 has been opened by @morphqdd.
+  is_human: 1
+  issue: 742
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:36:40.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634271
+  _job: 33955564592
+  _time: 2026-09-05 08:44:32.171835491 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '730'
+  details: The missing pull zerocracy/fbe#743 has been opened by @morphqdd.
+  is_human: 1
+  issue: 743
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-09-05 06:38:36.000000000 Z
+  where: github
+  who: 125282851
