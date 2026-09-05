@@ -7,7 +7,7 @@ require 'fbe/octo'
 require 'fbe/unmask_repos'
 
 def some_release_interval(fact)
-  dates = []
+  intervals = []
   Fbe.unmask_repos do |repo|
     releases =
       begin
@@ -22,15 +22,17 @@ def some_release_interval(fact)
         )
         next
       end
+    dates = []
     releases.each do |json|
       next if json[:published_at].nil?
       next if json[:published_at] > fact.when
       break if json[:published_at] < fact.since
       dates << json[:published_at]
     end
+    dates.sort!
+    intervals.concat(dates.each_cons(2).map { |pair| pair.last - pair.first })
   end
-  dates.sort!
   {
-    some_release_interval: (1..(dates.size - 1)).map { |i| dates[i] - dates[i - 1] }
+    some_release_interval: intervals
   }
 end
