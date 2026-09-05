@@ -1155,6 +1155,35 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_releases_stops_scanning_when_rate_limit_exhausted
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stubs =
+      %w[alpha beta].map do |name|
+        stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+        stub_request(:get, %r{^https://api\.github\.com/repos/foo/#{name}/releases}).to_return(
+          status: 403,
+          body: { message: 'API rate limit exceeded for installation ID 1' }.to_json,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+        )
+      end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/alpha,foo/beta' })
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_releases.rb'))
+    total_releases(nil)
+    assert_equal(
+      1, stubs.count { |stub| WebMock::RequestRegistry.instance.times_executed(stub.request_pattern).positive? },
+      'an exhausted rate limit must stop the scan, not send the judge on to the next repository'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
+  end
+
   def test_not_fill_props_if_quota_consumed
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
