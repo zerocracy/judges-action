@@ -1,12 +1,18 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
+  error:
+  - 'Failure in repository #820463873 at #626: The fact doesn''t match the "(and \n#
+    MIT License\n#\n# Copyrigh..." rule: [ _id: [2634218], _job: [33951340368], _time:
+    [2026-09-05 07:08:21.984551682 UTC], _version: ["0.19.16/0.61.1/0.17.22"], issue:
+    [626] ]'
+  - deadlock; recursive locking
   inserted: 8
-  seconds: 701.701242371
+  seconds: 1175.693357849
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-05 06:53:15.075129519 Z
+  when: 2026-09-05 07:21:02.012847394 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -189894,7 +189900,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 2
+  min_issue_was_found: 0
   min_pull_was_found: 28
   repository: 1090089359
   types_were_scanned: 0
@@ -192084,8 +192090,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 83
-  min_pull_was_found: 82
+  min_issue_was_found: 85
+  min_pull_was_found: 86
   repository: 974194993
   types_were_scanned: 0
   what: iterate
@@ -195861,7 +195867,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 8
+  min_issue_was_found: 11
   min_pull_was_found: 70
   repository: 1236759415
   types_were_scanned: 0
@@ -198612,7 +198618,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 230
+  min_issue_was_found: 232
   min_pull_was_found: 249
   repository: 849726475
   types_were_scanned: 0
@@ -198865,7 +198871,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 80
+  min_issue_was_found: 91
   min_pull_was_found: 100
   repository: 805238060
   types_were_scanned: 0
@@ -198882,7 +198888,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 28
+  min_issue_was_found: 30
   min_pull_was_found: 74
   repository: 1084843345
   types_were_scanned: 0
@@ -198900,7 +198906,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 315
   merges_were_scanned: 0
-  min_issue_was_found: 617
+  min_issue_was_found: 619
   min_pull_was_found: 687
   repository: 798641472
   types_were_scanned: 0
@@ -198918,7 +198924,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 290
+  min_issue_was_found: 293
   min_pull_was_found: 236
   repository: 840215648
   types_were_scanned: 0
@@ -199359,15 +199365,15 @@
   assignees_were_scanned: 600
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20082279080
+  events_were_scanned: 14474728467
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 720
+  min_issue_was_found: 721
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 726
   what: iterate
   where: github
 - _id: 2629882
@@ -200021,7 +200027,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 640
+  min_issue_was_found: 654
   min_pull_was_found: 544
   repository: 802720676
   types_were_scanned: 0
@@ -200162,12 +200168,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20069619301
+  events_were_scanned: 14475192699
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 196
   min_pull_was_found: 542
   repository: 799113787
   types_were_scanned: 0
@@ -200199,12 +200205,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14469625943
+  events_were_scanned: 14475225586
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 0
-  min_issue_was_found: 138
+  min_issue_was_found: 139
   min_pull_was_found: 237
   repository: 181044958
   types_were_scanned: 447
@@ -200214,18 +200220,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1990
+  assignees_were_scanned: 1472
   closures_were_checked: 1639
   earliest_issue_was_found: 1
-  events_were_scanned: 20096129573
+  events_were_scanned: 14474317520
   issues_were_scanned: 0
   labels_were_scanned: 1702
   latest_issue_was_found: 1073
   merges_were_scanned: 0
-  min_issue_was_found: 1513
+  min_issue_was_found: 1518
   min_pull_was_found: 1896
   repository: 799177290
-  types_were_scanned: 1720
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -200239,7 +200245,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 20
   min_pull_was_found: 10
   repository: 1081929119
   types_were_scanned: 0
@@ -200257,7 +200263,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1122
+  min_issue_was_found: 1128
   min_pull_was_found: 1084
   repository: 728758275
   types_were_scanned: 1142
@@ -279149,6 +279155,7 @@
   href: https://github.com/zerocracy/fbe/issues/708/#issuecomment-5548341641
   is_human: 1
   issue: 708
+  receipt: receipt-#90097
   repository: 820463873
   review_comments: 0
   seconds: 80288
@@ -279169,6 +279176,7 @@
   href: https://github.com/zerocracy/fbe/issues/706/#issuecomment-5548341782
   is_human: 1
   issue: 706
+  receipt: receipt-#90098
   repository: 820463873
   review_comments: 0
   seconds: 80460
@@ -279189,6 +279197,7 @@
   href: https://github.com/yegor256/0rsk/issues/459/#issuecomment-5548341964
   is_human: 1
   issue: 459
+  receipt: receipt-#90099
   repository: 181044958
   review_comments: 0
   seconds: 76155
@@ -279209,6 +279218,7 @@
   href: https://github.com/yegor256/0rsk/issues/458/#issuecomment-5548342098
   is_human: 1
   issue: 458
+  receipt: receipt-#90100
   repository: 181044958
   review_comments: 0
   seconds: 76262
@@ -279229,6 +279239,7 @@
   href: https://github.com/zerocracy/fbe/issues/705/#issuecomment-5548342240
   is_human: 1
   issue: 705
+  receipt: receipt-#90101
   repository: 820463873
   review_comments: 0
   seconds: 80563
@@ -279249,6 +279260,7 @@
   href: https://github.com/yegor256/0rsk/issues/457/#issuecomment-5548342382
   is_human: 1
   issue: 457
+  receipt: receipt-#90102
   repository: 181044958
   review_comments: 0
   seconds: 76396
@@ -279269,6 +279281,7 @@
   href: https://github.com/yegor256/0rsk/issues/455/#issuecomment-5548342501
   is_human: 1
   issue: 455
+  receipt: receipt-#90103
   repository: 181044958
   review_comments: 0
   seconds: 76616
@@ -279289,6 +279302,7 @@
   href: https://github.com/zerocracy/fbe/issues/704/#issuecomment-5548342652
   is_human: 1
   issue: 704
+  receipt: receipt-#90104
   repository: 820463873
   review_comments: 0
   seconds: 80630
@@ -281744,7 +281758,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-09-05 06:06:48.000000000 Z
+  when: &2908 2026-09-05 06:06:48.000000000 Z
   where: github
   who: 526301
 - _id: 2634209
@@ -281837,9 +281851,70 @@
   _time: 2026-09-05 06:53:05.016016392 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: Apparently, zerocracy/judges-action#2023 has been "issue-was-closed".
+  is_human: 1
   issue: 2023
   repository: 799177290
   what: issue-was-closed
   when: 2026-09-05 06:22:12.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634216
+  _job: 90738
+  _time: 2026-09-05 06:54:25.598667412 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  comments: 1
+  details: The pull request zerocracy/judges-action#2029 with 2 HoC created by @renovate[bot]
+    was merged by @yegor256 after 11h43m of being in review and 1 comments.
+  hoc: 2
+  is_human: 0
+  issue: 2029
+  merger: 526301
+  repository: 799177290
+  review_comments: 0
+  seconds: 42188
+  what: code-was-contributed
+  when: *2908
+  where: github
+  who: 29139614
+- _id: 2634217
+  _job: 90738
+  _time: 2026-09-05 06:54:28.444451499 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  award: 18
+  details: It's time to reward @thayorns for the bug reported in zerocracy/judges-action#2032,
+    the reward amount is 18.
+  greeting: 'Thanks for reporting a new bug! You''ve earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn''t look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+1750](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  is_human: 1
+  issue: 2032
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-09-05 06:54:28.450063769 Z
+  where: github
+  who: 96509556
+  why: Reported bug in zerocracy/judges-action#2032
+- _id: 2634218
+  _job: 33951340368
+  _time: 2026-09-05 07:08:21.984551682 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 626
+- _id: 2634219
+  _job: 33951340368
+  _time: 2026-09-05 07:09:20.117613486 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: 460-deadlock
+  details: The pull request yegor256/0rsk#464 has been opened by @morphqdd.
+  event_id: 14475225586
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 464
+  repository: 181044958
+  what: pull-was-opened
+  when: 2026-09-05 06:59:50.000000000 Z
   where: github
   who: 125282851
