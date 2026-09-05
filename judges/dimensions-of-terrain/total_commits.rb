@@ -6,6 +6,7 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'net/http'
 require_relative '../../lib/patches/unmask_repos'
 
 def total_commits(_fact)
@@ -26,16 +27,16 @@ def total_commits(_fact)
     next if json[:default_branch].nil?
     repos << [*repo.split('/'), json[:default_branch]]
   end
-  {
-    total_commits:
-    begin
-      repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] }
-    rescue GraphQL::Client::Error, Fbe::Error => e
-      $loog.info("Can't count total commits: #{e.message}")
-      0
-    rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
-      $loog.warn("[#{$judge}] Network error counting commits: #{e.message}")
-      0
-    end
-  }
+  begin
+    { total_commits: repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } }
+  rescue GraphQL::Client::Error, Fbe::Error => e
+    $loog.info("Can't count commits in #{repos.count} repositories, skipping total_commits: #{e.message}")
+    {}
+  rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    $loog.warn(
+      "[#{$judge}] Network error counting commits in #{repos.count} repositories " \
+      "(transient, will retry next cycle), skipping total_commits: #{e.message}"
+    )
+    {}
+  end
 end
