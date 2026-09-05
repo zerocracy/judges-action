@@ -24,9 +24,7 @@ def total_releases(_fact)
         next
       end
     next unless releases.is_a?(Array)
-    releases.each do |_|
-      total += 1
-    end
+    total += releases.count
   end
   { total_releases: total }
 end
