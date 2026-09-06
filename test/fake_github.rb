@@ -81,7 +81,7 @@ class Jp::FakeGithub
   def reply(route)
     case route
     when Integer then [route, {}]
-    when Array then route
+    when Array then route.first.is_a?(Integer) ? route : [200, route]
     else [200, route]
     end
   end
