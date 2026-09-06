@@ -4,18 +4,15 @@
   deleted: 8
   error:
   - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634552], _job: [34053488005],
-    _time: [2026-09-06 19:09:50.364780123 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634555], _job: [34055090114],
+    _time: [2026-09-06 19:34:31.436367142 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
     issue: [1566] ]'
-  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634553], _job: [34053488005],
-    _time: [2026-09-06 19:14:40.99844144 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
-    issue: [1566] ]'
+  - deadlock; recursive locking
   inserted: 8
-  seconds: 810.276712523
+  seconds: 1090.301477629
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-06 19:15:21.611971660 Z
+  when: 2026-09-06 19:50:03.427370798 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17336,41 +17333,6 @@
   when: 2025-12-23 08:57:52.000000000 Z
   where: github
   who: 526301
-- _id: 2599555
-  _job: 55194
-  _time: 2025-12-24 19:37:37.640571147 Z
-  _version: 0.19.2/0.58.1/0.17.6!0.17.8
-  award: 16
-  details: It's time to reward @yegor256 for the bug resolved in zerocracy/judges-action#1254
-    in 2 hours, the reward amount is 16.
-  href: https://github.com/zerocracy/judges-action/issues/1254
-  is_human: 1
-  issue: 1254
-  repository: 799177290
-  tombstone: 2026-09-04 22:52:30.418408320 Z
-  what: resolved-bug-was-rewarded
-  when: 2025-12-24 18:51:27.557166089 Z
-  where: github
-  who: 526301
-  why: Resolved bug in zerocracy/judges-action#1254
-- _id: 2599565
-  _job: 55202
-  _time: 2025-12-24 20:48:43.686929860 Z
-  _version: 0.19.2/0.58.1/0.17.6!0.17.8
-  award: 18
-  details: It's time to reward @makszhukov for the bug reported in zerocracy/judges-action#1254,
-    the reward amount is 18.
-  href: https://github.com/zerocracy/judges-action/issues/1254
-  is_human: 1
-  issue: 1254
-  receipt: receipt-#55018
-  repository: 799177290
-  tombstone: 2026-09-04 22:52:30.420418043 Z
-  what: bug-report-was-rewarded
-  when: 2025-12-24 18:51:49.197728966 Z
-  where: github
-  who: 23615115
-  why: Reported bug in zerocracy/judges-action#1254
 - _id: 2599574
   _job: 55206
   _time: 2025-12-24 21:40:03.244818843 Z
@@ -189229,7 +189191,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 2
   min_pull_was_found: 0
   repository: 1090089359
   types_were_scanned: 0
@@ -191422,7 +191384,7 @@
   min_issue_was_found: 62
   min_pull_was_found: 90
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 84
   what: iterate
   where: github
 - _id: 2629220
@@ -195188,7 +195150,7 @@
   min_issue_was_found: 36
   min_pull_was_found: 76
   repository: 1236759415
-  types_were_scanned: 0
+  types_were_scanned: 59
   what: iterate
   where: github
 - _id: 2629477
@@ -197705,7 +197667,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 227
+  min_issue_was_found: 228
   min_pull_was_found: 261
   repository: 849726475
   types_were_scanned: 0
@@ -197939,7 +197901,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 32
   min_pull_was_found: 115
   repository: 805238060
   types_were_scanned: 0
@@ -197969,7 +197931,7 @@
   assignees_were_scanned: 701
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14522736480
+  events_were_scanned: 14528636604
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 315
@@ -197977,7 +197939,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 687
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 748
   what: iterate
   where: github
 - _id: 2629842
@@ -197995,7 +197957,7 @@
   min_issue_was_found: 287
   min_pull_was_found: 241
   repository: 840215648
-  types_were_scanned: 416
+  types_were_scanned: 322
   what: iterate
   where: github
 - _id: 2629843
@@ -198411,18 +198373,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 600
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14523850363
+  events_were_scanned: 14528690195
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 511
+  min_issue_was_found: 512
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 726
+  types_were_scanned: 480
   what: iterate
   where: github
 - _id: 2629882
@@ -199079,7 +199041,7 @@
   min_issue_was_found: 601
   min_pull_was_found: 550
   repository: 802720676
-  types_were_scanned: 681
+  types_were_scanned: 593
   what: iterate
   where: github
 - _id: 2629939
@@ -199225,7 +199187,7 @@
   min_issue_was_found: 448
   min_pull_was_found: 298
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 502
   what: iterate
   where: github
 - _id: 2630021
@@ -199269,10 +199231,10 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1990
+  assignees_were_scanned: 1472
   closures_were_checked: 1637
   earliest_issue_was_found: 1
-  events_were_scanned: 20258892465
+  events_were_scanned: 20266581461
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 1073
@@ -199280,7 +199242,7 @@
   min_issue_was_found: 1564
   min_pull_was_found: 1916
   repository: 799177290
-  types_were_scanned: 0
+  types_were_scanned: 1524
   what: iterate
   where: github
 - _id: 2630036
@@ -199315,7 +199277,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 1090
   repository: 728758275
-  types_were_scanned: 1142
+  types_were_scanned: 791
   what: iterate
   where: github
 - _id: 2630038
@@ -286186,12 +286148,113 @@
   where: github
   who: 125282851
 - _id: 2634552
-  _job: 34053488005
-  _time: 2026-09-06 19:09:50.364780123 Z
+  _job: 34055090114
+  _time: 2026-09-06 19:34:14.831367521 Z
   _version: 0.19.16/0.61.1/0.17.22
-  issue: 1566
+  details: The issue zerocracy/fbe#774 has been earlier opened by @gemshrine.
+  is_human: 1
+  issue: 774
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-06 19:31:21.000000000 Z
+  where: github
+  who: 113778529
 - _id: 2634553
-  _job: 34053488005
-  _time: 2026-09-06 19:14:40.998441440 Z
+  _job: 34055090114
+  _time: 2026-09-06 19:34:15.351172681 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/fbe#773 has been earlier opened by @gemshrine.
+  is_human: 1
+  issue: 773
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-06 19:31:00.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2634554
+  _job: 34055090114
+  _time: 2026-09-06 19:34:15.530896065 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/fbe#772 has been earlier opened by @gemshrine.
+  is_human: 1
+  issue: 772
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-06 19:26:04.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2634555
+  _job: 34055090114
+  _time: 2026-09-06 19:34:31.436367142 Z
   _version: 0.19.16/0.61.1/0.17.22
   issue: 1566
+- _id: 2634556
+  _job: 34055090114
+  _time: 2026-09-06 19:35:13.033996851 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/factbase#794 has been opened by @gemshrine.
+  event_id: 14528636604
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 794
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-09-06 19:29:20.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2634557
+  _job: 34055090114
+  _time: 2026-09-06 19:35:13.431514569 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/factbase#793 has been opened by @gemshrine.
+  event_id: 14528594496
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 793
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-09-06 19:27:47.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2634558
+  _job: 34055090114
+  _time: 2026-09-06 19:35:13.663678855 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/factbase#792 has been opened by @gemshrine.
+  event_id: 14528518325
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 792
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-09-06 19:24:55.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2634559
+  _job: 34055090114
+  _time: 2026-09-06 19:35:13.942184456 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/factbase#791 has been opened by @gemshrine.
+  event_id: 14528508321
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 791
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-09-06 19:24:32.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2634560
+  _job: 34055090114
+  _time: 2026-09-06 19:35:14.209966544 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue yegor256/factbase#790 has been opened by @gemshrine.
+  event_id: 14528499446
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 790
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-09-06 19:24:12.000000000 Z
+  where: github
+  who: 113778529
