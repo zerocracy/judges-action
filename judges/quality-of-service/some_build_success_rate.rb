@@ -30,19 +30,21 @@ def some_build_success_rate(fact)
       end
     wfs = workflows.select { |json| json[:status] == 'completed' && !json[:conclusion].nil? }.first(60)
     runs =
-      wfs.map do |json|
+      wfs.filter_map do |json|
         secs =
           begin
-            (Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms] || 0) / 1000
+            ms = Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms]
+            next if ms.nil?
+            ms / 1000
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
-            0
+            next
           rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
-            0
+            next
           end
         { json: json, secs: secs, completed: json[:run_started_at] + secs }
       end
