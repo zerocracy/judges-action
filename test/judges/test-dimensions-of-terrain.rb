@@ -541,7 +541,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_total_commits_rescues_fbe_error_from_graph
+  def test_total_commits_skips_property_on_fbe_error
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -562,7 +562,65 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
-      assert_equal({ total_commits: 0 }, total_commits(nil))
+      assert_equal({}, total_commits(nil))
+    end
+  end
+
+  def test_total_commits_skips_property_on_network_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/unreachable', body: {
+        name: 'unreachable', full_name: 'foo/unreachable', size: 42,
+        stargazers_count: 0, forks: 0, default_branch: 'main', archived: false
+      }
+    )
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/unreachable' })
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_commits) do |*_args, **_kwargs|
+        raise(Net::ReadTimeout, 'api.github.com kept silent for 60 seconds')
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+      assert_equal({}, total_commits(nil))
+    end
+  end
+
+  def test_dont_write_total_commits_when_graph_breaks
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/broken', body: {
+        name: 'broken', full_name: 'foo/broken', size: 3,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/broken/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/broken/git/trees/master?recursive=true',
+      body: { sha: 'a', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/foo/broken/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/broken%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_commits) do |*_args, **_kwargs|
+        raise(Fbe::Error, "Repository 'foo/broken' or branch 'master' not found")
+      end
+    end.new
+    fb = Factbase.new
+    Fbe.stub(:github_graph, graph) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/broken' }))
+        assert_nil(fb.query("(eq what 'dimensions-of-terrain')").each.first['total_commits'])
+      end
     end
   end
 
