@@ -65,15 +65,61 @@ class TestTwice < Minitest::Test
     )
   end
 
+  def test_lets_an_unlabeled_event_through_when_another_one_has_a_label
+    fb = Factbase.new
+    event(fb, 'label-was-attached', 42)
+    insert(fb, 'bug', repository: 42)
+    refute(
+      Jp.twice?(fb, fb.query('(absent label)').each.to_a.first, 'label-was-attached', %w[where repository issue label]),
+      'an event without a label cannot be a duplicate of one that carries a label'
+    )
+  end
+
+  def test_finds_the_second_copy_when_neither_event_has_a_label
+    fb = Factbase.new
+    2.times { event(fb, 'label-was-attached', 42) }
+    assert(
+      Jp.twice?(fb, fb.query('(absent label)').each.to_a.first, 'label-was-attached', %w[where repository issue label]),
+      'two identical events without a label cannot both stay'
+    )
+  end
+
+  def test_lets_another_label_through_on_the_same_issue
+    fb = Factbase.new
+    insert(fb, 'bug', repository: 42)
+    insert(fb, 'ошибка', repository: 42)
+    refute(
+      Jp.twice?(
+        fb, fb.query("(eq label 'ошибка')").each.to_a.first, 'label-was-attached', %w[where repository issue label]
+      ),
+      'a second label on the same issue cannot count as a duplicate'
+    )
+  end
+
+  def test_lets_an_authorless_event_through_when_another_one_has_an_author
+    fb = Factbase.new
+    event(fb, 'issue-was-opened', 42)
+    event(fb, 'issue-was-opened', 42).who = 333
+    refute(
+      Jp.twice?(fb, fb.query('(absent who)').each.to_a.first, 'issue-was-opened', %w[where repository issue who]),
+      'an event without an author cannot be a duplicate of one that names an author'
+    )
+  end
+
   private
 
   def insert(fb, label, repository: 42)
+    f = event(fb, 'label-was-attached', repository)
+    f.label = label
+    f
+  end
+
+  def event(fb, what, repository)
     f = fb.insert
-    f.what = 'label-was-attached'
+    f.what = what
     f.where = 'github'
     f.repository = repository
     f.issue = 7
-    f.label = label
     f
   end
 end
