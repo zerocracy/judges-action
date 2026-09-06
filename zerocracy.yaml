@@ -1,16 +1,21 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
-  error: 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634584], _job: [34062713160],
-    _time: [2026-09-06 22:13:58.506183983 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+  error:
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634598], _job: [34064202921],
+    _time: [2026-09-06 22:38:38.835797805 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    issue: [1566] ]'
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634599], _job: [34064202921],
+    _time: [2026-09-06 22:43:06.024149251 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
     issue: [1566] ]'
   inserted: 8
-  seconds: 753.500931634
+  seconds: 716.400151238
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-06 22:14:34.761205792 Z
+  when: 2026-09-06 22:43:32.563606134 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -191291,7 +191296,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 63
+  min_issue_was_found: 67
   min_pull_was_found: 90
   repository: 974194993
   types_were_scanned: 0
@@ -195057,7 +195062,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 47
+  min_issue_was_found: 48
   min_pull_was_found: 76
   repository: 1236759415
   types_were_scanned: 0
@@ -197577,7 +197582,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 229
+  min_issue_was_found: 230
   min_pull_was_found: 261
   repository: 849726475
   types_were_scanned: 0
@@ -197811,7 +197816,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 43
+  min_issue_was_found: 67
   min_pull_was_found: 115
   repository: 805238060
   types_were_scanned: 0
@@ -197864,7 +197869,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 293
+  min_issue_was_found: 295
   min_pull_was_found: 241
   repository: 840215648
   types_were_scanned: 416
@@ -198283,7 +198288,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 748
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14530377780
@@ -198291,10 +198296,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 523
+  min_issue_was_found: 524
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 726
   what: iterate
   where: github
 - _id: 2629882
@@ -198943,12 +198948,12 @@
   assignees_were_scanned: 684
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20272483220
+  events_were_scanned: 14532042781
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 610
+  min_issue_was_found: 618
   min_pull_was_found: 550
   repository: 802720676
   types_were_scanned: 681
@@ -199141,7 +199146,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1667
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14532277402
@@ -199152,7 +199157,7 @@
   min_issue_was_found: 1564
   min_pull_was_found: 1916
   repository: 799177290
-  types_were_scanned: 1976
+  types_were_scanned: 1446
   what: iterate
   where: github
 - _id: 2630036
@@ -199166,7 +199171,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 5
   min_pull_was_found: 16
   repository: 1081929119
   types_were_scanned: 0
@@ -199184,7 +199189,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 5
+  min_issue_was_found: 137
   min_pull_was_found: 1090
   repository: 728758275
   types_were_scanned: 0
@@ -274771,27 +274776,6 @@
   when: *2799
   where: github
   who: 526301
-- _id: 2633837
-  _job: 90653
-  _time: 2026-09-04 21:51:39.261813537 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  analyzers: 18
-  text: |-
-    The average reward per task (15.0 points) is increasing (R=0.22).
-    The average punishment per task (7.0 points) is staying still.
-    The average number of builds per week (3828.9) is decreasing (R=-0.20).
-    The average number of commits per week (85.6) is decreasing (R=-0.66).
-    The average bugs accepted per month (63.0) is increasing (R=0.57).
-    The average monthly punishment (243 points) is increasing (R=0.10).
-    The average monthly wage (16.9 points) is increasing (R=0.56).
-    The average issue cycle time (2w) is increasing (R=0.37).
-    The average pull cycle time (1w1d) is increasing (R=0.21).
-    The average number of releases per month (5.5) is staying still.
-    The average monthly turnover (13.0 developers) is increasing (R=0.63).
-    The average weekly cost of HoC (1.20 points) is decreasing (R=-0.22).
-    The average monthly zents/points ratio (0.69) is decreasing (R=0.52).
-  what: assessment
-  when: 2026-09-04 21:51:39.283959742 Z
 - _id: 2633838
   _job: 90653
   _time: 2026-09-04 21:52:07.434578669 Z
@@ -286392,7 +286376,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-09-06 06:10:05.000000000 Z
+  when: &2956 2026-09-06 06:10:05.000000000 Z
   where: github
   who: 526301
 - _id: 2634581
@@ -286440,7 +286424,195 @@
   what: dimensions-of-terrain
   when: 2026-09-06 22:06:45.230384264 Z
 - _id: 2634584
-  _job: 34062713160
-  _time: 2026-09-06 22:13:58.506183983 Z
+  _job: 91009
+  _time: 2026-09-06 22:15:08.374400989 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  analyzers: 18
+  text: |-
+    The average reward per task (15.3 points) is increasing (R=0.27).
+    The average punishment per task (7.0 points) is staying still.
+    The average number of builds per week (3828.9) is decreasing (R=-0.20).
+    The average number of commits per week (85.6) is decreasing (R=-0.66).
+    The average bugs accepted per month (72.0) is increasing (R=0.63).
+    The average monthly punishment (243 points) is increasing (R=0.12).
+    The average monthly wage (16.1 points) is increasing (R=0.57).
+    The average issue cycle time (1w6d) is increasing (R=0.25).
+    The average pull cycle time (1w1d) is increasing (R=0.21).
+    The average number of releases per month (5.5) is staying still.
+    The average monthly turnover (13.0 developers) is increasing (R=0.68).
+    The average weekly cost of HoC (1.19 points) is decreasing (R=-0.21).
+    The average monthly zents/points ratio (0.68) is decreasing (R=0.74).
+  what: assessment
+  when: 2026-09-06 22:15:08.392170809 Z
+- _id: 2634585
+  _job: 91009
+  _time: 2026-09-06 22:15:11.434139786 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  comments: 1
+  details: The pull request yegor256/judges#550 with 43 HoC created by @morphqdd was
+    merged by @yegor256 after 23h14m of being in review and 1 comments.
+  hoc: 43
+  is_human: 1
+  issue: 550
+  merger: 526301
+  repository: 799113787
+  review_comments: 0
+  seconds: 83643
+  what: code-was-contributed
+  when: *2956
+  where: github
+  who: 125282851
+- _id: 2634586
+  _job: 34064202921
+  _time: 2026-09-06 22:37:49.192549850 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#773 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 773
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:40:38.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634587
+  _job: 34064202921
+  _time: 2026-09-06 22:37:49.386437566 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#772 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 772
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:40:37.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634588
+  _job: 34064202921
+  _time: 2026-09-06 22:37:49.581105667 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#771 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 771
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:40:21.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634589
+  _job: 34064202921
+  _time: 2026-09-06 22:37:49.857121443 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#770 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 770
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:40:20.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634590
+  _job: 34064202921
+  _time: 2026-09-06 22:37:50.060821055 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#769 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 769
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:39:41.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634591
+  _job: 34064202921
+  _time: 2026-09-06 22:37:50.234467907 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#768 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 768
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:39:40.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634592
+  _job: 34064202921
+  _time: 2026-09-06 22:37:50.526078454 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#767 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 767
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:39:19.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634593
+  _job: 34064202921
+  _time: 2026-09-06 22:37:50.788901438 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#766 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 766
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:38:47.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634594
+  _job: 34064202921
+  _time: 2026-09-06 22:37:50.963163737 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#765 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 765
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:38:46.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634595
+  _job: 34064202921
+  _time: 2026-09-06 22:37:51.171123530 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#764 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 764
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:38:29.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634596
+  _job: 34064202921
+  _time: 2026-09-06 22:37:51.378811973 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#763 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 763
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:38:16.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634597
+  _job: 34064202921
+  _time: 2026-09-06 22:37:51.555358044 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The issue zerocracy/pages-action#762 has been earlier opened by @morphqdd.
+  is_human: 1
+  issue: 762
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-09-06 21:37:55.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2634598
+  _job: 34064202921
+  _time: 2026-09-06 22:38:38.835797805 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 1566
+- _id: 2634599
+  _job: 34064202921
+  _time: 2026-09-06 22:43:06.024149251 Z
   _version: 0.19.16/0.61.1/0.17.22
   issue: 1566
