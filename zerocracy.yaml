@@ -2,15 +2,20 @@
 - added: 8
   cycles: 2
   deleted: 8
-  error: 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634599], _job: [34065618392],
-    _time: [2026-09-06 23:07:45.57572631 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+  error:
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634599], _job: [34067066865],
+    _time: [2026-09-06 23:36:00.047843944 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    issue: [1566] ]'
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634600], _job: [34067066865],
+    _time: [2026-09-06 23:39:14.628340258 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
     issue: [1566] ]'
   inserted: 8
-  seconds: 1097.980740387
+  seconds: 471.970656376
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-06 23:19:42.580268518 Z
+  when: 2026-09-06 23:39:44.672277345 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -189101,7 +189106,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 2
+  min_issue_was_found: 30
   min_pull_was_found: 0
   repository: 1090089359
   types_were_scanned: 0
@@ -191291,7 +191296,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 68
+  min_issue_was_found: 73
   min_pull_was_found: 90
   repository: 974194993
   types_were_scanned: 0
@@ -197811,7 +197816,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 68
+  min_issue_was_found: 80
   min_pull_was_found: 115
   repository: 805238060
   types_were_scanned: 0
@@ -197828,7 +197833,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 4
+  min_issue_was_found: 16
   min_pull_was_found: 12
   repository: 1084843345
   types_were_scanned: 0
@@ -198283,7 +198288,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 600
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14530377780
@@ -198291,10 +198296,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 525
+  min_issue_was_found: 526
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 584
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -198948,7 +198953,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 619
+  min_issue_was_found: 621
   min_pull_was_found: 550
   repository: 802720676
   types_were_scanned: 681
@@ -199094,7 +199099,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 463
+  min_issue_was_found: 464
   min_pull_was_found: 298
   repository: 799113787
   types_were_scanned: 0
@@ -199131,7 +199136,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 237
   merges_were_scanned: 0
-  min_issue_was_found: 469
+  min_issue_was_found: 470
   min_pull_was_found: 237
   repository: 181044958
   types_were_scanned: 0
@@ -199141,7 +199146,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1990
+  assignees_were_scanned: 1472
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14532277402
@@ -199152,7 +199157,7 @@
   min_issue_was_found: 1564
   min_pull_was_found: 1916
   repository: 799177290
-  types_were_scanned: 1721
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -286609,9 +286614,6 @@
   comments: 1
   details: It's time to reward @morphqdd for the code contributed in yegor256/judges#550,
     the reward amount is 24.
-  greeting: 'Thanks for the contribution! You''ve earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
-    them coming. Your running score is [+4954](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 43
   href: https://github.com/yegor256/judges/issues/550/#issuecomment-5562711801
   is_human: 1
@@ -286626,7 +286628,12 @@
   who: 125282851
   why: Contributed code in yegor256/judges#550
 - _id: 2634599
-  _job: 34065618392
-  _time: 2026-09-06 23:07:45.575726310 Z
+  _job: 34067066865
+  _time: 2026-09-06 23:36:00.047843944 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 1566
+- _id: 2634600
+  _job: 34067066865
+  _time: 2026-09-06 23:39:14.628340258 Z
   _version: 0.19.16/0.61.1/0.17.22
   issue: 1566
