@@ -4,15 +4,18 @@
   deleted: 8
   error:
   - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634555], _job: [34055090114],
-    _time: [2026-09-06 19:34:31.436367142 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634561], _job: [34056625710],
+    _time: [2026-09-06 20:04:50.979506639 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
     issue: [1566] ]'
-  - deadlock; recursive locking
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634562], _job: [34056625710],
+    _time: [2026-09-06 20:08:08.499241873 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    issue: [1566] ]'
   inserted: 8
-  seconds: 1090.301477629
+  seconds: 521.474995157
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-06 19:50:03.427370798 Z
+  when: 2026-09-06 20:10:26.670016864 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17333,94 +17336,6 @@
   when: 2025-12-23 08:57:52.000000000 Z
   where: github
   who: 526301
-- _id: 2599574
-  _job: 55206
-  _time: 2025-12-24 21:40:03.244818843 Z
-  _version: 0.19.2/0.58.1/0.17.6!0.17.8
-  award: 24
-  comments: 2
-  details: It's time to reward @yegorov for the code contributed in zerocracy/judges-action#1246,
-    the reward amount is 24.
-  hoc: 30
-  href: https://github.com/zerocracy/judges-action/issues/1246
-  is_human: 1
-  issue: 1246
-  receipt: receipt-#55027
-  repository: 799177290
-  review_comments: 0
-  seconds: 35703
-  tombstone: 2026-08-28 22:01:46.404113810 Z
-  what: code-contribution-was-rewarded
-  when: 2025-12-24 19:37:56.074926550 Z
-  where: github
-  who: 2566462
-  why: Contributed code in zerocracy/judges-action#1246
-- _id: 2599575
-  _job: 55206
-  _time: 2025-12-24 21:40:03.499069067 Z
-  _version: 0.19.2/0.58.1/0.17.6!0.17.8
-  award: 24
-  comments: 2
-  details: It's time to reward @yegorov for the code contributed in zerocracy/judges-action#1249,
-    the reward amount is 24.
-  hoc: 44
-  href: https://github.com/zerocracy/judges-action/issues/1249
-  is_human: 1
-  issue: 1249
-  receipt: receipt-#55028
-  repository: 799177290
-  review_comments: 0
-  seconds: 115793
-  tombstone: 2026-08-29 20:46:38.359982214 Z
-  what: code-contribution-was-rewarded
-  when: 2025-12-24 19:38:00.694443355 Z
-  where: github
-  who: 2566462
-  why: Contributed code in zerocracy/judges-action#1249
-- _id: 2599576
-  _job: 55206
-  _time: 2025-12-24 21:40:03.732030500 Z
-  _version: 0.19.2/0.58.1/0.17.6!0.17.8
-  award: 24
-  comments: 2
-  details: It's time to reward @yegorov for the code contributed in zerocracy/judges-action#1253,
-    the reward amount is 24.
-  hoc: 75
-  href: https://github.com/zerocracy/judges-action/issues/1253
-  is_human: 1
-  issue: 1253
-  receipt: receipt-#55029
-  repository: 799177290
-  review_comments: 0
-  seconds: 32155
-  tombstone: 2026-08-31 20:21:40.426732805 Z
-  what: code-contribution-was-rewarded
-  when: 2025-12-24 19:38:05.640371351 Z
-  where: github
-  who: 2566462
-  why: Contributed code in zerocracy/judges-action#1253
-- _id: 2599577
-  _job: 55206
-  _time: 2025-12-24 21:40:03.930064001 Z
-  _version: 0.19.2/0.58.1/0.17.6!0.17.8
-  award: 20
-  comments: 14
-  details: It's time to reward @yegorov for the code contributed in zerocracy/judges-action#1256,
-    the reward amount is 20.
-  hoc: 14
-  href: https://github.com/zerocracy/judges-action/issues/1256
-  is_human: 1
-  issue: 1256
-  receipt: receipt-#55030
-  repository: 799177290
-  review_comments: 5
-  seconds: 67395
-  tombstone: 2026-09-05 20:11:45.258721546 Z
-  what: code-contribution-was-rewarded
-  when: 2025-12-24 19:38:13.052768467 Z
-  where: github
-  who: 2566462
-  why: Contributed code in zerocracy/judges-action#1256
 - _id: 2599604
   _job: 20499565266
   _time: 2025-12-25 05:20:59.749601883 Z
@@ -189191,7 +189106,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 2
+  min_issue_was_found: 30
   min_pull_was_found: 0
   repository: 1090089359
   types_were_scanned: 0
@@ -191381,10 +191296,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 62
+  min_issue_was_found: 63
   min_pull_was_found: 90
   repository: 974194993
-  types_were_scanned: 84
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -195147,10 +195062,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 36
+  min_issue_was_found: 37
   min_pull_was_found: 76
   repository: 1236759415
-  types_were_scanned: 59
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629477
@@ -197901,7 +197816,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 32
+  min_issue_was_found: 34
   min_pull_was_found: 115
   repository: 805238060
   types_were_scanned: 0
@@ -197918,7 +197833,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 58
+  min_issue_was_found: 60
   min_pull_was_found: 12
   repository: 1084843345
   types_were_scanned: 0
@@ -197939,7 +197854,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 687
   repository: 798641472
-  types_were_scanned: 748
+  types_were_scanned: 677
   what: iterate
   where: github
 - _id: 2629842
@@ -197954,10 +197869,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 287
+  min_issue_was_found: 288
   min_pull_was_found: 241
   repository: 840215648
-  types_were_scanned: 322
+  types_were_scanned: 416
   what: iterate
   where: github
 - _id: 2629843
@@ -197971,7 +197886,7 @@
   issues_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 145
   repository: 857659265
   types_were_scanned: 0
@@ -198373,7 +198288,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 748
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14528690195
@@ -198384,7 +198299,7 @@
   min_issue_was_found: 512
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 480
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -199041,7 +198956,7 @@
   min_issue_was_found: 601
   min_pull_was_found: 550
   repository: 802720676
-  types_were_scanned: 593
+  types_were_scanned: 681
   what: iterate
   where: github
 - _id: 2629939
@@ -199184,10 +199099,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 0
-  min_issue_was_found: 448
+  min_issue_was_found: 454
   min_pull_was_found: 298
   repository: 799113787
-  types_were_scanned: 502
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630021
@@ -199231,7 +199146,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1472
+  assignees_were_scanned: 1731
   closures_were_checked: 1637
   earliest_issue_was_found: 1
   events_were_scanned: 20266581461
@@ -199242,7 +199157,7 @@
   min_issue_was_found: 1564
   min_pull_was_found: 1916
   repository: 799177290
-  types_were_scanned: 1524
+  types_were_scanned: 1897
   what: iterate
   where: github
 - _id: 2630036
@@ -199256,7 +199171,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 20
+  min_issue_was_found: 0
   min_pull_was_found: 16
   repository: 1081929119
   types_were_scanned: 0
@@ -199277,7 +199192,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 1090
   repository: 728758275
-  types_were_scanned: 791
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -286183,11 +286098,6 @@
   when: 2026-09-06 19:26:04.000000000 Z
   where: github
   who: 113778529
-- _id: 2634555
-  _job: 34055090114
-  _time: 2026-09-06 19:34:31.436367142 Z
-  _version: 0.19.16/0.61.1/0.17.22
-  issue: 1566
 - _id: 2634556
   _job: 34055090114
   _time: 2026-09-06 19:35:13.033996851 Z
@@ -286258,3 +286168,13 @@
   when: 2026-09-06 19:24:12.000000000 Z
   where: github
   who: 113778529
+- _id: 2634561
+  _job: 34056625710
+  _time: 2026-09-06 20:04:50.979506639 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 1566
+- _id: 2634562
+  _job: 34056625710
+  _time: 2026-09-06 20:08:08.499241873 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 1566
