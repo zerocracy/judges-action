@@ -1,16 +1,21 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
-  error: 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634921], _job: [34127990464],
-    _time: [2026-09-07 13:50:32.744797172 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+  error:
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634921], _job: [34130553528],
+    _time: [2026-09-07 14:09:07.223132828 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    issue: [1566] ]'
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634922], _job: [34130553528],
+    _time: [2026-09-07 14:15:17.756064555 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
     issue: [1566] ]'
   inserted: 8
-  seconds: 1026.616174526
+  seconds: 848.252207042
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-07 13:51:48.281764044 Z
+  when: 2026-09-07 14:15:46.155768034 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -197888,7 +197893,7 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 748
+  assignees_were_scanned: 600
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 14573026044
@@ -197896,10 +197901,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 0
-  min_issue_was_found: 578
+  min_issue_was_found: 579
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 726
+  types_were_scanned: 584
   what: iterate
   where: github
 - _id: 2629882
@@ -198727,10 +198732,10 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1990
+  assignees_were_scanned: 1472
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20327922953
+  events_were_scanned: 20339084322
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 1073
@@ -198738,7 +198743,7 @@
   min_issue_was_found: 1564
   min_pull_was_found: 1916
   repository: 799177290
-  types_were_scanned: 1721
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -290113,6 +290118,7 @@
   href: https://github.com/yegor256/factbase/issues/777/#issuecomment-5569503427
   is_human: 1
   issue: 777
+  receipt: receipt-#90629
   repository: 798641472
   review_comments: 0
   seconds: 76607
@@ -290133,6 +290139,7 @@
   href: https://github.com/yegor256/factbase/issues/776/#issuecomment-5569503659
   is_human: 1
   issue: 776
+  receipt: receipt-#90630
   repository: 798641472
   review_comments: 0
   seconds: 76870
@@ -290153,6 +290160,7 @@
   href: https://github.com/yegor256/factbase/issues/775/#issuecomment-5569503930
   is_human: 1
   issue: 775
+  receipt: receipt-#90631
   repository: 798641472
   review_comments: 0
   seconds: 77042
@@ -290173,6 +290181,7 @@
   href: https://github.com/yegor256/factbase/issues/774/#issuecomment-5569504201
   is_human: 1
   issue: 774
+  receipt: receipt-#90632
   repository: 798641472
   review_comments: 0
   seconds: 77116
@@ -291204,6 +291213,7 @@
   _time: 2026-09-07 13:49:58.733665138 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#803 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 803
   repository: 820463873
   what: issue-was-opened
@@ -291215,6 +291225,7 @@
   _time: 2026-09-07 13:49:59.528642132 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/fbe#802 has been earlier opened by @gemshrine.
+  is_human: 1
   issue: 802
   repository: 820463873
   what: issue-was-opened
@@ -291222,7 +291233,12 @@
   where: github
   who: 113778529
 - _id: 2634921
-  _job: 34127990464
-  _time: 2026-09-07 13:50:32.744797172 Z
+  _job: 34130553528
+  _time: 2026-09-07 14:09:07.223132828 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 1566
+- _id: 2634922
+  _job: 34130553528
+  _time: 2026-09-07 14:15:17.756064555 Z
   _version: 0.19.16/0.61.1/0.17.22
   issue: 1566
