@@ -333,10 +333,7 @@ class TestPullRequest < Jp::Test
     [20, 22, 24].each { |i| stub_github("https://api.github.com/repos/foo/foo/issues/comments/#{i}/reactions", body: []) }
     stub_github('https://api.github.com/repos/foo/foo/pulls/comments/20/reactions', body: [])
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
-      pr = {
-        number: 7, comments: 3, review_comments: 2,
-        user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } }
-      }
+      pr = { number: 7, comments: 3, review_comments: 2, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
       info = Jp.comments_info(pr)
       assert_equal(2, info[:comments], 'bots and the named bot must not be counted')
       assert_equal(1, info[:comments_to_code])

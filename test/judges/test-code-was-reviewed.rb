@@ -99,10 +99,7 @@ class TestCodeWasReviewed < Jp::Test
     stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 50, where: 'github')
-    load_it(
-      'code-was-reviewed', fb,
-      Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => 'rultor' })
-    )
+    load_it('code-was-reviewed', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => 'rultor' }))
     assert(fb.one?(what: 'code-was-reviewed', issue: 50, who: 422, comments: 1))
   end
 
