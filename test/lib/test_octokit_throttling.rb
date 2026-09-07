@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: MIT
 
 require 'octokit'
-require_relative '../../lib/patches/octokit_429'
+require_relative '../../lib/patches/octokit_throttling'
 require_relative '../test__helper'
 
-class TestOctokit429 < Jp::Test
+class TestOctokitThrottling < Jp::Test
   def test_turns_a_throttled_answer_into_too_many_requests
     [403, 429].each do |status|
       assert_kind_of(Octokit::TooManyRequests, error(status), "status #{status}")

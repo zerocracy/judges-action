@@ -8,7 +8,7 @@ require 'fbe/iterate'
 require 'fbe/octo'
 require 'octokit'
 require_relative '../../lib/issue_was_lost'
-require_relative '../../lib/patches/octokit_429'
+require_relative '../../lib/patches/octokit_throttling'
 
 Fbe.iterate do
   as 'closures_were_checked'
