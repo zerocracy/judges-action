@@ -52,7 +52,7 @@ class TestPullWasMerged < Jp::Test
       assert(
         fb.one?(
           what: 'pull-was-closed', where: 'github', who: 422, repository: 42, issue: 44, hoc: 17,
-          comments: 0, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
+          comments: 1, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
           comments_resolved: 0, comments_to_code: 0, succeeded_builds: 0, branch: '40',
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
@@ -106,7 +106,7 @@ class TestPullWasMerged < Jp::Test
       assert(
         fb.one?(
           what: 'pull-was-closed', where: 'github', who: 422, repository: 42, issue: 44, hoc: 17,
-          comments: 0, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
+          comments: 1, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
           comments_resolved: 0, comments_to_code: 1, succeeded_builds: 0, branch: '40',
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
