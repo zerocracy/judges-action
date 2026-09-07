@@ -309,6 +309,65 @@ class TestPullRequest < Jp::Test
     assert_equal(0, count)
   end
 
+  def test_counts_only_the_comments_that_people_made
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({ 'bots' => 'rultor' })
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/7/comments?per_page=100',
+      body: [
+        { id: 20, user: { id: 5, login: 'jeff', type: 'User' } },
+        { id: 21, user: { id: 9, login: 'github-actions', type: 'Bot' } }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/7/comments?per_page=100',
+      body: [
+        { id: 22, user: { id: 6, login: 'walter', type: 'User' } },
+        { id: 23, user: { id: 7, login: '0crat', type: 'Bot' } },
+        { id: 24, user: { id: 8, login: 'rultor', type: 'User' } }
+      ]
+    )
+    [20, 22, 24].each { |i| stub_github("https://api.github.com/repos/foo/foo/issues/comments/#{i}/reactions", body: []) }
+    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/20/reactions', body: [])
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = {
+        number: 7, comments: 3, review_comments: 2,
+        user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } }
+      }
+      info = Jp.comments_info(pr)
+      assert_equal(2, info[:comments], 'bots and the named bot must not be counted')
+      assert_equal(1, info[:comments_to_code])
+      assert_equal(1, info[:comments_by_author])
+      assert_equal(1, info[:comments_by_reviewers])
+    end
+  end
+
+  def test_counts_every_comment_when_no_bot_wrote_one
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/8/comments?per_page=100',
+      body: [{ id: 30, user: { id: 5, login: 'jeff', type: 'User' } }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/8/comments?per_page=100',
+      body: [{ id: 31, user: { id: 6, login: 'walter', type: 'User' } }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/comments/31/reactions', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/30/reactions', body: [])
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 8, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(2, info[:comments])
+    end
+  end
+
   def test_skips_pr_comments_on_not_found
     WebMock.disable_net_connect!
     rate_limit_up

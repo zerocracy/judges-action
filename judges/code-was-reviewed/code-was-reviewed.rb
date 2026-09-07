@@ -9,6 +9,7 @@ require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
 require 'octokit'
+require_relative '../../lib/humans'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.consider(
@@ -116,7 +117,7 @@ Fbe.consider(
       n.author = pr.dig(:user, :id)
       count ||=
         begin
-          Fbe.octo.issue_comments(repo, f.issue).count
+          Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
           0
