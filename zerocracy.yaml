@@ -1,16 +1,21 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
-  error: 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
-    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634949], _job: [34143709279],
-    _time: [2026-09-07 16:46:33.946000844 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+  error:
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634955], _job: [34145762810],
+    _time: [2026-09-07 17:05:47.911171574 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
+    issue: [1566] ]'
+  - 'Failure in repository #799177290 at #1566: The fact doesn''t match the "(and
+    \n# MIT License\n#\n# Copyrigh..." rule: [ _id: [2634981], _job: [34145762810],
+    _time: [2026-09-07 17:15:59.627112804 UTC], _version: ["0.19.16/0.61.1/0.17.22"],
     issue: [1566] ]'
   inserted: 8
-  seconds: 818.726517797
+  seconds: 885.657211799
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-07 16:47:15.684740806 Z
+  when: 2026-09-07 17:16:38.408566333 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17316,21 +17321,6 @@
   when: 2025-12-23 08:57:52.000000000 Z
   where: github
   who: 526301
-- _id: 2599604
-  _job: 20499565266
-  _time: 2025-12-25 05:20:59.749601883 Z
-  _version: 0.19.2/0.58.1/0.17.6
-  branch: renovate/ruby-4.x
-  details: The pull request zerocracy/fbe#380 has been opened by @renovate[bot].
-  event_id: 5492466075
-  event_type: PullRequestEvent
-  is_human: 0
-  issue: 380
-  repository: 820463873
-  what: pull-was-opened
-  when: 2025-12-25 05:07:33.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2599605
   _job: 20499565266
   _time: 2025-12-25 05:21:13.503876226 Z
@@ -17374,26 +17364,6 @@
   when: 2025-12-17 14:05:58.000000000 Z
   where: github
   who: 29139614
-- _id: 2599713
-  _job: 20509136406
-  _time: 2025-12-25 18:21:39.099086766 Z
-  _version: 0.19.2/0.58.1/0.17.7
-  comments: 4
-  commits: 1
-  details: The pull request zerocracy/fbe#380 has been reviewed by @yegor256 with
-    2 HoC and 4 comments.
-  event_id: 5496862792
-  event_type: PullRequestReviewEvent
-  files: 1
-  hoc: 2
-  is_human: 1
-  issue: 380
-  repository: 820463873
-  review_comments: 0
-  what: pull-was-reviewed
-  when: 2025-12-25 16:47:07.000000000 Z
-  where: github
-  who: 526301
 - _id: 2599721
   _job: 20509136406
   _time: 2025-12-25 18:26:30.150680971 Z
@@ -17416,28 +17386,11 @@
   review_comments: 0
   succeeded_builds: 10
   suggestions: 0
+  tombstone: 2026-09-07 16:49:06.142320045 Z
   what: pull-was-merged
   when: &189 2025-12-25 16:54:07.000000000 Z
   where: github
   who: 8086956
-- _id: 2599723
-  _job: 20509136406
-  _time: 2025-12-25 18:46:43.744342245 Z
-  _version: 0.19.2/0.58.1/0.17.7
-  author: 29139614
-  comments: 4
-  details: The pull request zerocracy/fbe#380 with 2 HoC created by @renovate[bot]
-    was reviewed by @yegor256 after 11h39m and 0 comments.
-  hoc: 2
-  is_human: 1
-  issue: 380
-  repository: 820463873
-  review_comments: 0
-  seconds: 41972
-  what: code-was-reviewed
-  when: 2025-12-25 16:47:05.000000000 Z
-  where: github
-  who: 526301
 - _id: 2599729
   _job: 55319
   _time: 2025-12-25 19:45:34.318520746 Z
@@ -17452,6 +17405,7 @@
   repository: 820463873
   review_comments: 0
   seconds: 42394
+  tombstone: 2026-09-07 16:49:06.144516626 Z
   what: code-was-contributed
   when: *189
   where: github
@@ -17471,6 +17425,7 @@
   repository: 820463873
   review_comments: 0
   seconds: 41972
+  tombstone: 2026-09-07 16:49:06.146467391 Z
   what: code-review-was-rewarded
   when: 2025-12-25 18:53:04.889320432 Z
   where: github
@@ -188671,7 +188626,7 @@
   - 3-159
   - 161-340
   - 342-360
-  - 362-379
+  - 362-380
   repository: 820463873
   what: tombstone
   where: github
@@ -188702,7 +188657,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 2
   min_pull_was_found: 0
   repository: 1090089359
   types_were_scanned: 0
@@ -190892,7 +190847,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 59
+  min_issue_was_found: 60
   min_pull_was_found: 90
   repository: 974194993
   types_were_scanned: 0
@@ -197183,7 +197138,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 225
+  min_issue_was_found: 226
   min_pull_was_found: 261
   repository: 849726475
   types_were_scanned: 0
@@ -197429,12 +197384,12 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19807356554
+  events_were_scanned: 14583902474
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 16
+  min_issue_was_found: 22
   min_pull_was_found: 12
   repository: 1084843345
   types_were_scanned: 0
@@ -197447,7 +197402,7 @@
   assignees_were_scanned: 701
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14578167114
+  events_were_scanned: 20353109103
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 315
@@ -197465,12 +197420,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14469624698
+  events_were_scanned: 14581890387
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 360
+  min_issue_was_found: 361
   min_pull_was_found: 241
   repository: 840215648
   types_were_scanned: 0
@@ -197487,7 +197442,7 @@
   issues_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 145
   repository: 857659265
   types_were_scanned: 0
@@ -197889,10 +197844,10 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 748
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14573999952
+  events_were_scanned: 20352893600
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
@@ -197900,7 +197855,7 @@
   min_issue_was_found: 582
   min_pull_was_found: 625
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 726
   what: iterate
   where: github
 - _id: 2629882
@@ -198549,7 +198504,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 14571851908
+  events_were_scanned: 20353280365
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
@@ -198695,7 +198650,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20328193011
+  events_were_scanned: 14584262777
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
@@ -198713,7 +198668,7 @@
   assignees_were_scanned: 447
   closures_were_checked: 406
   earliest_issue_was_found: 1
-  events_were_scanned: 20347889946
+  events_were_scanned: 14584335560
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 237
@@ -198728,7 +198683,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1472
+  assignees_were_scanned: 1731
   closures_were_checked: 1637
   earliest_issue_was_found: 1
   events_were_scanned: 20350308782
@@ -198739,7 +198694,7 @@
   min_issue_was_found: 1564
   min_pull_was_found: 1916
   repository: 799177290
-  types_were_scanned: 0
+  types_were_scanned: 1657
   what: iterate
   where: github
 - _id: 2630036
@@ -198753,7 +198708,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 20
+  min_issue_was_found: 5
   min_pull_was_found: 16
   repository: 1081929119
   types_were_scanned: 0
@@ -291532,6 +291487,7 @@
   _time: 2026-09-07 16:44:25.079220438 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/baza.rb#450 has been earlier opened by @gemshrine.
+  is_human: 1
   issue: 450
   repository: 840215648
   what: issue-was-opened
@@ -291543,6 +291499,7 @@
   _time: 2026-09-07 16:46:17.694125107 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/swarm-template#295 has been earlier opened by @gemshrine.
+  is_human: 1
   issue: 295
   repository: 849726475
   what: issue-was-opened
@@ -291554,6 +291511,7 @@
   _time: 2026-09-07 16:46:22.503911321 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#802 has been earlier opened by @gemshrine.
+  is_human: 1
   issue: 802
   repository: 802720676
   what: issue-was-opened
@@ -291565,6 +291523,7 @@
   _time: 2026-09-07 16:46:22.927752973 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#801 has been earlier opened by @gemshrine.
+  is_human: 1
   issue: 801
   repository: 802720676
   what: issue-was-opened
@@ -291576,6 +291535,7 @@
   _time: 2026-09-07 16:46:23.127543883 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/pages-action#800 has been earlier opened by @gemshrine.
+  is_human: 1
   issue: 800
   repository: 802720676
   what: issue-was-opened
@@ -291587,6 +291547,7 @@
   _time: 2026-09-07 16:46:31.045821876 Z
   _version: 0.19.16/0.61.1/0.17.22
   details: The issue zerocracy/brand-book#75 has been earlier opened by @gemshrine.
+  is_human: 1
   issue: 75
   repository: 1084843345
   what: issue-was-opened
@@ -291594,7 +291555,515 @@
   where: github
   who: 113778529
 - _id: 2634949
-  _job: 34143709279
-  _time: 2026-09-07 16:46:33.946000844 Z
+  _job: 34145762810
+  _time: 2026-09-07 17:03:34.336935129 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#805.
+  is_human: 1
+  issue: 805
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2026-09-07 16:56:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634950
+  _job: 34145762810
+  _time: 2026-09-07 17:03:34.879177300 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/pages-action#800.
+  is_human: 1
+  issue: 800
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2026-09-07 16:56:17.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634951
+  _job: 34145762810
+  _time: 2026-09-07 17:03:35.411976619 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#806.
+  is_human: 1
+  issue: 806
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2026-09-07 16:56:37.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634952
+  _job: 34145762810
+  _time: 2026-09-07 17:03:36.041423498 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/pages-action#801.
+  is_human: 1
+  issue: 801
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2026-09-07 16:56:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634953
+  _job: 34145762810
+  _time: 2026-09-07 17:03:36.548048928 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#807.
+  is_human: 1
+  issue: 807
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2026-09-07 16:56:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634954
+  _job: 34145762810
+  _time: 2026-09-07 17:03:37.086174057 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/pages-action#802.
+  is_human: 1
+  issue: 802
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2026-09-07 16:56:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634955
+  _job: 34145762810
+  _time: 2026-09-07 17:05:47.911171574 Z
   _version: 0.19.16/0.61.1/0.17.22
   issue: 1566
+- _id: 2634956
+  _job: 34145762810
+  _time: 2026-09-07 17:06:45.501521277 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, yegor256/factbase#783 has been "issue-was-closed".
+  is_human: 1
+  issue: 783
+  repository: 798641472
+  what: issue-was-closed
+  when: 2026-09-07 17:01:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634957
+  _job: 34145762810
+  _time: 2026-09-07 17:07:14.644517364 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/pages-action#758 has been "issue-was-closed".
+  is_human: 1
+  issue: 758
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-09-07 17:05:24.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634958
+  _job: 34145762810
+  _time: 2026-09-07 17:07:18.022883772 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/pages-action#759 has been "issue-was-closed".
+  is_human: 1
+  issue: 759
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-09-07 17:05:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634959
+  _job: 34145762810
+  _time: 2026-09-07 17:07:21.535887579 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/pages-action#760 has been "issue-was-closed".
+  is_human: 1
+  issue: 760
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-09-07 17:05:10.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634960
+  _job: 34145762810
+  _time: 2026-09-07 17:07:30.854544788 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, yegor256/judges#552 has been "issue-was-closed".
+  is_human: 1
+  issue: 552
+  repository: 799113787
+  what: issue-was-closed
+  when: 2026-09-07 17:03:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634961
+  _job: 34145762810
+  _time: 2026-09-07 17:07:38.075168021 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/pages-action#767 has been "issue-was-closed".
+  is_human: 1
+  issue: 767
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-09-07 17:05:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634962
+  _job: 34145762810
+  _time: 2026-09-07 17:07:40.507569032 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/pages-action#768 has been "issue-was-closed".
+  is_human: 1
+  issue: 768
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-09-07 17:05:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634963
+  _job: 34145762810
+  _time: 2026-09-07 17:07:42.563422352 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/pages-action#769 has been "issue-was-closed".
+  is_human: 1
+  issue: 769
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-09-07 17:05:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634964
+  _job: 34145762810
+  _time: 2026-09-07 17:07:47.573772609 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/pages-action#773 has been "issue-was-closed".
+  is_human: 1
+  issue: 773
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-09-07 17:05:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634965
+  _job: 34145762810
+  _time: 2026-09-07 17:07:52.535718356 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/fbe#773 has been "issue-was-closed".
+  is_human: 1
+  issue: 773
+  repository: 820463873
+  what: issue-was-closed
+  when: 2026-09-07 17:00:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634966
+  _job: 34145762810
+  _time: 2026-09-07 17:07:53.853973361 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/fbe#774 has been "issue-was-closed".
+  is_human: 1
+  issue: 774
+  repository: 820463873
+  what: issue-was-closed
+  when: 2026-09-07 17:00:44.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634967
+  _job: 34145762810
+  _time: 2026-09-07 17:07:55.056035780 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, yegor256/0rsk#484 has been "issue-was-closed".
+  is_human: 1
+  issue: 484
+  repository: 181044958
+  what: issue-was-closed
+  when: 2026-09-07 17:03:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634968
+  _job: 34145762810
+  _time: 2026-09-07 17:07:57.811531312 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/fbe#777 has been "issue-was-closed".
+  is_human: 1
+  issue: 777
+  repository: 820463873
+  what: issue-was-closed
+  when: 2026-09-07 17:00:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634969
+  _job: 34145762810
+  _time: 2026-09-07 17:07:59.117769387 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: Apparently, zerocracy/fbe#778 has been "issue-was-closed".
+  is_human: 1
+  issue: 778
+  repository: 820463873
+  what: issue-was-closed
+  when: 2026-09-07 17:00:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634970
+  _job: 34145762810
+  _time: 2026-09-07 17:11:20.866770724 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: 552-each-with-index
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#556 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 55
+  is_human: 1
+  issue: 556
+  repository: 799113787
+  reviews: 0
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:03:04.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634971
+  _job: 34145762810
+  _time: 2026-09-07 17:11:34.887981553 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: renovate/csv-3.x-lockfile
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/0rsk#486 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 486
+  repository: 181044958
+  review: 2026-09-07 16:36:16.000000000 Z
+  reviews: 1
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:03:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634972
+  _job: 34145762810
+  _time: 2026-09-07 17:11:46.063674685 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: '484'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/0rsk#487 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 27
+  is_human: 1
+  issue: 487
+  repository: 181044958
+  reviews: 0
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:03:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634973
+  _job: 34145762810
+  _time: 2026-09-07 17:11:57.075291288 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: 783-fallback-for-mixed-indexed-ranges
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#820 has been "pull-was-merged".
+  failed_builds: 0
+  files: 5
+  hoc: 45
+  is_human: 1
+  issue: 820
+  repository: 798641472
+  reviews: 0
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:01:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634974
+  _job: 34145762810
+  _time: 2026-09-07 17:12:09.379737756 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: 774-overwrite-returns-nil
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/fbe#787 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 25
+  is_human: 1
+  issue: 787
+  repository: 820463873
+  reviews: 0
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:00:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634975
+  _job: 34145762810
+  _time: 2026-09-07 17:12:17.785200685 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: 773-fbe-error-docstrings
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/fbe#788 has been "pull-was-merged".
+  failed_builds: 0
+  files: 14
+  hoc: 58
+  is_human: 1
+  issue: 788
+  repository: 820463873
+  reviews: 0
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:00:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634976
+  _job: 34145762810
+  _time: 2026-09-07 17:12:26.642766124 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: 777-formatter-stateless
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/fbe#790 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 62
+  is_human: 1
+  issue: 790
+  repository: 820463873
+  reviews: 0
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:00:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634977
+  _job: 34145762810
+  _time: 2026-09-07 17:12:34.875459297 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  branch: 778-iterate-nil-marker
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/fbe#791 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 33
+  is_human: 1
+  issue: 791
+  repository: 820463873
+  reviews: 0
+  succeeded_builds: 10
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-07 17:00:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634978
+  _job: 34145762810
+  _time: 2026-09-07 17:13:02.017524932 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/0rsk#488.
+  is_human: 1
+  issue: 488
+  label: bug
+  repository: 181044958
+  what: label-was-attached
+  when: 2026-09-07 16:56:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634979
+  _job: 34145762810
+  _time: 2026-09-07 17:13:02.733232034 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/0rsk#489.
+  is_human: 1
+  issue: 489
+  label: bug
+  repository: 181044958
+  what: label-was-attached
+  when: 2026-09-07 16:56:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634980
+  _job: 34145762810
+  _time: 2026-09-07 17:13:03.487657859 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/0rsk#490.
+  is_human: 1
+  issue: 490
+  label: bug
+  repository: 181044958
+  what: label-was-attached
+  when: 2026-09-07 16:56:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2634981
+  _job: 34145762810
+  _time: 2026-09-07 17:15:59.627112804 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  issue: 1566
+- _id: 2634982
+  _job: 34145762810
+  _time: 2026-09-07 17:16:28.883827401 Z
+  _version: 0.19.16/0.61.1/0.17.22
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/0rsk#486 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 10h2m and 0 comments.
+  hoc: 2
+  issue: 486
+  repository: 181044958
+  review_comments: 0
+  seconds: 36135
+  what: code-was-reviewed
+  when: 2026-09-07 16:36:16.000000000 Z
+  where: github
+  who: 526301
