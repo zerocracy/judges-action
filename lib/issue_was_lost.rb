@@ -22,18 +22,20 @@ def Jp.issue_was_lost(where, repository, issue)
     $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
     return
   end
-  f =
-    Fbe.if_absent do |n|
-      n.issue = issue
-      n.what = 'issue-was-lost'
-      n.repository = repository
-      n.where = where
+  Fbe.fb.txn do |fbt|
+    f =
+      Fbe.if_absent(fb: fbt) do |n|
+        n.issue = issue
+        n.what = 'issue-was-lost'
+        n.repository = repository
+        n.where = where
+      end
+    if f.nil?
+      $loog.warn("The issue ##{issue} was already lost")
+      next
     end
-  unless f
-    $loog.warn("The issue ##{issue} was already lost")
-    return
+    f.stale = 'issue'
+    f.when = Time.now
+    $loog.info("The issue #{issue} was marked as lost")
   end
-  f.stale = 'issue'
-  f.when = Time.now
-  $loog.info("The issue #{issue} was marked as lost")
 end

@@ -118,6 +118,37 @@ class TestFindAllIssues < Jp::Test
     refute_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
   end
 
+  def test_find_all_issues_with_lost_min
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
+    )
+    stub_github(
+      'https://api.github.com/repositories/695',
+      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/87',
+      status: 404,
+      body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.issue = 87
+      f.repository = 695
+      f.stale = 'issue'
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    refute_empty(
+      fb.query("(and (eq what 'issue-was-lost') (eq issue 87))").each.to_a,
+      'the lost issue cannot be recorded when the factbase enforces its rules'
+    )
+  end
+
   def test_find_all_issues
     WebMock.disable_net_connect!
     rate_limit_up
