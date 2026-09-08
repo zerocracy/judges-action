@@ -318,7 +318,8 @@ class TestCoverQo < Minitest::Test
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
-      gap = facts.find do |fact|
+      gap =
+        facts.find do |fact|
         fact.since == Time.parse('2025-02-01 12:00:00 UTC')
       end
       refute_nil(gap, 'gap after nested window is filled')
