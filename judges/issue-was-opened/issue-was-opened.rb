@@ -68,9 +68,15 @@ Fbe.conclude do
       end
     n.what = $judge
     n.when = json[:created_at]
-    n.who = json.dig(:user, :id)
-    n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.info("The issue #{Fbe.issue(n)} was opened by #{Fbe.who(n)} #{n.when.ago} ago")
+    who = json.dig(:user, :id)
+    if who
+      n.who = who
+    else
+      n.stale = 'who'
+    end
+    author = who ? Fbe.who(n) : 'an unknown user'
+    n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{author}."
+    $loog.info("The issue #{Fbe.issue(n)} was opened by #{author} #{n.when.ago} ago")
   end
 end
 

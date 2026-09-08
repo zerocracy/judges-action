@@ -56,6 +56,34 @@ class TestMilestoneWasSet < Jp::Test
     end
   end
 
+  def test_survives_a_milestone_whose_creator_is_gone
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
+      body: [
+        {
+          number: 1,
+          title: 'v1.0',
+          description: 'First release',
+          state: 'open',
+          created_at: '2024-01-15T10:00:00Z',
+          due_on: nil,
+          creator: nil
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('milestone-was-set', fb)
+    assert(fb.one?(what: 'milestone-was-set', milestone: 1))
+    f = fb.query("(eq what 'milestone-was-set')").each.to_a.first
+    assert_equal('who', f.stale)
+    assert_nil(f['who'])
+  end
+
   def test_empty_milestones_list
     WebMock.disable_net_connect!
     rate_limit_up

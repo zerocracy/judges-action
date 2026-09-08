@@ -75,7 +75,12 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         end
       next if f.nil?
       f.when = json[:created_at]
-      f.who = json.dig(:user, :id)
+      who = json.dig(:user, :id)
+      if who
+        f.who = who
+      else
+        f.stale = 'who'
+      end
       if type == 'pull'
         ref =
           begin
@@ -97,7 +102,8 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
           f.stale = 'branch'
         end
       end
-      f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+      author = who ? Fbe.who(f) : 'an unknown user'
+      f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{author}."
       $loog.info("The #{type} #{Fbe.issue(f)} is not tombstoned among #{ts.issues('github', r.repository).count}")
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end

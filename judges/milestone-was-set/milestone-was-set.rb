@@ -68,7 +68,12 @@ Fbe.consider(
       end
       nn.when = m[:created_at]
       nn.deadline = m[:due_on] if m[:due_on]
-      nn.who = m.dig(:creator, :id)
+      who = m.dig(:creator, :id)
+      if who
+        nn.who = who
+      else
+        nn.stale = 'who'
+      end
       nn.details = "The milestone ##{m[:number]} \"#{m[:title]}\" was set."
       $loog.info("Milestone ##{m[:number]} \"#{m[:title]}\" found in #{repo}")
     end
