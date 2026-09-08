@@ -44,6 +44,28 @@ class TestAddReviewComments < Jp::Test
     assert_equal(1, facts.first.review_comments)
   end
 
+  def test_ignores_bot_review_comments
+    WebMock.disable_net_connect!
+    pl = { id: 96, comments: 2 }
+    repo = 42
+    stub(repo, pl)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/96/comments?per_page=100',
+      body: [
+        { user: { type: 'Bot', login: 'review-bot' } },
+        { user: { type: 'User', login: 'reviewer' } }
+      ]
+    )
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = pl[:id]
+    fact.repository = repo
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    assert_equal(1, fb.query("(eq issue #{pl[:id]})").each.first.review_comments)
+  end
+
   def test_adds_review_comments_to_bare_facts
     WebMock.disable_net_connect!
     pulls = [{ id: 93, comments: 2 }, { id: 94, comments: 1 }, { id: 95, comments: 4 }]
@@ -228,6 +250,10 @@ class TestAddReviewComments < Jp::Test
           commits: 2,
           changed_files: 3
         }
+      )
+      stub_github(
+        "https://api.github.com/repos/foo/foo/pulls/#{pl[:id]}/comments?per_page=100",
+        body: Array.new(pl[:comments]) { { user: { type: 'User', login: 'reviewer' } } }
       )
     end
     stub_github(

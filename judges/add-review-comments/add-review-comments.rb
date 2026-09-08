@@ -6,6 +6,7 @@
 require 'fbe/consider'
 require 'fbe/octo'
 require 'octokit'
+require_relative '../../lib/humans'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.consider(
@@ -75,7 +76,7 @@ Fbe.consider(
       )
       next
     end
-  c = json[:review_comments]
+  c = Jp.human_comments(Fbe.octo.pull_request_comments(repo, f.issue)).count
   f.review_comments = c
   $loog.info("Found #{c} review comments in #{repo}##{f.issue} (what: #{f.what})")
 end
