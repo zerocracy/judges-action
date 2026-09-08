@@ -29,8 +29,6 @@ class TestEntryCycles < Jp::Test
 
   private
 
-  # Runs the block of entry.sh that reads the cycles input, taken from the
-  # file itself, so the guard under test is the shipped one.
   def run_block(env)
     body = File.read(File.join(File.expand_path('..', __dir__), 'entry.sh'))
     block = body[/^cycles=\$\{INPUT_CYCLES\}\n(?:.*\n)*?^fi\n/]
