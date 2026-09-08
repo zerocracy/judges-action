@@ -48,9 +48,8 @@ Fbe.consider(
       )
       next
     end
-  json =
-    begin
-      Fbe.octo.pull_request(repo, f.issue)
+  begin
+    Fbe.octo.pull_request(repo, f.issue)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Failed to find issue ##{f.issue} in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
@@ -75,7 +74,7 @@ Fbe.consider(
         "(will retry next cycle): #{e.class}: #{e.message}"
       )
       next
-    end
+  end
   c = Jp.human_comments(Fbe.octo.pull_request_comments(repo, f.issue)).count
   f.review_comments = c
   $loog.info("Found #{c} review comments in #{repo}##{f.issue} (what: #{f.what})")
