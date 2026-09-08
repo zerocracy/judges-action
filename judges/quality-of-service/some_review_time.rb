@@ -35,9 +35,7 @@ def some_review_time(fact)
       if first
         seconds = Integer(pr[:pull_request][:merged_at] - first[:submitted_at])
         if seconds.negative?
-          $loog.info(
-            "The pull ##{pr[:number]} in #{repo} was first reviewed after it was merged, "             'its review time is not measurable'
-          )
+          $loog.info("The pull ##{pr[:number]} in #{repo} was reviewed after it was merged")
         else
           times << seconds
         end

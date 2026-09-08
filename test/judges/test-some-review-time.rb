@@ -30,9 +30,7 @@ class TestSomeReviewTime < Jp::Test
     $global = {}
     $loog = Loog::NULL
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
-    found = {
-      items: [{ id: 1, number: 10, pull_request: { merged_at: Time.parse('2025-01-10 12:00:00 UTC') } }]
-    }
+    found = { items: [{ id: 1, number: 10, pull_request: { merged_at: Time.parse('2025-01-10 12:00:00 UTC') } }] }
     Jp::FakeGithub.new(
       'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
       'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
