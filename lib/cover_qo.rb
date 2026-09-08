@@ -35,7 +35,7 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
   gaps = []
   facts.each do |f|
     gaps << { since: prev.when, when: f.since } if f.since > prev.when
-    prev = f
+    prev = f if f.when > prev.when
   end
   large = gaps.reject { |g| g[:when] - g[:since] < slice }
   large.reject { |g| facts.find { |f| g[:since] < f.when && g[:when] > f.since } }.each do |g|

@@ -300,6 +300,32 @@ class TestCoverQo < Minitest::Test
     end
   end
 
+  def test_fills_gap_after_fact_nested_in_previous_window
+    fb = Factbase.new
+    now = Time.parse('2025-03-01 12:00:00 UTC')
+    outer = fb.insert
+    outer.what = 'test-judge'
+    outer.since = Time.parse('2025-01-01 12:00:00 UTC')
+    outer.when = Time.parse('2025-02-01 12:00:00 UTC')
+    nested = fb.insert
+    nested.what = 'test-judge'
+    nested.since = Time.parse('2025-01-10 12:00:00 UTC')
+    nested.when = Time.parse('2025-01-12 12:00:00 UTC')
+    later = fb.insert
+    later.what = 'test-judge'
+    later.since = Time.parse('2025-02-20 12:00:00 UTC')
+    later.when = Time.parse('2025-03-01 12:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a
+      gap = facts.find do |fact|
+        fact.since == Time.parse('2025-02-01 12:00:00 UTC')
+      end
+      refute_nil(gap, 'gap after nested window is filled')
+      assert_equal(Time.parse('2025-02-20 12:00:00 UTC'), gap.when)
+    end
+  end
+
   def test_adds_fresh_fact_past_slice_boundary
     fb = Factbase.new
     now = Time.parse('2025-01-20 12:00:00 UTC')
