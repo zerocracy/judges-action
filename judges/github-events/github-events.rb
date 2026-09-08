@@ -161,7 +161,7 @@ Fbe.iterate do
       rname = Fbe.octo.repo_name_by_id(fact.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Repository ##{fact.repository} not found by ID: #{e.message}")
-      return
+      skip(json)
     rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repo name for ##{fact.repository} " \
