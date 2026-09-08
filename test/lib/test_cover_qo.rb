@@ -16,7 +16,7 @@ class TestCoverQo < Minitest::Test
       now = Time.now
       Time.stub(:now, now) do
         Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL)
-      end
+        end
       facts = fb.query("(eq what 'test-judge')").each.to_a
       assert_equal(1, facts.size, 'exactly one fact inserted when none exist')
       assert_equal('test-judge', facts.first.what)
