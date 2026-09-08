@@ -64,7 +64,8 @@ The plugin gives them awards for good things
   they do (like fixing bugs) and also punishes them (by deducting points)
   for bad things (like stale pull requests).
 
-The plugin also generates a summary `foo.html` file, which
+The plugin also generates a summary `foo-vitals.html` file
+  in the `output` directory of `pages-action` (`pages` by default), which
   is automatically deployed to the `gh-pages` branch.
 You can configure your GitHub repository to render the branch
   as a static website via [GitHub Pages].
