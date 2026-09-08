@@ -5,6 +5,7 @@
 
 require 'fbe/github_graph'
 require 'fbe/octo'
+require_relative 'humans'
 require_relative 'jp'
 
 def Jp.comments_info(pr, repo: nil)
@@ -36,10 +37,12 @@ def Jp.comments_info(pr, repo: nil)
       )
       []
     end
+  ccomments = Jp.human_comments(ccomments)
+  icomments = Jp.human_comments(icomments)
   org, rname = repo.split('/')
   uid = pr.dig(:user, :id)
   {
-    comments: (pr[:comments] || 0) + (pr[:review_comments] || 0),
+    comments: ccomments.count + icomments.count,
     comments_to_code: ccomments.count,
     comments_by_author: ccomments.count { |c| c.dig(:user, :id) == uid } +
       icomments.count { |c| c.dig(:user, :id) == uid },
