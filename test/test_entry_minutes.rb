@@ -40,8 +40,6 @@ class TestEntryMinutes < Jp::Test
 
   private
 
-  # Runs the block of entry.sh that reads one of the two minute inputs,
-  # taken from the file itself, so the guard under test is the shipped one.
   def run_block(name, env)
     body = File.read(File.join(File.expand_path('..', __dir__), 'entry.sh'))
     block = body[/^#{name}=\$\{INPUT_#{name.upcase}\}\n(?:.*\n)*?#{name}=\$\(\(#{name} \* 60\)\)\n/]
