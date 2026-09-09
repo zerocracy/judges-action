@@ -11,7 +11,6 @@ require 'tago'
 require 'time'
 require_relative 'jp'
 
-# Factbase cannot store an empty property, so keep completion separately.
 Jp::INCREMATE_MARKER = '_incremate'
 
 def Jp.incremate(
