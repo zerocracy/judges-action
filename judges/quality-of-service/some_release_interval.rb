@@ -26,7 +26,7 @@ def some_release_interval(fact)
     releases.each do |json|
       next if json[:published_at].nil?
       next if json[:published_at] > fact.when
-      break if json[:published_at] < fact.since
+      next if json[:published_at] < fact.since
       dates << json[:published_at]
     end
     dates.sort!
