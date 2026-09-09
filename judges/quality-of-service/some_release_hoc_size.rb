@@ -27,12 +27,12 @@ def some_release_hoc_size(fact)
     releases.each do |json|
       next if json[:published_at].nil?
       next if json[:published_at] > fact.when
-      break if json[:published_at] < fact.since
+      next if json[:published_at] < fact.since
       (grouped[repo] ||= []) << json
     end
   end
   grouped.each do |repo, releases|
-    releases.reverse.each_cons(2) do |first, last|
+    releases.sort_by { |release| release[:published_at] }.each_cons(2) do |first, last|
       compare =
         begin
           Fbe.octo.compare(repo, first[:tag_name], last[:tag_name])
