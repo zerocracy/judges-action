@@ -24,14 +24,26 @@ module Fbe
           repos << mask
           next
         end
-        re = Fbe.mask_to_regex(mask)
         org = mask.split('/')[0]
+        re =
+          if org == '*'
+            Regexp.compile(
+              "\\A[^/]+/#{Regexp.escape(mask.split('/', 2)[1] || '*').gsub('\\*', '.*')}\\z",
+              Regexp::IGNORECASE
+            )
+          else
+            Fbe.mask_to_regex(mask)
+          end
         list =
           begin
-            begin
-              octo.organization_repositories(org, type: 'all')
-            rescue Octokit::NotFound
-              octo.repositories(org)
+            if org == '*'
+              octo.repositories
+            else
+              begin
+                octo.organization_repositories(org, type: 'all')
+              rescue Octokit::NotFound
+                octo.repositories(org)
+              end
             end
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden, Octokit::Unauthorized,
             Octokit::ServerError, Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
