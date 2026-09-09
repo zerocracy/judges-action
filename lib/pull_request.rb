@@ -161,6 +161,7 @@ def Jp.fetch_workflows(pr, repo: nil)
           nil
         end
     next unless rid
+    next if runs[rid]
     workflow =
       runs[rid] ||=
         begin
