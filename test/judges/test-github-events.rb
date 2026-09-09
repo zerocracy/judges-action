@@ -1309,6 +1309,36 @@ class TestGithubEvents < Jp::Test
     assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 55_555))
   end
 
+  def test_skips_event_whose_repository_cannot_be_resolved
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/repositories/99', status: 404, body: { message: 'Not Found' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '77777', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
+          repo: { id: 99, name: 'foo/gone', url: 'https://api.github.com/repos/foo/gone' },
+          payload: { action: 'published', release: { id: 178_369, tag_name: '9.9.9' } },
+          created_at: Time.parse('2025-06-27T00:52:08Z')
+        }
+      ]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 77_777))
+    assert_equal(0, fb.query('(eq event_id 77777)').each.to_a.size)
+  end
+
   def test_pull_request_event_with_comments
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'zerocracy/baza', 'testing' => true }))
