@@ -11,6 +11,9 @@ require 'tago'
 require 'time'
 require_relative 'jp'
 
+# Factbase cannot store an empty property, so keep completion separately.
+Jp::INCREMATE_MARKER = '_incremate'
+
 def Jp.incremate(
   fact, dir, prefix, avoid_duplicate: true, pause: 0,
   max_per_fact: nil,
@@ -19,8 +22,8 @@ def Jp.incremate(
   evaluated = 0
   Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
-    if fact[n]
-      $loog.debug("#{n} is here: #{fact[n].first}")
+    if fact[n] || fact[Jp::INCREMATE_MARKER]&.include?(n)
+      $loog.debug("#{n} is here: #{fact[n]&.first || 'empty'}")
       next
     end
     break if Fbe.over?(epoch:, kickoff:)
@@ -46,6 +49,9 @@ def Jp.incremate(
       end
       if h.key?(n.to_sym) && !(avoid_duplicate && fact.all_properties.include?(n))
         Array(h[n.to_sym]).each { fact.__send__("#{n}=", _1) }
+      end
+      if h[n.to_sym].is_a?(Array) && h[n.to_sym].empty?
+        fact.__send__("#{Jp::INCREMATE_MARKER}=", n)
       end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
