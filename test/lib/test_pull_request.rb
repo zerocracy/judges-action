@@ -74,6 +74,20 @@ class TestPullRequest < Jp::Test
     assert_equal(2, count)
   end
 
+  def test_asks_for_no_reactions_when_github_says_there_are_none
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    count = Jp.count_appreciated_comments(
+      { base: { repo: { full_name: 'foo/foo' } } },
+      [{ id: 101, user: { id: 7 }, reactions: { total_count: 0 } }],
+      [{ id: 202, user: { id: 7 }, reactions: { total_count: 0 } }]
+    )
+    assert_equal(0, count)
+  end
+
   def test_counts_reactions_when_comment_user_is_nil
     WebMock.disable_net_connect!
     rate_limit_up
