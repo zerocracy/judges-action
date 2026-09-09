@@ -66,7 +66,12 @@ Fbe.conclude do
       end
     n.what = $judge
     n.when = json[:created_at]
-    n.who = json.dig(:user, :id)
+    who = json.dig(:user, :id)
+    if who
+      n.who = who
+    else
+      n.stale = 'who'
+    end
     ref =
       begin
         Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
@@ -86,7 +91,8 @@ Fbe.conclude do
     else
       n.stale = 'branch'
     end
-    n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
+    author = who ? Fbe.who(n) : 'an unknown user'
+    n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{author}."
     $loog.info("The pull #{Fbe.issue(n)} was opened #{n.when.ago} ago")
   end
 end

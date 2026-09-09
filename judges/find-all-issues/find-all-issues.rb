@@ -94,7 +94,12 @@ require_relative '../../lib/qos_search'
             next if f.nil?
             found << f.issue
             f.when = json[:created_at]
-            f.who = json.dig(:user, :id)
+            who = json.dig(:user, :id)
+            if who
+              f.who = who
+            else
+              f.stale = 'who'
+            end
             if type == 'pull'
               ref =
                 begin
@@ -116,8 +121,9 @@ require_relative '../../lib/qos_search'
                 f.stale = 'branch'
               end
             end
-            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Fbe.who(f)}."
-            $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
+            author = who ? Fbe.who(f) : 'an unknown user'
+            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{author}."
+            $loog.info("The #{Fbe.issue(f)} was opened by #{author} #{f.when.ago} ago")
           end
         end
         issue = first if issue < first
