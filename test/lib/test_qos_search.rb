@@ -7,6 +7,20 @@ require 'fbe/octo'
 require_relative '../../lib/qos_search'
 require_relative '../test__helper'
 
+class FakeOffQuotaOcto
+  def get(_path)
+    { resources: { search: { remaining: 10, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }
+  end
+
+  def with_disable_auto_paginate
+    yield(self)
+  end
+
+  def search_issues(*_args, **_kwargs)
+    raise(Fbe::OffQuota, 'off quota')
+  end
+end
+
 class TestQosSearch < Jp::Test
   def setup
     @rackenv = ENV.fetch('RACK_ENV', nil)
@@ -109,6 +123,13 @@ class TestQosSearch < Jp::Test
     searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, remaining: 0, status: 403)
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
+  end
+
+  def test_latches_when_offquota_raised_during_search
+    Fbe.stub(:octo, FakeOffQuotaOcto.new) do
+      assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    end
+    assert(Jp.instance_variable_get(:@offquota)[$judge])
   end
 
   def test_qoreset_clears_the_latch
