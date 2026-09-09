@@ -14,6 +14,18 @@ require_relative '../test__helper'
 class TestGithubEvents < Jp::Test
   using SmartFactbase
 
+  def setup
+    super
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/93/comments?per_page=100',
+      body: [{ user: { type: 'User', login: 'commenter' } }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93/comments?per_page=100',
+      body: Array.new(2) { { user: { type: 'User', login: 'reviewer' } } }
+    )
+  end
+
   def test_create_tag_event
     WebMock.disable_net_connect!
     rate_limit_up
