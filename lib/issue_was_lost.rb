@@ -4,12 +4,14 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/fb'
+require 'fbe/if_absent'
 require 'fbe/tombstone'
 require_relative 'jp'
 
-def Jp.issue_was_lost(where, repository, issue)
+# @todo #2074:30min Bury through the given "fb", once zerocracy/fbe#843 lets Fbe.overwrite run in a txn.
+def Jp.issue_was_lost(where, repository, issue, fb: Fbe.fb)
   stale =
-    Fbe.fb.query(
+    fb.query(
       "(and
       (eq where '#{where}')
       (eq repository #{repository})
@@ -22,20 +24,18 @@ def Jp.issue_was_lost(where, repository, issue)
     $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
     return
   end
-  Fbe.fb.txn do |fbt|
-    f =
-      Fbe.if_absent(fb: fbt) do |n|
-        n.issue = issue
-        n.what = 'issue-was-lost'
-        n.repository = repository
-        n.where = where
-      end
-    if f.nil?
-      $loog.warn("The issue ##{issue} was already lost")
-      next
+  f =
+    Fbe.if_absent(fb:) do |n|
+      n.where = where
+      n.repository = repository
+      n.issue = issue
+      n.what = 'issue-was-lost'
     end
-    f.stale = 'issue'
-    f.when = Time.now
-    $loog.info("The issue #{issue} was marked as lost")
+  if f.nil?
+    $loog.warn("The issue ##{issue} was already lost")
+    return
   end
+  f.stale = 'issue'
+  f.when = Time.now
+  $loog.info("The issue #{issue} was marked as lost")
 end
