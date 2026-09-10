@@ -88,4 +88,43 @@ class TestIssueWasLost < Minitest::Test
       assert(Fbe::Tombstone.new(fb: fb).has?('github', 7, 11), 'tombstone must contain the issue after the call')
     end
   end
+
+  def test_dont_keep_the_lost_fact_when_the_transaction_rolls_back
+    seed = Random.new_seed
+    issue = Random.new(seed).rand(1..100_000)
+    fb = Factbase.new
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      fb.txn do |fbt|
+        Jp.issue_was_lost('github', 42, issue, fb: fbt)
+        throw(:rollback)
+      end
+      assert_empty(
+        fb.query("(and (eq what 'issue-was-lost') (eq issue #{issue}))").each.to_a,
+        "the issue-was-lost fact survived a rolled back transaction, seed #{seed}"
+      )
+    end
+  end
+
+  def test_dont_keep_the_stale_flag_when_the_transaction_rolls_back
+    seed = Random.new_seed
+    issue = Random.new(seed).rand(1..100_000)
+    fb = Factbase.new
+    f = fb.insert
+    f.where = 'github'
+    f.repository = 42
+    f.issue = issue
+    f.what = 'pull-was-opened'
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      fb.txn do |fbt|
+        Jp.issue_was_lost('github', 42, issue, fb: fbt)
+        throw(:rollback)
+      end
+      assert_nil(
+        fb.query("(eq issue #{issue})").each.first['stale'],
+        "the stale flag survived a rolled back transaction, seed #{seed}"
+      )
+    end
+  end
 end
