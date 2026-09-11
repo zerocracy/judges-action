@@ -654,6 +654,61 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_dont_pair_failure_with_success_of_other_repository
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    workflow = Random.new(seed).rand(1..1_000_000)
+    started = Time.parse('2024-08-07T10:00:00Z')
+    runs = {
+      'foo/foo' => [
+        { id: 1, status: 'completed', conclusion: 'failure', workflow_id: workflow, run_started_at: started }
+      ],
+      'bar/bar' => [
+        { id: 2, status: 'completed', conclusion: 'success', workflow_id: workflow, run_started_at: started + 3_600 }
+      ]
+    }
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |repo, *| { workflow_runs: runs[repo] } }
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 600_000 } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { runs.each_key(&block) }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_mttr], "repair times pair runs of two repositories, seed: #{seed}")
+      end
+    end
+  end
+
+  def test_pairs_failure_after_failure_of_other_repository
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    random = Random.new(seed)
+    workflow = random.rand(1..1_000_000)
+    gap = random.rand(60..86_400)
+    started = Time.parse('2024-08-07T10:00:00Z')
+    runs = {
+      'bar/bar' => [
+        { id: 1, status: 'completed', conclusion: 'failure', workflow_id: workflow, run_started_at: started + 90_000 }
+      ],
+      'foo/foo' => [
+        { id: 2, status: 'completed', conclusion: 'failure', workflow_id: workflow, run_started_at: started },
+        { id: 3, status: 'completed', conclusion: 'success', workflow_id: workflow, run_started_at: started + gap }
+      ]
+    }
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |repo, *| { workflow_runs: runs[repo] } }
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 600_000 } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { runs.each_key(&block) }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([gap], metrics[:some_build_mttr], "repair time is taken from other repository, seed: #{seed}")
+      end
+    end
+  end
+
   def test_skips_run_without_duration
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
