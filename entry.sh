@@ -72,7 +72,9 @@ fi
 
 name="$(basename "${INPUT_FACTBASE}")"
 name="${name%.*}"
-fb=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )")
+fb="$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )"
+mkdir -p "$(dirname "${fb}")"
+fb=$(realpath "${fb}")
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
     echo "The file name is: \"${INPUT_FACTBASE}\""
