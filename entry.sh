@@ -192,12 +192,17 @@ if [ "${bots_found}" == "false" ]; then
 fi
 
 cache_min_age=false
+declare -a kept=()
 for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=sqlite_cache_min_age=" ]]; then
+        continue
+    fi
     if [[ "${opt}" == "--option=sqlite_cache_min_age="* ]]; then
         cache_min_age=true
-        break
     fi
+    kept+=("${opt}")
 done
+options=("${kept[@]}")
 if [ "${cache_min_age}" == "false" ]; then
     options+=("--option=sqlite_cache_min_age=3600");
 fi
