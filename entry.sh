@@ -318,9 +318,10 @@ else
         "${name}" "${fb}"
 fi
 
+churn_val=$(cat churn.txt 2>/dev/null || echo '0i/0d/0a')
+fb_size=$(ruby -e "require 'factbase'; f=Factbase.new; f.import(File.binread(ARGV[0])); puts f.size" "$fb" 2>/dev/null || echo '0')
+
 if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
-    churn_val=$(cat churn.txt 2>/dev/null || echo '0i/0d/0a')
-    fb_size=$(ruby -e "require 'factbase'; f=Factbase.new; f.import(File.binread(ARGV[0])); puts f.size" "$fb" 2>/dev/null || echo '0')
     title="judges-action ${action_version} did ${churn_val} to ${fb_size} facts"
     echo "Updating workflow run title to: ${title}"
     curl -s -X PATCH \
@@ -329,6 +330,9 @@ if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
         "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
         -d "$(jq -n --arg t "${title}" '{"display_title": $t}')" > /dev/null || \
         echo "Failed to update workflow run title (non-critical)"
+fi
+
+if [ -n "${GITHUB_STEP_SUMMARY}" ]; then
     {
         echo "## zerocracy run"
         echo ""
@@ -340,5 +344,5 @@ if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
         echo "| Duration | $(($(date +%s) - start))s |"
         echo "| Owner | ${owner} |"
         echo "| Vitals | [View](${VITALS_URL}) |"
-    } > "${GITHUB_WORKSPACE}/summary.md" 2>/dev/null || true
+    } >> "${GITHUB_STEP_SUMMARY}" || echo "Failed to write the run report to ${GITHUB_STEP_SUMMARY} (non-critical)"
 fi
