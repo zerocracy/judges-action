@@ -255,6 +255,95 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 0, failed_builds: 1 }, result)
   end
 
+  def test_fetch_workflows_counts_check_run_by_its_own_job_id
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    seed = Random.new_seed
+    random = Random.new(seed)
+    job = random.rand(100_000_000_000...1_000_000_000_000)
+    run = random.rand(10_000_000_000...100_000_000_000)
+    pr = { number: 66, head: { sha: 'dd789' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/dd789/check-runs?per_page=100',
+      body: {
+        check_runs: [
+          {
+            id: job, app: { slug: 'github-actions' },
+            details_url: "https://github.com/foo/foo/actions/runs/#{run}/job/#{job}"
+          }
+        ]
+      }
+    )
+    stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{job}", body: { id: job, run_id: run })
+    stub_github(
+      "https://api.github.com/repos/foo/foo/actions/runs/#{run}",
+      body: { id: run, event: 'pull_request', conclusion: 'failure' }
+    )
+    assert_equal(
+      { succeeded_builds: 0, failed_builds: 1 }, Jp.fetch_workflows(pr),
+      "check run #{job} of run #{run} is not counted as its own job, seed #{seed}"
+    )
+  end
+
+  def test_fetch_workflows_counts_jobs_of_one_run_from_single_fetch
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    seed = Random.new_seed
+    random = Random.new(seed)
+    first = random.rand(100_000_000_000...1_000_000_000_000)
+    second = first + random.rand(1..1000)
+    run = random.rand(10_000_000_000...100_000_000_000)
+    pr = { number: 77, head: { sha: 'ee012' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/ee012/check-runs?per_page=100',
+      body: { check_runs: [first, second].map { |id| { id:, app: { slug: 'github-actions' } } } }
+    )
+    [first, second].each do |id|
+      stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{id}", body: { id:, run_id: run })
+    end
+    stub_request(:get, "https://api.github.com/repos/foo/foo/actions/runs/#{run}")
+      .to_return(
+        body: { id: run, event: 'pull_request', conclusion: 'success' }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      ).then.to_return(status: 404, body: '')
+    assert_equal(
+      { succeeded_builds: 2, failed_builds: 0 }, Jp.fetch_workflows(pr),
+      "jobs #{first} and #{second} of run #{run} are not counted from one fetch, seed #{seed}"
+    )
+  end
+
+  def test_fetch_workflows_dont_resolve_foreign_check_run_as_job
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    seed = Random.new_seed
+    random = Random.new(seed)
+    id = random.rand(100_000_000_000...1_000_000_000_000)
+    slug = %w[codecov circleci-checks travis-ci renovate].sample(random:)
+    pr = { number: 88, head: { sha: 'ff345' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/ff345/check-runs?per_page=100',
+      body: { check_runs: [{ id:, app: { slug: } }] }
+    )
+    stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{id}", body: { id:, run_id: id + 1 })
+    stub_github(
+      "https://api.github.com/repos/foo/foo/actions/runs/#{id + 1}",
+      body: { id: id + 1, event: 'pull_request', conclusion: 'success' }
+    )
+    assert_equal(
+      { succeeded_builds: 0, failed_builds: 0 }, Jp.fetch_workflows(pr),
+      "check run #{id} of #{slug} is not kept away from the jobs endpoint, seed #{seed}"
+    )
+  end
+
   def test_counts_appreciated_skips_issue_not_found
     WebMock.disable_net_connect!
     rate_limit_up
