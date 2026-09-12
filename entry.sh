@@ -279,15 +279,17 @@ ${JUDGES} "${gopts[@]}" --hello update \
     "${ALL_JUDGES}" \
     "${fb}"
 
-if [ -e "${sqlite}" ] && [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
+if [ -z "${sqlite}" ]; then
+    echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
+elif [ ! -e "${sqlite}" ]; then
+    echo "SQLite cache file not found, skipping upload: ${sqlite}"
+elif [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
     ${JUDGES} "${gopts[@]}" upload \
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${sqlite}"
-elif [ -e "${sqlite}" ]; then
-    echo "We are in 'dry' mode; skipping SQLite upload"
 else
-    echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
+    echo "We are in 'dry' mode; skipping SQLite upload"
 fi
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
