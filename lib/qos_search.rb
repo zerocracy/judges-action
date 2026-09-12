@@ -51,7 +51,7 @@ def Jp.qosearch(query, method: :search_issues, **)
   if left.zero?
     @offquota = true
     @offquotatime = Time.now
-    $loog.info('Too much GitHub Search API quota consumed already (0 left)')
+    $loog.info("[#{$judge}] Too much GitHub Search API quota consumed already (0 left)")
     return
   end
   @scount += 1
