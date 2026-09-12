@@ -260,4 +260,17 @@ class TestFindLatestIssue < Jp::Test
       'forbidden error must not produce an issue-was-lost tombstone'
     )
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    load_it('find-latest-issue', fb)
+    assert_empty(
+      fb.query("(eq what 'issue-was-opened')").each.to_a,
+      'A vanished repository must produce no facts and must not abort the judge'
+    )
+  end
 end

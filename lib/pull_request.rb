@@ -5,6 +5,7 @@
 
 require 'fbe/github_graph'
 require 'fbe/octo'
+require_relative 'humans'
 require_relative 'jp'
 
 def Jp.comments_info(pr, repo: nil)
@@ -36,10 +37,12 @@ def Jp.comments_info(pr, repo: nil)
       )
       []
     end
+  ccomments = Jp.human_comments(ccomments)
+  icomments = Jp.human_comments(icomments)
   org, rname = repo.split('/')
   uid = pr.dig(:user, :id)
   {
-    comments: (pr[:comments] || 0) + (pr[:review_comments] || 0),
+    comments: ccomments.count + icomments.count,
     comments_to_code: ccomments.count,
     comments_by_author: ccomments.count { |c| c.dig(:user, :id) == uid } +
       icomments.count { |c| c.dig(:user, :id) == uid },
@@ -139,11 +142,12 @@ def Jp.fetch_workflows(pr, repo: nil)
     )
     return { succeeded_builds: 0, failed_builds: 0 }
   end
-  wcache = {}
+  jobs = {}
+  runs = {}
   (entries[:check_runs] || []).each do |run|
     next unless run.dig(:app, :slug) == 'github-actions'
     rid =
-      wcache[run[:id]] ||=
+      jobs[run[:id]] ||=
         begin
           Fbe.octo.workflow_run_job(repo, run[:id])[:run_id]
         rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -158,7 +162,7 @@ def Jp.fetch_workflows(pr, repo: nil)
         end
     next unless rid
     workflow =
-      wcache[rid] ||=
+      runs[rid] ||=
         begin
           Fbe.octo.workflow_run(repo, rid)
         rescue Octokit::NotFound, Octokit::Deprecated => e

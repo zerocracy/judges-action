@@ -15,12 +15,12 @@ rubocop:
 
 test: target/docker-image.txt
 	img=$$(cat target/docker-image.txt)
-	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges'
-	echo "$$?" > target/test.exit
+	docker run --rm --entrypoint '/bin/bash' "$${img}" -c 'bundle exec judges test --disable live --lib /action/lib /action/judges' || rc=$$?
+	echo "$${rc:-0}" > target/test.exit
 
 entry: target/docker-image.txt
-	./test-action.sh "$$(cat $<)"
-	echo "$$?" > target/entry.exit
+	./test-action.sh "$$(cat $<)" || rc=$$?
+	echo "$${rc:-0}" > target/entry.exit
 
 rmi: target/docker-image.txt
 	img=$$(cat $<)
@@ -36,7 +36,7 @@ verify:
 	e2=$$(cat target/entry.exit)
 	test "$${e2}" = "0"
 
-target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock $(wildcard lib/*.rb) $(wildcard judges/*/*.rb)
+target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock $(shell find lib judges -type f)
 	mkdir -p "$$(dirname $@)"
 	docker build -t judges-action "$$(pwd)"
 	docker build -t judges-action -q "$$(pwd)" > "$@"

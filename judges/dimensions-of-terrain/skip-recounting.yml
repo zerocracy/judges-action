@@ -11,5 +11,11 @@ input:
     _id: 42
     what: dimensions-of-terrain
     when: 2024-03-03T00:00:00
+    total_commits: 777
+    total_stars: 555
 expected:
   - /fb[count(f)=1]
+  - /fb/f[total_commits=777]
+  - /fb/f[total_stars=555]
+  - /fb/f[not(total_forks)]
+  - /fb/f[total_files]

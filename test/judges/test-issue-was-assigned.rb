@@ -50,9 +50,10 @@ class TestIssueWasAssigned < Jp::Test
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
     load_it('issue-was-assigned', fb)
-    assert_equal(2, fb.all.size)
+    assert_equal(3, fb.all.size)
     assert_equal(2, fb.picks(what: 'issue-was-opened').size)
     assert_equal(0, fb.picks(what: 'issue-was-assigned').size)
+    assert_equal(1, fb.picks(what: 'tombstone').size)
   end
 
   def test_with_duplicate_assigned_event
@@ -122,6 +123,20 @@ class TestIssueWasAssigned < Jp::Test
     assert_nil(
       f['stale'],
       '403 is transient — fact must NOT be marked stale; next cycle will retry the events lookup'
+    )
+  end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-assigned', fb)
+    assert_empty(
+      fb.query("(eq what 'issue-was-assigned')").each.to_a,
+      'A vanished repository must produce no facts and must not abort the judge'
     )
   end
 end

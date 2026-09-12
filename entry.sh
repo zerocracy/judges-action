@@ -16,8 +16,8 @@ if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
     auth_args=(-H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")")
 fi
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    resp=$(curl --silent "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest)
-    latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name) catch empty")
+    resp=$(curl --silent "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
+    latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name // empty) catch empty")
     if [ -z "${latest}" ]; then
         echo "!!! Could not fetch the latest version from GitHub."
         echo "!!! GitHub returned: "
@@ -105,7 +105,8 @@ VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${n
 
 declare -a options=()
 while IFS= read -r o; do
-    s=$(echo "${o}" | xargs)
+    s="${o#"${o%%[![:space:]]*}"}"
+    s="${s%"${s##*[![:space:]]}"}"
     if [ "${s}" = "" ]; then
         continue
     fi
@@ -137,16 +138,18 @@ else
     echo "Since 'fail-fast' is not set to 'true', we will run all judges even if some of them fail"
 fi
 
-${JUDGES} "${gopts[@]}" eval \
-    "${fb}" \
-    "\$fb.query(\"(eq what 'judges-summary')\").delete!"
-
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
     trap 'rm -rf "$ALL_JUDGES"' EXIT INT TERM
     options+=("--no-expect-judges")
+    summary=off
+    echo "We are in 'dry' mode; keeping the summary facts of the factbase intact"
 else
     ALL_JUDGES=${SELF}/judges
+    summary=add
+    ${JUDGES} "${gopts[@]}" eval \
+        "${fb}" \
+        "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 fi
 
 github_token_found=false
@@ -231,6 +234,10 @@ timeout=${INPUT_TIMEOUT}
 if [ -z "${timeout}" ]; then
     timeout=10
 fi
+if ! [[ "${timeout}" =~ ^[1-9][0-9]*$ ]]; then
+    echo "INPUT_TIMEOUT must be a positive integer, got: ${timeout}" >&2
+    exit 1
+fi
 timeout=$((timeout * 60))
 echo "Each judge will spend up to ${timeout} seconds"
 
@@ -238,12 +245,16 @@ lifetime=${INPUT_LIFETIME}
 if [ -z "${lifetime}" ]; then
     lifetime=15
 fi
+if ! [[ "${lifetime}" =~ ^[1-9][0-9]*$ ]]; then
+    echo "INPUT_LIFETIME must be a positive integer, got: ${lifetime}" >&2
+    exit 1
+fi
 lifetime=$((lifetime * 60))
 echo "The update will run for up to ${lifetime} seconds"
 
 cycles=${INPUT_CYCLES}
 if [ -n "${cycles}" ]; then
-    if ! [[ "${cycles}" =~ ^[0-9]+$ ]]; then
+    if ! [[ "${cycles}" =~ ^[1-9][0-9]*$ ]]; then
         echo "INPUT_CYCLES must be a positive integer, got: ${cycles}" >&2
         exit 1
     fi
@@ -255,7 +266,7 @@ echo "The total number of cycles to run is ${cycles}"
 ${JUDGES} "${gopts[@]}" --hello update \
     --no-log \
     --quiet \
-    --summary=add \
+    "--summary=${summary}" \
     --shuffle=aaa \
     --boost=github-events \
     --lifetime "${lifetime}" \
@@ -280,11 +291,12 @@ else
 fi
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    action_version=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL "${auth_args[@]}" https://api.github.com/repos/zerocracy/judges-action/releases/latest | jq -r '.tag_name')
-    if [ "${action_version}" == "${VERSION}" ] || [ "${action_version}" == null ]; then
+    resp=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL "${auth_args[@]}" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
+    latest=$(echo -n "${resp}" | jq -Rrs "try (fromjson | .tag_name // empty) catch empty")
+    if [ -z "${latest}" ] || [ "${latest}" == "${VERSION}" ]; then
         action_version=${VERSION}
     else
-        action_version="${VERSION}!${action_version}"
+        action_version="${VERSION}!${latest}"
     fi
 else
     action_version=${VERSION}

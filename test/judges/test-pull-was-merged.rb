@@ -52,7 +52,7 @@ class TestPullWasMerged < Jp::Test
       assert(
         fb.one?(
           what: 'pull-was-closed', where: 'github', who: 422, repository: 42, issue: 44, hoc: 17,
-          comments: 0, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
+          comments: 1, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
           comments_resolved: 0, comments_to_code: 0, succeeded_builds: 0, branch: '40',
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
@@ -106,7 +106,7 @@ class TestPullWasMerged < Jp::Test
       assert(
         fb.one?(
           what: 'pull-was-closed', where: 'github', who: 422, repository: 42, issue: 44, hoc: 17,
-          comments: 0, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
+          comments: 1, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 1,
           comments_resolved: 0, comments_to_code: 1, succeeded_builds: 0, branch: '40',
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
@@ -434,6 +434,58 @@ class TestPullWasMerged < Jp::Test
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
     assert_equal('issue', fb.pick(issue: 44, what: 'pull-was-opened').stale)
     assert(fb.none?(issue: 44, what: 'pull-was-merged'))
+  end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('pull-was-merged', fb)
+    assert_empty(
+      fb.query("(eq what 'pull-was-merged')").each.to_a,
+      'A vanished repository must produce no facts and must not abort the judge'
+    )
+  end
+
+  def test_dont_crash_when_pull_has_no_hoc
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' }, state: 'closed',
+        merged_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        created_at: Time.parse('2025-09-30 15:35:30 UTC'),
+        changed_files: 1,
+        head: { ref: '40', sha: 'aa123' },
+        base: { repo: { id: 42, full_name: 'foo/foo' } }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, title: 'some title', state: 'closed',
+        closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        closed_by: { login: 'user2', id: 422 }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert_equal(
+      0, fb.pick(what: 'pull-was-merged', issue: 44).hoc,
+      'A pull request that reports no additions and no deletions cannot abort the judge'
+    )
   end
 
   private

@@ -14,6 +14,7 @@ require 'tago'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 require_relative '../../lib/supervision'
+require_relative '../../lib/twice'
 
 Fbe.iterate do
   as 'events_were_scanned'
@@ -116,15 +117,20 @@ Fbe.iterate do
   end
 
   def self.earliest(repo)
-    commits = Fbe.octo.commits(repo)
-    last = commits.last
-    while commits.size != 1
-      commits = Fbe.octo.commits(repo, sha: last[:sha])
-      last = commits.last
+    last =
+      Fbe.octo.with_disable_auto_paginate do |octo|
+        page = octo.commits(repo, per_page: 1)
+        rel = octo.last_response.rels[:last]
+        page = rel.get.data unless rel.nil?
+        page.last
+      end
+    if last.nil?
+      $loog.info("No commits found in #{repo}")
+    else
+      $loog.debug("The repo ##{repo} has this last commit: #{last}")
     end
-    $loog.debug("The repo ##{repo} has this last commit: #{last}")
     last
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Conflict => e
     $loog.info("Commits not found for #{repo}: #{e.message}")
     nil
   rescue Octokit::Forbidden => e
@@ -155,7 +161,7 @@ Fbe.iterate do
       rname = Fbe.octo.repo_name_by_id(fact.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Repository ##{fact.repository} not found by ID: #{e.message}")
-      return
+      skip(json)
     rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Access forbidden to repo name for ##{fact.repository} " \
@@ -262,6 +268,16 @@ Fbe.iterate do
           "with #{fact.hoc} HoC and #{fact.comments} comments."
         skip(json) if seen?(fact)
         $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
+      when 'reopened'
+        Fbe.fb.query(
+          "(and
+            (eq where 'github')
+            (eq repository #{fact.repository})
+            (eq issue #{fact.issue})
+            (eq what 'pull-was-closed'))"
+        ).delete!
+        $loog.info("The pull #{Fbe.issue(fact)} was reopened, its closure is forgotten")
+        skip(json)
       else
         skip(json)
       end
@@ -293,7 +309,7 @@ Fbe.iterate do
         end
         skip(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
-        fact.hoc = pull[:additions] + pull[:deletions]
+        fact.hoc = (pull[:additions] || 0) + (pull[:deletions] || 0)
         fact.comments = pull[:comments] + pull[:review_comments]
         fact.review_comments = pull[:review_comments]
         fact.commits = pull[:commits]
@@ -343,8 +359,9 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'published'
         fact.what = 'release-published'
-        if fact.all_properties.include?('who') && fact.who != json[:payload][:release][:author][:id]
-          Fbe.overwrite(fact, 'who', json[:payload][:release][:author][:id])
+        author = json[:payload][:release].dig(:author, :id)
+        if author && fact.all_properties.include?('who') && fact.who != author
+          Fbe.overwrite(fact, 'who', author)
         end
         contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(fact, info(fact, rname))
@@ -386,22 +403,6 @@ Fbe.iterate do
       $loog.error("[#{$judge}] #{who} doesn't have access to the #{rname} repository, maybe it is private")
     end
     skip(json)
-  end
-
-  def self.twice?(fb, fact, what, fields)
-    pairs = fields.map { [_1, fact[_1]&.first] }
-    pairs.reject! { _1.last.nil? }
-    eqs =
-      pairs.map do |prop, value|
-        val =
-          case value
-          when String then "'#{value}'"
-          when Time then value.utc.iso8601
-          else value
-          end
-        "(eq #{prop} #{val})"
-      end
-    fb.query("(and (eq what '#{what}') #{eqs.join(' ')})").each.to_a.size > 1
   end
   over do |repository, latest|
     begin
@@ -473,7 +474,7 @@ Fbe.iterate do
               next
             end
             fill(f, json)
-            uniques.each { |w, ff| throw :rollback if twice?(fbt, f, w, ff) }
+            uniques.each { |w, ff| throw :rollback if Jp.twice?(fbt, f, w, ff) }
             if f['issue']
               throw :rollback unless Fbe.fb.query(
                 "(and

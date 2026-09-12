@@ -3,11 +3,13 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
 require 'octokit'
+require_relative '../../lib/humans'
 require_relative '../../lib/issue_was_lost'
 
 Fbe.consider(
@@ -17,6 +19,7 @@ Fbe.consider(
       (eq what 'pull-was-closed'))
     (exists repository)
     (exists issue)
+    (absent reviews)
     (absent stale)
     (absent tombstone)
     (absent done)
@@ -29,7 +32,20 @@ Fbe.consider(
         (eq where 'github')
         (eq what '#{$judge}'))))"
 ) do |f|
-  repo = Fbe.octo.repo_name_by_id(f.repository)
+  repo =
+    begin
+      Fbe.octo.repo_name_by_id(f.repository)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Failed to find repository #{f.repository}: #{e.message}")
+      f.stale = 'repository'
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to repository #{f.repository} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   pr =
     begin
       Fbe.octo.pull_request(repo, f.issue)
@@ -43,9 +59,11 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
-    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
-      Net::OpenTimeout, Net::ReadTimeout, SocketError,
-      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    rescue Octokit::Unauthorized => e
+      $loog.error("[#{$judge}] Not authorized to fetch pull ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
+      next
+    rescue Octokit::TooManyRequests, Octokit::ServerError,
+      Faraday::TimeoutError, Faraday::ConnectionFailed => e
       $loog.warn(
         "[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
@@ -65,18 +83,25 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
-    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
-      Net::OpenTimeout, Net::ReadTimeout, SocketError,
-      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    rescue Octokit::Unauthorized => e
+      $loog.error(
+        "[#{$judge}] Not authorized to fetch reviews for pull ##{f.issue} in #{repo}: #{e.class}: #{e.message}"
+      )
+      next
+    rescue Octokit::TooManyRequests, Octokit::ServerError,
+      Faraday::TimeoutError, Faraday::ConnectionFailed => e
       $loog.warn(
         "[#{$judge}] Transient error fetching reviews for pull ##{f.issue} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
       )
       next
     end
+  f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
   count = nil
   reviews.each do |review|
-    next if review.dig(:user, :id) == pr.dig(:user, :id)
+    reviewer = review.dig(:user, :id)
+    next if reviewer.nil?
+    next if reviewer == pr.dig(:user, :id)
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
@@ -88,11 +113,11 @@ Fbe.consider(
         end
       next if n.nil?
       n.when = review[:submitted_at]
-      n.hoc = pr[:additions] + pr[:deletions]
+      n.hoc = (pr[:additions] || 0) + (pr[:deletions] || 0)
       n.author = pr.dig(:user, :id)
       count ||=
         begin
-          Fbe.octo.issue_comments(repo, f.issue).count
+          Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
           0
@@ -102,9 +127,13 @@ Fbe.consider(
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           0
-        rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
-          Net::OpenTimeout, Net::ReadTimeout, SocketError,
-          Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        rescue Octokit::Unauthorized => e
+          $loog.error(
+            "[#{$judge}] Not authorized to fetch issue comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
+          )
+          0
+        rescue Octokit::TooManyRequests, Octokit::ServerError,
+          Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
@@ -124,9 +153,13 @@ Fbe.consider(
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           0
-        rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
-          Net::OpenTimeout, Net::ReadTimeout, SocketError,
-          Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        rescue Octokit::Unauthorized => e
+          $loog.error(
+            "[#{$judge}] Not authorized to fetch review comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
+          )
+          0
+        rescue Octokit::TooManyRequests, Octokit::ServerError,
+          Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"

@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bar
+input:
+  -
+    _id: 1
+    what: pull-was-closed
+    where: github
+    issue: 94
+    repository: 680
+    who: 4444
+    when: 2025-05-27T23:54:44Z
+  -
+    _id: 2
+    what: pull-was-closed
+    where: github
+    issue: 172
+    repository: 680
+    who: 4444
+    when: 2025-05-28T23:54:44Z
+expected:
+  - /fb[count(f)=0]

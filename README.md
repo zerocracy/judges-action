@@ -35,7 +35,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-      - uses: zerocracy/judges-action@0.17.19
+      - uses: zerocracy/judges-action@0.17.21
         with:
           token: ${{ secrets.ZEROCRACY_TOKEN }}
           github-token: ${{ secrets.ZEROCRACY_PAT }}
@@ -64,7 +64,8 @@ The plugin gives them awards for good things
   they do (like fixing bugs) and also punishes them (by deducting points)
   for bad things (like stale pull requests).
 
-The plugin also generates a summary `foo.html` file, which
+The plugin also generates a summary `foo-vitals.html` file
+  in the `output` directory of `pages-action` (`pages` by default), which
   is automatically deployed to the `gh-pages` branch.
 You can configure your GitHub repository to render the branch
   as a static website via [GitHub Pages].
@@ -75,12 +76,13 @@ Thus, the summary page is updated hourly and you see
 
 ## Configuration
 
-The following options are expected by the plugin
+The following action inputs are set via `with:` in your workflow YAML
   (see how we [configure][ours] it):
 
 * `token` (mandatory) is an authentication token from
   [Zerocracy.com](https://www.zerocracy.com)
-* `options` (optional) is a list of `k=v` pairs, which are explained below
+* `options` (optional) is a list of `k=v` pairs for advanced tuning,
+  explained below
 * `factbase` (optional, default is `default.fb`) is the path of the
   [Factbase][factbase] file (where everything is kept)
 * `repositories` (optional) is a comma-separated list of masks that
@@ -99,12 +101,22 @@ The following options are expected by the plugin
 * `sqlite-cache` (optional) is a path of SQLite database file with HTTP cache
 * `bots` (optional) is a comma-separated list of GitHub user logins to mark as bots
 
-The following `k=v` pairs inside the `options` may be important:
+The dedicated action inputs above take precedence when a parameter
+  is also configurable via `options` (the k=v pairs below exist for
+  backward compatibility and advanced scenarios):
 
 * `github_token=...` is a default GitHub token, usually to be set to
-  `${{ secrets.GITHUB_TOKEN }}`
+  `${{ secrets.GITHUB_TOKEN }}`; it takes precedence over the
+  `github-token` action input when both are set
+* `repositories=..` is a comma-separated list of masks (alternative to
+  `repositories` action input), where
+  `yegor256/*` means all repos of the user,
+  `yegor256/judges` means a specific repo,
+  and
+  `-yegor256/judges` means an exclusion of the repo from the list.
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
+  (these two are only available as k=v pairs)
 * `sqlite_cache_min_age=3600` is the minimum age in seconds before a
   cached HTTP response is considered stale (default is 3600, i.e. 1 hour)
 
@@ -117,8 +129,8 @@ The following environment variables are recognized by the Docker entry point:
   development, testing with a non-release build, air-gapped environments,
   or faster CI when version checking is not critical.
 
-Note: `action_version` and `vitals_url` are automatically populated
-  by the entry point and should not be set manually.
+Note: `job_id`, `action_version`, and `vitals_url` are automatically
+  populated by the entry point and should not be set manually.
 
 The `zerocracy/pages-action` plugin is responsible for rendering
   the summary HTML page: its configuration is not explained here,

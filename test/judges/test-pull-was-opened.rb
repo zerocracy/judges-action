@@ -87,4 +87,17 @@ class TestPullWasOpened < Jp::Test
       '403 is transient — the issue must NOT be marked lost; next cycle will retry'
     )
   end
+
+  def test_rescues_not_found_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
+    load_it('pull-was-opened', fb)
+    assert_empty(
+      fb.query("(eq what 'pull-was-opened')").each.to_a,
+      'A vanished repository must produce no facts and must not abort the judge'
+    )
+  end
 end

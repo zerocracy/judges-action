@@ -50,7 +50,19 @@ Fbe.iterate do
       (eq where 'github'))"
   repeats 50
   over do |repository, issue|
-    repo = Fbe.octo.repo_name_by_id(repository)
+    repo =
+      begin
+        Fbe.octo.repo_name_by_id(repository)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository ##{repository} not found: #{e.message}")
+        next issue
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to repository ##{repository} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      end
     json =
       begin
         Fbe.octo.pull_request(repo, issue)
@@ -64,7 +76,10 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      rescue Octokit::Unauthorized => e
+        $loog.error("[#{$judge}] Not authorized to fetch pull ##{issue} in #{repo}: #{e.class}: #{e.message}")
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
         Net::OpenTimeout, Net::ReadTimeout, SocketError,
         Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(
@@ -90,7 +105,10 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      rescue Octokit::Unauthorized => e
+        $loog.error("[#{$judge}] Not authorized to fetch issue ##{issue} in #{repo}: #{e.class}: #{e.message}")
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
         Net::OpenTimeout, Net::ReadTimeout, SocketError,
         Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(
@@ -112,7 +130,12 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      rescue Octokit::Unauthorized => e
+        $loog.error(
+          "[#{$judge}] Not authorized to fetch reviews of pull ##{issue} in #{repo}: #{e.class}: #{e.message}"
+        )
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
         Net::OpenTimeout, Net::ReadTimeout, SocketError,
         Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn(
@@ -133,7 +156,7 @@ Fbe.iterate do
         $loog.warn("Pull already merged in #{repo}##{issue}, skipping duplicate")
         next issue
       end
-      nn.hoc = json[:additions] + json[:deletions]
+      nn.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, Jp.comments_info(json))

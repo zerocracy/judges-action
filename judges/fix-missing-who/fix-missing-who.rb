@@ -28,7 +28,20 @@ require_relative '../../lib/issue_was_lost'
       (absent done)
       (eq where 'github'))"
   ) do |f|
-    repo = Fbe.octo.repo_name_by_id(f.repository)
+    repo =
+      begin
+        Fbe.octo.repo_name_by_id(f.repository)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Failed to find repository #{f.repository}: #{e.message}")
+        f.stale = 'repository'
+        next
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to repository #{f.repository} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
     json =
       begin
         Fbe.octo.public_send(api, repo, f.issue)

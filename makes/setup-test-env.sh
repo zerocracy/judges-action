@@ -3,16 +3,16 @@
 # SPDX-License-Identifier: MIT
 
 # Sets up common test environment and returns a random factbase name
-# Usage (preferred): setup_test_env "$1" name
+# Usage (preferred): setup_test_env "$1" dest
 # Backward-compat: still echoes the name to stdout
 setup_test_env() {
   set -ex -o pipefail
 
   local SELF=$1
-  local name=$2
+  local dest=$2
 
-  if [ -z "${SELF:-}" ] || [ -z "${name:-}" ]; then
-    echo "missing required arguments: SELF='${SELF:-}' name='${name:-}'" >&2
+  if [ -z "${SELF:-}" ] || [ -z "${dest:-}" ]; then
+    echo "missing required arguments: SELF='${SELF:-}' dest='${dest:-}'" >&2
     return 1
   fi
 
@@ -29,9 +29,9 @@ setup_test_env() {
     return 1
   fi
 
-  declare -g "${name}=${generated}"
+  printf -v "${dest}" '%s' "${generated}"
 
   BUNDLE_GEMFILE="${SELF}/Gemfile"
   export BUNDLE_GEMFILE
-  bundle exec judges eval "${!name}.fb" "\$fb.insert" > /dev/null
+  bundle exec judges eval "${generated}.fb" "\$fb.insert" > /dev/null
 }

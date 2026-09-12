@@ -370,7 +370,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_builds_ran_skips_forbidden
+  def test_dont_report_total_when_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -383,10 +383,56 @@ class TestQuantityOfDeliverables < Jp::Test
     $judge = 'quantity-of-deliverables'
     $loog = Loog::NULL
     $global = {}
-    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $options = Judges::Options.new({ 'repositories' => 'foo/blocked' })
     Fbe.stub(:unmask_repos, ['foo/blocked']) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
-      assert_equal({ total_builds_ran: 0 }, total_builds_ran(fact))
+      assert_empty(total_builds_ran(fact), 'forbidden repository is reported as a total instead of being omitted')
+    end
+  end
+
+  def test_dont_report_total_when_one_repo_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    seed = Random.new_seed
+    runs = Random.new(seed).rand(1..999)
+    stub_github(
+      'https://api.github.com/repos/foo/good/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      body: { total_count: runs, workflow_runs: [] }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      status: 403, body: { message: 'Forbidden' }
+    )
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/good,foo/blocked' })
+    Fbe.stub(:unmask_repos, %w[foo/good foo/blocked]) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      assert_empty(total_builds_ran(fact), "partial total is reported while a repository is blocked, seed: #{seed}")
+    end
+  end
+
+  def test_dont_report_total_when_runs_are_absent
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/gone/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      status: 404, body: { message: 'Not Found' }
+    )
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/gone' })
+    Fbe.stub(:unmask_repos, ['foo/gone']) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      assert_empty(total_builds_ran(fact), 'unreadable repository is reported as a total instead of being omitted')
     end
   end
 

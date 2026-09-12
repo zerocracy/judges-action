@@ -21,7 +21,20 @@ Fbe.consider(
     (absent done)
     (absent hoc))"
 ) do |f|
-  repo = Fbe.octo.repo_name_by_id(f.repository)
+  repo =
+    begin
+      Fbe.octo.repo_name_by_id(f.repository)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Failed to find repository #{f.repository}: #{e.message}")
+      f.stale = 'repository'
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to repository #{f.repository} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
   json =
     begin
       Fbe.octo.pull_request(repo, f.issue)
@@ -42,7 +55,7 @@ Fbe.consider(
       )
       next
     end
-  f.hoc = json[:additions] + json[:deletions]
+  f.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
   $loog.info("Hoc found for #{Fbe.issue(f)}: #{f.hoc}")
 end
 

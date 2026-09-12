@@ -12,6 +12,7 @@ require 'fbe/octo'
 require 'fbe/overwrite'
 require 'octokit'
 require_relative '../../lib/nick_of'
+require_relative '../../lib/today'
 
 alive = []
 
@@ -62,7 +63,7 @@ end
 Fbe.consider(
   "(and
     (eq what 'who-has-name')
-    (lt when (minus (to_time (env 'TODAY' '#{Time.now.utc.iso8601}')) '5 days'))
+    (lt when (minus (to_time '#{Jp.today.utc.iso8601}') '5 days'))
     (absent stale)
     (absent tombstone)
     (absent done)
@@ -91,7 +92,7 @@ Fbe.consider(
     next
   end
   alive << f.who
-  Fbe.overwrite(f, 'name', nick)
+  Fbe.overwrite(f, { 'name' => nick, 'when' => Time.now })
 end
 
 alive.uniq!

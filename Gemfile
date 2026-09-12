@@ -19,7 +19,7 @@ gem 'others', '~>0.1'
 gem 'qbash', '~>0.8'
 gem 'rake', '~>13.2'
 gem 'rubocop', '~>1.75', require: false
-gem 'rubocop-elegant', '~>0.5', require: false
+gem 'rubocop-elegant', '~>0.8', require: false
 gem 'rubocop-minitest', '~>0.38', require: false
 gem 'rubocop-performance', '~>1.25', require: false
 gem 'rubocop-rake', '~>0.7', require: false

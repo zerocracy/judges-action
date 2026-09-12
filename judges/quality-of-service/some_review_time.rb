@@ -32,7 +32,14 @@ def some_review_time(fact)
           next
         end
       first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
-      times << Integer(pr[:pull_request][:merged_at] - first[:submitted_at]) if first
+      if first
+        seconds = Integer(pr[:pull_request][:merged_at] - first[:submitted_at])
+        if seconds.negative?
+          $loog.info("The pull ##{pr[:number]} in #{repo} was reviewed after it was merged")
+        else
+          times << seconds
+        end
+      end
       sizes << csize
       users = all.map { |r| r.dig(:user, :id) }
       users.uniq!

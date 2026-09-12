@@ -37,6 +37,36 @@ class TestQosSearch < Jp::Test
     assert_equal(1, found[:items].first[:number])
   end
 
+  def test_does_not_follow_pagination_links
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue',
+      body: { total_count: 2, items: [{ number: 1 }] },
+      headers: {
+        'Content-Type' => 'application/json',
+        'X-RateLimit-Remaining' => '999',
+        'Link' => '<https://api.github.com/search/issues?page=2&per_page=100&q=repo:foo/foo%20type:issue>; rel="next"'
+      }
+    )
+    Jp.qosearch('repo:foo/foo type:issue')
+    assert_not_requested(:get, %r{https://api\.github\.com/search/issues\?page=2})
+  end
+
+  def test_does_not_follow_pagination_links_for_code_search
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/search/code?per_page=100&q=repo:foo/foo%20test',
+      body: { total_count: 2, items: [{ name: 'a.rb' }] },
+      headers: {
+        'Content-Type' => 'application/json',
+        'X-RateLimit-Remaining' => '999',
+        'Link' => '<https://api.github.com/search/code?page=2&per_page=100&q=repo:foo/foo%20test>; rel="next"'
+      }
+    )
+    Jp.qosearch('repo:foo/foo test', method: :search_code)
+    assert_not_requested(:get, %r{https://api\.github\.com/search/code\?page=2})
+  end
+
   def test_skips_search_when_core_quota_low
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       body: { rate: { remaining: 49, limit: 1000 } }.to_json,
@@ -65,18 +95,11 @@ class TestQosSearch < Jp::Test
   end
 
   def test_latches_after_zero_remaining_search_quota
-    $global[:octo] = nil
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 30, limit: 30 } } }.to_json,
-      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '999' }
-    )
+    ratelimits(100)
     searchstub('repo:foo/foo type:issue', body: { total_count: 58, items: [{ number: 1 }] })
     assert_equal(58, Jp.qosearch('repo:foo/foo type:issue')[:total_count])
     $global[:octo] = nil
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 0, limit: 30 } } }.to_json,
-      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '999' }
-    )
+    ratelimits(0)
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
     assert_not_requested(:get, /type:pr/)
   end
@@ -89,14 +112,12 @@ class TestQosSearch < Jp::Test
   end
 
   def test_qoreset_clears_the_latch
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 0, limit: 30 } } }.to_json,
-      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '999' }
-    )
+    ratelimits(0)
+    searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     Jp.qoreset
     $global[:octo] = nil
-    rate_limit_up
+    ratelimits(1000)
     searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
     assert_equal(2, Jp.qosearch('repo:foo/foo type:pr')[:items].first[:number])
   end
@@ -121,7 +142,7 @@ class TestQosSearch < Jp::Test
       refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
     end
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
-    Jp.instance_variable_set(:@swstart, Time.now - Jp::SEARCH_WINDOW_SECONDS - 1)
+    Jp.instance_variable_set(:@swstart, { $judge => Time.now - Jp::SEARCH_WINDOW_SECONDS - 1 })
     $global[:octo] = nil
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 2 }] })
@@ -132,8 +153,8 @@ class TestQosSearch < Jp::Test
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, status: 403)
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
-    assert_equal(1, Jp.instance_variable_get(:@scount))
-    assert(Jp.instance_variable_get(:@offquota))
+    assert_equal(1, Jp.instance_variable_get(:@scount)[$judge])
+    assert(Jp.instance_variable_get(:@offquota)[$judge])
     Jp.qoreset
     $global[:octo] = nil
     rate_limit_up
@@ -147,6 +168,23 @@ class TestQosSearch < Jp::Test
   end
 
   private
+
+  def ratelimits(*remaining)
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      *remaining.map do |left|
+        {
+          body: {
+            resources: { search: { remaining: left, limit: 30 } },
+            rate: { remaining: left, limit: 1000 }
+          }.to_json,
+          headers: {
+            'Content-Type' => 'application/json',
+            'X-RateLimit-Remaining' => left.to_s
+          }
+        }
+      end
+    )
+  end
 
   def searchstub(query, body:, remaining: 999, status: 200)
     stub_github(

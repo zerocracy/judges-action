@@ -477,6 +477,7 @@ class TestQualityOfService < Jp::Test
   end
 
   def test_skips_unfinished_workflow_runs
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     timed = []
     octo = Object.new
@@ -505,6 +506,177 @@ class TestQualityOfService < Jp::Test
         assert_equal([43], timed)
         assert_equal([1], metrics[:some_build_success_rate])
         assert_equal([900], metrics[:some_build_duration])
+      end
+    end
+  end
+
+  def test_skips_repo_on_not_found_workflow_runs
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::NotFound) }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_success_rate])
+      end
+    end
+  end
+
+  def test_skips_repo_on_forbidden_workflow_runs
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::Forbidden) }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_success_rate])
+      end
+    end
+  end
+
+  def test_skips_run_on_not_found_workflow_run_usage
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          },
+          {
+            id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T11:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      raise(Octokit::NotFound) if id == 1
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([900], metrics[:some_build_duration], 'run with missing usage is not left out of durations')
+      end
+    end
+  end
+
+  def test_skips_run_on_forbidden_workflow_run_usage
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          },
+          {
+            id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T11:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      raise(Octokit::Forbidden) if id == 1
+      { run_duration_ms: 600_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([600], metrics[:some_build_duration], 'run with forbidden usage is not left out of durations')
+      end
+    end
+  end
+
+  def test_dont_count_run_with_unreadable_usage_as_success
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    secs = Random.new(seed).rand(1..3_600)
+    started = Time.parse('2024-08-07T10:00:00Z')
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          { id: 1, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started },
+          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 3_600 }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      raise(Octokit::NotFound) if id == 1
+      { run_duration_ms: secs * 1_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([1], metrics[:some_build_success_rate], "success rate counts unreadable run, seed: #{seed}")
+      end
+    end
+  end
+
+  def test_dont_pair_failure_with_unreadable_usage
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-07T10:00:00Z')
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          { id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started },
+          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 3_600 }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      raise(Octokit::Forbidden) if id == 1
+      { run_duration_ms: 600_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_mttr], 'repair times pair a failure with unreadable usage')
+      end
+    end
+  end
+
+  def test_skips_run_without_duration
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    secs = Random.new(seed).rand(1..3_600)
+    started = Time.parse('2024-08-07T10:00:00Z')
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          { id: 1, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started },
+          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 3_600 }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      id == 1 ? {} : { run_duration_ms: secs * 1_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([secs], metrics[:some_build_duration], "durations count a run without usage, seed: #{seed}")
       end
     end
   end
@@ -2443,6 +2615,7 @@ class TestQualityOfService < Jp::Test
   end
 
   def test_some_pull_hoc_size_handles_nil_additions_or_deletions
+    $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
     Jp.qoreset
     octo = Object.new
@@ -2464,6 +2637,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:pull_request_reviews) { |*| [] }
     octo.define_singleton_method(:pull_request_review_comments) { |*| [] }
     octo.define_singleton_method(:off_quota?) { false }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
     rl = Object.new
     rl.define_singleton_method(:remaining) { 30 }
     octo.define_singleton_method(:rate_limit) { rl }

@@ -12,9 +12,10 @@ require_relative '../../lib/nick_of'
 
 good = Set.new
 bad = Set.new
+forbidden = Set.new
 
 Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f|
-  next if good.include?(f.who) || bad.include?(f.who)
+  next if good.include?(f.who) || bad.include?(f.who) || forbidden.include?(f.who)
   next if Fbe.octo.off_quota?
   elapsed($loog, level: Logger::INFO) do
     nick =
@@ -23,6 +24,7 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
       rescue Fbe::Error => e
         case e.cause
         when Octokit::Forbidden
+          forbidden.add(f.who)
           $loog.warn(
             "[#{$judge}] Access forbidden to user ##{f.who} " \
             "(transient, will retry next cycle): #{e.cause.class}: #{e.cause.message}"
@@ -44,15 +46,17 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
   end
 end
 
-bad.each do |u|
-  Fbe.fb.query("(and (absent stale) (eq where 'github') (eq who #{u}))").each do |f|
-    f.stale = 'who'
+Fbe.fb.txn do |fbt|
+  bad.each do |u|
+    fbt.query("(and (not (eq stale 'who')) (eq where 'github') (eq who #{u}))").each do |f|
+      f.stale = 'who'
+    end
   end
-end
-
-Fbe.fb.query('(and (eq where "github") (exists who) (unique who) (eq stale "who"))').each do |f|
-  Fbe.fb.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
-    ff.stale = 'who'
+  fbt.query('(and (eq where "github") (exists who) (eq stale "who") (unique who))').each do |f|
+    next if good.include?(f.who)
+    fbt.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
+      ff.stale = 'who'
+    end
   end
 end
 

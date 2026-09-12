@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'factbase'
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'factbase'
 require 'judges/options'
 require_relative '../../lib/incremate'
 require_relative '../test__helper'
@@ -69,6 +69,36 @@ class TestIncremate < Minitest::Test
       Jp.incremate(f, dir, 'some', max_per_fact: 2, epoch: time, kickoff: time)
       cnt = %w[some_alpha some_beta some_gamma].count { |p| f[p] }
       assert_equal(2, cnt, "exactly 2 of 3 properties should be set with max_per_fact=2, got #{cnt}")
+    end
+    $global = nil
+    $local = nil
+    $loog = nil
+    $options = nil
+  end
+
+  def test_incremate_recovers_from_partial_write
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $loog = Loog::VERBOSE
+    $options = Judges::Options.new({ 'lifetime' => 100, 'timeout' => 100 })
+    Dir.mktmpdir do |dir|
+      File.write(File.expand_path('some_first.rb', dir), <<~RUBY)
+        def some_first(_f)
+          { some_first: 1, some_second: 2 }
+        end
+      RUBY
+      time = Time.now - 60
+      fb = Factbase.new
+      f = fb.insert
+      f.some_second = 2
+      Jp.incremate(f, dir, 'some', epoch: time, kickoff: time)
+      assert_equal(1, f.some_first, 'the property named after the file must still be collected')
+      assert_equal([2], f['some_second'], 'the property already written before the interruption must not be duplicated')
     end
     $global = nil
     $local = nil
