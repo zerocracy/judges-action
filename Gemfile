@@ -8,7 +8,7 @@ source 'https://rubygems.org'
 gem 'baza.rb', '~>0.11'
 gem 'decoor', '~>0.1'
 gem 'factbase', '~>0.17'
-gem 'fbe', '~>0.48'
+gem 'fbe', '~>0.49'
 gem 'judges', '~>0.57'
 gem 'minitest', '~>6.0', require: false
 gem 'minitest-mock', '~>5.27', require: false
