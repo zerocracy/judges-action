@@ -110,8 +110,13 @@ while IFS= read -r o; do
     if [ "${s}" = "" ]; then
         continue
     fi
-    k=$(echo "${s} "| cut -f1 -d '=')
-    v=$(echo "${s}" | cut -f2- -d '=')
+    if [[ "${s}" == *=* ]]; then
+        k="${s%%=*}"
+        v="${s#*=}"
+    else
+        k="${s}"
+        v="true"
+    fi
     if [[ "${k}" == vitals_url ]]; then
         VITALS_URL="${v}"
         continue
