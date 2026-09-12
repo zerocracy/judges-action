@@ -195,7 +195,7 @@ class TestFindAllIssues < Jp::Test
     )
     stub_github(
       'https://api.github.com/user/526302',
-      body: { login: 'yegor257', id: 526_301, type: 'User', site_admin: false }
+      body: { login: 'yegor257', id: 526_302, type: 'User', site_admin: false }
     )
     fb = Factbase.new
     fb.insert.then do |f|
