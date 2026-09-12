@@ -116,6 +116,9 @@ while IFS= read -r o; do
         VITALS_URL="${v}"
         continue
     fi
+    if [[ "${k}" == bots ]] && [ -z "${v}" ]; then
+        continue
+    fi
     options+=("--option=${k}=${v}");
 done <<< "${INPUT_OPTIONS}"
 if [ -z "${INPUT_REPOSITORIES}" ]; then
