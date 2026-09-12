@@ -297,7 +297,6 @@ class TestFindAllIssues < Jp::Test
     end
     load_it('find-all-issues', fb)
     assert_equal(3, fb.size)
-    refute_equal(0, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
     assert_equal(45, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
 
