@@ -60,6 +60,16 @@ class TestIsHumanOrRobot < Jp::Test
     assert(fb.one?(where: 'github', who: 18, name: 'user4', is_human: 1))
   end
 
+  def test_matches_bots_case_insensitively
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/19', body: { login: 'rultor', id: 19, type: 'User' })
+    fb = Factbase.new
+    fb.with(where: 'github', what: 'issue-was-opened', who: 19, name: 'rultor')
+    load_it('is-human-or-robot', fb, Judges::Options.new({ 'bots' => 'Rultor' }))
+    assert(fb.one?(where: 'github', who: 19, name: 'rultor', is_human: 0))
+  end
+
   def test_forbidden_user_lookup_leaves_fact_retriable
     WebMock.disable_net_connect!
     rate_limit_up
