@@ -106,6 +106,37 @@ class TestIncremate < Minitest::Test
     $options = nil
   end
 
+  def test_incremate_skips_metric_with_empty_result
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $loog = Loog::VERBOSE
+    $options = Judges::Options.new({ 'lifetime' => 100, 'timeout' => 100 })
+    Dir.mktmpdir do |dir|
+      File.write(File.expand_path('some_empty.rb', dir), <<~RUBY)
+        def some_empty(_f)
+          $calls += 1
+          { some_empty: [] }
+        end
+      RUBY
+      time = Time.now - 60
+      fb = Factbase.new
+      f = fb.insert
+      $calls = 0
+      3.times { Jp.incremate(f, dir, 'some', epoch: time, kickoff: time) }
+      assert_equal(1, $calls, 'a metric with an empty result must be evaluated once, then skipped')
+      $calls = nil
+    end
+    $global = nil
+    $local = nil
+    $loog = nil
+    $options = nil
+  end
+
   def test_incremate_pauses_between_evaluations
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
