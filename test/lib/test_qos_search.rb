@@ -133,6 +133,14 @@ class TestQosSearch < Jp::Test
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
   end
 
+  def test_invalid_method_does_not_consume_budget
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    assert_raises(RuntimeError) { Jp.qosearch('repo:foo/foo type:issue', method: :bad_method) }
+    assert_equal(0, Jp.instance_variable_get(:@scount)[$judge])
+    refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
+  end
+
   def test_resets_budget_after_window_elapses
     rate_limit_up
     Jp::SEARCH_WINDOW_BUDGET.times do
