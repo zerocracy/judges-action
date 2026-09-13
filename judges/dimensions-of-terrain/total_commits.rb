@@ -30,8 +30,8 @@ def total_commits(_fact)
   begin
     { total_commits: repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } }
   rescue GraphQL::Client::Error, Fbe::Error => e
-    $loog.info("Can't count commits in #{repos.count} repositories, skipping total_commits: #{e.message}")
-    {}
+    $loog.info("Batch commit count failed for #{repos.count} repos, retrying one by one: #{e.message}")
+    { total_commits: count_commits_per_repo(repos) }
   rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
     $loog.warn(
       "[#{$judge}] Network error counting commits in #{repos.count} repositories " \
@@ -39,4 +39,15 @@ def total_commits(_fact)
     )
     {}
   end
+end
+
+def count_commits_per_repo(repos)
+  total = 0
+  repos.each do |owner, name, branch|
+    total += Fbe.github_graph.total_commits(repos: [[owner, name, branch]]).sum { _1['total_commits'] }
+  rescue GraphQL::Client::Error, Fbe::Error,
+    Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    $loog.info("Skipping commits for #{owner}/#{name}: #{e.message}")
+  end
+  total
 end
