@@ -323,7 +323,7 @@ if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
     fb_size=$(ruby -e "require 'factbase'; f=Factbase.new; f.import(File.binread(ARGV[0])); puts f.size" "$fb" 2>/dev/null || echo '0')
     title="judges-action ${action_version} did ${churn_val} to ${fb_size} facts"
     echo "Updating workflow run title to: ${title}"
-    curl -s -X PATCH \
+    curl --fail -s -X PATCH \
         -H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")" \
         -H "Accept: application/vnd.github+json" \
         "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
