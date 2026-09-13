@@ -17,13 +17,15 @@ require_relative '../../lib/issue_was_lost'
 
 ts = Fbe::Tombstone.new
 
-Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
+Fbe.consider('(and (eq where "github") (exists repository) (absent stale) (absent tombstone) (unique repository))') do |r|
   repo =
     begin
       Fbe.octo.repo_name_by_id(r.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Failed to find repository #{r.repository}: #{e.message}")
-      r.stale = 'repository'
+      Fbe.fb.query("(and (eq repository #{r.repository}) (absent stale) (absent tombstone))").each do |f|
+        f.stale = 'repository'
+      end
       next
     rescue Octokit::Forbidden => e
       $loog.warn(
