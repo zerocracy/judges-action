@@ -55,8 +55,13 @@ Fbe.consider(
       )
       next
     end
-  f.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
-  $loog.info("Hoc found for #{Fbe.issue(f)}: #{f.hoc}")
+  if json[:additions].nil? && json[:deletions].nil?
+    f.stale = 'hoc'
+    $loog.info("Hoc is missing in #{Fbe.issue(f)}")
+  else
+    f.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
+    $loog.info("Hoc found for #{Fbe.issue(f)}: #{f.hoc}")
+  end
 end
 
 Fbe.octo.print_trace!
