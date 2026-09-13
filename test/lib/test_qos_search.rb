@@ -167,6 +167,23 @@ class TestQosSearch < Jp::Test
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
   end
 
+  def test_skips_search_when_get_unavailable
+    octo = Object.new
+    octo.define_singleton_method(:search_issues) { |*_| {} }
+    octo.define_singleton_method(:search_code) { |*_| {} }
+    octo.define_singleton_method(:search_commits) { |*_| {} }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&b| b.call(octo) }
+    octo.define_singleton_method(:off_quota?) { false }
+    rl = Object.new
+    rl.define_singleton_method(:remaining) { 30 }
+    octo.define_singleton_method(:rate_limit) { rl }
+    Fbe.stub(:octo, octo) do
+      found = Jp.qosearch('repo:foo/foo type:issue')
+      refute_nil(found, 'should still work via rate_limit fallback')
+    end
+    assert_not_requested(:get, %r{https://api\.github\.com/search/issues})
+  end
+
   private
 
   def ratelimits(*remaining)
