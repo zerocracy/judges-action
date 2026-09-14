@@ -11,8 +11,8 @@ def some_build_success_rate(fact)
   success = []
   duration = []
   ttrs = []
-  failed = {}
   Fbe.unmask_repos do |repo|
+    failed = {}
     workflows =
       begin
         Fbe.octo.repository_workflow_runs(
