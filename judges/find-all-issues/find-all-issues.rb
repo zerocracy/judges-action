@@ -101,7 +101,7 @@ require_relative '../../lib/qos_search'
                   Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
                 rescue Octokit::NotFound, Octokit::Deprecated => e
                   $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
-                  Jp.issue_was_lost(f.where, f.repository, f.issue)
+                  Jp.issue_was_lost(f.where, f.repository, f.issue, fb: fbt)
                   next
                 rescue Octokit::Forbidden => e
                   $loog.warn(
