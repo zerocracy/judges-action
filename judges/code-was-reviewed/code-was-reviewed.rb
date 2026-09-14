@@ -53,12 +53,6 @@ Fbe.consider(
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
       next
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
-      next
     rescue Octokit::Unauthorized => e
       $loog.error("[#{$judge}] Not authorized to fetch pull ##{f.issue} in #{repo}: #{e.class}: #{e.message}")
       next
@@ -69,6 +63,12 @@ Fbe.consider(
         "(will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
     end
   reviews =
     begin
@@ -76,12 +76,6 @@ Fbe.consider(
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("The pull request ##{f.issue} doesn't exist in #{repo}: #{e.message}")
       Jp.issue_was_lost(f.where, f.repository, f.issue)
-      next
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to reviews for pull ##{f.issue} in #{repo} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
       next
     rescue Octokit::Unauthorized => e
       $loog.error(
@@ -93,6 +87,12 @@ Fbe.consider(
       $loog.warn(
         "[#{$judge}] Transient error fetching reviews for pull ##{f.issue} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to reviews for pull ##{f.issue} in #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
     end
@@ -121,12 +121,6 @@ Fbe.consider(
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
           0
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
-          0
         rescue Octokit::Unauthorized => e
           $loog.error(
             "[#{$judge}] Not authorized to fetch issue comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
@@ -139,6 +133,12 @@ Fbe.consider(
             "(will retry next cycle): #{e.class}: #{e.message}"
           )
           0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
         end
       n.comments = count
       n.review_comments =
@@ -146,12 +146,6 @@ Fbe.consider(
           Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
-          0
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
           0
         rescue Octokit::Unauthorized => e
           $loog.error(
@@ -163,6 +157,12 @@ Fbe.consider(
           $loog.warn(
             "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
+          )
+          0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           0
         end
