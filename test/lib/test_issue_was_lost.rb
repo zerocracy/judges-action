@@ -23,6 +23,10 @@ class TestIssueWasLost < Minitest::Test
       facts = fb.query("(and (eq where 'github') (eq repository 42) (eq issue 7))").each.to_a
       assert_equal(1, facts.size, 'no new issue-was-lost fact inserted when a pre-existing fact was upgraded')
       assert_equal('issue', facts.first.stale, 'pre-existing fact must carry stale = issue')
+      assert(
+        Fbe::Tombstone.new(fb: fb).has?('github', 42, 7),
+        'issue must be buried in the tombstone even on the early-return path'
+      )
     end
   end
 
