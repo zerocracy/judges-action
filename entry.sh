@@ -2,7 +2,13 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+export PS4='+${BASH_SOURCE}:${LINENO}:'
+echo "INPUT_VERBOSE: ${INPUT_VERBOSE}"
 set -e -o pipefail
+
+if [ "${INPUT_VERBOSE}" == 'true' ]; then
+    set -x
+fi
 
 start=$(date +%s)
 
@@ -42,10 +48,6 @@ if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
 fi
 if [ -n "${INPUT_TOKEN}" ]; then
     echo "::add-mask::${INPUT_TOKEN}"
-fi
-
-if [ "${INPUT_VERBOSE}" == 'true' ]; then
-    set -x
 fi
 
 if [ -z "$1" ]; then
