@@ -70,6 +70,7 @@ Fbe.iterate do
         $loog.info("The pull ##{issue} doesn't exist in #{repo}: #{e.message}")
         Jp.issue_was_lost('github', repository, issue)
         next issue
+      # @todo #1941:30min Move the transient rescue arms ahead of the Forbidden ones, as in code-was-reviewed.rb
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to pull ##{issue} in #{repo} " \
