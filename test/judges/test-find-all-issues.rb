@@ -334,7 +334,7 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E=2025-05-04',
       body: {
         total_count: 2, incomplete_results: false,
         items: [
@@ -376,7 +376,7 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20created:%3E=2025-05-04',
       body: {
         total_count: 2, incomplete_results: false,
         items: [
