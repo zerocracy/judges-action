@@ -34,7 +34,7 @@ Fbe.iterate do
     json =
       begin
         Fbe.octo.with_disable_auto_paginate do |octo|
-          octo.list_issues(repo, state: :all, sort: :created, direction: :asc, page: 1, per_page: 1).first
+          octo.list_issues(repo, state: :all, sort: :created, direction: :asc, page: 1 - latest, per_page: 1).first
         end
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Issues list not available for #{repo}: #{e.message}")
@@ -48,7 +48,7 @@ Fbe.iterate do
       end
     next latest if json.nil?
     i = json[:number]
-    next latest if Fbe::Tombstone.new.has?('github', repository, i)
+    next latest - 1 if Fbe::Tombstone.new.has?('github', repository, i)
     Fbe.fb.txn do |fbt|
       f =
         Fbe.if_absent(fb: fbt) do |ff|
