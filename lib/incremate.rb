@@ -19,8 +19,8 @@ def Jp.incremate(
   evaluated = 0
   Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
-    if fact[n]
-      $loog.debug("#{n} is here: #{fact[n].first}")
+    if fact[n] || fact["#{n}_empty"]
+      $loog.debug("#{n} is here: #{fact[n]&.first}")
       next
     end
     break if Fbe.over?(epoch:, kickoff:)
@@ -45,7 +45,12 @@ def Jp.incremate(
         Array(v).each { fact.__send__("#{k}=", _1) }
       end
       if h.key?(n.to_sym) && !(avoid_duplicate && fact.all_properties.include?(n))
-        Array(h[n.to_sym]).each { fact.__send__("#{n}=", _1) }
+        values = Array(h[n.to_sym])
+        if values.empty?
+          fact.__send__("#{n}_empty=", 1)
+        else
+          values.each { fact.__send__("#{n}=", _1) }
+        end
       end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
