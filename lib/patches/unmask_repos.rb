@@ -19,6 +19,7 @@ module Fbe
       repos = []
       octo = Fbe.octo(loog:, global:, options:)
       masks = (options.repositories || '').split(',')
+      skipped = nil
       masks.reject { |m| m.start_with?('-') }.each do |mask|
         unless mask.include?('*')
           repos << mask
@@ -39,6 +40,7 @@ module Fbe
               "[#{$judge}] Cannot list the repositories of #{org.inspect}, " \
               "skipping the #{mask.inspect} mask (will retry next cycle): #{e.class}: #{e.message}"
             )
+            skipped = { mask:, error: e }
             next
           end
         list.each do |r|
@@ -61,7 +63,16 @@ module Fbe
         )
         false
       end
-      raise(Fbe::Error, "No repos found matching: #{options.repositories.inspect}") if repos.empty?
+      if repos.empty?
+        if skipped
+          raise(
+            Fbe::Error,
+            "No repos found: listing of #{skipped[:mask].inspect} failed " \
+            "(transient, will retry next cycle): #{skipped[:error].class}: #{skipped[:error].message}"
+          )
+        end
+        raise(Fbe::Error, "No repos found matching: #{options.repositories.inspect}")
+      end
       repos.shuffle!
       loog.debug("Scanning #{repos.size} repositories: #{repos.joined}...")
       return repos unless block_given?
