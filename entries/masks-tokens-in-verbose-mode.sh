@@ -18,6 +18,7 @@ setup_test_env "${SELF}" name
 # Distinctive token values so we can match them by exact string.
 github_token='ghp_test-secret-github-token-aaaaaaaaaaaa'
 zerocracy_token='ZRCY-test-secret-zerocracy-token-bbbbbbbbbbbb'
+options_token='ghp_test-options-token-cccccccccccc'
 
 run_entry_script "${SELF}" success \
   "GITHUB_WORKSPACE=$(pwd)" \
@@ -30,13 +31,18 @@ run_entry_script "${SELF}" success \
   "INPUT_FACTBASE=${name}.fb" \
   "INPUT_CYCLES=1" \
   "INPUT_VERBOSE=true" \
-  "INPUT_TOKEN=${zerocracy_token}"
+  "INPUT_TOKEN=${zerocracy_token}" \
+  "INPUT_OPTIONS=github_token=${options_token}"
 
 log_contains "::add-mask::${github_token}" \
   "::add-mask:: workflow command for INPUT_GITHUB-TOKEN must be emitted before bash tracing"
 log_contains "::add-mask::${zerocracy_token}" \
   "::add-mask:: workflow command for INPUT_TOKEN must be emitted before bash tracing"
+log_contains "::add-mask::${options_token}" \
+  "::add-mask:: workflow command for github_token in INPUT_OPTIONS must be emitted before bash tracing"
 log_not_contains "--option=github_token=${github_token}" \
   "github_token leaked via bash trace without ::add-mask:: prefix"
 log_not_contains "--token=${zerocracy_token}" \
   "zerocracy_token leaked via bash trace without ::add-mask:: prefix"
+log_not_contains "--option=github_token=${options_token}" \
+  "github_token from INPUT_OPTIONS leaked via bash trace without ::add-mask:: prefix"

@@ -44,10 +44,6 @@ if [ -n "${INPUT_TOKEN}" ]; then
     echo "::add-mask::${INPUT_TOKEN}"
 fi
 
-if [ "${INPUT_VERBOSE}" == 'true' ]; then
-    set -x
-fi
-
 if [ -z "$1" ]; then
     SELF=$(dirname "$0")
 else
@@ -200,6 +196,20 @@ for opt in "${options[@]}"; do
 done
 if [ "${cache_min_age}" == "false" ]; then
     options+=("--option=sqlite_cache_min_age=3600");
+fi
+
+# Mask secrets supplied through the generic options input before tracing the
+# command that expands the options array. GitHub cannot mask values that are
+# not present in an environment variable of its own.
+for opt in "${options[@]}"; do
+    case "${opt}" in
+        --option=*token=*|--option=*secret=*|--option=*password=*)
+            echo "::add-mask::${opt#*=*=}"
+            ;;
+    esac
+done
+if [ "${INPUT_VERBOSE}" == 'true' ]; then
+    set -x
 fi
 
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
