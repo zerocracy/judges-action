@@ -6,7 +6,7 @@
 # Usage (preferred): setup_test_env "$1" dest
 # Backward-compat: still echoes the name to stdout
 setup_test_env() {
-  set -ex -o pipefail
+  set -e -o pipefail
 
   local SELF=$1
   local dest=$2
