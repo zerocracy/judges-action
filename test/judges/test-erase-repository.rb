@@ -7,6 +7,8 @@ require 'factbase'
 require_relative '../test__helper'
 
 class TestEraseRepository < Jp::Test
+  using SmartFactbase
+
   def test_erase_not_found_repository
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -113,5 +115,51 @@ class TestEraseRepository < Jp::Test
     end
     load_it('erase-repository', fb)
     assert_requested(:get, 'https://api.github.com/repositories/403999', times: 1)
+  end
+
+  def test_writes_the_stale_flags_in_one_transaction
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/404125', body: '', status: 404)
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', repository: 404_125, what: 'something-a')
+      .with(_id: 2, where: 'github', repository: 404_125, what: 'something-b')
+    loog = Loog::Buffer.new
+    load_it('erase-repository', fb, loog:)
+    assert_includes(
+      loog.to_s, 'Txn #',
+      'The stale flags of a dead repository cannot be written one by one, outside a transaction'
+    )
+  end
+
+  def test_marks_every_fact_of_every_dead_repository
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/404201', body: '', status: 404)
+    stub_github('https://api.github.com/repositories/404202', body: '', status: 404)
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', repository: 404_201, what: 'something-a')
+      .with(_id: 2, where: 'github', repository: 404_201, what: 'something-b')
+      .with(_id: 3, where: 'github', repository: 404_202, what: 'something-c')
+    load_it('erase-repository', fb)
+    assert_equal(
+      3, fb.picks(stale: 'repository').count,
+      'A transaction over dead repositories cannot leave some of their facts unmarked'
+    )
+  end
+
+  def test_dont_touch_a_repository_that_is_alive
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/404301', body: '', status: 404)
+    stub_github('https://api.github.com/repositories/700301', body: { id: 700_301, full_name: 'foo/bar' })
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', repository: 404_301, what: 'something-a')
+      .with(_id: 2, where: 'github', repository: 700_301, what: 'something-b')
+    load_it('erase-repository', fb)
+    assert(
+      fb.none?(repository: 700_301, stale: 'repository'),
+      'A repository answering GitHub in this very run cannot have its facts retired'
+    )
   end
 end

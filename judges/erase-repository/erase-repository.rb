@@ -5,6 +5,7 @@
 
 require 'elapsed'
 require 'fbe/consider'
+require 'fbe/fb'
 require 'fbe/octo'
 require 'logger'
 require 'octokit'
@@ -31,10 +32,12 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').eac
   end
 end
 
-good.each do |repo, ok|
-  next if ok
-  Fbe.fb.query("(and (eq where 'github') (eq repository #{repo}) (absent stale))").each do |f|
-    f.stale = 'repository'
+Fbe.fb.txn do |fbt|
+  good.each do |repo, ok|
+    next if ok
+    fbt.query("(and (eq where 'github') (eq repository #{repo}) (absent stale))").each do |f|
+      f.stale = 'repository'
+    end
   end
 end
 
