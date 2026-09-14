@@ -98,7 +98,6 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         end
       end
       f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
-      $loog.info("The #{type} #{Fbe.issue(f)} is not tombstoned among #{ts.issues('github', r.repository).count}")
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end
     added << i
