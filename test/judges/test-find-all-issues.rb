@@ -332,7 +332,7 @@ class TestFindAllIssues < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github('https://api.github.com/repos/foo/foo/issues/44', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
       'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
       body: {
@@ -355,7 +355,7 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
-      f.issue = 45
+      f.issue = 44
       f.repository = 991
       f.what = 'pull-was-opened'
       f.where = 'github'
@@ -374,7 +374,7 @@ class TestFindAllIssues < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github('https://api.github.com/repos/foo/foo/issues/44', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
       'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
       body: {
@@ -397,7 +397,7 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
-      f.issue = 45
+      f.issue = 44
       f.repository = 991
       f.what = 'pull-was-opened'
       f.where = 'github'
