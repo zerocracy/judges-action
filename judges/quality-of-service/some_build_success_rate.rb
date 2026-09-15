@@ -35,7 +35,7 @@ def some_build_success_rate(fact)
           begin
             ms = Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms]
             next if ms.nil?
-            ms / 1000
+            ms / 1000.0
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
             next

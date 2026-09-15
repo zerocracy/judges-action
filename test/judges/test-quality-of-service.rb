@@ -681,6 +681,58 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_dont_round_subsecond_duration_to_zero
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    ms = Random.new(seed).rand(1..999)
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: ms } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([ms / 1000.0], metrics[:some_build_duration], "subsecond duration is truncated, seed: #{seed}")
+      end
+    end
+  end
+
+  def test_dont_pair_failure_with_success_finished_earlier_within_second
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    random = Random.new(seed)
+    durations = { 1 => random.rand(500..999), 2 => random.rand(1..499) }
+    started = Time.parse('2024-08-07T10:00:00Z')
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          { id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started },
+          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) { |_, id| { run_duration_ms: durations[id] } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_mttr], "repair pairs a failure with an earlier success, seed: #{seed}")
+      end
+    end
+  end
+
   def test_some_build_mttr_on_repeated_failures
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
