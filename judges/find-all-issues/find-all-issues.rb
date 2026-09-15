@@ -53,7 +53,7 @@ require_relative '../../lib/qos_search'
             "[#{$judge}] Access forbidden to #{type} ##{issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          next 0
+          next issue
         end
       if after.nil?
         $loog.info("The #{type} ##{issue} in #{repo} return empty created_at field")
