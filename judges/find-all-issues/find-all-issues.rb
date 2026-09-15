@@ -62,10 +62,14 @@ require_relative '../../lib/qos_search'
       seen = []
       found = []
       first = issue
+      total = 0
       elapsed($loog, level: Logger::INFO) do
         items =
           begin
-            json = Jp.qosearch("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")
+            json = Jp.qosearch(
+              "repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}", sort: 'created', order: 'asc'
+            )
+            total = json[:total_count] if json
             json ? json[:items] : []
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("No issues found for #{repo}: #{e.message}")
@@ -122,7 +126,7 @@ require_relative '../../lib/qos_search'
         end
         issue = first if issue < first
         m = [
-          "Checked #{seen.count} #{type}s in #{repo}",
+          "Checked #{seen.count} of #{total} #{type}s in #{repo}",
           ("(#{seen.joined(max: 8)})" unless seen.empty?),
           "created >= #{after.iso8601[0..9]};",
           "from ##{first} to ##{issue};",
