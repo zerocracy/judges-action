@@ -158,7 +158,12 @@ Fbe.iterate do
       end
       nn.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
       nn.files = json[:changed_files] if json[:changed_files]
-      nn.branch = json[:head][:ref]
+      ref = json.dig(:head, :ref)
+      if ref
+        nn.branch = ref
+      else
+        nn.stale = 'branch'
+      end
       Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
       Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
       if actor
