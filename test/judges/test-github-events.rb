@@ -3020,7 +3020,66 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_release_keeps_total_when_compare_has_no_commits
+    seed = Random.new_seed
+    tag = "#{Random.new(seed).rand(1..9_999)}.0.0"
+    stub_empty_compare(tag)
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(
+      [0], fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a.map(&:commits),
+      "The release #{tag} with an empty comparison did not record zero commits, seed #{seed}"
+    )
+  end
+
+  def test_release_has_no_last_commit_when_compare_has_no_commits
+    seed = Random.new_seed
+    tag = "#{Random.new(seed).rand(1..9_999)}.0.0"
+    stub_empty_compare(tag)
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(
+      [false],
+      fb.query('(and (eq repository 42) (eq what "release-published"))').each.map do |f|
+        f.all_properties.include?('last_commit')
+      end,
+      "The release #{tag} with an empty comparison got a last commit, seed #{seed}"
+    )
+  end
+
   private
+
+  def stub_empty_compare(tag)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '103',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_003,
+            author: { login: 'rultor', id: 8_086_956, type: 'User' },
+            tag_name: tag, name: "v#{tag}",
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'e5d4c3b2a1' }])
+    stub_github(
+      "https://api.github.com/repos/foo/foo/compare/e5d4c3b2a1...#{tag}?per_page=100",
+      body: { total_commits: 0, files: [], commits: [] }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+  end
 
   def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
