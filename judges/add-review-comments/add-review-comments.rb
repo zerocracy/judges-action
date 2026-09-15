@@ -10,7 +10,10 @@ require_relative '../../lib/issue_was_lost'
 
 Fbe.consider(
   '(and
-    (or (eq what "pull-was-reviewed") (eq what "pull-was-merged"))
+    (or
+      (eq what "pull-was-reviewed")
+      (eq what "pull-was-merged")
+      (eq what "pull-was-closed"))
     (absent review_comments)
     (absent stale)
     (absent tombstone)
