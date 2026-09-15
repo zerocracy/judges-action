@@ -147,9 +147,6 @@ if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
 else
     ALL_JUDGES=${SELF}/judges
     summary=add
-    ${JUDGES} "${gopts[@]}" eval \
-        "${fb}" \
-        "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 fi
 
 github_token_found=false
@@ -211,6 +208,9 @@ else
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${fb}"
+    ${JUDGES} "${gopts[@]}" eval \
+        "${fb}" \
+        "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 fi
 
 sqlite=$(printenv "INPUT_SQLITE-CACHE" || true)
