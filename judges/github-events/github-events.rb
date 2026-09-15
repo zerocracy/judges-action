@@ -48,10 +48,14 @@ Fbe.iterate do
     tag
   end
 
+  def self.previous(fact)
+    Fbe.fb.query(
+      "(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\") (lt when #{fact.when.utc.iso8601}))"
+    ).each.max_by(&:when)
+  end
+
   def self.contributors(fact, repo)
-    since = tag(
-      Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last, repo
-    )
+    since = tag(previous(fact), repo)
     list = Set.new
     if since
       (comparison(repo, since, fact.tag) || {}).fetch(:commits, []).each do |commit|
@@ -68,9 +72,7 @@ Fbe.iterate do
   end
 
   def self.info(fact, repo)
-    since = tag(
-      Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last, repo
-    )
+    since = tag(previous(fact), repo)
     since ||= earliest(repo)&.[](:sha)
     info = {}
     comparison(repo, since, fact.tag).then do |json|
