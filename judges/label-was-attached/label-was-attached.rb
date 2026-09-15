@@ -22,12 +22,6 @@ Fbe.iterate do
       (absent stale)
       (absent tombstone)
       (absent done)
-      (empty
-        (and
-          (eq where $where)
-          (eq repository $repository)
-          (eq issue $issue)
-          (eq what '#{$judge}')))
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
