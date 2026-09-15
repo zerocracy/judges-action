@@ -8,9 +8,21 @@ require 'fbe/octo'
 require_relative 'humans'
 require_relative 'jp'
 
+Jp::NO_COMMENTS = {
+  comments: 0,
+  comments_to_code: 0,
+  comments_by_author: 0,
+  comments_by_reviewers: 0,
+  comments_appreciated: 0,
+  comments_resolved: 0
+}.freeze
+
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
-  return {} if repo.nil?
+  if repo.nil?
+    $loog.info("The repository of the pull ##{pr[:number]} is unknown, reporting no comments")
+    return Jp::NO_COMMENTS
+  end
   ccomments =
     begin
       Fbe.octo.pull_request_comments(repo, pr[:number])
@@ -129,7 +141,10 @@ def Jp.fetch_workflows(pr, repo: nil)
   succeeded = 0
   failed = 0
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
-  return {} if repo.nil?
+  if repo.nil?
+    $loog.info("The repository of the pull ##{pr[:number]} is unknown, reporting no builds")
+    return { succeeded_builds: 0, failed_builds: 0 }
+  end
   begin
     entries = Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))
   rescue Octokit::NotFound, Octokit::Deprecated => e
