@@ -96,12 +96,18 @@ Fbe.consider(
       )
       next
     end
-  f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
+  author = pr.dig(:user, :id)
+  reviewers =
+    Jp.human_comments(reviews).filter_map do |review|
+      who = review.dig(:user, :id)
+      who unless who.nil? || who == author
+    end
+  f.reviews = reviewers.uniq.count
   count = nil
-  reviews.each do |review|
+  Jp.human_comments(reviews).each do |review|
     reviewer = review.dig(:user, :id)
     next if reviewer.nil?
-    next if reviewer == pr.dig(:user, :id)
+    next if reviewer == author
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
