@@ -52,8 +52,8 @@ module Fbe
       repos.reject! do |repo|
         octo.repository(repo)[:archived]
       rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} not found: #{e.message}")
-        false
+        $loog.info("Repository #{repo} is absent, dropping it: #{e.message}")
+        true
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
