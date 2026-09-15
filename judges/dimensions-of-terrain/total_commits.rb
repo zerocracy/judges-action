@@ -26,7 +26,7 @@ def total_commits(_fact)
     next if json[:size].nil? || json[:size].zero?
     next if json[:default_branch].nil?
     repos << [*repo.split('/'), json[:default_branch]]
-  end
+  end.then { |whole| return {} unless whole }
   begin
     { total_commits: repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } }
   rescue GraphQL::Client::Error, Fbe::Error => e
