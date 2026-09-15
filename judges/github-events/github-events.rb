@@ -77,7 +77,7 @@ Fbe.iterate do
       return info if json.nil?
       info[:commits] = json[:total_commits]
       info[:hoc] = json[:files].sum { |f| f[:changes] }
-      info[:last_commit] = json[:commits].first[:sha]
+      info[:last_commit] = json[:commits].last[:sha]
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
