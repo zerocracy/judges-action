@@ -168,8 +168,9 @@ Fbe.iterate do
       end
       nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-      review = reviews.first
-      nn.review = review[:submitted_at] if review
+      author = json.dig(:user, :id)
+      review = Jp.human_comments(reviews).find { |r| r.dig(:user, :id) != author }
+      nn.review = review[:submitted_at] if review && review[:submitted_at]
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("The pull #{Fbe.issue(nn)} was #{nn.what.inspect} #{nn.when.ago} ago")
     end
