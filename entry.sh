@@ -270,7 +270,7 @@ pairs=$(mktemp)
 trash+=("${pairs}")
 declare -a flags=()
 for opt in "${options[@]}"; do
-    if [[ "${opt}" == --option=* ]]; then
+    if [[ "${opt}" == --option=github_token=* ]]; then
         printf '%s\n' "${opt#--option=}" >> "${pairs}"
     else
         flags+=("${opt}")
