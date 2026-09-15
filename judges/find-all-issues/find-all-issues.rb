@@ -61,7 +61,6 @@ require_relative '../../lib/qos_search'
       end
       seen = []
       found = []
-      first = issue
       elapsed($loog, level: Logger::INFO) do
         items =
           begin
@@ -89,7 +88,6 @@ require_relative '../../lib/qos_search'
                 ff.repository = repository
                 ff.what = "#{type}-was-opened"
                 ff.where = 'github'
-                issue = ff.issue
               end
             next if f.nil?
             found << f.issue
@@ -120,12 +118,11 @@ require_relative '../../lib/qos_search'
             $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
           end
         end
-        issue = first if issue < first
         m = [
           "Checked #{seen.count} #{type}s in #{repo}",
           ("(#{seen.joined(max: 8)})" unless seen.empty?),
           "created >= #{after.iso8601[0..9]};",
-          "from ##{first} to ##{issue};",
+          "from ##{issue};",
           'found',
           (found.empty? ? 'nothing' : "#{found.count} (#{found.joined(max: 8)})")
         ].compact.join(' ')
