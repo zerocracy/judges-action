@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/unmask_repos'
 
 module Fbe
@@ -34,7 +35,7 @@ module Fbe
               octo.repositories(org)
             end
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden, Octokit::Unauthorized,
-            Octokit::ServerError, Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+            Octokit::ServerError, Faraday::ConnectionFailed, Faraday::TimeoutError => e
             loog.warn(
               "[#{$judge}] Cannot list the repositories of #{org.inspect}, " \
               "skipping the #{mask.inspect} mask (will retry next cycle): #{e.class}: #{e.message}"
@@ -54,9 +55,10 @@ module Fbe
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} not found: #{e.message}")
         false
-      rescue Octokit::Forbidden => e
+      rescue Octokit::Forbidden, Octokit::ServerError, Octokit::Unauthorized,
+        Faraday::ConnectionFailed, Faraday::TimeoutError => e
         $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
+          "[#{$judge}] Cannot tell whether #{repo} is archived, assuming it is not " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         false
