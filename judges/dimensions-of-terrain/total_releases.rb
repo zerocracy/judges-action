@@ -27,6 +27,6 @@ def total_releases(_fact)
     releases.each do |_|
       total += 1
     end
-  end
+  end.then { |whole| return {} unless whole }
   { total_releases: total }
 end
