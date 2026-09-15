@@ -114,4 +114,24 @@ class TestEraseRepository < Jp::Test
     load_it('erase-repository', fb)
     assert_requested(:get, 'https://api.github.com/repositories/403999', times: 1)
   end
+
+  def test_names_the_repository_when_access_is_forbidden
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repositories/403123', body: '', status: 403)
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.where = 'github'
+      f.repository = 403_123
+    end
+    loog = Loog::Buffer.new
+    load_it('erase-repository', fb, loog:)
+    assert_includes(
+      loog.to_s, 'GitHub repository #403123 is not accessible',
+      'The timing line of a forbidden repository must name it, as the found and missing arms do'
+    )
+  end
 end
