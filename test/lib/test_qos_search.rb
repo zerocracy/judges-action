@@ -122,15 +122,33 @@ class TestQosSearch < Jp::Test
     assert_equal(2, Jp.qosearch('repo:foo/foo type:pr')[:items].first[:number])
   end
 
-  def test_caps_search_calls_per_window
+  def test_dispatches_search_after_window_budget_is_spent
     rate_limit_up
-    Jp::SEARCH_WINDOW_BUDGET.times do
-      searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    Jp.instance_variable_set(:@scount, { $judge => Jp::SEARCH_WINDOW_BUDGET })
+    Jp.instance_variable_set(:@swstart, { $judge => Time.now })
+    found = Jp.stub(:sleep, nil) { Jp.qosearch('repo:foo/foo type:issue') }
+    refute_nil(found, 'search is not dispatched once the window budget is spent')
+  end
+
+  def test_sleeps_out_the_rest_of_window_when_budget_is_spent
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    Jp.instance_variable_set(:@scount, { $judge => Jp::SEARCH_WINDOW_BUDGET })
+    Jp.instance_variable_set(:@swstart, { $judge => Time.now - Jp::SEARCH_WINDOW_SECONDS + 10 })
+    naps = []
+    Jp.stub(:sleep, ->(pause) { naps << pause }) { Jp.qosearch('repo:foo/foo type:issue') }
+    assert_in_delta(10, naps.sum, 1, 'slept time is not the rest of the window')
+  end
+
+  def test_opens_fresh_budget_after_sleeping_out_window
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    naps = []
+    Jp.stub(:sleep, ->(pause) { naps << pause }) do
+      (2 * Jp::SEARCH_WINDOW_BUDGET).times { Jp.qosearch('repo:foo/foo type:issue') }
     end
-    Jp::SEARCH_WINDOW_BUDGET.times do
-      refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
-    end
-    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert_equal(1, naps.size, 'window is not reopened after sleeping out the spent budget')
   end
 
   def test_resets_budget_after_window_elapses
@@ -141,7 +159,6 @@ class TestQosSearch < Jp::Test
     Jp::SEARCH_WINDOW_BUDGET.times do
       refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
     end
-    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     Jp.instance_variable_set(:@swstart, { $judge => Time.now - Jp::SEARCH_WINDOW_SECONDS - 1 })
     $global[:octo] = nil
     rate_limit_up
@@ -164,7 +181,6 @@ class TestQosSearch < Jp::Test
     Jp::SEARCH_WINDOW_BUDGET.times do
       refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
     end
-    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
   end
 
   private

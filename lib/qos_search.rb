@@ -33,8 +33,14 @@ def Jp.qosearch(query, method: :search_issues, **)
     @scount[jg] = 0
   end
   if @scount[jg] >= Jp::SEARCH_WINDOW_BUDGET
-    $loog.info("[#{jg}] Search API per-minute budget exceeded (#{Jp::SEARCH_WINDOW_BUDGET}/#{Jp::SEARCH_WINDOW_SECONDS}s)")
-    return
+    rest = Jp::SEARCH_WINDOW_SECONDS - (now - @swstart[jg])
+    $loog.info(
+      "[#{jg}] Search API budget of #{Jp::SEARCH_WINDOW_BUDGET} calls " \
+      "per #{Jp::SEARCH_WINDOW_SECONDS}s is spent, sleeping #{rest.ceil}s"
+    )
+    sleep(rest)
+    @swstart[jg] = Time.now
+    @scount[jg] = 0
   end
   octo = Fbe.octo
   left = nil
