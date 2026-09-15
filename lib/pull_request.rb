@@ -227,7 +227,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
         )
         []
       end
-    comments.count do |comment|
+    Jp.human_comments(comments).count do |comment|
       comment.dig(:user, :id) != author && comment[:in_reply_to_id].nil? && Jp.suggests?(comment[:body])
     end
   end
