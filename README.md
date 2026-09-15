@@ -101,19 +101,25 @@ The following action inputs are set via `with:` in your workflow YAML
 * `sqlite-cache` (optional) is a path of SQLite database file with HTTP cache
 * `bots` (optional) is a comma-separated list of GitHub user logins to mark as bots
 
-The dedicated action inputs above take precedence when a parameter
-  is also configurable via `options` (the k=v pairs below exist for
-  backward compatibility and advanced scenarios):
+Some parameters are configurable both as an action input above and
+  as a k=v pair in `options` below (the pairs exist for backward
+  compatibility and advanced scenarios).
+When both are set, the `github_token=` and `bots=` pairs win over
+  the `github-token` and `bots` inputs, while the `repositories` and
+  `sqlite-cache` inputs win over the `repositories=` and `sqlite_cache=` pairs:
 
 * `github_token=...` is a default GitHub token, usually to be set to
-  `${{ secrets.GITHUB_TOKEN }}`; it takes precedence over the
-  `github-token` action input when both are set
-* `repositories=..` is a comma-separated list of masks (alternative to
-  `repositories` action input), where
+  `${{ secrets.GITHUB_TOKEN }}`; the `github-token` action input
+  is ignored when this pair is set
+* `repositories=..` is a comma-separated list of masks, where
   `yegor256/*` means all repos of the user,
   `yegor256/judges` means a specific repo,
   and
-  `-yegor256/judges` means an exclusion of the repo from the list.
+  `-yegor256/judges` means an exclusion of the repo from the list;
+  the `repositories` action input overrides this pair, and so does
+  the current repository when that input is empty
+* `bots=...` is a comma-separated list of GitHub user logins to mark as bots;
+  the `bots` action input is ignored when this pair is set
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
 * `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
   (these two are only available as k=v pairs)
