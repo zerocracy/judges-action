@@ -22,4 +22,5 @@ input:
     who: 4444
     when: 2025-05-28T23:54:44Z
 expected:
-  - /fb[count(f)=0]
+  - /fb[count(f)=2]
+  - /fb[count(f[what='pull-was-merged'])=2]
