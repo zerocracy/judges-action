@@ -11,7 +11,7 @@ def some_backlog_size(fact)
   return {} if Fbe.octo.off_quota?(resource: :search)
   issues = []
   Fbe.unmask_repos do |repo|
-    (fact.since.utc.to_date..fact.when.utc.to_date).last(7).each do |date|
+    (fact.since.utc.to_date..fact.when.utc.to_date).each do |date|
       return {} if Fbe.octo.off_quota?(resource: :search)
       found = Jp.qosearch(
         "repo:#{repo} type:issue created:*..#{date.iso8601[0..9]} (closed:>=#{date.iso8601[0..9]} OR state:open)",
