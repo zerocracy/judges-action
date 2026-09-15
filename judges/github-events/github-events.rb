@@ -310,10 +310,10 @@ Fbe.iterate do
         skip(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
         fact.hoc = (pull[:additions] || 0) + (pull[:deletions] || 0)
-        fact.comments = pull[:comments] + pull[:review_comments]
-        fact.review_comments = pull[:review_comments]
-        fact.commits = pull[:commits]
-        fact.files = pull[:changed_files]
+        fact.comments = (pull[:comments] || 0) + (pull[:review_comments] || 0)
+        fact.review_comments = pull[:review_comments] unless pull[:review_comments].nil?
+        fact.commits = pull[:commits] unless pull[:commits].nil?
+        fact.files = pull[:changed_files] unless pull[:changed_files].nil?
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been reviewed by #{Fbe.who(fact)} " \
