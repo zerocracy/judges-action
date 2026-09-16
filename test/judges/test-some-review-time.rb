@@ -22,10 +22,7 @@ class TestSomeReviewTime < Jp::Test
   end
 
   def test_keeps_fractional_review_seconds
-    assert_equal(
-      [1.75],
-      review_times(Time.parse('2025-01-10 11:59:58.25 UTC'))
-    )
+    assert_equal([1.75], review_times(Time.parse('2025-01-10 11:59:58.25 UTC')))
   end
 
   private
