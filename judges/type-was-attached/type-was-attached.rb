@@ -95,12 +95,31 @@ Fbe.iterate do
         $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
         next
       end
+      type = tee.dig('issue_type', 'name')
+      before = Fbe.fb.query(
+        "(and (eq issue #{issue}) (eq what '#{$judge}') (eq repository #{repository}) (eq where 'github'))"
+      ).each.to_a.first
+      if before && te[:event] == 'issue_type_changed'
+        actor = tee.dig('actor', 'login')
+        fresh = {
+          'type' => type,
+          'when' => tee['created_at'],
+          'details' =>
+            "The #{type.inspect} type was attached by #{actor ? "@#{actor}" : 'an unknown actor'} " \
+            "to the issue #{Fbe.issue(before)}, replacing #{before.type.inspect}."
+        }
+        who = tee.dig('actor', 'id')
+        fresh['who'] = who if who
+        Fbe.overwrite(before, fresh)
+        $loog.info("Type of #{Fbe.issue(before)} changed to #{type.inspect}")
+        next
+      end
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|
             n.issue = issue
             n.what = $judge
-            n.type = tee.dig('issue_type', 'name')
+            n.type = type
             n.repository = repository
             n.where = 'github'
           end
