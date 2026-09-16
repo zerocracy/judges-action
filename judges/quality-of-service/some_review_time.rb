@@ -34,7 +34,7 @@ def some_review_time(fact)
       first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
       merged = pr.dig(:pull_request, :merged_at)
       if first && merged
-        seconds = Integer(merged - first[:submitted_at])
+        seconds = merged - first[:submitted_at]
         if seconds.negative?
           $loog.info("The pull ##{pr[:number]} in #{repo} was reviewed after it was merged")
         else
