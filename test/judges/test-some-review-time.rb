@@ -21,6 +21,10 @@ class TestSomeReviewTime < Jp::Test
     assert_empty(review_times(Time.parse('2025-01-11 12:00:00 UTC')))
   end
 
+  def test_keeps_fractional_review_seconds
+    assert_equal([1.75], review_times(Time.parse('2025-01-10 11:59:58.25 UTC')))
+  end
+
   private
 
   def review_times(submitted)
@@ -35,7 +39,7 @@ class TestSomeReviewTime < Jp::Test
       'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
       'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
       'GET /repos/foo/foo/pulls/10/reviews?per_page=100' =>
-        [200, [{ id: 7, user: { id: 1 }, submitted_at: submitted.utc.iso8601 }]],
+        [200, [{ id: 7, user: { id: 1 }, submitted_at: submitted.utc.iso8601(3) }]],
       'GET /repos/foo/foo/pulls/10/comments?per_page=100' => [200, []]
     ).run { Jp.stub(:qosearch, found) { some_review_time(fact)[:some_review_time] } }
   end
