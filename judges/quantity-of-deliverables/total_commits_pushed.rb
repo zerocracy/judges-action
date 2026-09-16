@@ -8,11 +8,12 @@ require 'fbe/octo'
 require 'fbe/unmask_repos'
 require 'net/http'
 require 'octokit'
+require_relative '../../lib/patches/unmask_repos'
 
 def total_commits_pushed(fact)
   commits = 0
   hoc = 0
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     begin
       json = Fbe.octo.repository(repo)
       next if json[:size].nil? || json[:size].zero?
