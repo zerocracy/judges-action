@@ -37,7 +37,13 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
     gaps << { since: prev.when, when: f.since } if f.since > prev.when
     prev = f
   end
-  large = gaps.reject { |g| g[:when] - g[:since] < slice }
+  small, large = gaps.partition { |g| g[:when] - g[:since] < slice }
+  small.each do |g|
+    loog.info(
+      "Gap of #{judge} left unmeasured, it is shorter than one window of #{days} days: " \
+      "#{g[:since].utc.iso8601}..#{g[:when].utc.iso8601}"
+    )
+  end
   large.reject { |g| facts.find { |f| g[:since] < f.when && g[:when] > f.since } }.each do |g|
     Fbe.fb.insert.then do |n|
       n.what = judge
