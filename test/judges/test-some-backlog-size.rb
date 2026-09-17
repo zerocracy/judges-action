@@ -26,7 +26,7 @@ class TestSomeBacklogSize < Jp::Test
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     octo = Object.new
-    octo.define_singleton_method(:off_quota?) { |threshold: nil, resource: :core| false }
+    octo.define_singleton_method(:off_quota?) { |**| false }
     result =
       Fbe.stub(:fb, fb) do
         Fbe.stub(:octo, octo) do
