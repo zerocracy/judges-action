@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/recovered'
 require 'octokit'
 
 def some_build_success_rate(fact)
@@ -61,6 +62,12 @@ def some_build_success_rate(fact)
       success << (json[:conclusion] == 'success' ? 1 : 0)
       duration << secs
     end
+    failed.each do |wid, broke|
+      recovery = Jp.recovered(repo, wid, fact.when)
+      next if recovery.nil?
+      ttrs << Integer(recovery - broke)
+    end
+    failed.clear
   end
   {
     some_build_success_rate: success,
