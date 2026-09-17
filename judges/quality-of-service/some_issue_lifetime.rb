@@ -13,8 +13,10 @@ def some_issue_lifetime(fact)
     ages = []
     Fbe.unmask_repos do |repo|
       return {} if Fbe.octo.off_quota?
-      found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+      query = "repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+      found = Jp.qosearch(query)
       return {} if found.nil?
+      Jp.capped?(found, query)
       ages +=
         found[:items].map do |json|
           next if json[:closed_at].nil?
