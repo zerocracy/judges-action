@@ -12,7 +12,7 @@ def some_issue_lifetime(fact)
   { issue: 'some_issue_lifetime', pr: 'some_pull_lifetime' }.each do |type, prop|
     ages = []
     Fbe.unmask_repos do |repo|
-      return {} if Fbe.octo.off_quota?
+      return {} if Fbe.octo.off_quota?(resource: :search)
       found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
       return {} if found.nil?
       ages +=
