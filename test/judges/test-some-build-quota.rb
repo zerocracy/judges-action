@@ -16,7 +16,9 @@ class TestSomeBuildQuota < Jp::Test
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| true }
-    octo.define_singleton_method(:repository_workflow_runs) { |*| raise(RuntimeError, 'the quota check did not stop us') }
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      raise(RuntimeError, 'the quota check did not stop us')
+    end
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     result =
       Fbe.stub(:octo, octo) do
