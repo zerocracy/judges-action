@@ -28,7 +28,7 @@ def total_issues_created(fact)
         $loog.warn("[#{$judge}] Network error counting issues for #{repo}: #{e.message}")
         next
       end
-    issues += json['issues'] + json['pulls']
+    issues += json['issues']
     pulls += json['pulls']
   end
   {
