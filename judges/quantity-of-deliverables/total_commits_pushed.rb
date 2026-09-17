@@ -33,14 +33,8 @@ def total_commits_pushed(fact)
         commits += json['commits']
         hoc += json['hoc']
       end
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Fbe::Error => e
       $loog.info("Can't count pushed commits in #{repo}: #{e.message}")
-      next
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to pushed commits in #{repo} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
       next
     rescue GraphQL::Client::Error,
       Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
