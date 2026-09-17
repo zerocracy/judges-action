@@ -403,6 +403,26 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_stops_at_the_first_repository_when_over
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/one/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      body: { total_count: 3, workflow_runs: [] }
+    )
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/one,foo/two' })
+    load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+    Fbe.stub(:over?, true) do
+      assert_equal({ total_builds_ran: 0 }, total_builds_ran(fact))
+    end
+  end
+
   def test_dont_report_total_when_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
@@ -417,7 +437,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $loog = Loog::NULL
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/blocked' })
-    Fbe.stub(:unmask_repos, ['foo/blocked']) do
+    Fbe.stub(:unmask_repos, proc { |&b| ['foo/blocked'].each { |r| b.call(r) } }) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
       assert_empty(total_builds_ran(fact), 'forbidden repository is reported as a total instead of being omitted')
     end
@@ -443,7 +463,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $loog = Loog::NULL
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/good,foo/blocked' })
-    Fbe.stub(:unmask_repos, %w[foo/good foo/blocked]) do
+    Fbe.stub(:unmask_repos, proc { |&b| %w[foo/good foo/blocked].each { |r| b.call(r) } }) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
       assert_equal({ total_builds_ran: runs }, total_builds_ran(fact))
     end
@@ -463,7 +483,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $loog = Loog::NULL
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/gone' })
-    Fbe.stub(:unmask_repos, ['foo/gone']) do
+    Fbe.stub(:unmask_repos, proc { |&b| ['foo/gone'].each { |r| b.call(r) } }) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
       assert_empty(total_builds_ran(fact), 'unreadable repository is reported as a total instead of being omitted')
     end
