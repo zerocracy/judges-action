@@ -24,7 +24,9 @@ def total_releases(_fact)
         next
       end
     next unless releases.is_a?(Array)
-    releases.each do |_|
+    releases.each do |release|
+      next if release[:draft]
+      next if release[:published_at].nil?
       total += 1
     end
   end
