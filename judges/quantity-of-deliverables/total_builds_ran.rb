@@ -8,7 +8,7 @@ require 'fbe/unmask_repos'
 
 def total_builds_ran(fact)
   total = 0
-  Fbe.unmask_repos.each do |repo|
+  Fbe.unmask_repos do |repo|
     total +=
       Fbe.octo.with_disable_auto_paginate do |octo|
         octo.repository_workflow_runs(
