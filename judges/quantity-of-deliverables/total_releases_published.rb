@@ -16,7 +16,8 @@ def total_releases_published(fact)
     rescue Fbe::Error => e
       $loog.info("Can't count releases in #{repo}: #{e.message}")
       next
-    rescue GraphQL::Client::Error, Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+    rescue GraphQL::Client::Error, Net::OpenTimeout, Net::ReadTimeout,
+      SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn("[#{$judge}] Network error counting releases in #{repo}: #{e.message}")
       next
     end
