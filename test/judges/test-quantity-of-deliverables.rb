@@ -74,7 +74,7 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(29, f.first.total_commits_pushed)
         assert_equal(1857, f.first.total_hoc_committed)
-        assert_equal(25, f.first.total_issues_created)
+        assert_equal(17, f.first.total_issues_created)
         assert_equal(8, f.first.total_pulls_submitted)
       end
     end
@@ -100,7 +100,7 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(0, f.first.total_commits_pushed)
         assert_equal(0, f.first.total_hoc_committed)
-        assert_equal(25, f.first.total_issues_created)
+        assert_equal(17, f.first.total_issues_created)
         assert_equal(8, f.first.total_pulls_submitted)
       end
     end
