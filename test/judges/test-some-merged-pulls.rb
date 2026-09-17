@@ -18,7 +18,7 @@ class TestSomeMergedPulls < Jp::Test
     $loog = Loog::NULL
     asked = []
     octo = Object.new
-    octo.define_singleton_method(:off_quota?) do |threshold: nil, resource: :core|
+    octo.define_singleton_method(:off_quota?) do |resource: :core, **|
       asked << resource
       false
     end
