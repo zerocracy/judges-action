@@ -13,6 +13,7 @@ def some_build_success_rate(fact)
   ttrs = []
   failed = {}
   Fbe.unmask_repos do |repo|
+    return {} if Fbe.octo.off_quota?
     workflows =
       begin
         Fbe.octo.repository_workflow_runs(
@@ -31,6 +32,7 @@ def some_build_success_rate(fact)
     wfs = workflows.select { |json| json[:status] == 'completed' && !json[:conclusion].nil? }.first(60)
     runs =
       wfs.filter_map do |json|
+        break if Fbe.octo.off_quota?
         secs =
           begin
             ms = Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms]
