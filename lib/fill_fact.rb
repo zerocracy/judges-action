@@ -13,6 +13,10 @@ def Jp.fill_fact_by_hash(fact, hash)
     if Jp::FILL_FACT_FORBIDDEN.include?(prop.to_s)
       raise(ArgumentError, "Forbidden property name: #{prop.inspect} (conflicts with fact API)")
     end
-    fact.public_send(:"#{prop}=", value)
+    raise(ArgumentError, "The value of #{prop.inspect} can't be nil") if value.nil?
+    values = Array(value)
+    raise(ArgumentError, "The value of #{prop.inspect} can't be empty") if values.empty?
+    raise(ArgumentError, "The value of #{prop.inspect} can't hold a nil") if values.any?(&:nil?)
+    values.each { |v| fact.public_send(:"#{prop}=", v) }
   end
 end
