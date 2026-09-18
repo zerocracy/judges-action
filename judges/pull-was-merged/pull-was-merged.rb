@@ -150,11 +150,7 @@ Fbe.iterate do
           Jp.fetch_workflows(json),
           suggestions: Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
         )
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to comments or builds of pull ##{issue} in #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
+      rescue Octokit::Forbidden
         next issue
       end
     Fbe.fb.txn do |fbt|

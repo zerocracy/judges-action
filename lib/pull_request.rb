@@ -19,6 +19,12 @@ def Jp.comments_info(pr, repo: nil)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("PR comments not found for #{repo}##{pr[:number]}: #{e.message}")
       []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to PR comments for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      raise
     end
   icomments =
     begin
@@ -26,6 +32,12 @@ def Jp.comments_info(pr, repo: nil)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Issue comments not found for #{repo}##{pr[:number]}: #{e.message}")
       []
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to issue comments for #{repo}##{pr[:number]} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      raise
     end
   ccomments = Jp.human_comments(ccomments)
   icomments = Jp.human_comments(icomments)
@@ -125,6 +137,12 @@ def Jp.fetch_workflows(pr, repo: nil)
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Check runs not found for #{repo}@#{pr.dig(:head, :sha)}: #{e.message}")
     return { succeeded_builds: 0, failed_builds: 0 }
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to check runs for #{repo}@#{pr.dig(:head, :sha)} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    raise
   end
   jobs = {}
   runs = {}

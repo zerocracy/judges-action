@@ -59,11 +59,7 @@ Fbe.consider(
     end
   begin
     Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
-  rescue Octokit::Forbidden => e
-    $loog.warn(
-      "[#{$judge}] Access forbidden to comments of #{Fbe.issue(f)} in #{repo} " \
-      "(transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
+  rescue Octokit::Forbidden
     next
   end
   $loog.info("Comments found for #{Fbe.issue(f)}: #{f.comments}")
