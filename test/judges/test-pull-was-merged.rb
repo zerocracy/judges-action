@@ -419,6 +419,21 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
+  def test_skips_pull_when_code_comments_are_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
+      status: 403,
+      body: { message: 'You have exceeded a secondary rate limit' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(fb.none?(issue: 44, what: 'pull-was-merged'), 'merged fact is saved with comments the api refused')
+  end
+
   def test_rescues_deprecated_on_reviews_lookup
     WebMock.disable_net_connect!
     rate_limit_up

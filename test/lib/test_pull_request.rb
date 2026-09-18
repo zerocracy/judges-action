@@ -105,7 +105,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_empty_on_forbidden_runs
+  def test_fetch_workflows_raises_on_forbidden_runs
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -117,8 +117,7 @@ class TestPullRequest < Jp::Test
         status: 403, body: '{"message": "Forbidden"}',
         headers: { 'Content-Type' => 'application/json' }
       )
-    result = Jp.fetch_workflows(pr)
-    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
+    assert_raises(Octokit::Forbidden, 'refused check runs are counted as zero builds') { Jp.fetch_workflows(pr) }
   end
 
   def test_fetch_workflows_skips_not_found_run_job
@@ -388,7 +387,7 @@ class TestPullRequest < Jp::Test
     end
   end
 
-  def test_skips_issue_comments_on_forbidden
+  def test_raises_on_forbidden_issue_comments
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -401,14 +400,11 @@ class TestPullRequest < Jp::Test
     )
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       pr = { number: 2, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
-      info = Jp.comments_info(pr)
-      refute_nil(info)
-      assert_equal(0, info[:comments_by_reviewers])
-      assert_equal(0, info[:comments_by_author])
+      assert_raises(Octokit::Forbidden, 'refused issue comments are counted as zero') { Jp.comments_info(pr) }
     end
   end
 
-  def test_returns_zeros_on_both_forbidden
+  def test_raises_on_forbidden_code_comments
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -424,11 +420,7 @@ class TestPullRequest < Jp::Test
     )
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       pr = { number: 3, comments: 0, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
-      info = Jp.comments_info(pr)
-      refute_nil(info)
-      assert_equal(0, info[:comments_to_code])
-      assert_equal(0, info[:comments_by_author])
-      assert_equal(0, info[:comments_by_reviewers])
+      assert_raises(Octokit::Forbidden, 'refused code comments are counted as zero') { Jp.comments_info(pr) }
     end
   end
 
