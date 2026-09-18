@@ -488,6 +488,29 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_skips_pull_on_server_error_in_comments
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(45)
+    stub_pull_was_merged_base(44)
+    stub_pull_was_merged_issue(44)
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100',
+      status: 502,
+      body: { message: 'Bad Gateway' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(issue: 45, what: 'pull-was-merged', repository: 42, where: 'github', who: 422),
+      'A 502 on the comments of one pull aborted the judge before the next pull'
+    )
+  end
+
   private
 
   def stub_pull_was_merged_success(issue)
