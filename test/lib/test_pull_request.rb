@@ -263,7 +263,10 @@ class TestPullRequest < Jp::Test
     $loog = Loog::NULL
     stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/comments/301/reactions')
       .to_return(status: 404, headers: { 'Content-Type' => 'application/json' }, body: '{}')
-    stub_github('https://api.github.com/repos/foo/foo/issues/comments/302/reactions', body: [{ user: { id: 99 }, content: '+1' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/302/reactions',
+      body: [{ user: { id: 99 }, content: '+1' }]
+    )
     pr = { base: { repo: { full_name: 'foo/foo' } } }
     count = Jp.count_appreciated_comments(pr, [{ id: 301, user: { id: 1 } }, { id: 302, user: { id: 1 } }], [])
     assert_equal(1, count)
@@ -290,7 +293,10 @@ class TestPullRequest < Jp::Test
     $loog = Loog::NULL
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/comments/501/reactions')
       .to_return(status: 404, headers: { 'Content-Type' => 'application/json' }, body: '{}')
-    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/502/reactions', body: [{ user: { id: 88 }, content: '+1' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/comments/502/reactions',
+      body: [{ user: { id: 88 }, content: '+1' }]
+    )
     pr = { base: { repo: { full_name: 'foo/foo' } } }
     count = Jp.count_appreciated_comments(pr, [], [{ id: 501, user: { id: 1 } }, { id: 502, user: { id: 1 } }])
     assert_equal(1, count)
