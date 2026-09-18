@@ -39,7 +39,10 @@ def total_files(_fact)
         next
       end
     if tree[:truncated]
-      $loog.info("Tree for #{repo}@#{info[:default_branch]} is truncated, skipping total_files")
+      $loog.info(
+        "Tree for #{repo}@#{info[:default_branch]} is truncated, so total_files is not reported " \
+        'at all this time, not even for the repositories that were counted'
+      )
       truncated = true
       break
     end
