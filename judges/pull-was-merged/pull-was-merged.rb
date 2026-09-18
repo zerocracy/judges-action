@@ -62,6 +62,17 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
+      rescue Octokit::Unauthorized => e
+        $loog.error("[#{$judge}] Not authorized to fetch repository ##{repository}: #{e.class}: #{e.message}")
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError,
+        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching repository ##{repository} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
       end
     json =
       begin
