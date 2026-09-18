@@ -2649,12 +2649,12 @@ class TestGithubEvents < Jp::Test
         {
           id: 22_100, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func1...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
-          body: "```suggestion\nfixed\n```  question1", created_at: '2025-10-20 18:06:00 UTC', user: { id: 46, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-10-20 18:06:00 UTC', user: { id: 46, login: 'user2' }
         },
         {
           id: 22_101, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func2...', path: 'lib/some/path/file2.rb', commit_id: '3e695',
-          body: "```suggestion\nfixed\n```  question2", created_at: '2025-10-20 18:07:00 UTC', user: { id: 46, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-10-20 18:07:00 UTC', user: { id: 46, login: 'user2' }
         }
       ]
     )

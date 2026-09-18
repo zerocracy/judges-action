@@ -254,17 +254,17 @@ class TestPullWasMerged < Jp::Test
         {
           id: 22_099, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func...', path: 'lib/some/path/file.rb', commit_id: '3e695',
-          body: "```suggestion\nfixed\n```  question0", created_at: '2025-09-29 05:05:00 UTC', user: { id: 422, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:05:00 UTC', user: { id: 422, login: 'user2' }
         },
         {
           id: 22_100, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func1...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
-          body: "```suggestion\nfixed\n```  question1", created_at: '2025-09-29 05:06:00 UTC', user: { id: 422, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:06:00 UTC', user: { id: 422, login: 'user2' }
         },
         {
           id: 22_101, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func2...', path: 'lib/some/path/file2.rb', commit_id: '3e695',
-          body: "```suggestion\nfixed\n```  question2", created_at: '2025-09-29 05:07:00 UTC', user: { id: 422, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:07:00 UTC', user: { id: 422, login: 'user2' }
         }
       ]
     )
@@ -296,7 +296,7 @@ class TestPullWasMerged < Jp::Test
         {
           id: 22_105, pull_request_review_id: 126,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
-          body: "```suggestion\nfixed\n```  question3", created_at: '2025-09-29 05:56:00 UTC', user: { id: 422, login: 'user2' },
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:56:00 UTC', user: { id: 422, login: 'user2' },
           in_reply_to_id: 22_100
         }
       ]
