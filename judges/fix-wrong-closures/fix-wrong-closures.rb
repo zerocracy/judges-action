@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
@@ -51,8 +52,7 @@ Fbe.iterate do
         )
         next issue
       rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError,
-        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn(
           "[#{$judge}] Transient error fetching pull ##{issue} in #{repo} " \
           "(will retry next cycle): #{e.class}: #{e.message}"
