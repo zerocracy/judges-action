@@ -86,4 +86,56 @@ class TestFixWrongClosures < Jp::Test
       'A vanished repository must not delete the closure and must not abort the judge'
     )
   end
+
+  def test_keeps_the_closure_when_repo_name_lookup_fails_with_server_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 500, body: { message: 'Server Error' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', where: 'github', repository: 42, issue: 58, who: 44)
+    load_it('fix-wrong-closures', fb)
+    assert(
+      fb.one?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 58),
+      'The closure is lost after a server error on the repository lookup'
+    )
+  end
+
+  def test_keeps_the_closure_when_repo_name_lookup_times_out
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_request(:get, 'https://api.github.com/repositories/42').to_timeout
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', where: 'github', repository: 42, issue: 59, who: 44)
+    load_it('fix-wrong-closures', fb)
+    assert(
+      fb.one?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 59),
+      'The closure is lost after a timeout on the repository lookup'
+    )
+  end
+
+  def test_checks_the_next_pull_after_server_error_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/bar/bar', body: { id: 43, full_name: 'bar/bar' })
+    stub_github('https://api.github.com/repositories/42', status: 502, body: { message: 'Bad Gateway' })
+    stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'bar/bar' })
+    stub_github(
+      'https://api.github.com/repos/bar/bar/pulls/61',
+      body: {
+        id: 53, number: 61, state: 'open', merged: false, merged_at: nil,
+        head: { ref: '61', sha: 'dd012' }
+      }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', where: 'github', repository: 42, issue: 60, who: 44)
+    fb.with(_id: 2, what: 'pull-was-closed', where: 'github', repository: 43, issue: 61, who: 44)
+    load_it('fix-wrong-closures', fb, Judges::Options.new({ 'repositories' => 'foo/foo,bar/bar' }))
+    assert(
+      fb.none?(what: 'pull-was-closed', where: 'github', repository: 43, issue: 61),
+      'The judge stops before the next repository after a server error'
+    )
+  end
 end
