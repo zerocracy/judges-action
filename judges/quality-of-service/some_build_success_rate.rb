@@ -8,6 +8,8 @@ require 'fbe/unmask_repos'
 require_relative '../../lib/recovered'
 require 'octokit'
 
+RUNS_SAMPLE = 60
+
 def some_build_success_rate(fact)
   success = []
   duration = []
@@ -31,7 +33,14 @@ def some_build_success_rate(fact)
         )
         next
       end
-    wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
+    completed = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }
+    wfs = completed.first(RUNS_SAMPLE)
+    if completed.size > wfs.size
+      $loog.info(
+        "[#{$judge}] Measured #{wfs.size} of the #{completed.size} completed runs of #{repo}, " \
+        'so what follows is a sample of the window and not the whole of it'
+      )
+    end
     runs =
       wfs.filter_map do |json|
         break if Fbe.octo.off_quota?
