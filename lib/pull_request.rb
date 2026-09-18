@@ -8,6 +8,8 @@ require 'fbe/octo'
 require_relative 'humans'
 require_relative 'jp'
 
+# @todo #2352:30min Forbidden is still swallowed as zero for reactions, resolved threads, runs and reviews
+
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
@@ -17,24 +19,12 @@ def Jp.comments_info(pr, repo: nil)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("PR comments not found for #{repo}##{pr[:number]}: #{e.message}")
       []
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to PR comments for #{repo}##{pr[:number]} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
-      []
     end
   icomments =
     begin
       Fbe.octo.issue_comments(repo, pr[:number])
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Issue comments not found for #{repo}##{pr[:number]}: #{e.message}")
-      []
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to issue comments for #{repo}##{pr[:number]} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
       []
     end
   ccomments = Jp.human_comments(ccomments)
@@ -134,12 +124,6 @@ def Jp.fetch_workflows(pr, repo: nil)
     entries = Fbe.octo.check_runs_for_ref(repo, pr.dig(:head, :sha))
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Check runs not found for #{repo}@#{pr.dig(:head, :sha)}: #{e.message}")
-    return { succeeded_builds: 0, failed_builds: 0 }
-  rescue Octokit::Forbidden => e
-    $loog.warn(
-      "[#{$judge}] Access forbidden to check runs for #{repo}@#{pr.dig(:head, :sha)} " \
-      "(transient, will retry next cycle): #{e.class}: #{e.message}"
-    )
     return { succeeded_builds: 0, failed_builds: 0 }
   end
   jobs = {}

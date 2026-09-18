@@ -144,6 +144,19 @@ Fbe.iterate do
         )
         next issue
       end
+    stats =
+      begin
+        Jp.comments_info(json).merge(
+          Jp.fetch_workflows(json),
+          suggestions: Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
+        )
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to comments or builds of pull ##{issue} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      end
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |n|
@@ -159,14 +172,12 @@ Fbe.iterate do
       nn.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
-      Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
-      Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
+      Jp.fill_fact_by_hash(nn, stats)
       if actor
         nn.who = Integer(actor[:id])
       else
         nn.stale = 'who'
       end
-      nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       review = reviews.first
       nn.review = review[:submitted_at] if review
