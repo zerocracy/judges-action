@@ -442,15 +442,15 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/1/reviews/10/comments?per_page=100',
       body: [
-        { id: 1, user: { id: 100 }, in_reply_to_id: nil },
-        { id: 2, user: { id: 300 }, in_reply_to_id: nil },
-        { id: 3, user: { id: 100 }, in_reply_to_id: 1 }
+        { id: 1, user: { id: 100 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" },
+        { id: 2, user: { id: 300 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" },
+        { id: 3, user: { id: 100 }, in_reply_to_id: 1, body: "```suggestion\nx\n```" }
       ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/1/reviews/20/comments?per_page=100',
       body: [
-        { id: 4, user: { id: 200 }, in_reply_to_id: nil }
+        { id: 4, user: { id: 200 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" }
       ]
     )
     count = Jp.count_suggestions('foo/foo', 1, 300, reviews)
@@ -467,13 +467,13 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/2/reviews/40/comments?per_page=100',
       body: [
-        { id: 5, user: { id: 400 }, in_reply_to_id: nil }
+        { id: 5, user: { id: 400 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" }
       ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/2/reviews/50/comments?per_page=100',
       body: [
-        { id: 6, user: { id: 500 }, in_reply_to_id: nil }
+        { id: 6, user: { id: 500 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" }
       ]
     )
     count = Jp.count_suggestions('foo/foo', 2, 500, reviews)
@@ -490,7 +490,7 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/3/reviews/60/comments?per_page=100',
       body: [
-        { id: 7, user: { id: 600 }, in_reply_to_id: 5 }
+        { id: 7, user: { id: 600 }, in_reply_to_id: 5, body: "```suggestion\nx\n```" }
       ]
     )
     count = Jp.count_suggestions('foo/foo', 3, 700, reviews)
