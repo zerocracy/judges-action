@@ -11,11 +11,11 @@ require 'fbe/octo'
 require 'fbe/tombstone'
 require 'fbe/who'
 require 'tago'
+require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 require_relative '../../lib/supervision'
 require_relative '../../lib/twice'
-require_relative '../../lib/merging_review'
 
 Fbe.iterate do
   as 'events_were_scanned'
@@ -260,7 +260,7 @@ Fbe.iterate do
             )
             []
           end
-        review = Jp.merging_review(reviews, pl[:closed_at])
+        review = Jp.approval(reviews, pl[:closed_at])
         fact.review = review[:submitted_at] if review
         author = pl.dig(:user, :id)
         fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author

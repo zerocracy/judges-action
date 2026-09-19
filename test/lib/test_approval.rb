@@ -4,10 +4,10 @@
 # SPDX-License-Identifier: MIT
 
 require 'time'
-require_relative '../../lib/merging_review'
+require_relative '../../lib/approval'
 require_relative '../test__helper'
 
-class TestMergingReview < Minitest::Test
+class TestApproval < Minitest::Test
   def test_takes_the_last_approval
     reviews = [
       { state: 'CHANGES_REQUESTED', submitted_at: Time.parse('2025-06-20 10:00:00 UTC') },
@@ -15,7 +15,7 @@ class TestMergingReview < Minitest::Test
     ]
     assert_equal(
       Time.parse('2025-06-27 18:00:00 UTC'),
-      Jp.merging_review(reviews, Time.parse('2025-06-27 19:00:05 UTC'))[:submitted_at]
+      Jp.approval(reviews, Time.parse('2025-06-27 19:00:05 UTC'))[:submitted_at]
     )
   end
 
@@ -26,7 +26,7 @@ class TestMergingReview < Minitest::Test
     ]
     assert_equal(
       Time.parse('2025-06-21 10:00:00 UTC'),
-      Jp.merging_review(reviews, Time.parse('2025-06-27 19:00:05 UTC'))[:submitted_at]
+      Jp.approval(reviews, Time.parse('2025-06-27 19:00:05 UTC'))[:submitted_at]
     )
   end
 
@@ -35,13 +35,10 @@ class TestMergingReview < Minitest::Test
       { state: 'CHANGES_REQUESTED', submitted_at: Time.parse('2025-06-20 10:00:00 UTC') },
       { state: 'COMMENTED', submitted_at: Time.parse('2025-06-25 10:00:00 UTC') }
     ]
-    assert_equal(
-      Time.parse('2025-06-25 10:00:00 UTC'),
-      Jp.merging_review(reviews, nil)[:submitted_at]
-    )
+    assert_equal(Time.parse('2025-06-25 10:00:00 UTC'), Jp.approval(reviews, nil)[:submitted_at])
   end
 
   def test_answers_nil_for_no_reviews
-    assert_nil(Jp.merging_review([], nil))
+    assert_nil(Jp.approval([], nil))
   end
 end
