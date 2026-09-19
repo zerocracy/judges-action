@@ -13,6 +13,7 @@ require 'fbe/overwrite'
 require 'fbe/who'
 require 'octokit'
 require 'tago'
+require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
@@ -168,7 +169,7 @@ Fbe.iterate do
       end
       nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-      review = reviews.first
+      review = Jp.approval(reviews, json[:closed_at])
       nn.review = review[:submitted_at] if review
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("The pull #{Fbe.issue(nn)} was #{nn.what.inspect} #{nn.when.ago} ago")
