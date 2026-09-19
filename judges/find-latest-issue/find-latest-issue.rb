@@ -60,7 +60,7 @@ Fbe.iterate do
         end
       next if f.nil?
       f.when = json[:created_at]
-      Jp.set_who(f, json.dig(:user, :id))
+      Jp.author(f, json.dig(:user, :id))
       if json[:pull_request]
         ref =
           begin
@@ -82,8 +82,8 @@ Fbe.iterate do
           f.stale = 'branch'
         end
       end
-      f.details = "The issue #{Fbe.issue(f)} is the first we found, opened by #{Jp.mention_of(f)}."
-      $loog.info("The issue #{Fbe.issue(f)} was opened by #{Jp.mention_of(f)} #{f.when.ago} ago")
+      f.details = "The issue #{Fbe.issue(f)} is the first we found, opened by #{Jp.mention(f)}."
+      $loog.info("The issue #{Fbe.issue(f)} was opened by #{Jp.mention(f)} #{f.when.ago} ago")
     end
     json[:number]
   end

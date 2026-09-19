@@ -69,9 +69,9 @@ Fbe.conclude do
       end
     n.what = $judge
     n.when = json[:created_at]
-    Jp.set_who(n, json.dig(:user, :id))
-    n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Jp.mention_of(n)}."
-    $loog.info("The issue #{Fbe.issue(n)} was opened by #{Jp.mention_of(n)} #{n.when.ago} ago")
+    Jp.author(n, json.dig(:user, :id))
+    n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Jp.mention(n)}."
+    $loog.info("The issue #{Fbe.issue(n)} was opened by #{Jp.mention(n)} #{n.when.ago} ago")
   end
 end
 

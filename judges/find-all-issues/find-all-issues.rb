@@ -95,7 +95,7 @@ require_relative '../../lib/who_of'
             next if f.nil?
             found << f.issue
             f.when = json[:created_at]
-            Jp.set_who(f, json.dig(:user, :id))
+            Jp.author(f, json.dig(:user, :id))
             if type == 'pull'
               ref =
                 begin
@@ -117,8 +117,8 @@ require_relative '../../lib/who_of'
                 f.stale = 'branch'
               end
             end
-            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Jp.mention_of(f)}."
-            $loog.info("The #{Fbe.issue(f)} was opened by #{Jp.mention_of(f)} #{f.when.ago} ago")
+            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Jp.mention(f)}."
+            $loog.info("The #{Fbe.issue(f)} was opened by #{Jp.mention(f)} #{f.when.ago} ago")
           end
         end
         issue = first if issue < first
