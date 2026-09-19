@@ -12,6 +12,8 @@ def Jp.today
   if v.nil? || v.empty?
     Time.now.utc
   else
+    # rubocop:disable Style/DateTime
     DateTime.parse(v).to_time.utc
+    # rubocop:enable Style/DateTime
   end
 end
