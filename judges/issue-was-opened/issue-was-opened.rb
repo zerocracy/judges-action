@@ -11,6 +11,7 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/who_of'
 
 Fbe.conclude do
   on "(and
@@ -68,9 +69,9 @@ Fbe.conclude do
       end
     n.what = $judge
     n.when = json[:created_at]
-    n.who = json.dig(:user, :id)
-    n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
-    $loog.info("The issue #{Fbe.issue(n)} was opened by #{Fbe.who(n)} #{n.when.ago} ago")
+    Jp.set_who(n, json.dig(:user, :id))
+    n.details = "The issue #{Fbe.issue(n)} has been opened earlier by #{Jp.mention_of(n)}."
+    $loog.info("The issue #{Fbe.issue(n)} was opened by #{Jp.mention_of(n)} #{n.when.ago} ago")
   end
 end
 

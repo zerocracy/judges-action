@@ -10,6 +10,7 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/who_of'
 
 Fbe.conclude do
   on "(and
@@ -66,7 +67,7 @@ Fbe.conclude do
       end
     n.what = $judge
     n.when = json[:created_at]
-    n.who = json.dig(:user, :id)
+    Jp.set_who(n, json.dig(:user, :id))
     ref =
       begin
         Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
@@ -86,7 +87,7 @@ Fbe.conclude do
     else
       n.stale = 'branch'
     end
-    n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Fbe.who(n)}."
+    n.details = "The pull #{Fbe.issue(n)} has been opened earlier by #{Jp.mention_of(n)}."
     $loog.info("The pull #{Fbe.issue(n)} was opened #{n.when.ago} ago")
   end
 end

@@ -16,6 +16,7 @@ require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/qos_search'
+require_relative '../../lib/who_of'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
@@ -94,7 +95,7 @@ require_relative '../../lib/qos_search'
             next if f.nil?
             found << f.issue
             f.when = json[:created_at]
-            f.who = json.dig(:user, :id)
+            Jp.set_who(f, json.dig(:user, :id))
             if type == 'pull'
               ref =
                 begin
@@ -116,8 +117,8 @@ require_relative '../../lib/qos_search'
                 f.stale = 'branch'
               end
             end
-            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Fbe.who(f)}."
-            $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
+            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Jp.mention_of(f)}."
+            $loog.info("The #{Fbe.issue(f)} was opened by #{Jp.mention_of(f)} #{f.when.ago} ago")
           end
         end
         issue = first if issue < first
