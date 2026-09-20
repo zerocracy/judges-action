@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 812.53070451
+  seconds: 1096.1818692
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-20 20:15:12.029151400 Z
+  when: 2026-09-20 20:50:18.870361602 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17770,23 +17771,6 @@
   where: github
   who: 526301
   why: Pushed b6492fc5c to the default branch 'master' in zerocracy/baza
-- _id: 2600425
-  _job: 56751
-  _time: 2026-01-07 20:43:46.803185063 Z
-  _version: 0.19.2/0.58.1/0.17.9
-  award: 6
-  details: It's time to reward @yegor256 for the bug resolved in yegor256/judges#361
-    in 334 hours, the reward amount is 6.
-  href: https://github.com/yegor256/judges/issues/361
-  is_human: 1
-  issue: 361
-  repository: 799113787
-  tombstone: 2026-09-04 22:52:30.327945774 Z
-  what: resolved-bug-was-rewarded
-  when: 2026-01-07 19:23:33.664021478 Z
-  where: github
-  who: 526301
-  why: Resolved bug in yegor256/judges#361
 - _id: 2600438
   _job: 20802692838
   _time: 2026-01-08 01:50:05.175544240 Z
@@ -189512,25 +189496,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 828
+  assignees_were_scanned: 946
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15389810925
   issues_were_scanned: 956
   labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 1046
+  merges_were_scanned: 0
   min_issue_was_found: 1026
   min_pull_was_found: 448
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 677
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15385080168
@@ -189541,7 +189525,7 @@
   min_issue_was_found: 325
   min_pull_was_found: 171
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 416
   what: iterate
   where: github
 - _id: 2629843
@@ -189958,18 +189942,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 850
+  assignees_were_scanned: 1001
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 15387309539
+  events_were_scanned: 15390737447
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 0
+  merges_were_scanned: 868
   min_issue_was_found: 827
   min_pull_was_found: 396
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 584
   what: iterate
   where: github
 - _id: 2629882
@@ -190615,18 +190599,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 829
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15385395524
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 0
+  merges_were_scanned: 868
   min_issue_was_found: 680
   min_pull_was_found: 724
   repository: 802720676
-  types_were_scanned: 826
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -190761,54 +190745,54 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 604
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 15386937716
+  events_were_scanned: 15389740420
   issues_were_scanned: 652
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 691
   min_issue_was_found: 641
   min_pull_was_found: 384
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 579
   what: iterate
   where: github
 - _id: 2630023
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 406
+  assignees_were_scanned: 447
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15386930799
   issues_were_scanned: 538
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 0
+  merges_were_scanned: 571
   min_issue_was_found: 599
   min_pull_was_found: 219
   repository: 181044958
-  types_were_scanned: 447
+  types_were_scanned: 539
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1731
-  closures_were_checked: 0
+  assignees_were_scanned: 1990
+  closures_were_checked: 1637
   earliest_issue_was_found: 1
-  events_were_scanned: 21675827252
+  events_were_scanned: 15390742677
   issues_were_scanned: 0
-  labels_were_scanned: 1702
+  labels_were_scanned: 2190
   latest_issue_was_found: 1073
-  merges_were_scanned: 2343
+  merges_were_scanned: 0
   min_issue_was_found: 2188
   min_pull_was_found: 1626
   repository: 799177290
-  types_were_scanned: 1448
+  types_were_scanned: 1658
   what: iterate
   where: github
 - _id: 2630036
@@ -190832,7 +190816,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1188
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21547814854
@@ -190843,7 +190827,7 @@
   min_issue_was_found: 1261
   min_pull_was_found: 1070
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1142
   what: iterate
   where: github
 - _id: 2630038
@@ -334983,6 +334967,7 @@
   href: https://github.com/yegor256/judges/issues/628/#issuecomment-5748720534
   is_human: 1
   issue: 628
+  receipt: receipt-#93208
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-09-20 07:52:41.389082464 Z
@@ -334999,6 +334984,7 @@
   href: https://github.com/yegor256/judges/issues/629/#issuecomment-5748720644
   is_human: 1
   issue: 629
+  receipt: receipt-#93207
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-09-20 07:52:41.796777181 Z
@@ -335015,6 +335001,7 @@
   href: https://github.com/yegor256/judges/issues/630/#issuecomment-5748720759
   is_human: 1
   issue: 630
+  receipt: receipt-#93206
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-09-20 07:52:42.170390023 Z
@@ -335031,6 +335018,7 @@
   href: https://github.com/yegor256/judges/issues/631/#issuecomment-5748720862
   is_human: 1
   issue: 631
+  receipt: receipt-#93205
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-09-20 07:52:42.616224494 Z
@@ -336411,6 +336399,7 @@
   href: https://github.com/yegor256/factbase/issues/1032/#issuecomment-5749763059
   is_human: 1
   issue: 1032
+  receipt: receipt-#93209
   repository: 798641472
   review_comments: 0
   seconds: 80958
@@ -336431,6 +336420,7 @@
   href: https://github.com/yegor256/factbase/issues/1012/#issuecomment-5749763208
   is_human: 1
   issue: 1012
+  receipt: receipt-#93210
   repository: 798641472
   review_comments: 0
   seconds: 170539
@@ -337412,7 +337402,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-09-20 16:45:03.000000000 Z
+  when: &3706 2026-09-20 16:45:03.000000000 Z
   where: github
   who: 8086956
 - _id: 2638597
@@ -337556,6 +337546,7 @@
   _time: 2026-09-20 20:09:45.327517800 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/judges-action#2409 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 2409
   repository: 799177290
   what: issue-was-opened
@@ -337567,6 +337558,7 @@
   _time: 2026-09-20 20:09:45.865064718 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/judges-action#2408 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 2408
   repository: 799177290
   what: issue-was-opened
@@ -337578,6 +337570,7 @@
   _time: 2026-09-20 20:09:46.221233490 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/judges-action#2407 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 2407
   repository: 799177290
   what: issue-was-opened
@@ -337589,6 +337582,7 @@
   _time: 2026-09-20 20:10:51.638862962 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/fbe#1029 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1029
   repository: 820463873
   what: issue-was-opened
@@ -337600,6 +337594,7 @@
   _time: 2026-09-20 20:10:51.960293407 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/fbe#1028 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1028
   repository: 820463873
   what: issue-was-opened
@@ -337611,6 +337606,7 @@
   _time: 2026-09-20 20:10:52.280112039 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/fbe#1027 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1027
   repository: 820463873
   what: issue-was-opened
@@ -337622,6 +337618,7 @@
   _time: 2026-09-20 20:10:54.077123245 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/fbe#1026 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1026
   repository: 820463873
   what: issue-was-opened
@@ -337633,6 +337630,7 @@
   _time: 2026-09-20 20:10:54.543733613 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/fbe#1025 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1025
   repository: 820463873
   what: issue-was-opened
@@ -337644,6 +337642,7 @@
   _time: 2026-09-20 20:10:54.828023202 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/fbe#1024 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1024
   repository: 820463873
   what: issue-was-opened
@@ -337655,6 +337654,7 @@
   _time: 2026-09-20 20:11:36.057066783 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue yegor256/judges#712 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 712
   repository: 799113787
   what: issue-was-opened
@@ -337666,9 +337666,132 @@
   _time: 2026-09-20 20:11:36.672141536 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue yegor256/judges#711 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 711
   repository: 799113787
   what: issue-was-opened
   when: 2026-09-20 19:44:52.000000000 Z
   where: github
   who: 125282851
+- _id: 2638618
+  _job: 94093
+  _time: 2026-09-20 20:16:14.351104895 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request zerocracy/baza.rb#476 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 4d6h of being in review and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 476
+  merger: 8086956
+  repository: 840215648
+  review_comments: 0
+  seconds: 370562
+  what: code-was-contributed
+  when: *3706
+  where: github
+  who: 29139614
+- _id: 2638619
+  _job: 94093
+  _time: 2026-09-20 20:16:19.661646055 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in zerocracy/baza.rb#476,
+    the reward amount is 6.
+  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
+    -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
+    score is [+669](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 2
+  is_human: 1
+  issue: 476
+  repository: 840215648
+  review_comments: 0
+  seconds: 370088
+  what: code-review-was-rewarded
+  when: 2026-09-20 20:16:19.668049265 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/baza.rb#476
+- _id: 2638620
+  _job: 35535784201
+  _time: 2026-09-20 20:32:17.361322667 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1033 has been opened by @morphqdd.
+  event_id: 15390737447
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1033
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-20 20:23:30.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2638621
+  _job: 35535784201
+  _time: 2026-09-20 20:32:18.055914884 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1032 has been opened by @morphqdd.
+  event_id: 15390725088
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1032
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-20 20:23:02.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2638622
+  _job: 35535784201
+  _time: 2026-09-20 20:32:18.541762437 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1031 has been opened by @morphqdd.
+  event_id: 15390720622
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1031
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-20 20:22:52.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2638623
+  _job: 35535784201
+  _time: 2026-09-20 20:32:19.176571784 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1030 has been opened by @morphqdd.
+  event_id: 15390715779
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1030
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-20 20:22:40.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2638624
+  _job: 35535784201
+  _time: 2026-09-20 20:38:22.857312161 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 3
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#2397 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 2397
+  repository: 799177290
+  review: 2026-09-20 16:27:46.000000000 Z
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-09-20 17:09:58.000000000 Z
+  where: github
+  who: 8086956
