@@ -11,6 +11,7 @@ def total_reviews_submitted(fact)
   total = 0
   Fbe.unmask_repos.each do |repo|
     owner, name = repo.split('/')
+    count = 0
     cursor = nil
     queue = []
     loop do
@@ -24,27 +25,25 @@ def total_reviews_submitted(fact)
     until queue.empty?
       pulls = Fbe.github_graph.pull_request_reviews(owner, name, pulls: queue.shift(10))
       window = ->(r) { r['submitted_at'] > fact.since && r['submitted_at'] <= fact.when }
-      total += pulls.sum { |p| p['reviews'].count(&window) }
+      count += pulls.sum { |p| p['reviews'].count(&window) }
       pulls.select { _1['reviews_has_next_page'] }.each do |p|
         queue.push([p['number'], p['reviews_next_cursor']])
       end
     end
+    total += count
   rescue Octokit::NotFound, Octokit::Deprecated => e
-    $loog.info("Can't count submitted reviews in #{repo}: #{e.message}")
-    next
+    $loog.info("Can't count submitted reviews in #{repo}, #{count} of them dropped: #{e.message}")
   rescue Octokit::Forbidden => e
     $loog.warn(
-      "[#{$judge}] Access forbidden to submitted reviews in #{repo} " \
+      "[#{$judge}] Access forbidden to submitted reviews in #{repo}, #{count} of them dropped " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
-    next
   rescue GraphQL::Client::Error,
     Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
     $loog.warn(
-      "[#{$judge}] Can't count submitted reviews in #{repo} " \
+      "[#{$judge}] Can't count submitted reviews in #{repo}, #{count} of them dropped " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
-    next
   end
   { total_reviews_submitted: total }
 end

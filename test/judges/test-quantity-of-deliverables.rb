@@ -29,6 +29,19 @@ class TestQuantityOfDeliverables < Jp::Test
     graph
   end
 
+  def pagedgraph(repo, err)
+    graph = Fbe::Graph::Fake.new
+    reviews = graph.method(:pull_request_reviews)
+    seen = []
+    graph.define_singleton_method(:pull_request_reviews) do |owner, name, pulls:|
+      slug = "#{owner}/#{name}"
+      raise(err) if slug == repo && seen.include?(slug)
+      seen.push(slug)
+      reviews.call(owner, name, pulls:).map { |p| slug == repo ? p.merge('reviews_has_next_page' => true) : p }
+    end
+    graph
+  end
+
   def directreviews(repos, graph)
     WebMock.disable_net_connect!
     rate_limit_up
@@ -321,6 +334,26 @@ class TestQuantityOfDeliverables < Jp::Test
   def test_total_reviews_submitted_skips_reviews
     graph = reviewgraph('foo/bad', :reviews, GraphQL::Client::Error.new('GraphQL failed'))
     assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
+  end
+
+  def test_total_reviews_submitted_dont_count_partial_repo
+    seed = Random.new_seed
+    good = Random.new(seed).rand(1..3)
+    graph = pagedgraph('foo/bad', GraphQL::Client::Error.new('GraphQL failed'))
+    assert_equal(
+      { total_reviews_submitted: 4 * good },
+      directreviews(['foo/bad'] + Array.new(good) { |i| "foo/good-#{i}" }, graph),
+      "reviews counted in foo/bad before its second page failed are not excluded (seed: #{seed})"
+    )
+  end
+
+  def test_total_reviews_submitted_dont_count_partial_repo_when_forbidden
+    graph = pagedgraph('foo/bad', Octokit::Forbidden.new)
+    assert_equal(
+      { total_reviews_submitted: 4 },
+      directreviews(%w[foo/bad foo/good], graph),
+      'reviews counted in the forbidden foo/bad are not excluded from the total'
+    )
   end
 
   def test_total_reviews_submitted_keeps_code_errors
