@@ -591,6 +591,40 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_commits_keeps_repos_counted_after_batch_failure
+    WebMock.disable_net_connect!
+    rate_limit_up
+    seed = Random.new_seed
+    count = Random.new(seed).rand(1..10_000)
+    %w[alive broken].each do |name|
+      stub_github(
+        "https://api.github.com/repos/foo/#{name}", body: {
+          name:, full_name: "foo/#{name}", size: 42,
+          stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+        }
+      )
+    end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/alive,foo/broken' })
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_commits) do |owner = nil, name = nil, branch = nil, repos: nil|
+        raise(Fbe::Error, 'Repository or branch not found') unless repos.nil?
+        raise(Fbe::Error, "Repository '#{owner}/#{name}' or branch '#{branch}' not found") if name == 'broken'
+        count
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+      assert_equal(
+        { total_commits: count }, total_commits(nil),
+        "commits of the reachable repository are not kept, seed: #{seed}"
+      )
+    end
+  end
+
   def test_dont_write_total_commits_when_graph_breaks
     WebMock.disable_net_connect!
     rate_limit_up
