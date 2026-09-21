@@ -29,21 +29,21 @@ Fbe.iterate do
 
   def self.tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
-    if tag.nil? && fact&.all_properties&.include?('release_id')
+    if tag.nil? && fact&.all_properties&.include?('release')
       tag =
         begin
-          Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release_id}").fetch(:tag_name, nil)
+          Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release}").fetch(:tag_name, nil)
         rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("Release ##{fact.release_id} not found in #{repo}: #{e.message}")
+          $loog.info("Release ##{fact.release} not found in #{repo}: #{e.message}")
           nil
         rescue Octokit::Forbidden => e
           $loog.warn(
-            "[#{$judge}] Access forbidden to release ##{fact.release_id} in #{repo} " \
+            "[#{$judge}] Access forbidden to release ##{fact.release} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           nil
         end
-      $loog.debug("The release ##{fact.release_id} has this tag: #{tag.inspect}")
+      $loog.debug("The release ##{fact.release} has this tag: #{tag.inspect}")
     end
     tag
   end
