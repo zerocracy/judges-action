@@ -9,7 +9,6 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_files(_fact)
   files = 0
-  truncated = false
   Fbe.unmask_repos do |repo|
     info =
       begin
@@ -40,11 +39,9 @@ def total_files(_fact)
       end
     if tree[:truncated]
       $loog.info("Tree for #{repo}@#{info[:default_branch]} is truncated, skipping total_files")
-      truncated = true
-      break
+      next
     end
     files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
   end
-  return {} if truncated
   { total_files: files }
 end
