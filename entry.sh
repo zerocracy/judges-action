@@ -118,11 +118,20 @@ while IFS= read -r o; do
     fi
     options+=("--option=${k}=${v}");
 done <<< "${INPUT_OPTIONS}"
-if [ -z "${INPUT_REPOSITORIES}" ]; then
-    echo "The 'repositories' plugin parameter is not set, using current repository: ${GITHUB_REPOSITORY}"
-    options+=("--option=repositories=${GITHUB_REPOSITORY}");
-else
-    options+=("--option=repositories=${INPUT_REPOSITORIES}");
+repositories_found=false
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=repositories="* ]]; then
+        repositories_found=true
+        break
+    fi
+done
+if [ "${repositories_found}" == "false" ]; then
+    if [ -z "${INPUT_REPOSITORIES}" ]; then
+        echo "The 'repositories' plugin parameter is not set, using current repository: ${GITHUB_REPOSITORY}"
+        options+=("--option=repositories=${GITHUB_REPOSITORY}");
+    else
+        options+=("--option=repositories=${INPUT_REPOSITORIES}");
+    fi
 fi
 
 if [ -n "${GITHUB_RUN_ID}" ]; then
