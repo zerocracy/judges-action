@@ -6,13 +6,14 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require 'octokit'
+require_relative '../../lib/patches/unmask_repos'
 
 def some_build_success_rate(fact)
   success = []
   duration = []
   ttrs = []
   failed = {}
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     workflows =
       begin
         Fbe.octo.repository_workflow_runs(

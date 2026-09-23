@@ -5,10 +5,11 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
 def some_release_interval(fact)
   intervals = []
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     releases =
       begin
         Fbe.octo.releases(repo)

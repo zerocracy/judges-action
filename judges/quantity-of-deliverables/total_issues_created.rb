@@ -6,11 +6,12 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
 def total_issues_created(fact)
   issues = 0
   pulls = 0
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     owner, name = repo.split('/')
     json =
       begin
