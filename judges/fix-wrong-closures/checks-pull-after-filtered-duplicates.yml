@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bar
+input:
+  -
+    _id: 1
+    what: pull-was-closed
+    where: github
+    issue: 94
+    repository: 680
+    stale: who
+  -
+    _id: 2
+    what: pull-was-closed
+    where: github
+    issue: 94
+    repository: 680
+    tombstone: marked
+  -
+    _id: 3
+    what: pull-was-closed
+    where: github
+    issue: 94
+    repository: 680
+    done: marked
+  -
+    _id: 4
+    what: pull-was-closed
+    where: github
+    issue: 94
+    repository: 680
+expected:
+  - /fb[count(f[what='pull-was-closed' and repository=680 and issue=94])=0]
