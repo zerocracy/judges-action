@@ -1088,7 +1088,7 @@ class TestGithubEvents < Jp::Test
       f.event_id = 30_406
       f.event_type = 'ReleaseEvent'
       f.is_human = 1
-      f.release_id = 470_000
+      f.release = 470_000
       f.repository = 42
       f.what = 'release-published'
       f.when = Time.parse('2024-08-02 21:45:00 UTC')
@@ -1099,7 +1099,7 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_nil(f.first[:tag])
-    refute_nil(f.first[:release_id])
+    refute_nil(f.first[:release])
     assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
   end
 
@@ -1177,7 +1177,7 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_nil(f.first[:tag])
-    assert_nil(f.first[:release_id])
+    assert_nil(f.first[:release])
     assert_equal([526_301, 526_302], f.last[:contributors])
   end
 
@@ -1267,7 +1267,7 @@ class TestGithubEvents < Jp::Test
       f.event_id = 35_207
       f.event_type = 'ReleaseEvent'
       f.is_human = 1
-      f.release_id = 20_000
+      f.release = 20_000
       f.repository = 111
       f.what = 'release-published'
       f.when = Time.parse('2024-10-31 21:45:00 UTC')
