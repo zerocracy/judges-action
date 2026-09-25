@@ -10,7 +10,7 @@ def Jp.bots
   list = $options.bots
   return [] if list.nil? || list.empty?
   list.split(',').filter_map do |n|
-    n = n.strip
+    n = n.strip.downcase
     n unless n.empty?
   end
 end
@@ -18,6 +18,6 @@ end
 def Jp.human_comments(comments)
   bots = Jp.bots
   comments.reject do |c|
-    c.dig(:user, :type) == 'Bot' || bots.include?(c.dig(:user, :login))
+    c.dig(:user, :type) == 'Bot' || bots.include?(c.dig(:user, :login).to_s.downcase)
   end
 end
