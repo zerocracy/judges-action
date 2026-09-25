@@ -27,8 +27,9 @@ def total_commits(_fact)
     next if json[:default_branch].nil?
     repos << [*repo.split('/'), json[:default_branch]]
   end
+  return {} if repos.empty?
   begin
-    { total_commits: repos.empty? ? 0 : Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } }
+    { total_commits: Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } }
   rescue GraphQL::Client::Error, Fbe::Error => e
     $loog.info("Can't count commits in #{repos.count} repositories, skipping total_commits: #{e.message}")
     {}
