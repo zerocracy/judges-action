@@ -37,6 +37,7 @@ options:
   repositories: foo/bar
   max_labels: 5
 expected:
-  - /fb[count(f)=5]
+  - /fb[count(f)=4]
   - /fb/f/type
-  - /fb/f[type and issue=41]
+  - /fb/f[type='Task' and issue=41]
+  - /fb[count(f[what='type-was-attached'])=1]

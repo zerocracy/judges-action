@@ -87,4 +87,39 @@ class TestTypeWasAttached < Jp::Test
     assert_equal(['who'], f['stale'], 'a deleted GraphQL actor must mark the fact stale on who')
     assert_match(/an unknown actor/, f['details'].first)
   end
+
+  def test_replaces_the_type_when_it_changes
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      body: [
+        { id: 100, event: 'issue_type_added', node_id: 'ITAE_1', created_at: '2025-09-30 06:14:38 UTC' },
+        { id: 101, event: 'issue_type_changed', node_id: 'ITCE_1', created_at: '2025-09-30 07:00:00 UTC' }
+      ]
+    )
+    fake = Fbe::Graph::Fake.new
+    fake.define_singleton_method(:issue_type_event) do |node_id|
+      added = node_id == 'ITAE_1'
+      {
+        'type' => added ? 'IssueTypeAddedEvent' : 'IssueTypeChangedEvent',
+        'created_at' => Time.parse(added ? '2025-09-30 06:14:38 UTC' : '2025-09-30 07:00:00 UTC'),
+        'issue_type' => { 'id' => 'IT_x', 'name' => added ? 'Bug' : 'Task', 'description' => 'd' },
+        'prev_issue_type' => added ? nil : { 'id' => 'IT_y', 'name' => 'Bug', 'description' => 'd' },
+        'actor' => { 'login' => 'yegor256', 'type' => 'User', 'id' => 526_301, 'name' => 'Yegor', 'email' => 'e@x' }
+      }
+    end
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, fake) do
+      load_it('type-was-attached', fb)
+    end
+    facts = fb.query("(eq what 'type-was-attached')").each.to_a
+    assert_equal(1, facts.size, 'an issue has one type at a time, the change must replace, not add')
+    assert_equal(['Task'], facts.first['type'])
+    assert_equal([Time.parse('2025-09-30 07:00:00 UTC')], facts.first['when'])
+    assert_match(/replacing "Bug"/, facts.first['details'].first)
+  end
 end
