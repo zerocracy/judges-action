@@ -18,10 +18,10 @@ Fbe.iterate do
       (gt issue $before)
       (eq what 'pull-was-closed')
       (eq where 'github')
-      (unique issue)
       (absent stale)
       (absent tombstone)
-      (absent done))"
+      (absent done)
+      (unique issue))"
   repeats 50
   over do |repository, issue|
     repo =

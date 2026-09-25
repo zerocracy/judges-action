@@ -143,7 +143,7 @@ Fbe.consider(
       n.comments = count
       n.review_comments =
         begin
-          Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
+          Jp.human_comments(Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id])).count
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
           0

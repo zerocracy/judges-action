@@ -9,6 +9,7 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_files(_fact)
   files = 0
+  measured = false
   truncated = false
   Fbe.unmask_repos do |repo|
     info =
@@ -43,8 +44,10 @@ def total_files(_fact)
       truncated = true
       break
     end
+    measured = true
     files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
   end
   return {} if truncated
+  return {} unless measured
   { total_files: files }
 end

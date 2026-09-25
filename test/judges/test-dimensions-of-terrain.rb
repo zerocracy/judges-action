@@ -226,7 +226,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(0, f.total_contributors)
+        assert_nil(f['total_contributors'])
       end
     end
   end
@@ -498,13 +498,18 @@ class TestDimensionsOfTerrain < Jp::Test
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
-    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_commits) do |*_args, **_kwargs|
+        [{ 'total_commits' => 0 }]
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(2, f.total_repositories)
-        assert_equal(1484, f.total_commits)
+        assert_equal(0, f.total_commits)
         assert_equal(0, f.total_files)
         assert_equal(0, f.total_contributors)
       end
@@ -536,7 +541,39 @@ class TestDimensionsOfTerrain < Jp::Test
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/nobranch' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         refute_nil(f)
-        assert_equal(0, f.total_commits)
+        assert_nil(f['total_commits'])
+      end
+    end
+  end
+
+  def test_total_dimensions_skip_when_all_repositories_are_unscanned
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo', body: {
+        name: 'empty-repo', full_name: 'yegor256/empty-repo', size: 0,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo/git/trees/master?recursive=true',
+      body: { sha: 'a', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'yegor256/empty-repo' }))
+        fact = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        refute_nil(fact)
+        assert_nil(fact['total_commits'])
+        assert_nil(fact['total_files'])
+        assert_nil(fact['total_contributors'])
       end
     end
   end
