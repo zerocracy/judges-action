@@ -450,6 +450,48 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_rescues_server_error_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 500, body: { message: 'Internal Server Error' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('pull-was-merged', fb)
+    assert_nil(
+      fb.pick(issue: 44, what: 'pull-was-opened')['stale'],
+      'A 500 on the repository lookup aborted the judge or marked the pull stale'
+    )
+  end
+
+  def test_rescues_bad_gateway_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 502, body: { message: 'Bad Gateway' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('pull-was-merged', fb)
+    assert_empty(
+      fb.query("(eq what 'pull-was-merged')").each.to_a,
+      'A 502 on the repository lookup aborted the judge or produced a merge fact'
+    )
+  end
+
+  def test_rescues_unauthorized_on_repo_name_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', status: 401, body: { message: 'Bad credentials' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('pull-was-merged', fb)
+    assert_empty(
+      fb.query("(eq what 'pull-was-merged')").each.to_a,
+      'A 401 on the repository lookup aborted the judge or produced a merge fact'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
