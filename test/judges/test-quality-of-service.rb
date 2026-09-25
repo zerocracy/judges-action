@@ -510,6 +510,60 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_skips_non_build_workflow_runs_before_sampling
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-07T10:00:00Z')
+    conclusions = %w[skipped cancelled neutral timed_out stale action_required]
+    runs =
+      Array.new(60) do |index|
+        {
+          id: index + 1,
+          status: 'completed',
+          conclusion: conclusions[index % conclusions.length],
+          workflow_id: 101,
+          run_started_at: started - 3_600
+        }
+      end
+    runs.push(
+      {
+        id: 61, status: 'completed', conclusion: 'failure',
+        workflow_id: 101, run_started_at: started
+      },
+      {
+        id: 62, status: 'completed', conclusion: 'success',
+        workflow_id: 101, run_started_at: started + 3_600
+      }
+    )
+    timed = []
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      timed << id
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal(
+          {
+            timed: [61, 62],
+            rate: [0, 1],
+            duration: [900, 900],
+            mttr: [3_600]
+          },
+          {
+            timed:,
+            rate: metrics[:some_build_success_rate],
+            duration: metrics[:some_build_duration],
+            mttr: metrics[:some_build_mttr]
+          }
+        )
+      end
+    end
+  end
+
   def test_skips_repo_on_not_found_workflow_runs
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
