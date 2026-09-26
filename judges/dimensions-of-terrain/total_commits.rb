@@ -28,16 +28,27 @@ def total_commits(_fact)
     repos << [*repo.split('/'), json[:default_branch]]
   end
   return {} if repos.empty?
+  errors = [
+    GraphQL::Client::Error, Fbe::Error, Net::OpenTimeout, Net::ReadTimeout,
+    SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT
+  ]
   begin
     { total_commits: Fbe.github_graph.total_commits(repos:).sum { _1['total_commits'] } }
-  rescue GraphQL::Client::Error, Fbe::Error => e
-    $loog.info("Can't count commits in #{repos.count} repositories, skipping total_commits: #{e.message}")
-    {}
-  rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+  rescue *errors => e
     $loog.warn(
-      "[#{$judge}] Network error counting commits in #{repos.count} repositories " \
-      "(transient, will retry next cycle), skipping total_commits: #{e.message}"
+      "[#{$judge}] Can't count commits in #{repos.count} repositories at once, " \
+      "counting them one by one: #{e.class}: #{e.message}"
     )
-    {}
+    counted =
+      repos.filter_map do |owner, name, branch|
+        Fbe.github_graph.total_commits(owner, name, branch)
+      rescue *errors => error
+        $loog.warn(
+          "[#{$judge}] Can't count commits in #{owner}/#{name} at #{branch} " \
+          "(transient, will retry next cycle): #{error.class}: #{error.message}"
+        )
+        nil
+      end
+    counted.empty? ? {} : { total_commits: counted.sum }
   end
 end
