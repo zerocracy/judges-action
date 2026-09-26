@@ -4,9 +4,13 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require 'fbe/octo'
+require 'octokit'
 require_relative '../test__helper'
 
 class TestEraseRepository < Jp::Test
+  using SmartFactbase
+
   def test_erase_not_found_repository
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -113,5 +117,65 @@ class TestEraseRepository < Jp::Test
     end
     load_it('erase-repository', fb)
     assert_requested(:get, 'https://api.github.com/repositories/403999', times: 1)
+  end
+
+  def test_dont_ask_about_the_quota_after_it_is_gone
+    checks = 0
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) do |*|
+      checks += 1
+      true
+    end
+    octo.define_singleton_method(:print_trace!) { '' }
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', repository: 404_401, what: 'something-a')
+      .with(_id: 2, where: 'github', repository: 404_402, what: 'something-b')
+      .with(_id: 3, where: 'github', repository: 404_403, what: 'something-c')
+    Fbe.stub(:octo, octo) do
+      load_it('erase-repository', fb)
+    end
+    assert_equal(1, checks, 'An exhausted GitHub quota cannot be re-checked for every remaining fact')
+  end
+
+  def test_marks_a_repository_that_died_before_the_quota_was_gone
+    checks = 0
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) do |*|
+      checks += 1
+      checks > 1
+    end
+    octo.define_singleton_method(:repository) { |_repo| raise(Octokit::NotFound) }
+    octo.define_singleton_method(:print_trace!) { '' }
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', repository: 404_501, what: 'something-a')
+      .with(_id: 2, where: 'github', repository: 404_502, what: 'something-b')
+    Fbe.stub(:octo, octo) do
+      load_it('erase-repository', fb)
+    end
+    assert_equal(
+      1, fb.picks(repository: 404_501, stale: 'repository').count,
+      'A repository confirmed missing before the quota ran out cannot stay unmarked'
+    )
+  end
+
+  def test_dont_touch_a_repository_left_unchecked_by_the_lost_quota
+    checks = 0
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) do |*|
+      checks += 1
+      checks > 1
+    end
+    octo.define_singleton_method(:repository) { |_repo| raise(Octokit::NotFound) }
+    octo.define_singleton_method(:print_trace!) { '' }
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', repository: 404_601, what: 'something-a')
+      .with(_id: 2, where: 'github', repository: 404_602, what: 'something-b')
+    Fbe.stub(:octo, octo) do
+      load_it('erase-repository', fb)
+    end
+    assert(
+      fb.none?(repository: 404_602, stale: 'repository'),
+      'A repository nobody managed to ask GitHub about cannot be retired'
+    )
   end
 end
