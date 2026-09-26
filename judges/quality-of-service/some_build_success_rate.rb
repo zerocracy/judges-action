@@ -12,6 +12,7 @@ def some_build_success_rate(fact)
   duration = []
   ttrs = []
   failed = {}
+  conclusions = %w[success failure]
   Fbe.unmask_repos do |repo|
     workflows =
       begin
@@ -28,7 +29,7 @@ def some_build_success_rate(fact)
         )
         next
       end
-    wfs = workflows.select { |json| json[:status] == 'completed' && !json[:conclusion].nil? }.first(60)
+    wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
     runs =
       wfs.filter_map do |json|
         secs =
