@@ -19,6 +19,7 @@ require_relative '../../lib/qos_search'
 require_relative '../../lib/who_of'
 
 %w[issue pull].each do |type|
+  qualifier = type == 'pull' ? 'pr' : type
   Fbe.iterate do
     as "min_#{type}_was_found"
     sort_by 'issue'
@@ -66,7 +67,7 @@ require_relative '../../lib/who_of'
       elapsed($loog, level: Logger::INFO) do
         items =
           begin
-            json = Jp.qosearch("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")
+            json = Jp.qosearch("repo:#{repo} type:#{qualifier} created:>=#{after.iso8601[0..9]}")
             json ? json[:items] : []
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("No issues found for #{repo}: #{e.message}")
