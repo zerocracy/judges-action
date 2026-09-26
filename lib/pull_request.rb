@@ -189,7 +189,9 @@ def Jp.fetch_workflows(pr, repo: nil)
     case workflow[:conclusion]
     when 'success'
       succeeded += 1
-    when 'failure'
+    when nil, 'skipped'
+      next
+    else
       failed += 1
     end
   end
