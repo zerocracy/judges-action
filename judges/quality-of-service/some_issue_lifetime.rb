@@ -13,7 +13,7 @@ def some_issue_lifetime(fact)
     ages = []
     lost = false
     Fbe.unmask_repos do |repo|
-      if Fbe.octo.off_quota?
+      if Fbe.octo.off_quota?(resource: :search)
         lost = true
         break
       end
