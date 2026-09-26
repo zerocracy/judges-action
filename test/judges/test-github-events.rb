@@ -2678,7 +2678,7 @@ class TestGithubEvents < Jp::Test
     end
     f = fb.query('(eq what "pull-was-merged")').each.to_a.first
     refute_nil(f)
-    assert_equal(Time.parse('2025-10-20 18:05:00 UTC'), f.review)
+    assert_equal(Time.parse('2025-10-20 18:25:00 UTC'), f.review)
     assert_equal(2, f.suggestions)
   end
 

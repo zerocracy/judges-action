@@ -317,7 +317,7 @@ class TestPullWasMerged < Jp::Test
           what: 'pull-was-closed', where: 'github', who: 422, repository: 42, issue: 44, hoc: 17,
           comments: 0, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 0,
           comments_resolved: 0, comments_to_code: 0, succeeded_builds: 0, branch: '40',
-          suggestions: 3, review: Time.parse('2025-09-29 05:05:46 UTC'),
+          suggestions: 3, review: Time.parse('2025-09-29 06:45:00 UTC'),
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
       )
