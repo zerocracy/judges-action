@@ -16,6 +16,25 @@ class TestSomeReviewTime < Jp::Test
     assert_equal([7200], review_times(Time.parse('2025-01-10 10:00:00 UTC')))
   end
 
+  def test_skips_a_pull_that_is_not_merged
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-01-01 00:00:00 UTC')
+    fact.when = Time.parse('2025-02-01 00:00:00 UTC')
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    found = { items: [{ id: 1, number: 10, pull_request: {} }] }
+    times =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+        'GET /repos/foo/foo/pulls/10/reviews?per_page=100' =>
+          [200, [{ id: 7, user: { id: 1 }, submitted_at: Time.parse('2025-01-10 10:00:00 UTC').utc.iso8601 }]],
+        'GET /repos/foo/foo/pulls/10/comments?per_page=100' => [200, []]
+      ).run { Jp.stub(:qosearch, found) { some_review_time(fact)[:some_review_time] } }
+    assert_empty(times)
+  end
+
   def test_ignores_a_review_submitted_after_the_merge
     assert_empty(review_times(Time.parse('2025-01-10 14:00:00 UTC')))
     assert_empty(review_times(Time.parse('2025-01-11 12:00:00 UTC')))
