@@ -963,8 +963,8 @@ class TestGithubEvents < Jp::Test
       body: {
         total_commits: 2,
         commits: [
-          { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
-          { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
+          { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' },
+          { sha: '4683257342e98cd94becc2aa49900e720bd792e9' }
         ],
         files: [
           { additions: 5, deletions: 0, changes: 5 },
@@ -981,13 +981,13 @@ class TestGithubEvents < Jp::Test
       body: {
         total_commits: 4,
         commits: [
-          { sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } },
-          { sha: 'b50489ead5e8aa7', author: { login: 'Yegorov64', id: 2_566_463 } },
-          { sha: 'c50489ead5e8aa8', author: { login: 'Yegorov128', id: 2_566_464 } },
-          { sha: 'd50489ead5e8aa9', author: { login: 'Yegorov', id: 2_566_462 } },
-          { sha: 'e50489ead5e8aa9', author: nil },
+          { sha: 'e70489ead5e8aa9', author: { login: 'NoUser' } },
           { sha: 'e60489ead5e8aa9' },
-          { sha: 'e70489ead5e8aa9', author: { login: 'NoUser' } }
+          { sha: 'e50489ead5e8aa9', author: nil },
+          { sha: 'd50489ead5e8aa9', author: { login: 'Yegorov', id: 2_566_462 } },
+          { sha: 'c50489ead5e8aa8', author: { login: 'Yegorov128', id: 2_566_464 } },
+          { sha: 'b50489ead5e8aa7', author: { login: 'Yegorov64', id: 2_566_463 } },
+          { sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } }
         ],
         files: [
           { additions: 15, deletions: 40, changes: 55 },
@@ -1005,7 +1005,7 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 820463873) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_equal([526_301, 526_302], f.first[:contributors])
-    assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
+    assert_equal([2_566_462, 2_566_464, 2_566_463], f.last[:contributors])
     assert_equal(2, f.first.commits)
     assert_equal(22, f.first.hoc)
     assert_equal('4683257342e98cd94becc2aa49900e720bd792e9', f.first.last_commit)
