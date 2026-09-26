@@ -65,9 +65,9 @@ def Jp.qosearch(query, method: :search_issues, **)
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
     return
   end
-  @scount[jg] += 1
   raise(RuntimeError, "Unsafe search method: #{method}") unless
     %i[search_issues search_code search_commits].include?(method)
+  @scount[jg] += 1
   Fbe.octo.with_disable_auto_paginate { |octo| octo.__send__(method, query, **) }
 rescue Octokit::Forbidden => e
   @offquota[jg] = true
