@@ -8,6 +8,8 @@ require 'fbe/octo'
 require_relative 'humans'
 require_relative 'jp'
 
+# @todo #2352:30min Forbidden is still swallowed as zero for reactions, resolved threads, runs and reviews
+
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
@@ -22,7 +24,7 @@ def Jp.comments_info(pr, repo: nil)
         "[#{$judge}] Access forbidden to PR comments for #{repo}##{pr[:number]} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      []
+      raise
     end
   icomments =
     begin
@@ -35,7 +37,7 @@ def Jp.comments_info(pr, repo: nil)
         "[#{$judge}] Access forbidden to issue comments for #{repo}##{pr[:number]} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      []
+      raise
     end
   ccomments = Jp.human_comments(ccomments)
   icomments = Jp.human_comments(icomments)
@@ -147,7 +149,7 @@ def Jp.fetch_workflows(pr, repo: nil)
       "[#{$judge}] Access forbidden to check runs for #{repo}@#{pr.dig(:head, :sha)} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
-    return { succeeded_builds: 0, failed_builds: 0 }
+    raise
   end
   jobs = {}
   runs = {}
