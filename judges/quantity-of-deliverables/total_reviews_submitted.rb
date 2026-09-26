@@ -6,6 +6,7 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
 def total_reviews_submitted(fact)
   total = 0
