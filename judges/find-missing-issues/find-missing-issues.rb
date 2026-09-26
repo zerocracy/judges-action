@@ -14,6 +14,7 @@ require 'joined'
 require 'tago'
 require 'time'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/who_of'
 
 ts = Fbe::Tombstone.new
 
@@ -75,7 +76,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         end
       next if f.nil?
       f.when = json[:created_at]
-      f.who = json.dig(:user, :id)
+      Jp.author(f, json.dig(:user, :id))
       if type == 'pull'
         ref =
           begin
@@ -97,7 +98,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
           f.stale = 'branch'
         end
       end
-      f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+      f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Jp.mention(f)}."
       $loog.info("The #{type} #{Fbe.issue(f)} is not tombstoned among #{ts.issues('github', r.repository).count}")
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end
