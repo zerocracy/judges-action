@@ -481,6 +481,7 @@ class TestQualityOfService < Jp::Test
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     timed = []
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -568,6 +569,7 @@ class TestQualityOfService < Jp::Test
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::NotFound) }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
@@ -582,6 +584,7 @@ class TestQualityOfService < Jp::Test
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::Forbidden) }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
@@ -596,6 +599,7 @@ class TestQualityOfService < Jp::Test
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -627,6 +631,7 @@ class TestQualityOfService < Jp::Test
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -661,6 +666,7 @@ class TestQualityOfService < Jp::Test
     secs = Random.new(seed).rand(1..3_600)
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -687,6 +693,7 @@ class TestQualityOfService < Jp::Test
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -715,6 +722,7 @@ class TestQualityOfService < Jp::Test
     secs = Random.new(seed).rand(1..3_600)
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -2673,6 +2681,7 @@ class TestQualityOfService < Jp::Test
     load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
     Jp.qoreset
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:search_issues) do |*|
       {
         total_count: 2, incomplete_results: false,

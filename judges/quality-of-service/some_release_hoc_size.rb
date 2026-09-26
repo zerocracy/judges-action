@@ -11,6 +11,7 @@ def some_release_hoc_size(fact)
   hocs = []
   commits = []
   Fbe.unmask_repos do |repo|
+    return {} if Fbe.octo.off_quota?
     releases =
       begin
         Fbe.octo.releases(repo)
