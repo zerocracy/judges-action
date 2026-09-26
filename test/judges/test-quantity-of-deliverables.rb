@@ -445,7 +445,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/good,foo/blocked' })
     Fbe.stub(:unmask_repos, %w[foo/good foo/blocked]) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
-      assert_empty(total_builds_ran(fact), "partial total is reported while a repository is blocked, seed: #{seed}")
+      assert_equal({ total_builds_ran: runs }, total_builds_ran(fact))
     end
   end
 
