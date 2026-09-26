@@ -2720,6 +2720,11 @@ class TestQualityOfService < Jp::Test
         "https://api.github.com/repos/foo/foo/actions/runs/#{run[:id]}/timing",
         body: { run_duration_ms: 900_000 }
       )
+      stub_github(
+        "https://api.github.com/repos/foo/foo/actions/workflows/#{run[:workflow_id]}/runs" \
+        '?created=%3E2024-08-09T21:00:00Z&per_page=1&status=success',
+        body: { total_count: 0, workflow_runs: [] }
+      )
     end
     stub_github(
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
