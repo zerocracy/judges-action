@@ -110,13 +110,16 @@ while IFS= read -r o; do
     if [ "${s}" = "" ]; then
         continue
     fi
-    k=$(echo "${s} "| cut -f1 -d '=')
-    v=$(echo "${s}" | cut -f2- -d '=')
+    k="${s%%=*}"
+    v=""
+    if [[ "${s}" == *=* ]]; then
+        v="=${s#*=}"
+    fi
     if [[ "${k}" == vitals_url ]]; then
-        VITALS_URL="${v}"
+        VITALS_URL="${v#=}"
         continue
     fi
-    options+=("--option=${k}=${v}");
+    options+=("--option=${k}${v}");
 done <<< "${INPUT_OPTIONS}"
 repositories_found=false
 for opt in "${options[@]}"; do
