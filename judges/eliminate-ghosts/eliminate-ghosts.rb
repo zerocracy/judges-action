@@ -13,10 +13,14 @@ require_relative '../../lib/nick_of'
 good = Set.new
 bad = Set.new
 forbidden = Set.new
+finished = true
 
 Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f|
   next if good.include?(f.who) || bad.include?(f.who) || forbidden.include?(f.who)
-  next if Fbe.octo.off_quota?
+  if Fbe.octo.off_quota?
+    finished = false
+    next
+  end
   elapsed($loog, level: Logger::INFO) do
     nick =
       begin
@@ -52,10 +56,12 @@ Fbe.fb.txn do |fbt|
       f.stale = 'who'
     end
   end
-  fbt.query('(and (eq where "github") (exists who) (eq stale "who") (unique who))').each do |f|
-    next if good.include?(f.who)
-    fbt.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
-      ff.stale = 'who'
+  if finished
+    fbt.query('(and (eq where "github") (exists who) (eq stale "who") (unique who))').each do |f|
+      next if good.include?(f.who) || forbidden.include?(f.who)
+      fbt.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
+        ff.stale = 'who'
+      end
     end
   end
 end
