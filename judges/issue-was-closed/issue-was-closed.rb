@@ -131,7 +131,7 @@ Fbe.iterate do
         nn.when = te[:created_at]
         actor = te.dig(:actor, :login)
         nn.details =
-          "Seemingly, the #{nn.label.inspect} label was attached by #{actor ? "@#{actor}" : 'an unknown actor'} " \
+          "The #{nn.label.inspect} label was attached by #{actor ? "@#{actor}" : 'an unknown actor'} " \
           "to the issue #{Fbe.issue(nn)}."
         $loog.info("Label attached to #{Fbe.issue(nn)} found: #{nn.label.inspect}")
       end
