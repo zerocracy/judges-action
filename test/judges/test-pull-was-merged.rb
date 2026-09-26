@@ -488,6 +488,48 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_merges_pull_when_first_fact_is_stale
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github', stale: 'who')
+      .with(_id: 2, what: 'code-was-reviewed', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(what: 'pull-was-merged', repository: 42, issue: 44),
+      'pull with a stale opening fact is not merged by its clean review fact'
+    )
+  end
+
+  def test_merges_pull_when_first_fact_is_foreign
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'label-was-attached', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(what: 'pull-was-merged', repository: 42, issue: 44),
+      'pull with a foreign fact ahead of its opening fact is not merged'
+    )
+  end
+
+  def test_merges_pull_when_first_fact_is_elsewhere
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'gitlab')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(what: 'pull-was-merged', repository: 42, issue: 44, where: 'github'),
+      'pull with a gitlab fact ahead of its github opening fact is not merged'
+    )
+  end
+
   private
 
   def stub_pull_was_merged_success(issue)

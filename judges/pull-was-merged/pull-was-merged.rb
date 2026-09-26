@@ -25,7 +25,6 @@ Fbe.iterate do
     (and
       (eq repository $repository)
       (gt issue $before)
-      (unique repository issue)
       (empty
         (and
           (eq repository $repository)
@@ -48,7 +47,8 @@ Fbe.iterate do
       (absent stale)
       (absent tombstone)
       (absent done)
-      (eq where 'github'))"
+      (eq where 'github')
+      (unique repository issue))"
   repeats 50
   over do |repository, issue|
     repo =
