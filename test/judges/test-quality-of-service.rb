@@ -538,6 +538,7 @@ class TestQualityOfService < Jp::Test
     )
     timed = []
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
     octo.define_singleton_method(:workflow_run_usage) do |_, id|
       timed << id
