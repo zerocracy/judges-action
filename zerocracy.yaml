@@ -2,12 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 7m26s: execution expired'
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1217.17331013
+  seconds: 1083.663600713
   version: 0.61.1
   what: judges-summary
-  when: 2026-09-26 13:51:59.899395275 Z
+  when: 2026-09-26 14:19:37.097219569 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -79358,6 +79358,7 @@
   _job: 26228791834
   _time: 2026-05-21 13:31:08.012635499 Z
   _version: 0.19.9/0.60.2/0.17.17
+  tombstone: 2026-09-26 13:54:17.858310111 Z
   total_active_contributors: 17
   total_commits: 21087
   total_contributors: 41
@@ -80577,7 +80578,7 @@
   earliest_issue_was_found: 1
   events_were_scanned: 15342987299
   latest_issue_was_found: 1
-  min_pull_was_found: 0
+  min_pull_was_found: 1
   repository: 1246623470
   what: iterate
   where: github
@@ -177461,7 +177462,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 37
   min_pull_was_found: 12
   repository: 1090089359
   types_were_scanned: 0
@@ -179647,12 +179648,12 @@
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22177743729
-  issues_were_scanned: 0
+  issues_were_scanned: 68
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 3
-  min_pull_was_found: 105
+  min_issue_was_found: 25
+  min_pull_was_found: 106
   repository: 974194993
   types_were_scanned: 0
   what: iterate
@@ -181765,6 +181766,7 @@
   - 14.059707320031768
   - 14.059707320031768
   - 14.059707320031768
+  - 14.059707320031768
   qod_per_day:
   - 5.261714286182081
   - 3.5025714287953895
@@ -182691,8 +182693,9 @@
   - 75.35779661047194
   - 75.35779661047194
   - 75.35779661047194
+  - 75.35779661047194
   what: learn-eva
-  when: 2026-09-26 05:54:49.821528555 Z
+  when: 2026-09-26 13:55:41.367141437 Z
 - _id: 2629381
   _job: 80835
   _time: 2026-07-07 15:47:33.754402190 Z
@@ -183526,12 +183529,12 @@
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22176391164
-  issues_were_scanned: 0
+  issues_were_scanned: 64
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 58
-  min_pull_was_found: 76
+  min_issue_was_found: 59
+  min_pull_was_found: 77
   repository: 1236759415
   types_were_scanned: 0
   what: iterate
@@ -186048,12 +186051,12 @@
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22218722305
-  issues_were_scanned: 0
+  issues_were_scanned: 264
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 295
-  min_pull_was_found: 170
+  min_issue_was_found: 296
+  min_pull_was_found: 203
   repository: 849726475
   types_were_scanned: 0
   what: iterate
@@ -186282,11 +186285,11 @@
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22186437104
-  issues_were_scanned: 0
+  issues_were_scanned: 68
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 91
+  min_issue_was_found: 0
   min_pull_was_found: 137
   repository: 805238060
   types_were_scanned: 0
@@ -186304,7 +186307,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 48
+  min_issue_was_found: 50
   min_pull_was_found: 63
   repository: 1084843345
   types_were_scanned: 0
@@ -186314,36 +186317,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1078
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22228999562
-  issues_were_scanned: 944
+  issues_were_scanned: 955
   labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 0
-  min_issue_was_found: 954
-  min_pull_was_found: 549
+  merges_were_scanned: 968
+  min_issue_was_found: 955
+  min_pull_was_found: 550
   repository: 798641472
-  types_were_scanned: 677
+  types_were_scanned: 821
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22174635054
-  issues_were_scanned: 0
+  issues_were_scanned: 415
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 464
+  min_issue_was_found: 468
   min_pull_was_found: 292
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 416
   what: iterate
   where: github
 - _id: 2629843
@@ -186358,7 +186361,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 0
   min_pull_was_found: 113
   repository: 857659265
   types_were_scanned: 0
@@ -186760,18 +186763,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1109
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15812958926
-  issues_were_scanned: 0
+  issues_were_scanned: 679
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 972
-  min_issue_was_found: 977
-  min_pull_was_found: 491
+  merges_were_scanned: 0
+  min_issue_was_found: 978
+  min_pull_was_found: 492
   repository: 820463873
-  types_were_scanned: 1100
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -187417,18 +187420,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 829
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15801637306
-  issues_were_scanned: 0
+  issues_were_scanned: 742
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 807
-  min_pull_was_found: 856
+  min_issue_was_found: 810
+  min_pull_was_found: 868
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 683
   what: iterate
   where: github
 - _id: 2629939
@@ -187563,54 +187566,54 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 604
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 15807867232
-  issues_were_scanned: 0
+  issues_were_scanned: 523
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
-  min_issue_was_found: 554
+  merges_were_scanned: 692
+  min_issue_was_found: 555
   min_pull_was_found: 468
   repository: 799113787
-  types_were_scanned: 671
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630023
   _job: 29009155338
   _time: 2026-07-09 09:51:01.533731417 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 403
+  assignees_were_scanned: 447
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22211274010
-  issues_were_scanned: 541
+  issues_were_scanned: 656
   labels_were_scanned: 0
   latest_issue_was_found: 237
-  merges_were_scanned: 587
-  min_issue_was_found: 672
+  merges_were_scanned: 0
+  min_issue_was_found: 673
   min_pull_was_found: 120
   repository: 181044958
-  types_were_scanned: 539
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630033
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1731
-  closures_were_checked: 0
+  assignees_were_scanned: 1990
+  closures_were_checked: 1637
   earliest_issue_was_found: 1
   events_were_scanned: 15812308293
-  issues_were_scanned: 0
-  labels_were_scanned: 0
+  issues_were_scanned: 1941
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 2267
-  min_issue_was_found: 2363
+  merges_were_scanned: 0
+  min_issue_was_found: 2364
   min_pull_was_found: 1311
   repository: 799177290
-  types_were_scanned: 1658
+  types_were_scanned: 1722
   what: iterate
   where: github
 - _id: 2630036
@@ -187624,8 +187627,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 27
-  min_pull_was_found: 11
+  min_issue_was_found: 0
+  min_pull_was_found: 12
   repository: 1081929119
   types_were_scanned: 0
   what: iterate
@@ -187634,18 +187637,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1188
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22117445685
-  issues_were_scanned: 0
+  issues_were_scanned: 719
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1218
+  min_issue_was_found: 1219
   min_pull_was_found: 1164
   repository: 728758275
-  types_were_scanned: 1142
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -356488,6 +356491,7 @@
   issue: 779
   repository: 802720676
   review_comments: 0
+  reviews: 0
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
@@ -356513,6 +356517,7 @@
   issue: 843
   repository: 802720676
   review_comments: 0
+  reviews: 0
   succeeded_builds: 14
   suggestions: 0
   what: pull-was-merged
@@ -356538,6 +356543,7 @@
   issue: 1013
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356563,6 +356569,7 @@
   issue: 1015
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356588,6 +356595,7 @@
   issue: 1016
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356613,6 +356621,7 @@
   issue: 1019
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356638,6 +356647,7 @@
   issue: 1020
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356663,6 +356673,7 @@
   issue: 1021
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356688,6 +356699,7 @@
   issue: 1023
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356713,6 +356725,7 @@
   issue: 1027
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356738,6 +356751,7 @@
   issue: 1034
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -356763,6 +356777,7 @@
   issue: 1046
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357640,6 +357655,7 @@
   issue: 1048
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357665,6 +357681,7 @@
   issue: 1049
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357690,6 +357707,7 @@
   issue: 1058
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357715,6 +357733,7 @@
   issue: 1059
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357740,6 +357759,7 @@
   issue: 1092
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357765,6 +357785,7 @@
   issue: 1094
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357790,6 +357811,7 @@
   issue: 1095
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357815,6 +357837,7 @@
   issue: 1097
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357840,6 +357863,7 @@
   issue: 1098
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357865,6 +357889,7 @@
   issue: 1099
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357890,6 +357915,7 @@
   issue: 1100
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357915,6 +357941,7 @@
   issue: 1101
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357940,6 +357967,7 @@
   issue: 1102
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357965,6 +357993,7 @@
   issue: 1103
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -357990,6 +358019,7 @@
   issue: 1104
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -358015,6 +358045,7 @@
   issue: 1105
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -358040,6 +358071,7 @@
   issue: 1106
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -358065,6 +358097,7 @@
   issue: 1107
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -358090,6 +358123,7 @@
   issue: 1109
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -358115,6 +358149,7 @@
   issue: 1112
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -358140,6 +358175,7 @@
   issue: 2330
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358165,6 +358201,7 @@
   issue: 2332
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358190,6 +358227,7 @@
   issue: 2333
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358215,6 +358253,7 @@
   issue: 2334
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358240,6 +358279,7 @@
   issue: 2335
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358265,6 +358305,7 @@
   issue: 2336
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358290,6 +358331,7 @@
   issue: 2338
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358315,6 +358357,7 @@
   issue: 2341
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358340,6 +358383,7 @@
   issue: 2342
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -358365,6 +358409,7 @@
   issue: 2343
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359001,6 +359046,7 @@
   issue: 2347
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359026,6 +359072,7 @@
   issue: 2348
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359051,6 +359098,7 @@
   issue: 2369
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359076,6 +359124,7 @@
   issue: 997
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359101,6 +359150,7 @@
   issue: 2370
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359126,6 +359176,7 @@
   issue: 998
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359151,6 +359202,7 @@
   issue: 2371
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359176,6 +359228,7 @@
   issue: 2372
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359201,6 +359254,7 @@
   issue: 1002
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359226,6 +359280,7 @@
   issue: 2374
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359251,6 +359306,7 @@
   issue: 804
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359276,6 +359332,7 @@
   issue: 2376
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359301,6 +359358,7 @@
   issue: 808
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359326,6 +359384,7 @@
   issue: 2378
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359351,6 +359410,7 @@
   issue: 1008
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359376,6 +359436,7 @@
   issue: 811
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359401,6 +359462,7 @@
   issue: 2379
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359426,6 +359488,7 @@
   issue: 1009
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359451,6 +359514,7 @@
   issue: 812
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359476,6 +359540,7 @@
   issue: 2380
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359501,6 +359566,7 @@
   issue: 1010
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359526,6 +359592,7 @@
   issue: 813
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359551,6 +359618,7 @@
   issue: 1011
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359576,6 +359644,7 @@
   issue: 2382
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359601,6 +359670,7 @@
   issue: 1018
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359626,6 +359696,7 @@
   issue: 2383
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359651,6 +359722,7 @@
   issue: 2384
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359676,6 +359748,7 @@
   issue: 1068
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359701,6 +359774,7 @@
   issue: 2385
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359726,6 +359800,7 @@
   issue: 1069
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359751,6 +359826,7 @@
   issue: 853
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359776,6 +359852,7 @@
   issue: 2398
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359801,6 +359878,7 @@
   issue: 2399
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359826,6 +359904,7 @@
   issue: 1071
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359851,6 +359930,7 @@
   issue: 856
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -359876,6 +359956,7 @@
   issue: 2401
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359901,6 +359982,7 @@
   issue: 1075
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359926,6 +360008,7 @@
   issue: 2402
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -359951,6 +360034,7 @@
   issue: 1122
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -359976,6 +360060,7 @@
   issue: 859
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -360001,6 +360086,7 @@
   issue: 2404
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -360026,6 +360112,7 @@
   issue: 1123
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360051,6 +360138,7 @@
   issue: 2405
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -360076,6 +360164,7 @@
   issue: 861
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -360101,6 +360190,7 @@
   issue: 1125
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360126,6 +360216,7 @@
   issue: 862
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -360151,6 +360242,7 @@
   issue: 1127
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360176,6 +360268,7 @@
   issue: 1128
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360201,6 +360294,7 @@
   issue: 912
   repository: 798641472
   review_comments: 0
+  reviews: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -360226,6 +360320,7 @@
   issue: 1130
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360251,6 +360346,7 @@
   issue: 1131
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360276,6 +360372,7 @@
   issue: 1133
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360301,6 +360398,7 @@
   issue: 1134
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360326,6 +360424,7 @@
   issue: 1135
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360351,6 +360450,7 @@
   issue: 1136
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360376,6 +360476,7 @@
   issue: 1137
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360401,6 +360502,7 @@
   issue: 1138
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360426,6 +360528,7 @@
   issue: 1140
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360451,6 +360554,7 @@
   issue: 1141
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360476,6 +360580,7 @@
   issue: 1142
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360501,6 +360606,7 @@
   issue: 1144
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360526,6 +360632,7 @@
   issue: 1145
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -360551,6 +360658,7 @@
   issue: 1146
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -361252,6 +361360,7 @@
   issue: 1147
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -361277,6 +361386,7 @@
   issue: 1148
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -361302,6 +361412,7 @@
   issue: 1149
   repository: 820463873
   review_comments: 0
+  reviews: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -362983,6 +363094,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2402/#issuecomment-5846036684
   is_human: 1
   issue: 2402
+  receipt: receipt-#94496
   repository: 799177290
   review_comments: 0
   seconds: 480360
@@ -363003,6 +363115,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2401/#issuecomment-5846036825
   is_human: 1
   issue: 2401
+  receipt: receipt-#94497
   repository: 799177290
   review_comments: 0
   seconds: 480365
@@ -363023,6 +363136,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2399/#issuecomment-5846036975
   is_human: 1
   issue: 2399
+  receipt: receipt-#94498
   repository: 799177290
   review_comments: 0
   seconds: 480373
@@ -363050,6 +363164,7 @@
   issue: 2450
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -363075,6 +363190,7 @@
   issue: 2451
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -363091,6 +363207,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2185/#issuecomment-5846222643
   is_human: 1
   issue: 2185
+  receipt: receipt-#94499
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-09-26 11:52:21.366457514 Z
@@ -363107,6 +363224,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2183/#issuecomment-5846222890
   is_human: 1
   issue: 2183
+  receipt: receipt-#94500
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-09-26 11:52:25.763924192 Z
@@ -363123,6 +363241,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2182/#issuecomment-5846223096
   is_human: 1
   issue: 2182
+  receipt: receipt-#94501
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-09-26 11:52:29.488573985 Z
@@ -363139,6 +363258,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2174/#issuecomment-5846223274
   is_human: 1
   issue: 2174
+  receipt: receipt-#94502
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-09-26 11:52:32.716201232 Z
@@ -363312,6 +363432,7 @@
   issue: 2453
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -363337,6 +363458,7 @@
   issue: 2454
   repository: 799177290
   review_comments: 0
+  reviews: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -363386,22 +363508,6 @@
   award: 18
   details: It's time to reward @thayorns for the bug reported in zerocracy/judges-action#2108,
     the reward amount is 18.
-  greeting: "Hey, nice catch on that bug! \U0001F389 Since it got accepted by the
-    team, you've earned yourself **+18** points, just like that. Reporting bugs like
-    this genuinely helps keep our project in good shape, so thanks for taking the
-    time. If you spot [anything else](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    that seems off, [don't hold back](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    — go ahead and [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
-    You're now sitting at [+3228](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    overall, and you can always peek at your [Zerocracy account](https://www.zerocracy.com/)
-    for the full picture.\n\n<!-- Thanks for reporting a new bug! You've earned +18
-    points. By reporting bugs, you help our project improve its quality. If you find
-    anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+3228](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/judges-action/issues/2108/#issuecomment-5846471162
   is_human: 1
   issue: 2108
@@ -363418,21 +363524,6 @@
   award: 18
   details: It's time to reward @gemshrine for the bug reported in zerocracy/judges-action#2099,
     the reward amount is 18.
-  greeting: "Thanks for reporting a new bug! \U0001F389 You've earned **+18 points**.
-    Bug reports like yours help keep our project in great shape, so if you spot anything
-    else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    quite right, feel free to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it — [contributions like this are always welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html).
-    Your running score is now [+6038](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
-    so don't forget to check your [Zerocracy account](https://www.zerocracy.com/)
-    as well.\n\n<!-- Thanks for reporting a new bug! You've earned +18 points. By
-    reporting bugs, you help our project improve its quality. If you find anything
-    else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+6038](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/judges-action/issues/2099/#issuecomment-5846471339
   is_human: 1
   issue: 2099
@@ -363449,10 +363540,6 @@
   award: 18
   details: It's time to reward @thayorns for the bug reported in zerocracy/judges-action#2106,
     the reward amount is 18.
-  greeting: |-
-    Thanks for reporting a new bug! As per our policy, accepted bug reports earn a bonus of **+18 points**, which have been added to your score. Reporting issues helps us maintain high project quality, so if you spot anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is now [+3246](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) as well. Keep up the great work!
-
-    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+3246](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/zerocracy/judges-action/issues/2106/#issuecomment-5846471509
   is_human: 1
   issue: 2106
@@ -363470,10 +363557,6 @@
   comments: 2
   details: It's time to reward @thayorns for the code contributed in zerocracy/judges-action#2380,
     the reward amount is 24.
-  greeting: |-
-    Nice work on this one — you've bagged **+24** points, the max reward for a solid contribution! Sounds like you hit the sweet spot: enough hits-of-code to score well, reviews done, and comments kept in check. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is now [+3270](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — check your [Zerocracy account](https://www.zerocracy.com/) for the full picture.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+3270](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 46
   href: https://github.com/zerocracy/judges-action/issues/2380/#issuecomment-5846471697
   is_human: 1
@@ -363494,10 +363577,6 @@
   comments: 2
   details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2379,
     the reward amount is 24.
-  greeting: |-
-    Thanks for the contribution! You've earned **+24** points, the base award under our [policy](https://www.yegor256.com/2014/11/14/hits-of-code.html) for a code submission. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16858](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16858](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 60
   href: https://github.com/zerocracy/judges-action/issues/2379/#issuecomment-5846471911
   is_human: 1
@@ -363518,10 +363597,6 @@
   comments: 2
   details: It's time to reward @thayorns for the code contributed in zerocracy/judges-action#2378,
     the reward amount is 24.
-  greeting: |-
-    Thanks for the contribution! You've earned **+24 points**, calculated exactly as our policy defines: +24 as the base award for a code contribution, +5 for the 78 [hits-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html) you wrote (0.075 points per hoc, capped at 16), and -6 to bring the total back down to the policy's maximum of 24 points. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+3294](https://zerocracy.github.io/judges-
-
-    <!-- Thanks for the contribution! You've earned +24 points for this: +24 as a basis; +5 for the 78 hits-of-code that you wrote; -6 to not go over the cap. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+3294](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 78
   href: https://github.com/zerocracy/judges-action/issues/2378/#issuecomment-5846472098
   is_human: 1
@@ -363542,10 +363617,6 @@
   comments: 2
   details: It's time to reward @thayorns for the code contributed in zerocracy/judges-action#2376,
     the reward amount is 24.
-  greeting: |-
-    Hi, thanks for your contribution! Based on the team's scoring policy, you've earned a base **+24** points for this submission. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) up the good work. Your running score is now [+3318](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) for details.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+3318](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 60
   href: https://github.com/zerocracy/judges-action/issues/2376/#issuecomment-5846472280
   is_human: 1
@@ -363566,14 +363637,6 @@
   comments: 2
   details: It's time to reward @thayorns for the code contributed in zerocracy/judges-action#2374,
     the reward amount is 24.
-  greeting: "\U0001F389 Thanks for the contribution! You've earned **+24 points**.
-    [Keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)!
-    Your running score is now [+3342](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
-    and don't forget to check your [Zerocracy account](https://www.zerocracy.com/)
-    too.\n\n<!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
-    them coming. Your running score is [+3342](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 64
   href: https://github.com/zerocracy/judges-action/issues/2374/#issuecomment-5846472453
   is_human: 1
@@ -363594,10 +363657,6 @@
   comments: 2
   details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2372,
     the reward amount is 24.
-  greeting: |-
-    Thanks for the contribution! You've earned **+24** points, the base award for a code contribution under our policy. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16882](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16882](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 32
   href: https://github.com/zerocracy/judges-action/issues/2372/#issuecomment-5846472634
   is_human: 1
@@ -363675,6 +363734,7 @@
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
   hoc: 54
+  href: https://github.com/zerocracy/judges-action/issues/2451/#issuecomment-5846817623
   is_human: 1
   issue: 2451
   repository: 799177290
@@ -363698,6 +363758,7 @@
 
     <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+92](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 40
+  href: https://github.com/zerocracy/judges-action/issues/2450/#issuecomment-5846817767
   is_human: 1
   issue: 2450
   repository: 799177290
@@ -363721,6 +363782,7 @@
 
     <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16906](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 46
+  href: https://github.com/zerocracy/judges-action/issues/2371/#issuecomment-5846817957
   is_human: 1
   issue: 2371
   repository: 799177290
@@ -363752,6 +363814,7 @@
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
   hoc: 49
+  href: https://github.com/zerocracy/judges-action/issues/2370/#issuecomment-5846818129
   is_human: 1
   issue: 2370
   repository: 799177290
@@ -363775,6 +363838,7 @@
 
     <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (26) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16950](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 26
+  href: https://github.com/zerocracy/judges-action/issues/2369/#issuecomment-5846818322
   is_human: 1
   issue: 2369
   repository: 799177290
@@ -363827,5 +363891,208 @@
   repository: 798641472
   what: pull-was-opened
   when: 2026-09-26 12:18:46.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2640375
+  _job: 95070
+  _time: 2026-09-26 13:53:45.499633933 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 20
+  comments: 1
+  details: It's time to reward @titanism0v0 for the code contributed in zerocracy/judges-action#2454,
+    the reward amount is 20.
+  greeting: |-
+    Thanks for the contribution! You've earned **+20** points for this: **+24** as a basis; **-4** for too few (2) hits-of-code, per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html) which deducts 4 points when a contribution has fewer than 30 hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+112](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (2) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+112](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 2
+  is_human: 1
+  issue: 2454
+  repository: 799177290
+  review_comments: 0
+  seconds: 53661
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:53:45.506488831 Z
+  where: github
+  who: 263808434
+  why: Contributed code in zerocracy/judges-action#2454
+- _id: 2640376
+  _job: 95070
+  _time: 2026-09-26 13:53:48.733644551 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 1
+  details: It's time to reward @titanism0v0 for the code contributed in zerocracy/judges-action#2453,
+    the reward amount is 24.
+  greeting: "Thanks for the contribution! \U0001F389 You've earned **+24 points**
+    — [keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
+    Your running score is now [+136](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
+    so don't forget to check your [Zerocracy account](https://www.zerocracy.com/)
+    as well.\n\n<!-- Thanks for the contribution! You've earned +24 points. Please,
+    [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming.
+    Your running score is [+136](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 57
+  is_human: 1
+  issue: 2453
+  repository: 799177290
+  review_comments: 0
+  seconds: 80504
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:53:48.739864885 Z
+  where: github
+  who: 263808434
+  why: Contributed code in zerocracy/judges-action#2453
+- _id: 2640377
+  _job: 95070
+  _time: 2026-09-26 13:53:51.323309929 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2348,
+    the reward amount is 24.
+  greeting: |-
+    Thanks for the contribution! You've earned **+24** points for this: **+24** as the [basis](https://www.yegor256.com/2014/11/14/hits-of-code.html) award for the contribution, **+5** for the **77** hits-of-code you wrote (0.075 points per hit-of-code), and **-6** to keep the total within the **24**-point cap defined by our policy. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16974](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +24 points for this: +24 as a basis; +5 for the 77 hits-of-code that you wrote; -6 to not go over the cap. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+16974](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 77
+  is_human: 1
+  issue: 2348
+  repository: 799177290
+  review_comments: 0
+  seconds: 771234
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:53:51.328683930 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#2348
+- _id: 2640378
+  _job: 95070
+  _time: 2026-09-26 13:53:58.047138775 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2347,
+    the reward amount is 24.
+  greeting: "Great work! \U0001F389 You've earned **+24 points** — [keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
+    Your running score is now [+16998](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
+    so be sure to check your [Zerocracy account](https://www.zerocracy.com/) for details.\n\n<!--
+    Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+16998](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 42
+  is_human: 1
+  issue: 2347
+  repository: 799177290
+  review_comments: 0
+  seconds: 771490
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:53:58.057843740 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#2347
+- _id: 2640379
+  _job: 95070
+  _time: 2026-09-26 13:54:00.937020388 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2335,
+    the reward amount is 24.
+  greeting: |-
+    Thanks for the contribution! Since no code review was provided, +24 points were reduced by 8, leaving a total of **+16 points** for this submission. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) contributing, and consider requesting a review next time to maximize your score. Your running score is [+17022](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17022](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 38
+  is_human: 1
+  issue: 2335
+  repository: 799177290
+  review_comments: 0
+  seconds: 774682
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:54:00.962636968 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#2335
+- _id: 2640380
+  _job: 95070
+  _time: 2026-09-26 13:54:04.391534421 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2334,
+    the reward amount is 24.
+  greeting: |-
+    Thanks for the contribution! You've earned **+24 points**, the base award per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html) for a reviewed code contribution with no deductions. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17046](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17046](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 43
+  is_human: 1
+  issue: 2334
+  repository: 799177290
+  review_comments: 0
+  seconds: 774787
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:54:04.397079728 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#2334
+- _id: 2640381
+  _job: 95070
+  _time: 2026-09-26 13:54:08.378425408 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 20
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2333,
+    the reward amount is 20.
+  greeting: |-
+    Thanks for the contribution! You've earned **+20** points for this: **+24** as a basis; **-4** for too few (24) hits-of-code, per our [bonus policy](https://www.yegor256.com/2014/11/14/hits-of-code.html) which deducts points when contributions fall under **30** hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17066](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (24) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17066](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 24
+  is_human: 1
+  issue: 2333
+  repository: 799177290
+  review_comments: 0
+  seconds: 774857
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:54:08.384768467 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#2333
+- _id: 2640382
+  _job: 95070
+  _time: 2026-09-26 13:54:12.025261387 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 2
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2332,
+    the reward amount is 24.
+  greeting: |-
+    Hi, thanks for the contribution! Since no code review was provided, a deduction applies per policy, resulting in a net reward of **+24** points. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) contributing, and consider having your work reviewed next time to maximize your score. Your running score is [+17090](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17090](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 41
+  is_human: 1
+  issue: 2332
+  repository: 799177290
+  review_comments: 0
+  seconds: 774933
+  what: code-contribution-was-rewarded
+  when: 2026-09-26 13:54:12.030644136 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/judges-action#2332
+- _id: 2640383
+  _job: 36247023668
+  _time: 2026-09-26 14:14:18.654324180 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1152 has been earlier opened by @morphqdd.
+  issue: 1152
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-09-26 14:10:59.000000000 Z
   where: github
   who: 125282851
