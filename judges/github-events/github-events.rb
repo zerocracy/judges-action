@@ -435,6 +435,7 @@ Fbe.iterate do
       'label-was-attached' => %w[where repository issue label],
       'type-was-attached' => %w[where repository issue type]
     }
+    capped = false
     catch(:done) do
       events =
         begin
@@ -453,6 +454,7 @@ Fbe.iterate do
         Jp.supervision({ 'repo' => rname, 'json' => json.to_h }) do
           if !$options.max_events.nil? && idx >= $options.max_events
             $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
+            capped = true
             throw :done
           end
           total += 1
@@ -497,7 +499,7 @@ Fbe.iterate do
     if id.nil?
       $loog.info("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
       latest
-    elsif id <= latest || latest.zero?
+    elsif !capped && (id <= latest || latest.zero?)
       $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
       first
     else
