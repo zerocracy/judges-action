@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/conclude'
 require 'fbe/delete'
 require 'fbe/github_graph'
@@ -81,8 +82,7 @@ Fbe.iterate do
         $loog.error("[#{$judge}] Not authorized to fetch pull ##{issue} in #{repo}: #{e.class}: #{e.message}")
         next issue
       rescue Octokit::TooManyRequests, Octokit::ServerError,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError,
-        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn(
           "[#{$judge}] Transient error fetching pull ##{issue} in #{repo} " \
           "(will retry next cycle): #{e.class}: #{e.message}"
@@ -110,8 +110,7 @@ Fbe.iterate do
         $loog.error("[#{$judge}] Not authorized to fetch issue ##{issue} in #{repo}: #{e.class}: #{e.message}")
         next issue
       rescue Octokit::TooManyRequests, Octokit::ServerError,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError,
-        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn(
           "[#{$judge}] Transient error fetching issue ##{issue} in #{repo} " \
           "(will retry next cycle): #{e.class}: #{e.message}"
@@ -137,8 +136,7 @@ Fbe.iterate do
         )
         next issue
       rescue Octokit::TooManyRequests, Octokit::ServerError,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError,
-        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn(
           "[#{$judge}] Transient error fetching reviews of pull ##{issue} in #{repo} " \
           "(will retry next cycle): #{e.class}: #{e.message}"

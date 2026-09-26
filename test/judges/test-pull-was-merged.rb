@@ -465,6 +465,60 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_rescues_read_timeout_on_pull_request_lookup
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(45)
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/44').to_raise(Net::ReadTimeout)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(issue: 45, what: 'pull-was-merged', repository: 42, where: 'github', who: 422),
+      'a read timeout on the pull lookup did not let the judge go on to the next pull'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
+  end
+
+  def test_rescues_socket_error_on_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(45)
+    stub_pull_was_merged_base(44)
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/44').to_raise(SocketError)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(issue: 45, what: 'pull-was-merged', repository: 42, where: 'github', who: 422),
+      'a socket error on the issue lookup did not let the judge go on to the next pull'
+    )
+  end
+
+  def test_rescues_connection_reset_on_reviews_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(45)
+    stub_pull_was_merged_base(44)
+    stub_pull_was_merged_issue(44)
+    stub_request(
+      :get, 'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100'
+    ).to_raise(Errno::ECONNRESET)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(issue: 45, what: 'pull-was-merged', repository: 42, where: 'github', who: 422),
+      'a connection reset on the reviews lookup did not let the judge go on to the next pull'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
