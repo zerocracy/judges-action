@@ -114,4 +114,56 @@ class TestEraseRepository < Jp::Test
     load_it('erase-repository', fb)
     assert_requested(:get, 'https://api.github.com/repositories/403999', times: 1)
   end
+
+  def test_dont_check_more_repositories_after_rate_limit
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github(
+      'https://api.github.com/repositories/403222',
+      body: { message: 'API rate limit exceeded for user ID 42' }, status: 403
+    )
+    stub_github('https://api.github.com/repositories/1236', body: { id: 1236, name: 'żółw', full_name: 'foo/żółw' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.where = 'github'
+      f.repository = 403_222
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f.where = 'github'
+      f.repository = 1236
+    end
+    load_it('erase-repository', fb)
+    assert_not_requested(:get, 'https://api.github.com/repositories/1236')
+  end
+
+  def test_erase_repository_that_was_missing_before_rate_limit
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github('https://api.github.com/repositories/404125', body: '', status: 404)
+    stub_github(
+      'https://api.github.com/repositories/403223',
+      body: { message: 'API rate limit exceeded for user ID 42' }, status: 403
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.where = 'github'
+      f.repository = 404_125
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f.where = 'github'
+      f.repository = 403_223
+    end
+    load_it('erase-repository', fb)
+    assert_equal(1, fb.query('(exists stale)').each.to_a.size)
+  end
 end
