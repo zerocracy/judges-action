@@ -43,14 +43,29 @@ factbase_exists() {
 # Usage: log_contains <pattern> [error_message]
 log_contains() {
     local pattern=$1
-    grep -qF "$pattern" log.txt || die "Expected pattern '$pattern' not found in log.txt" "${2:-}"
+    grep -qF -- "$pattern" log.txt || die "Expected pattern '$pattern' not found in log.txt" "${2:-}"
+}
+
+# Check that one pattern appears in the log before another one
+# Usage: log_precedes <first> <second> [error_message]
+log_precedes() {
+    local first=$1
+    local second=$2
+    local a
+    local b
+    a=$(grep -n -m1 -F -- "$first" log.txt | cut -d: -f1) || true
+    b=$(grep -n -m1 -F -- "$second" log.txt | cut -d: -f1) || true
+    test -n "$a" || die "Expected pattern '$first' not found in log.txt" "${3:-}"
+    if [ -n "$b" ] && [ "$b" -lt "$a" ]; then
+        die "Pattern '$second' appears in log.txt before '$first'" "${3:-}"
+    fi
 }
 
 # Check that a pattern does NOT exist in the log
 # Usage: log_not_contains <pattern> [error_message]
 log_not_contains() {
     local pattern=$1
-    if grep -qF "$pattern" log.txt; then
+    if grep -qF -- "$pattern" log.txt; then
         die "Unexpected pattern '$pattern' found in log.txt" "${2:-}"
     fi
 }
