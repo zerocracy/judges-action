@@ -147,9 +147,12 @@ else
     echo "Since 'fail-fast' is not set to 'true', we will run all judges even if some of them fail"
 fi
 
+declare -a trash=()
+trap 'rm -rf "${trash[@]}"' EXIT INT TERM
+
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
-    trap 'rm -rf "$ALL_JUDGES"' EXIT INT TERM
+    trash+=("${ALL_JUDGES}")
     options+=("--no-expect-judges")
     summary=off
     echo "We are in 'dry' mode; keeping the summary facts of the factbase intact"
@@ -272,6 +275,17 @@ else
 fi
 echo "The total number of cycles to run is ${cycles}"
 
+pairs=$(mktemp)
+trash+=("${pairs}")
+declare -a flags=()
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == --option=github_token=* ]]; then
+        printf '%s\n' "${opt#--option=}" >> "${pairs}"
+    else
+        flags+=("${opt}")
+    fi
+done
+
 ${JUDGES} "${gopts[@]}" --hello update \
     --no-log \
     --quiet \
@@ -284,7 +298,8 @@ ${JUDGES} "${gopts[@]}" --hello update \
     --max-cycles "${cycles}" \
     --statistics \
     --churn=churn.txt \
-    "${options[@]}" \
+    "--options-file=${pairs}" \
+    "${flags[@]}" \
     "${ALL_JUDGES}" \
     "${fb}"
 
