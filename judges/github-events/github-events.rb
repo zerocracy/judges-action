@@ -157,7 +157,8 @@ Fbe.iterate do
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
     fact.repository = Integer(json[:repo][:id])
-    fact.who = Integer(json[:actor][:id]) if json[:actor]
+    who = json.dig(:payload, :release, :author, :id) || json.dig(:actor, :id)
+    fact.who = Integer(who) unless who.nil?
     begin
       rname = Fbe.octo.repo_name_by_id(fact.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -361,10 +362,6 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'published'
         fact.what = 'release-published'
-        author = json[:payload][:release].dig(:author, :id)
-        if author && fact.all_properties.include?('who') && fact.who != author
-          Fbe.overwrite(fact, 'who', author)
-        end
         contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(fact, info(fact, rname))
         fact.details =
