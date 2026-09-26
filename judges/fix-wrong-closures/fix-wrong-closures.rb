@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
@@ -34,6 +35,13 @@ Fbe.iterate do
         $loog.warn(
           "[#{$judge}] Access forbidden to repository ##{repository} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
+      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn(
+          "[#{$judge}] Transient error resolving repository ##{repository} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
       end
