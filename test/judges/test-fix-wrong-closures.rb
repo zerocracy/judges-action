@@ -9,7 +9,7 @@ require_relative '../test__helper'
 class TestFixWrongClosures < Jp::Test
   using SmartFactbase
 
-  def test_forgets_the_closure_of_a_merged_pull
+  def test_converts_the_closure_of_a_merged_pull_into_a_merge
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -26,8 +26,67 @@ class TestFixWrongClosures < Jp::Test
     fb.with(_id: 1, what: 'pull-was-closed', where: 'github', repository: 42, issue: 55, who: 44)
     load_it('fix-wrong-closures', fb)
     assert(
-      fb.none?(what: 'pull-was-closed', where: 'github', repository: 42, issue: 55),
-      'The closure of a merged pull cannot survive'
+      fb.one?(what: 'pull-was-merged', where: 'github', repository: 42, issue: 55, who: 44),
+      'The closure of a merged pull is not converted into a merge'
+    )
+  end
+
+  def test_takes_the_time_of_the_merge_from_the_pull
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/58',
+      body: { id: 53, number: 58, state: 'closed', merged_at: Time.parse('2025-10-01 07:15:00 UTC') }
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'pull-was-closed', where: 'github', repository: 42, issue: 58, when: Time.parse('2025-09-29T11:00Z')
+    )
+    load_it('fix-wrong-closures', fb)
+    assert(
+      fb.one?(what: 'pull-was-merged', issue: 58, when: Time.parse('2025-10-01 07:15:00 UTC')),
+      'The time of the merge is not the one of the pull'
+    )
+  end
+
+  def test_keeps_the_hoc_of_a_converted_closure
+    seed = Random.new_seed
+    hoc = Random.new(seed).rand(1..100_000)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/59',
+      body: { id: 54, number: 59, state: 'closed', merged_at: Time.parse('2025-10-02 09:30:00 UTC') }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', where: 'github', repository: 42, issue: 59, who: 44, hoc:)
+    load_it('fix-wrong-closures', fb)
+    assert(
+      fb.one?(what: 'pull-was-merged', issue: 59, hoc:),
+      "The hoc #{hoc} of the converted closure is lost, seed #{seed}"
+    )
+  end
+
+  def test_forgets_the_closure_of_a_pull_whose_merge_is_known
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/60',
+      body: { id: 55, number: 60, state: 'closed', merged_at: Time.parse('2025-10-03 12:45:00 UTC') }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', where: 'github', repository: 42, issue: 60, who: 44)
+    fb.with(_id: 2, what: 'pull-was-closed', where: 'github', repository: 42, issue: 60, who: 44)
+    load_it('fix-wrong-closures', fb)
+    assert(
+      fb.one?(what: 'pull-was-merged', where: 'github', repository: 42, issue: 60),
+      'The closure of a pull with a known merge is turned into a second merge'
     )
   end
 
