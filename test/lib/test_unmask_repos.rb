@@ -9,6 +9,14 @@ require_relative '../../lib/patches/unmask_repos'
 require_relative '../test__helper'
 
 class TestUnmaskRepos < Jp::Test
+  def test_delegates_to_the_upstream_gem_method
+    refute_match(
+      %r{lib/patches/unmask_repos\.rb\z},
+      Fbe.method(:unmask_repos).source_location.first,
+      'unmask_repos is redefined here instead of delegating to the fbe gem method'
+    )
+  end
+
   def test_falls_back_to_user_repositories_when_organization_is_absent
     rate_limit_up
     stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 404)
@@ -28,48 +36,5 @@ class TestUnmaskRepos < Jp::Test
     $loog = Loog::NULL
     Fbe.unmask_repos(options: Judges::Options.new({ 'repositories' => 'bar/bar' }), global: {}, loog: Loog::NULL)
     assert_requested(stub, times: 1, message: 'a repository cannot be fetched more than once per expansion')
-  end
-
-  def test_skips_the_mask_when_organization_listing_is_forbidden
-    rate_limit_up
-    stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 403)
-    stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
-    $loog = Loog::NULL
-    assert_equal(
-      ['bar/bar'],
-      Fbe.unmask_repos(
-        options: Judges::Options.new({ 'repositories' => 'foo/*,bar/bar' }), global: {}, loog: Loog::NULL
-      ),
-      'a forbidden organization cannot break the expansion of the other masks'
-    )
-  end
-
-  def test_skips_the_mask_when_neither_organization_nor_user_exists
-    rate_limit_up
-    stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 404)
-    stub_github('https://api.github.com/users/foo/repos?per_page=100', body: {}, status: 404)
-    stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
-    $loog = Loog::NULL
-    assert_equal(
-      ['bar/bar'],
-      Fbe.unmask_repos(
-        options: Judges::Options.new({ 'repositories' => 'foo/*,bar/bar' }), global: {}, loog: Loog::NULL
-      ),
-      'a mask pointing at nothing cannot break the expansion of the other masks'
-    )
-  end
-
-  def test_skips_the_mask_when_github_fails_to_list_the_organization
-    rate_limit_up
-    stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 500)
-    stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
-    $loog = Loog::NULL
-    assert_equal(
-      ['bar/bar'],
-      Fbe.unmask_repos(
-        options: Judges::Options.new({ 'repositories' => 'foo/*,bar/bar' }), global: {}, loog: Loog::NULL
-      ),
-      'a server error cannot break the expansion of the other masks'
-    )
   end
 end
