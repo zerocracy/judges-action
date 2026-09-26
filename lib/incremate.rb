@@ -23,11 +23,11 @@ def Jp.incremate(
       $loog.debug("#{n} is here: #{fact[n].first}")
       next
     end
-    break if Fbe.over?(epoch:, kickoff:)
     if pause.positive? && evaluated.positive?
       $loog.debug("Pausing for #{pause}s before next #{prefix}_* evaluation...")
       sleep(pause)
     end
+    break if Fbe.over?(epoch:, kickoff:)
     $loog.info(
       [
         "Starting to evaluate #{n}",
