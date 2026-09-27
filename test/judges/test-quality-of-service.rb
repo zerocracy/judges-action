@@ -243,6 +243,32 @@ class TestQualityOfService < Jp::Test
       ]
     )
     stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.0.1...0.0.2?per_page=100',
+      body: {
+        total_commits: 3, commits: [{ sha: 'ee04386901692ab0' }],
+        files: [
+          {
+            sha: '9e100c7246c0cc9',
+            filename: 'file.txt',
+            status: 'modified',
+            additions: 10,
+            deletions: 10,
+            changes: 5,
+            patch: '@@ -24,7 +24,7 @@ text ...'
+          },
+          {
+            sha: 'f97818271059e5455',
+            filename: 'file2.txt',
+            status: 'modified',
+            additions: 15,
+            deletions: 17,
+            changes: 6,
+            patch: '@@ -25,7 +25,7 @@ text ...'
+          }
+        ]
+      }
+    )
+    stub_github(
       'https://api.github.com/repos/foo/foo/compare/0.0.2...0.0.3?per_page=100',
       body: {
         total_commits: 1, commits: [{ sha: 'ee04386901692ab0' }],
@@ -365,8 +391,8 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal([64_800, 21_600, 36_000], f['some_release_interval'])
-      assert_equal([52, 24, 99], f['some_release_hoc_size'])
-      assert_equal([1, 2, 4], f['some_release_commits_size'])
+      assert_equal([11, 52, 24, 99], f['some_release_hoc_size'])
+      assert_equal([3, 1, 2, 4], f['some_release_commits_size'])
     end
   end
 
