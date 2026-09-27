@@ -2071,7 +2071,10 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 3 }))
     assert_equal(4, fb.all.size)
-    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 14))
+    assert(
+      fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 12),
+      'a scan cut short by max_events must resume at the oldest event it processed'
+    )
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 12))
