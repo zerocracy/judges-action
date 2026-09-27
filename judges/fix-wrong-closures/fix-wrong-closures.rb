@@ -7,6 +7,7 @@ require 'faraday'
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
+require 'fbe/overwrite'
 require 'octokit'
 require_relative '../../lib/issue_was_lost'
 
@@ -68,13 +69,28 @@ Fbe.iterate do
         next issue
       end
     next issue if json[:merged_at].nil? && json[:state] != 'open'
-    Fbe.fb.query(
+    closures = Fbe.fb.query(
       "(and
         (eq where 'github')
         (eq repository #{repository})
         (eq issue #{issue})
         (eq what 'pull-was-closed'))"
-    ).delete!
+    )
+    merges = Fbe.fb.query(
+      "(and
+        (eq where 'github')
+        (eq repository #{repository})
+        (eq issue #{issue})
+        (eq what 'pull-was-merged'))"
+    )
+    if json[:merged_at] && merges.each.none?
+      closures.each.to_a.each do |f|
+        Fbe.overwrite(f, { 'what' => 'pull-was-merged', 'when' => json[:merged_at] })
+      end
+      $loog.info("The closure of #{repo}##{issue} is wrong, it was merged at #{json[:merged_at]}, converted")
+      next issue
+    end
+    closures.delete!
     $loog.info(
       "The closure of #{repo}##{issue} is wrong, it is " \
       "#{json[:merged_at].nil? ? 'open' : 'merged'} now, forgotten"
