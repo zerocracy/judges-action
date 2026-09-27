@@ -16,7 +16,7 @@ if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
     auth_args=(-H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")")
 fi
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    resp=$(curl --silent "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
+    resp=$(curl --silent --connect-timeout 5 --max-time 40 "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
     latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name // empty) catch empty")
     if [ -z "${latest}" ]; then
         echo "!!! Could not fetch the latest version from GitHub."
