@@ -276,7 +276,8 @@ ${JUDGES} "${gopts[@]}" --hello update \
     --no-log \
     --quiet \
     "--summary=${summary}" \
-    --shuffle=aaa \
+    --shuffle=github-events \
+    --seed="${GITHUB_RUN_ID:-$$}" \
     --boost=github-events \
     --lifetime "${lifetime}" \
     --timeout "${timeout}" \
