@@ -213,12 +213,12 @@ class TestMilestoneWasSet < Jp::Test
     load_it('milestone-was-set', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
     found = fb.query("(eq what 'milestone-was-set')").each.to_a
     assert_equal(
-      [1, 2], found.map(&:milestone).sort,
+      [1, 2], found.map(&:milestone).sort!,
       'The fake client must answer with milestones, or the judge cannot be tested at all'
     )
-    open_one = found.find { |f| f.milestone == 1 }
-    assert_equal(526_301, open_one.who)
-    refute_nil(open_one['deadline'])
+    opened = found.find { |f| f.milestone == 1 }
+    assert_equal(526_301, opened.who)
+    refute_nil(opened['deadline'])
     assert_nil(found.find { |f| f.milestone == 2 }['deadline'])
   end
 end
