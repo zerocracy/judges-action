@@ -301,6 +301,47 @@ class TestFindAllIssues < Jp::Test
     assert_equal(45, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
 
+  def test_keeps_marker_on_iterated_issue_when_response_ends_higher
+    WebMock.disable_net_connect!
+    rate_limit_up
+    seed = Random.new_seed
+    last = Random.new(seed).rand(46..99_999)
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          { number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } },
+          { number: last, created_at: Time.parse('2025-05-05'), user: { id: 4242 } }
+        ]
+      }
+    )
+    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.repository = 991
+      f.what = 'iterate'
+      f.where = 'github'
+      f.min_issue_was_found = 44
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f.issue = 45
+      f.repository = 991
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    assert_equal(
+      45, fb.query('(eq what "iterate")').each.first.min_issue_was_found,
+      "marker is not the iterated issue but the last one of the response, seed #{seed}"
+    )
+  end
+
   def test_when_issue_response_has_empty_created_at
     WebMock.disable_net_connect!
     rate_limit_up
