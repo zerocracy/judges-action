@@ -542,11 +542,7 @@ class TestPullRequest < Jp::Test
       body: (1..5).map { |i| { user: { id: 40 + i }, content: '+1' } }
     )
     count =
-      Jp.count_appreciated_comments(
-        { base: { repo: { full_name: 'foo/foo' } } },
-        [{ id: 101, user: { id: 7 } }],
-        []
-      )
+      Jp.count_appreciated_comments({ base: { repo: { full_name: 'foo/foo' } } }, [{ id: 101, user: { id: 7 } }], [])
     assert_equal(1, count)
   end
 end
