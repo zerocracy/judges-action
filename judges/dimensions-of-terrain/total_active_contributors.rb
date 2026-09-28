@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'net/http'
 require_relative '../../lib/patches/unmask_repos'
 require_relative '../../lib/qos_search'
 
@@ -25,6 +26,9 @@ def total_active_contributors(fact)
           "[#{$judge}] Access forbidden to commit search for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error searching commits for #{repo} (transient): #{e.class}: #{e.message}")
         next
       end
     next if commits.nil?
