@@ -42,7 +42,7 @@ module Fbe
             next
           end
         list.each do |r|
-          repos << r[:full_name] if re.match?(r[:full_name])
+          repos << r[:full_name] if re.match?(r[:full_name]) && !r.to_h[:fork]
         end
       end
       masks.select { |m| m.start_with?('-') }.each do |mask|
