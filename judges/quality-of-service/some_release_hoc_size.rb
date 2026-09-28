@@ -47,7 +47,11 @@ def some_release_hoc_size(fact)
           )
           next
         end
-      hocs << compare[:files].sum { |file| file[:changes] }
+      if compare[:files].size < 300
+        hocs << compare[:files].sum { |file| file[:changes] }
+      else
+        $loog.info("The files of #{repo}@#{first[:tag_name]}..#{last[:tag_name]} are cut, HoC is not measured")
+      end
       commits << compare[:total_commits]
     end
   end
