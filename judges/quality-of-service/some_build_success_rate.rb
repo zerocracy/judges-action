@@ -55,18 +55,18 @@ def some_build_success_rate(fact)
     runs.sort_by! { _1[:completed] }
     runs.each do |item|
       item => { json:, secs:, completed: }
-      wid = json[:workflow_id]
-      if json[:conclusion] == 'failure' && failed[wid].nil?
-        failed[wid] = completed
-      elsif json[:conclusion] == 'success' && failed[wid]
-        ttrs << Integer(completed - failed[wid])
-        failed.delete(wid)
+      key = [json[:workflow_id], json[:head_branch]]
+      if json[:conclusion] == 'failure' && failed[key].nil?
+        failed[key] = completed
+      elsif json[:conclusion] == 'success' && failed[key]
+        ttrs << Integer(completed - failed[key])
+        failed.delete(key)
       end
       success << (json[:conclusion] == 'success' ? 1 : 0)
       duration << secs
     end
-    failed.each do |wid, broke|
-      recovery = Jp.recovered(repo, wid, fact.when)
+    failed.each do |(wid, branch), broke|
+      recovery = Jp.recovered(repo, wid, fact.when, branch:)
       next if recovery.nil?
       ttrs << Integer(recovery - broke)
     end
