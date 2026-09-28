@@ -28,6 +28,7 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').eac
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
     good[r] = true
+    throw(:"GitHub repository ##{r} is not accessible (transient)")
   end
 end
 
