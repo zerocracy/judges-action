@@ -25,11 +25,10 @@ def total_files(_fact)
         )
         next
       end
-    next if info[:size].nil? || info[:size].zero?
     tree =
       begin
         Fbe.octo.tree(repo, info[:default_branch], recursive: true)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
+      rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Conflict => e
         $loog.info("Tree not found for #{repo}@#{info[:default_branch]}: #{e.message}")
         next
       rescue Octokit::Forbidden => e
