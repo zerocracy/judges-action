@@ -50,7 +50,7 @@ class TestTerrainNetworkErrors < Jp::Test
     fact = Struct.new(:when).new(Time.utc(2026, 9, 28))
     load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
     search =
-      lambda do |query, method: _method|
+      lambda do |query, **_options|
         raise(Net::OpenTimeout) if query.include?('foo/broken')
         { items: [{ author: { id: 42 } }] }
       end
