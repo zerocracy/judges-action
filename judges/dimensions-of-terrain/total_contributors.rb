@@ -45,10 +45,7 @@ def total_contributors(_fact)
         )
         next
       rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
-        $loog.warn(
-          "[#{$judge}] Network error reading contributors for #{repo} (transient): " \
-          "#{e.class}: #{e.message}"
-        )
+        $loog.warn("[#{$judge}] Network error reading contributors for #{repo} (transient): #{e.class}: #{e.message}")
         next
       end
     next unless list.is_a?(Array)
