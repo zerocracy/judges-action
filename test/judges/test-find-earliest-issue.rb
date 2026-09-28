@@ -256,4 +256,24 @@ class TestFindEarliestIssue < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_dont_record_pull_when_its_lookup_is_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=asc&page=1&per_page=1&sort=created&state=all',
+      body: [
+        {
+          id: 123, number: 3, user: { id: 44, login: 'user' },
+          pull_request: { merged_at: '2025-09-27 07:03:00 UTC' }, created_at: '2025-09-27 06:03:16 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/3', status: 403, body: { message: 'Forbidden' })
+    fb = Factbase.new
+    load_it('find-earliest-issue', fb)
+    assert(fb.none?(what: 'pull-was-opened'), 'a pull that could not be read was recorded as opened')
+  end
 end
