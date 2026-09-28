@@ -43,6 +43,9 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error resolving repo ##{repository} (transient): #{e.class}: #{e.message}")
+        next issue
       end
     events =
       begin
@@ -56,6 +59,9 @@ Fbe.iterate do
           "[#{$judge}] Access forbidden to issue ##{issue} in repository ##{repository} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next issue
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error fetching timeline for ##{issue} (transient): #{e.class}: #{e.message}")
         next issue
       end
     events.each do |te|
