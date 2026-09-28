@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestEliminateGhosts < Jp::Test
@@ -185,5 +186,38 @@ class TestEliminateGhosts < Jp::Test
       .with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 44, who: 29_139_614, where: 'github')
     load_it('eliminate-ghosts', fb)
     assert_requested(stub, times: 1)
+  end
+
+  def test_keeps_siblings_of_stale_user_when_off_quota
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', who: 555, what: 'something-a', stale: 'who')
+      .with(_id: 2, where: 'github', who: 555, what: 'something-b')
+      .with(_id: 3, where: 'github', who: 555, what: 'something-c')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { core: { remaining: 7, limit: 5000 } }, rate: { remaining: 7, limit: 5000 } }
+    ).run do
+      load_it('eliminate-ghosts', fb)
+    end
+    assert_equal(
+      1, fb.picks(where: 'github', who: 555, stale: 'who').count,
+      'the siblings of a user nobody checked are retired, while the run was off quota'
+    )
+  end
+
+  def test_keeps_siblings_of_stale_user_on_forbidden_lookup
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', who: 666, what: 'something-a', stale: 'who')
+      .with(_id: 2, where: 'github', who: 666, what: 'something-b')
+      .with(_id: 3, where: 'github', who: 666, what: 'something-c')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { core: { remaining: 999, limit: 5000 } }, rate: { remaining: 999 } },
+      'GET /user/666' => [403, { message: 'Доступ запрещён' }]
+    ).run do
+      load_it('eliminate-ghosts', fb)
+    end
+    assert_equal(
+      1, fb.picks(where: 'github', who: 666, stale: 'who').count,
+      'the siblings of a user whose lookup was forbidden are retired, while the 403 is transient'
+    )
   end
 end
