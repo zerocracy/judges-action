@@ -807,6 +807,7 @@ class TestQualityOfService < Jp::Test
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { false }
     octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:workflow_runs) { |*| { workflow_runs: [] } }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
