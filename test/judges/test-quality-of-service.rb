@@ -564,6 +564,7 @@ class TestQualityOfService < Jp::Test
     )
     timed = []
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
     octo.define_singleton_method(:workflow_run_usage) do |_, id|
       timed << id
@@ -775,6 +776,7 @@ class TestQualityOfService < Jp::Test
     seed = Random.new_seed
     ms = Random.new(seed).rand(1..999)
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -803,6 +805,7 @@ class TestQualityOfService < Jp::Test
     durations = { 1 => random.rand(500..999), 2 => random.rand(1..499) }
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
