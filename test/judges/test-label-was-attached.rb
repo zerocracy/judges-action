@@ -116,7 +116,7 @@ class TestLabelWasAttached < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
     fb.with(_id: 2, what: 'issue-was-opened', repository: 43, issue: 45, where: 'github')
-    load_it('label-was-attached', fb)
+    load_it('label-was-attached', fb, Judges::Options.new({ 'repositories' => 'foo/foo,bar/bar' }))
     assert(fb.one?(what: 'label-was-attached', repository: 43, issue: 45, where: 'github', label: 'bug', who: 421))
     assert_nil(fb.query('(eq issue 44)').each.first['stale'])
   end

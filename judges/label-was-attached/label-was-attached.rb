@@ -7,6 +7,7 @@ require 'fbe/if_absent'
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
+require 'faraday'
 require_relative '../../lib/issue_was_lost'
 
 badges = %w[bug enhancement question]
@@ -43,7 +44,8 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+      rescue Faraday::ConnectionFailed, Faraday::TimeoutError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
         $loog.warn("[#{$judge}] Network error resolving repo ##{repository} (transient): #{e.class}: #{e.message}")
         next issue
       end
@@ -60,7 +62,8 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+      rescue Faraday::ConnectionFailed, Faraday::TimeoutError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
         $loog.warn("[#{$judge}] Network error fetching timeline for ##{issue} (transient): #{e.class}: #{e.message}")
         next issue
       end
