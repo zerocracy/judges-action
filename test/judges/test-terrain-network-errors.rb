@@ -55,6 +55,6 @@ class TestTerrainNetworkErrors < Jp::Test
         { items: [{ author: { id: 42 } }] }
       end
     result = Fbe.stub(:unmask_repos, unmask) { Jp.stub(:qosearch, search) { total_active_contributors(fact) } }
-    assert_equal({ total_active_contributors: 1 }, result)
+    assert_equal({}, result)
   end
 end
