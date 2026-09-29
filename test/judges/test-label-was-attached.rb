@@ -73,7 +73,7 @@ class TestLabelWasAttached < Jp::Test
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100')
-      .to_raise(Net::OpenTimeout)
+      .to_raise(Net::OpenTimeout).times(5)
     stub_github(
       'https://api.github.com/repos/foo/foo/issues/45/timeline?per_page=100',
       body: [
@@ -97,7 +97,8 @@ class TestLabelWasAttached < Jp::Test
   def test_skips_issue_after_network_error_resolving_repository
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_request(:get, 'https://api.github.com/repositories/42').to_raise(Net::OpenTimeout)
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 41, full_name: 'foo/foo' })
+    stub_request(:get, 'https://api.github.com/repositories/42').to_raise(Net::OpenTimeout).times(5)
     stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'bar/bar' })
     stub_github('https://api.github.com/repos/bar/bar', body: { id: 43, full_name: 'bar/bar' })
     stub_github(
