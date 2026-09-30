@@ -91,7 +91,7 @@ Fbe.iterate do
     return json if json.nil?
     commits = json[:commits] || []
     page = 1
-    while commits.size < json[:total_commits].to_i
+    while commits.size < (json[:total_commits] || 0)
       page += 1
       more = Fbe.octo.compare(repo, since, tag, page:)[:commits] || []
       break if more.empty?
