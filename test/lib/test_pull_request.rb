@@ -53,6 +53,28 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
+  def test_fetch_workflows_counts_runs_of_every_event_that_builds_a_pull
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { number: 55, head: { sha: 'cc789' }, base: { repo: { full_name: 'foo/foo' } } }
+    events = %w[push pull_request_target merge_group workflow_dispatch]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/cc789/check-runs?per_page=100',
+      body: { check_runs: events.each_index.map { |i| { id: i + 1, app: { slug: 'github-actions' } } } }
+    )
+    events.each_with_index do |event, i|
+      stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{i + 1}", body: { id: i + 1, run_id: 700 + i })
+      stub_github(
+        "https://api.github.com/repos/foo/foo/actions/runs/#{700 + i}",
+        body: { id: 700 + i, event:, conclusion: 'success' }
+      )
+    end
+    assert_equal({ succeeded_builds: 3, failed_builds: 0 }, Jp.fetch_workflows(pr))
+  end
+
   def test_counts_reactions_when_reaction_user_is_nil
     WebMock.disable_net_connect!
     rate_limit_up
