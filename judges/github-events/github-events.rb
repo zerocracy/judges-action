@@ -403,7 +403,7 @@ Fbe.iterate do
         end
       $loog.error("[#{$judge}] #{who} doesn't have access to the #{rname} repository, maybe it is private")
     end
-    skip(json)
+    raise
   end
   over do |repository, latest|
     begin
@@ -435,6 +435,7 @@ Fbe.iterate do
       'type-was-attached' => %w[where repository issue type]
     }
     capped = false
+    failed = nil
     catch(:done) do
       events =
         begin
@@ -454,7 +455,7 @@ Fbe.iterate do
           if !$options.max_events.nil? && idx >= $options.max_events
             $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
             capped = true
-            throw :done
+            throw(:done)
           end
           total += 1
           id = Integer(json[:id])
@@ -464,7 +465,7 @@ Fbe.iterate do
               "The event_id ##{id} (no.#{idx}) is not larger than ##{latest}, " \
               "good stop in #{json[:repo][:name]}"
             )
-            throw :done
+            throw(:done)
           end
           Fbe.fb.txn do |fbt|
             f =
@@ -477,24 +478,30 @@ Fbe.iterate do
               next
             end
             fill(f, json)
-            uniques.each { |w, ff| throw :rollback if Jp.twice?(fbt, f, w, ff) }
+            uniques.each { |w, ff| throw(:rollback) if Jp.twice?(fbt, f, w, ff) }
             if f['issue']
-              throw :rollback unless Fbe.fb.query(
+              throw(:rollback) unless Fbe.fb.query(
                 "(and
                   (eq where '#{f.where}')
                   (eq repository #{f.repository})
                   (eq issue #{f.issue})
                   (exists done))"
               ).each.none?
-              throw :rollback if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
+              throw(:rollback) if Fbe::Tombstone.new.has?(f.where, f.repository, f.issue)
             end
             $loog.info("Detected new event_id ##{id} (no.#{idx}) in #{json[:repo][:name]}: #{json[:type]}")
             detected += 1
           end
+        rescue Octokit::Forbidden
+          failed = [failed, id].compact.min
         end
       end
     end
     $loog.info("In #{rname}, detected #{detected} events out of #{total} scanned in #{rstart.ago}")
+    unless failed.nil?
+      $loog.info("In #{rname}, the event ##{failed} failed, next time will scan until ##{failed - 1}")
+      next failed - 1
+    end
     if id.nil?
       $loog.info("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
       latest
