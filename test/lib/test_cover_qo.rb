@@ -41,7 +41,7 @@ class TestCoverQo < Minitest::Test
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
       assert_equal(2, facts.size, 'fresh fact added when last is stale')
       assert_equal(Integer(old), Integer(facts.last.since))
-      assert_equal(Integer(now), Integer(facts.last.when))
+      assert_equal(Integer(old + slice), Integer(facts.last.when))
     end
   end
 
@@ -62,7 +62,7 @@ class TestCoverQo < Minitest::Test
       assert_equal(3, facts.size, 'gap fact inserted between two facts')
       gap = facts[1]
       assert_equal(Integer(Time.parse('2025-01-05 12:00:00 UTC')), Integer(gap.since))
-      assert_equal(Integer(Time.parse('2025-01-20 12:00:00 UTC')), Integer(gap.when))
+      assert_equal(Integer(Time.parse('2025-01-15 12:00:00 UTC')), Integer(gap.when))
     end
   end
 
@@ -104,11 +104,13 @@ class TestCoverQo < Minitest::Test
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
-      assert_equal(5, facts.size, 'two gap facts inserted for two gaps')
+      assert_equal(6, facts.size, 'three gap facts inserted for two gaps')
       assert_equal(Integer(Time.parse('2025-01-05 12:00:00 UTC')), Integer(facts[1].since))
-      assert_equal(Integer(Time.parse('2025-01-20 12:00:00 UTC')), Integer(facts[1].when))
+      assert_equal(Integer(Time.parse('2025-01-15 12:00:00 UTC')), Integer(facts[1].when))
       assert_equal(Integer(Time.parse('2025-01-25 12:00:00 UTC')), Integer(facts[3].since))
-      assert_equal(Integer(Time.parse('2025-02-15 12:00:00 UTC')), Integer(facts[3].when))
+      assert_equal(Integer(Time.parse('2025-02-04 12:00:00 UTC')), Integer(facts[3].when))
+      assert_equal(Integer(Time.parse('2025-02-04 12:00:00 UTC')), Integer(facts[4].since))
+      assert_equal(Integer(Time.parse('2025-02-14 12:00:00 UTC')), Integer(facts[4].when))
     end
   end
 
@@ -178,7 +180,7 @@ class TestCoverQo < Minitest::Test
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
       assert_equal(3, facts.size, 'gap filled even when facts inserted out of order')
       assert_equal(Integer(Time.parse('2025-01-05 12:00:00 UTC')), Integer(facts[1].since))
-      assert_equal(Integer(Time.parse('2025-01-20 12:00:00 UTC')), Integer(facts[1].when))
+      assert_equal(Integer(Time.parse('2025-01-15 12:00:00 UTC')), Integer(facts[1].when))
     end
   end
 
@@ -223,8 +225,9 @@ class TestCoverQo < Minitest::Test
       assert_equal(4, facts.size, 'fresh fact and historical gap both added')
       gap = facts.find { |f| Integer(f.since) == Integer(Time.parse('2025-01-05 12:00:00 UTC')) }
       refute_nil(gap, 'historical gap fact not found')
-      fresh = facts.find { |f| Integer(f.when) == Integer(now) }
+      fresh = facts.find { |f| Integer(f.since) == Integer(stale) }
       refute_nil(fresh, 'fresh fact not found')
+      assert_equal(Integer(stale + slice), Integer(fresh.when))
     end
   end
 
@@ -314,7 +317,7 @@ class TestCoverQo < Minitest::Test
       facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
       assert_equal(2, facts.size, 'fresh fact added when last is one second past boundary')
       assert_equal(Integer(past), Integer(facts.last.since))
-      assert_equal(Integer(now), Integer(facts.last.when))
+      assert_equal(Integer(past + slice), Integer(facts.last.when))
     end
   end
 
@@ -407,8 +410,25 @@ class TestCoverQo < Minitest::Test
     b.when = Time.parse('2025-01-30 12:00:00 UTC')
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
-      facts = fb.query("(eq what 'test-judge')").each.to_a
-      assert_equal(3, facts.size, 'gap of 20 days filled when slice is 10 days')
+      facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
+      assert_equal(4, facts.size, 'gap of 20 days filled with two windows of 10 days')
+      assert_equal([10 * 24 * 60 * 60] * 2, facts[1..2].map { |f| Integer(f.when - f.since) })
+    end
+  end
+
+  def test_chops_long_downtime_into_windows_of_equal_length
+    fb = Factbase.new
+    now = Time.parse('2026-09-23 00:00:00 UTC')
+    f = fb.insert
+    f.what = 'test-judge'
+    f.since = Time.parse('2026-06-08 00:00:00 UTC')
+    f.when = Time.parse('2026-06-15 00:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(7, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
+      assert_equal(15, facts.size, 'one hundred days of downtime chopped into seven day windows')
+      assert_equal([7 * 24 * 60 * 60], facts.to_set { |x| Integer(x.when - x.since) }.to_a)
+      facts.each_cons(2) { |a, b| assert_equal(Integer(a.when), Integer(b.since)) }
     end
   end
 end
