@@ -185,7 +185,7 @@ def Jp.fetch_workflows(pr, repo: nil)
           nil
         end
     next unless workflow
-    next unless workflow[:event] == 'pull_request'
+    next unless %w[pull_request pull_request_target push merge_group].include?(workflow[:event])
     case workflow[:conclusion]
     when 'success'
       succeeded += 1
