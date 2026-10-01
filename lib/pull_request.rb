@@ -153,6 +153,7 @@ def Jp.fetch_workflows(pr, repo: nil)
   end
   jobs = {}
   runs = {}
+  events = %w[pull_request pull_request_target push merge_group]
   (entries[:check_runs] || []).each do |run|
     next unless run.dig(:app, :slug) == 'github-actions'
     rid =
@@ -186,7 +187,7 @@ def Jp.fetch_workflows(pr, repo: nil)
           nil
         end
     next unless workflow
-    next unless workflow[:event] == 'pull_request'
+    next unless events.include?(workflow[:event])
     case workflow[:conclusion]
     when 'success'
       succeeded += 1
