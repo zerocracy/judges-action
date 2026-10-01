@@ -42,7 +42,7 @@ def some_review_time(fact)
         end
       end
       sizes << csize
-      users = all.map { |r| r.dig(:user, :id) }
+      users = all.filter_map { |r| r.dig(:user, :id) }
       users.uniq!
       reviewers << users.size
       reviews << all.size
