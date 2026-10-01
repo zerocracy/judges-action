@@ -81,7 +81,7 @@ if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     exit 1
 fi
 
-if [ -z "${INPUT_TOKEN}" ]; then
+if [ -z "${INPUT_TOKEN}" ] && [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
     echo "The 'token' plugin parameter is not set."
     echo "We stop here, since all further operations will fail anyway."
     echo "By the way, if you want to run it in 'dry' mode,"
