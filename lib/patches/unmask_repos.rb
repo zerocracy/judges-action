@@ -49,6 +49,7 @@ module Fbe
         re = Fbe.mask_to_regex(mask[1..])
         repos.reject! { |r| re.match?(r) }
       end
+      repos.uniq!(&:downcase)
       repos.reject! do |repo|
         octo.repository(repo)[:archived]
       rescue Octokit::NotFound, Octokit::Deprecated => e
