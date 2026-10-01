@@ -65,7 +65,8 @@ Fbe.iterate do
         who = event.dig(:assignee, :id)
         unless fbt.query(
           "(and (eq issue #{issue}) (eq who #{who}) (eq what '#{$judge}') " \
-          "(eq repository #{repository}) (eq where 'github') (absent unassigned))"
+          "(eq repository #{repository}) (eq where 'github') " \
+          "(or (absent unassigned) (eq when #{event[:created_at].utc.iso8601})))"
         ).each.to_a.empty?
           $loog.warn("Assignee already exists in #{repo}##{issue}")
           next
