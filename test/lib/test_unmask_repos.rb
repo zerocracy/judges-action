@@ -72,4 +72,24 @@ class TestUnmaskRepos < Jp::Test
       'a server error cannot break the expansion of the other masks'
     )
   end
+
+  def test_star_org_lists_all_accessible_repos
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/repos?per_page=100',
+      body: [
+        { full_name: 'foo/foo-one' },
+        { full_name: 'bar/foobar' },
+        { full_name: 'baz/other' }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo-one', body: { full_name: 'foo/foo-one', archived: false })
+    stub_github('https://api.github.com/repos/bar/foobar', body: { full_name: 'bar/foobar', archived: false })
+    $loog = Loog::NULL
+    assert_equal(
+      %w[foo/foo-one bar/foobar].sort,
+      Fbe.unmask_repos(options: Judges::Options.new({ 'repositories' => '*/foo*' }), global: {}, loog: Loog::NULL).sort,
+      'a star-org mask expands to all repositories the token can see, filtered by the repo pattern'
+    )
+  end
 end
