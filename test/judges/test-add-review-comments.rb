@@ -69,18 +69,57 @@ class TestAddReviewComments < Jp::Test
     WebMock.disable_net_connect!
     pl = { id: 93, comments: 2 }
     repo = 90
-    stub(repo, pl)
-    what = 'pull-was-reviewed'
+    stub(repo, pl, status: 404)
     fb = Factbase.new
     fact = fb.insert
-    fact.what = what
+    fact.what = 'pull-was-reviewed'
     fact.issue = pl[:id]
     fact.repository = repo
     fact.where = 'github'
     load_it('add-review-comments', fb)
-    facts = fb.query("(eq what '#{what}')").each.to_a
-    assert_equal(pl[:id], facts.first.issue)
-    assert_equal('repository', facts.first['stale'].first)
+    assert_nil(
+      fb.query("(eq issue #{pl[:id]})").each.first['review_comments'],
+      "review comments are set for ##{pl[:id]}, while the repository #{repo} is not found"
+    )
+  end
+
+  def test_marks_fact_stale_when_repo_is_not_found
+    WebMock.disable_net_connect!
+    pl = { id: 671, comments: 7 }
+    repo = 5_501
+    stub(repo, pl, status: 404)
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-merged'
+    fact.issue = pl[:id]
+    fact.repository = repo
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    assert_equal(
+      ['repository'],
+      fb.query("(eq issue #{pl[:id]})").each.first['stale'],
+      "the fact about ##{pl[:id]} is not stale, while the repository #{repo} is not found"
+    )
+  end
+
+  def test_marks_fact_stale_when_pull_is_not_found
+    WebMock.disable_net_connect!
+    repo = 7_412
+    issue = 908
+    stub(repo)
+    stub_github("https://api.github.com/repos/foo/foo/pulls/#{issue}", status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = issue
+    fact.repository = repo
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    assert_equal(
+      ['issue'],
+      fb.query("(and (eq issue #{issue}) (eq what 'pull-was-reviewed'))").each.first['stale'],
+      "the fact about ##{issue} is not stale, while the pull request is not found in #{repo}"
+    )
   end
 
   def test_skips_fact_already_marked_stale
@@ -215,7 +254,7 @@ class TestAddReviewComments < Jp::Test
     assert_nil(f['stale'], '500 is transient — fact must NOT be marked stale; pull lookup will retry next cycle')
   end
 
-  def stub(repo, *pulls)
+  def stub(repo, *pulls, status: 200)
     pulls.each do |pl|
       stub_github(
         "https://api.github.com/repos/foo/foo/pulls/#{pl[:id]}",
@@ -232,8 +271,8 @@ class TestAddReviewComments < Jp::Test
     end
     stub_github(
       "https://api.github.com/repositories/#{repo}",
-      status: repo == 90 ? 404 : 200,
-      body: { id: 820_463_873, name: 'foo', full_name: 'foo/foo' }
+      status:,
+      body: status == 200 ? { id: repo, name: 'foo', full_name: 'foo/foo' } : { message: 'Not Found' }
     )
     stub_github(
       'https://api.github.com/rate_limit',
