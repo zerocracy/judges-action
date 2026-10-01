@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/consider'
 require 'fbe/octo'
 require 'octokit'
@@ -40,7 +41,8 @@ Fbe.consider(
       next
     rescue Octokit::Unauthorized, Octokit::ServerError,
       Net::OpenTimeout, Net::ReadTimeout, SocketError,
-      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      Errno::ECONNRESET, Errno::ETIMEDOUT,
+      Faraday::TimeoutError, Faraday::ConnectionFailed => e
       $loog.warn(
         "[#{$judge}] Transient error fetching repository #{f.repository} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
@@ -68,7 +70,8 @@ Fbe.consider(
       next
     rescue Octokit::Unauthorized, Octokit::ServerError,
       Net::OpenTimeout, Net::ReadTimeout, SocketError,
-      Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      Errno::ECONNRESET, Errno::ETIMEDOUT,
+      Faraday::TimeoutError, Faraday::ConnectionFailed => e
       $loog.warn(
         "[#{$judge}] Transient error fetching issue ##{f.issue} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
