@@ -6,6 +6,7 @@
 require_relative 'jp'
 
 def Jp.twice?(fb, fact, what, fields)
+  return false unless fact['what']&.include?(what)
   pairs = fields.to_h { [_1, fact[_1]&.first] }
   fb.query(
     "(and (eq what $what) #{fields.map { pairs[_1].nil? ? "(absent #{_1})" : "(eq #{_1} $#{_1})" }.join(' ')})"
