@@ -10,6 +10,7 @@ permissions:
   issues: write
 jobs:
   titles:
+    if: contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
     timeout-minutes: 15
     runs-on: ubuntu-24.04
     steps:
