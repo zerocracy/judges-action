@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/if_absent'
 require 'fbe/issue'
 require 'fbe/iterate'
@@ -43,6 +44,10 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
+      rescue Faraday::ConnectionFailed, Faraday::TimeoutError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error resolving repo ##{repository} (transient): #{e.class}: #{e.message}")
+        next issue
       end
     events =
       begin
@@ -56,6 +61,10 @@ Fbe.iterate do
           "[#{$judge}] Access forbidden to issue ##{issue} in repository ##{repository} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next issue
+      rescue Faraday::ConnectionFailed, Faraday::TimeoutError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error fetching timeline for ##{issue} (transient): #{e.class}: #{e.message}")
         next issue
       end
     events.each do |te|
