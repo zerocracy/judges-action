@@ -2792,6 +2792,30 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_searches_merged_pulls_once_for_three_metrics
+    $judge = 'quality-of-service'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    queries = []
+    %w[some_merged_pulls some_pull_hoc_size some_review_time].each do |n|
+      load(File.join(__dir__, "../../judges/quality-of-service/#{n}.rb"))
+    end
+    Jp.stub(:qosearch, proc { |q, **| (queries << q) && { total_count: 0, items: [] } }) do
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) do
+          some_merged_pulls(fact)
+          some_pull_hoc_size(fact)
+          some_review_time(fact)
+        end
+      end
+    end
+    assert_equal(1, queries.count { |q| q.include?('is:merged') }, "merged pulls are searched again: #{queries}")
+  end
+
   private
 
   def stub_workflow_runs(workflow_runs)
