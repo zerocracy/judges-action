@@ -7,6 +7,8 @@ require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/patches/unmask_repos'
 
+CONTRIBUTORS_CAP = 500
+
 def total_contributors(_fact)
   contributors = Set.new
   measured = false
@@ -39,6 +41,13 @@ def total_contributors(_fact)
         next
       end
     next unless list.is_a?(Array)
+    if list.count >= CONTRIBUTORS_CAP
+      $loog.info(
+        "[#{$judge}] GitHub names at most #{CONTRIBUTORS_CAP} contributors and #{repo} has that many, " \
+        'so the total would be a floor and not a count'
+      )
+      return {}
+    end
     measured = true
     list.each do |contributor|
       id = contributor[:id]
