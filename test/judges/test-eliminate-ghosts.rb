@@ -172,6 +172,39 @@ class TestEliminateGhosts < Jp::Test
     )
   end
 
+  def test_keeps_sibling_facts_of_forbidden_user
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/29139615',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.what = 'issue-was-opened'
+      f.repository = 42
+      f.issue = 44
+      f.who = 29_139_615
+      f.where = 'github'
+      f.stale = 'who'
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f.what = 'issue-was-closed'
+      f.repository = 42
+      f.issue = 44
+      f.who = 29_139_615
+      f.where = 'github'
+    end
+    load_it('eliminate-ghosts', fb)
+    assert_equal(
+      1, fb.picks(where: 'github', who: 29_139_615, stale: 'who').count,
+      'a transient 403 must not retire the other facts of the user'
+    )
+  end
+
   def test_looks_up_forbidden_user_once_per_run
     WebMock.disable_net_connect!
     rate_limit_up
