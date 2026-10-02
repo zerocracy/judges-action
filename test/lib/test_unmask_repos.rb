@@ -22,6 +22,15 @@ class TestUnmaskRepos < Jp::Test
     )
   end
 
+  def test_logs_a_missing_repository_through_the_given_log
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/gone', body: { message: 'Not Found' }, status: 404)
+    $loog = Loog::NULL
+    log = Loog::Buffer.new
+    Fbe.unmask_repos(options: Judges::Options.new({ 'repositories' => 'foo/gone' }), global: {}, loog: log)
+    assert_includes(log.to_s, 'Repository foo/gone not found', 'the patch logged past the loog it was given')
+  end
+
   def test_fetches_every_repository_once
     rate_limit_up
     stub = stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
