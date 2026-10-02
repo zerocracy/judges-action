@@ -31,6 +31,54 @@ class TestIssueWasAssigned < Jp::Test
     assert_equal({ 42 => 1 }, calls)
   end
 
+  def test_records_a_later_assignment_to_another_person
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      body: [
+        {
+          id: 560,
+          event: 'assigned',
+          assignee: { id: 421, login: 'user1' },
+          assigner: { id: 422, login: 'user2' },
+          created_at: '2025-10-01 19:05:00 UTC'
+        },
+        {
+          id: 561,
+          event: 'assigned',
+          assignee: { id: 423, login: 'user3' },
+          assigner: { id: 424, login: 'user4' },
+          created_at: '2025-10-02 19:05:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    stub_github('https://api.github.com/user/423', body: { id: 423, login: 'user3' })
+    stub_github('https://api.github.com/user/424', body: { id: 424, login: 'user4' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    fb.with(
+      _id: 2, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 421,
+      assigner: 422, when: Time.parse('2025-10-01 19:05:00 UTC'),
+      details: 'foo/foo#44 was assigned to @user1 by @user2.'
+    )
+    load_it('issue-was-assigned', fb)
+    assert_equal(
+      1,
+      fb.query('(and (eq what "issue-was-assigned") (eq issue 44) (eq who 423))').each.to_a.size,
+      'an active assignment for another person must not block the later event'
+    )
+    assert_equal(
+      2,
+      fb.query('(and (eq what "issue-was-assigned") (eq issue 44))').each.to_a.size,
+      'the already-recorded event must not be duplicated while rescanning the timeline'
+    )
+  end
+
   def test_not_found_issue_events
     WebMock.disable_net_connect!
     rate_limit_up
