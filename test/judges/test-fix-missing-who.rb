@@ -80,10 +80,7 @@ class TestFixMissingWho < Jp::Test
     WebMock.disable_net_connect!
     rate_limit_up
     stub_request(:get, 'https://api.github.com/repositories/42').to_timeout
-    stub_github(
-      'https://api.github.com/repositories/43',
-      body: { id: 43, full_name: 'bar/bar' }
-    )
+    stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'bar/bar' })
     stub_github(
       'https://api.github.com/repos/bar/bar/issues/45',
       body: { number: 45, user: { id: 7, login: 'reporter' } }
@@ -93,7 +90,7 @@ class TestFixMissingWho < Jp::Test
     fb.with(_id: 2, what: 'issue-was-opened', repository: 43, issue: 45, where: 'github')
     options = Judges::Options.new({ 'repositories' => 'foo/foo,bar/bar' })
     load_it('fix-missing-who', fb, options)
-    assert_nil(fb.pick(issue: 44).who, 'the timed-out fact should remain eligible for a later retry')
+    assert_nil(fb.pick(issue: 44)['who'], 'the timed-out fact should remain eligible for a later retry')
     assert_equal(7, fb.pick(issue: 45).who, 'a repository timeout should not stop later facts from being repaired')
   end
 
@@ -102,11 +99,7 @@ class TestFixMissingWho < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'bar/bar' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/44',
-      status: 500,
-      body: { message: 'Server Error' }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44', status: 500, body: { message: 'Server Error' })
     stub_github(
       'https://api.github.com/repos/bar/bar/issues/45',
       body: { number: 45, user: { id: 7, login: 'reporter' } }
@@ -116,7 +109,7 @@ class TestFixMissingWho < Jp::Test
     fb.with(_id: 2, what: 'issue-was-opened', repository: 43, issue: 45, where: 'github')
     options = Judges::Options.new({ 'repositories' => 'foo/foo,bar/bar' })
     load_it('fix-missing-who', fb, options)
-    assert_nil(fb.pick(issue: 44).who, 'the failed fact should remain eligible for a later retry')
+    assert_nil(fb.pick(issue: 44)['who'], 'the failed fact should remain eligible for a later retry')
     assert_equal(7, fb.pick(issue: 45).who, 'a server error should not stop later facts from being repaired')
   end
 end
