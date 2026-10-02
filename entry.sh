@@ -314,6 +314,8 @@ if [ -e "${sqlite}" ] && [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'tru
         "${name}" "${sqlite}"
 elif [ -e "${sqlite}" ]; then
     echo "We are in 'dry' mode; skipping SQLite upload"
+elif [ -n "${sqlite}" ]; then
+    echo "There is no SQLite cache at ${sqlite}, nothing to upload"
 else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
