@@ -102,6 +102,7 @@ Jp::APPRECIATIONS = %w[+1 heart hooray laugh rocket].freeze
 
 def Jp.appreciated?(reaction, comment)
   return false if reaction.dig(:user, :id) == comment.dig(:user, :id)
+  return false if Jp.bot?(reaction)
   Jp::APPRECIATIONS.include?(reaction[:content].to_s)
 end
 
