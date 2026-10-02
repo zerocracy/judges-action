@@ -117,6 +117,7 @@ class TestPullWasOpened < Jp::Test
       }
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/45', body: { number: 45, head: { ref: 'feature' } })
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user', type: 'User' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'pull-was-reviewed', repository: 42, issue: 45, where: 'github')
