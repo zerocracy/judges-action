@@ -3,11 +3,11 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/who'
-require 'faraday'
 require 'octokit'
 require_relative '../../lib/issue_was_lost'
 
