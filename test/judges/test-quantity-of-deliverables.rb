@@ -419,7 +419,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/one,foo/two' })
     load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
     Fbe.stub(:over?, true) do
-      assert_equal({ total_builds_ran: 0 }, total_builds_ran(fact))
+      assert_empty(total_builds_ran(fact), "a run stopped before the first repository reported a total")
     end
   end
 
