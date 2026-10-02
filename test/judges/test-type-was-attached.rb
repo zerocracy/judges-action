@@ -132,8 +132,9 @@ class TestTypeWasAttached < Jp::Test
       load_it('type-was-attached', fb)
     end
     records = fb.query("(eq what 'type-was-attached')").each.to_a
-    states = records.map { |fact| [fact.type, fact['stale']&.first] }.sort
-    assert_equal([['Bug', 'removed'], ['Task', 'removed']], states)
+    states = records.map { |fact| [fact.type, fact['stale']&.first] }
+    states.sort!
+    assert_equal([%w[Bug removed], %w[Task removed]], states)
     assert(fb.one?(what: 'type-was-attached', repository: 42, issue: 44, type: 'Bug', stale: 'removed'))
     assert(fb.one?(what: 'type-was-attached', repository: 42, issue: 44, type: 'Task', stale: 'removed'))
   end
