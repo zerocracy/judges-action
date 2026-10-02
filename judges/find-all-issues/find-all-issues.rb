@@ -19,6 +19,7 @@ require_relative '../../lib/qos_search'
 require_relative '../../lib/who_of'
 
 %w[issue pull].each do |type|
+  qualifier = type == 'pull' ? 'pr' : type
   Fbe.iterate do
     as "min_#{type}_was_found"
     sort_by 'issue'
@@ -68,7 +69,7 @@ require_relative '../../lib/who_of'
         items =
           begin
             json = Jp.qosearch(
-              "repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}", sort: 'created', order: 'asc'
+              "repo:#{repo} type:#{qualifier} created:>=#{after.iso8601[0..9]}", sort: 'created', order: 'asc'
             )
             total = json[:total_count] if json
             json ? json[:items] : []
