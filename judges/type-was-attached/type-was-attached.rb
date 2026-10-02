@@ -12,6 +12,7 @@ require 'joined'
 require_relative '../../lib/issue_was_lost'
 
 events = %w[issue_type_added issue_type_changed issue_type_removed]
+detached = %w[issue_type_changed issue_type_removed]
 
 Fbe.iterate do
   as 'types_were_scanned'
@@ -89,7 +90,7 @@ Fbe.iterate do
         $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
         next
       end
-      if %w[issue_type_changed issue_type_removed].include?(te[:event])
+      if detached.include?(te[:event])
         type =
           if te[:event] == 'issue_type_changed'
             tee.dig('prev_issue_type', 'name')
