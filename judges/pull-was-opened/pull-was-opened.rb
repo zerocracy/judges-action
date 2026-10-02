@@ -56,7 +56,10 @@ Fbe.conclude do
         )
         throw(:rollback)
       rescue *transient => e
-        $loog.warn("[#{$judge}] Transient error fetching repository #{f.repository} (will retry next cycle): #{e.class}: #{e.message}")
+        $loog.warn(
+          "[#{$judge}] Transient error fetching repository #{f.repository} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
         throw(:rollback)
       end
     json =
@@ -73,7 +76,10 @@ Fbe.conclude do
         )
         throw(:rollback)
       rescue *transient => e
-        $loog.warn("[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} (will retry next cycle): #{e.class}: #{e.message}")
+        $loog.warn(
+          "[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
         throw(:rollback)
       end
     n.what = $judge
@@ -93,7 +99,10 @@ Fbe.conclude do
         )
         throw(:rollback)
       rescue *transient => e
-        $loog.warn("[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} (will retry next cycle): #{e.class}: #{e.message}")
+        $loog.warn(
+          "[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
         throw(:rollback)
       end
     if ref

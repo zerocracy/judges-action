@@ -116,10 +116,7 @@ class TestPullWasOpened < Jp::Test
         created_at: Time.parse('2025-09-30 15:35:30 UTC')
       }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/45',
-      body: { number: 45, head: { ref: 'feature' } }
-    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/45', body: { number: 45, head: { ref: 'feature' } })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
       .with(_id: 2, what: 'pull-was-reviewed', repository: 42, issue: 45, where: 'github')
