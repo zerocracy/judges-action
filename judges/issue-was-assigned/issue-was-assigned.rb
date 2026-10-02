@@ -60,7 +60,10 @@ Fbe.iterate do
           fbt.query(
             "(and (eq issue #{issue}) (eq who #{who}) (eq what '#{$judge}') " \
             "(eq repository #{repository}) (eq where 'github'))"
-          ).each.any? { |fact| fact.when == event[:created_at] }
+          ).each.any? do |fact|
+            fact.event_id == event[:id] ||
+              ((fact.event_id.nil? || event[:id].nil?) && fact.when == event[:created_at])
+          end
         if recorded
           $loog.warn("Assignee already exists in #{repo}##{issue}")
           next
@@ -71,6 +74,7 @@ Fbe.iterate do
         nn.what = $judge
         nn.repository = repository
         nn.where = 'github'
+        nn.event_id = event[:id] unless event[:id].nil?
         nn.assigner = event.dig(:assigner, :id)
         nn.when = event[:created_at]
         nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
