@@ -10,6 +10,11 @@ require_relative 'jp'
 Jp::SEARCH_WINDOW_SECONDS = 60
 Jp::SEARCH_WINDOW_BUDGET = 25
 
+# Seconds on a monotonic clock, which a change of the system time can't move.
+def Jp.qonow
+  Process.clock_gettime(Process::CLOCK_MONOTONIC)
+end
+
 def Jp.qoreset
   @offquota = {}
   @offquotatime = {}
@@ -24,11 +29,11 @@ def Jp.qosearch(query, method: :search_issues, **)
   @scount = {} unless @scount.is_a?(Hash)
   @swstart = {} unless @swstart.is_a?(Hash)
   if @offquota[jg]
-    return if @offquotatime[jg] && (Time.now - @offquotatime[jg]) < Jp::SEARCH_WINDOW_SECONDS
+    return if @offquotatime[jg] && (Jp.qonow - @offquotatime[jg]) < Jp::SEARCH_WINDOW_SECONDS
     @offquota[jg] = false
     @offquotatime[jg] = nil
   end
-  now = Time.now
+  now = Jp.qonow
   if @swstart[jg].nil? || (now - @swstart[jg]) >= Jp::SEARCH_WINDOW_SECONDS
     @swstart[jg] = now
     @scount[jg] = 0
@@ -40,7 +45,7 @@ def Jp.qosearch(query, method: :search_issues, **)
       "per #{Jp::SEARCH_WINDOW_SECONDS}s is spent, sleeping #{rest.ceil}s"
     )
     sleep(rest)
-    @swstart[jg] = Time.now
+    @swstart[jg] = Jp.qonow
     @scount[jg] = 0
   end
   octo = Fbe.octo
@@ -61,13 +66,13 @@ def Jp.qosearch(query, method: :search_issues, **)
   end
   if left.nil?
     @offquota[jg] = true
-    @offquotatime[jg] = Time.now
+    @offquotatime[jg] = Jp.qonow
     $loog.warn("[#{jg}] GitHub Search API quota info unavailable, stopping search calls")
     return
   end
   if left.zero?
     @offquota[jg] = true
-    @offquotatime[jg] = Time.now
+    @offquotatime[jg] = Jp.qonow
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
     return
   end
@@ -77,7 +82,7 @@ def Jp.qosearch(query, method: :search_issues, **)
   Fbe.octo.with_disable_auto_paginate { |octo| octo.__send__(method, query, **) }
 rescue Octokit::Forbidden => e
   @offquota[jg] = true
-  @offquotatime[jg] = Time.now
+  @offquotatime[jg] = Jp.qonow
   $loog.warn("[#{jg}] GitHub Search API quota exhausted, stopping search calls: #{e.message}")
   nil
 rescue Octokit::ServerError, Faraday::ConnectionFailed, Faraday::TimeoutError,
