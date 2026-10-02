@@ -24,7 +24,7 @@ def some_release_interval(fact)
         next
       end
     dates = []
-    releases.reject { |json| json[:published_at].nil? }.sort_by { |json| json[:published_at] }.reverse.each do |json|
+    releases.reject { |json| json[:published_at].nil? }.sort_by { |json| json[:published_at] }.reverse_each do |json|
       next if json[:published_at] > fact.when
       break if json[:published_at] < fact.since
       dates << json[:published_at]
