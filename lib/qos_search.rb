@@ -10,7 +10,6 @@ require_relative 'jp'
 Jp::SEARCH_WINDOW_SECONDS = 60
 Jp::SEARCH_WINDOW_BUDGET = 25
 
-# Seconds on a monotonic clock, which a change of the system time can't move.
 def Jp.qonow
   Process.clock_gettime(Process::CLOCK_MONOTONIC)
 end
