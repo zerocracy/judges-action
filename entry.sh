@@ -191,7 +191,7 @@ fi
 
 bots_found=false
 for opt in "${options[@]}"; do
-    if [[ "${opt}" == "--option=bots="* ]]; then
+    if [[ "${opt}" == "--option=bots="?* ]]; then
         bots_found=true
         break
     fi
