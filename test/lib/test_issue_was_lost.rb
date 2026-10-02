@@ -59,6 +59,10 @@ class TestIssueWasLost < Minitest::Test
       $loog = Loog::NULL
       Jp.issue_was_lost('github', 42, 123)
       Jp.issue_was_lost('github', 42, 123)
+      assert_equal(
+        1, fb.query("(and (eq what 'issue-was-lost') (eq where 'github') (eq repository 42) (eq issue 123))").each.to_a.size,
+        'a second call for the same issue added another issue-was-lost fact'
+      )
     end
   end
 
