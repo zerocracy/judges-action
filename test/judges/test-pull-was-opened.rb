@@ -100,4 +100,31 @@ class TestPullWasOpened < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_goes_on_after_a_transient_error_on_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/44').to_raise(
+      Faraday::ConnectionFailed.new('Connection reset by peer')
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45',
+      body: {
+        number: 45, state: 'open', user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-30 15:35:30 UTC')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/45',
+      body: { number: 45, head: { ref: 'feature' } }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-reviewed', repository: 42, issue: 45, where: 'github')
+    load_it('pull-was-opened', fb)
+    refute(fb.one?(what: 'pull-was-opened', issue: 44), 'a transient error must leave no fact behind')
+    assert(fb.one?(what: 'pull-was-opened', issue: 45, branch: 'feature'), 'the next pull was not processed')
+  end
 end
