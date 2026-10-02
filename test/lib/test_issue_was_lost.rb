@@ -88,4 +88,18 @@ class TestIssueWasLost < Minitest::Test
       assert(Fbe::Tombstone.new(fb: fb).has?('github', 7, 11), 'tombstone must contain the issue after the call')
     end
   end
+
+  def test_marks_a_fact_stale_when_where_has_an_apostrophe
+    fb = Factbase.new
+    f = fb.insert
+    f.where = "o'reilly"
+    f.repository = 7
+    f.issue = 42
+    f.what = 'pull-was-opened'
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      Jp.issue_was_lost("o'reilly", 7, 42)
+      assert_equal(['issue'], fb.query('(eq issue 42)').each.first['stale'])
+    end
+  end
 end
