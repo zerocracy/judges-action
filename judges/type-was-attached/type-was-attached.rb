@@ -106,7 +106,6 @@ Fbe.iterate do
         $loog.info("Type #{gone.inspect} detached from #{repo}##{issue}")
       end
       next if te[:event] == 'issue_type_removed'
-
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|
