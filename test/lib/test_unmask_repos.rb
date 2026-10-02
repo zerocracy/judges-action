@@ -22,6 +22,14 @@ class TestUnmaskRepos < Jp::Test
     )
   end
 
+  def test_refuses_a_missing_mask_before_reading_it
+    $loog = Loog::NULL
+    assert_includes(
+      assert_raises(Fbe::Error) { Fbe.unmask_repos(options: Judges::Options.new({}), global: {}, loog: Loog::NULL) }.message,
+      'not specified'
+    )
+  end
+
   def test_fetches_every_repository_once
     rate_limit_up
     stub = stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
