@@ -140,6 +140,26 @@ class TestPullRequest < Jp::Test
     assert_equal(1, count)
   end
 
+  def test_ignores_bot_reactions_for_issue_and_code_comments
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({ 'bots' => 'rultor' })
+    $global = {}
+    $loog = Loog::NULL
+    reactions = [
+      { user: { id: 42, login: 'person', type: 'User' }, content: '+1' },
+      { user: { id: 43, login: 'actions[bot]', type: 'Bot' }, content: '+1' },
+      { user: { id: 44, login: 'rultor', type: 'User' }, content: 'heart' }
+    ]
+    stub_github('https://api.github.com/repos/foo/foo/issues/comments/701/reactions', body: reactions)
+    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/702/reactions', body: reactions)
+    pr = { base: { repo: { full_name: 'foo/foo' } } }
+    count = Jp.count_appreciated_comments(
+      pr, [{ id: 701, user: { id: 1 } }], [{ id: 702, user: { id: 2 } }]
+    )
+    assert_equal(2, count)
+  end
+
   def test_fetch_workflows_empty_on_not_found_runs
     WebMock.disable_net_connect!
     rate_limit_up
