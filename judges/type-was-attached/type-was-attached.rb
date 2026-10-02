@@ -101,8 +101,8 @@ Fbe.iterate do
         Fbe.fb.txn do |fbt|
           fbt.query(
             "(and (eq repository #{repository}) (eq issue #{issue}) " \
-            "(eq what '#{$judge}') (eq type '#{type}') (absent stale))"
-          ).each { |fact| fact.stale = 'removed' }
+            "(eq what '#{$judge}') (eq type $type) (absent stale))"
+          ).each(fbt, type: [type]) { |fact| fact.stale = 'removed' }
         end
         $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
         next
