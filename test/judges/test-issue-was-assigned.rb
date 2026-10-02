@@ -136,7 +136,7 @@ class TestIssueWasAssigned < Jp::Test
             id: 422,
             login: 'user2'
           },
-          created_at: '2025-10-02 21:05:00 UTC'
+          created_at: '2025-10-01 19:05:00 UTC'
         }
       ]
     )
