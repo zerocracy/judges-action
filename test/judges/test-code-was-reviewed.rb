@@ -225,7 +225,7 @@ class TestCodeWasReviewed < Jp::Test
       end
     end
     refute(
-      fb.pick(what: 'pull-was-closed', repository: 42, issue: 101, where: 'github').reviews,
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 101, where: 'github', reviews: true),
       'the pull cannot be marked as checked if processing a review failed'
     )
     refute(
