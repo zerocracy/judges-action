@@ -101,7 +101,6 @@ class TestQosSearch < Jp::Test
     octo.define_singleton_method(:rate_limit) { core }
     octo.define_singleton_method(:search_issues) { |*_args| calls += 1 }
     $global[:octo] = octo
-
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     assert_equal(0, calls)
     assert(Jp.instance_variable_get(:@offquota)[$judge])
