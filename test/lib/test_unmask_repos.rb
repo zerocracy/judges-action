@@ -77,10 +77,9 @@ class TestUnmaskRepos < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 500)
     $loog = Loog::NULL
-    error = assert_raises(Fbe::Error) do
-      Fbe.unmask_repos(
-        options: Judges::Options.new({ 'repositories' => 'foo/*' }), global: {}, loog: Loog::NULL
-      )
+    error =
+      assert_raises(Fbe::Error) do
+        Fbe.unmask_repos(options: Judges::Options.new({ 'repositories' => 'foo/*' }), global: {}, loog: Loog::NULL)
     end
     assert_includes(error.message, 'foo/*')
     assert_includes(error.message, 'transient, will retry next cycle')
