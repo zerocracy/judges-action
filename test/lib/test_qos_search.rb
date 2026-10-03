@@ -94,6 +94,25 @@ class TestQosSearch < Jp::Test
     assert_not_requested(:get, %r{https://api\.github\.com/search/issues})
   end
 
+  def test_skips_search_when_client_cannot_report_search_quota
+    calls = 0
+    core = Struct.new(:remaining).new(100)
+    octo = Object.new
+    octo.define_singleton_method(:rate_limit) { core }
+    octo.define_singleton_method(:search_issues) { |*_args| calls += 1 }
+    $global[:octo] = octo
+
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert_equal(0, calls)
+    assert(Jp.instance_variable_get(:@offquota)[$judge])
+  end
+
+  def test_fake_octokit_reports_search_quota
+    $options = Judges::Options.new({ 'testing' => true })
+    $global = {}
+    assert_equal(30, Fbe.octo.get('/rate_limit').dig(:resources, :search, :remaining))
+  end
+
   def test_latches_after_zero_remaining_search_quota
     ratelimits(100)
     searchstub('repo:foo/foo type:issue', body: { total_count: 58, items: [{ number: 1 }] })
