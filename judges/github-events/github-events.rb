@@ -9,7 +9,6 @@ require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require 'fbe/tombstone'
-require 'fbe/who'
 require 'tago'
 require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
@@ -161,6 +160,7 @@ Fbe.iterate do
     fact.repository = Integer(json[:repo][:id])
     who = json.dig(:payload, :release, :author, :id) || json.dig(:actor, :id)
     fact.who = Integer(who) unless who.nil?
+    by = "@#{json.dig(:payload, :release, :author, :login) || json.dig(:actor, :login)}"
     begin
       rname = Fbe.octo.repo_name_by_id(fact.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -218,7 +218,7 @@ Fbe.iterate do
       end
       fact.details =
         "A new Git push ##{json[:payload][:push_id]} has arrived to #{rname}, " \
-        "made by #{Fbe.who(fact)} (default branch is #{fact.default_branch.inspect}), " \
+        "made by #{by} (default branch is #{fact.default_branch.inspect}), " \
         'not associated with any pull request.'
       $loog.debug("New PushEvent ##{json[:payload][:push_id]} recorded")
     when 'PullRequestEvent'
@@ -227,8 +227,8 @@ Fbe.iterate do
       when 'opened'
         fact.what = 'pull-was-opened'
         fact.branch = json.dig(:payload, :pull_request, :head, :ref)
-        fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
-        $loog.debug("New PR #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
+        fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{by}."
+        $loog.debug("New PR #{Fbe.issue(fact)} opened by #{by}")
       when 'closed'
         pl =
           begin
@@ -269,10 +269,10 @@ Fbe.iterate do
         fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
-          "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
+          "has been #{json[:payload][:action]} by #{by}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
         skip(json) if seen?(fact)
-        $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
+        $loog.debug("PR #{Fbe.issue(fact)} closed by #{by}")
       when 'reopened'
         Fbe.fb.query(
           "(and
@@ -321,9 +321,9 @@ Fbe.iterate do
         fact.files = pull[:changed_files]
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
-          "has been reviewed by #{Fbe.who(fact)} " \
+          "has been reviewed by #{by} " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
-        $loog.debug("PR #{Fbe.issue(fact)} was reviewed by #{Fbe.who(fact)}")
+        $loog.debug("PR #{Fbe.issue(fact)} was reviewed by #{by}")
       else
         skip(json)
       end
@@ -332,12 +332,12 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'closed'
         fact.what = 'issue-was-closed'
-        fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
-        $loog.debug("Issue #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
+        fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{by}."
+        $loog.debug("Issue #{Fbe.issue(fact)} closed by #{by}")
       when 'opened'
         fact.what = 'issue-was-opened'
-        fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
-        $loog.debug("Issue #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
+        fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{by}."
+        $loog.debug("Issue #{Fbe.issue(fact)} opened by #{by}")
       else
         skip(json)
       end
@@ -351,10 +351,9 @@ Fbe.iterate do
         fact.comment_id = json[:payload][:comment][:id]
         fact.comment_body = json[:payload][:comment][:body]
         fact.who = json[:payload][:comment][:user][:id]
-        fact.details =
-          "A new comment ##{json[:payload][:comment][:id]} has been posted " \
-          "to #{Fbe.issue(fact)} by #{Fbe.who(fact)}."
-        $loog.debug("Issue comment posted to #{Fbe.issue(fact)} by #{Fbe.who(fact)}")
+        by = "@#{json[:payload][:comment][:user][:login]}"
+        fact.details = "A new comment ##{json[:payload][:comment][:id]} has been posted to #{Fbe.issue(fact)} by #{by}."
+        $loog.debug("Issue comment posted to #{Fbe.issue(fact)} by #{by}")
       else
         skip(json)
       end
@@ -368,8 +367,8 @@ Fbe.iterate do
         Jp.fill_fact_by_hash(fact, info(fact, rname))
         fact.details =
           "A new release #{json[:payload][:release][:name].inspect} has been published " \
-          "in #{rname} by #{Fbe.who(fact)}."
-        $loog.debug("Release published by #{Fbe.who(fact)}")
+          "in #{rname} by #{by}."
+        $loog.debug("Release published by #{by}")
       else
         skip(json)
       end
@@ -378,8 +377,8 @@ Fbe.iterate do
       when 'tag'
         fact.what = 'tag-was-created'
         fact.tag = json[:payload][:ref]
-        fact.details = "A new tag #{fact.tag.inspect} has been created in #{rname} by #{Fbe.who(fact)}."
-        $loog.debug("Tag #{fact.tag.inspect} created by #{Fbe.who(fact)}")
+        fact.details = "A new tag #{fact.tag.inspect} has been created in #{rname} by #{by}."
+        $loog.debug("Tag #{fact.tag.inspect} created by #{by}")
       else
         skip(json)
       end
