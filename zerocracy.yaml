@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1140.800104715
+  seconds: 1103.058662924
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-04 15:24:26.737745583 Z
+  when: 2026-10-04 17:14:33.597288724 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -76322,23 +76323,6 @@
   where: github
   who: 207481257
   why: Wrongly named a branch in zerocracy/judges-action#1407
-- _id: 2616392
-  _job: 26228791834
-  _time: 2026-05-21 13:31:08.012635499 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  tombstone: 2026-09-26 13:54:17.858310111 Z
-  total_active_contributors: 17
-  total_commits: 21087
-  total_contributors: 41
-  total_files: 3138
-  total_forks: 103
-  total_issues: 1970
-  total_pulls: 5141
-  total_releases: 860
-  total_repositories: 18
-  total_stars: 141
-  what: dimensions-of-terrain
-  when: 2026-05-21 13:31:08.037498836 Z
 - _id: 2616467
   _job: 26270406920
   _time: 2026-05-22 05:39:16.350762997 Z
@@ -174175,7 +174159,7 @@
   min_issue_was_found: 48
   min_pull_was_found: 82
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 139
   what: iterate
   where: github
 - _id: 2629220
@@ -178097,7 +178081,7 @@
   min_issue_was_found: 23
   min_pull_was_found: 83
   repository: 1236759415
-  types_were_scanned: 0
+  types_were_scanned: 96
   what: iterate
   where: github
 - _id: 2629477
@@ -180844,7 +180828,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22943696009
+  events_were_scanned: 22979203812
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 141
@@ -180877,28 +180861,28 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 702
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22973359340
+  events_were_scanned: 16394481857
   issues_were_scanned: 1004
-  labels_were_scanned: 0
+  labels_were_scanned: 1229
   latest_issue_was_found: 315
-  merges_were_scanned: 0
+  merges_were_scanned: 972
   min_issue_was_found: 1205
   min_pull_was_found: 636
   repository: 798641472
-  types_were_scanned: 702
+  types_were_scanned: 791
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22964259494
+  events_were_scanned: 16391156459
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -180906,7 +180890,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 394
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 360
   what: iterate
   where: github
 - _id: 2629843
@@ -180916,7 +180900,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22942908697
+  events_were_scanned: 22980978477
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 115
@@ -181323,18 +181307,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1109
-  closures_were_checked: 0
+  assignees_were_scanned: 1228
+  closures_were_checked: 959
   earliest_issue_was_found: 1
-  events_were_scanned: 16388369980
+  events_were_scanned: 16391922779
   issues_were_scanned: 893
-  labels_were_scanned: 0
+  labels_were_scanned: 1416
   latest_issue_was_found: 317
-  merges_were_scanned: 1395
+  merges_were_scanned: 0
   min_issue_was_found: 1264
   min_pull_was_found: 596
   repository: 820463873
-  types_were_scanned: 1219
+  types_were_scanned: 1274
   what: iterate
   where: github
 - _id: 2629882
@@ -181980,18 +181964,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 691
+  assignees_were_scanned: 831
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16388710422
+  events_were_scanned: 16394508582
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 958
+  merges_were_scanned: 0
   min_issue_was_found: 862
   min_pull_was_found: 560
   repository: 802720676
-  types_were_scanned: 831
+  types_were_scanned: 920
   what: iterate
   where: github
 - _id: 2629939
@@ -182126,18 +182110,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 675
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16390207119
   issues_were_scanned: 661
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 743
   min_issue_was_found: 646
   min_pull_was_found: 559
   repository: 799113787
-  types_were_scanned: 604
+  types_were_scanned: 656
   what: iterate
   where: github
 - _id: 2630023
@@ -182162,18 +182146,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1668
-  closures_were_checked: 1933
+  assignees_were_scanned: 1732
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22967655982
+  events_were_scanned: 16392160244
   issues_were_scanned: 2494
-  labels_were_scanned: 2496
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
+  merges_were_scanned: 2260
   min_issue_was_found: 2477
   min_pull_was_found: 1402
   repository: 799177290
-  types_were_scanned: 2353
+  types_were_scanned: 2433
   what: iterate
   where: github
 - _id: 2630036
@@ -182197,7 +182181,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1193
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 22956320887
@@ -182208,7 +182192,7 @@
   min_issue_was_found: 1083
   min_pull_was_found: 1270
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1086
   what: iterate
   where: github
 - _id: 2630038
@@ -397949,21 +397933,6 @@
   award: 18
   details: It's time to reward @morphqdd for the bug reported in zerocracy/fbe#1384,
     the reward amount is 18.
-  greeting: "\U0001F389 Thanks for reporting a new bug! You've earned **+18 points**.
-    Bug reports like yours help keep our project in top shape. If you spot anything
-    else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    quite right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
-    Your running score is now [+17098](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
-    Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you
-    help our project improve its quality. If you find anything else in the repository
-    that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+17098](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/fbe/issues/1384/#issuecomment-5980643792
   is_human: 1
   issue: 1384
@@ -397981,21 +397950,6 @@
   award: 18
   details: It's time to reward @morphqdd for the bug reported in zerocracy/fbe#1383,
     the reward amount is 18.
-  greeting: "\U0001F389 Thanks for reporting a new bug! You've earned **+18 points**.
-    Bug reports like yours help keep our project in great shape. If you spot anything
-    else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    quite right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
-    Your running score is now [+17116](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
-    Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you
-    help our project improve its quality. If you find anything else in the repository
-    that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+17116](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/fbe/issues/1383/#issuecomment-5980644011
   is_human: 1
   issue: 1383
@@ -398013,22 +397967,6 @@
   award: 18
   details: It's time to reward @morphqdd for the bug reported in zerocracy/fbe#1381,
     the reward amount is 18.
-  greeting: "Hey, nice catch on that bug! \U0001F389 Since it got accepted by the
-    team, you've earned **+18** points, just for flagging it. Keep an eye out for
-    anything that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    right in the repo, and [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it, every bit helps us level up the project's quality. Your score's now sitting
-    at [+17134](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
-    check it out and keep tabs on your [Zerocracy account](https://www.zerocracy.com/)
-    too!\n\n<!-- Thanks for reporting a new bug! You've earned +18 points. By reporting
-    bugs, you help our project improve its quality. If you find anything else in the
-    repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+17134](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/fbe/issues/1381/#issuecomment-5980644217
   is_human: 1
   issue: 1381
@@ -398046,10 +397984,6 @@
   award: 18
   details: It's time to reward @morphqdd for the bug reported in zerocracy/fbe#1387,
     the reward amount is 18.
-  greeting: |-
-    Thanks for reporting a new bug! As per policy, you've earned **+18 points** for your contribution to improving our project's quality. If you spot anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as expected, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+17152](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) as well. Keep up the great work!
-
-    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17152](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/zerocracy/fbe/issues/1387/#issuecomment-5980644404
   is_human: 1
   issue: 1387
@@ -398067,22 +398001,6 @@
   award: 18
   details: It's time to reward @morphqdd for the bug reported in zerocracy/fbe#1396,
     the reward amount is 18.
-  greeting: "Hey, nice catch on that bug! \U0001F389 Since it was accepted by the
-    team, you've earned a solid **+18 points**, just for helping us keep things sharp.
-    Bug reports like yours genuinely make the project better, so if you spot anything
-    else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    quite right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
-    Your running score is now [+17170](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — check your [Zerocracy account](https://www.zerocracy.com/) to see it for yourself!\n\n<!--
-    Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you
-    help our project improve its quality. If you find anything else in the repository
-    that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+17170](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/fbe/issues/1396/#issuecomment-5980644625
   is_human: 1
   issue: 1396
@@ -398100,10 +398018,6 @@
   award: 18
   details: It's time to reward @morphqdd for the bug reported in zerocracy/fbe#1398,
     the reward amount is 18.
-  greeting: |-
-    Thanks for reporting a new bug! As per team policy, accepted bug reports earn a flat bonus of **+18 points**, which you've been awarded. Reporting bugs helps improve our project's quality, so if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+17188](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17188](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/zerocracy/fbe/issues/1398/#issuecomment-5980644816
   is_human: 1
   issue: 1398
@@ -398194,7 +398108,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-04 11:27:28.000000000 Z
+  when: &4565 2026-10-04 11:27:28.000000000 Z
   where: github
   who: 8086956
 - _id: 2642902
@@ -398221,8 +398135,10 @@
     Thanks for reporting a new bug! As per our [work policy](#), accepted bug reports earn a flat **+18 points** bonus, and you've just received it. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17206](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17206](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/zerocracy/judges-action/issues/2651/#issuecomment-5981571348
   is_human: 1
   issue: 2651
+  receipt: receipt-#96734
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-10-04 13:44:52.384076016 Z
@@ -398240,8 +398156,10 @@
     Thanks for reporting a new bug! As our [policy](#) states, every accepted bug report earns a flat bonus, and you've been awarded **+18 points**. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17224](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17224](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/zerocracy/judges-action/issues/2647/#issuecomment-5981571678
   is_human: 1
   issue: 2647
+  receipt: receipt-#96735
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-10-04 13:44:56.284739169 Z
@@ -398259,8 +398177,10 @@
     Thanks for reporting a new bug! As our [policy](#) states, reporters are awarded **18** points when a bug is accepted, and you've earned exactly that. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17242](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17242](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/zerocracy/judges-action/issues/2646/#issuecomment-5981572039
   is_human: 1
   issue: 2646
+  receipt: receipt-#96736
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-10-04 13:44:59.510865777 Z
@@ -398289,8 +398209,10 @@
     it. Your running score is [+17260](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
+  href: https://github.com/zerocracy/judges-action/issues/2633/#issuecomment-5981572389
   is_human: 1
   issue: 2633
+  receipt: receipt-#96737
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-10-04 13:45:03.222232757 Z
@@ -398308,8 +398230,10 @@
     Thanks for reporting a new bug! As per policy, accepted bug reports earn a flat **+18 points**, which have been added to your score. Reporting issues like this helps us maintain quality, so if you notice anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+17278](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — keep up the great work, and don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17278](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/zerocracy/judges-action/issues/2626/#issuecomment-5981572734
   is_human: 1
   issue: 2626
+  receipt: receipt-#96738
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-10-04 13:45:07.164769825 Z
@@ -398339,8 +398263,10 @@
     it. Your running score is [+17296](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
+  href: https://github.com/zerocracy/judges-action/issues/2625/#issuecomment-5981573043
   is_human: 1
   issue: 2625
+  receipt: receipt-#96739
   repository: 799177290
   what: bug-report-was-rewarded
   when: 2026-10-04 13:45:10.913396368 Z
@@ -398369,6 +398295,7 @@
     it. Your running score is [+17314](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
+  href: https://github.com/zerocracy/judges-action/issues/2624/#issuecomment-5981573345
   is_human: 1
   issue: 2624
   repository: 799177290
@@ -398388,6 +398315,7 @@
     Thanks for reporting a new bug! As per our [work policy](#), a flat **+18 points** bonus is awarded whenever a reported bug is accepted by the team, and this one qualifies. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17332](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17332](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/zerocracy/judges-action/issues/2623/#issuecomment-5981573669
   is_human: 1
   issue: 2623
   repository: 799177290
@@ -398409,6 +398337,7 @@
     score is [+310](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 2
+  href: https://github.com/yegor256/factbase/issues/1301/#issuecomment-5981574048
   is_human: 1
   issue: 1301
   repository: 798641472
@@ -398432,6 +398361,7 @@
 
     <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running score is [+316](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 2
+  href: https://github.com/zerocracy/baza.rb/issues/506/#issuecomment-5981574427
   is_human: 1
   issue: 506
   repository: 840215648
@@ -398624,6 +398554,7 @@
   issue: 835
   repository: 799113787
   review: 2026-10-04 10:36:12.000000000 Z
+  review_comments: 0
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
@@ -398649,9 +398580,718 @@
   issue: 1301
   repository: 798641472
   review: 2026-10-04 10:26:18.000000000 Z
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
   when: 2026-10-04 10:38:38.000000000 Z
   where: github
   who: 8086956
+- _id: 2642926
+  _job: 97632
+  _time: 2026-10-04 15:25:51.353218178 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request zerocracy/baza.rb#506 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 5h35m of being in review and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 506
+  merger: 8086956
+  repository: 840215648
+  review_comments: 0
+  seconds: 20110
+  what: code-was-contributed
+  when: *4565
+  where: github
+  who: 29139614
+- _id: 2642927
+  _job: 97632
+  _time: 2026-10-04 15:25:55.854172304 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2622,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As our [work policy](#) states, reporters are awarded **18** points for accepted bugs, and you've just earned them. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17350](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17350](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 2622
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:25:55.856000144 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2622
+- _id: 2642928
+  _job: 97632
+  _time: 2026-10-04 15:25:59.272520744 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2621,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per our policy, reported bugs that are accepted earn a flat bonus of **+18 points**, which you've been awarded. Your contributions help improve our project's quality—if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is now [+17368](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) as well.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17368](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 2621
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:25:59.274564362 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2621
+- _id: 2642929
+  _job: 97632
+  _time: 2026-10-04 15:26:03.080089672 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2620,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As our [policy](#) states, every accepted bug report earns a flat **+18 points** bonus, and that's exactly what you've received. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17386](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17386](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 2620
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:26:03.082000544 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2620
+- _id: 2642930
+  _job: 97632
+  _time: 2026-10-04 15:26:06.907914696 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2619,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per our [work policy](#), accepted bug reports earn a flat **+18 points** bonus, and you've just received it. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17404](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17404](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 2619
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:26:06.910057990 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2619
+- _id: 2642931
+  _job: 97632
+  _time: 2026-10-04 15:26:10.580448696 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2618,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per team policy, accepted bug reports earn a flat **+18 points** bonus, which you've now received. Your contributions help improve our project's quality—if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+17422](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); check your [Zerocracy account](https://www.zerocracy.com/) for more details.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+17422](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 2618
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:26:10.582506909 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2618
+- _id: 2642932
+  _job: 97632
+  _time: 2026-10-04 15:26:14.368925026 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2617,
+    the reward amount is 18.
+  greeting: "\U0001F389 Thanks for reporting a new bug! You've earned **+18 points**.
+    Bug reports like yours help keep our project in great shape — if you spot anything
+    else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    quite right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
+    Your running score is now [+17440](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
+    Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you
+    help our project improve its quality. If you find anything else in the repository
+    that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+17440](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 2617
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:26:14.370809517 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2617
+- _id: 2642933
+  _job: 97632
+  _time: 2026-10-04 15:26:17.398333703 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2616,
+    the reward amount is 18.
+  greeting: "Hey, nice catch on that bug! \U0001F389 Since it got accepted, you've
+    earned yourself a flat **+18 points**, just for helping us keep things solid.
+    Your running score is now [+17458](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
+    check your [Zerocracy account](https://www.zerocracy.com/) for details. If you
+    spot anything else that [doesn't look right](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html),
+    don't be shy, go ahead and [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    — [bugs are always welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    here!\n\n<!-- Thanks for reporting a new bug! You've earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+17458](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 2616
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:26:17.400217961 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2616
+- _id: 2642934
+  _job: 97632
+  _time: 2026-10-04 15:26:21.162423447 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2614,
+    the reward amount is 18.
+  greeting: "Hey, nice catch on that bug! \U0001F389 Since it got accepted, you've
+    earned **+18 points**, just for helping us keep things solid. Bugs like this are
+    exactly why our project keeps getting better, so if you spot anything else that
+    [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    quite right, [don't hold back](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    — go ahead and [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
+    You're now sitting at [+17476](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    points, so swing by your [Zerocracy account](https://www.zerocracy.com/) to see
+    where you stand. Keep it up!\n\n<!-- Thanks for reporting a new bug! You've earned
+    +18 points. By reporting bugs, you help our project improve its quality. If you
+    find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+17476](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 2614
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-04 15:26:21.164453668 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2614
+- _id: 2642935
+  _job: 37218523043
+  _time: 2026-10-04 16:56:32.412796736 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1441 has been opened by @morphqdd.
+  event_id: 16391922779
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1441
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:46:32.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642936
+  _job: 37218523043
+  _time: 2026-10-04 16:56:33.377557263 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1440 has been opened by @morphqdd.
+  event_id: 16391918835
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1440
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:46:26.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642937
+  _job: 37218523043
+  _time: 2026-10-04 16:56:34.115762608 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1439 has been opened by @morphqdd.
+  event_id: 16391915215
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1439
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:46:20.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642938
+  _job: 37218523043
+  _time: 2026-10-04 16:56:34.725327721 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1438 has been opened by @morphqdd.
+  event_id: 16391912121
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1438
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:46:15.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642939
+  _job: 37218523043
+  _time: 2026-10-04 16:56:35.360651905 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1437 has been opened by @morphqdd.
+  event_id: 16391908790
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1437
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:46:10.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642940
+  _job: 37218523043
+  _time: 2026-10-04 16:56:35.887408905 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1436 has been opened by @morphqdd.
+  event_id: 16391904803
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1436
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:46:03.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642941
+  _job: 37218523043
+  _time: 2026-10-04 16:56:36.411732714 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1435 has been opened by @morphqdd.
+  event_id: 16391901312
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1435
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:58.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642942
+  _job: 37218523043
+  _time: 2026-10-04 16:56:36.951828650 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1434 has been opened by @morphqdd.
+  event_id: 16391898539
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1434
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:53.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642943
+  _job: 37218523043
+  _time: 2026-10-04 16:56:37.476826681 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1433 has been opened by @morphqdd.
+  event_id: 16391894622
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1433
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:47.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642944
+  _job: 37218523043
+  _time: 2026-10-04 16:56:37.999047816 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1432 has been opened by @morphqdd.
+  event_id: 16391890934
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1432
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:41.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642945
+  _job: 37218523043
+  _time: 2026-10-04 16:56:38.881632642 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1431 has been opened by @morphqdd.
+  event_id: 16391886524
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1431
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:34.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642946
+  _job: 37218523043
+  _time: 2026-10-04 16:56:39.606790851 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1430 has been opened by @morphqdd.
+  event_id: 16391883362
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1430
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:29.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642947
+  _job: 37218523043
+  _time: 2026-10-04 16:56:40.146777521 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1429 has been opened by @morphqdd.
+  event_id: 16391880053
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1429
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:23.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642948
+  _job: 37218523043
+  _time: 2026-10-04 16:56:40.727419055 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1428 has been opened by @morphqdd.
+  event_id: 16391876774
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1428
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:18.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642949
+  _job: 37218523043
+  _time: 2026-10-04 16:56:41.445570313 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1427 has been opened by @morphqdd.
+  event_id: 16391873685
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1427
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:13.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642950
+  _job: 37218523043
+  _time: 2026-10-04 16:56:41.991750559 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1426 has been opened by @morphqdd.
+  event_id: 16391869895
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1426
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:07.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642951
+  _job: 37218523043
+  _time: 2026-10-04 16:56:42.575756946 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1425 has been opened by @morphqdd.
+  event_id: 16391867122
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1425
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:45:03.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642952
+  _job: 37218523043
+  _time: 2026-10-04 16:56:43.221929981 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1424 has been opened by @morphqdd.
+  event_id: 16391862620
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1424
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:56.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642953
+  _job: 37218523043
+  _time: 2026-10-04 16:56:43.900695936 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1423 has been opened by @morphqdd.
+  event_id: 16391859692
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1423
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:51.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642954
+  _job: 37218523043
+  _time: 2026-10-04 16:56:44.455336898 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1422 has been opened by @morphqdd.
+  event_id: 16391856811
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1422
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:46.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642955
+  _job: 37218523043
+  _time: 2026-10-04 16:56:45.015210642 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1421 has been opened by @morphqdd.
+  event_id: 16391852959
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1421
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:40.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642956
+  _job: 37218523043
+  _time: 2026-10-04 16:56:45.652074521 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1420 has been opened by @morphqdd.
+  event_id: 16391849729
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1420
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:35.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642957
+  _job: 37218523043
+  _time: 2026-10-04 16:56:46.364113462 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1419 has been opened by @morphqdd.
+  event_id: 16391846261
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1419
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:29.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642958
+  _job: 37218523043
+  _time: 2026-10-04 16:56:46.976953214 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1418 has been opened by @morphqdd.
+  event_id: 16391843132
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1418
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:24.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642959
+  _job: 37218523043
+  _time: 2026-10-04 16:56:47.696202388 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1417 has been opened by @morphqdd.
+  event_id: 16391839911
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1417
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:19.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642960
+  _job: 37218523043
+  _time: 2026-10-04 16:56:48.238332389 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1416 has been opened by @morphqdd.
+  event_id: 16391837007
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1416
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:14.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642961
+  _job: 37218523043
+  _time: 2026-10-04 16:56:48.823756556 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1415 has been opened by @morphqdd.
+  event_id: 16391833566
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1415
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:09.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642962
+  _job: 37218523043
+  _time: 2026-10-04 16:56:49.535691560 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1414 has been opened by @morphqdd.
+  event_id: 16391830076
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1414
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:44:03.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642963
+  _job: 37218523043
+  _time: 2026-10-04 16:56:50.087283941 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1413 has been opened by @morphqdd.
+  event_id: 16391826300
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1413
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:43:57.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642964
+  _job: 37218523043
+  _time: 2026-10-04 16:56:50.645455186 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1412 has been opened by @morphqdd.
+  event_id: 16391823228
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1412
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:43:52.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642965
+  _job: 37218523043
+  _time: 2026-10-04 16:56:51.464945241 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1411 has been opened by @morphqdd.
+  event_id: 16391820147
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1411
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:43:47.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642966
+  _job: 37218523043
+  _time: 2026-10-04 16:56:52.085003225 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1410 has been opened by @morphqdd.
+  event_id: 16391816869
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1410
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:43:42.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642967
+  _job: 37218523043
+  _time: 2026-10-04 16:56:52.796294694 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1409 has been opened by @morphqdd.
+  event_id: 16391812764
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1409
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:43:36.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642968
+  _job: 37218523043
+  _time: 2026-10-04 16:56:53.410930323 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1408 has been opened by @morphqdd.
+  event_id: 16391809626
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1408
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:43:31.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642969
+  _job: 37218523043
+  _time: 2026-10-04 16:56:54.126799620 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1407 has been opened by @morphqdd.
+  event_id: 16391805574
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1407
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-04 15:43:25.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2642970
+  _job: 37218523043
+  _time: 2026-10-04 16:56:59.644995974 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#970 has been opened by @gemshrine.
+  event_id: 16394508582
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 970
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-04 16:56:46.000000000 Z
+  where: github
+  who: 113778529
