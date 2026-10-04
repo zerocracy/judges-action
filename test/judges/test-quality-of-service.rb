@@ -1527,8 +1527,8 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal([505_800, 356_400], f['some_review_time'])
       assert_equal([5, 0, 5], f['some_review_size'])
-      assert_equal([2, 3, 0], f['some_reviewers_per_pull'])
-      assert_equal([3, 8, 0], f['some_reviews_per_pull'])
+      assert_equal([2, 2, 0], f['some_reviewers_per_pull'])
+      assert_equal([3, 6, 0], f['some_reviews_per_pull'])
     end
   end
 

@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require 'octokit'
+require_relative '../../lib/humans'
 require_relative '../../lib/qos_search'
 
 def some_review_time(fact)
@@ -20,7 +21,10 @@ def some_review_time(fact)
     found[:items].each do |pr|
       all, csize =
         begin
-          [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
+          [
+            Jp.human_comments(Fbe.octo.pull_request_reviews(repo, pr[:number])),
+            Fbe.octo.review_comments(repo, pr[:number]).size
+          ]
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
           next
