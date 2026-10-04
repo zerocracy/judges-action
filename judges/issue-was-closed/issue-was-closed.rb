@@ -29,7 +29,6 @@ Fbe.iterate do
         (eq what 'bug-report-was-rewarded')
         (eq what 'enhancement-suggestion-was-rewarded'))
       (eq repository $repository)
-      (unique repository issue)
       (absent stale)
       (absent tombstone)
       (absent done)
@@ -39,7 +38,8 @@ Fbe.iterate do
           (eq repository $repository)
           (eq what 'issue-was-closed')
           (eq where $where)))
-      (eq where 'github'))"
+      (eq where 'github')
+      (unique repository issue))"
   repeats 64
   over do |repository, issue|
     repo =
