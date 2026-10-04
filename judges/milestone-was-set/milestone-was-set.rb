@@ -30,6 +30,9 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+      next
     end
   milestones =
     begin
@@ -42,6 +45,9 @@ Fbe.consider(
         "[#{$judge}] Access forbidden to milestones in #{repo} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
+      next
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
       next
     end
   known =
