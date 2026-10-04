@@ -126,4 +126,20 @@ class TestWhoHasName < Jp::Test
       'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_keeps_stale_who_on_facts_of_other_sources
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/444', body: { login: 'lebowski', id: 444, type: 'User' })
+    fb = Factbase.new
+    fb.with(_id: 1, who: 444, where: 'github', what: 'issue-was-opened')
+    fb.with(_id: 2, who: 444, where: 'github', what: 'issue-was-closed', stale: 'who')
+    fb.with(_id: 3, who: 444, where: 'gitlab', what: 'issue-was-closed', stale: 'who')
+    load_it('who-has-name', fb)
+    assert_nil(fb.query('(eq _id 2)').each.first['stale'], 'a GitHub fact of a live user must lose its stale')
+    assert_equal(
+      ['who'], fb.query('(eq _id 3)').each.first['stale'],
+      'a fact from another source must keep its stale, its who is not a GitHub user'
+    )
+  end
 end
