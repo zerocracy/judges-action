@@ -2780,7 +2780,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:off_quota?) { false }
     octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
     octo.define_singleton_method(:get) do |path|
-      raise("Unexpected endpoint: #{path}") unless path == '/rate_limit'
+      raise(ArgumentError, "Unexpected endpoint: #{path}") unless path == '/rate_limit'
       { resources: { search: { remaining: 30, limit: 30 } } }
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
