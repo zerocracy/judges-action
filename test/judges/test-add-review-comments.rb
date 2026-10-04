@@ -159,7 +159,7 @@ class TestAddReviewComments < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44',
+      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
       status: 403,
       body: { message: 'Resource not accessible by integration' }
     )
@@ -199,7 +199,7 @@ class TestAddReviewComments < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
-      'https://api.github.com/repos/foo/foo/pulls/44',
+      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
       status: 500,
       body: { message: 'Internal Server Error' }
     )
@@ -215,19 +215,34 @@ class TestAddReviewComments < Jp::Test
     assert_nil(f['stale'], '500 is transient — fact must NOT be marked stale; pull lookup will retry next cycle')
   end
 
+  def test_skips_bot_review_comments
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
+      body: [
+        { id: 1, user: { login: 'coderabbitai[bot]', type: 'Bot' } },
+        { id: 2, user: { login: 'coderabbitai[bot]', type: 'Bot' } },
+        { id: 3, user: { login: 'yegor256', type: 'User' } }
+      ]
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pull-was-merged'
+      f.issue = 44
+      f.repository = 42
+      f.where = 'github'
+    end
+    load_it('add-review-comments', fb)
+    assert_equal(1, fb.query('(eq issue 44)').each.first.review_comments, 'comments by bots must not be counted')
+  end
+
   def stub(repo, *pulls)
     pulls.each do |pl|
       stub_github(
-        "https://api.github.com/repos/foo/foo/pulls/#{pl[:id]}",
-        body: {
-          default_branch: 'master',
-          additions: 1,
-          deletions: 1,
-          comments: 1,
-          review_comments: pl[:comments],
-          commits: 2,
-          changed_files: 3
-        }
+        "https://api.github.com/repos/foo/foo/pulls/#{pl[:id]}/comments?per_page=100",
+        body: Array.new(pl[:comments]) { |i| { id: i, user: { login: "user#{i}", type: 'User' } } }
       )
     end
     stub_github(
