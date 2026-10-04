@@ -35,6 +35,10 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
         else
           raise
         end
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        forbidden.add(f.who)
+        $loog.warn("[#{$judge}] Transient error on user ##{f.who} (will retry next cycle): #{e.class}: #{e.message}")
+        throw(:"GitHub user ##{f.who} is not accessible (transient)")
       end
     if nick.nil?
       bad.add(f.who)
