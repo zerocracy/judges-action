@@ -111,9 +111,12 @@ while IFS= read -r o; do
         continue
     fi
     k="${s%%=*}"
+    k="${k%"${k##*[![:space:]]}"}"
+    k="${k,,}"
     v=""
     if [[ "${s}" == *=* ]]; then
-        v="=${s#*=}"
+        v="${s#*=}"
+        v="=${v#"${v%%[![:space:]]*}"}"
     fi
     if [[ "${k}" == vitals_url ]]; then
         VITALS_URL="${v#=}"
