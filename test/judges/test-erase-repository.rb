@@ -118,6 +118,55 @@ class TestEraseRepository < Jp::Test
     assert_requested(:get, 'https://api.github.com/repositories/403999', times: 1)
   end
 
+  def test_names_forbidden_repository_in_trace
+    WebMock.disable_net_connect!
+    seed = Random.new_seed
+    id = Random.new(seed).rand(100_000..999_999)
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github("https://api.github.com/repositories/#{id}", body: '', status: 403)
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.where = 'github'
+      f.repository = id
+    end
+    loog = Loog::Buffer.new
+    load_it('erase-repository', fb, loog:)
+    assert_includes(
+      loog.to_s, "GitHub repository ##{id} is not accessible",
+      "Trace of forbidden repository ##{id} does not name it, seed #{seed}"
+    )
+  end
+
+  def test_erases_missing_repository_after_forbidden_one
+    WebMock.disable_net_connect!
+    seed = Random.new_seed
+    id = Random.new(seed).rand(100_000..999_999)
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
+    )
+    stub_github("https://api.github.com/repositories/#{id}", body: '', status: 403)
+    stub_github("https://api.github.com/repositories/#{id + 1}", body: '', status: 404)
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f._id = 1
+      f.where = 'github'
+      f.repository = id
+    end
+    fb.insert.then do |f|
+      f._id = 2
+      f.where = 'github'
+      f.repository = id + 1
+    end
+    load_it('erase-repository', fb)
+    assert_equal(
+      [id + 1], fb.query('(exists stale)').each.map(&:repository),
+      "Missing repository ##{id + 1} after forbidden ##{id} is not erased, seed #{seed}"
+    )
+  end
+
   def test_runs_without_fbe_consider
     Dir.mktmpdir do |dir|
       FileUtils.mkdir_p(File.join(dir, 'fbe'))
