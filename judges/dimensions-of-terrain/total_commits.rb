@@ -26,7 +26,7 @@ def total_commits(_fact)
     next if json[:size].nil? || json[:size].zero?
     next if json[:default_branch].nil?
     repos << [*repo.split('/'), json[:default_branch]]
-  end
+  end.then { |whole| return {} unless whole }
   return {} if repos.empty?
   errors = [
     GraphQL::Client::Error, Fbe::Error, Net::OpenTimeout, Net::ReadTimeout,
