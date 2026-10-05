@@ -243,6 +243,32 @@ class TestQualityOfService < Jp::Test
       ]
     )
     stub_github(
+      'https://api.github.com/repos/foo/foo/compare/0.0.1...0.0.2?per_page=100',
+      body: {
+        total_commits: 3, commits: [{ sha: 'ee04386901692ab0' }],
+        files: [
+          {
+            sha: '9e100c7246c0cc9',
+            filename: 'file.txt',
+            status: 'modified',
+            additions: 10,
+            deletions: 10,
+            changes: 5,
+            patch: '@@ -24,7 +24,7 @@ text ...'
+          },
+          {
+            sha: 'f97818271059e5455',
+            filename: 'file2.txt',
+            status: 'modified',
+            additions: 15,
+            deletions: 17,
+            changes: 6,
+            patch: '@@ -25,7 +25,7 @@ text ...'
+          }
+        ]
+      }
+    )
+    stub_github(
       'https://api.github.com/repos/foo/foo/compare/0.0.2...0.0.3?per_page=100',
       body: {
         total_commits: 1, commits: [{ sha: 'ee04386901692ab0' }],
@@ -365,8 +391,8 @@ class TestQualityOfService < Jp::Test
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
       assert_equal([64_800, 21_600, 36_000], f['some_release_interval'])
-      assert_equal([52, 24, 99], f['some_release_hoc_size'])
-      assert_equal([1, 2, 4], f['some_release_commits_size'])
+      assert_equal([11, 52, 24, 99], f['some_release_hoc_size'])
+      assert_equal([3, 1, 2, 4], f['some_release_commits_size'])
     end
   end
 
@@ -481,6 +507,7 @@ class TestQualityOfService < Jp::Test
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     timed = []
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -510,10 +537,65 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_skips_non_build_workflow_runs_before_sampling
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-07T10:00:00Z')
+    conclusions = %w[skipped cancelled neutral timed_out stale action_required]
+    runs =
+      Array.new(60) do |index|
+        {
+          id: index + 1,
+          status: 'completed',
+          conclusion: conclusions[index % conclusions.length],
+          workflow_id: 101,
+          run_started_at: started - 3_600
+        }
+      end
+    runs.push(
+      {
+        id: 61, status: 'completed', conclusion: 'failure',
+        workflow_id: 101, run_started_at: started
+      },
+      {
+        id: 62, status: 'completed', conclusion: 'success',
+        workflow_id: 101, run_started_at: started + 3_600
+      }
+    )
+    timed = []
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      timed << id
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal(
+          {
+            timed: [61, 62],
+            rate: [0, 1],
+            duration: [900, 900],
+            mttr: [3_600]
+          },
+          {
+            timed:,
+            rate: metrics[:some_build_success_rate],
+            duration: metrics[:some_build_duration],
+            mttr: metrics[:some_build_mttr]
+          }
+        )
+      end
+    end
+  end
+
   def test_skips_repo_on_not_found_workflow_runs
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::NotFound) }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
@@ -528,6 +610,7 @@ class TestQualityOfService < Jp::Test
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::Forbidden) }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
@@ -542,6 +625,7 @@ class TestQualityOfService < Jp::Test
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -573,6 +657,7 @@ class TestQualityOfService < Jp::Test
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -607,6 +692,7 @@ class TestQualityOfService < Jp::Test
     secs = Random.new(seed).rand(1..3_600)
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -633,6 +719,7 @@ class TestQualityOfService < Jp::Test
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -669,8 +756,11 @@ class TestQualityOfService < Jp::Test
       ]
     }
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |repo, *| { workflow_runs: runs[repo] } }
     octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 600_000 } }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:workflow_runs) { |*, **| { workflow_runs: [] } }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
       Fbe.stub(:unmask_repos, ->(&block) { runs.each_key(&block) }) do
@@ -698,8 +788,11 @@ class TestQualityOfService < Jp::Test
       ]
     }
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |repo, *| { workflow_runs: runs[repo] } }
     octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 600_000 } }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:workflow_runs) { |*, **| { workflow_runs: [] } }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
       Fbe.stub(:unmask_repos, ->(&block) { runs.each_key(&block) }) do
@@ -716,6 +809,7 @@ class TestQualityOfService < Jp::Test
     secs = Random.new(seed).rand(1..3_600)
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
@@ -732,6 +826,58 @@ class TestQualityOfService < Jp::Test
       Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
         metrics = some_build_success_rate(fact)
         assert_equal([secs], metrics[:some_build_duration], "durations count a run without usage, seed: #{seed}")
+      end
+    end
+  end
+
+  def test_dont_round_subsecond_duration_to_zero
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    ms = Random.new(seed).rand(1..999)
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-07T10:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: ms } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([ms / 1000.0], metrics[:some_build_duration], "subsecond duration is truncated, seed: #{seed}")
+      end
+    end
+  end
+
+  def test_dont_pair_failure_with_success_finished_earlier_within_second
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    random = Random.new(seed)
+    durations = { 1 => random.rand(500..999), 2 => random.rand(1..499) }
+    started = Time.parse('2024-08-07T10:00:00Z')
+    octo = Object.new
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          { id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started },
+          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) { |_, id| { run_duration_ms: durations[id] } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([], metrics[:some_build_mttr], "repair pairs a failure with an earlier success, seed: #{seed}")
       end
     end
   end
@@ -2674,6 +2820,7 @@ class TestQualityOfService < Jp::Test
     load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
     Jp.qoreset
     octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:search_issues) do |*|
       {
         total_count: 2, incomplete_results: false,
@@ -2720,6 +2867,11 @@ class TestQualityOfService < Jp::Test
       stub_github(
         "https://api.github.com/repos/foo/foo/actions/runs/#{run[:id]}/timing",
         body: { run_duration_ms: 900_000 }
+      )
+      stub_github(
+        "https://api.github.com/repos/foo/foo/actions/workflows/#{run[:workflow_id]}/runs" \
+        '?created=%3E2024-08-09T21:00:00Z&per_page=1&status=success',
+        body: { total_count: 0, workflow_runs: [] }
       )
     end
     stub_github(
