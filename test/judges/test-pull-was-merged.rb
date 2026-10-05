@@ -254,17 +254,17 @@ class TestPullWasMerged < Jp::Test
         {
           id: 22_099, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func...', path: 'lib/some/path/file.rb', commit_id: '3e695',
-          body: 'Some question0', created_at: '2025-09-29 05:05:00 UTC', user: { id: 422, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:05:00 UTC', user: { id: 422, login: 'user2' }
         },
         {
           id: 22_100, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func1...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
-          body: 'Some question1', created_at: '2025-09-29 05:06:00 UTC', user: { id: 422, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:06:00 UTC', user: { id: 422, login: 'user2' }
         },
         {
           id: 22_101, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func2...', path: 'lib/some/path/file2.rb', commit_id: '3e695',
-          body: 'Some question2', created_at: '2025-09-29 05:07:00 UTC', user: { id: 422, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:07:00 UTC', user: { id: 422, login: 'user2' }
         }
       ]
     )
@@ -296,7 +296,7 @@ class TestPullWasMerged < Jp::Test
         {
           id: 22_105, pull_request_review_id: 126,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
-          body: 'Some question3', created_at: '2025-09-29 05:56:00 UTC', user: { id: 422, login: 'user2' },
+          body: "```suggestion\nx\n```", created_at: '2025-09-29 05:56:00 UTC', user: { id: 422, login: 'user2' },
           in_reply_to_id: 22_100
         }
       ]
@@ -317,7 +317,7 @@ class TestPullWasMerged < Jp::Test
           what: 'pull-was-closed', where: 'github', who: 422, repository: 42, issue: 44, hoc: 17,
           comments: 0, comments_appreciated: 0, comments_by_author: 0, comments_by_reviewers: 0,
           comments_resolved: 0, comments_to_code: 0, succeeded_builds: 0, branch: '40',
-          suggestions: 3, review: Time.parse('2025-09-29 05:05:46 UTC'),
+          suggestions: 3, review: Time.parse('2025-09-29 06:45:00 UTC'),
           details: 'Apparently, foo/foo#44 has been "pull-was-closed".'
         )
       )
@@ -419,6 +419,21 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
+  def test_skips_pull_when_code_comments_are_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100',
+      status: 403,
+      body: { message: 'You have exceeded a secondary rate limit' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(fb.none?(issue: 44, what: 'pull-was-merged'), 'merged fact is saved with comments the api refused')
+  end
+
   def test_rescues_deprecated_on_reviews_lookup
     WebMock.disable_net_connect!
     rate_limit_up
@@ -492,6 +507,60 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_rescues_read_timeout_on_pull_request_lookup
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(45)
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/44').to_raise(Net::ReadTimeout)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(issue: 45, what: 'pull-was-merged', repository: 42, where: 'github', who: 422),
+      'a read timeout on the pull lookup did not let the judge go on to the next pull'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
+  end
+
+  def test_rescues_socket_error_on_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(45)
+    stub_pull_was_merged_base(44)
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/44').to_raise(SocketError)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(issue: 45, what: 'pull-was-merged', repository: 42, where: 'github', who: 422),
+      'a socket error on the issue lookup did not let the judge go on to the next pull'
+    )
+  end
+
+  def test_rescues_connection_reset_on_reviews_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(45)
+    stub_pull_was_merged_base(44)
+    stub_pull_was_merged_issue(44)
+    stub_request(
+      :get, 'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100'
+    ).to_raise(Errno::ECONNRESET)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(issue: 45, what: 'pull-was-merged', repository: 42, where: 'github', who: 422),
+      'a connection reset on the reviews lookup did not let the judge go on to the next pull'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
@@ -527,6 +596,48 @@ class TestPullWasMerged < Jp::Test
     assert_equal(
       0, fb.pick(what: 'pull-was-merged', issue: 44).hoc,
       'A pull request that reports no additions and no deletions cannot abort the judge'
+    )
+  end
+
+  def test_merges_pull_when_first_fact_is_stale
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github', stale: 'who')
+      .with(_id: 2, what: 'code-was-reviewed', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(what: 'pull-was-merged', repository: 42, issue: 44),
+      'pull with a stale opening fact is not merged by its clean review fact'
+    )
+  end
+
+  def test_merges_pull_when_first_fact_is_foreign
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'label-was-attached', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(what: 'pull-was-merged', repository: 42, issue: 44),
+      'pull with a foreign fact ahead of its opening fact is not merged'
+    )
+  end
+
+  def test_merges_pull_when_first_fact_is_elsewhere
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'gitlab')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert(
+      fb.one?(what: 'pull-was-merged', repository: 42, issue: 44, where: 'github'),
+      'pull with a gitlab fact ahead of its github opening fact is not merged'
     )
   end
 
