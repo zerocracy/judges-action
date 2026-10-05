@@ -41,17 +41,21 @@ class TestFillFact < Minitest::Test
   def test_rejects_the_forbidden_all_properties_name
     fb = Factbase.new
     f = fb.insert
-    assert_raises(ArgumentError, 'the all_properties name cannot be used, it collides with the fact API') do
-      Jp.fill_fact_by_hash(f, { 'all_properties' => 1 })
-    end
+    ex =
+      assert_raises(ArgumentError, 'the all_properties name cannot be used, it collides with the fact API') do
+        Jp.fill_fact_by_hash(f, { 'all_properties' => 1 })
+      end
+    assert_includes(ex.message, 'all_properties')
   end
 
   def test_rejects_the_forbidden_method_missing_name
     fb = Factbase.new
     f = fb.insert
-    assert_raises(ArgumentError, 'the method_missing name cannot be used, it collides with the fact API') do
-      Jp.fill_fact_by_hash(f, { 'method_missing' => 1 })
-    end
+    ex =
+      assert_raises(ArgumentError, 'the method_missing name cannot be used, it collides with the fact API') do
+        Jp.fill_fact_by_hash(f, { 'method_missing' => 1 })
+      end
+    assert_includes(ex.message, 'method_missing')
   end
 
   def test_rejects_a_property_name_with_an_embedded_newline
