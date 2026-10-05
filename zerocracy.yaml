@@ -2,12 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 9m48s: execution expired'
+  error:
+  - deadlock; recursive locking
+  - 'Failure in repository #799113787 at #833: end of file reached'
   inserted: 8
-  seconds: 1264.844071504
+  seconds: 1103.058154541
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-05 22:55:39.036199486 Z
+  when: 2026-10-05 23:19:58.784074661 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -173489,7 +173491,7 @@
   min_issue_was_found: 120
   min_pull_was_found: 82
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 120
   what: iterate
   where: github
 - _id: 2629220
@@ -177419,7 +177421,7 @@
   min_issue_was_found: 47
   min_pull_was_found: 83
   repository: 1236759415
-  types_were_scanned: 0
+  types_were_scanned: 62
   what: iterate
   where: github
 - _id: 2629477
@@ -180198,25 +180200,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 829
+  assignees_were_scanned: 940
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 23100725417
+  events_were_scanned: 16491810733
   issues_were_scanned: 1004
-  labels_were_scanned: 1230
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 0
+  merges_were_scanned: 972
   min_issue_was_found: 1219
   min_pull_was_found: 636
   repository: 798641472
-  types_were_scanned: 1189
+  types_were_scanned: 1221
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 23083334422
@@ -180227,7 +180229,7 @@
   min_issue_was_found: 313
   min_pull_was_found: 394
   repository: 840215648
-  types_were_scanned: 420
+  types_were_scanned: 479
   what: iterate
   where: github
 - _id: 2629843
@@ -180644,18 +180646,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 850
-  closures_were_checked: 953
+  assignees_were_scanned: 986
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16472259524
+  events_were_scanned: 16491468532
   issues_were_scanned: 893
-  labels_were_scanned: 0
+  labels_were_scanned: 1423
   latest_issue_was_found: 317
-  merges_were_scanned: 1403
+  merges_were_scanned: 0
   min_issue_was_found: 1325
   min_pull_was_found: 596
   repository: 820463873
-  types_were_scanned: 1102
+  types_were_scanned: 1180
   what: iterate
   where: github
 - _id: 2629882
@@ -181301,18 +181303,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 971
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16480030531
+  events_were_scanned: 16492291388
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 994
   latest_issue_was_found: 386
   merges_were_scanned: 0
   min_issue_was_found: 885
   min_pull_was_found: 560
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 621
   what: iterate
   where: github
 - _id: 2629939
@@ -181447,18 +181449,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 675
+  assignees_were_scanned: 832
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 23087167264
+  events_were_scanned: 16491762336
   issues_were_scanned: 661
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 743
   min_issue_was_found: 658
   min_pull_was_found: 559
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 514
   what: iterate
   where: github
 - _id: 2630023
@@ -181483,18 +181485,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1668
-  closures_were_checked: 0
+  assignees_were_scanned: 1725
+  closures_were_checked: 1637
   earliest_issue_was_found: 1
-  events_were_scanned: 23096185481
+  events_were_scanned: 23102726872
   issues_were_scanned: 2494
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 2283
+  merges_were_scanned: 2514
   min_issue_was_found: 2486
   min_pull_was_found: 1402
   repository: 799177290
-  types_were_scanned: 1659
+  types_were_scanned: 1690
   what: iterate
   where: github
 - _id: 2630036
@@ -181518,7 +181520,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1176
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16459531679
@@ -181529,7 +181531,7 @@
   min_issue_was_found: 1122
   min_pull_was_found: 1270
   repository: 728758275
-  types_were_scanned: 1166
+  types_were_scanned: 1246
   what: iterate
   where: github
 - _id: 2630038
@@ -404961,3 +404963,113 @@
   total_reviews_submitted: 11
   what: quantity-of-deliverables
   when: 2026-10-05 21:39:24.418173222 Z
+- _id: 2643382
+  _job: 37385948483
+  _time: 2026-10-05 23:01:42.885784040 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1400'
+  details: The pull request zerocracy/fbe#1447 has been opened by @gemshrine.
+  event_id: 16491468532
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1447
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-10-05 21:43:22.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2643383
+  _job: 37385948483
+  _time: 2026-10-05 23:01:44.021470286 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1399'
+  details: The pull request zerocracy/fbe#1446 has been opened by @gemshrine.
+  event_id: 16491328192
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1446
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-10-05 21:41:07.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2643384
+  _job: 37385948483
+  _time: 2026-10-05 23:02:08.030280006 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '972'
+  details: The pull request zerocracy/pages-action#1014 has been opened by @gemshrine.
+  event_id: 16492291388
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1014
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-10-05 21:56:41.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2643385
+  _job: 37385948483
+  _time: 2026-10-05 23:14:11.554419208 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '966'
+  details: The missing pull zerocracy/pages-action#1009 has been opened by @morphqdd.
+  is_human: 1
+  issue: 1009
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-10-05 18:10:16.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2643386
+  _job: 37385948483
+  _time: 2026-10-05 23:14:13.072529265 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '967'
+  details: The missing pull zerocracy/pages-action#1010 has been opened by @morphqdd.
+  is_human: 1
+  issue: 1010
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-10-05 18:10:21.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2643387
+  _job: 37385948483
+  _time: 2026-10-05 23:14:14.570151612 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '965'
+  details: The missing pull zerocracy/pages-action#1011 has been opened by @morphqdd.
+  is_human: 1
+  issue: 1011
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-10-05 18:10:25.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2643388
+  _job: 37385948483
+  _time: 2026-10-05 23:14:16.000434076 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '969'
+  details: The missing pull zerocracy/pages-action#1012 has been opened by @morphqdd.
+  is_human: 1
+  issue: 1012
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-10-05 18:10:30.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2643389
+  _job: 37385948483
+  _time: 2026-10-05 23:14:17.606860857 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '973'
+  details: The missing pull zerocracy/pages-action#1013 has been opened by @morphqdd.
+  is_human: 1
+  issue: 1013
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-10-05 18:10:36.000000000 Z
+  where: github
+  who: 125282851
