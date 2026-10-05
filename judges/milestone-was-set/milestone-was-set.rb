@@ -13,9 +13,9 @@ Fbe.consider(
   '(and
     (exists repository)
     (eq where \'github\')
-    (unique repository)
     (absent stale)
-    (absent tombstone))'
+    (absent tombstone)
+    (unique repository))'
 ) do |f|
   repo =
     begin
