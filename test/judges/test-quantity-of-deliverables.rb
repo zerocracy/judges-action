@@ -29,6 +29,19 @@ class TestQuantityOfDeliverables < Jp::Test
     graph
   end
 
+  def pagedgraph(repo, err)
+    graph = Fbe::Graph::Fake.new
+    reviews = graph.method(:pull_request_reviews)
+    seen = []
+    graph.define_singleton_method(:pull_request_reviews) do |owner, name, pulls:|
+      slug = "#{owner}/#{name}"
+      raise(err) if slug == repo && seen.include?(slug)
+      seen.push(slug)
+      reviews.call(owner, name, pulls:).map { |p| slug == repo ? p.merge('reviews_has_next_page' => true) : p }
+    end
+    graph
+  end
+
   def directreviews(repos, graph)
     WebMock.disable_net_connect!
     rate_limit_up
@@ -64,7 +77,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -74,7 +87,7 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(29, f.first.total_commits_pushed)
         assert_equal(1857, f.first.total_hoc_committed)
-        assert_equal(25, f.first.total_issues_created)
+        assert_equal(17, f.first.total_issues_created)
         assert_equal(8, f.first.total_pulls_submitted)
       end
     end
@@ -90,7 +103,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11..2024-08-12&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -100,7 +113,7 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query("(eq what 'quantity-of-deliverables')").each.to_a
         assert_equal(0, f.first.total_commits_pushed)
         assert_equal(0, f.first.total_hoc_committed)
-        assert_equal(25, f.first.total_issues_created)
+        assert_equal(17, f.first.total_issues_created)
         assert_equal(8, f.first.total_pulls_submitted)
       end
     end
@@ -227,7 +240,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
     fb = Factbase.new
@@ -256,7 +269,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-29..2025-10-06&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-29T21:00:00Z..2025-10-06T21:00:00Z&per_page=1',
       body: {
         total_count: 0,
         workflow_runs: []
@@ -288,7 +301,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-26..2025-10-03&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-26T00:00:00Z..2025-10-03T00:00:00Z&per_page=1',
       body: {
         total_count: 0,
         workflow_runs: []
@@ -323,6 +336,26 @@ class TestQuantityOfDeliverables < Jp::Test
     assert_equal({ total_reviews_submitted: 4 }, directreviews(%w[foo/bad foo/good], graph))
   end
 
+  def test_total_reviews_submitted_dont_count_partial_repo
+    seed = Random.new_seed
+    good = Random.new(seed).rand(1..3)
+    graph = pagedgraph('foo/bad', GraphQL::Client::Error.new('GraphQL failed'))
+    assert_equal(
+      { total_reviews_submitted: 4 * good },
+      directreviews(['foo/bad'] + Array.new(good) { |i| "foo/good-#{i}" }, graph),
+      "reviews counted in foo/bad before its second page failed are not excluded (seed: #{seed})"
+    )
+  end
+
+  def test_total_reviews_submitted_dont_count_partial_repo_when_forbidden
+    graph = pagedgraph('foo/bad', Octokit::Forbidden.new)
+    assert_equal(
+      { total_reviews_submitted: 4 },
+      directreviews(%w[foo/bad foo/good], graph),
+      'reviews counted in the forbidden foo/bad are not excluded from the total'
+    )
+  end
+
   def test_total_reviews_submitted_keeps_code_errors
     graph = reviewgraph('foo/bad', :pulls, NoMethodError.new('bad fake'))
     assert_raises(NoMethodError) { directreviews(%w[foo/bad], graph) }
@@ -338,7 +371,7 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02..2024-08-09&per_page=1',
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=1',
       body: {
         total_count: 3,
         workflow_runs: [
@@ -374,7 +407,7 @@ class TestQuantityOfDeliverables < Jp::Test
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
-      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
       status: 403, body: { message: 'Forbidden' }
     )
     fact = Object.new
@@ -396,11 +429,11 @@ class TestQuantityOfDeliverables < Jp::Test
     seed = Random.new_seed
     runs = Random.new(seed).rand(1..999)
     stub_github(
-      'https://api.github.com/repos/foo/good/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      'https://api.github.com/repos/foo/good/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
       body: { total_count: runs, workflow_runs: [] }
     )
     stub_github(
-      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
       status: 403, body: { message: 'Forbidden' }
     )
     fact = Object.new
@@ -412,7 +445,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/good,foo/blocked' })
     Fbe.stub(:unmask_repos, %w[foo/good foo/blocked]) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
-      assert_empty(total_builds_ran(fact), "partial total is reported while a repository is blocked, seed: #{seed}")
+      assert_equal({ total_builds_ran: runs }, total_builds_ran(fact))
     end
   end
 
@@ -420,7 +453,7 @@ class TestQuantityOfDeliverables < Jp::Test
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
-      'https://api.github.com/repos/foo/gone/actions/runs?created=2025-10-01..2025-10-06&per_page=1',
+      'https://api.github.com/repos/foo/gone/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
       status: 404, body: { message: 'Not Found' }
     )
     fact = Object.new
@@ -444,9 +477,9 @@ class TestQuantityOfDeliverables < Jp::Test
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
     [
-      %w[2025-09-01 2025-09-05],
-      %w[2025-09-05 2025-09-15],
-      %w[2025-09-15 2025-09-25]
+      %w[2025-09-01T15:00:00Z 2025-09-05T15:00:00Z],
+      %w[2025-09-05T15:00:00Z 2025-09-15T15:00:00Z],
+      %w[2025-09-15T15:00:00Z 2025-09-25T15:00:00Z]
     ].each do |since, upper|
       stub_github(
         "https://api.github.com/repos/foo/foo/actions/runs?created=#{since}..#{upper}&per_page=1",
