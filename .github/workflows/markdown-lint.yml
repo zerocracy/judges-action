@@ -5,6 +5,9 @@
 name: markdown-lint
 'on':
   push:
+    paths:
+      - '**.md'
+      - '.github/workflows/markdown-lint.yml'
   pull_request:
     branches:
       - master
