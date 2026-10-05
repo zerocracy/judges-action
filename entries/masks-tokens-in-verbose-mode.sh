@@ -36,7 +36,7 @@ log_contains "::add-mask::${github_token}" \
   "::add-mask:: workflow command for INPUT_GITHUB-TOKEN must be emitted before bash tracing"
 log_contains "::add-mask::${zerocracy_token}" \
   "::add-mask:: workflow command for INPUT_TOKEN must be emitted before bash tracing"
-log_not_contains "--option=github_token=${github_token}" \
-  "github_token leaked via bash trace without ::add-mask:: prefix"
-log_not_contains "--token=${zerocracy_token}" \
-  "zerocracy_token leaked via bash trace without ::add-mask:: prefix"
+log_precedes "::add-mask::${github_token}" "--option=github_token=${github_token}" \
+  "github_token reached the bash trace before ::add-mask:: was emitted"
+log_precedes "::add-mask::${zerocracy_token}" "--token=${zerocracy_token}" \
+  "zerocracy_token reached the bash trace before ::add-mask:: was emitted"

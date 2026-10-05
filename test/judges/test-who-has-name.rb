@@ -87,6 +87,27 @@ class TestWhoHasName < Jp::Test
     end
   end
 
+  def test_moves_the_refresh_line_forward_after_a_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/12', body: { login: 'user22', id: 12, type: 'User' })
+    fb = Factbase.new
+    fb.with(
+      _id: 3, what: 'who-has-name', where: 'github', who: 12, name: 'user2',
+      when: Time.parse('2025-06-18 20:00:00 UTC')
+    )
+    now = Time.parse('2025-06-23 22:00:00 UTC')
+    Time.stub(:now, now) do
+      load_it('who-has-name', fb)
+    end
+    fact = fb.query('(eq who 12)').each.first
+    assert_equal('user22', fact['name'].first)
+    assert_operator(
+      fact['when'].first, :>, now - 60,
+      'the fact stayed past the five-day line, so the next cycle looks the same user up again'
+    )
+  end
+
   def test_keeps_fact_active_on_forbidden_user_lookup
     WebMock.disable_net_connect!
     rate_limit_up

@@ -92,7 +92,7 @@ Fbe.consider(
     next
   end
   alive << f.who
-  Fbe.overwrite(f, 'name', nick)
+  Fbe.overwrite(f, { 'name' => nick, 'when' => Time.now })
 end
 
 alive.uniq!

@@ -18,6 +18,7 @@ end
 def Jp.human_comments(comments)
   bots = Jp.bots
   comments.reject do |c|
-    c.dig(:user, :type) == 'Bot' || bots.include?(c.dig(:user, :login))
+    login = c.dig(:user, :login)
+    c.dig(:user, :type) == 'Bot' || bots.any? { |b| b.casecmp?(login.to_s) }
   end
 end
