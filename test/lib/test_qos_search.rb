@@ -183,6 +183,23 @@ class TestQosSearch < Jp::Test
     end
   end
 
+  def test_searches_merged_pulls_again_for_another_fact
+    window = Struct.new(:since, :when)
+    start = Time.parse('2024-08-02T21:00:00Z')
+    count = 0
+    Jp.stub(:qosearch, proc { |*| (count += 1) && { total_count: 0, items: [] } }) do
+      2.times { Jp.merged('foo/foo', window.new(start, start + 604_800)) }
+    end
+    assert_equal(2, count, 'the merged pulls found for one fact are handed to another')
+  end
+
+  def test_searches_merged_pulls_again_after_failed_search
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    count = 0
+    Jp.stub(:qosearch, proc { |*| (count += 1) && nil }) { 2.times { Jp.merged('foo/foo', fact) } }
+    assert_equal(2, count, 'a failed search of merged pulls is remembered as if GitHub had answered')
+  end
+
   private
 
   def ratelimits(*remaining)
