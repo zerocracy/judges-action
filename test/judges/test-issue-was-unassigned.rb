@@ -188,4 +188,29 @@ class TestIssueWasUnassigned < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_records_unassignment_made_just_before_the_closure
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    now = Time.now.utc
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      body: [
+        { id: 300, event: 'assigned', assignee: { id: 421, login: 'user1' }, created_at: (now - 7200).iso8601 },
+        { id: 301, event: 'unassigned', assignee: { id: 421, login: 'user1' }, created_at: (now - 3600).iso8601 },
+        { id: 302, event: 'closed', created_at: (now - 1800).iso8601 }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 421, when: now - 7200
+    ).with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github', when: now - 1800)
+    load_it('issue-was-unassigned', fb)
+    refute_nil(
+      fb.query('(eq _id 1)').each.first['unassigned'],
+      'an unassignment made before a recent closure must still be recorded'
+    )
+  end
 end

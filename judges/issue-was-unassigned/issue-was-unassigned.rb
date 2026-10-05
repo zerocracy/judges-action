@@ -10,6 +10,7 @@ require 'fbe/who'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/supervision'
+require_relative '../../lib/today'
 
 Fbe.consider(
   "(and
@@ -26,7 +27,8 @@ Fbe.consider(
           (eq what 'pull-was-closed'))
         (eq issue $issue)
         (eq repository $repository)
-        (eq where $where)))
+        (eq where $where)
+        (lt when (minus (to_time '#{Jp.today.utc.iso8601}') '3 days'))))
     (eq where 'github'))"
 ) do |f|
   Jp.supervision({ 'repository' => f.repository, 'issue' => f.issue }) do
