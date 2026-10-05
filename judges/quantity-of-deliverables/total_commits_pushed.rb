@@ -6,9 +6,9 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 require 'net/http'
 require 'octokit'
-require_relative '../../lib/patches/unmask_repos'
 
 def total_commits_pushed(fact)
   commits = 0

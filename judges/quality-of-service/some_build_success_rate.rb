@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/recovered'
 require 'octokit'
 require_relative '../../lib/patches/unmask_repos'
 
@@ -13,7 +14,9 @@ def some_build_success_rate(fact)
   duration = []
   ttrs = []
   failed = {}
+  conclusions = %w[success failure]
   return {} unless Fbe.unmask_repos do |repo|
+    return {} if Fbe.octo.off_quota?
     workflows =
       begin
         Fbe.octo.repository_workflow_runs(
@@ -29,14 +32,15 @@ def some_build_success_rate(fact)
         )
         next
       end
-    wfs = workflows.select { |json| json[:status] == 'completed' && !json[:conclusion].nil? }.first(60)
+    wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
     runs =
       wfs.filter_map do |json|
+        break if Fbe.octo.off_quota?
         secs =
           begin
             ms = Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms]
             next if ms.nil?
-            ms / 1000
+            ms / 1000.0
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
             next
@@ -62,6 +66,12 @@ def some_build_success_rate(fact)
       success << (json[:conclusion] == 'success' ? 1 : 0)
       duration << secs
     end
+    failed.each do |wid, broke|
+      recovery = Jp.recovered(repo, wid, fact.when)
+      next if recovery.nil?
+      ttrs << Integer(recovery - broke)
+    end
+    failed.clear
   end
   {
     some_build_success_rate: success,

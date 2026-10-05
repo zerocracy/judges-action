@@ -10,6 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 def some_release_interval(fact)
   intervals = []
   return {} unless Fbe.unmask_repos do |repo|
+    return {} if Fbe.octo.off_quota?
     releases =
       begin
         Fbe.octo.releases(repo)

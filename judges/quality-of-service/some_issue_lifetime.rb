@@ -5,17 +5,23 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
-require_relative '../../lib/patches/unmask_repos'
 require_relative '../../lib/qos_search'
 
 def some_issue_lifetime(fact)
   ret = {}
   { issue: 'some_issue_lifetime', pr: 'some_pull_lifetime' }.each do |type, prop|
     ages = []
-    return {} unless Fbe.unmask_repos do |repo|
-      return {} if Fbe.octo.off_quota?
+    lost = false
+    Fbe.unmask_repos do |repo|
+      if Fbe.octo.off_quota?
+        lost = true
+        break
+      end
       found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
-      return {} if found.nil?
+      if found.nil?
+        lost = true
+        break
+      end
       ages +=
         found[:items].map do |json|
           next if json[:closed_at].nil?
@@ -23,6 +29,7 @@ def some_issue_lifetime(fact)
           json[:closed_at] - json[:created_at]
         end
     end
+    next if lost
     ages.compact!
     ret[prop] = ages
   end

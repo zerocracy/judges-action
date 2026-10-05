@@ -73,6 +73,7 @@ Fbe.iterate do
       $loog.debug("The issue #{repo}##{issue} is not closed: #{json[:state].inspect}")
       next issue
     end
+    duplicate = false
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |n|
@@ -83,7 +84,8 @@ Fbe.iterate do
         end
       if nn.nil?
         $loog.warn("Issue #{repo}##{issue} already closed, skipping duplicate")
-        next issue
+        duplicate = true
+        next
       end
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
       who = json.dig(:closed_by, :id)
@@ -95,6 +97,7 @@ Fbe.iterate do
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("The issue #{Fbe.issue(nn)} found closed #{nn.when.ago} ago")
     end
+    next issue if duplicate
     events =
       begin
         Fbe.octo.issue_timeline(repo, issue)
