@@ -105,4 +105,27 @@ class TestIsHumanOrRobot < Jp::Test
     refute_nil(forbidden)
     assert_raises(ArgumentError, 'the 403 user should remain unclassified, ready for a retry') { forbidden.is_human }
   end
+
+  def test_server_error_user_does_not_abort_others
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/100', body: { login: 'alice', id: 100, type: 'User' })
+    stub_github('https://api.github.com/user/200', status: 502, body: { message: 'Bad Gateway' })
+    stub_github('https://api.github.com/user/300', body: { login: 'bob', id: 300, type: 'User' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', who: 100, where: 'github')
+      .with(_id: 2, what: 'pull-was-merged', who: 200, where: 'github')
+      .with(_id: 3, what: 'pull-was-merged', who: 300, where: 'github')
+    load_it('is-human-or-robot', fb)
+    classified = fb.query('(exists is_human)').each.to_a
+    staled = fb.query("(eq stale 'who')").each.to_a
+    assert_equal(2, classified.size, 'both good users (100, 300) should be classified')
+    ids = classified.map(&:who)
+    ids.sort!
+    assert_equal([100, 300], ids, 'classified facts should be the two non-502 users')
+    assert_equal(0, staled.size, 'the 502 user must not be marked stale so the next cycle can retry')
+    forbidden = fb.query('(eq who 200)').each.first
+    refute_nil(forbidden)
+    assert_raises(ArgumentError, 'the 502 user should remain unclassified, ready for a retry') { forbidden.is_human }
+  end
 end
