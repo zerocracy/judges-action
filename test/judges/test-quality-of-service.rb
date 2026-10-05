@@ -2668,7 +2668,7 @@ class TestQualityOfService < Jp::Test
       'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
       'q=repo:foo/foo%20type:issue%20created:*..2025-08-22%20(closed:%3E=2025-08-22%20OR%20state:open)'
     load(File.join(__dir__, '../../judges/quality-of-service/some_backlog_size.rb'))
-    Jp.qoreset
+    qoclean
     fb = Factbase.new
     fb.insert.then do |f|
       f.what = 'quality-of-service'
@@ -2757,7 +2757,7 @@ class TestQualityOfService < Jp::Test
   def test_some_pull_hoc_size_handles_nil_additions_or_deletions
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
-    Jp.qoreset
+    qoclean
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:search_issues) do |*|
