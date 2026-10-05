@@ -18,7 +18,7 @@ Fbe.consider(
     (eq where 'github')
     (exists issue)
     (exists repository)
-    (absent stale)
+    (or (absent stale) (and (eq stale 'who') (one stale)))
     (absent tombstone)
     (absent done)
     (absent comments))"
