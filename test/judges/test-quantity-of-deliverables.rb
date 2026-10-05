@@ -478,7 +478,7 @@ class TestQuantityOfDeliverables < Jp::Test
     )
     [
       %w[2025-09-01T15:00:00Z 2025-09-05T15:00:00Z],
-      %w[2025-09-05T15:00:00Z 2025-09-15T15:00:00Z],
+      %w[2025-09-05T15:00:00Z 2025-09-12T15:00:00Z],
       %w[2025-09-15T15:00:00Z 2025-09-25T15:00:00Z]
     ].each do |since, upper|
       stub_github(
@@ -508,7 +508,7 @@ class TestQuantityOfDeliverables < Jp::Test
           fb.one?(
             what: 'quantity-of-deliverables',
             since: Time.parse('2025-09-05 15:00:00 UTC'),
-            when: Time.parse('2025-09-15 15:00:00 UTC')
+            when: Time.parse('2025-09-12 15:00:00 UTC')
           )
         )
       end
