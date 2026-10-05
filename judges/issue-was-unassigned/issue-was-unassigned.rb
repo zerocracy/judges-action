@@ -6,7 +6,6 @@
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
-require 'fbe/who'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/supervision'
@@ -62,7 +61,7 @@ Fbe.consider(
       end
     next if event.nil?
     f.unassigned = event[:created_at]
-    $loog.info("Github user #{Fbe.who(f)} was unassigned in #{Fbe.issue(f)} #{f.unassigned.ago} ago")
+    $loog.info("Github user ##{f.who} was unassigned in #{Fbe.issue(f)} #{f.unassigned.ago} ago")
   end
 end
 
