@@ -11,15 +11,26 @@ input:
     where: github
     issue: 94
     repository: 680
-    who: 4444
-    when: 2025-05-27T23:54:44Z
+    stale: who
   -
     _id: 2
     what: pull-was-closed
     where: github
-    issue: 172
+    issue: 94
     repository: 680
-    who: 4444
-    when: 2025-05-28T23:54:44Z
+    tombstone: marked
+  -
+    _id: 3
+    what: pull-was-closed
+    where: github
+    issue: 94
+    repository: 680
+    done: marked
+  -
+    _id: 4
+    what: pull-was-closed
+    where: github
+    issue: 94
+    repository: 680
 expected:
-  - /fb[count(f)=0]
+  - /fb[count(f[what='pull-was-closed' and repository=680 and issue=94])=0]
