@@ -325,9 +325,9 @@ Fbe.iterate do
             $loog.warn("Review comments of pull ##{fact.issue} in #{rname} are not readable: #{e.message}")
             0
           end
-        fact.comments = pull[:comments] + fact.review_comments
-        fact.commits = pull[:commits]
-        fact.files = pull[:changed_files]
+        fact.comments = (pull[:comments] || 0) + fact.review_comments
+        fact.commits = pull[:commits] unless pull[:commits].nil?
+        fact.files = pull[:changed_files] unless pull[:changed_files].nil?
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been reviewed by #{Fbe.who(fact)} " \
