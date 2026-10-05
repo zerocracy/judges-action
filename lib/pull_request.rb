@@ -8,6 +8,8 @@ require 'fbe/octo'
 require_relative 'humans'
 require_relative 'jp'
 
+# @todo #2352:30min Forbidden is still swallowed as zero for reactions, resolved threads, runs and reviews
+
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
@@ -22,7 +24,7 @@ def Jp.comments_info(pr, repo: nil)
         "[#{$judge}] Access forbidden to PR comments for #{repo}##{pr[:number]} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      []
+      raise
     end
   icomments =
     begin
@@ -35,7 +37,7 @@ def Jp.comments_info(pr, repo: nil)
         "[#{$judge}] Access forbidden to issue comments for #{repo}##{pr[:number]} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      []
+      raise
     end
   ccomments = Jp.human_comments(ccomments)
   icomments = Jp.human_comments(icomments)
@@ -77,7 +79,9 @@ def Jp.comments_info(pr, repo: nil)
             break if data.nil? || data['nodes'].nil?
             total += data['nodes'].count { |n| n['isResolved'] }
             break unless data.dig('pageInfo', 'hasNextPage')
-            cursor = data.dig('pageInfo', 'endCursor')
+            nxt = data.dig('pageInfo', 'endCursor')
+            break if nxt.nil? || nxt == cursor
+            cursor = nxt
           end
           total
         else
@@ -96,11 +100,18 @@ def Jp.comments_info(pr, repo: nil)
   }
 end
 
+Jp::APPRECIATIONS = %w[+1 heart hooray laugh rocket].freeze
+
+def Jp.appreciated?(reaction, comment)
+  return false if reaction.dig(:user, :id) == comment.dig(:user, :id)
+  Jp::APPRECIATIONS.include?(reaction[:content].to_s)
+end
+
 def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   issue_comments.sum do |comment|
     Fbe.octo.issue_comment_reactions(repo, comment[:id])
-      .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
+      .count { |reaction| Jp.appreciated?(reaction, comment) }
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Issue comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
@@ -112,7 +123,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
     0
   end + code_comments.sum do |comment|
     Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
-      .count { |reaction| reaction.dig(:user, :id) != comment.dig(:user, :id) }
+      .count { |reaction| Jp.appreciated?(reaction, comment) }
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Code comment ##{comment[:id]} reactions don't exist in #{repo}: #{e.message}")
     0
@@ -140,7 +151,7 @@ def Jp.fetch_workflows(pr, repo: nil)
       "[#{$judge}] Access forbidden to check runs for #{repo}@#{pr.dig(:head, :sha)} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
-    return { succeeded_builds: 0, failed_builds: 0 }
+    raise
   end
   jobs = {}
   runs = {}
@@ -161,6 +172,7 @@ def Jp.fetch_workflows(pr, repo: nil)
           nil
         end
     next unless rid
+    next if runs[rid]
     workflow =
       runs[rid] ||=
         begin
@@ -180,7 +192,9 @@ def Jp.fetch_workflows(pr, repo: nil)
     case workflow[:conclusion]
     when 'success'
       succeeded += 1
-    when 'failure'
+    when nil, 'skipped'
+      next
+    else
       failed += 1
     end
   end
@@ -217,7 +231,11 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
         []
       end
     comments.count do |comment|
-      comment.dig(:user, :id) != author && comment[:in_reply_to_id].nil?
+      comment.dig(:user, :id) != author && comment[:in_reply_to_id].nil? && Jp.suggests?(comment[:body])
     end
   end
+end
+
+def Jp.suggests?(body)
+  body.to_s.match?(/^\s*```+suggestion\b/i)
 end
