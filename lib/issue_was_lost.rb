@@ -11,12 +11,12 @@ def Jp.issue_was_lost(where, repository, issue)
   stale =
     Fbe.fb.query(
       "(and
-      (eq where '#{where}')
+      (eq where $where)
       (eq repository #{repository})
       (eq issue #{issue})
       (absent stale)
       (absent tombstone))"
-    ).each { |f| f.stale = 'issue' }
+    ).each(Fbe.fb, where: [where]) { |f| f.stale = 'issue' }
   Fbe::Tombstone.new.bury!(where, repository, issue)
   if stale.positive?
     $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
