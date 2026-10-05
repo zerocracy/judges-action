@@ -526,7 +526,7 @@ class TestDimensionsOfTerrain < Jp::Test
       }
     )
     stub_github('https://api.github.com/repos/foo/nobranch/releases?per_page=100', body: [])
-    stub_github(
+    tree = stub_github(
       'https://api.github.com/repos/foo/nobranch/git/trees/?recursive=true',
       status: 404, body: { message: 'Not Found' }
     )
@@ -542,6 +542,7 @@ class TestDimensionsOfTerrain < Jp::Test
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         refute_nil(f)
         assert_nil(f['total_commits'])
+        assert_not_requested(tree)
       end
     end
   end
