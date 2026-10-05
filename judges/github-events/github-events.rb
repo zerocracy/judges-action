@@ -11,6 +11,7 @@ require 'fbe/octo'
 require 'fbe/tombstone'
 require 'fbe/who'
 require 'tago'
+require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
 require_relative '../../lib/supervision'
@@ -29,29 +30,33 @@ Fbe.iterate do
 
   def self.tag(fact, repo)
     tag = fact&.all_properties&.include?('tag') ? fact.tag : nil
-    if tag.nil? && fact&.all_properties&.include?('release_id')
+    if tag.nil? && fact&.all_properties&.include?('release')
       tag =
         begin
-          Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release_id}").fetch(:tag_name, nil)
+          Fbe.octo.release("https://api.github.com/repos/#{repo}/releases/#{fact.release}").fetch(:tag_name, nil)
         rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("Release ##{fact.release_id} not found in #{repo}: #{e.message}")
+          $loog.info("Release ##{fact.release} not found in #{repo}: #{e.message}")
           nil
         rescue Octokit::Forbidden => e
           $loog.warn(
-            "[#{$judge}] Access forbidden to release ##{fact.release_id} in #{repo} " \
+            "[#{$judge}] Access forbidden to release ##{fact.release} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           nil
         end
-      $loog.debug("The release ##{fact.release_id} has this tag: #{tag.inspect}")
+      $loog.debug("The release ##{fact.release} has this tag: #{tag.inspect}")
     end
     tag
   end
 
+  def self.previous(fact)
+    Fbe.fb.query(
+      "(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\") (lt when #{fact.when.utc.iso8601}))"
+    ).each.max_by(&:when)
+  end
+
   def self.contributors(fact, repo)
-    since = tag(
-      Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last, repo
-    )
+    since = tag(previous(fact), repo)
     list = Set.new
     if since
       (comparison(repo, since, fact.tag) || {}).fetch(:commits, []).each do |commit|
@@ -68,16 +73,14 @@ Fbe.iterate do
   end
 
   def self.info(fact, repo)
-    since = tag(
-      Fbe.fb.query("(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\"))").each.to_a.last, repo
-    )
+    since = tag(previous(fact), repo)
     since ||= earliest(repo)&.[](:sha)
     info = {}
     comparison(repo, since, fact.tag).then do |json|
       return info if json.nil?
       info[:commits] = json[:total_commits]
       info[:hoc] = json[:files].sum { |f| f[:changes] }
-      info[:last_commit] = json[:commits].first[:sha]
+      info[:last_commit] = json[:commits].last[:sha]
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
@@ -156,7 +159,8 @@ Fbe.iterate do
     fact.when = Time.parse(json[:created_at].iso8601)
     fact.event_type = json[:type]
     fact.repository = Integer(json[:repo][:id])
-    fact.who = Integer(json[:actor][:id]) if json[:actor]
+    who = json.dig(:payload, :release, :author, :id) || json.dig(:actor, :id)
+    fact.who = Integer(who) unless who.nil?
     begin
       rname = Fbe.octo.repo_name_by_id(fact.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -246,19 +250,20 @@ Fbe.iterate do
         Jp.fill_fact_by_hash(fact, Jp.comments_info(pl, repo: rname))
         Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(pl, repo: rname))
         fact.branch = pl[:head][:ref]
-        review =
+        reviews =
           begin
-            Fbe.octo.pull_request_reviews(rname, fact.issue).first
+            Fbe.octo.pull_request_reviews(rname, fact.issue)
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("The pull request ##{fact.issue} doesn't exist in #{rname}: #{e.message}")
-            nil
+            []
           rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
-            nil
+            []
           end
+        review = Jp.approval(reviews, pl[:closed_at])
         fact.review = review[:submitted_at] if review
         author = pl.dig(:user, :id)
         fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
@@ -310,10 +315,10 @@ Fbe.iterate do
         skip(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
         fact.hoc = (pull[:additions] || 0) + (pull[:deletions] || 0)
-        fact.comments = pull[:comments] + pull[:review_comments]
-        fact.review_comments = pull[:review_comments]
-        fact.commits = pull[:commits]
-        fact.files = pull[:changed_files]
+        fact.comments = (pull[:comments] || 0) + (pull[:review_comments] || 0)
+        fact.review_comments = pull[:review_comments] unless pull[:review_comments].nil?
+        fact.commits = pull[:commits] unless pull[:commits].nil?
+        fact.files = pull[:changed_files] unless pull[:changed_files].nil?
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been reviewed by #{Fbe.who(fact)} " \
@@ -359,10 +364,6 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'published'
         fact.what = 'release-published'
-        author = json[:payload][:release].dig(:author, :id)
-        if author && fact.all_properties.include?('who') && fact.who != author
-          Fbe.overwrite(fact, 'who', author)
-        end
         contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(fact, info(fact, rname))
         fact.details =
@@ -433,6 +434,7 @@ Fbe.iterate do
       'label-was-attached' => %w[where repository issue label],
       'type-was-attached' => %w[where repository issue type]
     }
+    capped = false
     catch(:done) do
       events =
         begin
@@ -451,6 +453,7 @@ Fbe.iterate do
         Jp.supervision({ 'repo' => rname, 'json' => json.to_h }) do
           if !$options.max_events.nil? && idx >= $options.max_events
             $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
+            capped = true
             throw :done
           end
           total += 1
@@ -495,7 +498,7 @@ Fbe.iterate do
     if id.nil?
       $loog.info("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
       latest
-    elsif id <= latest || latest.zero?
+    elsif !capped && (id <= latest || latest.zero?)
       $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
       first
     else
