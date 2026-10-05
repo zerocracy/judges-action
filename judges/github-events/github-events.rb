@@ -43,6 +43,9 @@ Fbe.iterate do
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           nil
+        rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+          nil
         end
       $loog.debug("The release ##{fact.release} has this tag: #{tag.inspect}")
     end
@@ -97,6 +100,9 @@ Fbe.iterate do
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
     nil
+  rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+    nil
   rescue Octokit::Conflict => e
     $loog.warn(
       "[#{$judge}] Compare API conflict for #{repo} between #{since} and #{tag} " \
@@ -116,6 +122,9 @@ Fbe.iterate do
       "[#{$judge}] Access forbidden to contributors in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
+    []
+  rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
     []
   end
 
@@ -141,6 +150,9 @@ Fbe.iterate do
       "[#{$judge}] Access forbidden to commits for #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
+    nil
+  rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
     nil
   end
 
@@ -242,6 +254,9 @@ Fbe.iterate do
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
             nil
+          rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+            $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+            nil
           end
         skip(json) if pl.nil?
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
@@ -261,6 +276,9 @@ Fbe.iterate do
               "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
+            []
+          rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+            $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
             []
           end
         review = Jp.approval(reviews, pl[:closed_at])
@@ -301,6 +319,9 @@ Fbe.iterate do
               "[#{$judge}] Access forbidden to pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
+            skip(json)
+          rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+            $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
             skip(json)
           end
         skip(json) if pull.dig(:user, :id)&.then { |id| Integer(id) } == fact.who
@@ -404,6 +425,9 @@ Fbe.iterate do
       $loog.error("[#{$judge}] #{who} doesn't have access to the #{rname} repository, maybe it is private")
     end
     skip(json)
+  rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    $loog.warn("[#{$judge}] Transient error in #{rname} (will retry next cycle): #{e.class}: #{e.message}")
+    skip(json)
   end
   over do |repository, latest|
     begin
@@ -416,6 +440,9 @@ Fbe.iterate do
         "[#{$judge}] Access forbidden to repo name for ##{repository} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
+      next latest
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
       next latest
     end
     $loog.info("Starting to scan repository #{rname} (##{repository}), the latest event_id was ##{latest}...")
@@ -447,6 +474,9 @@ Fbe.iterate do
             "[#{$judge}] Access forbidden to events for repository ##{repository} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
+          []
+        rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
           []
         end
       events.each_with_index do |json, idx|

@@ -420,6 +420,43 @@ class TestGithubEvents < Jp::Test
     assert_equal(42, f.first.who)
   end
 
+  def test_goes_on_after_a_server_error_on_an_event
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, full_name: 'foo/foo', default_branch: 'master', owner: { id: 1 } }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/abc/pulls?per_page=100',
+      status: 502, body: { message: 'Bad Gateway' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'yegor256' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 40_623_323_542, type: 'PushEvent', public: true,
+          created_at: '2024-07-31 12:46:09 UTC',
+          actor: { id: 42, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 1, ref: 'refs/heads/master', head: 'abc' }
+        },
+        {
+          id: 40_623_323_541, type: 'IssuesEvent', public: true,
+          created_at: '2024-07-31 12:45:09 UTC',
+          actor: { id: 42, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'opened', issue: { number: 1347, state: 'open' } }
+        }
+      ]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    refute_nil(fb.query('(eq what "issue-was-opened")').each.first, 'a 502 on one event must not stop the judge')
+  end
+
   def test_skip_issue_was_opened_event
     WebMock.disable_net_connect!
     rate_limit_up
