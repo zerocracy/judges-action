@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1188.36272811
+  seconds: 1099.82058188
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-05 12:21:27.286179358 Z
+  when: 2026-10-05 13:26:30.040040018 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17080,6 +17081,7 @@
   is_human: 0
   issue: 211
   repository: 840215648
+  tombstone: 2026-10-05 12:25:02.803046452 Z
   what: pull-was-opened
   when: 2025-12-18 12:43:15.000000000 Z
   where: github
@@ -17138,6 +17140,7 @@
   is_human: 0
   issue: 216
   repository: 840215648
+  tombstone: 2026-10-05 12:25:02.833280360 Z
   what: pull-was-opened
   when: 2025-12-29 17:09:10.000000000 Z
   where: github
@@ -29927,6 +29930,7 @@
   is_human: 0
   issue: 1274
   repository: 799177290
+  tombstone: 2026-10-05 12:25:02.715700549 Z
   what: pull-was-opened
   when: 2026-01-21 15:46:44.000000000 Z
   where: github
@@ -30188,6 +30192,7 @@
   review_comments: 0
   succeeded_builds: 13
   suggestions: 0
+  tombstone: 2026-10-05 12:25:02.717713138 Z
   what: pull-was-merged
   when: &320 2026-01-22 09:45:52.000000000 Z
   where: github
@@ -30227,6 +30232,7 @@
   is_human: 0
   issue: 1275
   repository: 799177290
+  tombstone: 2026-10-05 12:25:02.683061769 Z
   what: pull-was-opened
   when: 2026-01-21 22:48:07.000000000 Z
   where: github
@@ -30620,6 +30626,7 @@
   review_comments: 0
   succeeded_builds: 13
   suggestions: 0
+  tombstone: 2026-10-05 12:25:02.685100220 Z
   what: pull-was-merged
   when: &324 2026-01-22 09:17:14.000000000 Z
   where: github
@@ -31116,6 +31123,7 @@
   repository: 799177290
   review_comments: 0
   seconds: 64748
+  tombstone: 2026-10-05 12:25:02.719678248 Z
   what: code-was-contributed
   when: *320
   where: github
@@ -31636,6 +31644,7 @@
   comments: 4
   details: The pull request zerocracy/judges-action#1274 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 17h1m and 0 comments.
+  done: 2026-10-05 12:25:02.688999313 Z
   hoc: 2
   is_human: 1
   issue: 1274
@@ -31654,6 +31663,7 @@
   comments: 4
   details: The pull request zerocracy/judges-action#1275 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 9h59m and 0 comments.
+  done: 2026-10-05 12:25:02.656076597 Z
   hoc: 2
   is_human: 1
   issue: 1275
@@ -31786,6 +31796,7 @@
   repository: 799177290
   review_comments: 0
   seconds: 37747
+  tombstone: 2026-10-05 12:25:02.687050892 Z
   what: code-was-contributed
   when: *324
   where: github
@@ -173763,7 +173774,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22972989309
+  events_were_scanned: 23062273694
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 20
@@ -173771,7 +173782,7 @@
   min_issue_was_found: 81
   min_pull_was_found: 82
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 58
   what: iterate
   where: github
 - _id: 2629220
@@ -177699,7 +177710,7 @@
   min_issue_was_found: 39
   min_pull_was_found: 83
   repository: 1236759415
-  types_were_scanned: 0
+  types_were_scanned: 34
   what: iterate
   where: github
 - _id: 2629477
@@ -180219,7 +180230,7 @@
   min_issue_was_found: 0
   min_pull_was_found: 285
   repository: 849726475
-  types_were_scanned: 0
+  types_were_scanned: 256
   what: iterate
   where: github
 - _id: 2629820
@@ -180445,7 +180456,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22979203812
+  events_were_scanned: 23061902333
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 141
@@ -180471,35 +180482,35 @@
   min_issue_was_found: 39
   min_pull_was_found: 21
   repository: 1084843345
-  types_were_scanned: 0
+  types_were_scanned: 48
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1306
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16440862874
+  events_were_scanned: 23060980211
   issues_were_scanned: 1004
-  labels_were_scanned: 0
+  labels_were_scanned: 1230
   latest_issue_was_found: 315
-  merges_were_scanned: 1253
+  merges_were_scanned: 0
   min_issue_was_found: 1216
   min_pull_was_found: 636
   repository: 798641472
-  types_were_scanned: 1083
+  types_were_scanned: 1134
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16408360415
+  events_were_scanned: 23061873374
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -180507,7 +180518,7 @@
   min_issue_was_found: 298
   min_pull_was_found: 394
   repository: 840215648
-  types_were_scanned: 416
+  types_were_scanned: 459
   what: iterate
   where: github
 - _id: 2629843
@@ -180517,7 +180528,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22980978477
+  events_were_scanned: 23058380055
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 115
@@ -180924,18 +180935,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 600
-  closures_were_checked: 953
+  assignees_were_scanned: 748
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16443359493
+  events_were_scanned: 23061898950
   issues_were_scanned: 893
-  labels_were_scanned: 0
+  labels_were_scanned: 1423
   latest_issue_was_found: 317
-  merges_were_scanned: 1403
+  merges_were_scanned: 0
   min_issue_was_found: 1322
   min_pull_was_found: 596
   repository: 820463873
-  types_were_scanned: 1110
+  types_were_scanned: 1173
   what: iterate
   where: github
 - _id: 2629882
@@ -181581,10 +181592,10 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 691
+  assignees_were_scanned: 831
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16443376288
+  events_were_scanned: 23061934468
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 386
@@ -181592,7 +181603,7 @@
   min_issue_was_found: 882
   min_pull_was_found: 560
   repository: 802720676
-  types_were_scanned: 977
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -181727,18 +181738,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 604
+  assignees_were_scanned: 675
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 16436695219
+  events_were_scanned: 23061924055
   issues_were_scanned: 661
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 803
+  merges_were_scanned: 0
   min_issue_was_found: 655
   min_pull_was_found: 559
   repository: 799113787
-  types_were_scanned: 579
+  types_were_scanned: 624
   what: iterate
   where: github
 - _id: 2630023
@@ -181763,18 +181774,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1668
-  closures_were_checked: 1933
+  assignees_were_scanned: 1732
+  closures_were_checked: 2590
   earliest_issue_was_found: 1
-  events_were_scanned: 16443370415
+  events_were_scanned: 23062265558
   issues_were_scanned: 2494
-  labels_were_scanned: 2496
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
-  merges_were_scanned: 2283
+  merges_were_scanned: 2514
   min_issue_was_found: 2484
   min_pull_was_found: 1402
   repository: 799177290
-  types_were_scanned: 1986
+  types_were_scanned: 2026
   what: iterate
   where: github
 - _id: 2630036
@@ -181798,10 +181809,10 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1197
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 22956320887
+  events_were_scanned: 23058232516
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
@@ -181809,7 +181820,7 @@
   min_issue_was_found: 1117
   min_pull_was_found: 1270
   repository: 728758275
-  types_were_scanned: 1166
+  types_were_scanned: 1204
   what: iterate
   where: github
 - _id: 2630038
@@ -182469,6 +182480,7 @@
   reviews: 0
   succeeded_builds: 10
   suggestions: 0
+  tombstone: 2026-10-05 12:25:02.805053163 Z
   what: pull-was-merged
   when: &1856 2026-01-22 09:08:24.000000000 Z
   where: github
@@ -183119,6 +183131,7 @@
   reviews: 0
   succeeded_builds: 8
   suggestions: 0
+  tombstone: 2026-10-05 12:25:02.835247558 Z
   what: pull-was-merged
   when: &1874 2026-01-22 09:03:03.000000000 Z
   where: github
@@ -186341,6 +186354,7 @@
   comments: 1
   details: The pull request zerocracy/baza.rb#211 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 1mo of being in review and 1 comments.
+  done: 2026-10-05 12:25:02.776219490 Z
   hoc: 6
   is_human: 0
   issue: 211
@@ -186671,6 +186685,7 @@
   comments: 1
   details: The pull request zerocracy/baza.rb#216 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 3w2d of being in review and 1 comments.
+  done: 2026-10-05 12:25:02.806998275 Z
   hoc: 2
   is_human: 0
   issue: 216
@@ -402742,6 +402757,7 @@
   href: https://github.com/zerocracy/fbe/issues/1416/#issuecomment-5992611445
   is_human: 1
   issue: 1416
+  receipt: receipt-#97017
   repository: 820463873
   what: bug-report-was-rewarded
   when: 2026-10-05 09:28:33.604332637 Z
@@ -402758,6 +402774,7 @@
   href: https://github.com/zerocracy/fbe/issues/1414/#issuecomment-5992611796
   is_human: 1
   issue: 1414
+  receipt: receipt-#97018
   repository: 820463873
   what: bug-report-was-rewarded
   when: 2026-10-05 09:28:37.783740095 Z
@@ -402776,6 +402793,7 @@
   href: https://github.com/zerocracy/pages-action/issues/932/#issuecomment-5992612291
   is_human: 1
   issue: 932
+  receipt: receipt-#97019
   repository: 802720676
   review_comments: 0
   seconds: 417923
@@ -402796,6 +402814,7 @@
   href: https://github.com/zerocracy/pages-action/issues/930/#issuecomment-5992612690
   is_human: 1
   issue: 930
+  receipt: receipt-#97020
   repository: 802720676
   review_comments: 0
   seconds: 417955
@@ -402816,6 +402835,7 @@
   href: https://github.com/zerocracy/pages-action/issues/929/#issuecomment-5992613153
   is_human: 1
   issue: 929
+  receipt: receipt-#97021
   repository: 802720676
   review_comments: 0
   seconds: 417965
@@ -403874,21 +403894,6 @@
   award: 18
   details: It's time to reward @gemshrine for the bug reported in zerocracy/pages-action#972,
     the reward amount is 18.
-  greeting: "Hey, nice catch on that bug! \U0001F389 Since it was accepted by the
-    team, you've bagged **+18** points, just like our policy promises for every accepted
-    report. Keep an eye out—if anything else in the repo seems [off](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html),
-    don't hesitate to [speak up](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    and [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
-    Your score's now at [+8778](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)—check
-    out your [Zerocracy account](https://www.zerocracy.com/) to see it in action!\n\n<!--
-    Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you
-    help our project improve its quality. If you find anything else in the repository
-    that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+8778](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/pages-action/issues/972/#issuecomment-5993938375
   is_human: 1
   issue: 972
@@ -403905,10 +403910,6 @@
   award: 18
   details: It's time to reward @gemshrine for the bug reported in zerocracy/pages-action#970,
     the reward amount is 18.
-  greeting: |-
-    Thanks for reporting a new bug! As per our work policy, you've earned **+18 points** for this report. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+8796](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+8796](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/zerocracy/pages-action/issues/970/#issuecomment-5993938792
   is_human: 1
   issue: 970
@@ -403925,10 +403926,6 @@
   award: 18
   details: It's time to reward @gemshrine for the bug reported in zerocracy/pages-action#969,
     the reward amount is 18.
-  greeting: |-
-    Thanks for reporting a new bug! As per policy, accepted bug reports earn a bonus, so you've been awarded **+18 points**. Your contributions help improve our project's quality—if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, feel free to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it, as [bugs are always welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html). Your running score is now [+8814](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); check your [Zerocracy account](https://www.zerocracy.com/) for more details.
-
-    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+8814](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/zerocracy/pages-action/issues/969/#issuecomment-5993939196
   is_human: 1
   issue: 969
@@ -403945,22 +403942,6 @@
   award: 18
   details: It's time to reward @gemshrine for the bug reported in zerocracy/pages-action#967,
     the reward amount is 18.
-  greeting: "Hey, nice catch on that bug! \U0001F389 Since it got accepted by the
-    team, you've earned yourself **+18 points**, just like our policy promises for
-    every accepted bug report. Keep an eye out — if anything else in the repo [doesn't
-    look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right,
-    [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to
-    [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
-    Your score's now at [+8832](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — go check your [Zerocracy account](https://www.zerocracy.com/) to see it for
-    yourself!\n\n<!-- Thanks for reporting a new bug! You've earned +18 points. By
-    reporting bugs, you help our project improve its quality. If you find anything
-    else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    it. Your running score is [+8832](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/zerocracy/pages-action/issues/967/#issuecomment-5993939599
   is_human: 1
   issue: 967
@@ -403977,10 +403958,6 @@
   award: 18
   details: It's time to reward @gemshrine for the bug reported in zerocracy/pages-action#966,
     the reward amount is 18.
-  greeting: |-
-    Thanks for reporting a new bug! As per our policy, accepted bug reports earn a bonus of **+18 points**, which have been added to your total. Reporting issues helps us maintain high code quality, so if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+8850](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — keep up the great work, and don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+8850](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/zerocracy/pages-action/issues/966/#issuecomment-5993940035
   is_human: 1
   issue: 966
@@ -403997,10 +403974,6 @@
   award: 18
   details: It's time to reward @gemshrine for the bug reported in zerocracy/pages-action#965,
     the reward amount is 18.
-  greeting: |-
-    Thanks for reporting a new bug! As per team policy, you've earned **+18** points for a reported and accepted bug, helping us keep the project's quality high. If you spot anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+8868](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+8868](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/zerocracy/pages-action/issues/965/#issuecomment-5993940511
   is_human: 1
   issue: 965
@@ -404018,10 +403991,6 @@
   comments: 1
   details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2288,
     the reward amount is 24.
-  greeting: |-
-    Thanks for the contribution! You've earned **+24** points, calculated per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html): base **24** points, adjusted for hits-of-code, review activity, and comments, then capped at the **24**-point maximum. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17536](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17536](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 36
   href: https://github.com/zerocracy/judges-action/issues/2288/#issuecomment-5993941092
   is_human: 1
@@ -404042,10 +404011,6 @@
   comments: 1
   details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2281,
     the reward amount is 24.
-  greeting: |-
-    Nice work on this one — you've banked **+24** points, right at the top of the scale (the policy caps rewards between **4** and **24**, so you nailed the max!). That's the base **24** plus whatever hits-of-code bonus applied, assuming no heavy comment deductions or skipped reviews knocked you down. Keep shipping solid, well-reviewed code like this and the points will keep rolling in — [more here](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) on why speed isn't everything. Your running score is now [+17560](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — go check your [Zerocracy account](https://www.zerocracy.com/) for the full breakdown!
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17560](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 44
   href: https://github.com/zerocracy/judges-action/issues/2281/#issuecomment-5993941551
   is_human: 1
@@ -404066,18 +404031,6 @@
   comments: 1
   details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2278,
     the reward amount is 20.
-  greeting: "Hey! Nice work on this one — you've bagged **+20 points** \U0001F389.
-    Here's the quick math: we start every contribution at **+24** as a base, but since
-    you clocked in **227** hits-of-code (over the **133** threshold set in our policy),
-    that triggers a **-4** deduction, landing you at **+20**. It's not a knock on
-    quality, just how we balance things out to keep [contributions lean](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
-    Your running score is now [+17580](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — keep it up, and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/)
-    too!\n\n<!-- Thanks for the contribution! You've earned +20 points for this: +24
-    as a basis; -4 for too many hits-of-code (227 >= 133). Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
-    them coming. Your running score is [+17580](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 227
   href: https://github.com/zerocracy/judges-action/issues/2278/#issuecomment-5993942060
   is_human: 1
@@ -404098,14 +404051,6 @@
   comments: 1
   details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2275,
     the reward amount is 24.
-  greeting: "Thanks for your contribution! \U0001F389 You've earned **+24 points**
-    — please [keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
-    Your running score is now **[+17604](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)**,
-    so don't forget to check your [Zerocracy account](https://www.zerocracy.com/)
-    too!\n\n<!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
-    them coming. Your running score is [+17604](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 48
   href: https://github.com/zerocracy/judges-action/issues/2275/#issuecomment-5993942629
   is_human: 1
@@ -404126,10 +404071,6 @@
   comments: 1
   details: It's time to reward @morphqdd for the code contributed in zerocracy/judges-action#2274,
     the reward amount is 24.
-  greeting: |-
-    Thanks for the contribution! You've earned +24 points, the base award per our work policy for a submitted contribution. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17628](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17628](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 35
   href: https://github.com/zerocracy/judges-action/issues/2274/#issuecomment-5993943071
   is_human: 1
@@ -404356,6 +404297,7 @@
 
     <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (9) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17648](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 9
+  href: https://github.com/zerocracy/pages-action/issues/925/#issuecomment-5994371396
   is_human: 1
   issue: 925
   repository: 802720676
@@ -404381,6 +404323,7 @@
 
     <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (2) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+17668](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 2
+  href: https://github.com/zerocracy/pages-action/issues/924/#issuecomment-5994371845
   is_human: 1
   issue: 924
   repository: 802720676
@@ -404391,3 +404334,310 @@
   where: github
   who: 125282851
   why: Contributed code in zerocracy/pages-action#924
+- _id: 2643321
+  _job: 37314225113
+  _time: 2026-10-05 13:08:24.972743648 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  by_owner: 1
+  commit: 0b3ef70ad7e68982b25afcdc7daee30aaeaff9d4
+  default_branch: master
+  details: 'A new Git push #45506097678 has arrived to yegor256/judges, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23061924055
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45506097678
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 13:04:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643322
+  _job: 37314225113
+  _time: 2026-10-05 13:08:26.269169595 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  by_owner: 1
+  commit: 5c69fde61c10217a9fc5ae1e368ce22342ea65b2
+  default_branch: master
+  details: 'A new Git push #45502222225 has arrived to yegor256/judges, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23058638417
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45502222225
+  ref: refs/heads/master
+  repository: 799113787
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:21:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643323
+  _job: 37314225113
+  _time: 2026-10-05 13:08:32.405348088 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 13ade1f7a04e95bd13946e11bbc0ca2d965e5eb0
+  default_branch: master
+  details: 'A new Git push #45506097383 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is "master"), not associated with any pull request.'
+  event_id: 23061922246
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45506097383
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 13:04:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643324
+  _job: 37314225113
+  _time: 2026-10-05 13:08:33.405767575 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: cc45768c0afa543da5912f56e1b52ba06ddbee78
+  default_branch: master
+  details: 'A new Git push #45502215892 has arrived to zerocracy/judges-action, made
+    by @yegor256 (default branch is "master"), not associated with any pull request.'
+  event_id: 23058633137
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45502215892
+  ref: refs/heads/master
+  repository: 799177290
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:21:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643325
+  _job: 37314225113
+  _time: 2026-10-05 13:08:36.967268952 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 02d299ef62187854b6426638afacbdb94605e139
+  default_branch: master
+  details: 'A new Git push #45504903625 has arrived to zerocracy/zerocracy-mcp-server,
+    made by @yegor256 (default branch is "master"), not associated with any pull request.'
+  event_id: 23060926797
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45504903625
+  ref: refs/heads/master
+  repository: 974194993
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:51:23.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643326
+  _job: 37314225113
+  _time: 2026-10-05 13:08:43.115957875 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 1f910e5df674e34f08a8df7436b44a8701a642c0
+  default_branch: master
+  details: 'A new Git push #45506065027 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23061898950
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45506065027
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 13:03:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643327
+  _job: 37314225113
+  _time: 2026-10-05 13:08:43.963008396 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 65c7347c9defa330ddc10d58ead252bdd272ffa7
+  default_branch: master
+  details: 'A new Git push #45504272254 has arrived to zerocracy/fbe, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23060394950
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45504272254
+  ref: refs/heads/master
+  repository: 820463873
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:44:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643328
+  _job: 37314225113
+  _time: 2026-10-05 13:08:50.707457243 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  by_owner: 1
+  commit: 0d616e7ddbb602a35360e026532bb86701782823
+  default_branch: master
+  details: 'A new Git push #45504255761 has arrived to yegor256/factbase, made by
+    @yegor256 (default branch is "master"), not associated with any pull request.'
+  event_id: 23060380863
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45504255761
+  ref: refs/heads/master
+  repository: 798641472
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:44:18.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643329
+  _job: 37314225113
+  _time: 2026-10-05 13:08:56.159518843 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 71b4a1cb454708d75dbaa934dd0bacfb26ed73f5
+  default_branch: master
+  details: 'A new Git push #45506038398 has arrived to zerocracy/baza.rb, made by
+    @yegor256 (default branch is "master"), not associated with any pull request.'
+  event_id: 23061873374
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45506038398
+  ref: refs/heads/master
+  repository: 840215648
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 13:03:29.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643330
+  _job: 37314225113
+  _time: 2026-10-05 13:08:59.833102298 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 42bbef98794aaf178ee345219576510c6b6245ad
+  default_branch: master
+  details: 'A new Git push #45506071917 has arrived to zerocracy/j, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23061902333
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45506071917
+  ref: refs/heads/master
+  repository: 805238060
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 13:03:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643331
+  _job: 37314225113
+  _time: 2026-10-05 13:09:00.666511788 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: d73b1ad1ac83aa2186f93cea8ab255771911f8bc
+  default_branch: master
+  details: 'A new Git push #45504339281 has arrived to zerocracy/j, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23060452147
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45504339281
+  ref: refs/heads/master
+  repository: 805238060
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:45:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643332
+  _job: 37314225113
+  _time: 2026-10-05 13:09:01.502863414 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 238641e5464b4945dc0865771206493718dc2963
+  default_branch: master
+  details: 'A new Git push #45502011026 has arrived to zerocracy/j, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23058457802
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45502011026
+  ref: refs/heads/master
+  repository: 805238060
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:19:00.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643333
+  _job: 37314225113
+  _time: 2026-10-05 13:09:03.113508431 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: a913580b3e18739526b2ccbe90670c59b91ae106
+  default_branch: master
+  details: 'A new Git push #45501920186 has arrived to zerocracy/eva, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23058380055
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45501920186
+  ref: refs/heads/master
+  repository: 857659265
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:17:59.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643334
+  _job: 37314225113
+  _time: 2026-10-05 13:09:04.914223602 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: cc7de4222f638670249252cbb0d20747888b1047
+  default_branch: master
+  details: 'A new Git push #45501748435 has arrived to zerocracy/baza, made by @yegor256
+    (default branch is "master"), not associated with any pull request.'
+  event_id: 23058232516
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45501748435
+  ref: refs/heads/master
+  repository: 728758275
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:16:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643335
+  _job: 37314225113
+  _time: 2026-10-05 13:09:12.942317891 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: 03d4a204db3e7fe8a0c38f5796fa32390a8f6b5f
+  default_branch: master
+  details: 'A new Git push #45506111388 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is "master"), not associated with any pull request.'
+  event_id: 23061934468
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45506111388
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 13:04:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 2643336
+  _job: 37314225113
+  _time: 2026-10-05 13:09:14.062297369 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  commit: dcee886e66c81ff69c038fadcb0f3f7a0ff07c23
+  default_branch: master
+  details: 'A new Git push #45502308629 has arrived to zerocracy/pages-action, made
+    by @yegor256 (default branch is "master"), not associated with any pull request.'
+  event_id: 23058713026
+  event_type: PushEvent
+  is_human: 1
+  push_id: 45502308629
+  ref: refs/heads/master
+  repository: 802720676
+  to_master: 1
+  what: git-was-pushed
+  when: 2026-10-05 12:22:22.000000000 Z
+  where: github
+  who: 526301
