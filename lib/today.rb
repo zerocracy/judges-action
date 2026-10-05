@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'date'
 require 'time'
 require_relative 'jp'
 
@@ -11,6 +12,8 @@ def Jp.today
   if v.nil? || v.empty?
     Time.now.utc
   else
-    Time.parse(v)
+    # rubocop:disable Style/DateTime
+    DateTime.parse(v).to_time.utc
+    # rubocop:enable Style/DateTime
   end
 end

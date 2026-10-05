@@ -57,7 +57,11 @@ Fbe.consider(
       )
       next
     end
-  Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
+  begin
+    Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
+  rescue Octokit::Forbidden
+    next
+  end
   $loog.info("Comments found for #{Fbe.issue(f)}: #{f.comments}")
 end
 

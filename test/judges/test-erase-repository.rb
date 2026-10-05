@@ -5,7 +5,10 @@
 
 require 'factbase'
 require 'fbe/octo'
+require 'fileutils'
 require 'octokit'
+require 'open3'
+require 'tmpdir'
 require_relative '../test__helper'
 
 class TestEraseRepository < Jp::Test
@@ -177,5 +180,25 @@ class TestEraseRepository < Jp::Test
       fb.none?(repository: 404_602, stale: 'repository'),
       'A repository nobody managed to ask GitHub about cannot be retired'
     )
+  end
+
+  def test_runs_without_fbe_consider
+    Dir.mktmpdir do |dir|
+      FileUtils.mkdir_p(File.join(dir, 'fbe'))
+      File.write(File.join(dir, 'fbe/consider.rb'), "raise('fbe/consider is loaded by erase-repository')\n")
+      script = <<~RUBY
+        require 'factbase'
+        require 'judges/options'
+        require 'loog'
+        $fb = Factbase.new
+        $global = {}
+        $options = Judges::Options.new({ 'testing' => true })
+        $loog = Loog::NULL
+        $judge = 'erase-repository'
+        load(#{File.join(__dir__, '../../judges/erase-repository/erase-repository.rb').inspect})
+      RUBY
+      out, status = Open3.capture2e('ruby', '-I', dir, '-e', script)
+      assert_predicate(status, :success?, "erase-repository does not run without fbe/consider: #{out}")
+    end
   end
 end
