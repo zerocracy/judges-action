@@ -13,6 +13,7 @@ require 'fbe/who'
 require 'tago'
 require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
+require_relative '../../lib/humans'
 require_relative '../../lib/pull_request'
 require_relative '../../lib/supervision'
 require_relative '../../lib/twice'
@@ -315,8 +316,16 @@ Fbe.iterate do
         skip(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
         fact.hoc = (pull[:additions] || 0) + (pull[:deletions] || 0)
-        fact.comments = (pull[:comments] || 0) + (pull[:review_comments] || 0)
-        fact.review_comments = pull[:review_comments] unless pull[:review_comments].nil?
+        fact.review_comments =
+          begin
+            Jp.human_comments(
+              Fbe.octo.pull_request_review_comments(rname, fact.issue, json.dig(:payload, :review, :id))
+            ).count
+          rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden => e
+            $loog.warn("Review comments of pull ##{fact.issue} in #{rname} are not readable: #{e.message}")
+            0
+          end
+        fact.comments = (pull[:comments] || 0) + fact.review_comments
         fact.commits = pull[:commits] unless pull[:commits].nil?
         fact.files = pull[:changed_files] unless pull[:changed_files].nil?
         fact.details =

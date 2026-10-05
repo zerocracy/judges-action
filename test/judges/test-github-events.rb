@@ -9,6 +9,7 @@ require 'fbe/github_graph'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestGithubEvents < Jp::Test
@@ -278,6 +279,7 @@ class TestGithubEvents < Jp::Test
           'X-RateLimit-Remaining' => '999'
         }
       )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/93/reviews/2210067609/comments?per_page=100', body: [])
     fb = Factbase.new
     load_it('github-events', fb)
     f = fb.query('(eq what "pull-was-reviewed")').each.to_a
@@ -413,6 +415,7 @@ class TestGithubEvents < Jp::Test
           'X-RateLimit-Remaining' => '999'
         }
       )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/93/reviews/2210067609/comments?per_page=100', body: [])
     fb = Factbase.new
     load_it('github-events', fb)
     f = fb.query('(eq what "pull-was-reviewed")').each.to_a
@@ -804,6 +807,10 @@ class TestGithubEvents < Jp::Test
           'X-RateLimit-Remaining' => '999'
         }
       )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93/reviews/2210067609/comments?per_page=100',
+      body: [{ user: { id: 7 } }, { user: { id: 8 } }]
+    )
     fb = Factbase.new
     load_it('github-events', fb)
     f = fb.query('(eq what "pull-was-reviewed")').each.to_a
@@ -3035,6 +3042,7 @@ class TestGithubEvents < Jp::Test
         comments: 1, review_comments: 2, commits: 2, changed_files: 3
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/93/reviews/2210067609/comments?per_page=100', body: [])
     fb = Factbase.new
     load_it('github-events', fb)
     assert_equal(
@@ -3082,6 +3090,37 @@ class TestGithubEvents < Jp::Test
     assert_equal(
       1, fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a.size,
       'A repository without a single commit cannot abort the scanning of its events'
+    )
+  end
+
+  def test_takes_review_comments_of_the_review_itself
+    event =
+      lambda do |id, who|
+        {
+          id: "7#{id}", type: 'PullRequestReviewEvent', created_at: '2024-07-31 12:45:09 UTC',
+          actor: { id: who, login: "рецензент#{who}" }, repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'created', review: { id:, state: 'approved' }, pull_request: { number: 93 } }
+        }
+      end
+    fb = Factbase.new
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42/events?per_page=100' => [event.call(11, 200), event.call(12, 201)],
+      'GET /repos/foo/foo/pulls/93' => {
+        user: { id: 300 }, additions: 3, deletions: 1, comments: 1, review_comments: 4, commits: 1, changed_files: 1
+      },
+      'GET /repos/foo/foo/pulls/93/reviews/11/comments?per_page=100' => Array.new(4) { { user: { id: 200 } } },
+      'GET /repos/foo/foo/pulls/93/reviews/12/comments?per_page=100' => [],
+      'GET /user/200' => { id: 200, login: 'рецензент200' },
+      'GET /user/201' => { id: 201, login: 'рецензент201' }
+    ).run do
+      load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo' }))
+    end
+    assert_equal(
+      [0], fb.query('(and (eq what "pull-was-reviewed") (eq who 201))').each.map(&:review_comments),
+      'a reviewer inherits the review comments that another reviewer wrote on the pull'
     )
   end
 
