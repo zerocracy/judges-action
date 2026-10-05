@@ -245,7 +245,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(0, f.total_contributors)
+        assert_nil(f['total_contributors'])
       end
     end
   end
@@ -302,7 +302,7 @@ class TestDimensionsOfTerrain < Jp::Test
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
-        assert_equal(9, f.total_releases)
+        assert_equal(8, f.total_releases)
       end
     end
   end
@@ -517,13 +517,18 @@ class TestDimensionsOfTerrain < Jp::Test
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
-    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_commits) do |*_args, **_kwargs|
+        [{ 'total_commits' => 0 }]
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(2, f.total_repositories)
-        assert_equal(1484, f.total_commits)
+        assert_equal(0, f.total_commits)
         assert_equal(0, f.total_files)
         assert_equal(0, f.total_contributors)
       end
@@ -555,7 +560,39 @@ class TestDimensionsOfTerrain < Jp::Test
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/nobranch' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         refute_nil(f)
-        assert_equal(0, f.total_commits)
+        assert_nil(f['total_commits'])
+      end
+    end
+  end
+
+  def test_total_dimensions_skip_when_all_repositories_are_unscanned
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo', body: {
+        name: 'empty-repo', full_name: 'yegor256/empty-repo', size: 0,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo/git/trees/master?recursive=true',
+      body: { sha: 'a', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'yegor256/empty-repo' }))
+        fact = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        refute_nil(fact)
+        assert_nil(fact['total_commits'])
+        assert_nil(fact['total_files'])
+        assert_nil(fact['total_contributors'])
       end
     end
   end
@@ -607,6 +644,40 @@ class TestDimensionsOfTerrain < Jp::Test
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
       assert_equal({}, total_commits(nil))
+    end
+  end
+
+  def test_total_commits_keeps_repos_counted_after_batch_failure
+    WebMock.disable_net_connect!
+    rate_limit_up
+    seed = Random.new_seed
+    count = Random.new(seed).rand(1..10_000)
+    %w[alive broken].each do |name|
+      stub_github(
+        "https://api.github.com/repos/foo/#{name}", body: {
+          name:, full_name: "foo/#{name}", size: 42,
+          stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+        }
+      )
+    end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/alive,foo/broken' })
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_commits) do |owner = nil, name = nil, branch = nil, repos: nil|
+        raise(Fbe::Error, 'Repository or branch not found') unless repos.nil?
+        raise(Fbe::Error, "Repository '#{owner}/#{name}' or branch '#{branch}' not found") if name == 'broken'
+        count
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+      assert_equal(
+        { total_commits: count }, total_commits(nil),
+        "commits of the reachable repository are not kept, seed: #{seed}"
+      )
     end
   end
 

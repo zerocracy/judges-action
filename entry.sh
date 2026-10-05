@@ -16,7 +16,7 @@ if [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
     auth_args=(-H "Authorization: Bearer $(printenv "INPUT_GITHUB-TOKEN")")
 fi
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    resp=$(curl --silent "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
+    resp=$(curl --silent --connect-timeout 5 --max-time 40 "${auth_args[@]}" -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
     latest=$(echo -n "$resp" | jq -Rrs "try (fromjson | .tag_name // empty) catch empty")
     if [ -z "${latest}" ]; then
         echo "!!! Could not fetch the latest version from GitHub."
@@ -72,7 +72,9 @@ fi
 
 name="$(basename "${INPUT_FACTBASE}")"
 name="${name%.*}"
-fb=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )")
+fb="$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )"
+mkdir -p "$(dirname "${fb}")"
+fb=$(realpath "${fb}")
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
     echo "The file name is: \"${INPUT_FACTBASE}\""
@@ -110,19 +112,31 @@ while IFS= read -r o; do
     if [ "${s}" = "" ]; then
         continue
     fi
-    k=$(echo "${s} "| cut -f1 -d '=')
-    v=$(echo "${s}" | cut -f2- -d '=')
+    k="${s%%=*}"
+    v=""
+    if [[ "${s}" == *=* ]]; then
+        v="=${s#*=}"
+    fi
     if [[ "${k}" == vitals_url ]]; then
-        VITALS_URL="${v}"
+        VITALS_URL="${v#=}"
         continue
     fi
-    options+=("--option=${k}=${v}");
+    options+=("--option=${k}${v}");
 done <<< "${INPUT_OPTIONS}"
-if [ -z "${INPUT_REPOSITORIES}" ]; then
-    echo "The 'repositories' plugin parameter is not set, using current repository: ${GITHUB_REPOSITORY}"
-    options+=("--option=repositories=${GITHUB_REPOSITORY}");
-else
-    options+=("--option=repositories=${INPUT_REPOSITORIES}");
+repositories_found=false
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=repositories="* ]]; then
+        repositories_found=true
+        break
+    fi
+done
+if [ "${repositories_found}" == "false" ]; then
+    if [ -z "${INPUT_REPOSITORIES}" ]; then
+        echo "The 'repositories' plugin parameter is not set, using current repository: ${GITHUB_REPOSITORY}"
+        options+=("--option=repositories=${GITHUB_REPOSITORY}");
+    else
+        options+=("--option=repositories=${INPUT_REPOSITORIES}");
+    fi
 fi
 
 if [ -n "${GITHUB_RUN_ID}" ]; then
@@ -138,18 +152,18 @@ else
     echo "Since 'fail-fast' is not set to 'true', we will run all judges even if some of them fail"
 fi
 
+declare -a trash=()
+trap 'rm -rf "${trash[@]}"' EXIT INT TERM
+
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
-    trap 'rm -rf "$ALL_JUDGES"' EXIT INT TERM
+    trash+=("${ALL_JUDGES}")
     options+=("--no-expect-judges")
     summary=off
     echo "We are in 'dry' mode; keeping the summary facts of the factbase intact"
 else
     ALL_JUDGES=${SELF}/judges
     summary=add
-    ${JUDGES} "${gopts[@]}" eval \
-        "${fb}" \
-        "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 fi
 
 github_token_found=false
@@ -211,6 +225,9 @@ else
         "--token=${INPUT_TOKEN}" \
         "--owner=${owner}" \
         "${name}" "${fb}"
+    ${JUDGES} "${gopts[@]}" eval \
+        "${fb}" \
+        "\$fb.query(\"(eq what 'judges-summary')\").delete!"
 fi
 
 sqlite=$(printenv "INPUT_SQLITE-CACHE" || true)
@@ -263,11 +280,23 @@ else
 fi
 echo "The total number of cycles to run is ${cycles}"
 
+pairs=$(mktemp)
+trash+=("${pairs}")
+declare -a flags=()
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == --option=github_token=* ]]; then
+        printf '%s\n' "${opt#--option=}" >> "${pairs}"
+    else
+        flags+=("${opt}")
+    fi
+done
+
 ${JUDGES} "${gopts[@]}" --hello update \
     --no-log \
     --quiet \
     "--summary=${summary}" \
-    --shuffle=aaa \
+    --shuffle=github-events \
+    --seed="${GITHUB_RUN_ID:-$$}" \
     --boost=github-events \
     --lifetime "${lifetime}" \
     --timeout "${timeout}" \
@@ -275,7 +304,8 @@ ${JUDGES} "${gopts[@]}" --hello update \
     --max-cycles "${cycles}" \
     --statistics \
     --churn=churn.txt \
-    "${options[@]}" \
+    "--options-file=${pairs}" \
+    "${flags[@]}" \
     "${ALL_JUDGES}" \
     "${fb}"
 

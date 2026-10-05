@@ -27,7 +27,7 @@ def total_active_contributors(fact)
         )
         next
       end
-    return {} if commits.nil?
+    next if commits.nil?
     commits[:items].each do |commit|
       author = commit.dig(:author, :id)
       seen << author unless author.nil?

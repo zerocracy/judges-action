@@ -26,6 +26,16 @@ class TestToday < Minitest::Test
     ENV.delete('TODAY')
   end
 
+  def test_reads_a_zoneless_date_in_utc
+    ENV['TODAY'] = '2024-06-15'
+    old = ENV.fetch('TZ', nil)
+    ENV['TZ'] = 'UTC-5'
+    assert_equal(Integer(Time.parse('2024-06-15T00:00:00Z')), Integer(Jp.today))
+  ensure
+    ENV['TZ'] = old
+    ENV.delete('TODAY')
+  end
+
   def test_parses_env_var_when_present
     ENV['TODAY'] = '2025-03-15T00:00:00Z'
     assert_equal(Integer(Time.parse('2025-03-15T00:00:00Z')), Integer(Jp.today))

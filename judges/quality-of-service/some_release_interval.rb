@@ -9,6 +9,7 @@ require 'fbe/unmask_repos'
 def some_release_interval(fact)
   intervals = []
   Fbe.unmask_repos do |repo|
+    return {} if Fbe.octo.off_quota?
     releases =
       begin
         Fbe.octo.releases(repo)
