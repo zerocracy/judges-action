@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'factbase'
 require 'fbe/github_graph'
 require 'fbe/if_absent'
 require 'fbe/issue'
@@ -50,9 +51,8 @@ Fbe.iterate do
   end
 
   def self.previous(fact)
-    Fbe.fb.query(
-      "(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\") (lt when #{fact.when.utc.iso8601}))"
-    ).each.max_by(&:when)
+    query = "(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\") (lt when #{fact.when.utc.iso8601}))"
+    [Fbe.fb, @released || Factbase.new].flat_map { |fb| fb.query(query).each.to_a }.max_by(&:when)
   end
 
   def self.contributors(fact, repo)
@@ -449,6 +449,16 @@ Fbe.iterate do
           )
           []
         end
+      @released = Factbase.new
+      events.each do |json|
+        next unless json[:type] == 'ReleaseEvent' && json.dig(:payload, :action) == 'published'
+        @released.insert.then do |r|
+          r.repository = Integer(json[:repo][:id])
+          r.what = 'release-published'
+          r.when = Time.parse(json[:created_at].iso8601)
+          r.tag = json.dig(:payload, :release, :tag_name)
+        end
+      end
       events.each_with_index do |json, idx|
         Jp.supervision({ 'repo' => rname, 'json' => json.to_h }) do
           if !$options.max_events.nil? && idx >= $options.max_events

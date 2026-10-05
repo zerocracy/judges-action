@@ -2792,10 +2792,10 @@ class TestGithubEvents < Jp::Test
       body: [{ login: 'yegor256', id: 526_301 }]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
-    %w[2.0.0 1.0.0].each do |tag|
+    %w[abc123def456...1.0.0 1.0.0...2.0.0].each do |range|
       stub_github(
-        "https://api.github.com/repos/foo/foo/compare/abc123def456...#{tag}?per_page=100",
-        body: { status: 'ahead', total_commits: 1, commits: [{ sha: "sha-#{tag}" }], files: [] }
+        "https://api.github.com/repos/foo/foo/compare/#{range}?per_page=100",
+        body: { status: 'ahead', total_commits: 1, commits: [{ sha: "sha-#{range}" }], files: [] }
       )
     end
     stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
@@ -2804,6 +2804,7 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_not_requested(:get, %r{/compare/2\.0\.0\.\.\.1\.0\.0})
+    assert_requested(:get, %r{/compare/1\.0\.0\.\.\.2\.0\.0}, at_least_times: 1)
   end
 
   def test_release_event_survives_a_deleted_release_author
