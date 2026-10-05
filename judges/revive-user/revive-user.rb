@@ -19,6 +19,9 @@ Fbe.consider("(and (eq stale 'who') (eq where 'github') (unique who))") do |f|
     rescue Octokit::Forbidden => e
       $loog.warn("[#{$judge}] The user ##{f.who} is still stale (access forbidden): #{e.class}: #{e.message}")
       next
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+      next
     end
   $loog.info("The user ##{f.who} is not stale, it is @#{json[:login]}")
   Fbe.fb.query("(and (eq stale 'who') (eq who #{f.who}))").each do |f1|
