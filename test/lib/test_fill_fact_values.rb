@@ -21,6 +21,13 @@ class TestFillFactValues < Minitest::Test
     assert_match(/hoc/, e.message)
   end
 
+  def test_refuses_an_empty_array
+    f = Factbase.new.insert
+    e = assert_raises(ArgumentError) { Jp.fill_fact_by_hash(f, { 'hoc' => [] }) }
+    assert_match(/can't be empty/, e.message)
+    assert_match(/hoc/, e.message)
+  end
+
   def test_refuses_a_nil_inside_an_array
     f = Factbase.new.insert
     e = assert_raises(ArgumentError) { Jp.fill_fact_by_hash(f, { 'hoc' => [1, nil] }) }
