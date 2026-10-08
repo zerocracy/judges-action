@@ -20,4 +20,19 @@ class TestHumans < Minitest::Test
       )
     assert_equal(['alice'], kept.map { |c| c.dig(:user, :login) })
   end
+
+  def test_filters_a_bot_named_after_a_space
+    $options = Judges::Options.new({ 'bots' => 'SomeBot, other-bot' })
+    kept =
+      Jp.human_comments(
+        [
+          { user: { login: 'other-bot', type: 'User' } },
+          { user: { login: 'alice', type: 'User' } }
+        ]
+      )
+    assert_equal(
+      ['alice'], kept.map { |c| c.dig(:user, :login) },
+      'a bot listed after a comma and a space must be filtered out too'
+    )
+  end
 end
