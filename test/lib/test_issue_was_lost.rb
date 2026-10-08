@@ -88,4 +88,22 @@ class TestIssueWasLost < Minitest::Test
       assert(Fbe::Tombstone.new(fb: fb).has?('github', 7, 11), 'tombstone must contain the issue after the call')
     end
   end
+
+  def test_leaves_the_same_issue_number_of_another_repository_alone
+    fb = Factbase.new
+    [42, 77].each do |repo|
+      f = fb.insert
+      f.where = 'github'
+      f.repository = repo
+      f.issue = 5
+      f.what = 'pull-was-opened'
+    end
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      Jp.issue_was_lost('github', 42, 5)
+      other = fb.query("(and (eq where 'github') (eq repository 77) (eq issue 5))").each.to_a
+      assert_equal(1, other.size, 'the fact of the other repository must stay')
+      assert_nil(other.first['stale'], 'issue 5 of another repository must not be marked stale')
+    end
+  end
 end
