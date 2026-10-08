@@ -251,8 +251,8 @@ timeout=${INPUT_TIMEOUT}
 if [ -z "${timeout}" ]; then
     timeout=10
 fi
-if ! [[ "${timeout}" =~ ^[1-9][0-9]*$ ]]; then
-    echo "INPUT_TIMEOUT must be a positive integer, got: ${timeout}" >&2
+if ! [[ "${timeout}" =~ ^[1-9][0-9]{0,6}$ ]]; then
+    echo "INPUT_TIMEOUT must be a positive integer of seven digits at most, got: ${timeout}" >&2
     exit 1
 fi
 timeout=$((timeout * 60))
@@ -262,8 +262,8 @@ lifetime=${INPUT_LIFETIME}
 if [ -z "${lifetime}" ]; then
     lifetime=15
 fi
-if ! [[ "${lifetime}" =~ ^[1-9][0-9]*$ ]]; then
-    echo "INPUT_LIFETIME must be a positive integer, got: ${lifetime}" >&2
+if ! [[ "${lifetime}" =~ ^[1-9][0-9]{0,6}$ ]]; then
+    echo "INPUT_LIFETIME must be a positive integer of seven digits at most, got: ${lifetime}" >&2
     exit 1
 fi
 lifetime=$((lifetime * 60))
