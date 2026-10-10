@@ -321,7 +321,7 @@ else
 fi
 
 if [ "${SKIP_VERSION_CHECKING}" != 'true' ]; then
-    resp=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 -sL "${auth_args[@]}" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
+    resp=$(curl --retry 5 --retry-delay 5 --retry-max-time 40 --connect-timeout 5 --max-time 40 -sL "${auth_args[@]}" https://api.github.com/repos/zerocracy/judges-action/releases/latest || true)
     latest=$(echo -n "${resp}" | jq -Rrs "try (fromjson | .tag_name // empty) catch empty")
     if [ -z "${latest}" ] || [ "${latest}" == "${VERSION}" ]; then
         action_version=${VERSION}
