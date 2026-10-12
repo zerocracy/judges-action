@@ -109,19 +109,19 @@ class TestDimensionsOfTerrain < Jp::Test
     stub_github('https://api.github.com/repos/foo/qwe/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/asd/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bar%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bar%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/qwe%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/qwe%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/asd%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/asd%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -182,7 +182,7 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -218,7 +218,7 @@ class TestDimensionsOfTerrain < Jp::Test
       body: { message: 'Not Found', documentation_url: 'https://docs.github.com/rest' }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -274,7 +274,7 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -339,11 +339,11 @@ class TestDimensionsOfTerrain < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/bar/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bar%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bar%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -490,11 +490,11 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/nil-size%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/nil-size%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -532,7 +532,7 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/nobranch/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/nobranch%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/nobranch%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -562,7 +562,7 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -678,7 +678,7 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/broken/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/broken%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/broken%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     graph = Class.new(Fbe::Graph::Fake) do
@@ -807,11 +807,11 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -856,11 +856,11 @@ class TestDimensionsOfTerrain < Jp::Test
     stub_github('https://api.github.com/repos/foo/good/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/malformed/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/malformed%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/malformed%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -894,7 +894,7 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/big/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/big%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/big%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -970,11 +970,11 @@ class TestDimensionsOfTerrain < Jp::Test
       ]
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1013,7 +1013,7 @@ class TestDimensionsOfTerrain < Jp::Test
       ]
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1058,7 +1058,7 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       body: {
         total_count: 7,
         incomplete_results: false,
@@ -1216,11 +1216,11 @@ class TestDimensionsOfTerrain < Jp::Test
     stub_github('https://api.github.com/repos/foo/good/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/bad/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bad%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bad%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1266,11 +1266,11 @@ class TestDimensionsOfTerrain < Jp::Test
     stub_github('https://api.github.com/repos/foo/good/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/bad/contributors?per_page=100', body: [])
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/good%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bad%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/bad%20author-date:%3E2024-08-30T21:00:00Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1325,7 +1325,7 @@ class TestDimensionsOfTerrain < Jp::Test
     $kickoff = Time.now
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30T21:00:00Z',
       status: 500, body: { message: 'Internal server error' }
     )
     load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
@@ -1353,14 +1353,14 @@ class TestDimensionsOfTerrain < Jp::Test
     stub_github('https://api.github.com/repos/foo/first', body: { id: 42, full_name: 'foo/first', archived: false })
     stub_github('https://api.github.com/repos/foo/second', body: { id: 43, full_name: 'foo/second', archived: false })
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/first%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/first%20author-date:%3E2024-08-30T21:00:00Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [{ author: { login: 'yegor256', id: 526_301, type: 'User' } }]
       }
     )
     stub_github(
-      'https://api.github.com/search/commits?per_page=100&q=repo:foo/second%20author-date:%3E2024-08-30',
+      'https://api.github.com/search/commits?per_page=100&q=repo:foo/second%20author-date:%3E2024-08-30T21:00:00Z',
       status: 500, body: { message: 'Internal server error' }
     )
     load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
@@ -1369,6 +1369,43 @@ class TestDimensionsOfTerrain < Jp::Test
       f.what = 'dimensions-of-terrain'
       f.when = Time.parse('2024-09-29 21:00:00 UTC')
       assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
+    end
+  end
+
+  def test_counts_active_contributor_from_first_day_of_window
+    seed = Random.new_seed
+    author = Random.new(seed).rand(1..999_999)
+    WebMock.disable_net_connect!
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+    )
+    $global = {}
+    $local = {}
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
+    stub_request(:get, %r{https://api\.github\.com/search/commits}).to_return do |req|
+      bound = URI.decode_www_form(req.uri.query).to_h['q'][/author-date:>(\S+)/, 1]
+      after = bound.include?('T') ? Time.parse(bound) : Time.parse("#{bound}T23:59:59Z")
+      items = Time.parse('2026-09-08T12:00:00Z') > after ? [{ author: { login: 'żółw', id: author } }] : []
+      {
+        body: { total_count: items.size, incomplete_results: false, items: }.to_json,
+        headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '999' }
+      }
+    end
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    Jp.qoreset
+    Factbase.new.insert.then do |f|
+      f.what = 'dimensions-of-terrain'
+      f.when = Time.parse('2026-10-08T00:00:00Z')
+      assert_equal(
+        { total_active_contributors: 1 }, total_active_contributors(f),
+        "the contributor ##{author} active on the first day of the window is not counted, seed #{seed}"
+      )
     end
   end
 end
