@@ -10,6 +10,7 @@ class TestMilestoneWasSet < Jp::Test
   using SmartFactbase
 
   def test_creates_facts_for_milestones
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -57,6 +58,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_empty_milestones_list
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -69,6 +71,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_skips_milestones_already_in_factbase
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -94,6 +97,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_not_found_on_milestones_list
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -110,6 +114,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_deprecated_on_milestones_list
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -126,6 +131,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_not_found_on_repo_name_lookup
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
@@ -137,6 +143,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_forbidden_on_repo_name_lookup
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -150,6 +157,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_forbidden_on_milestones_list
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -166,6 +174,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_dont_warn_about_known_milestones
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -188,6 +197,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_adds_only_the_unknown_milestone
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -208,6 +218,7 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_scans_a_repository_in_testing_mode
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
     load_it('milestone-was-set', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
