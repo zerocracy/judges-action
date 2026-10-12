@@ -216,4 +216,27 @@ class TestMilestoneWasSet < Jp::Test
       'The judge cannot break when the GitHub client is faked'
     )
   end
+
+  def test_follows_the_deadline_and_the_removal_of_a_milestone
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    url = 'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all'
+    one = {
+      number: 1, title: 'v1.0', state: 'open', created_at: '2024-01-15T10:00:00Z',
+      due_on: '2024-03-15T10:00:00Z', creator: { id: 888, login: 'yegor256' }
+    }
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', where: 'github', repository: 42, issue: 1, who: 44)
+    stub_github(url, body: [one])
+    load_it('milestone-was-set', fb)
+    stub_github(url, body: [one.merge(due_on: '2024-06-30T10:00:00Z')])
+    load_it('milestone-was-set', fb)
+    deadlines = fb.query('(eq what "milestone-was-set")').each.map(&:deadline)
+    assert_equal([Time.parse('2024-06-30T10:00:00Z')], deadlines, fb.to_json)
+    stub_github(url, body: [])
+    load_it('milestone-was-set', fb)
+    assert_equal(['milestone'], fb.query('(eq what "milestone-was-set")').each.first['stale'], fb.to_json)
+  end
 end
