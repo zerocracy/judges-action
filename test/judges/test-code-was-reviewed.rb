@@ -96,7 +96,7 @@ class TestCodeWasReviewed < Jp::Test
       .with(_id: 2, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
     load_it('code-was-reviewed', fb)
     assert_equal([2], fb.query('(eq what "pull-was-merged")').each.first['reviews'], fb.to_json)
-    assert(fb.one?(what: 'code-was-reviewed', repository: 42, issue: 44, who: 423), fb.to_json)
+    assert(fb.one?(what: 'code-was-reviewed', repository: 42, issue: 44, who: 423), "no review by 423: #{fb.to_json}")
   end
 
   def test_counts_only_the_comments_that_people_made
