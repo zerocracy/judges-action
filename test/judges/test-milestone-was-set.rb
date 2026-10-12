@@ -10,7 +10,6 @@ class TestMilestoneWasSet < Jp::Test
   using SmartFactbase
 
   def test_creates_facts_for_milestones
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -58,7 +57,6 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_empty_milestones_list
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -71,7 +69,6 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_skips_milestones_already_in_factbase
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -97,7 +94,6 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_not_found_on_milestones_list
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -114,7 +110,6 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_deprecated_on_milestones_list
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -157,7 +152,6 @@ class TestMilestoneWasSet < Jp::Test
   end
 
   def test_rescues_forbidden_on_milestones_list
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
@@ -226,5 +220,17 @@ class TestMilestoneWasSet < Jp::Test
       fb.query("(eq what 'milestone-was-set')").each.to_a,
       'The judge cannot break when the GitHub client is faked'
     )
+  end
+
+  def test_skips_a_repository_excluded_by_the_masks
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
+    stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'foo/bar' })
+    milestones = stub_github('https://api.github.com/repos/foo/bar/milestones?per_page=100&state=all', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', where: 'github', repository: 43, issue: 1, who: 44)
+    load_it('milestone-was-set', fb, Judges::Options.new({ 'repositories' => 'foo/foo,-foo/bar' }))
+    assert_not_requested(milestones)
   end
 end
