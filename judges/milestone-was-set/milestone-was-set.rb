@@ -6,6 +6,7 @@
 require 'fbe/consider'
 require 'fbe/if_absent'
 require 'fbe/octo'
+require 'fbe/overwrite'
 require 'octokit'
 require_relative '../../lib/patches/fake_octokit'
 
@@ -58,10 +59,21 @@ Fbe.consider(
         (eq what '#{$judge}')
         (eq where 'github')
         (eq repository #{f.repository})
-        (exists milestone))"
-    ).each.map(&:milestone)
+        (exists milestone)
+        (absent stale))"
+    ).each.to_h { |k| [k.milestone, k] }
+  numbers = milestones.map { |m| m[:number] }
+  known.each do |n, k|
+    next if numbers.include?(n)
+    k.stale = 'milestone'
+    $loog.info("Milestone ##{n} is gone from #{repo}, its fact is stale now")
+  end
   milestones.each do |m|
-    next if known.include?(m[:number])
+    k = known[m[:number]]
+    unless k.nil?
+      Fbe.overwrite(k, 'deadline', m[:due_on]) if m[:due_on] && k['deadline']&.first != m[:due_on]
+      next
+    end
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |nnn|
