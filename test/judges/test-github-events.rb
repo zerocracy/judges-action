@@ -3085,6 +3085,50 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_skips_a_closure_when_the_reviews_are_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '40623323545', type: 'PullRequestEvent', public: true, created_at: '2024-07-31 12:45:09 UTC',
+          actor: { id: 43, login: 'test' }, repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'closed', number: 7, pull_request: { id: 1_990_323_143, number: 7 } }
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/7',
+      body: {
+        id: 1_990_323_143, number: 7, user: { id: 50, login: 'author' }, additions: 1, deletions: 1,
+        merged_at: '2024-07-31 12:45:09 UTC', closed_at: '2024-07-31 12:45:09 UTC',
+        head: { ref: 'x', sha: 'abc' }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/7/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/7/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/abc/check-runs?per_page=100',
+      body: { total_count: 0, check_runs: [] }
+    )
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'test' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/7/reviews?per_page=100',
+      status: 403, body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    assert_empty(
+      fb.query('(and (eq issue 7) (or (eq what "pull-was-merged") (eq what "pull-was-closed")))').each.to_a,
+      'the closure was recorded without its review'
+    )
+  end
+
   private
 
   def stub_event(*json)
