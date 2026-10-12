@@ -46,7 +46,7 @@ jobs:
       - name: Job Summary
         if: always()
         run: |
-          cat > "$GITHUB_STEP_SUMMARY" <<'EOF'
+          cat > "$GITHUB_STEP_SUMMARY" <<EOF
           ## zerocracy run
 
           | Info | |

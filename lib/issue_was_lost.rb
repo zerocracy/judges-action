@@ -8,6 +8,7 @@ require 'fbe/tombstone'
 require_relative 'jp'
 
 def Jp.issue_was_lost(where, repository, issue)
+  Fbe::Tombstone.new.bury!(where, repository, issue)
   stale =
     Fbe.fb.query(
       "(and
@@ -17,7 +18,6 @@ def Jp.issue_was_lost(where, repository, issue)
       (absent stale)
       (absent tombstone))"
     ).each { |f| f.stale = 'issue' }
-  Fbe::Tombstone.new.bury!(where, repository, issue)
   if stale.positive?
     $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
     return

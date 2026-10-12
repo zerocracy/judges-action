@@ -79,7 +79,9 @@ def Jp.comments_info(pr, repo: nil)
             break if data.nil? || data['nodes'].nil?
             total += data['nodes'].count { |n| n['isResolved'] }
             break unless data.dig('pageInfo', 'hasNextPage')
-            cursor = data.dig('pageInfo', 'endCursor')
+            nxt = data.dig('pageInfo', 'endCursor')
+            break if nxt.nil? || nxt == cursor
+            cursor = nxt
           end
           total
         else
@@ -170,6 +172,7 @@ def Jp.fetch_workflows(pr, repo: nil)
           nil
         end
     next unless rid
+    next if runs[rid]
     workflow =
       runs[rid] ||=
         begin
