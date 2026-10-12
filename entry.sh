@@ -72,7 +72,9 @@ fi
 
 name="$(basename "${INPUT_FACTBASE}")"
 name="${name%.*}"
-fb=$(realpath "$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )")
+fb="$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )"
+mkdir -p "$(dirname "${fb}")"
+fb=$(realpath "${fb}")
 if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
     echo "The file name is: \"${INPUT_FACTBASE}\""
@@ -204,12 +206,17 @@ if [ "${bots_found}" == "false" ]; then
 fi
 
 cache_min_age=false
+declare -a kept=()
 for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=sqlite_cache_min_age=" ]]; then
+        continue
+    fi
     if [[ "${opt}" == "--option=sqlite_cache_min_age="* ]]; then
         cache_min_age=true
-        break
     fi
+    kept+=("${opt}")
 done
+options=("${kept[@]}")
 if [ "${cache_min_age}" == "false" ]; then
     options+=("--option=sqlite_cache_min_age=3600");
 fi
