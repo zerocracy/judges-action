@@ -423,6 +423,29 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_counts_builds_past_the_cap_of_github
+    WebMock.disable_net_connect!
+    rate_limit_up
+    start = Time.parse('2025-10-01 00:00:00 UTC')
+    times = Array.new(7000) { |i| start + (i * 86) }
+    stub_request(:get, %r{https://api.github.com/repos/foo/busy/actions/runs}).to_return do |req|
+      from, till = CGI.unescape(req.uri.query[/created=([^&]+)/, 1]).split('..').map { |t| Time.parse(t) }
+      found = [times.count { |t| t.between?(from, till) }, 2500].min
+      { body: { total_count: found, workflow_runs: [] }.to_json, headers: { 'Content-Type': 'application/json' } }
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { start }
+    fact.define_singleton_method(:when) { start + (7 * 86_400) }
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/busy' })
+    load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+    Fbe.stub(:unmask_repos, %w[foo/busy]) do
+      assert_equal({ total_builds_ran: 7000 }, total_builds_ran(fact))
+    end
+  end
+
   def test_dont_report_total_when_one_repo_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
