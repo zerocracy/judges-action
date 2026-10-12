@@ -103,6 +103,40 @@ class TestCodeWasReviewed < Jp::Test
     assert(fb.one?(what: 'code-was-reviewed', issue: 50, who: 422, comments: 1))
   end
 
+  def test_counts_only_the_review_comments_that_people_made
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/51',
+      body: {
+        id: 61, number: 51, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/51/reviews?per_page=100',
+      body: [
+        { id: 49_212, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/51/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/51/reviews/49212/comments?per_page=100',
+      body: [
+        { id: 58_219, user: { id: 422, login: 'user2', type: 'User' } },
+        { id: 58_220, user: { id: 900, login: 'github-actions', type: 'Bot' } },
+        { id: 58_221, user: { id: 901, login: 'rultor', type: 'User' } }
+      ]
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 51, where: 'github')
+    load_it('code-was-reviewed', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => 'rultor' }))
+    assert(fb.one?(what: 'code-was-reviewed', issue: 51, who: 422, review_comments: 1))
+  end
+
   def test_fetches_issue_comments_once_for_multiple_reviews
     WebMock.disable_net_connect!
     rate_limit_up

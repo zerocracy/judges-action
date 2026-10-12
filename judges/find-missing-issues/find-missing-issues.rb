@@ -14,16 +14,27 @@ require 'joined'
 require 'tago'
 require 'time'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/who_of'
 
 ts = Fbe::Tombstone.new
 
-Fbe.consider('(and (eq where "github") (exists repository) (unique repository))') do |r|
+Fbe.consider(
+  '(and (eq where "github") (exists repository) (absent stale) (absent tombstone) (unique repository))'
+) do |r|
   repo =
     begin
       Fbe.octo.repo_name_by_id(r.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Failed to find repository #{r.repository}: #{e.message}")
-      r.stale = 'repository'
+      marked =
+        Fbe.fb.query(
+          "(and
+          (eq where 'github')
+          (eq repository #{r.repository})
+          (absent stale)
+          (absent tombstone))"
+        ).each { |f| f.stale = 'repository' }
+      $loog.info("Marked #{marked} facts of repository #{r.repository} as stale")
       next
     rescue Octokit::Forbidden => e
       $loog.warn(
@@ -35,7 +46,6 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
   issues = Fbe.fb.query(
     "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
   ).each.map(&:issue)
-  issues.uniq!
   issues.sort!
   next if issues.empty?
   must = (issues.min..issues.max).to_a
@@ -75,7 +85,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
         end
       next if f.nil?
       f.when = json[:created_at]
-      f.who = json.dig(:user, :id)
+      Jp.author(f, json.dig(:user, :id))
       if type == 'pull'
         ref =
           begin
@@ -97,7 +107,7 @@ Fbe.consider('(and (eq where "github") (exists repository) (unique repository))'
           f.stale = 'branch'
         end
       end
-      f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Fbe.who(f)}."
+      f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Jp.mention(f)}."
       $loog.info("The #{type} #{Fbe.issue(f)} is not tombstoned among #{ts.issues('github', r.repository).count}")
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
     end

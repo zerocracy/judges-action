@@ -877,12 +877,12 @@ class TestGithubEvents < Jp::Test
               site_admin: false
             },
             tag_name: '0.0.1',
-            created_at: '2024-08-05T00:51:39Z',
-            published_at: '2024-08-05T00:52:07Z'
+            created_at: '2024-08-01T00:51:39Z',
+            published_at: '2024-08-01T00:52:07Z'
           }
         },
         public: true,
-        created_at: '2024-08-05T00:52:08Z',
+        created_at: '2024-08-01T00:52:08Z',
         org: {
           id: 24_234_201,
           login: 'zerocracy'
@@ -912,12 +912,12 @@ class TestGithubEvents < Jp::Test
               site_admin: false
             },
             tag_name: '0.0.5',
-            created_at: '2024-08-01T00:51:39Z',
-            published_at: '2024-08-01T00:52:07Z'
+            created_at: '2024-08-05T00:51:39Z',
+            published_at: '2024-08-05T00:52:07Z'
           }
         },
         public: true,
-        created_at: '2024-08-01T00:52:08Z',
+        created_at: '2024-08-05T00:52:08Z',
         org: {
           id: 24_234_201,
           login: 'zerocracy'
@@ -963,8 +963,8 @@ class TestGithubEvents < Jp::Test
       body: {
         total_commits: 2,
         commits: [
-          { sha: '4683257342e98cd94becc2aa49900e720bd792e9' },
-          { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' }
+          { sha: '69a28ba1122af281936371bbb36f67e5b97246b1' },
+          { sha: '4683257342e98cd94becc2aa49900e720bd792e9' }
         ],
         files: [
           { additions: 5, deletions: 0, changes: 5 },
@@ -981,13 +981,13 @@ class TestGithubEvents < Jp::Test
       body: {
         total_commits: 4,
         commits: [
-          { sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } },
-          { sha: 'b50489ead5e8aa7', author: { login: 'Yegorov64', id: 2_566_463 } },
-          { sha: 'c50489ead5e8aa8', author: { login: 'Yegorov128', id: 2_566_464 } },
-          { sha: 'd50489ead5e8aa9', author: { login: 'Yegorov', id: 2_566_462 } },
-          { sha: 'e50489ead5e8aa9', author: nil },
+          { sha: 'e70489ead5e8aa9', author: { login: 'NoUser' } },
           { sha: 'e60489ead5e8aa9' },
-          { sha: 'e70489ead5e8aa9', author: { login: 'NoUser' } }
+          { sha: 'e50489ead5e8aa9', author: nil },
+          { sha: 'd50489ead5e8aa9', author: { login: 'Yegorov', id: 2_566_462 } },
+          { sha: 'c50489ead5e8aa8', author: { login: 'Yegorov128', id: 2_566_464 } },
+          { sha: 'b50489ead5e8aa7', author: { login: 'Yegorov64', id: 2_566_463 } },
+          { sha: 'a50489ead5e8aa6', author: { login: 'Yegorov', id: 2_566_462 } }
         ],
         files: [
           { additions: 15, deletions: 40, changes: 55 },
@@ -1005,7 +1005,7 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 820463873) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_equal([526_301, 526_302], f.first[:contributors])
-    assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
+    assert_equal([2_566_462, 2_566_464, 2_566_463], f.last[:contributors])
     assert_equal(2, f.first.commits)
     assert_equal(22, f.first.hoc)
     assert_equal('4683257342e98cd94becc2aa49900e720bd792e9', f.first.last_commit)
@@ -1088,7 +1088,7 @@ class TestGithubEvents < Jp::Test
       f.event_id = 30_406
       f.event_type = 'ReleaseEvent'
       f.is_human = 1
-      f.release_id = 470_000
+      f.release = 470_000
       f.repository = 42
       f.what = 'release-published'
       f.when = Time.parse('2024-08-02 21:45:00 UTC')
@@ -1099,7 +1099,7 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_nil(f.first[:tag])
-    refute_nil(f.first[:release_id])
+    refute_nil(f.first[:release])
     assert_equal([2_566_462, 2_566_463, 2_566_464], f.last[:contributors])
   end
 
@@ -1177,7 +1177,7 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_nil(f.first[:tag])
-    assert_nil(f.first[:release_id])
+    assert_nil(f.first[:release])
     assert_equal([526_301, 526_302], f.last[:contributors])
   end
 
@@ -1267,7 +1267,7 @@ class TestGithubEvents < Jp::Test
       f.event_id = 35_207
       f.event_type = 'ReleaseEvent'
       f.is_human = 1
-      f.release_id = 20_000
+      f.release = 20_000
       f.repository = 111
       f.what = 'release-published'
       f.when = Time.parse('2024-10-31 21:45:00 UTC')
@@ -2071,7 +2071,10 @@ class TestGithubEvents < Jp::Test
     fb = Factbase.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 3 }))
     assert_equal(4, fb.all.size)
-    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 14))
+    assert(
+      fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 12),
+      'a scan cut short by max_events must resume at the oldest event it processed'
+    )
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 12))
@@ -2649,12 +2652,12 @@ class TestGithubEvents < Jp::Test
         {
           id: 22_100, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func1...', path: 'lib/some/path/file1.rb', commit_id: '3e695',
-          body: 'Some question1', created_at: '2025-10-20 18:06:00 UTC', user: { id: 46, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-10-20 18:06:00 UTC', user: { id: 46, login: 'user2' }
         },
         {
           id: 22_101, pull_request_review_id: 123,
           diff_hunk: '@@ -93,4 +93,65 @@ def some_func2...', path: 'lib/some/path/file2.rb', commit_id: '3e695',
-          body: 'Some question2', created_at: '2025-10-20 18:07:00 UTC', user: { id: 46, login: 'user2' }
+          body: "```suggestion\nx\n```", created_at: '2025-10-20 18:07:00 UTC', user: { id: 46, login: 'user2' }
         }
       ]
     )
@@ -2678,7 +2681,7 @@ class TestGithubEvents < Jp::Test
     end
     f = fb.query('(eq what "pull-was-merged")').each.to_a.first
     refute_nil(f)
-    assert_equal(Time.parse('2025-10-20 18:05:00 UTC'), f.review)
+    assert_equal(Time.parse('2025-10-20 18:25:00 UTC'), f.review)
     assert_equal(2, f.suggestions)
   end
 
@@ -2739,6 +2742,68 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(1, f.count)
     assert_equal([526_301], f.first[:contributors])
+  end
+
+  def test_two_releases_in_one_page_never_compare_backwards
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '102',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_002,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '2.0.0',
+            name: 'v2.0.0',
+            created_at: Time.parse('2024-11-30T10:00:00Z'),
+            published_at: Time.parse('2024-11-30T10:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T10:00:00Z')
+      },
+      {
+        id: '101',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_001,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T09:00:00Z'),
+            published_at: Time.parse('2024-11-30T09:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T09:00:00Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    %w[2.0.0 1.0.0].each do |tag|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/compare/abc123def456...#{tag}?per_page=100",
+        body: { status: 'ahead', total_commits: 1, commits: [{ sha: "sha-#{tag}" }], files: [] }
+      )
+    end
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(2, f.count)
+    assert_not_requested(:get, %r{/compare/2\.0\.0\.\.\.1\.0\.0})
   end
 
   def test_release_event_survives_a_deleted_release_author

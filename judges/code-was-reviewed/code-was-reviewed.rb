@@ -96,12 +96,18 @@ Fbe.consider(
       )
       next
     end
-  f.reviews = reviews.count { |review| review.dig(:user, :id) != pr.dig(:user, :id) }
+  author = pr.dig(:user, :id)
+  reviewers =
+    Jp.human_comments(reviews).filter_map do |review|
+      who = review.dig(:user, :id)
+      who unless who.nil? || who == author
+    end
+  f.reviews = reviewers.uniq.count
   count = nil
-  reviews.each do |review|
+  Jp.human_comments(reviews).each do |review|
     reviewer = review.dig(:user, :id)
     next if reviewer.nil?
-    next if reviewer == pr.dig(:user, :id)
+    next if reviewer == author
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
@@ -143,7 +149,7 @@ Fbe.consider(
       n.comments = count
       n.review_comments =
         begin
-          Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id]).count
+          Jp.human_comments(Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id])).count
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
           0

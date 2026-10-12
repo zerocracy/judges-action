@@ -16,6 +16,7 @@ require 'logger'
 require 'time'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/qos_search'
+require_relative '../../lib/who_of'
 
 %w[issue pull].each do |type|
   Fbe.iterate do
@@ -53,7 +54,7 @@ require_relative '../../lib/qos_search'
             "[#{$judge}] Access forbidden to #{type} ##{issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          next 0
+          next issue
         end
       if after.nil?
         $loog.info("The #{type} ##{issue} in #{repo} return empty created_at field")
@@ -62,10 +63,14 @@ require_relative '../../lib/qos_search'
       seen = []
       found = []
       first = issue
+      total = 0
       elapsed($loog, level: Logger::INFO) do
         items =
           begin
-            json = Jp.qosearch("repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}")
+            json = Jp.qosearch(
+              "repo:#{repo} type:#{type} created:>=#{after.iso8601[0..9]}", sort: 'created', order: 'asc'
+            )
+            total = json[:total_count] if json
             json ? json[:items] : []
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("No issues found for #{repo}: #{e.message}")
@@ -94,7 +99,7 @@ require_relative '../../lib/qos_search'
             next if f.nil?
             found << f.issue
             f.when = json[:created_at]
-            f.who = json.dig(:user, :id)
+            Jp.author(f, json.dig(:user, :id))
             if type == 'pull'
               ref =
                 begin
@@ -116,13 +121,13 @@ require_relative '../../lib/qos_search'
                 f.stale = 'branch'
               end
             end
-            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Fbe.who(f)}."
-            $loog.info("The #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
+            f.details = "The #{type} #{Fbe.issue(f)} has been earlier opened by #{Jp.mention(f)}."
+            $loog.info("The #{Fbe.issue(f)} was opened by #{Jp.mention(f)} #{f.when.ago} ago")
           end
         end
         issue = first if issue < first
         m = [
-          "Checked #{seen.count} #{type}s in #{repo}",
+          "Checked #{seen.count} of #{total} #{type}s in #{repo}",
           ("(#{seen.joined(max: 8)})" unless seen.empty?),
           "created >= #{after.iso8601[0..9]};",
           "from ##{first} to ##{issue};",

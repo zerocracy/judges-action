@@ -62,18 +62,20 @@ Fbe.iterate do
       end
     events.each do |event|
       Fbe.fb.txn do |fbt|
-        nn =
-          Fbe.if_absent(fb: fbt) do |n|
-            n.issue = issue
-            n.who = event.dig(:assignee, :id)
-            n.what = $judge
-            n.repository = repository
-            n.where = 'github'
-          end
-        if nn.nil?
+        who = event.dig(:assignee, :id)
+        unless fbt.query(
+          "(and (eq issue #{issue}) (eq who #{who}) (eq what '#{$judge}') " \
+          "(eq repository #{repository}) (eq where 'github') (absent unassigned))"
+        ).each.to_a.empty?
           $loog.warn("Assignee already exists in #{repo}##{issue}")
           next
         end
+        nn = fbt.insert
+        nn.issue = issue
+        nn.who = who
+        nn.what = $judge
+        nn.repository = repository
+        nn.where = 'github'
         nn.assigner = event.dig(:assigner, :id)
         nn.when = event[:created_at]
         nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."

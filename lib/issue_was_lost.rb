@@ -10,6 +10,7 @@ require_relative 'jp'
 
 # @todo #2074:30min Bury through the given "fb", once zerocracy/fbe#843 lets Fbe.overwrite run in a txn.
 def Jp.issue_was_lost(where, repository, issue, fb: Fbe.fb)
+  Fbe::Tombstone.new.bury!(where, repository, issue)
   stale =
     fb.query(
       "(and
@@ -19,7 +20,6 @@ def Jp.issue_was_lost(where, repository, issue, fb: Fbe.fb)
       (absent stale)
       (absent tombstone))"
     ).each { |f| f.stale = 'issue' }
-  Fbe::Tombstone.new.bury!(where, repository, issue)
   if stale.positive?
     $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
     return

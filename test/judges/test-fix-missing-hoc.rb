@@ -42,7 +42,7 @@ class TestFixMissingHoc < Jp::Test
     )
   end
 
-  def test_dont_crash_when_pull_has_no_hoc
+  def test_marks_stale_when_pull_reports_no_hoc
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
     Jp::FakeGithub.new(
@@ -52,9 +52,10 @@ class TestFixMissingHoc < Jp::Test
     ).run do
       load_it('fix-missing-hoc', fb)
     end
+    assert_nil(fb.pick(issue: 44)['hoc'], 'a number the API never gave must not be invented')
     assert_equal(
-      0, fb.pick(issue: 44).hoc,
-      'a pull request reporting no additions and no deletions aborted the judge'
+      'hoc', fb.pick(issue: 44).stale,
+      'a pull request reporting no additions and no deletions must be marked stale, not scored as empty'
     )
   end
 end

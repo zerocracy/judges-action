@@ -7,9 +7,17 @@ name: shellcheck
   push:
     branches:
       - master
+    paths:
+      - '**.sh'
+      - '**.bash'
+      - '.github/workflows/shellcheck.yml'
   pull_request:
     branches:
       - master
+    paths:
+      - '**.sh'
+      - '**.bash'
+      - '.github/workflows/shellcheck.yml'
 permissions:
   contents: read
 jobs:

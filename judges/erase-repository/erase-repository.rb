@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'elapsed'
-require 'fbe/consider'
+require 'fbe/fb'
 require 'fbe/octo'
 require 'logger'
 require 'octokit'

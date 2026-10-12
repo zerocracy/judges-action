@@ -31,7 +31,8 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04',
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04&sort=created',
       body: {
         total_count: 2, incomplete_results: false,
         items: [
@@ -266,7 +267,8 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04',
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04&sort=created',
       body: {
         total_count: 2, incomplete_results: false,
         items: [{ number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } }]
@@ -334,7 +336,8 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04&sort=created',
       body: {
         total_count: 2, incomplete_results: false,
         items: [
@@ -376,7 +379,8 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
-      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04',
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04&sort=created',
       body: {
         total_count: 2, incomplete_results: false,
         items: [
@@ -439,6 +443,35 @@ class TestFindAllIssues < Jp::Test
     assert_nil(
       fact['stale'],
       '403 is transient — fact must NOT be marked stale; next cycle will retry the issue lookup'
+    )
+  end
+
+  def test_restores_oldest_missing_issue_first
+    WebMock.disable_net_connect!
+    rate_limit_up
+    seed = Random.new_seed
+    number = 46 + Random.new(seed).rand(10_000)
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github(%r{https://api\.github\.com/search/issues\?.*}, body: { total_count: 0, items: [] })
+    stub_github(
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04&sort=created',
+      body: { total_count: 1, items: [{ number:, created_at: Time.parse('2025-05-05'), user: { id: 4242 } }] }
+    )
+    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.issue = 45
+      f.repository = 991
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    refute_empty(
+      fb.query("(and (eq what 'issue-was-opened') (eq issue #{number}))").each.to_a,
+      "the oldest missing issue ##{number} was not restored, seed #{seed}"
     )
   end
 
