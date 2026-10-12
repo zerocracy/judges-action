@@ -12,7 +12,7 @@ class TestEntryVersionCheck < Jp::Test
     refute_empty(calls, 'No version check request found in entry.sh')
     calls.each do |call|
       assert_includes(call, '--connect-timeout', "a version check request has no connect timeout: #{call}")
-      assert_match(/--max-time|--retry-max-time/, call, "a version check request has no deadline: #{call}")
+      assert_includes(call, '--max-time', "a version check request has no deadline for the whole transfer: #{call}")
     end
   end
 end
