@@ -244,6 +244,8 @@ Fbe.iterate do
             nil
           end
         skip(json) if pl.nil?
+        skip(json) if pl[:state] == 'open'
+        skip(json) if pl[:closed_at] && Time.parse(pl[:closed_at].to_s) - fact.when > 60
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
         fact.hoc = (pl[:additions] || 0) + (pl[:deletions] || 0)
         fact.files = pl[:changed_files] unless pl[:changed_files].nil?
@@ -279,7 +281,8 @@ Fbe.iterate do
             (eq where 'github')
             (eq repository #{fact.repository})
             (eq issue #{fact.issue})
-            (eq what 'pull-was-closed'))"
+            (eq what 'pull-was-closed')
+            (or (absent when) (lt when #{fact.when.utc.iso8601})))"
         ).delete!
         $loog.info("The pull #{Fbe.issue(fact)} was reopened, its closure is forgotten")
         skip(json)
