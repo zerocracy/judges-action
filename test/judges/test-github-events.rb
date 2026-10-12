@@ -3085,6 +3085,39 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_records_a_review_when_another_source_has_the_same_numbers
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '40623323544', type: 'PullRequestReviewEvent', public: true, created_at: '2024-07-31 12:45:09 UTC',
+          actor: { id: 43, login: 'test' }, repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'created',
+            review: { id: 2_210_067_610, user: { login: 'test', id: 43, type: 'User' }, state: 'approved' },
+            pull_request: { id: 1_990_323_142, number: 93 }
+          }
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93',
+      body: { id: 1_990_323_142, number: 93, user: { id: 50, login: 'author' } }
+    )
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'test' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-reviewed', where: 'gitlab', repository: 42, issue: 93, who: 43)
+    load_it('github-events', fb)
+    refute_empty(
+      fb.query('(and (eq what "pull-was-reviewed") (eq where "github") (eq issue 93))').each.to_a,
+      'a review from GitHub was dropped because of a fact from another source'
+    )
+  end
+
   private
 
   def stub_event(*json)
