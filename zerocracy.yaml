@@ -2,11 +2,15 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - 'Failure in repository #799177290 at #2285: GitHub GraphQL query failed: 502 Bad
+    Gateway'
+  - deadlock; recursive locking
   inserted: 8
-  seconds: 1144.362108124
+  seconds: 1137.216876023
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-12 11:57:11.802374515 Z
+  when: 2026-10-12 12:22:09.152432918 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -165958,7 +165962,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 2
   min_pull_was_found: 35
   repository: 1090089359
   types_were_scanned: 0
@@ -168149,7 +168153,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 140
+  min_issue_was_found: 141
   min_pull_was_found: 19
   repository: 974194993
   types_were_scanned: 0
@@ -174897,25 +174901,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1194
+  assignees_were_scanned: 1306
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17001395331
   issues_were_scanned: 1340
-  labels_were_scanned: 1384
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 0
-  min_issue_was_found: 1246
+  merges_were_scanned: 974
+  min_issue_was_found: 1247
   min_pull_was_found: 697
   repository: 798641472
-  types_were_scanned: 744
+  types_were_scanned: 870
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 16957984729
@@ -174923,10 +174927,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 369
+  min_issue_was_found: 370
   min_pull_was_found: 475
   repository: 840215648
-  types_were_scanned: 470
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -175343,18 +175347,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1001
-  closures_were_checked: 932
+  assignees_were_scanned: 1109
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17000520309
   issues_were_scanned: 1189
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1312
+  merges_were_scanned: 1403
   min_issue_was_found: 1384
   min_pull_was_found: 670
   repository: 820463873
-  types_were_scanned: 656
+  types_were_scanned: 775
   what: iterate
   where: github
 - _id: 2629882
@@ -176000,7 +176004,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 691
+  assignees_were_scanned: 831
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17001334043
@@ -176011,7 +176015,7 @@
   min_issue_was_found: 917
   min_pull_was_found: 616
   repository: 802720676
-  types_were_scanned: 992
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -176146,18 +176150,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 909
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17000628584
   issues_were_scanned: 843
-  labels_were_scanned: 877
+  labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 803
+  merges_were_scanned: 0
   min_issue_was_found: 827
   min_pull_was_found: 696
   repository: 799113787
-  types_were_scanned: 864
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630023
@@ -176182,18 +176186,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1474
-  closures_were_checked: 1637
+  assignees_were_scanned: 1668
+  closures_were_checked: 1933
   earliest_issue_was_found: 1
   events_were_scanned: 23769917886
   issues_were_scanned: 2552
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
+  merges_were_scanned: 2284
   min_issue_was_found: 2618
   min_pull_was_found: 1473
   repository: 799177290
-  types_were_scanned: 2120
+  types_were_scanned: 2184
   what: iterate
   where: github
 - _id: 2630036
@@ -176207,7 +176211,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 25
+  min_issue_was_found: 27
   min_pull_was_found: 19
   repository: 1081929119
   types_were_scanned: 0
@@ -176217,7 +176221,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 23514026153
@@ -176228,7 +176232,7 @@
   min_issue_was_found: 1254
   min_pull_was_found: 787
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1175
   what: iterate
   where: github
 - _id: 2630038
@@ -407652,7 +407656,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:36:04.000000000 Z
+  when: &4790 2026-10-12 09:36:04.000000000 Z
   where: github
   who: 526301
 - _id: 2643937
@@ -407677,7 +407681,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:35:58.000000000 Z
+  when: &4791 2026-10-12 09:35:58.000000000 Z
   where: github
   who: 526301
 - _id: 2643938
@@ -407702,7 +407706,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:35:31.000000000 Z
+  when: &4792 2026-10-12 09:35:31.000000000 Z
   where: github
   who: 526301
 - _id: 2643939
@@ -407727,7 +407731,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:35:01.000000000 Z
+  when: &4793 2026-10-12 09:35:01.000000000 Z
   where: github
   who: 526301
 - _id: 2643940
@@ -407752,7 +407756,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:34:47.000000000 Z
+  when: &4794 2026-10-12 09:34:47.000000000 Z
   where: github
   who: 526301
 - _id: 2643941
@@ -407777,7 +407781,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:34:42.000000000 Z
+  when: &4795 2026-10-12 09:34:42.000000000 Z
   where: github
   who: 526301
 - _id: 2643942
@@ -407802,7 +407806,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:34:25.000000000 Z
+  when: &4796 2026-10-12 09:34:25.000000000 Z
   where: github
   who: 526301
 - _id: 2643943
@@ -407827,7 +407831,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:34:17.000000000 Z
+  when: &4797 2026-10-12 09:34:17.000000000 Z
   where: github
   who: 526301
 - _id: 2643944
@@ -407852,7 +407856,7 @@
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:33:51.000000000 Z
+  when: &4798 2026-10-12 09:33:51.000000000 Z
   where: github
   who: 526301
 - _id: 2643945
@@ -407877,7 +407881,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:33:46.000000000 Z
+  when: &4799 2026-10-12 09:33:46.000000000 Z
   where: github
   who: 526301
 - _id: 2643946
@@ -407902,7 +407906,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:33:24.000000000 Z
+  when: &4800 2026-10-12 09:33:24.000000000 Z
   where: github
   who: 526301
 - _id: 2643947
@@ -407927,7 +407931,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:33:16.000000000 Z
+  when: &4801 2026-10-12 09:33:16.000000000 Z
   where: github
   who: 526301
 - _id: 2643948
@@ -407952,7 +407956,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:33:11.000000000 Z
+  when: &4802 2026-10-12 09:33:11.000000000 Z
   where: github
   who: 526301
 - _id: 2643949
@@ -407977,7 +407981,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:32:45.000000000 Z
+  when: &4803 2026-10-12 09:32:45.000000000 Z
   where: github
   who: 526301
 - _id: 2643950
@@ -408002,7 +408006,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:32:39.000000000 Z
+  when: &4804 2026-10-12 09:32:39.000000000 Z
   where: github
   who: 526301
 - _id: 2643951
@@ -408027,7 +408031,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:13:37.000000000 Z
+  when: &4805 2026-10-12 09:13:37.000000000 Z
   where: github
   who: 526301
 - _id: 2643952
@@ -408052,7 +408056,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:32:30.000000000 Z
+  when: &4806 2026-10-12 09:32:30.000000000 Z
   where: github
   who: 526301
 - _id: 2643953
@@ -408077,7 +408081,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:13:40.000000000 Z
+  when: &4807 2026-10-12 09:13:40.000000000 Z
   where: github
   who: 526301
 - _id: 2643954
@@ -408102,7 +408106,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:32:25.000000000 Z
+  when: &4808 2026-10-12 09:32:25.000000000 Z
   where: github
   who: 526301
 - _id: 2643955
@@ -408127,7 +408131,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 06:31:04.000000000 Z
+  when: &4809 2026-10-12 06:31:04.000000000 Z
   where: github
   who: 526301
 - _id: 2643956
@@ -408152,7 +408156,7 @@
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:13:27.000000000 Z
+  when: &4810 2026-10-12 09:13:27.000000000 Z
   where: github
   who: 526301
 - _id: 2643957
@@ -408177,7 +408181,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:31:26.000000000 Z
+  when: &4811 2026-10-12 09:31:26.000000000 Z
   where: github
   who: 526301
 - _id: 2643958
@@ -408202,7 +408206,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:13:24.000000000 Z
+  when: &4812 2026-10-12 09:13:24.000000000 Z
   where: github
   who: 526301
 - _id: 2643959
@@ -408227,7 +408231,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:31:34.000000000 Z
+  when: &4813 2026-10-12 09:31:34.000000000 Z
   where: github
   who: 526301
 - _id: 2643960
@@ -408252,7 +408256,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:13:21.000000000 Z
+  when: &4814 2026-10-12 09:13:21.000000000 Z
   where: github
   who: 526301
 - _id: 2643961
@@ -408277,7 +408281,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:31:23.000000000 Z
+  when: &4815 2026-10-12 09:31:23.000000000 Z
   where: github
   who: 526301
 - _id: 2643962
@@ -408302,7 +408306,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:55.000000000 Z
+  when: &4816 2026-10-12 09:30:55.000000000 Z
   where: github
   who: 526301
 - _id: 2643963
@@ -408327,7 +408331,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:31:20.000000000 Z
+  when: &4817 2026-10-12 09:31:20.000000000 Z
   where: github
   who: 526301
 - _id: 2643964
@@ -408352,7 +408356,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:50.000000000 Z
+  when: &4818 2026-10-12 09:30:50.000000000 Z
   where: github
   who: 526301
 - _id: 2643965
@@ -408377,7 +408381,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:59.000000000 Z
+  when: &4819 2026-10-12 09:30:59.000000000 Z
   where: github
   who: 526301
 - _id: 2643966
@@ -408402,7 +408406,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:56.000000000 Z
+  when: &4820 2026-10-12 09:30:56.000000000 Z
   where: github
   who: 526301
 - _id: 2643967
@@ -408427,7 +408431,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:52.000000000 Z
+  when: &4821 2026-10-12 09:30:52.000000000 Z
   where: github
   who: 526301
 - _id: 2643968
@@ -408452,7 +408456,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:13:43.000000000 Z
+  when: &4822 2026-10-12 09:13:43.000000000 Z
   where: github
   who: 526301
 - _id: 2643969
@@ -408477,7 +408481,7 @@
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:28.000000000 Z
+  when: &4823 2026-10-12 09:30:28.000000000 Z
   where: github
   who: 526301
 - _id: 2643970
@@ -408502,7 +408506,7 @@
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:31.000000000 Z
+  when: &4824 2026-10-12 09:30:31.000000000 Z
   where: github
   who: 526301
 - _id: 2643971
@@ -408527,7 +408531,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:46.000000000 Z
+  when: &4825 2026-10-12 09:30:46.000000000 Z
   where: github
   who: 526301
 - _id: 2643972
@@ -408552,7 +408556,7 @@
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:20.000000000 Z
+  when: &4826 2026-10-12 09:30:20.000000000 Z
   where: github
   who: 526301
 - _id: 2643973
@@ -408577,7 +408581,7 @@
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:02.000000000 Z
+  when: &4827 2026-10-12 09:30:02.000000000 Z
   where: github
   who: 526301
 - _id: 2643974
@@ -408602,7 +408606,7 @@
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:29:56.000000000 Z
+  when: &4828 2026-10-12 09:29:56.000000000 Z
   where: github
   who: 526301
 - _id: 2643975
@@ -408627,7 +408631,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:12:35.000000000 Z
+  when: &4829 2026-10-12 09:12:35.000000000 Z
   where: github
   who: 526301
 - _id: 2643976
@@ -408652,7 +408656,7 @@
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:29:50.000000000 Z
+  when: &4830 2026-10-12 09:29:50.000000000 Z
   where: github
   who: 526301
 - _id: 2643977
@@ -408677,7 +408681,7 @@
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:30:14.000000000 Z
+  when: &4831 2026-10-12 09:30:14.000000000 Z
   where: github
   who: 526301
 - _id: 2643978
@@ -408702,7 +408706,7 @@
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-12 09:12:41.000000000 Z
+  when: &4832 2026-10-12 09:12:41.000000000 Z
   where: github
   who: 526301
 - _id: 2643979
@@ -409823,7 +409827,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:29.000000000 Z
+  when: &4833 2026-10-12 09:29:29.000000000 Z
   where: github
   who: 526301
 - _id: 2644065
@@ -409836,7 +409840,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:24.000000000 Z
+  when: &4834 2026-10-12 09:29:24.000000000 Z
   where: github
   who: 526301
 - _id: 2644066
@@ -409849,7 +409853,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:26.000000000 Z
+  when: &4835 2026-10-12 09:29:26.000000000 Z
   where: github
   who: 526301
 - _id: 2644067
@@ -409862,7 +409866,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:25.000000000 Z
+  when: &4836 2026-10-12 09:29:25.000000000 Z
   where: github
   who: 526301
 - _id: 2644068
@@ -409875,7 +409879,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:23.000000000 Z
+  when: &4837 2026-10-12 09:29:23.000000000 Z
   where: github
   who: 526301
 - _id: 2644069
@@ -409888,7 +409892,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:22.000000000 Z
+  when: &4838 2026-10-12 09:29:22.000000000 Z
   where: github
   who: 526301
 - _id: 2644070
@@ -409901,7 +409905,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:18.000000000 Z
+  when: &4839 2026-10-12 09:29:18.000000000 Z
   where: github
   who: 526301
 - _id: 2644071
@@ -409914,7 +409918,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:17.000000000 Z
+  when: &4840 2026-10-12 09:29:17.000000000 Z
   where: github
   who: 526301
 - _id: 2644072
@@ -409927,7 +409931,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:23.000000000 Z
+  when: &4841 2026-10-12 09:29:23.000000000 Z
   where: github
   who: 526301
 - _id: 2644073
@@ -409940,7 +409944,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:15.000000000 Z
+  when: &4842 2026-10-12 09:29:15.000000000 Z
   where: github
   who: 526301
 - _id: 2644074
@@ -409953,7 +409957,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:14.000000000 Z
+  when: &4843 2026-10-12 09:29:14.000000000 Z
   where: github
   who: 526301
 - _id: 2644075
@@ -409966,7 +409970,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:10.000000000 Z
+  when: &4844 2026-10-12 09:29:10.000000000 Z
   where: github
   who: 526301
 - _id: 2644076
@@ -409979,7 +409983,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:09.000000000 Z
+  when: &4845 2026-10-12 09:29:09.000000000 Z
   where: github
   who: 526301
 - _id: 2644077
@@ -411396,8 +411400,10 @@
     it. Your running score is [+6556](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
+  href: https://github.com/yegor256/factbase/issues/1406/#issuecomment-6123799764
   is_human: 1
   issue: 1406
+  receipt: receipt-#98140
   repository: 798641472
   what: bug-report-was-rewarded
   when: 2026-10-12 11:01:47.351808747 Z
@@ -411415,8 +411421,10 @@
     Thanks for reporting a new bug! As per our [work policy](#), accepted bug reports earn a flat **+18 points** bonus, which has been added to your score. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6574](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6574](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/yegor256/factbase/issues/1405/#issuecomment-6123801957
   is_human: 1
   issue: 1405
+  receipt: receipt-#98141
   repository: 798641472
   what: bug-report-was-rewarded
   when: 2026-10-12 11:01:51.665033431 Z
@@ -411446,8 +411454,10 @@
     it. Your running score is [+6592](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
+  href: https://github.com/yegor256/factbase/issues/1403/#issuecomment-6123804081
   is_human: 1
   issue: 1403
+  receipt: receipt-#98138
   repository: 798641472
   what: bug-report-was-rewarded
   when: 2026-10-12 11:01:55.262707978 Z
@@ -411477,8 +411487,10 @@
     it. Your running score is [+15602](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
+  href: https://github.com/yegor256/judges/issues/915/#issuecomment-6123804851
   is_human: 1
   issue: 915
+  receipt: receipt-#98137
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-10-12 11:01:59.377732650 Z
@@ -411496,8 +411508,10 @@
     Thanks for reporting a new bug! As per policy, you've earned **+18 points** for your accepted report, helping improve our project's quality. If you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is [+6610](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); check your [Zerocracy account](https://www.zerocracy.com/) for details.
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6610](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/yegor256/factbase/issues/1402/#issuecomment-6123806651
   is_human: 1
   issue: 1402
+  receipt: receipt-#98136
   repository: 798641472
   what: bug-report-was-rewarded
   when: 2026-10-12 11:02:03.967616190 Z
@@ -411515,8 +411529,10 @@
     Thanks for reporting a new bug! As per team policy, you've earned **+18** points for this accepted report, helping us maintain project quality. If you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+15620](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too. Keep up the great work!
 
     <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+15620](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/yegor256/judges/issues/913/#issuecomment-6123807315
   is_human: 1
   issue: 913
+  receipt: receipt-#98135
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-10-12 11:02:07.518600668 Z
@@ -411547,6 +411563,7 @@
     \ -->"
   is_human: 1
   issue: 909
+  receipt: receipt-#98139
   repository: 799113787
   what: bug-report-was-rewarded
   when: 2026-10-12 11:02:11.132353082 Z
@@ -411618,7 +411635,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:08.000000000 Z
+  when: &4846 2026-10-12 09:29:08.000000000 Z
   where: github
   who: 526301
 - _id: 2644186
@@ -411631,7 +411648,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:07.000000000 Z
+  when: &4847 2026-10-12 09:29:07.000000000 Z
   where: github
   who: 526301
 - _id: 2644187
@@ -411644,7 +411661,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:03.000000000 Z
+  when: &4848 2026-10-12 09:29:03.000000000 Z
   where: github
   who: 526301
 - _id: 2644188
@@ -411657,7 +411674,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:02.000000000 Z
+  when: &4849 2026-10-12 09:29:02.000000000 Z
   where: github
   who: 526301
 - _id: 2644189
@@ -411670,7 +411687,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:01.000000000 Z
+  when: &4850 2026-10-12 09:29:01.000000000 Z
   where: github
   who: 526301
 - _id: 2644190
@@ -411683,7 +411700,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:00.000000000 Z
+  when: &4851 2026-10-12 09:29:00.000000000 Z
   where: github
   who: 526301
 - _id: 2644191
@@ -411696,7 +411713,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:57.000000000 Z
+  when: &4852 2026-10-12 09:28:57.000000000 Z
   where: github
   who: 526301
 - _id: 2644192
@@ -411709,7 +411726,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:55.000000000 Z
+  when: &4853 2026-10-12 09:28:55.000000000 Z
   where: github
   who: 526301
 - _id: 2644193
@@ -411722,7 +411739,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:57.000000000 Z
+  when: &4854 2026-10-12 09:30:57.000000000 Z
   where: github
   who: 526301
 - _id: 2644194
@@ -411735,7 +411752,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:54.000000000 Z
+  when: &4855 2026-10-12 09:28:54.000000000 Z
   where: github
   who: 526301
 - _id: 2644195
@@ -411748,7 +411765,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:56.000000000 Z
+  when: &4856 2026-10-12 09:30:56.000000000 Z
   where: github
   who: 526301
 - _id: 2644196
@@ -411761,7 +411778,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:55.000000000 Z
+  when: &4857 2026-10-12 09:30:55.000000000 Z
   where: github
   who: 526301
 - _id: 2644197
@@ -411774,7 +411791,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:48.000000000 Z
+  when: &4858 2026-10-12 09:28:48.000000000 Z
   where: github
   who: 526301
 - _id: 2644198
@@ -411787,7 +411804,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:54.000000000 Z
+  when: &4859 2026-10-12 09:30:54.000000000 Z
   where: github
   who: 526301
 - _id: 2644199
@@ -411800,7 +411817,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:53.000000000 Z
+  when: &4860 2026-10-12 09:30:53.000000000 Z
   where: github
   who: 526301
 - _id: 2644200
@@ -411813,7 +411830,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:50.000000000 Z
+  when: &4861 2026-10-12 09:30:50.000000000 Z
   where: github
   who: 526301
 - _id: 2644201
@@ -411826,7 +411843,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:47.000000000 Z
+  when: &4862 2026-10-12 09:28:47.000000000 Z
   where: github
   who: 526301
 - _id: 2644202
@@ -411839,7 +411856,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:49.000000000 Z
+  when: &4863 2026-10-12 09:30:49.000000000 Z
   where: github
   who: 526301
 - _id: 2644203
@@ -411852,7 +411869,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:47.000000000 Z
+  when: &4864 2026-10-12 09:30:47.000000000 Z
   where: github
   who: 526301
 - _id: 2644204
@@ -411865,7 +411882,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:48.000000000 Z
+  when: &4865 2026-10-12 09:29:48.000000000 Z
   where: github
   who: 526301
 - _id: 2644205
@@ -411878,7 +411895,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:46.000000000 Z
+  when: &4866 2026-10-12 09:30:46.000000000 Z
   where: github
   who: 526301
 - _id: 2644206
@@ -411891,7 +411908,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:29:47.000000000 Z
+  when: &4867 2026-10-12 09:29:47.000000000 Z
   where: github
   who: 526301
 - _id: 2644207
@@ -411904,7 +411921,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:45.000000000 Z
+  when: &4868 2026-10-12 09:30:45.000000000 Z
   where: github
   who: 526301
 - _id: 2644208
@@ -411917,7 +411934,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:44.000000000 Z
+  when: &4869 2026-10-12 09:30:44.000000000 Z
   where: github
   who: 526301
 - _id: 2644209
@@ -411930,7 +411947,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:42.000000000 Z
+  when: &4870 2026-10-12 09:28:42.000000000 Z
   where: github
   who: 526301
 - _id: 2644210
@@ -411943,7 +411960,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:41.000000000 Z
+  when: &4871 2026-10-12 09:30:41.000000000 Z
   where: github
   who: 526301
 - _id: 2644211
@@ -411956,7 +411973,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:39.000000000 Z
+  when: &4872 2026-10-12 09:30:39.000000000 Z
   where: github
   who: 526301
 - _id: 2644212
@@ -411969,7 +411986,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:38.000000000 Z
+  when: &4873 2026-10-12 09:30:38.000000000 Z
   where: github
   who: 526301
 - _id: 2644213
@@ -411982,7 +411999,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:41.000000000 Z
+  when: &4874 2026-10-12 09:28:41.000000000 Z
   where: github
   who: 526301
 - _id: 2644214
@@ -411995,7 +412012,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:18.000000000 Z
+  when: &4875 2026-10-12 09:29:18.000000000 Z
   where: github
   who: 526301
 - _id: 2644215
@@ -412008,7 +412025,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:37.000000000 Z
+  when: &4876 2026-10-12 09:30:37.000000000 Z
   where: github
   who: 526301
 - _id: 2644216
@@ -412021,7 +412038,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:39.000000000 Z
+  when: &4877 2026-10-12 09:28:39.000000000 Z
   where: github
   who: 526301
 - _id: 2644217
@@ -412034,7 +412051,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:17.000000000 Z
+  when: &4878 2026-10-12 09:29:17.000000000 Z
   where: github
   who: 526301
 - _id: 2644218
@@ -412047,7 +412064,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:36.000000000 Z
+  when: &4879 2026-10-12 09:30:36.000000000 Z
   where: github
   who: 526301
 - _id: 2644219
@@ -412060,7 +412077,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:15.000000000 Z
+  when: &4880 2026-10-12 09:29:15.000000000 Z
   where: github
   who: 526301
 - _id: 2644220
@@ -412073,7 +412090,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:35.000000000 Z
+  when: &4881 2026-10-12 09:30:35.000000000 Z
   where: github
   who: 526301
 - _id: 2644221
@@ -412086,7 +412103,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:14.000000000 Z
+  when: &4882 2026-10-12 09:29:14.000000000 Z
   where: github
   who: 526301
 - _id: 2644222
@@ -412099,7 +412116,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:32.000000000 Z
+  when: &4883 2026-10-12 09:30:32.000000000 Z
   where: github
   who: 526301
 - _id: 2644223
@@ -412112,7 +412129,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: 2026-10-12 09:28:46.000000000 Z
+  when: &4884 2026-10-12 09:28:46.000000000 Z
   where: github
   who: 526301
 - _id: 2644224
@@ -412125,7 +412142,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:13.000000000 Z
+  when: &4885 2026-10-12 09:29:13.000000000 Z
   where: github
   who: 526301
 - _id: 2644225
@@ -412138,7 +412155,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:31.000000000 Z
+  when: &4886 2026-10-12 09:30:31.000000000 Z
   where: github
   who: 526301
 - _id: 2644226
@@ -412151,7 +412168,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:12.000000000 Z
+  when: &4887 2026-10-12 09:29:12.000000000 Z
   where: github
   who: 526301
 - _id: 2644227
@@ -412164,7 +412181,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:30.000000000 Z
+  when: &4888 2026-10-12 09:30:30.000000000 Z
   where: github
   who: 526301
 - _id: 2644228
@@ -412177,7 +412194,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:09.000000000 Z
+  when: &4889 2026-10-12 09:29:09.000000000 Z
   where: github
   who: 526301
 - _id: 2644229
@@ -412190,7 +412207,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:28.000000000 Z
+  when: &4890 2026-10-12 09:30:28.000000000 Z
   where: github
   who: 526301
 - _id: 2644230
@@ -412203,7 +412220,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:27.000000000 Z
+  when: &4891 2026-10-12 09:30:27.000000000 Z
   where: github
   who: 526301
 - _id: 2644231
@@ -412216,7 +412233,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:26.000000000 Z
+  when: &4892 2026-10-12 09:30:26.000000000 Z
   where: github
   who: 526301
 - _id: 2644232
@@ -412229,7 +412246,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:07.000000000 Z
+  when: &4893 2026-10-12 09:29:07.000000000 Z
   where: github
   who: 526301
 - _id: 2644233
@@ -412242,7 +412259,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:23.000000000 Z
+  when: &4894 2026-10-12 09:30:23.000000000 Z
   where: github
   who: 526301
 - _id: 2644234
@@ -412255,7 +412272,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:06.000000000 Z
+  when: &4895 2026-10-12 09:29:06.000000000 Z
   where: github
   who: 526301
 - _id: 2644235
@@ -412268,7 +412285,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:22.000000000 Z
+  when: &4896 2026-10-12 09:30:22.000000000 Z
   where: github
   who: 526301
 - _id: 2644236
@@ -412281,7 +412298,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:05.000000000 Z
+  when: &4897 2026-10-12 09:29:05.000000000 Z
   where: github
   who: 526301
 - _id: 2644237
@@ -412294,7 +412311,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:20.000000000 Z
+  when: &4898 2026-10-12 09:30:20.000000000 Z
   where: github
   who: 526301
 - _id: 2644238
@@ -412307,7 +412324,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:29:03.000000000 Z
+  when: &4899 2026-10-12 09:29:03.000000000 Z
   where: github
   who: 526301
 - _id: 2644239
@@ -412320,7 +412337,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:15.000000000 Z
+  when: &4900 2026-10-12 09:30:15.000000000 Z
   where: github
   who: 526301
 - _id: 2644240
@@ -412333,7 +412350,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:14.000000000 Z
+  when: &4901 2026-10-12 09:30:14.000000000 Z
   where: github
   who: 526301
 - _id: 2644241
@@ -412346,7 +412363,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:13.000000000 Z
+  when: &4902 2026-10-12 09:30:13.000000000 Z
   where: github
   who: 526301
 - _id: 2644242
@@ -412359,7 +412376,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:10.000000000 Z
+  when: &4903 2026-10-12 09:30:10.000000000 Z
   where: github
   who: 526301
 - _id: 2644243
@@ -412372,7 +412389,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:09.000000000 Z
+  when: &4904 2026-10-12 09:30:09.000000000 Z
   where: github
   who: 526301
 - _id: 2644244
@@ -412385,7 +412402,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:08.000000000 Z
+  when: &4905 2026-10-12 09:30:08.000000000 Z
   where: github
   who: 526301
 - _id: 2644245
@@ -412398,7 +412415,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:07.000000000 Z
+  when: &4906 2026-10-12 09:30:07.000000000 Z
   where: github
   who: 526301
 - _id: 2644246
@@ -412411,7 +412428,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:06.000000000 Z
+  when: &4907 2026-10-12 09:30:06.000000000 Z
   where: github
   who: 526301
 - _id: 2644247
@@ -412424,7 +412441,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:04.000000000 Z
+  when: &4908 2026-10-12 09:30:04.000000000 Z
   where: github
   who: 526301
 - _id: 2644248
@@ -412437,7 +412454,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:01.000000000 Z
+  when: &4909 2026-10-12 09:30:01.000000000 Z
   where: github
   who: 526301
 - _id: 2644249
@@ -412450,7 +412467,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:28:46.000000000 Z
+  when: &4910 2026-10-12 09:28:46.000000000 Z
   where: github
   who: 526301
 - _id: 2644250
@@ -412463,7 +412480,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:30:00.000000000 Z
+  when: &4911 2026-10-12 09:30:00.000000000 Z
   where: github
   who: 526301
 - _id: 2644251
@@ -412476,7 +412493,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-10-12 09:28:45.000000000 Z
+  when: &4912 2026-10-12 09:28:45.000000000 Z
   where: github
   who: 526301
 - _id: 2644252
@@ -412489,7 +412506,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:29:59.000000000 Z
+  when: &4913 2026-10-12 09:29:59.000000000 Z
   where: github
   who: 526301
 - _id: 2644253
@@ -412502,7 +412519,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:29:57.000000000 Z
+  when: &4914 2026-10-12 09:29:57.000000000 Z
   where: github
   who: 526301
 - _id: 2644254
@@ -412515,7 +412532,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: 2026-10-12 09:29:56.000000000 Z
+  when: &4915 2026-10-12 09:29:56.000000000 Z
   where: github
   who: 526301
 - _id: 2644255
@@ -412828,5 +412845,2578 @@
   repository: 799113787
   what: label-was-attached
   when: 2026-10-12 09:29:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644279
+  _job: 98835
+  _time: 2026-10-12 11:58:46.306703206 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1257 with 16 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 16
+  is_human: 1
+  issue: 1257
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 858117
+  what: code-was-contributed
+  when: *4790
+  where: github
+  who: 125282851
+- _id: 2644280
+  _job: 98835
+  _time: 2026-10-12 11:58:46.708430666 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1258 with 11 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 11
+  is_human: 1
+  issue: 1258
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 857934
+  what: code-was-contributed
+  when: *4791
+  where: github
+  who: 125282851
+- _id: 2644281
+  _job: 98835
+  _time: 2026-10-12 11:58:47.004706818 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1262 with 85 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 85
+  is_human: 1
+  issue: 1262
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 857170
+  what: code-was-contributed
+  when: *4792
+  where: github
+  who: 125282851
+- _id: 2644282
+  _job: 98835
+  _time: 2026-10-12 11:58:47.283058868 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1264 with 62 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 62
+  is_human: 1
+  issue: 1264
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 856850
+  what: code-was-contributed
+  when: *4793
+  where: github
+  who: 125282851
+- _id: 2644283
+  _job: 98835
+  _time: 2026-10-12 11:58:47.575223269 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1266 with 8 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 8
+  is_human: 1
+  issue: 1266
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 856453
+  what: code-was-contributed
+  when: *4794
+  where: github
+  who: 125282851
+- _id: 2644284
+  _job: 98835
+  _time: 2026-10-12 11:58:47.856603670 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1267 with 48 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 48
+  is_human: 1
+  issue: 1267
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 856376
+  what: code-was-contributed
+  when: *4795
+  where: github
+  who: 125282851
+- _id: 2644285
+  _job: 98835
+  _time: 2026-10-12 11:58:48.157314872 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1268 with 19 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 19
+  is_human: 1
+  issue: 1268
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 856301
+  what: code-was-contributed
+  when: *4796
+  where: github
+  who: 125282851
+- _id: 2644286
+  _job: 98835
+  _time: 2026-10-12 11:58:48.435086073 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1270 with 20 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 20
+  is_human: 1
+  issue: 1270
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 856154
+  what: code-was-contributed
+  when: *4797
+  where: github
+  who: 125282851
+- _id: 2644287
+  _job: 98835
+  _time: 2026-10-12 11:58:48.738101797 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1275 with 16 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 16
+  is_human: 1
+  issue: 1275
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 855707
+  what: code-was-contributed
+  when: *4798
+  where: github
+  who: 125282851
+- _id: 2644288
+  _job: 98835
+  _time: 2026-10-12 11:58:49.033408539 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1276 with 11 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 11
+  is_human: 1
+  issue: 1276
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 855608
+  what: code-was-contributed
+  when: *4799
+  where: github
+  who: 125282851
+- _id: 2644289
+  _job: 98835
+  _time: 2026-10-12 11:58:49.313989171 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1277 with 8 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 8
+  is_human: 1
+  issue: 1277
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 855560
+  what: code-was-contributed
+  when: *4800
+  where: github
+  who: 125282851
+- _id: 2644290
+  _job: 98835
+  _time: 2026-10-12 11:58:49.610580027 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1279 with 20 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 20
+  is_human: 1
+  issue: 1279
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 855423
+  what: code-was-contributed
+  when: *4801
+  where: github
+  who: 125282851
+- _id: 2644291
+  _job: 98835
+  _time: 2026-10-12 11:58:49.888887235 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1280 with 25 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 25
+  is_human: 1
+  issue: 1280
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 855340
+  what: code-was-contributed
+  when: *4802
+  where: github
+  who: 125282851
+- _id: 2644292
+  _job: 98835
+  _time: 2026-10-12 11:58:50.181388249 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1281 with 19 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 19
+  is_human: 1
+  issue: 1281
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 855270
+  what: code-was-contributed
+  when: *4803
+  where: github
+  who: 125282851
+- _id: 2644293
+  _job: 98835
+  _time: 2026-10-12 11:58:50.462728247 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1282 with 12 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 12
+  is_human: 1
+  issue: 1282
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 855186
+  what: code-was-contributed
+  when: *4804
+  where: github
+  who: 125282851
+- _id: 2644294
+  _job: 98835
+  _time: 2026-10-12 11:58:50.761562756 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request zerocracy/pages-action#934 with 5 HoC created by @morphqdd
+    was merged by @yegor256 after 1w4d of being in review and 1 comments.
+  hoc: 5
+  is_human: 1
+  issue: 934
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 1031568
+  what: code-was-contributed
+  when: *4805
+  where: github
+  who: 125282851
+- _id: 2644295
+  _job: 98835
+  _time: 2026-10-12 11:58:51.289480765 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1283 with 12 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 12
+  is_human: 1
+  issue: 1283
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 854981
+  what: code-was-contributed
+  when: *4806
+  where: github
+  who: 125282851
+- _id: 2644296
+  _job: 98835
+  _time: 2026-10-12 11:58:51.589650269 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request zerocracy/pages-action#936 with 25 HoC created by @morphqdd
+    was merged by @yegor256 after 1w4d of being in review and 1 comments.
+  hoc: 25
+  is_human: 1
+  issue: 936
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 1029362
+  what: code-was-contributed
+  when: *4807
+  where: github
+  who: 125282851
+- _id: 2644297
+  _job: 98835
+  _time: 2026-10-12 11:58:51.882374194 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1284 with 43 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 43
+  is_human: 1
+  issue: 1284
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 854895
+  what: code-was-contributed
+  when: *4808
+  where: github
+  who: 125282851
+- _id: 2644298
+  _job: 98835
+  _time: 2026-10-12 11:58:52.156708231 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1288 with 37 HoC created by @morphqdd
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 37
+  is_human: 1
+  issue: 1288
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 843219
+  what: code-was-contributed
+  when: *4809
+  where: github
+  who: 125282851
+- _id: 2644299
+  _job: 98835
+  _time: 2026-10-12 11:58:52.451228768 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request zerocracy/pages-action#953 with 23 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 3 comments.
+  hoc: 23
+  is_human: 1
+  issue: 953
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 852094
+  what: code-was-contributed
+  when: *4810
+  where: github
+  who: 113778529
+- _id: 2644300
+  _job: 98835
+  _time: 2026-10-12 11:58:52.865273640 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1294 with 54 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 54
+  is_human: 1
+  issue: 1294
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 822142
+  what: code-was-contributed
+  when: *4811
+  where: github
+  who: 113778529
+- _id: 2644301
+  _job: 98835
+  _time: 2026-10-12 11:58:53.161375355 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request zerocracy/pages-action#954 with 19 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 19
+  is_human: 1
+  issue: 954
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 851956
+  what: code-was-contributed
+  when: *4812
+  where: github
+  who: 113778529
+- _id: 2644302
+  _job: 98835
+  _time: 2026-10-12 11:58:53.459216187 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1295 with 10 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 10
+  is_human: 1
+  issue: 1295
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 822002
+  what: code-was-contributed
+  when: *4813
+  where: github
+  who: 113778529
+- _id: 2644303
+  _job: 98835
+  _time: 2026-10-12 11:58:53.757280496 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request zerocracy/pages-action#955 with 20 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 2 comments.
+  hoc: 20
+  is_human: 1
+  issue: 955
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 851650
+  what: code-was-contributed
+  when: *4814
+  where: github
+  who: 113778529
+- _id: 2644304
+  _job: 98835
+  _time: 2026-10-12 11:58:54.052554414 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1296 with 10 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 10
+  is_human: 1
+  issue: 1296
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 821729
+  what: code-was-contributed
+  when: *4815
+  where: github
+  who: 113778529
+- _id: 2644305
+  _job: 98835
+  _time: 2026-10-12 11:58:54.328749079 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request zerocracy/pages-action#956 with 5 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 2 comments.
+  hoc: 5
+  is_human: 1
+  issue: 956
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 852638
+  what: code-was-contributed
+  when: *4816
+  where: github
+  who: 113778529
+- _id: 2644306
+  _job: 98835
+  _time: 2026-10-12 11:58:54.621846200 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1298 with 44 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 44
+  is_human: 1
+  issue: 1298
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 819871
+  what: code-was-contributed
+  when: *4817
+  where: github
+  who: 113778529
+- _id: 2644307
+  _job: 98835
+  _time: 2026-10-12 11:58:54.900250543 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request zerocracy/pages-action#957 with 6 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 2 comments.
+  hoc: 6
+  is_human: 1
+  issue: 957
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 852561
+  what: code-was-contributed
+  when: *4818
+  where: github
+  who: 113778529
+- _id: 2644308
+  _job: 98835
+  _time: 2026-10-12 11:58:55.195777869 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request yegor256/factbase#1308 with 22 HoC created by @morphqdd
+    was merged by @yegor256 after 1w of being in review and 2 comments.
+  hoc: 22
+  is_human: 1
+  issue: 1308
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 675708
+  what: code-was-contributed
+  when: *4819
+  where: github
+  who: 125282851
+- _id: 2644309
+  _job: 98835
+  _time: 2026-10-12 11:58:55.631390214 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request yegor256/factbase#1309 with 17 HoC created by @morphqdd
+    was merged by @yegor256 after 1w of being in review and 2 comments.
+  hoc: 17
+  is_human: 1
+  issue: 1309
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 675693
+  what: code-was-contributed
+  when: *4820
+  where: github
+  who: 125282851
+- _id: 2644310
+  _job: 98835
+  _time: 2026-10-12 11:58:55.905290512 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request yegor256/factbase#1310 with 16 HoC created by @morphqdd
+    was merged by @yegor256 after 1w of being in review and 2 comments.
+  hoc: 16
+  is_human: 1
+  issue: 1310
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 675685
+  what: code-was-contributed
+  when: *4821
+  where: github
+  who: 125282851
+- _id: 2644311
+  _job: 98835
+  _time: 2026-10-12 11:58:56.196945072 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request zerocracy/pages-action#960 with 42 HoC created by @gemshrine
+    was merged by @yegor256 after 1w2d of being in review and 1 comments.
+  hoc: 42
+  is_human: 1
+  issue: 960
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 851245
+  what: code-was-contributed
+  when: *4822
+  where: github
+  who: 113778529
+- _id: 2644312
+  _job: 98835
+  _time: 2026-10-12 11:58:56.599939891 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request zerocracy/pages-action#1010 with 2 HoC created by @morphqdd
+    was merged by @yegor256 after 6d15h of being in review and 2 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1010
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 573607
+  what: code-was-contributed
+  when: *4823
+  where: github
+  who: 125282851
+- _id: 2644313
+  _job: 98835
+  _time: 2026-10-12 11:58:56.889703826 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request yegor256/factbase#1365 with 8 HoC created by @morphqdd
+    was merged by @yegor256 after 6d13h of being in review and 2 comments.
+  hoc: 8
+  is_human: 1
+  issue: 1365
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 566686
+  what: code-was-contributed
+  when: *4824
+  where: github
+  who: 125282851
+- _id: 2644314
+  _job: 98835
+  _time: 2026-10-12 11:58:57.160345467 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request zerocracy/pages-action#1013 with 74 HoC created by @morphqdd
+    was merged by @yegor256 after 6d15h of being in review and 3 comments.
+  hoc: 74
+  is_human: 1
+  issue: 1013
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 573610
+  what: code-was-contributed
+  when: *4825
+  where: github
+  who: 125282851
+- _id: 2644315
+  _job: 98835
+  _time: 2026-10-12 11:58:57.454545386 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  details: The pull request yegor256/factbase#1366 with 21 HoC created by @morphqdd
+    was merged by @yegor256 after 6d13h of being in review and 2 comments.
+  hoc: 21
+  is_human: 1
+  issue: 1366
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 566670
+  what: code-was-contributed
+  when: *4826
+  where: github
+  who: 125282851
+- _id: 2644316
+  _job: 98835
+  _time: 2026-10-12 11:58:57.742989943 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1367 with 9 HoC created by @gemshrine
+    was merged by @yegor256 after 6d11h of being in review and 1 comments.
+  hoc: 9
+  is_human: 1
+  issue: 1367
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 560480
+  what: code-was-contributed
+  when: *4827
+  where: github
+  who: 113778529
+- _id: 2644317
+  _job: 98835
+  _time: 2026-10-12 11:58:58.015222514 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1368 with 11 HoC created by @morphqdd
+    was merged by @yegor256 after 6d2h of being in review and 1 comments.
+  hoc: 11
+  is_human: 1
+  issue: 1368
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 529014
+  what: code-was-contributed
+  when: *4828
+  where: github
+  who: 125282851
+- _id: 2644318
+  _job: 98835
+  _time: 2026-10-12 11:58:58.302944057 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request zerocracy/pages-action#1017 with 39 HoC created by @morphqdd
+    was merged by @yegor256 after 6d2h of being in review and 1 comments.
+  hoc: 39
+  is_human: 1
+  issue: 1017
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 528068
+  what: code-was-contributed
+  when: *4829
+  where: github
+  who: 125282851
+- _id: 2644319
+  _job: 98835
+  _time: 2026-10-12 11:58:58.578612123 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1369 with 13 HoC created by @morphqdd
+    was merged by @yegor256 after 6d2h of being in review and 1 comments.
+  hoc: 13
+  is_human: 1
+  issue: 1369
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 528304
+  what: code-was-contributed
+  when: *4830
+  where: github
+  who: 125282851
+- _id: 2644320
+  _job: 98835
+  _time: 2026-10-12 11:58:58.874763144 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1371 with 17 HoC created by @morphqdd
+    was merged by @yegor256 after 6d2h of being in review and 1 comments.
+  hoc: 17
+  is_human: 1
+  issue: 1371
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 528317
+  what: code-was-contributed
+  when: *4831
+  where: github
+  who: 125282851
+- _id: 2644321
+  _job: 98835
+  _time: 2026-10-12 11:58:59.163458094 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request zerocracy/pages-action#1019 with 17 HoC created by @morphqdd
+    was merged by @yegor256 after 6d2h of being in review and 1 comments.
+  hoc: 17
+  is_human: 1
+  issue: 1019
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 527222
+  what: code-was-contributed
+  when: *4832
+  where: github
+  who: 125282851
+- _id: 2644322
+  _job: 98835
+  _time: 2026-10-12 11:59:02.124487955 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2714 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2714
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4833
+  where: github
+  who: 526301
+- _id: 2644323
+  _job: 98835
+  _time: 2026-10-12 11:59:02.649592138 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1221 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1221
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4834
+  where: github
+  who: 526301
+- _id: 2644324
+  _job: 98835
+  _time: 2026-10-12 11:59:02.952414412 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2715 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2715
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4835
+  where: github
+  who: 526301
+- _id: 2644325
+  _job: 98835
+  _time: 2026-10-12 11:59:03.247144284 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2716 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2716
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4836
+  where: github
+  who: 526301
+- _id: 2644326
+  _job: 98835
+  _time: 2026-10-12 11:59:03.522730407 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2717 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2717
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4837
+  where: github
+  who: 526301
+- _id: 2644327
+  _job: 98835
+  _time: 2026-10-12 11:59:03.816957017 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2718 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2718
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4838
+  where: github
+  who: 526301
+- _id: 2644328
+  _job: 98835
+  _time: 2026-10-12 11:59:04.095879694 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2719 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2719
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4839
+  where: github
+  who: 526301
+- _id: 2644329
+  _job: 98835
+  _time: 2026-10-12 11:59:04.388032625 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2720 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2720
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4840
+  where: github
+  who: 526301
+- _id: 2644330
+  _job: 98835
+  _time: 2026-10-12 11:59:04.663838683 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1227 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1227
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4841
+  where: github
+  who: 526301
+- _id: 2644331
+  _job: 98835
+  _time: 2026-10-12 11:59:04.958155477 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2721 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2721
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4842
+  where: github
+  who: 526301
+- _id: 2644332
+  _job: 98835
+  _time: 2026-10-12 11:59:05.233457343 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2722 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2722
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4843
+  where: github
+  who: 526301
+- _id: 2644333
+  _job: 98835
+  _time: 2026-10-12 11:59:05.645975902 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2723 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2723
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4844
+  where: github
+  who: 526301
+- _id: 2644334
+  _job: 98835
+  _time: 2026-10-12 11:59:05.942684825 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2724 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2724
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4845
+  where: github
+  who: 526301
+- _id: 2644335
+  _job: 98835
+  _time: 2026-10-12 11:59:06.219060011 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2725 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2725
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4846
+  where: github
+  who: 526301
+- _id: 2644336
+  _job: 98835
+  _time: 2026-10-12 11:59:06.511461896 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2726 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2726
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4847
+  where: github
+  who: 526301
+- _id: 2644337
+  _job: 98835
+  _time: 2026-10-12 11:59:06.784996806 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2727 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2727
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4848
+  where: github
+  who: 526301
+- _id: 2644338
+  _job: 98835
+  _time: 2026-10-12 11:59:07.075461809 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2728 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2728
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4849
+  where: github
+  who: 526301
+- _id: 2644339
+  _job: 98835
+  _time: 2026-10-12 11:59:07.352515898 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2729 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2729
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4850
+  where: github
+  who: 526301
+- _id: 2644340
+  _job: 98835
+  _time: 2026-10-12 11:59:07.654339372 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2730 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2730
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4851
+  where: github
+  who: 526301
+- _id: 2644341
+  _job: 98835
+  _time: 2026-10-12 11:59:07.945098761 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2731 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2731
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4852
+  where: github
+  who: 526301
+- _id: 2644342
+  _job: 98835
+  _time: 2026-10-12 11:59:08.227021840 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2733 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2733
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4853
+  where: github
+  who: 526301
+- _id: 2644343
+  _job: 98835
+  _time: 2026-10-12 11:59:08.517609163 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#808 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 808
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4854
+  where: github
+  who: 526301
+- _id: 2644344
+  _job: 98835
+  _time: 2026-10-12 11:59:08.792979827 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2734 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2734
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4855
+  where: github
+  who: 526301
+- _id: 2644345
+  _job: 98835
+  _time: 2026-10-12 11:59:09.086703968 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#817 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 817
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4856
+  where: github
+  who: 526301
+- _id: 2644346
+  _job: 98835
+  _time: 2026-10-12 11:59:09.358462684 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#818 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 818
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4857
+  where: github
+  who: 526301
+- _id: 2644347
+  _job: 98835
+  _time: 2026-10-12 11:59:09.654367887 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2736 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2736
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4858
+  where: github
+  who: 526301
+- _id: 2644348
+  _job: 98835
+  _time: 2026-10-12 11:59:09.943994232 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#819 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 819
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4859
+  where: github
+  who: 526301
+- _id: 2644349
+  _job: 98835
+  _time: 2026-10-12 11:59:10.217869684 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#820 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 820
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4860
+  where: github
+  who: 526301
+- _id: 2644350
+  _job: 98835
+  _time: 2026-10-12 11:59:10.507145850 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#821 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 821
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4861
+  where: github
+  who: 526301
+- _id: 2644351
+  _job: 98835
+  _time: 2026-10-12 11:59:10.781232733 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2739 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2739
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4862
+  where: github
+  who: 526301
+- _id: 2644352
+  _job: 98835
+  _time: 2026-10-12 11:59:11.073079286 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#822 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 822
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4863
+  where: github
+  who: 526301
+- _id: 2644353
+  _job: 98835
+  _time: 2026-10-12 11:59:11.362722819 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#823 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 823
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4864
+  where: github
+  who: 526301
+- _id: 2644354
+  _job: 98835
+  _time: 2026-10-12 11:59:11.635865768 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2741 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2741
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4865
+  where: github
+  who: 526301
+- _id: 2644355
+  _job: 98835
+  _time: 2026-10-12 11:59:11.924542181 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#824 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 824
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4866
+  where: github
+  who: 526301
+- _id: 2644356
+  _job: 98835
+  _time: 2026-10-12 11:59:12.198627763 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2742 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2742
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4867
+  where: github
+  who: 526301
+- _id: 2644357
+  _job: 98835
+  _time: 2026-10-12 11:59:12.493865431 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#825 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 825
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4868
+  where: github
+  who: 526301
+- _id: 2644358
+  _job: 98835
+  _time: 2026-10-12 11:59:12.784819443 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#826 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 826
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4869
+  where: github
+  who: 526301
+- _id: 2644359
+  _job: 98835
+  _time: 2026-10-12 11:59:13.057992498 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2744 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2744
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4870
+  where: github
+  who: 526301
+- _id: 2644360
+  _job: 98835
+  _time: 2026-10-12 11:59:13.346300047 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#827 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 827
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4871
+  where: github
+  who: 526301
+- _id: 2644361
+  _job: 98835
+  _time: 2026-10-12 11:59:13.619454518 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#828 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 828
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4872
+  where: github
+  who: 526301
+- _id: 2644362
+  _job: 98835
+  _time: 2026-10-12 11:59:13.911857048 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#829 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 829
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4873
+  where: github
+  who: 526301
+- _id: 2644363
+  _job: 98835
+  _time: 2026-10-12 11:59:14.201168022 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2747 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2747
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4874
+  where: github
+  who: 526301
+- _id: 2644364
+  _job: 98835
+  _time: 2026-10-12 11:59:14.474582303 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1328 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1328
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4875
+  where: github
+  who: 526301
+- _id: 2644365
+  _job: 98835
+  _time: 2026-10-12 11:59:14.762178600 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#830 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 830
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4876
+  where: github
+  who: 526301
+- _id: 2644366
+  _job: 98835
+  _time: 2026-10-12 11:59:15.037391190 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2748 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2748
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4877
+  where: github
+  who: 526301
+- _id: 2644367
+  _job: 98835
+  _time: 2026-10-12 11:59:15.471482448 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1329 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1329
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4878
+  where: github
+  who: 526301
+- _id: 2644368
+  _job: 98835
+  _time: 2026-10-12 11:59:15.976510422 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#831 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 831
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4879
+  where: github
+  who: 526301
+- _id: 2644369
+  _job: 98835
+  _time: 2026-10-12 11:59:16.250819188 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1330 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1330
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4880
+  where: github
+  who: 526301
+- _id: 2644370
+  _job: 98835
+  _time: 2026-10-12 11:59:16.544559330 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#834 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 834
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4881
+  where: github
+  who: 526301
+- _id: 2644371
+  _job: 98835
+  _time: 2026-10-12 11:59:16.842082612 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1331 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1331
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4882
+  where: github
+  who: 526301
+- _id: 2644372
+  _job: 98835
+  _time: 2026-10-12 11:59:17.116099585 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#840 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 840
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4883
+  where: github
+  who: 526301
+- _id: 2644373
+  _job: 98835
+  _time: 2026-10-12 11:59:17.404747279 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2751 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2751
+  reporter: 125282851
+  repository: 799177290
+  what: bug-was-accepted
+  when: *4884
+  where: github
+  who: 526301
+- _id: 2644374
+  _job: 98835
+  _time: 2026-10-12 11:59:17.681739540 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1332 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1332
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4885
+  where: github
+  who: 526301
+- _id: 2644375
+  _job: 98835
+  _time: 2026-10-12 11:59:17.977474046 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#841 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 841
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4886
+  where: github
+  who: 526301
+- _id: 2644376
+  _job: 98835
+  _time: 2026-10-12 11:59:18.268419860 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1333 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1333
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4887
+  where: github
+  who: 526301
+- _id: 2644377
+  _job: 98835
+  _time: 2026-10-12 11:59:18.543058843 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#842 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 842
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4888
+  where: github
+  who: 526301
+- _id: 2644378
+  _job: 98835
+  _time: 2026-10-12 11:59:18.840685487 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1335 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1335
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4889
+  where: github
+  who: 526301
+- _id: 2644379
+  _job: 98835
+  _time: 2026-10-12 11:59:19.134986572 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#843 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 843
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4890
+  where: github
+  who: 526301
+- _id: 2644380
+  _job: 98835
+  _time: 2026-10-12 11:59:19.411522519 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#844 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 844
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4891
+  where: github
+  who: 526301
+- _id: 2644381
+  _job: 98835
+  _time: 2026-10-12 11:59:19.705694556 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#845 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 845
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4892
+  where: github
+  who: 526301
+- _id: 2644382
+  _job: 98835
+  _time: 2026-10-12 11:59:19.996531031 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1338 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1338
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4893
+  where: github
+  who: 526301
+- _id: 2644383
+  _job: 98835
+  _time: 2026-10-12 11:59:20.269676034 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#846 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 846
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4894
+  where: github
+  who: 526301
+- _id: 2644384
+  _job: 98835
+  _time: 2026-10-12 11:59:20.560970330 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1339 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1339
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4895
+  where: github
+  who: 526301
+- _id: 2644385
+  _job: 98835
+  _time: 2026-10-12 11:59:20.851109213 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#847 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 847
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4896
+  where: github
+  who: 526301
+- _id: 2644386
+  _job: 98835
+  _time: 2026-10-12 11:59:21.125700882 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1340 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1340
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4897
+  where: github
+  who: 526301
+- _id: 2644387
+  _job: 98835
+  _time: 2026-10-12 11:59:21.419588506 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#848 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 848
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4898
+  where: github
+  who: 526301
+- _id: 2644388
+  _job: 98835
+  _time: 2026-10-12 11:59:21.709851463 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1341 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1341
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4899
+  where: github
+  who: 526301
+- _id: 2644389
+  _job: 98835
+  _time: 2026-10-12 11:59:21.986000752 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#849 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 849
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4900
+  where: github
+  who: 526301
+- _id: 2644390
+  _job: 98835
+  _time: 2026-10-12 11:59:22.277769631 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#850 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 850
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4901
+  where: github
+  who: 526301
+- _id: 2644391
+  _job: 98835
+  _time: 2026-10-12 11:59:22.570563758 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#851 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 851
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4902
+  where: github
+  who: 526301
+- _id: 2644392
+  _job: 98835
+  _time: 2026-10-12 11:59:22.842521573 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#852 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 852
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4903
+  where: github
+  who: 526301
+- _id: 2644393
+  _job: 98835
+  _time: 2026-10-12 11:59:23.135270417 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#853 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 853
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4904
+  where: github
+  who: 526301
+- _id: 2644394
+  _job: 98835
+  _time: 2026-10-12 11:59:23.423799543 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#854 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 854
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4905
+  where: github
+  who: 526301
+- _id: 2644395
+  _job: 98835
+  _time: 2026-10-12 11:59:23.697857024 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#855 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 855
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4906
+  where: github
+  who: 526301
+- _id: 2644396
+  _job: 98835
+  _time: 2026-10-12 11:59:23.991688922 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#856 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 856
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4907
+  where: github
+  who: 526301
+- _id: 2644397
+  _job: 98835
+  _time: 2026-10-12 11:59:24.281397904 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#857 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 857
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4908
+  where: github
+  who: 526301
+- _id: 2644398
+  _job: 98835
+  _time: 2026-10-12 11:59:24.553619487 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#858 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 858
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4909
+  where: github
+  who: 526301
+- _id: 2644399
+  _job: 98835
+  _time: 2026-10-12 11:59:24.844272655 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1353 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1353
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4910
+  where: github
+  who: 526301
+- _id: 2644400
+  _job: 98835
+  _time: 2026-10-12 11:59:25.261643597 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#859 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 859
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4911
+  where: github
+  who: 526301
+- _id: 2644401
+  _job: 98835
+  _time: 2026-10-12 11:59:25.536721171 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1354 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1354
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *4912
+  where: github
+  who: 526301
+- _id: 2644402
+  _job: 98835
+  _time: 2026-10-12 11:59:25.832721210 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#860 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 860
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4913
+  where: github
+  who: 526301
+- _id: 2644403
+  _job: 98835
+  _time: 2026-10-12 11:59:26.123734255 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#861 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 861
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4914
+  where: github
+  who: 526301
+- _id: 2644404
+  _job: 98835
+  _time: 2026-10-12 11:59:26.397724888 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#862 reported by
+    @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 862
+  reporter: 125282851
+  repository: 799113787
+  what: bug-was-accepted
+  when: *4915
+  where: github
+  who: 526301
+- _id: 2644405
+  _job: 98835
+  _time: 2026-10-12 11:59:28.566700319 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @gemshrine for the bug reported in zerocracy/fbe#1466,
+    the reward amount is 18.
+  greeting: "Hey, nice catch on that bug! \U0001F389 Since it got accepted, you've
+    bagged **+18** points, easy as that. Reporting bugs like this really helps keep
+    our project in good shape, so if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    quite right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
+    You're now sitting at [+6628](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    overall, keep an eye on your [Zerocracy account](https://www.zerocracy.com/) too!\n\n<!--
+    Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you
+    help our project improve its quality. If you find anything else in the repository
+    that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+6628](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 1466
+  repository: 820463873
+  what: bug-report-was-rewarded
+  when: 2026-10-12 11:59:28.568605977 Z
+  where: github
+  who: 113778529
+  why: Reported bug in zerocracy/fbe#1466
+- _id: 2644406
+  _job: 98835
+  _time: 2026-10-12 11:59:33.094722920 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @gemshrine for the bug reported in zerocracy/pages-action#1024,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per our policy, accepted bug reports earn a bonus, and you've been awarded **+18 points**. Your contributions help improve our project's quality—if you spot anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html). Your running score is now [+6646](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); check your [Zerocracy account](https://www.zerocracy.com/) for details. Keep up the great work!
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6646](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1024
+  repository: 802720676
+  what: bug-report-was-rewarded
+  when: 2026-10-12 11:59:33.097207869 Z
+  where: github
+  who: 113778529
+  why: Reported bug in zerocracy/pages-action#1024
+- _id: 2644407
+  _job: 98835
+  _time: 2026-10-12 11:59:36.956438794 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @gemshrine for the bug reported in zerocracy/fbe#1465,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per our [work policy](#), accepted bug reports earn a flat **+18 points** bonus, which has been added to your score. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is now [+6664](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6664](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1465
+  repository: 820463873
+  what: bug-report-was-rewarded
+  when: 2026-10-12 11:59:36.958552799 Z
+  where: github
+  who: 113778529
+  why: Reported bug in zerocracy/fbe#1465
+- _id: 2644408
+  _job: 98835
+  _time: 2026-10-12 11:59:40.773219560 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/pages-action#1004,
+    the reward amount is 18.
+  greeting: "Hey, nice catch on that bug! \U0001F389 Since it got accepted, you've
+    earned **+18 points**, just for helping us keep the project in good shape. Found
+    something else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    right? [Don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    too. You're now at [+15656](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    overall, check your [Zerocracy account](https://www.zerocracy.com/) for the full
+    picture!\n\n<!-- Thanks for reporting a new bug! You've earned +18 points. By
+    reporting bugs, you help our project improve its quality. If you find anything
+    else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+15656](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 1004
+  repository: 802720676
+  what: bug-report-was-rewarded
+  when: 2026-10-12 11:59:40.775100147 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/pages-action#1004
+- _id: 2644409
+  _job: 98835
+  _time: 2026-10-12 11:59:44.637561837 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @gemshrine for the bug reported in zerocracy/fbe#1453,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per policy, accepted bug reports earn a bonus of **+18 points**, which have been added to your score. Reporting issues helps us maintain high project quality—if you spot anything else that [doesn't look right](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html), feel free to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html); [bugs are always welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html). Your running score is now [+6682](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)—check your [Zerocracy account](https://www.zerocracy.com/) for details. Keep up the great work!
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6682](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1453
+  repository: 820463873
+  what: bug-report-was-rewarded
+  when: 2026-10-12 11:59:44.639493188 Z
+  where: github
+  who: 113778529
+  why: Reported bug in zerocracy/fbe#1453
+- _id: 2644410
+  _job: 98835
+  _time: 2026-10-12 11:59:48.216195232 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @gemshrine for the bug reported in zerocracy/fbe#1452,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As our [bug bonus policy](#) states, every accepted bug report earns a flat **+18 points**, and that's exactly what you've just received. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6700](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6700](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1452
+  repository: 820463873
+  what: bug-report-was-rewarded
+  when: 2026-10-12 11:59:48.218227773 Z
+  where: github
+  who: 113778529
+  why: Reported bug in zerocracy/fbe#1452
+- _id: 2644411
+  _job: 98835
+  _time: 2026-10-12 11:59:52.055290841 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/pages-action#1003,
+    the reward amount is 18.
+  greeting: "Hey, nice catch on that bug! \U0001F389 Since the team accepted your
+    report, you've bagged **+18 points**, just like our policy promises for every
+    accepted bug. Keep an eye out for anything in the repo that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    right, [don't hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
+    Your running score is now [+15674](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
+    and you can check all the details on your [Zerocracy account](https://www.zerocracy.com/)
+    too!\n\n<!-- Thanks for reporting a new bug! You've earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+15674](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 1003
+  repository: 802720676
+  what: bug-report-was-rewarded
+  when: 2026-10-12 11:59:52.057263195 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/pages-action#1003
+- _id: 2644412
+  _job: 98835
+  _time: 2026-10-12 11:59:56.842253495 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 20
+  comments: 1
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/pages-action#1021,
+    the reward amount is 20.
+  greeting: "Thanks for the contribution! \U0001F389 You've earned **+20 points**:
+    +24 as a basis, -4 for a lower hits-of-code count (6). Please [keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
+    Your running score is now [+15694](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.\n\n<!--
+    Thanks for the contribution! You've earned +20 points for this: +24 as a basis;
+    -4 for too few (6) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+15694](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 6
+  is_human: 1
+  issue: 1021
+  repository: 802720676
+  review_comments: 0
+  seconds: 527189
+  what: code-contribution-was-rewarded
+  when: 2026-10-12 11:59:56.849426379 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/pages-action#1021
+- _id: 2644413
+  _job: 98835
+  _time: 2026-10-12 11:59:59.596523136 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 1
+  details: It's time to reward @morphqdd for the code contributed in zerocracy/pages-action#1020,
+    the reward amount is 24.
+  greeting: "Nice work on this one — you've bagged **+24 points**, the max under our
+    bonus policy! \U0001F389 That's the base award, and since your hits-of-code and
+    review comments stayed well within the sweet spot (no penalties for too little
+    or too much code, no excess review back-and-forth), you landed the full score.
+    Keep it up — quality contributions like this are exactly what we want, so [keep
+    them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html). Your
+    running score is now [+15718](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/)
+    too!\n\n<!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+15718](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 36
+  is_human: 1
+  issue: 1020
+  repository: 802720676
+  review_comments: 0
+  seconds: 527207
+  what: code-contribution-was-rewarded
+  when: 2026-10-12 11:59:59.607331842 Z
+  where: github
+  who: 125282851
+  why: Contributed code in zerocracy/pages-action#1020
+- _id: 2644414
+  _job: 38246433242
+  _time: 2026-10-12 12:04:43.416672275 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  assigner: 526301
+  details: zerocracy/pages-action#790 was assigned to @yegor256 by @yegor256.
+  is_human: 1
+  issue: 790
+  repository: 802720676
+  what: issue-was-assigned
+  when: 2026-10-12 09:28:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644415
+  _job: 38246433242
+  _time: 2026-10-12 12:04:46.170467844 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  assigner: 526301
+  details: zerocracy/pages-action#791 was assigned to @yegor256 by @yegor256.
+  is_human: 1
+  issue: 791
+  repository: 802720676
+  what: issue-was-assigned
+  when: 2026-10-12 09:28:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644416
+  _job: 38246433242
+  _time: 2026-10-12 12:04:48.902467170 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  assigner: 526301
+  details: zerocracy/pages-action#792 was assigned to @yegor256 by @yegor256.
+  is_human: 1
+  issue: 792
+  repository: 802720676
+  what: issue-was-assigned
+  when: 2026-10-12 09:28:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644417
+  _job: 38246433242
+  _time: 2026-10-12 12:04:52.083004532 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  assigner: 526301
+  details: zerocracy/pages-action#793 was assigned to @yegor256 by @yegor256.
+  is_human: 1
+  issue: 793
+  repository: 802720676
+  what: issue-was-assigned
+  when: 2026-10-12 09:28:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644418
+  _job: 38246433242
+  _time: 2026-10-12 12:07:47.565748496 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '877'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#916 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 36
+  is_human: 1
+  issue: 916
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:40:55.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644419
+  _job: 38246433242
+  _time: 2026-10-12 12:08:18.163639995 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/902-reject-extra-join-separators
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#921 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 16
+  is_human: 1
+  issue: 921
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:40:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644420
+  _job: 38246433242
+  _time: 2026-10-12 12:08:35.000038133 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/901-reject-invalid-import-shape
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#922 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 12
+  is_human: 1
+  issue: 922
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:40:19.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644421
+  _job: 38246433242
+  _time: 2026-10-12 12:08:54.540815687 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/873-reject-nil-import
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#923 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 8
+  is_human: 1
+  issue: 923
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:40:15.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644422
+  _job: 38246433242
+  _time: 2026-10-12 12:09:11.390654753 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix/872-validate-query-type
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#924 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 15
+  is_human: 1
+  issue: 924
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:40:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644423
+  _job: 38246433242
+  _time: 2026-10-12 12:09:33.360686321 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2100'
+  comments: 3
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#2193 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 19
+  is_human: 1
+  issue: 2193
+  repository: 799177290
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:16:08.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644424
+  _job: 38246433242
+  _time: 2026-10-12 12:09:54.009444383 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2098'
+  comments: 3
+  comments_appreciated: 0
+  comments_by_author: 2
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#2194 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 52
+  is_human: 1
+  issue: 2194
+  repository: 799177290
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:16:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644425
+  _job: 38246433242
+  _time: 2026-10-12 12:10:35.303465723 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2097'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#2195 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 85
+  is_human: 1
+  issue: 2195
+  repository: 799177290
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:15:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644426
+  _job: 38246433242
+  _time: 2026-10-12 12:11:14.559733969 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: 943r
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#960 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 12
+  is_human: 1
+  issue: 960
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:39:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644427
+  _job: 38246433242
+  _time: 2026-10-12 12:11:30.703138256 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '888'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#961 has been "pull-was-merged".
+  failed_builds: 0
+  files: 7
+  hoc: 87
+  is_human: 1
+  issue: 961
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:39:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644428
+  _job: 38246433242
+  _time: 2026-10-12 12:11:46.145034209 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '937'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#963 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 37
+  is_human: 1
+  issue: 963
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:39:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644429
+  _job: 38246433242
+  _time: 2026-10-12 12:12:05.861372668 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2144'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#2270 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 33
+  is_human: 1
+  issue: 2270
+  repository: 799177290
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:15:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644430
+  _job: 38246433242
+  _time: 2026-10-12 12:12:30.224097157 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2129'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#2279 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 49
+  is_human: 1
+  issue: 2279
+  repository: 799177290
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:15:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644431
+  _job: 38246433242
+  _time: 2026-10-12 12:12:57.857254497 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2128'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/judges-action#2280 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 38
+  is_human: 1
+  issue: 2280
+  repository: 799177290
+  succeeded_builds: 13
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:15:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2644432
+  _job: 38246433242
+  _time: 2026-10-12 12:13:16.642894925 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '882'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#973 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 37
+  is_human: 1
+  issue: 973
+  repository: 798641472
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-12 09:38:55.000000000 Z
   where: github
   who: 526301
