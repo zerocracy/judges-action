@@ -51,7 +51,8 @@ Fbe.iterate do
 
   def self.previous(fact)
     Fbe.fb.query(
-      "(and (eq repository #{fact.repository}) (eq what \"#{fact.what}\") (lt when #{fact.when.utc.iso8601}))"
+      "(and (eq where 'github') (eq repository #{fact.repository}) (eq what \"#{fact.what}\") " \
+      "(lt when #{fact.when.utc.iso8601}))"
     ).each.max_by(&:when)
   end
 
@@ -305,7 +306,7 @@ Fbe.iterate do
           end
         skip(json) if pull.dig(:user, :id)&.then { |id| Integer(id) } == fact.who
         if Fbe.fb.query(
-          "(and (eq repository #{fact.repository}) " \
+          "(and (eq where 'github') (eq repository #{fact.repository}) " \
           '(eq what "pull-was-reviewed") ' \
           "(eq who #{fact.who}) " \
           "(eq issue #{fact.issue}))"
