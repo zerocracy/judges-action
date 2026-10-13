@@ -215,6 +215,50 @@ class TestAddReviewComments < Jp::Test
     assert_nil(f['stale'], '500 is transient — fact must NOT be marked stale; pull lookup will retry next cycle')
   end
 
+  def test_rescues_too_many_requests_on_repo_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repositories/42',
+      status: 403,
+      body: { message: 'API rate limit exceeded for installation ID 1' }
+    )
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = 44
+    fact.repository = 42
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_nil(
+      f['stale'],
+      'rate limit is transient — seed fact must NOT be marked stale=repository; next cycle will retry the repo lookup'
+    )
+  end
+
+  def test_rescues_too_many_requests_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      status: 403,
+      body: { message: 'API rate limit exceeded for installation ID 1' }
+    )
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'pull-was-reviewed'
+    fact.issue = 44
+    fact.repository = 42
+    fact.where = 'github'
+    load_it('add-review-comments', fb)
+    f = fb.query('(eq issue 44)').each.first
+    refute_nil(f)
+    assert_nil(f['stale'], 'rate limit is transient — fact must NOT be marked stale; pull lookup will retry')
+  end
+
   def stub(repo, *pulls)
     pulls.each do |pl|
       stub_github(
