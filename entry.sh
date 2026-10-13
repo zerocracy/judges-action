@@ -75,7 +75,7 @@ name="${name%.*}"
 fb="$( [[ ${INPUT_FACTBASE} = /* ]] && echo "${INPUT_FACTBASE}" || echo "${GITHUB_WORKSPACE}/${INPUT_FACTBASE}" )"
 mkdir -p "$(dirname "${fb}")"
 fb=$(realpath "${fb}")
-if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
+if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{0,23}$ ]]; then
     echo "The base name (\"${name}\") of the factbase file doesn't match the expected pattern."
     echo "The file name is: \"${INPUT_FACTBASE}\""
     echo "A base name must only include lowercase English letters, numbers, and a dash,"
