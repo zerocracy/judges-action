@@ -12,6 +12,7 @@ require 'joined'
 require_relative '../../lib/issue_was_lost'
 
 events = %w[issue_type_added issue_type_changed issue_type_removed]
+detached = %w[issue_type_changed issue_type_removed]
 
 Fbe.iterate do
   as 'types_were_scanned'
@@ -24,12 +25,6 @@ Fbe.iterate do
       (absent stale)
       (absent tombstone)
       (absent done)
-      (empty
-        (and
-          (eq repository $repository)
-          (eq issue $issue)
-          (eq what '#{$judge}')
-          (eq where $where)))
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
@@ -67,7 +62,7 @@ Fbe.iterate do
         next issue
       end
     next issue unless timeline.is_a?(Array)
-    timeline.each do |te|
+    timeline.sort_by { |te| te[:created_at] }.each do |te|
       unless events.include?(te[:event])
         $loog.debug("No #{events.joined} events at #{repo}##{issue}")
         next
@@ -95,17 +90,23 @@ Fbe.iterate do
         $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
         next
       end
-      if te[:event] == 'issue_type_removed'
-        type = tee.dig('issue_type', 'name')
-        next if type.nil?
-        Fbe.fb.txn do |fbt|
-          fbt.query(
-            "(and (eq repository #{repository}) (eq issue #{issue}) " \
-            "(eq what '#{$judge}') (eq type '#{type}') (absent stale))"
-          ).each { |fact| fact.stale = 'removed' }
+      if detached.include?(te[:event])
+        type =
+          if te[:event] == 'issue_type_changed'
+            tee.dig('prev_issue_type', 'name')
+          else
+            tee.dig('issue_type', 'name')
+          end
+        unless type.nil?
+          Fbe.fb.txn do |fbt|
+            fbt.query(
+              "(and (eq repository #{repository}) (eq issue #{issue}) " \
+              "(eq what '#{$judge}') (eq type '#{type}') (absent stale))"
+            ).each { |fact| fact.stale = 'removed' }
+          end
+          $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
         end
-        $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
-        next
+        next if te[:event] == 'issue_type_removed'
       end
       Fbe.fb.txn do |fbt|
         nn =
