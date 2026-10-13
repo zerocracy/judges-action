@@ -35,4 +35,20 @@ class TestRecovered < Minitest::Test
       end
     assert_nil(found)
   end
+
+  def test_answers_nothing_on_a_transient_error
+    [
+      Octokit::ServerError.new, Faraday::ConnectionFailed.new('reset'), Faraday::TimeoutError.new('slow')
+    ].each do |error|
+      octo = Object.new
+      octo.define_singleton_method(:off_quota?) { |**| false }
+      octo.define_singleton_method(:with_disable_auto_paginate) { |&b| b.call(self) }
+      octo.define_singleton_method(:workflow_runs) { |_repo, _workflow, **| raise(error) }
+      found =
+        Fbe.stub(:octo, octo) do
+          Jp.recovered('foo/foo', 42, Time.now, judge: 'quality-of-service', loog: Loog::NULL)
+        end
+      assert_nil(found, "#{error.class} escaped Jp.recovered")
+    end
+  end
 end

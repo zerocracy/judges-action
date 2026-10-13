@@ -24,4 +24,12 @@ rescue Octokit::Forbidden => e
     "(transient, will retry next cycle): #{e.class}: #{e.message}"
   )
   nil
+rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+  Faraday::TimeoutError, Faraday::ConnectionFailed,
+  Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+  loog.warn(
+    "[#{judge}] Transient error reading later runs of workflow ##{workflow} in #{repo} " \
+    "(will retry next cycle): #{e.class}: #{e.message}"
+  )
+  nil
 end
