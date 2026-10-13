@@ -160,7 +160,11 @@ Fbe.iterate do
     fact.event_type = json[:type]
     fact.repository = Integer(json[:repo][:id])
     who = json.dig(:payload, :release, :author, :id) || json.dig(:actor, :id)
-    fact.who = Integer(who) unless who.nil?
+    if who.nil?
+      $loog.info("Event ##{json[:id]} (#{json[:type]}) in #{json[:repo][:name]} has no actor, ignoring it")
+      raise(Factbase::Rollback)
+    end
+    fact.who = Integer(who)
     begin
       rname = Fbe.octo.repo_name_by_id(fact.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
