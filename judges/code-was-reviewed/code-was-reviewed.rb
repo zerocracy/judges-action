@@ -120,7 +120,7 @@ Fbe.consider(
       next if n.nil?
       n.when = review[:submitted_at]
       n.hoc = (pr[:additions] || 0) + (pr[:deletions] || 0)
-      n.author = pr.dig(:user, :id)
+      n.author = author unless author.nil?
       count ||=
         begin
           Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count
@@ -175,7 +175,7 @@ Fbe.consider(
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
-        "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
+        "created by #{author.nil? ? 'an unknown author' : Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
         "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
       $loog.info(
         [
