@@ -315,8 +315,10 @@ Fbe.iterate do
         skip(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
         fact.hoc = (pull[:additions] || 0) + (pull[:deletions] || 0)
-        fact.comments = (pull[:comments] || 0) + (pull[:review_comments] || 0)
-        fact.review_comments = pull[:review_comments] unless pull[:review_comments].nil?
+        ic = Jp.human_comments(Fbe.octo.issue_comments(rname, fact.issue))
+        rc = Jp.human_comments(Fbe.octo.pull_request_comments(rname, fact.issue))
+        fact.comments = ic.count + rc.count
+        fact.review_comments = rc.count
         fact.commits = pull[:commits] unless pull[:commits].nil?
         fact.files = pull[:changed_files] unless pull[:changed_files].nil?
         fact.details =
