@@ -3085,6 +3085,44 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_keeps_the_last_closure_of_a_pull_closed_reopened_and_closed_in_one_scan
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [[30, 'closed', 3, '12'], [20, 'reopened', 1, '11'], [10, 'closed', 1, '10']].map do |id, a, who, t|
+        {
+          id: id.to_s, type: 'PullRequestEvent', public: true, created_at: "2025-06-02 #{t}:00:00 UTC",
+          actor: { id: who, login: "user#{who}" }, repo: { id: 42, name: 'foo/foo' },
+          payload: { action: a, number: 8, pull_request: { id: 1_990_323_144, number: 8 } }
+        }
+      end
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/8',
+      body: {
+        id: 1_990_323_144, number: 8, state: 'closed', user: { id: 50, login: 'author' }, additions: 1, deletions: 1,
+        closed_at: '2025-06-02 12:00:00 UTC', head: { ref: 'x', sha: 'abc' }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/8/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/user/1', body: { id: 1, login: 'user1' })
+    stub_github('https://api.github.com/user/3', body: { id: 3, login: 'user3' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/abc/check-runs?per_page=100',
+      body: { total_count: 0, check_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/8/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/8/comments?per_page=100', body: [])
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    assert_equal([3], fb.query('(eq what "pull-was-closed")').each.map(&:who), fb.to_json)
+  end
+
   private
 
   def stub_event(*json)
