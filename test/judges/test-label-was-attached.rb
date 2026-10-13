@@ -197,4 +197,21 @@ class TestLabelWasAttached < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_dont_record_label_that_was_removed_later
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      body: %w[labeled unlabeled].each_with_index.map do |event, i|
+        { id: i, actor: { id: 421 }, event:, created_at: "2025-09-30 06:1#{i}:38 UTC", label: { name: 'bug' } }
+      end
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('label-was-attached', fb)
+    assert(fb.none?(what: 'label-was-attached'), 'a label removed a minute later is recorded as attached')
+  end
 end
