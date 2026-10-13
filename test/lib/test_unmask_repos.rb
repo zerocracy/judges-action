@@ -72,4 +72,15 @@ class TestUnmaskRepos < Jp::Test
       'a server error cannot break the expansion of the other masks'
     )
   end
+
+  def test_reports_listing_failure_when_it_was_the_only_mask
+    rate_limit_up
+    stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 500)
+    $loog = Loog::NULL
+    options = Judges::Options.new({ 'repositories' => 'foo/*' })
+    error = assert_raises(Fbe::Error) { Fbe.unmask_repos(options:, global: {}, loog: Loog::NULL) }
+    assert_includes(error.message, 'foo/*')
+    assert_includes(error.message, 'transient, will retry next cycle')
+    assert_includes(error.message, 'Octokit::')
+  end
 end
