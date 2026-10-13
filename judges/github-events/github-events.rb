@@ -338,6 +338,16 @@ Fbe.iterate do
         fact.what = 'issue-was-opened'
         fact.details = "The issue #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("Issue #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
+      when 'reopened'
+        Fbe.fb.query(
+          "(and
+            (eq where 'github')
+            (eq repository #{fact.repository})
+            (eq issue #{fact.issue})
+            (eq what 'issue-was-closed'))"
+        ).delete!
+        $loog.info("The issue #{Fbe.issue(fact)} was reopened, its closure is forgotten")
+        skip(json)
       else
         skip(json)
       end
