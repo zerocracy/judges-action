@@ -44,7 +44,7 @@ def total_contributors(_fact)
       id = contributor[:id]
       contributors << id unless id.nil?
     end
-  end
+  end.then { |whole| return {} unless whole }
   return {} unless measured
   { total_contributors: contributors.count }
 end

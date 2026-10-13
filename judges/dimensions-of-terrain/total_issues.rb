@@ -27,6 +27,6 @@ def total_issues(_fact)
       end
     issues += json['issues']
     pulls += json['pulls']
-  end
+  end.then { |whole| return {} unless whole }
   { total_issues: issues, total_pulls: pulls }
 end
