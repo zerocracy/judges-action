@@ -125,7 +125,7 @@ while IFS= read -r o; do
 done <<< "${INPUT_OPTIONS}"
 repositories_found=false
 for opt in "${options[@]}"; do
-    if [[ "${opt}" == "--option=repositories="* ]]; then
+    if [[ "${opt}" == "--option=repositories="?* ]]; then
         repositories_found=true
         break
     fi
