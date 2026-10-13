@@ -75,14 +75,8 @@ Fbe.iterate do
       tee =
         begin
           Fbe.github_graph.issue_type_event(te[:node_id])
-        rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("Event type by node ID #{te[:node_id]} not found: #{e.message}")
-          next
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to event type by node ID #{te[:node_id]} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
+        rescue Fbe::Error => e
+          $loog.warn("[#{$judge}] Can't fetch event type by node ID #{te[:node_id]}: #{e.message}")
           next
         rescue GraphQL::Client::Error => e
           $loog.warn("[#{$judge}] GraphQL error fetching event type by node ID #{te[:node_id]}: #{e.message}")
