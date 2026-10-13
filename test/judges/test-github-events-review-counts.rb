@@ -209,6 +209,7 @@ class TestGithubEventsReviewCounts < Jp::Test
           'X-RateLimit-Remaining' => '999'
         }
       )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/93/reviews/2210067609/comments?per_page=100', body: [])
     fb = Factbase.new
     load_it('github-events', fb)
     refute_empty(
