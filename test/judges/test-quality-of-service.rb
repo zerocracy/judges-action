@@ -2687,7 +2687,7 @@ class TestQualityOfService < Jp::Test
     %w[
       2025-09-01T15:00:00Z..2025-09-05T15:00:00Z
       2025-09-15T15:00:00Z..2025-09-25T15:00:00Z
-      2025-09-05T15:00:00Z..2025-09-15T15:00:00Z
+      2025-09-05T15:00:00Z..2025-09-12T15:00:00Z
     ].each do |period|
       stub_github(
         'https://api.github.com/search/issues?per_page=100&' \
@@ -2748,7 +2748,7 @@ class TestQualityOfService < Jp::Test
         fb.one?(
           what: 'quality-of-service',
           since: Time.parse('2025-09-05 15:00:00 UTC'),
-          when: Time.parse('2025-09-15 15:00:00 UTC')
+          when: Time.parse('2025-09-12 15:00:00 UTC')
         )
       )
     end
