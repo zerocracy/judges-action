@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require 'octokit'
+require_relative '../../lib/patches/unmask_repos'
 require_relative '../../lib/qos_search'
 
 def some_review_time(fact)
@@ -13,7 +14,7 @@ def some_review_time(fact)
   sizes = []
   reviewers = []
   reviews = []
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
