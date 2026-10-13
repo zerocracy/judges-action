@@ -101,7 +101,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
-  def test_counts_reactions_when_reaction_user_is_nil
+  def test_counts_the_comment_once_when_reaction_user_is_nil
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -119,10 +119,10 @@ class TestPullRequest < Jp::Test
       [{ id: 101, user: { id: 7 } }],
       []
     )
-    assert_equal(2, count)
+    assert_equal(1, count)
   end
 
-  def test_counts_reactions_when_comment_user_is_nil
+  def test_counts_the_comment_once_when_comment_user_is_nil
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -577,5 +577,20 @@ class TestPullRequest < Jp::Test
       info = Jp.comments_info(pr)
       assert_equal(0, info[:comments_resolved])
     end
+  end
+
+  def test_never_counts_a_comment_more_than_once
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/101/reactions',
+      body: (1..5).map { |i| { user: { id: 40 + i }, content: '+1' } }
+    )
+    count =
+      Jp.count_appreciated_comments({ base: { repo: { full_name: 'foo/foo' } } }, [{ id: 101, user: { id: 7 } }], [])
+    assert_equal(1, count)
   end
 end
