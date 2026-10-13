@@ -578,4 +578,41 @@ class TestPullRequest < Jp::Test
       assert_equal(0, info[:comments_resolved])
     end
   end
+
+  def test_resolved_skips_threads_started_by_bots
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/6/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/6/comments?per_page=100', body: [])
+    thread =
+      lambda do |type, login|
+        {
+          'isResolved' => true,
+          'comments' => { 'nodes' => [{ 'author' => { '__typename' => type, 'login' => login } }] }
+        }
+      end
+    graph = Object.new
+    graph.define_singleton_method(:query) do |_q|
+      {
+        'repository' => {
+          'pullRequest' => {
+            'reviewThreads' => {
+              'pageInfo' => { 'hasNextPage' => false, 'endCursor' => nil },
+              'nodes' => [
+                thread.call('Bot', 'coderabbitai'), thread.call('Bot', 'coderabbitai'),
+                thread.call('Bot', 'coderabbitai'), thread.call('User', 'yegor256')
+              ]
+            }
+          }
+        }
+      }
+    end
+    Fbe.stub(:github_graph, graph) do
+      pr = { number: 6, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      assert_equal(1, Jp.comments_info(pr)[:comments_resolved], 'threads started by a bot must not be counted')
+    end
+  end
 end

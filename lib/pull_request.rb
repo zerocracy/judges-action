@@ -69,6 +69,14 @@ def Jp.comments_info(pr, repo: nil)
                         }
                         nodes {
                           isResolved
+                          comments(first: 1) {
+                            nodes {
+                              author {
+                                __typename
+                                login
+                              }
+                            }
+                          }
                         }
                       }
                     }
@@ -77,7 +85,13 @@ def Jp.comments_info(pr, repo: nil)
               GRAPHQL
             )&.to_h&.dig('repository', 'pullRequest', 'reviewThreads')
             break if data.nil? || data['nodes'].nil?
-            total += data['nodes'].count { |n| n['isResolved'] }
+            total += Jp.human_comments(
+              data['nodes'].filter_map do |n|
+                next unless n['isResolved']
+                author = n.dig('comments', 'nodes', 0, 'author') || {}
+                { user: { login: author['login'], type: author['__typename'] } }
+              end
+            ).count
             break unless data.dig('pageInfo', 'hasNextPage')
             nxt = data.dig('pageInfo', 'endCursor')
             break if nxt.nil? || nxt == cursor
