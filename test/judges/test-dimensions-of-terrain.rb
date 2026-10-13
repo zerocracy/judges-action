@@ -148,7 +148,7 @@ class TestDimensionsOfTerrain < Jp::Test
     $fb = Factbase.new
     $global = {}
     $local = {}
-    Jp.qoreset
+    qoclean
     $judge = 'dimensions-of-terrain'
     $options = Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe' })
     $loog = Loog::NULL
@@ -1028,7 +1028,7 @@ class TestDimensionsOfTerrain < Jp::Test
 
   def test_total_active_contributors
     require_relative('../../lib/qos_search')
-    Jp.qoreset
+    qoclean
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       {
@@ -1329,7 +1329,7 @@ class TestDimensionsOfTerrain < Jp::Test
       status: 500, body: { message: 'Internal server error' }
     )
     load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
-    Jp.qoreset
+    qoclean
     Factbase.new.insert.then do |f|
       f.what = 'dimensions-of-terrain'
       f.when = Time.parse('2024-09-29 21:00:00 UTC')
@@ -1364,7 +1364,7 @@ class TestDimensionsOfTerrain < Jp::Test
       status: 500, body: { message: 'Internal server error' }
     )
     load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
-    Jp.qoreset
+    qoclean
     Factbase.new.insert.then do |f|
       f.what = 'dimensions-of-terrain'
       f.when = Time.parse('2024-09-29 21:00:00 UTC')

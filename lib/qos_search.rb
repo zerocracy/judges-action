@@ -11,37 +11,31 @@ Jp::SEARCH_WINDOW_SECONDS = 60
 Jp::SEARCH_WINDOW_BUDGET = 25
 
 def Jp.qoreset
-  @offquota = {}
-  @offquotatime = {}
-  @scount = {}
-  @swstart = {}
+  @offquota = false
+  @offquotatime = nil
 end
 
 def Jp.qosearch(query, method: :search_issues, **)
   jg = $judge
-  @offquota = {} unless @offquota.is_a?(Hash)
-  @offquotatime = {} unless @offquotatime.is_a?(Hash)
-  @scount = {} unless @scount.is_a?(Hash)
-  @swstart = {} unless @swstart.is_a?(Hash)
-  if @offquota[jg]
-    return if @offquotatime[jg] && (Time.now - @offquotatime[jg]) < Jp::SEARCH_WINDOW_SECONDS
-    @offquota[jg] = false
-    @offquotatime[jg] = nil
+  if @offquota
+    return if @offquotatime && (Time.now - @offquotatime) < Jp::SEARCH_WINDOW_SECONDS
+    @offquota = false
+    @offquotatime = nil
   end
   now = Time.now
-  if @swstart[jg].nil? || (now - @swstart[jg]) >= Jp::SEARCH_WINDOW_SECONDS
-    @swstart[jg] = now
-    @scount[jg] = 0
+  if @swstart.nil? || (now - @swstart) >= Jp::SEARCH_WINDOW_SECONDS
+    @swstart = now
+    @scount = 0
   end
-  if @scount[jg] >= Jp::SEARCH_WINDOW_BUDGET
-    rest = Jp::SEARCH_WINDOW_SECONDS - (now - @swstart[jg])
+  if @scount >= Jp::SEARCH_WINDOW_BUDGET
+    rest = Jp::SEARCH_WINDOW_SECONDS - (now - @swstart)
     $loog.info(
       "[#{jg}] Search API budget of #{Jp::SEARCH_WINDOW_BUDGET} calls " \
       "per #{Jp::SEARCH_WINDOW_SECONDS}s is spent, sleeping #{rest.ceil}s"
     )
     sleep(rest)
-    @swstart[jg] = Time.now
-    @scount[jg] = 0
+    @swstart = Time.now
+    @scount = 0
   end
   octo = Fbe.octo
   left = nil
@@ -60,24 +54,24 @@ def Jp.qosearch(query, method: :search_issues, **)
     left = json.dig(:resources, :search, :remaining)
   end
   if left.nil?
-    @offquota[jg] = true
-    @offquotatime[jg] = Time.now
+    @offquota = true
+    @offquotatime = Time.now
     $loog.warn("[#{jg}] GitHub Search API quota info unavailable, stopping search calls")
     return
   end
   if left.zero?
-    @offquota[jg] = true
-    @offquotatime[jg] = Time.now
+    @offquota = true
+    @offquotatime = Time.now
     $loog.info('Too much GitHub Search API quota consumed already (0 left)')
     return
   end
-  @scount[jg] += 1
+  @scount += 1
   raise(RuntimeError, "Unsafe search method: #{method}") unless
     %i[search_issues search_code search_commits].include?(method)
   Fbe.octo.with_disable_auto_paginate { |octo| octo.__send__(method, query, **) }
 rescue Octokit::Forbidden => e
-  @offquota[jg] = true
-  @offquotatime[jg] = Time.now
+  @offquota = true
+  @offquotatime = Time.now
   $loog.warn("[#{jg}] GitHub Search API quota exhausted, stopping search calls: #{e.message}")
   nil
 rescue Octokit::ServerError, Faraday::ConnectionFailed, Faraday::TimeoutError,
