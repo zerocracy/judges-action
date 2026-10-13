@@ -13,8 +13,8 @@ class TestFakeOctokit < Jp::Test
     $global = {}
     $options = Judges::Options.new({ 'testing' => true })
     $loog = Loog::NULL
-    assert_empty(
-      Fbe.octo.list_milestones('foo/foo', state: 'all'),
+    assert_equal(
+      2, Fbe.octo.list_milestones('foo/foo', state: 'all').size,
       'The milestones stub cannot refuse the options that judges send with it'
     )
   end

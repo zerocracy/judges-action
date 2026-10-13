@@ -211,9 +211,14 @@ class TestMilestoneWasSet < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
     load_it('milestone-was-set', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
-    assert_empty(
-      fb.query("(eq what 'milestone-was-set')").each.to_a,
-      'The judge cannot break when the GitHub client is faked'
+    found = fb.query("(eq what 'milestone-was-set')").each.to_a
+    assert_equal(
+      [1, 2], found.map(&:milestone).sort!,
+      'The fake client must answer with milestones, or the judge cannot be tested at all'
     )
+    opened = found.find { |f| f.milestone == 1 }
+    assert_equal(526_301, opened.who)
+    refute_nil(opened['deadline'])
+    assert_nil(found.find { |f| f.milestone == 2 }['deadline'])
   end
 end
