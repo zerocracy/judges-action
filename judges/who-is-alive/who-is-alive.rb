@@ -7,6 +7,7 @@ require 'elapsed'
 require 'fbe/consider'
 require 'fbe/fb'
 require 'fbe/octo'
+require 'fbe/overwrite'
 require 'logger'
 require 'octokit'
 require_relative '../../lib/nick_of'
@@ -17,7 +18,11 @@ seen = []
 Fbe.consider(
   "(and
     (eq what 'who-has-name')
-    (lt when (minus (to_time '#{Jp.today.utc.iso8601}') '2 days'))
+    (or
+      (and
+        (absent alive_when)
+        (lt when (minus (to_time '#{Jp.today.utc.iso8601}') '2 days')))
+      (lt alive_when (minus (to_time '#{Jp.today.utc.iso8601}') '2 days')))
     (absent stale)
     (absent tombstone)
     (absent done)
@@ -45,6 +50,7 @@ Fbe.consider(
     end
   unless nick.nil?
     $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
+    Fbe.overwrite(f, 'alive_when', Time.now)
     next
   end
   elapsed($loog, level: Logger::INFO) do
