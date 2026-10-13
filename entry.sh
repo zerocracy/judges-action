@@ -4,7 +4,15 @@
 
 set -e -o pipefail
 
-start=$(date +%s)
+# Elapsed time is measured by the uptime of the machine, which is not changed
+# when somebody adjusts the system clock while the action is running.
+uptime_seconds() {
+    local up
+    read -r up _ </proc/uptime
+    echo "${up%.*}"
+}
+
+start=$(uptime_seconds)
 
 # This value is modified by the .rultor.yml script:
 VERSION=0.0.0
@@ -347,7 +355,7 @@ else
         "--meta=workflow_url:${owner}" \
         "--meta=churn:$(cat churn.txt)" \
         "--meta=vitals_url:${VITALS_URL}" \
-        "--meta=duration:$(($(date +%s) - start))" \
+        "--meta=duration:$(($(uptime_seconds) - start))" \
         "--meta=action_version:${action_version}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
@@ -372,7 +380,7 @@ if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
         echo "| Version | ${action_version} |"
         echo "| Churn | ${churn_val} |"
         echo "| Facts | ${fb_size} |"
-        echo "| Duration | $(($(date +%s) - start))s |"
+        echo "| Duration | $(($(uptime_seconds) - start))s |"
         echo "| Owner | ${owner} |"
         echo "| Vitals | [View](${VITALS_URL}) |"
     } > "${GITHUB_WORKSPACE}/summary.md" 2>/dev/null || true
