@@ -23,7 +23,6 @@ def total_commits(_fact)
       )
       next
     end
-    next if json[:size].nil? || json[:size].zero?
     next if json[:default_branch].nil?
     repos << [*repo.split('/'), json[:default_branch]]
   end

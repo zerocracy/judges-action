@@ -9,6 +9,7 @@ require 'fbe/octo'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestDimensionsOfTerrain < Jp::Test
@@ -436,10 +437,7 @@ class TestDimensionsOfTerrain < Jp::Test
   def test_total_commits
     WebMock.disable_net_connect!
     fb = Factbase.new
-    load_it(
-      'dimensions-of-terrain', fb,
-      Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true })
-    )
+    load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
     f = fb.query("(eq what 'dimensions-of-terrain')").each.first
     assert_equal(1484, f.total_commits)
   end
@@ -484,6 +482,11 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/nil-size/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/nil-size/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/nil-size/git/trees/master?recursive=true',
+      body: { sha: 'abc012345f', tree: [], truncated: false }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
       body: { sha: 'abc012345f', tree: [], truncated: false }
@@ -556,17 +559,19 @@ class TestDimensionsOfTerrain < Jp::Test
       }
     )
     stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', status: 204, body: '')
     stub_github(
       'https://api.github.com/repos/yegor256/empty-repo/git/trees/master?recursive=true',
-      body: { sha: 'a', tree: [], truncated: false }
+      status: 409, body: { message: 'Git Repository is empty.' }
     )
-    stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
-    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+    graph = Fbe::Graph::Fake.new
+    graph.define_singleton_method(:total_commits) { |*, **| raise(Fbe::Error, 'The branch master is not found') }
+    Fbe.stub(:github_graph, graph) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'yegor256/empty-repo' }))
         fact = fb.query("(eq what 'dimensions-of-terrain')").each.first
@@ -735,6 +740,11 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', status: 204, body: '')
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo/git/trees/master?recursive=true',
+      status: 409, body: { message: 'Git Repository is empty.' }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
       body: {
@@ -948,6 +958,11 @@ class TestDimensionsOfTerrain < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', status: 204, body: '')
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo/git/trees/master?recursive=true',
+      status: 409, body: { message: 'Git Repository is empty.' }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/git/trees/master?recursive=true',
       body: { sha: 'abc012345f', tree: [], truncated: false }
@@ -1370,5 +1385,50 @@ class TestDimensionsOfTerrain < Jp::Test
       f.when = Time.parse('2024-09-29 21:00:00 UTC')
       assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
     end
+  end
+
+  def test_counts_files_of_repository_whose_size_is_zero
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $global = {}
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_files.rb'))
+    result =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo', archived: false, size: 0, default_branch: 'главная' },
+        'GET /repos/foo/foo/git/trees/%D0%B3%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F?recursive=true' => {
+          tree: [{ type: 'blob' }, { type: 'blob' }, { type: 'tree' }], truncated: false
+        }
+      ).run { total_files(Factbase.new.insert) }
+    assert_equal({ total_files: 2 }, result, 'the files of a repository reporting zero size are not counted')
+  end
+
+  def test_counts_contributors_of_repository_whose_size_is_zero
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $global = {}
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_contributors.rb'))
+    result =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo', archived: false, size: 0 },
+        'GET /repos/foo/foo/contributors?per_page=100' => [{ login: 'Ω', id: 1, type: 'User' }]
+      ).run { total_contributors(Factbase.new.insert) }
+    assert_equal({ total_contributors: 1 }, result, 'the contributors of a repository reporting zero size are lost')
+  end
+
+  def test_counts_commits_of_repository_whose_size_is_zero
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    $global = {}
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+    graph = Object.new
+    graph.define_singleton_method(:total_commits) { |repos:| repos.map { { 'total_commits' => 640 } } }
+    result =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo', archived: false, size: 0, default_branch: 'main' }
+      ).run { Fbe.stub(:github_graph, graph) { total_commits(Factbase.new.insert) } }
+    assert_equal({ total_commits: 640 }, result, 'the commits of a repository reporting zero size are not counted')
   end
 end
