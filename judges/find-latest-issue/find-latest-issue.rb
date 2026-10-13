@@ -82,7 +82,7 @@ Fbe.iterate do
           f.stale = 'branch'
         end
       end
-      f.details = "The issue #{Fbe.issue(f)} is the first we found, opened by #{Jp.mention(f)}."
+      f.details = "The issue #{Fbe.issue(f)} is the latest we found, opened by #{Jp.mention(f)}."
       $loog.info("The issue #{Fbe.issue(f)} was opened by #{Jp.mention(f)} #{f.when.ago} ago")
     end
     json[:number]
