@@ -31,6 +31,9 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next latest
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+        next latest
       end
     json =
       begin
@@ -45,6 +48,9 @@ Fbe.iterate do
           "[#{$judge}] Access forbidden to issues list for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next latest
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
         next latest
       end
     next latest if json.nil?
@@ -74,6 +80,9 @@ Fbe.iterate do
               "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
+            next i
+          rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+            $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
             next i
           end
         if ref
