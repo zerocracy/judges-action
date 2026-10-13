@@ -151,6 +151,14 @@ Fbe.iterate do
         )
       rescue Octokit::Forbidden
         next issue
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError,
+        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching details of pull ##{issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next issue
       end
     Fbe.fb.txn do |fbt|
       nn =
