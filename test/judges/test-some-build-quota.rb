@@ -26,4 +26,31 @@ class TestSomeBuildQuota < Jp::Test
       end
     assert_empty(result)
   end
+
+  def test_reports_nothing_when_the_quota_ends_in_the_middle
+    $judge = 'quality-of-service'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    octo = Object.new
+    checks = 0
+    octo.define_singleton_method(:off_quota?) { |**| (checks += 1) > 1 }
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, workflow_id: 9, status: 'completed', conclusion: 'success',
+            run_started_at: Time.parse('2024-08-05T10:00:00Z')
+          }
+        ]
+      }
+    end
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    result =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) { some_build_success_rate(fact) }
+      end
+    assert_empty(result)
+  end
 end
