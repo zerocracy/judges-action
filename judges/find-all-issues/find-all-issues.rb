@@ -41,6 +41,9 @@ require_relative '../../lib/who_of'
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
           next issue
+        rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+          next issue
         end
       after =
         begin
@@ -54,6 +57,9 @@ require_relative '../../lib/who_of'
             "[#{$judge}] Access forbidden to #{type} ##{issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
+          next issue
+        rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
           next issue
         end
       if after.nil?
@@ -80,6 +86,9 @@ require_relative '../../lib/who_of'
               "[#{$judge}] Access forbidden to search issues for #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
+            []
+          rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+            $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
             []
           end
         items.each do |json|
@@ -113,6 +122,9 @@ require_relative '../../lib/who_of'
                     "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
                     "(transient, will retry next cycle): #{e.class}: #{e.message}"
                   )
+                  next
+                rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+                  $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
                   next
                 end
               if ref
