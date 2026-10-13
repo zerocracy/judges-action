@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/humans'
 require_relative '../../lib/patches/unmask_repos'
 require_relative '../../lib/qos_search'
 
@@ -29,8 +30,8 @@ def total_active_contributors(fact)
       end
     next if commits.nil?
     commits[:items].each do |commit|
-      author = commit.dig(:author, :id)
-      seen << author unless author.nil?
+      author = commit[:author]
+      seen << author[:id] if author && author[:id] && Jp.human?(author)
     end
   end
   { total_active_contributors: seen.count }

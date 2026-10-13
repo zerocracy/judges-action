@@ -9,6 +9,7 @@ require 'fbe/octo'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestDimensionsOfTerrain < Jp::Test
@@ -982,7 +983,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(12, f.total_contributors)
+        assert_equal(8, f.total_contributors)
       end
     end
   end
@@ -1370,5 +1371,46 @@ class TestDimensionsOfTerrain < Jp::Test
       f.when = Time.parse('2024-09-29 21:00:00 UTC')
       assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
     end
+  end
+
+  def test_dont_count_bots_among_contributors
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => 'rultor' })
+    $loog = Loog::NULL
+    $global = {}
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_contributors.rb'))
+    result =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo', archived: false, size: 7 },
+        'GET /repos/foo/foo/contributors?per_page=100' => [
+          { login: 'yegor256', id: 1, type: 'User' },
+          { login: 'renovate[bot]', id: 2, type: 'Bot' },
+          { login: 'rultor', id: 3, type: 'User' }
+        ]
+      ).run { total_contributors(Factbase.new.insert) }
+    assert_equal({ total_contributors: 1 }, result, 'bots are counted among the contributors')
+  end
+
+  def test_dont_count_bots_among_active_contributors
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => 'rultor' })
+    $loog = Loog::NULL
+    $global = {}
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    found = {
+      items: [
+        { author: { login: 'yegor256', id: 1, type: 'User' } },
+        { author: { login: 'github-actions[bot]', id: 2, type: 'Bot' } },
+        { author: { login: 'rultor', id: 3, type: 'User' } },
+        { author: nil }
+      ]
+    }
+    fact = Factbase.new.insert
+    fact.when = Time.parse('2024-09-29 21:00:00 UTC')
+    result =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo', archived: false }
+      ).run { Jp.stub(:qosearch, found) { total_active_contributors(fact) } }
+    assert_equal({ total_active_contributors: 1 }, result, 'bots are counted among the active contributors')
   end
 end
