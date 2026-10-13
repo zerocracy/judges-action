@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestCodeWasReviewed < Jp::Test
@@ -491,5 +492,55 @@ class TestCodeWasReviewed < Jp::Test
       0, fb.pick(what: 'code-was-reviewed', issue: 44).hoc,
       'A pull request that reports no additions and no deletions cannot abort the judge'
     )
+  end
+
+  def test_sums_review_comments_of_every_review_by_one_reviewer
+    seed = Random.new_seed
+    random = Random.new(seed)
+    counts = Array.new(random.rand(2..5)) { random.rand(1..7) }
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(routes(counts.map { |c| [422, c] })).run { load_it('code-was-reviewed', fb) }
+    assert_equal(
+      [counts.sum], fb.pick(what: 'code-was-reviewed')['review_comments'],
+      "review comments of later reviews by the same reviewer are lost, seed #{seed}"
+    )
+  end
+
+  def test_dont_add_review_comments_of_another_reviewer
+    seed = Random.new_seed
+    random = Random.new(seed)
+    mine = random.rand(0..7)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(routes([[422, mine], [423, random.rand(1..7)]])).run { load_it('code-was-reviewed', fb) }
+    assert_equal(
+      [mine], fb.pick(what: 'code-was-reviewed', who: 422)['review_comments'],
+      "review comments of another reviewer are added, seed #{seed}"
+    )
+  end
+
+  private
+
+  def routes(reviews)
+    routes = {
+      'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => {
+        id: 50, number: 44, user: { id: 421, login: 'автор' }, created_at: '2025-09-01T15:35:30Z'
+      },
+      'GET /repos/foo/foo/pulls/44/reviews?per_page=100' => reviews.each_with_index.map do |(who, _), i|
+        { id: i + 1, user: { id: who, login: "р#{who}" }, state: 'COMMENTED', submitted_at: '2025-09-02T10:39:20Z' }
+      end,
+      'GET /repos/foo/foo/issues/44/comments?per_page=100' => [],
+      'GET /user/421' => { id: 421, login: 'автор' },
+      'GET /user/422' => { id: 422, login: 'р422' },
+      'GET /user/423' => { id: 423, login: 'р423' }
+    }
+    reviews.each_with_index do |(who, count), i|
+      routes["GET /repos/foo/foo/pulls/44/reviews/#{i + 1}/comments?per_page=100"] =
+        Array.new(count) { |c| { id: (i * 10) + c, user: { id: who, login: "р#{who}", type: 'User' }, body: 'ё' } }
+    end
+    routes
   end
 end
