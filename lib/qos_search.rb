@@ -6,6 +6,7 @@
 require 'faraday'
 require 'fbe/octo'
 require_relative 'jp'
+require_relative 'patches/octokit_throttling'
 
 Jp::SEARCH_WINDOW_SECONDS = 60
 Jp::SEARCH_WINDOW_BUDGET = 25
