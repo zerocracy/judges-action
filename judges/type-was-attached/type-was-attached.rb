@@ -100,7 +100,7 @@ Fbe.iterate do
         next if type.nil?
         Fbe.fb.txn do |fbt|
           fbt.query(
-            "(and (eq repository #{repository}) (eq issue #{issue}) " \
+            "(and (eq where 'github') (eq repository #{repository}) (eq issue #{issue}) " \
             "(eq what '#{$judge}') (eq type '#{type}') (absent stale))"
           ).each { |fact| fact.stale = 'removed' }
         end
