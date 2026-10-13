@@ -7,3 +7,4 @@ options:
   repositories: yegor256/judges
 expected:
   - /fb[count(f) > 0]
+  - /fb/f[where='github' and event_id and event_type and when and what]
