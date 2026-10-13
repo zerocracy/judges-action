@@ -2510,9 +2510,10 @@ class TestGithubEvents < Jp::Test
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       load_it('github-events', fb)
     end
-    f = fb.query('(eq what "pull-was-merged")').each.first
-    refute_nil(f)
-    assert_nil(f['review'])
+    assert_nil(
+      fb.query('(eq what "pull-was-merged")').each.first,
+      'the closure was recorded without its review, and nothing would retry it'
+    )
   end
 
   def test_closed_pr_event_with_nil_additions

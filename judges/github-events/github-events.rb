@@ -261,7 +261,7 @@ Fbe.iterate do
               "[#{$judge}] Access forbidden to reviews for pull ##{fact.issue} in #{rname} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
-            []
+            skip(json)
           end
         review = Jp.approval(reviews, pl[:closed_at])
         fact.review = review[:submitted_at] if review
