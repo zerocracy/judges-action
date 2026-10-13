@@ -26,6 +26,7 @@ def total_files(_fact)
         next
       end
     next if info[:size].nil? || info[:size].zero?
+    next if info[:default_branch].nil?
     tree =
       begin
         Fbe.octo.tree(repo, info[:default_branch], recursive: true)
