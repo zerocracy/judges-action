@@ -543,7 +543,28 @@ class TestPullRequest < Jp::Test
     assert_equal(0, count)
   end
 
-  def test_resolved_graphql_error_returns_zero
+  def test_leaves_resolved_out_on_graphql_client_error
+    failure = GraphQL::Client::Error.new('test')
+    refute_includes(resolved(failure), :comments_resolved, 'graphql client error is counted as no resolved threads')
+  end
+
+  def test_leaves_resolved_out_on_forbidden
+    forbidden = Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden')
+    refute_includes(resolved(forbidden), :comments_resolved, 'forbidden answer is counted as no resolved threads')
+  end
+
+  def test_leaves_resolved_out_on_failed_graphql_query
+    failure = Fbe::Error.new('GitHub GraphQL query failed: Could not resolve to a Repository')
+    refute_includes(resolved(failure), :comments_resolved, 'failed graphql query is counted as no resolved threads')
+  end
+
+  def test_leaves_resolved_out_on_read_timeout
+    refute_includes(resolved(Net::ReadTimeout.new), :comments_resolved, 'read timeout is counted as no resolved thread')
+  end
+
+  private
+
+  def resolved(error)
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -552,30 +573,9 @@ class TestPullRequest < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/4/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/issues/4/comments?per_page=100', body: [])
     graph = Object.new
-    graph.define_singleton_method(:query) { |_q| raise(GraphQL::Client::Error, 'test') }
+    graph.define_singleton_method(:query) { |_q| raise(error) }
     Fbe.stub(:github_graph, graph) do
-      pr = { number: 4, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
-      info = Jp.comments_info(pr)
-      assert_equal(0, info[:comments_resolved])
-    end
-  end
-
-  def test_resolved_forbidden_returns_zero
-    WebMock.disable_net_connect!
-    rate_limit_up
-    $options = Judges::Options.new({})
-    $global = {}
-    $loog = Loog::NULL
-    stub_github('https://api.github.com/repos/foo/foo/pulls/5/comments?per_page=100', body: [])
-    stub_github('https://api.github.com/repos/foo/foo/issues/5/comments?per_page=100', body: [])
-    graph = Object.new
-    graph.define_singleton_method(:query) do |_q|
-      raise(Octokit::Forbidden.new(method: :get, url: 'https://api.github.com', status: 403, body: 'Forbidden'))
-    end
-    Fbe.stub(:github_graph, graph) do
-      pr = { number: 5, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
-      info = Jp.comments_info(pr)
-      assert_equal(0, info[:comments_resolved])
+      Jp.comments_info({ number: 4, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } })
     end
   end
 end
