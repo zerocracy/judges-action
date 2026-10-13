@@ -102,7 +102,6 @@ Fbe.consider(
       who = review.dig(:user, :id)
       who unless who.nil? || who == author
     end
-  f.reviews = reviewers.uniq.count
   count = nil
   Jp.human_comments(reviews).each do |review|
     reviewer = review.dig(:user, :id)
@@ -185,6 +184,7 @@ Fbe.consider(
       )
     end
   end
+  f.reviews = reviewers.uniq.count
 end
 
 Fbe.octo.print_trace!
