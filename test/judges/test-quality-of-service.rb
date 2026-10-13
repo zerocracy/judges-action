@@ -2973,7 +2973,7 @@ class TestQualityOfService < Jp::Test
       'https://api.github.com/repos/foo/foo/pulls/12/reviews?per_page=100',
       body: [
         {
-          id: 22_449_329, body: 'Some text 1', state: 'CHANGES_REQUESTED',
+          id: 22_449_329, body: 'Some text 1', state: 'CHANGES_REQUESTED', user: { id: 526_302 },
           author_association: 'CONTRIBUTOR', submitted_at: Time.parse('2024-08-23 15:30:00 UTC')
         }
       ]
