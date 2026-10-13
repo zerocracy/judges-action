@@ -216,4 +216,32 @@ class TestMilestoneWasSet < Jp::Test
       'The judge cannot break when the GitHub client is faked'
     )
   end
+
+  def test_goes_on_after_a_server_error_on_milestones
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'foo/bar' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
+      status: 502, body: { message: 'Bad Gateway' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/bar/milestones?per_page=100&state=all',
+      body: [
+        {
+          number: 1, title: 'v1.0', description: 'First', state: 'open',
+          created_at: '2024-01-15T10:00:00Z', due_on: nil, creator: { id: 888, login: 'yegor256' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 43, issue: 45, where: 'github')
+    load_it('milestone-was-set', fb)
+    assert(
+      fb.one?(what: 'milestone-was-set', repository: 43, milestone: 1),
+      'a 502 on one repository must not stop the judge'
+    )
+  end
 end
