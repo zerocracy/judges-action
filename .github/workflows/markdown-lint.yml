@@ -8,6 +8,9 @@ name: markdown-lint
     paths:
       - '**.md'
       - '.github/workflows/markdown-lint.yml'
+  pull_request:
+    branches:
+      - master
   workflow_call:
 permissions:
   contents: read
