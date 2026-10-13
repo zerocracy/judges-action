@@ -8,11 +8,12 @@ require_relative 'jp'
 
 def Jp.stamp(review)
   moment = review[:submitted_at]
+  return if moment.nil?
   moment.is_a?(Time) ? moment : Time.parse(moment.to_s)
 end
 
 def Jp.approval(reviews, closed = nil)
-  picked = reviews.nil? ? [] : reviews
+  picked = (reviews.nil? ? [] : reviews).reject { |r| Jp.stamp(r).nil? }
   unless closed.nil?
     edge = closed.is_a?(Time) ? closed : Time.parse(closed.to_s)
     before = picked.select { |r| Jp.stamp(r) <= edge }

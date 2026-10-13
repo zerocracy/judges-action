@@ -41,4 +41,19 @@ class TestApproval < Minitest::Test
   def test_answers_nil_for_no_reviews
     assert_nil(Jp.approval([], nil))
   end
+
+  def test_skips_a_review_that_was_never_submitted
+    reviews = [
+      { state: 'PENDING', submitted_at: nil },
+      { state: 'APPROVED', submitted_at: Time.parse('2025-06-20 10:00:00 UTC') }
+    ]
+    assert_equal(
+      Time.parse('2025-06-20 10:00:00 UTC'),
+      Jp.approval(reviews, Time.parse('2025-06-27 19:00:05 UTC'))[:submitted_at]
+    )
+  end
+
+  def test_answers_with_nothing_when_no_review_was_submitted
+    assert_nil(Jp.approval([{ state: 'PENDING', submitted_at: nil }], Time.now))
+  end
 end
