@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'net/http'
 require_relative '../../lib/patches/unmask_repos'
 
 def total_stars(_fact)
@@ -21,6 +22,12 @@ def total_stars(_fact)
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn(
+          "[#{$judge}] Network error reading #{repo} (transient, will retry next cycle): " \
+          "#{e.class}: #{e.message}"
         )
         next
       end

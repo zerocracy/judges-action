@@ -139,9 +139,9 @@ class TestQuantityOfDeliverables < Jp::Test
     $judge = 'quantity-of-deliverables'
     $loog = Loog::NULL
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
     Fbe.stub(:unmask_repos, unmask) do
       Fbe.stub(:github_graph, graph) do
-        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
         assert_equal({ total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact))
       end
     end

@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require 'net/http'
 require_relative '../../lib/patches/unmask_repos'
 
 def total_releases(_fact)
@@ -21,6 +22,9 @@ def total_releases(_fact)
           "[#{$judge}] Access forbidden to releases for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+        $loog.warn("[#{$judge}] Network error reading releases for #{repo} (transient): #{e.class}: #{e.message}")
         next
       end
     next unless releases.is_a?(Array)
