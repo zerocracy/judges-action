@@ -183,6 +183,15 @@ class TestQosSearch < Jp::Test
     end
   end
 
+  def test_refuses_a_method_that_is_not_a_search
+    rate_limit_up
+    e =
+      assert_raises(RuntimeError, 'a method outside the search API must not be dispatched') do
+        Jp.qosearch('repo:foo/foo type:issue', method: :delete_repository)
+      end
+    assert_match(/Unsafe search method: delete_repository/, e.message)
+  end
+
   private
 
   def ratelimits(*remaining)
