@@ -2808,8 +2808,10 @@ class TestQualityOfService < Jp::Test
         body: { run_duration_ms: 900_000 }
       )
       stub_github(
-        "https://api.github.com/repos/foo/foo/actions/workflows/#{run[:workflow_id]}/runs" \
-        '?created=%3E2024-08-09T21:00:00Z&per_page=1&status=success',
+        "https://api.github.com/repos/foo/foo/actions/workflows/#{run[:workflow_id]}/runs?" +
+        URI.encode_www_form(
+          { branch: run[:head_branch], created: '>2024-08-09T21:00:00Z', per_page: 1, status: 'success' }.compact
+        ),
         body: { total_count: 0, workflow_runs: [] }
       )
     end
