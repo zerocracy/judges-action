@@ -55,6 +55,12 @@ require_relative '../../lib/issue_was_lost'
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next
+      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching #{Fbe.issue(f)} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
       end
     who = json.dig(a, :id)
     if who.nil?

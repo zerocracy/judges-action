@@ -27,6 +27,21 @@ class TestFixMissingWho < Jp::Test
     )
   end
 
+  def test_rescues_transient_error_on_issue_lookup
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/issues/44' => [401, { message: 'Bad credentials' }]
+    ).run do
+      load_it('fix-missing-who', fb)
+    end
+    assert_nil(fb.pick(issue: 44)['stale'], 'a transient 401 must leave the fact for the next cycle')
+    assert_nil(fb.pick(issue: 44)['who'], 'nothing can be known about the author after a 401')
+  end
+
   def test_rescues_deprecated_on_issue_lookup
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 55, where: 'github')
