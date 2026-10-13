@@ -9,6 +9,7 @@ require 'fbe/unmask_repos'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../../lib/patches/unmask_repos'
 require_relative '../test__helper'
 
 class TestQuantityOfDeliverables < Jp::Test
@@ -255,6 +256,29 @@ class TestQuantityOfDeliverables < Jp::Test
         assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
         assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
         assert_equal(7, f.total_releases_published)
+      end
+    end
+  end
+
+  def test_total_issues_created_skips_metric_on_timeout
+    WebMock.disable_net_connect!
+    rate_limit_up
+    graph = Object.new
+    graph.define_singleton_method(:total_issues_created) do |owner, name, _since|
+      raise(Net::ReadTimeout, 'timeout') if "#{owner}/#{name}" == 'foo/bad'
+      { 'issues' => 3, 'pulls' => 2 }
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    unmask = proc { |&block| %w[foo/good foo/bad].each { |repo| block.call(repo) } }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_issues_created.rb'))
+        assert_empty(total_issues_created(fact), 'a failed count must leave the metric unset')
       end
     end
   end
