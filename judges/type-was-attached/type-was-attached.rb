@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/github_graph'
 require 'fbe/if_absent'
 require 'fbe/issue'
@@ -45,7 +46,8 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET,
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn("[#{$judge}] Network error resolving repo ##{repository} (transient): #{e.class}: #{e.message}")
         next issue
       end
@@ -62,7 +64,8 @@ Fbe.iterate do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next issue
-      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET,
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn("[#{$judge}] Network error fetching timeline for ##{issue} (transient): #{e.class}: #{e.message}")
         next issue
       end
