@@ -38,6 +38,17 @@ class TestEntryMinutes < Jp::Test
     assert_equal(0, code)
   end
 
+  def test_rejects_a_timeout_that_is_not_ten_percent_smaller_than_lifetime
+    body = File.read(File.join(File.expand_path('..', __dir__), 'entry.sh'))
+    block = body[/^timeout=\$\{INPUT_TIMEOUT\}\n(?:.*\n)*?.*10 percent smaller.*\n.*\n\s*fi\n/]
+    refute_nil(block, 'No check of timeout against lifetime found in entry.sh')
+    _, err, status = Open3.capture3({ 'INPUT_TIMEOUT' => '10', 'INPUT_LIFETIME' => '10' }, 'bash', '-c', block)
+    refute_equal(0, status.exitstatus)
+    assert_includes(err, 'must be at least 10 percent smaller than INPUT_LIFETIME')
+    _, _, status = Open3.capture3({ 'INPUT_TIMEOUT' => '10', 'INPUT_LIFETIME' => '15' }, 'bash', '-c', block)
+    assert_equal(0, status.exitstatus)
+  end
+
   private
 
   def run_block(name, env)

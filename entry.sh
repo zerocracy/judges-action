@@ -221,6 +221,32 @@ if [ "${cache_min_age}" == "false" ]; then
     options+=("--option=sqlite_cache_min_age=3600");
 fi
 
+timeout=${INPUT_TIMEOUT}
+if [ -z "${timeout}" ]; then
+    timeout=10
+fi
+if ! [[ "${timeout}" =~ ^[1-9][0-9]*$ ]]; then
+    echo "INPUT_TIMEOUT must be a positive integer, got: ${timeout}" >&2
+    exit 1
+fi
+timeout=$((timeout * 60))
+echo "Each judge will spend up to ${timeout} seconds"
+
+lifetime=${INPUT_LIFETIME}
+if [ -z "${lifetime}" ]; then
+    lifetime=15
+fi
+if ! [[ "${lifetime}" =~ ^[1-9][0-9]*$ ]]; then
+    echo "INPUT_LIFETIME must be a positive integer, got: ${lifetime}" >&2
+    exit 1
+fi
+lifetime=$((lifetime * 60))
+echo "The update will run for up to ${lifetime} seconds"
+if [ $((lifetime - timeout)) -lt $((timeout / 10)) ]; then
+    echo "INPUT_TIMEOUT (${timeout} seconds) must be at least 10 percent smaller than INPUT_LIFETIME (${lifetime} seconds)" >&2
+    exit 1
+fi
+
 owner="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     echo "We are in 'dry' mode; skipping 'pull'"
@@ -251,28 +277,6 @@ if [ -n "${sqlite}" ]; then
 else
     echo "SQLite is not used for HTTP caching because the sqlite-cache option is not set"
 fi
-
-timeout=${INPUT_TIMEOUT}
-if [ -z "${timeout}" ]; then
-    timeout=10
-fi
-if ! [[ "${timeout}" =~ ^[1-9][0-9]*$ ]]; then
-    echo "INPUT_TIMEOUT must be a positive integer, got: ${timeout}" >&2
-    exit 1
-fi
-timeout=$((timeout * 60))
-echo "Each judge will spend up to ${timeout} seconds"
-
-lifetime=${INPUT_LIFETIME}
-if [ -z "${lifetime}" ]; then
-    lifetime=15
-fi
-if ! [[ "${lifetime}" =~ ^[1-9][0-9]*$ ]]; then
-    echo "INPUT_LIFETIME must be a positive integer, got: ${lifetime}" >&2
-    exit 1
-fi
-lifetime=$((lifetime * 60))
-echo "The update will run for up to ${lifetime} seconds"
 
 cycles=${INPUT_CYCLES}
 if [ -n "${cycles}" ]; then
