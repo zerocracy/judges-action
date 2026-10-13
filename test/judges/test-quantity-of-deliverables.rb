@@ -9,6 +9,7 @@ require 'fbe/unmask_repos'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../../lib/patches/unmask_repos'
 require_relative '../test__helper'
 
 class TestQuantityOfDeliverables < Jp::Test
@@ -123,7 +124,6 @@ class TestQuantityOfDeliverables < Jp::Test
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/missing', status: 404, body: { message: 'Not Found' })
-    stub_github('https://api.github.com/repos/foo/blocked', status: 403, body: { message: 'Forbidden' })
     stub_github(
       'https://api.github.com/repos/foo/good',
       body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 }
@@ -134,7 +134,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
-    unmask = proc { |&block| %w[foo/missing foo/blocked foo/good].each { |repo| block.call(repo) } }
+    unmask = proc { |&block| %w[foo/missing foo/good].each { |repo| block.call(repo) } }
     $global = {}
     $judge = 'quantity-of-deliverables'
     $loog = Loog::NULL
@@ -174,7 +174,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
-  def test_total_commits_pushed_skips_graph_failures
+  def test_total_commits_pushed_skips_metric_on_graph_failure
     WebMock.disable_net_connect!
     rate_limit_up
     %w[bad good].each do |name|
@@ -199,7 +199,7 @@ class TestQuantityOfDeliverables < Jp::Test
     Fbe.stub(:unmask_repos, unmask) do
       Fbe.stub(:github_graph, graph) do
         load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
-        assert_equal({ total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact))
+        assert_empty(total_commits_pushed(fact), 'a failed count must leave the metric unset')
       end
     end
   end

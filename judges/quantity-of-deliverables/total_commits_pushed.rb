@@ -22,10 +22,10 @@ def total_commits_pushed(fact)
       next
     rescue Octokit::Forbidden => e
       $loog.warn(
-        "[#{$judge}] Access forbidden to #{repo} " \
+        "[#{$judge}] Access forbidden to #{repo}, skipping total_commits_pushed " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      next
+      return {}
     end
     owner, name = repo.split('/')
     begin
@@ -38,17 +38,17 @@ def total_commits_pushed(fact)
       next
     rescue Octokit::Forbidden => e
       $loog.warn(
-        "[#{$judge}] Access forbidden to pushed commits in #{repo} " \
+        "[#{$judge}] Access forbidden to pushed commits in #{repo}, skipping total_commits_pushed " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      next
+      return {}
     rescue GraphQL::Client::Error,
       Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
       $loog.warn(
-        "[#{$judge}] Can't count pushed commits in #{repo} " \
+        "[#{$judge}] Can't count pushed commits in #{repo}, skipping total_commits_pushed " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      next
+      return {}
     end
   end
   {
