@@ -153,7 +153,14 @@ else
 fi
 
 declare -a trash=()
-trap 'rm -rf "${trash[@]}"' EXIT INT TERM
+cleanup() {
+    if ((${#trash[@]})); then
+        rm -rf "${trash[@]}"
+    fi
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
