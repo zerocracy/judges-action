@@ -183,6 +183,41 @@ class TestQosSearch < Jp::Test
     end
   end
 
+  def test_answers_nil_when_search_refuses_repository
+    seed = Random.new_seed
+    query = "repo:foo/old#{Random.new(seed).rand(1..99_999)} type:issue"
+    rate_limit_up
+    searchstub(query, body: { message: 'Validation Failed' }, status: 422)
+    assert_nil(Jp.qosearch(query), "the refused search #{query.inspect} did not answer nil, seed #{seed}")
+  end
+
+  def test_answers_nil_when_commit_search_refuses_repository
+    seed = Random.new_seed
+    query = "repo:foo/old#{Random.new(seed).rand(1..99_999)} author-date:>2026-09-08"
+    rate_limit_up
+    stub_github(
+      "https://api.github.com/search/commits?per_page=100&q=#{query.gsub(' ', '%20')}",
+      body: { message: 'Validation Failed' }, status: 422, headers: { 'Content-Type' => 'application/json' }
+    )
+    assert_nil(
+      Jp.qosearch(query, method: :search_commits),
+      "the refused commit search #{query.inspect} did not answer nil, seed #{seed}"
+    )
+  end
+
+  def test_keeps_searching_after_search_refuses_repository
+    seed = Random.new_seed
+    repo = "foo/old#{Random.new(seed).rand(1..99_999)}"
+    rate_limit_up
+    searchstub("repo:#{repo} type:issue", body: { message: 'Validation Failed' }, status: 422)
+    searchstub('repo:foo/new type:issue', body: { total_count: 1, items: [{ number: 7 }] })
+    Jp.qosearch("repo:#{repo} type:issue")
+    refute_nil(
+      Jp.qosearch('repo:foo/new type:issue'),
+      "the search stopped after GitHub refused the repository #{repo}, seed #{seed}"
+    )
+  end
+
   private
 
   def ratelimits(*remaining)
