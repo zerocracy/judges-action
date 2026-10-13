@@ -9,13 +9,13 @@ input:
     where: github
     when: 2024-10-10T15:00:00Z
     repository: 700
-    issue: 141
+    issue: 143
   -
     what: pull-was-opened
     where: github
     when: 2024-10-11T15:00:00Z
     repository: 700
-    issue: 143
+    issue: 145
 expected:
   - /fb[count(f)=3]
-  - /fb/f[what='issue-was-opened' and repository='700' and issue='142']
+  - /fb/f[what='pull-was-opened' and repository='700' and issue='144' and branch='master']
