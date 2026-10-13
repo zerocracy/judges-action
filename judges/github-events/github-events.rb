@@ -79,7 +79,11 @@ Fbe.iterate do
     comparison(repo, since, fact.tag).then do |json|
       return info if json.nil?
       info[:commits] = json[:total_commits]
-      info[:hoc] = json[:files].sum { |f| f[:changes] }
+      if json[:files].size < 300
+        info[:hoc] = json[:files].sum { |f| f[:changes] }
+      else
+        $loog.info("The files of #{repo}@#{since}..#{fact.tag} are cut, HoC is not measured")
+      end
       info[:last_commit] = json[:commits].last[:sha]
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
