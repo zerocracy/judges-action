@@ -147,7 +147,7 @@ The `zerocracy/pages-action` plugin is responsible for rendering
 You need to have
   [GNU Bash] 5+,
   [GNU Make] 4+,
-  [Ruby] 3+,
+  [Ruby] 3.3+,
   [Bundler],
   and
   [GNU parallel] installed.
