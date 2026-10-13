@@ -7,6 +7,7 @@ require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/pmp'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 require_relative '../../lib/qos_search'
 
 def some_triage_time(fact)
