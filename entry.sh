@@ -103,7 +103,11 @@ else
 fi
 
 GITHUB_REPO_NAME="${GITHUB_REPOSITORY#"${GITHUB_REPOSITORY_OWNER}/"}"
-VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html"
+if [ "${GITHUB_REPO_NAME,,}" == "${GITHUB_REPOSITORY_OWNER,,}.github.io" ]; then
+    VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${name}-vitals.html"
+else
+    VITALS_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPO_NAME}/${name}-vitals.html"
+fi
 
 declare -a options=()
 while IFS= read -r o; do
