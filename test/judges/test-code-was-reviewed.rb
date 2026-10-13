@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestCodeWasReviewed < Jp::Test
@@ -491,5 +492,56 @@ class TestCodeWasReviewed < Jp::Test
       0, fb.pick(what: 'code-was-reviewed', issue: 44).hoc,
       'A pull request that reports no additions and no deletions cannot abort the judge'
     )
+  end
+
+  def test_skips_pending_review_that_was_never_submitted
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(
+      routes(
+        [
+          { id: 7, user: { id: 423, login: 'черновик' }, state: 'PENDING' },
+          { id: 8, user: { id: 422, login: 'рецензент' }, state: 'APPROVED', submitted_at: '2025-09-02T10:39:20Z' }
+        ]
+      )
+    ).run { load_it('code-was-reviewed', fb) }
+    assert_equal(
+      [422], fb.picks(what: 'code-was-reviewed').map(&:who),
+      'a pending review stopped the judge or was recorded as a code review'
+    )
+  end
+
+  def test_records_submitted_review_after_pending_one_of_same_reviewer
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(
+      routes(
+        [
+          { id: 7, user: { id: 422, login: 'рецензент' }, state: 'PENDING' },
+          { id: 8, user: { id: 422, login: 'рецензент' }, state: 'APPROVED', submitted_at: '2025-09-02T10:39:20Z' }
+        ]
+      )
+    ).run { load_it('code-was-reviewed', fb) }
+    assert_equal(
+      [Time.parse('2025-09-02T10:39:20Z')], fb.picks(what: 'code-was-reviewed').map(&:when),
+      'a pending review took the place of the submitted one of the same reviewer'
+    )
+  end
+
+  private
+
+  def routes(reviews)
+    {
+      'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => {
+        id: 50, number: 44, user: { id: 421, login: 'автор' }, created_at: '2025-09-01T15:35:30Z'
+      },
+      'GET /repos/foo/foo/pulls/44/reviews?per_page=100' => reviews,
+      'GET /repos/foo/foo/issues/44/comments?per_page=100' => [],
+      'GET /repos/foo/foo/pulls/44/reviews/8/comments?per_page=100' => [],
+      'GET /user/421' => { id: 421, login: 'автор' },
+      'GET /user/422' => { id: 422, login: 'рецензент' }
+    }
   end
 end
