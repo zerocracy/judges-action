@@ -18,6 +18,8 @@ def Jp.qoreset
 end
 
 def Jp.qosearch(query, method: :search_issues, **)
+  raise(RuntimeError, "Unsafe search method: #{method}") unless
+    %i[search_issues search_code search_commits].include?(method)
   jg = $judge
   @offquota = {} unless @offquota.is_a?(Hash)
   @offquotatime = {} unless @offquotatime.is_a?(Hash)
@@ -72,8 +74,6 @@ def Jp.qosearch(query, method: :search_issues, **)
     return
   end
   @scount[jg] += 1
-  raise(RuntimeError, "Unsafe search method: #{method}") unless
-    %i[search_issues search_code search_commits].include?(method)
   Fbe.octo.with_disable_auto_paginate { |octo| octo.__send__(method, query, **) }
 rescue Octokit::Forbidden => e
   @offquota[jg] = true
