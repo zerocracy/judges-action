@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'Judge find-all-issues stopped by timeout after 10m34s: execution expired'
   inserted: 8
-  seconds: 1106.927270724
+  seconds: 1231.485132842
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-14 06:20:23.468284084 Z
+  when: 2026-10-14 08:23:32.466230072 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -74212,7 +74213,7 @@
   earliest_issue_was_found: 1
   events_were_scanned: 15342987299
   latest_issue_was_found: 1
-  min_pull_was_found: 1
+  min_pull_was_found: 0
   repository: 1246623470
   what: iterate
   where: github
@@ -165786,8 +165787,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 41
-  min_pull_was_found: 13
+  min_issue_was_found: 2
+  min_pull_was_found: 14
   repository: 1090089359
   types_were_scanned: 0
   what: iterate
@@ -167977,10 +167978,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 45
-  min_pull_was_found: 31
+  min_issue_was_found: 47
+  min_pull_was_found: 32
   repository: 974194993
-  types_were_scanned: 41
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -171954,10 +171955,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 84
-  min_pull_was_found: 78
+  min_issue_was_found: 86
+  min_pull_was_found: 79
   repository: 1236759415
-  types_were_scanned: 19
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629477
@@ -174473,10 +174474,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 298
-  min_pull_was_found: 251
+  min_issue_was_found: 302
+  min_pull_was_found: 252
   repository: 849726475
-  types_were_scanned: 226
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629820
@@ -174707,10 +174708,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 32
-  min_pull_was_found: 141
+  min_issue_was_found: 42
+  min_pull_was_found: 142
   repository: 805238060
-  types_were_scanned: 43
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629837
@@ -174725,35 +174726,35 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 26
-  min_pull_was_found: 46
+  min_issue_was_found: 27
+  min_pull_was_found: 47
   repository: 1084843345
-  types_were_scanned: 30
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 830
+  assignees_were_scanned: 1208
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17171552411
+  events_were_scanned: 17176513553
   issues_were_scanned: 1347
-  labels_were_scanned: 0
+  labels_were_scanned: 1304
   latest_issue_was_found: 315
   merges_were_scanned: 1434
-  min_issue_was_found: 1319
-  min_pull_was_found: 706
+  min_issue_was_found: 1321
+  min_pull_was_found: 722
   repository: 798641472
-  types_were_scanned: 1332
+  types_were_scanned: 694
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17168811611
@@ -174761,10 +174762,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 460
-  min_pull_was_found: 500
+  min_issue_was_found: 462
+  min_pull_was_found: 501
   repository: 840215648
-  types_were_scanned: 269
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -174780,7 +174781,7 @@
   latest_issue_was_found: 115
   merges_were_scanned: 0
   min_issue_was_found: 3
-  min_pull_was_found: 129
+  min_pull_was_found: 130
   repository: 857659265
   types_were_scanned: 0
   what: iterate
@@ -175181,18 +175182,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1013
-  closures_were_checked: 932
+  assignees_were_scanned: 1352
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17171773297
+  events_were_scanned: 17173094556
   issues_were_scanned: 1195
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 0
-  min_issue_was_found: 1423
-  min_pull_was_found: 677
+  merges_were_scanned: 1312
+  min_issue_was_found: 1425
+  min_pull_was_found: 678
   repository: 820463873
-  types_were_scanned: 1095
+  types_were_scanned: 1421
   what: iterate
   where: github
 - _id: 2629882
@@ -175838,18 +175839,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 859
+  assignees_were_scanned: 691
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 23942383254
+  events_were_scanned: 17175998656
   issues_were_scanned: 737
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 967
-  min_pull_was_found: 637
+  min_issue_was_found: 969
+  min_pull_was_found: 638
   repository: 802720676
-  types_were_scanned: 402
+  types_were_scanned: 940
   what: iterate
   where: github
 - _id: 2629939
@@ -175984,18 +175985,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 605
+  assignees_were_scanned: 910
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17165527642
+  events_were_scanned: 17173093068
   issues_were_scanned: 849
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 744
-  min_issue_was_found: 854
-  min_pull_was_found: 703
+  merges_were_scanned: 0
+  min_issue_was_found: 856
+  min_pull_was_found: 704
   repository: 799113787
-  types_were_scanned: 608
+  types_were_scanned: 893
   what: iterate
   where: github
 - _id: 2630023
@@ -176020,18 +176021,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1732
-  closures_were_checked: 1637
+  assignees_were_scanned: 2181
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17171844356
+  events_were_scanned: 23947448453
   issues_were_scanned: 2593
   labels_were_scanned: 2497
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
-  min_issue_was_found: 2644
-  min_pull_was_found: 1485
+  merges_were_scanned: 2591
+  min_issue_was_found: 2646
+  min_pull_was_found: 1486
   repository: 799177290
-  types_were_scanned: 2395
+  types_were_scanned: 2738
   what: iterate
   where: github
 - _id: 2630036
@@ -176045,17 +176046,17 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
-  min_pull_was_found: 14
+  min_issue_was_found: 20
+  min_pull_was_found: 15
   repository: 1081929119
-  types_were_scanned: 27
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630037
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17117019434
@@ -176063,10 +176064,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1320
-  min_pull_was_found: 1074
+  min_issue_was_found: 0
+  min_pull_was_found: 1075
   repository: 728758275
-  types_were_scanned: 555
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -414688,6 +414689,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1021/#issuecomment-6124193405
   is_human: 1
   issue: 1021
+  receipt: receipt-#99171
   repository: 802720676
   review_comments: 0
   seconds: 527189
@@ -415665,6 +415667,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1019/#issuecomment-6125258424
   is_human: 1
   issue: 1019
+  receipt: receipt-#99172
   repository: 802720676
   review_comments: 0
   seconds: 527222
@@ -415685,6 +415688,7 @@
   href: https://github.com/zerocracy/pages-action/issues/955/#issuecomment-6125258882
   is_human: 1
   issue: 955
+  receipt: receipt-#99173
   repository: 802720676
   review_comments: 0
   seconds: 851650
@@ -415726,6 +415730,7 @@
   href: https://github.com/zerocracy/pages-action/issues/953/#issuecomment-6125259820
   is_human: 1
   issue: 953
+  receipt: receipt-#99174
   repository: 802720676
   review_comments: 0
   seconds: 852094
@@ -415746,6 +415751,7 @@
   href: https://github.com/zerocracy/pages-action/issues/934/#issuecomment-6125260287
   is_human: 1
   issue: 934
+  receipt: receipt-#99175
   repository: 802720676
   review_comments: 0
   seconds: 1031568
@@ -415766,6 +415772,7 @@
   href: https://github.com/zerocracy/pages-action/issues/936/#issuecomment-6126421009
   is_human: 1
   issue: 936
+  receipt: receipt-#99179
   repository: 802720676
   review_comments: 0
   seconds: 1029362
@@ -423130,6 +423137,7 @@
   href: https://github.com/yegor256/factbase/issues/1270/#issuecomment-6130115632
   is_human: 1
   issue: 1270
+  receipt: receipt-#99189
   repository: 798641472
   review_comments: 0
   seconds: 856154
@@ -423150,6 +423158,7 @@
   href: https://github.com/yegor256/factbase/issues/1268/#issuecomment-6130116023
   is_human: 1
   issue: 1268
+  receipt: receipt-#99184
   repository: 798641472
   review_comments: 0
   seconds: 856301
@@ -423190,6 +423199,7 @@
   href: https://github.com/yegor256/factbase/issues/1266/#issuecomment-6130116825
   is_human: 1
   issue: 1266
+  receipt: receipt-#99183
   repository: 798641472
   review_comments: 0
   seconds: 856453
@@ -423691,6 +423701,7 @@
   href: https://github.com/yegor256/factbase/issues/1258/#issuecomment-6130753371
   is_human: 1
   issue: 1258
+  receipt: receipt-#99182
   repository: 798641472
   review_comments: 0
   seconds: 857934
@@ -423711,6 +423722,7 @@
   href: https://github.com/yegor256/factbase/issues/1257/#issuecomment-6130753830
   is_human: 1
   issue: 1257
+  receipt: receipt-#99181
   repository: 798641472
   review_comments: 0
   seconds: 858117
@@ -423731,6 +423743,7 @@
   href: https://github.com/yegor256/factbase/issues/1255/#issuecomment-6130754269
   is_human: 1
   issue: 1255
+  receipt: receipt-#99180
   repository: 798641472
   review_comments: 0
   seconds: 858217
@@ -424833,6 +424846,7 @@
   href: https://github.com/yegor256/factbase/issues/1176/#issuecomment-6131543023
   is_human: 1
   issue: 1176
+  receipt: receipt-#99170
   repository: 798641472
   review_comments: 0
   seconds: 1095020
@@ -425417,6 +425431,7 @@
   href: https://github.com/yegor256/factbase/issues/916/#issuecomment-6132517426
   is_human: 1
   issue: 916
+  receipt: receipt-#99190
   repository: 798641472
   review_comments: 0
   seconds: 2303539
@@ -426081,6 +426096,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1039/#issuecomment-6134218165
   is_human: 1
   issue: 1039
+  receipt: receipt-#99195
   repository: 802720676
   review_comments: 0
   seconds: 2408
@@ -426853,6 +426869,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1027/#issuecomment-6136956191
   is_human: 1
   issue: 1027
+  receipt: receipt-#99192
   repository: 802720676
   review_comments: 0
   seconds: 3687
@@ -427061,6 +427078,7 @@
   href: https://github.com/yegor256/judges/issues/799/#issuecomment-6137376510
   is_human: 1
   issue: 799
+  receipt: receipt-#99191
   repository: 799113787
   review_comments: 0
   seconds: 856949
@@ -427747,6 +427765,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1054/#issuecomment-6138853297
   is_human: 1
   issue: 1054
+  receipt: receipt-#99194
   repository: 802720676
   review_comments: 0
   seconds: 8275
@@ -427767,6 +427786,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1055/#issuecomment-6138853626
   is_human: 1
   issue: 1055
+  receipt: receipt-#99193
   repository: 802720676
   review_comments: 0
   seconds: 8231
@@ -433334,10 +433354,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in zerocracy/swarm-template#293,
     the reward amount is 6.
-  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
-    -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
-    score is [+170](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 2
   href: https://github.com/zerocracy/swarm-template/issues/293/#issuecomment-6161870239
   is_human: 1
@@ -433358,10 +433374,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in zerocracy/swarm-template#284,
     the reward amount is 6.
-  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
-    -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
-    score is [+176](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 2
   href: https://github.com/zerocracy/swarm-template/issues/284/#issuecomment-6161870581
   is_human: 1
@@ -433397,7 +433409,7 @@
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-14 03:02:36.000000000 Z
+  when: &5045 2026-10-14 03:02:36.000000000 Z
   where: github
   who: 8086956
 - _id: 2645506
@@ -433410,5 +433422,748 @@
   repository: 798641472
   what: issue-was-opened
   when: 2026-10-14 05:34:28.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2645507
+  _job: 99532
+  _time: 2026-10-14 06:21:27.338151222 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request yegor256/judges#1001 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 3h30m of being in review and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 1001
+  merger: 8086956
+  repository: 799113787
+  review_comments: 0
+  seconds: 12658
+  what: code-was-contributed
+  when: *5045
+  where: github
+  who: 29139614
+- _id: 2645508
+  _job: 38524404765
+  _time: 2026-10-14 06:53:12.119537483 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1463'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#1467 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 31
+  is_human: 1
+  issue: 1467
+  repository: 798641472
+  review_comments: 0
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: &5047 2026-10-14 06:25:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645509
+  _job: 38524404765
+  _time: 2026-10-14 06:53:29.867783960 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1459'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#1469 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 25
+  is_human: 1
+  issue: 1469
+  repository: 798641472
+  review_comments: 0
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: &5048 2026-10-14 06:25:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645510
+  _job: 38524404765
+  _time: 2026-10-14 06:53:39.822133689 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1458'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/factbase#1470 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 33
+  is_human: 1
+  issue: 1470
+  repository: 798641472
+  review_comments: 0
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: &5049 2026-10-14 06:25:20.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645511
+  _job: 38524404765
+  _time: 2026-10-14 06:56:39.869564545 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/judges-action#2789.
+  is_human: 1
+  issue: 2789
+  label: bug
+  repository: 799177290
+  what: label-was-attached
+  when: &5046 2026-10-14 06:22:36.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645512
+  _job: 38524404765
+  _time: 2026-10-14 07:02:39.140123417 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/judges#1002 has been earlier opened by @gemshrine.
+  is_human: 1
+  issue: 1002
+  repository: 799113787
+  what: issue-was-opened
+  when: 2026-10-14 06:03:21.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2645513
+  _job: 38524404765
+  _time: 2026-10-14 07:03:14.194133595 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1479 has been earlier opened by @gemshrine.
+  is_human: 1
+  issue: 1479
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-10-14 05:53:36.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2645514
+  _job: 38524404765
+  _time: 2026-10-14 07:04:34.623526028 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1532 has been earlier opened by @gemshrine.
+  is_human: 1
+  issue: 1532
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-10-14 05:50:14.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2645515
+  _job: 99535
+  _time: 2026-10-14 07:07:13.600413454 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/judges-action#2789 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 2789
+  reporter: 113778529
+  repository: 799177290
+  what: bug-was-accepted
+  when: *5046
+  where: github
+  who: 526301
+- _id: 2645516
+  _job: 38529565846
+  _time: 2026-10-14 07:39:12.407020202 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1458 has been closed by @yegor256.
+  event_id: 17173249093
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1458
+  repository: 798641472
+  what: issue-was-closed
+  when: 2026-10-14 06:25:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645517
+  _job: 38529565846
+  _time: 2026-10-14 07:39:13.514392531 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1463 has been closed by @yegor256.
+  event_id: 17173247158
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1463
+  repository: 798641472
+  what: issue-was-closed
+  when: 2026-10-14 06:25:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645518
+  _job: 38529565846
+  _time: 2026-10-14 07:39:14.921017503 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1459 has been closed by @yegor256.
+  event_id: 17173241455
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1459
+  repository: 798641472
+  what: issue-was-closed
+  when: 2026-10-14 06:25:13.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645519
+  _job: 38529565846
+  _time: 2026-10-14 07:46:46.455859309 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '977'
+  comments: 3
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/pages-action#1025 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 18
+  is_human: 1
+  issue: 1025
+  repository: 802720676
+  review_comments: 0
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-14 06:24:58.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645520
+  _job: 38529565846
+  _time: 2026-10-14 07:47:11.569377775 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '978'
+  comments: 3
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 3
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/pages-action#1031 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 12
+  is_human: 1
+  issue: 1031
+  repository: 802720676
+  review_comments: 0
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-14 06:25:03.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645521
+  _job: 38529565846
+  _time: 2026-10-14 07:53:03.949714555 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/judges#1002.
+  is_human: 1
+  issue: 1002
+  label: bug
+  repository: 799113787
+  what: label-was-attached
+  when: &5050 2026-10-14 06:22:30.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645522
+  _job: 38529565846
+  _time: 2026-10-14 07:53:49.090671211 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#1528.
+  is_human: 1
+  issue: 1528
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: &5051 2026-10-14 06:22:34.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645523
+  _job: 38529565846
+  _time: 2026-10-14 07:53:52.021118697 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#1529.
+  is_human: 1
+  issue: 1529
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: &5052 2026-10-14 06:22:33.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645524
+  _job: 38529565846
+  _time: 2026-10-14 07:53:54.816674024 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/fbe#1532.
+  is_human: 1
+  issue: 1532
+  label: bug
+  repository: 820463873
+  what: label-was-attached
+  when: &5053 2026-10-14 06:22:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645525
+  _job: 38529565846
+  _time: 2026-10-14 07:54:18.340212803 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/pages-action#1056.
+  is_human: 1
+  issue: 1056
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: &5054 2026-10-14 06:22:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645526
+  _job: 38529565846
+  _time: 2026-10-14 07:54:31.936109635 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1464.
+  is_human: 1
+  issue: 1464
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5055 2026-10-14 06:22:50.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645527
+  _job: 38529565846
+  _time: 2026-10-14 07:54:33.539398785 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1466.
+  is_human: 1
+  issue: 1466
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5056 2026-10-14 06:22:48.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645528
+  _job: 38529565846
+  _time: 2026-10-14 07:54:35.029214231 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1473.
+  is_human: 1
+  issue: 1473
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5057 2026-10-14 06:22:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645529
+  _job: 38529565846
+  _time: 2026-10-14 07:54:36.345591380 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1474.
+  is_human: 1
+  issue: 1474
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5058 2026-10-14 06:22:46.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645530
+  _job: 38529565846
+  _time: 2026-10-14 07:54:37.862114726 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1475.
+  is_human: 1
+  issue: 1475
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5059 2026-10-14 06:22:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645531
+  _job: 38529565846
+  _time: 2026-10-14 07:54:39.275291429 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1476.
+  is_human: 1
+  issue: 1476
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5060 2026-10-14 06:22:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645532
+  _job: 38529565846
+  _time: 2026-10-14 07:54:40.635074945 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1477.
+  is_human: 1
+  issue: 1477
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5061 2026-10-14 06:22:42.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645533
+  _job: 38529565846
+  _time: 2026-10-14 07:54:42.046550887 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1478.
+  is_human: 1
+  issue: 1478
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5062 2026-10-14 06:22:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645534
+  _job: 38529565846
+  _time: 2026-10-14 07:54:43.523729381 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1479.
+  is_human: 1
+  issue: 1479
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: &5063 2026-10-14 06:22:39.000000000 Z
+  where: github
+  who: 526301
+- _id: 2645535
+  _job: 99539
+  _time: 2026-10-14 07:58:37.323458011 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1467 with 31 HoC created by @gemshrine
+    was merged by @yegor256 after 15h4m of being in review and 1 comments.
+  hoc: 31
+  is_human: 1
+  issue: 1467
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 54265
+  what: code-was-contributed
+  when: *5047
+  where: github
+  who: 113778529
+- _id: 2645536
+  _job: 99539
+  _time: 2026-10-14 07:58:37.942009444 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1469 with 25 HoC created by @gemshrine
+    was merged by @yegor256 after 15h of being in review and 1 comments.
+  hoc: 25
+  is_human: 1
+  issue: 1469
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 54020
+  what: code-was-contributed
+  when: *5048
+  where: github
+  who: 113778529
+- _id: 2645537
+  _job: 99539
+  _time: 2026-10-14 07:58:38.246783232 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/factbase#1470 with 33 HoC created by @gemshrine
+    was merged by @yegor256 after 14h57m of being in review and 1 comments.
+  hoc: 33
+  is_human: 1
+  issue: 1470
+  merger: 526301
+  repository: 798641472
+  review_comments: 0
+  seconds: 53840
+  what: code-was-contributed
+  when: *5049
+  where: github
+  who: 113778529
+- _id: 2645538
+  _job: 99539
+  _time: 2026-10-14 07:58:41.222706395 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/judges#1002 reported by
+    @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1002
+  reporter: 113778529
+  repository: 799113787
+  what: bug-was-accepted
+  when: *5050
+  where: github
+  who: 526301
+- _id: 2645539
+  _job: 99539
+  _time: 2026-10-14 07:58:41.700251284 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/fbe#1528 reported by
+    @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1528
+  reporter: 113778529
+  repository: 820463873
+  what: bug-was-accepted
+  when: *5051
+  where: github
+  who: 526301
+- _id: 2645540
+  _job: 99539
+  _time: 2026-10-14 07:58:42.244316401 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/fbe#1529 reported by
+    @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1529
+  reporter: 113778529
+  repository: 820463873
+  what: bug-was-accepted
+  when: *5052
+  where: github
+  who: 526301
+- _id: 2645541
+  _job: 99539
+  _time: 2026-10-14 07:58:42.544551616 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/fbe#1532 reported by
+    @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1532
+  reporter: 113778529
+  repository: 820463873
+  what: bug-was-accepted
+  when: *5053
+  where: github
+  who: 526301
+- _id: 2645542
+  _job: 99539
+  _time: 2026-10-14 07:58:42.840855469 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to zerocracy/pages-action#1056 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1056
+  reporter: 113778529
+  repository: 802720676
+  what: bug-was-accepted
+  when: *5054
+  where: github
+  who: 526301
+- _id: 2645543
+  _job: 99539
+  _time: 2026-10-14 07:58:43.393937993 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1464 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1464
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5055
+  where: github
+  who: 526301
+- _id: 2645544
+  _job: 99539
+  _time: 2026-10-14 07:58:43.688861109 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1466 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1466
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5056
+  where: github
+  who: 526301
+- _id: 2645545
+  _job: 99539
+  _time: 2026-10-14 07:58:43.965807753 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1473 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1473
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5057
+  where: github
+  who: 526301
+- _id: 2645546
+  _job: 99539
+  _time: 2026-10-14 07:58:44.265123763 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1474 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1474
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5058
+  where: github
+  who: 526301
+- _id: 2645547
+  _job: 99539
+  _time: 2026-10-14 07:58:44.540195022 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1475 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1475
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5059
+  where: github
+  who: 526301
+- _id: 2645548
+  _job: 99539
+  _time: 2026-10-14 07:58:44.843022168 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1476 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1476
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5060
+  where: github
+  who: 526301
+- _id: 2645549
+  _job: 99539
+  _time: 2026-10-14 07:58:45.139813948 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1477 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1477
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5061
+  where: github
+  who: 526301
+- _id: 2645550
+  _job: 99539
+  _time: 2026-10-14 07:58:45.416791176 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1478 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1478
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5062
+  where: github
+  who: 526301
+- _id: 2645551
+  _job: 99539
+  _time: 2026-10-14 07:58:45.714739004 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1479 reported
+    by @gemshrine; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1479
+  reporter: 113778529
+  repository: 798641472
+  what: bug-was-accepted
+  when: *5063
+  where: github
+  who: 526301
+- _id: 2645552
+  _job: 99539
+  _time: 2026-10-14 07:58:48.048436535 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @gemshrine for the bug reported in zerocracy/judges-action#2789,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per policy, accepted bug reports earn a flat **+18** points, which have been added to your score. Your contributions help keep the project in great shape — if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is now [+6900](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+6900](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 2789
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-14 07:58:48.050308597 Z
+  where: github
+  who: 113778529
+  why: Reported bug in zerocracy/judges-action#2789
+- _id: 2645553
+  _job: 38532114548
+  _time: 2026-10-14 08:13:02.321007453 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1483 has been earlier opened by @gemshrine.
+  issue: 1483
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-10-14 08:09:41.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2645554
+  _job: 38532114548
+  _time: 2026-10-14 08:13:02.659617989 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1482 has been earlier opened by @gemshrine.
+  issue: 1482
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-10-14 08:06:36.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2645555
+  _job: 38532114548
+  _time: 2026-10-14 08:13:03.176048603 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1481 has been earlier opened by @gemshrine.
+  issue: 1481
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-10-14 08:00:04.000000000 Z
+  where: github
+  who: 113778529
+- _id: 2645556
+  _job: 38532114548
+  _time: 2026-10-14 08:13:03.417323988 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue yegor256/factbase#1480 has been earlier opened by @gemshrine.
+  issue: 1480
+  repository: 798641472
+  what: issue-was-opened
+  when: 2026-10-14 07:52:05.000000000 Z
   where: github
   who: 113778529
