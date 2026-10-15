@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 11m1s: execution expired'
   inserted: 8
-  seconds: 24.053567168
+  seconds: 1215.855875458
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-15 02:41:14.169231761 Z
+  when: 2026-10-15 03:22:03.280646513 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -165345,7 +165348,7 @@
   min_issue_was_found: 73
   min_pull_was_found: 35
   repository: 974194993
-  types_were_scanned: 142
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -169326,7 +169329,7 @@
   min_issue_was_found: 97
   min_pull_was_found: 82
   repository: 1236759415
-  types_were_scanned: 98
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629477
@@ -172104,25 +172107,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1499
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24017954109
   issues_were_scanned: 1362
-  labels_were_scanned: 1304
+  labels_were_scanned: 1501
   latest_issue_was_found: 315
-  merges_were_scanned: 1435
-  min_issue_was_found: 1375
+  merges_were_scanned: 0
+  min_issue_was_found: 1377
   min_pull_was_found: 725
   repository: 798641472
-  types_were_scanned: 790
+  types_were_scanned: 895
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17260745931
@@ -172130,10 +172133,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 478
+  min_issue_was_found: 479
   min_pull_was_found: 505
   repository: 840215648
-  types_were_scanned: 363
+  types_were_scanned: 507
   what: iterate
   where: github
 - _id: 2629843
@@ -172148,7 +172151,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 0
   min_pull_was_found: 133
   repository: 857659265
   types_were_scanned: 0
@@ -172550,18 +172553,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1339
-  closures_were_checked: 953
+  assignees_were_scanned: 1451
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24028688888
   issues_were_scanned: 1217
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1312
-  min_issue_was_found: 1434
+  merges_were_scanned: 1404
+  min_issue_was_found: 1435
   min_pull_was_found: 699
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 586
   what: iterate
   where: github
 - _id: 2629882
@@ -173207,18 +173210,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 975
+  assignees_were_scanned: 1084
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24028939964
   issues_were_scanned: 795
-  labels_were_scanned: 1084
+  labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 0
-  min_issue_was_found: 979
+  min_issue_was_found: 980
   min_pull_was_found: 642
   repository: 802720676
-  types_were_scanned: 811
+  types_were_scanned: 921
   what: iterate
   where: github
 - _id: 2629939
@@ -173353,18 +173356,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 845
+  assignees_were_scanned: 910
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24029011964
   issues_were_scanned: 862
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
-  min_issue_was_found: 867
+  merges_were_scanned: 744
+  min_issue_was_found: 868
   min_pull_was_found: 707
   repository: 799113787
-  types_were_scanned: 654
+  types_were_scanned: 819
   what: iterate
   where: github
 - _id: 2630023
@@ -173389,18 +173392,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2471
-  closures_were_checked: 0
+  assignees_were_scanned: 2613
+  closures_were_checked: 1637
   earliest_issue_was_found: 1
   events_were_scanned: 24030127780
   issues_were_scanned: 2606
-  labels_were_scanned: 1702
+  labels_were_scanned: 2497
   latest_issue_was_found: 1073
-  merges_were_scanned: 2523
-  min_issue_was_found: 2709
+  merges_were_scanned: 2591
+  min_issue_was_found: 2710
   min_pull_was_found: 1490
   repository: 799177290
-  types_were_scanned: 2146
+  types_were_scanned: 2307
   what: iterate
   where: github
 - _id: 2630036
@@ -173414,7 +173417,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 5
+  min_issue_was_found: 20
   min_pull_was_found: 18
   repository: 1081929119
   types_were_scanned: 0
@@ -173424,7 +173427,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17117019434
@@ -173432,10 +173435,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1120
+  min_issue_was_found: 1121
   min_pull_was_found: 1095
   repository: 728758275
-  types_were_scanned: 1120
+  types_were_scanned: 1309
   what: iterate
   where: github
 - _id: 2630038
@@ -433827,6 +433830,8 @@
     [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
     Your running score is [+144](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/fbe/commit/f888443418f4e01128e993b068dba1a4e8cbc0d3/#commitcomment-205024547
+  is_human: 1
   repository: 820463873
   what: push-to-master-was-punished
   when: 2026-10-15 02:20:57.285178459 Z
@@ -433849,6 +433854,8 @@
     [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
     Your running score is [+136](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  href: https://github.com/zerocracy/pages-action/commit/564d714d4beca0cb59eefafbc0dde13205ba9d28/#commitcomment-205024552
+  is_human: 1
   repository: 802720676
   what: push-to-master-was-punished
   when: 2026-10-15 02:20:58.031855663 Z
