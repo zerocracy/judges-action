@@ -14,7 +14,7 @@ def Jp.fill_fact_by_hash(fact, hash)
       raise(ArgumentError, "Forbidden property name: #{prop.inspect} (conflicts with fact API)")
     end
     raise(ArgumentError, "The value of #{prop.inspect} can't be nil") if value.nil?
-    values = Array(value)
+    values = value.is_a?(Array) ? value : [value]
     raise(ArgumentError, "The value of #{prop.inspect} can't be empty") if values.empty?
     raise(ArgumentError, "The value of #{prop.inspect} can't hold a nil") if values.any?(&:nil?)
     values.each { |v| fact.public_send(:"#{prop}=", v) }

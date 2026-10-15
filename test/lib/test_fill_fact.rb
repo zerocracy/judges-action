@@ -8,6 +8,16 @@ require_relative '../../lib/fill_fact'
 require_relative '../test__helper'
 
 class TestFillFact < Minitest::Test
+  def test_preserves_scalar_and_array_timestamps
+    stamp = Time.utc(2026, 10, 14, 12, 34, 56)
+    [stamp, [stamp]].each do |value|
+      fact = Factbase.new.insert
+      Jp.fill_fact_by_hash(fact, { 'when' => value })
+      assert_equal([stamp], fact['when'])
+      assert_instance_of(Time, fact.when)
+    end
+  end
+
   def test_sets_a_valid_property
     fb = Factbase.new
     f = fb.insert
