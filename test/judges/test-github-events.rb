@@ -3085,6 +3085,89 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_fill_skips_when_repo_name_by_id_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/99', status: 403, body: { message: 'Forbidden' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '12345',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 99, name: 'bar/bar' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-05-05 19:03:16 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user', body: { id: 123, login: 'testuser' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.size)
+    assert_equal(1, fb.query('(eq what "iterate")').each.to_a.size)
+    assert_equal(0, fb.query('(eq what "git-was-pushed")').each.to_a.size)
+  end
+
+  def test_fill_skips_when_push_event_repository_not_found
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/99', body: { id: 99, name: 'bar', full_name: 'bar/bar' })
+    stub_github('https://api.github.com/repos/bar/bar', status: 404, body: { message: 'Not Found' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '12346',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 99, name: 'bar/bar' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-05-05 19:03:16 UTC'
+        }
+      ]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.size)
+    assert_equal(1, fb.query('(eq what "iterate")').each.to_a.size)
+    assert_equal(0, fb.query('(eq what "git-was-pushed")').each.to_a.size)
+  end
+
+  def test_fill_skips_when_push_event_repository_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/99', body: { id: 99, name: 'bar', full_name: 'bar/bar' })
+    stub_github('https://api.github.com/repos/bar/bar', status: 403, body: { message: 'Forbidden' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '12347',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 99, name: 'bar/bar' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-05-05 19:03:16 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user', body: { id: 123, login: 'testuser' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(1, fb.size)
+    assert_equal(1, fb.query('(eq what "iterate")').each.to_a.size)
+    assert_equal(0, fb.query('(eq what "git-was-pushed")').each.to_a.size)
+    assert_includes($global[:forbidden_repos], 'bar/bar')
+  end
+
   private
 
   def stub_event(*json)
