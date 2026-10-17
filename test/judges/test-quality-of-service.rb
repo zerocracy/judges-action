@@ -2792,6 +2792,129 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_merged_pulls_distinguishes_merged_and_unmerged
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_merged_pulls.rb'))
+    Jp.qoreset
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    fb = Factbase.new
+    fact = fb.insert
+    fact.what = 'quality-of-service'
+    fact.since = Time.parse('2025-01-01 00:00:00 UTC')
+    fact.when = Time.parse('2025-01-08 00:00:00 UTC')
+    queries = []
+    search =
+      proc do |query|
+        queries << query
+        if query.include?('is:merged')
+          { total_count: 42 }
+        elsif query.include?('is:unmerged')
+          { total_count: 7 }
+        end
+      end
+    result =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+          Jp.stub(:qosearch, search) do
+            some_merged_pulls(fact)
+          end
+        end
+      end
+    assert_equal({ some_merged_pulls: [42], some_unmerged_pulls: [7] }, result)
+    result[:some_merged_pulls].each { |count| fact.some_merged_pulls = count }
+    result[:some_unmerged_pulls].each { |count| fact.some_unmerged_pulls = count }
+    assert_equal([42], fact['some_merged_pulls'])
+    assert_equal([7], fact['some_unmerged_pulls'])
+    assert_equal(2, queries.size)
+    assert(queries.any? { |query| query.include?('is:merged') })
+    assert(queries.any? { |query| query.include?('is:unmerged') })
+  end
+
+  def test_some_merged_pulls_with_multiple_repositories_and_distinct_counts
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_merged_pulls.rb'))
+    Jp.qoreset
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-01-01 00:00:00 UTC')
+    fact.when = Time.parse('2025-01-08 00:00:00 UTC')
+    search =
+      proc do |query|
+        if query.include?('repo:foo/first')
+          query.include?('is:merged') ? { total_count: 10 } : { total_count: 3 }
+        elsif query.include?('repo:foo/second')
+          query.include?('is:merged') ? { total_count: 20 } : { total_count: 5 }
+        end
+      end
+    result =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, ->(&block) { %w[foo/first foo/second].each(&block) }) do
+          Jp.stub(:qosearch, search) do
+            some_merged_pulls(fact)
+          end
+        end
+      end
+    assert_equal({ some_merged_pulls: [10, 20], some_unmerged_pulls: [3, 5] }, result)
+  end
+
+  def test_some_merged_pulls_drops_repository_when_unmerged_search_fails
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_merged_pulls.rb'))
+    Jp.qoreset
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-01-01 00:00:00 UTC')
+    fact.when = Time.parse('2025-01-08 00:00:00 UTC')
+    search =
+      proc do |query|
+        if query.include?('repo:foo/good')
+          query.include?('is:merged') ? { total_count: 8 } : { total_count: 2 }
+        elsif query.include?('repo:foo/bad')
+          query.include?('is:merged') ? { total_count: 14 } : nil
+        end
+      end
+    result =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, ->(&block) { %w[foo/good foo/bad].each(&block) }) do
+          Jp.stub(:qosearch, search) do
+            some_merged_pulls(fact)
+          end
+        end
+      end
+    assert_equal({ some_merged_pulls: [8], some_unmerged_pulls: [2] }, result)
+  end
+
+  def test_some_merged_pulls_drops_repository_when_merged_search_fails
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_merged_pulls.rb'))
+    Jp.qoreset
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-01-01 00:00:00 UTC')
+    fact.when = Time.parse('2025-01-08 00:00:00 UTC')
+    search =
+      proc do |query|
+        if query.include?('repo:foo/bad')
+          query.include?('is:merged') ? nil : { total_count: 2 }
+        elsif query.include?('repo:foo/good')
+          query.include?('is:merged') ? { total_count: 12 } : { total_count: 4 }
+        end
+      end
+    result =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, ->(&block) { %w[foo/bad foo/good].each(&block) }) do
+          Jp.stub(:qosearch, search) do
+            some_merged_pulls(fact)
+          end
+        end
+      end
+    assert_equal({ some_merged_pulls: [12], some_unmerged_pulls: [4] }, result)
+  end
+
   private
 
   def stub_workflow_runs(workflow_runs)
