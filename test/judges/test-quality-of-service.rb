@@ -821,6 +821,57 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_build_mttr_two_cycles_in_window
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-07T10:00:00Z')
+    runs = [
+      { id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started },
+      { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 1_000 },
+      { id: 3, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started + 3_000 },
+      { id: 4, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 5_000 }
+    ]
+    durations = { 1 => 200, 2 => 100, 3 => 300, 4 => 100 }
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
+    octo.define_singleton_method(:workflow_run_usage) { |_, id| { run_duration_ms: durations[id] * 1_000 } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([900, 1800], metrics[:some_build_mttr])
+      end
+    end
+  end
+
+  def test_some_build_mttr_cross_window_recovery
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-07T10:00:00Z')
+    stop = Time.parse('2024-08-09T21:00:00Z')
+    recovery = Time.parse('2024-08-10T12:00:00Z')
+    runs = [{ id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started }]
+    calls = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 300_000 } }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(self) }
+    octo.define_singleton_method(:workflow_runs) do |repo, wid, **kwargs|
+      calls << { repo: repo, wid: wid, created: kwargs[:created], status: kwargs[:status] }
+      { workflow_runs: [{ id: 42, updated_at: recovery }] }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), stop)
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal([{ repo: 'foo/foo', wid: 101, created: ">#{stop.utc.iso8601}", status: 'success' }], calls)
+        assert_equal([266_100], metrics[:some_build_mttr])
+      end
+    end
+  end
+
   def test_some_build_mttr_on_repeated_failures
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
