@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 7m13s: execution expired'
   inserted: 8
-  seconds: 42.121377816
+  seconds: 1200.787231679
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-18 01:08:25.684117290 Z
+  when: 2026-10-18 02:22:19.656815390 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -161095,7 +161098,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 2
+  min_issue_was_found: 30
   min_pull_was_found: 25
   repository: 1090089359
   types_were_scanned: 0
@@ -169796,12 +169799,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17496249963
+  events_were_scanned: 24366765056
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 299
+  min_issue_was_found: 302
   min_pull_was_found: 269
   repository: 849726475
   types_were_scanned: 0
@@ -170035,7 +170038,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 4
   min_pull_was_found: 153
   repository: 805238060
   types_were_scanned: 0
@@ -170063,36 +170066,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 950
+  assignees_were_scanned: 1082
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17493769921
   issues_were_scanned: 1384
-  labels_were_scanned: 1304
+  labels_were_scanned: 1580
   latest_issue_was_found: 315
-  merges_were_scanned: 1052
+  merges_were_scanned: 1437
   min_issue_was_found: 1478
   min_pull_was_found: 732
   repository: 798641472
-  types_were_scanned: 1191
+  types_were_scanned: 1304
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17492709689
+  events_were_scanned: 24373179013
   issues_were_scanned: 452
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 360
+  min_issue_was_found: 361
   min_pull_was_found: 522
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -170509,18 +170512,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1352
-  closures_were_checked: 0
+  assignees_were_scanned: 1546
+  closures_were_checked: 932
   earliest_issue_was_found: 1
   events_were_scanned: 17493456834
   issues_were_scanned: 1225
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 0
-  min_issue_was_found: 1353
+  merges_were_scanned: 934
+  min_issue_was_found: 1380
   min_pull_was_found: 708
   repository: 820463873
-  types_were_scanned: 1463
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -171166,18 +171169,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 691
+  assignees_were_scanned: 859
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17493168133
   issues_were_scanned: 896
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 0
-  min_issue_was_found: 1149
+  merges_were_scanned: 1111
+  min_issue_was_found: 1150
   min_pull_was_found: 650
   repository: 802720676
-  types_were_scanned: 1219
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -171312,18 +171315,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 910
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 24348383474
+  events_were_scanned: 24368674472
   issues_were_scanned: 870
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1035
-  min_issue_was_found: 909
+  merges_were_scanned: 0
+  min_issue_was_found: 910
   min_pull_was_found: 719
   repository: 799113787
-  types_were_scanned: 579
+  types_were_scanned: 671
   what: iterate
   where: github
 - _id: 2630023
@@ -171348,18 +171351,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2392
-  closures_were_checked: 0
+  assignees_were_scanned: 2549
+  closures_were_checked: 1637
   earliest_issue_was_found: 1
-  events_were_scanned: 24365827317
+  events_were_scanned: 24377439944
   issues_were_scanned: 2614
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
+  merges_were_scanned: 2331
   min_issue_was_found: 2603
   min_pull_was_found: 1500
   repository: 799177290
-  types_were_scanned: 2472
+  types_were_scanned: 2613
   what: iterate
   where: github
 - _id: 2630036
@@ -171373,7 +171376,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 22
+  min_issue_was_found: 23
   min_pull_was_found: 14
   repository: 1081929119
   types_were_scanned: 0
@@ -171383,7 +171386,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24082025042
@@ -171394,7 +171397,7 @@
   min_issue_was_found: 1254
   min_pull_was_found: 1109
   repository: 728758275
-  types_were_scanned: 1175
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
