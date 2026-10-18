@@ -1026,6 +1026,22 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_excludes_commits_after_the_measurement_time
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    fact = Factbase.new.insert
+    fact.when = Time.iso8601('2026-10-02T12:00:00Z')
+    inside = { author: { id: 101 }, commit: { author: { date: '2026-09-20T12:00:00Z' } } }
+    boundary = { author: { id: 303 }, commit: { author: { date: fact.when } } }
+    after = { author: { id: 202 }, commit: { author: { date: '2026-10-02T12:00:01Z' } } }
+    Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      [[after], [inside, after], [inside, inside, boundary, after]].zip([0, 1, 2]).each do |commits, expected|
+        Jp.stub(:qosearch, { items: commits }) do
+          assert_equal(expected, total_active_contributors(fact)[:total_active_contributors])
+        end
+      end
+    end
+  end
+
   def test_total_active_contributors
     require_relative('../../lib/qos_search')
     Jp.qoreset
