@@ -2860,7 +2860,7 @@ class TestGithubEvents < Jp::Test
     assert_equal([8_086_956], f.first[:who])
   end
 
-  def test_release_rescues_forbidden_contributors
+  def test_dont_record_first_release_when_compare_is_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     stub_event(
@@ -2909,13 +2909,45 @@ class TestGithubEvents < Jp::Test
       body: { message: 'Resource not accessible by integration' }
     )
     stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    stub_github('https://api.github.com/user', body: { login: 'rultor', id: 8_086_956 })
     fb = Factbase.new
     load_it('github-events', fb)
-    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
-    assert_equal(1, f.count)
-    refute_includes(f.first.all_properties, 'contributors')
-    refute_includes(f.first.all_properties, 'commits')
-    refute_includes(f.first.all_properties, 'hoc')
+    assert_empty(
+      fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a,
+      'release is recorded without commits and hoc after a refused comparison'
+    )
+  end
+
+  def test_dont_record_next_release_when_compare_is_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '103', type: 'ReleaseEvent', actor: { id: 8_086_956, login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: { id: 999_003, author: { login: 'rultor', id: 8_086_956 }, tag_name: 'v2', name: 'второй' }
+        },
+        created_at: Time.parse('2024-12-02T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/v1...v2?per_page=100',
+      status: 403, body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    stub_github('https://api.github.com/user', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    fb.with(
+      event_id: 100, event_type: 'ReleaseEvent', repository: 42, tag: 'v1', what: 'release-published',
+      when: Time.parse('2024-11-29 00:52:08 UTC'), where: 'github', who: 526_301
+    )
+    load_it('github-events', fb)
+    assert_empty(
+      fb.query('(and (eq repository 42) (eq tag "v2"))').each.to_a,
+      'next release is recorded without commits and hoc after a refused comparison'
+    )
   end
 
   def test_release_rescues_deprecated_compare
