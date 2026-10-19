@@ -11,7 +11,7 @@ require 'fbe/octo'
 require 'joined'
 require_relative '../../lib/issue_was_lost'
 
-events = %w[issue_type_added issue_type_changed]
+events = %w[issue_type_added issue_type_changed issue_type_removed]
 
 Fbe.iterate do
   as 'types_were_scanned'
@@ -93,6 +93,18 @@ Fbe.iterate do
         end
       if tee.nil?
         $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
+        next
+      end
+      if te[:event] == 'issue_type_removed'
+        type = tee.dig('issue_type', 'name')
+        next if type.nil?
+        Fbe.fb.txn do |fbt|
+          fbt.query(
+            "(and (eq repository #{repository}) (eq issue #{issue}) " \
+            "(eq what '#{$judge}') (eq type '#{type}') (absent stale))"
+          ).each { |fact| fact.stale = 'removed' }
+        end
+        $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
         next
       end
       Fbe.fb.txn do |fbt|

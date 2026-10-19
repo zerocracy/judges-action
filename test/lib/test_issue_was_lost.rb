@@ -39,6 +39,20 @@ class TestIssueWasLost < Minitest::Test
     end
   end
 
+  def test_logs_how_many_facts_were_marked_stale
+    fb = Factbase.new
+    f = fb.insert
+    f.where = 'github'
+    f.repository = 42
+    f.issue = 7
+    f.what = 'pull-was-opened'
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::Buffer.new
+      Jp.issue_was_lost('github', 42, 7)
+      assert_includes($loog.to_s, '1 facts marked as stale', $loog.to_s)
+    end
+  end
+
   def test_graceful_on_second_call_for_same_issue
     fb = Factbase.new
     Fbe.stub(:fb, fb) do
@@ -72,6 +86,89 @@ class TestIssueWasLost < Minitest::Test
       refute(Fbe::Tombstone.new(fb: fb).has?('github', 7, 11), 'tombstone must be empty before the call')
       Jp.issue_was_lost('github', 7, 11)
       assert(Fbe::Tombstone.new(fb: fb).has?('github', 7, 11), 'tombstone must contain the issue after the call')
+    end
+  end
+
+  def test_buries_issue_on_retry_after_tombstone_failure
+    seed = Random.new_seed
+    random = Random.new(seed)
+    repo = random.rand(1..99_999)
+    issue = random.rand(1..99_999)
+    fb = Factbase.new
+    f = fb.insert
+    f.where = 'github'
+    f.repository = repo
+    f.issue = issue
+    f.what = 'issue-was-opened'
+    broken = Object.new
+    broken.define_singleton_method(:bury!) { |*| raise(Fbe::Error, 'tombstone is down') }
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      Fbe::Tombstone.stub(:new, broken) do
+        Jp.issue_was_lost('github', repo, issue)
+      rescue Fbe::Error
+        nil
+      end
+      Jp.issue_was_lost('github', repo, issue)
+      assert(
+        Fbe::Tombstone.new(fb: fb).has?('github', repo, issue),
+        "issue #{issue} in repo #{repo} is not buried after a retry, seed #{seed}"
+      )
+    end
+  end
+
+  def test_dont_insert_lost_fact_on_retry_after_tombstone_failure
+    seed = Random.new_seed
+    random = Random.new(seed)
+    repo = random.rand(1..99_999)
+    issue = random.rand(1..99_999)
+    fb = Factbase.new
+    f = fb.insert
+    f.where = 'github'
+    f.repository = repo
+    f.issue = issue
+    f.what = 'issue-was-opened'
+    broken = Object.new
+    broken.define_singleton_method(:bury!) { |*| raise(Fbe::Error, 'tombstone is down') }
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      Fbe::Tombstone.stub(:new, broken) do
+        Jp.issue_was_lost('github', repo, issue)
+      rescue Fbe::Error
+        nil
+      end
+      Jp.issue_was_lost('github', repo, issue)
+      assert_empty(
+        fb.query("(eq what 'issue-was-lost')").each.to_a,
+        "retry for issue #{issue} in repo #{repo} inserted a lost fact despite a prior fact, seed #{seed}"
+      )
+    end
+  end
+
+  def test_dont_mark_facts_stale_when_tombstone_fails
+    seed = Random.new_seed
+    random = Random.new(seed)
+    repo = random.rand(1..99_999)
+    issue = random.rand(1..99_999)
+    fb = Factbase.new
+    f = fb.insert
+    f.where = 'github'
+    f.repository = repo
+    f.issue = issue
+    f.what = 'issue-was-opened'
+    broken = Object.new
+    broken.define_singleton_method(:bury!) { |*| raise(Fbe::Error, 'tombstone is down') }
+    Fbe.stub(:fb, fb) do
+      $loog = Loog::NULL
+      Fbe::Tombstone.stub(:new, broken) do
+        Jp.issue_was_lost('github', repo, issue)
+      rescue Fbe::Error
+        nil
+      end
+      assert_empty(
+        fb.query('(exists stale)').each.to_a,
+        "facts of issue #{issue} in repo #{repo} are stale without a tombstone, seed #{seed}"
+      )
     end
   end
 end

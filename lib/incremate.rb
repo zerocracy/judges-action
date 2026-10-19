@@ -23,11 +23,11 @@ def Jp.incremate(
       $loog.debug("#{n} is here: #{fact[n].first}")
       next
     end
-    break if Fbe.over?(epoch:, kickoff:)
     if pause.positive? && evaluated.positive?
       $loog.debug("Pausing for #{pause}s before next #{prefix}_* evaluation...")
       sleep(pause)
     end
+    break if Fbe.over?(epoch:, kickoff:)
     $loog.info(
       [
         "Starting to evaluate #{n}",
@@ -44,8 +44,9 @@ def Jp.incremate(
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
         Array(v).each { fact.__send__("#{k}=", _1) }
       end
-      if h.key?(n.to_sym) && !(avoid_duplicate && fact.all_properties.include?(n))
-        Array(h[n.to_sym]).each { fact.__send__("#{n}=", _1) }
+      marker = h.keys.find { |k| k.to_s == n }
+      if !marker.nil? && !(avoid_duplicate && fact.all_properties.include?(n))
+        Array(h[marker]).each { fact.__send__("#{n}=", _1) }
       end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end

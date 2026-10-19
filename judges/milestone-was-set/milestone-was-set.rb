@@ -22,7 +22,15 @@ Fbe.consider(
       Fbe.octo.repo_name_by_id(f.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Failed to find repository #{f.repository}: #{e.message}")
-      f.stale = 'repository'
+      marked =
+        Fbe.fb.query(
+          "(and
+          (eq where 'github')
+          (eq repository #{f.repository})
+          (absent stale)
+          (absent tombstone))"
+        ).each { |x| x.stale = 'repository' }
+      $loog.info("Marked #{marked} facts of repository #{f.repository} as stale")
       next
     rescue Octokit::Forbidden => e
       $loog.warn(

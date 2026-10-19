@@ -8,6 +8,54 @@ require_relative '../../lib/pull_request'
 require_relative '../test__helper'
 
 class TestPullRequest < Jp::Test
+  def test_fetch_workflows_counts_each_workflow_once
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'many-jobs' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/many-jobs/check-runs?per_page=100',
+      body: { check_runs: (1..6).map { |id| { id: id, app: { slug: 'github-actions' } } } }
+    )
+    (1..6).each do |id|
+      stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{id}", body: { run_id: (id - 1) / 2 })
+    end
+    %w[success success failure].each_with_index do |conclusion, id|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/actions/runs/#{id}",
+        body: { event: 'pull_request', conclusion: conclusion }
+      )
+    end
+    2.times do
+      assert_equal({ succeeded_builds: 2, failed_builds: 1 }, Jp.fetch_workflows(pr))
+    end
+  end
+
+  def test_fetch_workflows_retries_missing_workflow_for_another_job
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'retry-job' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/retry-job/check-runs?per_page=100',
+      body: { check_runs: [1, 2].map { |id| { id: id, app: { slug: 'github-actions' } } } }
+    )
+    [1, 2].each do |id|
+      stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{id}", body: { run_id: 9001 })
+    end
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs/9001').to_return(
+      status: 404, body: '{}', headers: { 'Content-Type' => 'application/json' }
+    ).then.to_return(
+      status: 200, body: { event: 'pull_request', conclusion: 'success' }.to_json,
+      headers: { 'Content-Type' => 'application/json' }
+    )
+    assert_equal({ succeeded_builds: 1, failed_builds: 0 }, Jp.fetch_workflows(pr))
+  end
+
   def test_fetch_workflows_skips_nil_app_check_runs
     WebMock.disable_net_connect!
     rate_limit_up
@@ -62,8 +110,8 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/issues/comments/101/reactions',
       body: [
-        { user: nil },
-        { user: { id: 42 } }
+        { user: nil, content: '+1' },
+        { user: { id: 42 }, content: '+1' }
       ]
     )
     count = Jp.count_appreciated_comments(
@@ -83,8 +131,8 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/comments/202/reactions',
       body: [
-        { user: { id: 42 } },
-        { user: nil }
+        { user: { id: 42 }, content: '+1' },
+        { user: nil, content: '+1' }
       ]
     )
     pr = { base: { repo: { full_name: 'foo/foo' } } }
@@ -105,7 +153,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_empty_on_forbidden_runs
+  def test_fetch_workflows_raises_on_forbidden_runs
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -117,8 +165,7 @@ class TestPullRequest < Jp::Test
         status: 403, body: '{"message": "Forbidden"}',
         headers: { 'Content-Type' => 'application/json' }
       )
-    result = Jp.fetch_workflows(pr)
-    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
+    assert_raises(Octokit::Forbidden, 'refused check runs are counted as zero builds') { Jp.fetch_workflows(pr) }
   end
 
   def test_fetch_workflows_skips_not_found_run_job
@@ -263,7 +310,10 @@ class TestPullRequest < Jp::Test
     $loog = Loog::NULL
     stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/comments/301/reactions')
       .to_return(status: 404, headers: { 'Content-Type' => 'application/json' }, body: '{}')
-    stub_github('https://api.github.com/repos/foo/foo/issues/comments/302/reactions', body: [{ user: { id: 99 } }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/302/reactions',
+      body: [{ user: { id: 99 }, content: '+1' }]
+    )
     pr = { base: { repo: { full_name: 'foo/foo' } } }
     count = Jp.count_appreciated_comments(pr, [{ id: 301, user: { id: 1 } }, { id: 302, user: { id: 1 } }], [])
     assert_equal(1, count)
@@ -290,7 +340,10 @@ class TestPullRequest < Jp::Test
     $loog = Loog::NULL
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/comments/501/reactions')
       .to_return(status: 404, headers: { 'Content-Type' => 'application/json' }, body: '{}')
-    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/502/reactions', body: [{ user: { id: 88 } }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/comments/502/reactions',
+      body: [{ user: { id: 88 }, content: '+1' }]
+    )
     pr = { base: { repo: { full_name: 'foo/foo' } } }
     count = Jp.count_appreciated_comments(pr, [], [{ id: 501, user: { id: 1 } }, { id: 502, user: { id: 1 } }])
     assert_equal(1, count)
@@ -307,6 +360,62 @@ class TestPullRequest < Jp::Test
     pr = { base: { repo: { full_name: 'foo/foo' } } }
     count = Jp.count_appreciated_comments(pr, [], [{ id: 601, user: { id: 1 } }])
     assert_equal(0, count)
+  end
+
+  def test_counts_only_the_comments_that_people_made
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({ 'bots' => 'rultor' })
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/7/comments?per_page=100',
+      body: [
+        { id: 20, user: { id: 5, login: 'jeff', type: 'User' } },
+        { id: 21, user: { id: 9, login: 'github-actions', type: 'Bot' } }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/7/comments?per_page=100',
+      body: [
+        { id: 22, user: { id: 6, login: 'walter', type: 'User' } },
+        { id: 23, user: { id: 7, login: '0crat', type: 'Bot' } },
+        { id: 24, user: { id: 8, login: 'rultor', type: 'User' } }
+      ]
+    )
+    [20, 22, 24].each { |i| stub_github("https://api.github.com/repos/foo/foo/issues/comments/#{i}/reactions", body: []) }
+    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/20/reactions', body: [])
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 7, comments: 3, review_comments: 2, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(2, info[:comments], 'bots and the named bot must not be counted')
+      assert_equal(1, info[:comments_to_code])
+      assert_equal(1, info[:comments_by_author])
+      assert_equal(1, info[:comments_by_reviewers])
+    end
+  end
+
+  def test_counts_every_comment_when_no_bot_wrote_one
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/8/comments?per_page=100',
+      body: [{ id: 30, user: { id: 5, login: 'jeff', type: 'User' } }]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/8/comments?per_page=100',
+      body: [{ id: 31, user: { id: 6, login: 'walter', type: 'User' } }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/comments/31/reactions', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/comments/30/reactions', body: [])
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 8, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(2, info[:comments])
+    end
   end
 
   def test_skips_pr_comments_on_not_found
@@ -332,7 +441,7 @@ class TestPullRequest < Jp::Test
     end
   end
 
-  def test_skips_issue_comments_on_forbidden
+  def test_raises_on_forbidden_issue_comments
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -345,14 +454,11 @@ class TestPullRequest < Jp::Test
     )
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       pr = { number: 2, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
-      info = Jp.comments_info(pr)
-      refute_nil(info)
-      assert_equal(0, info[:comments_by_reviewers])
-      assert_equal(0, info[:comments_by_author])
+      assert_raises(Octokit::Forbidden, 'refused issue comments are counted as zero') { Jp.comments_info(pr) }
     end
   end
 
-  def test_returns_zeros_on_both_forbidden
+  def test_raises_on_forbidden_code_comments
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -368,11 +474,7 @@ class TestPullRequest < Jp::Test
     )
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       pr = { number: 3, comments: 0, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
-      info = Jp.comments_info(pr)
-      refute_nil(info)
-      assert_equal(0, info[:comments_to_code])
-      assert_equal(0, info[:comments_by_author])
-      assert_equal(0, info[:comments_by_reviewers])
+      assert_raises(Octokit::Forbidden, 'refused code comments are counted as zero') { Jp.comments_info(pr) }
     end
   end
 
@@ -386,15 +488,15 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/1/reviews/10/comments?per_page=100',
       body: [
-        { id: 1, user: { id: 100 }, in_reply_to_id: nil },
-        { id: 2, user: { id: 300 }, in_reply_to_id: nil },
-        { id: 3, user: { id: 100 }, in_reply_to_id: 1 }
+        { id: 1, user: { id: 100 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" },
+        { id: 2, user: { id: 300 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" },
+        { id: 3, user: { id: 100 }, in_reply_to_id: 1, body: "```suggestion\nx\n```" }
       ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/1/reviews/20/comments?per_page=100',
       body: [
-        { id: 4, user: { id: 200 }, in_reply_to_id: nil }
+        { id: 4, user: { id: 200 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" }
       ]
     )
     count = Jp.count_suggestions('foo/foo', 1, 300, reviews)
@@ -411,13 +513,13 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/2/reviews/40/comments?per_page=100',
       body: [
-        { id: 5, user: { id: 400 }, in_reply_to_id: nil }
+        { id: 5, user: { id: 400 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" }
       ]
     )
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/2/reviews/50/comments?per_page=100',
       body: [
-        { id: 6, user: { id: 500 }, in_reply_to_id: nil }
+        { id: 6, user: { id: 500 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" }
       ]
     )
     count = Jp.count_suggestions('foo/foo', 2, 500, reviews)
@@ -434,7 +536,7 @@ class TestPullRequest < Jp::Test
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/3/reviews/60/comments?per_page=100',
       body: [
-        { id: 7, user: { id: 600 }, in_reply_to_id: 5 }
+        { id: 7, user: { id: 600 }, in_reply_to_id: 5, body: "```suggestion\nx\n```" }
       ]
     )
     count = Jp.count_suggestions('foo/foo', 3, 700, reviews)

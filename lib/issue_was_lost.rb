@@ -8,6 +8,7 @@ require 'fbe/tombstone'
 require_relative 'jp'
 
 def Jp.issue_was_lost(where, repository, issue)
+  Fbe::Tombstone.new.bury!(where, repository, issue)
   stale =
     Fbe.fb.query(
       "(and
@@ -17,20 +18,24 @@ def Jp.issue_was_lost(where, repository, issue)
       (absent stale)
       (absent tombstone))"
     ).each { |f| f.stale = 'issue' }
-  Fbe::Tombstone.new.bury!(where, repository, issue)
-  return if stale.positive?
-  f =
-    Fbe.if_absent do |n|
-      n.issue = issue
-      n.what = 'issue-was-lost'
-      n.repository = repository
-      n.where = where
-    end
-  unless f
-    $loog.warn("The issue ##{issue} was already lost")
+  if stale.positive?
+    $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
     return
   end
-  f.stale = 'issue'
-  f.when = Time.now
-  $loog.info("The issue #{issue} was marked as lost, #{stale} facts marked as stale")
+  Fbe.fb.txn do |fbt|
+    f =
+      Fbe.if_absent(fb: fbt) do |n|
+        n.issue = issue
+        n.what = 'issue-was-lost'
+        n.repository = repository
+        n.where = where
+      end
+    if f.nil?
+      $loog.warn("The issue ##{issue} was already lost")
+      next
+    end
+    f.stale = 'issue'
+    f.when = Time.now
+    $loog.info("The issue #{issue} was marked as lost")
+  end
 end

@@ -24,7 +24,7 @@ def total_releases(_fact)
         next
       end
     next unless releases.is_a?(Array)
-    total += releases.count
+    total += releases.count { |release| !release[:draft] }
   end
   { total_releases: total }
 end

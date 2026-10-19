@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/conclude'
 require 'fbe/delete'
 require 'fbe/github_graph'
@@ -13,6 +14,7 @@ require 'fbe/overwrite'
 require 'fbe/who'
 require 'octokit'
 require 'tago'
+require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
@@ -24,7 +26,6 @@ Fbe.iterate do
     (and
       (eq repository $repository)
       (gt issue $before)
-      (unique repository issue)
       (empty
         (and
           (eq repository $repository)
@@ -47,7 +48,8 @@ Fbe.iterate do
       (absent stale)
       (absent tombstone)
       (absent done)
-      (eq where 'github'))"
+      (eq where 'github')
+      (unique repository issue))"
   repeats 50
   over do |repository, issue|
     repo =
@@ -80,8 +82,7 @@ Fbe.iterate do
         $loog.error("[#{$judge}] Not authorized to fetch pull ##{issue} in #{repo}: #{e.class}: #{e.message}")
         next issue
       rescue Octokit::TooManyRequests, Octokit::ServerError,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError,
-        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn(
           "[#{$judge}] Transient error fetching pull ##{issue} in #{repo} " \
           "(will retry next cycle): #{e.class}: #{e.message}"
@@ -109,8 +110,7 @@ Fbe.iterate do
         $loog.error("[#{$judge}] Not authorized to fetch issue ##{issue} in #{repo}: #{e.class}: #{e.message}")
         next issue
       rescue Octokit::TooManyRequests, Octokit::ServerError,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError,
-        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn(
           "[#{$judge}] Transient error fetching issue ##{issue} in #{repo} " \
           "(will retry next cycle): #{e.class}: #{e.message}"
@@ -136,12 +136,20 @@ Fbe.iterate do
         )
         next issue
       rescue Octokit::TooManyRequests, Octokit::ServerError,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError,
-        Errno::ECONNRESET, Errno::ETIMEDOUT => e
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
         $loog.warn(
           "[#{$judge}] Transient error fetching reviews of pull ##{issue} in #{repo} " \
           "(will retry next cycle): #{e.class}: #{e.message}"
         )
+        next issue
+      end
+    stats =
+      begin
+        Jp.comments_info(json).merge(
+          Jp.fetch_workflows(json),
+          suggestions: Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
+        )
+      rescue Octokit::Forbidden
         next issue
       end
     Fbe.fb.txn do |fbt|
@@ -159,16 +167,14 @@ Fbe.iterate do
       nn.hoc = (json[:additions] || 0) + (json[:deletions] || 0)
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
-      Jp.fill_fact_by_hash(nn, Jp.comments_info(json))
-      Jp.fill_fact_by_hash(nn, Jp.fetch_workflows(json))
+      Jp.fill_fact_by_hash(nn, stats)
       if actor
         nn.who = Integer(actor[:id])
       else
         nn.stale = 'who'
       end
-      nn.suggestions = Jp.count_suggestions(repo, issue, json.dig(:user, :id), reviews)
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-      review = reviews.first
+      review = Jp.approval(reviews, json[:closed_at])
       nn.review = review[:submitted_at] if review
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("The pull #{Fbe.issue(nn)} was #{nn.what.inspect} #{nn.when.ago} ago")

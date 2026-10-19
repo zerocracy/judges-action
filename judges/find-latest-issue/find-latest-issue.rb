@@ -12,6 +12,7 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/who_of'
 
 Fbe.iterate do
   as 'latest_issue_was_found'
@@ -59,7 +60,7 @@ Fbe.iterate do
         end
       next if f.nil?
       f.when = json[:created_at]
-      f.who = json.dig(:user, :id)
+      Jp.author(f, json.dig(:user, :id))
       if json[:pull_request]
         ref =
           begin
@@ -81,8 +82,8 @@ Fbe.iterate do
           f.stale = 'branch'
         end
       end
-      f.details = "The issue #{Fbe.issue(f)} is the first we found, opened by #{Fbe.who(f)}."
-      $loog.info("The issue #{Fbe.issue(f)} was opened by #{Fbe.who(f)} #{f.when.ago} ago")
+      f.details = "The issue #{Fbe.issue(f)} is the first we found, opened by #{Jp.mention(f)}."
+      $loog.info("The issue #{Fbe.issue(f)} was opened by #{Jp.mention(f)} #{f.when.ago} ago")
     end
     json[:number]
   end

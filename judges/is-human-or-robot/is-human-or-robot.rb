@@ -6,6 +6,7 @@
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
+require_relative '../../lib/humans'
 
 @bots = nil
 
@@ -35,14 +36,7 @@ Fbe.consider(
     end
   type = json[:type]
   location = "#{f.what} at #{Fbe.issue(f) if f['issue']}"
-  @bots ||=
-    if $options.respond_to?(:bots) && !$options.bots.nil? && !$options.bots.empty?
-      names = $options.bots.split(',').map(&:strip)
-      names.reject!(&:empty?)
-      names
-    else
-      []
-    end
+  @bots ||= Jp.bots
   if type == 'Bot' || @bots.include?(json[:login])
     f.is_human = 0
     $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is actually a bot, in #{location}")
