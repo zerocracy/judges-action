@@ -8,6 +8,7 @@ require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/slug'
 
 badges = %w[bug enhancement question]
 
@@ -27,7 +28,7 @@ Fbe.iterate do
   over do |repository, issue|
     repo =
       begin
-        Fbe.octo.repo_name_by_id(repository)
+        Jp.slug(repository)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository ##{repository} not found: #{e.message}")
         next issue
