@@ -96,7 +96,7 @@ Fbe.iterate do
       "[#{$judge}] Access forbidden to compare #{repo} between #{since} and #{tag} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
-    nil
+    raise
   rescue Octokit::Conflict => e
     $loog.warn(
       "[#{$judge}] Compare API conflict for #{repo} between #{since} and #{tag} " \
