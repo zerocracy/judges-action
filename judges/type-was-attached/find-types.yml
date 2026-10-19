@@ -40,3 +40,5 @@ expected:
   - /fb[count(f)=5]
   - /fb/f/type
   - /fb/f[type and issue=41]
+  - /fb[count(f[what='type-was-attached' and not(stale)])=1]
+  - /fb/f[what='type-was-attached' and type='Task' and not(stale)]
