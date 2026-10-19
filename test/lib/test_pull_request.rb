@@ -198,7 +198,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_skips_forbidden_run_job
+  def test_fetch_workflows_raises_on_forbidden_run_job
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -228,8 +228,7 @@ class TestPullRequest < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs/9002',
       body: { id: 9002, event: 'pull_request', conclusion: 'success' }
     )
-    result = Jp.fetch_workflows(pr)
-    assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
+    assert_raises(Octokit::Forbidden, 'refused run job is counted as no build') { Jp.fetch_workflows(pr) }
   end
 
   def test_fetch_workflows_skips_not_found_run
@@ -267,7 +266,7 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
-  def test_fetch_workflows_skips_forbidden_run
+  def test_fetch_workflows_raises_on_forbidden_run
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -298,8 +297,7 @@ class TestPullRequest < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs/9004',
       body: { id: 9004, event: 'pull_request', conclusion: 'failure' }
     )
-    result = Jp.fetch_workflows(pr)
-    assert_equal({ succeeded_builds: 0, failed_builds: 1 }, result)
+    assert_raises(Octokit::Forbidden, 'refused workflow run is counted as no build') { Jp.fetch_workflows(pr) }
   end
 
   def test_counts_appreciated_skips_issue_not_found
@@ -319,7 +317,7 @@ class TestPullRequest < Jp::Test
     assert_equal(1, count)
   end
 
-  def test_counts_appreciated_skips_issue_forbidden
+  def test_counts_appreciated_raises_on_issue_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -328,8 +326,9 @@ class TestPullRequest < Jp::Test
     stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/comments/401/reactions')
       .to_return(status: 403, headers: { 'Content-Type' => 'application/json' }, body: '{}')
     pr = { base: { repo: { full_name: 'foo/foo' } } }
-    count = Jp.count_appreciated_comments(pr, [{ id: 401, user: { id: 1 } }], [])
-    assert_equal(0, count)
+    assert_raises(Octokit::Forbidden, 'refused issue comment reactions are counted as zero') do
+      Jp.count_appreciated_comments(pr, [{ id: 401, user: { id: 1 } }], [])
+    end
   end
 
   def test_counts_appreciated_skips_code_not_found
@@ -349,7 +348,7 @@ class TestPullRequest < Jp::Test
     assert_equal(1, count)
   end
 
-  def test_counts_appreciated_skips_code_forbidden
+  def test_counts_appreciated_raises_on_code_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -358,8 +357,9 @@ class TestPullRequest < Jp::Test
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/comments/601/reactions')
       .to_return(status: 403, headers: { 'Content-Type' => 'application/json' }, body: '{}')
     pr = { base: { repo: { full_name: 'foo/foo' } } }
-    count = Jp.count_appreciated_comments(pr, [], [{ id: 601, user: { id: 1 } }])
-    assert_equal(0, count)
+    assert_raises(Octokit::Forbidden, 'refused code comment reactions are counted as zero') do
+      Jp.count_appreciated_comments(pr, [], [{ id: 601, user: { id: 1 } }])
+    end
   end
 
   def test_counts_only_the_comments_that_people_made
@@ -543,6 +543,30 @@ class TestPullRequest < Jp::Test
     assert_equal(0, count)
   end
 
+  def test_count_suggestions_raises_on_forbidden_reviews
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/8/reviews?per_page=100', status: 403, body: {})
+    assert_raises(Octokit::Forbidden, 'refused reviews are counted as zero suggestions') do
+      Jp.count_suggestions('foo/foo', 8, 800)
+    end
+  end
+
+  def test_count_suggestions_raises_on_forbidden_review_comments
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/9/reviews/90/comments?per_page=100', status: 403, body: {})
+    assert_raises(Octokit::Forbidden, 'refused review comments are counted as zero suggestions') do
+      Jp.count_suggestions('foo/foo', 9, 900, [{ id: 90, user: { id: 901 } }])
+    end
+  end
+
   def test_resolved_graphql_error_returns_zero
     WebMock.disable_net_connect!
     rate_limit_up
@@ -560,7 +584,7 @@ class TestPullRequest < Jp::Test
     end
   end
 
-  def test_resolved_forbidden_returns_zero
+  def test_resolved_raises_on_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     $options = Judges::Options.new({})
@@ -574,8 +598,7 @@ class TestPullRequest < Jp::Test
     end
     Fbe.stub(:github_graph, graph) do
       pr = { number: 5, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
-      info = Jp.comments_info(pr)
-      assert_equal(0, info[:comments_resolved])
+      assert_raises(Octokit::Forbidden, 'refused review threads are counted as zero resolved') { Jp.comments_info(pr) }
     end
   end
 end
