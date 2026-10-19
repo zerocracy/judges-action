@@ -451,7 +451,7 @@ Fbe.iterate do
         end
       events.each_with_index do |json, idx|
         Jp.supervision({ 'repo' => rname, 'json' => json.to_h }) do
-          if !$options.max_events.nil? && idx >= $options.max_events
+          if !$options.max_events.nil? && detected >= $options.max_events
             $loog.debug("Already scanned #{idx} events in #{rname}, stop now")
             capped = true
             throw :done
@@ -498,7 +498,10 @@ Fbe.iterate do
     if id.nil?
       $loog.info("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
       latest
-    elsif !capped && (id <= latest || latest.zero?)
+    elsif capped
+      $loog.info("Stopped scanning #{rname} at ##{id} in #{rstart.ago}, next time will scan until ##{latest} again")
+      latest
+    elsif id <= latest || latest.zero?
       $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
       first
     else
