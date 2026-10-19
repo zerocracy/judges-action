@@ -35,7 +35,6 @@ input:
 options:
   testing: true
   repositories: foo/bar
-  max_labels: 5
 expected:
   - /fb[count(f)=4]
   - /fb/f/label
