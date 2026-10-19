@@ -14,6 +14,7 @@ require 'tago'
 require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/pull_request'
+require_relative '../../lib/slug'
 require_relative '../../lib/supervision'
 require_relative '../../lib/twice'
 
@@ -162,7 +163,7 @@ Fbe.iterate do
     who = json.dig(:payload, :release, :author, :id) || json.dig(:actor, :id)
     fact.who = Integer(who) unless who.nil?
     begin
-      rname = Fbe.octo.repo_name_by_id(fact.repository)
+      rname = Jp.slug(fact.repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Repository ##{fact.repository} not found by ID: #{e.message}")
       skip(json)
@@ -407,7 +408,7 @@ Fbe.iterate do
   end
   over do |repository, latest|
     begin
-      rname = Fbe.octo.repo_name_by_id(repository)
+      rname = Jp.slug(repository)
     rescue Octokit::NotFound, Octokit::Deprecated => e
       $loog.info("Repository ##{repository} not found by ID: #{e.message}")
       next latest
