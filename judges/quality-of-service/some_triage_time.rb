@@ -41,6 +41,7 @@ def some_triage_time(fact)
             (eq label 'enhancement'))
           (absent stale)
           (exists when)
+          (lte when (to_time '#{fact.when.utc.iso8601}'))
           (eq where 'github'))
         "
       ).each.min_by(&:when)
