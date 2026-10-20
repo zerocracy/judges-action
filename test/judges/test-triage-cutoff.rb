@@ -11,8 +11,9 @@ require_relative '../test__helper'
 
 class TestTriageCutoff < Jp::Test
   def test_excludes_labels_after_the_measurement
-    moment = Time.iso8601('2026-10-02T00:00:00Z')
-    [[], [moment + 86_400], [moment], [moment - 3600, moment + 86_400]].each do |labels|
+    moment = Time.iso8601('2026-10-02T00:00:00.500000000Z')
+    scenarios = [[], [moment + 86_400], [moment], [moment - 3600, moment + 86_400], [moment - 0.25], [moment + 0.25]]
+    scenarios.each do |labels|
       fb = Factbase.new
       labels.each do |stamp|
         event = fb.insert
