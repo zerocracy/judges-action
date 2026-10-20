@@ -31,7 +31,8 @@ def some_review_time(fact)
           )
           next
         end
-      first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
+      all = all.select { |r| r[:submitted_at] }
+      first = all.min_by { |r| r[:submitted_at] }
       merged = pr.dig(:pull_request, :merged_at)
       if first && merged
         seconds = Integer(merged - first[:submitted_at])
