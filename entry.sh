@@ -121,6 +121,9 @@ while IFS= read -r o; do
         VITALS_URL="${v#=}"
         continue
     fi
+    if [[ "${k}" == job_id || "${k}" == action_version ]]; then
+        continue
+    fi
     options+=("--option=${k}${v}");
 done <<< "${INPUT_OPTIONS}"
 repositories_found=false
@@ -237,6 +240,14 @@ fi
 
 sqlite=$(printenv "INPUT_SQLITE-CACHE" || true)
 if [ -n "${sqlite}" ]; then
+    declare -a without_sqlite=()
+    for opt in "${options[@]}"; do
+        if [[ "${opt}" == "--option=sqlite_cache="* ]]; then
+            continue
+        fi
+        without_sqlite+=("${opt}")
+    done
+    options=("${without_sqlite[@]}")
     sqlite=$(realpath "$( [[ ${sqlite} = /* ]] && echo "${sqlite}" || echo "${GITHUB_WORKSPACE}/${sqlite}" )")
     options+=("--option=sqlite_cache=${sqlite}");
     echo "Using SQLite for HTTP caching: ${sqlite}"
