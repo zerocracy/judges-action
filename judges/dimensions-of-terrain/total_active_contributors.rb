@@ -10,6 +10,8 @@ require_relative '../../lib/qos_search'
 
 def total_active_contributors(fact)
   seen = Set.new
+  measured = false
+  lost = false
   Fbe.unmask_repos do |repo|
     commits =
       begin
@@ -25,13 +27,19 @@ def total_active_contributors(fact)
           "[#{$judge}] Access forbidden to commit search for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        lost = true
         next
       end
-    next if commits.nil?
+    if commits.nil?
+      lost = true
+      next
+    end
+    measured = true
     commits[:items].each do |commit|
       author = commit.dig(:author, :id)
       seen << author unless author.nil?
     end
   end
+  return {} if lost || !measured
   { total_active_contributors: seen.count }
 end
