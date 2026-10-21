@@ -249,7 +249,12 @@ Fbe.iterate do
         fact.files = pl[:changed_files] unless pl[:changed_files].nil?
         Jp.fill_fact_by_hash(fact, Jp.comments_info(pl, repo: rname))
         Jp.fill_fact_by_hash(fact, Jp.fetch_workflows(pl, repo: rname))
-        fact.branch = pl[:head][:ref]
+        ref = pl.dig(:head, :ref)
+        if ref
+          fact.branch = ref
+        else
+          fact.stale = 'branch'
+        end
         reviews =
           begin
             Fbe.octo.pull_request_reviews(rname, fact.issue)
