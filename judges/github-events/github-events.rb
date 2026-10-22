@@ -222,7 +222,12 @@ Fbe.iterate do
         'not associated with any pull request.'
       $loog.debug("New PushEvent ##{json[:payload][:push_id]} recorded")
     when 'PullRequestEvent'
-      fact.issue = json.dig(:payload, :pull_request, :number)
+      number = json.dig(:payload, :pull_request, :number)
+      if number.nil?
+        $loog.info("PullRequestEvent in #{rname} has no pull request number, ignoring it")
+        skip(json)
+      end
+      fact.issue = number
       case json[:payload][:action]
       when 'opened'
         fact.what = 'pull-was-opened'
@@ -287,7 +292,12 @@ Fbe.iterate do
         skip(json)
       end
     when 'PullRequestReviewEvent'
-      fact.issue = json.dig(:payload, :pull_request, :number)
+      number = json.dig(:payload, :pull_request, :number)
+      if number.nil?
+        $loog.info("PullRequestReviewEvent in #{rname} has no pull request number, ignoring it")
+        skip(json)
+      end
+      fact.issue = number
       case json[:payload][:action]
       when 'created'
         pull =
