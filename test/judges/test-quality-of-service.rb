@@ -512,11 +512,11 @@ class TestQualityOfService < Jp::Test
       {
         workflow_runs: [
           {
-            id: 42, status: 'in_progress', conclusion: nil, workflow_id: 101,
+            id: 42, event: 'push', status: 'in_progress', conclusion: nil, workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T10:00:00Z')
           },
           {
-            id: 43, status: 'completed', conclusion: 'success', workflow_id: 101,
+            id: 43, event: 'push', status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T11:00:00Z')
           }
         ]
@@ -546,6 +546,7 @@ class TestQualityOfService < Jp::Test
       Array.new(60) do |index|
         {
           id: index + 1,
+          event: 'push',
           status: 'completed',
           conclusion: conclusions[index % conclusions.length],
           workflow_id: 101,
@@ -554,11 +555,11 @@ class TestQualityOfService < Jp::Test
       end
     runs.push(
       {
-        id: 61, status: 'completed', conclusion: 'failure',
+        id: 61, event: 'push', status: 'completed', conclusion: 'failure',
         workflow_id: 101, run_started_at: started
       },
       {
-        id: 62, status: 'completed', conclusion: 'success',
+        id: 62, event: 'push', status: 'completed', conclusion: 'success',
         workflow_id: 101, run_started_at: started + 3_600
       }
     )
@@ -580,6 +581,53 @@ class TestQualityOfService < Jp::Test
             duration: [900, 900],
             mttr: [3_600]
           },
+          {
+            timed:,
+            rate: metrics[:some_build_success_rate],
+            duration: metrics[:some_build_duration],
+            mttr: metrics[:some_build_mttr]
+          }
+        )
+      end
+    end
+  end
+
+  def test_skips_runs_not_triggered_by_code_before_sampling
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-07T10:00:00Z')
+    events = %w[dynamic schedule issues]
+    runs =
+      Array.new(60) do |index|
+        {
+          id: index + 1,
+          event: events[index % events.length],
+          status: 'completed',
+          conclusion: index.even? ? 'failure' : 'success',
+          workflow_id: 33,
+          run_started_at: started - 3_600 + index
+        }
+      end
+    runs.push(
+      {
+        id: 61, event: 'push', status: 'completed', conclusion: 'success',
+        workflow_id: 11, run_started_at: started
+      }
+    )
+    timed = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
+    octo.define_singleton_method(:workflow_run_usage) do |_, id|
+      timed << id
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal(
+          { timed: [61], rate: [1], duration: [900], mttr: [] },
           {
             timed:,
             rate: metrics[:some_build_success_rate],
@@ -630,11 +678,11 @@ class TestQualityOfService < Jp::Test
       {
         workflow_runs: [
           {
-            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            id: 1, event: 'push', status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T10:00:00Z')
           },
           {
-            id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
+            id: 2, event: 'push', status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T11:00:00Z')
           }
         ]
@@ -662,11 +710,11 @@ class TestQualityOfService < Jp::Test
       {
         workflow_runs: [
           {
-            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            id: 1, event: 'push', status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T10:00:00Z')
           },
           {
-            id: 2, status: 'completed', conclusion: 'success', workflow_id: 101,
+            id: 2, event: 'push', status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T11:00:00Z')
           }
         ]
@@ -696,8 +744,14 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
-          { id: 1, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started },
-          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 3_600 }
+          {
+            id: 1, event: 'push', status: 'completed', conclusion: 'success',
+            workflow_id: 101, run_started_at: started
+          },
+          {
+            id: 2, event: 'push', status: 'completed', conclusion: 'success',
+            workflow_id: 101, run_started_at: started + 3_600
+          }
         ]
       }
     end
@@ -723,8 +777,14 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
-          { id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started },
-          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 3_600 }
+          {
+            id: 1, event: 'push', status: 'completed', conclusion: 'failure',
+            workflow_id: 101, run_started_at: started
+          },
+          {
+            id: 2, event: 'push', status: 'completed', conclusion: 'success',
+            workflow_id: 101, run_started_at: started + 3_600
+          }
         ]
       }
     end
@@ -752,8 +812,14 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
-          { id: 1, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started },
-          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started + 3_600 }
+          {
+            id: 1, event: 'push', status: 'completed', conclusion: 'success',
+            workflow_id: 101, run_started_at: started
+          },
+          {
+            id: 2, event: 'push', status: 'completed', conclusion: 'success',
+            workflow_id: 101, run_started_at: started + 3_600
+          }
         ]
       }
     end
@@ -779,7 +845,7 @@ class TestQualityOfService < Jp::Test
       {
         workflow_runs: [
           {
-            id: 1, status: 'completed', conclusion: 'success', workflow_id: 101,
+            id: 1, event: 'push', status: 'completed', conclusion: 'success', workflow_id: 101,
             run_started_at: Time.parse('2024-08-07T10:00:00Z')
           }
         ]
@@ -806,8 +872,14 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       {
         workflow_runs: [
-          { id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started },
-          { id: 2, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started }
+          {
+            id: 1, event: 'push', status: 'completed', conclusion: 'failure',
+            workflow_id: 101, run_started_at: started
+          },
+          {
+            id: 2, event: 'push', status: 'completed', conclusion: 'success',
+            workflow_id: 101, run_started_at: started
+          }
         ]
       }
     end
