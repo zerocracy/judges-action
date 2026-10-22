@@ -3085,6 +3085,56 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_opened_pr_with_null_head_ref_does_not_abort_scan
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11130',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'opened',
+            number: 42,
+            pull_request: { number: 42, head: { ref: nil } }
+          },
+          created_at: '2025-10-20 19:00:05 UTC'
+        },
+        {
+          id: '11131',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'opened', issue: { number: 9 } },
+          created_at: '2025-10-20 19:01:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/9', body: { number: 9, state: 'open' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert(
+      fb.one?(what: 'pull-was-opened', issue: 42, stale: 'branch'),
+      'opened pull with a null head.ref must be recorded with stale=branch'
+    )
+    assert(
+      fb.one?(what: 'issue-was-opened', issue: 9),
+      'later events must still be scanned after an opened pull with a null head.ref'
+    )
+  end
+
   private
 
   def stub_event(*json)

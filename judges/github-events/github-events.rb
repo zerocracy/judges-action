@@ -226,7 +226,12 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'opened'
         fact.what = 'pull-was-opened'
-        fact.branch = json.dig(:payload, :pull_request, :head, :ref)
+        ref = json.dig(:payload, :pull_request, :head, :ref)
+        if ref
+          fact.branch = ref
+        else
+          fact.stale = 'branch'
+        end
         fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("New PR #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
       when 'closed'
