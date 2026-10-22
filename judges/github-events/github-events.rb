@@ -192,6 +192,10 @@ Fbe.iterate do
           )
           raise
         end
+      if repo[:default_branch].nil?
+        $loog.info("Repository #{rname} has no default branch, ignoring push")
+        skip(json)
+      end
       fact.default_branch = repo[:default_branch]
       fact.to_master = fact.default_branch == fact.ref.sub('refs/heads/', '') ? 1 : 0
       fact.by_owner = 1 if repo.dig(:owner, :id) == fact.who
