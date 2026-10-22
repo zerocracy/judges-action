@@ -2,13 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'GET https://api.github.com/repos/yegor256/factbase/issues/1356/events?per_page=100:
-    502 - Server ... (Octokit::BadGateway)'
   inserted: 8
-  seconds: 1107.872701381
+  seconds: 26.700691839
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-22 23:19:59.313679999 Z
+  when: 2026-10-22 23:33:35.436298702 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -468401,15 +468399,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in yegor256/factbase#1781,
     the reward amount is 6.
-  greeting: "Thanks for the review! \U0001F389 You've earned **+6 points**: +18 as
-    a base, -8 for no comments posted, and -4 for only 2 hits-of-code. Your running
-    score is now [+144](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — check your [Zerocracy account](https://www.zerocracy.com/) for more details!\n\n<!--
-    Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for
-    absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running
-    score is [+144](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 2
   href: https://github.com/yegor256/factbase/issues/1781/#issuecomment-6353087445
   is_human: 1
@@ -468430,10 +468419,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in yegor256/factbase#1780,
     the reward amount is 6.
-  greeting: |-
-    Hey, nice work on that review! You picked up **+6 points** this time: the base **+18**, minus **-8** since there were no comments logged during the review, and another **-4** because the contribution only had **6** hits-of-code (less than the **24** needed to avoid that deduction). Adding a few comments next time and working with contributions that have more hits-of-code could really boost your score! Your running total is now [+150](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — check out your [Zerocracy account](https://www.zerocracy.com/) for more details.
-
-    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (6) hits-of-code.  Your running score is [+150](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 6
   href: https://github.com/yegor256/factbase/issues/1780/#issuecomment-6353087954
   is_human: 1
@@ -468517,7 +468502,7 @@
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-22 16:53:36.000000000 Z
+  when: &5506 2026-10-22 16:53:36.000000000 Z
   where: github
   who: 8086956
 - _id: 2648268
@@ -468553,3 +468538,42 @@
   when: 2026-10-22 22:23:36.000000000 Z
   where: github
   who: 29139614
+- _id: 2648270
+  _job: 101328
+  _time: 2026-10-22 23:20:48.856581937 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request yegor256/judges#1117 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h38m of being in review and 3 comments.
+  hoc: 2
+  issue: 1117
+  merger: 8086956
+  repository: 799113787
+  review_comments: 0
+  seconds: 5897
+  what: code-was-contributed
+  when: *5506
+  where: github
+  who: 29139614
+- _id: 2648271
+  _job: 101328
+  _time: 2026-10-22 23:20:56.050316293 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in yegor256/judges#1117,
+    the reward amount is 6.
+  greeting: |-
+    Thanks for the review! Per our [work policy](#), you've earned **+6** points: **+18** as the base award, **-8** since no comments were posted during the review (policy deducts 8 points for zero comments), and **-4** because the contribution had only 2 hits-of-code, below the 24 required to avoid the penalty. Your running score is now [+156](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — check your [Zerocracy account](https://www.zerocracy.com/) for details.
+
+    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running score is [+156](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 2
+  issue: 1117
+  repository: 799113787
+  review_comments: 0
+  seconds: 22195
+  what: code-review-was-rewarded
+  when: 2026-10-22 23:20:56.058768635 Z
+  where: github
+  who: 526301
+  why: Reviewed code in yegor256/judges#1117
