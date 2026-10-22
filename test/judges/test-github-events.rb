@@ -2411,6 +2411,58 @@ class TestGithubEvents < Jp::Test
     assert_equal(15, f.hoc)
   end
 
+  def test_records_merged_pull_from_merged_action
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11135',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'merged',
+            number: 305,
+            pull_request: {
+              number: 305,
+              head: { ref: 'fix', sha: '42b244' }
+            }
+          },
+          created_at: '2026-10-21 06:08:12 UTC'
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/305',
+      body: {
+        id: 50, number: 305, user: { id: 46, login: 'user2' },
+        head: { ref: 'fix', sha: '42b244' },
+        merged: true, state: 'closed', merged_at: Time.parse('2026-10-21 06:08:12 UTC'),
+        additions: 3, deletions: 2
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/305/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/305/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/305/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/42b244/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    assert(fb.one?(what: 'pull-was-merged', where: 'github', repository: 42, issue: 305, event_id: 11_135, hoc: 5))
+  end
+
   def test_rescues_forbidden_on_closed_pr_lookup
     WebMock.disable_net_connect!
     rate_limit_up
