@@ -107,6 +107,10 @@ Fbe.iterate do
         $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
         next
       end
+      if tee.dig('issue_type', 'name').nil?
+        $loog.debug("No type name in the event #{te[:node_id]} at #{repo}##{issue}")
+        next
+      end
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|
