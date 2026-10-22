@@ -328,7 +328,12 @@ Fbe.iterate do
         skip(json)
       end
     when 'IssuesEvent'
-      fact.issue = json[:payload][:issue][:number]
+      number = json.dig(:payload, :issue, :number)
+      if number.nil?
+        $loog.info("IssuesEvent in #{rname} has no issue number, ignoring it")
+        skip(json)
+      end
+      fact.issue = number
       case json[:payload][:action]
       when 'closed'
         fact.what = 'issue-was-closed'
