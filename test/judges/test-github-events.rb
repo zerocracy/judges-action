@@ -3085,6 +3085,52 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_skip_push_event_when_default_branch_is_nil
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: nil }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: nil }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-06-26 19:25:00 UTC'
+        },
+        {
+          id: '11112',
+          type: 'IssuesEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'opened', issue: { number: 7 } },
+          created_at: '2025-06-26 19:26:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/7',
+      body: { number: 7, state: 'open' }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert(fb.none?(what: 'git-was-pushed'), 'a push with a nil default branch must not be recorded')
+    assert(
+      fb.one?(what: 'issue-was-opened', issue: 7),
+      'a later event must still be scanned after a push with a nil default branch'
+    )
+  end
+
   private
 
   def stub_event(*json)
