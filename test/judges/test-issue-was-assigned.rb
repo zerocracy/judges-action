@@ -173,4 +173,32 @@ class TestIssueWasAssigned < Jp::Test
       'the second assignment of the same person must get its own fact'
     )
   end
+
+  def test_null_assigner_does_not_abort
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/7/events?per_page=100',
+      body: [
+        {
+          event: 'assigned',
+          created_at: '2024-01-15T10:00:00Z',
+          assignee: { id: 421, login: 'alice' },
+          assigner: nil
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'alice' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 7, where: 'github')
+    load_it('issue-was-assigned', fb)
+    f = fb.query("(eq what 'issue-was-assigned')").each.to_a.first
+    refute_nil(f)
+    assert_equal(421, f.who)
+    assert_nil(f['assigner'])
+    assert_equal(['assigner'], f['stale'])
+  end
+
 end
