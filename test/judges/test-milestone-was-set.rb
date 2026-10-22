@@ -216,4 +216,31 @@ class TestMilestoneWasSet < Jp::Test
       'The judge cannot break when the GitHub client is faked'
     )
   end
+
+  def test_null_creator_does_not_assign_nil_who
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
+      body: [
+        {
+          number: 1,
+          title: 'v1.0',
+          created_at: '2024-01-15T10:00:00Z',
+          due_on: nil,
+          creator: nil
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('milestone-was-set', fb)
+    f = fb.query("(eq what 'milestone-was-set')").each.to_a.first
+    refute_nil(f)
+    assert_nil(f['who'])
+    assert_equal(['who'], f['stale'])
+  end
+
 end
