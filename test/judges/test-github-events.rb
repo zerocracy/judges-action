@@ -2806,6 +2806,67 @@ class TestGithubEvents < Jp::Test
     assert_not_requested(:get, %r{/compare/2\.0\.0\.\.\.1\.0\.0})
   end
 
+  def test_counts_a_republished_release_once
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '102',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_002,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '0.0.2',
+            name: 'v0.0.2',
+            created_at: Time.parse('2024-11-30T09:00:00Z'),
+            published_at: Time.parse('2024-11-30T10:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T10:00:00Z')
+      },
+      {
+        id: '101',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_002,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '0.0.2',
+            name: 'v0.0.2',
+            created_at: Time.parse('2024-11-30T09:00:00Z'),
+            published_at: Time.parse('2024-11-30T09:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T09:00:00Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...0.0.2?per_page=100',
+      body: { status: 'ahead', total_commits: 1, commits: [{ sha: 'sha-0.0.2' }], files: [] }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(
+      1, fb.query('(and (eq repository 42) (eq what "release-published") (eq release 999002))').each.to_a.size,
+      'A release published twice cannot be counted twice'
+    )
+  end
+
   def test_release_event_survives_a_deleted_release_author
     WebMock.disable_net_connect!
     rate_limit_up
