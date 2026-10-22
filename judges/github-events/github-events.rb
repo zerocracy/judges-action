@@ -175,10 +175,15 @@ Fbe.iterate do
     end
     case json[:type]
     when 'PushEvent'
+      head = json.dig(:payload, :head)
+      if head.nil? || head.to_s.strip.empty?
+        $loog.info("PushEvent in #{rname} has no head, ignoring it")
+        skip(json)
+      end
       fact.what = 'git-was-pushed'
       fact.push_id = json[:payload][:push_id]
       fact.ref = json[:payload][:ref]
-      fact.commit = json[:payload][:head]
+      fact.commit = head
       repo =
         begin
           Fbe.octo.repository(rname)
