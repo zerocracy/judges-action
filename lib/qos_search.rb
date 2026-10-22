@@ -80,6 +80,9 @@ rescue Octokit::Forbidden => e
   @offquotatime[jg] = Time.now
   $loog.warn("[#{jg}] GitHub Search API quota exhausted, stopping search calls: #{e.message}")
   nil
+rescue Octokit::UnprocessableEntity => e
+  $loog.warn("[#{jg}] GitHub rejected the search '#{query}', check the logins in the 'bots' option: #{e.message}")
+  nil
 rescue Octokit::ServerError, Faraday::ConnectionFailed, Faraday::TimeoutError,
   Net::OpenTimeout, Net::ReadTimeout, SocketError,
   Errno::ECONNRESET, Errno::ETIMEDOUT => e

@@ -111,6 +111,18 @@ class TestQosSearch < Jp::Test
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
   end
 
+  def test_answers_nil_without_latching_when_a_login_is_unknown
+    $loog = Loog::Buffer.new
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue -author:nobody', body: { message: 'Validation Failed' }, status: 422)
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue -author:nobody'))
+    assert_includes($loog.to_s, 'repo:foo/foo type:issue -author:nobody')
+    $global[:octo] = nil
+    rate_limit_up
+    searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
+    refute_nil(Jp.qosearch('repo:foo/foo type:pr'), 'search is latched after a rejected query')
+  end
+
   def test_qoreset_clears_the_latch
     ratelimits(0)
     searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)

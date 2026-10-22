@@ -7,6 +7,7 @@ require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/pmp'
 require 'fbe/unmask_repos'
+require_relative '../../lib/humans'
 require_relative '../../lib/qos_search'
 
 def some_triage_time(fact)
@@ -14,7 +15,9 @@ def some_triage_time(fact)
   times = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    found = Jp.qosearch(
+      "repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}#{Jp.nobots}"
+    )
     return {} if found.nil?
     rid =
       begin
@@ -30,6 +33,7 @@ def some_triage_time(fact)
         next
       end
     found[:items].each do |issue|
+      next if issue.dig(:user, :type) == 'Bot'
       ff = Fbe.fb.query(
         "
         (and
