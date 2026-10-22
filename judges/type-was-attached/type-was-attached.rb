@@ -107,12 +107,14 @@ Fbe.iterate do
         $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
         next
       end
+      type = tee.dig('issue_type', 'name')
+      next if type.nil?
       Fbe.fb.txn do |fbt|
         nn =
           Fbe.if_absent(fb: fbt) do |n|
             n.issue = issue
             n.what = $judge
-            n.type = tee.dig('issue_type', 'name')
+            n.type = type
             n.repository = repository
             n.where = 'github'
           end
