@@ -229,7 +229,7 @@ Fbe.iterate do
         fact.branch = json.dig(:payload, :pull_request, :head, :ref)
         fact.details = "The pull request #{Fbe.issue(fact)} has been opened by #{Fbe.who(fact)}."
         $loog.debug("New PR #{Fbe.issue(fact)} opened by #{Fbe.who(fact)}")
-      when 'closed'
+      when 'closed', 'merged'
         pl =
           begin
             Fbe.octo.pull_request(rname, fact.issue)
