@@ -376,8 +376,13 @@ Fbe.iterate do
     when 'CreateEvent'
       case json[:payload][:ref_type]
       when 'tag'
+        ref = json[:payload][:ref]
+        if ref.nil? || ref.to_s.strip.empty?
+          $loog.info("CreateEvent tag in #{rname} has no ref, ignoring it")
+          skip(json)
+        end
         fact.what = 'tag-was-created'
-        fact.tag = json[:payload][:ref]
+        fact.tag = ref
         fact.details = "A new tag #{fact.tag.inspect} has been created in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Tag #{fact.tag.inspect} created by #{Fbe.who(fact)}")
       else
