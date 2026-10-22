@@ -31,4 +31,34 @@ class TestSomeIssueLifetime < Jp::Test
     assert_equal([3600.0], result['some_issue_lifetime'])
     refute_includes(result, 'some_pull_lifetime')
   end
+
+  def test_leaves_out_the_issues_and_pulls_of_bots
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-01-01 00:00:00 UTC')
+    fact.when = Time.parse('2025-02-01 00:00:00 UTC')
+    $judge = 'quality-of-service'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => '0pdd,rultor' })
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    queries = []
+    items = [
+      { user: { login: 'renovate[bot]', type: 'Bot' }, closed_at: fact.since + 60, created_at: fact.since },
+      { user: { login: 'jeff', type: 'User' }, closed_at: fact.since + 3600, created_at: fact.since }
+    ]
+    search =
+      proc do |q|
+        queries << q
+        { items: }
+      end
+    result =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) do
+          Jp.stub(:qosearch, search) { some_issue_lifetime(fact) }
+        end
+      end
+    assert_equal(2, queries.count { |q| q.end_with?(' -author:0pdd -author:rultor') }, queries)
+    assert_equal({ 'some_issue_lifetime' => [3600.0], 'some_pull_lifetime' => [3600.0] }, result)
+  end
 end
