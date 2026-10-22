@@ -359,8 +359,13 @@ Fbe.iterate do
         skip(json)
       end
     when 'ReleaseEvent'
+      tag = json.dig(:payload, :release, :tag_name)
+      if tag.nil? || tag.to_s.strip.empty?
+        $loog.info("ReleaseEvent in #{rname} has no tag_name, ignoring it")
+        skip(json)
+      end
       fact.release = json[:payload][:release][:id]
-      fact.tag = json[:payload][:release][:tag_name]
+      fact.tag = tag
       case json[:payload][:action]
       when 'published'
         fact.what = 'release-published'
