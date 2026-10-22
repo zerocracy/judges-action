@@ -1,12 +1,13 @@
 ---
 - added: 8
-  cycles: 2
+  cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 74.428845538
+  seconds: 1125.306718108
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-22 16:39:09.963691074 Z
+  when: 2026-10-22 17:53:23.239786206 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17984,22 +17985,6 @@
   when: 2026-02-08 11:16:02.000000000 Z
   where: github
   who: 94894473
-- _id: 2603654
-  _job: 21801359048
-  _time: 2026-02-08 16:21:42.789391715 Z
-  _version: 0.19.3/0.59.0/0.17.10
-  branch: '147'
-  details: The pull request zerocracy/pages-action#531 has been opened by @aidarkdev.
-  event_id: 6406347612
-  event_type: PullRequestEvent
-  is_human: 1
-  issue: 531
-  repository: 802720676
-  tombstone: 2026-10-22 16:17:21.109907067 Z
-  what: pull-was-opened
-  when: 2026-02-08 16:03:44.000000000 Z
-  where: github
-  who: 161327834
 - _id: 2603660
   _job: 21801359048
   _time: 2026-02-08 16:25:34.555744509 Z
@@ -18378,25 +18363,6 @@
   when: &192 2026-02-09 18:10:48.000000000 Z
   where: github
   who: 8086956
-- _id: 2603775
-  _job: 21836520810
-  _time: 2026-02-09 18:45:24.781732327 Z
-  _version: 0.19.3/0.59.0/0.17.10
-  author: 161327834
-  comments: 5
-  details: The pull request zerocracy/pages-action#531 with 100 HoC created by @aidarkdev
-    was reviewed by @coderabbitai[bot] after 0h3m and 1 comments.
-  done: 2026-10-22 16:17:21.077842339 Z
-  hoc: 100
-  is_human: 0
-  issue: 531
-  repository: 802720676
-  review_comments: 1
-  seconds: 233
-  what: code-was-reviewed
-  when: 2026-02-08 16:07:37.000000000 Z
-  where: github
-  who: 136622811
 - _id: 2603776
   _job: 21836520810
   _time: 2026-02-09 18:45:24.980254797 Z
@@ -162133,7 +162099,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 60
+  min_issue_was_found: 62
   min_pull_was_found: 75
   repository: 974194993
   types_were_scanned: 0
@@ -166021,6 +165987,7 @@
   - 511-523
   - 525-527
   - '529'
+  - '531'
   - '888'
   repository: 802720676
   what: tombstone
@@ -166142,7 +166109,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 27
+  min_issue_was_found: 29
   min_pull_was_found: 31
   repository: 1236759415
   types_were_scanned: 0
@@ -168652,12 +168619,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17897316185
+  events_were_scanned: 17934530470
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 223
+  min_issue_was_found: 224
   min_pull_was_found: 284
   repository: 849726475
   types_were_scanned: 0
@@ -168891,7 +168858,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 43
+  min_issue_was_found: 67
   min_pull_was_found: 0
   repository: 805238060
   types_were_scanned: 0
@@ -168909,7 +168876,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 39
+  min_issue_was_found: 40
   min_pull_was_found: 12
   repository: 1084843345
   types_were_scanned: 0
@@ -168919,18 +168886,18 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1569
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24806741954
   issues_were_scanned: 1681
-  labels_were_scanned: 1655
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 1172
+  merges_were_scanned: 1554
   min_issue_was_found: 1642
   min_pull_was_found: 755
   repository: 798641472
-  types_were_scanned: 1350
+  types_were_scanned: 1480
   what: iterate
   where: github
 - _id: 2629842
@@ -168940,7 +168907,7 @@
   assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17899553727
+  events_were_scanned: 24818950989
   issues_were_scanned: 517
   labels_were_scanned: 0
   latest_issue_was_found: 156
@@ -168948,7 +168915,7 @@
   min_issue_was_found: 507
   min_pull_was_found: 537
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -169365,18 +169332,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1613
-  closures_were_checked: 932
+  assignees_were_scanned: 600
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17928182775
   issues_were_scanned: 1549
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1215
-  min_issue_was_found: 1578
+  merges_were_scanned: 1336
+  min_issue_was_found: 1579
   min_pull_was_found: 736
   repository: 820463873
-  types_were_scanned: 986
+  types_were_scanned: 1102
   what: iterate
   where: github
 - _id: 2629882
@@ -170022,18 +169989,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1243
+  assignees_were_scanned: 700
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17925329703
   issues_were_scanned: 1236
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 0
-  min_issue_was_found: 1253
+  merges_were_scanned: 1123
+  min_issue_was_found: 1254
   min_pull_was_found: 672
   repository: 802720676
-  types_were_scanned: 970
+  types_were_scanned: 1079
   what: iterate
   where: github
 - _id: 2629939
@@ -170168,18 +170135,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 845
+  assignees_were_scanned: 1100
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 24817088221
+  events_were_scanned: 17934772451
   issues_were_scanned: 664
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 976
+  merges_were_scanned: 1065
   min_issue_was_found: 907
   min_pull_was_found: 742
   repository: 799113787
-  types_were_scanned: 905
+  types_were_scanned: 1094
   what: iterate
   where: github
 - _id: 2630023
@@ -170204,18 +170171,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2392
-  closures_were_checked: 1933
+  assignees_were_scanned: 2717
+  closures_were_checked: 2300
   earliest_issue_was_found: 1
-  events_were_scanned: 17921730797
+  events_were_scanned: 24823104774
   issues_were_scanned: 760
-  labels_were_scanned: 1725
+  labels_were_scanned: 2842
   latest_issue_was_found: 1073
-  merges_were_scanned: 2592
-  min_issue_was_found: 2728
+  merges_were_scanned: 2708
+  min_issue_was_found: 2729
   min_pull_was_found: 1520
   repository: 799177290
-  types_were_scanned: 1661
+  types_were_scanned: 1725
   what: iterate
   where: github
 - _id: 2630036
@@ -170229,7 +170196,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 24
+  min_issue_was_found: 25
   min_pull_was_found: 17
   repository: 1081929119
   types_were_scanned: 0
@@ -170242,15 +170209,15 @@
   assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 24805889226
+  events_were_scanned: 24823423922
   issues_were_scanned: 5
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1203
+  min_issue_was_found: 1204
   min_pull_was_found: 1131
   repository: 728758275
-  types_were_scanned: 1176
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -467669,6 +467636,7 @@
   details: The pull request zerocracy/fbe#1695 has been opened by @renyamamoto2026-cmyk.
   event_id: 17926434089
   event_type: PullRequestEvent
+  is_human: 1
   issue: 1695
   repository: 820463873
   what: pull-was-opened
@@ -467676,72 +467644,269 @@
   where: github
   who: 344213295
 - _id: 2648211
-  _job: 39815457076
-  _time: 2026-10-22 16:38:15.596474503 Z
+  _job: 39818858399
+  _time: 2026-10-22 17:07:42.722221493 Z
   _version: 0.19.16/0.61.1/0.17.23
-  branch: '1692'
-  details: The pull request zerocracy/fbe#1693 has been opened by @renyamamoto2026-cmyk.
-  event_id: 17925389948
-  event_type: PullRequestEvent
-  issue: 1693
-  repository: 820463873
+  branch: '147'
+  details: The pull zerocracy/pages-action#531 has been opened earlier by @aidarkdev.
+  is_human: 1
+  issue: 531
+  repository: 802720676
   what: pull-was-opened
-  when: 2026-10-22 14:11:31.000000000 Z
+  when: 2026-02-08 16:03:44.000000000 Z
   where: github
-  who: 344213295
+  who: 161327834
 - _id: 2648212
-  _job: 39815457076
-  _time: 2026-10-22 16:38:16.036133330 Z
+  _job: 39823756484
+  _time: 2026-10-22 17:34:43.309697516 Z
   _version: 0.19.16/0.61.1/0.17.23
-  branch: '1690'
-  details: The pull request zerocracy/fbe#1691 has been opened by @renyamamoto2026-cmyk.
-  event_id: 17925098661
-  event_type: PullRequestEvent
-  issue: 1691
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-10-22 13:53:57.000000000 Z
+  comments: 2
+  commits: 1
+  details: The pull request zerocracy/swarm-template#309 has been reviewed by @yegor256
+    with 2 HoC and 2 comments.
+  event_id: 17934530470
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 309
+  repository: 849726475
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-10-22 17:14:29.000000000 Z
   where: github
-  who: 344213295
+  who: 526301
 - _id: 2648213
-  _job: 39815457076
-  _time: 2026-10-22 16:38:16.843725379 Z
+  _job: 39823756484
+  _time: 2026-10-22 17:38:51.944328639 Z
   _version: 0.19.16/0.61.1/0.17.23
-  branch: '1688'
-  details: The pull request zerocracy/fbe#1689 has been opened by @renyamamoto2026-cmyk.
-  event_id: 17924974816
-  event_type: PullRequestEvent
-  issue: 1689
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-10-22 13:48:47.000000000 Z
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 2
+  comments_appreciated: 1
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/swarm-template#309 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 309
+  repository: 849726475
+  review: 2026-10-22 16:51:05.000000000 Z
+  succeeded_builds: 7
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-22 17:31:24.000000000 Z
   where: github
-  who: 344213295
+  who: 8086956
 - _id: 2648214
-  _job: 39815457076
-  _time: 2026-10-22 16:38:17.316574698 Z
+  _job: 39823756484
+  _time: 2026-10-22 17:50:10.718673436 Z
   _version: 0.19.16/0.61.1/0.17.23
-  branch: '1686'
-  details: The pull request zerocracy/fbe#1687 has been opened by @renyamamoto2026-cmyk.
-  event_id: 17924891662
-  event_type: PullRequestEvent
-  issue: 1687
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-10-22 13:43:50.000000000 Z
+  details: The issue zerocracy/pages-action#1328 has been earlier opened by @morphqdd.
+  issue: 1328
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:38:03.000000000 Z
   where: github
-  who: 344213295
+  who: 125282851
 - _id: 2648215
-  _job: 39815457076
-  _time: 2026-10-22 16:38:17.922022588 Z
+  _job: 39823756484
+  _time: 2026-10-22 17:50:11.152902637 Z
   _version: 0.19.16/0.61.1/0.17.23
-  branch: '1684'
-  details: The pull request zerocracy/fbe#1685 has been opened by @renyamamoto2026-cmyk.
-  event_id: 17924785354
-  event_type: PullRequestEvent
-  issue: 1685
-  repository: 820463873
-  what: pull-was-opened
-  when: 2026-10-22 13:38:47.000000000 Z
+  details: The issue zerocracy/pages-action#1327 has been earlier opened by @morphqdd.
+  issue: 1327
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:31:55.000000000 Z
   where: github
-  who: 344213295
+  who: 125282851
+- _id: 2648216
+  _job: 39823756484
+  _time: 2026-10-22 17:50:11.694448821 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1326 has been earlier opened by @morphqdd.
+  issue: 1326
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:30:11.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648217
+  _job: 39823756484
+  _time: 2026-10-22 17:50:12.070439504 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1325 has been earlier opened by @morphqdd.
+  issue: 1325
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:19:47.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648218
+  _job: 39823756484
+  _time: 2026-10-22 17:50:13.672082803 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1324 has been earlier opened by @morphqdd.
+  issue: 1324
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:19:38.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648219
+  _job: 39823756484
+  _time: 2026-10-22 17:50:14.125529631 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1323 has been earlier opened by @morphqdd.
+  issue: 1323
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:17:12.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648220
+  _job: 39823756484
+  _time: 2026-10-22 17:50:14.554723053 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1322 has been earlier opened by @morphqdd.
+  issue: 1322
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:11:42.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648221
+  _job: 39823756484
+  _time: 2026-10-22 17:50:15.002388157 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1321 has been earlier opened by @morphqdd.
+  issue: 1321
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:11:40.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648222
+  _job: 39823756484
+  _time: 2026-10-22 17:50:15.430040947 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1320 has been earlier opened by @morphqdd.
+  issue: 1320
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:11:39.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648223
+  _job: 39823756484
+  _time: 2026-10-22 17:50:15.875312103 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1319 has been earlier opened by @morphqdd.
+  issue: 1319
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 17:11:37.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648224
+  _job: 39823756484
+  _time: 2026-10-22 17:50:16.515767311 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1318 has been earlier opened by @morphqdd.
+  issue: 1318
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 16:43:19.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648225
+  _job: 39823756484
+  _time: 2026-10-22 17:50:16.957807303 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1317 has been earlier opened by @morphqdd.
+  issue: 1317
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 16:40:39.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648226
+  _job: 39823756484
+  _time: 2026-10-22 17:50:17.384345468 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1316 has been earlier opened by @morphqdd.
+  issue: 1316
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 16:37:24.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648227
+  _job: 39823756484
+  _time: 2026-10-22 17:50:17.836794623 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1315 has been earlier opened by @morphqdd.
+  issue: 1315
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 16:37:23.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648228
+  _job: 39823756484
+  _time: 2026-10-22 17:50:18.260887145 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1314 has been earlier opened by @morphqdd.
+  issue: 1314
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 16:27:07.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648229
+  _job: 39823756484
+  _time: 2026-10-22 17:50:18.714231441 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1313 has been earlier opened by @morphqdd.
+  issue: 1313
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 16:27:05.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648230
+  _job: 39823756484
+  _time: 2026-10-22 17:50:19.139254704 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#1312 has been earlier opened by @morphqdd.
+  issue: 1312
+  repository: 802720676
+  what: issue-was-opened
+  when: 2026-10-22 16:26:52.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648231
+  _job: 39823756484
+  _time: 2026-10-22 17:51:30.680085484 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/judges-action#2890 has been earlier opened by @morphqdd.
+  issue: 2890
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-10-22 15:34:23.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2648232
+  _job: 39823756484
+  _time: 2026-10-22 17:51:31.114577156 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/judges-action#2889 has been earlier opened by @morphqdd.
+  issue: 2889
+  repository: 799177290
+  what: issue-was-opened
+  when: 2026-10-22 15:33:55.000000000 Z
+  where: github
+  who: 125282851
