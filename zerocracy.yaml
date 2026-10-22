@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 10m20s: execution expired'
   inserted: 8
-  seconds: 950.991212907
+  seconds: 1291.868041665
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-22 20:51:07.848723758 Z
+  when: 2026-10-22 21:23:32.078610090 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -111038,23 +111041,6 @@
   when: *1236
   where: github
   who: 243740572
-- _id: 2621763
-  _job: 27163043537
-  _time: 2026-06-08 19:56:10.624513679 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  tombstone: 2026-10-14 20:22:46.720962793 Z
-  total_active_contributors: 22
-  total_commits: 22094
-  total_contributors: 52
-  total_files: 3220
-  total_forks: 149
-  total_issues: 2196
-  total_pulls: 5553
-  total_releases: 861
-  total_repositories: 19
-  total_stars: 141
-  what: dimensions-of-terrain
-  when: 2026-06-08 19:56:10.636545694 Z
 - _id: 2621764
   _job: 76327
   _time: 2026-06-08 20:29:37.219302418 Z
@@ -159907,7 +159893,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 40
+  min_issue_was_found: 41
   min_pull_was_found: 9
   repository: 1090089359
   types_were_scanned: 0
@@ -162098,7 +162084,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 67
+  min_issue_was_found: 68
   min_pull_was_found: 76
   repository: 974194993
   types_were_scanned: 0
@@ -166108,7 +166094,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 32
+  min_issue_was_found: 34
   min_pull_was_found: 33
   repository: 1236759415
   types_were_scanned: 0
@@ -168623,7 +168609,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 226
+  min_issue_was_found: 227
   min_pull_was_found: 284
   repository: 849726475
   types_were_scanned: 0
@@ -168857,7 +168843,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 80
+  min_issue_was_found: 84
   min_pull_was_found: 94
   repository: 805238060
   types_were_scanned: 0
@@ -168875,7 +168861,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 41
+  min_issue_was_found: 42
   min_pull_was_found: 13
   repository: 1084843345
   types_were_scanned: 0
@@ -168885,25 +168871,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 952
+  assignees_were_scanned: 1084
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17950422310
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 1304
   latest_issue_was_found: 315
-  merges_were_scanned: 1172
-  min_issue_was_found: 1646
+  merges_were_scanned: 1539
+  min_issue_was_found: 1647
   min_pull_was_found: 756
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 702
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24818950989
@@ -168911,10 +168897,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 508
+  min_issue_was_found: 509
   min_pull_was_found: 538
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -168929,7 +168915,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 0
   min_pull_was_found: 105
   repository: 857659265
   types_were_scanned: 0
@@ -169331,18 +169317,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1013
-  closures_were_checked: 0
+  assignees_were_scanned: 1110
+  closures_were_checked: 932
   earliest_issue_was_found: 1
   events_were_scanned: 17928182775
   issues_were_scanned: 1615
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1645
+  merges_were_scanned: 0
   min_issue_was_found: 1581
   min_pull_was_found: 737
   repository: 820463873
-  types_were_scanned: 1463
+  types_were_scanned: 1601
   what: iterate
   where: github
 - _id: 2629882
@@ -169988,18 +169974,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1096
+  assignees_were_scanned: 1243
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17946534398
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 1323
   latest_issue_was_found: 386
-  merges_were_scanned: 1113
-  min_issue_was_found: 1256
+  merges_were_scanned: 1215
+  min_issue_was_found: 1257
   min_pull_was_found: 674
   repository: 802720676
-  types_were_scanned: 687
+  types_were_scanned: 830
   what: iterate
   where: github
 - _id: 2629939
@@ -170134,18 +170120,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 676
+  assignees_were_scanned: 845
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 17950227833
+  events_were_scanned: 17955946011
   issues_were_scanned: 851
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 925
-  min_issue_was_found: 909
+  merges_were_scanned: 976
+  min_issue_was_found: 910
   min_pull_was_found: 743
   repository: 799113787
-  types_were_scanned: 671
+  types_were_scanned: 840
   what: iterate
   where: github
 - _id: 2630023
@@ -170170,18 +170156,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1476
-  closures_were_checked: 2300
+  assignees_were_scanned: 1669
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 17939998632
   issues_were_scanned: 2145
-  labels_were_scanned: 2859
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
-  merges_were_scanned: 2331
+  merges_were_scanned: 2524
   min_issue_was_found: 2731
   min_pull_was_found: 1523
   repository: 799177290
-  types_were_scanned: 2170
+  types_were_scanned: 2356
   what: iterate
   where: github
 - _id: 2630036
@@ -170205,7 +170191,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24823423922
@@ -170213,10 +170199,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1210
+  min_issue_was_found: 1213
   min_pull_was_found: 1131
   repository: 728758275
-  types_were_scanned: 1176
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -468126,6 +468112,7 @@
   _time: 2026-10-22 20:42:27.099259280 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/pages-action#1329 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1329
   repository: 802720676
   what: issue-was-opened
@@ -468141,6 +468128,7 @@
   details: The pull request zerocracy/swarm-template#308 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 0h22m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 308
   repository: 849726475
   review_comments: 0
@@ -468158,6 +468146,7 @@
   details: The pull request yegor256/judges#1116 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 11h53m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1116
   repository: 799113787
   review_comments: 0
@@ -468175,6 +468164,7 @@
   details: The pull request yegor256/factbase#1780 with 6 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 4h2m and 0 comments.
   hoc: 6
+  is_human: 1
   issue: 1780
   repository: 798641472
   review_comments: 0
@@ -468192,6 +468182,7 @@
   details: The pull request yegor256/factbase#1781 with 2 HoC created by @renovate[bot]
     was reviewed by @yegor256 after 4h2m and 0 comments.
   hoc: 2
+  is_human: 1
   issue: 1781
   repository: 798641472
   review_comments: 0
@@ -468205,6 +468196,7 @@
   _time: 2026-10-22 20:50:35.887640714 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, zerocracy/judges-action#2097 has been "issue-was-closed".
+  is_human: 1
   issue: 2097
   repository: 799177290
   what: issue-was-closed
@@ -468216,6 +468208,7 @@
   _time: 2026-10-22 20:50:38.281021590 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, zerocracy/judges-action#2098 has been "issue-was-closed".
+  is_human: 1
   issue: 2098
   repository: 799177290
   what: issue-was-closed
@@ -468227,6 +468220,7 @@
   _time: 2026-10-22 20:50:42.123187990 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, zerocracy/judges-action#2100 has been "issue-was-closed".
+  is_human: 1
   issue: 2100
   repository: 799177290
   what: issue-was-closed
@@ -468238,6 +468232,7 @@
   _time: 2026-10-22 20:50:49.503297280 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, zerocracy/judges-action#2121 has been "issue-was-closed".
+  is_human: 1
   issue: 2121
   repository: 799177290
   what: issue-was-closed
@@ -468249,6 +468244,7 @@
   _time: 2026-10-22 20:50:52.521407665 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, zerocracy/judges-action#2128 has been "issue-was-closed".
+  is_human: 1
   issue: 2128
   repository: 799177290
   what: issue-was-closed
@@ -468260,6 +468256,7 @@
   _time: 2026-10-22 20:50:53.994849230 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, zerocracy/judges-action#2129 has been "issue-was-closed".
+  is_human: 1
   issue: 2129
   repository: 799177290
   what: issue-was-closed
@@ -468271,6 +468268,7 @@
   _time: 2026-10-22 20:50:59.973095302 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: Apparently, zerocracy/judges-action#2144 has been "issue-was-closed".
+  is_human: 1
   issue: 2144
   repository: 799177290
   what: issue-was-closed
