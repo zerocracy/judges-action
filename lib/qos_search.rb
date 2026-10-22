@@ -74,7 +74,10 @@ def Jp.qosearch(query, method: :search_issues, **)
   @scount[jg] += 1
   raise(RuntimeError, "Unsafe search method: #{method}") unless
     %i[search_issues search_code search_commits].include?(method)
-  Fbe.octo.with_disable_auto_paginate { |octo| octo.__send__(method, query, **) }
+  found = Fbe.octo.with_disable_auto_paginate { |octo| octo.__send__(method, query, **) }
+  return found unless found && found[:incomplete_results]
+  $loog.warn("[#{jg}] GitHub Search API returned incomplete results (will retry next cycle): #{query}")
+  nil
 rescue Octokit::Forbidden => e
   @offquota[jg] = true
   @offquotatime[jg] = Time.now
