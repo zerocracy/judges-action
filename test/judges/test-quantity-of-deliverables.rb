@@ -76,10 +76,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 10 }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=1',
-      body: { total_count: 0, workflow_runs: [] }
-    )
+    stub_build_runs('foo/foo', '2024-07-11T21:00:00Z..2024-08-12T21:00:00Z')
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
@@ -102,10 +99,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 0 }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=1',
-      body: { total_count: 0, workflow_runs: [] }
-    )
+    stub_build_runs('foo/foo', '2024-07-11T21:00:00Z..2024-08-12T21:00:00Z')
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
@@ -239,10 +233,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=1',
-      body: { total_count: 0, workflow_runs: [] }
-    )
+    stub_build_runs('foo/foo', '2024-08-02T21:00:00Z..2024-08-09T21:00:00Z')
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -268,13 +259,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-29T21:00:00Z..2025-10-06T21:00:00Z&per_page=1',
-      body: {
-        total_count: 0,
-        workflow_runs: []
-      }
-    )
+    stub_build_runs('foo/foo', '2025-09-29T21:00:00Z..2025-10-06T21:00:00Z')
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -300,13 +285,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-09-26T00:00:00Z..2025-10-03T00:00:00Z&per_page=1',
-      body: {
-        total_count: 0,
-        workflow_runs: []
-      }
-    )
+    stub_build_runs('foo/foo', '2025-09-26T00:00:00Z..2025-10-03T00:00:00Z')
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -370,23 +349,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo',
       body: { id: 42, full_name: 'foo/foo', open_issues: 0, size: 100 }
     )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=1',
-      body: {
-        total_count: 3,
-        workflow_runs: [
-          {
-            id: 710,
-            display_title: 'some title',
-            run_number: 2615,
-            event: 'dynamic',
-            status: 'completed',
-            conclusion: 'success',
-            workflow_id: 141
-          }
-        ]
-      }
-    )
+    stub_build_runs('foo/foo', '2024-08-02T21:00:00Z..2024-08-09T21:00:00Z', pull_request: 3)
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -406,10 +369,7 @@ class TestQuantityOfDeliverables < Jp::Test
   def test_dont_report_total_when_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
-      status: 403, body: { message: 'Forbidden' }
-    )
+    stub_build_runs('foo/blocked', '2025-10-01T00:00:00Z..2025-10-06T00:00:00Z', status: 403)
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
     fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
@@ -428,14 +388,8 @@ class TestQuantityOfDeliverables < Jp::Test
     rate_limit_up
     seed = Random.new_seed
     runs = Random.new(seed).rand(1..999)
-    stub_github(
-      'https://api.github.com/repos/foo/good/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
-      body: { total_count: runs, workflow_runs: [] }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/blocked/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
-      status: 403, body: { message: 'Forbidden' }
-    )
+    stub_build_runs('foo/good', '2025-10-01T00:00:00Z..2025-10-06T00:00:00Z', push: runs)
+    stub_build_runs('foo/blocked', '2025-10-01T00:00:00Z..2025-10-06T00:00:00Z', status: 403)
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
     fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
@@ -452,10 +406,7 @@ class TestQuantityOfDeliverables < Jp::Test
   def test_dont_report_total_when_runs_are_absent
     WebMock.disable_net_connect!
     rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/gone/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
-      status: 404, body: { message: 'Not Found' }
-    )
+    stub_build_runs('foo/gone', '2025-10-01T00:00:00Z..2025-10-06T00:00:00Z', status: 404)
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
     fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
@@ -481,13 +432,7 @@ class TestQuantityOfDeliverables < Jp::Test
       %w[2025-09-05T15:00:00Z 2025-09-15T15:00:00Z],
       %w[2025-09-15T15:00:00Z 2025-09-25T15:00:00Z]
     ].each do |since, upper|
-      stub_github(
-        "https://api.github.com/repos/foo/foo/actions/runs?created=#{since}..#{upper}&per_page=1",
-        body: {
-          total_count: 0,
-          workflow_runs: []
-        }
-      )
+      stub_build_runs('foo/foo', "#{since}..#{upper}")
     end
     fb = Factbase.new
     f = fb.insert
