@@ -591,6 +591,35 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_counts_all_completed_runs_when_more_than_sixty
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-07T10:00:00Z')
+    runs =
+      (0...100).map do |hour|
+        {
+          id: 1000 + hour,
+          status: 'completed',
+          conclusion: hour < 40 ? 'failure' : 'success',
+          workflow_id: 101,
+          run_started_at: started - ((99 - hour) * 3_600)
+        }
+      end
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repository_workflow_runs) { |*| { workflow_runs: runs } }
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 900_000 } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal(100, metrics[:some_build_success_rate].size, 'only the newest 60 runs are counted')
+        assert_equal(([0] * 40) + ([1] * 60), metrics[:some_build_success_rate], 'early failures are invisible')
+        assert_equal(100, metrics[:some_build_duration].size)
+      end
+    end
+  end
+
   def test_skips_repo_on_not_found_workflow_runs
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
