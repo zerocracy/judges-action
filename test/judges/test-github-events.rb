@@ -1638,6 +1638,37 @@ class TestGithubEvents < Jp::Test
     assert_equal(60, push.who)
   end
 
+  def test_push_inside_pull_is_ignored
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-06-26 19:03:16 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100', body: [{ number: 7 }])
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert(fb.none?(what: 'git-was-pushed'), 'a push that belongs to a pull must be ignored')
+  end
+
   def test_adds_opened_pull_request_event
     WebMock.disable_net_connect!
     rate_limit_up
