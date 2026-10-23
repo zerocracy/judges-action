@@ -304,14 +304,6 @@ Fbe.iterate do
             skip(json)
           end
         skip(json) if pull.dig(:user, :id)&.then { |id| Integer(id) } == fact.who
-        if Fbe.fb.query(
-          "(and (eq repository #{fact.repository}) " \
-          '(eq what "pull-was-reviewed") ' \
-          "(eq who #{fact.who}) " \
-          "(eq issue #{fact.issue}))"
-        ).each.any?
-          skip(json)
-        end
         skip(json) unless json.dig(:payload, :review, :state) == 'approved'
         fact.what = 'pull-was-reviewed'
         fact.hoc = (pull[:additions] || 0) + (pull[:deletions] || 0)
@@ -323,6 +315,21 @@ Fbe.iterate do
           "The pull request #{Fbe.issue(fact)} " \
           "has been reviewed by #{Fbe.who(fact)} " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
+        previous =
+          "(and (eq repository #{fact.repository}) " \
+          '(eq what "pull-was-reviewed") ' \
+          "(eq who #{fact.who}) " \
+          "(eq issue #{fact.issue}))"
+        old = Fbe.fb.query(previous).each.to_a
+        oldest = old.min_by(&:when)
+        if !old.empty? && oldest.when > fact.when
+          Fbe.overwrite(
+            oldest,
+            { 'when' => fact.when, 'event_id' => fact.event_id, 'details' => fact.details },
+            fb: Fbe.fb
+          )
+        end
+        skip(json) unless old.empty?
         $loog.debug("PR #{Fbe.issue(fact)} was reviewed by #{Fbe.who(fact)}")
       else
         skip(json)
