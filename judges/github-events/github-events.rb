@@ -271,7 +271,9 @@ Fbe.iterate do
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
-        skip(json) if seen?(fact)
+        if pl[:state] == 'open' || (pl[:closed_at] && pl[:closed_at] > fact.when)
+          skip(json)
+        end
         $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       when 'reopened'
         Fbe.fb.query(
@@ -279,7 +281,8 @@ Fbe.iterate do
             (eq where 'github')
             (eq repository #{fact.repository})
             (eq issue #{fact.issue})
-            (eq what 'pull-was-closed'))"
+            (eq what 'pull-was-closed')
+            (not (gte when #{fact.when.utc.iso8601})))"
         ).delete!
         $loog.info("The pull #{Fbe.issue(fact)} was reopened, its closure is forgotten")
         skip(json)
