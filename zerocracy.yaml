@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'Judge find-all-issues stopped by timeout after 11m39s: execution expired'
   inserted: 8
-  seconds: 1115.177137464
+  seconds: 1207.132454611
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-24 07:53:59.581676615 Z
+  when: 2026-10-24 08:21:55.722990009 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -17836,6 +17837,7 @@
   is_human: 0
   issue: 528
   repository: 802720676
+  tombstone: 2026-10-24 07:56:27.600737902 Z
   what: pull-was-opened
   when: 2026-02-02 19:35:10.000000000 Z
   where: github
@@ -17909,6 +17911,7 @@
   is_human: 0
   issue: 530
   repository: 802720676
+  tombstone: 2026-10-24 07:56:27.639329703 Z
   what: pull-was-opened
   when: 2026-02-04 05:46:01.000000000 Z
   where: github
@@ -17951,6 +17954,7 @@
   is_human: 1
   issue: 533
   repository: 802720676
+  tombstone: 2026-10-24 07:56:27.464387243 Z
   what: issue-was-opened
   when: 2026-02-09 21:36:37.000000000 Z
   where: github
@@ -17992,6 +17996,7 @@
   reviews: 0
   succeeded_builds: 14
   suggestions: 0
+  tombstone: 2026-10-24 07:56:27.603838094 Z
   what: pull-was-merged
   when: &190 2026-02-10 07:49:48.000000000 Z
   where: github
@@ -18018,6 +18023,7 @@
   reviews: 0
   succeeded_builds: 14
   suggestions: 0
+  tombstone: 2026-10-24 07:56:27.642149785 Z
   what: pull-was-merged
   when: &191 2026-02-10 07:49:41.000000000 Z
   where: github
@@ -18031,6 +18037,7 @@
   issue: 533
   label: bug
   repository: 802720676
+  tombstone: 2026-10-24 07:56:27.466260686 Z
   what: label-was-attached
   when: &189 2026-02-10 07:49:22.000000000 Z
   where: github
@@ -18041,6 +18048,7 @@
   _version: 0.19.4/0.59.0/0.17.10
   details: "@yegor256 attached the '#bug' label to zerocracy/pages-action#533 reported
     by @belfil; this means that a bug was accepted as valid, by the project team."
+  done: 2026-10-24 07:56:27.434413849 Z
   is_human: 1
   issue: 533
   reporter: 94894473
@@ -18056,6 +18064,7 @@
   comments: 1
   details: The pull request zerocracy/pages-action#528 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 1w of being in review and 1 comments.
+  done: 2026-10-24 07:56:27.546792106 Z
   hoc: 2
   is_human: 0
   issue: 528
@@ -18074,6 +18083,7 @@
   comments: 1
   details: The pull request zerocracy/pages-action#530 with 4 HoC created by @renovate[bot]
     was merged by @yegor256 after 6d2h of being in review and 1 comments.
+  done: 2026-10-24 07:56:27.606831606 Z
   hoc: 4
   is_human: 0
   issue: 530
@@ -18123,6 +18133,7 @@
   issue: 533
   receipt: receipt-#61018
   repository: 802720676
+  tombstone: 2026-10-24 07:56:27.468084799 Z
   what: bug-report-was-rewarded
   when: 2026-02-10 09:59:50.293066043 Z
   where: github
@@ -18250,6 +18261,7 @@
   is_human: 1
   issue: 533
   repository: 802720676
+  tombstone: 2026-10-24 07:56:27.469832797 Z
   what: issue-was-closed
   when: 2026-02-11 05:23:34.000000000 Z
   where: github
@@ -159312,7 +159324,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 37
   min_pull_was_found: 11
   repository: 1090089359
   types_were_scanned: 0
@@ -161503,7 +161515,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 132
+  min_issue_was_found: 133
   min_pull_was_found: 79
   repository: 974194993
   types_were_scanned: 0
@@ -168028,7 +168040,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 211
   min_pull_was_found: 286
   repository: 849726475
   types_were_scanned: 0
@@ -168262,7 +168274,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 25
+  min_issue_was_found: 26
   min_pull_was_found: 104
   repository: 805238060
   types_were_scanned: 0
@@ -168280,7 +168292,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 31
   min_pull_was_found: 15
   repository: 1084843345
   types_were_scanned: 0
@@ -168290,25 +168302,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 0
+  assignees_were_scanned: 711
+  closures_were_checked: 1761
   earliest_issue_was_found: 1
   events_were_scanned: 18087538702
   issues_were_scanned: 954
-  labels_were_scanned: 1580
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 1547
-  min_issue_was_found: 1679
+  merges_were_scanned: 1645
+  min_issue_was_found: 1680
   min_pull_was_found: 758
   repository: 798641472
-  types_were_scanned: 1195
+  types_were_scanned: 1307
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18084518815
@@ -168316,10 +168328,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 341
+  min_issue_was_found: 344
   min_pull_was_found: 540
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -168334,7 +168346,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 0
   min_pull_was_found: 107
   repository: 857659265
   types_were_scanned: 0
@@ -168736,18 +168748,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1229
-  closures_were_checked: 0
+  assignees_were_scanned: 1352
+  closures_were_checked: 932
   earliest_issue_was_found: 1
   events_were_scanned: 18078195600
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1518
-  min_issue_was_found: 1604
+  merges_were_scanned: 1652
+  min_issue_was_found: 1605
   min_pull_was_found: 739
   repository: 820463873
-  types_were_scanned: 986
+  types_were_scanned: 1102
   what: iterate
   where: github
 - _id: 2629882
@@ -169393,18 +169405,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1098
+  assignees_were_scanned: 1245
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24998481129
   issues_were_scanned: 1060
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1227
-  min_issue_was_found: 1326
+  merges_were_scanned: 1333
+  min_issue_was_found: 1327
   min_pull_was_found: 688
   repository: 802720676
-  types_were_scanned: 1222
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -169539,18 +169551,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 677
+  assignees_were_scanned: 846
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24998821759
   issues_were_scanned: 905
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 976
-  min_issue_was_found: 1048
+  merges_were_scanned: 1035
+  min_issue_was_found: 1049
   min_pull_was_found: 745
   repository: 799113787
-  types_were_scanned: 672
+  types_were_scanned: 841
   what: iterate
   where: github
 - _id: 2630023
@@ -169575,18 +169587,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2855
-  closures_were_checked: 1933
+  assignees_were_scanned: 0
+  closures_were_checked: 2300
   earliest_issue_was_found: 1
   events_were_scanned: 24999995998
   issues_were_scanned: 2354
-  labels_were_scanned: 1702
+  labels_were_scanned: 2497
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
+  merges_were_scanned: 2331
   min_issue_was_found: 2789
   min_pull_was_found: 1526
   repository: 799177290
-  types_were_scanned: 2388
+  types_were_scanned: 2487
   what: iterate
   where: github
 - _id: 2630036
@@ -169600,7 +169612,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 22
+  min_issue_was_found: 23
   min_pull_was_found: 26
   repository: 1081929119
   types_were_scanned: 0
@@ -169610,7 +169622,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 24912862594
@@ -169618,10 +169630,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1258
+  min_issue_was_found: 1259
   min_pull_was_found: 1133
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1176
   what: iterate
   where: github
 - _id: 2630038
@@ -474878,6 +474890,7 @@
   is_human: 1
   issue: 935
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -474902,6 +474915,7 @@
   is_human: 1
   issue: 936
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -474926,6 +474940,7 @@
   is_human: 1
   issue: 937
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -474950,6 +474965,7 @@
   is_human: 1
   issue: 938
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -474974,6 +474990,7 @@
   is_human: 1
   issue: 942
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -474998,9 +475015,408 @@
   is_human: 1
   issue: 943
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
   when: 2026-10-24 06:18:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648724
+  _job: 101750
+  _time: 2026-10-24 07:55:05.171835506 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/judges-action#2908,
+    the reward amount is 18.
+  greeting: "\U0001F389 Thanks for reporting a new bug! You've earned **+18 points**
+    for helping improve our project's quality. If you spot anything else that [doesn't
+    look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right,
+    feel free to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    — [bugs are always welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html).
+    Your running score is now [+20884](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too!\n\n<!--
+    Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you
+    help our project improve its quality. If you find anything else in the repository
+    that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+20884](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 2908
+  repository: 799177290
+  what: bug-report-was-rewarded
+  when: 2026-10-24 07:55:05.173736332 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/judges-action#2908
+- _id: 2648725
+  _job: 101750
+  _time: 2026-10-24 07:55:09.252444141 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @morphqdd for the bug reported in zerocracy/pages-action#1322,
+    the reward amount is 18.
+  greeting: "Hey, awesome catch on that bug! \U0001F389 Since it got accepted by the
+    team, you've bagged **+18 points**, just like the policy promises. Keep an eye
+    out for anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    quite right in the repo — [bugs are welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    here, so don't hesitate to [report them](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html).
+    Your running score is now at [+20902](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
+    so check it out, and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/)
+    too!\n\n<!-- Thanks for reporting a new bug! You've earned +18 points. By reporting
+    bugs, you help our project improve its quality. If you find anything else in the
+    repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
+    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
+    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
+    it. Your running score is [+20902](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 1322
+  repository: 802720676
+  what: bug-report-was-rewarded
+  when: 2026-10-24 07:55:09.254462014 Z
+  where: github
+  who: 125282851
+  why: Reported bug in zerocracy/pages-action#1322
+- _id: 2648726
+  _job: 40076360769
+  _time: 2026-10-24 08:03:50.908146270 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '847'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#982 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 27
+  is_human: 1
+  issue: 982
+  repository: 799113787
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:17:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648727
+  _job: 40076360769
+  _time: 2026-10-24 08:04:05.733534620 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '849'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#984 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 18
+  is_human: 1
+  issue: 984
+  repository: 799113787
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:16:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648728
+  _job: 40076360769
+  _time: 2026-10-24 08:04:13.401576152 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '850'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#985 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 8
+  is_human: 1
+  issue: 985
+  repository: 799113787
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:16:35.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648729
+  _job: 40076360769
+  _time: 2026-10-24 08:04:24.596588586 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '866'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#988 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 7
+  is_human: 1
+  issue: 988
+  repository: 799113787
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:16:26.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648730
+  _job: 40076360769
+  _time: 2026-10-24 08:04:35.705752725 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '871'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#991 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 18
+  is_human: 1
+  issue: 991
+  repository: 799113787
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:16:01.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648731
+  _job: 40076360769
+  _time: 2026-10-24 08:04:52.443849320 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '884'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#997 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 17
+  is_human: 1
+  issue: 997
+  repository: 799113787
+  succeeded_builds: 9
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:15:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648732
+  _job: 40076360769
+  _time: 2026-10-24 08:05:20.833692298 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-910
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#1016 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 38
+  is_human: 1
+  issue: 1016
+  repository: 799113787
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:19:02.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648733
+  _job: 40076360769
+  _time: 2026-10-24 08:05:30.059820383 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-906
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#1019 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 36
+  is_human: 1
+  issue: 1019
+  repository: 799113787
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:15:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648734
+  _job: 40076360769
+  _time: 2026-10-24 08:05:40.874579175 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: 1007-protect-cache-sidecar
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#1022 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 46
+  is_human: 1
+  issue: 1022
+  repository: 799113787
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:15:12.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648735
+  _job: 40076360769
+  _time: 2026-10-24 08:05:51.220020614 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1300'
+  comments: 2
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/pages-action#1302 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 88
+  is_human: 1
+  issue: 1302
+  repository: 802720676
+  succeeded_builds: 11
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:11:56.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648736
+  _job: 40076360769
+  _time: 2026-10-24 08:06:03.371544631 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-897
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#1028 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 74
+  is_human: 1
+  issue: 1028
+  repository: 799113787
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:14:53.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648737
+  _job: 40076360769
+  _time: 2026-10-24 08:06:10.709748301 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-889
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#1029 has been "pull-was-merged".
+  failed_builds: 0
+  files: 8
+  hoc: 44
+  is_human: 1
+  issue: 1029
+  repository: 799113787
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:14:47.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648738
+  _job: 40076360769
+  _time: 2026-10-24 08:06:23.574572838 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: fix-1023
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 1
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, yegor256/judges#1033 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 45
+  is_human: 1
+  issue: 1033
+  repository: 799113787
+  succeeded_builds: 8
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-10-24 06:14:25.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648739
+  _job: 40076360769
+  _time: 2026-10-24 08:07:45.149940934 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1686.
+  is_human: 1
+  issue: 1686
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2026-10-24 06:07:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 2648740
+  _job: 40076360769
+  _time: 2026-10-24 08:07:52.857394038 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue yegor256/factbase#1790.
+  is_human: 1
+  issue: 1790
+  label: bug
+  repository: 798641472
+  what: label-was-attached
+  when: 2026-10-24 06:07:55.000000000 Z
   where: github
   who: 526301
