@@ -463,6 +463,48 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
+  def test_does_not_credit_a_review_to_the_ghost_account
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/71',
+      body: {
+        id: 71, number: 71, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/71/reviews?per_page=100',
+      body: [
+        {
+          id: 71_001, user: { id: 10_137, login: 'ghost', type: 'User' },
+          submitted_at: Time.parse('2025-09-02 10:00:00 UTC')
+        },
+        { id: 71_002, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 11:00:00 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/71/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/71/reviews/71002/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 71, where: 'github', who: 421)
+    load_it('code-was-reviewed', fb)
+    assert(
+      fb.one?(what: 'pull-was-merged', issue: 71, reviews: 1),
+      'a review left by the ghost placeholder user must not be counted'
+    )
+    assert(
+      fb.one?(what: 'code-was-reviewed', issue: 71, who: 422),
+      'the review of a live user next to the ghost one must still be recorded'
+    )
+    refute(
+      fb.one?(what: 'code-was-reviewed', issue: 71, who: 10_137),
+      'a review attributed to the ghost placeholder user must not be recorded'
+    )
+  end
+
   def test_dont_crash_when_pull_has_no_hoc
     WebMock.disable_net_connect!
     rate_limit_up
