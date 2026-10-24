@@ -58,4 +58,40 @@ class TestFixMissingHoc < Jp::Test
       'a pull request reporting no additions and no deletions must be marked stale, not scored as empty'
     )
   end
+
+  def test_sums_additions_and_deletions
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { id: 50, number: 44, state: 'closed', additions: 5, deletions: 3 }
+    ).run do
+      load_it('fix-missing-hoc', fb)
+    end
+    assert_equal(
+      8, fb.pick(issue: 44).hoc,
+      'the hoc must be the sum of additions and deletions, or the pull is rewarded for a different amount of work'
+    )
+  end
+
+  def test_uses_additions_when_deletions_are_absent
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { id: 50, number: 44, state: 'closed', additions: 5 }
+    ).run do
+      load_it('fix-missing-hoc', fb)
+    end
+    assert_equal(
+      5, fb.pick(issue: 44)['hoc'],
+      'the hoc must be the additions the API reported, even when it did not report deletions'
+    )
+    assert_nil(
+      fb.pick(issue: 44)['stale'],
+      'a pull request reporting only one of the two numbers must not be marked stale, or its hoc is lost for good'
+    )
+  end
 end
