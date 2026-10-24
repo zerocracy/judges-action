@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require 'octokit'
+require_relative '../../lib/humans'
 require_relative '../../lib/qos_search'
 
 def some_review_time(fact)
@@ -18,9 +19,9 @@ def some_review_time(fact)
     found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |pr|
-      all, csize =
+      all, comments =
         begin
-          [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
+          [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number])]
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
           next
@@ -41,7 +42,11 @@ def some_review_time(fact)
           times << seconds
         end
       end
-      sizes << csize
+      author = pr.dig(:user, :id)
+      sizes << Jp.human_comments(comments).count do |comment|
+        who = comment.dig(:user, :id)
+        !who.nil? && who != author
+      end
       users = all.map { |r| r.dig(:user, :id) }
       users.uniq!
       reviewers << users.size
