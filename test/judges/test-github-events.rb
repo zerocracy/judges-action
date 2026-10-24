@@ -6,6 +6,7 @@
 require 'factbase'
 require 'fbe'
 require 'fbe/github_graph'
+require 'fbe/tombstone'
 require 'json'
 require 'judges/options'
 require 'loog'
@@ -3085,7 +3086,37 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_done_issue_is_not_touched
+    stub_issue_opened
+    fb = Factbase.new
+    fb.with(what: 'pull-was-opened', where: 'github', repository: 42, issue: 9, done: 'yes')
+    load_it('github-events', fb)
+    assert(fb.none?(what: 'issue-was-opened'), 'an issue with a done fact gets no new event fact')
+  end
+
+  def test_tombstoned_issue_is_not_touched
+    stub_issue_opened
+    fb = Factbase.new
+    Fbe::Tombstone.new(fb: fb).bury!('github', 42, 9)
+    load_it('github-events', fb)
+    assert(fb.none?(what: 'issue-was-opened'), 'a tombstoned issue gets no event fact')
+  end
+
   private
+
+  def stub_issue_opened
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      id: '11112',
+      type: 'IssuesEvent',
+      actor: { id: 43, login: 'yegor256' },
+      repo: { id: 42, name: 'foo/foo' },
+      payload: { action: 'opened', issue: { number: 9 } },
+      created_at: '2025-06-26 19:03:16 UTC'
+    )
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+  end
 
   def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
