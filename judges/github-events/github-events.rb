@@ -175,8 +175,13 @@ Fbe.iterate do
     end
     case json[:type]
     when 'PushEvent'
+      push_id = json.dig(:payload, :push_id)
+      if push_id.nil?
+        $loog.info("PushEvent in #{rname} has no push_id, ignoring it")
+        skip(json)
+      end
       fact.what = 'git-was-pushed'
-      fact.push_id = json[:payload][:push_id]
+      fact.push_id = push_id
       fact.ref = json[:payload][:ref]
       fact.commit = json[:payload][:head]
       repo =
