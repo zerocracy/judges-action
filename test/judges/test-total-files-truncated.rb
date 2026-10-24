@@ -24,4 +24,22 @@ class TestTotalFilesTruncated < Jp::Test
     assert_empty(result)
     assert_includes($loog.to_s, 'not reported')
   end
+
+  def test_drops_the_total_when_a_later_repository_is_truncated
+    $judge = 'dimensions-of-terrain'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/one,foo/two' })
+    octo = Object.new
+    octo.define_singleton_method(:repository) { |_repo| { size: 100, default_branch: 'master' } }
+    octo.define_singleton_method(:tree) do |repo, _branch, **|
+      repo == 'foo/one' ? { truncated: false, tree: [{ type: 'blob' }] * 5 } : { truncated: true, tree: [] }
+    end
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_files.rb'))
+    result =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, proc { |&b| %w[foo/one foo/two].each { |r| b.call(r) } }) { total_files(nil) }
+      end
+    assert_empty(result, 'the total of foo/one is reported although the tree of foo/two is truncated')
+  end
 end
