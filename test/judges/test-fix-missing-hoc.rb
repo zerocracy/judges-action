@@ -86,7 +86,7 @@ class TestFixMissingHoc < Jp::Test
       load_it('fix-missing-hoc', fb)
     end
     assert_equal(
-      5, fb.pick(issue: 44)['hoc'],
+      5, fb.pick(issue: 44).hoc,
       'the hoc must be the additions the API reported, even when it did not report deletions'
     )
     assert_nil(
