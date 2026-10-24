@@ -94,10 +94,10 @@ class TestFindAllIssues < Jp::Test
       'https://api.github.com/rate_limit',
       body: {
         resources: {
-          core: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' },
+          core: { limit: 60, remaining: 999, reset: 1_728_464_472, used: 1, resource: 'core' },
           search: { remaining: 30, limit: 30 }
         },
-        rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
+        rate: { limit: 60, remaining: 999, reset: 1_728_464_472, used: 1, resource: 'core' }
       }
     )
     fb = Factbase.new
@@ -114,9 +114,10 @@ class TestFindAllIssues < Jp::Test
       f.who = 257_964
     end
     load_it('find-all-issues', fb)
-    fs = fb.query('(always)').each.to_a
-    assert_equal(1, fs.count)
-    refute_empty(fb.query("(eq what 'issue-was-opened')").each.to_a)
+    fact = fb.query("(and (eq what 'issue-was-opened') (eq issue 87))").each.first
+    refute_nil(fact, 'the issue-was-opened fact must survive the 404')
+    assert_equal(['issue'], fact['stale'], 'the lowest issue must be marked stale after the 404')
+    assert_includes(Fbe::Tombstone.new.issues('github', 695), 87, 'issue 87 must be in the tombstone')
   end
 
   def test_find_all_issues_with_lost_min
