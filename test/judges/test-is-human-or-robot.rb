@@ -105,4 +105,18 @@ class TestIsHumanOrRobot < Jp::Test
     refute_nil(forbidden)
     assert_raises(ArgumentError, 'the 403 user should remain unclassified, ready for a retry') { forbidden.is_human }
   end
+
+  def test_classifies_a_user_whose_repository_is_gone
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/15', body: { login: 'alice', id: 15, type: 'User' })
+    stub_github('https://api.github.com/user/16', body: { login: 'bob', id: 16, type: 'User' })
+    stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', who: 15, repository: 42, issue: 7, where: 'github')
+      .with(_id: 2, what: 'pull-was-merged', who: 16, where: 'github')
+    load_it('is-human-or-robot', fb)
+    assert(fb.one?(who: 15, is_human: 1), 'the user of the fact with a gone repository is not classified')
+    assert(fb.one?(who: 16, is_human: 1), 'a gone repository stopped the classification of the following fact')
+  end
 end
