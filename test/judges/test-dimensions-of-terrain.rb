@@ -1333,7 +1333,10 @@ class TestDimensionsOfTerrain < Jp::Test
     Factbase.new.insert.then do |f|
       f.what = 'dimensions-of-terrain'
       f.when = Time.parse('2024-09-29 21:00:00 UTC')
-      assert_equal({}, total_active_contributors(f), 'active contributors are counted while the search is broken')
+      assert_equal(
+        { total_active_contributors: 0 }, total_active_contributors(f),
+        'a broken search still records a zero active-contributor count'
+      )
     end
   end
 
@@ -1368,7 +1371,10 @@ class TestDimensionsOfTerrain < Jp::Test
     Factbase.new.insert.then do |f|
       f.what = 'dimensions-of-terrain'
       f.when = Time.parse('2024-09-29 21:00:00 UTC')
-      assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
+      assert_equal(
+        { total_active_contributors: 1 }, total_active_contributors(f),
+        'a failed repository search keeps the count from the repositories that answered'
+      )
     end
   end
 end
