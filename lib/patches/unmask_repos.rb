@@ -56,6 +56,9 @@ module Fbe
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} is absent, dropping it: #{e.message}")
         true
+      rescue Octokit::UnavailableForLegalReasons => e
+        $loog.info("Repository #{repo} is blocked for legal reasons, dropping it: #{e.message}")
+        true
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
