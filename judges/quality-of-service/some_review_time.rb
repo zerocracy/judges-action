@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require 'octokit'
@@ -28,6 +29,12 @@ def some_review_time(fact)
           $loog.warn(
             "[#{$judge}] Access forbidden to pull ##{pr[:number]} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn(
+            "[#{$judge}] Transient error fetching pull ##{pr[:number]} in #{repo} " \
+            "(will retry next cycle): #{e.class}: #{e.message}"
           )
           next
         end
