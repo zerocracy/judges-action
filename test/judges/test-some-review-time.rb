@@ -40,6 +40,53 @@ class TestSomeReviewTime < Jp::Test
     assert_empty(review_times(Time.parse('2025-01-11 12:00:00 UTC')))
   end
 
+  def test_counts_only_comments_left_by_human_reviewers
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2025-01-01 00:00:00 UTC')
+    fact.when = Time.parse('2025-02-01 00:00:00 UTC')
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    author = { id: 3, login: 'author', type: 'User' }
+    human = { id: 7, login: 'reviewer', type: 'User' }
+    bot = { id: 9, login: 'coderabbit', type: 'Bot' }
+    found = {
+      items: [
+        {
+          id: 1, number: 10, user: author,
+          pull_request: { merged_at: Time.parse('2024-09-04 00:00:00 UTC') }
+        }
+      ]
+    }
+    result =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+        'GET /repos/foo/foo/pulls/10/reviews?per_page=100' => [
+          200,
+          [{ id: 10, user: human, state: 'CHANGES_REQUESTED', submitted_at: '2024-09-03T00:00:00Z' }]
+        ],
+        'GET /repos/foo/foo/pulls/10/comments?per_page=100' => [
+          200,
+          [
+            { id: 100, user: human, body: 'Please rename this.' },
+            { id: 101, user: author, body: 'Done.' },
+            { id: 102, user: bot, body: 'Summary by CodeRabbit ...' },
+            { id: 103, user: bot, body: 'Potential issue ...' }
+          ]
+        ]
+      ).run { Jp.stub(:qosearch, found) { some_review_time(fact) } }
+    assert_equal(
+      {
+        some_review_time: [86_400],
+        some_review_size: [1],
+        some_reviewers_per_pull: [1],
+        some_reviews_per_pull: [1]
+      },
+      result
+    )
+  end
+
   private
 
   def review_times(submitted)
