@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 
@@ -22,6 +23,12 @@ def some_release_hoc_size(fact)
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching releases for #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
         )
         next
       end
@@ -44,6 +51,12 @@ def some_release_hoc_size(fact)
           $loog.warn(
             "[#{$judge}] Access forbidden to compare for #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn(
+            "[#{$judge}] Transient error fetching compare for #{repo} " \
+            "(will retry next cycle): #{e.class}: #{e.message}"
           )
           next
         end
