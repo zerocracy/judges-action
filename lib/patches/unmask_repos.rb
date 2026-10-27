@@ -52,7 +52,13 @@ module Fbe
       end
       repos.uniq!(&:downcase)
       repos.reject! do |repo|
-        octo.repository(repo)[:archived]
+        json = octo.repository(repo)
+        if json[:message] == 'Moved Permanently'
+          $loog.warn("Repository #{repo} has moved to #{json[:url]}, dropping it")
+          true
+        else
+          json[:archived]
+        end
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} is absent, dropping it: #{e.message}")
         true
