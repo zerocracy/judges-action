@@ -196,7 +196,7 @@ Fbe.iterate do
       fact.to_master = fact.default_branch == fact.ref.sub('refs/heads/', '') ? 1 : 0
       fact.by_owner = 1 if repo.dig(:owner, :id) == fact.who
       if fact.to_master.zero?
-        $loog.debug("Push #{fact.commit} to non-default branch #{fact.default_branch.inspect}, ignoring it")
+        $loog.debug("Push #{fact.commit} to non-default branch #{fact.ref.inspect}, ignoring it")
         skip(json)
       end
       pulls =
