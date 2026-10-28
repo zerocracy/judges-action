@@ -16,6 +16,7 @@ def Jp.incremate(
   max_per_fact: nil,
   epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
 )
+  return if max_per_fact&.zero?
   evaluated = 0
   Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
