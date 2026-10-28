@@ -11,7 +11,7 @@ require_relative '../test__helper'
 require_relative '../../judges/quality-of-service/some_merged_pulls'
 
 class TestSomeMergedPulls < Jp::Test
-  def test_keeps_the_counts_of_a_repository_when_a_later_search_fails
+  def test_reports_nothing_when_a_later_search_fails
     fact = Factbase.new.insert
     fact.since = Time.parse('2025-01-01 00:00:00 UTC')
     fact.when = Time.parse('2025-02-01 00:00:00 UTC')
@@ -28,6 +28,6 @@ class TestSomeMergedPulls < Jp::Test
           Jp.stub(:qosearch, proc { |*| answers.shift }) { some_merged_pulls(fact) }
         end
       end
-    assert_equal({ some_merged_pulls: [10], some_unmerged_pulls: [3] }, result)
+    assert_equal({}, result)
   end
 end

@@ -2792,7 +2792,56 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_merged_pulls_counts_every_repository
+    n = 0
+    search =
+      lambda do |*|
+        n += 1
+        { total_count: n }
+      end
+    metrics = scan_merged_pulls(%w[foo/one foo/two], -> { false }, search)
+    assert_equal([1, 3], metrics[:some_merged_pulls])
+    assert_equal([2, 4], metrics[:some_unmerged_pulls])
+  end
+
+  def test_some_merged_pulls_returns_empty_when_quota_runs_out
+    step = 0
+    quota =
+      lambda do
+        step += 1
+        step > 2
+      end
+    metrics = scan_merged_pulls(%w[foo/one foo/two], quota, ->(*) { { total_count: 9 } })
+    assert_equal({}, metrics)
+  end
+
+  def test_some_merged_pulls_returns_empty_when_search_is_nil
+    n = 0
+    search =
+      lambda do |*|
+        n += 1
+        n > 2 ? nil : { total_count: 5 }
+      end
+    metrics = scan_merged_pulls(%w[foo/one foo/two], -> { false }, search)
+    assert_equal({}, metrics)
+  end
+
   private
+
+  def scan_merged_pulls(repos, quota, search)
+    $loog = Loog::NULL
+    $judge = 'quality-of-service'
+    load(File.join(__dir__, '../../judges/quality-of-service/some_merged_pulls.rb'))
+    Jp.qoreset
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?, &quota)
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { repos.each { block.call(_1) } }) do
+        Jp.stub(:qosearch, search) { some_merged_pulls(fact) }
+      end
+    end
+  end
 
   def stub_workflow_runs(workflow_runs)
     stub_github(
