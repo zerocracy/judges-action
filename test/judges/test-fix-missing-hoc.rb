@@ -58,4 +58,38 @@ class TestFixMissingHoc < Jp::Test
       'a pull request reporting no additions and no deletions must be marked stale, not scored as empty'
     )
   end
+
+  def test_goes_on_after_connection_failure_on_pull_request_lookup
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 2, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/45' => { number: 45, additions: 3, deletions: 4 }
+    ).run do
+      stub_request(:get, %r{/repos/foo/foo/pulls/44\z}).to_raise(Faraday::ConnectionFailed.new('reset by peer'))
+      load_it('fix-missing-hoc', fb)
+    end
+    assert_nil(fb.pick(issue: 44)['hoc'], 'hoc is saved for the pull that was never read')
+    assert_equal(7, fb.pick(issue: 45).hoc, 'the next pull was not visited after a dropped connection')
+  end
+
+  def test_goes_on_after_timeout_on_pull_request_lookup
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 2, what: 'pull-was-closed', repository: 42, issue: 45, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/45' => { number: 45, additions: 10, deletions: 0 }
+    ).run do
+      stub_request(:get, %r{/repos/foo/foo/pulls/44\z}).to_raise(Faraday::TimeoutError.new('read timeout'))
+      load_it('fix-missing-hoc', fb)
+    end
+    assert_nil(fb.pick(issue: 44)['hoc'], 'hoc is saved for the pull whose lookup timed out')
+    assert_equal(10, fb.pick(issue: 45).hoc, 'the next pull was not visited after a timeout')
+  end
 end
