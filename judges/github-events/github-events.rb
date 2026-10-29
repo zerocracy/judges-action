@@ -387,21 +387,22 @@ Fbe.iterate do
       skip(json)
     end
   rescue Octokit::Forbidden => e
-    if $global[:forbidden_repos]&.include?(rname)
+    ref = rname || "##{json[:repo][:id]}"
+    if $global[:forbidden_repos]&.include?(ref)
       $loog.warn(
-        "[#{$judge}] Access forbidden to #{rname} " \
+        "[#{$judge}] Access forbidden to #{ref} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
     else
       $global[:forbidden_repos] ||= Set.new
-      $global[:forbidden_repos] << rname
+      $global[:forbidden_repos] << ref
       who =
         begin
           "@#{Fbe.octo.user[:login]}"
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden
           'You'
         end
-      $loog.error("[#{$judge}] #{who} doesn't have access to the #{rname} repository, maybe it is private")
+      $loog.error("[#{$judge}] #{who} doesn't have access to the #{ref} repository, maybe it is private")
     end
     skip(json)
   end
