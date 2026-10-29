@@ -26,6 +26,9 @@ def total_commits_pushed(fact)
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Can't read #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
+      next
     end
     owner, name = repo.split('/')
     begin
