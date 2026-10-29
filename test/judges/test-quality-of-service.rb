@@ -2057,6 +2057,14 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_triage_time_counts_label_with_unknown_author
+    assert_equal([60.0], triage_time_with_stale('who'), 'a label attached by an unknown user is not counted')
+  end
+
+  def test_some_triage_time_skips_label_of_lost_issue
+    assert_nil(triage_time_with_stale('issue'), 'a label of a lost issue is counted')
+  end
+
   def test_some_triage_time_mixes_kept_and_filtered
     WebMock.disable_net_connect!
     rate_limit_up
@@ -2793,6 +2801,99 @@ class TestQualityOfService < Jp::Test
   end
 
   private
+
+  def triage_time_with_stale(stale)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=100',
+      body: { total_count: 0, workflow_runs: [] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:issue%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&q=repo:foo/foo%20type:pr%20closed:%3E2024-08-02',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    (Date.parse('2024-08-02')..Date.parse('2024-08-09')).each do |date|
+      stub_github(
+        'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
+        "q=repo:foo/foo%20type:issue%20created:*..#{date}%20(closed:%3E=#{date}%20OR%20state:open)",
+        body: { total_count: 0, items: [] }
+      )
+    end
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:unmerged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:pr%20is:merged%20closed:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    stub_github(
+      'https://api.github.com/search/issues?per_page=100&' \
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_710,
+            number: 60,
+            title: 'Issue 60',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          },
+          {
+            id: 2_544_140_711,
+            number: 61,
+            title: 'Issue 61',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            labels: [
+              { id: 6_937_082_637, name: 'bug', description: "Something isn't working" }
+            ],
+            created_at: Time.parse('2024-08-04 12:00:00 UTC')
+          }
+        ]
+      }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.what = 'pmp'
+      f.area = 'quality'
+      f.qos_days = 7
+      f.qos_interval = 3
+    end
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 60, when: Time.parse('2024-08-04 12:00:59 UTC'), label: 'bug'
+    )
+    insert_label_was_attached_fact(
+      fb, where: 'github', repository: 42, issue: 61, when: Time.parse('2024-08-04 12:01:00 UTC'), label: 'bug'
+    )
+    fb.query("(eq what 'label-was-attached')").each { |f| f.stale = stale }
+    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+      load_it('quality-of-service', fb)
+      fb.query('(eq what "quality-of-service")').each.first['some_triage_time']
+    end
+  end
 
   def stub_workflow_runs(workflow_runs)
     stub_github(
