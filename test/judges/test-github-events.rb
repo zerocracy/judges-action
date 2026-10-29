@@ -3085,6 +3085,97 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_forbidden_on_repo_name_by_id_records_repo_id_in_global_set
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11400',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 43, name: 'other/other' },
+          payload: { action: 'opened', issue: { number: 16 } },
+          created_at: Time.parse('2024-11-30T00:52:08Z')
+        },
+        {
+          id: '11401',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 43, name: 'other/other' },
+          payload: { action: 'opened', issue: { number: 17 } },
+          created_at: Time.parse('2024-11-30T00:52:09Z')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repositories/43',
+      status: 403,
+      body: { message: 'Must have admin rights to Repository' }
+    )
+    stub_github('https://api.github.com/user', body: { id: 50, login: 'agent' })
+    fb = Factbase.new
+    log = Loog::Buffer.new
+    load_it('github-events', fb, loog: log)
+    refute_includes($global[:forbidden_repos], nil, 'nil must not be placed into forbidden_repos')
+    assert_includes($global[:forbidden_repos], '#43', 'repository #43 must be placed into forbidden_repos')
+    assert_includes(log.to_s, "@agent doesn't have access to the #43 repository, maybe it is private")
+    assert_includes(log.to_s, 'Access forbidden to #43 (transient, will retry next cycle)')
+  end
+
+  def test_forbidden_on_second_unrelated_repo_is_not_suppressed_by_earlier_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11402',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 43, name: 'first/private' },
+          payload: { action: 'opened', issue: { number: 18 } },
+          created_at: Time.parse('2024-11-30T00:52:08Z')
+        },
+        {
+          id: '11403',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 44, name: 'second/private' },
+          payload: { action: 'opened', issue: { number: 19 } },
+          created_at: Time.parse('2024-11-30T00:52:09Z')
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repositories/43', status: 403, body: { message: 'Forbidden' })
+    stub_github('https://api.github.com/repositories/44', status: 403, body: { message: 'Forbidden' })
+    stub_github('https://api.github.com/user', body: { id: 50, login: 'agent' })
+    fb = Factbase.new
+    log = Loog::Buffer.new
+    load_it('github-events', fb, loog: log)
+    assert_includes($global[:forbidden_repos], '#43')
+    assert_includes($global[:forbidden_repos], '#44')
+    assert_includes(log.to_s, "@agent doesn't have access to the #43 repository")
+    assert_includes(log.to_s, "@agent doesn't have access to the #44 repository")
+  end
+
   private
 
   def stub_event(*json)
