@@ -57,4 +57,45 @@ class TestFixMissingComments < Jp::Test
       'the fact of a vanished repository is not stale, while the judge must mark it instead of aborting'
     )
   end
+
+  def test_goes_on_after_server_error_on_pull_comments
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 2, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { number: 44, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/45' => { number: 45, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/44/comments?per_page=100' => [500, { message: 'boom' }],
+      'GET /repos/foo/foo/pulls/45/comments?per_page=100' => [],
+      'GET /repos/foo/foo/issues/45/comments?per_page=100' => []
+    ).run do
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('fix-missing-comments', fb) }
+    end
+    assert_nil(fb.pick(issue: 44)['comments'], 'comments are saved for the pull whose comments failed with 500')
+    refute_nil(fb.pick(issue: 45)['comments'], 'the next pull was not visited after a 500 on the previous one')
+  end
+
+  def test_goes_on_after_server_error_on_issue_comments
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 2, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { number: 44, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/45' => { number: 45, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/44/comments?per_page=100' => [],
+      'GET /repos/foo/foo/issues/44/comments?per_page=100' => [500, { message: 'unavailable' }],
+      'GET /repos/foo/foo/pulls/45/comments?per_page=100' => [],
+      'GET /repos/foo/foo/issues/45/comments?per_page=100' => []
+    ).run do
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('fix-missing-comments', fb) }
+    end
+    assert_nil(fb.pick(issue: 44)['comments'], 'comments are saved for the pull whose issue comments failed with 500')
+    refute_nil(fb.pick(issue: 45)['comments'], 'the next pull was not visited after a 500 on the previous one')
+  end
 end
