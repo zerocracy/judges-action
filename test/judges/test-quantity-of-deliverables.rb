@@ -356,6 +356,16 @@ class TestQuantityOfDeliverables < Jp::Test
     )
   end
 
+  def test_total_reviews_submitted_reports_nothing_when_every_repo_fails
+    graph = reviewgraph('foo/bad', :pulls, GraphQL::Client::Error.new('GraphQL failed'))
+    assert_empty(directreviews(%w[foo/bad], graph), 'a zero is reported although no repository was counted')
+  end
+
+  def test_total_reviews_submitted_reports_nothing_when_every_repo_is_forbidden
+    graph = pagedgraph('foo/bad', Octokit::Forbidden.new)
+    assert_empty(directreviews(%w[foo/bad], graph), 'a zero is reported although the only repository is forbidden')
+  end
+
   def test_total_reviews_submitted_keeps_code_errors
     graph = reviewgraph('foo/bad', :pulls, NoMethodError.new('bad fake'))
     assert_raises(NoMethodError) { directreviews(%w[foo/bad], graph) }
