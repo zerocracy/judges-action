@@ -61,6 +61,12 @@ Fbe.consider(
     Jp.fill_fact_by_hash(f, Jp.comments_info(json, repo:))
   rescue Octokit::Forbidden
     next
+  rescue Octokit::TooManyRequests, Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    $loog.warn(
+      "[#{$judge}] Transient error fetching comments of #{Fbe.issue(f)} in #{repo} " \
+      "(will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   $loog.info("Comments found for #{Fbe.issue(f)}: #{f.comments}")
 end
