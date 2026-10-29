@@ -1,12 +1,12 @@
 ---
 - added: 8
-  cycles: 1
+  cycles: 2
   deleted: 8
   inserted: 8
-  seconds: 1175.809776296
+  seconds: 82.705892561
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-29 00:21:22.940496594 Z
+  when: 2026-10-29 00:52:26.222208216 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -129466,7 +129466,7 @@
   - 6
   tombstone: 2026-10-21 12:22:12.189124299 Z
   what: quality-of-service
-  when: 2026-06-15 12:18:58.000000000 Z
+  when: &5713 2026-06-15 12:18:58.000000000 Z
 - _id: 2624004
   _job: 27553034068
   _time: 2026-06-15 14:25:22.971530631 Z
@@ -143189,7 +143189,7 @@
   _job: 28384377741
   _time: 2026-06-29 15:50:26.406657890 Z
   _version: 0.19.9/0.60.2/0.17.17
-  since: 2026-06-22 13:30:41.000000000 Z
+  since: &5714 2026-06-22 13:30:41.000000000 Z
   some_backlog_size:
   - 6
   - 6
@@ -166393,7 +166393,7 @@
   assignees_were_scanned: 1669
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 25466895463
+  events_were_scanned: 25474534910
   issues_were_scanned: 2600
   labels_were_scanned: 0
   latest_issue_was_found: 1073
@@ -490978,13 +490978,6 @@
   default_branch: master
   details: It's time to punish @yegor256 for pushing to the default branch 'master'
     in zerocracy/baza, the penalty amount is -8.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -8 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running score is [+240](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   href: https://github.com/zerocracy/baza/commit/4fb58d69d7e0569667158b7e043f7489e38410d9/#commitcomment-207140245
   is_human: 1
   repository: 728758275
@@ -491002,13 +490995,6 @@
   default_branch: master
   details: It's time to punish @yegor256 for pushing to the default branch 'master'
     in zerocracy/baza, the penalty amount is -8.
-  greeting: 'It is [not a good idea](https://www.yegor256.com/2014/07/21/read-only-master-branch.html)
-    to push directly to the default branch `master`. You''ve earned -8 points. Next
-    time, create a new branch, push your changes over there, then make a pull request
-    and merge it. Even if you are flying solo, contributing via pull requests is a
-    [good practice](https://www.yegor256.com/2020/07/29/open-source-etiquette.html).
-    Your running score is [+232](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   href: https://github.com/zerocracy/baza/commit/f9529c05e3aee6c9b37b36c8a7c0cb2d2f1cd8c2/#commitcomment-207140248
   is_human: 1
   repository: 728758275
@@ -491038,3 +491024,10 @@
     The average monthly zents/points ratio (0.84) is decreasing (R=0.33).
   what: assessment
   when: 2026-10-28 23:51:58.931432553 Z
+- _id: 2650036
+  _job: 40796596673
+  _time: 2026-10-29 00:51:33.713144756 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  since: *5713
+  what: quality-of-service
+  when: *5714
