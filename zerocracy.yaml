@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1109.509186826
+  seconds: 1118.755654793
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-29 15:49:57.113912898 Z
+  when: 2026-10-29 16:20:52.556254349 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18193,6 +18194,7 @@
   is_human: 0
   issue: 389
   repository: 799113787
+  tombstone: 2026-10-29 15:52:09.172839312 Z
   what: issue-was-closed
   when: 2026-02-16 05:23:35.000000000 Z
   where: github
@@ -18205,6 +18207,7 @@
   is_human: 1
   issue: 389
   repository: 799113787
+  tombstone: 2026-10-29 15:52:09.174759633 Z
   what: issue-was-opened
   when: &194 2026-02-15 15:23:26.000000000 Z
   where: github
@@ -18378,6 +18381,7 @@
   details: 'In the repository #799113787, the user #161327834 submitted the issue
     #389 which was later closed by the user #8086956 not becoming a bug or enhancement;
     this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  done: 2026-10-29 15:52:09.142498877 Z
   is_human: 1
   issue: 389
   repository: 799113787
@@ -18597,6 +18601,7 @@
   is_human: 1
   issue: 389
   repository: 799113787
+  tombstone: 2026-10-29 15:52:09.176768202 Z
   what: dud-was-punished
   when: 2026-02-16 07:39:26.299327386 Z
   where: github
@@ -154275,7 +154280,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 39
+  min_issue_was_found: 40
   min_pull_was_found: 27
   repository: 1090089359
   types_were_scanned: 0
@@ -156466,10 +156471,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 148
+  min_issue_was_found: 152
   min_pull_was_found: 98
   repository: 974194993
-  types_were_scanned: 81
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -160474,7 +160479,7 @@
   min_issue_was_found: 27
   min_pull_was_found: 63
   repository: 1236759415
-  types_were_scanned: 54
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629477
@@ -162988,10 +162993,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 228
+  min_issue_was_found: 229
   min_pull_was_found: 305
   repository: 849726475
-  types_were_scanned: 298
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629820
@@ -163222,7 +163227,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 68
+  min_issue_was_found: 80
   min_pull_was_found: 149
   repository: 805238060
   types_were_scanned: 0
@@ -163240,35 +163245,35 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 57
+  min_issue_was_found: 58
   min_pull_was_found: 45
   repository: 1084843345
-  types_were_scanned: 76
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1383
-  closures_were_checked: 1761
+  assignees_were_scanned: 1579
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 18562638393
+  events_were_scanned: 18570556051
   issues_were_scanned: 1242
-  labels_were_scanned: 0
+  labels_were_scanned: 1304
   latest_issue_was_found: 315
-  merges_were_scanned: 0
+  merges_were_scanned: 1178
   min_issue_was_found: 1834
   min_pull_was_found: 781
   repository: 798641472
-  types_were_scanned: 894
+  types_were_scanned: 1044
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18549820012
@@ -163276,10 +163281,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 497
+  min_issue_was_found: 498
   min_pull_was_found: 556
   repository: 840215648
-  types_were_scanned: 495
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -163294,7 +163299,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 0
   min_pull_was_found: 121
   repository: 857659265
   types_were_scanned: 0
@@ -163696,18 +163701,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 600
-  closures_were_checked: 932
+  assignees_were_scanned: 748
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18557642396
   issues_were_scanned: 1041
-  labels_were_scanned: 0
+  labels_were_scanned: 1764
   latest_issue_was_found: 317
-  merges_were_scanned: 1215
-  min_issue_was_found: 1828
+  merges_were_scanned: 1328
+  min_issue_was_found: 1829
   min_pull_was_found: 771
   repository: 820463873
-  types_were_scanned: 477
+  types_were_scanned: 658
   what: iterate
   where: github
 - _id: 2629882
@@ -164353,18 +164358,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1139
+  assignees_were_scanned: 1246
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18541875968
   issues_were_scanned: 1241
-  labels_were_scanned: 0
+  labels_were_scanned: 1374
   latest_issue_was_found: 386
-  merges_were_scanned: 1227
-  min_issue_was_found: 1248
+  merges_were_scanned: 1334
+  min_issue_was_found: 1249
   min_pull_was_found: 705
   repository: 802720676
-  types_were_scanned: 1312
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -164499,18 +164504,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 678
+  assignees_were_scanned: 847
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 18533469187
+  events_were_scanned: 18574000348
   issues_were_scanned: 1205
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 754
   min_issue_was_found: 1208
   min_pull_was_found: 763
   repository: 799113787
-  types_were_scanned: 1213
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630023
@@ -164535,18 +164540,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 1933
+  assignees_were_scanned: 1476
+  closures_were_checked: 2300
   earliest_issue_was_found: 1
-  events_were_scanned: 25519121192
+  events_were_scanned: 25536211804
   issues_were_scanned: 2600
-  labels_were_scanned: 2497
+  labels_were_scanned: 2997
   latest_issue_was_found: 1073
-  merges_were_scanned: 2331
-  min_issue_was_found: 2926
+  merges_were_scanned: 2524
+  min_issue_was_found: 2927
   min_pull_was_found: 1548
   repository: 799177290
-  types_were_scanned: 2976
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -164570,7 +164575,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 25474231564
@@ -164578,10 +164583,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1242
+  min_issue_was_found: 1244
   min_pull_was_found: 1154
   repository: 728758275
-  types_were_scanned: 1283
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -489642,3 +489647,33 @@
   when: 2026-10-29 12:35:48.000000000 Z
   where: github
   who: 125282851
+- _id: 2650076
+  _job: 40907321083
+  _time: 2026-10-29 16:02:37.294870796 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The pull request yegor256/factbase#1894 has been opened by @renovate[bot].
+  event_id: 18570556051
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1894
+  repository: 798641472
+  what: pull-was-opened
+  when: 2026-10-29 15:16:45.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2650077
+  _job: 40907321083
+  _time: 2026-10-29 16:02:58.801133837 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  details: The pull request yegor256/judges#1216 has been opened by @renovate[bot].
+  event_id: 18574000348
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1216
+  repository: 799113787
+  what: pull-was-opened
+  when: 2026-10-29 15:52:42.000000000 Z
+  where: github
+  who: 29139614
