@@ -449,6 +449,51 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_total_builds_ran_skips_repo_on_server_error
+    assert_equal(
+      { total_builds_ran: 7 }, builds_with_broken_repo(status: 502),
+      'a 502 on one repository stops the count'
+    )
+  end
+
+  def test_total_builds_ran_skips_repo_on_dropped_connection
+    assert_equal(
+      { total_builds_ran: 7 }, builds_with_broken_repo(timeout: true),
+      'a dropped connection on one repository stops the count'
+    )
+  end
+
+  def test_total_commits_pushed_skips_repo_on_server_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 41, full_name: 'foo/foo', size: 100 })
+    stub_github('https://api.github.com/repos/foo/bad', status: 502, body: { message: 'Bad Gateway' })
+    stub_github(
+      'https://api.github.com/repos/foo/good',
+      body: { id: 43, full_name: 'foo/good', open_issues: 0, size: 100 }
+    )
+    graph = Object.new
+    graph.define_singleton_method(:total_commits_pushed) do |_owner, name, _since|
+      { 'commits' => name.length, 'hoc' => name.length * 100 }
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    unmask = proc { |&block| %w[foo/bad foo/good].each { |repo| block.call(repo) } }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        assert_equal(
+          { total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact),
+          'a 502 on one repository stops the count of pushed commits'
+        )
+      end
+    end
+  end
+
   def test_dont_report_total_when_runs_are_absent
     WebMock.disable_net_connect!
     rate_limit_up
@@ -512,6 +557,34 @@ class TestQuantityOfDeliverables < Jp::Test
           )
         )
       end
+    end
+  end
+
+  private
+
+  def builds_with_broken_repo(status: nil, timeout: false)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    url = 'https://api.github.com/repos/foo/%s/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1'
+    %w[foo bad good].each do |name|
+      stub_github("https://api.github.com/repos/foo/#{name}", body: { id: 42, full_name: "foo/#{name}", size: 100 })
+    end
+    stub_github(format(url, 'good'), body: { total_count: 7, workflow_runs: [] })
+    if timeout
+      stub_request(:get, format(url, 'bad')).to_raise(Faraday::ConnectionFailed.new('connection reset'))
+    else
+      stub_github(format(url, 'bad'), status:, body: { message: 'Server Error' })
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/bad,foo/good' })
+    Fbe.stub(:unmask_repos, %w[foo/bad foo/good]) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      total_builds_ran(fact)
     end
   end
 end
