@@ -85,6 +85,7 @@ Fbe.iterate do
     )
     if json[:merged_at] && merges.each.none?
       closures.each.to_a.each do |f|
+        next if f['stale'] || f['tombstone'] || f['done']
         Fbe.overwrite(f, { 'what' => 'pull-was-merged', 'when' => json[:merged_at] })
       end
       $loog.info("The closure of #{repo}##{issue} is wrong, it was merged at #{json[:merged_at]}, converted")
