@@ -39,7 +39,7 @@ def some_triage_time(fact)
           (or
             (eq label 'bug')
             (eq label 'enhancement'))
-          (absent stale)
+          (not (eq stale 'issue'))
           (exists when)
           (eq where 'github'))
         "
