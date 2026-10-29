@@ -3085,6 +3085,107 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_release_event_without_name_falls_back_to_tag_name_in_details
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11300',
+          type: 'ReleaseEvent',
+          actor: { id: 8_086_956, login: 'rultor' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'published',
+            release: {
+              id: 777, tag_name: '0.0.3', name: nil,
+              author: { id: 8_086_956, login: 'rultor' },
+              created_at: Time.parse('2024-11-30T00:51:39Z'),
+              published_at: Time.parse('2024-11-30T00:52:07Z')
+            }
+          },
+          created_at: Time.parse('2024-11-30T00:52:08Z')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/...0.0.3?per_page=100',
+      status: 404, body: { message: 'Not Found' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    facts = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, facts.size)
+    assert_includes(facts.first['details'].first, 'A new release "0.0.3" has been published')
+    refute_includes(facts.first['details'].first, 'A new release nil has been published')
+  end
+
+  def test_release_event_with_name_uses_release_name_in_details
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11301',
+          type: 'ReleaseEvent',
+          actor: { id: 8_086_956, login: 'rultor' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'published',
+            release: {
+              id: 778, tag_name: '0.0.4', name: 'Version 0.0.4',
+              author: { id: 8_086_956, login: 'rultor' },
+              created_at: Time.parse('2024-11-30T00:51:39Z'),
+              published_at: Time.parse('2024-11-30T00:52:07Z')
+            }
+          },
+          created_at: Time.parse('2024-11-30T00:52:08Z')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/...0.0.4?per_page=100',
+      status: 404, body: { message: 'Not Found' }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    facts = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, facts.size)
+    assert_includes(facts.first['details'].first, 'A new release "Version 0.0.4" has been published')
+  end
+
   private
 
   def stub_event(*json)

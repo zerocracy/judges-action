@@ -366,9 +366,8 @@ Fbe.iterate do
         fact.what = 'release-published'
         contributors(fact, rname).each { |c| fact.contributors = c }
         Jp.fill_fact_by_hash(fact, info(fact, rname))
-        fact.details =
-          "A new release #{json[:payload][:release][:name].inspect} has been published " \
-          "in #{rname} by #{Fbe.who(fact)}."
+        title = json[:payload][:release][:name] || json[:payload][:release][:tag_name]
+        fact.details = "A new release #{title.inspect} has been published in #{rname} by #{Fbe.who(fact)}."
         $loog.debug("Release published by #{Fbe.who(fact)}")
       else
         skip(json)
