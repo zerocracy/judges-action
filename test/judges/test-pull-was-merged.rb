@@ -599,7 +599,37 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_merges_pull_known_only_from_its_review_reward
+    assert_equal([44], merged_from(what: 'code-review-was-rewarded'), 'a rewarded review did not start a merge')
+  end
+
+  def test_merges_pull_known_only_from_its_review
+    assert_equal([44], merged_from(what: 'pull-was-reviewed'), 'a review did not start a merge')
+  end
+
+  def test_skips_pull_that_is_done
+    assert_empty(merged_from(what: 'pull-was-opened', done: 1), 'a done pull got a new merge')
+  end
+
+  def test_skips_pull_that_is_buried
+    assert_empty(merged_from(what: 'pull-was-opened', tombstone: 'yes'), 'a buried pull got a new merge')
+  end
+
+  def test_skips_pull_that_is_stale
+    assert_empty(merged_from(what: 'pull-was-opened', stale: 'who'), 'a stale pull got a new merge')
+  end
+
   private
+
+  def merged_from(**fact)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, repository: 42, issue: 44, where: 'github', **fact)
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    fb.query('(eq what "pull-was-merged")').each.map(&:issue)
+  end
 
   def stub_pull_was_merged_success(issue)
     stub_pull_was_merged_base(issue)
