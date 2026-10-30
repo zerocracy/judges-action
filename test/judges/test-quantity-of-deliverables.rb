@@ -29,6 +29,23 @@ class TestQuantityOfDeliverables < Jp::Test
     graph
   end
 
+  def timedgraph(times)
+    graph = Fbe::Graph::Fake.new
+    graph.define_singleton_method(:pull_requests_with_reviews) do |_owner, _name, _since, cursor:|
+      { 'pulls_with_reviews' => [{ 'number' => 1 }], 'has_next_page' => false, 'next_cursor' => cursor }
+    end
+    graph.define_singleton_method(:pull_request_reviews) do |_owner, _name, pulls:|
+      pulls.map do |n, _|
+        {
+          'number' => n,
+          'reviews' => times.map { |t| { 'submitted_at' => Time.parse(t) } },
+          'reviews_has_next_page' => false
+        }
+      end
+    end
+    graph
+  end
+
   def pagedgraph(repo, err)
     graph = Fbe::Graph::Fake.new
     reviews = graph.method(:pull_request_reviews)
@@ -324,6 +341,26 @@ class TestQuantityOfDeliverables < Jp::Test
         )
       end
     end
+  end
+
+  def test_total_reviews_submitted_skips_reviews_before_since
+    graph = timedgraph(['2025-09-20 10:00:00 UTC', '2025-10-02 10:00:00 UTC'])
+    assert_equal({ total_reviews_submitted: 1 }, directreviews(%w[foo/foo], graph))
+  end
+
+  def test_total_reviews_submitted_skips_review_exactly_at_since
+    graph = timedgraph(['2025-09-29 21:00:00 UTC', '2025-10-02 10:00:00 UTC'])
+    assert_equal({ total_reviews_submitted: 1 }, directreviews(%w[foo/foo], graph))
+  end
+
+  def test_total_reviews_submitted_counts_review_exactly_at_when
+    graph = timedgraph(['2025-10-06 21:00:00 UTC', '2025-10-06 21:00:01 UTC'])
+    assert_equal({ total_reviews_submitted: 1 }, directreviews(%w[foo/foo], graph))
+  end
+
+  def test_total_reviews_submitted_counts_review_a_second_after_since
+    graph = timedgraph(['2025-09-29 21:00:01 UTC'])
+    assert_equal({ total_reviews_submitted: 1 }, directreviews(%w[foo/foo], graph))
   end
 
   def test_total_reviews_submitted_skips_pull_list
