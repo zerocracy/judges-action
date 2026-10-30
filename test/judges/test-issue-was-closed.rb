@@ -267,4 +267,45 @@ class TestIssueWasClosed < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_closes_issue_known_only_from_accepted_bug
+    assert_equal([44], closed_from(what: 'bug-was-accepted'), 'an accepted bug did not start a closure')
+  end
+
+  def test_closes_issue_known_only_from_rewarded_suggestion
+    assert_equal([44], closed_from(what: 'enhancement-suggestion-was-rewarded'), 'a reward did not start a closure')
+  end
+
+  def test_skips_issue_that_is_stale
+    assert_empty(closed_from(what: 'issue-was-opened', stale: 'who'), 'a stale issue got a closure')
+  end
+
+  def test_skips_issue_that_is_done
+    assert_empty(closed_from(what: 'issue-was-opened', done: 1), 'a done issue got a closure')
+  end
+
+  def test_skips_issue_that_is_buried
+    assert_empty(closed_from(what: 'issue-was-opened', tombstone: 'yes'), 'a buried issue got a closure')
+  end
+
+  private
+
+  def closed_from(**fact)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, state: 'closed', closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, repository: 42, issue: 44, where: 'github', **fact)
+    load_it('issue-was-closed', fb)
+    fb.query('(eq what "issue-was-closed")').each.map(&:issue)
+  end
 end
