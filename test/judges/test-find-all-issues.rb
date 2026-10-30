@@ -475,6 +475,42 @@ class TestFindAllIssues < Jp::Test
     )
   end
 
+  def test_opens_transaction_only_for_unknown_issue
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github(%r{https://api\.github\.com/search/issues\?.*}, body: { total_count: 0, items: [] })
+    stub_github(
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04&sort=created',
+      body: {
+        total_count: 3, incomplete_results: false,
+        items: [45, 46, 47].map { |n| { number: n, created_at: Time.parse('2025-05-04'), user: { id: 4242 } } }
+      }
+    )
+    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
+    fb = Factbase.new
+    [45, 46].each do |n|
+      fb.insert.then do |f|
+        f.issue = n
+        f.repository = 991
+        f.what = 'issue-was-opened'
+        f.where = 'github'
+      end
+    end
+    txns = 0
+    fb.define_singleton_method(:txn) do |&blk|
+      txns += 1
+      super(&blk)
+    end
+    load_it('find-all-issues', fb)
+    assert_equal(1, fb.query("(and (eq what 'issue-was-opened') (eq issue 47) (eq who 4242))").each.to_a.size)
+    assert_equal(3, fb.query("(eq what 'issue-was-opened')").each.to_a.size)
+    assert_equal(1, txns, 'a transaction was opened for an issue already in the factbase')
+  end
+
   def test_rescues_not_found_on_repo_name_lookup
     WebMock.disable_net_connect!
     rate_limit_up
