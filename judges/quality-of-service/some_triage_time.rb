@@ -14,7 +14,7 @@ def some_triage_time(fact)
   times = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{(fact.when - 1).utc.iso8601}")
     return {} if found.nil?
     rid =
       begin
