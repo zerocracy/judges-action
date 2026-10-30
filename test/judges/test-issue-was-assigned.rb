@@ -173,4 +173,46 @@ class TestIssueWasAssigned < Jp::Test
       'the second assignment of the same person must get its own fact'
     )
   end
+
+  def test_keeps_two_people_assigned_to_one_issue
+    fb = assigned_after(44 => [{}, [5, 6]])
+    assert_equal([5, 6], fb.query('(eq what "issue-was-assigned")').each.map(&:who).sort!, 'an assignee was lost')
+  end
+
+  def test_skips_done_issue
+    fb = assigned_after(45 => [{ done: 1 }, [7]])
+    assert_empty(fb.query('(eq what "issue-was-assigned")').each.to_a, 'a done issue got an assignment')
+  end
+
+  def test_skips_buried_issue
+    fb = assigned_after(46 => [{ tombstone: 'yes' }, [7]])
+    assert_empty(fb.query('(eq what "issue-was-assigned")').each.to_a, 'a buried issue got an assignment')
+  end
+
+  def test_assigns_only_live_issue_next_to_done_one
+    fb = assigned_after(44 => [{}, [5, 6]], 45 => [{ done: 1 }, [7]])
+    assert_equal([44, 44], fb.query('(eq what "issue-was-assigned")').each.map(&:issue), 'the done issue was assigned')
+  end
+
+  private
+
+  def assigned_after(issues)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    [5, 6, 7, 9].each { |u| stub_github("https://api.github.com/user/#{u}", body: { id: u, login: "user#{u}" }) }
+    fb = Factbase.new
+    issues.each_with_index do |(n, (extra, whos)), i|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/issues/#{n}/events?per_page=100",
+        body: whos.map do |w|
+          { id: w, event: 'assigned', assignee: { id: w }, assigner: { id: 9 }, created_at: "2025-10-0#{w} 19:05 UTC" }
+        end
+      )
+      fb.with(_id: i + 1, what: 'issue-was-opened', repository: 42, issue: n, where: 'github', **extra)
+    end
+    load_it('issue-was-assigned', fb)
+    fb
+  end
 end
