@@ -3085,7 +3085,69 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_release_compares_with_latest_earlier_release
+    fb = release_after(%w[1.0.0 2024-10-01 2.0.0 2024-11-01])
+    f = fb.query('(and (eq repository 42) (eq what "release-published") (eq tag "3.0.0"))').each.first
+    assert_equal([2], f[:commits], 'the release was not compared with the latest earlier one')
+    assert_equal([10], f[:hoc], 'the HoC was not taken from the latest earlier release')
+    assert_equal([7, 8], f[:contributors].sort, 'the contributors came from an older release')
+  end
+
+  def test_release_compares_with_latest_earlier_release_inserted_first
+    fb = release_after(%w[2.0.0 2024-11-01 1.0.0 2024-10-01])
+    f = fb.query('(and (eq repository 42) (eq what "release-published") (eq tag "3.0.0"))').each.first
+    assert_equal([2], f[:commits], 'the order of facts changed the release compared with')
+  end
+
+  def test_release_ignores_later_release_when_comparing
+    fb = release_after(%w[2.0.0 2024-11-01 9.0.0 2024-12-15])
+    f = fb.query('(and (eq repository 42) (eq what "release-published") (eq tag "3.0.0"))').each.first
+    assert_equal([2], f[:commits], 'a later release was taken as the previous one')
+  end
+
   private
+
+  def release_after(earlier)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100', type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_003, author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '3.0.0', name: 'v3.0.0',
+            created_at: Time.parse('2024-12-01T10:00:00Z'), published_at: Time.parse('2024-12-01T10:00:00Z')
+          }
+        },
+        public: true, created_at: Time.parse('2024-12-01T10:00:00Z')
+      }
+    )
+    { '2.0.0' => [2, 10, [7, 8]], '1.0.0' => [9, 100, [7, 8, 9, 10]], '9.0.0' => [1, 1, [11]] }.each do |t, (c, h, a)|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/compare/#{t}...3.0.0?per_page=100",
+        body: {
+          total_commits: c, files: [{ changes: h }],
+          commits: a.map { |i| { sha: "sha-#{i}", author: { id: i } } }
+        }
+      )
+    end
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    earlier.each_slice(2) do |tag, day|
+      f = fb.insert
+      f.what = 'release-published'
+      f.where = 'github'
+      f.repository = 42
+      f.tag = tag
+      f.when = Time.parse("#{day}T10:00:00Z")
+    end
+    load_it('github-events', fb)
+    fb
+  end
 
   def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
