@@ -15,7 +15,7 @@ def total_builds_ran(fact)
       Fbe.octo.with_disable_auto_paginate do |octo|
         octo.repository_workflow_runs(
           repo,
-          created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}",
+          created: "#{fact.since.utc.iso8601}..#{(fact.when - 1).utc.iso8601}",
           per_page: 1
         )[:total_count]
       end
