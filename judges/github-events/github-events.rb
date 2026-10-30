@@ -156,7 +156,9 @@ Fbe.iterate do
   end
 
   def self.fill(fact, json)
-    fact.when = Time.parse(json[:created_at].iso8601)
+    opened = json.dig(:payload, :issue, :created_at) if json[:type] == 'IssuesEvent'
+    opened = nil unless json.dig(:payload, :action) == 'opened'
+    fact.when = Time.parse((opened || json[:created_at]).iso8601)
     fact.event_type = json[:type]
     fact.repository = Integer(json[:repo][:id])
     who = json.dig(:payload, :release, :author, :id) || json.dig(:actor, :id)
