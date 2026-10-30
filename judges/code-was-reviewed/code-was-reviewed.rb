@@ -123,7 +123,7 @@ Fbe.consider(
       n.author = pr.dig(:user, :id)
       count ||=
         begin
-          Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count
+          Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count { |c| c.dig(:user, :id) != author }
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
           0
