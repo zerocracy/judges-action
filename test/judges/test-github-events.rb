@@ -3043,6 +3043,41 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_stamps_opened_issue_with_its_creation_time
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    event =
+      lambda do |id, action, created, issue|
+        {
+          id:, type: 'IssuesEvent', actor: { id: 42, login: 'torvalds' },
+          repo: { id: 42, name: 'foo/foo' }, created_at: created, payload: { action:, issue: }
+        }
+      end
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        event.call('41', 'opened', '2024-07-31 15:29:45 UTC', { number: 1, created_at: '2024-07-31 13:50:31 UTC' }),
+        event.call('42', 'opened', '2024-07-31 16:00:00 UTC', { number: 2 }),
+        event.call('43', 'closed', '2024-07-31 17:00:00 UTC', { number: 3, created_at: '2024-07-30 10:00:00 UTC' })
+      ]
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/3', body: { number: 3, state: 'closed' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    {
+      'issue-was-opened' => { 1 => '2024-07-31 13:50:31 UTC', 2 => '2024-07-31 16:00:00 UTC' },
+      'issue-was-closed' => { 3 => '2024-07-31 17:00:00 UTC' }
+    }.each do |what, times|
+      times.each do |issue, time|
+        f = fb.query("(and (eq what '#{what}') (eq issue #{issue}))").each.to_a.first
+        assert_equal(Time.parse(time), f.when, "#{what} of issue ##{issue} has a wrong time")
+      end
+    end
+  end
+
   def test_release_event_when_repository_has_no_commits
     WebMock.disable_net_connect!
     rate_limit_up
