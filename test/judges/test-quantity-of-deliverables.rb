@@ -449,6 +449,53 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_sums_total_builds_ran_over_two_repositories
+    WebMock.disable_net_connect!
+    rate_limit_up
+    { 'a' => 5, 'b' => 7 }.each do |name, runs|
+      stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+      stub_github(
+        "https://api.github.com/repos/foo/#{name}/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1",
+        body: { total_count: runs, workflow_runs: [] }
+      )
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/a,foo/b' })
+    load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+    assert_equal({ total_builds_ran: 12 }, total_builds_ran(fact), 'The runs of both repositories must be added up')
+  end
+
+  def test_sums_total_releases_published_over_two_repositories
+    WebMock.disable_net_connect!
+    rate_limit_up
+    %w[a b].each do |name|
+      stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+    end
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/a,foo/b' })
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_releases_published) do |_owner, name, _since|
+        { 'releases' => { 'a' => 2, 'b' => 3 }[name] }
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_releases_published.rb'))
+      assert_equal(
+        { total_releases_published: 5 }, total_releases_published(fact),
+        'The releases of both repositories must be added up'
+      )
+    end
+  end
+
   def test_dont_report_total_when_runs_are_absent
     WebMock.disable_net_connect!
     rate_limit_up
