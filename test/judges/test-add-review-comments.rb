@@ -242,4 +242,43 @@ class TestAddReviewComments < Jp::Test
       }
     )
   end
+
+  def test_keeps_the_only_value_of_existing_review_comments
+    fb = review_comments_of(44 => { review_comments: 1 })
+    assert_equal([1], fb.query('(eq issue 44)').each.first['review_comments'], 'a second value was appended')
+  end
+
+  def test_skips_done_fact
+    fb = review_comments_of(45 => { done: 1 })
+    assert_nil(fb.query('(eq issue 45)').each.first['review_comments'], 'a done fact got review comments')
+  end
+
+  def test_skips_buried_fact
+    fb = review_comments_of(46 => { tombstone: 'yes' })
+    assert_nil(fb.query('(eq issue 46)').each.first['review_comments'], 'a buried fact got review comments')
+  end
+
+  def test_fills_plain_fact_next_to_closed_out_ones
+    fb = review_comments_of(44 => { review_comments: 1 }, 45 => { done: 1 }, 46 => { tombstone: 'yes' }, 47 => {})
+    assert_equal([8], fb.query('(eq issue 47)').each.first['review_comments'], 'the plain fact was not filled')
+    assert_nil(fb.query('(eq issue 45)').each.first['review_comments'], 'the done fact was filled')
+  end
+
+  private
+
+  def review_comments_of(facts)
+    WebMock.disable_net_connect!
+    stub(42, *facts.keys.map { |n| { id: n, comments: n - 39 } })
+    fb = Factbase.new
+    facts.each do |n, extra|
+      f = fb.insert
+      f.what = 'pull-was-reviewed'
+      f.issue = n
+      f.repository = 42
+      f.where = 'github'
+      extra.each { |k, v| f.public_send(:"#{k}=", v) }
+    end
+    load_it('add-review-comments', fb)
+    fb
+  end
 end
