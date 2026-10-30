@@ -9,6 +9,7 @@ require 'fbe/octo'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../../lib/incremate'
 require_relative '../test__helper'
 
 class TestDimensionsOfTerrain < Jp::Test
@@ -1370,5 +1371,40 @@ class TestDimensionsOfTerrain < Jp::Test
       f.when = Time.parse('2024-09-29 21:00:00 UTC')
       assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
     end
+  end
+
+  def test_measures_into_new_fact_when_last_one_is_days_old
+    fb, measured = terrain_after(Time.parse('2026-10-25 10:00:00 UTC'))
+    assert_equal(2, fb.query('(eq what "dimensions-of-terrain")').each.to_a.size, 'no fact was added for today')
+    assert_equal(Time.parse('2026-10-28 10:00:00 UTC'), measured.when, 'an old fact was measured again')
+  end
+
+  def test_measures_into_new_fact_when_last_one_is_exactly_one_day_old
+    fb, measured = terrain_after(Time.parse('2026-10-27 10:00:00 UTC'))
+    assert_equal(2, fb.query('(eq what "dimensions-of-terrain")').each.to_a.size, 'no fact was added for today')
+    assert_equal(Time.parse('2026-10-28 10:00:00 UTC'), measured.when, 'the fact of yesterday was measured again')
+  end
+
+  def test_measures_into_fact_taken_a_few_hours_ago
+    fb, measured = terrain_after(Time.parse('2026-10-28 04:00:00 UTC'))
+    assert_equal(1, fb.query('(eq what "dimensions-of-terrain")').each.to_a.size, 'a second fact was added')
+    assert_equal(Time.parse('2026-10-28 04:00:00 UTC'), measured.when, 'the fresh fact was not measured')
+  end
+
+  private
+
+  def terrain_after(stamp)
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'dimensions-of-terrain'
+    f.when = stamp
+    f.total_stars = 5
+    measured = nil
+    Time.stub(:now, Time.parse('2026-10-28 10:00:00 UTC')) do
+      Jp.stub(:incremate, ->(f, *) { measured = f }) do
+        load_it('dimensions-of-terrain', fb)
+      end
+    end
+    [fb, measured]
   end
 end
