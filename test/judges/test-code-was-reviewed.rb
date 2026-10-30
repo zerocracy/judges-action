@@ -492,4 +492,50 @@ class TestCodeWasReviewed < Jp::Test
       'A pull request that reports no additions and no deletions cannot abort the judge'
     )
   end
+
+  def test_skips_a_pull_that_is_done
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub = stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github', done: 1)
+    load_it('code-was-reviewed', fb)
+    assert_not_requested(stub, message: 'a pull that is done cannot be fetched again')
+  end
+
+  def test_skips_a_pull_that_is_buried
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub = stub_github('https://api.github.com/repos/foo/foo/pulls/46/reviews?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 46, where: 'github', tombstone: 'yes')
+    load_it('code-was-reviewed', fb)
+    assert_not_requested(stub, message: 'a buried pull cannot be fetched again')
+  end
+
+  def test_reviews_only_the_live_pull_next_to_done_and_buried_ones
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    [44, 45, 46].each do |n|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/pulls/#{n}",
+        body: { id: n, number: n, user: { id: 421 }, created_at: Time.parse('2025-09-01 15:35:30 UTC') }
+      )
+      stub_github(
+        "https://api.github.com/repos/foo/foo/pulls/#{n}/reviews?per_page=100",
+        body: [{ id: n, user: { id: 4, login: 'user4' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }]
+      )
+      stub_github("https://api.github.com/repos/foo/foo/issues/#{n}/comments?per_page=100", body: [])
+      stub_github("https://api.github.com/repos/foo/foo/pulls/#{n}/reviews/#{n}/comments?per_page=100", body: [])
+    end
+    stub_github('https://api.github.com/user/4', body: { id: 4, login: 'user4' })
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github', done: 1)
+      .with(_id: 3, what: 'pull-was-merged', repository: 42, issue: 46, where: 'github', tombstone: 'yes')
+    load_it('code-was-reviewed', fb)
+    assert_equal([44], fb.query('(eq what "code-was-reviewed")').each.map(&:issue), 'a closed out pull was reviewed')
+  end
 end
