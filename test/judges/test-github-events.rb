@@ -3085,7 +3085,51 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_review_sums_hoc_and_comments_of_pull
+    f = reviewed_pull(additions: 10, deletions: 5, comments: 2, review_comments: 3)
+    assert_equal(15, f.hoc, 'the HoC is not the sum of additions and deletions')
+    assert_equal(5, f.comments, 'the comments are not the sum of comments and review comments')
+    assert_includes(f.details, 'with 15 HoC and 5 comments', 'the details show other numbers')
+  end
+
+  def test_review_counts_missing_deletions_and_review_comments_as_zero
+    f = reviewed_pull(additions: 10, comments: 2)
+    assert_equal(10, f.hoc, 'missing deletions were not counted as zero')
+    assert_equal(2, f.comments, 'missing review comments were not counted as zero')
+  end
+
+  def test_review_counts_missing_additions_and_comments_as_zero
+    f = reviewed_pull(deletions: 5, review_comments: 3)
+    assert_equal(5, f.hoc, 'missing additions were not counted as zero')
+    assert_equal(3, f.comments, 'missing comments were not counted as zero')
+  end
+
   private
+
+  def reviewed_pull(numbers)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '300', type: 'PullRequestReviewEvent', public: true, created_at: '2024-07-31 12:45:09 UTC',
+        actor: { id: 42, login: 'torvalds', display_login: 'torvalds' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'created',
+          review: { id: 2_210_067_609, user: { login: 'torvalds', id: 42, type: 'User' }, state: 'approved' },
+          pull_request: { id: 1_990_323_142, number: 93 }
+        }
+      }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93',
+      body: { user: { login: 'test', id: 526_200 } }.merge(numbers)
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    fb.query('(eq what "pull-was-reviewed")').each.first
+  end
 
   def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
