@@ -3085,7 +3085,37 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_keeps_marker_when_repository_is_not_found_by_id
+    fb = scanned_marker { stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' }) }
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 100), 'the marker moved after a 404')
+  end
+
+  def test_keeps_marker_when_repository_name_is_forbidden
+    fb = scanned_marker { stub_github('https://api.github.com/repositories/42', status: 403, body: { message: 'Forbidden' }) }
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 100), 'the marker moved after a 403')
+  end
+
+  def test_keeps_marker_when_repository_has_no_events
+    fb =
+      scanned_marker do
+        stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+        stub_github('https://api.github.com/repositories/42/events?per_page=100', body: [])
+      end
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 100), 'the marker of a quiet repository moved')
+  end
+
   private
+
+  def scanned_marker
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    yield
+    fb = Factbase.new
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 100, what: 'iterate')
+    load_it('github-events', fb)
+    fb
+  end
 
   def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
