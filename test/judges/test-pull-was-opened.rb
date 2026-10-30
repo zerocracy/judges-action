@@ -100,4 +100,47 @@ class TestPullWasOpened < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_opens_pull_known_only_from_its_review
+    assert_equal([44], opened_after(44 => { what: 'code-was-reviewed' }), 'a reviewed pull got no opening')
+  end
+
+  def test_skips_done_pull
+    assert_empty(opened_after(45 => { what: 'pull-was-merged', done: 1 }), 'a done pull got an opening')
+  end
+
+  def test_skips_buried_pull
+    assert_empty(opened_after(46 => { what: 'pull-was-merged', tombstone: 'yes' }), 'a buried pull got an opening')
+  end
+
+  def test_opens_only_live_pull_next_to_closed_out_ones
+    issues =
+      opened_after(
+        44 => { what: 'code-was-reviewed' },
+        45 => { what: 'pull-was-merged', done: 1 },
+        46 => { what: 'pull-was-merged', tombstone: 'yes' }
+      )
+    assert_equal([44], issues, 'a closed out pull got an opening')
+  end
+
+  private
+
+  def opened_after(facts)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user' })
+    fb = Factbase.new
+    facts.each_with_index do |(n, extra), i|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/issues/#{n}",
+        body: { number: n, user: { id: 421, login: 'user' }, created_at: Time.parse('2025-09-30 15:35:30 UTC') }
+      )
+      stub_github("https://api.github.com/repos/foo/foo/pulls/#{n}", body: { number: n, head: { ref: "b#{n}" } })
+      fb.with(_id: i + 1, repository: 42, issue: n, where: 'github', **extra)
+    end
+    load_it('pull-was-opened', fb)
+    fb.query('(eq what "pull-was-opened")').each.map(&:issue)
+  end
 end
