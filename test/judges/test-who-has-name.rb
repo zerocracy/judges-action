@@ -126,4 +126,43 @@ class TestWhoHasName < Jp::Test
       'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_skips_user_known_only_from_done_fact
+    assert_empty(names_from(done: 1), 'a user of a done fact was looked up')
+  end
+
+  def test_skips_user_known_only_from_buried_fact
+    assert_empty(names_from(tombstone: 'yes'), 'a user of a buried fact was looked up')
+  end
+
+  def test_skips_user_known_only_from_stale_fact
+    assert_empty(names_from(stale: 'who'), 'a user of a stale fact was looked up')
+  end
+
+  def test_revives_facts_of_user_whose_old_name_was_refreshed
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/8', body: { login: 'user8', id: 8, type: 'User' })
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'who-has-name', where: 'github', who: 8, name: 'user8',
+      when: Time.parse('2025-06-13 20:00:00 UTC')
+    ).with(_id: 2, what: 'issue-was-closed', where: 'github', who: 8, issue: 45, repository: 42, stale: 'who')
+    Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
+      load_it('who-has-name', fb)
+    end
+    assert_nil(fb.query('(eq issue 45)').each.first['stale'], 'the fact of a refreshed user stayed stale')
+  end
+
+  private
+
+  def names_from(**extra)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/7', body: { login: 'user7', id: 7, type: 'User' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', where: 'github', who: 7, issue: 44, repository: 42, **extra)
+    load_it('who-has-name', fb)
+    fb.query('(eq what "who-has-name")').each.map(&:who)
+  end
 end
