@@ -599,6 +599,40 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_skips_pull_that_is_still_open
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(48)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/48',
+      body: { id: 50, number: 48, user: { id: 421 }, state: 'open', head: { ref: '40', sha: 'aa123' } }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 48, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert_equal(1, fb.query('(eq issue 48)').each.to_a.size, 'an open pull got a closing fact')
+  end
+
+  def test_takes_when_from_closed_at_and_review_before_it
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(49)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/49/reviews?per_page=100',
+      body: [
+        { id: 7, user: { id: 142 }, state: 'APPROVED', submitted_at: '2025-10-02 10:00:00 UTC' },
+        { id: 8, user: { id: 143 }, state: 'APPROVED', submitted_at: '2025-09-30 17:00:00 UTC' }
+      ]
+    )
+    [7, 8].each { |r| stub_github("https://api.github.com/repos/foo/foo/pulls/49/reviews/#{r}/comments?per_page=100", body: []) }
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 49, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    f = fb.pick(what: 'pull-was-merged', issue: 49)
+    assert_equal(Time.parse('2025-09-30 18:00:00 UTC'), f.when, 'the merge time is not the closed_at of the pull')
+    assert_equal(Time.parse('2025-09-30 17:00:00 UTC'), f.review, 'the approval after the merge was taken')
+  end
+
   private
 
   def stub_pull_was_merged_success(issue)
