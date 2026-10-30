@@ -2792,7 +2792,58 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_review_time_skips_review_after_merge
+    r = review_times(12 => [Time.parse('2024-08-05 10:00:00 UTC'), Time.parse('2024-08-05 12:00:00 UTC')])
+    assert_empty(r[:some_review_time], 'a review after the merge gave a negative time')
+    assert_equal([1], r[:some_reviews_per_pull], 'the late review was not counted as a review')
+  end
+
+  def test_some_review_time_skips_pull_without_merge_time
+    r = review_times(14 => [nil, Time.parse('2024-08-04 10:00:00 UTC')])
+    assert_empty(r[:some_review_time], 'a pull without merged_at gave a review time')
+    assert_equal([1], r[:some_reviews_per_pull], 'the pull without merged_at was not counted')
+  end
+
+  def test_some_review_time_keeps_review_before_merge_next_to_skipped_ones
+    r =
+      review_times(
+        12 => [Time.parse('2024-08-05 10:00:00 UTC'), Time.parse('2024-08-05 12:00:00 UTC')],
+        14 => [nil, Time.parse('2024-08-04 10:00:00 UTC')],
+        16 => [Time.parse('2024-08-06 10:00:00 UTC'), Time.parse('2024-08-06 09:00:00 UTC')]
+      )
+    assert_equal([3600], r[:some_review_time], 'only the review before the merge must give a time')
+    assert_equal([1, 1, 1], r[:some_reviews_per_pull], 'every pull must be counted')
+  end
+
   private
+
+  def review_times(pulls)
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_review_time.rb'))
+    Jp.qoreset
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:search_issues) do |*|
+      {
+        total_count: pulls.size, incomplete_results: false,
+        items: pulls.map { |n, (merged, _)| { number: n, pull_request: merged.nil? ? {} : { merged_at: merged } } }
+      }
+    end
+    octo.define_singleton_method(:pull_request_reviews) do |_, n|
+      [{ id: n, user: { id: 526_301 }, submitted_at: pulls[n].last }]
+    end
+    octo.define_singleton_method(:review_comments) { |*| [] }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    rl = Object.new
+    rl.define_singleton_method(:remaining) { 30 }
+    octo.define_singleton_method(:rate_limit) { rl }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        some_review_time(fact)
+      end
+    end
+  end
 
   def stub_workflow_runs(workflow_runs)
     stub_github(
