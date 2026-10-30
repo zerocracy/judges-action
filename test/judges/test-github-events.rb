@@ -3085,7 +3085,64 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_release_in_empty_repository_survives_all_its_answers
+    fb = release_in_empty_repo(commits: 409, compare: 409, contributors: 204)
+    assert_equal(1, fb.query('(eq what "release-published")').each.to_a.size, 'the release was lost')
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 101), 'the marker was not saved')
+  end
+
+  def test_release_in_empty_repository_survives_conflict_on_commits
+    fb = release_in_empty_repo(commits: 409, compare: 404, contributors: 200)
+    assert_equal(1, fb.query('(eq what "release-published")').each.to_a.size, 'the 409 on commits stopped the judge')
+  end
+
+  def test_release_in_empty_repository_survives_conflict_on_compare
+    fb = release_in_empty_repo(commits: 200, compare: 409, contributors: 200)
+    assert_equal(1, fb.query('(eq what "release-published")').each.to_a.size, 'the 409 on compare stopped the judge')
+  end
+
+  def test_release_in_empty_repository_survives_contributors_without_body
+    fb = release_in_empty_repo(commits: 200, compare: 404, contributors: 204)
+    f = fb.query('(eq what "release-published")').each.first
+    assert_nil(f['contributors'], 'contributors came from an empty answer')
+  end
+
   private
+
+  def release_in_empty_repo(commits:, compare:, contributors:)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '101', type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_001, author: { login: 'rultor', id: 8_086_956, type: 'User' },
+            tag_name: '1.0.0', name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'), published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true, created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    {
+      'contributors?per_page=100' => [contributors, [{ login: 'yegor256', id: 526_301 }]],
+      'commits?per_page=1' => [commits, []],
+      'compare/...1.0.0?per_page=100' => [compare, { total_commits: 0, files: [], commits: [] }]
+    }.each do |path, (status, body)|
+      stub_request(:get, "https://api.github.com/repos/foo/foo/#{path}").to_return(
+        status:, body: status == 200 ? body.to_json : '', headers: { 'Content-Type': 'application/json' }
+      )
+    end
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 100, what: 'iterate')
+    load_it('github-events', fb)
+    fb
+  end
 
   def stub_event(*json)
     stub_request(:get, 'https://api.github.com/repos/foo/foo').to_return(
