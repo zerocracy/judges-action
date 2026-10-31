@@ -10,19 +10,21 @@ def some_release_interval(fact)
   intervals = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    releases =
-      begin
-        Fbe.octo.releases(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Releases not found for #{repo}: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to releases for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+    begin
+      releases = Fbe.octo.releases(repo)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Releases not found for #{repo}: #{e.message}")
+      next
+    rescue Octokit::TooManyRequests => e
+      $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+      return {}
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to releases for #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
     dates = []
     releases.each do |json|
       next if json[:published_at].nil?
