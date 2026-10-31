@@ -42,11 +42,12 @@ def Jp.incremate(
       h.each do |k, v|
         next if k.to_s == n
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
-        Array(v).each { fact.__send__("#{k}=", _1) }
+        (v.is_a?(Time) ? [v] : Array(v)).each { fact.__send__("#{k}=", _1) }
       end
       marker = h.keys.find { |k| k.to_s == n }
       if !marker.nil? && !(avoid_duplicate && fact.all_properties.include?(n))
-        Array(h[marker]).each { fact.__send__("#{n}=", _1) }
+        value = h[marker]
+        (value.is_a?(Time) ? [value] : Array(value)).each { fact.__send__("#{n}=", _1) }
       end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
