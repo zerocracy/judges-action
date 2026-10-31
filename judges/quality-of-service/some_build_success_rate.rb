@@ -16,40 +16,47 @@ def some_build_success_rate(fact)
   conclusions = %w[success failure]
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    workflows =
-      begin
+    begin
+      workflows =
         Fbe.octo.repository_workflow_runs(
           repo, created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
         )[:workflow_runs]
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Workflow runs not found for #{repo}: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Workflow runs not found for #{repo}: #{e.message}")
+      next
+    rescue Octokit::TooManyRequests => e
+      $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+      return {}
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
     wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
     runs =
       wfs.filter_map do |json|
         break if Fbe.octo.off_quota?
-        secs =
-          begin
-            ms = Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms]
-            next if ms.nil?
-            ms / 1000.0
-          rescue Octokit::NotFound, Octokit::Deprecated => e
-            $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
-            next
-          rescue Octokit::Forbidden => e
-            $loog.warn(
-              "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
-              "(transient, will retry next cycle): #{e.class}: #{e.message}"
-            )
-            next
-          end
+        stopped = false
+        begin
+          ms = Fbe.octo.workflow_run_usage(repo, json[:id])[:run_duration_ms]
+          next if ms.nil?
+          secs = ms / 1000.0
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
+          next
+        rescue Octokit::TooManyRequests => e
+          $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+          stopped = true
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+        return {} if stopped
         { json: json, secs: secs, completed: json[:run_started_at] + secs }
       end
     runs.sort_by! { _1[:completed] }
@@ -66,7 +73,11 @@ def some_build_success_rate(fact)
       duration << secs
     end
     failed.each do |wid, broke|
-      recovery = Jp.recovered(repo, wid, fact.when)
+      begin
+        recovery = Jp.recovered(repo, wid, fact.when)
+      rescue Octokit::TooManyRequests
+        return {}
+      end
       next if recovery.nil?
       ttrs << Integer(recovery - broke)
     end
