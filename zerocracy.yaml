@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1102.624111332
+  seconds: 1003.326160059
   version: 0.61.1
   what: judges-summary
-  when: 2026-10-31 19:20:27.792727592 Z
+  when: 2026-10-31 19:48:26.035545211 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18246,6 +18247,7 @@
   is_human: 1
   issue: 517
   repository: 798641472
+  tombstone: 2026-10-31 19:22:40.799903704 Z
   what: pull-was-opened
   when: 2026-02-17 17:44:05.000000000 Z
   where: github
@@ -18286,6 +18288,7 @@
   reviews: 0
   succeeded_builds: 12
   suggestions: 0
+  tombstone: 2026-10-31 19:22:40.802429114 Z
   what: pull-was-merged
   when: &190 2026-02-17 18:42:55.000000000 Z
   where: github
@@ -18297,6 +18300,7 @@
   comments: 0
   details: The pull request yegor256/factbase#517 with 26 HoC created by @belfil was
     merged by @yegor256 after 58m49s of being in review and 0 comments.
+  done: 2026-10-31 19:22:40.764427730 Z
   hoc: 26
   is_human: 1
   issue: 517
@@ -18341,6 +18345,7 @@
   repository: 798641472
   review_comments: 0
   seconds: 3530
+  tombstone: 2026-10-31 19:22:40.804915699 Z
   what: code-contribution-was-rewarded
   when: 2026-02-18 16:55:22.160545203 Z
   where: github
@@ -157954,7 +157959,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 6
   merges_were_scanned: 0
-  min_issue_was_found: 97
+  min_issue_was_found: 98
   min_pull_was_found: 68
   repository: 1236759415
   types_were_scanned: 0
@@ -160470,7 +160475,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 233
+  min_issue_was_found: 234
   min_pull_was_found: 309
   repository: 849726475
   types_were_scanned: 0
@@ -160732,36 +160737,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1226
-  closures_were_checked: 1761
+  assignees_were_scanned: 1403
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18764872896
   issues_were_scanned: 1396
-  labels_were_scanned: 1828
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 1178
-  min_issue_was_found: 1868
+  merges_were_scanned: 1547
+  min_issue_was_found: 1869
   min_pull_was_found: 803
   repository: 798641472
-  types_were_scanned: 1184
+  types_were_scanned: 1291
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 25752057144
   issues_were_scanned: 0
-  labels_were_scanned: 492
+  labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
   min_issue_was_found: 349
   min_pull_was_found: 561
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -160776,7 +160781,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 125
   repository: 857659265
   types_were_scanned: 0
@@ -161178,18 +161183,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 748
-  closures_were_checked: 0
+  assignees_were_scanned: 850
+  closures_were_checked: 932
   earliest_issue_was_found: 1
   events_were_scanned: 18764870622
   issues_were_scanned: 1225
-  labels_were_scanned: 1745
+  labels_were_scanned: 1809
   latest_issue_was_found: 317
-  merges_were_scanned: 934
-  min_issue_was_found: 1857
+  merges_were_scanned: 1215
+  min_issue_was_found: 1858
   min_pull_was_found: 784
   repository: 820463873
-  types_were_scanned: 1532
+  types_were_scanned: 1607
   what: iterate
   where: github
 - _id: 2629882
@@ -161835,18 +161840,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 738
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 25749681275
   issues_were_scanned: 1382
-  labels_were_scanned: 1081
+  labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1123
-  min_issue_was_found: 1326
+  merges_were_scanned: 1265
+  min_issue_was_found: 1327
   min_pull_was_found: 709
   repository: 802720676
-  types_were_scanned: 974
+  types_were_scanned: 1083
   what: iterate
   where: github
 - _id: 2629939
@@ -161981,18 +161986,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 617
+  assignees_were_scanned: 681
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18741900252
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1154
-  min_issue_was_found: 1044
+  merges_were_scanned: 1229
+  min_issue_was_found: 1045
   min_pull_was_found: 767
   repository: 799113787
-  types_were_scanned: 909
+  types_were_scanned: 1098
   what: iterate
   where: github
 - _id: 2630023
@@ -162017,18 +162022,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 1964
+  assignees_were_scanned: 1476
+  closures_were_checked: 2590
   earliest_issue_was_found: 1
   events_were_scanned: 18767140232
   issues_were_scanned: 2725
-  labels_were_scanned: 2112
+  labels_were_scanned: 2970
   latest_issue_was_found: 1073
-  merges_were_scanned: 2524
-  min_issue_was_found: 2970
+  merges_were_scanned: 2592
+  min_issue_was_found: 2971
   min_pull_was_found: 1552
   repository: 799177290
-  types_were_scanned: 2176
+  types_were_scanned: 2362
   what: iterate
   where: github
 - _id: 2630036
@@ -162042,7 +162047,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 5
   min_pull_was_found: 12
   repository: 1081929119
   types_were_scanned: 0
@@ -162052,7 +162057,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18766137084
@@ -162060,10 +162065,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1320
+  min_issue_was_found: 1327
   min_pull_was_found: 1159
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1186
   what: iterate
   where: github
 - _id: 2630038
@@ -498110,7 +498115,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-31 16:24:38.000000000 Z
+  when: &5851 2026-10-31 16:24:38.000000000 Z
   where: github
   who: 526301
 - _id: 2650774
@@ -498136,7 +498141,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: 2026-10-31 16:45:17.000000000 Z
+  when: &5852 2026-10-31 16:45:17.000000000 Z
   where: github
   who: 526301
 - _id: 2650775
@@ -498144,6 +498149,7 @@
   _time: 2026-10-31 18:13:16.073480025 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/fbe#1940 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1940
   repository: 820463873
   what: issue-was-opened
@@ -498155,6 +498161,7 @@
   _time: 2026-10-31 18:14:44.371325461 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue yegor256/factbase#1935 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 1935
   repository: 798641472
   what: issue-was-opened
@@ -498166,6 +498173,7 @@
   _time: 2026-10-31 18:17:25.139259899 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/judges-action#3077 has been earlier opened by @morphqdd.
+  is_human: 1
   issue: 3077
   repository: 799177290
   what: issue-was-opened
@@ -498180,6 +498188,7 @@
   details: The pull request zerocracy/eva#155 with 6 HoC created by @renovate[bot]
     was merged by @yegor256 after 6h41m of being in review and 0 comments.
   hoc: 6
+  is_human: 0
   issue: 155
   merger: 526301
   repository: 857659265
@@ -498197,6 +498206,7 @@
   details: The pull request zerocracy/eva#156 with 4 HoC created by @renovate[bot]
     was merged by @yegor256 after 3h55m of being in review and 0 comments.
   hoc: 4
+  is_human: 0
   issue: 156
   merger: 526301
   repository: 857659265
@@ -498214,6 +498224,7 @@
   details: The pull request zerocracy/eva#157 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 3h55m of being in review and 0 comments.
   hoc: 2
+  is_human: 0
   issue: 157
   merger: 526301
   repository: 857659265
@@ -498231,6 +498242,7 @@
   details: The pull request zerocracy/baza#1335 with 12 HoC created by @renovate[bot]
     was merged by @yegor256 after 2h27m of being in review and 0 comments.
   hoc: 12
+  is_human: 0
   issue: 1335
   merger: 526301
   repository: 728758275
@@ -498248,6 +498260,7 @@
   details: The pull request zerocracy/j#170 with 2 HoC created by @renovate[bot] was
     merged by @yegor256 after 6h54m of being in review and 0 comments.
   hoc: 2
+  is_human: 0
   issue: 170
   merger: 526301
   repository: 805238060
@@ -498265,6 +498278,7 @@
   details: The pull request zerocracy/baza#1336 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 2h27m of being in review and 0 comments.
   hoc: 2
+  is_human: 0
   issue: 1336
   merger: 526301
   repository: 728758275
@@ -498287,6 +498301,8 @@
 
     <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (6) hits-of-code.  Your running score is [+262](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 6
+  href: https://github.com/zerocracy/pages-action/issues/1419/#issuecomment-6548020696
+  is_human: 1
   issue: 1419
   repository: 802720676
   review_comments: 0
@@ -498309,6 +498325,8 @@
     running score is [+268](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 22
+  href: https://github.com/zerocracy/pages-action/issues/1418/#issuecomment-6548020982
+  is_human: 1
   issue: 1418
   repository: 802720676
   review_comments: 0
@@ -498326,6 +498344,7 @@
   details: The pull request zerocracy/j#175 has been opened by @renovate[bot].
   event_id: 18766213044
   event_type: PullRequestEvent
+  is_human: 0
   issue: 175
   repository: 805238060
   what: pull-was-opened
@@ -498340,6 +498359,7 @@
   details: The pull request zerocracy/j#174 has been opened by @renovate[bot].
   event_id: 18764463765
   event_type: PullRequestEvent
+  is_human: 0
   issue: 174
   repository: 805238060
   what: pull-was-opened
@@ -498354,6 +498374,7 @@
   details: The pull request zerocracy/j#173 has been opened by @renovate[bot].
   event_id: 18764102187
   event_type: PullRequestEvent
+  is_human: 0
   issue: 173
   repository: 805238060
   what: pull-was-opened
@@ -498367,6 +498388,7 @@
   details: The issue zerocracy/swarm-template#213 has been closed by @yegor256.
   event_id: 18763987190
   event_type: IssuesEvent
+  is_human: 1
   issue: 213
   repository: 849726475
   what: issue-was-closed
@@ -498381,6 +498403,7 @@
   details: The pull request zerocracy/baza#1342 has been opened by @renovate[bot].
   event_id: 18766137084
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1342
   repository: 728758275
   what: pull-was-opened
@@ -498395,6 +498418,7 @@
   details: The pull request zerocracy/baza#1341 has been opened by @renovate[bot].
   event_id: 18766127698
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1341
   repository: 728758275
   what: pull-was-opened
@@ -498409,6 +498433,7 @@
   details: The pull request zerocracy/baza#1340 has been opened by @renovate[bot].
   event_id: 18764126002
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1340
   repository: 728758275
   what: pull-was-opened
@@ -498423,6 +498448,7 @@
   details: The pull request zerocracy/baza#1339 has been opened by @renovate[bot].
   event_id: 18764105567
   event_type: PullRequestEvent
+  is_human: 0
   issue: 1339
   repository: 728758275
   what: pull-was-opened
@@ -498444,9 +498470,11 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 220
   repository: 849726475
   review: 2026-05-28 21:22:22.000000000 Z
+  review_comments: 0
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
@@ -498468,9 +498496,11 @@
   failed_builds: 0
   files: 2
   hoc: 6
+  is_human: 1
   issue: 32
   repository: 974194993
   review: 2026-05-26 17:06:10.000000000 Z
+  review_comments: 0
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
@@ -498492,8 +498522,10 @@
   failed_builds: 0
   files: 1
   hoc: 2
+  is_human: 1
   issue: 1337
   repository: 728758275
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -498515,8 +498547,10 @@
   failed_builds: 0
   files: 1
   hoc: 10
+  is_human: 1
   issue: 171
   repository: 805238060
+  review_comments: 0
   succeeded_builds: 5
   suggestions: 0
   what: pull-was-merged
@@ -498538,8 +498572,10 @@
   failed_builds: 0
   files: 7
   hoc: 14
+  is_human: 1
   issue: 1338
   repository: 728758275
+  review_comments: 0
   succeeded_builds: 15
   suggestions: 0
   what: pull-was-merged
@@ -498561,8 +498597,10 @@
   failed_builds: 0
   files: 1
   hoc: 14
+  is_human: 1
   issue: 172
   repository: 805238060
+  review_comments: 0
   succeeded_builds: 5
   suggestions: 0
   what: pull-was-merged
@@ -498584,8 +498622,10 @@
   failed_builds: 0
   files: 2
   hoc: 19
+  is_human: 1
   issue: 1340
   repository: 728758275
+  review_comments: 0
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
@@ -498607,8 +498647,10 @@
   failed_builds: 0
   files: 1
   hoc: 4
+  is_human: 1
   issue: 174
   repository: 805238060
+  review_comments: 0
   succeeded_builds: 5
   suggestions: 0
   what: pull-was-merged
@@ -498621,6 +498663,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '2994'
   details: The missing pull zerocracy/judges-action#3054 has been opened by @morphqdd.
+  is_human: 1
   issue: 3054
   repository: 799177290
   what: pull-was-opened
@@ -498633,6 +498676,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '2995'
   details: The missing pull zerocracy/judges-action#3055 has been opened by @morphqdd.
+  is_human: 1
   issue: 3055
   repository: 799177290
   what: pull-was-opened
@@ -498645,6 +498689,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '2996'
   details: The missing pull zerocracy/judges-action#3056 has been opened by @morphqdd.
+  is_human: 1
   issue: 3056
   repository: 799177290
   what: pull-was-opened
@@ -498657,6 +498702,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '2998'
   details: The missing pull zerocracy/judges-action#3057 has been opened by @morphqdd.
+  is_human: 1
   issue: 3057
   repository: 799177290
   what: pull-was-opened
@@ -498669,6 +498715,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '2997'
   details: The missing pull zerocracy/judges-action#3058 has been opened by @morphqdd.
+  is_human: 1
   issue: 3058
   repository: 799177290
   what: pull-was-opened
@@ -498681,6 +498728,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '2999'
   details: The missing pull zerocracy/judges-action#3059 has been opened by @morphqdd.
+  is_human: 1
   issue: 3059
   repository: 799177290
   what: pull-was-opened
@@ -498693,6 +498741,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3000'
   details: The missing pull zerocracy/judges-action#3060 has been opened by @morphqdd.
+  is_human: 1
   issue: 3060
   repository: 799177290
   what: pull-was-opened
@@ -498705,6 +498754,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3001'
   details: The missing pull zerocracy/judges-action#3061 has been opened by @morphqdd.
+  is_human: 1
   issue: 3061
   repository: 799177290
   what: pull-was-opened
@@ -498717,6 +498767,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3002'
   details: The missing pull zerocracy/judges-action#3062 has been opened by @morphqdd.
+  is_human: 1
   issue: 3062
   repository: 799177290
   what: pull-was-opened
@@ -498729,6 +498780,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3003'
   details: The missing pull zerocracy/judges-action#3063 has been opened by @morphqdd.
+  is_human: 1
   issue: 3063
   repository: 799177290
   what: pull-was-opened
@@ -498741,6 +498793,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3004'
   details: The missing pull zerocracy/judges-action#3064 has been opened by @morphqdd.
+  is_human: 1
   issue: 3064
   repository: 799177290
   what: pull-was-opened
@@ -498753,6 +498806,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3005'
   details: The missing pull zerocracy/judges-action#3065 has been opened by @morphqdd.
+  is_human: 1
   issue: 3065
   repository: 799177290
   what: pull-was-opened
@@ -498765,6 +498819,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3006'
   details: The missing pull zerocracy/judges-action#3066 has been opened by @morphqdd.
+  is_human: 1
   issue: 3066
   repository: 799177290
   what: pull-was-opened
@@ -498777,6 +498832,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3007'
   details: The missing pull zerocracy/judges-action#3067 has been opened by @morphqdd.
+  is_human: 1
   issue: 3067
   repository: 799177290
   what: pull-was-opened
@@ -498789,6 +498845,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3010'
   details: The missing pull zerocracy/judges-action#3068 has been opened by @morphqdd.
+  is_human: 1
   issue: 3068
   repository: 799177290
   what: pull-was-opened
@@ -498801,6 +498858,7 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3011'
   details: The missing pull zerocracy/judges-action#3069 has been opened by @morphqdd.
+  is_human: 1
   issue: 3069
   repository: 799177290
   what: pull-was-opened
@@ -498813,9 +498871,124 @@
   _version: 0.19.16/0.61.1/0.17.23
   branch: '3012'
   details: The missing pull zerocracy/judges-action#3070 has been opened by @morphqdd.
+  is_human: 1
   issue: 3070
   repository: 799177290
   what: pull-was-opened
   when: 2026-10-30 12:21:10.000000000 Z
   where: github
   who: 125282851
+- _id: 2650819
+  _job: 103622
+  _time: 2026-10-31 19:21:24.568896114 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request zerocracy/pages-action#1418 with 22 HoC created by @renovate[bot]
+    was merged by @yegor256 after 4h23m of being in review and 3 comments.
+  hoc: 22
+  is_human: 0
+  issue: 1418
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 15824
+  what: code-was-contributed
+  when: *5851
+  where: github
+  who: 29139614
+- _id: 2650820
+  _job: 103622
+  _time: 2026-10-31 19:21:25.067836117 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request zerocracy/pages-action#1419 with 6 HoC created by @renovate[bot]
+    was merged by @yegor256 after 4h44m of being in review and 3 comments.
+  hoc: 6
+  is_human: 0
+  issue: 1419
+  merger: 526301
+  repository: 802720676
+  review_comments: 0
+  seconds: 17054
+  what: code-was-contributed
+  when: *5852
+  where: github
+  who: 29139614
+- _id: 2650821
+  _job: 41234532745
+  _time: 2026-10-31 19:37:18.114839593 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '3013'
+  details: The missing pull zerocracy/judges-action#3071 has been opened by @morphqdd.
+  is_human: 1
+  issue: 3071
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-10-30 12:21:19.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2650822
+  _job: 41234532745
+  _time: 2026-10-31 19:37:19.335462252 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '3014'
+  details: The missing pull zerocracy/judges-action#3072 has been opened by @morphqdd.
+  is_human: 1
+  issue: 3072
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-10-30 12:21:27.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2650823
+  _job: 41234532745
+  _time: 2026-10-31 19:37:20.520501733 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '3015'
+  details: The missing pull zerocracy/judges-action#3073 has been opened by @morphqdd.
+  is_human: 1
+  issue: 3073
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-10-30 12:21:36.000000000 Z
+  where: github
+  who: 125282851
+- _id: 2650824
+  _job: 41234532745
+  _time: 2026-10-31 19:37:21.756151578 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '3040'
+  details: The missing pull zerocracy/judges-action#3074 has been opened by @opusstudiohq-max.
+  is_human: 1
+  issue: 3074
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-10-30 16:24:55.000000000 Z
+  where: github
+  who: 276356426
+- _id: 2650825
+  _job: 41234532745
+  _time: 2026-10-31 19:37:22.888319804 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2985'
+  details: The missing pull zerocracy/judges-action#3075 has been opened by @renchi-x.
+  is_human: 1
+  issue: 3075
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-10-31 15:05:31.000000000 Z
+  where: github
+  who: 216949634
+- _id: 2650826
+  _job: 41234532745
+  _time: 2026-10-31 19:37:23.966191610 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '2861'
+  details: The missing pull zerocracy/judges-action#3076 has been opened by @titanism0v0.
+  is_human: 1
+  issue: 3076
+  repository: 799177290
+  what: pull-was-opened
+  when: 2026-10-31 17:36:36.000000000 Z
+  where: github
+  who: 263808434
