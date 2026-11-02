@@ -212,6 +212,10 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/bad',
       body: { id: 42, full_name: 'foo/bad', open_issues: 0, size: 100 }
     )
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 44, full_name: 'foo/foo', open_issues: 0, archived: false, size: 100 }
+    )
     graph = Object.new
     graph.define_singleton_method(:total_commits_pushed) do |_owner, _name, _since|
       raise(NoMethodError, 'unexpected')
