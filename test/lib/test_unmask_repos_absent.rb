@@ -26,4 +26,23 @@ class TestUnmaskReposAbsent < Jp::Test
       'a repository GitHub answers 404 for cannot be handed to the judges'
     )
   end
+
+  def test_drops_a_repository_blocked_for_legal_reasons
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/blocked',
+      status: 451,
+      body: { message: 'Repository access blocked', block: { reason: 'dmca' } }
+    )
+    stub_github('https://api.github.com/repos/foo/here', body: { full_name: 'foo/here', archived: false })
+    $loog = Loog::Buffer.new
+    assert_equal(
+      ['foo/here'],
+      Fbe.unmask_repos(
+        options: Judges::Options.new({ 'repositories' => 'foo/blocked,foo/here' }), global: {}, loog: $loog
+      ),
+      'a repository GitHub answers 451 for cannot be handed to the judges'
+    )
+    assert_includes($loog.to_s, 'Repository foo/blocked is blocked for legal reasons, dropping it', $loog.to_s)
+  end
 end
