@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/recovered'
@@ -30,6 +31,12 @@ def some_build_success_rate(fact)
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching workflow runs for #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
       end
     wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
     runs =
@@ -47,6 +54,12 @@ def some_build_success_rate(fact)
             $loog.warn(
               "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
+            next
+          rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+            $loog.warn(
+              "[#{$judge}] Transient error fetching workflow run usage for #{repo}##{json[:id]} " \
+              "(will retry next cycle): #{e.class}: #{e.message}"
             )
             next
           end
