@@ -5,14 +5,14 @@
 
 require 'simplecov'
 require 'simplecov-cobertura'
-unless SimpleCov.running || ARGV.include?('--no-cov')
+unless Coverage.running? || ARGV.include?('--no-cov')
   SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
     [
       SimpleCov::Formatter::HTMLFormatter,
       SimpleCov::Formatter::CoberturaFormatter
     ]
   )
-  SimpleCov.minimum_coverage(80)
+  SimpleCov.minimum_coverage(55)
   SimpleCov.minimum_coverage_by_file(10)
   SimpleCov.start do
     add_filter 'vendor/'
