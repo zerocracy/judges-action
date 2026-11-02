@@ -57,4 +57,43 @@ class TestFixMissingComments < Jp::Test
       'the fact of a vanished repository is not stale, while the judge must mark it instead of aborting'
     )
   end
+
+  def test_handles_selection_rules
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github', comments: 1)
+    fb.with(_id: 2, what: 'pull-was-closed', repository: 42, issue: 45, where: 'github')
+    fb.with(_id: 3, what: 'pull-was-merged', repository: 42, issue: 46, where: 'github', done: 1)
+    fb.with(_id: 4, what: 'pull-was-merged', repository: 42, issue: 47, where: 'github', tombstone: 'yes')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { number: 44, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/44/comments?per_page=100' => [{ id: 1, user: { id: 8, login: 'b', type: 'User' } }],
+      'GET /repos/foo/foo/issues/44/comments?per_page=100' => [{ id: 2, user: { id: 9, login: 'a', type: 'User' } }],
+      'GET /repos/foo/foo/pulls/comments/1/reactions' => [],
+      'GET /repos/foo/foo/issues/comments/2/reactions' => [],
+      'GET /repos/foo/foo/pulls/45' => { number: 45, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/45/comments?per_page=100' => [{ id: 3, user: { id: 8, login: 'b', type: 'User' } }],
+      'GET /repos/foo/foo/issues/45/comments?per_page=100' => [{ id: 4, user: { id: 9, login: 'a', type: 'User' } }],
+      'GET /repos/foo/foo/pulls/comments/3/reactions' => [],
+      'GET /repos/foo/foo/issues/comments/4/reactions' => [],
+      'GET /repos/foo/foo/pulls/46' => { number: 46, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/46/comments?per_page=100' => [{ id: 5, user: { id: 8, login: 'b', type: 'User' } }],
+      'GET /repos/foo/foo/issues/46/comments?per_page=100' => [{ id: 6, user: { id: 9, login: 'a', type: 'User' } }],
+      'GET /repos/foo/foo/pulls/comments/5/reactions' => [],
+      'GET /repos/foo/foo/issues/comments/6/reactions' => [],
+      'GET /repos/foo/foo/pulls/47' => { number: 47, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/47/comments?per_page=100' => [{ id: 7, user: { id: 8, login: 'b', type: 'User' } }],
+      'GET /repos/foo/foo/issues/47/comments?per_page=100' => [{ id: 8, user: { id: 9, login: 'a', type: 'User' } }],
+      'GET /repos/foo/foo/pulls/comments/7/reactions' => [],
+      'GET /repos/foo/foo/issues/comments/8/reactions' => []
+    ).run do
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('fix-missing-comments', fb) }
+    end
+    assert_equal([1], fb.pick(issue: 44)['comments'], 'the fact already having comments changed')
+    assert_equal([2], fb.pick(issue: 45)['comments'], 'the closed pull request got no comments')
+    assert_nil(fb.pick(issue: 46)['comments'], 'a done fact got comments')
+    assert_nil(fb.pick(issue: 47)['comments'], 'a tombstoned fact got comments')
+  end
 end
