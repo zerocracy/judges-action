@@ -2,11 +2,16 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - 'Failure in repository #799177290 at #3057: GET https://api.github.com/repos/zerocracy/judges-action/pulls/3057:
+    422 - The request could not be processed because too many files changed // See:
+    https://docs.github.com/rest/pulls/pulls#get-a-pull-request'
+  - 'Judge find-all-issues stopped by timeout after 12m59s: execution expired'
   inserted: 8
-  seconds: 999.135681037
+  seconds: 1275.766124072
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-03 22:48:20.330322347 Z
+  when: 2026-11-03 23:22:24.267456372 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -152910,7 +152915,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 48
+  min_issue_was_found: 58
   min_pull_was_found: 111
   repository: 974194993
   types_were_scanned: 0
@@ -159430,7 +159435,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 297
+  min_issue_was_found: 298
   min_pull_was_found: 0
   repository: 849726475
   types_were_scanned: 0
@@ -159682,7 +159687,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 27
+  min_issue_was_found: 28
   min_pull_was_found: 63
   repository: 1084843345
   types_were_scanned: 0
@@ -159692,36 +159697,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1771
-  closures_were_checked: 0
+  assignees_were_scanned: 0
+  closures_were_checked: 1761
   earliest_issue_was_found: 1
   events_were_scanned: 19045372172
   issues_were_scanned: 1396
-  labels_were_scanned: 0
+  labels_were_scanned: 1306
   latest_issue_was_found: 315
-  merges_were_scanned: 0
+  merges_were_scanned: 1126
   min_issue_was_found: 0
   min_pull_was_found: 815
   repository: 798641472
-  types_were_scanned: 1317
+  types_were_scanned: 1397
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26054715759
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
-  min_issue_was_found: 461
+  merges_were_scanned: 552
+  min_issue_was_found: 462
   min_pull_was_found: 570
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -159736,7 +159741,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 134
   repository: 857659265
   types_were_scanned: 0
@@ -160138,18 +160143,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1967
-  closures_were_checked: 931
+  assignees_were_scanned: 0
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19037733371
   issues_were_scanned: 1225
-  labels_were_scanned: 1969
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 0
-  min_issue_was_found: 1895
+  merges_were_scanned: 905
+  min_issue_was_found: 1896
   min_pull_was_found: 793
   repository: 820463873
-  types_were_scanned: 1665
+  types_were_scanned: 1767
   what: iterate
   where: github
 - _id: 2629882
@@ -160795,18 +160800,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1387
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19033377423
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1123
-  min_issue_was_found: 1433
+  merges_were_scanned: 1212
+  min_issue_was_found: 1434
   min_pull_was_found: 718
   repository: 802720676
-  types_were_scanned: 1390
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -160941,18 +160946,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 681
+  assignees_were_scanned: 850
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18972701636
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
-  min_issue_was_found: 1097
+  merges_were_scanned: 748
+  min_issue_was_found: 1098
   min_pull_was_found: 776
   repository: 799113787
-  types_were_scanned: 1094
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630023
@@ -160977,18 +160982,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2392
-  closures_were_checked: 1744
+  assignees_were_scanned: 2549
+  closures_were_checked: 1964
   earliest_issue_was_found: 1
   events_were_scanned: 26073462378
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 2918
-  min_issue_was_found: 3018
+  merges_were_scanned: 3056
+  min_issue_was_found: 3019
   min_pull_was_found: 1596
   repository: 799177290
-  types_were_scanned: 2420
+  types_were_scanned: 2535
   what: iterate
   where: github
 - _id: 2630036
@@ -161002,7 +161007,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 21
+  min_issue_was_found: 22
   min_pull_was_found: 28
   repository: 1081929119
   types_were_scanned: 0
@@ -161012,7 +161017,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26070780919
@@ -161020,10 +161025,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1234
+  min_issue_was_found: 1235
   min_pull_was_found: 1171
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1186
   what: iterate
   where: github
 - _id: 2630038
@@ -506678,6 +506683,24 @@
   succeeded_builds: 6
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 10:02:51.000000000 Z
+  when: &5978 2026-11-03 10:02:51.000000000 Z
   where: github
   who: 8086956
+- _id: 2651308
+  _job: 104305
+  _time: 2026-11-03 22:49:12.311525268 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 7
+  details: The pull request zerocracy/fbe#1973 with 4 HoC created by @yegor256 was
+    merged by @rultor after 4h16m of being in review and 7 comments.
+  hoc: 4
+  is_human: 1
+  issue: 1973
+  merger: 8086956
+  repository: 820463873
+  review_comments: 0
+  seconds: 15403
+  what: code-was-contributed
+  when: *5978
+  where: github
+  who: 526301
