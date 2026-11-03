@@ -2,12 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 11m25s: execution expired'
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1298.799432321
+  seconds: 1048.155821244
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-03 19:52:54.627382457 Z
+  when: 2026-11-03 20:19:12.065889421 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -65577,7 +65577,7 @@
   earliest_issue_was_found: 1
   events_were_scanned: 15342987299
   latest_issue_was_found: 1
-  min_pull_was_found: 0
+  min_pull_was_found: 1
   repository: 1246623470
   what: iterate
   where: github
@@ -150762,8 +150762,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 0
-  min_pull_was_found: 9
+  min_issue_was_found: 2
+  min_pull_was_found: 10
   repository: 1090089359
   types_were_scanned: 0
   what: iterate
@@ -152954,8 +152954,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 44
-  min_pull_was_found: 108
+  min_issue_was_found: 45
+  min_pull_was_found: 109
   repository: 974194993
   types_were_scanned: 0
   what: iterate
@@ -159473,8 +159473,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 259
-  min_pull_was_found: 315
+  min_issue_was_found: 264
+  min_pull_was_found: 316
   repository: 849726475
   types_were_scanned: 0
   what: iterate
@@ -159707,8 +159707,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 166
-  min_pull_was_found: 159
+  min_issue_was_found: 0
+  min_pull_was_found: 160
   repository: 805238060
   types_were_scanned: 0
   what: iterate
@@ -159725,8 +159725,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 16
-  min_pull_was_found: 59
+  min_issue_was_found: 18
+  min_pull_was_found: 61
   repository: 1084843345
   types_were_scanned: 0
   what: iterate
@@ -159735,25 +159735,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 849
-  closures_were_checked: 0
+  assignees_were_scanned: 1000
+  closures_were_checked: 1759
   earliest_issue_was_found: 1
   events_were_scanned: 19032996674
   issues_were_scanned: 1396
-  labels_were_scanned: 1581
+  labels_were_scanned: 1852
   latest_issue_was_found: 315
-  merges_were_scanned: 0
-  min_issue_was_found: 1948
-  min_pull_was_found: 812
+  merges_were_scanned: 1260
+  min_issue_was_found: 1949
+  min_pull_was_found: 813
   repository: 798641472
-  types_were_scanned: 719
+  types_were_scanned: 845
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26054715759
@@ -159761,10 +159761,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 456
-  min_pull_was_found: 567
+  min_issue_was_found: 457
+  min_pull_was_found: 568
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -159779,8 +159779,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
-  min_pull_was_found: 131
+  min_issue_was_found: 3
+  min_pull_was_found: 132
   repository: 857659265
   types_were_scanned: 0
   what: iterate
@@ -160181,18 +160181,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1013
-  closures_were_checked: 931
+  assignees_were_scanned: 1110
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19032659761
   issues_were_scanned: 1225
-  labels_were_scanned: 1766
+  labels_were_scanned: 1830
   latest_issue_was_found: 317
-  merges_were_scanned: 1336
-  min_issue_was_found: 1888
-  min_pull_was_found: 790
+  merges_were_scanned: 1458
+  min_issue_was_found: 1889
+  min_pull_was_found: 791
   repository: 820463873
-  types_were_scanned: 1041
+  types_were_scanned: 1178
   what: iterate
   where: github
 - _id: 2629882
@@ -160838,18 +160838,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 739
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26047152666
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1351
-  min_issue_was_found: 1414
-  min_pull_was_found: 715
+  merges_were_scanned: 0
+  min_issue_was_found: 1427
+  min_pull_was_found: 716
   repository: 802720676
-  types_were_scanned: 794
+  types_were_scanned: 909
   what: iterate
   where: github
 - _id: 2629939
@@ -160984,18 +160984,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 681
+  assignees_were_scanned: 850
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18972701636
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1161
-  min_issue_was_found: 1093
-  min_pull_was_found: 773
+  merges_were_scanned: 0
+  min_issue_was_found: 1094
+  min_pull_was_found: 774
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 605
   what: iterate
   where: github
 - _id: 2630023
@@ -161020,18 +161020,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1476
-  closures_were_checked: 2590
+  assignees_were_scanned: 1669
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26061528369
   issues_were_scanned: 2725
-  labels_were_scanned: 2497
+  labels_were_scanned: 3083
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
-  min_issue_was_found: 3013
-  min_pull_was_found: 1563
+  merges_were_scanned: 2340
+  min_issue_was_found: 3014
+  min_pull_was_found: 1565
   repository: 799177290
-  types_were_scanned: 1694
+  types_were_scanned: 1906
   what: iterate
   where: github
 - _id: 2630036
@@ -161045,8 +161045,8 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 31
-  min_pull_was_found: 18
+  min_issue_was_found: 0
+  min_pull_was_found: 19
   repository: 1081929119
   types_were_scanned: 0
   what: iterate
@@ -161055,7 +161055,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19031290948
@@ -161063,10 +161063,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1218
-  min_pull_was_found: 1165
+  min_issue_was_found: 1219
+  min_pull_was_found: 1167
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1186
   what: iterate
   where: github
 - _id: 2630038
@@ -506278,7 +506278,7 @@
   succeeded_builds: 6
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 18:37:52.000000000 Z
+  when: &5971 2026-11-03 18:37:52.000000000 Z
   where: github
   who: 526301
 - _id: 2651285
@@ -506304,7 +506304,7 @@
   succeeded_builds: 6
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 18:48:38.000000000 Z
+  when: &5972 2026-11-03 18:48:38.000000000 Z
   where: github
   who: 526301
 - _id: 2651286
@@ -506329,7 +506329,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 18:35:16.000000000 Z
+  when: &5973 2026-11-03 18:35:16.000000000 Z
   where: github
   who: 526301
 - _id: 2651287
@@ -506354,7 +506354,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 18:35:52.000000000 Z
+  when: &5974 2026-11-03 18:35:52.000000000 Z
   where: github
   who: 526301
 - _id: 2651288
@@ -506379,7 +506379,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 18:36:05.000000000 Z
+  when: &5975 2026-11-03 18:36:05.000000000 Z
   where: github
   who: 526301
 - _id: 2651289
@@ -506404,7 +506404,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 18:36:16.000000000 Z
+  when: &5976 2026-11-03 18:36:16.000000000 Z
   where: github
   who: 526301
 - _id: 2651290
@@ -506432,6 +506432,7 @@
     Hey, just a heads up — [branch naming](https://www.yegor256.com/2014/04/15/github-guidelines.html) matters more than you'd think, and "`renovate-automerge`" doesn't quite follow the convention, so that's **-6** points for you. The policy's pretty clear on this one, but it's an easy fix going forward: just name your branch after the ticket number you're solving, like "`1972`" for example. Your running score is still looking solid at [+438](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — keep it up, and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/) when you get a chance.
 
     <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`renovate-automerge`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`1972`". Your running score is [+438](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  href: https://github.com/zerocracy/fbe/issues/1973/#issuecomment-6613986799
   is_human: 1
   issue: 1973
   repository: 820463873
@@ -506472,6 +506473,7 @@
   issue: 1951
   repository: 798641472
   review: 2026-11-03 05:32:27.000000000 Z
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
@@ -506483,6 +506485,7 @@
   _time: 2026-11-03 19:41:29.783847984 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue yegor256/factbase#1954 has been earlier opened by @opusstudiohq-max.
+  is_human: 1
   issue: 1954
   repository: 798641472
   what: issue-was-opened
@@ -506494,6 +506497,7 @@
   _time: 2026-11-03 19:41:30.185584523 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue yegor256/factbase#1953 has been earlier opened by @opusstudiohq-max.
+  is_human: 1
   issue: 1953
   repository: 798641472
   what: issue-was-opened
@@ -506505,9 +506509,118 @@
   _time: 2026-11-03 19:41:30.634125496 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue yegor256/factbase#1952 has been earlier opened by @opusstudiohq-max.
+  is_human: 1
   issue: 1952
   repository: 798641472
   what: issue-was-opened
   when: 2026-11-03 18:54:31.000000000 Z
   where: github
   who: 276356426
+- _id: 2651297
+  _job: 104281
+  _time: 2026-11-03 19:54:26.182428532 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 10
+  details: The pull request zerocracy/words#30 with 4 HoC created by @yegor256 was
+    merged by @yegor256 after 12h40m of being in review and 10 comments.
+  hoc: 4
+  is_human: 1
+  issue: 30
+  merger: 526301
+  repository: 1081929119
+  review_comments: 0
+  seconds: 45621
+  what: code-was-contributed
+  when: *5971
+  where: github
+  who: 526301
+- _id: 2651298
+  _job: 104281
+  _time: 2026-11-03 19:54:26.834347342 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request zerocracy/words#32 with 3 HoC created by @yegor256 was
+    merged by @yegor256 after 12m47s of being in review and 1 comments.
+  hoc: 3
+  is_human: 1
+  issue: 32
+  merger: 526301
+  repository: 1081929119
+  review_comments: 0
+  seconds: 767
+  what: code-was-contributed
+  when: *5972
+  where: github
+  who: 526301
+- _id: 2651299
+  _job: 104281
+  _time: 2026-11-03 19:54:27.197935382 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  details: The pull request zerocracy/baza#1359 with 4 HoC created by @renovate[bot]
+    was merged by @yegor256 after 15h53m of being in review and 0 comments.
+  hoc: 4
+  is_human: 0
+  issue: 1359
+  merger: 526301
+  repository: 728758275
+  review_comments: 0
+  seconds: 57188
+  what: code-was-contributed
+  when: *5973
+  where: github
+  who: 29139614
+- _id: 2651300
+  _job: 104281
+  _time: 2026-11-03 19:54:28.056260473 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  details: The pull request zerocracy/baza#1363 with 6 HoC created by @renovate[bot]
+    was merged by @yegor256 after 6h54m of being in review and 0 comments.
+  hoc: 6
+  is_human: 0
+  issue: 1363
+  merger: 526301
+  repository: 728758275
+  review_comments: 0
+  seconds: 24888
+  what: code-was-contributed
+  when: *5974
+  where: github
+  who: 29139614
+- _id: 2651301
+  _job: 104281
+  _time: 2026-11-03 19:54:28.402672488 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  details: The pull request zerocracy/baza#1364 with 3 HoC created by @renovate[bot]
+    was merged by @yegor256 after 6h54m of being in review and 0 comments.
+  hoc: 3
+  is_human: 0
+  issue: 1364
+  merger: 526301
+  repository: 728758275
+  review_comments: 0
+  seconds: 24869
+  what: code-was-contributed
+  when: *5975
+  where: github
+  who: 29139614
+- _id: 2651302
+  _job: 104281
+  _time: 2026-11-03 19:54:28.767286037 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  details: The pull request zerocracy/baza#1365 with 2 HoC created by @renovate[bot]
+    was merged by @yegor256 after 6h19m of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 1365
+  merger: 526301
+  repository: 728758275
+  review_comments: 0
+  seconds: 22781
+  what: code-was-contributed
+  when: *5976
+  where: github
+  who: 29139614
