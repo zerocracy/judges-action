@@ -173,13 +173,27 @@ Fbe.consider(
           0
         end
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
+      author =
+        begin
+          Fbe.who(n, :author)
+        rescue Fbe::Error => e
+          $loog.warn("Can't find the login of #{Fbe.issue(n)} author: #{e.message}")
+          "user ##{n.author}"
+        end
+      who =
+        begin
+          Fbe.who(n)
+        rescue Fbe::Error => e
+          $loog.warn("Can't find the login of #{Fbe.issue(n)} reviewer: #{e.message}")
+          "user ##{n.who}"
+        end
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
-        "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
+        "created by #{author} was reviewed by #{who} " \
         "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
       $loog.info(
         [
-          "The pull #{Fbe.issue(n)} was reviewed by #{Fbe.who(n)} #{n.when.ago} ago:",
+          "The pull #{Fbe.issue(n)} was reviewed by #{who} #{n.when.ago} ago:",
           "#{n.review_comments} review comments, #{n.seconds} seconds, #{n.comments} comments"
         ].join(' ')
       )
