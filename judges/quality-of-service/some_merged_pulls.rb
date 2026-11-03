@@ -12,11 +12,11 @@ def some_merged_pulls(fact)
   rejected = []
   Fbe.unmask_repos do |repo|
     break if Fbe.octo.off_quota?
-    q = "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+    q = "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{(fact.when - 1).utc.iso8601}"
     merged = Jp.qosearch(q)
     next if merged.nil?
     break if Fbe.octo.off_quota?
-    q = "repo:#{repo} type:pr is:unmerged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+    q = "repo:#{repo} type:pr is:unmerged closed:#{fact.since.utc.iso8601}..#{(fact.when - 1).utc.iso8601}"
     found = Jp.qosearch(q)
     next if found.nil?
     pulls << merged[:total_count]

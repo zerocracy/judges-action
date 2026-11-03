@@ -30,4 +30,38 @@ class TestSomeMergedPulls < Jp::Test
       end
     assert_equal({ some_merged_pulls: [10], some_unmerged_pulls: [3] }, result)
   end
+
+  def test_some_merged_pulls_searches_each_second_in_one_window_only
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_merged_pulls.rb'))
+    Jp.qoreset
+    queries = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:rate_limit) { Struct.new(:remaining).new(30) }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:search_issues) do |q, **|
+      queries << q
+      { total_count: 0, incomplete_results: false, items: [] }
+    end
+    window = Struct.new(:since, :when)
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        some_merged_pulls(window.new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z')))
+        some_merged_pulls(window.new(Time.parse('2024-08-09T21:00:00Z'), Time.parse('2024-08-16T21:00:00Z')))
+        some_merged_pulls(window.new(Time.parse('2024-08-16T21:00:00Z'), Time.parse('2024-08-23T21:00:00.700Z')))
+      end
+    end
+    assert_equal(
+      [
+        'repo:foo/foo type:pr is:merged closed:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
+        'repo:foo/foo type:pr is:unmerged closed:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
+        'repo:foo/foo type:pr is:merged closed:2024-08-09T21:00:00Z..2024-08-16T20:59:59Z',
+        'repo:foo/foo type:pr is:unmerged closed:2024-08-09T21:00:00Z..2024-08-16T20:59:59Z',
+        'repo:foo/foo type:pr is:merged closed:2024-08-16T21:00:00Z..2024-08-23T20:59:59Z',
+        'repo:foo/foo type:pr is:unmerged closed:2024-08-16T21:00:00Z..2024-08-23T20:59:59Z'
+      ],
+      queries
+    )
+  end
 end
