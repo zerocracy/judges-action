@@ -2,12 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 9m34s: execution expired'
   inserted: 8
-  seconds: 1211.091494026
+  seconds: 35.686739984
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-03 12:21:43.119352503 Z
+  when: 2026-11-03 12:32:52.463494317 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18053,36 +18052,6 @@
   when: 2026-02-16 21:29:48.000000000 Z
   where: github
   who: 29139614
-- _id: 2604799
-  _job: 22179842526
-  _time: 2026-02-19 11:27:09.378493138 Z
-  _version: 0.19.6/0.60.0/0.17.11
-  details: The issue yegor256/factbase#519 has been opened by @belfil.
-  event_id: 6705174848
-  event_type: IssuesEvent
-  is_human: 1
-  issue: 519
-  repository: 798641472
-  tombstone: 2026-11-03 11:52:39.510270610 Z
-  what: issue-was-opened
-  when: 2026-02-19 11:08:27.000000000 Z
-  where: github
-  who: 94894473
-- _id: 2604867
-  _job: 22223993296
-  _time: 2026-02-20 12:26:03.645635508 Z
-  _version: 0.19.6/0.60.0/0.17.11
-  details: The issue yegor256/factbase#519 has been closed by @belfil.
-  done: 2026-11-03 11:52:39.479707964 Z
-  event_id: 6739717507
-  event_type: IssuesEvent
-  is_human: 1
-  issue: 519
-  repository: 798641472
-  what: issue-was-closed
-  when: 2026-02-20 11:32:40.000000000 Z
-  where: github
-  who: 94894473
 - _id: 2604889
   _job: 22229904047
   _time: 2026-02-20 15:26:04.380325182 Z
@@ -157239,7 +157208,7 @@
   - 117-244
   - 246-301
   - 303-320
-  - 322-518
+  - 322-519
   - '689'
   - '726'
   repository: 798641472
@@ -505517,7 +505486,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-03 11:37:53.000000000 Z
+  when: &5959 2026-11-03 11:37:53.000000000 Z
   where: github
   who: 526301
 - _id: 2651243
@@ -505541,6 +505510,7 @@
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
   hoc: 4
+  href: https://github.com/zerocracy/baza.rb/issues/575/#issuecomment-6603670445
   is_human: 1
   issue: 575
   repository: 840215648
@@ -505551,3 +505521,20 @@
   where: github
   who: 526301
   why: Contributed code in zerocracy/baza.rb#575
+- _id: 2651244
+  _job: 104248
+  _time: 2026-11-03 12:22:38.137354699 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  details: The pull request zerocracy/baza.rb#568 with 2 HoC created by @renovate[bot]
+    was merged by @yegor256 after 1w1d of being in review and 0 comments.
+  hoc: 2
+  issue: 568
+  merger: 526301
+  repository: 840215648
+  review_comments: 0
+  seconds: 728017
+  what: code-was-contributed
+  when: *5959
+  where: github
+  who: 29139614
