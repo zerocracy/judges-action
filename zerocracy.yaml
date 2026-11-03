@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - deadlock; recursive locking
   inserted: 8
-  seconds: 1114.650493662
+  seconds: 1112.492680251
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-03 17:49:49.024132394 Z
+  when: 2026-11-03 19:20:20.946576293 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18274,6 +18277,7 @@
   is_human: 1
   issue: 543
   repository: 802720676
+  tombstone: 2026-11-03 17:51:55.079777583 Z
   what: pull-was-opened
   when: 2026-02-20 17:01:14.000000000 Z
   where: github
@@ -19084,6 +19088,7 @@
   review_comments: 2
   succeeded_builds: 14
   suggestions: 1
+  tombstone: 2026-11-03 17:51:55.082184169 Z
   what: pull-was-merged
   when: &198 2026-02-26 15:38:49.000000000 Z
   where: github
@@ -19206,6 +19211,7 @@
   repository: 802720676
   review_comments: 2
   seconds: 513455
+  tombstone: 2026-11-03 17:51:55.084270908 Z
   what: code-was-contributed
   when: *198
   where: github
@@ -19298,6 +19304,7 @@
   repository: 802720676
   review_comments: 2
   seconds: 513455
+  tombstone: 2026-11-03 17:51:55.086585664 Z
   what: code-contribution-was-rewarded
   when: 2026-02-26 18:35:23.510229418 Z
   where: github
@@ -20600,6 +20607,7 @@
   comments: 7
   details: The pull request zerocracy/pages-action#543 with 82 HoC created by @aidarkdev
     was reviewed by @coderabbitai[bot] after 0h7m and 0 comments.
+  done: 2026-11-03 17:51:55.046310686 Z
   hoc: 82
   is_human: 0
   issue: 543
@@ -20913,6 +20921,7 @@
   repository: 802720676
   review_comments: 1
   seconds: 214038
+  tombstone: 2026-11-03 17:51:55.088709288 Z
   what: code-review-was-rewarded
   when: 2026-03-02 20:40:22.507515836 Z
   where: github
@@ -152975,7 +152984,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26052356386
+  events_were_scanned: 26061018586
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 20
@@ -152983,7 +152992,7 @@
   min_issue_was_found: 44
   min_pull_was_found: 108
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 119
   what: iterate
   where: github
 - _id: 2629220
@@ -159761,25 +159770,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 0
+  assignees_were_scanned: 742
+  closures_were_checked: 1759
   earliest_issue_was_found: 1
-  events_were_scanned: 26019310498
+  events_were_scanned: 19032996674
   issues_were_scanned: 1396
-  labels_were_scanned: 0
+  labels_were_scanned: 1306
   latest_issue_was_found: 315
-  merges_were_scanned: 1798
+  merges_were_scanned: 1930
   min_issue_was_found: 1947
   min_pull_was_found: 812
   repository: 798641472
-  types_were_scanned: 1901
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26054715759
@@ -159790,7 +159799,7 @@
   min_issue_was_found: 455
   min_pull_was_found: 567
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 483
   what: iterate
   where: github
 - _id: 2629843
@@ -160207,18 +160216,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 748
-  closures_were_checked: 931
+  assignees_were_scanned: 850
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19007531116
+  events_were_scanned: 19032659761
   issues_were_scanned: 1225
-  labels_were_scanned: 1854
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 949
+  merges_were_scanned: 1270
   min_issue_was_found: 1887
   min_pull_was_found: 790
   repository: 820463873
-  types_were_scanned: 843
+  types_were_scanned: 898
   what: iterate
   where: github
 - _id: 2629882
@@ -160864,18 +160873,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1247
+  assignees_were_scanned: 1387
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26047152666
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1123
+  merges_were_scanned: 1265
   min_issue_was_found: 1413
   min_pull_was_found: 715
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 631
   what: iterate
   where: github
 - _id: 2629939
@@ -161010,18 +161019,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 617
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 18972701636
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 964
+  merges_were_scanned: 1035
   min_issue_was_found: 1092
   min_pull_was_found: 773
   repository: 799113787
-  types_were_scanned: 1099
+  types_were_scanned: 1208
   what: iterate
   where: github
 - _id: 2630023
@@ -161046,18 +161055,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2945
-  closures_were_checked: 1744
+  assignees_were_scanned: 0
+  closures_were_checked: 1964
   earliest_issue_was_found: 1
-  events_were_scanned: 26054010057
+  events_were_scanned: 26061528369
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 2918
+  merges_were_scanned: 3067
   min_issue_was_found: 3012
   min_pull_was_found: 1563
   repository: 799177290
-  types_were_scanned: 1461
+  types_were_scanned: 1536
   what: iterate
   where: github
 - _id: 2630036
@@ -161066,7 +161075,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19002673411
+  events_were_scanned: 19031844700
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 2
@@ -161081,10 +161090,10 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19023252720
+  events_were_scanned: 19031290948
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
@@ -161092,7 +161101,7 @@
   min_issue_was_found: 1213
   min_pull_was_found: 1165
   repository: 728758275
-  types_were_scanned: 1186
+  types_were_scanned: 1259
   what: iterate
   where: github
 - _id: 2630038
@@ -506194,3 +506203,249 @@
   where: github
   who: 526301
   why: Contributed code in zerocracy/pages-action#1439
+- _id: 2651278
+  _job: 41699223806
+  _time: 2026-11-03 19:02:17.876633114 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/fbe#1974 has been opened by @opusstudiohq-max.
+  event_id: 19032659761
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 1974
+  repository: 820463873
+  what: issue-was-opened
+  when: 2026-11-03 18:57:48.000000000 Z
+  where: github
+  who: 276356426
+- _id: 2651279
+  _job: 41699223806
+  _time: 2026-11-03 19:02:40.010291283 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/telepost-0.x-lockfile
+  details: The pull request zerocracy/baza#1368 has been opened by @renovate[bot].
+  event_id: 19031290948
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1368
+  repository: 728758275
+  what: pull-was-opened
+  when: 2026-11-03 18:42:31.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2651280
+  _job: 41699223806
+  _time: 2026-11-03 19:02:41.101299039 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/stylelint-17.x-lockfile
+  details: The pull request zerocracy/baza#1367 has been opened by @renovate[bot].
+  event_id: 19031255205
+  event_type: PullRequestEvent
+  is_human: 0
+  issue: 1367
+  repository: 728758275
+  what: pull-was-opened
+  when: 2026-11-03 18:42:06.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2651281
+  _job: 41699223806
+  _time: 2026-11-03 19:02:44.661790198 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/words#31 has been closed by @yegor256.
+  event_id: 19031844700
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 31
+  repository: 1081929119
+  what: issue-was-closed
+  when: 2026-11-03 18:48:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651282
+  _job: 41699223806
+  _time: 2026-11-03 19:02:47.643343513 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '31'
+  details: The pull request zerocracy/words#32 has been opened by @yegor256.
+  event_id: 19030690129
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 32
+  repository: 1081929119
+  what: pull-was-opened
+  when: 2026-11-03 18:35:51.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651283
+  _job: 41699223806
+  _time: 2026-11-03 19:02:48.569358926 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/words#31 has been opened by @yegor256.
+  event_id: 19030562243
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 31
+  repository: 1081929119
+  what: issue-was-opened
+  when: 2026-11-03 18:34:28.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651284
+  _job: 41699223806
+  _time: 2026-11-03 19:08:13.480829680 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate-automerge
+  comments: 10
+  comments_appreciated: 3
+  comments_by_author: 4
+  comments_by_reviewers: 6
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/words#30 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  is_human: 1
+  issue: 30
+  repository: 1081929119
+  review: 2026-11-03 05:57:40.000000000 Z
+  succeeded_builds: 6
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 18:37:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651285
+  _job: 41699223806
+  _time: 2026-11-03 19:08:32.676366416 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '31'
+  comments: 1
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/words#32 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 3
+  is_human: 1
+  issue: 32
+  repository: 1081929119
+  review: 2026-11-03 18:36:00.000000000 Z
+  succeeded_builds: 6
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 18:48:38.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651286
+  _job: 41699223806
+  _time: 2026-11-03 19:08:51.809625409 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/rubocop-minitest-0.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/baza#1359 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  is_human: 1
+  issue: 1359
+  repository: 728758275
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 18:35:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651287
+  _job: 41699223806
+  _time: 2026-11-03 19:09:07.948226137 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/haml-7.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/baza#1363 has been "pull-was-merged".
+  failed_builds: 0
+  files: 2
+  hoc: 6
+  is_human: 1
+  issue: 1363
+  repository: 728758275
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 18:35:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651288
+  _job: 41699223806
+  _time: 2026-11-03 19:09:24.235602035 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/selenium-webdriver-4.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/baza#1364 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 3
+  is_human: 1
+  issue: 1364
+  repository: 728758275
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 18:36:05.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651289
+  _job: 41699223806
+  _time: 2026-11-03 19:09:40.595166047 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/sentry-ruby-monorepo
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/baza#1365 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 1
+  issue: 1365
+  repository: 728758275
+  succeeded_builds: 12
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-03 18:36:16.000000000 Z
+  where: github
+  who: 526301
+- _id: 2651290
+  _job: 41699223806
+  _time: 2026-11-03 19:14:48.420470761 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate-automerge
+  details: The missing pull zerocracy/fbe#1973 has been opened by @yegor256.
+  is_human: 1
+  issue: 1973
+  repository: 820463873
+  what: pull-was-opened
+  when: 2026-11-03 05:46:08.000000000 Z
+  where: github
+  who: 526301
