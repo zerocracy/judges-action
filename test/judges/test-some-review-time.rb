@@ -40,6 +40,38 @@ class TestSomeReviewTime < Jp::Test
     assert_empty(review_times(Time.parse('2025-01-11 12:00:00 UTC')))
   end
 
+  def test_some_review_time_searches_each_second_in_one_window_only
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_review_time.rb'))
+    Jp.qoreset
+    queries = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repo_id_by_name) { |*| 42 }
+    octo.define_singleton_method(:rate_limit) { Struct.new(:remaining).new(30) }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:search_issues) do |q, **|
+      queries << q
+      { total_count: 0, incomplete_results: false, items: [] }
+    end
+    window = Struct.new(:since, :when)
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        some_review_time(window.new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z')))
+        some_review_time(window.new(Time.parse('2024-08-09T21:00:00Z'), Time.parse('2024-08-16T21:00:00Z')))
+        some_review_time(window.new(Time.parse('2024-08-16T21:00:00Z'), Time.parse('2024-08-23T21:00:00.700Z')))
+      end
+    end
+    assert_equal(
+      [
+        'repo:foo/foo type:pr is:merged closed:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
+        'repo:foo/foo type:pr is:merged closed:2024-08-09T21:00:00Z..2024-08-16T20:59:59Z',
+        'repo:foo/foo type:pr is:merged closed:2024-08-16T21:00:00Z..2024-08-23T20:59:59Z'
+      ],
+      queries
+    )
+  end
+
   private
 
   def review_times(submitted)
