@@ -168,7 +168,7 @@ Fbe.iterate do
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, stats)
-      if actor
+      if actor && actor[:id]
         nn.who = Integer(actor[:id])
       else
         nn.stale = 'who'
