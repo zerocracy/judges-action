@@ -27,7 +27,7 @@ def total_active_contributors(fact)
         )
         next
       end
-    next if commits.nil?
+    return {} if commits.nil?
     commits[:items].each do |commit|
       date = commit.dig(:commit, :author, :date)
       next if !date.nil? && Time.parse(date.to_s) > fact.when
