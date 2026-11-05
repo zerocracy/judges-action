@@ -41,8 +41,8 @@ class TestCodeWasReviewed < Jp::Test
         { id: 47_122, user: { id: 422, login: 'user2' } }
       ]
     )
-    stub_github('https://api.github.com/user/421', body: {  id: 421, login: 'user1' })
-    stub_github('https://api.github.com/user/422', body: {  id: 422, login: 'user2' })
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
     stub_github(
       'https://api.github.com/repos/foo/foo/pulls/45',
       body: {
@@ -407,8 +407,8 @@ class TestCodeWasReviewed < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/issues/100/comments?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/pulls/100/reviews/50100/comments?per_page=100', body: [])
-    stub_github('https://api.github.com/user/421', body: {  id: 421, login: 'user1' })
-    stub_github('https://api.github.com/user/422', body: {  id: 422, login: 'user2' })
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 99, where: 'github')
       .with(_id: 2, what: 'pull-was-closed', repository: 42, issue: 100, where: 'github')

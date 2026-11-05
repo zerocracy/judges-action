@@ -7,18 +7,22 @@ name: actionlint
   push:
     branches:
       - master
+    paths:
+      - '.github/**'
   pull_request:
     branches:
       - master
+    paths:
+      - '.github/**'
   workflow_call:
 permissions:
   contents: read
 jobs:
   actionlint:
     timeout-minutes: 15
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
-      - uses: reviewdog/action-actionlint@ab7138020abfe6cd20b742c82e5b7a9749fb5884 # v1.75.0
+      - uses: reviewdog/action-actionlint@cfa6a621f27735ccc88d35af9d0608692fd9b9f7 # v1.80.8
