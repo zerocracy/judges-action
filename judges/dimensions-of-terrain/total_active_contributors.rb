@@ -27,7 +27,7 @@ def total_active_contributors(fact)
         )
         next
       end
-    next if commits.nil?
+    return {} if commits.nil?
     if commits[:total_count] >= 1000
       $loog.info("Commit search for #{repo} hit the 1000 result ceiling, leaving total_active_contributors unset")
       return {}
