@@ -12,7 +12,7 @@ jobs:
   titles:
     if: contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association)
     timeout-minutes: 15
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: horw/issue-title-ai@2221301dec59c2a3cb3498227702cb6efb5c9d4d # v0.1.8b
         with:

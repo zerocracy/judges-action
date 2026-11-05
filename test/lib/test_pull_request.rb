@@ -8,6 +8,54 @@ require_relative '../../lib/pull_request'
 require_relative '../test__helper'
 
 class TestPullRequest < Jp::Test
+  def test_fetch_workflows_counts_each_workflow_once
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'many-jobs' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/many-jobs/check-runs?per_page=100',
+      body: { check_runs: (1..6).map { |id| { id: id, app: { slug: 'github-actions' } } } }
+    )
+    (1..6).each do |id|
+      stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{id}", body: { run_id: (id - 1) / 2 })
+    end
+    %w[success success failure].each_with_index do |conclusion, id|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/actions/runs/#{id}",
+        body: { event: 'pull_request', conclusion: conclusion }
+      )
+    end
+    2.times do
+      assert_equal({ succeeded_builds: 2, failed_builds: 1 }, Jp.fetch_workflows(pr))
+    end
+  end
+
+  def test_fetch_workflows_retries_missing_workflow_for_another_job
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'retry-job' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/retry-job/check-runs?per_page=100',
+      body: { check_runs: [1, 2].map { |id| { id: id, app: { slug: 'github-actions' } } } }
+    )
+    [1, 2].each do |id|
+      stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{id}", body: { run_id: 9001 })
+    end
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs/9001').to_return(
+      status: 404, body: '{}', headers: { 'Content-Type' => 'application/json' }
+    ).then.to_return(
+      status: 200, body: { event: 'pull_request', conclusion: 'success' }.to_json,
+      headers: { 'Content-Type' => 'application/json' }
+    )
+    assert_equal({ succeeded_builds: 1, failed_builds: 0 }, Jp.fetch_workflows(pr))
+  end
+
   def test_fetch_workflows_skips_nil_app_check_runs
     WebMock.disable_net_connect!
     rate_limit_up
