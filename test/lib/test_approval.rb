@@ -41,4 +41,16 @@ class TestApproval < Minitest::Test
   def test_answers_nil_for_no_reviews
     assert_nil(Jp.approval([], nil))
   end
+
+  def test_prefers_an_approval_to_a_later_comment
+    reviews = [
+      { state: 'APPROVED', submitted_at: Time.parse('2025-06-20 10:00:00 UTC') },
+      { state: 'COMMENTED', submitted_at: Time.parse('2025-06-24 10:00:00 UTC') }
+    ]
+    assert_equal(
+      Time.parse('2025-06-20 10:00:00 UTC'),
+      Jp.approval(reviews, Time.parse('2025-06-27 19:00:05 UTC'))[:submitted_at],
+      'an approval must win over a comment-only review that came after it'
+    )
+  end
 end
