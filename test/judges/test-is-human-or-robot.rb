@@ -5,6 +5,7 @@
 
 require 'factbase'
 require 'octokit'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestIsHumanOrRobot < Jp::Test
@@ -104,5 +105,37 @@ class TestIsHumanOrRobot < Jp::Test
     forbidden = fb.query('(eq who 200)').each.first
     refute_nil(forbidden)
     assert_raises(ArgumentError, 'the 403 user should remain unclassified, ready for a retry') { forbidden.is_human }
+  end
+
+  def test_reclassifies_every_fact_of_user_configured_as_bot
+    seed = Random.new_seed
+    count = Random.new(seed).rand(1..5)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'who-has-name', who: 21, name: 'ренoвейт', where: 'github', is_human: 1)
+    count.times { |i| fb.with(_id: i + 2, what: 'pull-was-merged', who: 21, where: 'github', is_human: 1) }
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } }
+    ).run do
+      load_it('is-human-or-robot', fb, Judges::Options.new({ 'bots' => 'rultor,ренoвейт' }))
+    end
+    assert_equal(
+      count + 1, fb.query('(and (eq who 21) (eq is_human 0))').each.to_a.size,
+      "the facts of a user added to the bots option are still classified as human, seed #{seed}"
+    )
+  end
+
+  def test_keeps_human_whose_name_is_not_among_bots
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'who-has-name', who: 22, name: 'renovate-fan', where: 'github', is_human: 1)
+      .with(_id: 2, what: 'pull-was-merged', who: 22, where: 'github', is_human: 1)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } }
+    ).run do
+      load_it('is-human-or-robot', fb, Judges::Options.new({ 'bots' => 'renovate' }))
+    end
+    assert_equal(
+      2, fb.query('(and (eq who 22) (eq is_human 1))').each.to_a.size,
+      'a human whose name only resembles a configured bot is re-classified as a bot'
+    )
   end
 end

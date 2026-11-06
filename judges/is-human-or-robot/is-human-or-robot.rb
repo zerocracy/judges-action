@@ -4,8 +4,10 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/consider'
+require 'fbe/fb'
 require 'fbe/issue'
 require 'fbe/octo'
+require 'fbe/overwrite'
 require_relative '../../lib/humans'
 
 @bots = nil
@@ -43,6 +45,17 @@ Fbe.consider(
   else
     f.is_human = 1
     $loog.info("GitHub user ##{f.who} (@#{json[:login]}) is not a bot, in #{location}")
+  end
+end
+
+Jp.bots.each do |login|
+  Fbe.fb.query(
+    "(and (eq what 'who-has-name') (eq where 'github') (eq name '#{login}') (exists who))"
+  ).each.to_a.each do |n|
+    Fbe.fb.query("(and (eq where 'github') (eq who #{n.who}) (eq is_human 1))").each.to_a.each do |f|
+      Fbe.overwrite(f, 'is_human', 0)
+      $loog.info("GitHub user ##{n.who} (@#{login}) is configured as a bot, fact ##{f._id} is re-classified")
+    end
   end
 end
 
