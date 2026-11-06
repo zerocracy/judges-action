@@ -13,7 +13,7 @@ require 'octokit'
 def total_commits_pushed(fact)
   commits = 0
   hoc = 0
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     begin
       json = Fbe.octo.repository(repo)
       next if json[:size].nil? || json[:size].zero?

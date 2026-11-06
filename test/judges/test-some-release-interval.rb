@@ -69,4 +69,27 @@ class TestSomeReleaseInterval < Jp::Test
       "the lonely release of foo/bar became an interval #{intervals.inspect}, seed #{seed}"
     )
   end
+
+  def test_reports_nothing_when_the_repository_scan_is_cut_short
+    base = Time.parse('2024-08-10 00:00:00 UTC')
+    releases = [{ id: 2, published_at: (base + 600).utc.iso8601 }, { id: 1, published_at: base.utc.iso8601 }]
+    fact = Factbase.new.insert
+    fact.since = Time.parse('2024-08-01 00:00:00 UTC')
+    fact.when = Time.parse('2024-09-01 00:00:00 UTC')
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar' })
+    calls = 0
+    found =
+      Fbe.stub(:over?, ->(**) { (calls += 1) > 2 }) do
+        Jp::FakeGithub.new(
+          'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+          'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+          'GET /repos/foo/bar' => { id: 43, full_name: 'foo/bar' },
+          'GET /repos/foo/foo/releases?per_page=100' => [200, releases],
+          'GET /repos/foo/bar/releases?per_page=100' => [200, releases]
+        ).run { some_release_interval(fact) }
+      end
+    assert_empty(found, 'intervals from a scan that stopped in the middle cannot be reported')
+  end
 end

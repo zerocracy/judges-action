@@ -7,6 +7,7 @@ require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/recovered'
 require 'octokit'
+require_relative '../../lib/patches/unmask_repos'
 
 def some_build_success_rate(fact)
   success = []
@@ -14,7 +15,7 @@ def some_build_success_rate(fact)
   ttrs = []
   failed = {}
   conclusions = %w[success failure]
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     workflows =
       begin
