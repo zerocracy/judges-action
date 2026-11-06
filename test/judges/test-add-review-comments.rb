@@ -7,6 +7,8 @@ require 'factbase'
 require_relative '../test__helper'
 
 class TestAddReviewComments < Jp::Test
+  using SmartFactbase
+
   def test_sets_review_comments_when_missing
     WebMock.disable_net_connect!
     pl = { id: 93, comments: 2 }
@@ -213,6 +215,42 @@ class TestAddReviewComments < Jp::Test
     f = fb.query('(eq issue 44)').each.first
     refute_nil(f)
     assert_nil(f['stale'], '500 is transient — fact must NOT be marked stale; pull lookup will retry next cycle')
+  end
+
+  def test_rescues_read_timeout_on_pull_request_lookup
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    stub(42, { id: 45, comments: 3 })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/44').to_raise(Net::ReadTimeout)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-reviewed', repository: 42, issue: 45, where: 'github')
+    load_it('add-review-comments', fb)
+    assert(
+      fb.one?(issue: 45, review_comments: 3),
+      'a read timeout on the pull lookup did not let the judge go on to the next pull'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
+  end
+
+  def test_rescues_connection_failure_on_repo_lookup
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    stub(42, { id: 45, comments: 3 })
+    stub_request(:get, 'https://api.github.com/repositories/43').to_raise(Errno::ECONNRESET)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 43, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
+    load_it('add-review-comments', fb)
+    assert(
+      fb.one?(issue: 45, review_comments: 3),
+      'a reset connection on the repository lookup did not let the judge go on to the next fact'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
   end
 
   def stub(repo, *pulls)
