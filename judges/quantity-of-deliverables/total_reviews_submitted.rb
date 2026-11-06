@@ -6,6 +6,7 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/humans'
 require_relative '../../lib/patches/unmask_repos'
 
 def total_reviews_submitted(fact)
@@ -24,9 +25,17 @@ def total_reviews_submitted(fact)
       cursor = json['next_cursor']
     end
     until queue.empty?
-      pulls = Fbe.github_graph.pull_request_reviews(owner, name, pulls: queue.shift(10))
+      batch = queue.shift(10)
+      pulls = Fbe.github_graph.pull_request_reviews(owner, name, pulls: batch)
+      authors = authors(owner, name, batch)
       window = ->(r) { r['submitted_at'] > fact.since && r['submitted_at'] <= fact.when }
-      count += pulls.sum { |p| p['reviews'].count(&window) }
+      count +=
+        pulls.sum do |pull|
+          pull['reviews'].count do |review|
+            author = review['author'] || authors[review['id']]
+            window.call(review) && Jp.human?(author&.dig('login'), author&.dig('__typename') || author&.dig('type'))
+          end
+        end
       pulls.select { _1['reviews_has_next_page'] }.each do |p|
         queue.push([p['number'], p['reviews_next_cursor']])
       end
@@ -47,4 +56,38 @@ def total_reviews_submitted(fact)
     )
   end
   { total_reviews_submitted: total }
+end
+
+def authors(owner, name, batch)
+  data =
+    Fbe.github_graph.query(
+      <<~GRAPHQL
+        {
+          repository(owner: "#{owner}", name: "#{name}") {
+            #{batch.map { |number, cursor| request(number, cursor) }.join("\n")}
+          }
+        }
+      GRAPHQL
+    )&.to_h&.dig('repository')
+  return {} if data.nil?
+  data.each_with_object({}) do |(_key, pull), map|
+    pull&.dig('reviews', 'nodes')&.each { |review| map[review['id']] = review['author'] }
+  end
+end
+
+def request(number, cursor)
+  after = "after: \"#{cursor}\", " unless cursor.nil?
+  <<~GRAPHQL
+    pr_#{number}: pullRequest(number: #{number}) {
+      reviews(#{after}first: 100) {
+        nodes {
+          id
+          author {
+            login
+            __typename
+          }
+        }
+      }
+    }
+  GRAPHQL
 end
