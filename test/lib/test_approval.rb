@@ -41,4 +41,11 @@ class TestApproval < Minitest::Test
   def test_answers_nil_for_no_reviews
     assert_nil(Jp.approval([], nil))
   end
+
+  def test_ignores_reviews_submitted_after_the_pull_was_closed
+    reviews = [
+      { state: 'APPROVED', submitted_at: Time.parse('2025-07-01 10:00:00 UTC') }
+    ]
+    assert_nil(Jp.approval(reviews, Time.parse('2025-06-27 19:00:05 UTC')))
+  end
 end

@@ -15,8 +15,7 @@ def Jp.approval(reviews, closed = nil)
   picked = reviews.nil? ? [] : reviews
   unless closed.nil?
     edge = closed.is_a?(Time) ? closed : Time.parse(closed.to_s)
-    before = picked.select { |r| Jp.stamp(r) <= edge }
-    picked = before unless before.empty?
+    picked = picked.select { |r| Jp.stamp(r) <= edge }
   end
   approved = picked.select { |r| r[:state] == 'APPROVED' }
   picked = approved unless approved.empty?
