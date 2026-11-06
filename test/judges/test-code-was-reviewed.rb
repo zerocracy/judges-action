@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestCodeWasReviewed < Jp::Test
@@ -491,5 +492,49 @@ class TestCodeWasReviewed < Jp::Test
       0, fb.pick(what: 'code-was-reviewed', issue: 44).hoc,
       'A pull request that reports no additions and no deletions cannot abort the judge'
     )
+  end
+
+  def test_dont_record_review_that_carries_no_verdict
+    seed = Random.new_seed
+    state = %w[COMMENTED DISMISSED PENDING].sample(random: Random.new(seed))
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(routes(state)).run { load_it('code-was-reviewed', fb) }
+    assert(fb.none?(what: 'code-was-reviewed'), "a #{state} review is recorded as a code review, seed #{seed}")
+  end
+
+  def test_dont_count_review_that_carries_no_verdict
+    seed = Random.new_seed
+    state = %w[COMMENTED DISMISSED PENDING].sample(random: Random.new(seed))
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(routes(state)).run { load_it('code-was-reviewed', fb) }
+    assert_equal([0], fb.pick(what: 'pull-was-merged')['reviews'], "a #{state} review is counted, seed #{seed}")
+  end
+
+  def test_records_review_that_requests_changes
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(routes('CHANGES_REQUESTED')).run { load_it('code-was-reviewed', fb) }
+    assert(fb.one?(what: 'code-was-reviewed', who: 422), 'a review that requests changes is not recorded')
+  end
+
+  private
+
+  def routes(state)
+    {
+      'GET /rate_limit' => { resources: { core: { remaining: 999 } }, rate: { remaining: 999 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => {
+        id: 50, number: 44, user: { id: 421, login: 'автор' }, created_at: '2025-09-01T15:35:30Z'
+      },
+      'GET /repos/foo/foo/pulls/44/reviews?per_page=100' => [
+        { id: 7, user: { id: 422, login: 'рецензент' }, state:, submitted_at: '2025-09-02T10:39:20Z' }
+      ],
+      'GET /repos/foo/foo/issues/44/comments?per_page=100' => [],
+      'GET /repos/foo/foo/pulls/44/reviews/7/comments?per_page=100' => [],
+      'GET /user/421' => { id: 421, login: 'автор' },
+      'GET /user/422' => { id: 422, login: 'рецензент' }
+    }
   end
 end
