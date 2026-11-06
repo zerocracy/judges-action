@@ -20,4 +20,11 @@ class TestHumans < Minitest::Test
       )
     assert_equal(['alice'], kept.map { |c| c.dig(:user, :login) })
   end
+
+  def test_keeps_everybody_when_no_bots_are_configured
+    $options = Judges::Options.new({})
+    assert_empty(Jp.bots)
+    kept = Jp.human_comments([{ user: { login: 'alice', type: 'User' } }])
+    assert_equal(['alice'], kept.map { |c| c.dig(:user, :login) })
+  end
 end
