@@ -14,6 +14,10 @@ def Jp.author(fact, id)
   end
 end
 
+def Jp.ghost?(id)
+  id == 10_137
+end
+
 def Jp.mention(fact)
   return 'a user who has deleted the account' if fact['who'].nil?
   Fbe.who(fact)
