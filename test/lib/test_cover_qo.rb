@@ -86,6 +86,21 @@ class TestCoverQo < Minitest::Test
     end
   end
 
+  def test_does_not_duplicate_when_slice_is_zero
+    fb = Factbase.new
+    today = Time.parse('2025-01-20 12:00:00 UTC')
+    f = fb.insert
+    f.what = 'test-judge'
+    f.since = today
+    f.when = today
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(0, judge: 'test-judge', loog: Loog::NULL, today: today)
+      Jp.cover_qo(0, judge: 'test-judge', loog: Loog::NULL, today: today)
+      facts = fb.query("(eq what 'test-judge')").each.to_a
+      assert_equal(1, facts.size, 'no duplicate window when timeline is contiguous and slice is zero')
+    end
+  end
+
   def test_fills_multiple_gaps
     fb = Factbase.new
     now = Time.parse('2025-03-01 12:00:00 UTC')
