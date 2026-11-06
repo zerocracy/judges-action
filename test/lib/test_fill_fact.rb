@@ -61,4 +61,12 @@ class TestFillFact < Minitest::Test
       Jp.fill_fact_by_hash(f, { "commits\nall_properties" => 1 })
     end
   end
+
+  def test_rejects_whitespace_only_string_values
+    fb = Factbase.new
+    f = fb.insert
+    assert_raises(ArgumentError, 'whitespace-only strings must be rejected like empty ones') do
+      Jp.fill_fact_by_hash(f, { 'commits' => '   ' })
+    end
+  end
 end

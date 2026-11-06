@@ -17,6 +17,9 @@ def Jp.fill_fact_by_hash(fact, hash)
     values = Array(value)
     raise(ArgumentError, "The value of #{prop.inspect} can't be empty") if values.empty?
     raise(ArgumentError, "The value of #{prop.inspect} can't hold a nil") if values.any?(&:nil?)
+    if values.any? { |v| v.is_a?(String) && v.strip.empty? }
+      raise(ArgumentError, "The value of #{prop.inspect} can't be empty")
+    end
     values.each { |v| fact.public_send(:"#{prop}=", v) }
   end
 end
