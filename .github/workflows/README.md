@@ -58,18 +58,20 @@ These workflows are specific to `zerocracy/judges-action` and should NOT be refe
 
 ### SHA Pinning
 
-`zerocracy/judges-action` pins all third-party actions to exact commit SHAs (e.g., `actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6`). Other repos currently use semver tags (`@v6`). By switching to reusable workflows, all callers inherit SHA-pinned versions — this is **more secure and reproducible**.
+`zerocracy/judges-action` pins all third-party actions to exact commit SHAs (e.g., `actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6`). FBE already pins its external actions to commit SHAs, while Pages Action uses version tags (e.g., `@v7`). Reusable workflows give callers the shared SHA-pinned action versions; for FBE, pinning is an existing property, rather than a new migration benefit.
 
 ### Known Differences Between Repos
 
-| Aspect | judges-action | fbe / pages-action | judges |
-|--------|--------------|-------------------|--------|
-| Action versions | SHA-pinned | Semver tags | Semver tags |
-| Branch filter | `branches: [master]` | Some missing (`copyrights.yml`, `xcop.yml`) | `branches: [master]` |
-| SPDX header | Zerocracy | Zerocracy | Yegor Bugayenko |
+FBE and Pages Action baselines checked on 2026-10-28.
+
+| Aspect | judges-action | fbe | pages-action | judges |
+|--------|--------------|-----|--------------|--------|
+| Action versions | SHA-pinned | SHA-pinned | Version tags | Semver tags |
+| Branch filter | `branches: [master]` | `copyrights.yml`: master; `xcop.yml`: paths only | `copyrights.yml` and `xcop.yml`: master | `branches: [master]` |
+| SPDX header | Zerocracy | Zerocracy | Zerocracy | Yegor Bugayenko |
 
 ### Breaking Changes to Watch For
 
-1. **Branch filter narrowing** — If your repo relies on workflows running on all branches (e.g., `fbe/copyrights.yml` has `push:` without branch filter), switching to reusable workflows will restrict to `master` only
+1. **Branch filter narrowing** — If your repo relies on workflows running on all branches (e.g., `fbe/xcop.yml` filters paths without restricting branches), adopting the example wrapper's `branches: [master]` will narrow its triggers. FBE's `copyrights.yml` already restricts both `push` and `pull_request` to `master`
 2. **Config file paths** — `typos.yml` in fbe uses `.github/.typos.toml` while judges-action uses `.github/typos.toml`. Standardize paths before migrating
 3. **SPDX headers** — `yegor256/judges` has `Copyright (c) 2024-2026 Yegor Bugayenko`. This will change when referencing judges-action's workflows
