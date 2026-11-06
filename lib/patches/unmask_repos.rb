@@ -14,7 +14,7 @@ module Fbe
     )
       raise(Fbe::Error, 'Repositories mask is not specified') unless options.repositories
       raise(Fbe::Error, 'Repositories mask is empty') if options.repositories.empty?
-      return if block_given? && Fbe.over?(
+      return false if block_given? && Fbe.over?(
         global:, options:, loog:, epoch:, kickoff:, quota_aware:, lifetime_aware:, timeout_aware:
       )
       repos = []
@@ -75,9 +75,12 @@ module Fbe
       loog.debug("Scanning #{repos.size} repositories: #{repos.joined}...")
       return repos unless block_given?
       repos.each do |repo|
-        break if Fbe.over?(global:, options:, loog:, epoch:, kickoff:, quota_aware:, lifetime_aware:, timeout_aware:)
+        return false if Fbe.over?(
+          global:, options:, loog:, epoch:, kickoff:, quota_aware:, lifetime_aware:, timeout_aware:
+        )
         yield(repo)
       end
+      true
     end
   end
 end
