@@ -12,7 +12,8 @@ def some_pull_hoc_size(fact)
   files = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    found =
+      Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{(fact.when - 1).utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |json|
       pull =
