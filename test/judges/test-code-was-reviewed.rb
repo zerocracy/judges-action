@@ -492,4 +492,35 @@ class TestCodeWasReviewed < Jp::Test
       'A pull request that reports no additions and no deletions cannot abort the judge'
     )
   end
+
+  def test_null_pull_author_does_not_abort
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/71',
+      body: {
+        id: 71, number: 71, user: nil,
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 2, deletions: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/71/reviews?per_page=100',
+      body: [
+        { id: 72_001, user: { id: 422, login: 'reviewer' }, submitted_at: Time.parse('2025-09-02 10:00:00 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/71/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/71/reviews/72001/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'reviewer' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 71, where: 'github')
+    load_it('code-was-reviewed', fb)
+    f = fb.query("(eq what 'code-was-reviewed')").each.to_a.first
+    refute_nil(f)
+    assert_equal(422, f.who)
+    assert_nil(f['author'])
+    assert_equal(['author'], f['stale'])
+  end
+
 end
