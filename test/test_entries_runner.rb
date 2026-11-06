@@ -20,6 +20,8 @@ class TestEntriesRunner < Jp::Test
       assert_includes(log, 'nested')
       assert_includes(out, '❌ nested/check.sh failed')
       assert_equal(1, out.scan('👍🏻 check.sh passed').size)
+      assert_includes(File.read(File.join(dir, 'target/entries-logs/check.sh.txt')), 'root-token')
+      assert_includes(File.read(File.join(dir, 'target/entries-logs/nested/check.sh.txt')), 'nested-token')
     end
   end
 
@@ -49,7 +51,7 @@ class TestEntriesRunner < Jp::Test
   def script(dir, name, code, marker)
     path = File.join(dir, 'entries', name)
     FileUtils.mkdir_p(File.dirname(path))
-    File.write(path, "#!/bin/bash\necho #{marker} >> \"$1/executed.log\"\nexit #{code}\n")
+    File.write(path, "#!/bin/bash\necho #{marker}-token\necho #{marker} >> \"$1/executed.log\"\nexit #{code}\n")
     FileUtils.chmod(0o755, path)
   end
 
