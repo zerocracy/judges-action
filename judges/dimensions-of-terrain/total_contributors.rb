@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/humans'
 require_relative '../../lib/patches/unmask_repos'
 
 def total_contributors(_fact)
@@ -42,7 +43,7 @@ def total_contributors(_fact)
     measured = true
     list.each do |contributor|
       id = contributor[:id]
-      contributors << id unless id.nil?
+      contributors << id if id && Jp.human?(contributor)
     end
   end
   return {} unless measured

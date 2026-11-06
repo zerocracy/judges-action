@@ -15,6 +15,10 @@ def Jp.bots
   end
 end
 
+def Jp.human?(account)
+  account[:type] != 'Bot' && Jp.bots.none? { |b| b.casecmp?(account[:login].to_s) }
+end
+
 def Jp.human_comments(comments)
   bots = Jp.bots
   comments.reject do |c|
