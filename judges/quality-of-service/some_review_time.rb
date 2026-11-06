@@ -18,19 +18,22 @@ def some_review_time(fact)
     found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |pr|
-      all, csize =
-        begin
-          [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
-        rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
-          next
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to pull ##{pr[:number]} in #{repo} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
-          next
-        end
+      begin
+        all = Fbe.octo.pull_request_reviews(repo, pr[:number])
+        csize = Fbe.octo.review_comments(repo, pr[:number]).size
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
+        next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        return {}
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to pull ##{pr[:number]} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
       first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
       merged = pr.dig(:pull_request, :merged_at)
       if first && merged

@@ -18,6 +18,9 @@ def Jp.recovered(repo, workflow, since, judge: $judge, loog: $loog)
 rescue Octokit::NotFound, Octokit::Deprecated => e
   loog.info("No later runs of workflow ##{workflow} in #{repo}: #{e.message}")
   nil
+rescue Octokit::TooManyRequests => e
+  loog.warn("[#{judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+  raise
 rescue Octokit::Forbidden => e
   loog.warn(
     "[#{judge}] Access forbidden to later runs of workflow ##{workflow} in #{repo} " \
