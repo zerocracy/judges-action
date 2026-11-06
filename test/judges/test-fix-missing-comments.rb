@@ -57,4 +57,21 @@ class TestFixMissingComments < Jp::Test
       'the fact of a vanished repository is not stale, while the judge must mark it instead of aborting'
     )
   end
+
+  def test_fills_comments_of_pull_stale_only_by_who
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github', stale: 'who')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { number: 44, user: { id: 7 }, base: { repo: { full_name: 'foo/foo' } } },
+      'GET /repos/foo/foo/pulls/44/comments?per_page=100' => [],
+      'GET /repos/foo/foo/issues/44/comments?per_page=100' => [
+        { id: 1, user: { id: 8, login: 'ψ', type: 'User' }, body: 'здесь' }
+      ]
+    ).run do
+      Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('fix-missing-comments', fb) }
+    end
+    assert_equal([1], fb.pick(issue: 44)['comments'], 'the comments of a pull that lost only its author are not filled')
+  end
 end

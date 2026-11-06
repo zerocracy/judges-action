@@ -58,4 +58,38 @@ class TestFixMissingHoc < Jp::Test
       'a pull request reporting no additions and no deletions must be marked stale, not scored as empty'
     )
   end
+
+  def test_fills_hoc_of_pull_stale_only_by_who
+    seed = Random.new_seed
+    random = Random.new(seed)
+    additions = random.rand(10_000)
+    deletions = random.rand(10_000)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github', stale: 'who')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { id: 50, number: 44, state: 'closed', additions:, deletions: }
+    ).run do
+      load_it('fix-missing-hoc', fb)
+    end
+    assert_equal(
+      [additions + deletions], fb.pick(issue: 44)['hoc'],
+      "the hoc of a pull that lost only its author is not filled, seed #{seed}"
+    )
+  end
+
+  def test_skips_pull_stale_by_who_and_by_repository
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github', stale: 'who')
+    fb.pick(issue: 44).stale = 'repository'
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/pulls/44' => { id: 50, number: 44, state: 'closed', additions: 7, deletions: 3 }
+    ).run do
+      load_it('fix-missing-hoc', fb)
+    end
+    assert_nil(fb.pick(issue: 44)['hoc'], 'the hoc of a pull stale for more than its author is filled')
+  end
 end
