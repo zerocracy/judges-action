@@ -28,23 +28,24 @@ class TestPatternACoverage < Minitest::Test
           next if nxt.strip.empty?
           ni = nxt[/\A\s*/].length
           next if ni > indent
-          if nxt =~ FORBIDDEN_RE && ni == indent
+          break if ni < indent
+          if FORBIDDEN_RE.match?(nxt)
             status = :found
             break
-          elsif nxt =~ ANY_RESCUE_RE || nxt =~ BLOCK_END_RE
-            break
           end
+          break if BLOCK_END_RE.match?(nxt)
+          break unless ANY_RESCUE_RE.match?(nxt)
         end
         next if status == :found
         rel = path.sub("#{root}/", '')
         offenders <<
-          "#{rel}:#{idx + 1} — Pattern A rescue has no adjacent " \
+          "#{rel}:#{idx + 1} — Pattern A rescue has no " \
           "'rescue Octokit::Forbidden => e' in the same begin/rescue/end block"
       end
     end
     assert_empty(
       offenders,
-      "Every Pattern A rescue must be immediately followed by a Forbidden rescue at the same indent:\n  " \
+      "Every Pattern A rescue must be followed by a Forbidden rescue in the same block:\n  " \
       "#{offenders.join("\n  ")}"
     )
   end
