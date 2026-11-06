@@ -413,7 +413,28 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_total_issues_keeps_local_graph_bug
+  def test_total_issues_lets_unrescued_errors_propagate
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/bad', body: { full_name: 'foo/bad', archived: false })
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/bad' })
+    unrescued = Class.new(StandardError)
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_issues_and_pulls) do |_owner, _name|
+        raise(unrescued, 'not one of the transient errors the judge rescues')
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      assert_raises(unrescued) { total_issues(nil) }
+    end
+  end
+
+  def test_total_issues_does_not_rescue_octokit_unauthorized
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/bad', body: { full_name: 'foo/bad', archived: false })
@@ -424,12 +445,14 @@ class TestDimensionsOfTerrain < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/bad' })
     graph = Class.new(Fbe::Graph::Fake) do
       define_method(:total_issues_and_pulls) do |_owner, _name|
-        raise(NoMethodError, 'local bug')
+        raise(
+          Octokit::Unauthorized.new(method: :get, url: 'https://api.github.com', status: 401, body: 'bad credentials')
+        )
       end
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
-      assert_raises(NoMethodError) { total_issues(nil) }
+      assert_raises(Octokit::Unauthorized) { total_issues(nil) }
     end
   end
 
