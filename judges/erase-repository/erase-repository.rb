@@ -10,8 +10,10 @@ require 'logger'
 require 'octokit'
 
 good = {}
+quota = true
 
 Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').each do |f|
+  break unless quota
   next if Fbe.octo.off_quota?
   r = f.repository
   next unless good[r].nil?
@@ -19,6 +21,12 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').eac
     json = Fbe.octo.repository(r)
     good[r] = true
     throw(:"GitHub repository ##{r} is found: #{json[:full_name]}")
+  rescue Octokit::TooManyRequests => e
+    quota = false
+    $loog.warn(
+      "[#{$judge}] GitHub quota is exhausted at repository ##{r}, " \
+      "no more repositories will be checked in this cycle: #{e.class}: #{e.message}"
+    )
   rescue Octokit::NotFound, Octokit::Deprecated => e
     good[r] = false
     throw(:"GitHub repository ##{r} is not found: #{e.message}")
