@@ -3085,6 +3085,50 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_dont_measure_release_hoc_when_compare_cuts_the_files
+    seed = Random.new_seed
+    random = Random.new(seed)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '103',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_003,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '3.0.0',
+            name: 'v3.0.0',
+            created_at: Time.parse('2024-11-30T10:00:00Z'),
+            published_at: Time.parse('2024-11-30T10:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T10:00:00Z')
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...3.0.0?per_page=100',
+      body: {
+        status: 'ahead', total_commits: 1, commits: [{ sha: 'sha-3.0.0' }],
+        files: Array.new(300) { |i| { filename: "файл#{i}.rb", changes: random.rand(1..500) } }
+      }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_nil(
+      fb.pick(what: 'release-published')['hoc'],
+      "hoc of a release is taken from a compare that cut its files at 300, seed #{seed}"
+    )
+  end
+
   private
 
   def stub_event(*json)
