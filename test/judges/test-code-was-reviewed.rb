@@ -345,10 +345,9 @@ class TestCodeWasReviewed < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 93, where: 'github')
     load_it('code-was-reviewed', fb)
-    assert_equal(
-      0, fb.pick(what: 'code-was-reviewed', issue: 93).comments,
-      'a transient connection reset while counting issue comments must fall back to zero'
-    )
+    n = fb.query('(eq what "code-was-reviewed")').each.first
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    refute_includes(n.all_properties, 'comments', 'a transient connection reset cannot invent a zero comment count')
   end
 
   def test_rescues_deprecated_on_reviews_lookup
