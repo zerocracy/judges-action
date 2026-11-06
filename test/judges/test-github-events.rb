@@ -2744,6 +2744,49 @@ class TestGithubEvents < Jp::Test
     assert_equal([526_301], f.first[:contributors])
   end
 
+  def test_release_event_with_identical_compare_response
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      body: { status: 'identical', total_commits: 0, commits: [], files: [] }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    facts = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, facts.count)
+    assert_equal(0, facts.first.commits)
+    assert_equal(0, facts.first.hoc)
+    assert_nil(facts.first['last_commit'])
+  end
+
   def test_two_releases_in_one_page_never_compare_backwards
     WebMock.disable_net_connect!
     rate_limit_up
