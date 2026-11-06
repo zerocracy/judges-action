@@ -814,6 +814,113 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, f.last.review_comments)
   end
 
+  def test_oldest_approval_wins_over_newer_in_same_scan
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 9002,
+          type: 'PullRequestReviewEvent',
+          actor: { id: 11, login: 'reviewer' },
+          repo: { id: 42, name: 'foo/foo' },
+          created_at: '2025-06-01 10:00:00 UTC',
+          payload: {
+            action: 'created',
+            review: { id: 2, user: { id: 11, login: 'reviewer' }, state: 'approved' },
+            pull_request: { id: 70, number: 7 }
+          }
+        },
+        {
+          id: 9001,
+          type: 'PullRequestReviewEvent',
+          actor: { id: 11, login: 'reviewer' },
+          repo: { id: 42, name: 'foo/foo' },
+          created_at: '2025-06-01 09:30:00 UTC',
+          payload: {
+            action: 'created',
+            review: { id: 1, user: { id: 11, login: 'reviewer' }, state: 'approved' },
+            pull_request: { id: 70, number: 7 }
+          }
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/11', body: { id: 11, login: 'reviewer' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/7',
+      body: {
+        number: 7, user: { id: 526_200, login: 'author' },
+        additions: 5, deletions: 5, comments: 1, review_comments: 2,
+        commits: 3, changed_files: 4
+      }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "pull-was-reviewed")').each.to_a
+    assert_equal(1, f.count)
+    assert_equal(11, f.first.who)
+    assert_equal(7, f.first.issue)
+    assert_equal(Time.parse('2025-06-01 09:30:00 UTC'), f.first.when)
+    assert_equal(9001, f.first.event_id)
+  end
+
+  def test_two_approvals_in_separate_scans_keep_oldest
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 9002,
+          type: 'PullRequestReviewEvent',
+          actor: { id: 11, login: 'reviewer' },
+          repo: { id: 42, name: 'foo/foo' },
+          created_at: '2025-06-01 10:00:00 UTC',
+          payload: {
+            action: 'created',
+            review: { id: 2, user: { id: 11, login: 'reviewer' }, state: 'approved' },
+            pull_request: { id: 70, number: 7 }
+          }
+        },
+        {
+          id: 9001,
+          type: 'PullRequestReviewEvent',
+          actor: { id: 11, login: 'reviewer' },
+          repo: { id: 42, name: 'foo/foo' },
+          created_at: '2025-06-01 09:30:00 UTC',
+          payload: {
+            action: 'created',
+            review: { id: 1, user: { id: 11, login: 'reviewer' }, state: 'approved' },
+            pull_request: { id: 70, number: 7 }
+          }
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/11', body: { id: 11, login: 'reviewer' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/7',
+      body: {
+        number: 7, user: { id: 526_200, login: 'author' },
+        additions: 5, deletions: 5, comments: 1, review_comments: 2,
+        commits: 3, changed_files: 4
+      }
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    load_it('github-events', fb)
+    f = fb.query('(eq what "pull-was-reviewed")').each.to_a
+    assert_equal(1, f.count)
+    assert_equal(11, f.first.who)
+    assert_equal(7, f.first.issue)
+    assert_equal(Time.parse('2025-06-01 09:30:00 UTC'), f.first.when)
+    assert_equal(9001, f.first.event_id)
+  end
+
   def test_skip_pr_review_event_on_unknown_action
     WebMock.disable_net_connect!
     rate_limit_up
