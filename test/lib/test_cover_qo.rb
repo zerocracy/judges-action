@@ -86,6 +86,21 @@ class TestCoverQo < Minitest::Test
     end
   end
 
+  def test_does_not_duplicate_when_slice_is_zero
+    fb = Factbase.new
+    today = Time.parse('2025-01-20 12:00:00 UTC')
+    f = fb.insert
+    f.what = 'test-judge'
+    f.since = today
+    f.when = today
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(0, judge: 'test-judge', loog: Loog::NULL, today: today)
+      Jp.cover_qo(0, judge: 'test-judge', loog: Loog::NULL, today: today)
+      facts = fb.query("(eq what 'test-judge')").each.to_a
+      assert_equal(1, facts.size, 'no duplicate window when timeline is contiguous and slice is zero')
+    end
+  end
+
   def test_fills_multiple_gaps
     fb = Factbase.new
     now = Time.parse('2025-03-01 12:00:00 UTC')
@@ -284,7 +299,7 @@ class TestCoverQo < Minitest::Test
     end
   end
 
-  def test_skips_fact_exactly_at_slice_boundary
+  def test_adds_fresh_fact_exactly_at_slice_boundary
     fb = Factbase.new
     now = Time.parse('2025-01-20 12:00:00 UTC')
     slice = 10 * 24 * 60 * 60
@@ -295,8 +310,26 @@ class TestCoverQo < Minitest::Test
     f.when = boundary
     Fbe.stub(:fb, fb) do
       Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
+      assert_equal(2, facts.size, 'fresh fact added when last is exactly at slice boundary')
+      assert_equal(Integer(boundary), Integer(facts.last.since))
+      assert_equal(Integer(now), Integer(facts.last.when))
+    end
+  end
+
+  def test_does_not_add_fresh_fact_when_tail_is_shorter_than_slice
+    fb = Factbase.new
+    now = Time.parse('2025-01-20 12:00:00 UTC')
+    slice = 10 * 24 * 60 * 60
+    recent = now - slice + 1
+    f = fb.insert
+    f.what = 'test-judge'
+    f.since = recent - slice
+    f.when = recent
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(10, judge: 'test-judge', loog: Loog::NULL, today: now)
       facts = fb.query("(eq what 'test-judge')").each.to_a
-      assert_equal(1, facts.size, 'no fresh fact when last is exactly at slice boundary')
+      assert_equal(1, facts.size, 'no fresh fact when tail is one second shorter than slice')
     end
   end
 

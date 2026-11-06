@@ -22,7 +22,7 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
     end
     return
   end
-  if last && last < today - slice
+  if last && last < today && last <= today - slice
     Fbe.fb.insert.then do |n|
       n.what = judge
       n.since = last
