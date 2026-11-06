@@ -11,16 +11,19 @@ require 'tago'
 require 'time'
 require_relative 'jp'
 
+Jp::INCREMATE_MARKER = '_incremate'
+
 def Jp.incremate(
   fact, dir, prefix, avoid_duplicate: true, pause: 0,
   max_per_fact: nil,
   epoch: $epoch || Time.now, kickoff: $kickoff || Time.now
 )
+  return if max_per_fact&.zero?
   evaluated = 0
   Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
-    if fact[n]
-      $loog.debug("#{n} is here: #{fact[n].first}")
+    if fact[n] || fact[Jp::INCREMATE_MARKER]&.include?(n)
+      $loog.debug("#{n} is here: #{fact[n]&.first || 'empty'}")
       next
     end
     if pause.positive? && evaluated.positive?
@@ -42,11 +45,15 @@ def Jp.incremate(
       h.each do |k, v|
         next if k.to_s == n
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
-        Array(v).each { fact.__send__("#{k}=", _1) }
+        (v.is_a?(Time) ? [v] : Array(v)).each { fact.__send__("#{k}=", _1) }
       end
       marker = h.keys.find { |k| k.to_s == n }
       if !marker.nil? && !(avoid_duplicate && fact.all_properties.include?(n))
-        Array(h[marker]).each { fact.__send__("#{n}=", _1) }
+        value = h[marker]
+        (value.is_a?(Time) ? [value] : Array(value)).each { fact.__send__("#{n}=", _1) }
+      end
+      if h[n.to_sym].is_a?(Array) && h[n.to_sym].empty?
+        fact.__send__("#{Jp::INCREMATE_MARKER}=", n)
       end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
