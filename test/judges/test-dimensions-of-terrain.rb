@@ -413,7 +413,28 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_total_issues_keeps_local_graph_bug
+  def test_total_issues_lets_unrescued_errors_propagate
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/bad', body: { full_name: 'foo/bad', archived: false })
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/bad' })
+    unrescued = Class.new(StandardError)
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_issues_and_pulls) do |_owner, _name|
+        raise(unrescued, 'not one of the transient errors the judge rescues')
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      assert_raises(unrescued) { total_issues(nil) }
+    end
+  end
+
+  def test_total_issues_does_not_rescue_octokit_unauthorized
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/bad', body: { full_name: 'foo/bad', archived: false })
@@ -424,12 +445,14 @@ class TestDimensionsOfTerrain < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/bad' })
     graph = Class.new(Fbe::Graph::Fake) do
       define_method(:total_issues_and_pulls) do |_owner, _name|
-        raise(NoMethodError, 'local bug')
+        raise(
+          Octokit::Unauthorized.new(method: :get, url: 'https://api.github.com', status: 401, body: 'bad credentials')
+        )
       end
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
-      assert_raises(NoMethodError) { total_issues(nil) }
+      assert_raises(Octokit::Unauthorized) { total_issues(nil) }
     end
   end
 
@@ -1026,6 +1049,22 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_excludes_commits_after_the_measurement_time
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    fact = Factbase.new.insert
+    fact.when = Time.iso8601('2026-10-02T12:00:00Z')
+    inside = { author: { id: 101 }, commit: { author: { date: '2026-09-20T12:00:00Z' } } }
+    boundary = { author: { id: 303 }, commit: { author: { date: fact.when } } }
+    after = { author: { id: 202 }, commit: { author: { date: '2026-10-02T12:00:01Z' } } }
+    Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      [[after], [inside, after], [inside, inside, boundary, after]].zip([0, 1, 2]).each do |commits, expected|
+        Jp.stub(:qosearch, { items: commits }) do
+          assert_equal(expected, total_active_contributors(fact)[:total_active_contributors])
+        end
+      end
+    end
+  end
+
   def test_total_active_contributors
     require_relative('../../lib/qos_search')
     Jp.qoreset
@@ -1282,6 +1321,35 @@ class TestDimensionsOfTerrain < Jp::Test
         assert_equal(1, f.total_files)
       end
     end
+  end
+
+  def test_total_releases_stops_scanning_when_rate_limit_exhausted
+    rackenv = ENV.fetch('RACK_ENV', nil)
+    ENV['RACK_ENV'] = 'test'
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stubs =
+      %w[alpha beta].map do |name|
+        stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+        stub_request(:get, %r{^https://api\.github\.com/repos/foo/#{name}/releases}).to_return(
+          status: 403,
+          body: { message: 'API rate limit exceeded for installation ID 1' }.to_json,
+          headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+        )
+      end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/alpha,foo/beta' })
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_releases.rb'))
+    total_releases(nil)
+    assert_equal(
+      1, stubs.count { |stub| WebMock::RequestRegistry.instance.times_executed(stub.request_pattern).positive? },
+      'an exhausted rate limit must stop the scan, not send the judge on to the next repository'
+    )
+  ensure
+    rackenv.nil? ? ENV.delete('RACK_ENV') : ENV['RACK_ENV'] = rackenv
   end
 
   def test_not_fill_props_if_quota_consumed

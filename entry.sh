@@ -4,7 +4,15 @@
 
 set -e -o pipefail
 
-start=$(date +%s)
+# Elapsed time is measured by the uptime of the machine, which is not changed
+# when somebody adjusts the system clock while the action is running.
+uptime_seconds() {
+    local up
+    read -r up _ </proc/uptime
+    echo "${up%.*}"
+}
+
+start=$(uptime_seconds)
 
 # This value is modified by the .rultor.yml script:
 VERSION=0.0.0
@@ -83,7 +91,7 @@ if [[ ! "${name}" =~ ^[a-z][a-z0-9-]{1,23}$ ]]; then
     exit 1
 fi
 
-if [ -z "${INPUT_TOKEN}" ]; then
+if [ -z "${INPUT_TOKEN}" ] && [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" != 'true' ]; then
     echo "The 'token' plugin parameter is not set."
     echo "We stop here, since all further operations will fail anyway."
     echo "By the way, if you want to run it in 'dry' mode,"
@@ -153,7 +161,14 @@ else
 fi
 
 declare -a trash=()
-trap 'rm -rf "${trash[@]}"' EXIT INT TERM
+cleanup() {
+    if ((${#trash[@]})); then
+        rm -rf "${trash[@]}"
+    fi
+}
+trap cleanup EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
 
 if [ "$(printenv "INPUT_DRY-RUN" || echo 'false')" == 'true' ]; then
     ALL_JUDGES=$(mktemp -d)
@@ -347,15 +362,16 @@ else
         "--meta=workflow_url:${owner}" \
         "--meta=churn:$(cat churn.txt)" \
         "--meta=vitals_url:${VITALS_URL}" \
-        "--meta=duration:$(($(date +%s) - start))" \
+        "--meta=duration:$(($(uptime_seconds) - start))" \
         "--meta=action_version:${action_version}" \
         "--token=${INPUT_TOKEN}" \
         "${name}" "${fb}"
 fi
 
+churn_val=$(cat churn.txt 2>/dev/null || echo '0i/0d/0a')
+fb_size=$(ruby -e "require 'factbase'; f=Factbase.new; f.import(File.binread(ARGV[0])); puts f.size" "$fb" 2>/dev/null || echo '0')
+
 if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
-    churn_val=$(cat churn.txt 2>/dev/null || echo '0i/0d/0a')
-    fb_size=$(ruby -e "require 'factbase'; f=Factbase.new; f.import(File.binread(ARGV[0])); puts f.size" "$fb" 2>/dev/null || echo '0')
     title="judges-action ${action_version} did ${churn_val} to ${fb_size} facts"
     echo "Updating workflow run title to: ${title}"
     curl -s -X PATCH \
@@ -364,6 +380,9 @@ if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
         "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" \
         -d "$(jq -n --arg t "${title}" '{"display_title": $t}')" > /dev/null || \
         echo "Failed to update workflow run title (non-critical)"
+fi
+
+if [ -n "${GITHUB_STEP_SUMMARY}" ]; then
     {
         echo "## zerocracy run"
         echo ""
@@ -372,8 +391,8 @@ if [ -n "${GITHUB_RUN_ID}" ] && [ -n "$(printenv "INPUT_GITHUB-TOKEN")" ]; then
         echo "| Version | ${action_version} |"
         echo "| Churn | ${churn_val} |"
         echo "| Facts | ${fb_size} |"
-        echo "| Duration | $(($(date +%s) - start))s |"
+        echo "| Duration | $(($(uptime_seconds) - start))s |"
         echo "| Owner | ${owner} |"
         echo "| Vitals | [View](${VITALS_URL}) |"
-    } > "${GITHUB_WORKSPACE}/summary.md" 2>/dev/null || true
+    } >> "${GITHUB_STEP_SUMMARY}" || echo "Failed to write the run report to ${GITHUB_STEP_SUMMARY} (non-critical)"
 fi

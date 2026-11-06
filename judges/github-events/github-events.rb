@@ -80,7 +80,8 @@ Fbe.iterate do
       return info if json.nil?
       info[:commits] = json[:total_commits]
       info[:hoc] = json[:files].sum { |f| f[:changes] }
-      info[:last_commit] = json[:commits].last[:sha]
+      last = json[:commits].last
+      info[:last_commit] = last[:sha] unless last.nil?
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
@@ -263,9 +264,9 @@ Fbe.iterate do
             )
             []
           end
-        review = Jp.approval(reviews, pl[:closed_at])
-        fact.review = review[:submitted_at] if review
         author = pl.dig(:user, :id)
+        review = Jp.approval(reviews, pl[:closed_at], author)
+        fact.review = review[:submitted_at] if review
         fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \

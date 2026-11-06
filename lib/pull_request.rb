@@ -237,5 +237,19 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
 end
 
 def Jp.suggests?(body)
-  body.to_s.match?(/^\s*```+suggestion\b/i)
+  fence = nil
+  body.to_s.each_line do |line|
+    match = line.chomp.match(/\A {0,3}(`{3,}|~{3,})(.*)\z/)
+    next if match.nil?
+    marker = match[1]
+    info = match[2]
+    if fence
+      fence = nil if marker[0] == fence[0] && marker.length >= fence.length && info.strip.empty?
+      next
+    end
+    next if marker.start_with?('`') && info.include?('`')
+    return true if marker.start_with?('`') && info.lstrip.match?(/\Asuggestion\b/i)
+    fence = marker
+  end
+  false
 end

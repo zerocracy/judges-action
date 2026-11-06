@@ -478,6 +478,25 @@ class TestPullRequest < Jp::Test
     end
   end
 
+  def test_suggests_ignores_examples_inside_code_fences
+    [
+      "````markdown\n```suggestion\nexample\n```\n````",
+      "~~~markdown\n```suggestion\nexample\n```\n~~~",
+      "````markdown\n```\n```suggestion\nexample\n````"
+    ].each do |body|
+      refute(Jp.suggests?(body), body)
+    end
+  end
+
+  def test_suggests_reads_a_real_suggestion_after_a_code_example
+    body = "````markdown\n```suggestion\nexample\n```\n````\n```suggestion\nreplacement\n```"
+    assert(Jp.suggests?(body))
+  end
+
+  def test_suggests_does_not_close_a_fence_with_a_different_marker
+    refute(Jp.suggests?("````markdown\n~~~~\n```suggestion\nexample\n```"))
+  end
+
   def test_count_suggestions_with_provided_reviews
     WebMock.disable_net_connect!
     rate_limit_up
@@ -489,6 +508,7 @@ class TestPullRequest < Jp::Test
       'https://api.github.com/repos/foo/foo/pulls/1/reviews/10/comments?per_page=100',
       body: [
         { id: 1, user: { id: 100 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" },
+        { id: 8, user: { id: 100 }, in_reply_to_id: nil, body: "````markdown\n```suggestion\nexample\n```\n````" },
         { id: 2, user: { id: 300 }, in_reply_to_id: nil, body: "```suggestion\nx\n```" },
         { id: 3, user: { id: 100 }, in_reply_to_id: 1, body: "```suggestion\nx\n```" }
       ]
