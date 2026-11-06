@@ -38,4 +38,20 @@ class TestSupervision < Minitest::Test
       end
     end
   end
+
+  def test_supervision_keeps_original_exception_for_inconvertible_message_encoding
+    $loog = Loog::Buffer.new
+    error = RuntimeError.new((+'some error').force_encoding(Encoding::UTF_7))
+    raised =
+      assert_raises(RuntimeError) do
+        Jp.supervision({ 'repo' => 'zerocracy/judges-action' }) do
+          raise(error)
+        end
+      end
+    assert_same(error, raised)
+    $loog.to_s.then do |s|
+      assert_match('RuntimeError: "', s)
+      assert_match('"repo": "zerocracy/judges-action"', s)
+    end
+  end
 end
