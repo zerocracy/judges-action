@@ -61,4 +61,62 @@ class TestFillFact < Minitest::Test
       Jp.fill_fact_by_hash(f, { "commits\nall_properties" => 1 })
     end
   end
+
+  def test_rejects_a_nil_fact
+    error = assert_raises(ArgumentError) { Jp.fill_fact_by_hash(nil, { 'commits' => 42 }) }
+    assert_equal('The fact cannot be nil', error.message)
+  end
+
+  def test_rejects_a_nil_fact_with_empty_hash
+    error = assert_raises(ArgumentError) { Jp.fill_fact_by_hash(nil, {}) }
+    assert_equal('The fact cannot be nil', error.message)
+  end
+
+  def test_rejects_a_nil_hash
+    fb = Factbase.new
+    fact = fb.insert
+    error = assert_raises(ArgumentError) { Jp.fill_fact_by_hash(fact, nil) }
+    assert_equal('The hash cannot be nil', error.message)
+  end
+
+  def test_handles_an_empty_hash_gracefully
+    fb = Factbase.new
+    fact = fb.insert
+    Jp.fill_fact_by_hash(fact, {})
+    assert_empty(fact.all_properties)
+  end
+
+  def test_sets_properties_from_symbol_keys
+    fb = Factbase.new
+    fact = fb.insert
+    Jp.fill_fact_by_hash(fact, { count: 99 })
+    assert_equal(99, fact.count)
+  end
+
+  def test_sets_multiple_valid_properties
+    fb = Factbase.new
+    fact = fb.insert
+    Jp.fill_fact_by_hash(fact, { 'first' => 10, 'second' => 20 })
+    assert_equal(10, fact.first)
+    assert_equal(20, fact.second)
+  end
+
+  def test_sets_array_of_numbers_from_symbol_key
+    fb = Factbase.new
+    fact = fb.insert
+    Jp.fill_fact_by_hash(fact, { numbers: [1, 2, 3] })
+    assert_equal([1, 2, 3], fact['numbers'])
+  end
+
+  def test_sets_string_value_from_symbol_key
+    fb = Factbase.new
+    fact = fb.insert
+    Jp.fill_fact_by_hash(fact, { name: 'alpha' })
+    assert_equal('alpha', fact.name)
+  end
+
+  def test_rejects_both_nil_fact_and_nil_hash
+    error = assert_raises(ArgumentError) { Jp.fill_fact_by_hash(nil, nil) }
+    assert_equal('The fact cannot be nil', error.message)
+  end
 end
