@@ -267,4 +267,20 @@ class TestIssueWasClosed < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_checks_issue_whose_first_fact_is_stale
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: { number: 44, title: 'some title 44', state: 'open' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'bug-was-accepted', repository: 42, issue: 44, where: 'github', stale: 'who')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert_requested(:get, 'https://api.github.com/repos/foo/foo/issues/44')
+  end
 end
