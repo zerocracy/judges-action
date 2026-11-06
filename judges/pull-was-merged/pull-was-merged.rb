@@ -174,8 +174,9 @@ Fbe.iterate do
         nn.stale = 'who'
       end
       nn.when = json[:closed_at] ? Time.parse(json[:closed_at].iso8601) : Time.now
-      review = Jp.approval(reviews, json[:closed_at])
-      nn.review = review[:submitted_at] if review
+      author = json.dig(:user, :id)
+      review = Jp.approval(Jp.human_comments(reviews).reject { |r| r.dig(:user, :id) == author }, json[:closed_at])
+      nn.review = review[:submitted_at] if review && review[:submitted_at]
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("The pull #{Fbe.issue(nn)} was #{nn.what.inspect} #{nn.when.ago} ago")
     end
