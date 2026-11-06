@@ -100,6 +100,7 @@ unless alive.empty?
   Fbe.fb.query(
     "(and
       (exists _id)
+      (eq where 'github')
       (eq stale 'who')
       (exists who)
       (or #{alive.map { |u| "(eq who #{u})" }.join}))"
