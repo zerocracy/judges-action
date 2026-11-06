@@ -324,6 +324,36 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
+  def test_leaves_review_unset_when_only_the_author_and_bots_reviewed
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_base(44)
+    stub_pull_was_merged_issue(44)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        {
+          id: 1, state: 'COMMENTED', user: { id: 421, login: 'user', type: 'User' },
+          submitted_at: '2025-09-29 05:05:46 UTC'
+        },
+        {
+          id: 2, state: 'APPROVED', user: { id: 9, login: 'copilot', type: 'Bot' },
+          submitted_at: '2025-09-29 06:00:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/2/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    fact = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    refute_nil(fact)
+    assert_nil(fact['review'])
+  end
+
   def test_rescues_forbidden_on_pull_request_lookup
     WebMock.disable_net_connect!
     rate_limit_up

@@ -263,9 +263,9 @@ Fbe.iterate do
             )
             []
           end
-        review = Jp.approval(reviews, pl[:closed_at])
-        fact.review = review[:submitted_at] if review
         author = pl.dig(:user, :id)
+        review = Jp.approval(reviews, pl[:closed_at], author)
+        fact.review = review[:submitted_at] if review
         fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
