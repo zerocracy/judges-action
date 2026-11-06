@@ -266,7 +266,7 @@ Fbe.iterate do
         review = Jp.approval(reviews, pl[:closed_at])
         fact.review = review[:submitted_at] if review
         author = pl.dig(:user, :id)
-        fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
+        fact.suggestions = Jp.count_suggestions(rname, fact.issue, author, reviews) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \

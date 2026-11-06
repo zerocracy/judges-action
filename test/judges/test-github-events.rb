@@ -2685,6 +2685,63 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, f.suggestions)
   end
 
+  def test_closed_pr_counts_suggestions_from_the_same_reviews
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '11131',
+        type: 'PullRequestEvent',
+        actor: { id: 45, login: 'user' },
+        repo: { id: 42, name: 'foo/foo' },
+        payload: {
+          action: 'closed',
+          pull_request: { number: 123, head: { ref: 'feature-branch', sha: 'abc123' } }
+        },
+        created_at: '2025-10-20 19:00:05 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: {
+        id: 50, number: 123, user: { id: 45, login: 'user' },
+        head: { ref: 'feature-branch', sha: 'abc123' },
+        merged: true, state: 'closed', merged_at: Time.parse('2025-10-20 19:00:05 UTC'),
+        additions: 10, deletions: 5
+      }
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123/reviews/123/comments?per_page=100',
+      body: [{ id: 22_100, body: "```suggestion\nx\n```", user: { id: 46, login: 'user2' } }]
+    )
+    reviews =
+      stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100')
+        .to_return(
+          {
+            status: 403,
+            body: { message: 'Resource not accessible by integration' }.to_json,
+            headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+          },
+          {
+            body: [{ id: 123, user: { id: 46, login: 'user2' }, submitted_at: '2025-10-20 18:05:00 UTC' }].to_json,
+            headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
+          }
+        )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(eq what "pull-was-merged")').each.first
+    refute_nil(f)
+    assert_nil(f['review'])
+    assert_equal(0, f.suggestions)
+    assert_requested(reviews, times: 1, message: 'the reviews of a closed pull cannot be fetched twice')
+  end
+
   def test_release_event_with_nil_compare_response
     WebMock.disable_net_connect!
     rate_limit_up
