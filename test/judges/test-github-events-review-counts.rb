@@ -192,6 +192,8 @@ class TestGithubEventsReviewCounts < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/issues/93/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/93/comments?per_page=100', body: [])
     stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/93')
       .to_return(
         status: 200,
