@@ -16,7 +16,10 @@ run_test() {
         exit 1
     fi
     mkdir -p "${base}/target/${sh}"
-    if /bin/bash -c "cd \"target/${sh}\" && exec \"${fqn}\" \"${base}\" > \"${base}/target/entries-logs/${sh}.txt\" 2>&1"; then
+    if (
+        cd "target/${sh}" &&
+        exec "${fqn}" "${base}" > "${base}/target/entries-logs/${sh}.txt" 2>&1
+    ); then
         echo "👍🏻 ${sh} passed"
         return 0
     else
