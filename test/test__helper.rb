@@ -57,6 +57,18 @@ class Jp::Test < Minitest::Test
     load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
 
+  def stub_build_runs(repo, created, push: 0, pull_request: 0, merge_group: 0, status: 200)
+    {
+      'push' => push, 'pull_request' => pull_request, 'merge_group' => merge_group
+    }.each do |event, total|
+      stub_github(
+        "https://api.github.com/repos/#{repo}/actions/runs?created=#{created}&event=#{event}&per_page=1",
+        body: (status == 200 ? { total_count: total, workflow_runs: [] } : { message: 'Not Available' }),
+        status:
+      )
+    end
+  end
+
   def stub_github(
     url, body:, method: :get, status: 200,
     headers: { 'Content-Type': 'application/json', 'X-RateLimit-Remaining' => '999' }
