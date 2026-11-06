@@ -8,6 +8,8 @@ require_relative 'jp'
 Jp::FILL_FACT_FORBIDDEN = %w[all_properties method_missing].freeze
 
 def Jp.fill_fact_by_hash(fact, hash)
+  raise(ArgumentError, 'The fact cannot be nil') if fact.nil?
+  raise(ArgumentError, 'The hash cannot be nil') if hash.nil?
   hash.each do |prop, value|
     raise(ArgumentError, "Invalid property name: #{prop.inspect}") unless /\A[_a-z][a-zA-Z0-9_]*\z/.match?(prop.to_s)
     if Jp::FILL_FACT_FORBIDDEN.include?(prop.to_s)
