@@ -91,6 +91,32 @@ class TestWhoIsAlive < Jp::Test
     end
   end
 
+  def test_marks_a_live_user_so_the_next_cycle_leaves_it_alone
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'who-has-name', where: 'github', who: 10, name: 'user0',
+      when: Time.parse('2025-06-23 20:00:00 UTC')
+    )
+    now = Time.parse('2025-06-25 22:00:00 UTC')
+    Time.stub(:now, now) do
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { rate: { remaining: 222 } },
+        'GET /user/10' => { login: 'user0', id: 10, type: 'User' }
+      ).run do
+        load_it('who-is-alive', fb)
+      end
+    end
+    fact = fb.query('(eq who 10)').each.first
+    refute_nil(fact['alive_when'], 'the user was checked but nothing recorded that')
+    assert_operator(fact['alive_when'].first, :>, now - 60, 'the mark is older than the check')
+    Time.stub(:now, now + (60 * 60)) do
+      Jp::FakeGithub.new('GET /rate_limit' => { rate: { remaining: 222 } }).run do
+        load_it('who-is-alive', fb)
+      end
+    end
+    assert_equal(1, fb.all.size, 'the same user was looked up again an hour later')
+  end
+
   def test_keeps_fact_on_forbidden_user_lookup
     fb = Factbase.new
     fb.with(
