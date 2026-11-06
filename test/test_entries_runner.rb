@@ -8,7 +8,6 @@ require 'minitest/autorun'
 require 'open3'
 require 'tmpdir'
 
-# Regression test for https://github.com/zerocracy/judges-action/issues/3083
 class TestEntriesRunner < Minitest::Test
   ROOT = File.expand_path('..', __dir__)
 
@@ -17,12 +16,10 @@ class TestEntriesRunner < Minitest::Test
       checkout = File.join(tmp, 'checkout" name')
       copy_runner(checkout)
       marker = File.join(checkout, 'marker')
-
       write_entry(checkout, "printf 'ran' > \"$1/marker\"\n")
       output, status = run_entries(checkout)
       assert_predicate(status, :success?, output)
       assert(File.file?(marker), "The entry did not run in #{checkout}:\n#{output}")
-
       write_entry(checkout, "printf 'ran' > \"$1/marker\"\nexit 3\n")
       output, status = run_entries(checkout)
       refute_predicate(status, :success?, "The entry exit status 3 was lost:\n#{output}")
