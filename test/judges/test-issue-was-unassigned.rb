@@ -188,4 +188,35 @@ class TestIssueWasUnassigned < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_goes_on_when_unassigned_user_has_deleted_the_account
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/7', status: 404, body: { message: 'Not Found' })
+    stub_github('https://api.github.com/user/8', body: { id: 8, login: 'user8' })
+    [[44, 7], [45, 8]].each do |issue, who|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/issues/#{issue}/events?per_page=100",
+        body: [
+          {
+            id: 300 + issue, event: 'unassigned',
+            assignee: { id: who, login: "user#{who}" },
+            created_at: '2025-10-02 21:05:00 UTC'
+          }
+        ]
+      )
+    end
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 7,
+      when: Time.parse('2025-10-01 19:05:00 UTC')
+    ).with(
+      _id: 2, what: 'issue-was-assigned', repository: 42, issue: 45, where: 'github', who: 8,
+      when: Time.parse('2025-10-01 19:05:00 UTC')
+    )
+    load_it('issue-was-unassigned', fb)
+    refute_nil(fb.query('(eq _id 1)').each.first['unassigned'], 'a deleted account must not stop the judge')
+    refute_nil(fb.query('(eq _id 2)').each.first['unassigned'], 'the next assignment must be processed too')
+  end
 end
