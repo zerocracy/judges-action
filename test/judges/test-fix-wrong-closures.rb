@@ -88,6 +88,10 @@ class TestFixWrongClosures < Jp::Test
       fb.one?(what: 'pull-was-merged', where: 'github', repository: 42, issue: 60),
       'The closure of a pull with a known merge is turned into a second merge'
     )
+    assert_empty(
+      fb.query('(and (eq what "pull-was-closed") (eq issue 60))').each.to_a,
+      'The closure of a pull with a known merge is not forgotten'
+    )
   end
 
   def test_forgets_the_closure_of_a_reopened_pull
