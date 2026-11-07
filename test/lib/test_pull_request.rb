@@ -362,6 +362,34 @@ class TestPullRequest < Jp::Test
     assert_equal(0, count)
   end
 
+  def test_counts_appreciated_skips_issue_deprecated
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/comments/701/reactions')
+      .to_return(status: 410, headers: { 'Content-Type': 'application/json' }, body: '{}')
+    pr = { base: { repo: { full_name: 'foo/foo' } } }
+    count = Jp.count_appreciated_comments(pr, [{ id: 701, user: { id: 1 } }], [])
+    assert_equal(0, count)
+    assert_requested(:get, 'https://api.github.com/repos/foo/foo/issues/comments/701/reactions')
+  end
+
+  def test_counts_appreciated_skips_code_deprecated
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/comments/702/reactions')
+      .to_return(status: 410, headers: { 'Content-Type': 'application/json' }, body: '{}')
+    pr = { base: { repo: { full_name: 'foo/foo' } } }
+    count = Jp.count_appreciated_comments(pr, [], [{ id: 702, user: { id: 1 } }])
+    assert_equal(0, count)
+    assert_requested(:get, 'https://api.github.com/repos/foo/foo/pulls/comments/702/reactions')
+  end
+
   def test_counts_only_the_comments_that_people_made
     WebMock.disable_net_connect!
     rate_limit_up
@@ -438,6 +466,67 @@ class TestPullRequest < Jp::Test
       info = Jp.comments_info(pr)
       refute_nil(info)
       assert_equal(0, info[:comments_to_code])
+    end
+  end
+
+  def test_skips_pr_comments_on_deprecated
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/90/comments?per_page=100',
+      status: 410, body: { message: 'Gone' }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/90/comments?per_page=100', body: [])
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 90, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(0, info[:comments_to_code])
+      assert_requested(:get, 'https://api.github.com/repos/foo/foo/pulls/90/comments?per_page=100')
+    end
+  end
+
+  def test_skips_issue_comments_on_deprecated
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/91/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/91/comments?per_page=100',
+      status: 410, body: { message: 'Gone' }
+    )
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 91, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(0, info[:comments])
+      assert_equal(0, info[:comments_by_author])
+      assert_equal(0, info[:comments_by_reviewers])
+      assert_requested(:get, 'https://api.github.com/repos/foo/foo/issues/91/comments?per_page=100')
+    end
+  end
+
+  def test_skips_issue_comments_on_not_found
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/92/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/92/comments?per_page=100',
+      status: 404, body: { message: 'Not Found' }
+    )
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      pr = { number: 92, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      info = Jp.comments_info(pr)
+      assert_equal(0, info[:comments])
+      assert_equal(0, info[:comments_by_author])
+      assert_equal(0, info[:comments_by_reviewers])
+      assert_requested(:get, 'https://api.github.com/repos/foo/foo/issues/92/comments?per_page=100')
     end
   end
 
