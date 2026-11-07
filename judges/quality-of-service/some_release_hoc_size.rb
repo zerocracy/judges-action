@@ -25,8 +25,7 @@ def some_release_hoc_size(fact)
         )
         next
       end
-    releases.each do |json|
-      next if json[:published_at].nil?
+    releases.reject { |json| json[:published_at].nil? }.sort_by { |json| json[:published_at] }.reverse_each do |json|
       next if json[:published_at] > fact.when
       (grouped[repo] ||= []) << json
       break if json[:published_at] < fact.since
