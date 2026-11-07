@@ -10,6 +10,14 @@ require_relative '../../lib/cover_qo'
 require_relative '../test__helper'
 
 class TestCoverQo < Minitest::Test
+  def test_refuses_a_window_of_zero_days
+    assert_refused(0)
+  end
+
+  def test_refuses_a_window_of_negative_days
+    assert_refused(-3)
+  end
+
   def test_inserts_first_fact_when_none_exist
     fb = Factbase.new
     Fbe.stub(:fb, fb) do
@@ -326,7 +334,7 @@ class TestCoverQo < Minitest::Test
           fact.since == Time.parse('2025-02-01 12:00:00 UTC')
         end
       refute_nil(gap, 'gap after nested window is filled')
-      assert_equal(Time.parse('2025-02-20 12:00:00 UTC'), gap.when)
+      assert_equal(Time.parse('2025-02-11 12:00:00 UTC'), gap.when)
     end
   end
 
@@ -457,5 +465,24 @@ class TestCoverQo < Minitest::Test
       assert_equal([7 * 24 * 60 * 60], facts.to_set { |x| Integer(x.when - x.since) }.to_a)
       facts.each_cons(2) { |a, b| assert_equal(Integer(a.when), Integer(b.since)) }
     end
+  end
+
+  private
+
+  def assert_refused(days)
+    fb = Factbase.new
+    f = fb.insert
+    f.what = 'test-judge'
+    f.since = Time.parse('2025-01-01 00:00:00 UTC')
+    f.when = Time.parse('2025-01-02 00:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      assert_includes(
+        assert_raises(ArgumentError) do
+          Jp.cover_qo(days, judge: 'test-judge', loog: Loog::NULL, today: Time.parse('2025-02-01 00:00:00 UTC'))
+        end.message,
+        'positive number of days'
+      )
+    end
+    assert_equal(1, fb.size, 'no fact may be inserted for a window that is not positive')
   end
 end
