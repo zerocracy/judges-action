@@ -35,7 +35,7 @@ module Fbe
               octo.repositories(org)
             end
           rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden, Octokit::Unauthorized,
-            Octokit::ServerError, Faraday::ConnectionFailed, Faraday::TimeoutError => e
+            Octokit::ServerError, Faraday::ConnectionFailed, Faraday::TimeoutError, Fbe::OffQuota => e
             loog.warn(
               "[#{$judge}] Cannot list the repositories of #{org.inspect}, " \
               "skipping the #{mask.inspect} mask (will retry next cycle): #{e.class}: #{e.message}"
@@ -63,7 +63,7 @@ module Fbe
         )
         false
       rescue Octokit::ServerError, Octokit::Unauthorized,
-        Faraday::ConnectionFailed, Faraday::TimeoutError => e
+        Faraday::ConnectionFailed, Faraday::TimeoutError, Fbe::OffQuota => e
         $loog.warn(
           "[#{$judge}] Cannot tell whether #{repo} is archived, assuming it is not " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
