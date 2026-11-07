@@ -865,6 +865,64 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_build_mttr_retries_when_the_quota_dies_before_the_repair
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    quota = false
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| quota }
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          {
+            id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101,
+            run_started_at: Time.parse('2024-08-08T10:00:00Z')
+          }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) do |*|
+      quota = true
+      { run_duration_ms: 900_000 }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        Time.stub(:now, Time.parse('2024-08-16T21:00:00Z')) do
+          assert_equal(
+            {}, some_build_success_rate(fact), 'a window whose repair was not read is not finalized on a quota loss'
+          )
+        end
+      end
+    end
+  end
+
+  def test_some_build_mttr_defers_when_any_repo_has_an_open_failure
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-08T10:00:00Z')
+    runs = {
+      'foo/clean' => [{ id: 1, status: 'completed', conclusion: 'success', workflow_id: 101, run_started_at: started }],
+      'foo/broken' => [{ id: 2, status: 'completed', conclusion: 'failure', workflow_id: 102, run_started_at: started }]
+    }
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repository_workflow_runs) { |repo, **| { workflow_runs: runs[repo] } }
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 900_000 } }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:workflow_runs) { |*| { workflow_runs: [] } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      [%w[foo/clean foo/broken], %w[foo/broken foo/clean]].each do |repos|
+        Fbe.stub(:unmask_repos, ->(&block) { repos.each(&block) }) do
+          Time.stub(:now, Time.parse('2024-08-10T21:00:00Z')) do
+            assert_equal({}, some_build_success_rate(fact), "an open failure is not masked by a clean repo (#{repos})")
+          end
+        end
+      end
+    end
+  end
+
   def test_some_build_mttr_on_repeated_failures
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(

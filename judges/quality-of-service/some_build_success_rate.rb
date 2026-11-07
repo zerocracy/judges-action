@@ -70,6 +70,7 @@ def some_build_success_rate(fact)
     failed.each do |wid, broke|
       recovery = Jp.recovered(repo, wid, fact.when)
       if recovery.nil?
+        return {} if Fbe.octo.off_quota?
         pending = true
         next
       end
