@@ -2,12 +2,15 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 5m26s: execution expired'
+  error:
+  - deadlock; recursive locking
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 9m29s: execution expired'
   inserted: 8
-  seconds: 1215.810139798
+  seconds: 1284.609239517
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-07 14:21:49.702982303 Z
+  when: 2026-11-07 15:23:08.506398575 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -148604,7 +148607,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 41
+  min_issue_was_found: 0
   min_pull_was_found: 21
   repository: 1090089359
   types_were_scanned: 0
@@ -150791,12 +150794,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26433802286
+  events_were_scanned: 19425417630
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 73
+  min_issue_was_found: 78
   min_pull_was_found: 124
   repository: 974194993
   types_were_scanned: 0
@@ -157310,12 +157313,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26439008613
+  events_were_scanned: 26444521772
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 297
+  min_issue_was_found: 298
   min_pull_was_found: 207
   repository: 849726475
   types_were_scanned: 0
@@ -157544,7 +157547,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26433055362
+  events_were_scanned: 26440366818
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 141
@@ -157567,7 +157570,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 29
+  min_issue_was_found: 30
   min_pull_was_found: 74
   repository: 1084843345
   types_were_scanned: 0
@@ -157577,25 +157580,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1669
-  closures_were_checked: 1759
+  assignees_were_scanned: 1865
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26436633716
+  events_were_scanned: 26443312844
   issues_were_scanned: 1396
-  labels_were_scanned: 1852
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 1556
-  min_issue_was_found: 1870
+  merges_were_scanned: 1673
+  min_issue_was_found: 1871
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 719
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26413943396
@@ -157606,7 +157609,7 @@
   min_issue_was_found: 361
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -157621,7 +157624,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 142
   repository: 857659265
   types_were_scanned: 0
@@ -158023,18 +158026,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1013
-  closures_were_checked: 0
+  assignees_were_scanned: 1110
+  closures_were_checked: 931
   earliest_issue_was_found: 1
   events_were_scanned: 26434379246
   issues_were_scanned: 1225
-  labels_were_scanned: 1766
+  labels_were_scanned: 1830
   latest_issue_was_found: 317
-  merges_were_scanned: 949
+  merges_were_scanned: 1270
   min_issue_was_found: 1852
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 586
+  types_were_scanned: 728
   what: iterate
   where: github
 - _id: 2629882
@@ -158680,18 +158683,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1387
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19421450393
+  events_were_scanned: 19425260886
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1330
-  min_issue_was_found: 1355
+  merges_were_scanned: 0
+  min_issue_was_found: 1356
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 1317
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -158826,18 +158829,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 618
+  assignees_were_scanned: 682
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26430298269
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
-  min_issue_was_found: 0
+  merges_were_scanned: 763
+  min_issue_was_found: 1049
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 1077
+  types_were_scanned: 1239
   what: iterate
   where: github
 - _id: 2630023
@@ -158862,18 +158865,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1476
-  closures_were_checked: 0
+  assignees_were_scanned: 1669
+  closures_were_checked: 1744
   earliest_issue_was_found: 1
-  events_were_scanned: 26438969576
+  events_were_scanned: 26445557157
   issues_were_scanned: 2725
-  labels_were_scanned: 2975
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
-  merges_were_scanned: 2560
+  merges_were_scanned: 2664
   min_issue_was_found: 2978
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 2975
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -158888,7 +158891,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 20
+  min_issue_was_found: 21
   min_pull_was_found: 14
   repository: 1081929119
   types_were_scanned: 0
@@ -158898,18 +158901,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26437872496
+  events_were_scanned: 26445127654
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1187
+  min_issue_was_found: 1188
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1186
   what: iterate
   where: github
 - _id: 2630038
@@ -481703,7 +481706,7 @@
   issue: 1863
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 17:28:27.000000000 Z
+  when: &6436 2026-10-28 17:28:27.000000000 Z
   where: github
   who: 113778529
 - _id: 2649927
@@ -481836,7 +481839,7 @@
   issue: 1868
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 19:12:40.000000000 Z
+  when: &6437 2026-10-28 19:12:40.000000000 Z
   where: github
   who: 113778529
 - _id: 2649938
@@ -481886,7 +481889,7 @@
   issue: 1869
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 19:13:54.000000000 Z
+  when: &6438 2026-10-28 19:13:54.000000000 Z
   where: github
   who: 113778529
 - _id: 2649942
@@ -481898,7 +481901,7 @@
   issue: 1870
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 19:16:42.000000000 Z
+  when: &6439 2026-10-28 19:16:42.000000000 Z
   where: github
   who: 113778529
 - _id: 2649944
@@ -482842,7 +482845,7 @@
   issue: 1876
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:46:58.000000000 Z
+  when: &6440 2026-10-28 21:46:58.000000000 Z
   where: github
   who: 125282851
 - _id: 2650017
@@ -482854,7 +482857,7 @@
   issue: 1875
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:46:53.000000000 Z
+  when: &6441 2026-10-28 21:46:53.000000000 Z
   where: github
   who: 125282851
 - _id: 2650018
@@ -482878,7 +482881,7 @@
   issue: 1873
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:46:45.000000000 Z
+  when: &6442 2026-10-28 21:46:45.000000000 Z
   where: github
   who: 125282851
 - _id: 2650020
@@ -482890,7 +482893,7 @@
   issue: 1872
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:46:41.000000000 Z
+  when: &6443 2026-10-28 21:46:41.000000000 Z
   where: github
   who: 125282851
 - _id: 2650021
@@ -482930,7 +482933,7 @@
   issue: 1884
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:47:34.000000000 Z
+  when: &6444 2026-10-28 21:47:34.000000000 Z
   where: github
   who: 125282851
 - _id: 2650024
@@ -482944,7 +482947,7 @@
   issue: 1883
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:47:30.000000000 Z
+  when: &6445 2026-10-28 21:47:30.000000000 Z
   where: github
   who: 125282851
 - _id: 2650025
@@ -482958,7 +482961,7 @@
   issue: 1882
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:47:25.000000000 Z
+  when: &6446 2026-10-28 21:47:25.000000000 Z
   where: github
   who: 125282851
 - _id: 2650026
@@ -482972,7 +482975,7 @@
   issue: 1881
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:47:21.000000000 Z
+  when: &6447 2026-10-28 21:47:21.000000000 Z
   where: github
   who: 125282851
 - _id: 2650027
@@ -482986,7 +482989,7 @@
   issue: 1880
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:47:17.000000000 Z
+  when: &6448 2026-10-28 21:47:17.000000000 Z
   where: github
   who: 125282851
 - _id: 2650028
@@ -483000,7 +483003,7 @@
   issue: 1879
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:47:12.000000000 Z
+  when: &6449 2026-10-28 21:47:12.000000000 Z
   where: github
   who: 125282851
 - _id: 2650029
@@ -483014,7 +483017,7 @@
   issue: 1878
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-28 21:47:08.000000000 Z
+  when: &6450 2026-10-28 21:47:08.000000000 Z
   where: github
   who: 125282851
 - _id: 2650030
@@ -483597,7 +483600,7 @@
   issue: 1893
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-29 12:43:28.000000000 Z
+  when: &6451 2026-10-29 12:43:28.000000000 Z
   where: github
   who: 125282851
 - _id: 2650073
@@ -483609,7 +483612,7 @@
   issue: 1892
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-29 12:43:27.000000000 Z
+  when: &6452 2026-10-29 12:43:27.000000000 Z
   where: github
   who: 125282851
 - _id: 2650074
@@ -483679,7 +483682,7 @@
   issue: 1898
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-29 16:41:23.000000000 Z
+  when: &6453 2026-10-29 16:41:23.000000000 Z
   where: github
   who: 113778529
 - _id: 2650079
@@ -483870,7 +483873,7 @@
   issue: 1896
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-29 16:35:49.000000000 Z
+  when: &6454 2026-10-29 16:35:49.000000000 Z
   where: github
   who: 113778529
 - _id: 2650093
@@ -484073,7 +484076,7 @@
   issue: 1899
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-29 18:20:42.000000000 Z
+  when: &6455 2026-10-29 18:20:42.000000000 Z
   where: github
   who: 113778529
 - _id: 2650109
@@ -484187,7 +484190,7 @@
   issue: 1900
   repository: 798641472
   what: issue-was-opened
-  when: 2026-10-29 18:44:40.000000000 Z
+  when: &6456 2026-10-29 18:44:40.000000000 Z
   where: github
   who: 125282851
 - _id: 2650116
@@ -504256,7 +504259,7 @@
   issue: 1954
   repository: 798641472
   what: issue-was-opened
-  when: 2026-11-03 19:01:32.000000000 Z
+  when: &6457 2026-11-03 19:01:32.000000000 Z
   where: github
   who: 276356426
 - _id: 2651295
@@ -513570,6 +513573,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1277/#issuecomment-6691593964
   is_human: 1
   issue: 1277
+  receipt: receipt-#105236
   repository: 802720676
   review_comments: 0
   seconds: 1748353
@@ -530078,6 +530082,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1122/#issuecomment-6703860528
   is_human: 1
   issue: 1122
+  receipt: receipt-#105240
   repository: 802720676
   review_comments: 0
   seconds: 1930057
@@ -530098,6 +530103,7 @@
   href: https://github.com/zerocracy/pages-action/issues/1121/#issuecomment-6703860793
   is_human: 1
   issue: 1121
+  receipt: receipt-#105239
   repository: 802720676
   review_comments: 0
   seconds: 1930073
@@ -530543,6 +530549,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2992/#issuecomment-6704683652
   is_human: 1
   issue: 2992
+  receipt: receipt-#105238
   repository: 799177290
   review_comments: 0
   seconds: 817807
@@ -530623,6 +530630,7 @@
   href: https://github.com/zerocracy/judges-action/issues/2822/#issuecomment-6704684718
   is_human: 1
   issue: 2822
+  receipt: receipt-#105237
   repository: 799177290
   review_comments: 0
   seconds: 1437270
@@ -532313,10 +532321,6 @@
   comments: 1
   details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1923,
     the reward amount is 20.
-  greeting: |-
-    Thanks for the contribution! You've earned **+20 points** for this: +24 as a base, -4 for contributing fewer than 30 hits-of-code (21 in this case). Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+330](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (21) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+330](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 21
   href: https://github.com/yegor256/factbase/issues/1923/#issuecomment-6707799218
   is_human: 1
@@ -532337,15 +532341,6 @@
   comments: 1
   details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1909,
     the reward amount is 20.
-  greeting: "Thanks for your contribution! \U0001F389 You've earned **+20 points**:
-    +24 as a base, -4 for a lower hits-of-code count (6). Please [keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
-    Your running score is now [+350](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too!\n\n<!--
-    Thanks for the contribution! You've earned +20 points for this: +24 as a basis;
-    -4 for too few (6) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
-    them coming. Your running score is [+350](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 6
   href: https://github.com/yegor256/factbase/issues/1909/#issuecomment-6707799483
   is_human: 1
@@ -532366,10 +532361,6 @@
   comments: 1
   details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1919,
     the reward amount is 24.
-  greeting: |-
-    Thanks for the contribution! You've earned **+24** points: the base 24, plus up to 16 for hits-of-code, minus any deductions for low hoc, missing review, or excess comments, all capped between **4** and **24** per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html). Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+374](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+374](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 55
   href: https://github.com/yegor256/factbase/issues/1919/#issuecomment-6707799748
   is_human: 1
@@ -532390,10 +532381,6 @@
   comments: 1
   details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1908,
     the reward amount is 20.
-  greeting: |-
-    Thanks for the contribution! You've earned +20 points for this, calculated per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html): +24 as a basis, -4 for contributing fewer than 30 hits-of-code (you had 8). Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+394](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (8) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+394](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 8
   href: https://github.com/yegor256/factbase/issues/1908/#issuecomment-6707800015
   is_human: 1
@@ -532414,10 +532401,6 @@
   comments: 1
   details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1918,
     the reward amount is 20.
-  greeting: |-
-    Hey, nice work on this one! You've bagged **+20 points** — started with the usual **24**, but since this contribution came in at just **13 hits-of-code** (under the **30** minimum), we had to knock off **4** points, per the usual [policy](https://www.yegor256.com/2014/11/14/hits-of-code.html). No worries though, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming and those bigger contributions will add up nicely. Your running score is now [+414](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/) too!
-
-    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (13) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+414](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 13
   href: https://github.com/yegor256/factbase/issues/1918/#issuecomment-6707800294
   is_human: 1
@@ -532438,16 +532421,6 @@
   comments: 1
   details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1907,
     the reward amount is 20.
-  greeting: "Thanks for the contribution! \U0001F389 You've earned **+20 points**:
-    +24 as a base, -4 for a low hits-of-code count (7). Keep the momentum going—quality
-    and consistency both count, so [here's why](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
-    it matters. Your running score is now [+434](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too!\n\n<!--
-    Thanks for the contribution! You've earned +20 points for this: +24 as a basis;
-    -4 for too few (7) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
-    them coming. Your running score is [+434](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 7
   href: https://github.com/yegor256/factbase/issues/1907/#issuecomment-6707800576
   is_human: 1
@@ -532468,10 +532441,6 @@
   comments: 4
   details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1280,
     the reward amount is 6.
-  greeting: |-
-    Hi there! Thanks for completing this review. Based on our team policy, your reward works out as follows: +18 as a base, +0.255 for the 17 hits-of-code (0.015 per hit), -5 for having fewer than 9 comments, -8 for posting no comments at all, and -4 for too few hits-of-code (17), bringing the raw total to 1.255 points — since this falls below the policy's minimum, your final reward is adjusted to **+4** points. Your running score is [+850](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); please also check your [Zerocracy account](https://www.zerocracy.com/) for details. Let's aim for more detailed feedback in future reviews to boost your score!
-
-    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (17) hits-of-code.  Your running score is [+852](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 17
   href: https://github.com/zerocracy/pages-action/issues/1280/#issuecomment-6707800909
   is_human: 1
@@ -532492,15 +532461,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1277,
     the reward amount is 6.
-  greeting: "Thanks for the review! \U0001F389 You've earned **+6 points**: +18 as
-    a base, -8 for no comments posted, and -4 for only 16 hits-of-code. Your running
-    score is now [+858](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
-    Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for
-    absolutely no comments posted; -4 for too few (16) hits-of-code.  Your running
-    score is [+858](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 16
   href: https://github.com/zerocracy/pages-action/issues/1277/#issuecomment-6707801204
   is_human: 1
@@ -532521,13 +532481,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1275,
     the reward amount is 10.
-  greeting: "Thanks for the review! \U0001F389 You've earned **+10 points** (+18 base,
-    -8 for no comments posted). Your running score is now [+868](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — check your [Zerocracy account](https://www.zerocracy.com/) for more details!\n\n<!--
-    Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for
-    absolutely no comments posted.  Your running score is [+868](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 43
   href: https://github.com/zerocracy/pages-action/issues/1275/#issuecomment-6707801457
   is_human: 1
@@ -532548,18 +532501,6 @@
   comments: 3
   details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1274,
     the reward amount is 6.
-  greeting: "Hey, nice work on the review! \U0001F389 You're getting **+6 points**
-    this time — here's the breakdown: you start with **+18** as the base, but since
-    there were **absolutely no comments** during the review, that costs you **-8**,
-    and with only **3 hits-of-code** (below the 24 threshold), there's another **-4**
-    ding. Try to leave a few comments and tackle reviews with more substance next
-    time to boost that score! Your running total is sitting at [+874](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — keep it up, and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/)
-    too.\n\n<!-- Thanks for the review! You've earned +6 points for this: +18 as a
-    basis; -8 for absolutely no comments posted; -4 for too few (3) hits-of-code.
-    \ Your running score is [+874](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 3
   href: https://github.com/zerocracy/pages-action/issues/1274/#issuecomment-6707801752
   is_human: 1
@@ -532585,6 +532526,7 @@
 
     <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (15) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+454](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 15
+  href: https://github.com/yegor256/factbase/issues/1914/#issuecomment-6708132365
   is_human: 1
   issue: 1914
   repository: 798641472
@@ -532608,6 +532550,7 @@
 
     <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+478](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 38
+  href: https://github.com/yegor256/factbase/issues/1906/#issuecomment-6708132631
   is_human: 1
   issue: 1906
   repository: 798641472
@@ -532631,6 +532574,7 @@
 
     <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (7) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+498](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 7
+  href: https://github.com/yegor256/factbase/issues/1905/#issuecomment-6708132880
   is_human: 1
   issue: 1905
   repository: 798641472
@@ -532654,6 +532598,7 @@
 
     <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (4) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+518](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 4
+  href: https://github.com/yegor256/factbase/issues/1904/#issuecomment-6708133151
   is_human: 1
   issue: 1904
   repository: 798641472
@@ -532677,6 +532622,7 @@
 
     <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+542](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 31
+  href: https://github.com/yegor256/factbase/issues/1903/#issuecomment-6708133466
   is_human: 1
   issue: 1903
   repository: 798641472
@@ -532700,6 +532646,7 @@
 
     <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (4) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+562](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 4
+  href: https://github.com/yegor256/factbase/issues/1902/#issuecomment-6708133797
   is_human: 1
   issue: 1902
   repository: 798641472
@@ -532731,6 +532678,7 @@
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
   hoc: 29
+  href: https://github.com/zerocracy/pages-action/issues/1273/#issuecomment-6708134194
   is_human: 1
   issue: 1273
   repository: 802720676
@@ -532754,6 +532702,7 @@
 
     <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+894](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 26
+  href: https://github.com/zerocracy/pages-action/issues/1271/#issuecomment-6708134461
   is_human: 1
   issue: 1271
   repository: 802720676
@@ -532764,3 +532713,571 @@
   where: github
   who: 526301
   why: Reviewed code in zerocracy/pages-action#1271
+- _id: 2652903
+  _job: 105912
+  _time: 2026-11-07 14:23:44.954273550 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 1
+  details: It's time to reward @gemshrine for the code contributed in yegor256/factbase#1895,
+    the reward amount is 24.
+  greeting: |-
+    Thanks for the contribution! Per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html), you've earned **+24** points: a **+24** base award, plus **+5** for the **69** hits-of-code you wrote (0.075 points per hit, capped at 16), minus **-5** to keep the total within the policy's **24**-point maximum. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming! Your running score is now [**+4682**](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +24 points for this: +24 as a basis; +5 for the 69 hits-of-code that you wrote; -5 to not go over the cap. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+4682](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 69
+  is_human: 1
+  issue: 1895
+  repository: 798641472
+  review_comments: 0
+  seconds: 714301
+  what: code-contribution-was-rewarded
+  when: 2026-11-07 14:23:44.959787246 Z
+  where: github
+  who: 113778529
+  why: Contributed code in yegor256/factbase#1895
+- _id: 2652904
+  _job: 105912
+  _time: 2026-11-07 14:23:53.360560216 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 20
+  comments: 1
+  details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1889,
+    the reward amount is 20.
+  greeting: |-
+    Thanks for the contribution! You've earned **+20** points for this: **+24** as a basis per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html); **-4** for too few (24) hits-of-code, since contributions under 30 hits-of-code incur this deduction. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming — more hits-of-code next time means a higher bonus. Your running score is [+582](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (24) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+582](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 24
+  is_human: 1
+  issue: 1889
+  repository: 798641472
+  review_comments: 0
+  seconds: 734716
+  what: code-contribution-was-rewarded
+  when: 2026-11-07 14:23:53.366151843 Z
+  where: github
+  who: 17333511
+  why: Contributed code in yegor256/factbase#1889
+- _id: 2652905
+  _job: 105912
+  _time: 2026-11-07 14:23:56.716817850 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 20
+  comments: 1
+  details: It's time to reward @gemshrine for the code contributed in yegor256/factbase#1861,
+    the reward amount is 20.
+  greeting: |-
+    Thanks for the contribution! You've earned **+20** points for this: **+24** as a basis per our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html); **-4** for contributing less than **30** hits-of-code (you had **18**), as the policy requires a deduction in that case. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+4702](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (18) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+4702](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 18
+  is_human: 1
+  issue: 1861
+  repository: 798641472
+  review_comments: 0
+  seconds: 824178
+  what: code-contribution-was-rewarded
+  when: 2026-11-07 14:23:56.722346207 Z
+  where: github
+  who: 113778529
+  why: Contributed code in yegor256/factbase#1861
+- _id: 2652906
+  _job: 105912
+  _time: 2026-11-07 14:24:00.048238963 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 20
+  comments: 1
+  details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1888,
+    the reward amount is 20.
+  greeting: |-
+    Thanks for the contribution! You've earned **+20 points**: +24 as a base, -4 for contributing fewer than 30 hits-of-code (9 in this case). Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+602](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (9) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+602](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 9
+  is_human: 1
+  issue: 1888
+  repository: 798641472
+  review_comments: 0
+  seconds: 735579
+  what: code-contribution-was-rewarded
+  when: 2026-11-07 14:24:00.053988147 Z
+  where: github
+  who: 17333511
+  why: Contributed code in yegor256/factbase#1888
+- _id: 2652907
+  _job: 105912
+  _time: 2026-11-07 14:24:03.556804279 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 1
+  details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1920,
+    the reward amount is 24.
+  greeting: |-
+    Nice work on this one — you've hit the max **+24 points**! Looks like your hits-of-code and clean reviews (no excessive comments) kept you right at the top of the scale, so [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) this momentum going. Your running score is now [+626](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/) too!
+
+    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+626](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 56
+  is_human: 1
+  issue: 1920
+  repository: 798641472
+  review_comments: 0
+  seconds: 644851
+  what: code-contribution-was-rewarded
+  when: 2026-11-07 14:24:03.562417412 Z
+  where: github
+  who: 17333511
+  why: Contributed code in yegor256/factbase#1920
+- _id: 2652908
+  _job: 105912
+  _time: 2026-11-07 14:24:08.346292357 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 24
+  comments: 1
+  details: It's time to reward @macoladik for the code contributed in yegor256/factbase#1811,
+    the reward amount is 24.
+  greeting: |-
+    Thanks for the contribution! You've earned **+24** points, the base award per the team's policy. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+650](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+650](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 55
+  is_human: 1
+  issue: 1811
+  repository: 798641472
+  review_comments: 0
+  seconds: 1069371
+  what: code-contribution-was-rewarded
+  when: 2026-11-07 14:24:08.351920806 Z
+  where: github
+  who: 17333511
+  why: Contributed code in yegor256/factbase#1811
+- _id: 2652909
+  _job: 105912
+  _time: 2026-11-07 14:24:12.421329409 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1270,
+    the reward amount is 6.
+  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
+    -8 for absolutely no comments posted; -4 for too few (9) hits-of-code.  Your running
+    score is [+900](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 9
+  is_human: 1
+  issue: 1270
+  repository: 802720676
+  review_comments: 0
+  seconds: 1748431
+  what: code-review-was-rewarded
+  when: 2026-11-07 14:24:12.445556214 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/pages-action#1270
+- _id: 2652910
+  _job: 105912
+  _time: 2026-11-07 14:24:19.798486163 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1269,
+    the reward amount is 10.
+  greeting: |-
+    Hi there! Thanks for completing this code review. Based on our team’s review policy, you’ve earned **+5 points** for this contribution: **+18** as a base, **-5** for having fewer than 9 comments during the review, and **-8** for no comments being posted at all. Your running score is now [+905](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don’t forget to check your [Zerocracy account](https://www.zerocracy.com/) for more details. Let’s aim for more detailed feedback in your next review to boost your score further!
+
+    <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+910](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 37
+  is_human: 1
+  issue: 1269
+  repository: 802720676
+  review_comments: 0
+  seconds: 1748447
+  what: code-review-was-rewarded
+  when: 2026-11-07 14:24:19.804046955 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/pages-action#1269
+- _id: 2652911
+  _job: 105912
+  _time: 2026-11-07 14:24:34.073305523 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1267,
+    the reward amount is 6.
+  greeting: "Thanks for the review! \U0001F389 You've earned **+6 points**: +18 as
+    a base, -8 for no comments posted, and -4 for only 15 hits-of-code. Your running
+    score is now [+916](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too!\n\n<!--
+    Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for
+    absolutely no comments posted; -4 for too few (15) hits-of-code.  Your running
+    score is [+916](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 15
+  is_human: 1
+  issue: 1267
+  repository: 802720676
+  review_comments: 0
+  seconds: 1748458
+  what: code-review-was-rewarded
+  when: 2026-11-07 14:24:34.078928365 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/pages-action#1267
+- _id: 2652912
+  _job: 105912
+  _time: 2026-11-07 14:24:36.623885407 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1266,
+    the reward amount is 10.
+  greeting: "Thanks for the review! \U0001F389 You've earned **+10 points**: +18 as
+    a base, -8 for not leaving any comments. Your running score is now [+926](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
+    Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for
+    absolutely no comments posted.  Your running score is [+926](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 26
+  is_human: 1
+  issue: 1266
+  repository: 802720676
+  review_comments: 0
+  seconds: 1748468
+  what: code-review-was-rewarded
+  when: 2026-11-07 14:24:36.629427110 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/pages-action#1266
+- _id: 2652913
+  _job: 105912
+  _time: 2026-11-07 14:24:42.832855336 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #113778529 submitted the issue
+    #1863 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1863
+  repository: 798641472
+  what: dud-was-closed
+  when: *6436
+  where: github
+  who: 113778529
+- _id: 2652914
+  _job: 105912
+  _time: 2026-11-07 14:24:43.235482263 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #113778529 submitted the issue
+    #1868 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1868
+  repository: 798641472
+  what: dud-was-closed
+  when: *6437
+  where: github
+  who: 113778529
+- _id: 2652915
+  _job: 105912
+  _time: 2026-11-07 14:24:43.637649917 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #113778529 submitted the issue
+    #1869 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1869
+  repository: 798641472
+  what: dud-was-closed
+  when: *6438
+  where: github
+  who: 113778529
+- _id: 2652916
+  _job: 105912
+  _time: 2026-11-07 14:24:44.041647847 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #113778529 submitted the issue
+    #1870 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1870
+  repository: 798641472
+  what: dud-was-closed
+  when: *6439
+  where: github
+  who: 113778529
+- _id: 2652917
+  _job: 105912
+  _time: 2026-11-07 14:24:44.443759259 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1876 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1876
+  repository: 798641472
+  what: dud-was-closed
+  when: *6440
+  where: github
+  who: 125282851
+- _id: 2652918
+  _job: 105912
+  _time: 2026-11-07 14:24:44.847498865 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1875 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1875
+  repository: 798641472
+  what: dud-was-closed
+  when: *6441
+  where: github
+  who: 125282851
+- _id: 2652919
+  _job: 105912
+  _time: 2026-11-07 14:24:45.251343766 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1873 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1873
+  repository: 798641472
+  what: dud-was-closed
+  when: *6442
+  where: github
+  who: 125282851
+- _id: 2652920
+  _job: 105912
+  _time: 2026-11-07 14:24:45.654298131 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1872 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1872
+  repository: 798641472
+  what: dud-was-closed
+  when: *6443
+  where: github
+  who: 125282851
+- _id: 2652921
+  _job: 105912
+  _time: 2026-11-07 14:24:46.057563430 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1884 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1884
+  repository: 798641472
+  what: dud-was-closed
+  when: *6444
+  where: github
+  who: 125282851
+- _id: 2652922
+  _job: 105912
+  _time: 2026-11-07 14:24:46.460687421 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1883 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1883
+  repository: 798641472
+  what: dud-was-closed
+  when: *6445
+  where: github
+  who: 125282851
+- _id: 2652923
+  _job: 105912
+  _time: 2026-11-07 14:24:46.871227195 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1882 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1882
+  repository: 798641472
+  what: dud-was-closed
+  when: *6446
+  where: github
+  who: 125282851
+- _id: 2652924
+  _job: 105912
+  _time: 2026-11-07 14:24:47.370031892 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1881 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1881
+  repository: 798641472
+  what: dud-was-closed
+  when: *6447
+  where: github
+  who: 125282851
+- _id: 2652925
+  _job: 105912
+  _time: 2026-11-07 14:24:47.778503883 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1880 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1880
+  repository: 798641472
+  what: dud-was-closed
+  when: *6448
+  where: github
+  who: 125282851
+- _id: 2652926
+  _job: 105912
+  _time: 2026-11-07 14:24:48.153818646 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1879 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1879
+  repository: 798641472
+  what: dud-was-closed
+  when: *6449
+  where: github
+  who: 125282851
+- _id: 2652927
+  _job: 105912
+  _time: 2026-11-07 14:24:48.562165327 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1878 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1878
+  repository: 798641472
+  what: dud-was-closed
+  when: *6450
+  where: github
+  who: 125282851
+- _id: 2652928
+  _job: 105912
+  _time: 2026-11-07 14:24:48.937300496 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1893 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1893
+  repository: 798641472
+  what: dud-was-closed
+  when: *6451
+  where: github
+  who: 125282851
+- _id: 2652929
+  _job: 105912
+  _time: 2026-11-07 14:24:49.346191067 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1892 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1892
+  repository: 798641472
+  what: dud-was-closed
+  when: *6452
+  where: github
+  who: 125282851
+- _id: 2652930
+  _job: 105912
+  _time: 2026-11-07 14:24:49.721443283 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #113778529 submitted the issue
+    #1898 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1898
+  repository: 798641472
+  what: dud-was-closed
+  when: *6453
+  where: github
+  who: 113778529
+- _id: 2652931
+  _job: 105912
+  _time: 2026-11-07 14:24:50.130196283 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #113778529 submitted the issue
+    #1896 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1896
+  repository: 798641472
+  what: dud-was-closed
+  when: *6454
+  where: github
+  who: 113778529
+- _id: 2652932
+  _job: 105912
+  _time: 2026-11-07 14:24:50.505797019 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #113778529 submitted the issue
+    #1899 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1899
+  repository: 798641472
+  what: dud-was-closed
+  when: *6455
+  where: github
+  who: 113778529
+- _id: 2652933
+  _job: 105912
+  _time: 2026-11-07 14:24:50.913644007 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #125282851 submitted the issue
+    #1900 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1900
+  repository: 798641472
+  what: dud-was-closed
+  when: *6456
+  where: github
+  who: 125282851
+- _id: 2652934
+  _job: 105912
+  _time: 2026-11-07 14:24:51.317125401 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  closer: 526301
+  details: 'In the repository #798641472, the user #276356426 submitted the issue
+    #1954 which was later closed by the user #526301 not becoming a bug or enhancement;
+    this means that the issue was not valid, maybe a duplicate or simply a mistake.'
+  is_human: 1
+  issue: 1954
+  repository: 798641472
+  what: dud-was-closed
+  when: *6457
+  where: github
+  who: 276356426
