@@ -7,9 +7,12 @@ require 'factbase'
 require 'fileutils'
 require 'open3'
 require 'tmpdir'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestEraseRepository < Jp::Test
+  using SmartFactbase
+
   def test_erase_not_found_repository
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -136,5 +139,41 @@ class TestEraseRepository < Jp::Test
       out, status = Open3.capture2e('ruby', '-I', dir, '-e', script)
       assert_predicate(status, :success?, "erase-repository does not run without fbe/consider: #{out}")
     end
+  end
+
+  def test_erases_repository_blocked_for_legal_reasons
+    seed = Random.new_seed
+    repo = Random.new(seed).rand(1..999_999)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: repo, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      "GET /repositories/#{repo}" => 451
+    ).run do
+      load_it('erase-repository', fb)
+    end
+    assert_equal(
+      ['repository'], fb.pick(repository: repo)['stale'],
+      "the repository ##{repo} blocked for legal reasons was not erased, seed #{seed}"
+    )
+  end
+
+  def test_erases_missing_repository_after_blocked_one
+    seed = Random.new_seed
+    blocked = Random.new(seed).rand(1..999_999)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: blocked, where: 'github')
+    fb.with(_id: 2, what: 'issue-was-opened', repository: blocked + 1, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      "GET /repositories/#{blocked}" => 451,
+      "GET /repositories/#{blocked + 1}" => 404
+    ).run do
+      load_it('erase-repository', fb)
+    end
+    assert_equal(
+      ['repository'], fb.pick(repository: blocked + 1)['stale'],
+      "the missing repository ##{blocked + 1} after the blocked ##{blocked} was not erased, seed #{seed}"
+    )
   end
 end

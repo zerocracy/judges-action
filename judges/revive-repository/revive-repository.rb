@@ -13,7 +13,7 @@ Fbe.consider("(and (eq stale 'repository') (eq where 'github') (unique repositor
   json =
     begin
       Fbe.octo.repository(f.repository)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
+    rescue Octokit::NotFound, Octokit::Deprecated, Octokit::UnavailableForLegalReasons => e
       $loog.info("The repository ##{f.repository} is still stale: #{e.message}")
       next
     rescue Octokit::Forbidden => e
