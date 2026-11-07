@@ -436,6 +436,7 @@ Fbe.iterate do
       'type-was-attached' => %w[where repository issue type]
     }
     capped = false
+    seen = Set.new
     catch(:done) do
       events =
         begin
@@ -461,12 +462,17 @@ Fbe.iterate do
           id = Integer(json[:id])
           first = id if first.nil?
           if Fbe.fb.query("(and (eq where 'github') (eq event_id #{id}))").each.any?
+            if seen.include?(id)
+              $loog.debug("The event ##{id} (no.#{idx}) repeats an earlier event of this scan, skipping it")
+              next
+            end
             $loog.debug(
               "The event_id ##{id} (no.#{idx}) is already in the factbase, " \
               "good stop in #{json[:repo][:name]}"
             )
             throw :done
           end
+          seen << id
           Fbe.fb.txn do |fbt|
             f =
               Fbe.if_absent(fb: fbt) do |n|
