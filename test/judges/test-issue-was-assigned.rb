@@ -203,10 +203,10 @@ class TestIssueWasAssigned < Jp::Test
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     [5, 6, 7, 9].each { |u| stub_github("https://api.github.com/user/#{u}", body: { id: u, login: "user#{u}" }) }
     fb = Factbase.new
-    issues.each_with_index do |(n, (extra, whos)), i|
+    issues.each_with_index do |(n, (extra, owners)), i|
       stub_github(
         "https://api.github.com/repos/foo/foo/issues/#{n}/events?per_page=100",
-        body: whos.map do |w|
+        body: owners.map do |w|
           { id: w, event: 'assigned', assignee: { id: w }, assigner: { id: 9 }, created_at: "2025-10-0#{w} 19:05 UTC" }
         end
       )
