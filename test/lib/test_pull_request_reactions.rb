@@ -28,4 +28,37 @@ class TestPullRequestReactions < Jp::Test
       Jp.count_appreciated_comments({ base: { repo: { full_name: 'foo/foo' } } }, [{ id: 101, user: { id: 7 } }], [])
     assert_equal(1, count)
   end
+
+  def test_does_not_count_a_self_reaction_on_an_issue_comment
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/101/reactions',
+      body: [
+        { user: { id: 1 }, content: '+1' },
+        { user: { id: 2 }, content: 'heart' }
+      ]
+    )
+    count =
+      Jp.count_appreciated_comments({ base: { repo: { full_name: 'foo/foo' } } }, [{ id: 101, user: { id: 1 } }], [])
+    assert_equal(1, count)
+  end
+
+  def test_counts_nothing_when_only_the_issue_comment_author_reacted
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/comments/101/reactions',
+      body: [{ user: { id: 1 }, content: '+1' }]
+    )
+    count =
+      Jp.count_appreciated_comments({ base: { repo: { full_name: 'foo/foo' } } }, [{ id: 101, user: { id: 1 } }], [])
+    assert_equal(0, count)
+  end
 end
