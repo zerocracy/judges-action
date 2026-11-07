@@ -1534,6 +1534,38 @@ class TestGithubEvents < Jp::Test
     assert(fb.none?(what: 'git-was-pushed'))
   end
 
+  def test_logs_pushed_branch_when_skipping_push_to_non_default_branch
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/feature-x', head: 'f5d59b035' },
+          created_at: '2025-06-26 19:25:00 UTC'
+        }
+      ]
+    )
+    buf = Loog::Buffer.new
+    load_it('github-events', Factbase.new, loog: buf)
+    assert_includes(
+      buf.to_s, 'to non-default branch "refs/heads/feature-x", ignoring it',
+      'the log must name the pushed branch, not the default one'
+    )
+  end
+
   def test_success_add_push_event_to_factbase
     WebMock.disable_net_connect!
     rate_limit_up
