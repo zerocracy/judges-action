@@ -77,28 +77,28 @@ class TestFixMissingWho < Jp::Test
   end
 
   def test_reads_closed_by_for_closed_issue
-    fb = whos_after(44 => { what: 'issue-was-closed' })
+    fb = authors_after(44 => { what: 'issue-was-closed' })
     assert_equal([9], fb.pick(issue: 44)['who'], 'the closer of the issue was not found')
   end
 
   def test_keeps_the_who_a_fact_already_has
-    fb = whos_after(45 => { what: 'issue-was-opened', who: 5 })
+    fb = authors_after(45 => { what: 'issue-was-opened', who: 5 })
     assert_equal([5], fb.pick(issue: 45)['who'], 'the who of the fact changed')
   end
 
   def test_skips_done_fact
-    fb = whos_after(46 => { what: 'issue-was-opened', done: 1 })
+    fb = authors_after(46 => { what: 'issue-was-opened', done: 1 })
     assert_nil(fb.pick(issue: 46)['who'], 'a done fact got a who')
   end
 
   def test_skips_buried_fact
-    fb = whos_after(47 => { what: 'issue-was-closed', tombstone: 'yes' })
+    fb = authors_after(47 => { what: 'issue-was-closed', tombstone: 'yes' })
     assert_nil(fb.pick(issue: 47)['who'], 'a buried fact got a who')
   end
 
   private
 
-  def whos_after(facts)
+  def authors_after(facts)
     fb = Factbase.new
     facts.each_with_index do |(n, extra), i|
       fb.with(_id: i + 1, repository: 42, issue: n, where: 'github', **extra)
