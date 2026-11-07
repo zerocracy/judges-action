@@ -2818,6 +2818,7 @@ class TestQualityOfService < Jp::Test
           some_triage_time(window.new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z')))
           some_triage_time(window.new(Time.parse('2024-08-09T21:00:00Z'), Time.parse('2024-08-16T21:00:00Z')))
           some_triage_time(window.new(Time.parse('2024-08-16T21:00:00Z'), Time.parse('2024-08-23T21:00:00.700Z')))
+          some_triage_time(window.new(Time.parse('2024-08-23T21:00:00.300Z'), Time.parse('2024-08-30T21:00:00Z')))
         end
       end
     end
@@ -2825,7 +2826,8 @@ class TestQualityOfService < Jp::Test
       [
         'repo:foo/foo type:issue created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
         'repo:foo/foo type:issue created:2024-08-09T21:00:00Z..2024-08-16T20:59:59Z',
-        'repo:foo/foo type:issue created:2024-08-16T21:00:00Z..2024-08-23T20:59:59Z'
+        'repo:foo/foo type:issue created:2024-08-16T21:00:00Z..2024-08-23T21:00:00Z',
+        'repo:foo/foo type:issue created:2024-08-23T21:00:01Z..2024-08-30T20:59:59Z'
       ],
       queries
     )
