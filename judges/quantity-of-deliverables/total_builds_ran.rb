@@ -11,7 +11,7 @@ def total_builds_ran(fact)
   total = 0
   available = false
   repos = Fbe.unmask_repos
-  return {} if repos.nil?
+  return {} if repos.empty?
   repos.each do |repo|
     total +=
       Fbe.octo.with_disable_auto_paginate do |octo|

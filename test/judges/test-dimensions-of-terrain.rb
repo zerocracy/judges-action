@@ -1056,7 +1056,7 @@ class TestDimensionsOfTerrain < Jp::Test
     inside = { author: { id: 101 }, commit: { author: { date: '2026-09-20T12:00:00Z' } } }
     boundary = { author: { id: 303 }, commit: { author: { date: fact.when } } }
     after = { author: { id: 202 }, commit: { author: { date: '2026-10-02T12:00:01Z' } } }
-    Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+    Fbe.stub(:unmask_repos, yielding_repos('foo/foo')) do
       [[after], [inside, after], [inside, inside, boundary, after]].zip([0, 1, 2]).each do |commits, expected|
         Jp.stub(:qosearch, { items: commits }) do
           assert_equal(expected, total_active_contributors(fact)[:total_active_contributors])
@@ -1446,7 +1446,7 @@ class TestDimensionsOfTerrain < Jp::Test
     $loog = Loog::NULL
     $options = Judges::Options.new({ 'repositories' => 'foo/*' })
     load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_stars.rb'))
-    Fbe.stub(:unmask_repos, ->(&_block) {}) do
+    Fbe.stub(:unmask_repos, ->(&_block) { [] }) do
       assert_equal({}, total_stars(nil), 'a skipped mask cannot be reported as zero stars')
     end
   end
@@ -1457,7 +1457,7 @@ class TestDimensionsOfTerrain < Jp::Test
     $loog = Loog::NULL
     $options = Judges::Options.new({ 'repositories' => 'foo/*' })
     load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_repositories.rb'))
-    Fbe.stub(:unmask_repos, ->(&_block) {}) do
+    Fbe.stub(:unmask_repos, ->(&_block) { [] }) do
       assert_equal({}, total_repositories(nil), 'a skipped mask cannot be reported as zero repositories')
     end
   end

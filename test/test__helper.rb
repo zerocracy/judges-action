@@ -44,6 +44,13 @@ class Jp::Test < Minitest::Test
     )
   end
 
+  def yielding_repos(*repos)
+    lambda do |&block|
+      repos.each(&block)
+      repos
+    end
+  end
+
   def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }), loog: nil)
     $fb = fb
     $global = {}

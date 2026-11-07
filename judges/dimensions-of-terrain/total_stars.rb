@@ -29,6 +29,6 @@ def total_stars(_fact)
       end
     stars += json[:stargazers_count] || 0
     forks += json[:forks] || 0
-  end.nil?
+  end&.empty?
   { total_stars: stars, total_forks: forks }
 end

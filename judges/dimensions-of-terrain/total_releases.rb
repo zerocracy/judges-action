@@ -30,6 +30,6 @@ def total_releases(_fact)
     releases.reject { |release| release[:draft] }.each do |_|
       total += 1
     end
-  end.nil?
+  end&.empty?
   { total_releases: total }
 end

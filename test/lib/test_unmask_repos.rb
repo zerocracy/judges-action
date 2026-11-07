@@ -36,7 +36,7 @@ class TestUnmaskRepos < Jp::Test
     bar = stub_github('https://api.github.com/orgs/bar/repos?per_page=100&type=all', body: [{ full_name: 'bar/bar' }])
     stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
     $loog = Loog::NULL
-    assert_nil(
+    assert_empty(
       Fbe.unmask_repos(
         options: Judges::Options.new({ 'repositories' => 'foo/*,bar/*' }), global: {}, loog: Loog::NULL
       ),
@@ -52,7 +52,7 @@ class TestUnmaskRepos < Jp::Test
     bar = stub_github('https://api.github.com/orgs/bar/repos?per_page=100&type=all', body: [{ full_name: 'bar/bar' }])
     stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
     $loog = Loog::NULL
-    assert_nil(
+    assert_empty(
       Fbe.unmask_repos(
         options: Judges::Options.new({ 'repositories' => 'foo/*,bar/*' }), global: {}, loog: Loog::NULL
       ),
@@ -67,7 +67,7 @@ class TestUnmaskRepos < Jp::Test
     bar = stub_github('https://api.github.com/orgs/bar/repos?per_page=100&type=all', body: [{ full_name: 'bar/bar' }])
     stub_github('https://api.github.com/repos/bar/bar', body: { full_name: 'bar/bar', archived: false })
     $loog = Loog::NULL
-    assert_nil(
+    assert_empty(
       Fbe.unmask_repos(
         options: Judges::Options.new({ 'repositories' => 'foo/*,bar/*' }), global: {}, loog: Loog::NULL
       ),
@@ -87,7 +87,7 @@ class TestUnmaskRepos < Jp::Test
       Fbe.unmask_repos(
         options: Judges::Options.new({ 'repositories' => 'foo/*,bar/*' }), global: {}, loog: Loog::NULL
       ) { |repo| yielded << repo }
-    assert_nil(result, 'the block form must report the skipped mask too')
+    assert_empty(result, 'the block form must report the skipped mask too')
     assert_empty(yielded, 'a partial list must not be handed to the block')
   end
 
