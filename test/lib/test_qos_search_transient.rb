@@ -32,7 +32,9 @@ class TestQosSearchTransient < Jp::Test
       headers: { 'Content-Type' => 'application/json' }
     )
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    $global[:octo] = nil
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
+    assert_requested(:get, 'https://api.github.com/rate_limit', times: 1)
     assert_requested(:get, %r{search/issues}, times: 1)
   end
 
