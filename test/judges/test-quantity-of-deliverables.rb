@@ -218,7 +218,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
-    unmask = proc { |&block| block.call('foo/bad') }
+    unmask = yielding_repos('foo/bad')
     $global = {}
     $judge = 'quantity-of-deliverables'
     $loog = Loog::NULL
