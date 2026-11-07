@@ -61,6 +61,7 @@ if [ -z "$1" ]; then
 else
     SELF=$1
 fi
+SELF=$(cd "${SELF}" && pwd)
 
 if [ -z "${JUDGES}" ]; then
     BUNDLE_GEMFILE="${SELF}/Gemfile"
