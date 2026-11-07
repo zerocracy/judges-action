@@ -9,7 +9,6 @@ require 'fbe/octo'
 require 'fbe/who'
 require 'octokit'
 require_relative '../../lib/issue_was_lost'
-require_relative '../../lib/patches/octokit_throttling'
 
 Fbe.consider(
   "(and
