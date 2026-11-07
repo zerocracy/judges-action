@@ -54,7 +54,7 @@ Fbe.conclude do
     end
     alive << f.who
     n.name = nick
-    n.when = Time.now
+    n.when = Jp.today
     n.what = $judge
     Fbe.overwrite(n, 'details', "We found out that the user ##{f.who} is known in GitHub as @#{nick}.")
   end
@@ -92,7 +92,7 @@ Fbe.consider(
     next
   end
   alive << f.who
-  Fbe.overwrite(f, { 'name' => nick, 'when' => Time.now })
+  Fbe.overwrite(f, { 'name' => nick, 'when' => Jp.today })
 end
 
 alive.uniq!
