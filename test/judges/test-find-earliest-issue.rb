@@ -256,4 +256,19 @@ class TestFindEarliestIssue < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_rescues_server_error_on_list_issues
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues?direction=asc&page=1&per_page=1&sort=created&state=all',
+      status: 502,
+      body: { message: 'Bad Gateway' }
+    )
+    fb = Factbase.new
+    load_it('find-earliest-issue', fb)
+    assert_equal(0, fb.all.size, 'no facts must be written when list_issues answers 502 — next cycle will retry')
+  end
 end
