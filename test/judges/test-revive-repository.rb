@@ -26,4 +26,19 @@ class TestReviveRepository < Jp::Test
       "the repository ##{repo} stayed stale although GitHub answered it, seed #{seed}"
     )
   end
+
+  def test_keeps_repository_stale_after_a_server_error
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, where: 'github', stale: 'repository')
+      .with(_id: 2, what: 'issue-was-opened', repository: 43, where: 'github', stale: 'repository')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => [502, { message: 'Bad Gateway' }],
+      'GET /repositories/43' => { id: 43, name: 'bar', full_name: 'foo/bar' }
+    ).run do
+      load_it('revive-repository', fb)
+    end
+    assert_equal('repository', fb.pick(repository: 42).stale, 'a 502 must not revive the repository')
+    assert_nil(fb.pick(repository: 43)['stale'], 'a 502 on one repository must not stop the judge')
+  end
 end

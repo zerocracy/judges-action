@@ -21,6 +21,9 @@ Fbe.consider("(and (eq stale 'repository') (eq where 'github') (unique repositor
         "[#{$judge}] The repository ##{f.repository} is still stale (access forbidden): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+      next
     end
   $loog.info("The repository ##{f.repository} is not stale, it is #{json[:full_name]}")
   Fbe.fb.query("(and (eq stale 'repository') (eq where 'github') (eq repository #{f.repository}))").each do |f1|
