@@ -27,8 +27,8 @@ def some_release_interval(fact)
     releases.each do |json|
       next if json[:published_at].nil?
       next if json[:published_at] > fact.when
-      break if json[:published_at] < fact.since
       dates << json[:published_at]
+      break if json[:published_at] < fact.since
     end
     dates.sort!
     intervals.concat(dates.each_cons(2).map { |pair| pair.last - pair.first })

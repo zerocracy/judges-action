@@ -390,7 +390,7 @@ class TestQualityOfService < Jp::Test
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
       assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
-      assert_equal([64_800, 21_600, 36_000], f['some_release_interval'])
+      assert_equal([277_200, 64_800, 21_600, 36_000], f['some_release_interval'])
       assert_equal([11, 52, 24, 99], f['some_release_hoc_size'])
       assert_equal([3, 1, 2, 4], f['some_release_commits_size'])
     end

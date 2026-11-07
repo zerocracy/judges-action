@@ -69,4 +69,22 @@ class TestSomeReleaseInterval < Jp::Test
       "the lonely release of foo/bar became an interval #{intervals.inspect}, seed #{seed}"
     )
   end
+
+  def test_measures_a_release_against_the_one_before_the_window
+    base = Time.parse('2024-09-01 12:00:00 UTC')
+    rels = (0..2).map { |i| { id: 10 - i, published_at: (base - (i * 8 * 86_400)).utc.iso8601 } }
+    fact = Factbase.new.insert
+    fact.since = base - (7 * 86_400)
+    fact.when = base + 3600
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    intervals =
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+        'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+        'GET /repos/foo/foo/releases?per_page=100' => [200, rels]
+      ).run { some_release_interval(fact)[:some_release_interval] }
+    assert_equal([8 * 86_400], intervals, 'the only release of the window was not measured')
+  end
 end
