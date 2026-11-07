@@ -2685,6 +2685,60 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, f.suggestions)
   end
 
+  def test_closed_pr_with_null_head_does_not_abort_scan
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11126',
+          type: 'PullRequestEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed',
+            number: 123,
+            pull_request: { number: 123 }
+          },
+          created_at: '2025-10-20 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/123',
+      body: {
+        id: 50, number: 123, user: { id: 45, login: 'user' },
+        head: nil,
+        merged: true, state: 'closed', merged_at: Time.parse('2025-10-20 19:00:05 UTC'),
+        closed_at: Time.parse('2025-10-20 19:00:05 UTC'),
+        additions: 3, deletions: 1, changed_files: 2
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/123/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits//check-runs?per_page=100', body: { check_runs: [] })
+    stub_github('https://api.github.com/repos/foo/foo/commits/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    refute_nil(f, 'closed pull with null head must still be recorded')
+    assert_nil(f['branch'])
+    assert_equal('branch', f.stale)
+  end
+
   def test_release_event_with_nil_compare_response
     WebMock.disable_net_connect!
     rate_limit_up
