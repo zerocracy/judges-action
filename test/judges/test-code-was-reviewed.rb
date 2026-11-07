@@ -52,7 +52,7 @@ class TestCodeWasReviewed < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
     fb = Factbase.new
-    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 40, where: 'github')
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 40, where: 'github', reviews: 1)
       .with(_id: 2, what: 'code-was-reviewed', repository: 42, issue: 40, where: 'github')
       .with(_id: 3, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
       .with(_id: 4, what: 'pull-was-merged', repository: 42, issue: 45, where: 'github')
@@ -67,6 +67,36 @@ class TestCodeWasReviewed < Jp::Test
           'was reviewed by @user2 after 19h3m and 3 comments.'
       )
     )
+  end
+
+  def test_reviews_a_pull_merged_after_a_reopen
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') },
+        { id: 49_112, user: { id: 423, login: 'user3' }, submitted_at: Time.parse('2025-09-04 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/49112/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/423', body: { id: 423, login: 'user3' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'code-was-reviewed', repository: 42, issue: 44, where: 'github', who: 422)
+      .with(_id: 2, what: 'pull-was-merged', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert_equal([2], fb.query('(eq what "pull-was-merged")').each.first['reviews'], fb.to_json)
+    assert(fb.one?(what: 'code-was-reviewed', repository: 42, issue: 44, who: 423), "no review by 423: #{fb.to_json}")
   end
 
   def test_counts_only_the_comments_that_people_made
