@@ -51,9 +51,8 @@ jobs:
           clean: false
 ```
 
-In the file, there is only one place that you should configure:
-  the `repositories=...` should have a comma-separated list
-  of repositories where your team works (instead of `...`).
+In the file, the `repositories` input should have a comma-separated list
+  of repositories where your team works (instead of `yegor256/foo`).
 If you have more than one repository in your product, list them here.
 The CI job must only be added to one of them.
 
