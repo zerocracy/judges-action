@@ -22,14 +22,16 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
     end
     return
   end
-  if last && last < today - slice
+  start = last
+  while start + slice < today
     Fbe.fb.insert.then do |n|
       n.what = judge
-      n.since = last
-      n.when = today
+      n.since = start
+      n.when = start + slice
       loog.info("Fresh #{judge} added: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
       facts << n
     end
+    start += slice
   end
   prev = facts.min_by(&:since)
   gaps = []
@@ -45,11 +47,15 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
     )
   end
   large.reject { |g| facts.find { |f| g[:since] < f.when && g[:when] > f.since } }.each do |g|
-    Fbe.fb.insert.then do |n|
-      n.what = judge
-      n.since = g[:since]
-      n.when = g[:when]
-      loog.info("Missing gap of #{judge} filled up: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
+    start = g[:since]
+    while start + slice <= g[:when]
+      Fbe.fb.insert.then do |n|
+        n.what = judge
+        n.since = start
+        n.when = start + slice
+        loog.info("Missing gap of #{judge} filled up: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
+      end
+      start += slice
     end
   end
 end
