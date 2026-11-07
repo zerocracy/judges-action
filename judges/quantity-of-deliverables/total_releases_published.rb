@@ -10,7 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_releases_published(fact)
   releases = 0
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     owner, name = repo.split('/')
     begin
       releases += Fbe.github_graph.total_releases_published(owner, name, fact.since)['releases']
@@ -27,7 +27,7 @@ def total_releases_published(fact)
       $loog.warn("[#{$judge}] Network error counting releases in #{repo}: #{e.message}")
       next
     end
-  end
+  end.nil?
   {
     total_releases_published: releases
   }
