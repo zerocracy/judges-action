@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/unmask_repos'
 
 def some_release_hoc_size(fact)
   grouped = {}
