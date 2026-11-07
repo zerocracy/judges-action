@@ -201,4 +201,19 @@ class TestEliminateGhosts < Jp::Test
       'fact must not be marked stale on a transient 502; the cycle should retry on the next run'
     )
   end
+
+  def test_keeps_live_facts_of_a_user_with_a_stale_one_on_server_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/29139614', status: 502, body: { message: 'Bad Gateway' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, who: 29_139_614, where: 'github')
+    fb.with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 45, who: 29_139_614, where: 'github', stale: 'who')
+    load_it('eliminate-ghosts', fb)
+    assert_nil(
+      fb.query('(eq _id 1)').each.first['stale']&.first,
+      'a live fact of a user that failed with 502 was marked stale because of an older stale one'
+    )
+    assert_equal('who', fb.query('(eq _id 2)').each.first['stale']&.first)
+  end
 end
