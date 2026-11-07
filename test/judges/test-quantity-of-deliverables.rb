@@ -250,6 +250,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo/releases?per_page=100',
       body: [
         { id: 7, draft: false, published_at: Time.parse('2024-08-02 21:00:00 UTC') },
+        { id: 6, draft: false, published_at: Time.parse('2024-08-01 00:00:00 UTC') },
         { id: 5, draft: false, published_at: Time.parse('2024-08-05 12:00:00 UTC') },
         { id: 4, draft: false, published_at: Time.parse('2024-08-09 21:00:00 UTC') },
         { id: 3, draft: false, published_at: Time.parse('2024-08-10 00:00:00 UTC') },
@@ -274,6 +275,39 @@ class TestQuantityOfDeliverables < Jp::Test
           'only the 2024-08-05 release and the one exactly at fact.when count'
         )
       end
+    end
+  end
+
+  def test_total_releases_published_skips_unavailable
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/good/releases?per_page=100',
+      body: [
+        { id: 2, draft: false, published_at: Time.parse('2025-10-02 00:00:00 UTC') },
+        { id: 1, draft: false, published_at: Time.parse('2025-09-01 00:00:00 UTC') }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/missing/releases?per_page=100',
+      status: 500, body: { message: 'Internal Server Error' }
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/slow/releases?per_page=100')
+      .to_raise(Faraday::ConnectionFailed.new('connection failed'))
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    unmask = proc { |&block| %w[foo/missing foo/slow foo/good].each { |repo| block.call(repo) } }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_releases_published.rb'))
+      assert_equal(
+        { total_releases_published: 1 }, total_releases_published(fact),
+        'a repository answering 500 or failing the connection must not abort the sum of the remaining repositories'
+      )
     end
   end
 

@@ -18,7 +18,7 @@ def total_releases_published(fact)
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Can't count releases in #{repo}: #{e.message}")
     next
-  rescue Octokit::Forbidden => e
+  rescue Octokit::Forbidden, Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
     $loog.warn(
       "[#{$judge}] Can't count releases in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
