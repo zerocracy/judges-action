@@ -188,4 +188,31 @@ class TestIssueWasUnassigned < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_goes_on_after_a_server_error_on_issue_events
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/8', body: { id: 8, login: 'user8' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      status: 502, body: { message: 'Bad Gateway' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45/events?per_page=100',
+      body: [
+        { id: 345, event: 'unassigned', assignee: { id: 8, login: 'user8' }, created_at: '2025-10-02 21:05:00 UTC' }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who: 7,
+      when: Time.parse('2025-10-01 19:05:00 UTC')
+    ).with(
+      _id: 2, what: 'issue-was-assigned', repository: 42, issue: 45, where: 'github', who: 8,
+      when: Time.parse('2025-10-01 19:05:00 UTC')
+    )
+    load_it('issue-was-unassigned', fb)
+    refute_nil(fb.query('(eq _id 2)').each.first['unassigned'], 'a 502 on one issue must not stop the judge')
+  end
 end
