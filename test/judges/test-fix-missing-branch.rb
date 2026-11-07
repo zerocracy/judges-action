@@ -29,6 +29,25 @@ class TestFixMissingBranch < Jp::Test
     )
   end
 
+  def test_goes_on_after_a_network_failure_on_pull_request_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/pulls/44').to_raise(
+      Faraday::ConnectionFailed.new('Connection reset by peer')
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/45',
+      body: { number: 45, state: 'open', head: { ref: 'other-branch', sha: 'def456' } }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    load_it('fix-missing-branch', fb)
+    assert_nil(fb.pick(issue: 44)['stale'], 'a network failure must leave the fact for the next cycle')
+    assert_equal('other-branch', fb.pick(issue: 45).branch, 'the next pull was not processed')
+  end
+
   def test_rescues_forbidden_on_pull_request_lookup
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
