@@ -66,7 +66,7 @@ class TestSomeTriageTime < Jp::Test
     assert_equal({ some_triage_time: [] }, result)
   end
 
-  def test_skips_repository_when_forbidden
+  def test_retries_metric_when_forbidden
     fact = Factbase.new.insert
     fact.since = Time.parse('2025-01-01 00:00:00 UTC')
     fact.when = Time.parse('2025-02-01 00:00:00 UTC')
@@ -89,6 +89,6 @@ class TestSomeTriageTime < Jp::Test
           end
         end
       end
-    assert_equal({ some_triage_time: [] }, result)
+    assert_empty(result)
   end
 end

@@ -16,19 +16,18 @@ def some_triage_time(fact)
     return {} if Fbe.octo.off_quota?
     found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
-    rid =
-      begin
-        Fbe.octo.repo_id_by_name(repo)
-      rescue Fbe::Error, Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} not accessible: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+    begin
+      rid = Fbe.octo.repo_id_by_name(repo)
+    rescue Fbe::Error, Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Repository #{repo} not accessible: #{e.message}")
+      next
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      return {}
+    end
     found[:items].each do |issue|
       ff = Fbe.fb.query(
         "
