@@ -1461,4 +1461,15 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_equal({}, total_repositories(nil), 'a skipped mask cannot be reported as zero repositories')
     end
   end
+
+  def test_total_repositories_does_not_crash_when_the_scan_stops_early
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/*' })
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_repositories.rb'))
+    Fbe.stub(:unmask_repos, ->(&_block) {}) do
+      assert_equal({ total_repositories: 0 }, total_repositories(nil), 'an early stop cannot crash the metric')
+    end
+  end
 end
