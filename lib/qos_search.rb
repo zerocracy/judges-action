@@ -15,6 +15,13 @@ def Jp.qoreset
   @offquotatime = {}
   @scount = {}
   @swstart = {}
+  @merged = {}.compare_by_identity
+end
+
+def Jp.merged(repo, fact)
+  @merged = {}.compare_by_identity unless @merged.is_a?(Hash)
+  (@merged[fact] ||= {})[repo] ||=
+    Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
 end
 
 def Jp.qosearch(query, method: :search_issues, **)
