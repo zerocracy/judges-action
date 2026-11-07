@@ -110,6 +110,26 @@ class TestFindMissingIssues < Jp::Test
     )
   end
 
+  def test_missing_issue_by_an_account_github_no_longer_serves
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45',
+      body: { number: 45, user: { id: 44, login: 'spammer' }, created_at: '2025-09-27 06:03:16 UTC' }
+    )
+    stub_github('https://api.github.com/user/44', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 46, where: 'github')
+    load_it('find-missing-issues', fb)
+    assert(fb.one?(what: 'issue-was-opened', issue: 45, repository: 42, who: 44))
+    assert_equal(
+      'The missing issue foo/foo#45 has been opened by user #44.',
+      fb.pick(what: 'issue-was-opened', issue: 45, repository: 42).details
+    )
+  end
+
   def test_rescues_not_found_on_repo_name_lookup
     WebMock.disable_net_connect!
     rate_limit_up
