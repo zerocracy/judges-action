@@ -7,7 +7,7 @@ require 'fbe/who'
 require_relative 'jp'
 
 def Jp.author(fact, id)
-  if id.nil?
+  if id.nil? || id == 10_137
     fact.stale = 'who'
   else
     fact.who = id
