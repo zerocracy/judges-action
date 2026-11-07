@@ -19,7 +19,7 @@ module Fbe
       )
       repos = []
       octo = Fbe.octo(loog:, global:, options:)
-      masks = (options.repositories || '').split(',')
+      masks = options.repositories.split(',')
       masks.reject { |m| m.start_with?('-') }.each do |mask|
         unless mask.include?('*')
           repos << mask
