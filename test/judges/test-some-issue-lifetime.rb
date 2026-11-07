@@ -31,4 +31,38 @@ class TestSomeIssueLifetime < Jp::Test
     assert_equal([3600.0], result['some_issue_lifetime'])
     refute_includes(result, 'some_pull_lifetime')
   end
+
+  def test_some_issue_lifetime_searches_each_second_in_one_window_only
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_issue_lifetime.rb'))
+    Jp.qoreset
+    queries = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:rate_limit) { Struct.new(:remaining).new(30) }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:search_issues) do |q, **|
+      queries << q
+      { total_count: 0, incomplete_results: false, items: [] }
+    end
+    window = Struct.new(:since, :when)
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        some_issue_lifetime(window.new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z')))
+        some_issue_lifetime(window.new(Time.parse('2024-08-09T21:00:00Z'), Time.parse('2024-08-16T21:00:00Z')))
+        some_issue_lifetime(window.new(Time.parse('2024-08-16T21:00:00Z'), Time.parse('2024-08-23T21:00:00.700Z')))
+      end
+    end
+    assert_equal(
+      [
+        'repo:foo/foo type:issue closed:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
+        'repo:foo/foo type:pr closed:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
+        'repo:foo/foo type:issue closed:2024-08-09T21:00:00Z..2024-08-16T20:59:59Z',
+        'repo:foo/foo type:pr closed:2024-08-09T21:00:00Z..2024-08-16T20:59:59Z',
+        'repo:foo/foo type:issue closed:2024-08-16T21:00:00Z..2024-08-23T20:59:59Z',
+        'repo:foo/foo type:pr closed:2024-08-16T21:00:00Z..2024-08-23T20:59:59Z'
+      ],
+      queries
+    )
+  end
 end

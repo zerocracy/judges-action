@@ -17,7 +17,7 @@ def some_issue_lifetime(fact)
         lost = true
         break
       end
-      found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+      found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{(fact.when - 1).utc.iso8601}")
       if found.nil?
         lost = true
         break
