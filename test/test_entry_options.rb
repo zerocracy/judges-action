@@ -19,6 +19,21 @@ class TestEntryOptions < Jp::Test
     assert_equal(['--option=token=a=b'], run_options("token=a=b\n"))
   end
 
+  def test_takes_an_empty_repositories_option_as_not_set
+    body = File.read(File.join(File.expand_path('..', __dir__), 'entry.sh'))
+    block = body[/^declare -a options=\(\)\n(?:.*\n)*?^repositories_found=false\n(?:.*\n)*?^fi\n/]
+    refute_nil(block, 'No repositories block found in entry.sh')
+    out, _, status = Open3.capture3(
+      { 'INPUT_OPTIONS' => "repositories=\n", 'INPUT_REPOSITORIES' => 'zerocracy/*' },
+      'bash', '-c', "set -e -o pipefail\n#{block}\nprintf '%s\\n' \"${options[@]}\""
+    )
+    assert_equal(0, status.exitstatus, out)
+    assert_equal(
+      ['--option=repositories=', '--option=repositories=zerocracy/*'], out.split("\n"),
+      'an empty repositories option must not hide the repositories input'
+    )
+  end
+
   private
 
   def run_options(input)
