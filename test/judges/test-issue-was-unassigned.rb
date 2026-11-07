@@ -188,4 +188,43 @@ class TestIssueWasUnassigned < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_takes_the_earliest_unassignment_from_unordered_events
+    f = unassigned_after(%w[2025-03-01 2025-02-01])
+    assert_equal(Time.parse('2025-02-01 10:00:00 UTC'), f.unassigned, 'a later unassignment was taken')
+  end
+
+  def test_ignores_unassignment_before_the_assignment
+    f = unassigned_after(%w[2025-02-01 2024-12-01])
+    assert_equal(Time.parse('2025-02-01 10:00:00 UTC'), f.unassigned, 'an old unassignment was taken')
+  end
+
+  def test_skips_done_assignment
+    assert_nil(unassigned_after(%w[2025-02-01], done: 1)['unassigned'], 'a done assignment got unassigned')
+  end
+
+  def test_skips_buried_assignment
+    assert_nil(unassigned_after(%w[2025-02-01], tombstone: 'yes')['unassigned'], 'a buried assignment got unassigned')
+  end
+
+  private
+
+  def unassigned_after(days, **extra)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/5', body: { id: 5, login: 'user5' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      body: days.map { |d| { event: 'unassigned', assignee: { id: 5 }, created_at: "#{d} 10:00:00 UTC" } }
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github',
+      who: 5, when: Time.parse('2025-01-01 10:00:00 UTC'), **extra
+    )
+    load_it('issue-was-unassigned', fb)
+    fb.pick(what: 'issue-was-assigned')
+  end
 end
