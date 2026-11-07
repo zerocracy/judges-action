@@ -461,7 +461,7 @@ Fbe.iterate do
           total += 1
           id = Integer(json[:id])
           first = id if first.nil?
-          if Fbe.fb.query("(and (eq where 'github') (eq event_id #{id}))").each.any?
+          if Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq event_id #{id}))").each.any?
             if seen.include?(id)
               $loog.debug("The event ##{id} (no.#{idx}) repeats an earlier event of this scan, skipping it")
               next
