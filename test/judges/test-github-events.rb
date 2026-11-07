@@ -420,6 +420,31 @@ class TestGithubEvents < Jp::Test
     assert_equal(42, f.first.who)
   end
 
+  def test_records_event_made_by_deleted_account
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/7', status: 404, body: { message: 'Not Found' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 40_623_323_541, type: 'IssuesEvent', public: true,
+          created_at: '2024-07-31 12:45:09 UTC',
+          actor: { id: 7, login: 'ghost' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'opened', issue: { number: 1347, state: 'open' } }
+        }
+      ]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(eq what "issue-was-opened")').each.first
+    refute_nil(f, 'an event by a deleted account must still be recorded')
+    assert_includes(f.details, '@ghost')
+  end
+
   def test_skip_issue_was_opened_event
     WebMock.disable_net_connect!
     rate_limit_up
