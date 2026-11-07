@@ -37,6 +37,10 @@ require_relative '../lib/qos_search'
 require_relative 'smart_factbase'
 
 class Jp::Test < Minitest::Test
+  def qoclean
+    %i[@scount @swstart @offquota @offquotatime].each { |v| Jp.instance_variable_set(v, nil) }
+  end
+
   def rate_limit_up
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
@@ -48,7 +52,7 @@ class Jp::Test < Minitest::Test
     $fb = fb
     $global = {}
     $local = {}
-    Jp.qoreset
+    qoclean
     $judge = judge
     $options = options
     $loog = loog || (ENV['RAKE_RUN'] ? Loog::NULL : Loog::VERBOSE)
