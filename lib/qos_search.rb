@@ -11,6 +11,7 @@ Jp::SEARCH_WINDOW_SECONDS = 60
 Jp::SEARCH_WINDOW_BUDGET = 25
 
 def Jp.qoreset
+  return if @offquotatime && (Time.now - @offquotatime) < Jp::SEARCH_WINDOW_SECONDS
   @offquota = false
   @offquotatime = nil
 end

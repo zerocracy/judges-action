@@ -111,10 +111,24 @@ class TestQosSearch < Jp::Test
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
   end
 
-  def test_qoreset_clears_the_latch
-    ratelimits(0)
-    searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
+  def test_qoreset_keeps_a_latch_that_has_not_expired
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, remaining: 0, status: 403)
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    Jp.qoreset
+    $judge = 'another-judge'
+    $global[:octo] = nil
+    ratelimits(1000)
+    searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
+    assert_nil(Jp.qosearch('repo:foo/foo type:pr'), 'the next cycle searched before the backoff expired')
+    assert_not_requested(:get, /type:pr/)
+  end
+
+  def test_qoreset_clears_an_expired_latch
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { message: 'API rate limit exceeded' }, remaining: 0, status: 403)
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    Jp.instance_variable_set(:@offquotatime, Time.now - Jp::SEARCH_WINDOW_SECONDS - 1)
     Jp.qoreset
     $global[:octo] = nil
     ratelimits(1000)
@@ -172,6 +186,7 @@ class TestQosSearch < Jp::Test
     assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
     assert_equal(1, Jp.instance_variable_get(:@scount))
     assert(Jp.instance_variable_get(:@offquota))
+    Jp.instance_variable_set(:@offquotatime, Time.now - Jp::SEARCH_WINDOW_SECONDS - 1)
     Jp.qoreset
     $global[:octo] = nil
     rate_limit_up
