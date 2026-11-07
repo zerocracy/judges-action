@@ -6,6 +6,7 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/total_issues_created'
 require_relative '../../lib/patches/unmask_repos'
 
 def total_issues_created(fact)
@@ -15,7 +16,7 @@ def total_issues_created(fact)
     owner, name = repo.split('/')
     json =
       begin
-        Fbe.github_graph.total_issues_created(owner, name, fact.since)
+        Fbe.github_graph.total_issues_created(owner, name, fact.since..fact.when)
       rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Issues count not available for #{repo}: #{e.message}")
         next
