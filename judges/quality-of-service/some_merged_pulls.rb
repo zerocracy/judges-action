@@ -10,7 +10,7 @@ require_relative '../../lib/qos_search'
 def some_merged_pulls(fact)
   pulls = []
   rejected = []
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     break if Fbe.octo.off_quota?
     q = "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     merged = Jp.qosearch(q)
@@ -21,7 +21,7 @@ def some_merged_pulls(fact)
     next if found.nil?
     pulls << merged[:total_count]
     rejected << found[:total_count]
-  end
+  end&.empty?
   {
     some_merged_pulls: pulls,
     some_unmerged_pulls: rejected

@@ -10,7 +10,7 @@ require_relative '../../lib/qos_search'
 def some_pull_hoc_size(fact)
   hocs = []
   files = []
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
@@ -31,7 +31,7 @@ def some_pull_hoc_size(fact)
       hocs << ((pull[:additions] || 0) + (pull[:deletions] || 0))
       files << (pull[:changed_files] || 0)
     end
-  end
+  end&.empty?
   {
     some_pull_hoc_size: hocs,
     some_pull_files_size: files

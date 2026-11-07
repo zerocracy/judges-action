@@ -14,7 +14,7 @@ def some_build_success_rate(fact)
   ttrs = []
   failed = {}
   conclusions = %w[success failure]
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     workflows =
       begin
@@ -71,7 +71,7 @@ def some_build_success_rate(fact)
       ttrs << Integer(recovery - broke)
     end
     failed.clear
-  end
+  end&.empty?
   {
     some_build_success_rate: success,
     some_build_duration: duration,

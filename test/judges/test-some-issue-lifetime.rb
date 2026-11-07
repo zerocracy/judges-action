@@ -24,7 +24,7 @@ class TestSomeIssueLifetime < Jp::Test
     answers = [{ items: [{ closed_at: fact.since + 3600, created_at: fact.since }] }, nil]
     result =
       Fbe.stub(:octo, octo) do
-        Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) do
+        Fbe.stub(:unmask_repos, yielding_repos('foo/foo')) do
           Jp.stub(:qosearch, proc { |*| answers.shift }) { some_issue_lifetime(fact) }
         end
       end

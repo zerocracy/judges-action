@@ -32,7 +32,7 @@ class TestTriageCutoff < Jp::Test
       client.define_singleton_method(:repo_id_by_name) { |_repo| 42 }
       pmp = Struct.new(:quality).new(Struct.new(:qos_min_triage_seconds).new(Struct.new(:value).new(60)))
       issue = { number: 7, created_at: moment - 86_400 }
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('acme/project') }) do
+      Fbe.stub(:unmask_repos, yielding_repos('acme/project')) do
         Fbe.stub(:octo, client) do
           Fbe.stub(:fb, fb) do
             Fbe.stub(:pmp, pmp) do
