@@ -9,7 +9,10 @@ require 'fbe/pmp'
 require 'fbe/unmask_repos'
 require_relative '../../lib/qos_search'
 
+TRIAGE_LAG_SECONDS = 24 * 60 * 60
+
 def some_triage_time(fact)
+  return {} if Time.now - fact.when < TRIAGE_LAG_SECONDS
   threshold = Fbe.pmp.quality.qos_min_triage_seconds.value || 60
   times = []
   Fbe.unmask_repos do |repo|
