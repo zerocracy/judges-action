@@ -11,6 +11,7 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/slug'
 require_relative '../../lib/who_of'
 
 Fbe.conclude do
@@ -42,7 +43,7 @@ Fbe.conclude do
   draw do |n, f|
     repo =
       begin
-        Fbe.octo.repo_name_by_id(f.repository)
+        Jp.slug(f.repository)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Failed to find repository #{f.repository}: #{e.message}")
         throw(:rollback)

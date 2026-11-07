@@ -9,6 +9,7 @@ require 'fbe/octo'
 require 'fbe/who'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/slug'
 
 repos = {}
 Fbe.iterate do
@@ -35,7 +36,7 @@ Fbe.iterate do
     repo =
       repos[repository] ||=
         begin
-          Fbe.octo.repo_name_by_id(repository)
+          Jp.slug(repository)
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Repository ##{repository} not found: #{e.message}")
           next issue

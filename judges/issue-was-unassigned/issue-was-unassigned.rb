@@ -9,6 +9,7 @@ require 'fbe/octo'
 require 'fbe/who'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/slug'
 require_relative '../../lib/supervision'
 
 Fbe.consider(
@@ -32,7 +33,7 @@ Fbe.consider(
   Jp.supervision({ 'repository' => f.repository, 'issue' => f.issue }) do
     repo =
       begin
-        Fbe.octo.repo_name_by_id(f.repository)
+        Jp.slug(f.repository)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Failed to find repository #{f.repository}: #{e.message}")
         f.stale = 'repository'
