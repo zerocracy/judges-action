@@ -24,7 +24,7 @@ def Jp.capped?(found, query, judge: $judge, loog: $loog)
   if capped
     loog.info(
       "[#{judge}] The search \"#{query}\" answers one page of #{Jp::SEARCH_PAGE} and has that many, " \
-      'so what follows is a sample of the window and not the whole of it'
+      'so it is a sample of the window and no measurement is reported for it'
     )
   end
   capped

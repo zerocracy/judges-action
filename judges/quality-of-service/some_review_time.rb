@@ -18,7 +18,7 @@ def some_review_time(fact)
     query = "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
     found = Jp.qosearch(query)
     return {} if found.nil?
-    Jp.capped?(found, query)
+    return {} if Jp.capped?(found, query)
     found[:items].each do |pr|
       all, csize =
         begin

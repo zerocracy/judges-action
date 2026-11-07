@@ -30,7 +30,7 @@ def some_triage_time(fact)
         )
         next
       end
-    Jp.capped?(found, query)
+    return {} if Jp.capped?(found, query)
     found[:items].each do |issue|
       ff = Fbe.fb.query(
         "
