@@ -38,6 +38,14 @@ class TestApproval < Minitest::Test
     assert_equal(Time.parse('2025-06-25 10:00:00 UTC'), Jp.approval(reviews, nil)[:submitted_at])
   end
 
+  def test_answers_nil_when_every_review_came_after_the_closure
+    reviews = [
+      { state: 'APPROVED', submitted_at: Time.parse('2025-07-01 10:00:00 UTC') },
+      { state: 'COMMENTED', submitted_at: Time.parse('2025-07-02 10:00:00 UTC') }
+    ]
+    assert_nil(Jp.approval(reviews, Time.parse('2025-06-27 19:00:05 UTC')))
+  end
+
   def test_answers_nil_for_no_reviews
     assert_nil(Jp.approval([], nil))
   end
