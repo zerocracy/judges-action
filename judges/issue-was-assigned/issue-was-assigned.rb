@@ -78,8 +78,15 @@ Fbe.iterate do
         nn.where = 'github'
         nn.assigner = event.dig(:assigner, :id)
         nn.when = event[:created_at]
-        nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
-        $loog.info("The issue #{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} #{nn.when.ago} ago (fact ##{nn._id})")
+        assignee, assigner =
+          begin
+            [Fbe.who(nn), Fbe.who(nn, :assigner)]
+          rescue Fbe::Error => e
+            $loog.warn("Can't find the logins of #{Fbe.issue(nn)} assignment: #{e.message}")
+            ["user ##{nn.who}", "user ##{nn.assigner}"]
+          end
+        nn.details = "#{Fbe.issue(nn)} was assigned to #{assignee} by #{assigner}."
+        $loog.info("The issue #{Fbe.issue(nn)} was assigned to #{assignee} #{nn.when.ago} ago (fact ##{nn._id})")
       end
     end
     issue
