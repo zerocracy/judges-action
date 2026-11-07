@@ -101,6 +101,26 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
+  def test_fetch_workflows_empty_without_repository
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    assert_equal({}, Jp.fetch_workflows({ head: { sha: 'x' } }))
+  end
+
+  def test_fetch_workflows_counts_nothing_when_check_runs_missing
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'no-runs' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github('https://api.github.com/repos/foo/foo/commits/no-runs/check-runs?per_page=100', body: {})
+    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, Jp.fetch_workflows(pr))
+  end
+
   def test_counts_reactions_when_reaction_user_is_nil
     WebMock.disable_net_connect!
     rate_limit_up
