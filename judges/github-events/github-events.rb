@@ -95,7 +95,7 @@ Fbe.iterate do
 
   def self.commit(repo, sha)
     Fbe.octo.commit(repo, sha)
-  rescue Octokit::NotFound, Octokit::Deprecated => e
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Conflict => e
     $loog.info("Commit #{sha} not found in #{repo}: #{e.message}")
     nil
   rescue Octokit::Forbidden => e

@@ -2899,6 +2899,54 @@ class TestGithubEvents < Jp::Test
     assert_equal('second', f.first.last_commit)
   end
 
+  def test_first_release_keeps_compare_numbers_when_root_commit_conflicts
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '0.0.1',
+            name: 'v0.0.1',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'root' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits/root', status: 409, body: { message: 'Conflict' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/root...0.0.1?per_page=100',
+      body: {
+        total_commits: 1,
+        commits: [{ sha: 'second', author: { id: 526_301 } }],
+        files: [{ changes: 5 }]
+      }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    assert_equal(1, f.first.commits)
+    assert_equal(5, f.first.hoc)
+    assert_equal('second', f.first.last_commit)
+  end
+
   def test_two_releases_in_one_page_never_compare_backwards
     WebMock.disable_net_connect!
     rate_limit_up
