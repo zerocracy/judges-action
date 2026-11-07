@@ -1368,6 +1368,10 @@ class TestGithubEvents < Jp::Test
     )
     f = fb.query('(and (eq what "pull-was-merged") (eq event_id 43))').each.first
     assert_nil(f)
+    f = fb.query('(and (eq what "pull-was-merged") (eq event_id 42))').each.first
+    refute_nil(f, fb.to_json)
+    assert_equal([0], f['succeeded_builds'], f)
+    assert_equal([0], f['failed_builds'], f)
   end
 
   def test_no_have_access_to_resource_by_integration
