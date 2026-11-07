@@ -11,22 +11,24 @@ def total_stars(_fact)
   stars = 0
   forks = 0
   Fbe.unmask_repos do |repo|
-    json =
-      begin
-        Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} not found: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-        break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+    begin
+      json = Fbe.octo.repository(repo)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Repository #{repo} not found: #{e.message}")
+      next
+    rescue Octokit::TooManyRequests => e
+      $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+      break
+    rescue Octokit::ServerError => e
+      $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+      return {}
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
     stars += json[:stargazers_count] || 0
     forks += json[:forks] || 0
   end
