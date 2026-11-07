@@ -493,4 +493,27 @@ class TestFindAllIssues < Jp::Test
       'A vanished repository must add no issues and must not abort the judge'
     )
   end
+
+  def test_dont_record_pull_when_its_lookup_is_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github(
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04&sort=created',
+      body: { total_count: 1, incomplete_results: false, items: [{ number: 46, created_at: Time.parse('2025-05-05') }] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46', status: 403, body: { message: 'Forbidden' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.issue = 45
+      f.repository = 991
+      f.what = 'pull-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    assert_empty(fb.query('(eq issue 46)').each.to_a, 'a pull that could not be read was recorded as opened')
+  end
 end
