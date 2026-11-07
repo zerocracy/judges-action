@@ -826,6 +826,45 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_build_mttr_waits_for_a_repair_after_the_window
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    started = Time.parse('2024-08-08T10:00:00Z')
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repository_workflow_runs) do |*|
+      {
+        workflow_runs: [
+          { id: 1, status: 'completed', conclusion: 'failure', workflow_id: 101, run_started_at: started }
+        ]
+      }
+    end
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 900_000 } }
+    repairs = []
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:workflow_runs) { |*| { workflow_runs: repairs } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        Time.stub(:now, Time.parse('2024-08-10T21:00:00Z')) do
+          assert_equal({}, some_build_success_rate(fact), 'a fresh window with an open failure is not measured')
+        end
+        repairs << { id: 7, updated_at: Time.parse('2024-08-10T10:00:00Z') }
+        Time.stub(:now, Time.parse('2024-08-10T21:00:00Z')) do
+          assert_equal(
+            [171_900], some_build_success_rate(fact)[:some_build_mttr], 'the repair after the window is measured'
+          )
+        end
+        repairs.clear
+        Time.stub(:now, Time.parse('2024-08-16T21:00:00Z')) do
+          metrics = some_build_success_rate(fact)
+          assert_equal([0], metrics[:some_build_success_rate], 'the window is measured once the deadline is reached')
+          assert_equal([], metrics[:some_build_mttr], 'an unrepaired failure is left without a repair time')
+        end
+      end
+    end
+  end
+
   def test_some_build_mttr_on_repeated_failures
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -1031,7 +1070,11 @@ class TestQualityOfService < Jp::Test
     f.area = 'quality'
     f.qos_days = 7
     f.qos_interval = 3
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+    f = fb.insert
+    f.what = 'quality-of-service'
+    f.since = Time.parse('2024-08-02 21:00:00 UTC')
+    f.when = Time.parse('2024-08-09 21:00:00 UTC')
+    Time.stub(:now, Time.parse('2024-08-16 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([3600], f['some_build_mttr'])
