@@ -15,6 +15,10 @@ def Jp.bots
   end
 end
 
+def Jp.nobots
+  Jp.bots.map { |b| " -author:#{b}" }.join
+end
+
 def Jp.human_comments(comments)
   bots = Jp.bots
   comments.reject do |c|
