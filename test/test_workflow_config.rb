@@ -13,6 +13,13 @@ class TestWorkflowConfig < Jp::Test
     YAML.load_file(File.expand_path('../.github/workflows/zerocracy.yml', __dir__))
   end
 
+  def test_up_creates_pull_request_with_pat
+    steps = YAML.load_file(File.expand_path('../.github/workflows/up.yml', __dir__))['jobs']['up']['steps']
+    step = steps.find { |s| s['uses'].to_s.start_with?('peter-evans/create-pull-request') }
+    refute_nil(step, 'up.yml has no create-pull-request step')
+    assert_equal('${{ secrets.PAT }}', step.dig('with', 'token'), 'version PR must use the PAT so CI starts')
+  end
+
   def test_no_stale_baza
     text = File.read(File.expand_path('../.github/workflows/zerocracy.yml', __dir__))
     repos = text[/repositories: (\S+)/, 1]
