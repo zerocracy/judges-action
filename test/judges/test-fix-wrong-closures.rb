@@ -197,4 +197,28 @@ class TestFixWrongClosures < Jp::Test
       'The judge stops before the next repository after a server error'
     )
   end
+
+  def test_converts_only_the_live_closure_of_a_merged_pull
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/55',
+      body: {
+        id: 50, number: 55, state: 'closed', merged: true,
+        merged_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        head: { ref: '55', sha: 'aa123' }
+      }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', where: 'github', repository: 42, issue: 55, who: 44)
+    fb.with(_id: 2, what: 'pull-was-closed', where: 'github', repository: 42, issue: 55, who: 44, done: 'yes')
+    fb.with(_id: 3, what: 'pull-was-closed', where: 'github', repository: 42, issue: 55, who: 44, stale: 'who')
+    fb.with(_id: 4, what: 'pull-was-closed', where: 'github', repository: 42, issue: 55, who: 44, tombstone: 'yes')
+    load_it('fix-wrong-closures', fb)
+    assert(fb.one?(what: 'pull-was-merged', issue: 55), 'not exactly one merge was made out of the closures')
+    assert(fb.none?(what: 'pull-was-merged', issue: 55, done: 'yes'), 'a done closure turned into a done merge')
+    assert(fb.none?(what: 'pull-was-closed', issue: 55), 'a closure of the merged pull is left in the factbase')
+  end
 end
