@@ -345,9 +345,39 @@ class TestCodeWasReviewed < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 93, where: 'github')
     load_it('code-was-reviewed', fb)
-    assert_equal(
-      0, fb.pick(what: 'code-was-reviewed', issue: 93).comments,
-      'a transient connection reset while counting issue comments must fall back to zero'
+    assert_nil(
+      fb.pick(what: 'code-was-reviewed', issue: 93),
+      'a transient connection reset while counting issue comments must leave the pull for the next cycle'
+    )
+  end
+
+  def test_rescues_connection_reset_on_review_comments_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/94',
+      body: {
+        id: 94, number: 94, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/94/reviews?per_page=100',
+      body: [
+        { id: 49_223, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/94/comments?per_page=100', body: [])
+    stub_request(
+      :get, 'https://api.github.com/repos/foo/foo/pulls/94/reviews/49223/comments?per_page=100'
+    ).to_raise(Errno::ECONNRESET)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 94, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert_nil(
+      fb.pick(what: 'code-was-reviewed', issue: 94),
+      'a transient connection reset while counting review comments must leave the pull for the next cycle'
     )
   end
 

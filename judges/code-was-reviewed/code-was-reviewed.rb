@@ -108,6 +108,59 @@ Fbe.consider(
     reviewer = review.dig(:user, :id)
     next if reviewer.nil?
     next if reviewer == author
+    count ||=
+      begin
+        Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
+        0
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        :skip
+      rescue Octokit::Unauthorized => e
+        $loog.error(
+          "[#{$judge}] Not authorized to fetch issue comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
+        )
+        :skip
+      rescue Octokit::TooManyRequests, Octokit::ServerError,
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
+    rcount = :skip
+    unless count == :skip
+      rcount =
+        begin
+          Jp.human_comments(Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id])).count
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
+          0
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          :skip
+        rescue Octokit::Unauthorized => e
+          $loog.error(
+            "[#{$judge}] Not authorized to fetch review comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
+          )
+          :skip
+        rescue Octokit::TooManyRequests, Octokit::ServerError,
+          Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn(
+            "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
+            "(will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+    end
     Fbe.fb.txn do |fbt|
       n =
         Fbe.if_absent(fb: fbt) do |nn|
@@ -121,57 +174,9 @@ Fbe.consider(
       n.when = review[:submitted_at]
       n.hoc = (pr[:additions] || 0) + (pr[:deletions] || 0)
       n.author = pr.dig(:user, :id)
-      count ||=
-        begin
-          Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count
-        rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("Issue comments not found for #{repo}##{f.issue}: #{e.message}")
-          0
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
-          next
-        rescue Octokit::Unauthorized => e
-          $loog.error(
-            "[#{$judge}] Not authorized to fetch issue comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
-          )
-          next
-        rescue Octokit::TooManyRequests, Octokit::ServerError,
-          Faraday::TimeoutError, Faraday::ConnectionFailed => e
-          $loog.warn(
-            "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
-            "(will retry next cycle): #{e.class}: #{e.message}"
-          )
-          next
-        end
-      n.comments = count
-      n.review_comments =
-        begin
-          Jp.human_comments(Fbe.octo.pull_request_review_comments(repo, f.issue, review[:id])).count
-        rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("Review comments not found for #{repo}##{f.issue}: #{e.message}")
-          0
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
-          next
-        rescue Octokit::Unauthorized => e
-          $loog.error(
-            "[#{$judge}] Not authorized to fetch review comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
-          )
-          next
-        rescue Octokit::TooManyRequests, Octokit::ServerError,
-          Faraday::TimeoutError, Faraday::ConnectionFailed => e
-          $loog.warn(
-            "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
-            "(will retry next cycle): #{e.class}: #{e.message}"
-          )
-          next
-        end
+      n.comments = count unless count == :skip
+      n.review_comments = rcount unless rcount == :skip
+      next if count == :skip || rcount == :skip
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
       author =
         begin
