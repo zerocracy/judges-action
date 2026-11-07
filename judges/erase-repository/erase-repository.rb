@@ -28,6 +28,9 @@ Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').eac
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
     good[r] = true
+  rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+    good[r] = true
   end
 end
 
