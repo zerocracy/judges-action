@@ -11,39 +11,43 @@ def total_contributors(_fact)
   contributors = Set.new
   measured = false
   Fbe.unmask_repos do |repo|
-    json =
-      begin
-        Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} not found: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-        break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+    begin
+      json = Fbe.octo.repository(repo)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Repository #{repo} not found: #{e.message}")
+      next
+    rescue Octokit::TooManyRequests => e
+      $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+      break
+    rescue Octokit::ServerError => e
+      $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+      return {}
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
     next if json[:size].nil? || json[:size].zero?
-    list =
-      begin
-        Fbe.octo.contributors(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Contributors not found for #{repo}: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-        break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to contributors for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
+    begin
+      list = Fbe.octo.contributors(repo)
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Contributors not found for #{repo}: #{e.message}")
+      next
+    rescue Octokit::TooManyRequests => e
+      $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+      break
+    rescue Octokit::ServerError => e
+      $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+      return {}
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to contributors for #{repo} " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      next
+    end
     next unless list.is_a?(Array)
     measured = true
     list.each do |contributor|
