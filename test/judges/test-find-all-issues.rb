@@ -334,7 +334,7 @@ class TestFindAllIssues < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github('https://api.github.com/repos/foo/foo/issues/44', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
       'https://api.github.com/search/issues?order=asc&per_page=100' \
       '&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04&sort=created',
@@ -346,7 +346,7 @@ class TestFindAllIssues < Jp::Test
         ]
       }
     )
-    stub_github(
+    broken = stub_github(
       'https://api.github.com/repos/foo/foo/pulls/45',
       status: 404,
       body: { message: 'Not Found', documentation_url: 'https://docs.github.com', status: '404' }
@@ -358,12 +358,13 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
-      f.issue = 45
+      f.issue = 44
       f.repository = 991
       f.what = 'pull-was-opened'
       f.where = 'github'
     end
     load_it('find-all-issues', fb)
+    assert_requested(broken)
     survivor = fb.query("(and (eq issue 46) (eq what 'pull-was-opened'))").each.first
     refute_nil(
       survivor,
@@ -377,7 +378,7 @@ class TestFindAllIssues < Jp::Test
     rate_limit_up
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
     stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github('https://api.github.com/repos/foo/foo/issues/44', body: { created_at: Time.parse('2025-05-04') })
     stub_github(
       'https://api.github.com/search/issues?order=asc&per_page=100' \
       '&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04&sort=created',
@@ -389,7 +390,7 @@ class TestFindAllIssues < Jp::Test
         ]
       }
     )
-    stub_github(
+    broken = stub_github(
       'https://api.github.com/repos/foo/foo/pulls/45',
       status: 403,
       body: { message: 'Resource not accessible by integration' }
@@ -401,12 +402,13 @@ class TestFindAllIssues < Jp::Test
     stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
     fb = Factbase.new
     fb.insert.then do |f|
-      f.issue = 45
+      f.issue = 44
       f.repository = 991
       f.what = 'pull-was-opened'
       f.where = 'github'
     end
     load_it('find-all-issues', fb)
+    assert_requested(broken)
     survivor = fb.query("(and (eq issue 46) (eq what 'pull-was-opened'))").each.first
     refute_nil(survivor, 'the second pull must be recorded after the first hits transient forbidden')
     assert_equal('feature/branch-survivor', survivor.branch)
