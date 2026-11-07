@@ -12,9 +12,9 @@ require 'octokit'
 good = {}
 
 Fbe.fb.query('(and (eq where "github") (exists repository) (absent stale))').each do |f|
-  next if Fbe.octo.off_quota?
   r = f.repository
   next unless good[r].nil?
+  next if Fbe.octo.off_quota?
   elapsed($loog, level: Logger::INFO) do
     json = Fbe.octo.repository(r)
     good[r] = true
