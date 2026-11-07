@@ -108,4 +108,22 @@ class TestWhoIsAlive < Jp::Test
       'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_keeps_fact_on_server_error_user_lookup
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'who-has-name', where: 'github', who: 29_139_614,
+      name: 'someone', when: Time.now - (3 * 86_400)
+    )
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } },
+      'GET /user/29139614' => [502, { message: 'Bad Gateway' }]
+    ).run do
+      load_it('who-is-alive', fb)
+    end
+    refute_empty(
+      fb.query('(eq what "who-has-name")').each.to_a,
+      'who-is-alive must not delete the who-has-name fact on a transient 502; the cycle should retry on the next run'
+    )
+  end
 end
