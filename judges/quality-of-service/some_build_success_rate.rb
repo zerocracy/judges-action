@@ -34,13 +34,14 @@ def some_build_success_rate(fact)
         next
       end
     completed = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }
-    wfs = completed.first(RUNS_SAMPLE)
-    if completed.size > wfs.size
+    if completed.size > RUNS_SAMPLE
       $loog.info(
-        "[#{$judge}] Measured #{wfs.size} of the #{completed.size} completed runs of #{repo}, " \
-        'so what follows is a sample of the window and not the whole of it'
+        "[#{$judge}] There are #{completed.size} completed runs in #{repo}, more than #{RUNS_SAMPLE} " \
+        'we can measure, so no build metrics are reported for this window'
       )
+      return {}
     end
+    wfs = completed
     runs =
       wfs.filter_map do |json|
         break if Fbe.octo.off_quota?
