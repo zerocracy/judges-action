@@ -72,4 +72,52 @@ class TestUnmaskRepos < Jp::Test
       'a server error cannot break the expansion of the other masks'
     )
   end
+
+  def test_includes_repository_listed_after_space
+    seed = Random.new_seed
+    two = "acme/two-#{Random.new(seed).rand(1..99_999)}"
+    rate_limit_up
+    stub_github('https://api.github.com/repos/acme/one', body: { full_name: 'acme/one', archived: false })
+    stub_github("https://api.github.com/repos/#{two}", body: { full_name: two, archived: false })
+    $loog = Loog::NULL
+    assert_equal(
+      ['acme/one', two].sort,
+      Fbe.unmask_repos(
+        options: Judges::Options.new({ 'repositories' => "acme/one, #{two}" }), global: {}, loog: Loog::NULL
+      ).sort,
+      "the repository #{two} after a space is lost, seed #{seed}"
+    )
+  end
+
+  def test_excludes_repository_listed_after_space
+    seed = Random.new_seed
+    two = "acme/two-#{Random.new(seed).rand(1..99_999)}"
+    rate_limit_up
+    stub_github('https://api.github.com/repos/acme/one', body: { full_name: 'acme/one', archived: false })
+    stub_github("https://api.github.com/repos/#{two}", body: { full_name: two, archived: false })
+    $loog = Loog::NULL
+    assert_equal(
+      ['acme/one'],
+      Fbe.unmask_repos(
+        options: Judges::Options.new({ 'repositories' => "acme/one,#{two}, -#{two}" }), global: {}, loog: Loog::NULL
+      ),
+      "the repository #{two} excluded after a space is kept, seed #{seed}"
+    )
+  end
+
+  def test_ignores_empty_masks
+    seed = Random.new_seed
+    two = "acme/two-#{Random.new(seed).rand(1..99_999)}"
+    rate_limit_up
+    stub_github('https://api.github.com/repos/acme/one', body: { full_name: 'acme/one', archived: false })
+    stub_github("https://api.github.com/repos/#{two}", body: { full_name: two, archived: false })
+    $loog = Loog::NULL
+    assert_equal(
+      ['acme/one', two].sort,
+      Fbe.unmask_repos(
+        options: Judges::Options.new({ 'repositories' => "acme/one,, #{two} , " }), global: {}, loog: Loog::NULL
+      ).sort,
+      "empty masks around #{two} break the expansion, seed #{seed}"
+    )
+  end
 end
