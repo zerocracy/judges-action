@@ -607,7 +607,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_skips_repo_on_forbidden_workflow_runs
+  def test_retries_on_forbidden_workflow_runs
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
@@ -617,7 +617,7 @@ class TestQualityOfService < Jp::Test
     Fbe.stub(:octo, octo) do
       Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
         metrics = some_build_success_rate(fact)
-        assert_equal([], metrics[:some_build_success_rate])
+        assert_empty(metrics)
       end
     end
   end
@@ -654,7 +654,7 @@ class TestQualityOfService < Jp::Test
     end
   end
 
-  def test_skips_run_on_forbidden_workflow_run_usage
+  def test_retries_on_forbidden_workflow_run_usage
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
@@ -681,7 +681,7 @@ class TestQualityOfService < Jp::Test
     Fbe.stub(:octo, octo) do
       Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
         metrics = some_build_success_rate(fact)
-        assert_equal([600], metrics[:some_build_duration], 'run with forbidden usage is not left out of durations')
+        assert_empty(metrics, 'forbidden usage must leave the whole metric pending')
       end
     end
   end
@@ -737,7 +737,7 @@ class TestQualityOfService < Jp::Test
     Fbe.stub(:octo, octo) do
       Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
         metrics = some_build_success_rate(fact)
-        assert_equal([], metrics[:some_build_mttr], 'repair times pair a failure with unreadable usage')
+        assert_empty(metrics, 'forbidden usage must leave repair times pending as well')
       end
     end
   end
