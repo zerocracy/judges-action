@@ -8,11 +8,17 @@ require 'octokit'
 require_relative 'jp'
 
 def Jp.recovered(repo, workflow, since, judge: $judge, loog: $loog)
-  return if Fbe.octo.off_quota?
+  return if Fbe.octo.respond_to?(:off_quota?) && Fbe.octo.off_quota?
   runs =
-    Fbe.octo.with_disable_auto_paginate do |octo|
-      octo.workflow_runs(repo, workflow, status: 'success', created: ">#{since.utc.iso8601}", per_page: 1)
-    end[:workflow_runs]
+    if Fbe.octo.respond_to?(:with_disable_auto_paginate)
+      Fbe.octo.with_disable_auto_paginate do |octo|
+        octo.workflow_runs(repo, workflow, status: 'success', created: ">#{since.utc.iso8601}", per_page: 1)
+      end[:workflow_runs]
+    elsif Fbe.octo.respond_to?(:workflow_runs)
+      Fbe.octo.workflow_runs(
+        repo, workflow, status: 'success', created: ">#{since.utc.iso8601}", per_page: 1
+      )[:workflow_runs]
+    end
   return if runs.nil? || runs.empty?
   runs.first[:updated_at]
 rescue Octokit::NotFound, Octokit::Deprecated => e

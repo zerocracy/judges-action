@@ -3,4 +3,6 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require_relative 'patches/unmask_repos'
+
 module Jp; end
