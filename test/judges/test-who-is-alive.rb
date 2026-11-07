@@ -108,4 +108,24 @@ class TestWhoIsAlive < Jp::Test
       'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_keeps_one_stale_who_on_already_stale_facts
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', where: 'github', who: 15, stale: 'who')
+      .with(_id: 2, what: 'issue-was-closed', where: 'github', who: 15, stale: 'repository')
+      .with(
+        _id: 3, what: 'who-has-name', where: 'github', who: 15, name: 'gone',
+        when: Time.parse('2025-06-23 20:00:00 UTC')
+      )
+    Time.stub(:now, Time.parse('2025-06-25 22:00:00 UTC')) do
+      Jp::FakeGithub.new(
+        'GET /rate_limit' => { rate: { remaining: 222 } },
+        'GET /user/15' => [404, { message: 'Not Found' }]
+      ).run do
+        load_it('who-is-alive', fb)
+      end
+    end
+    assert_equal(['who'], fb.pick(_id: 1)['stale'], 'a fact already stale for who got the same value again')
+    assert_equal(%w[repository who], fb.pick(_id: 2)['stale'].sort, 'a fact stale for another reason was not marked')
+  end
 end
