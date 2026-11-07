@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/consider'
+require 'fbe/delete'
 require 'fbe/if_absent'
 require 'fbe/octo'
 require 'fbe/overwrite'
@@ -71,7 +72,11 @@ Fbe.consider(
   milestones.each do |m|
     k = known[m[:number]]
     unless k.nil?
-      Fbe.overwrite(k, 'deadline', m[:due_on]) if m[:due_on] && k['deadline']&.first != m[:due_on]
+      if m[:due_on].nil?
+        Fbe.delete(k, 'deadline')
+      elsif k['deadline']&.first != m[:due_on]
+        Fbe.overwrite(k, 'deadline', m[:due_on])
+      end
       next
     end
     Fbe.fb.txn do |fbt|
