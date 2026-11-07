@@ -85,6 +85,16 @@ class TestQosSearch < Jp::Test
     assert_not_requested(:get, %r{https://api\.github\.com/search/issues})
   end
 
+  def test_names_the_judge_when_search_quota_is_zero
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 }, resources: { search: { remaining: 0, limit: 30 } } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '1000' }
+    )
+    $loog = Loog::Buffer.new
+    Jp.qosearch('repo:foo/foo type:issue')
+    assert_includes($loog.to_s, '[test-qos-search] Too much GitHub Search API quota consumed already')
+  end
+
   def test_skips_search_when_search_quota_missing
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
