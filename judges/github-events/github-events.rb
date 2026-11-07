@@ -360,6 +360,7 @@ Fbe.iterate do
         skip(json)
       end
     when 'ReleaseEvent'
+      skip(json) if json.dig(:payload, :release, :tag_name).nil?
       fact.release = json[:payload][:release][:id]
       fact.tag = json[:payload][:release][:tag_name]
       case json[:payload][:action]
@@ -453,11 +454,13 @@ Fbe.iterate do
       @released = Factbase.new
       events.each do |json|
         next unless json[:type] == 'ReleaseEvent' && json.dig(:payload, :action) == 'published'
+        tag = json.dig(:payload, :release, :tag_name)
+        next if tag.nil?
         @released.insert.then do |r|
           r.repository = Integer(json[:repo][:id])
           r.what = 'release-published'
           r.when = Time.parse(json[:created_at].iso8601)
-          r.tag = json.dig(:payload, :release, :tag_name)
+          r.tag = tag
         end
       end
       events.each_with_index do |json, idx|
