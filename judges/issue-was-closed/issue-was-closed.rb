@@ -11,6 +11,7 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/labeled'
 
 badges = %w[bug enhancement question]
 
@@ -108,8 +109,7 @@ Fbe.iterate do
         $loog.warn("[#{$judge}] Access forbidden to timeline for #{repo}##{issue}: #{e.class}: #{e.message}")
         next issue
       end
-    events.each do |te|
-      next unless te[:event] == 'labeled'
+    Jp.labeled(events).each do |te|
       badge = te.dig(:label, :name)
       next unless badges.include?(badge)
       Fbe.fb.txn do |fbt|
