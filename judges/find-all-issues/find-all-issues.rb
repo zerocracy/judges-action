@@ -87,6 +87,10 @@ require_relative '../../lib/who_of'
           i = json[:number]
           seen << i
           next if Fbe::Tombstone.new.has?('github', repository, i)
+          issue = i
+          next if Fbe.fb.query(
+            "(and (eq issue #{i}) (eq repository #{repository}) (eq what '#{type}-was-opened') (eq where 'github'))"
+          ).each.any?
           Fbe.fb.txn do |fbt|
             f =
               Fbe.if_absent(fb: fbt) do |ff|
@@ -94,7 +98,6 @@ require_relative '../../lib/who_of'
                 ff.repository = repository
                 ff.what = "#{type}-was-opened"
                 ff.where = 'github'
-                issue = ff.issue
               end
             next if f.nil?
             found << f.issue
