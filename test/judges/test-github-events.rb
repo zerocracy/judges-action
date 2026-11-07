@@ -457,6 +457,52 @@ class TestGithubEvents < Jp::Test
     refute_nil(fb.query('(eq what "issue-was-opened")').each.first, 'a 502 on one event must not stop the judge')
   end
 
+  def test_retries_a_release_whose_comparison_failed_in_the_next_cycle
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '101',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_001,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T09:00:00Z'),
+            published_at: Time.parse('2024-11-30T09:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T09:00:00Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    compare = 'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100'
+    stub_github(compare, status: 502, body: { message: 'Bad Gateway' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_empty(fb.query('(eq what "release-published")').each.to_a, 'a release was recorded without its HoC')
+    stub_github(
+      compare,
+      body: { status: 'ahead', total_commits: 3, commits: [{ sha: 'sha-1' }], files: [{ changes: 7 }] }
+    )
+    load_it('github-events', fb)
+    release = fb.query('(eq what "release-published")').each.first
+    refute_nil(release, 'the release that failed with 502 was not retried in the next cycle')
+    assert_equal(3, release.commits)
+    assert_equal(7, release.hoc)
+  end
+
   def test_skip_issue_was_opened_event
     WebMock.disable_net_connect!
     rate_limit_up
