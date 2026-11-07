@@ -27,7 +27,7 @@ class TestTriageCutoff < Jp::Test
         Fbe.stub(:fb, fb) do
           Fbe.stub(:pmp, pmp) do
             Jp.stub(:qosearch, { items: [issue] }) do
-              assert_equal({}, Time.stub(:now, moment + 3600) { some_triage_time(fact) })
+              assert_equal({}, Time.stub(:now, moment + 3_600) { some_triage_time(fact) })
               late = fb.insert
               late.what = 'label-was-attached'
               late.repository = 42
