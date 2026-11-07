@@ -6,6 +6,7 @@
 require 'fbe/github_graph'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/patches/total_commits_pushed'
 require_relative '../../lib/patches/unmask_repos'
 require 'net/http'
 require 'octokit'
@@ -29,7 +30,7 @@ def total_commits_pushed(fact)
     end
     owner, name = repo.split('/')
     begin
-      Fbe.github_graph.total_commits_pushed(owner, name, fact.since).then do |json|
+      Fbe.github_graph.total_commits_pushed(owner, name, fact.since, fact.when).then do |json|
         commits += json['commits']
         hoc += json['hoc']
       end
