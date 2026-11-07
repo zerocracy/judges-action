@@ -42,6 +42,9 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+      next
     end
   issues = Fbe.fb.query(
     "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
@@ -66,6 +69,9 @@ Fbe.consider(
           "[#{$judge}] Access forbidden to issue #{repo}##{i} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
         next
       end
     checked << i
@@ -99,6 +105,9 @@ Fbe.consider(
               "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
+            next
+          rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+            $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
             next
           end
         if ref
