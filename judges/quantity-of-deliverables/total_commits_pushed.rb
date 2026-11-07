@@ -47,7 +47,7 @@ def total_commits_pushed(fact)
       )
       next
     end
-  end.nil?
+  end&.empty?
   {
     total_commits_pushed: commits,
     total_hoc_committed: hoc

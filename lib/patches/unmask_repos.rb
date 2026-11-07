@@ -58,7 +58,7 @@ module Fbe
           "[#{$judge}] The expansion of #{options.repositories.inspect} is incomplete, " \
           "so the #{repos.size} repositories it did find are not reported (will retry next cycle)"
         )
-        return
+        return []
       end
       repos.reject! do |repo|
         octo.repository(repo)[:archived]

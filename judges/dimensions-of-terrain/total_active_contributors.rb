@@ -37,6 +37,6 @@ def total_active_contributors(fact)
       author = commit.dig(:author, :id)
       seen << author unless author.nil?
     end
-  end.nil?
+  end&.empty?
   { total_active_contributors: seen.count }
 end

@@ -27,7 +27,7 @@ def total_releases_published(fact)
       $loog.warn("[#{$judge}] Network error counting releases in #{repo}: #{e.message}")
       next
     end
-  end.nil?
+  end&.empty?
   {
     total_releases_published: releases
   }

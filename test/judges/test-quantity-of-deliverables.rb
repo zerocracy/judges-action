@@ -521,7 +521,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $loog = Loog::NULL
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/*' })
-    Fbe.stub(:unmask_repos, ->(&_block) {}) do
+    Fbe.stub(:unmask_repos, ->(&_block) { [] }) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
       assert_empty(total_builds_ran(nil), 'a skipped mask cannot be reported as zero builds')
     end
@@ -532,7 +532,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $loog = Loog::NULL
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/*' })
-    Fbe.stub(:unmask_repos, ->(&_block) {}) do
+    Fbe.stub(:unmask_repos, ->(&_block) { [] }) do
       load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
       assert_empty(total_commits_pushed(nil), 'a skipped mask cannot be reported as zero commits')
     end

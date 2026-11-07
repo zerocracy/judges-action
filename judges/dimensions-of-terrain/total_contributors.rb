@@ -50,7 +50,7 @@ def total_contributors(_fact)
       id = contributor[:id]
       contributors << id unless id.nil?
     end
-  end.nil?
+  end&.empty?
   return {} unless measured
   { total_contributors: contributors.count }
 end

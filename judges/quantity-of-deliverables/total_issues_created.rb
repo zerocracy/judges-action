@@ -31,7 +31,7 @@ def total_issues_created(fact)
       end
     issues += json['issues']
     pulls += json['pulls']
-  end.nil?
+  end&.empty?
   {
     total_issues_created: issues,
     total_pulls_submitted: pulls
