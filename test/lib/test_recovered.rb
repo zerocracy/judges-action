@@ -9,7 +9,7 @@ require_relative '../test__helper'
 
 class TestRecovered < Minitest::Test
   def test_finds_the_success_that_came_after_the_window
-    ended = Time.parse('2025-01-10 00:00:00 UTC')
+    ended = Time.parse('2025-01-10 03:00:00 +03:00')
     recovery = Time.parse('2025-01-12 00:00:00 UTC')
     calls = []
     octo = fake_octo([{ id: 7, updated_at: recovery }], calls)
