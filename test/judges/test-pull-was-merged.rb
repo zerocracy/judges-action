@@ -677,7 +677,27 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
+  def test_ignores_already_merged_pull
+    ignores('pull-was-merged')
+  end
+
+  def test_ignores_already_closed_pull
+    ignores('pull-was-closed')
+  end
+
   private
+
+  def ignores(what)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44)
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what:, repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert_not_requested(:get, 'https://api.github.com/repos/foo/foo/pulls/44')
+    assert_equal(2, fb.size, 'a pull that was already processed must stay unchanged')
+  end
 
   def stub_pull_was_merged_success(issue)
     stub_pull_was_merged_base(issue)
