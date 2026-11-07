@@ -19,13 +19,17 @@ def total_builds_ran(fact)
       return found if found < 2500
       if till - from < 120
         $loog.warn("[#{$judge}] GitHub caps the workflow runs of #{repo} at #{found} in #{from}..#{till}")
-        return found
+        return
       end
       middle = from + ((till - from) / 2).floor
-      count.call(repo, from, middle) + count.call(repo, middle + 1, till)
+      early = count.call(repo, from, middle)
+      late = count.call(repo, middle + 1, till) unless early.nil?
+      early + late unless late.nil?
     end
   Fbe.unmask_repos.each do |repo|
-    total += count.call(repo, fact.since, fact.when)
+    found = count.call(repo, fact.since, fact.when)
+    return {} if found.nil?
+    total += found
     available = true
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info(
