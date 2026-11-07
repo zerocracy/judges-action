@@ -8,6 +8,6 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_repositories(_fact)
   total = 0
-  Fbe.unmask_repos { total += 1 }
+  return {} if Fbe.unmask_repos { total += 1 }.nil?
   { total_repositories: total }
 end

@@ -11,7 +11,7 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_commits(_fact)
   repos = []
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     begin
       json = Fbe.octo.repository(repo)
     rescue Octokit::NotFound, Octokit::Deprecated => e
@@ -29,7 +29,7 @@ def total_commits(_fact)
     next if json[:size].nil? || json[:size].zero?
     next if json[:default_branch].nil?
     repos << [*repo.split('/'), json[:default_branch]]
-  end
+  end.nil?
   return {} if repos.empty?
   errors = [
     GraphQL::Client::Error, Fbe::Error, Net::OpenTimeout, Net::ReadTimeout,
