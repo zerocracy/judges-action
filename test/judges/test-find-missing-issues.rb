@@ -10,6 +10,7 @@ class TestFindMissingIssues < Jp::Test
   using SmartFactbase
 
   def test_find_missing_issues_if_issue_not_found
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -27,6 +28,7 @@ class TestFindMissingIssues < Jp::Test
   end
 
   def test_rescues_forbidden_on_issue_lookup
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -46,6 +48,7 @@ class TestFindMissingIssues < Jp::Test
   end
 
   def test_continues_scan_after_pull_request_not_found
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -84,6 +87,7 @@ class TestFindMissingIssues < Jp::Test
   end
 
   def test_rescues_forbidden_on_pull_request_lookup
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
@@ -111,6 +115,7 @@ class TestFindMissingIssues < Jp::Test
   end
 
   def test_rescues_not_found_on_repo_name_lookup
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github('https://api.github.com/repositories/42', status: 404, body: { message: 'Not Found' })

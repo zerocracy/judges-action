@@ -6,8 +6,11 @@
 require 'fbe/consider'
 require 'fbe/if_absent'
 require 'fbe/octo'
+require 'fbe/unmask_repos'
 require 'octokit'
 require_relative '../../lib/patches/fake_octokit'
+
+managed = Fbe.unmask_repos.to_set(&:downcase)
 
 Fbe.consider(
   '(and
@@ -39,6 +42,7 @@ Fbe.consider(
       )
       next
     end
+  next unless managed.include?(repo.downcase)
   milestones =
     begin
       Fbe.octo.list_milestones(repo, state: 'all')
