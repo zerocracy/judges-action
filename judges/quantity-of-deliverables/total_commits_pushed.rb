@@ -13,7 +13,7 @@ require 'octokit'
 def total_commits_pushed(fact)
   commits = 0
   hoc = 0
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     begin
       json = Fbe.octo.repository(repo)
       next if json[:size].nil? || json[:size].zero?
@@ -21,10 +21,7 @@ def total_commits_pushed(fact)
       $loog.info("#{repo} can't be inspected: #{e.class}: #{e.message}")
       next
     rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Access forbidden to #{repo} " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
+      $loog.warn("[#{$judge}] Access forbidden to #{repo} (transient, will retry next cycle): #{e.class}: #{e.message}")
       next
     end
     owner, name = repo.split('/')
@@ -50,7 +47,7 @@ def total_commits_pushed(fact)
       )
       next
     end
-  end
+  end.nil?
   {
     total_commits_pushed: commits,
     total_hoc_committed: hoc
