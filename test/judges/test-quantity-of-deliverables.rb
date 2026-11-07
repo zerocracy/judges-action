@@ -481,6 +481,14 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs?created=2025-10-06T00:00:00Z..2025-10-10T23:59:59Z&per_page=1',
       body: { total_count: 4, workflow_runs: [] }
     )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-10-01T00:00:00Z..2025-10-06T00:00:00Z&per_page=1',
+      body: { total_count: 5, workflow_runs: [] }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs?created=2025-10-06T00:00:01Z..2025-10-10T23:59:59Z&per_page=1',
+      body: { total_count: 2, workflow_runs: [] }
+    )
     window = Struct.new(:since, :when)
     $judge = 'quantity-of-deliverables'
     $loog = Loog::NULL
@@ -493,7 +501,9 @@ class TestQuantityOfDeliverables < Jp::Test
       second = window.new(Time.parse('2025-10-06 00:00:00 UTC'), Time.parse('2025-10-11 00:00:00 UTC'))
       assert_equal({ total_builds_ran: 4 }, total_builds_ran(second))
       fraction = window.new(Time.parse('2025-10-01 00:00:00 UTC'), Time.parse('2025-10-06 00:00:00.700 UTC'))
-      assert_equal({ total_builds_ran: 3 }, total_builds_ran(fraction))
+      assert_equal({ total_builds_ran: 5 }, total_builds_ran(fraction))
+      late = window.new(Time.parse('2025-10-06 00:00:00.700 UTC'), Time.parse('2025-10-11 00:00:00 UTC'))
+      assert_equal({ total_builds_ran: 2 }, total_builds_ran(late))
     end
   end
 
