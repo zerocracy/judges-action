@@ -109,6 +109,46 @@ class TestEliminateGhosts < Jp::Test
     assert(fb.has?(where: 'github', who: 333))
   end
 
+  def test_does_not_mark_a_fact_of_a_lost_user_twice
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/404001', body: {}, status: 404)
+    fb = Factbase.new
+    fb.with(_id: 1, where: 'github', who: 404_001, what: 'something-a')
+      .with(_id: 2, where: 'github', who: 404_001, what: 'something-b', stale: 'who')
+    load_it('eliminate-ghosts', fb)
+    assert_equal(%w[who], fb.query('(eq _id 1)').each.first['stale'])
+    assert_equal(
+      %w[who], fb.query('(eq _id 2)').each.first['stale'],
+      'A fact already stale for its user cannot get one more "who"'
+    )
+  end
+
+  def test_keeps_one_mark_on_a_lost_user_over_two_runs
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/404003', body: {}, status: 404)
+    fb = Factbase.new
+    fb.with(_id: 4, where: 'github', who: 404_003, what: 'something-d')
+      .with(_id: 5, where: 'github', who: 404_003, what: 'something-e')
+    2.times { load_it('eliminate-ghosts', fb) }
+    [4, 5].each do |id|
+      assert_equal(%w[who], fb.query("(eq _id #{id})").each.first['stale'], "fact #{id} got more than one mark")
+    end
+  end
+
+  def test_does_not_mark_a_fully_stale_user_twice
+    WebMock.disable_net_connect!
+    rate_limit_up
+    fb = Factbase.new
+    fb.with(_id: 3, where: 'github', who: 404_002, what: 'something-c', stale: 'who')
+    2.times { load_it('eliminate-ghosts', fb) }
+    assert_equal(
+      %w[who], fb.query('(eq _id 3)').each.first['stale'],
+      'A user with only stale facts cannot get one more "who" on every run'
+    )
+  end
+
   def test_keeps_sibling_facts_of_a_live_user
     WebMock.disable_net_connect!
     rate_limit_up
