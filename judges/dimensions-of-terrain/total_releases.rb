@@ -9,7 +9,7 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_releases(_fact)
   total = 0
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     releases =
       begin
         Fbe.octo.releases(repo)
@@ -30,6 +30,6 @@ def total_releases(_fact)
     releases.reject { |release| release[:draft] }.each do |_|
       total += 1
     end
-  end
+  end.nil?
   { total_releases: total }
 end

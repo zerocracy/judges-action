@@ -1439,4 +1439,26 @@ class TestDimensionsOfTerrain < Jp::Test
       assert_equal({}, total_active_contributors(f), 'a partial count is saved when one repository search fails')
     end
   end
+
+  def test_total_stars_returns_empty_hash_when_a_mask_is_skipped
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/*' })
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_stars.rb'))
+    Fbe.stub(:unmask_repos, ->(&_block) {}) do
+      assert_equal({}, total_stars(nil), 'a skipped mask cannot be reported as zero stars')
+    end
+  end
+
+  def test_total_repositories_returns_empty_hash_when_a_mask_is_skipped
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/*' })
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_repositories.rb'))
+    Fbe.stub(:unmask_repos, ->(&_block) {}) do
+      assert_equal({}, total_repositories(nil), 'a skipped mask cannot be reported as zero repositories')
+    end
+  end
 end

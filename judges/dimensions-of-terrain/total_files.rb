@@ -11,7 +11,7 @@ def total_files(_fact)
   files = 0
   measured = false
   truncated = false
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     info =
       begin
         Fbe.octo.repository(repo)
@@ -55,7 +55,7 @@ def total_files(_fact)
     end
     measured = true
     files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
-  end
+  end.nil?
   return {} if truncated
   return {} unless measured
   { total_files: files }

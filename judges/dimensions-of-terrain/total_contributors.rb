@@ -10,7 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 def total_contributors(_fact)
   contributors = Set.new
   measured = false
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     json =
       begin
         Fbe.octo.repository(repo)
@@ -50,7 +50,7 @@ def total_contributors(_fact)
       id = contributor[:id]
       contributors << id unless id.nil?
     end
-  end
+  end.nil?
   return {} unless measured
   { total_contributors: contributors.count }
 end

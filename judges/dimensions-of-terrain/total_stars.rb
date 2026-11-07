@@ -10,7 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 def total_stars(_fact)
   stars = 0
   forks = 0
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     json =
       begin
         Fbe.octo.repository(repo)
@@ -29,6 +29,6 @@ def total_stars(_fact)
       end
     stars += json[:stargazers_count] || 0
     forks += json[:forks] || 0
-  end
+  end.nil?
   { total_stars: stars, total_forks: forks }
 end

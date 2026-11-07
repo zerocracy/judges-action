@@ -10,7 +10,7 @@ require_relative '../../lib/qos_search'
 
 def total_active_contributors(fact)
   seen = Set.new
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     commits =
       begin
         Jp.qosearch(
@@ -37,6 +37,6 @@ def total_active_contributors(fact)
       author = commit.dig(:author, :id)
       seen << author unless author.nil?
     end
-  end
+  end.nil?
   { total_active_contributors: seen.count }
 end
