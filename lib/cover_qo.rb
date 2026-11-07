@@ -9,6 +9,8 @@ require_relative 'jp'
 require_relative 'today'
 
 def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
+  days = Integer(days)
+  raise(ArgumentError, "The days must be a positive Integer, got #{days}") unless days.positive?
   today ||= Jp.today
   slice = days * 24 * 60 * 60
   facts = Fbe.fb.query("(and (eq what '#{judge}') (exists since) (exists when))").each.to_a.sort_by(&:since)

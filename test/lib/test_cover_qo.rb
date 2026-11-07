@@ -438,4 +438,13 @@ class TestCoverQo < Minitest::Test
       assert_equal(3, facts.size, 'gap of 20 days filled when slice is 10 days')
     end
   end
+  def test_rejects_non_positive_days
+    fb = Factbase.new
+    Fbe.stub(:fb, fb) do
+      assert_raises(ArgumentError) { Jp.cover_qo(-5, judge: 'test-judge', loog: Loog::NULL) }
+      assert_raises(ArgumentError) { Jp.cover_qo(0, judge: 'test-judge', loog: Loog::NULL) }
+    end
+    assert_empty(fb.query("(eq what 'test-judge')").each.to_a)
+  end
+
 end
