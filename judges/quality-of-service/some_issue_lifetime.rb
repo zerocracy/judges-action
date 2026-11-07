@@ -17,11 +17,13 @@ def some_issue_lifetime(fact)
         lost = true
         break
       end
-      found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+      query = "repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}"
+      found = Jp.qosearch(query)
       if found.nil?
         lost = true
         break
       end
+      Jp.capped?(found, query)
       ages +=
         found[:items].map do |json|
           next if json[:closed_at].nil?
