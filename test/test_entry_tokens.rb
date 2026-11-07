@@ -45,6 +45,16 @@ class TestEntryTokens < Jp::Test
     end
   end
 
+  def test_accepts_a_one_character_factbase_basename
+    Dir.mktmpdir do |dir|
+      launch(
+        dir,
+        'INPUT_GITHUB-TOKEN' => secret(Random.new_seed), 'INPUT_OPTIONS' => '',
+        'INPUT_FACTBASE' => File.join(dir, 'a.fb')
+      )
+    end
+  end
+
   private
 
   def secret(seed)
