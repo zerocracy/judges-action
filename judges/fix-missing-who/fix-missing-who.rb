@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/consider'
 require 'fbe/issue'
 require 'fbe/octo'
@@ -41,6 +42,13 @@ require_relative '../../lib/issue_was_lost'
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next
+      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn(
+          "[#{$judge}] Transient error resolving repository ##{f.repository} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
       end
     json =
       begin
@@ -53,6 +61,13 @@ require_relative '../../lib/issue_was_lost'
         $loog.warn(
           "[#{$judge}] Access forbidden to #{Fbe.issue(f)} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+        Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching #{Fbe.issue(f)} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
         )
         next
       end
