@@ -13,7 +13,7 @@ def some_review_time(fact)
   sizes = []
   reviewers = []
   reviews = []
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
@@ -47,7 +47,7 @@ def some_review_time(fact)
       reviewers << users.size
       reviews << all.size
     end
-  end
+  end&.empty?
   {
     some_review_time: times,
     some_review_size: sizes,

@@ -8,7 +8,7 @@ require 'fbe/unmask_repos'
 
 def some_release_interval(fact)
   intervals = []
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     releases =
       begin
@@ -32,7 +32,7 @@ def some_release_interval(fact)
     end
     dates.sort!
     intervals.concat(dates.each_cons(2).map { |pair| pair.last - pair.first })
-  end
+  end&.empty?
   {
     some_release_interval: intervals
   }

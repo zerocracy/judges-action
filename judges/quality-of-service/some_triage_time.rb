@@ -12,7 +12,7 @@ require_relative '../../lib/qos_search'
 def some_triage_time(fact)
   threshold = Fbe.pmp.quality.qos_min_triage_seconds.value || 60
   times = []
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
@@ -32,18 +32,18 @@ def some_triage_time(fact)
     found[:items].each do |issue|
       ff = Fbe.fb.query(
         "
-        (and
-          (eq repository #{rid})
-          (eq issue #{issue[:number]})
-          (eq what 'label-was-attached')
-          (or
-            (eq label 'bug')
-            (eq label 'enhancement'))
-          (absent stale)
-          (exists when)
-          (lte when (to_time '#{fact.when.utc.iso8601(9)}'))
-          (eq where 'github'))
-        "
+      (and
+        (eq repository #{rid})
+        (eq issue #{issue[:number]})
+        (eq what 'label-was-attached')
+        (or
+          (eq label 'bug')
+          (eq label 'enhancement'))
+        (absent stale)
+        (exists when)
+        (lte when (to_time '#{fact.when.utc.iso8601(9)}'))
+        (eq where 'github'))
+      "
       ).each.min_by(&:when)
       next unless ff
       next unless issue[:created_at]
@@ -51,7 +51,7 @@ def some_triage_time(fact)
       next if delta < threshold
       times << delta
     end
-  end
+  end&.empty?
   {
     some_triage_time: times
   }

@@ -30,7 +30,7 @@ class TestSomeBacklogSize < Jp::Test
     result =
       Fbe.stub(:fb, fb) do
         Fbe.stub(:octo, octo) do
-          Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) do
+          Fbe.stub(:unmask_repos, yielding_repos('foo/foo')) do
             Jp.stub(:qosearch, { total_count: 4 }) { some_backlog_size(fact) }
           end
         end

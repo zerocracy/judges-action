@@ -10,7 +10,7 @@ def some_release_hoc_size(fact)
   grouped = {}
   hocs = []
   commits = []
-  Fbe.unmask_repos do |repo|
+  return {} if Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     releases =
       begin
@@ -31,7 +31,7 @@ def some_release_hoc_size(fact)
       (grouped[repo] ||= []) << json
       break if json[:published_at] < fact.since
     end
-  end
+  end&.empty?
   grouped.each do |repo, releases|
     releases.reverse.each_cons(2) do |first, last|
       compare =
