@@ -10,6 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 def total_contributors(_fact)
   contributors = Set.new
   measured = false
+  skipped = false
   Fbe.unmask_repos do |repo|
     json =
       begin
@@ -25,7 +26,8 @@ def total_contributors(_fact)
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        skipped = true
+        break
       end
     next if json[:size].nil? || json[:size].zero?
     list =
@@ -42,7 +44,8 @@ def total_contributors(_fact)
           "[#{$judge}] Access forbidden to contributors for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        skipped = true
+        break
       end
     next unless list.is_a?(Array)
     measured = true
@@ -51,6 +54,7 @@ def total_contributors(_fact)
       contributors << id unless id.nil?
     end
   end
+  return {} if skipped
   return {} unless measured
   { total_contributors: contributors.count }
 end

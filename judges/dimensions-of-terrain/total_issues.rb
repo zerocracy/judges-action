@@ -10,6 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 def total_issues(_fact)
   issues = 0
   pulls = 0
+  skipped = false
   Fbe.unmask_repos do |repo|
     json =
       begin
@@ -23,10 +24,12 @@ def total_issues(_fact)
           "[#{$judge}] Can't count issues and pulls in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        skipped = true
+        break
       end
     issues += json['issues']
     pulls += json['pulls']
   end
+  return {} if skipped
   { total_issues: issues, total_pulls: pulls }
 end

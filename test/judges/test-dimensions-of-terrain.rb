@@ -367,7 +367,7 @@ class TestDimensionsOfTerrain < Jp::Test
     assert_equal(19, f.total_pulls)
   end
 
-  def test_total_issues_skips_failing_graph_repo
+  def test_total_issues_drops_total_when_one_repo_fails
     WebMock.disable_net_connect!
     rate_limit_up
     %w[bad good].each do |name|
@@ -386,7 +386,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
-      assert_equal({ total_issues: 7, total_pulls: 5 }, total_issues(nil))
+      assert_empty(total_issues(nil))
     end
   end
 
@@ -651,11 +651,9 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_total_commits_keeps_repos_counted_after_batch_failure
+  def test_total_commits_drops_partial_count_when_one_repo_fails
     WebMock.disable_net_connect!
     rate_limit_up
-    seed = Random.new_seed
-    count = Random.new(seed).rand(1..10_000)
     %w[alive broken].each do |name|
       stub_github(
         "https://api.github.com/repos/foo/#{name}", body: {
@@ -673,15 +671,12 @@ class TestDimensionsOfTerrain < Jp::Test
       define_method(:total_commits) do |owner = nil, name = nil, branch = nil, repos: nil|
         raise(Fbe::Error, 'Repository or branch not found') unless repos.nil?
         raise(Fbe::Error, "Repository '#{owner}/#{name}' or branch '#{branch}' not found") if name == 'broken'
-        count
+        4
       end
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
-      assert_equal(
-        { total_commits: count }, total_commits(nil),
-        "commits of the reachable repository are not kept, seed: #{seed}"
-      )
+      assert_empty(total_commits(nil))
     end
   end
 
@@ -1273,7 +1268,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
-  def test_skips_repo_on_tree_forbidden
+  def test_does_not_record_total_files_when_a_tree_is_forbidden
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -1318,7 +1313,7 @@ class TestDimensionsOfTerrain < Jp::Test
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/good,foo/bad' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         refute_nil(f)
-        assert_equal(1, f.total_files)
+        assert_nil(f['total_files'])
       end
     end
   end
