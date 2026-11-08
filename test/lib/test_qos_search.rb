@@ -224,6 +224,7 @@ class TestQosSearch < Jp::Test
     end
     assert_equal(1, naps.size, 'the search did not wait at 59s, the window ends too early')
     assert_in_delta(1, naps.sum, 0.5, 'the search did not sleep the last second of the window')
+    assert_requested(:get, %r{https://api\.github\.com/search/issues}, times: 26)
   end
 
   def test_reopens_the_budget_at_the_window_end
