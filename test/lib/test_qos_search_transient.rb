@@ -38,10 +38,15 @@ class TestQosSearchTransient < Jp::Test
     end
   end
 
+  def test_answers_nil_on_a_connection_failure_over_http
+    rate_limit_up
+    stub_request(:get, %r{search/issues}).to_raise(Faraday::ConnectionFailed.new('connection refused'))
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+  end
+
   def test_lets_a_foreign_no_method_error_out
     octo = Minitest::Mock.new
     octo.expect(:get, nil) { raise(NoMethodError.new('foreign', :foo)) }
-    octo.expect(:rate_limit, Struct.new(:remaining).new(0))
     error = Fbe.stub(:octo, octo) { assert_raises(NoMethodError) { Jp.qosearch('repo:foo/foo type:issue') } }
     assert_equal(:foo, error.name)
   end
