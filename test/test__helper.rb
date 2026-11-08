@@ -12,7 +12,7 @@ unless Coverage.running? || ARGV.include?('--no-cov')
       SimpleCov::Formatter::CoberturaFormatter
     ]
   )
-  SimpleCov.minimum_coverage(55)
+  SimpleCov.minimum_coverage(80)
   SimpleCov.minimum_coverage_by_file(10)
   SimpleCov.start do
     enable_coverage :eval
