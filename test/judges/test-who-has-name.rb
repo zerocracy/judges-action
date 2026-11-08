@@ -184,10 +184,17 @@ class TestWhoHasName < Jp::Test
     f.who = 12
     f.stale = 'issue'
     f.stale = 'who'
+    g = fb.insert
+    g._id = 3
+    g.what = 'pull-was-merged'
+    g.where = 'github'
+    g.who = 12
+    g.stale = 'who'
     Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
       load_it('who-has-name', fb)
     end
     assert(fb.one?(_id: 1, name: 'user22'))
-    assert_equal(%w[issue who], fb.pick(_id: 2)['stale'])
+    assert_equal(%w[issue who], fb.pick(_id: 2)['stale'].sort)
+    assert_nil(fb.pick(_id: 3)['stale'])
   end
 end
