@@ -2,12 +2,13 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 9m52s: execution expired'
+  error: 'Failure in repository #849726475 at #225: GET https://api.github.com/repos/zerocracy/swarm-template/issues/225:
+    502 - Server Error'
   inserted: 8
-  seconds: 1206.817616843
+  seconds: 988.204280863
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-08 14:51:12.758932819 Z
+  when: 2026-11-08 15:47:51.636959139 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -36067,90 +36068,6 @@
   stale: issue
   what: pull-was-opened
   when: 2025-12-25 05:53:50.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2610389
-  _job: 24713148707
-  _time: 2026-04-21 08:57:42.469556859 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  branch: renovate/minitest-6.x-lockfile
-  details: The missing pull zerocracy/eva#110 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 110
-  repository: 857659265
-  stale: issue
-  tombstone: 2026-11-08 12:53:41.650534718 Z
-  what: pull-was-opened
-  when: 2026-02-23 23:40:24.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2610390
-  _job: 24713148707
-  _time: 2026-04-21 08:57:43.532267657 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  branch: renovate/rubocop-minitest-0.x-lockfile
-  details: The missing pull zerocracy/eva#111 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 111
-  repository: 857659265
-  stale: issue
-  tombstone: 2026-11-08 12:53:41.683401449 Z
-  what: pull-was-opened
-  when: 2026-02-24 08:36:12.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2610414
-  _job: 24715638408
-  _time: 2026-04-21 09:49:30.587220061 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  branch: renovate/minitest-6.x-lockfile
-  comments: 1
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 1
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/eva#110 has been "pull-was-closed".
-  done: 2026-11-08 12:53:41.619247532 Z
-  failed_builds: 0
-  files: 1
-  hoc: 3
-  is_human: 0
-  issue: 110
-  repository: 857659265
-  stale: issue
-  succeeded_builds: 10
-  suggestions: 0
-  tombstone: 2026-11-08 14:22:08.142989315 Z
-  what: pull-was-closed
-  when: 2026-02-25 05:12:31.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2610415
-  _job: 24715638408
-  _time: 2026-04-21 09:49:43.070518048 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  branch: renovate/rubocop-minitest-0.x-lockfile
-  comments: 1
-  comments_appreciated: 0
-  comments_by_author: 0
-  comments_by_reviewers: 1
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/eva#111 has been "pull-was-closed".
-  done: 2026-11-08 12:53:41.652371650 Z
-  failed_builds: 0
-  files: 1
-  hoc: 2
-  is_human: 0
-  issue: 111
-  repository: 857659265
-  stale: issue
-  succeeded_builds: 10
-  suggestions: 0
-  tombstone: 2026-11-08 14:22:08.149568594 Z
-  what: pull-was-closed
-  when: 2026-02-25 05:12:32.000000000 Z
   where: github
   who: 29139614
 - _id: 2610420
@@ -147907,7 +147824,7 @@
   - 97-101
   - '103'
   - '105'
-  - 108-109
+  - 108-111
   repository: 857659265
   what: tombstone
   where: github
@@ -150075,7 +149992,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19460800757
+  events_were_scanned: 19480914258
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 20
@@ -156862,36 +156779,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1680
-  closures_were_checked: 0
+  assignees_were_scanned: 1873
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
-  events_were_scanned: 19477121034
+  events_were_scanned: 26552486073
   issues_were_scanned: 1396
-  labels_were_scanned: 1306
+  labels_were_scanned: 1581
   latest_issue_was_found: 315
-  merges_were_scanned: 1271
-  min_issue_was_found: 1891
+  merges_were_scanned: 1563
+  min_issue_was_found: 1892
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 847
+  types_were_scanned: 996
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26547059965
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 588
+  merges_were_scanned: 0
   min_issue_was_found: 369
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -156901,7 +156818,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26542079158
+  events_were_scanned: 26554862570
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 115
@@ -157308,18 +157225,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1614
-  closures_were_checked: 931
+  assignees_were_scanned: 1967
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19454220522
+  events_were_scanned: 26555393834
   issues_were_scanned: 1225
-  labels_were_scanned: 1969
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 949
+  merges_were_scanned: 1270
   min_issue_was_found: 1862
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 0
+  types_were_scanned: 586
   what: iterate
   where: github
 - _id: 2629882
@@ -157965,18 +157882,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1247
+  assignees_were_scanned: 1387
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19474739611
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1332
+  merges_were_scanned: 0
   min_issue_was_found: 1373
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 975
+  types_were_scanned: 1084
   what: iterate
   where: github
 - _id: 2629939
@@ -158111,18 +158028,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 916
+  assignees_were_scanned: 1106
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19477122220
+  events_were_scanned: 26552942591
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1063
+  merges_were_scanned: 1164
   min_issue_was_found: 1064
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 1099
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630023
@@ -158147,18 +158064,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1993
-  closures_were_checked: 2328
+  assignees_were_scanned: 2121
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26548361147
+  events_were_scanned: 26555280433
   issues_were_scanned: 2725
-  labels_were_scanned: 1702
+  labels_were_scanned: 2975
   latest_issue_was_found: 1073
-  merges_were_scanned: 2886
+  merges_were_scanned: 3043
   min_issue_was_found: 2988
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 2867
+  types_were_scanned: 2975
   what: iterate
   where: github
 - _id: 2630036
@@ -158173,7 +158090,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 21
+  min_issue_was_found: 22
   min_pull_was_found: 14
   repository: 1081929119
   types_were_scanned: 0
@@ -158183,10 +158100,10 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 26549418535
+  events_were_scanned: 26553707979
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
@@ -158194,7 +158111,7 @@
   min_issue_was_found: 1209
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 1186
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -536942,17 +536859,6 @@
   comments: 1
   details: It's time to reward @yegor256 for the code review in yegor256/judges#1277,
     the reward amount is 6.
-  greeting: "Hey, nice work on the review! \U0001F389 You've bagged **+6 points**
-    for it — here's the breakdown: **+18** as your starting basis, **-8** since there
-    were no comments posted during the review (per policy, zero comments means a bigger
-    deduction), and **-4** because the contribution only had 2 hits-of-code, which
-    is below the 24 HOC threshold. Your running score is now [+1655](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — keep it up, and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/)
-    for more details!\n\n<!-- Thanks for the review! You've earned +6 points for this:
-    +18 as a basis; -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.
-    \ Your running score is [+1655](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 2
   href: https://github.com/yegor256/judges/issues/1277/#issuecomment-6722641996
   is_human: 1
@@ -536973,10 +536879,6 @@
   comments: 2
   details: It's time to reward @yegor256 for the code review in zerocracy/zerocracy-mcp-server#169,
     the reward amount is 6.
-  greeting: |-
-    Nice work getting that review done! Here's the breakdown: you start with **+18** base points, but since there were absolutely no comments posted during the review, that's **-8**, and with only 2 hits-of-code (below the 24 threshold), that's another **-4** — landing you at **+6** points overall. Your running score is now [+1661](https://zerocracy.github.io/judges-action/zerocracy-vitals.html), so keep it up, and don't forget to swing by your [Zerocracy account](https://www.zerocracy.com/) to check the details!
-
-    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (2) hits-of-code.  Your running score is [+1661](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 2
   href: https://github.com/zerocracy/zerocracy-mcp-server/issues/169/#issuecomment-6722642412
   is_human: 1
