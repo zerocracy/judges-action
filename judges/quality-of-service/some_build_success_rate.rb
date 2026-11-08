@@ -50,23 +50,23 @@ def some_build_success_rate(fact)
             )
             next
           end
-        { json: json, secs: secs, completed: json[:run_started_at] + secs }
+        { repo:, json:, secs:, completed: json[:run_started_at] + secs }
       end
     runs.sort_by! { _1[:completed] }
     runs.each do |item|
-      item => { json:, secs:, completed: }
-      wid = json[:workflow_id]
-      if json[:conclusion] == 'failure' && failed[wid].nil?
-        failed[wid] = completed
-      elsif json[:conclusion] == 'success' && failed[wid]
-        ttrs << Integer(completed - failed[wid])
-        failed.delete(wid)
+      item => { repo: repository, json:, secs:, completed: }
+      key = [repository, json[:workflow_id]]
+      if json[:conclusion] == 'failure' && failed[key].nil?
+        failed[key] = completed
+      elsif json[:conclusion] == 'success' && failed[key]
+        ttrs << Integer(completed - failed[key])
+        failed.delete(key)
       end
       success << (json[:conclusion] == 'success' ? 1 : 0)
       duration << secs
     end
-    failed.each do |wid, broke|
-      recovery = Jp.recovered(repo, wid, fact.when)
+    failed.each do |(repository, wid), broke|
+      recovery = Jp.recovered(repository, wid, fact.when)
       next if recovery.nil?
       ttrs << Integer(recovery - broke)
     end

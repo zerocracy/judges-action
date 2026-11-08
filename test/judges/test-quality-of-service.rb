@@ -742,6 +742,50 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_dont_pair_same_workflow_id_across_repositories
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    seed = Random.new_seed
+    random = Random.new(seed)
+    workflow = random.rand(1..1_000_000)
+    gap = random.rand(60..86_400)
+    started = Time.parse('2024-08-07T10:00:00Z')
+    runs = {
+      'bar/bar' => [
+        {
+          id: 1, status: 'completed', conclusion: 'failure', workflow_id: workflow,
+          run_started_at: started
+        }
+      ],
+      'foo/foo' => [
+        {
+          id: 2, status: 'completed', conclusion: 'failure', workflow_id: workflow,
+          run_started_at: started + 90_000
+        },
+        {
+          id: 3, status: 'completed', conclusion: 'success', workflow_id: workflow,
+          run_started_at: started + 90_000 + gap
+        }
+      ]
+    }
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repository_workflow_runs) { |repo, *| { workflow_runs: runs[repo] } }
+    octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: 600_000 } }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:workflow_runs) { |*, **| { workflow_runs: [] } }
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { runs.each_key(&block) }) do
+        metrics = some_build_success_rate(fact)
+        assert_equal(
+          [gap], metrics[:some_build_mttr],
+          "repair time is taken from the other repository, seed: #{seed}"
+        )
+      end
+    end
+  end
+
   def test_skips_run_without_duration
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
