@@ -5,12 +5,12 @@
 
 require 'fbe/fb'
 require 'fbe/octo'
-require 'fbe/pmp'
 require 'fbe/unmask_repos'
+require_relative '../../lib/qos_param'
 require_relative '../../lib/qos_search'
 
 def some_triage_time(fact)
-  threshold = Fbe.pmp.quality.qos_min_triage_seconds.value || 60
+  threshold = Jp.qos_param(:qos_min_triage_seconds, 60)
   times = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?

@@ -4,14 +4,14 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/octo'
-require 'fbe/pmp'
 require 'fbe/unmask_repos'
+require_relative '../../lib/qos_param'
 require_relative '../../lib/qos_search'
 
 def some_backlog_size(fact)
   return {} if Fbe.octo.off_quota?(resource: :search)
   issues = []
-  sample = Fbe.pmp.quality.qos_backlog_days.value || 7
+  sample = Jp.qos_param(:qos_backlog_days, 7)
   Fbe.unmask_repos do |repo|
     (fact.since.utc.to_date..fact.when.utc.to_date).last(sample).each do |date|
       return {} if Fbe.octo.off_quota?(resource: :search)

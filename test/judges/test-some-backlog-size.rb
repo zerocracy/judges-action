@@ -37,4 +37,24 @@ class TestSomeBacklogSize < Jp::Test
       end
     assert_equal([4, 4, 4], result[:some_backlog_size])
   end
+
+  def test_uses_default_sample_when_fbe_raises
+    fact = Factbase.new.insert
+    pmp = Object.new
+    pmp.define_singleton_method(:quality) { pmp }
+    pmp.define_singleton_method(:qos_backlog_days) do
+      raise(Fbe::Error, "There is no 'qos_backlog_days' property in the 'quality' area")
+    end
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    result =
+      Fbe.stub(:pmp, pmp) do
+        Fbe.stub(:octo, octo) do
+          Fbe.stub(:unmask_repos, proc { |&b| }) do
+            some_backlog_size(fact)
+          end
+        end
+      end
+    assert_equal({ some_backlog_size: [] }, result)
+  end
 end
