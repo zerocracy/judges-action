@@ -16,16 +16,16 @@ class TestIsHumanOrRobot < Jp::Test
     fact = fb.insert
     fact.who = id
     fact.where = 'github'
+    fact.what = 'pull-was-merged'
     Jp::FakeGithub.new(
-      'GET /rate_limit' => {
-        rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
-      },
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
       "GET /user/#{id}" => [404, {}]
     ).run do
       load_it('is-human-or-robot', fb)
     end
     facts = fb.query("(eq who #{id})").each.to_a
     assert_equal(id, facts.first.who)
+    assert_equal('who', facts.first.stale)
     assert_raises(ArgumentError) { facts.first.is_human }
   end
 
