@@ -63,7 +63,7 @@ class TestQuantityOfDeliverables < Jp::Test
     fact.since = Time.parse('2025-09-30 00:00:00 +03:00')
     fact.when = Time.parse('2025-10-06 21:00:00 UTC')
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_reviews_submitted.rb'))
+      load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_reviews_submitted.rb'))
       total_reviews_submitted(fact)
     end
   end
@@ -142,7 +142,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     Fbe.stub(:unmask_repos, unmask) do
       Fbe.stub(:github_graph, graph) do
-        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
         assert_equal({ total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact))
       end
     end
@@ -169,7 +169,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     Fbe.stub(:unmask_repos, unmask) do
       Fbe.stub(:github_graph, graph) do
-        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
         assert_equal({ total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact))
       end
     end
@@ -199,7 +199,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     Fbe.stub(:unmask_repos, unmask) do
       Fbe.stub(:github_graph, graph) do
-        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
         assert_equal({ total_commits_pushed: 4, total_hoc_committed: 400 }, total_commits_pushed(fact))
       end
     end
@@ -225,7 +225,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
     Fbe.stub(:unmask_repos, unmask) do
       Fbe.stub(:github_graph, graph) do
-        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
         assert_raises(NoMethodError) { total_commits_pushed(fact) }
       end
     end
@@ -419,7 +419,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/blocked' })
     Fbe.stub(:unmask_repos, ['foo/blocked']) do
-      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
       assert_empty(total_builds_ran(fact), 'forbidden repository is reported as a total instead of being omitted')
     end
   end
@@ -445,7 +445,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/good,foo/blocked' })
     Fbe.stub(:unmask_repos, %w[foo/good foo/blocked]) do
-      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
       assert_equal({ total_builds_ran: runs }, total_builds_ran(fact))
     end
   end
@@ -465,7 +465,7 @@ class TestQuantityOfDeliverables < Jp::Test
     $global = {}
     $options = Judges::Options.new({ 'repositories' => 'foo/gone' })
     Fbe.stub(:unmask_repos, ['foo/gone']) do
-      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      load_judge(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
       assert_empty(total_builds_ran(fact), 'unreadable repository is reported as a total instead of being omitted')
     end
   end
