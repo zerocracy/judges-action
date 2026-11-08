@@ -108,4 +108,20 @@ class TestWhoIsAlive < Jp::Test
       'who-is-alive must not delete the who-has-name fact on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_looks_up_user_once_per_run
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub = stub_github('https://api.github.com/user/10', body: { login: 'user0', id: 10, type: 'User' })
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'who-has-name', where: 'github', who: 10, name: 'user0',
+      when: Time.now - (3 * 86_400)
+    ).with(
+      _id: 2, what: 'who-has-name', where: 'github', who: 10, name: 'user0',
+      when: Time.now - (3 * 86_400)
+    )
+    load_it('who-is-alive', fb)
+    assert_requested(stub, times: 1)
+  end
 end
