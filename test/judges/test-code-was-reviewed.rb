@@ -350,6 +350,104 @@ class TestCodeWasReviewed < Jp::Test
     refute_includes(n.all_properties, 'comments', 'a transient connection reset cannot invent a zero comment count')
   end
 
+  def test_leaves_comments_unset_on_issue_comments_server_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/94',
+      body: {
+        id: 94, number: 94, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/94/reviews?per_page=100',
+      body: [
+        { id: 49_444, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/94/comments?per_page=100',
+      status: 500,
+      body: { message: 'Server Error' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 94, where: 'github')
+    load_it('code-was-reviewed', fb)
+    n = fb.query('(eq what "code-was-reviewed")').each.first
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    refute_includes(
+      n.all_properties, 'comments',
+      'a server error while counting issue comments cannot invent a zero comment count'
+    )
+  end
+
+  def test_leaves_review_comments_unset_on_review_comments_server_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews/49111/comments?per_page=100',
+      status: 500,
+      body: { message: 'Server Error' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    n = fb.query('(eq what "code-was-reviewed")').each.first
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    assert_equal(0, n.comments, 'the issue comments were fetched successfully')
+    refute_includes(
+      n.all_properties, 'review_comments',
+      'a server error while counting review comments cannot invent a zero comment count'
+    )
+  end
+
+  def test_records_zero_when_both_comment_lists_are_empty
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44',
+      body: {
+        id: 50, number: 44, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 12, deletions: 5
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        { id: 49_111, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/49111/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 44, where: 'github')
+    load_it('code-was-reviewed', fb)
+    n = fb.query('(eq what "code-was-reviewed")').each.first
+    refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
+    assert_equal(0, n.comments, 'an empty issue-comments list is a real zero, not a missing count')
+    assert_equal(0, n.review_comments, 'an empty review-comments list is a real zero, not a missing count')
+  end
+
   def test_rescues_deprecated_on_reviews_lookup
     WebMock.disable_net_connect!
     rate_limit_up
