@@ -493,5 +493,36 @@ class TestFindAllIssues < Jp::Test
       1, fb.query("(eq what 'issue-was-opened')").each.to_a.size,
       'A vanished repository must add no issues and must not abort the judge'
     )
+    assert_nil(
+      fb.query("(eq what 'issue-was-opened')").each.first['stale'],
+      'a vanished repo must not mark its issue stale'
+    )
+    assert_empty(Fbe::Tombstone.new.issues('github', 42), 'a vanished repository must not bury its issues')
+  end
+
+  def test_forbidden_search_keeps_the_min_issue_for_retry
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 993 })
+    stub_github('https://api.github.com/repositories/993', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/45', body: { created_at: Time.parse('2025-05-04') })
+    stub_github(
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-04&sort=created',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.issue = 45
+      f.repository = 993
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    fact = fb.query('(eq issue 45)').each.first
+    refute_nil(fact, 'a forbidden search must not drop the issue it was scanning from')
+    assert_nil(fact['stale'], 'a forbidden search is transient, the issue must stay retriable')
+    assert_empty(Fbe::Tombstone.new.issues('github', 993), 'a forbidden search must not bury the issue')
   end
 end
