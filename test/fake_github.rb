@@ -9,9 +9,9 @@ require 'socket'
 require_relative '../lib/jp'
 
 # rubocop:disable Elegant/NoComments
-# @todo #3112:60min Move the rest of the tests onto this server.
-#  Twenty five files under `test/` still build their GitHub with
-#  `stub_request` and `stub_github`, one thousand two hundred and twenty seven
+# @todo #3166:60min Move the rest of the tests onto this server.
+#  Forty four files under `test/` still build their GitHub with
+#  `stub_request` and `stub_github`, one thousand three hundred and ninety two
 #  stubs in all, the heaviest being `test/judges/test-quality-of-service.rb`
 #  with two hundred and fifty three. Each of them should declare its routes
 #  through `Jp::FakeGithub` instead, one file at a time, so that a reviewer
