@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/consider'
-require 'fbe/issue'
 require 'fbe/octo'
 require_relative '../../lib/humans'
 
@@ -35,7 +34,7 @@ Fbe.consider(
       next
     end
   type = json[:type]
-  location = "#{f.what} at #{Fbe.issue(f) if f['issue']}"
+  location = f['issue'] ? "#{f.what} at #{f.repository}##{f.issue}" : f.what.to_s
   @bots ||= Jp.bots
   if type == 'Bot' || @bots.include?(json[:login])
     f.is_human = 0
