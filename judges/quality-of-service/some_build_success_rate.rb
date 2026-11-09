@@ -52,6 +52,7 @@ def some_build_success_rate(fact)
           end
         { json: json, secs: secs, completed: json[:run_started_at] + secs }
       end
+    runs ||= []
     runs.sort_by! { _1[:completed] }
     runs.each do |item|
       item => { json:, secs:, completed: }
