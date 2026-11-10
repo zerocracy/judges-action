@@ -61,6 +61,48 @@ class TestIssueWasClosed < Jp::Test
     )
   end
 
+  def test_copies_the_close_reason
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, title: 'some title 44', state: 'closed', state_reason: 'not_planned',
+        closed_at: Time.parse('2025-10-01 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert_equal('not_planned', fb.pick(what: 'issue-was-closed')['reason'].first)
+  end
+
+  def test_copies_no_close_reason_when_absent
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, title: 'some title 44', state: 'closed', state_reason: nil,
+        closed_at: Time.parse('2025-10-01 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-closed', fb)
+    f = fb.pick(what: 'issue-was-closed')
+    refute_nil(f)
+    assert_nil(f['reason'], 'GitHub gave no close reason, the property must stay absent')
+  end
+
   def test_multiple_facts_with_identical_repo
     WebMock.disable_net_connect!
     rate_limit_up
