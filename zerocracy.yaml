@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 7m14s: execution expired'
   inserted: 8
-  seconds: 1150.430518328
+  seconds: 1205.510594357
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-10 21:20:50.628257268 Z
+  when: 2026-11-10 21:51:38.882980072 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -155523,7 +155526,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 229
+  min_issue_was_found: 230
   min_pull_was_found: 207
   repository: 849726475
   types_were_scanned: 0
@@ -155785,36 +155788,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 888
-  closures_were_checked: 0
+  assignees_were_scanned: 1042
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
   events_were_scanned: 19711437501
   issues_were_scanned: 1396
-  labels_were_scanned: 0
+  labels_were_scanned: 1306
   latest_issue_was_found: 315
-  merges_were_scanned: 1805
+  merges_were_scanned: 1997
   min_issue_was_found: 1817
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 1038
+  types_were_scanned: 1150
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19705813869
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
-  min_issue_was_found: 469
+  merges_were_scanned: 589
+  min_issue_was_found: 470
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -156231,18 +156234,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1547
-  closures_were_checked: 955
+  assignees_were_scanned: 1614
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19705144690
+  events_were_scanned: 19710495042
   issues_were_scanned: 1225
-  labels_were_scanned: 1841
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1459
+  merges_were_scanned: 1515
   min_issue_was_found: 1894
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 1247
+  types_were_scanned: 1410
   what: iterate
   where: github
 - _id: 2629882
@@ -156888,18 +156891,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1140
+  assignees_were_scanned: 1247
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19708438295
+  events_were_scanned: 19714892255
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1334
+  merges_were_scanned: 0
   min_issue_was_found: 1234
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 0
+  types_were_scanned: 738
   what: iterate
   where: github
 - _id: 2629939
@@ -157034,18 +157037,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 682
+  assignees_were_scanned: 851
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19708194767
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 768
   min_issue_was_found: 1098
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 605
+  types_were_scanned: 676
   what: iterate
   where: github
 - _id: 2630023
@@ -157070,18 +157073,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2550
-  closures_were_checked: 2328
+  assignees_were_scanned: 2718
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19708368855
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
+  merges_were_scanned: 2465
   min_issue_was_found: 3037
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 2027
+  types_were_scanned: 2130
   what: iterate
   where: github
 - _id: 2630036
@@ -157106,7 +157109,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19707855314
@@ -157117,7 +157120,7 @@
   min_issue_was_found: 1320
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1187
   what: iterate
   where: github
 - _id: 2630038
@@ -546212,10 +546215,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in yegor256/judges#967,
     the reward amount is 6.
-  greeting: |-
-    Thanks for the review! You've earned **+6 points**: +18 as a base, -8 for no comments posted, and -4 for only 9 hits-of-code. Your running score is now [+2522](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — check your [Zerocracy account](https://www.zerocracy.com/) for more details.
-
-    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (9) hits-of-code.  Your running score is [+2522](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 9
   href: https://github.com/yegor256/judges/issues/967/#issuecomment-6778934873
   is_human: 1
@@ -546236,10 +546235,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in yegor256/judges#965,
     the reward amount is 6.
-  greeting: |-
-    Hi there! Thanks for completing this review. Based on our team's bonus policy, here's how your score was calculated: +18 as a basis; +0.195 for 13 hits-of-code; -5 for fewer than 9 comments; -8 for no comments posted at all; -4 for too few (13) hits-of-code — bringing the raw total to 1.195, which is adjusted up to the policy's minimum of **+4** points. Your running score is [+2526](https://zerocracy.github
-
-    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (13) hits-of-code.  Your running score is [+2528](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 13
   href: https://github.com/yegor256/judges/issues/965/#issuecomment-6778935422
   is_human: 1
@@ -546307,7 +546302,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 20:51:36.000000000 Z
+  when: &6613 2026-11-10 20:51:36.000000000 Z
   where: github
   who: 526301
 - _id: 2653754
@@ -546327,7 +546322,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 20:41:00.000000000 Z
+  when: &6614 2026-11-10 20:41:00.000000000 Z
   where: github
   who: 526301
 - _id: 2653755
@@ -546347,7 +546342,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 20:28:19.000000000 Z
+  when: &6615 2026-11-10 20:28:19.000000000 Z
   where: github
   who: 526301
 - _id: 2653756
@@ -546367,7 +546362,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 20:28:17.000000000 Z
+  when: &6616 2026-11-10 20:28:17.000000000 Z
   where: github
   who: 526301
 - _id: 2653757
@@ -546387,7 +546382,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 20:26:57.000000000 Z
+  when: &6617 2026-11-10 20:26:57.000000000 Z
   where: github
   who: 526301
 - _id: 2653758
@@ -546407,7 +546402,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 20:16:42.000000000 Z
+  when: &6618 2026-11-10 20:16:42.000000000 Z
   where: github
   who: 526301
 - _id: 2653759
@@ -546415,9 +546410,192 @@
   _time: 2026-11-10 21:17:52.865683440 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/baza#1410 has been earlier opened by @yegor256.
+  is_human: 1
   issue: 1410
   repository: 728758275
   what: issue-was-opened
   when: 2026-11-10 20:19:33.000000000 Z
   where: github
   who: 526301
+- _id: 2653760
+  _job: 107610
+  _time: 2026-11-10 21:21:37.389048764 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 3
+  details: The pull request yegor256/factbase#1697 with 50 HoC created by @thayorns
+    was reviewed by @yegor256 after 3w1d and 3 comments.
+  hoc: 50
+  is_human: 1
+  issue: 1697
+  repository: 798641472
+  review_comments: 0
+  seconds: 1917143
+  what: code-was-reviewed
+  when: *6613
+  where: github
+  who: 526301
+- _id: 2653761
+  _job: 107610
+  _time: 2026-11-10 21:21:38.269458389 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 3
+  details: The pull request yegor256/factbase#1698 with 36 HoC created by @thayorns
+    was reviewed by @yegor256 after 3w1d and 3 comments.
+  hoc: 36
+  is_human: 1
+  issue: 1698
+  repository: 798641472
+  review_comments: 0
+  seconds: 1916395
+  what: code-was-reviewed
+  when: *6614
+  where: github
+  who: 526301
+- _id: 2653762
+  _job: 107610
+  _time: 2026-11-10 21:21:38.653381859 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 3
+  details: The pull request yegor256/factbase#1707 with 60 HoC created by @thayorns
+    was reviewed by @yegor256 after 3w1d and 3 comments.
+  hoc: 60
+  is_human: 1
+  issue: 1707
+  repository: 798641472
+  review_comments: 0
+  seconds: 1914489
+  what: code-was-reviewed
+  when: *6615
+  where: github
+  who: 526301
+- _id: 2653763
+  _job: 107610
+  _time: 2026-11-10 21:21:39.034389907 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 3
+  details: The pull request yegor256/factbase#1709 with 28 HoC created by @thayorns
+    was reviewed by @yegor256 after 3w1d and 3 comments.
+  hoc: 28
+  is_human: 1
+  issue: 1709
+  repository: 798641472
+  review_comments: 0
+  seconds: 1914323
+  what: code-was-reviewed
+  when: *6616
+  where: github
+  who: 526301
+- _id: 2653764
+  _job: 107610
+  _time: 2026-11-10 21:21:39.434399446 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 6
+  details: The pull request yegor256/factbase#1558 with 10 HoC created by @morphqdd
+    was reviewed by @yegor256 after 3w5d and 6 comments.
+  hoc: 10
+  is_human: 1
+  issue: 1558
+  repository: 798641472
+  review_comments: 0
+  seconds: 2294386
+  what: code-was-reviewed
+  when: *6617
+  where: github
+  who: 526301
+- _id: 2653765
+  _job: 107610
+  _time: 2026-11-10 21:21:39.992347415 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 3
+  details: The pull request yegor256/factbase#1555 with 27 HoC created by @morphqdd
+    was reviewed by @yegor256 after 3w5d and 3 comments.
+  hoc: 27
+  is_human: 1
+  issue: 1555
+  repository: 798641472
+  review_comments: 0
+  seconds: 2294276
+  what: code-was-reviewed
+  when: *6618
+  where: github
+  who: 526301
+- _id: 2653766
+  _job: 107610
+  _time: 2026-11-10 21:21:54.029420076 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 0
+  details: It's time to reward @yegor256 for the code review in yegor256/judges#966,
+    the reward amount is 6.
+  greeting: |-
+    Thanks for the review! Based on our [review policy](https://www.yegor256.com/2014/11/14/hits-of-code.html), you've earned **+6** points: **+18** as a basis, **-8** since no comments were posted during the review, and **-4** since the contribution had only 4 hits-of-code, which is below the 24 threshold. Your running score is [+2534](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); check your [Zerocracy account](https://www.zerocracy.com/) for more details.
+
+    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (4) hits-of-code.  Your running score is [+2534](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 4
+  is_human: 1
+  issue: 966
+  repository: 799113787
+  review_comments: 0
+  seconds: 2473145
+  what: code-review-was-rewarded
+  when: 2026-11-10 21:21:54.035114989 Z
+  where: github
+  who: 526301
+  why: Reviewed code in yegor256/judges#966
+- _id: 2653767
+  _job: 42905709691
+  _time: 2026-11-10 21:35:28.522545292 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1383'
+  comments: 3
+  comments_appreciated: 0
+  comments_by_author: 1
+  comments_by_reviewers: 2
+  comments_resolved: 0
+  comments_to_code: 2
+  details: Apparently, zerocracy/pages-action#1397 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 42
+  is_human: 1
+  issue: 1397
+  repository: 802720676
+  review: 2026-11-06 15:32:10.000000000 Z
+  succeeded_builds: 12
+  suggestions: 1
+  what: pull-was-merged
+  when: 2026-11-10 20:25:21.000000000 Z
+  where: github
+  who: 526301
+- _id: 2653768
+  _job: 42905709691
+  _time: 2026-11-10 21:38:00.620424151 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1407'
+  details: The missing pull zerocracy/baza#1408 has been opened by @yegor256.
+  is_human: 1
+  issue: 1408
+  repository: 728758275
+  what: pull-was-opened
+  when: 2026-11-10 10:53:14.000000000 Z
+  where: github
+  who: 526301
+- _id: 2653769
+  _job: 42905709691
+  _time: 2026-11-10 21:38:01.937241783 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/aws-sdk-s3-1.x-lockfile
+  details: The missing pull zerocracy/baza#1409 has been opened by @renovate[bot].
+  is_human: 0
+  issue: 1409
+  repository: 728758275
+  what: pull-was-opened
+  when: 2026-11-10 12:41:14.000000000 Z
+  where: github
+  who: 29139614
