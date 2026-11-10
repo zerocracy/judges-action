@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - end of file reached
+  - 'Judge find-all-issues stopped by timeout after 9m58s: execution expired'
   inserted: 8
-  seconds: 1101.632011744
+  seconds: 1234.65914929
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-10 19:20:06.862772571 Z
+  when: 2026-11-10 19:51:49.232236746 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -134057,23 +134060,6 @@
   when: *1488
   where: github
   who: 29139614
-- _id: 2626827
-  _job: 28297749827
-  _time: 2026-06-27 18:22:00.348397033 Z
-  _version: 0.19.9/0.60.2/0.17.17
-  tombstone: 2026-11-02 19:21:11.433829378 Z
-  total_active_contributors: 14
-  total_commits: 16619
-  total_contributors: 52
-  total_files: 2352
-  total_forks: 153
-  total_issues: 1982
-  total_pulls: 4879
-  total_releases: 863
-  total_repositories: 18
-  total_stars: 140
-  what: dimensions-of-terrain
-  when: 2026-06-27 18:22:00.357900461 Z
 - _id: 2626880
   _job: 28315973959
   _time: 2026-06-28 08:08:25.987303659 Z
@@ -146826,7 +146812,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 41
+  min_issue_was_found: 0
   min_pull_was_found: 21
   repository: 1090089359
   types_were_scanned: 0
@@ -149021,7 +149007,7 @@
   min_issue_was_found: 45
   min_pull_was_found: 124
   repository: 974194993
-  types_were_scanned: 62
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -155543,7 +155529,7 @@
   min_issue_was_found: 227
   min_pull_was_found: 207
   repository: 849726475
-  types_were_scanned: 259
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629820
@@ -155774,7 +155760,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 34
+  min_issue_was_found: 42
   min_pull_was_found: 172
   repository: 805238060
   types_were_scanned: 0
@@ -155792,35 +155778,35 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 77
+  min_issue_was_found: 78
   min_pull_was_found: 74
   repository: 1084843345
-  types_were_scanned: 58
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1683
-  closures_were_checked: 0
+  assignees_were_scanned: 1876
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
   events_were_scanned: 19696128494
   issues_were_scanned: 1396
-  labels_were_scanned: 1306
+  labels_were_scanned: 1581
   latest_issue_was_found: 315
   merges_were_scanned: 1271
   min_issue_was_found: 1815
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 619
+  types_were_scanned: 783
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26765967758
@@ -155828,10 +155814,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 589
-  min_issue_was_found: 463
+  min_issue_was_found: 464
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 469
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -156248,18 +156234,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1013
-  closures_were_checked: 955
+  assignees_were_scanned: 1110
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19695280747
   issues_were_scanned: 1225
-  labels_were_scanned: 1969
+  labels_were_scanned: 0
   latest_issue_was_found: 317
   merges_were_scanned: 951
-  min_issue_was_found: 1890
+  min_issue_was_found: 1891
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 894
+  types_were_scanned: 1037
   what: iterate
   where: github
 - _id: 2629882
@@ -156905,7 +156891,7 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 739
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26770739742
@@ -156913,10 +156899,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 386
   merges_were_scanned: 1334
-  min_issue_was_found: 1231
+  min_issue_was_found: 1232
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 1151
+  types_were_scanned: 1254
   what: iterate
   where: github
 - _id: 2629939
@@ -157051,7 +157037,7 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 916
+  assignees_were_scanned: 1106
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19699086837
@@ -157059,10 +157045,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 299
   merges_were_scanned: 1071
-  min_issue_was_found: 1096
+  min_issue_was_found: 1097
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 1048
+  types_were_scanned: 1198
   what: iterate
   where: github
 - _id: 2630023
@@ -157087,18 +157073,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1993
-  closures_were_checked: 2328
+  assignees_were_scanned: 2121
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19698129380
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
   merges_were_scanned: 2886
-  min_issue_was_found: 3033
+  min_issue_was_found: 3034
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 1524
+  types_were_scanned: 1685
   what: iterate
   where: github
 - _id: 2630036
@@ -157113,7 +157099,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 22
+  min_issue_was_found: 23
   min_pull_was_found: 14
   repository: 1081929119
   types_were_scanned: 0
@@ -157123,7 +157109,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26768302771
@@ -157131,10 +157117,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1314
+  min_issue_was_found: 1317
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 1242
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -545705,10 +545691,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in yegor256/judges#690,
     the reward amount is 10.
-  greeting: |-
-    Thanks for the review! Based on our [work policy](https://www.yegor256.com/2014/11/14/hits-of-code.html), you've earned **+10** points: a base reward of **+18** points for completing the review, reduced by **-8** points since no comments were posted during it (as the policy requires deducting when there's absolutely no feedback). Your running score is now [+2418](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — keep reviews active with comments next time to earn even more, and check your [Zerocracy account](https://www.zerocracy.com/) for full details.
-
-    <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+2418](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 32
   href: https://github.com/yegor256/judges/issues/690/#issuecomment-6776326935
   is_human: 1
@@ -545729,10 +545711,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in yegor256/judges#717,
     the reward amount is 6.
-  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
-    -8 for absolutely no comments posted; -4 for too few (8) hits-of-code.  Your running
-    score is [+2424](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 8
   href: https://github.com/yegor256/judges/issues/717/#issuecomment-6776327539
   is_human: 1
@@ -545753,10 +545731,6 @@
   comments: 2
   details: It's time to reward @yegor256 for the code review in zerocracy/fbe#756,
     the reward amount is 10.
-  greeting: |-
-    Hi there, thanks for completing this code review! Your reward comes out to **+10 points**, calculated as: **+18** base points, minus **8** points for having absolutely no comments posted during the review — in line with our team's review policy. Your running score is now [+2434](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); feel free to check your [Zerocracy account](https://www.zerocracy.com/) for more details. Keep up the great work, and try adding a few comments next time to boost your score further!
-
-    <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+2434](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 57
   href: https://github.com/zerocracy/fbe/issues/756/#issuecomment-6776328644
   is_human: 1
@@ -545792,7 +545766,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-10 17:15:23.000000000 Z
+  when: &6611 2026-11-10 17:15:23.000000000 Z
   where: github
   who: 8086956
 - _id: 2653726
@@ -545808,6 +545782,7 @@
     running score is [+2440](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
     don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 21
+  href: https://github.com/zerocracy/fbe/issues/707/#issuecomment-6776953671
   is_human: 1
   issue: 707
   repository: 820463873
@@ -545831,6 +545806,7 @@
 
     <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+2450](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 55
+  href: https://github.com/zerocracy/fbe/issues/946/#issuecomment-6776954348
   is_human: 1
   issue: 946
   repository: 820463873
@@ -545872,7 +545848,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 18:45:54.000000000 Z
+  when: &6608 2026-11-10 18:45:54.000000000 Z
   where: github
   who: 526301
 - _id: 2653730
@@ -545907,7 +545883,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 18:36:30.000000000 Z
+  when: &6609 2026-11-10 18:36:30.000000000 Z
   where: github
   who: 526301
 - _id: 2653732
@@ -545927,6 +545903,263 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 18:32:25.000000000 Z
+  when: &6610 2026-11-10 18:32:25.000000000 Z
   where: github
   who: 526301
+- _id: 2653733
+  _job: 107589
+  _time: 2026-11-10 19:20:54.899296277 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#965 with 13 HoC created by @morphqdd was
+    reviewed by @yegor256 after 4w and 0 comments.
+  hoc: 13
+  is_human: 1
+  issue: 965
+  repository: 799113787
+  review_comments: 0
+  seconds: 2471919
+  what: code-was-reviewed
+  when: *6608
+  where: github
+  who: 526301
+- _id: 2653734
+  _job: 107589
+  _time: 2026-11-10 19:20:55.918637450 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#967 with 9 HoC created by @morphqdd was
+    reviewed by @yegor256 after 4w and 0 comments.
+  hoc: 9
+  is_human: 1
+  issue: 967
+  repository: 799113787
+  review_comments: 0
+  seconds: 2471202
+  what: code-was-reviewed
+  when: *6609
+  where: github
+  who: 526301
+- _id: 2653735
+  _job: 107589
+  _time: 2026-11-10 19:20:56.325538364 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#958 with 14 HoC created by @morphqdd was
+    reviewed by @yegor256 after 4w and 0 comments.
+  hoc: 14
+  is_human: 1
+  issue: 958
+  repository: 799113787
+  review_comments: 0
+  seconds: 2471877
+  what: code-was-reviewed
+  when: *6610
+  where: github
+  who: 526301
+- _id: 2653736
+  _job: 107589
+  _time: 2026-11-10 19:21:06.820944234 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request yegor256/factbase#2024 with 2 HoC created by @renovate[bot]
+    was merged by @rultor after 1h11m of being in review and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 2024
+  merger: 8086956
+  repository: 798641472
+  review_comments: 0
+  seconds: 4284
+  what: code-was-contributed
+  when: *6611
+  where: github
+  who: 29139614
+- _id: 2653737
+  _job: 107589
+  _time: 2026-11-10 19:21:13.159308084 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: upgrade-deps
+  details: It's time to punish @yegor256 for the branch named as 'upgrade-deps', which
+    is wrong in yegor256/judges#1296, the penalty amount is -6.
+  greeting: "Heads up: naming a branch `upgrade-deps` isn't ideal—check our [branch
+    naming guidelines](https://www.yegor256.com/2014/04/15/github-guidelines.html)
+    \U0001F4CB. You've earned **-6 points** for this one. Next time, try naming your
+    branch after the ticket number you're solving, e.g., `1295`. Your running score
+    is [+2444](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)—keep
+    an eye on your [Zerocracy account](https://www.zerocracy.com/) too!\n\n<!-- It
+    is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html)
+    to name Git branches the way you named this one: \"`upgrade-deps`\". You've earned
+    -6 points. Next time, better give your branch the same name as the number of the
+    ticket that you are solving. In this case, a perfect name, for example, would
+    be \"`1295`\". Your running score is [+2444](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  is_human: 1
+  issue: 1296
+  repository: 799113787
+  what: bad-branch-name-was-punished
+  when: 2026-11-10 19:21:13.161650849 Z
+  where: github
+  who: 526301
+  why: Wrongly named a branch in yegor256/judges#1296
+- _id: 2653738
+  _job: 107589
+  _time: 2026-11-10 19:21:19.756246836 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#944,
+    the reward amount is 10.
+  greeting: |-
+    Hi there! Thanks for completing the review. Your reward for this contribution is **+5 points**, calculated as: **+18** base points, **-8** for having absolutely no comments posted, and **-5** for the total comments being below the required 9, as per our team policy. Your running score is now [+2454](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — feel free to check your [Zerocracy account](https://www.zerocracy.com/) for more details. Keep up the great work, and try to add more comments in your next review for a higher score!
+
+    <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+2454](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 49
+  is_human: 1
+  issue: 944
+  repository: 820463873
+  review_comments: 0
+  seconds: 4851114
+  what: code-review-was-rewarded
+  when: 2026-11-10 19:21:19.761826863 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#944
+- _id: 2653739
+  _job: 107589
+  _time: 2026-11-10 19:21:28.401849270 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 0
+  details: It's time to reward @yegor256 for the code review in yegor256/judges#611,
+    the reward amount is 6.
+  greeting: "Thanks for the review! \U0001F389 You've earned **+6 points**: +18 as
+    a base, -8 for no comments posted, and -4 for too few hits-of-code (8). Your running
+    score is now [+2460](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
+    Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for
+    absolutely no comments posted; -4 for too few (8) hits-of-code.  Your running
+    score is [+2460](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 8
+  is_human: 1
+  issue: 611
+  repository: 799113787
+  review_comments: 0
+  seconds: 4577034
+  what: code-review-was-rewarded
+  when: 2026-11-10 19:21:28.409215238 Z
+  where: github
+  who: 526301
+  why: Reviewed code in yegor256/judges#611
+- _id: 2653740
+  _job: 107589
+  _time: 2026-11-10 19:21:30.740865464 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 4
+  details: It's time to reward @yegor256 for the code review in yegor256/factbase#1432,
+    the reward amount is 6.
+  greeting: "Thanks for the review! \U0001F389 You've earned **+6 points**: +18 as
+    a base, -8 for no comments posted, and -4 for only 20 hits-of-code. Your running
+    score is now [+2466](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
+    Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for
+    absolutely no comments posted; -4 for too few (20) hits-of-code.  Your running
+    score is [+2466](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 20
+  is_human: 1
+  issue: 1432
+  repository: 798641472
+  review_comments: 0
+  seconds: 2518833
+  what: code-review-was-rewarded
+  when: 2026-11-10 19:21:30.746681574 Z
+  where: github
+  who: 526301
+  why: Reviewed code in yegor256/factbase#1432
+- _id: 2653741
+  _job: 107589
+  _time: 2026-11-10 19:21:33.220326450 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 2
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#737,
+    the reward amount is 10.
+  greeting: "Thanks for the review! \U0001F389 You've earned **+10 points** (+18 base,
+    -8 for no comments posted). Your running score is now [+2476](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — check your [Zerocracy account](https://www.zerocracy.com/) for more details!\n\n<!--
+    Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for
+    absolutely no comments posted.  Your running score is [+2476](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 30
+  is_human: 1
+  issue: 737
+  repository: 820463873
+  review_comments: 0
+  seconds: 5738450
+  what: code-review-was-rewarded
+  when: 2026-11-10 19:21:33.226103578 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#737
+- _id: 2653742
+  _job: 107589
+  _time: 2026-11-10 19:21:35.533192412 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 2
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#736,
+    the reward amount is 6.
+  greeting: |-
+    Thanks for the review! According to our review policy, you've earned **+6 points**: +18 as a basis, -8 because absolutely no comments were posted, and -4 since the contribution had too few hits-of-code (21) — exactly as the policy dictates for such cases. Your running score is now [+2482](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (21) hits-of-code.  Your running score is [+2482](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 21
+  is_human: 1
+  issue: 736
+  repository: 820463873
+  review_comments: 0
+  seconds: 5738631
+  what: code-review-was-rewarded
+  when: 2026-11-10 19:21:35.539503346 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#736
+- _id: 2653743
+  _job: 107589
+  _time: 2026-11-10 19:21:45.923426207 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 2
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#757,
+    the reward amount is 6.
+  greeting: "Thanks for the review! \U0001F389 You've earned **+6 points**: +18 as
+    a basis, -8 for no comments posted, and -4 for too few (9) hits-of-code. Your
+    running score is now [+2488](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
+    — keep up the great work, and don't forget to check your [Zerocracy account](https://www.zerocracy.com/)!\n\n<!--
+    Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for
+    absolutely no comments posted; -4 for too few (9) hits-of-code.  Your running
+    score is [+2488](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 9
+  is_human: 1
+  issue: 757
+  repository: 820463873
+  review_comments: 0
+  seconds: 5641290
+  what: code-review-was-rewarded
+  when: 2026-11-10 19:21:45.929042609 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#757
