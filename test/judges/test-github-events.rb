@@ -620,6 +620,30 @@ class TestGithubEvents < Jp::Test
     assert_nil(f['reason'], 'GitHub gave no close reason, the property must stay absent')
   end
 
+  def test_skips_an_empty_issue_close_reason
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: 42,
+        created_at: '2025-06-27 19:00:05 UTC',
+        actor: { id: 45 },
+        type: 'IssuesEvent',
+        repo: { id: 42 },
+        payload: {
+          action: 'closed',
+          issue: { number: 1347, state: 'closed', state_reason: '' }
+        }
+      }
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.pick(what: 'issue-was-closed')
+    refute_nil(f, 'an empty close reason must not abort the judge')
+    assert_nil(f['reason'], 'an empty close reason is no reason')
+  end
+
   def test_skip_issue_event_on_unknown_action
     WebMock.disable_net_connect!
     rate_limit_up

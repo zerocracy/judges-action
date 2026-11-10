@@ -94,7 +94,8 @@ Fbe.iterate do
       else
         nn.stale = 'who'
       end
-      nn.reason = json[:state_reason] unless json[:state_reason].nil?
+      reason = json[:state_reason]
+      nn.reason = reason unless reason.to_s.empty?
       nn.details = "Apparently, #{Fbe.issue(nn)} has been #{nn.what.inspect}."
       $loog.info("The issue #{Fbe.issue(nn)} found closed #{nn.when.ago} ago")
     end
