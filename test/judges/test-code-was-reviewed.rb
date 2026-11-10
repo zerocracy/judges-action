@@ -347,7 +347,10 @@ class TestCodeWasReviewed < Jp::Test
     load_it('code-was-reviewed', fb)
     n = fb.query('(eq what "code-was-reviewed")').each.first
     refute_nil(n, 'a code-was-reviewed fact must still exist for the reviewer')
-    refute_includes(n.all_properties, 'comments', 'a transient connection reset cannot invent a zero comment count')
+    refute_includes(
+      n.all_properties, 'comments',
+      'a transient connection reset while counting issue comments leaves comments unset'
+    )
   end
 
   def test_rescues_deprecated_on_reviews_lookup
