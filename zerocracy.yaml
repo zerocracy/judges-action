@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 8m46s: execution expired'
   inserted: 8
-  seconds: 1116.141263546
+  seconds: 1250.72429299
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-10 17:50:01.417230486 Z
+  when: 2026-11-10 18:22:03.074218806 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -146826,10 +146829,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 39
+  min_issue_was_found: 40
   min_pull_was_found: 21
   repository: 1090089359
-  types_were_scanned: 40
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2628882
@@ -149018,10 +149021,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 43
+  min_issue_was_found: 44
   min_pull_was_found: 124
   repository: 974194993
-  types_were_scanned: 28
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -155540,10 +155543,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 225
+  min_issue_was_found: 226
   min_pull_was_found: 207
   repository: 849726475
-  types_were_scanned: 224
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629820
@@ -155774,10 +155777,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 32
+  min_issue_was_found: 34
   min_pull_was_found: 172
   repository: 805238060
-  types_were_scanned: 32
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629837
@@ -155792,46 +155795,46 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 75
+  min_issue_was_found: 76
   min_pull_was_found: 74
   repository: 1084843345
-  types_were_scanned: 27
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1183
-  closures_were_checked: 1439
+  assignees_were_scanned: 1311
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19688868875
   issues_were_scanned: 1396
-  labels_were_scanned: 1823
+  labels_were_scanned: 1898
   latest_issue_was_found: 315
-  merges_were_scanned: 1805
+  merges_were_scanned: 1997
   min_issue_was_found: 1790
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 1841
+  types_were_scanned: 1948
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19685231267
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
-  min_issue_was_found: 461
+  merges_were_scanned: 589
+  min_issue_was_found: 462
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 452
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -155846,7 +155849,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 142
   repository: 857659265
   types_were_scanned: 0
@@ -156248,18 +156251,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 600
-  closures_were_checked: 0
+  assignees_were_scanned: 748
+  closures_were_checked: 955
   earliest_issue_was_found: 1
   events_were_scanned: 19685071673
   issues_were_scanned: 1225
-  labels_were_scanned: 0
+  labels_were_scanned: 1766
   latest_issue_was_found: 317
-  merges_were_scanned: 1893
-  min_issue_was_found: 1889
+  merges_were_scanned: 1979
+  min_issue_was_found: 1890
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 597
+  types_were_scanned: 747
   what: iterate
   where: github
 - _id: 2629882
@@ -156905,18 +156908,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1140
+  assignees_were_scanned: 1247
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26761777882
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1334
-  min_issue_was_found: 1229
+  merges_were_scanned: 0
+  min_issue_was_found: 1230
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 865
+  types_were_scanned: 981
   what: iterate
   where: github
 - _id: 2629939
@@ -157051,18 +157054,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 618
+  assignees_were_scanned: 682
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19687178140
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 768
   min_issue_was_found: 1096
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 681
+  types_were_scanned: 850
   what: iterate
   where: github
 - _id: 2630023
@@ -157087,18 +157090,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1476
-  closures_were_checked: 0
+  assignees_were_scanned: 1669
+  closures_were_checked: 1744
   earliest_issue_was_found: 1
   events_were_scanned: 26763477446
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 2563
-  min_issue_was_found: 3031
+  merges_were_scanned: 2667
+  min_issue_was_found: 3032
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 2987
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -157116,14 +157119,14 @@
   min_issue_was_found: 22
   min_pull_was_found: 14
   repository: 1081929119
-  types_were_scanned: 23
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630037
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19688065229
@@ -157131,10 +157134,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1309
+  min_issue_was_found: 1311
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 1201
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -545013,10 +545016,6 @@
   branch: deps/compatible-refresh
   details: It's time to punish @yegor256 for the branch named as 'deps/compatible-refresh',
     which is wrong in yegor256/factbase#2023, the penalty amount is -6.
-  greeting: |-
-    Hi! It [isn't ideal](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name a branch "`deps/compatible-refresh`" — per our naming convention, branches should be named after the ticket number they resolve (e.g., "`2022`"), so a **-6** point deduction applies here. Your running score is now [+2420](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); feel free to check your [Zerocracy account](https://www.zerocracy.com/) for details. Thanks for understanding, and let's keep branch names consistent going forward!
-
-    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`deps/compatible-refresh`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`2022`". Your running score is [+2420](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   href: https://github.com/yegor256/factbase/issues/2023/#issuecomment-6773756469
   is_human: 1
   issue: 2023
@@ -545043,7 +545042,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:55:54.000000000 Z
+  when: &6592 2026-11-10 16:55:54.000000000 Z
   where: github
   who: 526301
 - _id: 2653687
@@ -545063,7 +545062,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:49:13.000000000 Z
+  when: &6593 2026-11-10 16:49:13.000000000 Z
   where: github
   who: 526301
 - _id: 2653688
@@ -545098,7 +545097,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:29:48.000000000 Z
+  when: &6594 2026-11-10 16:29:48.000000000 Z
   where: github
   who: 526301
 - _id: 2653690
@@ -545147,7 +545146,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:38:10.000000000 Z
+  when: &6595 2026-11-10 16:38:10.000000000 Z
   where: github
   who: 526301
 - _id: 2653693
@@ -545167,7 +545166,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:32:17.000000000 Z
+  when: &6596 2026-11-10 16:32:17.000000000 Z
   where: github
   who: 526301
 - _id: 2653694
@@ -545187,7 +545186,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:30:12.000000000 Z
+  when: &6597 2026-11-10 16:30:12.000000000 Z
   where: github
   who: 526301
 - _id: 2653695
@@ -545207,7 +545206,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:27:30.000000000 Z
+  when: &6598 2026-11-10 16:27:30.000000000 Z
   where: github
   who: 526301
 - _id: 2653696
@@ -545227,7 +545226,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:19:21.000000000 Z
+  when: &6599 2026-11-10 16:19:21.000000000 Z
   where: github
   who: 526301
 - _id: 2653697
@@ -545247,7 +545246,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:16:24.000000000 Z
+  when: &6600 2026-11-10 16:16:24.000000000 Z
   where: github
   who: 526301
 - _id: 2653698
@@ -545267,7 +545266,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:09:42.000000000 Z
+  when: &6601 2026-11-10 16:09:42.000000000 Z
   where: github
   who: 526301
 - _id: 2653699
@@ -545287,7 +545286,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:55:31.000000000 Z
+  when: &6602 2026-11-10 16:55:31.000000000 Z
   where: github
   who: 526301
 - _id: 2653700
@@ -545307,7 +545306,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:46:14.000000000 Z
+  when: &6603 2026-11-10 16:46:14.000000000 Z
   where: github
   who: 526301
 - _id: 2653701
@@ -545327,7 +545326,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:27:48.000000000 Z
+  when: &6604 2026-11-10 16:27:48.000000000 Z
   where: github
   who: 526301
 - _id: 2653702
@@ -545347,7 +545346,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 16:09:05.000000000 Z
+  when: &6605 2026-11-10 16:09:05.000000000 Z
   where: github
   who: 526301
 - _id: 2653703
@@ -545367,7 +545366,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-10 15:59:14.000000000 Z
+  when: &6606 2026-11-10 15:59:14.000000000 Z
   where: github
   who: 526301
 - _id: 2653704
@@ -545389,9 +545388,300 @@
   issue: 1295
   repository: 799113787
   review: 2026-11-10 16:38:19.000000000 Z
+  review_comments: 0
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
   when: 2026-11-10 16:58:01.000000000 Z
   where: github
   who: 8086956
+- _id: 2653705
+  _job: 107548
+  _time: 2026-11-10 17:50:44.048593408 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 4
+  details: The pull request yegor256/factbase#1014 with 46 HoC created by @morphqdd
+    was reviewed by @yegor256 after 1mo3w and 4 comments.
+  hoc: 46
+  is_human: 1
+  issue: 1014
+  repository: 798641472
+  review_comments: 0
+  seconds: 4614866
+  what: code-was-reviewed
+  when: *6592
+  where: github
+  who: 526301
+- _id: 2653706
+  _job: 107548
+  _time: 2026-11-10 17:50:45.180664996 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/factbase#2024 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 45m14s and 3 comments.
+  hoc: 2
+  is_human: 1
+  issue: 2024
+  repository: 798641472
+  review_comments: 0
+  seconds: 2714
+  what: code-was-reviewed
+  when: *6593
+  where: github
+  who: 526301
+- _id: 2653707
+  _job: 107548
+  _time: 2026-11-10 17:50:45.743593718 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 4
+  details: The pull request yegor256/factbase#1432 with 20 HoC created by @morphqdd
+    was reviewed by @yegor256 after 4w1d and 4 comments.
+  hoc: 20
+  is_human: 1
+  issue: 1432
+  repository: 798641472
+  review_comments: 0
+  seconds: 2518833
+  what: code-was-reviewed
+  when: *6594
+  where: github
+  who: 526301
+- _id: 2653708
+  _job: 107548
+  _time: 2026-11-10 17:50:46.116738256 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 2
+  details: The pull request zerocracy/fbe#757 with 9 HoC created by @morphqdd was
+    reviewed by @yegor256 after 2mo and 2 comments.
+  hoc: 9
+  is_human: 1
+  issue: 757
+  repository: 820463873
+  review_comments: 0
+  seconds: 5641290
+  what: code-was-reviewed
+  when: *6595
+  where: github
+  who: 526301
+- _id: 2653709
+  _job: 107548
+  _time: 2026-11-10 17:50:46.804235064 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 2
+  details: The pull request zerocracy/fbe#736 with 21 HoC created by @morphqdd was
+    reviewed by @yegor256 after 2mo and 2 comments.
+  hoc: 21
+  is_human: 1
+  issue: 736
+  repository: 820463873
+  review_comments: 0
+  seconds: 5738631
+  what: code-was-reviewed
+  when: *6596
+  where: github
+  who: 526301
+- _id: 2653710
+  _job: 107548
+  _time: 2026-11-10 17:50:47.171835141 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 2
+  details: The pull request zerocracy/fbe#737 with 30 HoC created by @morphqdd was
+    reviewed by @yegor256 after 2mo and 2 comments.
+  hoc: 30
+  is_human: 1
+  issue: 737
+  repository: 820463873
+  review_comments: 0
+  seconds: 5738450
+  what: code-was-reviewed
+  when: *6597
+  where: github
+  who: 526301
+- _id: 2653711
+  _job: 107548
+  _time: 2026-11-10 17:50:47.532372605 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 276356426
+  comments: 3
+  details: The pull request zerocracy/fbe#944 with 49 HoC created by @opusstudiohq-max
+    was reviewed by @yegor256 after 1mo3w and 3 comments.
+  hoc: 49
+  is_human: 1
+  issue: 944
+  repository: 820463873
+  review_comments: 0
+  seconds: 4851114
+  what: code-was-reviewed
+  when: *6598
+  where: github
+  who: 526301
+- _id: 2653712
+  _job: 107548
+  _time: 2026-11-10 17:50:48.087193740 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 276356426
+  comments: 3
+  details: The pull request zerocracy/fbe#946 with 55 HoC created by @opusstudiohq-max
+    was reviewed by @yegor256 after 1mo3w and 3 comments.
+  hoc: 55
+  is_human: 1
+  issue: 946
+  repository: 820463873
+  review_comments: 0
+  seconds: 4850412
+  what: code-was-reviewed
+  when: *6599
+  where: github
+  who: 526301
+- _id: 2653713
+  _job: 107548
+  _time: 2026-11-10 17:50:48.467023542 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 3
+  details: The pull request zerocracy/fbe#707 with 21 HoC created by @morphqdd was
+    reviewed by @yegor256 after 2mo1w and 3 comments.
+  hoc: 21
+  is_human: 1
+  issue: 707
+  repository: 820463873
+  review_comments: 0
+  seconds: 5905476
+  what: code-was-reviewed
+  when: *6600
+  where: github
+  who: 526301
+- _id: 2653714
+  _job: 107548
+  _time: 2026-11-10 17:50:48.820248202 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 2
+  details: The pull request zerocracy/fbe#756 with 57 HoC created by @morphqdd was
+    reviewed by @yegor256 after 2mo and 2 comments.
+  hoc: 57
+  is_human: 1
+  issue: 756
+  repository: 820463873
+  review_comments: 0
+  seconds: 5639705
+  what: code-was-reviewed
+  when: *6601
+  where: github
+  who: 526301
+- _id: 2653715
+  _job: 107548
+  _time: 2026-11-10 17:50:49.187745615 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 29139614
+  comments: 3
+  details: The pull request yegor256/judges#1295 with 2 HoC created by @renovate[bot]
+    was reviewed by @yegor256 after 4h46m and 3 comments.
+  hoc: 2
+  is_human: 1
+  issue: 1295
+  repository: 799113787
+  review_comments: 0
+  seconds: 17180
+  what: code-was-reviewed
+  when: *6602
+  where: github
+  who: 526301
+- _id: 2653716
+  _job: 107548
+  _time: 2026-11-10 17:50:49.839186704 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#963 with 15 HoC created by @morphqdd was
+    reviewed by @yegor256 after 4w and 0 comments.
+  hoc: 15
+  is_human: 1
+  issue: 963
+  repository: 799113787
+  review_comments: 0
+  seconds: 2464885
+  what: code-was-reviewed
+  when: *6603
+  where: github
+  who: 526301
+- _id: 2653717
+  _job: 107548
+  _time: 2026-11-10 17:50:50.209818404 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 113778529
+  comments: 0
+  details: The pull request yegor256/judges#611 with 8 HoC created by @gemshrine was
+    reviewed by @yegor256 after 1mo3w and 0 comments.
+  hoc: 8
+  is_human: 1
+  issue: 611
+  repository: 799113787
+  review_comments: 0
+  seconds: 4577034
+  what: code-was-reviewed
+  when: *6604
+  where: github
+  who: 526301
+- _id: 2653718
+  _job: 107548
+  _time: 2026-11-10 17:50:50.732277303 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 113778529
+  comments: 0
+  details: The pull request yegor256/judges#717 with 8 HoC created by @gemshrine was
+    reviewed by @yegor256 after 1mo1w and 0 comments.
+  hoc: 8
+  is_human: 1
+  issue: 717
+  repository: 799113787
+  review_comments: 0
+  seconds: 3698965
+  what: code-was-reviewed
+  when: *6605
+  where: github
+  who: 526301
+- _id: 2653719
+  _job: 107548
+  _time: 2026-11-10 17:50:51.094777679 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 113778529
+  comments: 0
+  details: The pull request yegor256/judges#690 with 32 HoC created by @gemshrine
+    was reviewed by @yegor256 after 1mo2w and 0 comments.
+  hoc: 32
+  is_human: 1
+  issue: 690
+  repository: 799113787
+  review_comments: 0
+  seconds: 4401626
+  what: code-was-reviewed
+  when: *6606
+  where: github
+  who: 526301
+- _id: 2653720
+  _job: 107548
+  _time: 2026-11-10 17:51:01.822189743 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: deps/compatible-upgrades
+  details: It's time to punish @yegor256 for the branch named as 'deps/compatible-upgrades',
+    which is wrong in yegor256/factbase#2025, the penalty amount is -6.
+  greeting: |-
+    Hi there! It looks like your branch name "`deps/compatible-upgrades`" doesn't follow our [naming convention](https://www.yegor256.com/2014/04/15/github-guidelines.html), which calls for using the ticket number instead (e.g., "`2024`"). Per policy, this results in a deduction of **-6** points. Your running score is now [+2414](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — feel free to check your [Zerocracy account](https://www.zerocracy.com/) for details. Keep up the good work, and let's aim for consistent branch naming going forward!
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`deps/compatible-upgrades`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`2024`". Your running score is [+2414](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 2025
+  repository: 798641472
+  what: bad-branch-name-was-punished
+  when: 2026-11-10 17:51:01.824317517 Z
+  where: github
+  who: 526301
+  why: Wrongly named a branch in yegor256/factbase#2025
