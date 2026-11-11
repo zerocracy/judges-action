@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1111.910932483
+  seconds: 1184.242374153
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-11 15:50:15.223553022 Z
+  when: 2026-11-11 16:21:23.957965805 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -147258,6 +147259,7 @@
   composite: 270.901
   ffact: 163490
   since: *1595
+  tombstone: 2026-11-11 15:52:24.585213172 Z
   total_builds_ran: 6771
   total_commits_pushed: 102
   total_hoc_committed: 2262
@@ -149002,7 +149004,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 78
+  min_issue_was_found: 81
   min_pull_was_found: 124
   repository: 974194993
   types_were_scanned: 0
@@ -155524,7 +155526,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 264
+  min_issue_was_found: 283
   min_pull_was_found: 207
   repository: 849726475
   types_were_scanned: 0
@@ -155758,7 +155760,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 32
   min_pull_was_found: 172
   repository: 805238060
   types_were_scanned: 0
@@ -155776,7 +155778,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 42
+  min_issue_was_found: 43
   min_pull_was_found: 74
   repository: 1084843345
   types_were_scanned: 0
@@ -155786,25 +155788,25 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1483
-  closures_were_checked: 0
+  assignees_were_scanned: 1683
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
   events_were_scanned: 19790270269
   issues_were_scanned: 1396
-  labels_were_scanned: 1937
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 0
+  merges_were_scanned: 1271
   min_issue_was_found: 1830
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 1299
+  types_were_scanned: 1383
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19779525803
@@ -155812,10 +155814,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 156
   merges_were_scanned: 0
-  min_issue_was_found: 489
+  min_issue_was_found: 490
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -155830,7 +155832,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 142
   repository: 857659265
   types_were_scanned: 0
@@ -156232,18 +156234,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1352
-  closures_were_checked: 955
+  assignees_were_scanned: 1547
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19790163524
   issues_were_scanned: 1225
-  labels_were_scanned: 1874
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 0
-  min_issue_was_found: 1905
+  merges_were_scanned: 951
+  min_issue_was_found: 1906
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 1189
+  types_were_scanned: 1262
   what: iterate
   where: github
 - _id: 2629882
@@ -156889,18 +156891,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 739
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19787019782
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1198
-  min_issue_was_found: 1243
+  merges_were_scanned: 1400
+  min_issue_was_found: 1244
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 1165
+  types_were_scanned: 1316
   what: iterate
   where: github
 - _id: 2629939
@@ -157035,18 +157037,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 851
+  assignees_were_scanned: 916
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19789783613
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 971
-  min_issue_was_found: 1109
+  merges_were_scanned: 1118
+  min_issue_was_found: 1110
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 605
   what: iterate
   where: github
 - _id: 2630023
@@ -157071,18 +157073,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1733
-  closures_were_checked: 2328
+  assignees_were_scanned: 1993
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26850074548
   issues_were_scanned: 2725
-  labels_were_scanned: 2711
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
-  min_issue_was_found: 3099
+  merges_were_scanned: 2465
+  min_issue_was_found: 3100
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 1855
+  types_were_scanned: 1996
   what: iterate
   where: github
 - _id: 2630036
@@ -157097,7 +157099,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 31
+  min_issue_was_found: 0
   min_pull_was_found: 14
   repository: 1081929119
   types_were_scanned: 0
@@ -157107,7 +157109,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26848434526
@@ -157118,7 +157120,7 @@
   min_issue_was_found: 1120
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1187
   what: iterate
   where: github
 - _id: 2630038
@@ -559942,10 +559944,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1939,
     the reward amount is 6.
-  greeting: |-
-    Thanks for your code review! As per our policy, you've earned **+6** points this time: starting from the base **+18**, we deducted **-8** because absolutely no comments were posted during the review, and another **-4** since the contribution had only **18** hits-of-code, falling short of the **24** needed to avoid that penalty. Your running score is now [+3483](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — feel free to verify the details anytime in your [Zerocracy account](https://www.zerocracy.com/).
-
-    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (18) hits-of-code.  Your running score is [+3483](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 18
   href: https://github.com/zerocracy/fbe/issues/1939/#issuecomment-6799748096
   is_human: 1
@@ -559966,10 +559964,6 @@
   comments: 1
   details: It's time to reward @yegor256 for the code review in zerocracy/zerocracy-mcp-server#149,
     the reward amount is 6.
-  greeting: |-
-    Hi there, thanks for completing the review! Based on team policy, your bonus is calculated as follows: +18 as a basis; +0.345 for 23 hits-of-code; -5 for fewer than 9 comments; -8 for no comments posted at all; -4 for too few (23) hits-of-code — resulting in a raw total below the policy minimum, so it's adjusted to the floor of **+4** points. Your running score is [+3487](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too. Keep up the effort, and try to add more review comments next time to boost your score!
-
-    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (23) hits-of-code.  Your running score is [+3489](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 23
   href: https://github.com/zerocracy/zerocracy-mcp-server/issues/149/#issuecomment-6799749019
   is_human: 1
@@ -559990,10 +559984,6 @@
   comments: 1
   details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1943,
     the reward amount is 10.
-  greeting: |-
-    Hi there, thanks for completing the review! Based on our policy, your reward for this contribution is **+5 points**: +18 as the base score, -8 for having no comments posted during the review, and -5 for the review containing fewer than 9 comments overall. Your running score is now [+3494](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — please also check your [Zerocracy account](https://www.zerocracy.com/) for details. Let’s aim for more thorough feedback in future reviews to boost your score further!
-
-    <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+3499](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 42
   href: https://github.com/zerocracy/fbe/issues/1943/#issuecomment-6799749760
   is_human: 1
@@ -560028,7 +560018,7 @@
   succeeded_builds: 7
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-11 15:03:12.000000000 Z
+  when: &6841 2026-11-11 15:03:12.000000000 Z
   where: github
   who: 29139614
 - _id: 2654461
@@ -560054,7 +560044,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-11 14:01:11.000000000 Z
+  when: &6842 2026-11-11 14:01:11.000000000 Z
   where: github
   who: 29139614
 - _id: 2654462
@@ -560070,6 +560060,7 @@
 
     <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (10) hits-of-code.  Your running score is [+3505](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 10
+  href: https://github.com/zerocracy/fbe/issues/1938/#issuecomment-6800447529
   is_human: 1
   issue: 1938
   repository: 820463873
@@ -560097,6 +560088,7 @@
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
   hoc: 27
+  href: https://github.com/zerocracy/fbe/issues/1945/#issuecomment-6800448316
   is_human: 1
   issue: 1945
   repository: 820463873
@@ -560120,6 +560112,7 @@
 
     <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (20) hits-of-code.  Your running score is [+3521](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 20
+  href: https://github.com/zerocracy/fbe/issues/1946/#issuecomment-6800449012
   is_human: 1
   issue: 1946
   repository: 820463873
@@ -560130,3 +560123,85 @@
   where: github
   who: 526301
   why: Reviewed code in zerocracy/fbe#1946
+- _id: 2654465
+  _job: 108040
+  _time: 2026-11-11 15:51:36.267075700 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  details: The pull request zerocracy/j#183 with 2 HoC created by @renovate[bot] was
+    merged by @renovate[bot] after 8h10m of being in review and 0 comments.
+  hoc: 2
+  is_human: 0
+  issue: 183
+  merger: 29139614
+  repository: 805238060
+  review_comments: 0
+  seconds: 29422
+  what: code-was-contributed
+  when: *6841
+  where: github
+  who: 29139614
+- _id: 2654466
+  _job: 108040
+  _time: 2026-11-11 15:51:37.269769252 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  details: The pull request zerocracy/zerocracy-mcp-server#185 with 2 HoC created
+    by @renovate[bot] was merged by @renovate[bot] after 8h35m of being in review
+    and 3 comments.
+  hoc: 2
+  is_human: 0
+  issue: 185
+  merger: 29139614
+  repository: 974194993
+  review_comments: 0
+  seconds: 30917
+  what: code-was-contributed
+  when: *6842
+  where: github
+  who: 29139614
+- _id: 2654467
+  _job: 108040
+  _time: 2026-11-11 15:51:45.940201085 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 1
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1947,
+    the reward amount is 10.
+  greeting: |-
+    Hi there! Thanks for completing the code review. For this contribution, you've earned **+10 points**: starting with **+18** as the base, then **-8** for no comments being posted during the review (as per team policy). Your running score is now [+3531](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — feel free to check your [Zerocracy account](https://www.zerocracy.com/) for more details. Keep up the great work, and try to include more comments in your next review to maximize your bonus!
+
+    <!-- Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for absolutely no comments posted.  Your running score is [+3531](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 46
+  is_human: 1
+  issue: 1947
+  repository: 820463873
+  review_comments: 0
+  seconds: 833431
+  what: code-review-was-rewarded
+  when: 2026-11-11 15:51:45.946912126 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#1947
+- _id: 2654468
+  _job: 108040
+  _time: 2026-11-11 15:51:55.020703965 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 1
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1948,
+    the reward amount is 10.
+  greeting: 'Thanks for the review! You''ve earned +10 points for this: +18 as a basis;
+    -8 for absolutely no comments posted.  Your running score is [+3541](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
+  hoc: 33
+  is_human: 1
+  issue: 1948
+  repository: 820463873
+  review_comments: 0
+  seconds: 833428
+  what: code-review-was-rewarded
+  when: 2026-11-11 15:51:55.031175846 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#1948
