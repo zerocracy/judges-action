@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
-require_relative '../test__helper'
 require_relative '../../lib/ghost'
+require_relative '../test__helper'
 
 class TestAuthorGhost < Jp::Test
   using SmartFactbase

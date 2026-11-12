@@ -5,7 +5,6 @@
 
 require_relative 'jp'
 
-# GitHub's shared placeholder for deleted accounts: https://api.github.com/users/ghost.
 def Jp.ghost?(id)
   id == 10_137
 end

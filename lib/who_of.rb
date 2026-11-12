@@ -4,8 +4,8 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/who'
-require_relative 'jp'
 require_relative 'ghost'
+require_relative 'jp'
 
 def Jp.author(fact, id)
   if id.nil? || Jp.ghost?(id)
