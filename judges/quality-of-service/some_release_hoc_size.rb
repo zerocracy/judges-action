@@ -18,10 +18,13 @@ def some_release_hoc_size(fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Releases not found for #{repo}: #{e.message}")
         next
+      rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
+        $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
+        return {}
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          "(skipping inaccessible data): #{e.class}: #{e.message}"
         )
         next
       end
@@ -40,10 +43,13 @@ def some_release_hoc_size(fact)
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("Compare not found for #{repo}@#{first[:tag_name]}..#{last[:tag_name]}: #{e.message}")
           next
+        rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
+          $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
+          return {}
         rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to compare for #{repo} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            "(skipping inaccessible data): #{e.class}: #{e.message}"
           )
           next
         end

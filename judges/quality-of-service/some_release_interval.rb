@@ -16,10 +16,13 @@ def some_release_interval(fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Releases not found for #{repo}: #{e.message}")
         next
+      rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
+        $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
+        return {}
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          "(skipping inaccessible data): #{e.class}: #{e.message}"
         )
         next
       end

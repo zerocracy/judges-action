@@ -24,10 +24,13 @@ def some_build_success_rate(fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Workflow runs not found for #{repo}: #{e.message}")
         next
+      rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
+        $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
+        return {}
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          "(skipping inaccessible data): #{e.class}: #{e.message}"
         )
         next
       end
@@ -43,10 +46,13 @@ def some_build_success_rate(fact)
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("Workflow run usage not found for #{repo}##{json[:id]}: #{e.message}")
             next
+          rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
+            $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
+            return {}
           rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
-              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+              "(skipping inaccessible data): #{e.class}: #{e.message}"
             )
             next
           end
