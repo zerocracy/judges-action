@@ -2,12 +2,11 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 5m6s: execution expired'
   inserted: 8
-  seconds: 1214.030499274
+  seconds: 63.118058436
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-12 08:51:32.957175746 Z
+  when: 2026-11-12 09:02:56.780442402 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -19107,22 +19106,9 @@
   is_human: 1
   issue: 1113
   repository: 728758275
+  tombstone: 2026-11-12 08:53:48.675448727 Z
   what: pull-was-opened
   when: 2026-02-19 20:39:10.000000000 Z
-  where: github
-  who: 113470971
-- _id: 2605981
-  _job: 22594091782
-  _time: 2026-03-02 20:25:27.778279077 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  branch: '1110'
-  details: The missing pull zerocracy/baza#1116 has been opened by @yegorov0725.
-  is_human: 1
-  issue: 1116
-  repository: 728758275
-  tombstone: 2026-11-12 08:23:34.189399861 Z
-  what: pull-was-opened
-  when: 2026-02-25 14:14:30.000000000 Z
   where: github
   who: 113470971
 - _id: 2605983
@@ -19591,6 +19577,7 @@
   review_comments: 11
   succeeded_builds: 0
   suggestions: 3
+  tombstone: 2026-11-12 08:53:48.677441708 Z
   what: pull-was-merged
   when: &202 2026-03-04 18:23:51.000000000 Z
   where: github
@@ -19603,6 +19590,7 @@
   comments: 30
   details: The pull request zerocracy/baza#1113 with 127 HoC created by @yegorov0725
     was reviewed by @yegor256 after 227h48m and 1 comments.
+  done: 2026-11-12 08:53:48.641109801 Z
   hoc: 127
   is_human: 1
   issue: 1113
@@ -19628,6 +19616,7 @@
   repository: 728758275
   review_comments: 1
   seconds: 820135
+  tombstone: 2026-11-12 08:53:48.679364858 Z
   what: code-review-was-rewarded
   when: 2026-03-04 18:43:08.463384819 Z
   where: github
@@ -19647,6 +19636,7 @@
   repository: 728758275
   review_comments: 11
   seconds: 1115081
+  tombstone: 2026-11-12 08:53:48.681242955 Z
   what: code-was-contributed
   when: *202
   where: github
@@ -19667,6 +19657,7 @@
   repository: 728758275
   review_comments: 11
   seconds: 1115081
+  tombstone: 2026-11-12 08:53:48.683161875 Z
   what: code-contribution-was-rewarded
   when: 2026-03-04 22:33:13.427529728 Z
   where: github
@@ -20322,25 +20313,6 @@
   when: 2026-03-10 14:45:37.000000000 Z
   where: github
   who: 113470971
-- _id: 2606628
-  _job: 22920438432
-  _time: 2026-03-10 19:39:24.399784152 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  author: 113470971
-  comments: 13
-  details: The pull request zerocracy/baza#1116 with 53 HoC created by @yegorov0725
-    was reviewed by @yegor256 after 89h32m and 1 comments.
-  done: 2026-11-12 08:23:34.147858971 Z
-  hoc: 53
-  is_human: 1
-  issue: 1116
-  repository: 728758275
-  review_comments: 1
-  seconds: 322343
-  what: code-was-reviewed
-  when: 2026-03-01 07:46:53.000000000 Z
-  where: github
-  who: 526301
 - _id: 2606631
   _job: 22922545448
   _time: 2026-03-10 20:22:16.722991384 Z
@@ -152049,8 +152021,7 @@
   - 1076-1084
   - 1087-1105
   - 1107-1109
-  - 1114-1115
-  - '1117'
+  - 1114-1117
   repository: 728758275
   what: tombstone
   where: github
