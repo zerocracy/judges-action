@@ -26,7 +26,7 @@ def some_build_success_rate(fact)
         next
       rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
         $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
-        return {}
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to workflow runs for #{repo} " \
@@ -34,6 +34,7 @@ def some_build_success_rate(fact)
         )
         next
       end
+    return {} if workflows == :retry
     wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
     runs =
       wfs.filter_map do |json|
@@ -48,7 +49,7 @@ def some_build_success_rate(fact)
             next
           rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
             $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
-            return {}
+            :retry
           rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to workflow run usage for #{repo}##{json[:id]} " \
@@ -56,6 +57,7 @@ def some_build_success_rate(fact)
             )
             next
           end
+        return {} if secs == :retry
         { json: json, secs: secs, completed: json[:run_started_at] + secs }
       end
     runs.sort_by! { _1[:completed] }

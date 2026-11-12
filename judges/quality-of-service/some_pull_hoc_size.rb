@@ -23,7 +23,7 @@ def some_pull_hoc_size(fact)
           next
         rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
           $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
-          return {}
+          :retry
         rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to pull request ##{json[:number]} in #{repo} " \
@@ -31,6 +31,7 @@ def some_pull_hoc_size(fact)
           )
           next
         end
+      return {} if pull == :retry
       hocs << ((pull[:additions] || 0) + (pull[:deletions] || 0))
       files << (pull[:changed_files] || 0)
     end

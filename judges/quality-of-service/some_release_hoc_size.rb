@@ -20,7 +20,7 @@ def some_release_hoc_size(fact)
         next
       rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
         $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
-        return {}
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
@@ -28,6 +28,7 @@ def some_release_hoc_size(fact)
         )
         next
       end
+    return {} if releases == :retry
     releases.each do |json|
       next if json[:published_at].nil?
       next if json[:published_at] > fact.when
@@ -45,7 +46,7 @@ def some_release_hoc_size(fact)
           next
         rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
           $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
-          return {}
+          :retry
         rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to compare for #{repo} " \
@@ -53,6 +54,7 @@ def some_release_hoc_size(fact)
           )
           next
         end
+      return {} if compare == :retry
       hocs << compare[:files].sum { |file| file[:changes] }
       commits << compare[:total_commits]
     end

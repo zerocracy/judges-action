@@ -18,7 +18,7 @@ def some_release_interval(fact)
         next
       rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
         $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
-        return {}
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
@@ -26,6 +26,7 @@ def some_release_interval(fact)
         )
         next
       end
+    return {} if releases == :retry
     dates = []
     releases.each do |json|
       next if json[:published_at].nil?

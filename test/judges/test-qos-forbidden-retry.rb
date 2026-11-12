@@ -57,9 +57,10 @@ class TestQosForbiddenRetry < Jp::Test
   def test_does_not_swallow_other_http_client_errors
     [400, 429].each do |status|
       error = Octokit::Error.from_response(status:, body: 'Client error', response_headers: {})
-      raised = assert_raises(error.class) do
-        exercise_metric(:some_release_interval, :releases, { some_release_interval: [3600.0, 3600.0] }, error)
-      end
+      raised =
+        assert_raises(error.class) do
+          exercise_metric(:some_release_interval, :releases, { some_release_interval: [3600.0, 3600.0] }, error)
+        end
       assert_same(error, raised)
     end
   end
@@ -138,7 +139,7 @@ class TestQosForbiddenRetry < Jp::Test
             assert_equal(values.take(values.length / 2), fact[key.to_s], "#{key} must not duplicate accessible data")
           end
         end
-        return
+        next
       end
       expected.each_key { |key| assert_nil(fact[key.to_s], "#{key} was frozen after a forbidden lookup") }
       assert_nil(fact[Jp::INCREMATE_MARKER], 'an incomplete metric was marked complete')
