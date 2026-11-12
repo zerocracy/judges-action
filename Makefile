@@ -8,7 +8,7 @@ SHELL := bash
 
 export
 
-all: rubocop test entry rmi verify entries
+all: rubocop verify entries
 
 rubocop:
 	bundle exec rubocop
@@ -22,7 +22,7 @@ entry: target/docker-image.txt
 	./test-action.sh "$$(cat $<)" || rc=$$?
 	echo "$${rc:-0}" > target/entry.exit
 
-rmi: target/docker-image.txt
+rmi: target/docker-image.txt test entry
 	img=$$(cat $<)
 	docker rmi "$${img}"
 	rm "$<"
@@ -30,7 +30,7 @@ rmi: target/docker-image.txt
 entries:
 	./makes/entries.sh
 
-verify:
+verify: rmi
 	e1=$$(cat target/test.exit)
 	test "$${e1}" = "0"
 	e2=$$(cat target/entry.exit)
