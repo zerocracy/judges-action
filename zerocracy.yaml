@@ -2,11 +2,15 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - 'Failure in repository #1090089359 at #26951958266: GET https://api.github.com/repositories/1090089359/events?per_page=100:
+    502 - Server Error'
+  - 'Judge find-all-issues stopped by timeout after 7m26s: execution expired'
   inserted: 8
-  seconds: 1146.25305785
+  seconds: 1217.123397103
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-12 18:20:54.024742938 Z
+  when: 2026-11-12 18:51:52.838111084 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -146362,7 +146366,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 41
+  min_issue_was_found: 0
   min_pull_was_found: 21
   repository: 1090089359
   types_were_scanned: 0
@@ -154147,7 +154151,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 4
+  min_issue_was_found: 16
   min_pull_was_found: 74
   repository: 1084843345
   types_were_scanned: 0
@@ -154157,36 +154161,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1043
-  closures_were_checked: 0
+  assignees_were_scanned: 1184
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
-  events_were_scanned: 19916901400
+  events_were_scanned: 26959831774
   issues_were_scanned: 1396
-  labels_were_scanned: 1591
+  labels_were_scanned: 1860
   latest_issue_was_found: 315
-  merges_were_scanned: 0
-  min_issue_was_found: 1844
+  merges_were_scanned: 1271
+  min_issue_was_found: 1845
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 998
+  types_were_scanned: 1129
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 19917356375
+  events_were_scanned: 19925362836
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
-  min_issue_was_found: 517
+  merges_were_scanned: 603
+  min_issue_was_found: 519
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -154201,7 +154205,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 161
+  min_issue_was_found: 0
   min_pull_was_found: 142
   repository: 857659265
   types_were_scanned: 0
@@ -154603,18 +154607,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1110
-  closures_were_checked: 955
+  assignees_were_scanned: 1229
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19920677396
   issues_were_scanned: 1225
-  labels_were_scanned: 1976
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1648
-  min_issue_was_found: 1969
+  merges_were_scanned: 1917
+  min_issue_was_found: 1970
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 1784
+  types_were_scanned: 1848
   what: iterate
   where: github
 - _id: 2629882
@@ -155260,18 +155264,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 739
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26954775962
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1198
-  min_issue_was_found: 1256
+  merges_were_scanned: 1400
+  min_issue_was_found: 1257
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 973
+  types_were_scanned: 1082
   what: iterate
   where: github
 - _id: 2629939
@@ -155406,18 +155410,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 851
+  assignees_were_scanned: 916
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19918997168
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 971
-  min_issue_was_found: 1205
+  merges_were_scanned: 1118
+  min_issue_was_found: 1206
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 605
+  types_were_scanned: 676
   what: iterate
   where: github
 - _id: 2630023
@@ -155442,18 +155446,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2718
-  closures_were_checked: 1744
+  assignees_were_scanned: 2856
+  closures_were_checked: 1964
   earliest_issue_was_found: 1
   events_were_scanned: 26955203864
   issues_were_scanned: 2725
-  labels_were_scanned: 1708
+  labels_were_scanned: 2984
   latest_issue_was_found: 1073
-  merges_were_scanned: 2563
+  merges_were_scanned: 2667
   min_issue_was_found: 2954
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 2496
+  types_were_scanned: 2644
   what: iterate
   where: github
 - _id: 2630036
@@ -155478,7 +155482,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26953440349
@@ -155489,7 +155493,7 @@
   min_issue_was_found: 1169
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 1187
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -560258,3 +560262,129 @@
   when: *6845
   where: github
   who: 526301
+- _id: 2654571
+  _job: 108299
+  _time: 2026-11-12 18:21:50.413716258 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: upload-gap
+  details: It's time to punish @eazyhood for the branch named as 'upload-gap', which
+    is wrong in zerocracy/baza.rb#605, the penalty amount is -6.
+  greeting: |-
+    Naming Git branches like "`upload-gap`" isn't ideal, as explained in our [guidelines](https://www.yegor256.com/2014/04/15/github-guidelines.html) — this cost you -6 points. Next time, try naming your branch after the ticket number you're resolving, e.g., "`604`". Your running score is now [+262](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`upload-gap`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`604`". Your running score is [+262](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 605
+  repository: 840215648
+  what: bad-branch-name-was-punished
+  when: 2026-11-12 18:21:50.419419890 Z
+  where: github
+  who: 209367218
+  why: Wrongly named a branch in zerocracy/baza.rb#605
+- _id: 2654572
+  _job: 108299
+  _time: 2026-11-12 18:21:54.353863445 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: fake-chunk-size
+  details: It's time to punish @eazyhood for the branch named as 'fake-chunk-size',
+    which is wrong in zerocracy/baza.rb#604, the penalty amount is -6.
+  greeting: |-
+    It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`fake-chunk-size`". Per our work policy, branches that don't follow the naming convention incur a penalty, so you've earned **-6** points. Next time, better give your branch the same name as the number of the ticket you're solving — in this case, a perfect name would have been "`603`". Your running score is [+256](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`fake-chunk-size`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`603`". Your running score is [+256](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 604
+  repository: 840215648
+  what: bad-branch-name-was-punished
+  when: 2026-11-12 18:21:54.356258345 Z
+  where: github
+  who: 209367218
+  why: Wrongly named a branch in zerocracy/baza.rb#604
+- _id: 2654573
+  _job: 108299
+  _time: 2026-11-12 18:21:57.768967018 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: nested-durable
+  details: It's time to punish @eazyhood for the branch named as 'nested-durable',
+    which is wrong in zerocracy/baza.rb#603, the penalty amount is -6.
+  greeting: |-
+    Hi there! It looks like the branch name "`nested-durable`" doesn't follow our [naming convention](https://www.yegor256.com/2014/04/15/github-guidelines.html), which calls for branches to be named after the ticket number they resolve (e.g., "`602`"). Per policy, this results in a deduction of **-6** points. Your running score is now [+250](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — check your [Zerocracy account](https://www.zerocracy.com/) for details. Please keep this convention in mind for future branches!
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`nested-durable`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`602`". Your running score is [+250](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 603
+  repository: 840215648
+  what: bad-branch-name-was-punished
+  when: 2026-11-12 18:21:57.771081963 Z
+  where: github
+  who: 209367218
+  why: Wrongly named a branch in zerocracy/baza.rb#603
+- _id: 2654574
+  _job: 108299
+  _time: 2026-11-12 18:22:00.974437507 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: upgrade-compatible-dependencies
+  details: It's time to punish @yegor256 for the branch named as 'upgrade-compatible-dependencies',
+    which is wrong in zerocracy/judges-action#3172, the penalty amount is -6.
+  greeting: |-
+    Hi! It looks like your branch name "`upgrade-compatible-dependencies`" doesn't follow our [naming convention](https://www.yegor256.com/2014/04/15/github-guidelines.html), which asks for the branch to match the ticket number (e.g., "`3171`"), so **-6** points have been applied. Your running score is now [+3687](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — check your [Zerocracy account](https://www.zerocracy.com/) for details, and thanks for keeping this in mind next time!
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`upgrade-compatible-dependencies`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`3171`". Your running score is [+3687](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 3172
+  repository: 799177290
+  what: bad-branch-name-was-punished
+  when: 2026-11-12 18:22:00.976608738 Z
+  where: github
+  who: 526301
+  why: Wrongly named a branch in zerocracy/judges-action#3172
+- _id: 2654575
+  _job: 108299
+  _time: 2026-11-12 18:22:07.726014910 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 2
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#2032,
+    the reward amount is 6.
+  greeting: |-
+    Thanks for the review! According to our **work policy**, you've earned **+6 points**: starting with **+18** as the base award, then **-8** because the policy deducts points when there were absolutely no comments made during review, and **-4** since the policy also deducts points when there are less than **24** hits-of-code (yours had just **6**). These rules keep rewards fair and consistent for everyone. Your running score is now [+3693](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too!
+
+    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (6) hits-of-code.  Your running score is [+3693](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 6
+  is_human: 1
+  issue: 2032
+  repository: 820463873
+  review_comments: 0
+  seconds: 27002
+  what: code-review-was-rewarded
+  when: 2026-11-12 18:22:07.733200695 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#2032
+- _id: 2654576
+  _job: 108299
+  _time: 2026-11-12 18:22:18.470404433 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 6
+  comments: 3
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#2031,
+    the reward amount is 6.
+  greeting: |-
+    Thanks for the review! Per our [review bonus policy](policy-link), you've earned **+6 points**: starting with **+18** as the base award, then **-8** because the review had absolutely no comments posted, and **-4** since the contribution had only 8 hits-of-code, below the 24-hoc threshold — bringing your total to **+6**. Your running score is now [+3699](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
+
+    <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (8) hits-of-code.  Your running score is [+3699](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  hoc: 8
+  is_human: 1
+  issue: 2031
+  repository: 820463873
+  review_comments: 0
+  seconds: 27017
+  what: code-review-was-rewarded
+  when: 2026-11-12 18:22:18.478905749 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#2031
