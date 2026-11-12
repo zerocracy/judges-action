@@ -629,6 +629,16 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_records_the_merged_pulls_changed_files
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44, files: 7)
+    fb = Factbase.new
+    fb.with(what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert_equal(7, fb.pick(what: 'pull-was-merged').files, 'the merged fact must keep the changed-file count')
+  end
+
   def test_merged_with_ghost_user_closed_by
     WebMock.disable_net_connect!
     rate_limit_up
@@ -679,8 +689,8 @@ class TestPullWasMerged < Jp::Test
 
   private
 
-  def stub_pull_was_merged_success(issue)
-    stub_pull_was_merged_base(issue)
+  def stub_pull_was_merged_success(issue, files: 1)
+    stub_pull_was_merged_base(issue, files:)
     stub_pull_was_merged_issue(issue)
     stub_github("https://api.github.com/repos/foo/foo/pulls/#{issue}/reviews?per_page=100", body: [])
     stub_github("https://api.github.com/repos/foo/foo/pulls/#{issue}/comments?per_page=100", body: [])
@@ -688,7 +698,7 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
   end
 
-  def stub_pull_was_merged_base(issue)
+  def stub_pull_was_merged_base(issue, files: 1)
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github(
@@ -698,7 +708,7 @@ class TestPullWasMerged < Jp::Test
         merged_at: Time.parse('2025-09-30 18:00:00 UTC'),
         closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
         created_at: Time.parse('2025-09-30 15:35:30 UTC'),
-        additions: 12, deletions: 5, changed_files: 1,
+        additions: 12, deletions: 5, changed_files: files,
         head: { ref: '40', sha: 'aa123' },
         base: { repo: { id: 42, full_name: 'foo/foo' } }
       }
