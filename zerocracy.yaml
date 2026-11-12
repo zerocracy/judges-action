@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: 'Judge find-all-issues stopped by timeout after 10m10s: execution expired'
   inserted: 8
-  seconds: 1099.526397811
+  seconds: 1226.5983072
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-12 11:19:50.064252919 Z
+  when: 2026-11-12 11:51:35.254702728 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18121,6 +18122,7 @@
   is_human: 1
   issue: 535
   repository: 798641472
+  tombstone: 2026-11-12 11:22:06.737588364 Z
   what: pull-was-opened
   when: 2026-02-27 01:21:00.000000000 Z
   where: github
@@ -18151,6 +18153,7 @@
   is_human: 1
   issue: 538
   repository: 798641472
+  tombstone: 2026-11-12 11:22:06.779370311 Z
   what: pull-was-opened
   when: 2026-02-28 20:03:21.000000000 Z
   where: github
@@ -18185,21 +18188,6 @@
   when: 2026-03-01 07:47:00.000000000 Z
   where: github
   who: 29139614
-- _id: 2605698
-  _job: 22542321214
-  _time: 2026-03-01 11:20:44.199905777 Z
-  _version: 0.19.8/0.60.0/0.17.13
-  details: The issue yegor256/factbase#537 has been closed by @yegor256.
-  event_id: 6978486540
-  event_type: IssuesEvent
-  is_human: 1
-  issue: 537
-  repository: 798641472
-  tombstone: 2026-11-11 20:26:03.518886800 Z
-  what: issue-was-closed
-  when: 2026-03-01 11:13:07.000000000 Z
-  where: github
-  who: 526301
 - _id: 2605699
   _job: 22542321214
   _time: 2026-03-01 11:20:45.165852594 Z
@@ -18291,6 +18279,7 @@
   reviews: 0
   succeeded_builds: 12
   suggestions: 0
+  tombstone: 2026-11-12 11:22:06.739791250 Z
   what: pull-was-merged
   when: &190 2026-03-01 11:13:39.000000000 Z
   where: github
@@ -18317,6 +18306,7 @@
   reviews: 0
   succeeded_builds: 12
   suggestions: 0
+  tombstone: 2026-11-12 11:22:06.781772713 Z
   what: pull-was-merged
   when: &191 2026-03-01 11:13:06.000000000 Z
   where: github
@@ -18364,6 +18354,7 @@
   comments: 3
   details: The pull request yegor256/factbase#535 with 48 HoC created by @belfil was
     merged by @yegor256 after 2d9h of being in review and 3 comments.
+  done: 2026-11-12 11:22:06.701288198 Z
   hoc: 48
   is_human: 1
   issue: 535
@@ -18382,6 +18373,7 @@
   comments: 1
   details: The pull request yegor256/factbase#538 with 6 HoC created by @belfil was
     merged by @yegor256 after 15h9m of being in review and 1 comments.
+  done: 2026-11-12 11:22:06.743990493 Z
   hoc: 6
   is_human: 1
   issue: 538
@@ -18431,6 +18423,7 @@
   repository: 798641472
   review_comments: 0
   seconds: 208359
+  tombstone: 2026-11-12 11:22:06.741896797 Z
   what: code-contribution-was-rewarded
   when: 2026-03-01 14:24:00.502150392 Z
   where: github
@@ -18452,6 +18445,7 @@
   repository: 798641472
   review_comments: 0
   seconds: 54585
+  tombstone: 2026-11-12 11:22:06.783892110 Z
   what: code-contribution-was-rewarded
   when: 2026-03-01 14:24:05.467005843 Z
   where: github
@@ -19066,6 +19060,7 @@
   is_human: 0
   issue: 536
   repository: 798641472
+  tombstone: 2026-11-12 11:22:06.819725911 Z
   what: pull-was-opened
   when: 2026-02-27 16:46:05.000000000 Z
   where: github
@@ -19151,6 +19146,7 @@
   reviews: 0
   succeeded_builds: 12
   suggestions: 0
+  tombstone: 2026-11-12 11:22:06.821763578 Z
   what: pull-was-merged
   when: &199 2026-03-01 11:12:46.000000000 Z
   where: github
@@ -19288,6 +19284,7 @@
   comments: 0
   details: The pull request yegor256/factbase#536 with 2 HoC created by @renovate[bot]
     was merged by @yegor256 after 1d18h of being in review and 0 comments.
+  done: 2026-11-12 11:22:06.786063359 Z
   hoc: 2
   is_human: 0
   issue: 536
@@ -146711,7 +146708,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 38
+  min_issue_was_found: 39
   min_pull_was_found: 21
   repository: 1090089359
   types_were_scanned: 0
@@ -147725,7 +147722,7 @@
   min_issue_was_found: 130
   min_pull_was_found: 124
   repository: 974194993
-  types_were_scanned: 68
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -154244,10 +154241,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 225
+  min_issue_was_found: 226
   min_pull_was_found: 207
   repository: 849726475
-  types_were_scanned: 283
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629820
@@ -154478,7 +154475,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 4
+  min_issue_was_found: 24
   min_pull_was_found: 172
   repository: 805238060
   types_were_scanned: 0
@@ -154499,32 +154496,32 @@
   min_issue_was_found: 75
   min_pull_was_found: 74
   repository: 1084843345
-  types_were_scanned: 66
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1877
-  closures_were_checked: 1439
+  assignees_were_scanned: 0
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19878527972
   issues_were_scanned: 1396
-  labels_were_scanned: 1311
+  labels_were_scanned: 1582
   latest_issue_was_found: 315
-  merges_were_scanned: 1997
+  merges_were_scanned: 0
   min_issue_was_found: 1841
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 1235
+  types_were_scanned: 1354
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26924764273
@@ -154535,7 +154532,7 @@
   min_issue_was_found: 510
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 312
+  types_were_scanned: 471
   what: iterate
   where: github
 - _id: 2629843
@@ -154952,18 +154949,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 850
-  closures_were_checked: 0
+  assignees_were_scanned: 1013
+  closures_were_checked: 955
   earliest_issue_was_found: 1
   events_were_scanned: 19878306018
   issues_were_scanned: 1225
-  labels_were_scanned: 0
+  labels_were_scanned: 1766
   latest_issue_was_found: 317
-  merges_were_scanned: 1271
-  min_issue_was_found: 1940
+  merges_were_scanned: 1337
+  min_issue_was_found: 1966
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 656
+  types_were_scanned: 775
   what: iterate
   where: github
 - _id: 2629882
@@ -155609,18 +155606,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 739
+  assignees_were_scanned: 864
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26931309213
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 0
-  min_issue_was_found: 1252
+  merges_were_scanned: 1198
+  min_issue_was_found: 1253
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 619
+  types_were_scanned: 771
   what: iterate
   where: github
 - _id: 2629939
@@ -155755,18 +155752,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 682
+  assignees_were_scanned: 851
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26928856708
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 768
+  merges_were_scanned: 971
   min_issue_was_found: 1195
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 1046
+  types_were_scanned: 1194
   what: iterate
   where: github
 - _id: 2630023
@@ -155791,18 +155788,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2550
-  closures_were_checked: 0
+  assignees_were_scanned: 2718
+  closures_were_checked: 1744
   earliest_issue_was_found: 1
   events_were_scanned: 26931091904
   issues_were_scanned: 2725
-  labels_were_scanned: 1702
+  labels_were_scanned: 2975
   latest_issue_was_found: 1073
-  merges_were_scanned: 2886
-  min_issue_was_found: 2942
+  merges_were_scanned: 3044
+  min_issue_was_found: 2944
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 3005
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -155827,7 +155824,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1203
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 26928203669
@@ -155835,10 +155832,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1166
+  min_issue_was_found: 1168
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 748
+  types_were_scanned: 1245
   what: iterate
   where: github
 - _id: 2630038
