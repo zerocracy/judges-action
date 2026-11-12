@@ -5,9 +5,10 @@
 
 require 'fbe/who'
 require_relative 'jp'
+require_relative 'ghost'
 
 def Jp.author(fact, id)
-  if id.nil?
+  if id.nil? || Jp.ghost?(id)
     fact.stale = 'who'
   else
     fact.who = id
