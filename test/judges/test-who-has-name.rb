@@ -126,4 +126,75 @@ class TestWhoHasName < Jp::Test
       'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_marks_stale_when_user_gone_in_draw_block
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/444', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(_id: 999, who: 444, where: 'github', what: 'issue-was-opened')
+    load_it('who-has-name', fb)
+    assert_equal(1, fb.all.size)
+    assert(fb.one?(who: 444, stale: 'who'))
+  end
+
+  def test_stamps_new_name_fact_with_current_time
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/444', body: { login: 'lebowski' })
+    fb = Factbase.new
+    fb.with(_id: 333, who: 444, where: 'github', what: 'issue-was-opened')
+    now = Time.parse('2025-06-23 22:00:00 UTC')
+    Time.stub(:now, now) do
+      load_it('who-has-name', fb)
+    end
+    fact = fb.pick(what: 'who-has-name')
+    assert_equal('lebowski', fact.name)
+    assert_equal(now, fact.when)
+  end
+
+  def test_marks_stale_when_user_gone_in_refresh_block
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/14', status: 404, body: { message: 'Not Found' })
+    fb = Factbase.new
+    fb.with(
+      _id: 5, what: 'who-has-name', where: 'github', who: 14, name: 'user4',
+      when: Time.parse('2025-06-15 20:00:00 UTC')
+    )
+    Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
+      load_it('who-has-name', fb)
+    end
+    assert(fb.one?(who: 14, name: 'user4', stale: 'who'))
+  end
+
+  def test_keeps_foreign_stale_value_of_an_alive_user
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/12', body: { login: 'user22', id: 12, type: 'User' })
+    fb = Factbase.new
+    fb.with(
+      _id: 1, what: 'who-has-name', where: 'github', who: 12, name: 'user2',
+      when: Time.parse('2025-06-18 20:00:00 UTC')
+    )
+    f = fb.insert
+    f._id = 2
+    f.what = 'pull-was-merged'
+    f.where = 'github'
+    f.who = 12
+    f.stale = 'issue'
+    f.stale = 'who'
+    g = fb.insert
+    g._id = 3
+    g.what = 'pull-was-merged'
+    g.where = 'github'
+    g.who = 12
+    g.stale = 'who'
+    Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
+      load_it('who-has-name', fb)
+    end
+    assert(fb.one?(_id: 1, name: 'user22'))
+    assert_equal(%w[issue who], fb.pick(_id: 2)['stale'].sort)
+    assert_nil(fb.pick(_id: 3)['stale'])
+  end
 end
