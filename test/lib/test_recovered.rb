@@ -35,4 +35,21 @@ class TestRecovered < Minitest::Test
       end
     assert_nil(found)
   end
+
+  def test_makes_no_request_when_the_quota_is_spent
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| true }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&b| b.call(self) }
+    asked = false
+    octo.define_singleton_method(:workflow_runs) do |_repo, _workflow, **|
+      asked = true
+      { workflow_runs: [] }
+    end
+    found =
+      Fbe.stub(:octo, octo) do
+        Jp.recovered('foo/foo', 42, Time.now, judge: 'quality-of-service', loog: Loog::NULL)
+      end
+    assert_nil(found)
+    refute(asked, 'no workflow_runs request must be made when the quota is spent')
+  end
 end
