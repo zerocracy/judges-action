@@ -31,7 +31,7 @@ def some_build_success_rate(fact)
         )
         next
       end
-    wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
+    wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }
     runs =
       wfs.filter_map do |json|
         break if Fbe.octo.off_quota?
