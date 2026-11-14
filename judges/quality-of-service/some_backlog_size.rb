@@ -12,16 +12,18 @@ def some_backlog_size(fact)
   return {} if Fbe.octo.off_quota?(resource: :search)
   issues = []
   sample = Fbe.pmp.quality.qos_backlog_days.value || 7
-  Fbe.unmask_repos do |repo|
-    (fact.since.utc.to_date..fact.when.utc.to_date).last(sample).each do |date|
-      return {} if Fbe.octo.off_quota?(resource: :search)
-      found = Jp.qosearch(
-        "repo:#{repo} type:issue created:*..#{date.iso8601[0..9]} (closed:>=#{date.iso8601[0..9]} OR state:open)",
-        advanced_search: true
-      )
-      return {} if found.nil?
-      issues << found[:total_count]
+  expanded =
+    Fbe.unmask_repos do |repo|
+      (fact.since.utc.to_date..fact.when.utc.to_date).last(sample).each do |date|
+        return {} if Fbe.octo.off_quota?(resource: :search)
+        found = Jp.qosearch(
+          "repo:#{repo} type:issue created:*..#{date.iso8601[0..9]} (closed:>=#{date.iso8601[0..9]} OR state:open)",
+          advanced_search: true
+        )
+        return {} if found.nil?
+        issues << found[:total_count]
+      end
     end
-  end
+  return {} if expanded && expanded.empty?
   { some_backlog_size: issues }
 end

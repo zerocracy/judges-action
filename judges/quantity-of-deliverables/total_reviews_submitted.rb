@@ -10,7 +10,9 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_reviews_submitted(fact)
   total = 0
-  Fbe.unmask_repos.each do |repo|
+  repos = Fbe.unmask_repos
+  return {} if repos.empty?
+  repos.each do |repo|
     owner, name = repo.split('/')
     count = 0
     cursor = nil

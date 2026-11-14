@@ -10,23 +10,25 @@ require_relative '../../lib/patches/unmask_repos'
 def total_issues(_fact)
   issues = 0
   pulls = 0
-  Fbe.unmask_repos do |repo|
-    json =
-      begin
-        Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
-      rescue Fbe::Error => e
-        $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
-        next
-      rescue GraphQL::Client::Error,
-        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
-        $loog.warn(
-          "[#{$judge}] Can't count issues and pulls in #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
-    issues += json['issues']
-    pulls += json['pulls']
-  end
+  expanded =
+    Fbe.unmask_repos do |repo|
+      json =
+        begin
+          Fbe.github_graph.total_issues_and_pulls(*repo.split('/'))
+        rescue Fbe::Error => e
+          $loog.info("Can't count issues and pulls in #{repo}: #{e.message}")
+          next
+        rescue GraphQL::Client::Error,
+          Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+          $loog.warn(
+            "[#{$judge}] Can't count issues and pulls in #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      issues += json['issues']
+      pulls += json['pulls']
+    end
+  return {} if expanded && expanded.empty?
   { total_issues: issues, total_pulls: pulls }
 end

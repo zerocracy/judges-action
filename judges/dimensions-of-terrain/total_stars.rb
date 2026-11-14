@@ -10,25 +10,27 @@ require_relative '../../lib/patches/unmask_repos'
 def total_stars(_fact)
   stars = 0
   forks = 0
-  Fbe.unmask_repos do |repo|
-    json =
-      begin
-        Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} not found: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-        break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      end
-    stars += json[:stargazers_count] || 0
-    forks += json[:forks] || 0
-  end
+  expanded =
+    Fbe.unmask_repos do |repo|
+      json =
+        begin
+          Fbe.octo.repository(repo)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Repository #{repo} not found: #{e.message}")
+          next
+        rescue Octokit::TooManyRequests => e
+          $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+          break
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      stars += json[:stargazers_count] || 0
+      forks += json[:forks] || 0
+    end
+  return {} if expanded && expanded.empty?
   { total_stars: stars, total_forks: forks }
 end

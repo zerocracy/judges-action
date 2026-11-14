@@ -22,7 +22,7 @@ class TestSomeBuildQuota < Jp::Test
     load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     result =
       Fbe.stub(:octo, octo) do
-        Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) { some_build_success_rate(fact) }
+        Fbe.stub(:unmask_repos, yielding_repos('foo/foo')) { some_build_success_rate(fact) }
       end
     assert_empty(result)
   end

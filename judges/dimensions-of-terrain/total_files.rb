@@ -11,51 +11,53 @@ def total_files(_fact)
   files = 0
   measured = false
   truncated = false
-  Fbe.unmask_repos do |repo|
-    info =
-      begin
-        Fbe.octo.repository(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} not found: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-        break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+  expanded =
+    Fbe.unmask_repos do |repo|
+      info =
+        begin
+          Fbe.octo.repository(repo)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Repository #{repo} not found: #{e.message}")
+          next
+        rescue Octokit::TooManyRequests => e
+          $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+          break
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      next if info[:size].nil? || info[:size].zero?
+      tree =
+        begin
+          Fbe.octo.tree(repo, info[:default_branch], recursive: true)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Tree not found for #{repo}@#{info[:default_branch]}: #{e.message}")
+          next
+        rescue Octokit::TooManyRequests => e
+          $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+          break
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to tree for #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      if tree[:truncated]
+        $loog.info(
+          "Tree for #{repo}@#{info[:default_branch]} is truncated, so total_files is not reported " \
+          'at all this time, not even for the repositories that were counted'
         )
-        next
-      end
-    next if info[:size].nil? || info[:size].zero?
-    tree =
-      begin
-        Fbe.octo.tree(repo, info[:default_branch], recursive: true)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Tree not found for #{repo}@#{info[:default_branch]}: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        truncated = true
         break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to tree for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
       end
-    if tree[:truncated]
-      $loog.info(
-        "Tree for #{repo}@#{info[:default_branch]} is truncated, so total_files is not reported " \
-        'at all this time, not even for the repositories that were counted'
-      )
-      truncated = true
-      break
+      measured = true
+      files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
     end
-    measured = true
-    files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
-  end
+  return {} if expanded && expanded.empty?
   return {} if truncated
   return {} unless measured
   { total_files: files }
