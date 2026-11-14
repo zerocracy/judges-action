@@ -87,4 +87,58 @@ class TestTypeWasAttached < Jp::Test
     assert_equal(['who'], f['stale'], 'a deleted GraphQL actor must mark the fact stale on who')
     assert_match(/an unknown actor/, f['details'].first)
   end
+
+  def test_marks_previous_type_stale_when_type_changes
+    seed = Random.new_seed
+    random = Random.new(seed)
+    first = "Ошибка #{random.rand(1_000)}"
+    second = "Задача #{random.rand(1_000)}"
+    assert_equal(
+      [second],
+      live([%w[issue_type_added ITAE_1], %w[issue_type_changed ITCE_1]], 'ITAE_1' => first, 'ITCE_1' => second),
+      "the live type of the issue is not the one it was changed to, seed #{seed}"
+    )
+  end
+
+  def test_attaches_again_type_it_was_changed_back_to
+    seed = Random.new_seed
+    random = Random.new(seed)
+    first = "Ошибка #{random.rand(1_000)}"
+    second = "Задача #{random.rand(1_000)}"
+    assert_equal(
+      [first],
+      live(
+        [%w[issue_type_added ITAE_1], %w[issue_type_changed ITCE_1], %w[issue_type_changed ITCE_2]],
+        'ITAE_1' => first, 'ITCE_1' => second, 'ITCE_2' => first
+      ),
+      "the live type of the issue is not the one it was changed back to, seed #{seed}"
+    )
+  end
+
+  private
+
+  def live(events, types)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      body: events.map { |event, node| { event:, node_id: node, created_at: '2025-09-30 06:14:38 UTC' } }
+    )
+    fake = Fbe::Graph::Fake.new
+    fake.define_singleton_method(:issue_type_event) do |node|
+      {
+        'created_at' => Time.parse('2025-09-30 06:14:38 UTC'),
+        'issue_type' => { 'name' => types[node] },
+        'actor' => { 'login' => 'yegor256', 'id' => 526_301 }
+      }
+    end
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, fake) do
+      load_it('type-was-attached', fb)
+    end
+    fb.query("(and (eq what 'type-was-attached') (absent stale))").each.map(&:type)
+  end
 end
