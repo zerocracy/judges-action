@@ -31,6 +31,10 @@ def total_active_contributors(fact)
         next
       end
     return {} if commits.nil?
+    if commits[:total_count] >= 1000
+      $loog.info("Commit search for #{repo} hit the 1000 result ceiling, leaving total_active_contributors unset")
+      return {}
+    end
     commits[:items].each do |commit|
       date = commit.dig(:commit, :author, :date)
       next if !date.nil? && Time.parse(date.to_s) > fact.when
