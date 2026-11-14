@@ -126,6 +126,7 @@ require_relative '../../lib/who_of'
           end
         end
         issue = first if issue < first
+        issue = seen.last - 1 if total > seen.count && !seen.empty? && seen.last > first
         m = [
           "Checked #{seen.count} of #{total} #{type}s in #{repo}",
           ("(#{seen.joined(max: 8)})" unless seen.empty?),
