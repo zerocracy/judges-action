@@ -183,6 +183,67 @@ class TestQosSearch < Jp::Test
     end
   end
 
+  def test_spends_the_budget_on_the_twenty_fifth_search
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    now = Time.utc(2026, 11, 8, 12)
+    naps = []
+    Time.stub(:now, -> { now }) do
+      Jp.stub(:sleep, ->(pause) { naps << pause }) do
+        24.times { refute_nil(Jp.qosearch('repo:foo/foo type:issue')) }
+        assert_empty(naps, 'the search slept before the window budget was spent')
+        refute_nil(Jp.qosearch('repo:foo/foo type:issue'), 'the twenty-fifth search is not dispatched')
+        assert_empty(naps, 'the twenty-fifth search slept, the budget is spent too early')
+        assert_equal(25, Jp.instance_variable_get(:@scount)[$judge], 'the budget is not 25 calls')
+        assert_requested(:get, %r{https://api\.github\.com/search/issues}, times: 25)
+        refute_nil(Jp.qosearch('repo:foo/foo type:issue'), 'the twenty-sixth search is not dispatched after the wait')
+        assert_equal(1, naps.size, 'the twenty-sixth search did not wait for the window to end')
+        assert_in_delta(60, naps.sum, 0.5, 'the twenty-sixth search did not sleep out the whole window')
+      end
+    end
+    assert_requested(:get, %r{https://api\.github\.com/search/issues}, times: 26)
+  end
+
+  def test_keeps_the_budget_spent_just_before_the_window_ends
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    now = Time.utc(2026, 11, 8, 12)
+    naps = []
+    before =
+      lambda do |pause|
+        naps << pause
+        assert_requested(:get, %r{https://api\.github\.com/search/issues}, times: 25)
+      end
+    Time.stub(:now, -> { now }) do
+      Jp.stub(:sleep, before) do
+        25.times { Jp.qosearch('repo:foo/foo type:issue') }
+        assert_empty(naps, 'the search slept although the budget was not spent')
+        now += 59
+        refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
+      end
+    end
+    assert_equal(1, naps.size, 'the search did not wait at 59s, the window ends too early')
+    assert_in_delta(1, naps.sum, 0.5, 'the search did not sleep the last second of the window')
+    assert_requested(:get, %r{https://api\.github\.com/search/issues}, times: 26)
+  end
+
+  def test_reopens_the_budget_at_the_window_end
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    now = Time.utc(2026, 11, 8, 12)
+    naps = []
+    Time.stub(:now, -> { now }) do
+      Jp.stub(:sleep, ->(pause) { naps << pause }) do
+        25.times { Jp.qosearch('repo:foo/foo type:issue') }
+        now += 60
+        refute_nil(Jp.qosearch('repo:foo/foo type:issue'), 'the search is not dispatched at 60s')
+      end
+    end
+    assert_empty(naps, 'the search waited although the window is over at 60s')
+    assert_equal(1, Jp.instance_variable_get(:@scount)[$judge], 'the budget is not reopened with a fresh count')
+    assert_requested(:get, %r{https://api\.github\.com/search/issues}, times: 26)
+  end
+
   private
 
   def ratelimits(*remaining)
