@@ -9,13 +9,13 @@ base=$(realpath "$(dirname "$0")/..")
 mkdir -p "${base}/target/entries-logs"
 
 run_test() {
-    local sh="$1"
-    local fqn="${base}/entries/${sh}"
+    local fqn="$1"
+    local sh="${fqn#"${base}"/entries/}"
     if [ ! -x "${fqn}" ]; then
         echo "The file is not executable: ${fqn}"
         exit 1
     fi
-    mkdir -p "${base}/target/${sh}"
+    mkdir -p "${base}/target/${sh}" "${base}/target/entries-logs/$(dirname "${sh}")"
     if /bin/bash -c "cd \"target/${sh}\" && exec \"${fqn}\" \"${base}\" > \"${base}/target/entries-logs/${sh}.txt\" 2>&1"; then
         echo "👍🏻 ${sh} passed"
         return 0
@@ -29,5 +29,5 @@ run_test() {
 export -f run_test
 export base
 
-find "${base}/entries" -name '*.sh' -exec basename {} \; | \
+find "${base}/entries" -name '*.sh' | \
     parallel --line-buffer run_test
