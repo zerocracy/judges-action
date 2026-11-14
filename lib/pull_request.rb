@@ -8,7 +8,7 @@ require 'fbe/octo'
 require_relative 'humans'
 require_relative 'jp'
 
-# @todo #2352:30min Forbidden is still swallowed as zero for reactions, resolved threads, runs and reviews
+# @todo #2352:30min Forbidden is still swallowed as zero for reactions, runs and reviews
 
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
@@ -87,17 +87,18 @@ def Jp.comments_info(pr, repo: nil)
         else
           0
         end
-      rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
+      rescue Fbe::Error, GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated,
+        Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.info("Resolved conversations not available for #{repo}##{pr[:number]}: #{e.message}")
-        0
+        nil
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        0
+        nil
       end
-  }
+  }.compact
 end
 
 Jp::APPRECIATIONS = %w[+1 heart hooray laugh rocket].freeze
