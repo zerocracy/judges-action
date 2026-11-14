@@ -68,6 +68,97 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def issuesfact(since, upper)
+    fact = Object.new
+    fact.define_singleton_method(:since) { since }
+    fact.define_singleton_method(:when) { upper }
+    fact
+  end
+
+  def countissues(fact, graph, repos)
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => repos.join(',') })
+    unmask = proc { |&block| repos.each { |repo| block.call(repo) } }
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_issues_created.rb'))
+        total_issues_created(fact)
+      end
+    end
+  end
+
+  def test_total_issues_created_is_bounded_by_the_fact_window
+    graph = Fbe::Graph::Fake.new
+    windows = []
+    graph.define_singleton_method(:total_issues_created) do |owner, name, since|
+      windows.push([owner, name, since])
+      { 'issues' => 3, 'pulls' => 2 }
+    end
+    since = Time.parse('2025-09-30 00:00:00 +03:00')
+    upper = Time.parse('2025-10-06 21:00:00 UTC')
+    assert_equal(
+      { total_issues_created: 3, total_pulls_submitted: 2 },
+      countissues(issuesfact(since, upper), graph, %w[foo/foo]),
+      'issues created after fact.when must not be counted in a closed slice'
+    )
+    assert_equal(
+      [['foo', 'foo', since..upper]], windows,
+      'the probe must carry fact.since..fact.when, not an open-ended window'
+    )
+  end
+
+  def test_total_issues_created_patch_renders_the_half_open_window
+    require_relative('../../lib/patches/total_issues_created')
+    graph = Fbe::Graph.allocate
+    queries = []
+    graph.define_singleton_method(:query) do |qry|
+      queries.push(qry)
+      { 'issues' => { 'issueCount' => 3 }, 'pulls' => { 'issueCount' => 2 } }
+    end
+    since = Time.parse('2025-09-30 00:00:00 +03:00')
+    upper = Time.parse('2025-10-06 21:00:00 UTC')
+    assert_equal({ 'issues' => 3, 'pulls' => 2 }, graph.total_issues_created('foo', 'foo', since..upper))
+    assert_equal(1, queries.size, 'both search terms must share one GraphQL request')
+    [
+      'type:issue created:2025-09-29T21:00:01Z..2025-10-06T21:00:00Z',
+      'type:pr created:2025-09-29T21:00:01Z..2025-10-06T21:00:00Z'
+    ].each do |term|
+      assert_includes(
+        queries.first, term,
+        'the window must be UTC and half-open: an issue created exactly at fact.since ' \
+        'belongs to the previous slice, one created exactly at fact.when belongs here'
+      )
+    end
+  end
+
+  def test_total_issues_created_keeps_counts_when_search_answers_nothing
+    graph = Fbe::Graph.allocate
+    graph.define_singleton_method(:query) { |_qry| {} }
+    fact = issuesfact(Time.parse('2025-10-01 00:00:00 UTC'), Time.parse('2025-10-08 00:00:00 UTC'))
+    assert_equal(
+      { total_issues_created: 0, total_pulls_submitted: 0 },
+      countissues(fact, graph, %w[foo/foo]),
+      'an empty search answer must be counted as zero, not crash on nil arithmetic'
+    )
+  end
+
+  def test_total_issues_created_skips_graph_failures
+    graph = Fbe::Graph::Fake.new
+    counts = graph.method(:total_issues_created)
+    graph.define_singleton_method(:total_issues_created) do |owner, name, since|
+      raise(Net::OpenTimeout, 'timeout') if "#{owner}/#{name}" == 'foo/bad'
+      counts.call(owner, name, since)
+    end
+    fact = issuesfact(Time.parse('2025-10-01 00:00:00 UTC'), Time.parse('2025-10-08 00:00:00 UTC'))
+    assert_equal(
+      { total_issues_created: 17, total_pulls_submitted: 8 },
+      countissues(fact, graph, %w[foo/bad foo/good]),
+      'a failed repo is skipped instead of zeroing or crashing the count'
+    )
+  end
+
   def test_counts_commits
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
