@@ -54,17 +54,17 @@ module Fbe
       repos.reject! do |repo|
         octo.repository(repo)[:archived]
       rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} is absent, dropping it: #{e.message}")
+        loog.info("Repository #{repo} is absent, dropping it: #{e.message}")
         true
       rescue Octokit::Forbidden => e
-        $loog.warn(
+        loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         false
       rescue Octokit::ServerError, Octokit::Unauthorized,
         Faraday::ConnectionFailed, Faraday::TimeoutError => e
-        $loog.warn(
+        loog.warn(
           "[#{$judge}] Cannot tell whether #{repo} is archived, assuming it is not " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
