@@ -43,6 +43,9 @@ Fbe.consider(
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+        next
       end
     event =
       begin
@@ -58,6 +61,9 @@ Fbe.consider(
           "[#{$judge}] Access forbidden to issue events for issue ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
         next
       end
     next if event.nil?
