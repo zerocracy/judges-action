@@ -111,6 +111,48 @@ class TestQosSearch < Jp::Test
     assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
   end
 
+  def test_latch_lifts_after_the_search_window
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 0, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '1000' }
+    )
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert(Jp.instance_variable_get(:@offquota)[$judge], 'search quota latch is not set')
+    Jp.instance_variable_set(:@offquotatime, { $judge => Time.now - Jp::SEARCH_WINDOW_SECONDS - 1 })
+    $global[:octo] = nil
+    rate_limit_up
+    searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
+    assert_equal(1, Jp.qosearch('repo:foo/foo type:pr')[:total_count])
+  end
+
+  def test_latch_blocks_a_probe_within_the_window
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { resources: { search: { remaining: 0, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '1000' }
+    )
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert(Jp.instance_variable_get(:@offquota)[$judge], 'search quota latch is not set')
+    $global[:octo] = nil
+    rate_limit_up
+    searchstub('repo:foo/foo type:pr', body: { total_count: 1, items: [{ number: 2 }] })
+    assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
+    assert_requested(:get, 'https://api.github.com/rate_limit', times: 1)
+    assert_not_requested(:get, /type:pr/)
+  end
+
+  def test_missing_search_quota_latches_once
+    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
+      body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'X-RateLimit-Remaining' => '1000' }
+    )
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert(Jp.instance_variable_get(:@offquota)[$judge], 'missing search quota latch is not set')
+    $global[:octo] = nil
+    assert_nil(Jp.qosearch('repo:foo/foo type:pr'))
+    assert_requested(:get, 'https://api.github.com/rate_limit', times: 1)
+    assert_not_requested(:get, %r{search/issues})
+  end
+
   def test_qoreset_clears_the_latch
     ratelimits(0)
     searchstub('repo:foo/foo type:issue', body: { total_count: 0, items: [] }, remaining: 0)
