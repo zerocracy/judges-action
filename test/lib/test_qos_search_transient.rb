@@ -15,7 +15,7 @@ class TestQosSearchTransient < Jp::Test
     $global = {}
     $loog = Loog::NULL
     $judge = 'test-qos-search-transient'
-    Jp.qoreset
+    qoclean
   end
 
   def test_answers_nil_on_a_connection_failure
