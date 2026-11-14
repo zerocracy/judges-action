@@ -13,24 +13,26 @@ def total_issues_created(fact)
   pulls = 0
   Fbe.unmask_repos do |repo|
     owner, name = repo.split('/')
-    json =
-      begin
-        Fbe.github_graph.total_issues_created(owner, name, fact.since)
-      rescue GraphQL::Client::Error, Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Issues count not available for #{repo}: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to issues count for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
-      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
-        $loog.warn("[#{$judge}] Network error counting issues for #{repo}: #{e.message}")
-        next
-      end
-    issues += json['issues']
-    pulls += json['pulls']
+    begin
+      json = Fbe.github_graph.total_issues_created(owner, name, fact.since)
+      issues += json['issues']
+      pulls += json['pulls']
+    rescue Octokit::NotFound, Octokit::Deprecated => e
+      $loog.info("Issues count not available for #{repo}: #{e.message}")
+    rescue Octokit::Forbidden => e
+      $loog.warn(
+        "[#{$judge}] Access forbidden to issues for #{repo}, skipping total_issues_created " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      return {}
+    rescue GraphQL::Client::Error,
+      Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
+      $loog.warn(
+        "[#{$judge}] Can't count issues for #{repo}, skipping total_issues_created " \
+        "(transient, will retry next cycle): #{e.class}: #{e.message}"
+      )
+      return {}
+    end
   end
   {
     total_issues_created: issues,
