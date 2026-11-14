@@ -42,4 +42,14 @@ class TestToday < Minitest::Test
   ensure
     ENV.delete('TODAY')
   end
+
+  def test_normalizes_an_explicit_offset_to_utc
+    ENV['TODAY'] = '2026-10-27T00:30:00+03:00'
+    today = Jp.today
+    assert_predicate(today, :utc?)
+    assert_equal('2026-10-26T21:30:00Z', today.iso8601)
+    assert_equal(Integer(Time.utc(2026, 10, 26, 21, 30)), Integer(today))
+  ensure
+    ENV.delete('TODAY')
+  end
 end
