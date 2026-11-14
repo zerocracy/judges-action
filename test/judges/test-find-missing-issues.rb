@@ -122,4 +122,24 @@ class TestFindMissingIssues < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_dont_record_pull_when_its_lookup_is_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45',
+      body: {
+        number: 45, pull_request: { url: 'https://api.github.com/repos/foo/foo/pulls/45' },
+        user: { id: 44, login: 'user' }, created_at: '2025-09-27 06:03:16 UTC'
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/45', status: 403, body: { message: 'Forbidden' })
+    stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 46, where: 'github')
+    load_it('find-missing-issues', fb)
+    assert(fb.none?(issue: 45), 'a pull that could not be read was recorded as opened')
+  end
 end

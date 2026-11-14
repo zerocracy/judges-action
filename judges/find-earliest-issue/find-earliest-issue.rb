@@ -68,13 +68,13 @@ Fbe.iterate do
           rescue Octokit::NotFound, Octokit::Deprecated => e
             $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
             Jp.issue_was_lost(f.where, f.repository, f.issue)
-            next i
+            throw(:rollback)
           rescue Octokit::Forbidden => e
             $loog.warn(
               "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
               "(transient, will retry next cycle): #{e.class}: #{e.message}"
             )
-            next i
+            throw(:rollback)
           end
         if ref
           f.branch = ref
