@@ -9,11 +9,12 @@ require_relative 'jp'
 
 def Jp.stamp(review)
   moment = review[:submitted_at]
+  return if moment.nil?
   moment.is_a?(Time) ? moment : Time.parse(moment.to_s)
 end
 
 def Jp.approval(reviews, closed = nil, author = nil)
-  picked = reviews.nil? ? [] : reviews
+  picked = (reviews.nil? ? [] : reviews).reject { |r| Jp.stamp(r).nil? }
   picked = Jp.human_comments(picked)
   picked = picked.reject { |review| review.dig(:user, :id) == author } if author
   unless closed.nil?
