@@ -20,6 +20,9 @@ def total_contributors(_fact)
       rescue Octokit::TooManyRequests => e
         $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
         break
+      rescue Octokit::ServerError => e
+        $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
@@ -27,6 +30,7 @@ def total_contributors(_fact)
         )
         next
       end
+    return {} if json == :retry
     next if json[:size].nil? || json[:size].zero?
     list =
       begin
@@ -37,6 +41,9 @@ def total_contributors(_fact)
       rescue Octokit::TooManyRequests => e
         $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
         break
+      rescue Octokit::ServerError => e
+        $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to contributors for #{repo} " \
@@ -44,6 +51,7 @@ def total_contributors(_fact)
         )
         next
       end
+    return {} if list == :retry
     next unless list.is_a?(Array)
     measured = true
     list.each do |contributor|

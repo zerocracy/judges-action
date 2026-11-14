@@ -19,6 +19,9 @@ def total_releases(_fact)
       rescue Octokit::TooManyRequests => e
         $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
         break
+      rescue Octokit::ServerError => e
+        $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to releases for #{repo} " \
@@ -26,6 +29,7 @@ def total_releases(_fact)
         )
         next
       end
+    return {} if releases == :retry
     next unless releases.is_a?(Array)
     releases.reject { |release| release[:draft] }.each do |_|
       total += 1
