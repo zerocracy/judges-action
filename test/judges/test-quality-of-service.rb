@@ -155,7 +155,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-07-11T21:00:00Z..2024-08-12T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-07-11T21:00:00Z..2024-08-12T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -376,7 +376,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -486,7 +486,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -930,7 +930,7 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1022,7 +1022,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1185,7 +1185,7 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/20/comments?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1516,7 +1516,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1641,7 +1641,7 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/16/comments?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -1706,7 +1706,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: {
         total_count: 4, incomplete_results: false,
         items: [
@@ -1848,7 +1848,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [
@@ -1934,7 +1934,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: {
         total_count: 1, incomplete_results: false,
         items: [
@@ -2015,7 +2015,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: {
         total_count: 2, incomplete_results: false,
         items: [
@@ -2108,7 +2108,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: {
         total_count: 2, incomplete_results: false,
         items: [
@@ -2193,7 +2193,7 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/pulls/12/comments?per_page=100', body: [])
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -2375,7 +2375,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -2459,7 +2459,7 @@ class TestQualityOfService < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-30T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2024-08-02T21:00:00Z..2024-08-30T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     stub_github(
@@ -2638,7 +2638,7 @@ class TestQualityOfService < Jp::Test
     )
     stub_github(
       'https://api.github.com/search/issues?per_page=100&' \
-      'q=repo:foo/foo%20type:issue%20created:2025-08-21T21:00:00Z..2025-08-28T21:00:00Z',
+      'q=repo:foo/foo%20type:issue%20created:2025-08-21T21:00:00Z..2025-08-28T20:59:59Z',
       body: { total_count: 0, incomplete_results: false, items: [] }
     )
     fb = Factbase.new
@@ -2701,7 +2701,7 @@ class TestQualityOfService < Jp::Test
       )
       stub_github(
         'https://api.github.com/search/issues?per_page=100&' \
-        "q=repo:foo/foo%20type:issue%20created:#{period}",
+        "q=repo:foo/foo%20type:issue%20created:#{period.sub(/15:00:00Z\z/, '14:59:59Z')}",
         body: { total_count: 0, incomplete_results: false, items: [] }
       )
       stub_github(
@@ -2795,6 +2795,42 @@ class TestQualityOfService < Jp::Test
         assert_equal([1, 2], metrics[:some_pull_files_size])
       end
     end
+  end
+
+  def test_some_triage_time_searches_each_second_in_one_window_only
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_triage_time.rb'))
+    Jp.qoreset
+    queries = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:repo_id_by_name) { |*| 42 }
+    octo.define_singleton_method(:rate_limit) { Struct.new(:remaining).new(30) }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&block| block.call(octo) }
+    octo.define_singleton_method(:search_issues) do |q, **|
+      queries << q
+      { total_count: 0, incomplete_results: false, items: [] }
+    end
+    window = Struct.new(:since, :when)
+    Fbe.stub(:fb, Factbase.new) do
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+          some_triage_time(window.new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z')))
+          some_triage_time(window.new(Time.parse('2024-08-09T21:00:00Z'), Time.parse('2024-08-16T21:00:00Z')))
+          some_triage_time(window.new(Time.parse('2024-08-16T21:00:00Z'), Time.parse('2024-08-23T21:00:00.700Z')))
+          some_triage_time(window.new(Time.parse('2024-08-23T21:00:00.300Z'), Time.parse('2024-08-30T21:00:00Z')))
+        end
+      end
+    end
+    assert_equal(
+      [
+        'repo:foo/foo type:issue created:2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
+        'repo:foo/foo type:issue created:2024-08-09T21:00:00Z..2024-08-16T20:59:59Z',
+        'repo:foo/foo type:issue created:2024-08-16T21:00:00Z..2024-08-23T21:00:00Z',
+        'repo:foo/foo type:issue created:2024-08-23T21:00:01Z..2024-08-30T20:59:59Z'
+      ],
+      queries
+    )
   end
 
   private

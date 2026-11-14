@@ -12,9 +12,11 @@ require_relative '../../lib/qos_search'
 def some_triage_time(fact)
   threshold = Fbe.pmp.quality.qos_min_triage_seconds.value || 60
   times = []
+  since = fact.since.ceil.utc.iso8601
+  upper = (fact.when.ceil - 1).utc.iso8601
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:issue created:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    found = Jp.qosearch("repo:#{repo} type:issue created:#{since}..#{upper}")
     return {} if found.nil?
     rid =
       begin
