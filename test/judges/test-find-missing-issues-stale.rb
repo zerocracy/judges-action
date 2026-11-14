@@ -10,6 +10,7 @@ class TestFindMissingIssuesStale < Jp::Test
   using SmartFactbase
 
   def test_marks_every_fact_of_a_gone_repository_once
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo', archived: false })
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
