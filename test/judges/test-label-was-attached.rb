@@ -67,6 +67,60 @@ class TestLabelWasAttached < Jp::Test
     )
   end
 
+  def test_skips_issue_after_network_error_on_timeline_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100')
+      .to_raise(Net::OpenTimeout).times(5)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45/timeline?per_page=100',
+      body: [
+        {
+          id: 195,
+          actor: { id: 421, login: 'user' },
+          event: 'labeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
+    load_it('label-was-attached', fb)
+    assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 45, where: 'github', label: 'bug', who: 421))
+    assert_nil(fb.query('(eq issue 44)').each.first['stale'])
+  end
+
+  def test_skips_issue_after_network_error_resolving_repository
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 41, full_name: 'foo/foo' })
+    stub_request(:get, 'https://api.github.com/repositories/42').to_raise(Net::OpenTimeout).times(5)
+    stub_github('https://api.github.com/repositories/43', body: { id: 43, full_name: 'bar/bar' })
+    stub_github('https://api.github.com/repos/bar/bar', body: { id: 43, full_name: 'bar/bar' })
+    stub_github(
+      'https://api.github.com/repos/bar/bar/issues/45/timeline?per_page=100',
+      body: [
+        {
+          id: 195,
+          actor: { id: 421, login: 'user' },
+          event: 'labeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 2, what: 'issue-was-opened', repository: 43, issue: 45, where: 'github')
+    load_it('label-was-attached', fb, Judges::Options.new({ 'repositories' => 'foo/foo,bar/bar' }))
+    assert(fb.one?(what: 'label-was-attached', repository: 43, issue: 45, where: 'github', label: 'bug', who: 421))
+    assert_nil(fb.query('(eq issue 44)').each.first['stale'])
+  end
+
   def test_attaches_tracked_labels_ignores_others
     WebMock.disable_net_connect!
     rate_limit_up
