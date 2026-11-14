@@ -126,7 +126,7 @@ class TestQosSearch < Jp::Test
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
     Jp.instance_variable_set(:@scount, { $judge => Jp::SEARCH_WINDOW_BUDGET })
-    Jp.instance_variable_set(:@swstart, { $judge => Time.now })
+    Jp.instance_variable_set(:@swstart, { $judge => Jp.qonow })
     found = Jp.stub(:sleep, nil) { Jp.qosearch('repo:foo/foo type:issue') }
     refute_nil(found, 'search is not dispatched once the window budget is spent')
   end
@@ -135,10 +135,22 @@ class TestQosSearch < Jp::Test
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
     Jp.instance_variable_set(:@scount, { $judge => Jp::SEARCH_WINDOW_BUDGET })
-    Jp.instance_variable_set(:@swstart, { $judge => Time.now - Jp::SEARCH_WINDOW_SECONDS + 10 })
+    Jp.instance_variable_set(:@swstart, { $judge => Jp.qonow - Jp::SEARCH_WINDOW_SECONDS + 10 })
     naps = []
     Jp.stub(:sleep, ->(pause) { naps << pause }) { Jp.qosearch('repo:foo/foo type:issue') }
     assert_in_delta(10, naps.sum, 1, 'slept time is not the rest of the window')
+  end
+
+  def test_sleeps_no_longer_than_the_window_when_the_wall_clock_goes_back
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 1 }] })
+    Jp.instance_variable_set(:@scount, { $judge => Jp::SEARCH_WINDOW_BUDGET })
+    Jp.instance_variable_set(:@swstart, { $judge => Jp.qonow - Jp::SEARCH_WINDOW_SECONDS + 10 })
+    naps = []
+    Time.stub(:now, Time.now - 300) do
+      Jp.stub(:sleep, ->(pause) { naps << pause }) { Jp.qosearch('repo:foo/foo type:issue') }
+    end
+    assert_in_delta(10, naps.sum, 1, 'a clock moved back made the search sleep longer than its window')
   end
 
   def test_opens_fresh_budget_after_sleeping_out_window
@@ -159,7 +171,7 @@ class TestQosSearch < Jp::Test
     Jp::SEARCH_WINDOW_BUDGET.times do
       refute_nil(Jp.qosearch('repo:foo/foo type:issue'))
     end
-    Jp.instance_variable_set(:@swstart, { $judge => Time.now - Jp::SEARCH_WINDOW_SECONDS - 1 })
+    Jp.instance_variable_set(:@swstart, { $judge => Jp.qonow - Jp::SEARCH_WINDOW_SECONDS - 1 })
     $global[:octo] = nil
     rate_limit_up
     searchstub('repo:foo/foo type:issue', body: { total_count: 1, items: [{ number: 2 }] })
