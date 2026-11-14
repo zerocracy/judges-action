@@ -96,7 +96,8 @@ The following action inputs are set via `with:` in your workflow YAML
 * `fail-fast` (optional) stops after the first error if set to `true`
 * `dry-run` (optional) skips all judges and makes no changes if set to `true`
 * `timeout` (optional) is how many minutes each judge can spend
-* `lifetime` (optional) is how many minutes the entire update can take
+* `lifetime` (optional) is how many minutes the entire update can take;
+  it must be at least 10 percent bigger than `timeout`
 * `cycles` (optional) is a number of update cycles to run, default is `2`
 * `sqlite-cache` (optional) is a path of SQLite database file with HTTP cache
 * `bots` (optional) is a comma-separated list of GitHub user logins to mark as bots
