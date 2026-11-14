@@ -31,7 +31,11 @@ class TestQualityOfService < Jp::Test
     )
     stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=100').to_return(
       status: 200,
-      body: { workflow_runs: [{ id: 1, run_started_at: Time.now - rand(10_000) }] }.to_json,
+      body: {
+        workflow_runs: [
+          { id: 1, run_started_at: Time.now - rand(10_000), status: 'completed', conclusion: 'success' }
+        ]
+      }.to_json,
       headers: {
         'Content-Type': 'application/json',
         'X-RateLimit-Remaining' => '999'
@@ -162,6 +166,11 @@ class TestQualityOfService < Jp::Test
     Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
     end
+    f = fb.query('(eq what "quality-of-service")').each.first
+    refute_nil(f, 'the judge must write a fact')
+    assert_nil(f['some_build_duration'], 'a run with no duration must not be counted')
+    assert_nil(f['some_build_success_rate'], 'a run with no duration must not be counted')
+    assert_nil(f['some_build_mttr'], 'a run with no duration must not be counted')
   end
 
   def test_some_release_hocs_size_and_commits_size
