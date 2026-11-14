@@ -175,7 +175,7 @@ bundle exec rake -- --live
 In order to run a single test, try this:
 
 ```bash
-bundle exec ruby test/judges/test-dimensions-of-terrain.rb -n test_total_repositories
+bundle exec ruby test/judges/test-dimensions-of-terrain.rb -n test_total_repositories -- --no-cov
 ```
 
 [factbase]: https://github.com/yegor256/factbase
