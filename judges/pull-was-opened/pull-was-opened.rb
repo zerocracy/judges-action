@@ -12,6 +12,11 @@ require 'tago'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/who_of'
 
+transient = [
+  Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed,
+  Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT
+].freeze
+
 Fbe.conclude do
   on "(and
     (eq where 'github')
@@ -50,6 +55,12 @@ Fbe.conclude do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         throw(:rollback)
+      rescue *transient => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching repository #{f.repository} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
       end
     json =
       begin
@@ -62,6 +73,12 @@ Fbe.conclude do
         $loog.warn(
           "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
+      rescue *transient => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
         )
         throw(:rollback)
       end
@@ -79,6 +96,12 @@ Fbe.conclude do
         $loog.warn(
           "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        throw(:rollback)
+      rescue *transient => e
+        $loog.warn(
+          "[#{$judge}] Transient error fetching pull ##{f.issue} in #{repo} " \
+          "(will retry next cycle): #{e.class}: #{e.message}"
         )
         throw(:rollback)
       end
