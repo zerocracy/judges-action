@@ -23,6 +23,10 @@ class TestGithubEventsReleaseAuthor < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/contributors?per_page=100', body: [])
     stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'aa1122' }])
     stub_github(
+      'https://api.github.com/repos/foo/foo/commits/aa1122',
+      body: { sha: 'aa1122', files: [{ changes: 3 }] }
+    )
+    stub_github(
       'https://api.github.com/repos/foo/foo/compare/aa1122...1.0.0?per_page=100',
       body: { total_commits: 1, commits: [{ sha: 'aa1122' }], files: [] }
     )
