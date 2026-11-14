@@ -42,7 +42,7 @@ GEM
       loog (~> 0.6)
       tago (~> 0.1)
     ellipsized (0.3.0)
-    ethon (0.19.1)
+    ethon (0.19.2)
       ffi (>= 1.15.0)
       logger
     factbase (0.19.16)
@@ -104,7 +104,7 @@ GEM
     filesize (0.2.0)
     gli (2.22.2)
       ostruct
-    graphql (2.6.14)
+    graphql (2.6.15)
       base64
       fiber-storage
       logger
@@ -193,7 +193,14 @@ GEM
     parser (3.3.13.0)
       ast (~> 2.4.1)
       racc
-    prism (1.9.0)
+    prism (2.1.0-aarch64-linux-gnu)
+    prism (2.1.0-aarch64-linux-musl)
+    prism (2.1.0-arm-linux-gnu)
+    prism (2.1.0-arm-linux-musl)
+    prism (2.1.0-arm64-darwin)
+    prism (2.1.0-x86_64-darwin)
+    prism (2.1.0-x86_64-linux-gnu)
+    prism (2.1.0-x86_64-linux-musl)
     public_suffix (7.0.5)
     qbash (0.8.4)
       backtrace (> 0)
@@ -217,9 +224,9 @@ GEM
       rubocop-ast (>= 1.49.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.50.0)
+    rubocop-ast (1.51.0)
       parser (>= 3.3.7.2)
-      prism (~> 1.7)
+      prism (>= 1.7)
     rubocop-elegant (0.8.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.75)
