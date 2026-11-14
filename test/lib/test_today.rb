@@ -26,6 +26,16 @@ class TestToday < Minitest::Test
     ENV.delete('TODAY')
   end
 
+  def test_returns_now_when_env_var_is_whitespace_only
+    ENV['TODAY'] = '   '
+    now = Time.now
+    Time.stub(:now, now) do
+      assert_equal(Integer(now.utc), Integer(Jp.today))
+    end
+  ensure
+    ENV.delete('TODAY')
+  end
+
   def test_reads_a_zoneless_date_in_utc
     ENV['TODAY'] = '2024-06-15'
     old = ENV.fetch('TZ', nil)
