@@ -10,7 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_releases_published(fact)
   releases = 0
-  Fbe.unmask_repos do |repo|
+  return {} unless Fbe.unmask_repos do |repo|
     owner, name = repo.split('/')
     begin
       releases += Fbe.github_graph.total_releases_published(owner, name, fact.since)['releases']
