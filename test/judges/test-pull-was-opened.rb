@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestPullWasOpened < Jp::Test
@@ -98,6 +99,48 @@ class TestPullWasOpened < Jp::Test
     assert_empty(
       fb.query("(eq what 'pull-was-opened')").each.to_a,
       'A vanished repository must produce no facts and must not abort the judge'
+    )
+  end
+
+  def test_copies_branch_from_pull_request
+    seed = Random.new_seed
+    branch = "фича-#{Random.new(seed).rand(1_000_000)}/Ω"
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/issues/44' => {
+        number: 44, user: { id: 421, login: 'user' }, created_at: '2025-09-30T15:35:30Z'
+      },
+      'GET /repos/foo/foo/pulls/44' => { number: 44, head: { ref: branch } },
+      'GET /user/421' => { id: 421, login: 'user' }
+    ).run do
+      load_it('pull-was-opened', fb)
+    end
+    assert_equal(
+      [branch], fb.pick(what: 'pull-was-opened', issue: 44)['branch'],
+      "the branch of the opened pull is not the head ref of the pull request, seed #{seed}"
+    )
+  end
+
+  def test_marks_fact_stale_when_pull_has_no_head_ref
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-reviewed', repository: 42, issue: 44, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/issues/44' => {
+        number: 44, user: { id: 421, login: 'user' }, created_at: '2025-09-30T15:35:30Z'
+      },
+      'GET /repos/foo/foo/pulls/44' => { number: 44, head: {} },
+      'GET /user/421' => { id: 421, login: 'user' }
+    ).run do
+      load_it('pull-was-opened', fb)
+    end
+    assert_equal(
+      ['branch'], fb.pick(what: 'pull-was-opened', issue: 44)['stale'],
+      'the opened pull without a head ref is not marked stale by branch, so it would be retried forever'
     )
   end
 end
