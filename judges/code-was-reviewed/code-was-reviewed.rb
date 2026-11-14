@@ -24,13 +24,7 @@ Fbe.consider(
     (absent tombstone)
     (absent done)
     (eq where 'github')
-    (unique where repository issue)
-    (empty
-      (and
-        (eq issue $issue)
-        (eq repository $repository)
-        (eq where 'github')
-        (eq what '#{$judge}'))))"
+    (unique where repository issue))"
 ) do |f|
   repo =
     begin
