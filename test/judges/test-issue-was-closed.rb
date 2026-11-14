@@ -267,4 +267,26 @@ class TestIssueWasClosed < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_goes_on_after_a_server_error_on_issue_lookup
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/44', status: 502, body: { message: 'Bad Gateway' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45',
+      body: {
+        number: 45, title: 'some title 45', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/45/timeline?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert(fb.one?(what: 'issue-was-closed', issue: 45), 'a 502 on one issue must not stop the judge')
+  end
 end
