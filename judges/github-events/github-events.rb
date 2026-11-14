@@ -333,6 +333,8 @@ Fbe.iterate do
       case json[:payload][:action]
       when 'closed'
         fact.what = 'issue-was-closed'
+        reason = json.dig(:payload, :issue, :state_reason)
+        fact.reason = reason unless reason.to_s.empty?
         fact.details = "The issue #{Fbe.issue(fact)} has been closed by #{Fbe.who(fact)}."
         $loog.debug("Issue #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       when 'opened'
