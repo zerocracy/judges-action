@@ -2797,6 +2797,27 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_loads_with_undeclared_quality_properties
+    reads = []
+    pmp = Object.new
+    pmp.define_singleton_method(:quality) { pmp }
+    pmp.define_singleton_method(:qos_days) { Struct.new(:value).new(7) }
+    %i[qos_pause_seconds qos_max_per_fact].each do |name|
+      pmp.define_singleton_method(name) do
+        reads << name
+        raise(Fbe::Error, "There is no '#{name}' property in the 'quality' area")
+      end
+    end
+    Fbe.stub(:pmp, pmp) do
+      Fbe.stub(:consider, proc {}) do
+        Jp.stub(:cover_qo, proc {}) do
+          load_it('quality-of-service', Factbase.new)
+        end
+      end
+    end
+    assert_equal(%i[qos_pause_seconds qos_max_per_fact], reads)
+  end
+
   private
 
   def stub_workflow_runs(workflow_runs)

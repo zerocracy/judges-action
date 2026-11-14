@@ -91,4 +91,20 @@ class TestSomeTriageTime < Jp::Test
       end
     assert_equal({ some_triage_time: [] }, result)
   end
+
+  def test_uses_default_threshold_when_fbe_raises
+    fact = Factbase.new.insert
+    pmp = Object.new
+    pmp.define_singleton_method(:quality) { pmp }
+    pmp.define_singleton_method(:qos_min_triage_seconds) do
+      raise(Fbe::Error, "There is no 'qos_min_triage_seconds' property in the 'quality' area")
+    end
+    result =
+      Fbe.stub(:pmp, pmp) do
+        Fbe.stub(:unmask_repos, proc { |&b| }) do
+          some_triage_time(fact)
+        end
+      end
+    assert_equal({ some_triage_time: [] }, result)
+  end
 end
