@@ -12,9 +12,10 @@ unless Coverage.running? || ARGV.include?('--no-cov')
       SimpleCov::Formatter::CoberturaFormatter
     ]
   )
-  SimpleCov.minimum_coverage(55)
+  SimpleCov.minimum_coverage(80)
   SimpleCov.minimum_coverage_by_file(10)
   SimpleCov.start do
+    enable_coverage :eval
     add_filter 'vendor/'
     add_filter 'target/'
     add_filter 'test/smart_factbase.rb'
@@ -37,6 +38,16 @@ require_relative '../lib/qos_search'
 require_relative 'smart_factbase'
 
 class Jp::Test < Minitest::Test
+  JUDGE_ISEQS = {} # rubocop:disable Style/MutableConstant
+
+  def load_judge(path)
+    path = File.expand_path(path)
+    return if !JUDGE_ISEQS.key?(path) && $LOADED_FEATURES.include?(path)
+    iseq = (JUDGE_ISEQS[path] ||= RubyVM::InstructionSequence.compile_file(path))
+    $LOADED_FEATURES.push(path) unless $LOADED_FEATURES.include?(path)
+    iseq.eval
+  end
+
   def rate_limit_up
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       body: { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 } }.to_json,
@@ -54,7 +65,7 @@ class Jp::Test < Minitest::Test
     $loog = loog || (ENV['RAKE_RUN'] ? Loog::NULL : Loog::VERBOSE)
     $epoch = Time.now
     $kickoff = Time.now
-    load(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
+    load_judge(File.join(__dir__, "../judges/#{judge}/#{judge}.rb"))
   end
 
   def stub_github(

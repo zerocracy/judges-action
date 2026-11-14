@@ -154,7 +154,7 @@ class TestDimensionsOfTerrain < Jp::Test
     $loog = Loog::NULL
     $epoch = Time.now
     $kickoff = Time.now
-    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_repositories.rb'))
+    load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_repositories.rb'))
     total_repositories($fb.insert)
     assert_requested(:get, 'https://api.github.com/repos/foo/foo', times: 1)
   end
@@ -385,7 +385,7 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end.new
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
       assert_equal({ total_issues: 7, total_pulls: 5 }, total_issues(nil))
     end
   end
@@ -408,7 +408,7 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end.new
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
       assert_equal({ total_issues: 7, total_pulls: 5 }, total_issues(nil))
     end
   end
@@ -429,7 +429,7 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end.new
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
       assert_raises(unrescued) { total_issues(nil) }
     end
   end
@@ -451,7 +451,7 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end.new
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
       assert_raises(Octokit::Unauthorized) { total_issues(nil) }
     end
   end
@@ -621,7 +621,7 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end.new
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+      load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
       assert_equal({}, total_commits(nil))
     end
   end
@@ -646,7 +646,7 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end.new
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+      load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
       assert_equal({}, total_commits(nil))
     end
   end
@@ -677,7 +677,7 @@ class TestDimensionsOfTerrain < Jp::Test
       end
     end.new
     Fbe.stub(:github_graph, graph) do
-      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
+      load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
       assert_equal(
         { total_commits: count }, total_commits(nil),
         "commits of the reachable repository are not kept, seed: #{seed}"
@@ -1050,7 +1050,7 @@ class TestDimensionsOfTerrain < Jp::Test
   end
 
   def test_excludes_commits_after_the_measurement_time
-    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
     fact = Factbase.new.insert
     fact.when = Time.iso8601('2026-10-02T12:00:00Z')
     inside = { author: { id: 101 }, commit: { author: { date: '2026-09-20T12:00:00Z' } } }
@@ -1342,7 +1342,7 @@ class TestDimensionsOfTerrain < Jp::Test
     $local = {}
     $loog = Loog::NULL
     $options = Judges::Options.new({ 'repositories' => 'foo/alpha,foo/beta' })
-    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_releases.rb'))
+    load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_releases.rb'))
     total_releases(nil)
     assert_equal(
       1, stubs.count { |stub| WebMock::RequestRegistry.instance.times_executed(stub.request_pattern).positive? },
@@ -1396,7 +1396,7 @@ class TestDimensionsOfTerrain < Jp::Test
       'https://api.github.com/search/commits?per_page=100&q=repo:foo/foo%20author-date:%3E2024-08-30',
       status: 500, body: { message: 'Internal server error' }
     )
-    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
     Jp.qoreset
     Factbase.new.insert.then do |f|
       f.what = 'dimensions-of-terrain'
@@ -1431,7 +1431,7 @@ class TestDimensionsOfTerrain < Jp::Test
       'https://api.github.com/search/commits?per_page=100&q=repo:foo/second%20author-date:%3E2024-08-30',
       status: 500, body: { message: 'Internal server error' }
     )
-    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
+    load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_active_contributors.rb'))
     Jp.qoreset
     Factbase.new.insert.then do |f|
       f.what = 'dimensions-of-terrain'

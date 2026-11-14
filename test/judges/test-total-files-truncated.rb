@@ -16,7 +16,7 @@ class TestTotalFilesTruncated < Jp::Test
     octo = Object.new
     octo.define_singleton_method(:repository) { |_repo| { size: 100, default_branch: 'master' } }
     octo.define_singleton_method(:tree) { |_repo, _branch, **| { truncated: true, tree: [] } }
-    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_files.rb'))
+    load_judge(File.join(__dir__, '../../judges/dimensions-of-terrain/total_files.rb'))
     result =
       Fbe.stub(:octo, octo) do
         Fbe.stub(:unmask_repos, proc { |&b| %w[foo/one foo/two].each { |r| b.call(r) } }) { total_files(nil) }
