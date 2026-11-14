@@ -26,4 +26,22 @@ class TestUnmaskReposAbsent < Jp::Test
       'a repository GitHub answers 404 for cannot be handed to the judges'
     )
   end
+
+  def test_drops_a_renamed_repository
+    rate_limit_up
+    stub_request(:get, 'https://api.github.com/repos/cqfn/eo').to_return(
+      status: 301,
+      headers: { 'Content-Type' => 'application/json', 'Location' => 'https://api.github.com/repositories/73056727' },
+      body: { message: 'Moved Permanently', url: 'https://api.github.com/repositories/73056727' }.to_json
+    )
+    stub_github('https://api.github.com/repos/foo/foo', body: { full_name: 'foo/foo', id: 42, archived: false })
+    $loog = Loog::Buffer.new
+    options = Judges::Options.new({ 'repositories' => 'cqfn/eo,foo/foo' })
+    assert_equal(
+      ['foo/foo'],
+      Fbe.unmask_repos(options:, global: {}, loog: $loog),
+      'a repository GitHub answers 301 for cannot be handed to the judges'
+    )
+    assert_includes($loog.to_s, 'Repository cqfn/eo has moved', $loog.to_s)
+  end
 end
