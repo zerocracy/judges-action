@@ -173,4 +173,32 @@ class TestIssueWasAssigned < Jp::Test
       'the second assignment of the same person must get its own fact'
     )
   end
+
+  def test_goes_on_after_a_server_error_on_issue_events
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      status: 502, body: { message: 'Bad Gateway' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45/events?per_page=100',
+      body: [
+        {
+          id: 560, event: 'assigned',
+          assignee: { id: 421, login: 'user1' }, assigner: { id: 422, login: 'user2' },
+          created_at: '2025-10-01 19:05:00 UTC'
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
+    load_it('issue-was-assigned', fb)
+    assert(fb.one?(what: 'issue-was-assigned', issue: 45, who: 421), 'a 502 on one issue must not stop the judge')
+  end
 end
