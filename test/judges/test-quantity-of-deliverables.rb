@@ -260,6 +260,29 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_total_releases_published_skips_metric_on_timeout
+    WebMock.disable_net_connect!
+    rate_limit_up
+    graph = Object.new
+    graph.define_singleton_method(:total_releases_published) do |owner, name, _since|
+      raise(Net::ReadTimeout, 'timeout') if "#{owner}/#{name}" == 'foo/bad'
+      { 'releases' => 3 }
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    unmask = proc { |&block| %w[foo/good foo/bad].each { |repo| block.call(repo) } }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_releases_published.rb'))
+        assert_empty(total_releases_published(fact), 'a failed count must leave the metric unset')
+      end
+    end
+  end
+
   def test_total_reviews_submitted
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
