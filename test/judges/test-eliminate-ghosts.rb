@@ -186,4 +186,19 @@ class TestEliminateGhosts < Jp::Test
     load_it('eliminate-ghosts', fb)
     assert_requested(stub, times: 1)
   end
+
+  def test_keeps_the_live_facts_of_a_forbidden_user_who_has_a_stale_one
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/user/29139614',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, who: 29_139_614, where: 'github')
+      .with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 45, who: 29_139_614, where: 'github', stale: 'who')
+    load_it('eliminate-ghosts', fb)
+    assert_nil(fb.query('(eq _id 1)').each.first['stale'], 'a forbidden user was taken for a ghost')
+  end
 end
