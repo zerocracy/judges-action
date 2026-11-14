@@ -120,7 +120,7 @@ Fbe.consider(
       next if n.nil?
       n.when = review[:submitted_at]
       n.hoc = (pr[:additions] || 0) + (pr[:deletions] || 0)
-      n.author = pr.dig(:user, :id)
+      n.author = author unless author.nil?
       count ||=
         begin
           Jp.human_comments(Fbe.octo.issue_comments(repo, f.issue)).count
@@ -173,9 +173,9 @@ Fbe.consider(
           next
         end
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
-      author =
+      creator =
         begin
-          Fbe.who(n, :author)
+          author.nil? ? 'an unknown author' : Fbe.who(n, :author)
         rescue Fbe::Error => e
           $loog.warn("Can't find the login of #{Fbe.issue(n)} author: #{e.message}")
           "user ##{n.author}"
@@ -189,7 +189,7 @@ Fbe.consider(
         end
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
-        "created by #{author} was reviewed by #{who} " \
+        "created by #{creator} was reviewed by #{who} " \
         "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
       $loog.info(
         [
