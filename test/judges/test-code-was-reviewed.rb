@@ -198,6 +198,42 @@ class TestCodeWasReviewed < Jp::Test
     )
   end
 
+  def test_does_not_mark_reviews_checked_before_they_are_recorded
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/101',
+      body: {
+        id: 101, number: 101, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 1, deletions: 1
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/101/reviews?per_page=100',
+      body: [
+        { id: 102_001, user: { id: 422, login: 'user2' }, submitted_at: Time.parse('2025-09-02 10:00:00 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/101/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/101/reviews/102001/comments?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 101, where: 'github')
+    assert_raises(StandardError) do
+      Fbe.stub(:who, proc { raise(StandardError, 'temporary reviewer lookup failure') }) do
+        load_it('code-was-reviewed', fb)
+      end
+    end
+    refute(
+      fb.one?(what: 'pull-was-closed', repository: 42, issue: 101, where: 'github', reviews: true),
+      'the pull cannot be marked as checked if processing a review failed'
+    )
+    refute(
+      fb.one?(what: 'code-was-reviewed', repository: 42, issue: 101),
+      'a review whose recording failed must remain eligible for retry'
+    )
+  end
+
   def test_marks_a_pull_without_reviews_as_checked
     WebMock.disable_net_connect!
     rate_limit_up
