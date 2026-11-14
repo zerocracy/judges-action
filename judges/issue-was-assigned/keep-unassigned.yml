@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
+# SPDX-License-Identifier: MIT
+---
+options:
+  testing: true
+  repositories: foo/bar
+input:
+  -
+    _id: 1
+    what: issue-was-opened
+    where: github
+    issue: 120
+    repository: 680
+    who: 4444
+    when: 2025-10-27T13:00:00Z
+  -
+    _id: 2
+    what: issue-was-assigned
+    where: github
+    issue: 120
+    repository: 680
+    who: 422
+    assigner: 411
+    when: 2025-10-27T14:00:00Z
+    unassigned: 2025-10-27T15:00:00Z
+expected:
+  - /fb[count(f[what='issue-was-assigned'])=1]
