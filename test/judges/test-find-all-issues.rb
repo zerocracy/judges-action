@@ -493,4 +493,44 @@ class TestFindAllIssues < Jp::Test
       'A vanished repository must add no issues and must not abort the judge'
     )
   end
+
+  def test_paginated_pulls_continue_after_server_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/44', body: { created_at: Time.parse('2025-05-04') })
+    stub_github(
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:pull%20created:%3E=2025-05-04&sort=created',
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          { number: 45, created_at: Time.parse('2025-05-04'), user: { id: 4242 } },
+          { number: 46, created_at: Time.parse('2025-05-05'), user: { id: 4242 } }
+        ]
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/45', status: 502, body: { message: 'Bad Gateway' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/46',
+      body: { number: 46, head: { ref: 'feature/branch-survivor' } }
+    )
+    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.issue = 44
+      f.repository = 991
+      f.what = 'pull-was-opened'
+      f.where = 'github'
+    end
+    load_it('find-all-issues', fb)
+    survivor = fb.query("(and (eq issue 46) (eq what 'pull-was-opened'))").each.first
+    refute_nil(survivor, 'the second pull must be recorded after the first hits a 502')
+    assert_equal('feature/branch-survivor', survivor.branch)
+    assert_empty(
+      fb.query('(eq what "issue-was-lost")').each.to_a,
+      'a 502 is transient — must not produce an issue-was-lost tombstone'
+    )
+  end
 end
