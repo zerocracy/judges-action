@@ -15,10 +15,11 @@ def Jp.bots
   end
 end
 
+def Jp.human?(login, type, bots: Jp.bots)
+  type != 'Bot' && bots.none? { |b| b.casecmp?(login.to_s) }
+end
+
 def Jp.human_comments(comments)
   bots = Jp.bots
-  comments.reject do |c|
-    login = c.dig(:user, :login)
-    c.dig(:user, :type) == 'Bot' || bots.any? { |b| b.casecmp?(login.to_s) }
-  end
+  comments.select { |c| Jp.human?(c.dig(:user, :login), c.dig(:user, :type), bots:) }
 end
