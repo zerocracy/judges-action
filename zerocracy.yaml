@@ -2,11 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 10m22s: execution expired'
   inserted: 8
-  seconds: 1100.838737661
+  seconds: 1207.942162736
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-13 23:49:36.357787415 Z
+  when: 2026-11-14 00:22:13.744205209 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18336,50 +18339,6 @@
   when: 2026-03-02 08:40:57.000000000 Z
   where: github
   who: 526301
-- _id: 2606075
-  _job: 63794
-  _time: 2026-03-03 01:09:28.943688475 Z
-  _version: 0.19.9/0.60.0/0.17.15
-  award: 24
-  comments: 1
-  details: It's time to reward @yegorov for the code contributed in yegor256/judges#394,
-    the reward amount is 24.
-  hoc: 47
-  href: https://github.com/yegor256/judges/issues/394/#issuecomment-3987674832
-  is_human: 1
-  issue: 394
-  receipt: receipt-#64073
-  repository: 799113787
-  review_comments: 0
-  seconds: 34886
-  tombstone: 2026-11-01 06:24:22.906810374 Z
-  what: code-contribution-was-rewarded
-  when: 2026-03-02 23:41:16.046955007 Z
-  where: github
-  who: 2566462
-  why: Contributed code in yegor256/judges#394
-- _id: 2606076
-  _job: 63794
-  _time: 2026-03-03 01:09:29.082222646 Z
-  _version: 0.19.9/0.60.0/0.17.15
-  award: 20
-  comments: 2
-  details: It's time to reward @belfil for the code contributed in yegor256/factbase#534,
-    the reward amount is 20.
-  hoc: 24
-  href: https://github.com/yegor256/factbase/issues/534/#issuecomment-3987674929
-  is_human: 1
-  issue: 534
-  receipt: receipt-#64072
-  repository: 798641472
-  review_comments: 0
-  seconds: 58195
-  tombstone: 2026-11-10 16:52:47.714587104 Z
-  what: code-contribution-was-rewarded
-  when: 2026-03-02 23:41:21.808733611 Z
-  where: github
-  who: 94894473
-  why: Contributed code in yegor256/factbase#534
 - _id: 2606208
   _job: 22667144431
   _time: 2026-03-04 11:21:59.611776694 Z
@@ -146621,10 +146580,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 43
+  min_issue_was_found: 44
   min_pull_was_found: 124
   repository: 974194993
-  types_were_scanned: 145
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -153143,7 +153102,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 224
+  min_issue_was_found: 225
   min_pull_was_found: 207
   repository: 849726475
   types_were_scanned: 0
@@ -153377,7 +153336,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 34
+  min_issue_was_found: 42
   min_pull_was_found: 172
   repository: 805238060
   types_were_scanned: 0
@@ -153405,36 +153364,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 749
-  closures_were_checked: 1439
+  assignees_were_scanned: 891
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20065616574
   issues_were_scanned: 1396
-  labels_were_scanned: 1582
+  labels_were_scanned: 1853
   latest_issue_was_found: 315
-  merges_were_scanned: 1694
-  min_issue_was_found: 1867
+  merges_were_scanned: 1805
+  min_issue_was_found: 1868
   min_pull_was_found: 841
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 745
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 19977547182
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
-  min_issue_was_found: 356
+  merges_were_scanned: 604
+  min_issue_was_found: 357
   min_pull_was_found: 230
   repository: 840215648
-  types_were_scanned: 368
+  types_were_scanned: 515
   what: iterate
   where: github
 - _id: 2629843
@@ -153449,7 +153408,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 161
+  min_issue_was_found: 0
   min_pull_was_found: 142
   repository: 857659265
   types_were_scanned: 0
@@ -153852,18 +153811,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 748
-  closures_were_checked: 0
+  assignees_were_scanned: 850
+  closures_were_checked: 955
   earliest_issue_was_found: 1
   events_were_scanned: 27068096731
   issues_were_scanned: 1225
-  labels_were_scanned: 1830
+  labels_were_scanned: 1969
   latest_issue_was_found: 317
-  merges_were_scanned: 1459
+  merges_were_scanned: 1515
   min_issue_was_found: 1837
   min_pull_was_found: 813
   repository: 820463873
-  types_were_scanned: 695
+  types_were_scanned: 825
   what: iterate
   where: github
 - _id: 2629882
@@ -154509,18 +154468,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 984
+  assignees_were_scanned: 1141
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20072321852
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1400
+  merges_were_scanned: 0
   min_issue_was_found: 1319
   min_pull_was_found: 727
   repository: 802720676
-  types_were_scanned: 1175
+  types_were_scanned: 1326
   what: iterate
   where: github
 - _id: 2629939
@@ -154655,18 +154614,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 618
+  assignees_were_scanned: 682
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20070696509
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 768
   min_issue_was_found: 1247
   min_pull_was_found: 785
   repository: 799113787
-  types_were_scanned: 664
+  types_were_scanned: 829
   what: iterate
   where: github
 - _id: 2630023
@@ -154691,18 +154650,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1476
-  closures_were_checked: 0
+  assignees_were_scanned: 1669
+  closures_were_checked: 1744
   earliest_issue_was_found: 1
-  events_were_scanned: 20067568624
+  events_were_scanned: 27076416520
   issues_were_scanned: 2725
-  labels_were_scanned: 1702
+  labels_were_scanned: 2975
   latest_issue_was_found: 1073
-  merges_were_scanned: 2886
-  min_issue_was_found: 2974
+  merges_were_scanned: 3044
+  min_issue_was_found: 2975
   min_pull_was_found: 1609
   repository: 799177290
-  types_were_scanned: 2971
+  types_were_scanned: 3100
   what: iterate
   where: github
 - _id: 2630036
@@ -154727,7 +154686,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1203
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20070770744
@@ -154738,7 +154697,7 @@
   min_issue_was_found: 1221
   min_pull_was_found: 1185
   repository: 728758275
-  types_were_scanned: 1142
+  types_were_scanned: 1407
   what: iterate
   where: github
 - _id: 2630038
@@ -561576,19 +561535,6 @@
   award: 18
   details: It's time to reward @sherenkov for the enhancement suggested in yegor256/judges#1259,
     the reward amount is 18.
-  greeting: "Thanks for suggesting this enhancement! \U0001F389 You've earned **+18
-    points**. If you spot anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    quite right, feel free to [report it](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    — [bugs are welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    here too. Your running score is now [+144](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
-    Thanks for suggesting an enhancement! You've earned +18 points. If you find anything
-    else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html)
-    as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html)
-    to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html)
-    bugs too. Your running score is [+144](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   href: https://github.com/yegor256/judges/issues/1259/#issuecomment-6866915361
   is_human: 1
   issue: 1259
@@ -561607,13 +561553,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in yegor256/judges#1035,
     the reward amount is 10.
-  greeting: "Thanks for the review! \U0001F389 You've earned **+10 points**: +18 as
-    a base, -8 for not leaving any comments. Your running score is now [+3763](https://zerocracy.github.io/judges-action/zerocracy-vitals.html)
-    — check your [Zerocracy account](https://www.zerocracy.com/) for more details.\n\n<!--
-    Thanks for the review! You've earned +10 points for this: +18 as a basis; -8 for
-    absolutely no comments posted.  Your running score is [+3763](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ -->"
   hoc: 65
   href: https://github.com/yegor256/judges/issues/1035/#issuecomment-6866915905
   is_human: 1
@@ -561634,10 +561573,6 @@
   comments: 1
   details: It's time to reward @yegor256 for the code review in yegor256/judges#612,
     the reward amount is 6.
-  greeting: 'Thanks for the review! You''ve earned +6 points for this: +18 as a basis;
-    -8 for absolutely no comments posted; -4 for too few (13) hits-of-code.  Your
-    running score is [+3769](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don''t forget to check your [Zerocracy account](https://www.zerocracy.com/) too). '
   hoc: 13
   href: https://github.com/yegor256/judges/issues/612/#issuecomment-6866916414
   is_human: 1
@@ -561670,6 +561605,7 @@
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
   hoc: 29
+  href: https://github.com/yegor256/judges/issues/1059/#issuecomment-6867889800
   is_human: 1
   issue: 1059
   repository: 799113787
@@ -561693,6 +561629,7 @@
 
     <!-- Thanks for the review! You've earned +6 points for this: +18 as a basis; -8 for absolutely no comments posted; -4 for too few (5) hits-of-code.  Your running score is [+3785](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 5
+  href: https://github.com/yegor256/judges/issues/753/#issuecomment-6867890238
   is_human: 1
   issue: 753
   repository: 799113787
@@ -561750,7 +561687,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-13 22:22:02.000000000 Z
+  when: &6871 2026-11-13 22:22:02.000000000 Z
   where: github
   who: 526301
 - _id: 2654693
@@ -561786,9 +561723,68 @@
   is_human: 1
   issue: 1299
   repository: 799113787
+  review_comments: 0
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
   when: 2026-11-13 23:06:13.000000000 Z
   where: github
   who: 526301
+- _id: 2654695
+  _job: 108628
+  _time: 2026-11-13 23:50:22.042677911 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 113778529
+  comments: 0
+  details: The pull request yegor256/judges#719 with 35 HoC created by @gemshrine
+    was reviewed by @yegor256 after 1mo2w and 0 comments.
+  hoc: 35
+  is_human: 1
+  issue: 719
+  repository: 799113787
+  review_comments: 0
+  seconds: 3980326
+  what: code-was-reviewed
+  when: *6871
+  where: github
+  who: 526301
+- _id: 2654696
+  _job: 108628
+  _time: 2026-11-13 23:50:36.613657979 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: chore/update-dependencies
+  details: It's time to punish @yegor256 for the branch named as 'chore/update-dependencies',
+    which is wrong in yegor256/judges#1302, the penalty amount is -6.
+  greeting: |-
+    Hey! Quick heads up — branch naming [matters](https://www.yegor256.com/2014/04/15/github-guidelines.html) around here, and "`chore/update-dependencies`" doesn't quite follow the convention, so that's **-6** points for you. No big deal, just try naming your branches after the ticket number next time — something like "`1301`" would've been perfect here. Your running score is still looking solid at [+3779](https://zerocracy.github.io/judges-action/zerocracy-vitals.html), so keep it up, and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/) when you get a chance.
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`chore/update-dependencies`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`1301`". Your running score is [+3779](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1302
+  repository: 799113787
+  what: bad-branch-name-was-punished
+  when: 2026-11-13 23:50:36.619656917 Z
+  where: github
+  who: 526301
+  why: Wrongly named a branch in yegor256/judges#1302
+- _id: 2654697
+  _job: 108628
+  _time: 2026-11-13 23:50:40.591513711 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: update-uncovered-ruby-dependencies
+  details: It's time to punish @yegor256 for the branch named as 'update-uncovered-ruby-dependencies',
+    which is wrong in zerocracy/pages-action#1478, the penalty amount is -6.
+  greeting: |-
+    Hey! Quick heads up — branch names need to [follow the convention](https://www.yegor256.com/2014/04/15/github-guidelines.html), and "`update-uncovered-ruby-dependencies`" doesn't quite fit, so that's a **-6** points deduction. No big deal, just try naming your branches after the ticket number next time — something like "`1477`" would've been perfect here. You're still doing great overall, running score is [+3773](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — keep it up, and don't forget to peek at your [Zerocracy account](https://www.zerocracy.com/) too!
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`update-uncovered-ruby-dependencies`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`1477`". Your running score is [+3773](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1478
+  repository: 802720676
+  what: bad-branch-name-was-punished
+  when: 2026-11-13 23:50:40.593212290 Z
+  where: github
+  who: 526301
+  why: Wrongly named a branch in zerocracy/pages-action#1478
