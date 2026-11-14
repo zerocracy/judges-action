@@ -390,6 +390,31 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_issues_sums_two_repositories
+    WebMock.disable_net_connect!
+    rate_limit_up
+    %w[a b].each do |name|
+      stub_github("https://api.github.com/repos/foo/#{name}", body: { full_name: "foo/#{name}", archived: false })
+    end
+    $judge = 'dimensions-of-terrain'
+    $global = {}
+    $local = {}
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/a,foo/b' })
+    graph = Class.new(Fbe::Graph::Fake) do
+      define_method(:total_issues_and_pulls) do |_owner, name|
+        { 'a' => { 'issues' => 20, 'pulls' => 4 }, 'b' => { 'issues' => 30, 'pulls' => 6 } }[name]
+      end
+    end.new
+    Fbe.stub(:github_graph, graph) do
+      load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
+      assert_equal(
+        { total_issues: 50, total_pulls: 10 }, total_issues(nil),
+        'The issues and pulls of both repositories must be added up'
+      )
+    end
+  end
+
   def test_total_issues_skips_repo_on_fbe_error
     WebMock.disable_net_connect!
     rate_limit_up
