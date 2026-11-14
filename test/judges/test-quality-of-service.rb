@@ -396,6 +396,109 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_release_hoc_size_stops_at_first_release_older_than_window
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_release_hoc_size.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:releases) do |_repo|
+      [
+        { tag_name: 'v7', published_at: nil },
+        { tag_name: 'v6', published_at: Time.parse('2024-09-05 00:00:00 UTC') },
+        { tag_name: 'v5', published_at: Time.parse('2024-08-28 00:00:00 UTC') },
+        { tag_name: 'v4', published_at: Time.parse('2024-08-18 00:00:00 UTC') },
+        { tag_name: 'v3', published_at: Time.parse('2024-08-08 00:00:00 UTC') },
+        { tag_name: 'v2', published_at: Time.parse('2024-07-29 00:00:00 UTC') },
+        { tag_name: 'v1', published_at: Time.parse('2024-07-19 00:00:00 UTC') }
+      ]
+    end
+    compared = []
+    octo.define_singleton_method(:compare) do |_repo, first, last|
+      compared << "#{first}..#{last}"
+      {
+        total_commits: 1,
+        files: [{ changes: 10 }]
+      }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-25 00:00:00 UTC'), Time.parse('2024-09-01 00:00:00 UTC'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_release_hoc_size(fact)
+        assert_equal(['v4..v5'], compared, 'only window release paired with first older base release is compared')
+        assert_equal([10], metrics[:some_release_hoc_size], 'releases older than first base release are excluded')
+        assert_equal([1], metrics[:some_release_commits_size], 'commits older than first base release are excluded')
+      end
+    end
+  end
+
+  def test_some_release_hoc_size_with_multiple_releases_in_window_stops_at_first_older_release
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_release_hoc_size.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:releases) do |_repo|
+      [
+        { tag_name: 'v6', published_at: Time.parse('2024-08-30 00:00:00 UTC') },
+        { tag_name: 'v5', published_at: Time.parse('2024-08-28 00:00:00 UTC') },
+        { tag_name: 'v4', published_at: Time.parse('2024-08-18 00:00:00 UTC') },
+        { tag_name: 'v3', published_at: Time.parse('2024-08-08 00:00:00 UTC') },
+        { tag_name: 'v2', published_at: Time.parse('2024-07-29 00:00:00 UTC') },
+        { tag_name: 'v1', published_at: Time.parse('2024-07-19 00:00:00 UTC') }
+      ]
+    end
+    compared = []
+    octo.define_singleton_method(:compare) do |_repo, first, last|
+      compared << "#{first}..#{last}"
+      stats = { 'v4..v5' => { total_commits: 1, changes: 10 }, 'v5..v6' => { total_commits: 2, changes: 20 } }
+      info = stats.fetch("#{first}..#{last}", { total_commits: 99, changes: 999 })
+      {
+        total_commits: info[:total_commits],
+        files: [{ changes: info[:changes] }]
+      }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-25 00:00:00 UTC'), Time.parse('2024-09-01 00:00:00 UTC'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_release_hoc_size(fact)
+        assert_equal(['v4..v5', 'v5..v6'], compared)
+        assert_equal([10, 20], metrics[:some_release_hoc_size])
+        assert_equal([1, 2], metrics[:some_release_commits_size])
+      end
+    end
+  end
+
+  def test_some_release_hoc_size_with_only_older_releases_measures_nothing
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_release_hoc_size.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:releases) do |_repo|
+      [
+        { tag_name: 'v4', published_at: Time.parse('2024-08-18 00:00:00 UTC') },
+        { tag_name: 'v3', published_at: Time.parse('2024-08-08 00:00:00 UTC') },
+        { tag_name: 'v2', published_at: Time.parse('2024-07-29 00:00:00 UTC') },
+        { tag_name: 'v1', published_at: Time.parse('2024-07-19 00:00:00 UTC') }
+      ]
+    end
+    compared = []
+    octo.define_singleton_method(:compare) do |_repo, first, last|
+      compared << "#{first}..#{last}"
+      {
+        total_commits: 1,
+        files: [{ changes: 10 }]
+      }
+    end
+    fact = Struct.new(:since, :when).new(Time.parse('2024-08-25 00:00:00 UTC'), Time.parse('2024-09-01 00:00:00 UTC'))
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_release_hoc_size(fact)
+        assert_empty(compared)
+        assert_empty(metrics[:some_release_hoc_size])
+        assert_empty(metrics[:some_release_commits_size])
+      end
+    end
+  end
+
   def test_quality_of_service_some_build_mttr
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
