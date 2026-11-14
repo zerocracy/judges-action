@@ -87,4 +87,34 @@ class TestTypeWasAttached < Jp::Test
     assert_equal(['who'], f['stale'], 'a deleted GraphQL actor must mark the fact stale on who')
     assert_match(/an unknown actor/, f['details'].first)
   end
+
+  def test_rescues_graphql_failure_on_type_event
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    { 44 => 'ITAE_gone', 45 => 'ITAE_kept' }.each do |issue, node|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/issues/#{issue}/timeline?per_page=100",
+        body: [{ id: issue, event: 'issue_type_added', node_id: node, created_at: '2025-09-30 06:14:38 UTC' }]
+      )
+    end
+    fake = Fbe::Graph::Fake.new
+    fake.define_singleton_method(:issue_type_event) do |node|
+      raise(Fbe::Error, "GitHub GraphQL query failed: Could not resolve to a node #{node}") if node == 'ITAE_gone'
+      {
+        'created_at' => Time.parse('2025-09-30 06:14:38 UTC'),
+        'issue_type' => { 'name' => 'Bug' },
+        'actor' => { 'login' => 'jeff', 'id' => 5 }
+      }
+    end
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, fake) { load_it('type-was-attached', fb) }
+    assert(
+      fb.one?(what: 'type-was-attached', issue: 45, type: 'Bug'),
+      'a failed graphql query on one type event did not let the judge go on to the next issue'
+    )
+  end
 end
