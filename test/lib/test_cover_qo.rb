@@ -438,4 +438,56 @@ class TestCoverQo < Minitest::Test
       assert_equal(3, facts.size, 'gap of 20 days filled when slice is 10 days')
     end
   end
+
+  def test_fills_two_gaps_when_three_windows_inserted_out_of_order
+    fb = Factbase.new
+    now = Time.parse('2025-01-30 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-20 12:00:00 UTC')
+    a.when = Time.parse('2025-01-30 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-01 12:00:00 UTC')
+    b.when = Time.parse('2025-01-05 12:00:00 UTC')
+    c = fb.insert
+    c.what = 'test-judge'
+    c.since = Time.parse('2025-01-12 12:00:00 UTC')
+    c.when = Time.parse('2025-01-15 12:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(5, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
+      assert_equal(5, facts.size, 'both gaps filled when windows inserted out of order')
+      assert_equal(Integer(Time.parse('2025-01-05 12:00:00 UTC')), Integer(facts[1].since))
+      assert_equal(Integer(Time.parse('2025-01-12 12:00:00 UTC')), Integer(facts[1].when))
+      assert_equal(Integer(Time.parse('2025-01-15 12:00:00 UTC')), Integer(facts[3].since))
+      assert_equal(Integer(Time.parse('2025-01-20 12:00:00 UTC')), Integer(facts[3].when))
+    end
+  end
+
+  def test_fills_two_gaps_when_three_windows_inserted_in_order
+    fb = Factbase.new
+    now = Time.parse('2025-01-30 12:00:00 UTC')
+    b = fb.insert
+    b.what = 'test-judge'
+    b.since = Time.parse('2025-01-01 12:00:00 UTC')
+    b.when = Time.parse('2025-01-05 12:00:00 UTC')
+    c = fb.insert
+    c.what = 'test-judge'
+    c.since = Time.parse('2025-01-12 12:00:00 UTC')
+    c.when = Time.parse('2025-01-15 12:00:00 UTC')
+    a = fb.insert
+    a.what = 'test-judge'
+    a.since = Time.parse('2025-01-20 12:00:00 UTC')
+    a.when = Time.parse('2025-01-30 12:00:00 UTC')
+    Fbe.stub(:fb, fb) do
+      Jp.cover_qo(5, judge: 'test-judge', loog: Loog::NULL, today: now)
+      facts = fb.query("(eq what 'test-judge')").each.to_a.sort_by(&:since)
+      assert_equal(5, facts.size, 'both gaps filled when windows inserted in order')
+      assert_equal(Integer(Time.parse('2025-01-05 12:00:00 UTC')), Integer(facts[1].since))
+      assert_equal(Integer(Time.parse('2025-01-12 12:00:00 UTC')), Integer(facts[1].when))
+      assert_equal(Integer(Time.parse('2025-01-15 12:00:00 UTC')), Integer(facts[3].since))
+      assert_equal(Integer(Time.parse('2025-01-20 12:00:00 UTC')), Integer(facts[3].when))
+    end
+  end
 end
