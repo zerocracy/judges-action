@@ -18,6 +18,7 @@ require_relative '../../lib/approval'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
+require_relative '../../lib/slug'
 
 Fbe.iterate do
   as 'merges_were_scanned'
@@ -54,7 +55,7 @@ Fbe.iterate do
   over do |repository, issue|
     repo =
       begin
-        Fbe.octo.repo_name_by_id(repository)
+        Jp.slug(repository)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository ##{repository} not found: #{e.message}")
         next issue
