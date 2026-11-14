@@ -147,6 +147,17 @@ if [ "${repositories_found}" == "false" ]; then
     fi
 fi
 
+job_name_found=false
+for opt in "${options[@]}"; do
+    if [[ "${opt}" == "--option=job_name="* ]]; then
+        job_name_found=true
+        break
+    fi
+done
+if [ "${job_name_found}" == "false" ]; then
+    options+=("--option=job_name=${name}")
+fi
+
 if [ -n "${GITHUB_RUN_ID}" ]; then
     options+=("--option=job_id=${GITHUB_RUN_ID}")
 fi
