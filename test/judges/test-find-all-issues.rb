@@ -326,7 +326,7 @@ class TestFindAllIssues < Jp::Test
     end
     load_it('find-all-issues', fb)
     assert_equal(2, fb.size)
-    assert_equal(0, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
+    assert_equal(11, fb.query('(eq what "iterate")').each.to_a.first.min_issue_was_found)
   end
 
   def test_paginated_pulls_continue_after_not_found
@@ -492,5 +492,65 @@ class TestFindAllIssues < Jp::Test
       1, fb.query("(eq what 'issue-was-opened')").each.to_a.size,
       'A vanished repository must add no issues and must not abort the judge'
     )
+  end
+
+  def test_finds_issue_after_deleted_lowest_one
+    seed = Random.new_seed
+    newest = 89 + Random.new(seed).rand(1..999)
+    fb = scanned(newest, status: 404, body: { message: 'Not Found' })
+    refute_empty(
+      fb.query("(and (eq what 'issue-was-opened') (eq issue #{newest}))").each.to_a,
+      "the issue ##{newest} after the deleted issue #87 was never found, seed #{seed}"
+    )
+  end
+
+  def test_finds_issue_after_lowest_one_without_creation_time
+    seed = Random.new_seed
+    newest = 89 + Random.new(seed).rand(1..999)
+    fb = scanned(newest, body: { number: 87, created_at: nil })
+    refute_empty(
+      fb.query("(and (eq what 'issue-was-opened') (eq issue #{newest}))").each.to_a,
+      "the issue ##{newest} after the issue #87 without creation time was never found, seed #{seed}"
+    )
+  end
+
+  private
+
+  def scanned(newest, **lowest)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 695, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/695', body: { id: 695, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/87', **lowest)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/88',
+      body: { number: 88, created_at: Time.parse('2024-09-10 15:00:00 UTC') }
+    )
+    stub_github(
+      %r{https://api\.github\.com/search/issues\?.*},
+      body: {
+        total_count: 2, incomplete_results: false,
+        items: [
+          { number: 88, user: { id: 4242 }, created_at: Time.parse('2024-09-10 15:00:00 UTC') },
+          { number: newest, user: { id: 4242 }, created_at: Time.parse('2024-09-11 15:00:00 UTC') }
+        ]
+      }
+    )
+    stub_github('https://api.github.com/user/4242', body: { login: 'jeff', id: 4242, type: 'User' })
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.issue = 87
+      f.repository = 695
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    fb.insert.then do |f|
+      f.issue = 88
+      f.repository = 695
+      f.what = 'issue-was-opened'
+      f.where = 'github'
+    end
+    3.times { load_it('find-all-issues', fb) }
+    fb
   end
 end
