@@ -302,6 +302,84 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 0, failed_builds: 1 }, result)
   end
 
+  def test_fetch_workflows_empty_on_deprecated_check_runs
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { number: 44, head: { sha: 'aa123' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100')
+      .to_return(status: 410, body: '')
+    result = Jp.fetch_workflows(pr)
+    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, result)
+  end
+
+  def test_fetch_workflows_skips_deprecated_run_job
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { number: 55, head: { sha: 'bb456' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/bb456/check-runs?per_page=100',
+      body: {
+        check_runs: [
+          { id: 1, app: { slug: 'github-actions' } },
+          { id: 2, app: { slug: 'github-actions' } }
+        ]
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/1').to_return(status: 410, body: '')
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/2')
+      .to_return(
+        body: { id: 2, run_id: 9002 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs/9002',
+      body: { id: 9002, event: 'pull_request', conclusion: 'success' }
+    )
+    result = Jp.fetch_workflows(pr)
+    assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
+  end
+
+  def test_fetch_workflows_skips_deprecated_run
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { number: 55, head: { sha: 'bb456' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/bb456/check-runs?per_page=100',
+      body: {
+        check_runs: [
+          { id: 1, app: { slug: 'github-actions' } },
+          { id: 2, app: { slug: 'github-actions' } }
+        ]
+      }
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/1')
+      .to_return(
+        body: { id: 1, run_id: 9001 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/jobs/2')
+      .to_return(
+        body: { id: 2, run_id: 9002 }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/actions/runs/9001').to_return(status: 410, body: '')
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs/9002',
+      body: { id: 9002, event: 'pull_request', conclusion: 'success' }
+    )
+    result = Jp.fetch_workflows(pr)
+    assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
+  end
+
   def test_counts_appreciated_skips_issue_not_found
     WebMock.disable_net_connect!
     rate_limit_up
