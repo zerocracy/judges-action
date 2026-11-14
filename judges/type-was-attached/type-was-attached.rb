@@ -4,7 +4,6 @@
 # SPDX-License-Identifier: MIT
 
 require 'fbe/github_graph'
-require 'fbe/if_absent'
 require 'fbe/issue'
 require 'fbe/iterate'
 require 'fbe/octo'
@@ -107,19 +106,22 @@ Fbe.iterate do
         $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
         next
       end
+      type = tee.dig('issue_type', 'name')
+      next if type.nil?
       Fbe.fb.txn do |fbt|
-        nn =
-          Fbe.if_absent(fb: fbt) do |n|
-            n.issue = issue
-            n.what = $judge
-            n.type = tee.dig('issue_type', 'name')
-            n.repository = repository
-            n.where = 'github'
-          end
-        if nn.nil?
+        unless fbt.query(
+          "(and (eq repository #{repository}) (eq issue #{issue}) " \
+          "(eq what '#{$judge}') (eq type '#{type}') (not (eq stale 'removed')))"
+        ).each.to_a.empty?
           $loog.warn("Type already attached to #{repo}##{issue}, skipping duplicate")
           next
         end
+        nn = fbt.insert
+        nn.issue = issue
+        nn.what = $judge
+        nn.type = type
+        nn.repository = repository
+        nn.where = 'github'
         who = tee.dig('actor', 'id')
         if who
           nn.who = who
