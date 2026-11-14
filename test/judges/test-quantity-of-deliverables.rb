@@ -9,6 +9,7 @@ require 'fbe/unmask_repos'
 require 'json'
 require 'judges/options'
 require 'loog'
+require 'timeout'
 require_relative '../../lib/patches/unmask_repos'
 require_relative '../test__helper'
 
@@ -40,6 +41,16 @@ class TestQuantityOfDeliverables < Jp::Test
       seen.push(slug)
       reviews.call(owner, name, pulls:).map { |p| slug == repo ? p.merge('reviews_has_next_page' => true) : p }
     end
+    graph
+  end
+
+  def commits_payload(history)
+    { 'repository' => { 'defaultBranchRef' => { 'target' => { 'history' => history } } } }
+  end
+
+  def commitgraph(&)
+    graph = Object.new
+    graph.define_singleton_method(:total_commits_pushed, &)
     graph
   end
 
@@ -120,6 +131,119 @@ class TestQuantityOfDeliverables < Jp::Test
     end
   end
 
+  def test_total_commits_pushed_bounds_the_history_by_when
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/good',
+      body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 }
+    )
+    queries = []
+    payload = commits_payload(
+      'totalCount' => 3, 'nodes' => [{ 'additions' => 20, 'deletions' => 1 }],
+      'pageInfo' => { 'endCursor' => 'cur1', 'hasNextPage' => false }
+    )
+    graph = Fbe::Graph.new(token: 'fake')
+    graph.define_singleton_method(:query) do |qry|
+      queries.push(qry)
+      payload
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    unmask = proc { |&block| block.call('foo/good') }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        assert_equal({ total_commits_pushed: 3, total_hoc_committed: 21 }, total_commits_pushed(fact))
+      end
+    end
+    assert_equal(1, queries.size, 'the bounded history must be queried once')
+    assert_includes(queries.first, 'since: "2025-10-01T00:00:00Z"')
+    assert_includes(queries.first, 'until: "2025-10-06T00:00:00Z"')
+  end
+
+  def test_total_commits_pushed_pages_the_bounded_history
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/good',
+      body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 }
+    )
+    queries = []
+    pages = [
+      commits_payload(
+        'totalCount' => 5, 'nodes' => [{ 'additions' => 10, 'deletions' => 5 }],
+        'pageInfo' => { 'endCursor' => 'cur1', 'hasNextPage' => true }
+      ),
+      commits_payload(
+        'totalCount' => 5, 'nodes' => [{ 'additions' => 7, 'deletions' => 3 }],
+        'pageInfo' => { 'endCursor' => 'cur2', 'hasNextPage' => false }
+      )
+    ]
+    graph = Fbe::Graph.new(token: 'fake')
+    graph.define_singleton_method(:query) do |qry|
+      queries.push(qry)
+      pages.shift
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    unmask = proc { |&block| block.call('foo/good') }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        assert_equal({ total_commits_pushed: 5, total_hoc_committed: 25 }, total_commits_pushed(fact))
+      end
+    end
+    assert_equal(2, queries.size, 'both pages of the bounded history must be queried')
+    assert_includes(queries.last, 'after: "cur1"')
+    assert_includes(queries.last, 'until: "2025-10-06T00:00:00Z"')
+  end
+
+  def test_total_commits_pushed_stops_on_a_repeated_cursor
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/good',
+      body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 }
+    )
+    queries = []
+    payload = commits_payload(
+      'totalCount' => 5, 'nodes' => [{ 'additions' => 10, 'deletions' => 5 }],
+      'pageInfo' => { 'endCursor' => 'cur1', 'hasNextPage' => true }
+    )
+    graph = Fbe::Graph.new(token: 'fake')
+    graph.define_singleton_method(:query) do |qry|
+      queries.push(qry)
+      payload
+    end
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    unmask = proc { |&block| block.call('foo/good') }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      Fbe.stub(:github_graph, graph) do
+        load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+        result = Timeout.timeout(2) { total_commits_pushed(fact) }
+        assert_equal({ total_commits_pushed: 5, total_hoc_committed: 30 }, result)
+      end
+    end
+    assert_equal(2, queries.size, 'a repeated endCursor must stop the pagination')
+  end
+
   def test_total_commits_pushed_skips_unavailable
     WebMock.disable_net_connect!
     rate_limit_up
@@ -129,12 +253,10 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/good',
       body: { id: 42, full_name: 'foo/good', open_issues: 0, size: 100 }
     )
-    graph = Object.new
-    graph.define_singleton_method(:total_commits_pushed) do |_owner, name, _since|
-      { 'commits' => name.length, 'hoc' => name.length * 100 }
-    end
+    graph = commitgraph { |_owner, _name, _since, _till| { 'commits' => 4, 'hoc' => 400 } }
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
     unmask = proc { |&block| %w[foo/missing foo/blocked foo/good].each { |repo| block.call(repo) } }
     $global = {}
     $judge = 'quantity-of-deliverables'
@@ -156,12 +278,10 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/good',
       body: { id: 43, full_name: 'foo/good', open_issues: 0, size: 100 }
     )
-    graph = Object.new
-    graph.define_singleton_method(:total_commits_pushed) do |_owner, name, _since|
-      { 'commits' => name.length, 'hoc' => name.length * 100 }
-    end
+    graph = commitgraph { |_owner, _name, _since, _till| { 'commits' => 4, 'hoc' => 400 } }
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
     unmask = proc { |&block| %w[foo/nosize foo/good].each { |repo| block.call(repo) } }
     $global = {}
     $judge = 'quantity-of-deliverables'
@@ -184,14 +304,14 @@ class TestQuantityOfDeliverables < Jp::Test
         body: { id: 42, full_name: "foo/#{name}", open_issues: 0, size: 100 }
       )
     end
-    graph = Object.new
-    graph.define_singleton_method(:total_commits_pushed) do |owner, name, _since|
-      repo = "#{owner}/#{name}"
-      raise(Net::OpenTimeout, 'timeout') if repo == 'foo/bad'
-      { 'commits' => name.length, 'hoc' => name.length * 100 }
-    end
+    graph =
+      commitgraph do |_owner, name, _since, _till|
+        raise(Net::OpenTimeout, 'timeout') if name == 'bad'
+        { 'commits' => 4, 'hoc' => 400 }
+      end
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
     unmask = proc { |&block| %w[foo/bad foo/good].each { |repo| block.call(repo) } }
     $global = {}
     $judge = 'quantity-of-deliverables'
@@ -212,12 +332,10 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/bad',
       body: { id: 42, full_name: 'foo/bad', open_issues: 0, size: 100 }
     )
-    graph = Object.new
-    graph.define_singleton_method(:total_commits_pushed) do |_owner, _name, _since|
-      raise(NoMethodError, 'unexpected')
-    end
+    graph = commitgraph { |_owner, _name, _since, _till| raise(NoMethodError, 'unexpected') }
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
     unmask = proc { |&block| block.call('foo/bad') }
     $global = {}
     $judge = 'quantity-of-deliverables'
