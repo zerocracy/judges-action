@@ -59,4 +59,23 @@ class TestIssueWasOpened < Jp::Test
       'a vanished repository produced facts, while the judge must make none and not abort'
     )
   end
+
+  def test_goes_on_after_a_server_error_on_issue_lookup
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'issue-was-closed', repository: 42, issue: 45, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/issues/44' => [502, { message: 'Bad Gateway' }],
+      'GET /user/421' => { id: 421, login: 'user' },
+      'GET /repos/foo/foo/issues/45' => {
+        number: 45, created_at: Time.parse('2025-01-01 12:00:00 UTC'), user: { id: 421, login: 'user' }
+      }
+    ).run do
+      load_it('issue-was-opened', fb)
+    end
+    refute_nil(fb.pick(what: 'issue-was-opened', issue: 45), 'a 502 on one issue must not stop the judge')
+  end
 end
