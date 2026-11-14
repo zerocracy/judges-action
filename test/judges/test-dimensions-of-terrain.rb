@@ -288,6 +288,37 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_total_releases_sums_published_releases_across_repositories
+    WebMock.disable_net_connect!
+    rate_limit_up
+    seed = Random.new_seed
+    random = Random.new(seed)
+    published = Array.new(2) { random.rand(1..9) }
+    %w[foo/foo foo/bar].each_with_index do |repo, i|
+      stub_github("https://api.github.com/repos/#{repo}", body: { full_name: repo, archived: false })
+      stub_github(
+        "https://api.github.com/repos/#{repo}/releases?per_page=100",
+        body: (
+          Array.new(published[i]) { |n| { id: n, tag_name: "0.#{n}.ж", draft: false } } +
+          Array.new(random.rand(1..9)) { |n| { id: 100 + n, tag_name: "1.#{n}", draft: true } }
+        ).shuffle(random: random)
+      )
+    end
+    $fb = Factbase.new
+    $global = {}
+    $local = {}
+    $judge = 'dimensions-of-terrain'
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar' })
+    $loog = Loog::NULL
+    $epoch = Time.now
+    $kickoff = Time.now
+    load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_releases.rb'))
+    assert_equal(
+      { total_releases: published.sum }, total_releases($fb.insert),
+      "releases counted with seed #{seed} are not the published ones of both repositories"
+    )
+  end
+
   def test_total_stars_and_forks
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
