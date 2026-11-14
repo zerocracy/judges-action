@@ -9,6 +9,7 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_releases(_fact)
   total = 0
+  skipped = false
   Fbe.unmask_repos do |repo|
     releases =
       begin
@@ -24,12 +25,14 @@ def total_releases(_fact)
           "[#{$judge}] Access forbidden to releases for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        skipped = true
+        break
       end
     next unless releases.is_a?(Array)
     releases.reject { |release| release[:draft] }.each do |_|
       total += 1
     end
   end
+  return {} if skipped
   { total_releases: total }
 end
