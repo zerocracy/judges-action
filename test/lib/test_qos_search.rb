@@ -85,6 +85,13 @@ class TestQosSearch < Jp::Test
     assert_not_requested(:get, %r{https://api\.github\.com/search/issues})
   end
 
+  def test_refuses_an_unsafe_method_before_spending_anything
+    probe = stub_request(:get, 'https://api.github.com/rate_limit')
+    assert_raises(RuntimeError) { Jp.qosearch('repo:foo/foo', method: :delete_repo) }
+    assert_not_requested(probe)
+    assert_nil(Jp.instance_variable_get(:@scount)[$judge], 'a refused call took a slot of the search budget')
+  end
+
   def test_skips_search_when_search_quota_missing
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
       body: { rate: { remaining: 1000, limit: 1000 } }.to_json,
