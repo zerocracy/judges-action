@@ -7,11 +7,14 @@ require 'fbe/octo'
 require 'octokit'
 require_relative 'jp'
 
-def Jp.recovered(repo, workflow, since, judge: $judge, loog: $loog)
+def Jp.recovered(repo, workflow, since, branch:, judge: $judge, loog: $loog)
   return if Fbe.octo.off_quota?
   runs =
     Fbe.octo.with_disable_auto_paginate do |octo|
-      octo.workflow_runs(repo, workflow, status: 'success', created: ">#{since.utc.iso8601}", per_page: 1)
+      octo.workflow_runs(
+        repo, workflow,
+        **{ branch:, status: 'success', created: ">#{since.utc.iso8601}", per_page: 1 }.compact
+      )
     end[:workflow_runs]
   return if runs.nil? || runs.empty?
   runs.first[:updated_at]
