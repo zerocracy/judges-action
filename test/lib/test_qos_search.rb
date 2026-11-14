@@ -183,6 +183,22 @@ class TestQosSearch < Jp::Test
     end
   end
 
+  def test_qorange_respects_integer_and_fractional_bounds
+    assert_equal(
+      '2024-08-02T21:00:00Z..2024-08-09T20:59:59Z',
+      Jp.qorange(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
+    )
+    assert_equal(
+      '2024-08-16T21:00:00Z..2024-08-23T21:00:00Z',
+      Jp.qorange(Time.parse('2024-08-16T21:00:00Z'), Time.parse('2024-08-23T21:00:00.700Z'))
+    )
+    assert_equal(
+      '2024-08-23T21:00:01Z..2024-08-30T20:59:59Z',
+      Jp.qorange(Time.parse('2024-08-23T21:00:00.700Z'), Time.parse('2024-08-30T21:00:00Z'))
+    )
+    assert_nil(Jp.qorange(Time.parse('2024-08-23T21:00:00.100Z'), Time.parse('2024-08-23T21:00:00.700Z')))
+  end
+
   private
 
   def ratelimits(*remaining)
