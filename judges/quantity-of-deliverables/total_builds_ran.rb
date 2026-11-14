@@ -32,6 +32,12 @@ def total_builds_ran(fact)
       "no total_builds_ran reported (will retry next cycle): #{e.class}: #{e.message}"
     )
     next
+  rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+    $loog.warn(
+      "[#{$judge}] Workflow runs of #{repo} failed to load, " \
+      "no total_builds_ran reported (will retry next cycle): #{e.class}: #{e.message}"
+    )
+    next
   end
   available ? { total_builds_ran: total } : {}
 end
