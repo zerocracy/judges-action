@@ -75,6 +75,7 @@ Fbe.consider(
       next
     end
     type = json[:pull_request] ? 'pull' : 'issue'
+    fresh = false
     Fbe.fb.txn do |fbt|
       f =
         Fbe.if_absent(fb: fbt) do |n|
@@ -110,9 +111,11 @@ Fbe.consider(
       f.details = "The missing #{type} #{Fbe.issue(f)} has been opened by #{Jp.mention(f)}."
       $loog.info("The #{type} #{Fbe.issue(f)} is not tombstoned among #{ts.issues('github', r.repository).count}")
       $loog.info("Missing #{type} #{Fbe.issue(f)} was found opened #{f.when.ago} ago")
+      fresh = true
     end
+    next unless fresh
     added << i
-    break if added.size > 16
+    break if added.size >= 16
   end
   if missing.empty?
     $loog.info("No missing issues in #{repo}")
