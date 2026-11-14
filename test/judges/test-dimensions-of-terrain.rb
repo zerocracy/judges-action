@@ -159,6 +159,25 @@ class TestDimensionsOfTerrain < Jp::Test
     assert_requested(:get, 'https://api.github.com/repos/foo/foo', times: 1)
   end
 
+  def test_dont_record_totals_when_the_scan_is_cut_short
+    WebMock.disable_net_connect!
+    $fb = Factbase.new
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    $loog = Loog::NULL
+    names =
+      Dir[File.join(__dir__, '../../judges/dimensions-of-terrain/total_*.rb')].map do |rb|
+        load(rb)
+        File.basename(rb, '.rb')
+      end
+    Fbe.stub(:over?, true) do
+      assert_empty(
+        names.reject { |n| __send__(n, $fb.insert).empty? },
+        'a metric records a total although the scan of repositories was cut short'
+      )
+    end
+  end
+
   def test_total_releases_skips_non_array_response
     WebMock.disable_net_connect!
     rate_limit_up

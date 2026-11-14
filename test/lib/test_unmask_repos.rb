@@ -59,6 +59,22 @@ class TestUnmaskRepos < Jp::Test
     )
   end
 
+  def test_reports_a_scan_cut_short
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/first', body: { full_name: 'foo/first', archived: false })
+    stub_github('https://api.github.com/repos/foo/second', body: { full_name: 'foo/second', archived: false })
+    $loog = Loog::NULL
+    checks = [false, false, true]
+    Fbe.stub(:over?, ->(**) { checks.shift }) do
+      refute(
+        Fbe.unmask_repos(
+          options: Judges::Options.new({ 'repositories' => 'foo/first,foo/second' }), global: {}, loog: Loog::NULL
+        ) { _1 },
+        'a scan stopped before the last repository is reported as complete'
+      )
+    end
+  end
+
   def test_skips_the_mask_when_github_fails_to_list_the_organization
     rate_limit_up
     stub_github('https://api.github.com/orgs/foo/repos?per_page=100&type=all', body: {}, status: 500)
