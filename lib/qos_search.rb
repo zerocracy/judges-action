@@ -17,6 +17,12 @@ def Jp.qoreset
   @swstart = {}
 end
 
+def Jp.qorange(since, till)
+  head = Time.at(Rational(since).ceil).utc
+  tail = Time.at(Rational(till).ceil - 1).utc
+  "#{head.iso8601}..#{tail.iso8601}" unless head > tail
+end
+
 def Jp.qosearch(query, method: :search_issues, **)
   jg = $judge
   @offquota = {} unless @offquota.is_a?(Hash)

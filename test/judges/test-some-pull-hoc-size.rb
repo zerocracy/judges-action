@@ -29,4 +29,51 @@ class TestSomePullHocSize < Jp::Test
     assert_equal([8], result[:some_pull_hoc_size])
     assert_equal([0], result[:some_pull_files_size])
   end
+
+  def test_samples_boundary_pulls_in_exactly_one_window_including_subsecond_cutoffs
+    $judge = 'quality-of-service'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Jp.qoreset
+    closed = {
+      1 => Time.parse('2024-08-09T20:59:59Z'),
+      2 => Time.parse('2024-08-09T21:00:00Z'),
+      3 => Time.parse('2024-08-23T21:00:00Z'),
+      4 => Time.parse('2024-08-23T21:00:01Z')
+    }
+    octo = boundary_octo(closed)
+    win = Struct.new(:since, :when)
+    results =
+      Fbe.stub(:octo, octo) do
+        Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) do
+          [
+            some_pull_hoc_size(win.new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))),
+            some_pull_hoc_size(win.new(Time.parse('2024-08-09T21:00:00Z'), Time.parse('2024-08-23T21:00:00.700Z'))),
+            some_pull_hoc_size(win.new(Time.parse('2024-08-23T21:00:00.700Z'), Time.parse('2024-08-30T21:00:00Z')))
+          ]
+        end
+      end
+    assert_equal([[10], [20, 30], [40]], results.map { |res| res[:some_pull_hoc_size] })
+    assert_equal(4, results.sum { |res| res[:some_pull_files_size].size })
+  end
+
+  private
+
+  def boundary_octo(closed)
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:rate_limit) { Struct.new(:remaining).new(30) }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&b| b.call(octo) }
+    octo.define_singleton_method(:search_issues) do |q, **|
+      head = Time.parse(q[/closed:(\S+)\.\./, 1])
+      tail = Time.parse(q[/closed:\S+\.\.(\S+)/, 1])
+      matched = closed.select { |_, at| at.between?(head, tail) }.keys.map { |num| { number: num } }
+      { total_count: matched.size, items: matched }
+    end
+    octo.define_singleton_method(:pull_request) do |_repo, num|
+      { number: num, additions: num * 10, deletions: 0, changed_files: 1 }
+    end
+    octo
+  end
 end
