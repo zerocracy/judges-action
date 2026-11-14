@@ -69,8 +69,11 @@ Fbe.consider(
         next
       end
     checked << i
-    if json[:number].nil?
-      $loog.warn("Apparently, the JSON for the issue ##{i} doesn't have 'number' field")
+    matches =
+      json.respond_to?(:to_hash) && json[:number] == i &&
+      (!json[:repository_url] || json[:repository_url].split('/').last(2).join('/').casecmp?(repo))
+    unless matches
+      $loog.warn("The response for #{repo}##{i} does not identify the requested issue")
       Jp.issue_was_lost('github', r.repository, i)
       next
     end
