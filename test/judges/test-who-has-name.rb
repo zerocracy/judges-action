@@ -4,61 +4,55 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestWhoHasName < Jp::Test
   using SmartFactbase
 
   def test_finds_name
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/user/444', body: { login: 'lebowski' })
     fb = Factbase.new
     f = fb.insert
     f._id = 333
     f.who = 444
     f.where = 'github'
     f.what = 'issue-was-opened'
-    load_it('who-has-name', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } },
+      'GET /user/444' => { login: 'lebowski' }
+    ).run do
+      load_it('who-has-name', fb)
+    end
     assert_equal(2, fb.query('(always)').each.to_a.size)
     assert_equal('lebowski', fb.query('(exists name)').each.first.name)
   end
 
   def test_ignores_who_when_not_found
-    WebMock.disable_net_connect!
-    stub_request(:get, 'https://api.github.com/rate_limit').to_return(
-      { body: '{"rate":{"remaining":222}}', headers: { 'X-RateLimit-Remaining' => '222' } }
-    )
-    stub_github('https://api.github.com/user/444', body: '', status: 404)
     fb = Factbase.new
     f = fb.insert
     f._id = 999
     f.who = 444
     f.where = 'github'
-    load_it('who-has-name', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } },
+      'GET /user/444' => [404, { message: 'Not Found' }]
+    ).run do
+      load_it('who-has-name', fb)
+    end
     assert_equal(1, fb.query('(exists who)').each.to_a.size)
   end
 
   def test_does_not_crash_when_all_users_resolved
-    WebMock.disable_net_connect!
-    rate_limit_up
     fb = Factbase.new
-    load_it('who-has-name', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } }
+    ).run do
+      load_it('who-has-name', fb)
+    end
     assert_equal(0, fb.all.size)
   end
 
   def test_overwrite_name_if_user_login_changed
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github('https://api.github.com/user/12', body: { login: 'user22', id: 12, type: 'User' })
-    stub_github('https://api.github.com/user/13', body: { login: 'user3', id: 13, type: 'User' })
-    stub_github(
-      'https://api.github.com/user/14',
-      status: 404,
-      body: { message: 'Not Found', documentation_url: 'https://docs.github.com/rest', status: '404' }
-    )
     fb = Factbase.new
     fb.with(
       _id: 1, what: 'who-has-name', where: 'github', who: 10, name: 'user0',
@@ -76,29 +70,38 @@ class TestWhoHasName < Jp::Test
       _id: 5, what: 'who-has-name', where: 'github', who: 14, name: 'user4',
       when: Time.parse('2025-06-15 20:00:00 UTC')
     )
-    Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
-      load_it('who-has-name', fb)
-      assert_equal(5, fb.all.size)
-      assert(fb.one?(what: 'who-has-name', where: 'github', who: 10, name: 'user0', stale: 'who'))
-      assert(fb.one?(what: 'who-has-name', where: 'github', who: 11, name: 'user1'))
-      assert(fb.one?(what: 'who-has-name', where: 'github', who: 12, name: 'user22'))
-      assert(fb.one?(what: 'who-has-name', where: 'github', who: 13, name: 'user3'))
-      assert(fb.one?(what: 'who-has-name', where: 'github', who: 14, name: 'user4'))
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } },
+      'GET /user/12' => { login: 'user22', id: 12, type: 'User' },
+      'GET /user/13' => { login: 'user3', id: 13, type: 'User' },
+      'GET /user/14' => [404, { message: 'Not Found', status: '404' }]
+    ).run do
+      Time.stub(:now, Time.parse('2025-06-23 22:00:00 UTC')) do
+        load_it('who-has-name', fb)
+      end
     end
+    assert_equal(5, fb.all.size)
+    assert(fb.one?(what: 'who-has-name', where: 'github', who: 10, name: 'user0', stale: 'who'))
+    assert(fb.one?(what: 'who-has-name', where: 'github', who: 11, name: 'user1'))
+    assert(fb.one?(what: 'who-has-name', where: 'github', who: 12, name: 'user22'))
+    assert(fb.one?(what: 'who-has-name', where: 'github', who: 13, name: 'user3'))
+    assert(fb.one?(what: 'who-has-name', where: 'github', who: 14, name: 'user4'))
   end
 
   def test_moves_the_refresh_line_forward_after_a_lookup
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github('https://api.github.com/user/12', body: { login: 'user22', id: 12, type: 'User' })
     fb = Factbase.new
     fb.with(
       _id: 3, what: 'who-has-name', where: 'github', who: 12, name: 'user2',
       when: Time.parse('2025-06-18 20:00:00 UTC')
     )
     now = Time.parse('2025-06-23 22:00:00 UTC')
-    Time.stub(:now, now) do
-      load_it('who-has-name', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } },
+      'GET /user/12' => { login: 'user22', id: 12, type: 'User' }
+    ).run do
+      Time.stub(:now, now) do
+        load_it('who-has-name', fb)
+      end
     end
     fact = fb.query('(eq who 12)').each.first
     assert_equal('user22', fact['name'].first)
@@ -109,16 +112,14 @@ class TestWhoHasName < Jp::Test
   end
 
   def test_keeps_fact_active_on_forbidden_user_lookup
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github(
-      'https://api.github.com/user/29139614',
-      status: 403,
-      body: { message: 'Resource not accessible by integration' }
-    )
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 29_139_614, where: 'github')
-    load_it('who-has-name', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { rate: { remaining: 222 } },
+      'GET /user/29139614' => [403, { message: 'Resource not accessible by integration' }]
+    ).run do
+      load_it('who-has-name', fb)
+    end
     fact = fb.query('(eq who 29139614)').each.first
     refute_nil(fact)
     assert_nil(
