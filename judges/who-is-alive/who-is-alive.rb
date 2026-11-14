@@ -42,6 +42,9 @@ Fbe.consider(
       else
         raise
       end
+    rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+      $loog.warn("[#{$judge}] Transient error on user ##{f.who} (will retry next cycle): #{e.class}: #{e.message}")
+      next
     end
   unless nick.nil?
     $loog.debug("GitHub user @#{nick} (##{f.who}) is alive")
