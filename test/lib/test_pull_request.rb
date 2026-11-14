@@ -546,6 +546,24 @@ class TestPullRequest < Jp::Test
     assert_equal(1, count)
   end
 
+  def test_count_suggestions_skips_suggestions_of_bots
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({ 'bots' => 'helper' })
+    $global = {}
+    $loog = Loog::NULL
+    reviews = [{ id: 70, user: { id: 700 } }]
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/4/reviews/70/comments?per_page=100',
+      body: [
+        { id: 9, user: { id: 701, login: 'copilot', type: 'Bot' }, body: "```suggestion\nx\n```" },
+        { id: 10, user: { id: 702, login: 'helper', type: 'User' }, body: "```suggestion\nx\n```" },
+        { id: 11, user: { id: 703, login: 'jeff', type: 'User' }, body: "```suggestion\nx\n```" }
+      ]
+    )
+    assert_equal(1, Jp.count_suggestions('foo/foo', 4, 800, reviews))
+  end
+
   def test_count_suggestions_returns_zero_when_no_suggestions
     WebMock.disable_net_connect!
     rate_limit_up
