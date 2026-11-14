@@ -10,6 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_reviews_submitted(fact)
   total = 0
+  available = false
   Fbe.unmask_repos.each do |repo|
     owner, name = repo.split('/')
     count = 0
@@ -32,6 +33,7 @@ def total_reviews_submitted(fact)
       end
     end
     total += count
+    available = true
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Can't count submitted reviews in #{repo}, #{count} of them dropped: #{e.message}")
   rescue Octokit::Forbidden => e
@@ -46,5 +48,5 @@ def total_reviews_submitted(fact)
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
   end
-  { total_reviews_submitted: total }
+  available ? { total_reviews_submitted: total } : {}
 end
