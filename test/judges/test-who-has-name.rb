@@ -126,4 +126,51 @@ class TestWhoHasName < Jp::Test
       'fact must not be marked stale on a transient 403; the cycle should retry on the next run'
     )
   end
+
+  def test_creates_who_has_name_fact_with_today_timestamp
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user422' })
+    prev = ENV.fetch('TODAY', nil)
+    begin
+      ENV['TODAY'] = '2025-03-10T00:00:00Z'
+      fb = Factbase.new
+      fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 44, who: 422, where: 'github')
+      load_it('who-has-name', fb)
+      fact = fb.query('(eq what "who-has-name")').each.first
+      refute_nil(fact, 'who-has-name fact should be created')
+      assert_equal('user422', fact['name'].first)
+      expected = Time.parse('2025-03-10T00:00:00Z')
+      assert_equal(expected, fact['when'].first, 'created fact when must match TODAY')
+    ensure
+      ENV['TODAY'] = prev
+    end
+  end
+
+  def test_refreshes_stale_who_has_name_fact_with_today_timestamp
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/423', body: { id: 423, login: 'newnick' })
+    prev = ENV.fetch('TODAY', nil)
+    begin
+      ENV['TODAY'] = '2025-03-20T00:00:00Z'
+      fb = Factbase.new
+      fb.with(
+        _id: 10,
+        what: 'who-has-name',
+        where: 'github',
+        who: 423,
+        name: 'oldnick',
+        when: Time.parse('2025-03-01T00:00:00Z')
+      )
+      load_it('who-has-name', fb)
+      fact = fb.query('(eq who 423)').each.first
+      refute_nil(fact, 'refreshed who-has-name fact should exist')
+      assert_equal('newnick', fact['name'].first)
+      expected = Time.parse('2025-03-20T00:00:00Z')
+      assert_equal(expected, fact['when'].first, 'refreshed fact when must match TODAY')
+    ensure
+      ENV['TODAY'] = prev
+    end
+  end
 end

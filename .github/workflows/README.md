@@ -35,13 +35,10 @@ name: copyrights
       - master
 jobs:
   copyrights:
-    uses: zerocracy/judges-action/.github/workflows/copyrights.yml@master
+    uses: zerocracy/judges-action/.github/workflows/copyrights.yml@6e19bf99c4e4ce695b45a468e6b8e4768478ac0d # 0.17.23
 ```
 
-> **Important:** Pin to a specific commit SHA instead of `@master` for production stability:
-> ```yaml
-> uses: zerocracy/judges-action/.github/workflows/copyrights.yml@<sha>
-> ```
+To adopt a newer release, update the commit SHA and its version comment together.
 
 ## Repo-Specific Workflows (NOT reusable)
 
