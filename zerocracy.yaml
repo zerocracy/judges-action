@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 73.171306557
+  seconds: 1105.175763614
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-18 03:02:44.243589815 Z
+  when: 2026-11-18 03:49:44.377858474 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -136295,7 +136296,7 @@
   issue: 578
   repository: 820463873
   what: issue-was-opened
-  when: &1920 2026-07-01 00:33:39.000000000 Z
+  when: &1919 2026-07-01 00:33:39.000000000 Z
   where: github
   who: 229011572
 - _id: 2627733
@@ -136343,7 +136344,7 @@
   issue: 582
   repository: 820463873
   what: issue-was-opened
-  when: &1921 2026-07-01 00:36:52.000000000 Z
+  when: &1920 2026-07-01 00:36:52.000000000 Z
   where: github
   who: 229011572
 - _id: 2627737
@@ -136355,7 +136356,7 @@
   issue: 583
   repository: 820463873
   what: issue-was-opened
-  when: &1922 2026-07-01 00:37:43.000000000 Z
+  when: &1921 2026-07-01 00:37:43.000000000 Z
   where: github
   who: 229011572
 - _id: 2627738
@@ -136367,7 +136368,7 @@
   issue: 584
   repository: 820463873
   what: issue-was-opened
-  when: &1923 2026-07-01 00:38:51.000000000 Z
+  when: &1922 2026-07-01 00:38:51.000000000 Z
   where: github
   who: 229011572
 - _id: 2627739
@@ -136379,7 +136380,7 @@
   issue: 585
   repository: 820463873
   what: issue-was-opened
-  when: &1924 2026-07-01 00:39:37.000000000 Z
+  when: &1923 2026-07-01 00:39:37.000000000 Z
   where: github
   who: 229011572
 - _id: 2627740
@@ -136403,7 +136404,7 @@
   issue: 587
   repository: 820463873
   what: issue-was-opened
-  when: &1925 2026-07-01 00:41:55.000000000 Z
+  when: &1924 2026-07-01 00:41:55.000000000 Z
   where: github
   who: 229011572
 - _id: 2627742
@@ -136415,7 +136416,7 @@
   issue: 588
   repository: 820463873
   what: issue-was-opened
-  when: &1926 2026-07-01 00:42:21.000000000 Z
+  when: &1925 2026-07-01 00:42:21.000000000 Z
   where: github
   who: 229011572
 - _id: 2627743
@@ -136427,7 +136428,7 @@
   issue: 589
   repository: 820463873
   what: issue-was-opened
-  when: &1927 2026-07-01 00:42:53.000000000 Z
+  when: &1926 2026-07-01 00:42:53.000000000 Z
   where: github
   who: 229011572
 - _id: 2627744
@@ -144210,21 +144211,6 @@
   where: github
   who: 526301
   why: Reviewed code in yegor256/judges#466
-- _id: 2628618
-  _job: 80371
-  _time: 2026-07-05 01:39:45.123360409 Z
-  _version: 0.19.13/0.60.4/0.17.17
-  ac: 31502
-  cost_of_qod: 10.834503168540536
-  ev: 137045
-  pv: 164604
-  qod: 12649
-  qod_per_day: 35.2104220177899
-  qod_per_sec: 0.0003393220646121621
-  start: &1918 2025-04-29 14:07:31.154700897 Z
-  tombstone: 2026-11-10 02:26:00.665875858 Z
-  what: earned-value
-  when: 2026-07-05 01:39:45.123572392 Z
 - _id: 2628619
   _job: 28726697593
   _time: 2026-07-05 02:16:44.265680300 Z
@@ -152470,12 +152456,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27442959228
+  events_were_scanned: 20469073100
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 211
   min_pull_was_found: 208
   repository: 849726475
   types_were_scanned: 0
@@ -152709,7 +152695,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 25
+  min_issue_was_found: 26
   min_pull_was_found: 173
   repository: 805238060
   types_were_scanned: 0
@@ -152737,36 +152723,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 750
-  closures_were_checked: 0
+  assignees_were_scanned: 901
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
-  events_were_scanned: 27487090517
+  events_were_scanned: 27494855017
   issues_were_scanned: 1396
-  labels_were_scanned: 1312
+  labels_were_scanned: 1599
   latest_issue_was_found: 315
-  merges_were_scanned: 1763
-  min_issue_was_found: 1824
+  merges_were_scanned: 1981
+  min_issue_was_found: 1825
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 1153
+  types_were_scanned: 1234
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27461766594
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
+  merges_were_scanned: 604
   min_issue_was_found: 492
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -153184,18 +153170,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1229
-  closures_were_checked: 955
+  assignees_were_scanned: 1352
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27479124193
+  events_were_scanned: 20468456930
   issues_were_scanned: 1225
-  labels_were_scanned: 1969
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1917
-  min_issue_was_found: 1891
+  merges_were_scanned: 2014
+  min_issue_was_found: 1894
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 728
+  types_were_scanned: 843
   what: iterate
   where: github
 - _id: 2629882
@@ -153841,18 +153827,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1390
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20423922936
+  events_were_scanned: 20470529674
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1425
-  min_issue_was_found: 1427
+  merges_were_scanned: 0
+  min_issue_was_found: 1428
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 1388
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -153987,18 +153973,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 684
+  assignees_were_scanned: 853
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20420737743
+  events_were_scanned: 20470140592
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 0
+  merges_were_scanned: 770
   min_issue_was_found: 1101
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 911
+  types_were_scanned: 1100
   what: iterate
   where: github
 - _id: 2630023
@@ -154023,18 +154009,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1994
-  closures_were_checked: 1744
+  assignees_were_scanned: 2122
+  closures_were_checked: 1964
   earliest_issue_was_found: 1
-  events_were_scanned: 27480845578
+  events_were_scanned: 27495808199
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 3050
-  min_issue_was_found: 3089
+  merges_were_scanned: 3135
+  min_issue_was_found: 3099
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 2970
+  types_were_scanned: 3099
   what: iterate
   where: github
 - _id: 2630036
@@ -154059,7 +154045,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1218
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27467643444
@@ -154067,10 +154053,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1141
+  min_issue_was_found: 1142
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 1189
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -167844,7 +167830,7 @@
   total_releases_published: 9
   total_reviews_submitted: 94
   what: quantity-of-deliverables
-  when: &1955 2026-07-13 16:19:27.706071011 Z
+  when: &1954 2026-07-13 16:19:27.706071011 Z
 - _id: 2630751
   _job: 29265828741
   _time: 2026-07-13 16:21:36.286443210 Z
@@ -169792,7 +169778,7 @@
   - 0
   - 0
   what: quality-of-service
-  when: &1956 2026-07-13 16:25:53.436252346 Z
+  when: &1955 2026-07-13 16:25:53.436252346 Z
 - _id: 2630753
   _job: 82114
   _time: 2026-07-13 16:33:45.948998108 Z
@@ -174515,7 +174501,7 @@
   qod: 12565
   qod_per_day: 35.2104220177899
   qod_per_sec: 0.00032942503172539314
-  start: *1918
+  start: &1986 2025-04-29 14:07:31.154700897 Z
   what: earned-value
   when: 2026-07-15 01:47:19.444449206 Z
 - _id: 2631019
@@ -174573,7 +174559,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1919 2026-07-17 04:02:45.000000000 Z
+  when: &1918 2026-07-17 04:02:45.000000000 Z
   where: github
   who: 8086956
 - _id: 2631025
@@ -174636,7 +174622,7 @@
   review_comments: 0
   seconds: 964512
   what: code-was-contributed
-  when: *1919
+  when: *1918
   where: github
   who: 29139614
 - _id: 2631029
@@ -174913,7 +174899,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1928 2026-07-17 05:54:17.000000000 Z
+  when: &1927 2026-07-17 05:54:17.000000000 Z
   where: github
   who: 526301
 - _id: 2631048
@@ -174939,7 +174925,7 @@
   succeeded_builds: 10
   suggestions: 1
   what: pull-was-merged
-  when: &1929 2026-07-17 07:03:43.000000000 Z
+  when: &1928 2026-07-17 07:03:43.000000000 Z
   where: github
   who: 526301
 - _id: 2631049
@@ -174965,7 +174951,7 @@
   succeeded_builds: 10
   suggestions: 1
   what: pull-was-merged
-  when: &1930 2026-07-17 06:01:55.000000000 Z
+  when: &1929 2026-07-17 06:01:55.000000000 Z
   where: github
   who: 526301
 - _id: 2631050
@@ -174991,7 +174977,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1931 2026-07-17 06:02:09.000000000 Z
+  when: &1930 2026-07-17 06:02:09.000000000 Z
   where: github
   who: 526301
 - _id: 2631051
@@ -175017,7 +175003,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1932 2026-07-17 06:02:22.000000000 Z
+  when: &1931 2026-07-17 06:02:22.000000000 Z
   where: github
   who: 526301
 - _id: 2631052
@@ -175043,7 +175029,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1933 2026-07-17 06:03:00.000000000 Z
+  when: &1932 2026-07-17 06:03:00.000000000 Z
   where: github
   who: 526301
 - _id: 2631053
@@ -175069,7 +175055,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1934 2026-07-17 06:03:11.000000000 Z
+  when: &1933 2026-07-17 06:03:11.000000000 Z
   where: github
   who: 526301
 - _id: 2631054
@@ -175095,7 +175081,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1935 2026-07-17 06:03:23.000000000 Z
+  when: &1934 2026-07-17 06:03:23.000000000 Z
   where: github
   who: 526301
 - _id: 2631055
@@ -175122,7 +175108,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1936 2026-07-17 07:03:25.000000000 Z
+  when: &1935 2026-07-17 07:03:25.000000000 Z
   where: github
   who: 526301
 - _id: 2631056
@@ -175148,7 +175134,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1937 2026-07-17 07:04:43.000000000 Z
+  when: &1936 2026-07-17 07:04:43.000000000 Z
   where: github
   who: 526301
 - _id: 2631057
@@ -175174,7 +175160,7 @@
   issue: 578
   repository: 820463873
   what: dud-was-closed
-  when: *1920
+  when: *1919
   where: github
   who: 229011572
 - _id: 2631059
@@ -175189,7 +175175,7 @@
   issue: 582
   repository: 820463873
   what: dud-was-closed
-  when: *1921
+  when: *1920
   where: github
   who: 229011572
 - _id: 2631060
@@ -175204,7 +175190,7 @@
   issue: 583
   repository: 820463873
   what: dud-was-closed
-  when: *1922
+  when: *1921
   where: github
   who: 229011572
 - _id: 2631061
@@ -175219,7 +175205,7 @@
   issue: 584
   repository: 820463873
   what: dud-was-closed
-  when: *1923
+  when: *1922
   where: github
   who: 229011572
 - _id: 2631062
@@ -175234,7 +175220,7 @@
   issue: 585
   repository: 820463873
   what: dud-was-closed
-  when: *1924
+  when: *1923
   where: github
   who: 229011572
 - _id: 2631063
@@ -175249,7 +175235,7 @@
   issue: 587
   repository: 820463873
   what: dud-was-closed
-  when: *1925
+  when: *1924
   where: github
   who: 229011572
 - _id: 2631064
@@ -175264,7 +175250,7 @@
   issue: 588
   repository: 820463873
   what: dud-was-closed
-  when: *1926
+  when: *1925
   where: github
   who: 229011572
 - _id: 2631065
@@ -175279,7 +175265,7 @@
   issue: 589
   repository: 820463873
   what: dud-was-closed
-  when: *1927
+  when: *1926
   where: github
   who: 229011572
 - _id: 2631066
@@ -175333,7 +175319,7 @@
   review_comments: 0
   seconds: 514285
   what: code-was-contributed
-  when: *1928
+  when: *1927
   where: github
   who: 33578155
 - _id: 2631071
@@ -175351,7 +175337,7 @@
   review_comments: 1
   seconds: 517400
   what: code-was-contributed
-  when: *1929
+  when: *1928
   where: github
   who: 33578155
 - _id: 2631072
@@ -175369,7 +175355,7 @@
   review_comments: 1
   seconds: 513680
   what: code-was-contributed
-  when: *1930
+  when: *1929
   where: github
   who: 33578155
 - _id: 2631073
@@ -175387,7 +175373,7 @@
   review_comments: 0
   seconds: 513143
   what: code-was-contributed
-  when: *1931
+  when: *1930
   where: github
   who: 33578155
 - _id: 2631074
@@ -175405,7 +175391,7 @@
   review_comments: 0
   seconds: 513031
   what: code-was-contributed
-  when: *1932
+  when: *1931
   where: github
   who: 33578155
 - _id: 2631075
@@ -175423,7 +175409,7 @@
   review_comments: 0
   seconds: 512770
   what: code-was-contributed
-  when: *1933
+  when: *1932
   where: github
   who: 33578155
 - _id: 2631076
@@ -175441,7 +175427,7 @@
   review_comments: 0
   seconds: 512573
   what: code-was-contributed
-  when: *1934
+  when: *1933
   where: github
   who: 33578155
 - _id: 2631077
@@ -175459,7 +175445,7 @@
   review_comments: 0
   seconds: 512450
   what: code-was-contributed
-  when: *1935
+  when: *1934
   where: github
   who: 33578155
 - _id: 2631078
@@ -175477,7 +175463,7 @@
   review_comments: 0
   seconds: 513848
   what: code-was-contributed
-  when: *1936
+  when: *1935
   where: github
   who: 33578155
 - _id: 2631079
@@ -175495,7 +175481,7 @@
   review_comments: 0
   seconds: 3843
   what: code-was-contributed
-  when: *1937
+  when: *1936
   where: github
   who: 104617579
 - _id: 2631080
@@ -175782,7 +175768,7 @@
   repository: 974194993
   review_comments: 0
   what: pull-was-reviewed
-  when: &1938 2026-07-17 09:09:47.000000000 Z
+  when: &1937 2026-07-17 09:09:47.000000000 Z
   where: github
   who: 526301
 - _id: 2631094
@@ -175802,7 +175788,7 @@
   repository: 974194993
   review_comments: 0
   what: pull-was-reviewed
-  when: &1939 2026-07-17 09:09:42.000000000 Z
+  when: &1938 2026-07-17 09:09:42.000000000 Z
   where: github
   who: 526301
 - _id: 2631095
@@ -175820,7 +175806,7 @@
   review_comments: 0
   seconds: 13123
   what: code-was-reviewed
-  when: *1938
+  when: *1937
   where: github
   who: 526301
 - _id: 2631096
@@ -175838,7 +175824,7 @@
   review_comments: 0
   seconds: 13110
   what: code-was-reviewed
-  when: *1939
+  when: *1938
   where: github
   who: 526301
 - _id: 2631097
@@ -176048,7 +176034,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1940 2026-07-17 11:55:10.000000000 Z
+  when: &1939 2026-07-17 11:55:10.000000000 Z
   where: github
   who: 29139614
 - _id: 2631106
@@ -176067,7 +176053,7 @@
   review_comments: 0
   seconds: 23046
   what: code-was-contributed
-  when: *1940
+  when: *1939
   where: github
   who: 29139614
 - _id: 2631107
@@ -176109,7 +176095,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1941 2026-07-17 15:41:53.000000000 Z
+  when: &1940 2026-07-17 15:41:53.000000000 Z
   where: github
   who: 29139614
 - _id: 2631110
@@ -176128,7 +176114,7 @@
   review_comments: 0
   seconds: 36641
   what: code-was-contributed
-  when: *1941
+  when: *1940
   where: github
   who: 29139614
 - _id: 2631111
@@ -176194,7 +176180,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1942 2026-07-17 16:59:37.000000000 Z
+  when: &1941 2026-07-17 16:59:37.000000000 Z
   where: github
   who: 8086956
 - _id: 2631114
@@ -176220,7 +176206,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1943 2026-07-17 16:49:39.000000000 Z
+  when: &1942 2026-07-17 16:49:39.000000000 Z
   where: github
   who: 8086956
 - _id: 2631115
@@ -176274,7 +176260,7 @@
   review_comments: 0
   seconds: 39883
   what: code-was-contributed
-  when: *1942
+  when: *1941
   where: github
   who: 29139614
 - _id: 2631118
@@ -176292,7 +176278,7 @@
   review_comments: 0
   seconds: 38758
   what: code-was-contributed
-  when: *1943
+  when: *1942
   where: github
   who: 29139614
 - _id: 2631119
@@ -176402,7 +176388,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1944 2026-07-17 18:10:34.000000000 Z
+  when: &1943 2026-07-17 18:10:34.000000000 Z
   where: github
   who: 29139614
 - _id: 2631124
@@ -176421,7 +176407,7 @@
   review_comments: 0
   seconds: 22487
   what: code-was-contributed
-  when: *1944
+  when: *1943
   where: github
   who: 29139614
 - _id: 2631125
@@ -176552,7 +176538,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1945 2026-07-18 09:06:00.000000000 Z
+  when: &1944 2026-07-18 09:06:00.000000000 Z
   where: github
   who: 8086956
 - _id: 2631133
@@ -176588,7 +176574,7 @@
   review_comments: 0
   seconds: 17649
   what: code-was-contributed
-  when: *1945
+  when: *1944
   where: github
   who: 29139614
 - _id: 2631135
@@ -176686,7 +176672,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1946 2026-07-19 09:25:38.000000000 Z
+  when: &1945 2026-07-19 09:25:38.000000000 Z
   where: github
   who: 8086956
 - _id: 2631142
@@ -176722,7 +176708,7 @@
   review_comments: 0
   seconds: 105277
   what: code-was-contributed
-  when: *1946
+  when: *1945
   where: github
   who: 29139614
 - _id: 2631144
@@ -176768,7 +176754,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1947 2026-07-19 10:20:48.000000000 Z
+  when: &1946 2026-07-19 10:20:48.000000000 Z
   where: github
   who: 8086956
 - _id: 2631146
@@ -176804,7 +176790,7 @@
   review_comments: 0
   seconds: 44573
   what: code-was-contributed
-  when: *1947
+  when: *1946
   where: github
   who: 29139614
 - _id: 2631148
@@ -176922,7 +176908,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: &1951 2026-07-17 17:03:04.000000000 Z
+  when: &1950 2026-07-17 17:03:04.000000000 Z
   where: github
   who: 8086956
 - _id: 2631157
@@ -176948,7 +176934,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: &1952 2026-07-19 03:47:12.000000000 Z
+  when: &1951 2026-07-19 03:47:12.000000000 Z
   where: github
   who: 8086956
 - _id: 2631158
@@ -176968,7 +176954,7 @@
   repository: 1236759415
   review_comments: 0
   what: pull-was-reviewed
-  when: &1948 2026-07-20 09:42:13.000000000 Z
+  when: &1947 2026-07-20 09:42:13.000000000 Z
   where: github
   who: 526301
 - _id: 2631159
@@ -176988,7 +176974,7 @@
   repository: 181044958
   review_comments: 0
   what: pull-was-reviewed
-  when: &1949 2026-07-20 09:51:21.000000000 Z
+  when: &1948 2026-07-20 09:51:21.000000000 Z
   where: github
   who: 526301
 - _id: 2631160
@@ -177008,7 +176994,7 @@
   repository: 1084843345
   review_comments: 0
   what: pull-was-reviewed
-  when: &1950 2026-07-20 09:37:36.000000000 Z
+  when: &1949 2026-07-20 09:37:36.000000000 Z
   where: github
   who: 526301
 - _id: 2631161
@@ -177073,7 +177059,7 @@
   succeeded_builds: 10
   suggestions: 0
   what: pull-was-merged
-  when: &1953 2026-07-20 10:03:31.000000000 Z
+  when: &1952 2026-07-20 10:03:31.000000000 Z
   where: github
   who: 29139614
 - _id: 2631165
@@ -177099,7 +177085,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: &1954 2026-07-20 09:46:07.000000000 Z
+  when: &1953 2026-07-20 09:46:07.000000000 Z
   where: github
   who: 8086956
 - _id: 2631166
@@ -177117,7 +177103,7 @@
   review_comments: 0
   seconds: 19685
   what: code-was-reviewed
-  when: *1948
+  when: *1947
   where: github
   who: 526301
 - _id: 2631167
@@ -177135,7 +177121,7 @@
   review_comments: 0
   seconds: 13291
   what: code-was-reviewed
-  when: *1949
+  when: *1948
   where: github
   who: 526301
 - _id: 2631168
@@ -177153,7 +177139,7 @@
   review_comments: 0
   seconds: 27891
   what: code-was-reviewed
-  when: *1950
+  when: *1949
   where: github
   who: 526301
 - _id: 2631169
@@ -177171,7 +177157,7 @@
   review_comments: 0
   seconds: 24744
   what: code-was-contributed
-  when: *1951
+  when: *1950
   where: github
   who: 29139614
 - _id: 2631170
@@ -177189,7 +177175,7 @@
   review_comments: 0
   seconds: 20647
   what: code-was-contributed
-  when: *1952
+  when: *1951
   where: github
   who: 29139614
 - _id: 2631171
@@ -177235,7 +177221,7 @@
   review_comments: 0
   seconds: 29446
   what: code-was-contributed
-  when: *1953
+  when: *1952
   where: github
   who: 29139614
 - _id: 2631174
@@ -177253,7 +177239,7 @@
   review_comments: 0
   seconds: 3960
   what: code-was-contributed
-  when: *1954
+  when: *1953
   where: github
   who: 29139614
 - _id: 2631175
@@ -177451,7 +177437,7 @@
   _version: 0.19.16/0.61.0/0.17.20
   composite: 63.356
   ffact: 163490
-  since: *1955
+  since: *1954
   total_builds_ran: 4163
   total_commits_pushed: 75
   total_hoc_committed: 1031
@@ -177465,7 +177451,7 @@
   _job: 29761769536
   _time: 2026-07-20 17:08:57.248064585 Z
   _version: 0.19.16/0.61.0/0.17.20
-  since: *1956
+  since: *1955
   some_backlog_size:
   - 7
   - 7
@@ -179353,7 +179339,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1957 2026-07-19 03:35:19.000000000 Z
+  when: &1956 2026-07-19 03:35:19.000000000 Z
   where: github
   who: 8086956
 - _id: 2631197
@@ -179379,7 +179365,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1958 2026-07-19 09:35:22.000000000 Z
+  when: &1957 2026-07-19 09:35:22.000000000 Z
   where: github
   who: 8086956
 - _id: 2631198
@@ -179477,7 +179463,7 @@
   review_comments: 0
   seconds: 24548
   what: code-was-contributed
-  when: *1957
+  when: *1956
   where: github
   who: 29139614
 - _id: 2631204
@@ -179495,7 +179481,7 @@
   review_comments: 0
   seconds: 44505
   what: code-was-contributed
-  when: *1958
+  when: *1957
   where: github
   who: 29139614
 - _id: 2631205
@@ -179591,7 +179577,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: &1959 2026-07-21 03:57:48.000000000 Z
+  when: &1958 2026-07-21 03:57:48.000000000 Z
   where: github
   who: 8086956
 - _id: 2631210
@@ -179617,7 +179603,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: &1960 2026-07-21 03:44:48.000000000 Z
+  when: &1959 2026-07-21 03:44:48.000000000 Z
   where: github
   who: 8086956
 - _id: 2631211
@@ -179635,7 +179621,7 @@
   review_comments: 0
   seconds: 609006
   what: code-was-contributed
-  when: *1959
+  when: *1958
   where: github
   who: 29139614
 - _id: 2631212
@@ -179653,7 +179639,7 @@
   review_comments: 0
   seconds: 5399
   what: code-was-contributed
-  when: *1960
+  when: *1959
   where: github
   who: 29139614
 - _id: 2631213
@@ -179749,7 +179735,7 @@
   repository: 798641472
   review_comments: 0
   what: pull-was-reviewed
-  when: &1961 2026-07-21 09:23:44.000000000 Z
+  when: &1960 2026-07-21 09:23:44.000000000 Z
   where: github
   who: 526301
 - _id: 2631218
@@ -179767,7 +179753,7 @@
   review_comments: 0
   seconds: 37026
   what: code-was-reviewed
-  when: *1961
+  when: *1960
   where: github
   who: 526301
 - _id: 2631219
@@ -179883,7 +179869,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1962 2026-07-21 07:56:17.000000000 Z
+  when: &1961 2026-07-21 07:56:17.000000000 Z
   where: github
   who: 29139614
 - _id: 2631225
@@ -179902,7 +179888,7 @@
   review_comments: 0
   seconds: 19150
   what: code-was-contributed
-  when: *1962
+  when: *1961
   where: github
   who: 29139614
 - _id: 2631226
@@ -179989,7 +179975,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1963 2026-07-22 01:12:29.000000000 Z
+  when: &1962 2026-07-22 01:12:29.000000000 Z
   where: github
   who: 29139614
 - _id: 2631232
@@ -180015,7 +180001,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1964 2026-07-22 03:33:04.000000000 Z
+  when: &1963 2026-07-22 03:33:04.000000000 Z
   where: github
   who: 8086956
 - _id: 2631233
@@ -180034,7 +180020,7 @@
   review_comments: 0
   seconds: 25238
   what: code-was-contributed
-  when: *1963
+  when: *1962
   where: github
   who: 29139614
 - _id: 2631234
@@ -180070,7 +180056,7 @@
   review_comments: 0
   seconds: 21007
   what: code-was-contributed
-  when: *1964
+  when: *1963
   where: github
   who: 29139614
 - _id: 2631236
@@ -180116,7 +180102,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1965 2026-07-22 09:32:35.000000000 Z
+  when: &1964 2026-07-22 09:32:35.000000000 Z
   where: github
   who: 8086956
 - _id: 2631240
@@ -180169,7 +180155,7 @@
   review_comments: 0
   seconds: 45077
   what: code-was-contributed
-  when: *1965
+  when: *1964
   where: github
   who: 29139614
 - _id: 2631243
@@ -180195,7 +180181,7 @@
   succeeded_builds: 16
   suggestions: 0
   what: pull-was-merged
-  when: &1966 2026-07-22 09:59:24.000000000 Z
+  when: &1965 2026-07-22 09:59:24.000000000 Z
   where: github
   who: 8086956
 - _id: 2631244
@@ -180251,7 +180237,7 @@
   review_comments: 0
   seconds: 46422
   what: code-was-contributed
-  when: *1966
+  when: *1965
   where: github
   who: 29139614
 - _id: 2631247
@@ -180347,7 +180333,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1967 2026-07-22 17:07:15.000000000 Z
+  when: &1966 2026-07-22 17:07:15.000000000 Z
   where: github
   who: 29139614
 - _id: 2631252
@@ -180384,7 +180370,7 @@
   review_comments: 0
   seconds: 26764
   what: code-was-contributed
-  when: *1967
+  when: *1966
   where: github
   who: 29139614
 - _id: 2631254
@@ -180546,7 +180532,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1969 2026-07-22 09:44:24.000000000 Z
+  when: &1968 2026-07-22 09:44:24.000000000 Z
   where: github
   who: 8086956
 - _id: 2631267
@@ -180572,7 +180558,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1970 2026-07-24 04:41:31.000000000 Z
+  when: &1969 2026-07-24 04:41:31.000000000 Z
   where: github
   who: 526301
 - _id: 2631268
@@ -180598,7 +180584,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1971 2026-07-24 04:58:27.000000000 Z
+  when: &1970 2026-07-24 04:58:27.000000000 Z
   where: github
   who: 526301
 - _id: 2631269
@@ -180611,7 +180597,7 @@
   label: bug
   repository: 799113787
   what: label-was-attached
-  when: &1968 2026-07-24 04:42:10.000000000 Z
+  when: &1967 2026-07-24 04:42:10.000000000 Z
   where: github
   who: 526301
 - _id: 2631270
@@ -180625,7 +180611,7 @@
   reporter: 125282851
   repository: 799113787
   what: bug-was-accepted
-  when: *1968
+  when: *1967
   where: github
   who: 526301
 - _id: 2631271
@@ -180668,7 +180654,7 @@
   issue: 1860
   repository: 799177290
   what: issue-was-closed
-  when: &1977 2026-07-24 06:28:14.000000000 Z
+  when: &1976 2026-07-24 06:28:14.000000000 Z
   where: github
   who: 526301
 - _id: 2631276
@@ -180951,7 +180937,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1974 2026-07-13 19:18:07.000000000 Z
+  when: &1973 2026-07-13 19:18:07.000000000 Z
   where: github
   who: 526301
 - _id: 2631296
@@ -180977,7 +180963,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1975 2026-07-14 17:56:52.000000000 Z
+  when: &1974 2026-07-14 17:56:52.000000000 Z
   where: github
   who: 8086956
 - _id: 2631297
@@ -181003,7 +180989,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1976 2026-07-14 17:18:36.000000000 Z
+  when: &1975 2026-07-14 17:18:36.000000000 Z
   where: github
   who: 8086956
 - _id: 2631298
@@ -181016,7 +181002,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: &1972 2026-07-24 04:56:48.000000000 Z
+  when: &1971 2026-07-24 04:56:48.000000000 Z
   where: github
   who: 526301
 - _id: 2631299
@@ -181029,7 +181015,7 @@
   label: bug
   repository: 799177290
   what: label-was-attached
-  when: &1973 2026-07-24 04:55:24.000000000 Z
+  when: &1972 2026-07-24 04:55:24.000000000 Z
   where: github
   who: 526301
 - _id: 2631300
@@ -181060,7 +181046,7 @@
   review_comments: 0
   seconds: 46152
   what: code-was-contributed
-  when: *1969
+  when: *1968
   where: github
   who: 29139614
 - _id: 2631302
@@ -181078,7 +181064,7 @@
   review_comments: 0
   seconds: 143
   what: code-was-contributed
-  when: *1970
+  when: *1969
   where: github
   who: 526301
 - _id: 2631303
@@ -181096,7 +181082,7 @@
   review_comments: 0
   seconds: 1084334
   what: code-was-contributed
-  when: *1971
+  when: *1970
   where: github
   who: 125282851
 - _id: 2631304
@@ -181110,7 +181096,7 @@
   reporter: 125282851
   repository: 799177290
   what: bug-was-accepted
-  when: *1972
+  when: *1971
   where: github
   who: 526301
 - _id: 2631305
@@ -181124,7 +181110,7 @@
   reporter: 125282851
   repository: 799177290
   what: bug-was-accepted
-  when: *1973
+  when: *1972
   where: github
   who: 526301
 - _id: 2631306
@@ -181184,7 +181170,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1978 2026-07-21 04:09:00.000000000 Z
+  when: &1977 2026-07-21 04:09:00.000000000 Z
   where: github
   who: 8086956
 - _id: 2631309
@@ -181210,7 +181196,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1979 2026-07-21 17:26:07.000000000 Z
+  when: &1978 2026-07-21 17:26:07.000000000 Z
   where: github
   who: 8086956
 - _id: 2631310
@@ -181236,7 +181222,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1980 2026-07-23 09:53:41.000000000 Z
+  when: &1979 2026-07-23 09:53:41.000000000 Z
   where: github
   who: 8086956
 - _id: 2631311
@@ -181380,7 +181366,7 @@
   review_comments: 0
   seconds: 3005
   what: code-was-contributed
-  when: *1974
+  when: *1973
   where: github
   who: 29139614
 - _id: 2631319
@@ -181398,7 +181384,7 @@
   review_comments: 0
   seconds: 78368
   what: code-was-contributed
-  when: *1975
+  when: *1974
   where: github
   who: 29139614
 - _id: 2631320
@@ -181416,7 +181402,7 @@
   review_comments: 0
   seconds: 27771
   what: code-was-contributed
-  when: *1976
+  when: *1975
   where: github
   who: 29139614
 - _id: 2631321
@@ -181654,7 +181640,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1982 2026-07-24 08:05:56.000000000 Z
+  when: &1981 2026-07-24 08:05:56.000000000 Z
   where: github
   who: 526301
 - _id: 2631336
@@ -181680,7 +181666,7 @@
   succeeded_builds: 12
   suggestions: 0
   what: pull-was-merged
-  when: &1983 2026-07-24 08:06:10.000000000 Z
+  when: &1982 2026-07-24 08:06:10.000000000 Z
   where: github
   who: 526301
 - _id: 2631337
@@ -181706,7 +181692,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: &1981 2026-07-24 08:05:39.000000000 Z
+  when: &1980 2026-07-24 08:05:39.000000000 Z
   where: github
   who: 526301
 - _id: 2631339
@@ -181724,7 +181710,7 @@
   repository: 799177290
   seconds: 5414
   what: bug-was-resolved
-  when: *1977
+  when: *1976
   where: github
   who: 526301
 - _id: 2631340
@@ -181742,7 +181728,7 @@
   review_comments: 0
   seconds: 42035
   what: code-was-contributed
-  when: *1978
+  when: *1977
   where: github
   who: 29139614
 - _id: 2631341
@@ -181760,7 +181746,7 @@
   review_comments: 0
   seconds: 36947
   what: code-was-contributed
-  when: *1979
+  when: *1978
   where: github
   who: 29139614
 - _id: 2631342
@@ -181778,7 +181764,7 @@
   review_comments: 0
   seconds: 135395
   what: code-was-contributed
-  when: *1980
+  when: *1979
   where: github
   who: 29139614
 - _id: 2631343
@@ -181792,7 +181778,7 @@
   reporter: 125282851
   repository: 798641472
   what: bug-was-accepted
-  when: *1981
+  when: *1980
   where: github
   who: 526301
 - _id: 2631344
@@ -181980,7 +181966,7 @@
   review_comments: 0
   seconds: 912784
   what: code-was-contributed
-  when: *1982
+  when: *1981
   where: github
   who: 125282851
 - _id: 2631354
@@ -181998,7 +181984,7 @@
   review_comments: 0
   seconds: 291572
   what: code-was-contributed
-  when: *1983
+  when: *1982
   where: github
   who: 29139614
 - _id: 2631355
@@ -182041,7 +182027,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1984 2026-07-24 09:45:05.000000000 Z
+  when: &1983 2026-07-24 09:45:05.000000000 Z
   where: github
   who: 8086956
 - _id: 2631357
@@ -182098,7 +182084,7 @@
   review_comments: 0
   seconds: 11714
   what: code-was-contributed
-  when: *1984
+  when: *1983
   where: github
   who: 29139614
 - _id: 2631360
@@ -182212,7 +182198,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1985 2026-07-24 12:36:17.000000000 Z
+  when: &1984 2026-07-24 12:36:17.000000000 Z
   where: github
   who: 526301
 - _id: 2631366
@@ -182230,7 +182216,7 @@
   review_comments: 0
   seconds: 18625
   what: code-was-contributed
-  when: *1985
+  when: *1984
   where: github
   who: 125282851
 - _id: 2631367
@@ -182302,7 +182288,7 @@
   succeeded_builds: 13
   suggestions: 0
   what: pull-was-merged
-  when: &1986 2026-07-24 12:35:58.000000000 Z
+  when: &1985 2026-07-24 12:35:58.000000000 Z
   where: github
   who: 526301
 - _id: 2631371
@@ -182320,7 +182306,7 @@
   review_comments: 0
   seconds: 11211
   what: code-was-contributed
-  when: *1986
+  when: *1985
   where: github
   who: 125282851
 - _id: 2631372
@@ -182386,7 +182372,7 @@
   qod: 8460
   qod_per_day: 44.41080904994545
   qod_per_sec: 0.00021687511035895846
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-07-25 01:54:16.873168404 Z
 - _id: 2631377
@@ -187346,7 +187332,7 @@
   qod: 4527
   qod_per_day: 17.4533298354975
   qod_per_sec: 0.0001135359033230953
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-08-04 03:19:37.119320914 Z
 - _id: 2631551
@@ -190845,7 +190831,7 @@
   qod: 3227
   qod_per_day: 86.28509330285111
   qod_per_sec: 7.922180980305608e-05
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-08-14 03:36:55.196242710 Z
 - _id: 2631680
@@ -193682,7 +193668,7 @@
   qod: 2171
   qod_per_day: 16.660555490123294
   qod_per_sec: 5.2180389280751194e-05
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-08-24 03:50:47.088862728 Z
 - _id: 2631789
@@ -220398,7 +220384,7 @@
   qod: 2961
   qod_per_day: 44.41080904994545
   qod_per_sec: 6.972303720570147e-05
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-09-03 04:00:29.787393672 Z
 - _id: 2633347
@@ -267417,7 +267403,7 @@
   qod: 19329
   qod_per_day: 44.41080904994545
   qod_per_sec: 0.0004460289598172451
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-09-13 04:18:17.241198022 Z
 - _id: 2636422
@@ -305652,7 +305638,7 @@
   qod: 28666
   qod_per_day: 64.87610078307245
   qod_per_sec: 0.0006485450889060514
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-09-23 04:22:20.192059025 Z
 - _id: 2639015
@@ -366574,7 +366560,7 @@
   qod: 27203
   qod_per_day: 11.579852531878196
   qod_per_sec: 0.0006036353437237198
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-10-03 04:29:03.632869994 Z
 - _id: 2642714
@@ -405473,7 +405459,7 @@
   qod: 31153
   qod_per_day: 16.45033503262167
   qod_per_sec: 0.0006782291812953706
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-10-13 05:23:56.331168318 Z
 - _id: 2645179
@@ -452329,7 +452315,7 @@
   qod: 37623
   qod_per_day: 16.45033503262167
   qod_per_sec: 0.0008039705531612724
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-10-23 05:27:16.123138121 Z
 - _id: 2648290
@@ -493907,7 +493893,7 @@
   qod: 38377
   qod_per_day: 16.45033503262167
   qod_per_sec: 0.0008051574162667736
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-11-02 06:23:02.143253474 Z
 - _id: 2651012
@@ -557783,7 +557769,7 @@
   qod: 39654
   qod_per_day: 16.45033503262167
   qod_per_sec: 0.0008171202726225887
-  start: *1918
+  start: *1986
   what: earned-value
   when: 2026-11-12 06:24:00.274358843 Z
 - _id: 2654508
@@ -575447,5 +575433,71 @@
   seconds: 12059
   what: code-was-contributed
   when: *7089
+  where: github
+  who: 29139614
+- _id: 2655487
+  _job: 44230874040
+  _time: 2026-11-18 03:31:37.394521210 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 2
+  commits: 1
+  details: The pull request zerocracy/pages-action#1492 has been reviewed by @yegor256
+    with 4 HoC and 2 comments.
+  event_id: 20469487175
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 4
+  is_human: 1
+  issue: 1492
+  repository: 802720676
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-18 02:51:41.000000000 Z
+  where: github
+  who: 526301
+- _id: 2655488
+  _job: 44230874040
+  _time: 2026-11-18 03:31:55.762086746 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 3
+  commits: 1
+  details: The pull request yegor256/judges#1309 has been reviewed by @yegor256 with
+    4 HoC and 3 comments.
+  event_id: 20468005347
+  event_type: PullRequestReviewEvent
+  files: 1
+  hoc: 4
+  is_human: 1
+  issue: 1309
+  repository: 799113787
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-18 02:30:11.000000000 Z
+  where: github
+  who: 526301
+- _id: 2655489
+  _job: 44230874040
+  _time: 2026-11-18 03:36:27.146690397 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/rubocop-1.x-lockfile
+  details: The pull zerocracy/pages-action#1492 has been opened earlier by @renovate[bot].
+  is_human: 0
+  issue: 1492
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-11-17 18:07:42.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2655490
+  _job: 44230874040
+  _time: 2026-11-18 03:36:27.766893164 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/rubocop-1.x-lockfile
+  details: The pull yegor256/judges#1309 has been opened earlier by @renovate[bot].
+  is_human: 0
+  issue: 1309
+  repository: 799113787
+  what: pull-was-opened
+  when: 2026-11-17 17:37:10.000000000 Z
   where: github
   who: 29139614
