@@ -2,13 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Failure in repository #840215648 at #299: GET https://api.github.com/repos/zerocracy/baza.rb/issues/299/timeline?per_page=100:
-    502 - Server Error'
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 8m5s: execution expired'
   inserted: 8
-  seconds: 1132.96518793
+  seconds: 1237.08890458
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-18 12:52:10.698236420 Z
+  when: 2026-11-18 13:21:52.773109764 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -145923,7 +145924,7 @@
   min_issue_was_found: 45
   min_pull_was_found: 137
   repository: 974194993
-  types_were_scanned: 58
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629220
@@ -152448,7 +152449,7 @@
   min_issue_was_found: 224
   min_pull_was_found: 208
   repository: 849726475
-  types_were_scanned: 256
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629820
@@ -152700,43 +152701,43 @@
   min_issue_was_found: 77
   min_pull_was_found: 80
   repository: 1084843345
-  types_were_scanned: 48
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629840
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1064
-  closures_were_checked: 1439
+  assignees_were_scanned: 1191
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27530001727
   issues_were_scanned: 1396
-  labels_were_scanned: 0
+  labels_were_scanned: 1312
   latest_issue_was_found: 315
-  merges_were_scanned: 1324
+  merges_were_scanned: 1611
   min_issue_was_found: 1829
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 783
+  types_were_scanned: 888
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27530695122
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
+  merges_were_scanned: 604
   min_issue_was_found: 496
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 298
+  types_were_scanned: 462
   what: iterate
   where: github
 - _id: 2629843
@@ -153154,18 +153155,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1229
-  closures_were_checked: 0
+  assignees_were_scanned: 1352
+  closures_were_checked: 955
   earliest_issue_was_found: 1
   events_were_scanned: 20511524267
   issues_were_scanned: 1225
-  labels_were_scanned: 1830
+  labels_were_scanned: 1969
   latest_issue_was_found: 317
-  merges_were_scanned: 2014
+  merges_were_scanned: 0
   min_issue_was_found: 1900
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 1805
+  types_were_scanned: 1869
   what: iterate
   where: github
 - _id: 2629882
@@ -153811,18 +153812,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 986
+  assignees_were_scanned: 1143
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20502077593
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 0
+  merges_were_scanned: 1201
   min_issue_was_found: 1434
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 767
+  types_were_scanned: 898
   what: iterate
   where: github
 - _id: 2629939
@@ -153957,18 +153958,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 620
+  assignees_were_scanned: 684
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27530777666
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1177
+  merges_were_scanned: 1287
   min_issue_was_found: 1105
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 472
+  types_were_scanned: 629
   what: iterate
   where: github
 - _id: 2630023
@@ -153993,18 +153994,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1733
-  closures_were_checked: 0
+  assignees_were_scanned: 1994
+  closures_were_checked: 1744
   earliest_issue_was_found: 1
   events_were_scanned: 27531269330
   issues_were_scanned: 2725
-  labels_were_scanned: 2975
+  labels_were_scanned: 0
   latest_issue_was_found: 1073
-  merges_were_scanned: 0
+  merges_were_scanned: 2465
   min_issue_was_found: 3142
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 2408
+  types_were_scanned: 2497
   what: iterate
   where: github
 - _id: 2630036
@@ -154029,7 +154030,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1218
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27527886469
@@ -154040,7 +154041,7 @@
   min_issue_was_found: 1158
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 684
+  types_were_scanned: 1241
   what: iterate
   where: github
 - _id: 2630038
@@ -576101,5 +576102,97 @@
   repository: 805238060
   what: pull-was-opened
   when: 2026-11-17 23:43:48.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2655526
+  _job: 110056
+  _time: 2026-11-18 12:53:10.190745329 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: dependency-updates
+  details: It's time to punish @yegor256 for the branch named as 'dependency-updates',
+    which is wrong in zerocracy/j#186, the penalty amount is -6.
+  greeting: |-
+    Hi there! It looks like [this branch naming](https://www.yegor256.com/2014/04/15/github-guidelines.html) doesn't follow our convention: "`dependency-updates`". Per policy, this results in a deduction of **-6** points. Next time, try naming your branch after the ticket number you're solving, e.g., "`185`" would be ideal here. Your running score is now [+4486](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — keep up the good work, and don't forget to check your [Zerocracy account](https://www.zerocracy.com/) for details.
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`dependency-updates`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`185`". Your running score is [+4486](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 186
+  repository: 805238060
+  what: bad-branch-name-was-punished
+  when: 2026-11-18 12:53:10.192896642 Z
+  where: github
+  who: 526301
+  why: Wrongly named a branch in zerocracy/j#186
+- _id: 2655527
+  _job: 44309305046
+  _time: 2026-11-18 13:05:00.921025615 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/reviewdog-action-actionlint-1.x
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/j#184 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 2
+  is_human: 0
+  issue: 184
+  repository: 805238060
+  succeeded_builds: 7
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-12 22:27:31.000000000 Z
+  where: github
+  who: 29139614
+- _id: 2655528
+  _job: 44309305046
+  _time: 2026-11-18 13:05:20.708972539 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '80'
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/j#185 has been "pull-was-merged".
+  failed_builds: 0
+  files: 3
+  hoc: 96
+  is_human: 1
+  issue: 185
+  repository: 805238060
+  succeeded_builds: 6
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-15 06:50:45.000000000 Z
+  where: github
+  who: 526301
+- _id: 2655529
+  _job: 44309305046
+  _time: 2026-11-18 13:05:36.464055207 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: renovate/rubocop-1.x-lockfile
+  comments: 0
+  comments_appreciated: 0
+  comments_by_author: 0
+  comments_by_reviewers: 0
+  comments_resolved: 0
+  comments_to_code: 0
+  details: Apparently, zerocracy/j#187 has been "pull-was-merged".
+  failed_builds: 0
+  files: 1
+  hoc: 4
+  is_human: 0
+  issue: 187
+  repository: 805238060
+  succeeded_builds: 5
+  suggestions: 0
+  what: pull-was-merged
+  when: 2026-11-18 05:12:42.000000000 Z
   where: github
   who: 29139614
