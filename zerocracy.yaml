@@ -2,12 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: deadlock; recursive locking
+  error: 'Judge find-all-issues stopped by timeout after 8m50s: execution expired'
   inserted: 8
-  seconds: 1157.992039967
+  seconds: 1200.760142065
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-19 05:20:45.923483751 Z
+  when: 2026-11-19 05:51:30.658508959 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18347,6 +18347,7 @@
   is_human: 1
   issue: 555
   repository: 802720676
+  tombstone: 2026-11-19 05:23:03.321747000 Z
   what: pull-was-opened
   when: 2026-03-07 16:31:20.000000000 Z
   where: github
@@ -18426,6 +18427,7 @@
   reviews: 0
   succeeded_builds: 14
   suggestions: 0
+  tombstone: 2026-11-19 05:23:03.324446133 Z
   what: pull-was-merged
   when: &190 2026-03-08 05:22:19.000000000 Z
   where: github
@@ -18477,6 +18479,7 @@
   comments: 2
   details: The pull request zerocracy/pages-action#555 with 4 HoC created by @aidarkdev
     was merged by @yegor256 after 12h50m of being in review and 2 comments.
+  done: 2026-11-19 05:23:03.283133011 Z
   hoc: 4
   is_human: 1
   issue: 555
@@ -18526,6 +18529,7 @@
   repository: 802720676
   review_comments: 0
   seconds: 46259
+  tombstone: 2026-11-19 05:23:03.327190955 Z
   what: code-contribution-was-rewarded
   when: 2026-03-08 08:32:43.199323042 Z
   where: github
@@ -152444,7 +152448,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 233
+  min_issue_was_found: 234
   min_pull_was_found: 208
   repository: 849726475
   types_were_scanned: 0
@@ -152706,36 +152710,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 0
+  assignees_were_scanned: 750
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
   events_were_scanned: 27581920997
   issues_were_scanned: 1396
-  labels_were_scanned: 1312
+  labels_were_scanned: 1599
   latest_issue_was_found: 315
-  merges_were_scanned: 0
+  merges_were_scanned: 1324
   min_issue_was_found: 1838
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 1724
+  types_were_scanned: 1853
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 447
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27545366458
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 605
+  merges_were_scanned: 0
   min_issue_was_found: 511
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -153153,18 +153157,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1572
-  closures_were_checked: 955
+  assignees_were_scanned: 1686
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20557752979
   issues_were_scanned: 1225
-  labels_were_scanned: 0
+  labels_were_scanned: 1766
   latest_issue_was_found: 317
-  merges_were_scanned: 1459
+  merges_were_scanned: 1515
   min_issue_was_found: 1909
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 986
+  types_were_scanned: 1102
   what: iterate
   where: github
 - _id: 2629882
@@ -153810,18 +153814,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 742
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20602719432
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1425
+  merges_were_scanned: 0
   min_issue_was_found: 1229
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 1382
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -153956,18 +153960,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 620
+  assignees_were_scanned: 684
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27589155414
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1125
+  merges_were_scanned: 1177
   min_issue_was_found: 1180
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 606
+  types_were_scanned: 677
   what: iterate
   where: github
 - _id: 2630023
@@ -153992,18 +153996,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1733
-  closures_were_checked: 2328
+  assignees_were_scanned: 1994
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27591673491
+  events_were_scanned: 27598532501
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 3135
+  merges_were_scanned: 0
   min_issue_was_found: 2940
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 0
+  types_were_scanned: 1467
   what: iterate
   where: github
 - _id: 2630036
@@ -154028,7 +154032,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1218
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27582963703
@@ -154036,10 +154040,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1186
+  min_issue_was_found: 1187
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 1189
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -574788,3 +574792,19 @@
   when: 2026-11-19 04:55:55.000000000 Z
   where: github
   who: 29139614
+- _id: 2655557
+  _job: 44465639815
+  _time: 2026-11-19 05:36:19.312893629 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  total_active_contributors: 10
+  total_commits: 19068
+  total_contributors: 70
+  total_files: 2470
+  total_forks: 227
+  total_issues: 4857
+  total_pulls: 8315
+  total_releases: 837
+  total_repositories: 16
+  total_stars: 118
+  what: dimensions-of-terrain
+  when: 2026-11-19 05:36:19.272438554 Z
