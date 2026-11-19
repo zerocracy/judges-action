@@ -2681,7 +2681,7 @@ class TestGithubEvents < Jp::Test
     end
     f = fb.query('(eq what "pull-was-merged")').each.to_a.first
     refute_nil(f)
-    assert_equal(Time.parse('2025-10-20 18:25:00 UTC'), f.review)
+    assert_equal(Time.parse('2025-10-20 18:05:00 UTC'), f.review)
     assert_equal(2, f.suggestions)
   end
 
@@ -2742,6 +2742,49 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(1, f.count)
     assert_equal([526_301], f.first[:contributors])
+  end
+
+  def test_release_event_with_identical_compare_response
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      body: { status: 'identical', total_commits: 0, commits: [], files: [] }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    facts = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, facts.count)
+    assert_equal(0, facts.first.commits)
+    assert_equal(0, facts.first.hoc)
+    assert_nil(facts.first['last_commit'])
   end
 
   def test_two_releases_in_one_page_never_compare_backwards
@@ -3083,6 +3126,97 @@ class TestGithubEvents < Jp::Test
       1, fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a.size,
       'A repository without a single commit cannot abort the scanning of its events'
     )
+  end
+
+  def test_forbidden_on_repo_name_by_id_records_repo_id_in_global_set
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11400',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 43, name: 'other/other' },
+          payload: { action: 'opened', issue: { number: 16 } },
+          created_at: Time.parse('2024-11-30T00:52:08Z')
+        },
+        {
+          id: '11401',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 43, name: 'other/other' },
+          payload: { action: 'opened', issue: { number: 17 } },
+          created_at: Time.parse('2024-11-30T00:52:09Z')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repositories/43',
+      status: 403,
+      body: { message: 'Must have admin rights to Repository' }
+    )
+    stub_github('https://api.github.com/user', body: { id: 50, login: 'agent' })
+    fb = Factbase.new
+    log = Loog::Buffer.new
+    load_it('github-events', fb, loog: log)
+    refute_includes($global[:forbidden_repos], nil, 'nil must not be placed into forbidden_repos')
+    assert_includes($global[:forbidden_repos], '#43', 'repository #43 must be placed into forbidden_repos')
+    assert_includes(log.to_s, "@agent doesn't have access to the #43 repository, maybe it is private")
+    assert_includes(log.to_s, 'Access forbidden to #43 (transient, will retry next cycle)')
+  end
+
+  def test_forbidden_on_second_unrelated_repo_is_not_suppressed_by_earlier_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11402',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 43, name: 'first/private' },
+          payload: { action: 'opened', issue: { number: 18 } },
+          created_at: Time.parse('2024-11-30T00:52:08Z')
+        },
+        {
+          id: '11403',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'tester' },
+          repo: { id: 44, name: 'second/private' },
+          payload: { action: 'opened', issue: { number: 19 } },
+          created_at: Time.parse('2024-11-30T00:52:09Z')
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repositories/43', status: 403, body: { message: 'Forbidden' })
+    stub_github('https://api.github.com/repositories/44', status: 403, body: { message: 'Forbidden' })
+    stub_github('https://api.github.com/user', body: { id: 50, login: 'agent' })
+    fb = Factbase.new
+    log = Loog::Buffer.new
+    load_it('github-events', fb, loog: log)
+    assert_includes($global[:forbidden_repos], '#43')
+    assert_includes($global[:forbidden_repos], '#44')
+    assert_includes(log.to_s, "@agent doesn't have access to the #43 repository")
+    assert_includes(log.to_s, "@agent doesn't have access to the #44 repository")
   end
 
   private

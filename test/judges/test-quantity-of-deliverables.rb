@@ -6,10 +6,10 @@
 require 'factbase'
 require 'fbe/github_graph'
 require 'fbe/unmask_repos'
-require_relative '../../lib/patches/unmask_repos'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../../lib/patches/unmask_repos'
 require_relative '../test__helper'
 
 class TestQuantityOfDeliverables < Jp::Test
@@ -184,10 +184,6 @@ class TestQuantityOfDeliverables < Jp::Test
         body: { id: 42, full_name: "foo/#{name}", open_issues: 0, size: 100 }
       )
     end
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 44, full_name: 'foo/foo', open_issues: 0, archived: false, size: 100 }
-    )
     graph = Object.new
     graph.define_singleton_method(:total_commits_pushed) do |owner, name, _since|
       repo = "#{owner}/#{name}"

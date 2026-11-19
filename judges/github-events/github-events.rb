@@ -80,7 +80,8 @@ Fbe.iterate do
       return info if json.nil?
       info[:commits] = json[:total_commits]
       info[:hoc] = json[:files].sum { |f| f[:changes] }
-      info[:last_commit] = json[:commits].last[:sha]
+      last = json[:commits].last
+      info[:last_commit] = last[:sha] unless last.nil?
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
@@ -263,9 +264,9 @@ Fbe.iterate do
             )
             []
           end
-        review = Jp.approval(reviews, pl[:closed_at])
-        fact.review = review[:submitted_at] if review
         author = pl.dig(:user, :id)
+        review = Jp.approval(reviews, pl[:closed_at], author)
+        fact.review = review[:submitted_at] if review
         fact.suggestions = Jp.count_suggestions(rname, fact.issue, author) if author
         fact.details =
           "The pull request #{Fbe.issue(fact)} " \
@@ -387,21 +388,22 @@ Fbe.iterate do
       skip(json)
     end
   rescue Octokit::Forbidden => e
-    if $global[:forbidden_repos]&.include?(rname)
+    ref = rname || "##{json[:repo][:id]}"
+    if $global[:forbidden_repos]&.include?(ref)
       $loog.warn(
-        "[#{$judge}] Access forbidden to #{rname} " \
+        "[#{$judge}] Access forbidden to #{ref} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
     else
       $global[:forbidden_repos] ||= Set.new
-      $global[:forbidden_repos] << rname
+      $global[:forbidden_repos] << ref
       who =
         begin
           "@#{Fbe.octo.user[:login]}"
         rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Forbidden
           'You'
         end
-      $loog.error("[#{$judge}] #{who} doesn't have access to the #{rname} repository, maybe it is private")
+      $loog.error("[#{$judge}] #{who} doesn't have access to the #{ref} repository, maybe it is private")
     end
     skip(json)
   end

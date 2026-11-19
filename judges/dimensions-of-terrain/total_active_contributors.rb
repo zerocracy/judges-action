@@ -20,6 +20,9 @@ def total_active_contributors(fact)
       rescue Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Commits not found for #{repo}: #{e.message}")
         next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        break
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to commit search for #{repo} " \
@@ -27,8 +30,10 @@ def total_active_contributors(fact)
         )
         next
       end
-    next if commits.nil?
+    return {} if commits.nil?
     commits[:items].each do |commit|
+      date = commit.dig(:commit, :author, :date)
+      next if !date.nil? && Time.parse(date.to_s) > fact.when
       author = commit.dig(:author, :id)
       seen << author unless author.nil?
     end

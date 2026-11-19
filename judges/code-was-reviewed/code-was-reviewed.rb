@@ -132,19 +132,19 @@ Fbe.consider(
             "[#{$judge}] Access forbidden to issue comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::Unauthorized => e
           $loog.error(
             "[#{$judge}] Not authorized to fetch issue comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::TooManyRequests, Octokit::ServerError,
           Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         end
       n.comments = count
       n.review_comments =
@@ -158,28 +158,42 @@ Fbe.consider(
             "[#{$judge}] Access forbidden to review comments for #{repo}##{f.issue} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::Unauthorized => e
           $loog.error(
             "[#{$judge}] Not authorized to fetch review comments for #{repo}##{f.issue}: #{e.class}: #{e.message}"
           )
-          0
+          next
         rescue Octokit::TooManyRequests, Octokit::ServerError,
           Faraday::TimeoutError, Faraday::ConnectionFailed => e
           $loog.warn(
             "[#{$judge}] Transient error fetching review comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
           )
-          0
+          next
         end
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
+      author =
+        begin
+          Fbe.who(n, :author)
+        rescue Fbe::Error => e
+          $loog.warn("Can't find the login of #{Fbe.issue(n)} author: #{e.message}")
+          "user ##{n.author}"
+        end
+      who =
+        begin
+          Fbe.who(n)
+        rescue Fbe::Error => e
+          $loog.warn("Can't find the login of #{Fbe.issue(n)} reviewer: #{e.message}")
+          "user ##{n.who}"
+        end
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
-        "created by #{Fbe.who(n, :author)} was reviewed by #{Fbe.who(n)} " \
+        "created by #{author} was reviewed by #{who} " \
         "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
       $loog.info(
         [
-          "The pull #{Fbe.issue(n)} was reviewed by #{Fbe.who(n)} #{n.when.ago} ago:",
+          "The pull #{Fbe.issue(n)} was reviewed by #{who} #{n.when.ago} ago:",
           "#{n.review_comments} review comments, #{n.seconds} seconds, #{n.comments} comments"
         ].join(' ')
       )
