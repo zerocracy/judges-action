@@ -118,6 +118,47 @@ class TestEraseRepository < Jp::Test
     assert_requested(:get, 'https://api.github.com/repositories/403999', times: 1)
   end
 
+  def test_asks_about_quota_once_per_repository
+    seed = Random.new_seed
+    random = Random.new(seed)
+    repos = Array.new(random.rand(2..5)) { |i| (i * 1000) + random.rand(1..999) }
+    fb = Factbase.new
+    facts = repos.flat_map { |r| [r] * random.rand(2..6) }
+    facts.shuffle!(random:)
+    facts.each do |r|
+      fb.insert.then do |f|
+        f.where = 'github'
+        f.repository = r
+      end
+    end
+    asked = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| asked.push(true) && false }
+    octo.define_singleton_method(:repository) { |r| { full_name: "foé/#{r}" } }
+    octo.define_singleton_method(:print_trace!) { |**| '' }
+    Fbe.stub(:octo, octo) { load_it('erase-repository', fb, Judges::Options.new({}), loog: Loog::NULL) }
+    assert_equal(repos.size, asked.size, "quota is not asked once per repository, seed #{seed}")
+  end
+
+  def test_dont_look_up_repository_when_off_quota
+    seed = Random.new_seed
+    random = Random.new(seed)
+    fb = Factbase.new
+    Array.new(random.rand(1..7)) { random.rand(1..99_999) }.each do |r|
+      fb.insert.then do |f|
+        f.where = 'github'
+        f.repository = r
+      end
+    end
+    looked = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| true }
+    octo.define_singleton_method(:repository) { |r| looked.push(r) && { full_name: "bär/#{r}" } }
+    octo.define_singleton_method(:print_trace!) { |**| '' }
+    Fbe.stub(:octo, octo) { load_it('erase-repository', fb, Judges::Options.new({}), loog: Loog::NULL) }
+    assert_empty(looked, "repository is looked up while off quota, seed #{seed}")
+  end
+
   def test_runs_without_fbe_consider
     Dir.mktmpdir do |dir|
       FileUtils.mkdir_p(File.join(dir, 'fbe'))
