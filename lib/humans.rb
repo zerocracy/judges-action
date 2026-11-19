@@ -7,8 +7,8 @@ require_relative 'jp'
 
 def Jp.bots
   return [] unless $options.respond_to?(:bots)
-  list = $options.bots
-  return [] if list.nil? || list.empty?
+  list = $options.bots.to_s
+  return [] if list.empty?
   list.split(',').filter_map do |n|
     n = n.strip
     n unless n.empty?

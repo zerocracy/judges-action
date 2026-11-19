@@ -19,8 +19,8 @@ def some_triage_time(fact)
     rid =
       begin
         Fbe.octo.repo_id_by_name(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Repository #{repo} not found: #{e.message}")
+      rescue Fbe::Error, Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository #{repo} not accessible: #{e.message}")
         next
       rescue Octokit::Forbidden => e
         $loog.warn(
@@ -41,6 +41,7 @@ def some_triage_time(fact)
             (eq label 'enhancement'))
           (absent stale)
           (exists when)
+          (lte when (to_time '#{fact.when.utc.iso8601(9)}'))
           (eq where 'github'))
         "
       ).each.min_by(&:when)

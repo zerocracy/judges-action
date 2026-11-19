@@ -324,6 +324,36 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
+  def test_leaves_review_unset_when_only_the_author_and_bots_reviewed
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_base(44)
+    stub_pull_was_merged_issue(44)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100',
+      body: [
+        {
+          id: 1, state: 'COMMENTED', user: { id: 421, login: 'user', type: 'User' },
+          submitted_at: '2025-09-29 05:05:46 UTC'
+        },
+        {
+          id: 2, state: 'APPROVED', user: { id: 9, login: 'copilot', type: 'Bot' },
+          submitted_at: '2025-09-29 06:00:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews/2/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    fact = fb.query('(eq what "pull-was-merged")').each.to_a.first
+    refute_nil(fact)
+    assert_nil(fact['review'])
+  end
+
   def test_rescues_forbidden_on_pull_request_lookup
     WebMock.disable_net_connect!
     rate_limit_up
@@ -599,10 +629,68 @@ class TestPullWasMerged < Jp::Test
     )
   end
 
+  def test_records_the_merged_pulls_changed_files
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_success(44, files: 7)
+    fb = Factbase.new
+    fb.with(what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) { load_it('pull-was-merged', fb) }
+    assert_equal(7, fb.pick(what: 'pull-was-merged').files, 'the merged fact must keep the changed-file count')
+  end
+
+  def test_merged_with_ghost_user_closed_by
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_base(44)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44',
+      body: {
+        number: 44, title: 'some title 44', state: 'closed',
+        closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        closed_by: { login: 'ghost', id: nil }
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/44/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('pull-was-merged', fb)
+      assert(fb.one?(what: 'pull-was-merged', where: 'github', stale: 'who', repository: 42, issue: 44, hoc: 17))
+    end
+  end
+
+  def test_merged_with_nil_closed_by
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_pull_was_merged_base(45)
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45',
+      body: {
+        number: 45, title: 'some title 45', state: 'closed',
+        closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        closed_by: nil
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/45/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/45/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/45/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 45, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('pull-was-merged', fb)
+      assert(fb.one?(what: 'pull-was-merged', where: 'github', stale: 'who', repository: 42, issue: 45, hoc: 17))
+    end
+  end
+
   private
 
-  def stub_pull_was_merged_success(issue)
-    stub_pull_was_merged_base(issue)
+  def stub_pull_was_merged_success(issue, files: 1)
+    stub_pull_was_merged_base(issue, files:)
     stub_pull_was_merged_issue(issue)
     stub_github("https://api.github.com/repos/foo/foo/pulls/#{issue}/reviews?per_page=100", body: [])
     stub_github("https://api.github.com/repos/foo/foo/pulls/#{issue}/comments?per_page=100", body: [])
@@ -610,7 +698,7 @@ class TestPullWasMerged < Jp::Test
     stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
   end
 
-  def stub_pull_was_merged_base(issue)
+  def stub_pull_was_merged_base(issue, files: 1)
     stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
     stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
     stub_github(
@@ -620,7 +708,7 @@ class TestPullWasMerged < Jp::Test
         merged_at: Time.parse('2025-09-30 18:00:00 UTC'),
         closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
         created_at: Time.parse('2025-09-30 15:35:30 UTC'),
-        additions: 12, deletions: 5, changed_files: 1,
+        additions: 12, deletions: 5, changed_files: files,
         head: { ref: '40', sha: 'aa123' },
         base: { repo: { id: 42, full_name: 'foo/foo' } }
       }

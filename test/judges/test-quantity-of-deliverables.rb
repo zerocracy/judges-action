@@ -9,6 +9,7 @@ require 'fbe/unmask_repos'
 require 'json'
 require 'judges/options'
 require 'loog'
+require_relative '../../lib/patches/unmask_repos'
 require_relative '../test__helper'
 
 class TestQuantityOfDeliverables < Jp::Test
