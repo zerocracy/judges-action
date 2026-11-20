@@ -2,12 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 12m1s: execution expired'
+  error:
+  - deadlock; recursive locking
+  - deadlock; recursive locking
   inserted: 8
-  seconds: 1230.007167529
+  seconds: 1164.570701775
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-20 23:21:53.501963948 Z
+  when: 2026-11-20 23:50:34.637864802 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -144671,7 +144673,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 41
+  min_issue_was_found: 0
   min_pull_was_found: 22
   repository: 1090089359
   types_were_scanned: 0
@@ -152151,7 +152153,7 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27625043314
+  events_were_scanned: 27757713997
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 170
@@ -152385,12 +152387,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20765946133
+  events_were_scanned: 20810851452
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 26
+  min_issue_was_found: 30
   min_pull_was_found: 173
   repository: 805238060
   types_were_scanned: 0
@@ -152408,7 +152410,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 4
   min_pull_was_found: 80
   repository: 1084843345
   types_were_scanned: 0
@@ -152418,36 +152420,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
-  closures_were_checked: 0
+  assignees_were_scanned: 750
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
-  events_were_scanned: 27754187672
+  events_were_scanned: 20813657277
   issues_were_scanned: 1396
-  labels_were_scanned: 1866
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 1324
+  merges_were_scanned: 1630
   min_issue_was_found: 1859
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 1639
+  types_were_scanned: 1752
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 447
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27742688095
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
-  min_issue_was_found: 337
+  merges_were_scanned: 605
+  min_issue_was_found: 339
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -152865,18 +152867,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1547
-  closures_were_checked: 955
+  assignees_were_scanned: 1614
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20804109701
   issues_were_scanned: 1225
-  labels_were_scanned: 1830
+  labels_were_scanned: 1969
   latest_issue_was_found: 317
-  merges_were_scanned: 1337
-  min_issue_was_found: 1983
+  merges_were_scanned: 1459
+  min_issue_was_found: 0
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 1578
+  types_were_scanned: 1715
   what: iterate
   where: github
 - _id: 2629882
@@ -153522,18 +153524,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1250
+  assignees_were_scanned: 1390
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 20807437292
+  events_were_scanned: 27756047994
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1201
-  min_issue_was_found: 1248
+  merges_were_scanned: 1425
+  min_issue_was_found: 1249
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 861
+  types_were_scanned: 977
   what: iterate
   where: github
 - _id: 2629939
@@ -153668,18 +153670,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 620
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 20790252115
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 974
-  min_issue_was_found: 1236
+  merges_were_scanned: 1125
+  min_issue_was_found: 1237
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 0
+  types_were_scanned: 606
   what: iterate
   where: github
 - _id: 2630023
@@ -153704,18 +153706,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2719
-  closures_were_checked: 1744
+  assignees_were_scanned: 2857
+  closures_were_checked: 1964
   earliest_issue_was_found: 1
-  events_were_scanned: 27753905262
+  events_were_scanned: 27761170430
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 2769
+  merges_were_scanned: 2893
   min_issue_was_found: 2971
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 1950
+  types_were_scanned: 2082
   what: iterate
   where: github
 - _id: 2630036
@@ -153740,10 +153742,10 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1218
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27747901158
+  events_were_scanned: 27759292348
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
@@ -153751,7 +153753,7 @@
   min_issue_was_found: 1250
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 1189
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -577374,10 +577376,6 @@
   comments: 2
   details: It's time to reward @opusstudiohq-max for the code contributed in yegor256/factbase#1603,
     the reward amount is 24.
-  greeting: |-
-    Thanks for the contribution! You've earned +24 points, the base award under our [policy](https://www.yegor256.com/2014/11/14/hits-of-code.html) for a code contribution. Please [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+1390](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too.
-
-    <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+1390](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 57
   href: https://github.com/yegor256/factbase/issues/1603/#issuecomment-7052608747
   is_human: 1
