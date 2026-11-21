@@ -8,6 +8,22 @@ require 'fbe/octo'
 require_relative '../../lib/humans'
 
 @bots = nil
+users =
+  Hash.new do |cache, id|
+    cache[id] =
+      begin
+        Fbe.octo.user(id)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("GitHub user ##{id} is not found: #{e.message}")
+        :missing
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] GitHub user ##{id} is not accessible " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        :forbidden
+      end
+  end
 
 Fbe.consider(
   '(and
@@ -19,20 +35,12 @@ Fbe.consider(
     (exists what)
     (exists who))'
 ) do |f|
-  json =
-    begin
-      Fbe.octo.user(f.who)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
-      $loog.info("GitHub user ##{f.who} is not found: #{e.message}")
-      f.stale = 'who'
-      next
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] GitHub user ##{f.who} is not accessible " \
-        "(transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
-      next
-    end
+  json = users[f.who]
+  if json == :missing
+    f.stale = 'who'
+    next
+  end
+  next if json == :forbidden
   type = json[:type]
   location = f['issue'] ? "#{f.what} at #{f.repository}##{f.issue}" : f.what.to_s
   @bots ||= Jp.bots
