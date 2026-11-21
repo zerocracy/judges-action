@@ -2835,10 +2835,10 @@ class TestGithubEvents < Jp::Test
       body: [{ login: 'yegor256', id: 526_301 }]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
-    %w[2.0.0 1.0.0].each do |tag|
+    %w[abc123def456...1.0.0 1.0.0...2.0.0].each do |range|
       stub_github(
-        "https://api.github.com/repos/foo/foo/compare/abc123def456...#{tag}?per_page=100",
-        body: { status: 'ahead', total_commits: 1, commits: [{ sha: "sha-#{tag}" }], files: [] }
+        "https://api.github.com/repos/foo/foo/compare/#{range}?per_page=100",
+        body: { status: 'ahead', total_commits: 1, commits: [{ sha: "sha-#{range}" }], files: [] }
       )
     end
     stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
@@ -2847,6 +2847,65 @@ class TestGithubEvents < Jp::Test
     f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(2, f.count)
     assert_not_requested(:get, %r{/compare/2\.0\.0\.\.\.1\.0\.0})
+    assert_requested(:get, %r{/compare/1\.0\.0\.\.\.2\.0\.0}, at_least_times: 1)
+  end
+
+  def test_skips_a_release_without_a_tag_and_records_the_next_one
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '103',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_003,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: nil,
+            name: 'broken',
+            created_at: Time.parse('2024-11-30T11:00:00Z'),
+            published_at: Time.parse('2024-11-30T11:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T11:00:00Z')
+      },
+      {
+        id: '101',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_001,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '1.0.0',
+            name: 'v1.0.0',
+            created_at: Time.parse('2024-11-30T09:00:00Z'),
+            published_at: Time.parse('2024-11-30T09:00:00Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T09:00:00Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
+      body: { status: 'ahead', total_commits: 1, commits: [{ sha: 'sha-1' }], files: [] }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert_equal(['1.0.0'], fb.query('(and (eq repository 42) (eq what "release-published"))').each.map(&:tag))
   end
 
   def test_release_event_survives_a_deleted_release_author
