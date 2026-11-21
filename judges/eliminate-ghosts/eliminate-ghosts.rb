@@ -35,6 +35,10 @@ Fbe.fb.query('(and (absent stale) (eq where "github") (exists who))').each do |f
         else
           raise
         end
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        forbidden.add(f.who)
+        $loog.warn("[#{$judge}] Transient error on user ##{f.who} (will retry next cycle): #{e.class}: #{e.message}")
+        throw(:"GitHub user ##{f.who} is not accessible (transient)")
       end
     if nick.nil?
       bad.add(f.who)
@@ -53,7 +57,7 @@ Fbe.fb.txn do |fbt|
     end
   end
   fbt.query('(and (eq where "github") (exists who) (eq stale "who") (unique who))').each do |f|
-    next if good.include?(f.who)
+    next if good.include?(f.who) || forbidden.include?(f.who)
     fbt.query("(and (eq who #{f.who}) (not (eq stale 'who')) (eq where 'github'))").each do |ff|
       ff.stale = 'who'
     end
