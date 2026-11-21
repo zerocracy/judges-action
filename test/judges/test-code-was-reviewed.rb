@@ -61,7 +61,7 @@ class TestCodeWasReviewed < Jp::Test
     assert(
       fb.one?(
         what: 'code-was-reviewed', where: 'github', repository: 42, issue: 44, who: 422, hoc: 17, author: 421,
-        when: Time.parse('2025-09-02 10:39:20 UTC'), comments: 2, review_comments: 3, seconds: 68_630,
+        when: Time.parse('2025-09-02 10:39:20 UTC'), comments: 1, review_comments: 3, seconds: 68_630,
         details:
           'The pull request foo/foo#44 with 17 HoC created by @user1 ' \
           'was reviewed by @user2 after 19h3m and 3 comments.'
@@ -100,7 +100,38 @@ class TestCodeWasReviewed < Jp::Test
     fb = Factbase.new
     fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 50, where: 'github')
     load_it('code-was-reviewed', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'bots' => 'rultor' }))
-    assert(fb.one?(what: 'code-was-reviewed', issue: 50, who: 422, comments: 1))
+    assert(fb.one?(what: 'code-was-reviewed', issue: 50, who: 422, comments: 0))
+  end
+
+  def test_leaves_out_the_comments_of_the_pull_author
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/51',
+      body: {
+        id: 61, number: 51, user: { id: 421, login: 'user' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 100, deletions: 25
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/51/reviews?per_page=100',
+      body: [422, 423].map { |u| { id: 49_000 + u, user: { id: u }, submitted_at: Time.parse('2025-09-02 10:39') } }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/51/comments?per_page=100',
+      body: [421, 421, 421, 422, 423, 421].each_with_index.map { |u, i| { id: 48_300 + i, user: { id: u } } }
+    )
+    [422, 423].each do |u|
+      stub_github("https://api.github.com/repos/foo/foo/pulls/51/reviews/#{49_000 + u}/comments?per_page=100", body: [])
+      stub_github("https://api.github.com/user/#{u}", body: { id: u, login: "user#{u}" })
+    end
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-closed', repository: 42, issue: 51, where: 'github')
+    load_it('code-was-reviewed', fb)
+    assert(fb.one?(what: 'code-was-reviewed', issue: 51, who: 422, author: 421, comments: 2))
+    assert(fb.one?(what: 'code-was-reviewed', issue: 51, who: 423, author: 421, comments: 2))
   end
 
   def test_counts_only_the_review_comments_that_people_made
