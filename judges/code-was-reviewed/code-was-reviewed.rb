@@ -11,6 +11,7 @@ require 'fbe/who'
 require 'octokit'
 require_relative '../../lib/humans'
 require_relative '../../lib/issue_was_lost'
+require_relative '../../lib/who_of'
 
 Fbe.consider(
   "(and
@@ -100,13 +101,13 @@ Fbe.consider(
   reviewers =
     Jp.human_comments(reviews).filter_map do |review|
       who = review.dig(:user, :id)
-      who unless who.nil? || who == author
+      who unless who.nil? || Jp.ghost?(who) || who == author
     end
   f.reviews = reviewers.uniq.count
   count = nil
   Jp.human_comments(reviews).each do |review|
     reviewer = review.dig(:user, :id)
-    next if reviewer.nil?
+    next if reviewer.nil? || Jp.ghost?(reviewer)
     next if reviewer == author
     Fbe.fb.txn do |fbt|
       n =
