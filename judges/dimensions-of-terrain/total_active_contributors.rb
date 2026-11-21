@@ -14,7 +14,7 @@ def total_active_contributors(fact)
     commits =
       begin
         Jp.qosearch(
-          "repo:#{repo} author-date:>#{(fact.when - (30 * 24 * 60 * 60)).iso8601[0..9]}",
+          "repo:#{repo} author-date:>#{(fact.when - (30 * 24 * 60 * 60)).utc.iso8601}",
           method: :search_commits
         )
       rescue Octokit::NotFound, Octokit::Deprecated => e
