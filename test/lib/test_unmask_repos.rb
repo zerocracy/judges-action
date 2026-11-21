@@ -72,4 +72,48 @@ class TestUnmaskRepos < Jp::Test
       'a server error cannot break the expansion of the other masks'
     )
   end
+
+  def test_skips_forks_found_by_mask
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/orgs/foo/repos?per_page=100&type=all',
+      body: [{ full_name: 'foo/own', fork: false }, { full_name: 'foo/kafka', fork: true }]
+    )
+    stub_github('https://api.github.com/repos/foo/own', body: { full_name: 'foo/own', archived: false, fork: false })
+    stub_github('https://api.github.com/repos/foo/kafka', body: { full_name: 'foo/kafka', archived: false, fork: true })
+    $loog = Loog::NULL
+    assert_equal(
+      ['foo/own'],
+      Fbe.unmask_repos(options: Judges::Options.new({ 'repositories' => 'foo/*' }), global: {}, loog: Loog::NULL),
+      'a fork of somebody else is taken as the terrain of the organization'
+    )
+  end
+
+  def test_keeps_fork_named_explicitly
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/kafka', body: { full_name: 'foo/kafka', archived: false, fork: true })
+    $loog = Loog::NULL
+    assert_equal(
+      ['foo/kafka'],
+      Fbe.unmask_repos(options: Judges::Options.new({ 'repositories' => 'foo/kafka' }), global: {}, loog: Loog::NULL),
+      'a fork listed by its own name is dropped, although somebody asked for it'
+    )
+  end
+
+  def test_keeps_fork_named_next_to_its_mask
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/orgs/foo/repos?per_page=100&type=all',
+      body: [{ full_name: 'foo/kafka', fork: true }]
+    )
+    stub_github('https://api.github.com/repos/foo/kafka', body: { full_name: 'foo/kafka', archived: false, fork: true })
+    $loog = Loog::NULL
+    assert_equal(
+      ['foo/kafka'],
+      Fbe.unmask_repos(
+        options: Judges::Options.new({ 'repositories' => 'foo/*,foo/kafka' }), global: {}, loog: Loog::NULL
+      ),
+      'a fork named next to the mask that finds it is dropped, although somebody asked for it'
+    )
+  end
 end
