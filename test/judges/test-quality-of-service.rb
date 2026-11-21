@@ -1868,6 +1868,11 @@ class TestQualityOfService < Jp::Test
       f.qos_interval = 3
       f.qos_min_triage_seconds = 60
     end
+    fb.insert.then do |f|
+      f.what = 'quality-of-service'
+      f.since = Time.parse('2024-08-02 21:00:00 UTC')
+      f.when = Time.parse('2024-08-09 21:00:00 UTC')
+    end
     insert_label_was_attached_fact(
       fb, where: 'gitlab', repository: 42, issue: 40, when: Time.parse('2024-08-04 11:10:00 UTC'), label: 'bug'
     )
@@ -1894,7 +1899,7 @@ class TestQualityOfService < Jp::Test
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 45, when: Time.parse('2024-08-06 11:00:00 UTC'), label: 'enhancement'
     )
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+    Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal(Time.parse('2024-08-02 21:00:00 UTC'), f.since)
@@ -1976,13 +1981,18 @@ class TestQualityOfService < Jp::Test
       f.qos_interval = 3
       f.qos_min_triage_seconds = 60
     end
+    fb.insert.then do |f|
+      f.what = 'quality-of-service'
+      f.since = Time.parse('2024-08-02 21:00:00 UTC')
+      f.when = Time.parse('2024-08-09 21:00:00 UTC')
+    end
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 50, when: Time.parse('2024-08-04 12:00:01 UTC'), label: 'bug'
     )
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 50, when: Time.parse('2024-08-04 14:00:00 UTC'), label: 'enhancement'
     )
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+    Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_nil(f['some_triage_time'])
@@ -2062,10 +2072,15 @@ class TestQualityOfService < Jp::Test
       f.qos_interval = 3
       f.qos_min_triage_seconds = 7_200
     end
+    fb.insert.then do |f|
+      f.what = 'quality-of-service'
+      f.since = Time.parse('2024-08-02 21:00:00 UTC')
+      f.when = Time.parse('2024-08-09 21:00:00 UTC')
+    end
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 51, when: Time.parse('2024-08-04 13:00:00 UTC'), label: 'bug'
     )
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+    Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_nil(f['some_triage_time'])
@@ -2152,13 +2167,18 @@ class TestQualityOfService < Jp::Test
       f.qos_days = 7
       f.qos_interval = 3
     end
+    fb.insert.then do |f|
+      f.what = 'quality-of-service'
+      f.since = Time.parse('2024-08-02 21:00:00 UTC')
+      f.when = Time.parse('2024-08-09 21:00:00 UTC')
+    end
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 60, when: Time.parse('2024-08-04 12:00:59 UTC'), label: 'bug'
     )
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 61, when: Time.parse('2024-08-04 12:01:00 UTC'), label: 'bug'
     )
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+    Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([60.0], f['some_triage_time'])
@@ -2246,13 +2266,18 @@ class TestQualityOfService < Jp::Test
       f.qos_interval = 3
       f.qos_min_triage_seconds = 60
     end
+    fb.insert.then do |f|
+      f.what = 'quality-of-service'
+      f.since = Time.parse('2024-08-02 21:00:00 UTC')
+      f.when = Time.parse('2024-08-09 21:00:00 UTC')
+    end
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 70, when: Time.parse('2024-08-04 12:00:01 UTC'), label: 'bug'
     )
     insert_label_was_attached_fact(
       fb, where: 'github', repository: 42, issue: 71, when: Time.parse('2024-08-04 14:00:00 UTC'), label: 'enhancement'
     )
-    Time.stub(:now, Time.parse('2024-08-09 21:00:00 UTC')) do
+    Time.stub(:now, Time.parse('2024-08-10 21:00:00 UTC')) do
       load_it('quality-of-service', fb)
       f = fb.query('(eq what "quality-of-service")').each.first
       assert_equal([7_200.0], f['some_triage_time'])
