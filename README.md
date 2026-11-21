@@ -125,6 +125,9 @@ When both are set, the `github_token=` and `bots=` pairs win over
   (these two are only available as k=v pairs)
 * `sqlite_cache_min_age=3600` is the minimum age in seconds before a
   cached HTTP response is considered stale (default is 3600, i.e. 1 hour)
+* `job_name=...` identifies the Zerocracy project for valve operations;
+  by default, it is the base name of the `factbase` input without its extension
+  (for example, `data/my-project.fb` produces `my-project`)
 
 ### Environment Variables
 
