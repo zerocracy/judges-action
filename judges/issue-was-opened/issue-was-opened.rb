@@ -52,6 +52,9 @@ Fbe.conclude do
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         throw(:rollback)
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
+        throw(:rollback)
       end
     json =
       begin
@@ -65,6 +68,9 @@ Fbe.conclude do
           "[#{$judge}] Access forbidden to issue ##{f.issue} in #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        throw(:rollback)
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error (will retry next cycle): #{e.class}: #{e.message}")
         throw(:rollback)
       end
     n.what = $judge
