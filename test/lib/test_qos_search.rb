@@ -37,6 +37,23 @@ class TestQosSearch < Jp::Test
     assert_equal(1, found[:items].first[:number])
   end
 
+  def test_returns_nil_when_search_results_are_incomplete
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 17, incomplete_results: true, items: [] })
+    $loog = Loog::Buffer.new
+    assert_nil(Jp.qosearch('repo:foo/foo type:issue'))
+    assert_includes($loog.to_s, 'incomplete results')
+    refute(Jp.instance_variable_get(:@offquota)[$judge])
+  end
+
+  def test_returns_results_when_incomplete_flag_is_false
+    rate_limit_up
+    searchstub('repo:foo/foo type:issue', body: { total_count: 4, incomplete_results: false, items: [{ number: 3 }] })
+    found = Jp.qosearch('repo:foo/foo type:issue')
+    assert_equal(4, found[:total_count])
+    assert_equal(3, found[:items].first[:number])
+  end
+
   def test_does_not_follow_pagination_links
     rate_limit_up
     stub_github(
