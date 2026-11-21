@@ -62,6 +62,9 @@ module Fbe
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         false
+      rescue Octokit::UnavailableForLegalReasons => e
+        $loog.info("Repository #{repo} is blocked for legal reasons, dropping it: #{e.message}")
+        true
       rescue Octokit::ServerError, Octokit::Unauthorized,
         Faraday::ConnectionFailed, Faraday::TimeoutError => e
         $loog.warn(
