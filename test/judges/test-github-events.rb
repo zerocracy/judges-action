@@ -1576,6 +1576,44 @@ class TestGithubEvents < Jp::Test
     )
   end
 
+  def test_rescans_push_event_after_transient_forbidden
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11111',
+          type: 'PushEvent',
+          actor: { id: 43, login: 'yegor256' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 2412, ref: 'refs/heads/master', head: 'f5d59b035' },
+          created_at: '2025-06-26 19:03:16 UTC'
+        }
+      ]
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/foo/commits/f5d59b035/pulls?per_page=100')
+      .to_return(status: 403, body: { message: 'Forbidden' }.to_json, headers: { 'Content-Type': 'application/json' })
+      .then.to_return(body: [].to_json, headers: { 'Content-Type': 'application/json' })
+    stub_github('https://api.github.com/user', body: { id: 7, login: 'robot' })
+    stub_github('https://api.github.com/user/43', body: { id: 43, login: 'yegor256' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert(fb.none?(what: 'git-was-pushed'), 'the event is recorded although it failed')
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_110))
+    load_it('github-events', fb)
+    assert(fb.one?(what: 'git-was-pushed', event_id: 11_111), 'the failed event is never scanned again')
+    assert(fb.one?(what: 'iterate', repository: 42, events_were_scanned: 11_111))
+  end
+
   def test_push_event_by_owner_sets_by_owner_to_one
     WebMock.disable_net_connect!
     rate_limit_up
