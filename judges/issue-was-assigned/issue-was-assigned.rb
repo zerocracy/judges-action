@@ -22,13 +22,6 @@ Fbe.iterate do
       (absent stale)
       (absent tombstone)
       (absent done)
-      (empty
-        (and
-          (eq issue $issue)
-          (eq repository $repository)
-          (eq what '#{$judge}')
-          (eq where $where)
-          (absent unassigned)))
       (eq where 'github'))"
   repeats 64
   over do |repository, issue|
@@ -63,10 +56,12 @@ Fbe.iterate do
     events.each do |event|
       Fbe.fb.txn do |fbt|
         who = event.dig(:assignee, :id)
-        unless fbt.query(
-          "(and (eq issue #{issue}) (eq who #{who}) (eq what '#{$judge}') " \
-          "(eq repository #{repository}) (eq where 'github') (absent unassigned))"
-        ).each.to_a.empty?
+        recorded =
+          fbt.query(
+            "(and (eq issue #{issue}) (eq who #{who}) (eq what '#{$judge}') " \
+            "(eq repository #{repository}) (eq where 'github'))"
+          ).each.any? { |fact| fact.when == event[:created_at] }
+        if recorded
           $loog.warn("Assignee already exists in #{repo}##{issue}")
           next
         end
