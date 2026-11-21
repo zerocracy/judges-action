@@ -76,9 +76,15 @@ Fbe.iterate do
         nn.what = $judge
         nn.repository = repository
         nn.where = 'github'
-        nn.assigner = event.dig(:assigner, :id)
+        assigner = event.dig(:assigner, :id)
+        if assigner
+          nn.assigner = assigner
+        else
+          nn.stale = 'assigner'
+        end
         nn.when = event[:created_at]
-        nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
+        by = assigner ? Fbe.who(nn, :assigner) : 'someone'
+        nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{by}."
         $loog.info("The issue #{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} #{nn.when.ago} ago (fact ##{nn._id})")
       end
     end
