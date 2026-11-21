@@ -1955,6 +1955,41 @@ class TestGithubEvents < Jp::Test
     assert(fb.none?(event_id: 11_129), 'A reopening event cannot leave a fact behind')
   end
 
+  def test_reopened_issue_drops_its_stale_closure
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11130',
+          type: 'IssuesEvent',
+          actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'reopened', issue: { number: 456 } },
+          created_at: '2025-06-27 19:00:05 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    fb = Factbase.new
+    fb.with(what: 'issue-was-closed', where: 'github', repository: 42, issue: 456, who: 45)
+    load_it('github-events', fb)
+    assert(
+      fb.none?(what: 'issue-was-closed', where: 'github', repository: 42, issue: 456),
+      'The closure of a reopened issue cannot stay in the factbase'
+    )
+    assert(fb.none?(event_id: 11_130), 'A reopening event cannot leave a fact behind')
+  end
+
   def test_adds_created_issue_comment_event
     skip('This type of event is not needed now')
     WebMock.disable_net_connect!
