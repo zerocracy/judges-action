@@ -28,6 +28,8 @@ name: zerocracy
 concurrency:
   group: zerocracy
   cancel-in-progress: false
+permissions:
+  contents: write
 jobs:
   zerocracy:
     if: github.repository_owner == 'yegor256'
