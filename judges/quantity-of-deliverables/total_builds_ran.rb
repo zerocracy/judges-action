@@ -10,15 +10,26 @@ require_relative '../../lib/patches/unmask_repos'
 def total_builds_ran(fact)
   total = 0
   available = false
-  Fbe.unmask_repos.each do |repo|
-    total +=
-      Fbe.octo.with_disable_auto_paginate do |octo|
-        octo.repository_workflow_runs(
-          repo,
-          created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}",
-          per_page: 1
-        )[:total_count]
+  count =
+    lambda do |repo, from, till|
+      found =
+        Fbe.octo.with_disable_auto_paginate do |octo|
+          octo.repository_workflow_runs(repo, created: "#{from.utc.iso8601}..#{till.utc.iso8601}", per_page: 1)
+        end[:total_count]
+      return found if found < 2500
+      if till - from < 120
+        $loog.warn("[#{$judge}] GitHub caps the workflow runs of #{repo} at #{found} in #{from}..#{till}")
+        return
       end
+      middle = from + ((till - from) / 2).floor
+      early = count.call(repo, from, middle)
+      late = count.call(repo, middle + 1, till) unless early.nil?
+      early + late unless late.nil?
+    end
+  Fbe.unmask_repos.each do |repo|
+    found = count.call(repo, fact.since, fact.when)
+    return {} if found.nil?
+    total += found
     available = true
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info(
