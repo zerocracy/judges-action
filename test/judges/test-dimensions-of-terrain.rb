@@ -133,7 +133,6 @@ class TestDimensionsOfTerrain < Jp::Test
         )
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
         assert_equal('dimensions-of-terrain', f.what)
-        assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(3, f.total_repositories)
       end
     end
@@ -231,6 +230,38 @@ class TestDimensionsOfTerrain < Jp::Test
     end
   end
 
+  def test_dates_the_fact_by_today
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo', body: {
+        name: 'empty-repo', full_name: 'yegor256/empty-repo', size: 0,
+        stargazers_count: 0, forks: 0, default_branch: 'master', archived: false
+      }
+    )
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/releases?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/repos/yegor256/empty-repo/git/trees/master?recursive=true',
+      body: { sha: 'a', tree: [], truncated: false }
+    )
+    stub_github('https://api.github.com/repos/yegor256/empty-repo/contributors?per_page=100', body: [])
+    stub_github(
+      'https://api.github.com/search/commits?per_page=100&q=repo:yegor256/empty-repo%20author-date:%3E2024-08-30',
+      body: { total_count: 0, incomplete_results: false, items: [] }
+    )
+    fb = Factbase.new
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
+        load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'yegor256/empty-repo' }))
+        f = fb.query("(eq what 'dimensions-of-terrain')").each.first
+        assert_equal(
+          Time.parse('2024-09-29 21:00:00 UTC'), f.when,
+          'the fact of dimensions-of-terrain is dated by today'
+        )
+      end
+    end
+  end
+
   def test_total_releases
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(
@@ -282,7 +313,6 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(8, f.total_releases)
       end
     end
@@ -351,7 +381,6 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(20, f.total_stars)
         assert_equal(15, f.total_forks)
       end
@@ -530,7 +559,6 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(Time.parse('2024-09-29 21:00:00 UTC'), f.when)
         assert_equal(2, f.total_repositories)
         assert_equal(0, f.total_commits)
         assert_equal(0, f.total_files)
