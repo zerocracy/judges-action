@@ -49,6 +49,27 @@ class TestWhoHasName < Jp::Test
     assert_equal(0, fb.all.size)
   end
 
+  def test_clears_who_staleness_behind_another_stale_value
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/user/444', body: { login: 'lebowski', id: 444, type: 'User' })
+    fb = Factbase.new
+    f = fb.insert
+    f._id = 1
+    f.who = 444
+    f.where = 'github'
+    f.what = 'issue-was-opened'
+    g = fb.insert
+    g._id = 2
+    g.who = 444
+    g.where = 'github'
+    g.what = 'issue-was-closed'
+    g.stale = 'issue'
+    g.stale = 'who'
+    load_it('who-has-name', fb)
+    assert_equal(['issue'], fb.query('(eq _id 2)').each.first['stale'])
+  end
+
   def test_overwrite_name_if_user_login_changed
     WebMock.disable_net_connect!
     rate_limit_up

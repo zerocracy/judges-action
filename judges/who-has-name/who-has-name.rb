@@ -104,7 +104,6 @@ unless alive.empty?
       (exists who)
       (or #{alive.map { |u| "(eq who #{u})" }.join}))"
   ).each do |f|
-    next unless f.stale == 'who'
     Fbe.delete_one(f, 'stale', 'who')
   end
 end
