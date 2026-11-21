@@ -173,4 +173,60 @@ class TestIssueWasAssigned < Jp::Test
       'the second assignment of the same person must get its own fact'
     )
   end
+
+  def test_records_assignment_by_a_deleted_assigner
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      body: [
+        {
+          id: 560,
+          event: 'assigned',
+          assignee: { id: 7, login: 'user1' },
+          assigner: { id: 8, login: 'user2' },
+          created_at: '2025-10-03 09:00:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/7', body: { id: 7, login: 'user7' })
+    stub_request(:get, 'https://api.github.com/user/8').to_return(status: 404, body: '')
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-assigned', fb)
+    assert(
+      fb.one?(what: 'issue-was-assigned', issue: 44, who: 7, assigner: 8),
+      'the assignment is lost because the assigner account is deleted'
+    )
+  end
+
+  def test_records_assignment_of_a_deleted_assignee
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      body: [
+        {
+          id: 560,
+          event: 'assigned',
+          assignee: { id: 7, login: 'user1' },
+          assigner: { id: 8, login: 'user2' },
+          created_at: '2025-10-03 09:00:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/8', body: { id: 8, login: 'user8' })
+    stub_request(:get, 'https://api.github.com/user/7').to_return(status: 404, body: '')
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-assigned', fb)
+    assert(
+      fb.one?(what: 'issue-was-assigned', issue: 44, who: 7, assigner: 8),
+      'the assignment is lost because the assignee account is deleted'
+    )
+  end
 end
