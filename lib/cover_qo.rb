@@ -9,6 +9,7 @@ require_relative 'jp'
 require_relative 'today'
 
 def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
+  raise(ArgumentError, "The window of #{judge} must be a positive number of days, not #{days}") unless days.positive?
   today ||= Jp.today
   slice = days * 24 * 60 * 60
   facts = Fbe.fb.query("(and (eq what '#{judge}') (exists since) (exists when))").each.to_a.sort_by(&:since)
@@ -22,14 +23,16 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
     end
     return
   end
-  if last && last < today - slice
+  start = last
+  while start + slice < today
     Fbe.fb.insert.then do |n|
       n.what = judge
-      n.since = last
-      n.when = today
+      n.since = start
+      n.when = start + slice
       loog.info("Fresh #{judge} added: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
       facts << n
     end
+    start += slice
   end
   prev = facts.min_by(&:since)
   gaps = []
@@ -45,11 +48,15 @@ def Jp.cover_qo(days, judge: $judge, loog: $loog, today: nil)
     )
   end
   large.reject { |g| facts.find { |f| g[:since] < f.when && g[:when] > f.since } }.each do |g|
-    Fbe.fb.insert.then do |n|
-      n.what = judge
-      n.since = g[:since]
-      n.when = g[:when]
-      loog.info("Missing gap of #{judge} filled up: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
+    start = g[:since]
+    while start + slice <= g[:when]
+      Fbe.fb.insert.then do |n|
+        n.what = judge
+        n.since = start
+        n.when = start + slice
+        loog.info("Missing gap of #{judge} filled up: #{n.since.utc.iso8601}..#{n.when.utc.iso8601}")
+      end
+      start += slice
     end
   end
 end
