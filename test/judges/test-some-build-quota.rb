@@ -19,7 +19,7 @@ class TestSomeBuildQuota < Jp::Test
     octo.define_singleton_method(:repository_workflow_runs) do |*|
       raise(RuntimeError, 'the quota check did not stop us')
     end
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     result =
       Fbe.stub(:octo, octo) do
         Fbe.stub(:unmask_repos, proc { |&b| b.call('foo/foo') }) { some_build_success_rate(fact) }
