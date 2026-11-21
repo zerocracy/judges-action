@@ -39,7 +39,7 @@ def some_triage_time(fact)
           (or
             (eq label 'bug')
             (eq label 'enhancement'))
-          (absent stale)
+          (not (eq stale 'issue'))
           (exists when)
           (lte when (to_time '#{fact.when.utc.iso8601(9)}'))
           (eq where 'github'))
