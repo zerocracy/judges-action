@@ -25,7 +25,7 @@ def total_issues_created(fact)
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
         next
-      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET => e
+      rescue Net::OpenTimeout, Net::ReadTimeout, SocketError, Errno::ECONNRESET, Errno::ETIMEDOUT => e
         $loog.warn("[#{$judge}] Network error counting issues for #{repo}: #{e.message}")
         next
       end
