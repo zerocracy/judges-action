@@ -8,11 +8,13 @@ require 'fbe/unmask_repos'
 require_relative '../../lib/qos_search'
 
 def some_pull_hoc_size(fact)
+  range = Jp.qorange(fact.since, fact.when)
+  return { some_pull_hoc_size: [], some_pull_files_size: [] } if range.nil?
   hocs = []
   files = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{range}")
     return {} if found.nil?
     found[:items].each do |json|
       pull =

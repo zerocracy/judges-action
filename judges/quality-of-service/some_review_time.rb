@@ -9,13 +9,17 @@ require 'octokit'
 require_relative '../../lib/qos_search'
 
 def some_review_time(fact)
+  range = Jp.qorange(fact.since, fact.when)
+  if range.nil?
+    return { some_review_time: [], some_review_size: [], some_reviewers_per_pull: [], some_reviews_per_pull: [] }
+  end
   times = []
   sizes = []
   reviewers = []
   reviews = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{range}")
     return {} if found.nil?
     found[:items].each do |pr|
       all, csize =
