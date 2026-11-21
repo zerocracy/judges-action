@@ -46,9 +46,9 @@ require_relative '../../lib/who_of'
         begin
           Fbe.octo.issue(repo, issue)[:created_at]
         rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("The #{type} ##{issue} doesn't exist, time to start from zero: #{e.message}")
+          $loog.info("The #{type} ##{issue} doesn't exist, moving on to the next one: #{e.message}")
           Jp.issue_was_lost('github', repository, issue)
-          next 0
+          next issue
         rescue Octokit::Forbidden => e
           $loog.warn(
             "[#{$judge}] Access forbidden to #{type} ##{issue} " \
@@ -58,7 +58,7 @@ require_relative '../../lib/who_of'
         end
       if after.nil?
         $loog.info("The #{type} ##{issue} in #{repo} return empty created_at field")
-        next 0
+        next issue
       end
       seen = []
       found = []
