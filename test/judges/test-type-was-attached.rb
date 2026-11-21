@@ -87,4 +87,34 @@ class TestTypeWasAttached < Jp::Test
     assert_equal(['who'], f['stale'], 'a deleted GraphQL actor must mark the fact stale on who')
     assert_match(/an unknown actor/, f['details'].first)
   end
+
+  def test_skips_issue_that_is_done
+    assert_not_requested(timeline_of(done: 1), message: 'the timeline of a done issue was read')
+  end
+
+  def test_skips_issue_that_is_buried
+    assert_not_requested(timeline_of(tombstone: 'yes'), message: 'the timeline of a buried issue was read')
+  end
+
+  def test_skips_issue_that_is_stale
+    assert_not_requested(timeline_of(stale: 'who'), message: 'the timeline of a stale issue was read')
+  end
+
+  def test_reads_timeline_of_plain_issue
+    assert_requested(timeline_of, message: 'the timeline of a plain issue was not read')
+  end
+
+  private
+
+  def timeline_of(**extra)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub = stub_github('https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100', body: [])
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github', **extra)
+    load_it('type-was-attached', fb)
+    stub
+  end
 end
