@@ -26,6 +26,24 @@ class TestFindMissingIssues < Jp::Test
     assert(fb.one?(what: 'tombstone', where: 'github', issues: '45', repository: 42))
   end
 
+  def test_adds_at_most_sixteen_facts_per_repository
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    (2..21).each do |i|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/issues/#{i}",
+        body: { number: i, created_at: Time.parse('2024-01-01T00:00:00Z'), user: { id: 7, login: 'jeff' } }
+      )
+    end
+    stub_github('https://api.github.com/user/7', body: { id: 7, login: 'jeff', type: 'User' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 1, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', repository: 42, issue: 22, where: 'github')
+    load_it('find-missing-issues', fb)
+    assert_equal(18, fb.picks(what: 'issue-was-opened').count)
+  end
+
   def test_rescues_forbidden_on_issue_lookup
     WebMock.disable_net_connect!
     rate_limit_up
