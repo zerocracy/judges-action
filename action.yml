@@ -6,7 +6,7 @@ description: 'Scan a few GitHub repositories and build a Factbase'
 author: 'Yegor Bugayenko <yegor256@gmail.com>'
 runs:
   using: 'docker'
-  image: 'docker://yegor256/judges-action:0.0.0'
+  image: 'docker://yegor256/judges-action:0.17.23@sha256:dd3fea10c8e13c54707af47466072ba24ac9710442d7bb3b8fd888a54fef8078'
 inputs:
   token:
     description: 'Authentication token from www.zerocracy.com, not needed when "dry-run" is true'
