@@ -17,4 +17,6 @@ end
 def Jp.mention(fact)
   return 'a user who has deleted the account' if fact['who'].nil?
   Fbe.who(fact)
+rescue Fbe::Error
+  "user ##{fact.who}"
 end

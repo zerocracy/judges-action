@@ -27,6 +27,27 @@ class TestIssueWasOpened < Jp::Test
     )
   end
 
+  def test_records_opening_when_author_is_not_accessible
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-closed', repository: 42, issue: 45, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/issues/45' => {
+        number: 45, user: { id: 44, login: 'spammer' }, created_at: '2025-09-27 06:03:16 UTC'
+      },
+      'GET /user/44' => [404, { message: 'Not Found' }]
+    ).run do
+      load_it('issue-was-opened', fb)
+    end
+    assert(fb.one?(what: 'issue-was-opened', issue: 45, repository: 42, who: 44))
+    assert_equal(
+      'The issue foo/foo#45 has been opened earlier by user #44.',
+      fb.pick(what: 'issue-was-opened', issue: 45, repository: 42).details
+    )
+  end
+
   def test_survives_an_issue_whose_author_is_gone
     fb = Factbase.new
     fb.with(_id: 1, what: 'issue-was-closed', repository: 42, issue: 44, where: 'github')
