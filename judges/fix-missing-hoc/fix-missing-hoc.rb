@@ -48,7 +48,8 @@ Fbe.consider(
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
       next
-    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError => e
+    rescue Octokit::TooManyRequests, Octokit::Unauthorized, Octokit::ServerError,
+      Faraday::TimeoutError, Faraday::ConnectionFailed => e
       $loog.warn(
         "[#{$judge}] Transient error fetching #{Fbe.issue(f)} in #{repo} " \
         "(will retry next cycle): #{e.class}: #{e.message}"
