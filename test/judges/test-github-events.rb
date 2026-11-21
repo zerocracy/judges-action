@@ -2081,7 +2081,7 @@ class TestGithubEvents < Jp::Test
     assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 11))
   end
 
-  def test_stops_scanning_below_latest_event_id
+  def test_stops_scanning_at_event_already_in_factbase
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -2114,13 +2114,146 @@ class TestGithubEvents < Jp::Test
       ]
     )
     fb = Factbase.new
-    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 14, what: 'iterate')
-    load_it('github-events', fb)
-    assert_equal(2, fb.all.size)
+    fb.with(what: 'tag-was-created', event_type: 'CreateEvent', where: 'github', repository: 42, event_id: 13)
+    loog = Loog::Buffer.new
+    load_it('github-events', fb, loog:)
     assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 15))
     assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
-    assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
-    assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
+    assert_equal(
+      1, fb.query('(and (eq what "tag-was-created") (eq event_id 13))').each.to_a.size,
+      'an event already in the factbase cannot be recorded twice'
+    )
+    assert_equal(1, loog.to_s.scan('good stop').size, 'the scan cannot log more than one good stop')
+  end
+
+  def test_does_not_stop_at_event_of_another_repository
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 15, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 13, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 14, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(what: 'tag-was-created', event_type: 'CreateEvent', where: 'github', repository: 43, event_id: 13)
+    load_it('github-events', fb)
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
+    assert(fb.none?(what: 'tag-was-created', where: 'github', repository: 42, event_id: 13))
+  end
+
+  def test_keeps_scanning_past_event_duplicated_in_one_page
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 15, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 15, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        },
+        {
+          id: 14, created_at: Time.now.to_s, actor: { id: 42 },
+          type: 'CreateEvent', repo: { id: 42 },
+          payload: { ref_type: 'tag', ref: 'foo' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    load_it('github-events', fb)
+    assert(fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 15))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 15))
+    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
+  end
+
+  def test_detects_issue_event_with_smaller_id_than_push_cursor
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: 17_880_183_419, type: 'IssuesEvent',
+          actor: { id: 45, login: 'user' }, repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'opened', issue: { number: 11 } },
+          created_at: '2025-10-16 10:01:00 UTC'
+        },
+        {
+          id: 24_778_097_616, type: 'PushEvent',
+          actor: { id: 45, login: 'user' }, repo: { id: 42, name: 'foo/foo' },
+          payload: { push_id: 9001, ref: 'refs/heads/develop', head: 'abcdef1' },
+          created_at: '2025-10-16 10:00:00 UTC'
+        },
+        {
+          id: 17_871_536_134, type: 'IssuesEvent',
+          actor: { id: 45, login: 'user' }, repo: { id: 42, name: 'foo/foo' },
+          payload: { action: 'opened', issue: { number: 10 } },
+          created_at: '2025-10-16 09:00:00 UTC'
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(
+      _id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 24_778_097_616,
+      what: 'iterate'
+    )
+    fb.with(
+      what: 'issue-was-opened', event_type: 'IssuesEvent', where: 'github', repository: 42,
+      event_id: 17_871_536_134, issue: 10, who: 45
+    )
+    load_it('github-events', fb)
+    issues = fb.query('(and (eq where "github") (eq what "issue-was-opened"))').each.map(&:issue)
+    issues.sort!
+    assert_equal([10, 11], issues, 'a newer issue event with a smaller id than the push cursor cannot be lost')
   end
 
   def test_max_events_guard_fires_once
@@ -2149,35 +2282,6 @@ class TestGithubEvents < Jp::Test
     loog = Loog::Buffer.new
     load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 2 }), loog:)
     assert_equal(1, loog.to_s.scan('Already scanned').size)
-  end
-
-  def test_latest_id_guard_fires_once
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
-    )
-    stub_github(
-      'https://api.github.com/repositories/42',
-      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
-    )
-    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
-    stub_github(
-      'https://api.github.com/repositories/42/events?per_page=100',
-      body: 15.downto(10).map do |id|
-        {
-          id:, created_at: Time.now.to_s, actor: { id: 42 },
-          type: 'CreateEvent', repo: { id: 42 },
-          payload: { ref_type: 'tag', ref: 'foo' }
-        }
-      end
-    )
-    fb = Factbase.new
-    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 13, what: 'iterate')
-    loog = Loog::Buffer.new
-    load_it('github-events', fb, loog:)
-    assert_equal(1, loog.to_s.scan('good stop').size)
   end
 
   def test_skip_fill_up_if_event_exists_in_factbase

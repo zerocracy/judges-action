@@ -437,6 +437,7 @@ Fbe.iterate do
       'type-was-attached' => %w[where repository issue type]
     }
     capped = false
+    seen = Set.new
     catch(:done) do
       events =
         begin
@@ -461,13 +462,18 @@ Fbe.iterate do
           total += 1
           id = Integer(json[:id])
           first = id if first.nil?
-          if id <= latest
+          if Fbe.fb.query("(and (eq where 'github') (eq repository #{repository}) (eq event_id #{id}))").each.any?
+            if seen.include?(id)
+              $loog.debug("The event ##{id} (no.#{idx}) repeats an earlier event of this scan, skipping it")
+              next
+            end
             $loog.debug(
-              "The event_id ##{id} (no.#{idx}) is not larger than ##{latest}, " \
+              "The event_id ##{id} (no.#{idx}) is already in the factbase, " \
               "good stop in #{json[:repo][:name]}"
             )
             throw :done
           end
+          seen << id
           Fbe.fb.txn do |fbt|
             f =
               Fbe.if_absent(fb: fbt) do |n|
@@ -500,12 +506,12 @@ Fbe.iterate do
     if id.nil?
       $loog.info("No events found in #{rname} in #{rstart.ago}, the latest event_id remains ##{latest}")
       latest
-    elsif !capped && (id <= latest || latest.zero?)
-      $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
-      first
-    else
+    elsif capped
       $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{id}")
       id
+    else
+      $loog.info("Finished scanning #{rname} correctly in #{rstart.ago}, next time will scan until ##{first}")
+      first
     end
   end
 end
