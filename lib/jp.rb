@@ -4,3 +4,5 @@
 # SPDX-License-Identifier: MIT
 
 module Jp; end
+
+require_relative 'patches/octokit_throttling'
