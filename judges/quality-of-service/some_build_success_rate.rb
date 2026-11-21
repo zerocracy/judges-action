@@ -14,6 +14,7 @@ def some_build_success_rate(fact)
   ttrs = []
   failed = {}
   conclusions = %w[success failure]
+  events = %w[push pull_request merge_group]
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
     workflows =
@@ -31,7 +32,10 @@ def some_build_success_rate(fact)
         )
         next
       end
-    wfs = workflows.select { |json| json[:status] == 'completed' && conclusions.include?(json[:conclusion]) }.first(60)
+    wfs =
+      workflows.select do |json|
+        json[:status] == 'completed' && conclusions.include?(json[:conclusion]) && events.include?(json[:event])
+      end.first(60)
     runs =
       wfs.filter_map do |json|
         break if Fbe.octo.off_quota?
