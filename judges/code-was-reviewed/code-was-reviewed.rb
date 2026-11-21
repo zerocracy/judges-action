@@ -144,7 +144,7 @@ Fbe.consider(
             "[#{$judge}] Transient error fetching issue comments for #{repo}##{f.issue} " \
             "(will retry next cycle): #{e.class}: #{e.message}"
           )
-          next
+          count = 0
         end
       n.comments = count
       n.review_comments =
