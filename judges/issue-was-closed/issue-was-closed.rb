@@ -110,7 +110,7 @@ Fbe.iterate do
       end
     events.each do |te|
       next unless te[:event] == 'labeled'
-      badge = te.dig(:label, :name)
+      badge = te.dig(:label, :name).to_s.downcase
       next unless badges.include?(badge)
       Fbe.fb.txn do |fbt|
         nn =
