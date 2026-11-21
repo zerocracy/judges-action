@@ -19,6 +19,12 @@ rescue StandardError => e
         "Failed to serialize context: #{je.message}"
       end
   end
-  loog.error("Additional context for '#{e.class}: #{e.message}':\n#{info}")
+  loog.error(
+    "Additional context for '#{e.class}: #{begin
+      e.message.encode(Encoding::UTF_8, invalid: :replace, undef: :replace)
+    rescue EncodingError
+      e.message.inspect
+    end}':\n#{info}"
+  )
   raise
 end
