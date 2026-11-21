@@ -173,4 +173,33 @@ class TestIssueWasAssigned < Jp::Test
       'the second assignment of the same person must get its own fact'
     )
   end
+
+  def test_records_only_the_new_assignment_on_rescan
+    seed = Random.new_seed
+    who = Random.new(seed).rand(1000..9999)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      body: ['2025-10-01 19:05:00 UTC', '2025-10-03 09:00:00 UTC'].each_with_index.map do |time, i|
+        { id: i, event: 'assigned', assignee: { id: who, login: 'юзер' }, assigner: { id: 422 }, created_at: time }
+      end
+    )
+    stub_github("https://api.github.com/user/#{who}", body: { id: who, login: 'юзер' })
+    stub_github('https://api.github.com/user/422', body: { id: 422, login: 'user2' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    fb.with(
+      _id: 2, what: 'issue-was-assigned', repository: 42, issue: 44, where: 'github', who:, assigner: 422,
+      when: Time.parse('2025-10-01 19:05:00 UTC'), unassigned: Time.parse('2025-10-02 12:00:00 UTC')
+    )
+    load_it('issue-was-assigned', fb)
+    assert_equal(
+      [Time.parse('2025-10-01 19:05:00 UTC'), Time.parse('2025-10-03 09:00:00 UTC')],
+      fb.picks(what: 'issue-was-assigned', who:).map(&:when),
+      "an assignment that was already recorded is recorded again instead of the new one, seed #{seed}"
+    )
+  end
 end
