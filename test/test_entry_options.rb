@@ -19,6 +19,14 @@ class TestEntryOptions < Jp::Test
     assert_equal(['--option=token=a=b'], run_options("token=a=b\n"))
   end
 
+  def test_lowercases_the_key_the_way_judges_reads_it
+    assert_equal(['--option=repositories=yegor256/judges'], run_options("REPOSITORIES=yegor256/judges\n"))
+  end
+
+  def test_strips_spaces_around_the_equals_sign
+    assert_equal(['--option=repositories=yegor256/judges'], run_options("repositories = yegor256/judges\n"))
+  end
+
   private
 
   def run_options(input)
