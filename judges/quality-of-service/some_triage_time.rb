@@ -22,13 +22,14 @@ def some_triage_time(fact)
       rescue Fbe::Error, Octokit::NotFound, Octokit::Deprecated => e
         $loog.info("Repository #{repo} not accessible: #{e.message}")
         next
+      rescue Octokit::TooManyRequests, Octokit::AbuseDetected => e
+        $loog.warn("[#{$judge}] GitHub rate limit reached for #{repo}; leaving the metric for retry: #{e.message}")
+        :retry
       rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
+        $loog.warn("[#{$judge}] Access forbidden to #{repo} (skipping inaccessible data): #{e.class}: #{e.message}")
         next
       end
+    return {} if rid == :retry
     found[:items].each do |issue|
       ff = Fbe.fb.query(
         "
