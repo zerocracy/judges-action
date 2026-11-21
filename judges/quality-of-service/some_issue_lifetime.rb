@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/humans'
 require_relative '../../lib/qos_search'
 
 def some_issue_lifetime(fact)
@@ -17,13 +18,16 @@ def some_issue_lifetime(fact)
         lost = true
         break
       end
-      found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+      found = Jp.qosearch(
+        "repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}#{Jp.nobots}"
+      )
       if found.nil?
         lost = true
         break
       end
       ages +=
         found[:items].map do |json|
+          next if json.dig(:user, :type) == 'Bot'
           next if json[:closed_at].nil?
           next if json[:created_at].nil?
           json[:closed_at] - json[:created_at]
