@@ -20,6 +20,9 @@ def total_commits(_fact)
     rescue Octokit::TooManyRequests => e
       $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
       break
+    rescue Octokit::ServerError => e
+      $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+      return {}
     rescue Octokit::Forbidden => e
       $loog.warn(
         "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
