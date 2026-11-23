@@ -2,11 +2,15 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Failure in repository #840215648 at #526: GET https://api.github.com/repos/zerocracy/baza.rb/issues/526/timeline?per_page=100:
+    502 - Server Error'
   inserted: 8
-  seconds: 1171.552213221
+  seconds: 1150.369682014
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-23 01:50:54.203497254 Z
+  when: 2026-11-23 02:52:12.973628680 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -61014,7 +61018,7 @@
   events_were_scanned: 20868799354
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 6
   min_pull_was_found: 2
   repository: 1246623470
   what: iterate
@@ -144962,7 +144966,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 59
+  min_issue_was_found: 60
   min_pull_was_found: 137
   repository: 974194993
   types_were_scanned: 0
@@ -151730,36 +151734,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 901
-  closures_were_checked: 0
+  assignees_were_scanned: 1064
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
   events_were_scanned: 27988136377
   issues_were_scanned: 1396
-  labels_were_scanned: 1875
+  labels_were_scanned: 1954
   latest_issue_was_found: 315
-  merges_were_scanned: 1324
+  merges_were_scanned: 1650
   min_issue_was_found: 1898
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 745
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 449
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27977791164
   issues_were_scanned: 0
-  labels_were_scanned: 0
+  labels_were_scanned: 519
   latest_issue_was_found: 156
-  merges_were_scanned: 605
+  merges_were_scanned: 0
   min_issue_was_found: 420
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629843
@@ -152160,18 +152164,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1353
-  closures_were_checked: 955
+  assignees_were_scanned: 1548
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27947247201
   issues_were_scanned: 1225
-  labels_were_scanned: 0
+  labels_were_scanned: 1737
   latest_issue_was_found: 317
-  merges_were_scanned: 1515
-  min_issue_was_found: 1845
+  merges_were_scanned: 1648
+  min_issue_was_found: 1846
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 1040
+  types_were_scanned: 1177
   what: iterate
   where: github
 - _id: 2629882
@@ -152817,18 +152821,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 742
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27984219393
+  events_were_scanned: 27992603953
   issues_were_scanned: 1382
-  labels_were_scanned: 0
+  labels_were_scanned: 1437
   latest_issue_was_found: 386
-  merges_were_scanned: 0
+  merges_were_scanned: 1201
   min_issue_was_found: 1326
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 1429
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -152963,18 +152967,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1108
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 27983818135
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 770
+  merges_were_scanned: 974
   min_issue_was_found: 1050
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 1207
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630023
@@ -152999,18 +153003,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1669
-  closures_were_checked: 2328
+  assignees_were_scanned: 1733
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27986060954
+  events_were_scanned: 27993154851
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1672
   latest_issue_was_found: 1073
-  merges_were_scanned: 2893
-  min_issue_was_found: 3003
+  merges_were_scanned: 3050
+  min_issue_was_found: 3004
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 3010
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630036
@@ -153025,7 +153029,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 27
+  min_issue_was_found: 31
   min_pull_was_found: 15
   repository: 1081929119
   types_were_scanned: 0
@@ -153035,18 +153039,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1244
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 27988571666
+  events_were_scanned: 27989229885
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1385
+  min_issue_was_found: 1407
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1201
   what: iterate
   where: github
 - _id: 2630038
