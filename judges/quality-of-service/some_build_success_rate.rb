@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/recovered'
+require_relative '../../lib/today'
 require 'octokit'
 
 def some_build_success_rate(fact)
@@ -13,6 +14,7 @@ def some_build_success_rate(fact)
   duration = []
   ttrs = []
   failed = {}
+  pending = false
   conclusions = %w[success failure]
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
@@ -67,11 +69,16 @@ def some_build_success_rate(fact)
     end
     failed.each do |wid, broke|
       recovery = Jp.recovered(repo, wid, fact.when)
-      next if recovery.nil?
+      if recovery.nil?
+        return {} if Fbe.octo.off_quota?
+        pending = true
+        next
+      end
       ttrs << Integer(recovery - broke)
     end
     failed.clear
   end
+  return {} if pending && Jp.today < fact.when + (fact.when - fact.since)
   {
     some_build_success_rate: success,
     some_build_duration: duration,
