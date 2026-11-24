@@ -2,12 +2,14 @@
 - added: 8
   cycles: 1
   deleted: 8
-  error: 'Judge find-all-issues stopped by timeout after 8m53s: execution expired'
+  error:
+  - deadlock; recursive locking
+  - 'Judge find-all-issues stopped by timeout after 9m4s: execution expired'
   inserted: 8
-  seconds: 1251.416601207
+  seconds: 1243.024220858
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-24 01:52:36.312446154 Z
+  when: 2026-11-24 02:22:23.313278926 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -143987,7 +143989,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 39
+  min_issue_was_found: 40
   min_pull_was_found: 22
   repository: 1090089359
   types_were_scanned: 0
@@ -144963,7 +144965,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 85
+  min_issue_was_found: 119
   min_pull_was_found: 137
   repository: 974194993
   types_were_scanned: 0
@@ -151721,7 +151723,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 30
+  min_issue_was_found: 31
   min_pull_was_found: 80
   repository: 1084843345
   types_were_scanned: 0
@@ -151731,36 +151733,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1509
-  closures_were_checked: 1439
+  assignees_were_scanned: 1716
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21074123061
   issues_were_scanned: 1396
-  labels_were_scanned: 1882
+  labels_were_scanned: 0
   latest_issue_was_found: 315
-  merges_were_scanned: 1809
-  min_issue_was_found: 1940
+  merges_were_scanned: 2007
+  min_issue_was_found: 1941
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 1214
+  types_were_scanned: 1333
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 449
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 28085325555
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 605
+  merges_were_scanned: 0
   min_issue_was_found: 453
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -151775,7 +151777,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 143
   repository: 857659265
   types_were_scanned: 0
@@ -152161,18 +152163,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1116
-  closures_were_checked: 0
+  assignees_were_scanned: 1235
+  closures_were_checked: 955
   earliest_issue_was_found: 1
   events_were_scanned: 21056592229
   issues_were_scanned: 1225
-  labels_were_scanned: 1766
+  labels_were_scanned: 1830
   latest_issue_was_found: 317
-  merges_were_scanned: 951
+  merges_were_scanned: 1271
   min_issue_was_found: 1859
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 1222
+  types_were_scanned: 1345
   what: iterate
   where: github
 - _id: 2629882
@@ -152818,18 +152820,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 991
+  assignees_were_scanned: 1148
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21072175214
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1425
-  min_issue_was_found: 1356
+  merges_were_scanned: 0
+  min_issue_was_found: 1362
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 1367
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -152964,18 +152966,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 620
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21078941829
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1125
+  merges_were_scanned: 1177
   min_issue_was_found: 1074
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 677
+  types_were_scanned: 846
   what: iterate
   where: github
 - _id: 2630023
@@ -153000,18 +153002,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2724
-  closures_were_checked: 0
+  assignees_were_scanned: 2862
+  closures_were_checked: 1744
   earliest_issue_was_found: 1
   events_were_scanned: 28085492020
   issues_were_scanned: 2725
-  labels_were_scanned: 0
+  labels_were_scanned: 1702
   latest_issue_was_found: 1073
-  merges_were_scanned: 2894
-  min_issue_was_found: 3013
+  merges_were_scanned: 3051
+  min_issue_was_found: 3014
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 0
+  types_were_scanned: 1467
   what: iterate
   where: github
 - _id: 2630036
@@ -153036,7 +153038,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1244
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 28080980212
@@ -153044,10 +153046,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1008
+  min_issue_was_found: 1120
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1201
   what: iterate
   where: github
 - _id: 2630038
@@ -586600,8 +586602,10 @@
     don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
     \ -->"
   hoc: 1
+  href: https://github.com/zerocracy/judges-action/issues/2532/#issuecomment-7119563355
   is_human: 1
   issue: 2532
+  receipt: receipt-#108542
   repository: 799177290
   review_comments: 0
   seconds: 4806977
@@ -586637,6 +586641,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 22
+  href: https://github.com/yegor256/judges/issues/1154/#issuecomment-7119563839
   is_human: 1
   issue: 1154
   repository: 799113787
@@ -586674,6 +586679,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 19
+  href: https://github.com/yegor256/judges/issues/1156/#issuecomment-7119564277
   is_human: 1
   issue: 1156
   repository: 799113787
@@ -586711,6 +586717,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 17
+  href: https://github.com/yegor256/judges/issues/1159/#issuecomment-7119564743
   is_human: 1
   issue: 1159
   repository: 799113787
@@ -586748,6 +586755,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 23
+  href: https://github.com/yegor256/judges/issues/1163/#issuecomment-7119565152
   is_human: 1
   issue: 1163
   repository: 799113787
@@ -586785,6 +586793,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 17
+  href: https://github.com/yegor256/judges/issues/1168/#issuecomment-7119565587
   is_human: 1
   issue: 1168
   repository: 799113787
@@ -586812,7 +586821,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 01:29:11.000000000 Z
+  when: &7320 2026-11-24 01:29:11.000000000 Z
   where: github
   who: 526301
 - _id: 2656277
@@ -586832,7 +586841,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 01:18:24.000000000 Z
+  when: &7321 2026-11-24 01:18:24.000000000 Z
   where: github
   who: 526301
 - _id: 2656278
@@ -586852,7 +586861,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 01:18:22.000000000 Z
+  when: &7322 2026-11-24 01:18:22.000000000 Z
   where: github
   who: 526301
 - _id: 2656279
@@ -586872,7 +586881,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 01:04:12.000000000 Z
+  when: &7323 2026-11-24 01:04:12.000000000 Z
   where: github
   who: 526301
 - _id: 2656280
@@ -586892,7 +586901,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 01:01:37.000000000 Z
+  when: &7324 2026-11-24 01:01:37.000000000 Z
   where: github
   who: 526301
 - _id: 2656281
@@ -586912,7 +586921,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 00:48:46.000000000 Z
+  when: &7325 2026-11-24 00:48:46.000000000 Z
   where: github
   who: 526301
 - _id: 2656282
@@ -586932,7 +586941,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 00:34:22.000000000 Z
+  when: &7326 2026-11-24 00:34:22.000000000 Z
   where: github
   who: 526301
 - _id: 2656283
@@ -586952,7 +586961,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 00:19:28.000000000 Z
+  when: &7327 2026-11-24 00:19:28.000000000 Z
   where: github
   who: 526301
 - _id: 2656284
@@ -586972,7 +586981,7 @@
   repository: 799113787
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-24 00:05:17.000000000 Z
+  when: &7328 2026-11-24 00:05:17.000000000 Z
   where: github
   who: 526301
 - _id: 2656285
@@ -587003,3 +587012,165 @@
   when: 2026-11-23 19:43:15.000000000 Z
   where: github
   who: 29139614
+- _id: 2656287
+  _job: 111289
+  _time: 2026-11-24 01:54:03.985627116 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 113778529
+  comments: 0
+  details: The pull request yegor256/judges#1201 with 16 HoC created by @gemshrine
+    was reviewed by @yegor256 after 3w5d and 0 comments.
+  hoc: 16
+  is_human: 1
+  issue: 1201
+  repository: 799113787
+  review_comments: 0
+  seconds: 2296940
+  what: code-was-reviewed
+  when: *7320
+  where: github
+  who: 526301
+- _id: 2656288
+  _job: 111289
+  _time: 2026-11-24 01:54:04.913051295 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 113778529
+  comments: 0
+  details: The pull request yegor256/judges#1003 with 34 HoC created by @gemshrine
+    was reviewed by @yegor256 after 1mo1w and 0 comments.
+  hoc: 34
+  is_human: 1
+  issue: 1003
+  repository: 799113787
+  review_comments: 0
+  seconds: 3497103
+  what: code-was-reviewed
+  when: *7321
+  where: github
+  who: 526301
+- _id: 2656289
+  _job: 111289
+  _time: 2026-11-24 01:54:05.327685181 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 113778529
+  comments: 0
+  details: The pull request yegor256/judges#1118 with 25 HoC created by @gemshrine
+    was reviewed by @yegor256 after 1mo and 0 comments.
+  hoc: 25
+  is_human: 1
+  issue: 1118
+  repository: 799113787
+  review_comments: 0
+  seconds: 2777110
+  what: code-was-reviewed
+  when: *7322
+  where: github
+  who: 526301
+- _id: 2656290
+  _job: 111289
+  _time: 2026-11-24 01:54:05.746468816 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#977 with 87 HoC created by @morphqdd was
+    reviewed by @yegor256 after 1mo1w and 0 comments.
+  hoc: 87
+  is_human: 1
+  issue: 977
+  repository: 799113787
+  review_comments: 0
+  seconds: 3616727
+  what: code-was-reviewed
+  when: *7323
+  where: github
+  who: 526301
+- _id: 2656291
+  _job: 111289
+  _time: 2026-11-24 01:54:06.340632705 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 2
+  details: The pull request yegor256/judges#983 with 57 HoC created by @morphqdd was
+    reviewed by @yegor256 after 1mo1w and 2 comments.
+  hoc: 57
+  is_human: 1
+  issue: 983
+  repository: 799113787
+  review_comments: 0
+  seconds: 3616126
+  what: code-was-reviewed
+  when: *7324
+  where: github
+  who: 526301
+- _id: 2656292
+  _job: 111289
+  _time: 2026-11-24 01:54:06.733166886 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#964 with 21 HoC created by @morphqdd was
+    reviewed by @yegor256 after 1mo1w and 0 comments.
+  hoc: 21
+  is_human: 1
+  issue: 964
+  repository: 799113787
+  review_comments: 0
+  seconds: 3616953
+  what: code-was-reviewed
+  when: *7325
+  where: github
+  who: 526301
+- _id: 2656293
+  _job: 111289
+  _time: 2026-11-24 01:54:07.143846672 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#962 with 10 HoC created by @morphqdd was
+    reviewed by @yegor256 after 1mo1w and 0 comments.
+  hoc: 10
+  is_human: 1
+  issue: 962
+  repository: 799113787
+  review_comments: 0
+  seconds: 3616235
+  what: code-was-reviewed
+  when: *7326
+  where: github
+  who: 526301
+- _id: 2656294
+  _job: 111289
+  _time: 2026-11-24 01:54:07.560560117 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#960 with 16 HoC created by @morphqdd was
+    reviewed by @yegor256 after 1mo1w and 0 comments.
+  hoc: 16
+  is_human: 1
+  issue: 960
+  repository: 799113787
+  review_comments: 0
+  seconds: 3615539
+  what: code-was-reviewed
+  when: *7327
+  where: github
+  who: 526301
+- _id: 2656295
+  _job: 111289
+  _time: 2026-11-24 01:54:07.975722685 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 125282851
+  comments: 0
+  details: The pull request yegor256/judges#1169 with 44 HoC created by @morphqdd
+    was reviewed by @yegor256 after 1mo and 0 comments.
+  hoc: 44
+  is_human: 1
+  issue: 1169
+  repository: 799113787
+  review_comments: 0
+  seconds: 2624169
+  what: code-was-reviewed
+  when: *7328
+  where: github
+  who: 526301
