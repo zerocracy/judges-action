@@ -173,4 +173,38 @@ class TestIssueWasAssigned < Jp::Test
       'the second assignment of the same person must get its own fact'
     )
   end
+
+  def test_handles_nil_assignee_and_assigner
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/events?per_page=100',
+      body: [
+        {
+          id: 561,
+          event: 'assigned',
+          assignee: nil,
+          assigner: { id: 422, login: 'user2' },
+          created_at: '2025-10-03 09:00:00 UTC'
+        },
+        {
+          id: 562,
+          event: 'assigned',
+          assignee: { id: 421, login: 'user1' },
+          assigner: nil,
+          created_at: '2025-10-03 10:00:00 UTC'
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/421', body: { id: 421, login: 'user1' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    load_it('issue-was-assigned', fb)
+    assert(
+      fb.one?(what: 'issue-was-assigned', repository: 42, issue: 44, who: 421),
+      'Assignment with nil assigner must still be recorded and nil assignee must be skipped'
+    )
+  end
 end

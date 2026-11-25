@@ -61,8 +61,12 @@ Fbe.iterate do
         next issue
       end
     events.each do |event|
+      who = event.dig(:assignee, :id)
+      if who.nil?
+        $loog.warn("Assignee is missing in #{repo}##{issue} event ##{event[:id]}")
+        next
+      end
       Fbe.fb.txn do |fbt|
-        who = event.dig(:assignee, :id)
         unless fbt.query(
           "(and (eq issue #{issue}) (eq who #{who}) (eq what '#{$judge}') " \
           "(eq repository #{repository}) (eq where 'github') (absent unassigned))"
@@ -76,9 +80,11 @@ Fbe.iterate do
         nn.what = $judge
         nn.repository = repository
         nn.where = 'github'
-        nn.assigner = event.dig(:assigner, :id)
+        assigner = event.dig(:assigner, :id)
+        nn.assigner = assigner unless assigner.nil?
         nn.when = event[:created_at]
-        nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{Fbe.who(nn, :assigner)}."
+        by = assigner.nil? ? 'an unknown user' : Fbe.who(nn, :assigner)
+        nn.details = "#{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} by #{by}."
         $loog.info("The issue #{Fbe.issue(nn)} was assigned to #{Fbe.who(nn)} #{nn.when.ago} ago (fact ##{nn._id})")
       end
     end
