@@ -95,14 +95,17 @@ Fbe.iterate do
         $loog.debug("Can't fetch event by node ID #{te[:node_id]}")
         next
       end
+      type = tee.dig('issue_type', 'name')
+      if type.nil?
+        $loog.debug("Issue type name is nil for #{repo}##{issue} event #{te[:node_id]}")
+        next
+      end
       if te[:event] == 'issue_type_removed'
-        type = tee.dig('issue_type', 'name')
-        next if type.nil?
         Fbe.fb.txn do |fbt|
           fbt.query(
             "(and (eq repository #{repository}) (eq issue #{issue}) " \
-            "(eq what '#{$judge}') (eq type '#{type}') (absent stale))"
-          ).each { |fact| fact.stale = 'removed' }
+            "(eq what '#{$judge}') (exists type) (absent stale))"
+          ).each { |fact| fact.stale = 'removed' if fact.type == type }
         end
         $loog.info("Type #{type.inspect} detached from #{repo}##{issue}")
         next
@@ -112,7 +115,7 @@ Fbe.iterate do
           Fbe.if_absent(fb: fbt) do |n|
             n.issue = issue
             n.what = $judge
-            n.type = tee.dig('issue_type', 'name')
+            n.type = type
             n.repository = repository
             n.where = 'github'
           end
