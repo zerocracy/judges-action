@@ -2,11 +2,15 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error:
+  - deadlock; recursive locking
+  - 'Failure in repository #802720676 at #1174: GET https://api.github.com/repos/zerocracy/pages-action/issues/1174/timeline?per_page=100:
+    502 - Server Error'
   inserted: 8
-  seconds: 1112.926876151
+  seconds: 1196.596225441
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-25 05:19:58.450522093 Z
+  when: 2026-11-25 05:51:19.782074008 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -60861,7 +60865,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 8
+  min_issue_was_found: 0
   min_pull_was_found: 2
   repository: 1246623470
   what: iterate
@@ -143833,7 +143837,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 37
+  min_issue_was_found: 38
   min_pull_was_found: 22
   repository: 1090089359
   types_were_scanned: 0
@@ -144810,10 +144814,10 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 143
+  min_issue_was_found: 144
   min_pull_was_found: 137
   repository: 974194993
-  types_were_scanned: 0
+  types_were_scanned: 126
   what: iterate
   where: github
 - _id: 2629220
@@ -151316,7 +151320,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 3
+  min_issue_was_found: 211
   min_pull_was_found: 208
   repository: 849726475
   types_were_scanned: 0
@@ -151550,7 +151554,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 4
+  min_issue_was_found: 24
   min_pull_was_found: 173
   repository: 805238060
   types_were_scanned: 0
@@ -151568,7 +151572,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 65
+  min_issue_was_found: 66
   min_pull_was_found: 80
   repository: 1084843345
   types_were_scanned: 0
@@ -151578,36 +151582,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 901
-  closures_were_checked: 0
+  assignees_were_scanned: 1064
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
   events_were_scanned: 28191029633
   issues_were_scanned: 1396
-  labels_were_scanned: 1345
+  labels_were_scanned: 1758
   latest_issue_was_found: 315
-  merges_were_scanned: 2007
+  merges_were_scanned: 0
   min_issue_was_found: 1790
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 1139
+  types_were_scanned: 1189
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 449
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21219779513
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
-  min_issue_was_found: 472
+  merges_were_scanned: 605
+  min_issue_was_found: 473
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 489
   what: iterate
   where: github
 - _id: 2629843
@@ -151622,7 +151626,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 143
   repository: 857659265
   types_were_scanned: 0
@@ -152008,18 +152012,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 749
-  closures_were_checked: 955
+  assignees_were_scanned: 851
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21219615095
   issues_were_scanned: 1225
-  labels_were_scanned: 1772
+  labels_were_scanned: 1837
   latest_issue_was_found: 317
-  merges_were_scanned: 1648
-  min_issue_was_found: 1875
+  merges_were_scanned: 1917
+  min_issue_was_found: 1876
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 1907
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629882
@@ -152665,18 +152669,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 867
+  assignees_were_scanned: 986
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21214705365
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 1201
-  min_issue_was_found: 1378
+  merges_were_scanned: 1425
+  min_issue_was_found: 1379
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 1139
+  types_were_scanned: 1173
   what: iterate
   where: github
 - _id: 2629939
@@ -152811,18 +152815,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1109
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21214405285
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 975
-  min_issue_was_found: 1087
+  merges_were_scanned: 1126
+  min_issue_was_found: 1088
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 1037
+  types_were_scanned: 1084
   what: iterate
   where: github
 - _id: 2630023
@@ -152847,18 +152851,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1669
-  closures_were_checked: 1744
+  assignees_were_scanned: 1733
+  closures_were_checked: 1964
   earliest_issue_was_found: 1
   events_were_scanned: 28195541646
   issues_were_scanned: 2725
-  labels_were_scanned: 1702
+  labels_were_scanned: 2975
   latest_issue_was_found: 1073
-  merges_were_scanned: 3053
-  min_issue_was_found: 3080
+  merges_were_scanned: 3140
+  min_issue_was_found: 3081
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 2390
+  types_were_scanned: 2442
   what: iterate
   where: github
 - _id: 2630036
@@ -152873,7 +152877,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 21
+  min_issue_was_found: 22
   min_pull_was_found: 15
   repository: 1081929119
   types_were_scanned: 0
@@ -152883,7 +152887,7 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1244
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 28165372010
@@ -152894,7 +152898,7 @@
   min_issue_was_found: 1187
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 1201
+  types_were_scanned: 1287
   what: iterate
   where: github
 - _id: 2630038
@@ -593104,23 +593108,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in zerocracy/pgtk#7,
     the reward amount is 10.
-  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
-    -8 for absolutely no comments posted.  Calculation inputs: 27 hits-of-code; 0
-    review comments; self-review: no. Your running score is [+5688](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
-    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
-    total number of hits-of-code in the contribution. Then, assume that _comments_
-    is the total number of comments made by all reviewers. Then, assume that _self_
-    is 1 if the review was made for their own code contribution, otherwise zero, and
-    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
-    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-    but not more than **16** points. Then, deduct **5** points if there were less
-    than **9** comments made during review. Then, deduct **8** points if there were
-    absolutely no comments made during review. Then, add **0.375** points for each
-    comment during the review, but not more than **8** points. Then, deduct **4**
-    points if there were less than **24** hits-of-code. Then, make sure the reward
-    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 27
   href: https://github.com/zerocracy/pgtk/issues/7/#issuecomment-7153254770
   is_human: 1
@@ -593141,23 +593128,6 @@
   comments: 0
   details: It's time to reward @yegor256 for the code review in zerocracy/swarm-template#321,
     the reward amount is 10.
-  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
-    -8 for absolutely no comments posted.  Calculation inputs: 24 hits-of-code; 0
-    review comments; self-review: no. Your running score is [+5698](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
-    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
-    total number of hits-of-code in the contribution. Then, assume that _comments_
-    is the total number of comments made by all reviewers. Then, assume that _self_
-    is 1 if the review was made for their own code contribution, otherwise zero, and
-    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
-    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-    but not more than **16** points. Then, deduct **5** points if there were less
-    than **9** comments made during review. Then, deduct **8** points if there were
-    absolutely no comments made during review. Then, add **0.375** points for each
-    comment during the review, but not more than **8** points. Then, deduct **4**
-    points if there were less than **24** hits-of-code. Then, make sure the reward
-    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 24
   href: https://github.com/zerocracy/swarm-template/issues/321/#issuecomment-7153255322
   is_human: 1
@@ -593178,23 +593148,6 @@
   comments: 1
   details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1266,
     the reward amount is 10.
-  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
-    -8 for absolutely no comments posted.  Calculation inputs: 53 hits-of-code; 0
-    review comments; self-review: no. Your running score is [+5708](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
-    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
-    total number of hits-of-code in the contribution. Then, assume that _comments_
-    is the total number of comments made by all reviewers. Then, assume that _self_
-    is 1 if the review was made for their own code contribution, otherwise zero, and
-    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
-    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-    but not more than **16** points. Then, deduct **5** points if there were less
-    than **9** comments made during review. Then, deduct **8** points if there were
-    absolutely no comments made during review. Then, add **0.375** points for each
-    comment during the review, but not more than **8** points. Then, deduct **4**
-    points if there were less than **24** hits-of-code. Then, make sure the reward
-    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 53
   href: https://github.com/zerocracy/fbe/issues/1266/#issuecomment-7153255924
   is_human: 1
@@ -593215,23 +593168,6 @@
   comments: 1
   details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1215,
     the reward amount is 10.
-  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
-    -8 for absolutely no comments posted.  Calculation inputs: 56 hits-of-code; 0
-    review comments; self-review: no. Your running score is [+5718](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
-    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
-    total number of hits-of-code in the contribution. Then, assume that _comments_
-    is the total number of comments made by all reviewers. Then, assume that _self_
-    is 1 if the review was made for their own code contribution, otherwise zero, and
-    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
-    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-    but not more than **16** points. Then, deduct **5** points if there were less
-    than **9** comments made during review. Then, deduct **8** points if there were
-    absolutely no comments made during review. Then, add **0.375** points for each
-    comment during the review, but not more than **8** points. Then, deduct **4**
-    points if there were less than **24** hits-of-code. Then, make sure the reward
-    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 56
   href: https://github.com/zerocracy/fbe/issues/1215/#issuecomment-7153256370
   is_human: 1
@@ -593252,23 +593188,6 @@
   comments: 1
   details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1267,
     the reward amount is 10.
-  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
-    -8 for absolutely no comments posted.  Calculation inputs: 96 hits-of-code; 0
-    review comments; self-review: no. Your running score is [+5728](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
-    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
-    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
-    total number of hits-of-code in the contribution. Then, assume that _comments_
-    is the total number of comments made by all reviewers. Then, assume that _self_
-    is 1 if the review was made for their own code contribution, otherwise zero, and
-    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
-    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
-    but not more than **16** points. Then, deduct **5** points if there were less
-    than **9** comments made during review. Then, deduct **8** points if there were
-    absolutely no comments made during review. Then, add **0.375** points for each
-    comment during the review, but not more than **8** points. Then, deduct **4**
-    points if there were less than **24** hits-of-code. Then, make sure the reward
-    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 96
   href: https://github.com/zerocracy/fbe/issues/1267/#issuecomment-7153256779
   is_human: 1
@@ -593369,6 +593288,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 2
+  href: https://github.com/zerocracy/fbe/issues/2050/#issuecomment-7153683265
   is_human: 1
   issue: 2050
   repository: 820463873
@@ -593406,6 +593326,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 2
+  href: https://github.com/zerocracy/judges-action/issues/3203/#issuecomment-7153683857
   is_human: 1
   issue: 3203
   repository: 799177290
@@ -593442,6 +593363,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 47
+  href: https://github.com/zerocracy/fbe/issues/1268/#issuecomment-7153684287
   is_human: 1
   issue: 1268
   repository: 820463873
@@ -593479,6 +593401,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 2
+  href: https://github.com/zerocracy/baza.rb/issues/622/#issuecomment-7153684786
   is_human: 1
   issue: 622
   repository: 840215648
@@ -593515,6 +593438,7 @@
     points if there were less than **24** hits-of-code. Then, make sure the reward
     is not larger than **24** points and not smaller than **4** points.\n\n</details>"
   hoc: 25
+  href: https://github.com/zerocracy/pgtk/issues/9/#issuecomment-7153685345
   is_human: 1
   issue: 9
   repository: 1246623470
@@ -593542,7 +593466,7 @@
   repository: 840215648
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 05:00:30.000000000 Z
+  when: &7435 2026-11-25 05:00:30.000000000 Z
   where: github
   who: 526301
 - _id: 2656648
@@ -593562,7 +593486,7 @@
   repository: 840215648
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 04:55:58.000000000 Z
+  when: &7436 2026-11-25 04:55:58.000000000 Z
   where: github
   who: 526301
 - _id: 2656649
@@ -593582,7 +593506,7 @@
   repository: 840215648
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 04:51:54.000000000 Z
+  when: &7437 2026-11-25 04:51:54.000000000 Z
   where: github
   who: 526301
 - _id: 2656650
@@ -593602,7 +593526,7 @@
   repository: 840215648
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 04:34:28.000000000 Z
+  when: &7438 2026-11-25 04:34:28.000000000 Z
   where: github
   who: 526301
 - _id: 2656651
@@ -593652,7 +593576,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 04:58:03.000000000 Z
+  when: &7439 2026-11-25 04:58:03.000000000 Z
   where: github
   who: 526301
 - _id: 2656654
@@ -593672,7 +593596,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 04:49:03.000000000 Z
+  when: &7440 2026-11-25 04:49:03.000000000 Z
   where: github
   who: 526301
 - _id: 2656655
@@ -593692,7 +593616,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 04:32:18.000000000 Z
+  when: &7441 2026-11-25 04:32:18.000000000 Z
   where: github
   who: 526301
 - _id: 2656656
@@ -593712,7 +593636,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 04:14:13.000000000 Z
+  when: &7442 2026-11-25 04:14:13.000000000 Z
   where: github
   who: 526301
 - _id: 2656657
@@ -593732,7 +593656,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-25 03:45:53.000000000 Z
+  when: &7443 2026-11-25 03:45:53.000000000 Z
   where: github
   who: 526301
 - _id: 2656658
@@ -593781,6 +593705,7 @@
   is_human: 0
   issue: 621
   repository: 840215648
+  review_comments: 0
   succeeded_builds: 9
   suggestions: 0
   what: pull-was-merged
@@ -593825,3 +593750,225 @@
   when: 2026-11-25 01:56:22.000000000 Z
   where: github
   who: 29139614
+- _id: 2656663
+  _job: 111826
+  _time: 2026-11-25 05:20:44.803580265 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 276356426
+  comments: 1
+  details: The pull request zerocracy/baza.rb#536 with 60 HoC created by @opusstudiohq-max
+    was reviewed by @yegor256 after 1mo1w and 1 comments.
+  hoc: 60
+  is_human: 1
+  issue: 536
+  repository: 840215648
+  review_comments: 0
+  seconds: 3370476
+  what: code-was-reviewed
+  when: *7435
+  where: github
+  who: 526301
+- _id: 2656664
+  _job: 111826
+  _time: 2026-11-25 05:20:46.010834347 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 276356426
+  comments: 1
+  details: The pull request zerocracy/baza.rb#541 with 155 HoC created by @opusstudiohq-max
+    was reviewed by @yegor256 after 1mo1w and 1 comments.
+  hoc: 155
+  is_human: 1
+  issue: 541
+  repository: 840215648
+  review_comments: 0
+  seconds: 3369752
+  what: code-was-reviewed
+  when: *7436
+  where: github
+  who: 526301
+- _id: 2656665
+  _job: 111826
+  _time: 2026-11-25 05:20:46.460771138 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 276356426
+  comments: 1
+  details: The pull request zerocracy/baza.rb#545 with 63 HoC created by @opusstudiohq-max
+    was reviewed by @yegor256 after 1mo1w and 1 comments.
+  hoc: 63
+  is_human: 1
+  issue: 545
+  repository: 840215648
+  review_comments: 0
+  seconds: 3354685
+  what: code-was-reviewed
+  when: *7437
+  where: github
+  who: 526301
+- _id: 2656666
+  _job: 111826
+  _time: 2026-11-25 05:20:46.860999693 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 209367218
+  comments: 2
+  details: The pull request zerocracy/baza.rb#603 with 4 HoC created by @eazyhood
+    was reviewed by @yegor256 after 1w5d and 2 comments.
+  hoc: 4
+  is_human: 1
+  issue: 603
+  repository: 840215648
+  review_comments: 0
+  seconds: 1083766
+  what: code-was-reviewed
+  when: *7438
+  where: github
+  who: 526301
+- _id: 2656667
+  _job: 111826
+  _time: 2026-11-25 05:20:47.436692398 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 1
+  details: The pull request zerocracy/fbe#1273 with 44 HoC created by @thayorns was
+    reviewed by @yegor256 after 1mo3w and 1 comments.
+  hoc: 44
+  is_human: 1
+  issue: 1273
+  repository: 820463873
+  review_comments: 0
+  seconds: 4967615
+  what: code-was-reviewed
+  when: *7439
+  where: github
+  who: 526301
+- _id: 2656668
+  _job: 111826
+  _time: 2026-11-25 05:20:48.298126577 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 1
+  details: The pull request zerocracy/fbe#1272 with 40 HoC created by @thayorns was
+    reviewed by @yegor256 after 1mo3w and 1 comments.
+  hoc: 40
+  is_human: 1
+  issue: 1272
+  repository: 820463873
+  review_comments: 0
+  seconds: 4967209
+  what: code-was-reviewed
+  when: *7440
+  where: github
+  who: 526301
+- _id: 2656669
+  _job: 111826
+  _time: 2026-11-25 05:20:48.721602906 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 1
+  details: The pull request zerocracy/fbe#1271 with 92 HoC created by @thayorns was
+    reviewed by @yegor256 after 1mo3w and 1 comments.
+  hoc: 92
+  is_human: 1
+  issue: 1271
+  repository: 820463873
+  review_comments: 0
+  seconds: 4966337
+  what: code-was-reviewed
+  when: *7441
+  where: github
+  who: 526301
+- _id: 2656670
+  _job: 111826
+  _time: 2026-11-25 05:20:49.128571132 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 1
+  details: The pull request zerocracy/fbe#1270 with 44 HoC created by @thayorns was
+    reviewed by @yegor256 after 1mo3w and 1 comments.
+  hoc: 44
+  is_human: 1
+  issue: 1270
+  repository: 820463873
+  review_comments: 0
+  seconds: 4965465
+  what: code-was-reviewed
+  when: *7442
+  where: github
+  who: 526301
+- _id: 2656671
+  _job: 111826
+  _time: 2026-11-25 05:20:49.547000835 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 1
+  details: The pull request zerocracy/fbe#1269 with 41 HoC created by @thayorns was
+    reviewed by @yegor256 after 1mo3w and 1 comments.
+  hoc: 41
+  is_human: 1
+  issue: 1269
+  repository: 820463873
+  review_comments: 0
+  seconds: 4963884
+  what: code-was-reviewed
+  when: *7443
+  where: github
+  who: 526301
+- _id: 2656672
+  _job: 111826
+  _time: 2026-11-25 05:21:11.640273619 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -6
+  branch: chore/uncovered-dependencies
+  details: It's time to punish @yegor256 for the branch named as 'chore/uncovered-dependencies',
+    which is wrong in zerocracy/pgtk#10, the penalty amount is -6.
+  greeting: |-
+    Hey, quick heads up — naming a branch "`chore/uncovered-dependencies`" isn't quite [following convention](https://www.yegor256.com/2014/04/15/github-guidelines.html), so that's a **-6** points deduction. Next time, try naming it after the ticket number you're working on — something like "`9`" would be perfect. No worries though, your running score is still looking great at [+5744](https://zerocracy.github.io/judges-action/zerocracy-vitals.html) — just swing by your [Zerocracy account](https://www.zerocracy.com/) when you get a chance to check it out.
+
+    <!-- It is [not a good idea](https://www.yegor256.com/2014/04/15/github-guidelines.html) to name Git branches the way you named this one: "`chore/uncovered-dependencies`". You've earned -6 points. Next time, better give your branch the same name as the number of the ticket that you are solving. In this case, a perfect name, for example, would be "`9`". Your running score is [+5744](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 10
+  repository: 1246623470
+  what: bad-branch-name-was-punished
+  when: 2026-11-25 05:21:11.642101993 Z
+  where: github
+  who: 526301
+  why: Wrongly named a branch in zerocracy/pgtk#10
+- _id: 2656673
+  _job: 111826
+  _time: 2026-11-25 05:21:17.118109858 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 20
+  comments: 1
+  details: It's time to reward @eazyhood for the code contributed in zerocracy/zerocracy-mcp-server#167,
+    the reward amount is 20.
+  greeting: "Thanks for the contribution! \U0001F389 You've earned **+20 points**:
+    +24 as a base, -4 for a lower hits-of-code count (8). Keep up the great work—every
+    contribution counts, so [keep them coming](https://www.yegor256.com/2018/03/06/speed-vs-quality.html).
+    Your running score is now [+710](https://zerocracy.github.io/judges-action/zerocracy-vitals.html),
+    and don't forget to check your [Zerocracy account](https://www.zerocracy.com/)
+    for more details.\n\n<!-- Thanks for the contribution! You've earned +20 points
+    for this: +24 as a basis; -4 for too few (8) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html)
+    them coming. Your running score is [+710](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ -->"
+  hoc: 8
+  is_human: 1
+  issue: 167
+  repository: 974194993
+  review_comments: 0
+  seconds: 1549424
+  what: code-contribution-was-rewarded
+  when: 2026-11-25 05:21:17.123968377 Z
+  where: github
+  who: 209367218
+  why: Contributed code in zerocracy/zerocracy-mcp-server#167
+- _id: 2656674
+  _job: 45554031252
+  _time: 2026-11-25 05:49:59.026059873 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/swarm-template#339 has been earlier opened by @yegor256.
+  issue: 339
+  repository: 849726475
+  what: issue-was-opened
+  when: 2026-11-25 05:40:20.000000000 Z
+  where: github
+  who: 526301
