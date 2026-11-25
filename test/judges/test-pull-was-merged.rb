@@ -687,6 +687,36 @@ class TestPullWasMerged < Jp::Test
     end
   end
 
+  def test_handles_nil_head_ref_without_crashing
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/46',
+      body: {
+        id: 50, number: 46, user: { id: 421, login: 'user' }, state: 'closed',
+        merged_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        closed_at: Time.parse('2025-09-30 18:00:00 UTC'),
+        created_at: Time.parse('2025-09-30 15:35:30 UTC'),
+        additions: 12, deletions: 5,
+        head: { ref: nil, sha: 'aa123' },
+        base: { repo: { id: 42, full_name: 'foo/foo' } }
+      }
+    )
+    stub_pull_was_merged_issue(46)
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/46/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/aa123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 46, where: 'github')
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('pull-was-merged', fb)
+      assert(fb.one?(what: 'pull-was-merged', where: 'github', repository: 42, issue: 46, stale: 'branch'))
+    end
+  end
+
   private
 
   def stub_pull_was_merged_success(issue, files: 1)
