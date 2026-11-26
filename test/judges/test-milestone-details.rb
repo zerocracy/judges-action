@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 require 'factbase'
+require_relative '../fake_github'
 require_relative '../test__helper'
 
 class TestMilestoneDetails < Jp::Test
@@ -20,17 +21,20 @@ class TestMilestoneDetails < Jp::Test
   private
 
   def milestone
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
-    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
-    stub_github(
-      'https://api.github.com/repos/foo/foo/milestones?per_page=100&state=all',
-      body: [{ number: 7, title: 'Release candidate', created_at: '2025-01-01T12:00:00Z', creator: { id: 421 } }]
-    )
     fb = Factbase.new
     fb.with(what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
-    load_it('milestone-was-set', fb)
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => {
+        resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000, limit: 1000 }
+      },
+      'GET /repositories/42' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo' => { id: 42, full_name: 'foo/foo' },
+      'GET /repos/foo/foo/milestones?per_page=100&state=all' => [
+        { number: 7, title: 'Release candidate', created_at: '2025-01-01T12:00:00Z', creator: { id: 421 } }
+      ]
+    ).run do
+      load_it('milestone-was-set', fb)
+    end
     fb.pick(what: 'milestone-was-set')
   end
 end
