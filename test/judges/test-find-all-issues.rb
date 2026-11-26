@@ -150,114 +150,37 @@ class TestFindAllIssues < Jp::Test
     )
   end
 
-  def test_find_all_issues
-    WebMock.disable_net_connect!
-    rate_limit_up
-    stub_github(
-      'https://api.github.com/repos/foo/foo',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
-    stub_github(
-      'https://api.github.com/repositories/695',
-      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
-    )
-    stub_github(
-      'https://api.github.com/repos/foo/foo/issues/87',
-      body: {
-        id: 2_564_855_709, number: 87, title: 'Issue 87', created_at: Time.parse('2024-09-10 15:00:00 UTC')
-      }
-    )
-    stub_github(
-      %r{https://api\.github\.com/search/issues\?.*},
-      body: {
-        total_count: 3, incomplete_results: false,
-        items: [
-          {
-            id: 2_544_140_680, number: 42, title: 'Issue 42',
-            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
-            created_at: Time.parse('2024-09-04 17:00:00 UTC')
-          },
-          {
-            id: 2_544_140_685, number: 45, title: 'Issue 45',
-            user: { login: 'yegor257', id: 526_302, type: 'User', site_admin: false },
-            created_at: Time.parse('2024-09-04 18:00:00 UTC')
-          },
-          {
-            id: 2_564_855_709, number: 87, title: 'Issue 87',
-            user: { login: 'bar', id: 257_964, type: 'User', site_admin: false },
-            created_at: Time.parse('2024-09-10 15:00:00 UTC')
-          }
-        ]
-      }
-    )
-    stub_github(
-      'https://api.github.com/user/526301',
-      body: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false }
-    )
-    stub_github(
-      'https://api.github.com/user/526302',
-      body: { login: 'yegor257', id: 526_301, type: 'User', site_admin: false }
-    )
-    fb = Factbase.new
-    fb.insert.then do |f|
-      f.details = 'The issue foo/foo#87 has been opened by @bar.'
-      f.event_id = 1_598_476_635
-      f.event_type = 'IssuesEvent'
-      f.is_human = 1
-      f.issue = 87
-      f.repository = 695
-      f.what = 'issue-was-opened'
-      f.when = Time.parse('2024-09-10T15:00:00Z')
-      f.where = 'github'
-      f.who = 257_964
-    end
-    fb.insert.then do |f|
-      f.issue = 85
-      f.repository = 700
-      f.what = 'issue-was-opened'
-      f.when = Time.parse('2024-09-09T15:00:00Z')
-      f.where = 'github'
-      f.who = 257_961
-    end
-    fb.insert.then do |f|
-      f.issue = 85
-      f.repository = 695
-      f.what = 'issue-was-opened'
-      f.when = Time.parse('2024-09-08T15:00:00Z')
-      f.where = 'gitlab'
-      f.who = 257_962
-    end
-    load_it('find-all-issues', fb)
-    assert_equal(6, fb.query('(always)').each.to_a.size)
-    fb.query("(eq what 'iterate')").each.first.then do |f|
-      assert_equal('github', f.where)
-      assert_equal(695, f.repository)
-      assert_equal(87, f.min_issue_was_found)
-    end
-    fs = fb.query("(eq what 'issue-was-opened')").each.to_a
-    assert_equal(5, fs.count)
-    fs[-2].then do |f|
-      assert_nil(f[:event_id])
-      assert_nil(f[:event_type])
-      assert_equal('The issue foo/foo#42 has been earlier opened by @yegor256.', f.details)
-      assert_equal(42, f.issue)
-      assert_equal(695, f.repository)
-      assert_equal('issue-was-opened', f.what)
-      assert_equal(Time.parse('2024-09-04 17:00:00 UTC'), f.when)
-      assert_equal('github', f.where)
-      assert_equal(526_301, f.who)
-    end
-    fs[-1].then do |f|
-      assert_nil(f[:event_id])
-      assert_nil(f[:event_type])
-      assert_equal('The issue foo/foo#45 has been earlier opened by @yegor257.', f.details)
-      assert_equal(45, f.issue)
-      assert_equal(695, f.repository)
-      assert_equal('issue-was-opened', f.what)
-      assert_equal(Time.parse('2024-09-04 18:00:00 UTC'), f.when)
-      assert_equal('github', f.where)
-      assert_equal(526_302, f.who)
-    end
+  def test_adds_only_the_missing_facts
+    assert_equal(6, scanned_issues.query('(always)').each.count)
+  end
+
+  def test_keeps_the_lowest_known_issue_in_the_iteration_marker
+    marker = scanned_issues.query("(eq what 'iterate')").each.first
+    assert_equal(['github', 695, 87], [marker.where, marker.repository, marker.min_issue_was_found])
+  end
+
+  def test_keeps_existing_openings_when_restoring_missing_issues
+    assert_equal(5, scanned_issues.query("(eq what 'issue-was-opened')").each.count)
+  end
+
+  def test_restores_the_attributes_of_each_missing_issue
+    common = { event_id: nil, event_type: nil, repository: 695, what: 'issue-was-opened', where: 'github' }
+    expected = [
+      common.merge(
+        issue: 42, who: 526_301, when: Time.utc(2024, 9, 4, 17),
+        details: 'The issue foo/foo#42 has been earlier opened by @yegor256.'
+      ),
+      common.merge(
+        issue: 45, who: 526_302, when: Time.utc(2024, 9, 4, 18),
+        details: 'The issue foo/foo#45 has been earlier opened by @yegor257.'
+      )
+    ]
+    facts = scanned_issues.query("(and (eq what 'issue-was-opened') (or (eq issue 42) (eq issue 45)))")
+    actual =
+      facts.each.sort_by(&:issue).map do |fact|
+        expected.first.keys.to_h { |attr| [attr, fact[attr]&.first] }
+      end
+    assert_equal(expected, actual)
   end
 
   def test_iteration_end_keeps_old_marker
@@ -492,5 +415,88 @@ class TestFindAllIssues < Jp::Test
       1, fb.query("(eq what 'issue-was-opened')").each.to_a.size,
       'A vanished repository must add no issues and must not abort the judge'
     )
+  end
+
+  private
+
+  def scanned_issues
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
+    )
+    stub_github(
+      'https://api.github.com/repositories/695',
+      body: { id: 695, name: 'foo', full_name: 'foo/foo', created_at: Time.parse('2024-07-11 20:35:25 UTC') }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/87',
+      body: {
+        id: 2_564_855_709, number: 87, title: 'Issue 87', created_at: Time.parse('2024-09-10 15:00:00 UTC')
+      }
+    )
+    stub_github(
+      %r{https://api\.github\.com/search/issues\?.*},
+      body: {
+        total_count: 3, incomplete_results: false,
+        items: [
+          {
+            id: 2_544_140_680, number: 42, title: 'Issue 42',
+            user: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false },
+            created_at: Time.parse('2024-09-04 17:00:00 UTC')
+          },
+          {
+            id: 2_544_140_685, number: 45, title: 'Issue 45',
+            user: { login: 'yegor257', id: 526_302, type: 'User', site_admin: false },
+            created_at: Time.parse('2024-09-04 18:00:00 UTC')
+          },
+          {
+            id: 2_564_855_709, number: 87, title: 'Issue 87',
+            user: { login: 'bar', id: 257_964, type: 'User', site_admin: false },
+            created_at: Time.parse('2024-09-10 15:00:00 UTC')
+          }
+        ]
+      }
+    )
+    stub_github(
+      'https://api.github.com/user/526301',
+      body: { login: 'yegor256', id: 526_301, type: 'User', site_admin: false }
+    )
+    stub_github(
+      'https://api.github.com/user/526302',
+      body: { login: 'yegor257', id: 526_301, type: 'User', site_admin: false }
+    )
+    fb = Factbase.new
+    fb.insert.then do |f|
+      f.details = 'The issue foo/foo#87 has been opened by @bar.'
+      f.event_id = 1_598_476_635
+      f.event_type = 'IssuesEvent'
+      f.is_human = 1
+      f.issue = 87
+      f.repository = 695
+      f.what = 'issue-was-opened'
+      f.when = Time.parse('2024-09-10T15:00:00Z')
+      f.where = 'github'
+      f.who = 257_964
+    end
+    fb.insert.then do |f|
+      f.issue = 85
+      f.repository = 700
+      f.what = 'issue-was-opened'
+      f.when = Time.parse('2024-09-09T15:00:00Z')
+      f.where = 'github'
+      f.who = 257_961
+    end
+    fb.insert.then do |f|
+      f.issue = 85
+      f.repository = 695
+      f.what = 'issue-was-opened'
+      f.when = Time.parse('2024-09-08T15:00:00Z')
+      f.where = 'gitlab'
+      f.who = 257_962
+    end
+    load_it('find-all-issues', fb)
+    fb
   end
 end
