@@ -246,6 +246,7 @@ Fbe.iterate do
           end
         skip(json) if pl.nil?
         fact.what = "pull-was-#{pl[:merged_at].nil? ? 'closed' : 'merged'}"
+        skip(json) if seen?(fact)
         fact.hoc = (pl[:additions] || 0) + (pl[:deletions] || 0)
         fact.files = pl[:changed_files] unless pl[:changed_files].nil?
         Jp.fill_fact_by_hash(fact, Jp.comments_info(pl, repo: rname))
@@ -272,7 +273,6 @@ Fbe.iterate do
           "The pull request #{Fbe.issue(fact)} " \
           "has been #{json[:payload][:action]} by #{Fbe.who(fact)}, " \
           "with #{fact.hoc} HoC and #{fact.comments} comments."
-        skip(json) if seen?(fact)
         $loog.debug("PR #{Fbe.issue(fact)} closed by #{Fbe.who(fact)}")
       when 'reopened'
         Fbe.fb.query(
