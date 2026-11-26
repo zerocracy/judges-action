@@ -25,12 +25,12 @@ run_entry_script() {
     local exit_code=${status[0]}
 
     if [ "$expected_result" = "success" ]; then
-        if [ $exit_code -ne 0 ]; then
+        if [ "$exit_code" -ne 0 ]; then
             die "judges-action script failed with exit code $exit_code, but should succeed" \
               "Check log.txt for details of the failure"
         fi
     elif [ "$expected_result" = "failure" ]; then
-        if [ $exit_code -eq 0 ]; then
+        if [ "$exit_code" -eq 0 ]; then
             die "judges-action script succeeded when it should have failed" \
               "Expected: script to exit with non-zero code"
         fi
