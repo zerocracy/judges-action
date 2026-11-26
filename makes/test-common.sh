@@ -56,6 +56,16 @@ log_precedes() {
     a=$(grep -n -m1 -F -- "$first" log.txt | cut -d: -f1) || true
     b=$(grep -n -m1 -F -- "$second" log.txt | cut -d: -f1) || true
     test -n "$a" || die "Expected pattern '$first' not found in log.txt" "${3:-}"
+    if [ "$a" = "$b" ]; then
+        local line
+        local before_first
+        local before_second
+        line=$(grep -m1 -F -- "$first" log.txt)
+        before_first=${line%%"$first"*}
+        before_second=${line%%"$second"*}
+        a=${#before_first}
+        b=${#before_second}
+    fi
     if [ -n "$b" ] && [ "$b" -lt "$a" ]; then
         die "Pattern '$second' appears in log.txt before '$first'" "${3:-}"
     fi

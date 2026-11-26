@@ -31,3 +31,10 @@ if ( log_precedes "--marker-b" "--marker-a" ) 2>/dev/null; then
 fi
 
 log_precedes "--marker-a" "--marker-absent"   "log_precedes must pass when the second pattern is not in the log at all"
+
+printf '%s\n' 'prefix [a] item* [a]' > log.txt
+log_precedes '[a]' 'item*'
+
+if ( log_precedes 'item*' '[a]' ) 2>/dev/null; then
+  die "log_precedes accepted patterns in reverse order on a single line"
+fi
