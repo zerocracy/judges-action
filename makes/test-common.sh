@@ -67,6 +67,8 @@ log_not_contains() {
     local pattern=$1
     if grep -qF -- "$pattern" log.txt; then
         die "Unexpected pattern '$pattern' found in log.txt" "${2:-}"
+    elif [ $? -ne 1 ]; then
+        die "Could not search log.txt for '$pattern'" "${2:-}"
     fi
 }
 
