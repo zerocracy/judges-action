@@ -29,14 +29,11 @@ class Jp::FakeGithub
     uri = "http://127.0.0.1:#{server.addr[1]}"
     thread = Thread.new { serve(server) }
     endpoint = Octokit.api_endpoint
-    net = WebMock.net_connect_allowed?
     begin
       Octokit.api_endpoint = uri
-      WebMock.disable_net_connect!(allow_localhost: true)
-      yield(uri)
+      WebMock.disable_net_connect!(allow_localhost: true) { yield(uri) }
     ensure
       Octokit.api_endpoint = endpoint
-      net ? WebMock.allow_net_connect! : WebMock.disable_net_connect!
       thread.kill
       server.close
     end
