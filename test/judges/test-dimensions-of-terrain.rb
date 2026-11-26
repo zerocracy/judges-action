@@ -132,8 +132,8 @@ class TestDimensionsOfTerrain < Jp::Test
           Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar,foo/qwe,foo/asd' })
         )
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal('dimensions-of-terrain', f.what)
-        assert_equal(3, f.total_repositories)
+        assert_equal('dimensions-of-terrain', f.what, 'the measurement has the wrong fact type')
+        assert_equal(3, f.total_repositories, 'the repository count must include the three unarchived repositories')
       end
     end
   end
@@ -189,7 +189,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(0, f.total_releases)
+        assert_equal(0, f.total_releases, 'a non-array releases response contributes to the release count')
       end
     end
   end
@@ -225,7 +225,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_nil(f['total_contributors'])
+        assert_nil(f['total_contributors'], 'a contributor count is recorded from a non-array response')
       end
     end
   end
@@ -313,7 +313,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(8, f.total_releases)
+        assert_equal(8, f.total_releases, 'the release count does not match the list returned for foo/foo')
       end
     end
   end
@@ -381,8 +381,8 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/bar' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(20, f.total_stars)
-        assert_equal(15, f.total_forks)
+        assert_equal(20, f.total_stars, 'the star count does not equal the sum across repositories')
+        assert_equal(15, f.total_forks, 'the fork count does not equal the sum across repositories')
       end
     end
   end
@@ -392,8 +392,8 @@ class TestDimensionsOfTerrain < Jp::Test
     fb = Factbase.new
     load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'testing' => true }))
     f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-    assert_equal(23, f.total_issues)
-    assert_equal(19, f.total_pulls)
+    assert_equal(23, f.total_issues, 'the issue count differs from the graph result')
+    assert_equal(19, f.total_pulls, 'the pull request count differs from the graph result')
   end
 
   def test_total_issues_skips_failing_graph_repo
@@ -415,7 +415,10 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
-      assert_equal({ total_issues: 7, total_pulls: 5 }, total_issues(nil))
+      assert_equal(
+        { total_issues: 7, total_pulls: 5 }, total_issues(nil),
+        'a GraphQL failure changes the totals from the reachable repository'
+      )
     end
   end
 
@@ -438,7 +441,10 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
-      assert_equal({ total_issues: 7, total_pulls: 5 }, total_issues(nil))
+      assert_equal(
+        { total_issues: 7, total_pulls: 5 }, total_issues(nil),
+        'an Fbe error changes the totals from the reachable repository'
+      )
     end
   end
 
@@ -459,7 +465,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
-      assert_raises(unrescued) { total_issues(nil) }
+      assert_raises(unrescued, 'an unexpected graph error is swallowed') { total_issues(nil) }
     end
   end
 
@@ -481,7 +487,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_issues.rb'))
-      assert_raises(Octokit::Unauthorized) { total_issues(nil) }
+      assert_raises(Octokit::Unauthorized, 'invalid GitHub credentials are silently ignored') { total_issues(nil) }
     end
   end
 
@@ -493,7 +499,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo', 'testing' => true })
     )
     f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-    assert_equal(1484, f.total_commits)
+    assert_equal(1484, f.total_commits, 'the commit total differs from the count returned by the graph')
   end
 
   def test_total_commits_with_nil_size_repo
@@ -559,10 +565,10 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,foo/nil-size' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(2, f.total_repositories)
-        assert_equal(0, f.total_commits)
-        assert_equal(0, f.total_files)
-        assert_equal(0, f.total_contributors)
+        assert_equal(2, f.total_repositories, 'a missing size excludes the repository from the repository count')
+        assert_equal(0, f.total_commits, 'a repository of unknown size contributes commits')
+        assert_equal(0, f.total_files, 'a repository of unknown size contributes files')
+        assert_equal(0, f.total_contributors, 'a repository of unknown size contributes contributors')
       end
     end
   end
@@ -591,8 +597,8 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/nobranch' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        refute_nil(f)
-        assert_nil(f['total_commits'])
+        refute_nil(f, 'the missing default branch prevents recording a terrain fact')
+        assert_nil(f['total_commits'], 'a commit count is recorded without a default branch')
       end
     end
   end
@@ -621,10 +627,10 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'yegor256/empty-repo' }))
         fact = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        refute_nil(fact)
-        assert_nil(fact['total_commits'])
-        assert_nil(fact['total_files'])
-        assert_nil(fact['total_contributors'])
+        refute_nil(fact, 'empty repositories prevent recording the terrain fact')
+        assert_nil(fact['total_commits'], 'a commit count is recorded without scanning a repository')
+        assert_nil(fact['total_files'], 'a file count is recorded without scanning a repository')
+        assert_nil(fact['total_contributors'], 'a contributor count is recorded without scanning a repository')
       end
     end
   end
@@ -650,7 +656,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
-      assert_equal({}, total_commits(nil))
+      assert_equal({}, total_commits(nil), 'a failed graph query produces a commit count')
     end
   end
 
@@ -675,7 +681,7 @@ class TestDimensionsOfTerrain < Jp::Test
     end.new
     Fbe.stub(:github_graph, graph) do
       load(File.join(__dir__, '../../judges/dimensions-of-terrain/total_commits.rb'))
-      assert_equal({}, total_commits(nil))
+      assert_equal({}, total_commits(nil), 'a network timeout produces a commit count')
     end
   end
 
@@ -741,7 +747,10 @@ class TestDimensionsOfTerrain < Jp::Test
     Fbe.stub(:github_graph, graph) do
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/broken' }))
-        assert_nil(fb.query("(eq what 'dimensions-of-terrain')").each.first['total_commits'])
+        assert_nil(
+          fb.query("(eq what 'dimensions-of-terrain')").each.first['total_commits'],
+          'the terrain fact records a commit count after the graph fails'
+        )
       end
     end
   end
@@ -870,7 +879,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(7, f.total_files)
+        assert_equal(7, f.total_files, 'the file count differs from the number of blobs in the trees')
       end
     end
   end
@@ -919,8 +928,8 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/good,foo/malformed' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        refute_nil(f)
-        assert_equal(1, f.total_files)
+        refute_nil(f, 'a missing tree key prevents recording the terrain fact')
+        assert_equal(1, f.total_files, 'a missing tree key changes the count from the other repository')
       end
     end
   end
@@ -953,8 +962,8 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/big' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        refute_nil(f)
-        assert_nil(f['total_files'])
+        refute_nil(f, 'a truncated tree prevents recording the terrain fact')
+        assert_nil(f['total_files'], 'a partial tree produces a file count')
       end
     end
   end
@@ -1033,7 +1042,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo,yegor256/empty-repo' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(12, f.total_contributors)
+        assert_equal(12, f.total_contributors, 'the contributor total differs from the number of unique GitHub IDs')
       end
     end
   end
@@ -1072,7 +1081,7 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(1, f.total_contributors)
+        assert_equal(1, f.total_contributors, 'a contributor without a GitHub ID increases the total')
       end
     end
   end
@@ -1087,7 +1096,10 @@ class TestDimensionsOfTerrain < Jp::Test
     Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
       [[after], [inside, after], [inside, inside, boundary, after]].zip([0, 1, 2]).each do |commits, expected|
         Jp.stub(:qosearch, { items: commits }) do
-          assert_equal(expected, total_active_contributors(fact)[:total_active_contributors])
+          assert_equal(
+            expected, total_active_contributors(fact)[:total_active_contributors],
+            'the active contributor count includes a duplicate or a commit outside the measurement window'
+          )
         end
       end
     end
@@ -1249,7 +1261,10 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb)
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        assert_equal(5, f.total_active_contributors)
+        assert_equal(
+          5, f.total_active_contributors,
+          'the active contributor total differs from the distinct authors in the window'
+        )
       end
     end
   end
@@ -1295,8 +1310,8 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/good,foo/bad' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        refute_nil(f)
-        assert_equal(0, f.total_releases)
+        refute_nil(f, 'a missing releases endpoint prevents recording the terrain fact')
+        assert_equal(0, f.total_releases, 'a missing releases endpoint contributes to the release count')
       end
     end
   end
@@ -1345,8 +1360,8 @@ class TestDimensionsOfTerrain < Jp::Test
       Time.stub(:now, Time.parse('2024-09-29 21:00:00 UTC')) do
         load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/good,foo/bad' }))
         f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-        refute_nil(f)
-        assert_equal(1, f.total_files)
+        refute_nil(f, 'a forbidden tree prevents recording the terrain fact')
+        assert_equal(1, f.total_files, 'a forbidden tree changes the count from the readable repository')
       end
     end
   end
@@ -1392,17 +1407,17 @@ class TestDimensionsOfTerrain < Jp::Test
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       load_it('dimensions-of-terrain', fb, Judges::Options.new({ 'repositories' => 'foo/foo' }))
       f = fb.query("(eq what 'dimensions-of-terrain')").each.first
-      refute_nil(f)
-      assert_nil(f['total_commits'])
-      assert_nil(f['total_releases'])
-      assert_nil(f['total_contributors'])
-      assert_nil(f['total_active_contributors'])
-      assert_nil(f['total_repositories'])
-      assert_nil(f['total_files'])
-      assert_nil(f['total_issues'])
-      assert_nil(f['total_pulls'])
-      assert_nil(f['total_forks'])
-      assert_nil(f['total_stars'])
+      refute_nil(f, 'exhausting the quota prevents recording the terrain fact')
+      assert_nil(f['total_commits'], 'the fact records commits after the quota is exhausted')
+      assert_nil(f['total_releases'], 'the fact records releases after the quota is exhausted')
+      assert_nil(f['total_contributors'], 'the fact records contributors after the quota is exhausted')
+      assert_nil(f['total_active_contributors'], 'the fact records active contributors after the quota is exhausted')
+      assert_nil(f['total_repositories'], 'the fact records repositories after the quota is exhausted')
+      assert_nil(f['total_files'], 'the fact records files after the quota is exhausted')
+      assert_nil(f['total_issues'], 'the fact records issues after the quota is exhausted')
+      assert_nil(f['total_pulls'], 'the fact records pulls after the quota is exhausted')
+      assert_nil(f['total_forks'], 'the fact records forks after the quota is exhausted')
+      assert_nil(f['total_stars'], 'the fact records stars after the quota is exhausted')
     end
   end
 
