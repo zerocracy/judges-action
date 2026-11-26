@@ -38,8 +38,7 @@ verify:
 
 target/docker-image.txt: Makefile Dockerfile entry.sh Gemfile Gemfile.lock $(shell find lib judges)
 	mkdir -p "$$(dirname $@)"
-	docker build -t judges-action "$$(pwd)"
-	docker build -t judges-action -q "$$(pwd)" > "$@"
+	docker build -t judges-action --iidfile "$@" "$$(pwd)"
 
 clean:
 	rm -rf target
