@@ -20,8 +20,8 @@ def Jp.incremate(
 )
   return if max_per_fact&.zero?
   evaluated = 0
-  Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
-    n = File.basename(rb).gsub(/\.rb$/, '')
+  Dir.glob("#{prefix}_*.rb", base: dir).each do |rb|
+    n = File.basename(rb, '.rb')
     if fact[n] || fact[Jp::INCREMATE_MARKER]&.include?(n)
       $loog.debug("#{n} is here: #{fact[n]&.first || 'empty'}")
       next
@@ -39,7 +39,7 @@ def Jp.incremate(
         '...'
       ].compact.join
     )
-    require(rb)
+    require(File.expand_path(rb, dir))
     elapsed($loog, level: Logger::INFO) do
       h = __send__(n, fact)
       h.each do |k, v|
