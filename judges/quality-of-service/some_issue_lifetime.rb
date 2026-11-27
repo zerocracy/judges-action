@@ -8,6 +8,8 @@ require 'fbe/unmask_repos'
 require_relative '../../lib/qos_search'
 
 def some_issue_lifetime(fact)
+  range = Jp.qorange(fact.since, fact.when)
+  return { 'some_issue_lifetime' => [], 'some_pull_lifetime' => [] } if range.nil?
   ret = {}
   { issue: 'some_issue_lifetime', pr: 'some_pull_lifetime' }.each do |type, prop|
     ages = []
@@ -17,7 +19,7 @@ def some_issue_lifetime(fact)
         lost = true
         break
       end
-      found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+      found = Jp.qosearch("repo:#{repo} type:#{type} closed:#{range}")
       if found.nil?
         lost = true
         break
