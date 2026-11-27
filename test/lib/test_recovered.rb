@@ -19,7 +19,7 @@ class TestRecovered < Minitest::Test
     end
     found =
       Fbe.stub(:octo, octo) do
-        Jp.recovered('foo/foo', 42, ended, judge: 'quality-of-service', loog: Loog::NULL)
+        Jp.recovered('foo/foo', 42, ended, branch: 'master', judge: 'quality-of-service', loog: Loog::NULL)
       end
     assert_equal(recovery, found)
   end
@@ -31,8 +31,23 @@ class TestRecovered < Minitest::Test
     octo.define_singleton_method(:workflow_runs) { |_repo, _workflow, **| { workflow_runs: [] } }
     found =
       Fbe.stub(:octo, octo) do
-        Jp.recovered('foo/foo', 42, Time.now, judge: 'quality-of-service', loog: Loog::NULL)
+        Jp.recovered('foo/foo', 42, Time.now, branch: 'master', judge: 'quality-of-service', loog: Loog::NULL)
       end
     assert_nil(found)
+  end
+
+  def test_looks_for_success_on_the_branch_that_broke
+    asked = []
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:with_disable_auto_paginate) { |&b| b.call(self) }
+    octo.define_singleton_method(:workflow_runs) do |_repo, _workflow, **opts|
+      asked << opts[:branch]
+      { workflow_runs: [] }
+    end
+    Fbe.stub(:octo, octo) do
+      Jp.recovered('foo/foo', 42, Time.now, branch: 'фича-ä', judge: 'quality-of-service', loog: Loog::NULL)
+    end
+    assert_equal(['фича-ä'], asked, 'the later success is looked for on another branch than the one that broke')
   end
 end
