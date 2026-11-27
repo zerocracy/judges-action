@@ -3219,6 +3219,54 @@ class TestGithubEvents < Jp::Test
     assert_includes(log.to_s, "@agent doesn't have access to the #44 repository")
   end
 
+  def test_release_event_with_nil_compare_files
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '11500',
+          type: 'ReleaseEvent',
+          actor: { id: 8_086_956, login: 'rultor' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'published',
+            release: {
+              id: 472_000, tag_name: '0.0.9', name: 'v0.0.9',
+              created_at: Time.parse('2024-11-30T00:51:39Z'),
+              published_at: Time.parse('2024-11-30T00:52:07Z')
+            }
+          },
+          created_at: Time.parse('2024-11-30T00:52:08Z')
+        }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'firstsha' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/firstsha...0.0.9?per_page=100',
+      body: { total_commits: 2, files: nil, commits: [{ sha: 'lastsha' }] }
+    )
+    stub_github('https://api.github.com/users/rultor', body: { id: 8_086_956, login: 'rultor' })
+    stub_github('https://api.github.com/user/8086956', body: { id: 8_086_956, login: 'rultor' })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    facts = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, facts.size)
+    assert_equal(0, facts.first.hoc)
+    assert_equal(2, facts.first.commits)
+    assert_equal('lastsha', facts.first.last_commit)
+  end
+
   private
 
   def stub_event(*json)

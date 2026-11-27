@@ -79,7 +79,7 @@ Fbe.iterate do
     comparison(repo, since, fact.tag).then do |json|
       return info if json.nil?
       info[:commits] = json[:total_commits]
-      info[:hoc] = json[:files].sum { |f| f[:changes] }
+      info[:hoc] = (json[:files] || []).sum { |f| f[:changes] }
       last = json[:commits].last
       info[:last_commit] = last[:sha] unless last.nil?
     end
