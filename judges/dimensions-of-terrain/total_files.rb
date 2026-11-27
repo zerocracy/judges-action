@@ -21,6 +21,9 @@ def total_files(_fact)
       rescue Octokit::TooManyRequests => e
         $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
         break
+      rescue Octokit::ServerError => e
+        $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to #{repo} " \
@@ -28,6 +31,7 @@ def total_files(_fact)
         )
         next
       end
+    return {} if info == :retry
     next if info[:size].nil? || info[:size].zero?
     tree =
       begin
@@ -38,6 +42,9 @@ def total_files(_fact)
       rescue Octokit::TooManyRequests => e
         $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
         break
+      rescue Octokit::ServerError => e
+        $loog.warn("[#{$judge}] GitHub failed for #{repo}; leaving the metric for retry: #{e.class}: #{e.message}")
+        :retry
       rescue Octokit::Forbidden => e
         $loog.warn(
           "[#{$judge}] Access forbidden to tree for #{repo} " \
@@ -45,6 +52,7 @@ def total_files(_fact)
         )
         next
       end
+    return {} if tree == :retry
     if tree[:truncated]
       $loog.info(
         "Tree for #{repo}@#{info[:default_branch]} is truncated, so total_files is not reported " \
