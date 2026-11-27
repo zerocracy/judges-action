@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require_relative '../../lib/qos_search'
@@ -25,6 +26,12 @@ def some_pull_hoc_size(fact)
           $loog.warn(
             "[#{$judge}] Access forbidden to pull request ##{json[:number]} in #{repo} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+          $loog.warn(
+            "[#{$judge}] Transient error fetching pull request ##{json[:number]} in #{repo} " \
+            "(will retry next cycle): #{e.class}: #{e.message}"
           )
           next
         end

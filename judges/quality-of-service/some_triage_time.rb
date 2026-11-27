@@ -3,6 +3,7 @@
 # SPDX-FileCopyrightText: Copyright (c) 2024-2026 Zerocracy
 # SPDX-License-Identifier: MIT
 
+require 'faraday'
 require 'fbe/fb'
 require 'fbe/octo'
 require 'fbe/pmp'
@@ -27,6 +28,9 @@ def some_triage_time(fact)
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
+        next
+      rescue Octokit::ServerError, Faraday::TimeoutError, Faraday::ConnectionFailed => e
+        $loog.warn("[#{$judge}] Transient error fetching #{repo} (will retry next cycle): #{e.class}: #{e.message}")
         next
       end
     found[:items].each do |issue|
