@@ -11,8 +11,10 @@ def some_issue_lifetime(fact)
   ret = {}
   { issue: 'some_issue_lifetime', pr: 'some_pull_lifetime' }.each do |type, prop|
     ages = []
+    ran = false
     lost = false
     Fbe.unmask_repos do |repo|
+      ran = true
       if Fbe.octo.off_quota?
         lost = true
         break
@@ -29,9 +31,10 @@ def some_issue_lifetime(fact)
           json[:closed_at] - json[:created_at]
         end
     end
-    next if lost
+    next if !ran || lost
     ages.compact!
     ret[prop] = ages
   end
+  ret['some_issue_lifetime_done'] = 1 if ret.key?('some_issue_lifetime') && ret.key?('some_pull_lifetime')
   ret
 end

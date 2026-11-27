@@ -22,7 +22,7 @@ def Jp.incremate(
   evaluated = 0
   Dir[File.join(dir, "#{prefix}_*.rb")].each do |rb|
     n = File.basename(rb).gsub(/\.rb$/, '')
-    if fact[n] || fact[Jp::INCREMATE_MARKER]&.include?(n)
+    if Jp.collected?(fact, n) || fact[Jp::INCREMATE_MARKER]&.include?(n)
       $loog.debug("#{n} is here: #{fact[n]&.first || 'empty'}")
       next
     end
@@ -43,7 +43,7 @@ def Jp.incremate(
     elapsed($loog, level: Logger::INFO) do
       h = __send__(n, fact)
       h.each do |k, v|
-        next if k.to_s == n
+        next if [n, 'some_issue_lifetime_done'].include?(k.to_s)
         next if avoid_duplicate && fact.all_properties.include?(k.to_s)
         (v.is_a?(Time) ? [v] : Array(v)).each { fact.__send__("#{k}=", _1) }
       end
@@ -55,9 +55,23 @@ def Jp.incremate(
       if h[n.to_sym].is_a?(Array) && h[n.to_sym].empty?
         fact.__send__("#{Jp::INCREMATE_MARKER}=", n)
       end
+      done = h.keys.find { |k| k.to_s == 'some_issue_lifetime_done' }
+      if done && !(avoid_duplicate && fact.all_properties.include?('some_issue_lifetime_done'))
+        Array(h[done]).each { fact.some_issue_lifetime_done = _1 }
+      end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
     end
     evaluated += 1
     break if max_per_fact && evaluated >= max_per_fact
+  end
+end
+
+def Jp.collected?(fact, name)
+  if name == 'some_issue_lifetime'
+    return true if fact['some_issue_lifetime_done']
+    return true if fact['some_issue_lifetime'] && fact['some_pull_lifetime']
+    false
+  else
+    !fact[name].nil?
   end
 end
