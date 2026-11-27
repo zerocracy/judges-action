@@ -87,4 +87,36 @@ class TestTypeWasAttached < Jp::Test
     assert_equal(['who'], f['stale'], 'a deleted GraphQL actor must mark the fact stale on who')
     assert_match(/an unknown actor/, f['details'].first)
   end
+
+  def test_keeps_facts_of_other_sources_on_type_removal
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      body: [
+        { id: 100, event: 'issue_type_removed', node_id: 'ITRE_1', created_at: '2025-09-30 06:14:38 UTC' }
+      ]
+    )
+    fake = Fbe::Graph::Fake.new
+    fake.define_singleton_method(:issue_type_event) do |_node_id|
+      {
+        'type' => 'IssueTypeRemovedEvent',
+        'created_at' => Time.parse('2025-09-30 06:14:38 UTC'),
+        'issue_type' => { 'id' => 'IT_x', 'name' => 'Bug', 'description' => 'd' },
+        'actor' => { 'login' => 'yegor256', 'type' => 'User', 'id' => 526_301, 'name' => 'Y', 'email' => nil }
+      }
+    end
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    fb.with(_id: 3, what: 'type-was-attached', repository: 42, issue: 44, where: 'gitlab', type: 'Bug')
+    Fbe.stub(:github_graph, fake) do
+      load_it('type-was-attached', fb)
+    end
+    assert_nil(
+      fb.query('(eq _id 3)').each.first['stale'],
+      'a fact from another source must not be retired by a GitHub type removal'
+    )
+  end
 end
