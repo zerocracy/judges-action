@@ -28,7 +28,16 @@ runs:
           }
           const fs = require('fs');
           let readme = fs.readFileSync('README.md', 'utf8');
-          const escaped = '${{ inputs.repo }}'.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          readme = readme.replace(new RegExp(escaped + '@.+$', 'gm'), `${{ inputs.repo }}@${latest}`);
+          const slug = '${{ inputs.owner }}/${{ inputs.repo }}';
+          const escaped = slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const reference = new RegExp('(?<![\\w./-])' + escaped + '@([^\\s\'"`<>()[\\]]+)', 'g');
+          readme = readme.replace(reference, (match, revision, offset) => {
+            const preceding = readme.slice(0, offset);
+            const quote = preceding.slice(-1);
+            const quoted = ["'", '"', '`'].includes(quote) && readme[offset + match.length] === quote;
+            const yaml = /\buses:[ \t]*$/.test(preceding);
+            const suffix = quoted || yaml ? '' : revision.match(/[.,;:!?]+$/)?.[0] || '';
+            return `${slug}@${latest}${suffix}`;
+          });
           fs.writeFileSync('README.md', readme);
           core.info(`Updated ${{ inputs.repo }} to ${latest}`);
