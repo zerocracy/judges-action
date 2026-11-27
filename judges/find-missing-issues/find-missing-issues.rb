@@ -75,6 +75,24 @@ Fbe.consider(
       next
     end
     type = json[:pull_request] ? 'pull' : 'issue'
+    if type == 'pull'
+      failed = false
+      ref =
+        begin
+          Fbe.octo.pull_request(repo, json[:number]).dig(:head, :ref)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("The pull ##{json[:number]} doesn't exist in #{repo}: #{e.message}")
+          Jp.issue_was_lost('github', r.repository, json[:number])
+          failed = true
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to pull ##{json[:number]} in #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          failed = true
+        end
+      next if failed
+    end
     Fbe.fb.txn do |fbt|
       f =
         Fbe.if_absent(fb: fbt) do |n|
@@ -87,20 +105,6 @@ Fbe.consider(
       f.when = json[:created_at]
       Jp.author(f, json.dig(:user, :id))
       if type == 'pull'
-        ref =
-          begin
-            Fbe.octo.pull_request(repo, f.issue).dig(:head, :ref)
-          rescue Octokit::NotFound, Octokit::Deprecated => e
-            $loog.info("The pull ##{f.issue} doesn't exist in #{repo}: #{e.message}")
-            Jp.issue_was_lost(f.where, f.repository, f.issue)
-            next
-          rescue Octokit::Forbidden => e
-            $loog.warn(
-              "[#{$judge}] Access forbidden to pull ##{f.issue} in #{repo} " \
-              "(transient, will retry next cycle): #{e.class}: #{e.message}"
-            )
-            next
-          end
         if ref
           f.branch = ref
         else

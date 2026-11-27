@@ -122,4 +122,31 @@ class TestFindMissingIssues < Jp::Test
       'The fact of a vanished repository must be marked stale instead of aborting the judge'
     )
   end
+
+  def test_does_not_commit_partial_pull_on_pull_request_error
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/45',
+      body: {
+        number: 45, pull_request: { url: 'https://api.github.com/repos/foo/foo/pulls/45' },
+        user: { id: 44, login: 'user' }, created_at: '2025-09-27 06:03:16 UTC'
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/45',
+      status: 403,
+      body: { message: 'Resource not accessible by integration' }
+    )
+    stub_github('https://api.github.com/user/44', body: { id: 44, login: 'user' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-opened', repository: 42, issue: 44, where: 'github')
+      .with(_id: 2, what: 'pull-was-opened', repository: 42, issue: 46, where: 'github')
+    load_it('find-missing-issues', fb)
+    refute(
+      fb.one?(what: 'pull-was-opened', where: 'github', issue: 45, repository: 42),
+      'Transient 403 on pull_request must not commit a partial pull-was-opened fact without branch or details'
+    )
+  end
 end
