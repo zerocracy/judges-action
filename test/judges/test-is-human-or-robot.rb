@@ -16,17 +16,71 @@ class TestIsHumanOrRobot < Jp::Test
     fact = fb.insert
     fact.who = id
     fact.where = 'github'
+    fact.what = 'pull-was-merged'
     Jp::FakeGithub.new(
-      'GET /rate_limit' => {
-        rate: { limit: 60, remaining: 59, reset: 1_728_464_472, used: 1, resource: 'core' }
-      },
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
       "GET /user/#{id}" => [404, {}]
     ).run do
       load_it('is-human-or-robot', fb)
     end
     facts = fb.query("(eq who #{id})").each.to_a
     assert_equal(id, facts.first.who)
+    assert_equal('who', facts.first.stale)
     assert_raises(ArgumentError) { facts.first.is_human }
+  end
+
+  def test_marks_all_facts_of_a_missing_user_stale
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', who: 555, where: 'github')
+      .with(_id: 2, what: 'issue-was-opened', who: 555, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /user/555' => [404, {}]
+    ).run do
+      load_it('is-human-or-robot', fb)
+    end
+    staled = fb.query("(and (eq who 555) (eq stale 'who'))").each.to_a
+    assert_equal(2, staled.size, 'every fact of the missing user must be marked stale')
+  end
+
+  def test_does_not_mark_tombstoned_fact_stale
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', who: 666, where: 'github', tombstone: 'who')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /user/666' => [404, {}]
+    ).run do
+      load_it('is-human-or-robot', fb)
+    end
+    assert_empty(fb.query("(eq stale 'who')").each.to_a, 'a tombstoned user must not be queried again')
+  end
+
+  def test_does_not_retry_already_stale_fact
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', who: 777, where: 'github', stale: 'who')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /user/777' => { login: 'late', id: 777, type: 'User' }
+    ).run do
+      load_it('is-human-or-robot', fb)
+    end
+    fact = fb.query('(eq who 777)').each.first
+    refute_nil(fact)
+    assert_raises(ArgumentError, 'an already stale fact must not be classified again') { fact.is_human }
+  end
+
+  def test_skips_fact_without_what
+    fb = Factbase.new
+    fb.with(_id: 1, who: 888, where: 'github')
+    Jp::FakeGithub.new(
+      'GET /rate_limit' => { resources: { search: { remaining: 30, limit: 30 } }, rate: { remaining: 1000 } },
+      'GET /user/888' => { login: 'nobody', id: 888, type: 'User' }
+    ).run do
+      load_it('is-human-or-robot', fb)
+    end
+    fact = fb.query('(eq who 888)').each.first
+    refute_nil(fact)
+    assert_raises(ArgumentError, 'a fact without what is out of scope') { fact.is_human }
   end
 
   def test_identify_user_as_bot_or_human
