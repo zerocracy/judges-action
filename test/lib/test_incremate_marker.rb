@@ -9,6 +9,28 @@ require_relative '../../lib/incremate'
 require_relative '../test__helper'
 
 class TestIncremateMarker < Minitest::Test
+  def test_runs_an_empty_string_keyed_metric_only_once
+    options = $options
+    loog = $loog
+    $options = Judges::Options.new({})
+    $loog = Loog::NULL
+    Dir.mktmpdir do |dir|
+      File.write(File.join(dir, 'some_empty.rb'), <<~RUBY)
+        def some_empty(_f)
+          { 'some_empty' => [], visits: 1 }
+        end
+      RUBY
+      fact = Factbase.new.insert
+      Fbe.stub(:over?, false) do
+        2.times { Jp.incremate(fact, dir, 'some', avoid_duplicate: false) }
+      end
+      assert_equal([1], fact['visits'], 'a completed empty metric must not run again in the next cycle')
+    end
+  ensure
+    $options = options
+    $loog = loog
+  end
+
   def test_keeps_the_marker_that_came_back_as_a_string
     WebMock.disable_net_connect!
     stub_request(:get, 'https://api.github.com/rate_limit').to_return(

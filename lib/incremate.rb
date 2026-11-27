@@ -52,7 +52,7 @@ def Jp.incremate(
         value = h[marker]
         (value.is_a?(Time) ? [value] : Array(value)).each { fact.__send__("#{n}=", _1) }
       end
-      if h[n.to_sym].is_a?(Array) && h[n.to_sym].empty?
+      if marker && h[marker] == []
         fact.__send__("#{Jp::INCREMATE_MARKER}=", n)
       end
       throw(:"Collected #{n}: [#{h.map { |k, v| "#{k}: #{v}" }.join(', ')}]")
