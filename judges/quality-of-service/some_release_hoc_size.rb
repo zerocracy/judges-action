@@ -10,28 +10,30 @@ def some_release_hoc_size(fact)
   grouped = {}
   hocs = []
   commits = []
-  Fbe.unmask_repos do |repo|
-    return {} if Fbe.octo.off_quota?
-    releases =
-      begin
-        Fbe.octo.releases(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Releases not found for #{repo}: #{e.message}")
-        next
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to releases for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+  expanded =
+    Fbe.unmask_repos do |repo|
+      return {} if Fbe.octo.off_quota?
+      releases =
+        begin
+          Fbe.octo.releases(repo)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Releases not found for #{repo}: #{e.message}")
+          next
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to releases for #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      releases.each do |json|
+        next if json[:published_at].nil?
+        next if json[:published_at] > fact.when
+        (grouped[repo] ||= []) << json
+        break if json[:published_at] < fact.since
       end
-    releases.each do |json|
-      next if json[:published_at].nil?
-      next if json[:published_at] > fact.when
-      (grouped[repo] ||= []) << json
-      break if json[:published_at] < fact.since
     end
-  end
+  return {} if expanded && expanded.empty?
   grouped.each do |repo, releases|
     releases.reverse.each_cons(2) do |first, last|
       compare =

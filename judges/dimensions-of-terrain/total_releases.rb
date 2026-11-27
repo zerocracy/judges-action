@@ -9,27 +9,29 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_releases(_fact)
   total = 0
-  Fbe.unmask_repos do |repo|
-    releases =
-      begin
-        Fbe.octo.releases(repo)
-      rescue Octokit::NotFound, Octokit::Deprecated => e
-        $loog.info("Releases not found for #{repo}: #{e.message}")
-        next
-      rescue Octokit::TooManyRequests => e
-        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-        break
-      rescue Octokit::Forbidden => e
-        $loog.warn(
-          "[#{$judge}] Access forbidden to releases for #{repo} " \
-          "(transient, will retry next cycle): #{e.class}: #{e.message}"
-        )
-        next
+  expanded =
+    Fbe.unmask_repos do |repo|
+      releases =
+        begin
+          Fbe.octo.releases(repo)
+        rescue Octokit::NotFound, Octokit::Deprecated => e
+          $loog.info("Releases not found for #{repo}: #{e.message}")
+          next
+        rescue Octokit::TooManyRequests => e
+          $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+          break
+        rescue Octokit::Forbidden => e
+          $loog.warn(
+            "[#{$judge}] Access forbidden to releases for #{repo} " \
+            "(transient, will retry next cycle): #{e.class}: #{e.message}"
+          )
+          next
+        end
+      next unless releases.is_a?(Array)
+      releases.reject { |release| release[:draft] }.each do |_|
+        total += 1
       end
-    next unless releases.is_a?(Array)
-    releases.reject { |release| release[:draft] }.each do |_|
-      total += 1
     end
-  end
+  return {} if expanded && expanded.empty?
   { total_releases: total }
 end

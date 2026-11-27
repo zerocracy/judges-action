@@ -13,41 +13,43 @@ def some_review_time(fact)
   sizes = []
   reviewers = []
   reviews = []
-  Fbe.unmask_repos do |repo|
-    return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
-    return {} if found.nil?
-    found[:items].each do |pr|
-      all, csize =
-        begin
-          [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
-        rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
-          next
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to pull ##{pr[:number]} in #{repo} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
-          next
+  expanded =
+    Fbe.unmask_repos do |repo|
+      return {} if Fbe.octo.off_quota?
+      found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+      return {} if found.nil?
+      found[:items].each do |pr|
+        all, csize =
+          begin
+            [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
+          rescue Octokit::NotFound, Octokit::Deprecated => e
+            $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
+            next
+          rescue Octokit::Forbidden => e
+            $loog.warn(
+              "[#{$judge}] Access forbidden to pull ##{pr[:number]} in #{repo} " \
+              "(transient, will retry next cycle): #{e.class}: #{e.message}"
+            )
+            next
+          end
+        first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
+        merged = pr.dig(:pull_request, :merged_at)
+        if first && merged
+          seconds = merged - first[:submitted_at]
+          if seconds.negative?
+            $loog.info("The pull ##{pr[:number]} in #{repo} was reviewed after it was merged")
+          else
+            times << seconds
+          end
         end
-      first = all.select { |r| r[:submitted_at] }.min_by { |r| r[:submitted_at] }
-      merged = pr.dig(:pull_request, :merged_at)
-      if first && merged
-        seconds = merged - first[:submitted_at]
-        if seconds.negative?
-          $loog.info("The pull ##{pr[:number]} in #{repo} was reviewed after it was merged")
-        else
-          times << seconds
-        end
+        sizes << csize
+        users = all.map { |r| r.dig(:user, :id) }
+        users.uniq!
+        reviewers << users.size
+        reviews << all.size
       end
-      sizes << csize
-      users = all.map { |r| r.dig(:user, :id) }
-      users.uniq!
-      reviewers << users.size
-      reviews << all.size
     end
-  end
+  return {} if expanded && expanded.empty?
   {
     some_review_time: times,
     some_review_size: sizes,

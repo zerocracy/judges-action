@@ -11,25 +11,27 @@ require_relative '../../lib/patches/unmask_repos'
 
 def total_commits(_fact)
   repos = []
-  Fbe.unmask_repos do |repo|
-    begin
-      json = Fbe.octo.repository(repo)
-    rescue Octokit::NotFound, Octokit::Deprecated => e
-      $loog.info("Repository #{repo} not found: #{e.message}")
-      next
-    rescue Octokit::TooManyRequests => e
-      $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
-      break
-    rescue Octokit::Forbidden => e
-      $loog.warn(
-        "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
-      )
-      next
+  expanded =
+    Fbe.unmask_repos do |repo|
+      begin
+        json = Fbe.octo.repository(repo)
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Repository #{repo} not found: #{e.message}")
+        next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        break
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
+      next if json[:size].nil? || json[:size].zero?
+      next if json[:default_branch].nil?
+      repos << [*repo.split('/'), json[:default_branch]]
     end
-    next if json[:size].nil? || json[:size].zero?
-    next if json[:default_branch].nil?
-    repos << [*repo.split('/'), json[:default_branch]]
-  end
+  return {} if expanded && expanded.empty?
   return {} if repos.empty?
   errors = [
     GraphQL::Client::Error, Fbe::Error, Net::OpenTimeout, Net::ReadTimeout,

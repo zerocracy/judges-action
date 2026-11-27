@@ -18,6 +18,7 @@ module Fbe
         global:, options:, loog:, epoch:, kickoff:, quota_aware:, lifetime_aware:, timeout_aware:
       )
       repos = []
+      skipped = false
       octo = Fbe.octo(loog:, global:, options:)
       masks = (options.repositories || '').split(',')
       masks.reject { |m| m.start_with?('-') }.each do |mask|
@@ -40,6 +41,7 @@ module Fbe
               "[#{$judge}] Cannot list the repositories of #{org.inspect}, " \
               "skipping the #{mask.inspect} mask (will retry next cycle): #{e.class}: #{e.message}"
             )
+            skipped = true
             next
           end
         list.each do |r|
@@ -51,6 +53,13 @@ module Fbe
         repos.reject! { |r| re.match?(r) }
       end
       repos.uniq!(&:downcase)
+      if skipped
+        loog.warn(
+          "[#{$judge}] The expansion of #{options.repositories.inspect} is incomplete, " \
+          "so the #{repos.size} repositories it did find are not reported (will retry next cycle)"
+        )
+        return []
+      end
       repos.reject! do |repo|
         octo.repository(repo)[:archived]
       rescue Octokit::NotFound, Octokit::Deprecated => e

@@ -218,7 +218,7 @@ class TestQuantityOfDeliverables < Jp::Test
     end
     fact = Object.new
     fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
-    unmask = proc { |&block| block.call('foo/bad') }
+    unmask = yielding_repos('foo/bad')
     $global = {}
     $judge = 'quantity-of-deliverables'
     $loog = Loog::NULL
@@ -513,6 +513,28 @@ class TestQuantityOfDeliverables < Jp::Test
           )
         )
       end
+    end
+  end
+
+  def test_total_builds_ran_returns_empty_hash_when_a_mask_is_skipped
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/*' })
+    Fbe.stub(:unmask_repos, ->(&_block) { [] }) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_builds_ran.rb'))
+      assert_empty(total_builds_ran(nil), 'a skipped mask cannot be reported as zero builds')
+    end
+  end
+
+  def test_total_commits_pushed_returns_empty_hash_when_a_mask_is_skipped
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $global = {}
+    $options = Judges::Options.new({ 'repositories' => 'foo/*' })
+    Fbe.stub(:unmask_repos, ->(&_block) { [] }) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_commits_pushed.rb'))
+      assert_empty(total_commits_pushed(nil), 'a skipped mask cannot be reported as zero commits')
     end
   end
 end
