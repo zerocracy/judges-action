@@ -431,6 +431,30 @@ class TestQualityOfService < Jp::Test
     end
   end
 
+  def test_some_release_hoc_size_survives_nil_compare_files
+    $loog = Loog::NULL
+    load(File.join(__dir__, '../../judges/quality-of-service/some_release_hoc_size.rb'))
+    octo = Object.new
+    octo.define_singleton_method(:off_quota?) { |**| false }
+    octo.define_singleton_method(:releases) do |_repo|
+      [
+        { tag_name: 'v2', published_at: Time.parse('2024-08-05 12:00:00 UTC') },
+        { tag_name: 'v1', published_at: Time.parse('2024-08-03 12:00:00 UTC') }
+      ]
+    end
+    octo.define_singleton_method(:compare) { |_repo, _base, _head| { files: nil, total_commits: 2 } }
+    fact = Factbase::Fact.new({})
+    fact.since = Time.parse('2024-08-02 21:00:00 UTC')
+    fact.when = Time.parse('2024-08-09 21:00:00 UTC')
+    Fbe.stub(:octo, octo) do
+      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+        metrics = some_release_hoc_size(fact)
+        assert_equal([0], metrics[:some_release_hoc_size])
+        assert_equal([2], metrics[:some_release_commits_size])
+      end
+    end
+  end
+
   def test_some_release_hoc_size_with_multiple_releases_in_window_stops_at_first_older_release
     $loog = Loog::NULL
     load(File.join(__dir__, '../../judges/quality-of-service/some_release_hoc_size.rb'))

@@ -47,7 +47,7 @@ def some_release_hoc_size(fact)
           )
           next
         end
-      hocs << compare[:files].sum { |file| file[:changes] }
+      hocs << (compare[:files] || []).sum { |file| file[:changes] }
       commits << compare[:total_commits]
     end
   end
