@@ -2031,7 +2031,7 @@ class TestGithubEvents < Jp::Test
     assert(fb.none?(event_type: 'IssueCommentEvent'))
   end
 
-  def test_stops_scanning_above_max_events
+  def test_records_events_cut_off_by_max_events_on_next_run
     WebMock.disable_net_connect!
     rate_limit_up
     stub_github(
@@ -2069,16 +2069,35 @@ class TestGithubEvents < Jp::Test
       ]
     )
     fb = Factbase.new
-    load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 3 }))
-    assert_equal(4, fb.all.size)
+    2.times { load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 3 })) }
     assert(
-      fb.one?(what: 'iterate', where: 'github', repository: 42, events_were_scanned: 12),
-      'a scan cut short by max_events must resume at the oldest event it processed'
+      fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 11),
+      'event cut off by max_events is never recorded by the next run'
     )
-    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 14))
-    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 13))
-    assert(fb.one?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 12))
-    assert(fb.none?(what: 'tag-was-created', where: 'github', event_type: 'CreateEvent', repository: 42, event_id: 11))
+  end
+
+  def test_records_events_cut_off_by_max_events_down_to_the_old_cursor
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    stub_github('https://api.github.com/user/42', body: { id: 42, login: 'torvalds' })
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: 14.downto(10).map do |id|
+        {
+          id:, created_at: Time.now.to_s, actor: { id: 42 }, type: 'CreateEvent',
+          repo: { id: 42 }, payload: { ref_type: 'tag', ref: "тег-#{id}" }
+        }
+      end
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, _time: Time.now.utc, where: 'github', repository: 42, events_were_scanned: 10, what: 'iterate')
+    2.times { load_it('github-events', fb, Judges::Options.new({ 'repositories' => 'foo/foo', 'max_events' => 2 })) }
+    assert_equal(
+      Set[11, 12, 13, 14], Set.new(fb.query("(eq what 'tag-was-created')").each, &:event_id),
+      'events between the old cursor and the cap are not recorded by the next run'
+    )
   end
 
   def test_stops_scanning_below_latest_event_id
