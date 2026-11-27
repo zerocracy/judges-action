@@ -45,6 +45,33 @@ class TestEntryTokens < Jp::Test
     end
   end
 
+  def test_passes_the_arguments_that_change_update
+    Dir.mktmpdir do |dir|
+      launch(
+        dir,
+        'INPUT_GITHUB-TOKEN' => secret(Random.new_seed), 'INPUT_OPTIONS' => '',
+        'INPUT_TIMEOUT' => '7', 'INPUT_LIFETIME' => '3', 'INPUT_CYCLES' => '5'
+      )
+      argv = File.readlines(File.join(dir, 'argv.txt'), chomp: true)
+      pairs = argv.each_cons(2).to_a
+      [
+        ['--hello'], ['--no-log'], ['--quiet'], ['--summary=off'], ['--boost=github-events'],
+        ['--statistics'], ['--churn=churn.txt'], ['--lifetime', '180'], ['--timeout', '420'],
+        ['--max-cycles', '5']
+      ].each do |args|
+        if args.size == 1
+          assert_includes(argv, args.first, "entry.sh does not pass #{args.first} to judges update")
+        else
+          assert_includes(pairs, args, "entry.sh does not pass #{args.join(' ')} to judges update")
+        end
+      end
+      assert(
+        argv.any? { |a| a.start_with?('--option=action_version=') },
+        'entry.sh does not stamp the action version into the facts of judges update'
+      )
+    end
+  end
+
   private
 
   def secret(seed)
@@ -54,6 +81,7 @@ class TestEntryTokens < Jp::Test
 
   def launch(dir, env)
     %w[argv.txt options.txt mode.txt].each { |f| File.write(File.join(dir, f), '') }
+    File.write(File.join(dir, 'base.fb'), '')
     fake = File.join(dir, 'judges.sh')
     File.write(fake, <<~BASH)
       #!/usr/bin/env bash
