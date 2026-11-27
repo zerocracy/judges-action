@@ -15,6 +15,7 @@ require 'fbe/who'
 require 'octokit'
 require 'tago'
 require_relative '../../lib/approval'
+require_relative '../../lib/closing_issues'
 require_relative '../../lib/fill_fact'
 require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/pull_request'
@@ -152,6 +153,7 @@ Fbe.iterate do
       rescue Octokit::Forbidden
         next issue
       end
+    closing = json[:merged_at] && Jp.closing_issues(repo, issue)
     Fbe.fb.txn do |fbt|
       nn =
         Fbe.if_absent(fb: fbt) do |n|
@@ -168,6 +170,7 @@ Fbe.iterate do
       nn.files = json[:changed_files] if json[:changed_files]
       nn.branch = json[:head][:ref]
       Jp.fill_fact_by_hash(nn, stats)
+      Jp.fill_hijacks(nn, closing, json.dig(:user, :id)) if closing
       if actor && actor[:id]
         nn.who = Integer(actor[:id])
       else
