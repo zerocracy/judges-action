@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1113.217985344
+  seconds: 1125.413398597
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-27 12:20:21.609145867 Z
+  when: 2026-11-27 12:53:41.555184159 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -60819,7 +60820,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 13
+  min_issue_was_found: 0
   min_pull_was_found: 2
   repository: 1246623470
   what: iterate
@@ -143791,7 +143792,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 55
+  min_issue_was_found: 0
   min_pull_was_found: 22
   repository: 1090089359
   types_were_scanned: 0
@@ -144769,7 +144770,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 20
   merges_were_scanned: 0
-  min_issue_was_found: 123
+  min_issue_was_found: 125
   min_pull_was_found: 137
   repository: 974194993
   types_were_scanned: 0
@@ -151275,7 +151276,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 337
+  min_issue_was_found: 339
   min_pull_was_found: 208
   repository: 849726475
   types_were_scanned: 0
@@ -151527,7 +151528,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 75
+  min_issue_was_found: 76
   min_pull_was_found: 80
   repository: 1084843345
   types_were_scanned: 0
@@ -151537,36 +151538,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1502
-  closures_were_checked: 0
+  assignees_were_scanned: 1708
+  closures_were_checked: 1439
   earliest_issue_was_found: 1
   events_were_scanned: 21478014433
   issues_were_scanned: 1396
-  labels_were_scanned: 0
+  labels_were_scanned: 1345
   latest_issue_was_found: 315
-  merges_were_scanned: 1325
+  merges_were_scanned: 1663
   min_issue_was_found: 1853
   min_pull_was_found: 842
   repository: 798641472
-  types_were_scanned: 0
+  types_were_scanned: 745
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 449
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21468846423
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 618
-  min_issue_was_found: 498
+  merges_were_scanned: 0
+  min_issue_was_found: 503
   min_pull_was_found: 231
   repository: 840215648
-  types_were_scanned: 438
+  types_were_scanned: 637
   what: iterate
   where: github
 - _id: 2629843
@@ -151581,7 +151582,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 115
   merges_were_scanned: 0
-  min_issue_was_found: 0
+  min_issue_was_found: 3
   min_pull_was_found: 143
   repository: 857659265
   types_were_scanned: 0
@@ -151967,18 +151968,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 616
-  closures_were_checked: 955
+  assignees_were_scanned: 750
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21456362335
   issues_were_scanned: 1225
-  labels_were_scanned: 0
+  labels_were_scanned: 1773
   latest_issue_was_found: 317
-  merges_were_scanned: 1271
-  min_issue_was_found: 1908
+  merges_were_scanned: 1337
+  min_issue_was_found: 1909
   min_pull_was_found: 814
   repository: 820463873
-  types_were_scanned: 1785
+  types_were_scanned: 1849
   what: iterate
   where: github
 - _id: 2629882
@@ -152624,18 +152625,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 742
+  assignees_were_scanned: 867
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 21483177602
+  events_were_scanned: 21488998154
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 0
-  min_issue_was_found: 1522
+  merges_were_scanned: 1201
+  min_issue_was_found: 1526
   min_pull_was_found: 728
   repository: 802720676
-  types_were_scanned: 1367
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2629939
@@ -152770,18 +152771,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 854
+  assignees_were_scanned: 919
   closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21483288474
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 770
+  merges_were_scanned: 975
   min_issue_was_found: 1113
   min_pull_was_found: 790
   repository: 799113787
-  types_were_scanned: 847
+  types_were_scanned: 912
   what: iterate
   where: github
 - _id: 2630023
@@ -152806,18 +152807,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2190
-  closures_were_checked: 2328
+  assignees_were_scanned: 2394
+  closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 21481010223
+  events_were_scanned: 28417863682
   issues_were_scanned: 2725
-  labels_were_scanned: 1702
+  labels_were_scanned: 2975
   latest_issue_was_found: 1073
-  merges_were_scanned: 2669
-  min_issue_was_found: 3234
+  merges_were_scanned: 2771
+  min_issue_was_found: 3235
   min_pull_was_found: 1610
   repository: 799177290
-  types_were_scanned: 2107
+  types_were_scanned: 2174
   what: iterate
   where: github
 - _id: 2630036
@@ -152832,7 +152833,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 2
   merges_were_scanned: 0
-  min_issue_was_found: 24
+  min_issue_was_found: 25
   min_pull_was_found: 15
   repository: 1081929119
   types_were_scanned: 0
@@ -152842,10 +152843,10 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1244
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 28410096545
+  events_were_scanned: 21484398471
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
@@ -152853,7 +152854,7 @@
   min_issue_was_found: 1261
   min_pull_was_found: 1190
   repository: 728758275
-  types_were_scanned: 1201
+  types_were_scanned: 0
   what: iterate
   where: github
 - _id: 2630038
@@ -600140,7 +600141,7 @@
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-27 07:46:25.000000000 Z
+  when: &7537 2026-11-27 07:46:25.000000000 Z
   where: github
   who: 526301
 - _id: 2657164
@@ -600166,7 +600167,7 @@
   succeeded_builds: 8
   suggestions: 0
   what: pull-was-merged
-  when: 2026-11-27 08:30:25.000000000 Z
+  when: &7538 2026-11-27 08:30:25.000000000 Z
   where: github
   who: 526301
 - _id: 2657165
@@ -600223,8 +600224,10 @@
 
     <!-- Thanks for the contribution! You've earned +24 points. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+1348](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 35
+  href: https://github.com/zerocracy/judges-action/issues/3208/#issuecomment-7218142491
   is_human: 1
   issue: 3208
+  receipt: receipt-#109095
   repository: 799177290
   review_comments: 0
   seconds: 172604
@@ -600252,9 +600255,93 @@
   issue: 1474
   repository: 802720676
   review: 2026-11-17 00:27:51.000000000 Z
+  review_comments: 0
   succeeded_builds: 11
   suggestions: 0
   what: pull-was-merged
   when: 2026-11-27 11:48:07.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657170
+  _job: 112769
+  _time: 2026-11-27 12:21:23.611531903 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/judges#1327 with 33 HoC created by @opusstudiohq-max
+    was merged by @yegor256 after 1d23h of being in review and 1 comments.
+  hoc: 33
+  is_human: 1
+  issue: 1327
+  merger: 526301
+  repository: 799113787
+  review_comments: 0
+  seconds: 169418
+  what: code-was-contributed
+  when: *7537
+  where: github
+  who: 276356426
+- _id: 2657171
+  _job: 112769
+  _time: 2026-11-27 12:21:24.518814597 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 1
+  details: The pull request yegor256/judges#1329 with 46 HoC created by @opusstudiohq-max
+    was merged by @yegor256 after 1d23h of being in review and 1 comments.
+  hoc: 46
+  is_human: 1
+  issue: 1329
+  merger: 526301
+  repository: 799113787
+  review_comments: 0
+  seconds: 172053
+  what: code-was-contributed
+  when: *7538
+  where: github
+  who: 276356426
+- _id: 2657172
+  _job: 112769
+  _time: 2026-11-27 12:21:31.184296708 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 18
+  details: It's time to reward @opusstudiohq-max for the bug reported in yegor256/judges#1323,
+    the reward amount is 18.
+  greeting: |-
+    Thanks for reporting a new bug! As per policy, accepted bug reports earn a bonus, so you've been awarded **+18 points**. Your contributions help improve our project's quality—if you spot anything else that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) right, feel free to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it, [bugs are welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html). Your running score is now [+1366](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); check your [Zerocracy account](https://www.zerocracy.com/) for more details. Keep up the great work!
+
+    <!-- Thanks for reporting a new bug! You've earned +18 points. By reporting bugs, you help our project improve its quality. If you find anything else in the repository that [doesn't look](https://www.yegor256.com/2018/02/06/where-to-find-more-bugs.html) as good as you might expect, [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) it. Your running score is [+1366](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1323
+  repository: 799113787
+  what: bug-report-was-rewarded
+  when: 2026-11-27 12:21:31.186336637 Z
+  where: github
+  who: 276356426
+  why: Reported bug in yegor256/judges#1323
+- _id: 2657173
+  _job: 45999702836
+  _time: 2026-11-27 12:35:14.059202176 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#793 has been closed by @yegor256.
+  event_id: 21488998154
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 793
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-11-27 12:32:52.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657174
+  _job: 45999702836
+  _time: 2026-11-27 12:35:15.767270481 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The issue zerocracy/pages-action#792 has been closed by @yegor256.
+  event_id: 21485247557
+  event_type: IssuesEvent
+  is_human: 1
+  issue: 792
+  repository: 802720676
+  what: issue-was-closed
+  when: 2026-11-27 11:48:10.000000000 Z
   where: github
   who: 526301
