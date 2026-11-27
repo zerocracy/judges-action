@@ -5,6 +5,7 @@
 
 require 'fbe/octo'
 require 'fbe/unmask_repos'
+require_relative '../../lib/build_events'
 require_relative '../../lib/patches/unmask_repos'
 
 def total_builds_ran(fact)
@@ -12,12 +13,15 @@ def total_builds_ran(fact)
   available = false
   Fbe.unmask_repos.each do |repo|
     total +=
-      Fbe.octo.with_disable_auto_paginate do |octo|
-        octo.repository_workflow_runs(
-          repo,
-          created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}",
-          per_page: 1
-        )[:total_count]
+      Jp::BUILD_EVENTS.sum do |event|
+        Fbe.octo.with_disable_auto_paginate do |octo|
+          octo.repository_workflow_runs(
+            repo,
+            created: "#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}",
+            event:,
+            per_page: 1
+          )[:total_count]
+        end
       end
     available = true
   rescue Octokit::NotFound, Octokit::Deprecated => e
