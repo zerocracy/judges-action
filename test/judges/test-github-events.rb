@@ -1955,6 +1955,69 @@ class TestGithubEvents < Jp::Test
     assert(fb.none?(event_id: 11_129), 'A reopening event cannot leave a fact behind')
   end
 
+  def test_close_reopen_close_keeps_latest_closure
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/foo',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42',
+      body: { id: 42, name: 'foo', full_name: 'foo/foo', default_branch: 'master' }
+    )
+    stub_github(
+      'https://api.github.com/repositories/42/events?per_page=100',
+      body: [
+        {
+          id: '30', type: 'PullRequestEvent', actor: { id: 47, login: 'user3' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'closed', number: 456,
+            pull_request: { number: 456, head: { ref: '487', sha: 'abc123' } }
+          },
+          created_at: Time.parse('2025-06-02 10:00:00 UTC')
+        },
+        {
+          id: '20', type: 'PullRequestEvent', actor: { id: 45, login: 'user' },
+          repo: { id: 42, name: 'foo/foo' },
+          payload: {
+            action: 'reopened', number: 456,
+            pull_request: { number: 456, head: { ref: '487', sha: 'abc123' } }
+          },
+          created_at: Time.parse('2025-06-02 09:00:00 UTC')
+        }
+      ]
+    )
+    stub_github('https://api.github.com/user/45', body: { id: 45, login: 'user' })
+    stub_github('https://api.github.com/user/47', body: { id: 47, login: 'user3' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/456',
+      body: {
+        id: 50, number: 456, user: { id: 46, login: 'user2' },
+        state: 'closed', closed_at: Time.parse('2025-06-02 10:00:00 UTC'),
+        head: { ref: '487', sha: 'abc123' },
+        additions: 1, deletions: 1, changed_files: 1, comments: 0
+      }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/pulls/456/reviews?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/456/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/456/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123/check-runs?per_page=100', body: { check_runs: [] })
+    fb = Factbase.new
+    fb.with(
+      what: 'pull-was-closed', where: 'github', repository: 42, issue: 456, who: 45,
+      when: Time.parse('2025-06-02 08:00:00 UTC'), event_id: 10
+    )
+    Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
+      load_it('github-events', fb)
+    end
+    f = fb.query('(and (eq what "pull-was-closed") (eq repository 42) (eq issue 456))').each.to_a
+    assert_equal(1, f.size, 'The pull must have exactly one closure fact')
+    assert_equal(Time.parse('2025-06-02 10:00:00 UTC'), f.first.when, 'The latest closure must be kept')
+    assert_equal(47, f.first.who, 'The latest closure must be attributed to the latest closer')
+  end
+
   def test_adds_created_issue_comment_event
     skip('This type of event is not needed now')
     WebMock.disable_net_connect!
