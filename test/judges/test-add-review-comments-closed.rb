@@ -17,6 +17,10 @@ class TestAddReviewCommentsClosed < Jp::Test
       }
     )
     stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/93/comments?per_page=100',
+      body: Array.new(2) { { user: { type: 'User', login: 'reviewer' } } }
+    )
+    stub_github(
       'https://api.github.com/repositories/42',
       body: { id: 820_463_873, name: 'foo', full_name: 'foo/foo' }
     )
