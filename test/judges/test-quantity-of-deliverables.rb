@@ -81,6 +81,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
@@ -107,6 +108,7 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-07-11T21:00:00Z..2024-08-12T21:00:00Z&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     fb = Factbase.new
     Fbe.stub(:github_graph, Fbe::Graph::Fake.new) do
       Time.stub(:now, Time.parse('2024-08-12 21:00:00 UTC')) do
@@ -244,6 +246,18 @@ class TestQuantityOfDeliverables < Jp::Test
       'https://api.github.com/repos/foo/foo/actions/runs?created=2024-08-02T21:00:00Z..2024-08-09T21:00:00Z&per_page=1',
       body: { total_count: 0, workflow_runs: [] }
     )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/releases?per_page=100',
+      body: [
+        { id: 7, draft: false, published_at: Time.parse('2024-08-02 21:00:00 UTC') },
+        { id: 6, draft: false, published_at: Time.parse('2024-08-01 00:00:00 UTC') },
+        { id: 5, draft: false, published_at: Time.parse('2024-08-05 12:00:00 UTC') },
+        { id: 4, draft: false, published_at: Time.parse('2024-08-09 21:00:00 UTC') },
+        { id: 3, draft: false, published_at: Time.parse('2024-08-10 00:00:00 UTC') },
+        { id: 2, draft: true, published_at: Time.parse('2024-08-06 12:00:00 UTC') },
+        { id: 1, draft: false, published_at: nil }
+      ]
+    )
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -255,8 +269,45 @@ class TestQuantityOfDeliverables < Jp::Test
         f = fb.query('(eq what "quantity-of-deliverables")').each.first
         assert_equal(Time.parse('2024-08-03 00:00:00 +03:00'), f.since)
         assert_equal(Time.parse('2024-08-09 21:00:00 UTC'), f.when)
-        assert_equal(7, f.total_releases_published)
+        assert_equal(
+          2, f.total_releases_published,
+          'releases at fact.since, after fact.when, drafts and nil published_at must be excluded; ' \
+          'only the 2024-08-05 release and the one exactly at fact.when count'
+        )
       end
+    end
+  end
+
+  def test_total_releases_published_skips_unavailable
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github(
+      'https://api.github.com/repos/foo/good/releases?per_page=100',
+      body: [
+        { id: 2, draft: false, published_at: Time.parse('2025-10-02 00:00:00 UTC') },
+        { id: 1, draft: false, published_at: Time.parse('2025-09-01 00:00:00 UTC') }
+      ]
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/missing/releases?per_page=100',
+      status: 500, body: { message: 'Internal Server Error' }
+    )
+    stub_request(:get, 'https://api.github.com/repos/foo/slow/releases?per_page=100')
+      .to_raise(Faraday::ConnectionFailed.new('connection failed'))
+    fact = Object.new
+    fact.define_singleton_method(:since) { Time.parse('2025-10-01 00:00:00 UTC') }
+    fact.define_singleton_method(:when) { Time.parse('2025-10-06 00:00:00 UTC') }
+    unmask = proc { |&block| %w[foo/missing foo/slow foo/good].each { |repo| block.call(repo) } }
+    $global = {}
+    $judge = 'quantity-of-deliverables'
+    $loog = Loog::NULL
+    $options = Judges::Options.new({ 'repositories' => 'foo/foo' })
+    Fbe.stub(:unmask_repos, unmask) do
+      load(File.join(__dir__, '../../judges/quantity-of-deliverables/total_releases_published.rb'))
+      assert_equal(
+        { total_releases_published: 1 }, total_releases_published(fact),
+        'a repository answering 500 or failing the connection must not abort the sum of the remaining repositories'
+      )
     end
   end
 
@@ -276,6 +327,7 @@ class TestQuantityOfDeliverables < Jp::Test
         workflow_runs: []
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -308,6 +360,7 @@ class TestQuantityOfDeliverables < Jp::Test
         workflow_runs: []
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -388,6 +441,7 @@ class TestQuantityOfDeliverables < Jp::Test
         ]
       }
     )
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
@@ -490,6 +544,7 @@ class TestQuantityOfDeliverables < Jp::Test
         }
       )
     end
+    stub_github('https://api.github.com/repos/foo/foo/releases?per_page=100', body: [])
     fb = Factbase.new
     f = fb.insert
     f.what = 'pmp'
