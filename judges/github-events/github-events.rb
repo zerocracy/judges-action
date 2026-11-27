@@ -74,17 +74,36 @@ Fbe.iterate do
 
   def self.info(fact, repo)
     since = tag(previous(fact), repo)
+    first = since.nil?
     since ||= earliest(repo)&.[](:sha)
     info = {}
     comparison(repo, since, fact.tag).then do |json|
       return info if json.nil?
       info[:commits] = json[:total_commits]
       info[:hoc] = json[:files].sum { |f| f[:changes] }
+      root = first && since ? commit(repo, since) : nil
+      unless root.nil?
+        info[:commits] += 1
+        info[:hoc] += root[:files].sum { |f| f[:changes] }
+      end
       last = json[:commits].last
       info[:last_commit] = last[:sha] unless last.nil?
     end
     $loog.debug("The repository ##{fact.repository} has this: #{info.inspect}")
     info
+  end
+
+  def self.commit(repo, sha)
+    Fbe.octo.commit(repo, sha)
+  rescue Octokit::NotFound, Octokit::Deprecated, Octokit::Conflict => e
+    $loog.info("Commit #{sha} not found in #{repo}: #{e.message}")
+    nil
+  rescue Octokit::Forbidden => e
+    $loog.warn(
+      "[#{$judge}] Access forbidden to commit #{sha} in #{repo} " \
+      "(transient, will retry next cycle): #{e.class}: #{e.message}"
+    )
+    nil
   end
 
   def self.comparison(repo, since, tag)

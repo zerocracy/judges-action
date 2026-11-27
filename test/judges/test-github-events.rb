@@ -955,6 +955,10 @@ class TestGithubEvents < Jp::Test
         'X-RateLimit-Remaining' => '999'
       }
     )
+    stub_github(
+      'https://api.github.com/repos/zerocracy/fbe/commits/69a28ba1122af281936371bbb36f67e5b97246b1',
+      body: { sha: '69a28ba1122af281936371bbb36f67e5b97246b1', files: [{ changes: 10 }] }
+    )
     stub_request(
       :get,
       'https://api.github.com/repos/zerocracy/fbe/compare/' \
@@ -1006,12 +1010,13 @@ class TestGithubEvents < Jp::Test
     assert_equal(2, f.count)
     assert_equal([526_301, 526_302], f.first[:contributors])
     assert_equal([2_566_462, 2_566_464, 2_566_463], f.last[:contributors])
-    assert_equal(2, f.first.commits)
-    assert_equal(22, f.first.hoc)
+    assert_equal(3, f.first.commits)
+    assert_equal(32, f.first.hoc)
     assert_equal('4683257342e98cd94becc2aa49900e720bd792e9', f.first.last_commit)
     assert_equal(4, f.last.commits)
     assert_equal(90, f.last.hoc)
     assert_equal('a50489ead5e8aa6', f.last.last_commit)
+    assert_not_requested(:get, 'https://api.github.com/repos/zerocracy/fbe/commits/0.0.1')
   end
 
   def test_release_contributors_no_tag_with_id
@@ -1152,6 +1157,10 @@ class TestGithubEvents < Jp::Test
       ]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: '4683257342e98cd94' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/4683257342e98cd94',
+      body: { sha: '4683257342e98cd94', files: [] }
+    )
     stub_github(
       'https://api.github.com/repos/foo/foo/compare/4683257342e98cd94...0.0.3?per_page=100',
       body: {
@@ -2774,6 +2783,10 @@ class TestGithubEvents < Jp::Test
     )
     stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
     stub_github(
+      'https://api.github.com/repos/foo/foo/commits/abc123def456',
+      body: { sha: 'abc123def456', files: [{ changes: 10 }] }
+    )
+    stub_github(
       'https://api.github.com/repos/foo/foo/compare/abc123def456...1.0.0?per_page=100',
       body: { status: 'identical', total_commits: 0, commits: [], files: [] }
     )
@@ -2782,9 +2795,156 @@ class TestGithubEvents < Jp::Test
     load_it('github-events', fb)
     facts = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
     assert_equal(1, facts.count)
-    assert_equal(0, facts.first.commits)
-    assert_equal(0, facts.first.hoc)
+    assert_equal(1, facts.first.commits)
+    assert_equal(10, facts.first.hoc)
     assert_nil(facts.first['last_commit'])
+  end
+
+  def test_first_release_includes_root_commit
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '0.0.1',
+            name: 'v0.0.1',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'root' }])
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/root',
+      body: { sha: 'root', files: [{ changes: 2650 }] }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/root...0.0.1?per_page=100',
+      body: {
+        total_commits: 1,
+        commits: [{ sha: 'second', author: { id: 526_301 } }],
+        files: [{ changes: 5 }]
+      }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    assert_equal(2, f.first.commits)
+    assert_equal(2655, f.first.hoc)
+    assert_equal('second', f.first.last_commit)
+  end
+
+  def test_first_release_keeps_compare_numbers_when_root_commit_is_missing
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '0.0.1',
+            name: 'v0.0.1',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'root' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits/root', status: 404, body: { message: 'Not Found' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/root...0.0.1?per_page=100',
+      body: {
+        total_commits: 1,
+        commits: [{ sha: 'second', author: { id: 526_301 } }],
+        files: [{ changes: 5 }]
+      }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    assert_equal(1, f.first.commits)
+    assert_equal(5, f.first.hoc)
+    assert_equal('second', f.first.last_commit)
+  end
+
+  def test_first_release_keeps_compare_numbers_when_root_commit_conflicts
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_event(
+      {
+        id: '100',
+        type: 'ReleaseEvent',
+        actor: { id: 8_086_956, login: 'rultor', display_login: 'rultor' },
+        repo: { id: 42, name: 'foo/foo', url: 'https://api.github.com/repos/foo/foo' },
+        payload: {
+          action: 'published',
+          release: {
+            id: 999_000,
+            author: { login: 'rultor', id: 8_086_956, type: 'User', site_admin: false },
+            tag_name: '0.0.1',
+            name: 'v0.0.1',
+            created_at: Time.parse('2024-11-30T00:51:39Z'),
+            published_at: Time.parse('2024-11-30T00:52:07Z')
+          }
+        },
+        public: true,
+        created_at: Time.parse('2024-11-30T00:52:08Z')
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/contributors?per_page=100',
+      body: [{ login: 'yegor256', id: 526_301 }]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'root' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits/root', status: 409, body: { message: 'Conflict' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/compare/root...0.0.1?per_page=100',
+      body: {
+        total_commits: 1,
+        commits: [{ sha: 'second', author: { id: 526_301 } }],
+        files: [{ changes: 5 }]
+      }
+    )
+    stub_github('https://api.github.com/user/8086956', body: { login: 'rultor', id: 8_086_956 })
+    fb = Factbase.new
+    load_it('github-events', fb)
+    f = fb.query('(and (eq repository 42) (eq what "release-published"))').each.to_a
+    assert_equal(1, f.count)
+    assert_equal(1, f.first.commits)
+    assert_equal(5, f.first.hoc)
+    assert_equal('second', f.first.last_commit)
   end
 
   def test_two_releases_in_one_page_never_compare_backwards
@@ -2835,6 +2995,7 @@ class TestGithubEvents < Jp::Test
       body: [{ login: 'yegor256', id: 526_301 }]
     )
     stub_github('https://api.github.com/repos/foo/foo/commits?per_page=1', body: [{ sha: 'abc123def456' }])
+    stub_github('https://api.github.com/repos/foo/foo/commits/abc123def456', body: { sha: 'abc123def456', files: [] })
     %w[2.0.0 1.0.0].each do |tag|
       stub_github(
         "https://api.github.com/repos/foo/foo/compare/abc123def456...#{tag}?per_page=100",
