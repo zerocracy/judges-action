@@ -15,19 +15,21 @@ def some_pull_hoc_size(fact)
     found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |json|
-      pull =
-        begin
-          Fbe.octo.pull_request(repo, json[:number])
-        rescue Octokit::NotFound, Octokit::Deprecated => e
-          $loog.info("Pull request ##{json[:number]} not found in #{repo}: #{e.message}")
-          next
-        rescue Octokit::Forbidden => e
-          $loog.warn(
-            "[#{$judge}] Access forbidden to pull request ##{json[:number]} in #{repo} " \
-            "(transient, will retry next cycle): #{e.class}: #{e.message}"
-          )
-          next
-        end
+      begin
+        pull = Fbe.octo.pull_request(repo, json[:number])
+      rescue Octokit::NotFound, Octokit::Deprecated => e
+        $loog.info("Pull request ##{json[:number]} not found in #{repo}: #{e.message}")
+        next
+      rescue Octokit::TooManyRequests => e
+        $loog.warn("[#{$judge}] API rate limit exhausted, stopping the scan: #{e.class}: #{e.message}")
+        return {}
+      rescue Octokit::Forbidden => e
+        $loog.warn(
+          "[#{$judge}] Access forbidden to pull request ##{json[:number]} in #{repo} " \
+          "(transient, will retry next cycle): #{e.class}: #{e.message}"
+        )
+        next
+      end
       hocs << ((pull[:additions] || 0) + (pull[:deletions] || 0))
       files << (pull[:changed_files] || 0)
     end
