@@ -8,8 +8,6 @@ require 'fbe/octo'
 require_relative 'humans'
 require_relative 'jp'
 
-# @todo #2352:30min Forbidden is still swallowed as zero for reactions, resolved threads, runs and reviews
-
 def Jp.comments_info(pr, repo: nil)
   repo = pr.dig(:base, :repo, :full_name) if repo.nil?
   return {} if repo.nil?
@@ -95,7 +93,7 @@ def Jp.comments_info(pr, repo: nil)
           "[#{$judge}] Access forbidden to resolved conversations for #{repo}##{pr[:number]} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        0
+        raise
       end
   }
 end
@@ -120,7 +118,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
       "Access forbidden to issue comment ##{comment[:id]} reactions in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
-    0
+    raise
   end + code_comments.sum do |comment|
     Fbe.octo.pull_request_review_comment_reactions(repo, comment[:id])
       .count { |reaction| Jp.appreciated?(reaction, comment) }
@@ -132,7 +130,7 @@ def Jp.count_appreciated_comments(pr, issue_comments, code_comments, repo: nil)
       "Access forbidden to code comment ##{comment[:id]} reactions in #{repo} " \
       "(transient, will retry next cycle): #{e.class}: #{e.message}"
     )
-    0
+    raise
   end
 end
 
@@ -169,7 +167,7 @@ def Jp.fetch_workflows(pr, repo: nil)
             "[#{$judge}] Access forbidden to workflow run job for #{repo} job ##{run[:id]} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          nil
+          raise
         end
     next unless rid
     next if runs[rid]
@@ -185,7 +183,7 @@ def Jp.fetch_workflows(pr, repo: nil)
             "[#{$judge}] Access forbidden to workflow run for #{repo} run ##{rid} " \
             "(transient, will retry next cycle): #{e.class}: #{e.message}"
           )
-          nil
+          raise
         end
     next unless workflow
     next unless workflow[:event] == 'pull_request'
@@ -213,7 +211,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
         "[#{$judge}] Access forbidden to pull request reviews for #{repo}##{issue} " \
         "(transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      []
+      raise
     end
   found.sum do |review|
     next 0 if review.dig(:user, :id) == author
@@ -228,7 +226,7 @@ def Jp.count_suggestions(repo, issue, author, reviews = nil)
           "[#{$judge}] Access forbidden to review comments for #{repo}##{issue} review ##{review[:id]} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        []
+        raise
       end
     comments.count do |comment|
       comment.dig(:user, :id) != author && comment[:in_reply_to_id].nil? && Jp.suggests?(comment[:body])
