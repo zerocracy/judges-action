@@ -55,7 +55,7 @@ def total_files(_fact)
     end
     measured = true
     files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
-  end
+  end.then { |whole| return {} unless whole }
   return {} if truncated
   return {} unless measured
   { total_files: files }
