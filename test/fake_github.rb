@@ -49,16 +49,18 @@ class Jp::FakeGithub
       socket = server.accept
       begin
         line = socket.gets
-        break if line.nil?
+        next if line.nil?
         while (header = socket.gets)
           break if header.strip.empty?
         end
         answer(socket, line.split[0], line.split[1])
+      rescue Errno::ECONNRESET, Errno::EPIPE
+        next
       ensure
         socket.close
       end
     end
-  rescue IOError, Errno::EBADF, Errno::ECONNRESET
+  rescue IOError, Errno::EBADF
     nil
   end
 

@@ -71,4 +71,39 @@ class TestFakeGithub < Jp::Test
       )
     end
   end
+
+  def test_answers_after_connection_that_sends_nothing
+    seed = Random.new_seed
+    number = Random.new(seed).rand(1_000_000)
+    Jp::FakeGithub.new(
+      'GET /repos/foo/foo' => { id: number, full_name: 'foo/foo' }
+    ).run do |uri|
+      TCPSocket.new(URI(uri).host, URI(uri).port).close
+      assert_equal(
+        number,
+        Octokit::Client.new(
+          connection_options: { request: { timeout: 5, open_timeout: 5 } }
+        ).repository('foo/foo')[:id],
+        "the server did not answer a request after a connection that sent nothing, seed #{seed}"
+      )
+    end
+  end
+
+  def test_answers_after_several_connections_that_send_nothing
+    seed = Random.new_seed
+    random = Random.new(seed)
+    number = random.rand(1_000_000)
+    Jp::FakeGithub.new(
+      'GET /repos/foo/foo' => { id: number, full_name: 'foo/foo' }
+    ).run do |uri|
+      (random.rand(5) + 2).times { TCPSocket.new(URI(uri).host, URI(uri).port).close }
+      assert_equal(
+        number,
+        Octokit::Client.new(
+          connection_options: { request: { timeout: 5, open_timeout: 5 } }
+        ).repository('foo/foo')[:id],
+        "the server did not answer a request after several connections that sent nothing, seed #{seed}"
+      )
+    end
+  end
 end
