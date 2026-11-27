@@ -197,4 +197,45 @@ class TestLabelWasAttached < Jp::Test
       'A vanished repository must produce no facts and must not abort the judge'
     )
   end
+
+  def test_skips_stale_issue
+    assert_empty(labeled_after(44 => { stale: 'who' }), 'a stale issue got a label')
+  end
+
+  def test_skips_done_issue
+    assert_empty(labeled_after(45 => { done: 1 }), 'a done issue got a label')
+  end
+
+  def test_skips_buried_issue
+    assert_empty(labeled_after(46 => { tombstone: 'yes' }), 'a buried issue got a label')
+  end
+
+  def test_labels_only_plain_issue_next_to_skipped_ones
+    issues = labeled_after(44 => { stale: 'who' }, 45 => { done: 1 }, 46 => { tombstone: 'yes' }, 47 => {})
+    assert_equal([47], issues, 'a skipped issue got a label')
+  end
+
+  private
+
+  def labeled_after(issues)
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, name: 'foo', full_name: 'foo/foo' })
+    fb = Factbase.new
+    issues.each_with_index do |(n, extra), i|
+      stub_github(
+        "https://api.github.com/repos/foo/foo/issues/#{n}/timeline?per_page=100",
+        body: [
+          {
+            id: n, actor: { id: 421, login: 'user' }, event: 'labeled',
+            created_at: '2025-09-30 06:14:38 UTC', label: { name: 'bug', color: 'd73a4a' }
+          }
+        ]
+      )
+      fb.with(_id: i + 1, what: 'issue-was-opened', repository: 42, issue: n, where: 'github', **extra)
+    end
+    load_it('label-was-attached', fb)
+    fb.query('(eq what "label-was-attached")').each.map(&:issue)
+  end
 end
