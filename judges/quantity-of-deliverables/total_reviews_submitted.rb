@@ -32,6 +32,8 @@ def total_reviews_submitted(fact)
       end
     end
     total += count
+  rescue Fbe::Error => e
+    $loog.info("Can't count submitted reviews in #{repo}: #{e.message}")
   rescue Octokit::NotFound, Octokit::Deprecated => e
     $loog.info("Can't count submitted reviews in #{repo}, #{count} of them dropped: #{e.message}")
   rescue Octokit::Forbidden => e
