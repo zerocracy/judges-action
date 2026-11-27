@@ -6,6 +6,7 @@
 require 'faraday'
 require 'fbe/octo'
 require_relative 'jp'
+require_relative 'patches/fake_octokit'
 
 Jp::SEARCH_WINDOW_SECONDS = 60
 Jp::SEARCH_WINDOW_BUDGET = 25
@@ -50,7 +51,6 @@ def Jp.qosearch(query, method: :search_issues, **)
     json = octo.get('/rate_limit')
   rescue NoMethodError => e
     raise unless e.name == :get
-    left = octo.rate_limit.remaining
   rescue Fbe::OffQuota => e
     $loog.info("[#{jg}] Not searching, the quota is spent: #{e.message}")
     return
