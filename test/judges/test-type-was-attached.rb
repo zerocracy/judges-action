@@ -87,4 +87,41 @@ class TestTypeWasAttached < Jp::Test
     assert_equal(['who'], f['stale'], 'a deleted GraphQL actor must mark the fact stale on who')
     assert_match(/an unknown actor/, f['details'].first)
   end
+
+  def test_skips_event_when_graphql_type_name_is_nil
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/44/timeline?per_page=100',
+      body: [
+        {
+          id: 100,
+          event: 'issue_type_added',
+          node_id: 'ITAE_nil_type',
+          created_at: '2025-09-30 06:14:38 UTC'
+        }
+      ]
+    )
+    fake = Fbe::Graph::Fake.new
+    fake.define_singleton_method(:issue_type_event) do |_node_id|
+      {
+        'type' => 'IssueTypeAddedEvent',
+        'created_at' => Time.parse('2025-09-30 06:14:38 UTC'),
+        'issue_type' => { 'id' => 'IT_x', 'name' => nil, 'description' => nil },
+        'prev_issue_type' => nil,
+        'actor' => { 'login' => 'yegor256', 'type' => 'User', 'id' => 43, 'name' => nil, 'email' => nil }
+      }
+    end
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 44, where: 'github')
+    Fbe.stub(:github_graph, fake) do
+      load_it('type-was-attached', fb)
+    end
+    assert(
+      fb.none?(what: 'type-was-attached'),
+      'an event without a type name must be skipped, not written with a nil type'
+    )
+  end
 end
