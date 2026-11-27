@@ -120,9 +120,10 @@ When both are set, the `github_token=` and `bots=` pairs win over
   the current repository when that input is empty
 * `bots=...` is a comma-separated list of GitHub user logins to mark as bots;
   the `bots` action input is ignored when this pair is set
-* `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
-* `sqlite_cache_maxvsize=10K` is the maximum size of a single HTTP entry to cache
-  (these two are only available as k=v pairs)
+* `sqlite_cache_maxsize=100M` is the maximum size of HTTP cache file
+  (default is 100M)
+* `sqlite_cache_maxvsize=100K` is the maximum size of a single HTTP entry to cache
+  (default is 100K; these two are only available as k=v pairs)
 * `sqlite_cache_min_age=3600` is the minimum age in seconds before a
   cached HTTP response is considered stale (default is 3600, i.e. 1 hour)
 
