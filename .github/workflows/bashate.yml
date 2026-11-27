@@ -33,5 +33,4 @@ jobs:
           python-version: 3.15
       - run: pip install bashate
       - run: |
-          readarray -t files < <(find . -name '*.sh')
-          bashate -i E006,E003 "${files[@]}"
+          find . -type f \( -name '*.sh' -o -name '*.bash' \) -exec bashate -i E006,E003 {} +
