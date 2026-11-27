@@ -18,9 +18,13 @@ def some_review_time(fact)
     found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
     return {} if found.nil?
     found[:items].each do |pr|
+      author = pr.dig(:user, :id)
       all, csize =
         begin
-          [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
+          [
+            Fbe.octo.pull_request_reviews(repo, pr[:number]).reject { |r| author && r.dig(:user, :id) == author },
+            Fbe.octo.review_comments(repo, pr[:number]).size
+          ]
         rescue Octokit::NotFound, Octokit::Deprecated => e
           $loog.info("The pull ##{pr[:number]} doesn't exist in #{repo}: #{e.message}")
           next
