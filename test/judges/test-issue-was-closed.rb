@@ -170,6 +170,112 @@ class TestIssueWasClosed < Jp::Test
     assert(fb.one?(what: 'label-was-attached', repository: 42, issue: 52, where: 'github', label: 'bug', who: 421))
   end
 
+  def test_ignores_non_labeled_timeline_events
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52',
+      body: {
+        number: 52, title: 'some title 52', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
+      body: [
+        {
+          id: 196,
+          actor: { id: 421, login: 'user' },
+          event: 'unlabeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert_empty(
+      fb.query("(eq what 'label-was-attached')").each.to_a,
+      'an unlabeled event must not produce a label-was-attached fact'
+    )
+  end
+
+  def test_ignores_labels_outside_badges
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52',
+      body: {
+        number: 52, title: 'some title 52', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'user1', id: 222_111 }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
+      body: [
+        {
+          id: 197,
+          actor: { id: 421, login: 'user' },
+          event: 'labeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'documentation', color: '0075ca' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
+    load_it('issue-was-closed', fb)
+    assert_empty(
+      fb.query("(eq what 'label-was-attached')").each.to_a,
+      'a label outside bug/enhancement/question must not produce a label-was-attached fact'
+    )
+  end
+
+  def test_marks_closure_stale_on_deleted_closer
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52',
+      body: {
+        number: 52, title: 'some title 52', state: 'closed',
+        closed_at: Time.parse('2025-07-10 10:00:00 UTC'),
+        closed_by: { login: 'ghost' }
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/issues/52/timeline?per_page=100',
+      body: [
+        {
+          id: 198,
+          actor: { id: 421, login: 'user' },
+          event: 'labeled',
+          created_at: '2025-09-30 06:14:38 UTC',
+          label: { name: 'bug', color: 'd73a4a' }
+        }
+      ]
+    )
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'issue-was-opened', repository: 42, issue: 52, where: 'github')
+    load_it('issue-was-closed', fb)
+    f = fb.query("(and (eq what 'issue-was-closed') (eq issue 52))").each.first
+    refute_nil(f)
+    assert_nil(f['who'], 'a deleted closer must not set who')
+    assert_equal(['who'], f['stale'], 'a deleted closer must mark the fact stale on who')
+    label = fb.query("(eq what 'label-was-attached')").each.first
+    refute_nil(label, 'the badge label must still be recorded')
+    assert_equal(Time.parse('2025-09-30 06:14:38 UTC'), label['when'].first, 'when must come from the event')
+    assert_nil(label['stale'], 'a present timeline actor must not mark the label fact stale')
+  end
+
   def test_marks_label_stale_on_nil_timeline_actor
     WebMock.disable_net_connect!
     rate_limit_up
