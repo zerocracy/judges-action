@@ -104,9 +104,9 @@ The following action inputs are set via `with:` in your workflow YAML
 Some parameters are configurable both as an action input above and
   as a k=v pair in `options` below (the pairs exist for backward
   compatibility and advanced scenarios).
-When both are set, the `github_token=` and `bots=` pairs win over
-  the `github-token` and `bots` inputs, while the `repositories` and
-  `sqlite-cache` inputs win over the `repositories=` and `sqlite_cache=` pairs:
+When both are set, the `github_token=`, `bots=` and `repositories=` pairs win
+  over the `github-token`, `bots` and `repositories` inputs, while the
+  `sqlite-cache` input wins over the `sqlite_cache=` pair:
 
 * `github_token=...` is a default GitHub token, usually to be set to
   `${{ secrets.GITHUB_TOKEN }}`; the `github-token` action input
@@ -116,8 +116,8 @@ When both are set, the `github_token=` and `bots=` pairs win over
   `yegor256/judges` means a specific repo,
   and
   `-yegor256/judges` means an exclusion of the repo from the list;
-  the `repositories` action input overrides this pair, and so does
-  the current repository when that input is empty
+  the `repositories` action input and the current repository
+  are ignored when this pair is set
 * `bots=...` is a comma-separated list of GitHub user logins to mark as bots;
   the `bots` action input is ignored when this pair is set
 * `sqlite_cache_maxsize=10M` is the maximum size of HTTP cache file
