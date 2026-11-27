@@ -41,4 +41,41 @@ class TestPullRequestPaging < Jp::Test
       )
     end
   end
+
+  def test_sums_resolved_threads_across_two_pages
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    stub_github('https://api.github.com/repos/foo/foo/pulls/7/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/issues/7/comments?per_page=100', body: [])
+    pages =
+      [
+        {
+          'pageInfo' => { 'hasNextPage' => true, 'endCursor' => 'first-page' },
+          'nodes' => [{ 'isResolved' => true }, { 'isResolved' => false }]
+        },
+        {
+          'pageInfo' => { 'hasNextPage' => false, 'endCursor' => 'second-page' },
+          'nodes' => [{ 'isResolved' => true }]
+        }
+      ]
+    asked = 0
+    graph = Object.new
+    graph.define_singleton_method(:query) do |_q|
+      page = pages[asked]
+      asked += 1
+      raise(RuntimeError, 'a page that says it is the last one must end the walk') if page.nil?
+      { 'repository' => { 'pullRequest' => { 'reviewThreads' => page } } }
+    end
+    Fbe.stub(:github_graph, graph) do
+      pr = { number: 7, user: { id: 5 }, base: { repo: { full_name: 'foo/foo' } } }
+      assert_equal(
+        2, Jp.comments_info(pr)[:comments_resolved],
+        'the resolved threads of both pages must be summed up'
+      )
+    end
+    assert_equal(2, asked, 'exactly two pages must be asked for')
+  end
 end
