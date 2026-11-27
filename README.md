@@ -18,7 +18,7 @@ You may ignore this, if all your repositories are public.
 Then, add this `zerocracy.yml` file to your GitHub repository
   at the `.github/workflows/` directory
   (replace `foo` with the name of your team, `yegor256` with the name of the
-  account owner, and `42` with anything between zero and `60`):
+  account owner, and `42` with anything between `0` and `59`):
 
 ```yaml
 name: zerocracy
