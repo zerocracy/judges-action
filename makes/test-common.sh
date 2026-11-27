@@ -14,18 +14,23 @@ run_entry_script() {
     local expected_result=$2
     shift 2
 
-    set +e
-    env "$@" "${self}/entry.sh" 2>&1 | tee log.txt
-    local exit_code=$?
-    set -e
+    local -a status
+    {
+        env "$@" "${self}/entry.sh" 2>&1 | tee log.txt
+        status=("${PIPESTATUS[@]}")
+    } || return 1
+    if [ "${status[1]}" -ne 0 ]; then
+        die "Could not capture the entry output in log.txt"
+    fi
+    local exit_code=${status[0]}
 
     if [ "$expected_result" = "success" ]; then
-        if [ $exit_code -ne 0 ]; then
+        if [ "$exit_code" -ne 0 ]; then
             die "judges-action script failed with exit code $exit_code, but should succeed" \
               "Check log.txt for details of the failure"
         fi
     elif [ "$expected_result" = "failure" ]; then
-        if [ $exit_code -eq 0 ]; then
+        if [ "$exit_code" -eq 0 ]; then
             die "judges-action script succeeded when it should have failed" \
               "Expected: script to exit with non-zero code"
         fi
