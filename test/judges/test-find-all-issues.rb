@@ -54,6 +54,39 @@ class TestFindAllIssues < Jp::Test
     refute_empty(fb.query('(eq issue 46)').each.to_a)
   end
 
+  def test_continues_from_the_last_item_of_a_full_page
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repos/foo/foo', body: { id: 991 })
+    stub_github('https://api.github.com/repositories/991', body: { full_name: 'foo/foo' })
+    stub_github('https://api.github.com/repos/foo/foo/issues/1', body: { created_at: Time.parse('2025-05-01') })
+    stub_github(
+      'https://api.github.com/search/issues?order=asc&per_page=100' \
+      '&q=repo:foo/foo%20type:issue%20created:%3E=2025-05-01&sort=created',
+      body: {
+        total_count: 200, incomplete_results: false,
+        items: (1..100).map do |i|
+          { number: i, created_at: Time.parse('2025-05-01') + (i * 86_400), user: { id: 4242 } }
+        end
+      }
+    )
+    stub_github('https://api.github.com/user/4242', body: { login: 'yegor256' })
+    fb = Factbase.new
+    [1, 180].each do |i|
+      fb.insert.then do |f|
+        f.issue = i
+        f.repository = 991
+        f.what = 'issue-was-opened'
+        f.where = 'github'
+      end
+    end
+    load_it('find-all-issues', fb)
+    assert_equal(
+      [99], fb.query('(eq what "iterate")').each.first['min_issue_was_found'],
+      'the next run would jump over the issues between the page and the next known one'
+    )
+  end
+
   def test_restarts_after_zero
     WebMock.disable_net_connect!
     fb = Factbase.new
