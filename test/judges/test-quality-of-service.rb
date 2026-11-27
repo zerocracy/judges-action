@@ -607,7 +607,7 @@ class TestQualityOfService < Jp::Test
 
   def test_skips_unfinished_workflow_runs
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     timed = []
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
@@ -642,7 +642,7 @@ class TestQualityOfService < Jp::Test
 
   def test_skips_non_build_workflow_runs_before_sampling
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     started = Time.parse('2024-08-07T10:00:00Z')
     conclusions = %w[skipped cancelled neutral timed_out stale action_required]
     runs =
@@ -697,7 +697,7 @@ class TestQualityOfService < Jp::Test
 
   def test_skips_repo_on_not_found_workflow_runs
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::NotFound) }
@@ -712,7 +712,7 @@ class TestQualityOfService < Jp::Test
 
   def test_skips_repo_on_forbidden_workflow_runs
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::Forbidden) }
@@ -727,7 +727,7 @@ class TestQualityOfService < Jp::Test
 
   def test_skips_run_on_not_found_workflow_run_usage
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
@@ -759,7 +759,7 @@ class TestQualityOfService < Jp::Test
 
   def test_skips_run_on_forbidden_workflow_run_usage
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
     octo.define_singleton_method(:repository_workflow_runs) do |*|
@@ -791,7 +791,7 @@ class TestQualityOfService < Jp::Test
 
   def test_dont_count_run_with_unreadable_usage_as_success
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     seed = Random.new_seed
     secs = Random.new(seed).rand(1..3_600)
     started = Time.parse('2024-08-07T10:00:00Z')
@@ -820,7 +820,7 @@ class TestQualityOfService < Jp::Test
 
   def test_dont_pair_failure_with_unreadable_usage
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     started = Time.parse('2024-08-07T10:00:00Z')
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
@@ -847,7 +847,7 @@ class TestQualityOfService < Jp::Test
 
   def test_skips_run_without_duration
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     seed = Random.new_seed
     secs = Random.new(seed).rand(1..3_600)
     started = Time.parse('2024-08-07T10:00:00Z')
@@ -875,7 +875,7 @@ class TestQualityOfService < Jp::Test
 
   def test_dont_round_subsecond_duration_to_zero
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     seed = Random.new_seed
     ms = Random.new(seed).rand(1..999)
     octo = Object.new
@@ -902,7 +902,7 @@ class TestQualityOfService < Jp::Test
 
   def test_dont_pair_failure_with_success_finished_earlier_within_second
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_build_success_rate.rb'))
     seed = Random.new_seed
     random = Random.new(seed)
     durations = { 1 => random.rand(500..999), 2 => random.rand(1..499) }
@@ -2826,7 +2826,7 @@ class TestQualityOfService < Jp::Test
     url =
       'https://api.github.com/search/issues?advanced_search=true&per_page=100&' \
       'q=repo:foo/foo%20type:issue%20created:*..2025-08-22%20(closed:%3E=2025-08-22%20OR%20state:open)'
-    load(File.join(__dir__, '../../judges/quality-of-service/some_backlog_size.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_backlog_size.rb'))
     Jp.qoreset
     fb = Factbase.new
     fb.insert.then do |f|
@@ -2915,7 +2915,7 @@ class TestQualityOfService < Jp::Test
 
   def test_some_pull_hoc_size_handles_nil_additions_or_deletions
     $loog = Loog::NULL
-    load(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
+    load_judge(File.join(__dir__, '../../judges/quality-of-service/some_pull_hoc_size.rb'))
     Jp.qoreset
     octo = Object.new
     octo.define_singleton_method(:off_quota?) { |**| false }
