@@ -11,6 +11,7 @@ def total_files(_fact)
   files = 0
   measured = false
   truncated = false
+  skipped = false
   Fbe.unmask_repos do |repo|
     info =
       begin
@@ -26,7 +27,8 @@ def total_files(_fact)
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        skipped = true
+        break
       end
     next if info[:size].nil? || info[:size].zero?
     tree =
@@ -43,7 +45,8 @@ def total_files(_fact)
           "[#{$judge}] Access forbidden to tree for #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        skipped = true
+        break
       end
     if tree[:truncated]
       $loog.info(
@@ -56,7 +59,7 @@ def total_files(_fact)
     measured = true
     files += (tree[:tree] || []).count { |item| item[:type] == 'blob' }
   end
-  return {} if truncated
+  return {} if truncated || skipped
   return {} unless measured
   { total_files: files }
 end

@@ -24,7 +24,7 @@ def total_commits(_fact)
       $loog.warn(
         "[#{$judge}] Repository #{repo} forbidden (transient, will retry next cycle): #{e.class}: #{e.message}"
       )
-      next
+      return {}
     end
     next if json[:size].nil? || json[:size].zero?
     next if json[:default_branch].nil?
@@ -42,6 +42,7 @@ def total_commits(_fact)
       "[#{$judge}] Can't count commits in #{repos.count} repositories at once, " \
       "counting them one by one: #{e.class}: #{e.message}"
     )
+    skipped = false
     counted =
       repos.filter_map do |owner, name, branch|
         Fbe.github_graph.total_commits(owner, name, branch)
@@ -50,8 +51,10 @@ def total_commits(_fact)
           "[#{$judge}] Can't count commits in #{owner}/#{name} at #{branch} " \
           "(transient, will retry next cycle): #{error.class}: #{error.message}"
         )
+        skipped = true
         nil
       end
-    counted.empty? ? {} : { total_commits: counted.sum }
+    return {} if skipped || counted.empty?
+    { total_commits: counted.sum }
   end
 end

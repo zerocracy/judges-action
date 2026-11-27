@@ -10,6 +10,7 @@ require_relative '../../lib/patches/unmask_repos'
 def total_stars(_fact)
   stars = 0
   forks = 0
+  skipped = false
   Fbe.unmask_repos do |repo|
     json =
       begin
@@ -25,10 +26,12 @@ def total_stars(_fact)
           "[#{$judge}] Access forbidden to #{repo} " \
           "(transient, will retry next cycle): #{e.class}: #{e.message}"
         )
-        next
+        skipped = true
+        break
       end
     stars += json[:stargazers_count] || 0
     forks += json[:forks] || 0
   end
+  return {} if skipped
   { total_stars: stars, total_forks: forks }
 end
