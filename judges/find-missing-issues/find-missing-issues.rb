@@ -9,6 +9,7 @@ require 'fbe/if_absent'
 require 'fbe/issue'
 require 'fbe/octo'
 require 'fbe/tombstone'
+require 'fbe/unmask_repos'
 require 'fbe/who'
 require 'joined'
 require 'tago'
@@ -17,6 +18,7 @@ require_relative '../../lib/issue_was_lost'
 require_relative '../../lib/who_of'
 
 ts = Fbe::Tombstone.new
+managed = Fbe.unmask_repos.to_set(&:downcase)
 
 Fbe.consider(
   '(and (eq where "github") (exists repository) (absent stale) (absent tombstone) (unique repository))'
@@ -43,6 +45,7 @@ Fbe.consider(
       )
       next
     end
+  next unless managed.include?(repo.downcase)
   issues = Fbe.fb.query(
     "(and (eq repository #{r.repository}) (exists issue) (eq where 'github') (unique issue))"
   ).each.map(&:issue)
