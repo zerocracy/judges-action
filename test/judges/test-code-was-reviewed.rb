@@ -618,4 +618,35 @@ class TestCodeWasReviewed < Jp::Test
     assert_equal(431, f.author)
     assert_includes(f.details, 'created by user #431')
   end
+
+  def test_skips_author_review_after_earlier_reviewer_fact
+    WebMock.disable_net_connect!
+    rate_limit_up
+    stub_github('https://api.github.com/repositories/42', body: { id: 42, full_name: 'foo/foo' })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/46',
+      body: {
+        id: 46, number: 46, user: { id: 441, login: 'author1' },
+        created_at: Time.parse('2025-09-01 15:35:30 UTC'), additions: 4, deletions: 2
+      }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/pulls/46/reviews?per_page=100',
+      body: [
+        { id: 49_441, user: { id: 442, login: 'rev1' }, submitted_at: Time.parse('2025-09-02 10:39:20 UTC') },
+        { id: 49_442, user: { id: 441, login: 'author1' }, submitted_at: Time.parse('2025-09-02 11:00:00 UTC') }
+      ]
+    )
+    stub_github('https://api.github.com/repos/foo/foo/issues/46/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46/reviews/49441/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/repos/foo/foo/pulls/46/reviews/49442/comments?per_page=100', body: [])
+    stub_github('https://api.github.com/user/441', body: { id: 441, login: 'author1' })
+    stub_github('https://api.github.com/user/442', body: { id: 442, login: 'rev1' })
+    fb = Factbase.new
+    fb.with(_id: 1, what: 'pull-was-merged', repository: 42, issue: 46, where: 'github')
+    load_it('code-was-reviewed', fb)
+    facts = fb.query('(and (eq what "code-was-reviewed") (eq issue 46))').each.to_a
+    assert_equal(1, facts.size, 'author self-review after another review must be skipped')
+    assert_equal(442, facts.first.who)
+  end
 end

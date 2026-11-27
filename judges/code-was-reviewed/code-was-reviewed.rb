@@ -173,7 +173,7 @@ Fbe.consider(
           next
         end
       n.seconds = Integer(review[:submitted_at] - pr[:created_at])
-      author =
+      opener =
         begin
           Fbe.who(n, :author)
         rescue Fbe::Error => e
@@ -189,7 +189,7 @@ Fbe.consider(
         end
       n.details =
         "The pull request #{Fbe.issue(n)} with #{n.hoc} HoC " \
-        "created by #{author} was reviewed by #{who} " \
+        "created by #{opener} was reviewed by #{who} " \
         "after #{n.seconds / 3600}h#{(n.seconds % 3600) / 60}m and #{n.review_comments} comments."
       $loog.info(
         [
