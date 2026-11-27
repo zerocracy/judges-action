@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/pmp'
 require 'fbe/unmask_repos'
+require_relative '../../lib/humans'
 require_relative '../../lib/qos_search'
 
 def some_backlog_size(fact)
@@ -16,7 +17,8 @@ def some_backlog_size(fact)
     (fact.since.utc.to_date..fact.when.utc.to_date).last(sample).each do |date|
       return {} if Fbe.octo.off_quota?(resource: :search)
       found = Jp.qosearch(
-        "repo:#{repo} type:issue created:*..#{date.iso8601[0..9]} (closed:>=#{date.iso8601[0..9]} OR state:open)",
+        "repo:#{repo} type:issue created:*..#{date.iso8601[0..9]} " \
+        "(closed:>=#{date.iso8601[0..9]} OR state:open)#{Jp.nobots}",
         advanced_search: true
       )
       return {} if found.nil?

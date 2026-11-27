@@ -6,6 +6,7 @@
 require 'fbe/octo'
 require 'fbe/unmask_repos'
 require 'octokit'
+require_relative '../../lib/humans'
 require_relative '../../lib/qos_search'
 
 def some_review_time(fact)
@@ -15,9 +16,12 @@ def some_review_time(fact)
   reviews = []
   Fbe.unmask_repos do |repo|
     return {} if Fbe.octo.off_quota?
-    found = Jp.qosearch("repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}")
+    found = Jp.qosearch(
+      "repo:#{repo} type:pr is:merged closed:#{fact.since.utc.iso8601}..#{fact.when.utc.iso8601}#{Jp.nobots}"
+    )
     return {} if found.nil?
     found[:items].each do |pr|
+      next if pr.dig(:user, :type) == 'Bot'
       all, csize =
         begin
           [Fbe.octo.pull_request_reviews(repo, pr[:number]), Fbe.octo.review_comments(repo, pr[:number]).size]
