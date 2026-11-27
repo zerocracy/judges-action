@@ -631,7 +631,7 @@ class TestQualityOfService < Jp::Test
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([43], timed)
         assert_equal([1], metrics[:some_build_success_rate])
@@ -675,7 +675,7 @@ class TestQualityOfService < Jp::Test
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal(
           {
@@ -703,7 +703,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::NotFound) }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([], metrics[:some_build_success_rate])
       end
@@ -718,7 +718,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:repository_workflow_runs) { |*| raise(Octokit::Forbidden) }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([], metrics[:some_build_success_rate])
       end
@@ -750,7 +750,7 @@ class TestQualityOfService < Jp::Test
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([900], metrics[:some_build_duration], 'run with missing usage is not left out of durations')
       end
@@ -782,7 +782,7 @@ class TestQualityOfService < Jp::Test
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([600], metrics[:some_build_duration], 'run with forbidden usage is not left out of durations')
       end
@@ -811,7 +811,7 @@ class TestQualityOfService < Jp::Test
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([1], metrics[:some_build_success_rate], "success rate counts unreadable run, seed: #{seed}")
       end
@@ -838,7 +838,7 @@ class TestQualityOfService < Jp::Test
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([], metrics[:some_build_mttr], 'repair times pair a failure with unreadable usage')
       end
@@ -866,7 +866,7 @@ class TestQualityOfService < Jp::Test
     end
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([secs], metrics[:some_build_duration], "durations count a run without usage, seed: #{seed}")
       end
@@ -893,7 +893,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:workflow_run_usage) { |*| { run_duration_ms: ms } }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([ms / 1000.0], metrics[:some_build_duration], "subsecond duration is truncated, seed: #{seed}")
       end
@@ -922,7 +922,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:workflow_runs) { |*| { workflow_runs: [] } }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_build_success_rate(fact)
         assert_equal([], metrics[:some_build_mttr], "repair pairs a failure with an earlier success, seed: #{seed}")
       end
@@ -2943,7 +2943,7 @@ class TestQualityOfService < Jp::Test
     octo.define_singleton_method(:rate_limit) { rl }
     fact = Struct.new(:since, :when).new(Time.parse('2024-08-02T21:00:00Z'), Time.parse('2024-08-09T21:00:00Z'))
     Fbe.stub(:octo, octo) do
-      Fbe.stub(:unmask_repos, ->(&block) { block.call('foo/foo') }) do
+      Fbe.stub(:unmask_repos, full_scan_of('foo/foo')) do
         metrics = some_pull_hoc_size(fact)
         assert_equal([5, 10], metrics[:some_pull_hoc_size])
         assert_equal([1, 2], metrics[:some_pull_files_size])

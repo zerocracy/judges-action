@@ -44,6 +44,13 @@ class Jp::Test < Minitest::Test
     )
   end
 
+  def full_scan_of(repo)
+    lambda do |&block|
+      block.call(repo)
+      true
+    end
+  end
+
   def load_it(judge, fb, options = Judges::Options.new({ 'repositories' => 'foo/foo' }), loog: nil)
     $fb = fb
     $global = {}
