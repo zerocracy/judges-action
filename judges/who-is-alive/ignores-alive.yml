@@ -19,7 +19,7 @@ input:
     what: who-has-name
     who: 4444
     name: john-travolta
-    when: 2025-03-01T00:00:00
+    when: 2025-02-20T00:00:00
 expected:
   - /fb[count(f)=2]
   - /fb/f[_id=2 and name='john-travolta']
