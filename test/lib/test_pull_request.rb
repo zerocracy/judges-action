@@ -101,6 +101,80 @@ class TestPullRequest < Jp::Test
     assert_equal({ succeeded_builds: 1, failed_builds: 0 }, result)
   end
 
+  def test_fetch_workflows_empty_without_repository
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    assert_equal({}, Jp.fetch_workflows({ head: { sha: 'x' } }))
+  end
+
+  def test_fetch_workflows_counts_nothing_when_check_runs_missing
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'no-runs' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github('https://api.github.com/repos/foo/foo/commits/no-runs/check-runs?per_page=100', body: {})
+    assert_equal({ succeeded_builds: 0, failed_builds: 0 }, Jp.fetch_workflows(pr))
+  end
+
+  def test_fetch_workflows_ignores_non_pull_request_runs
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'push-run' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/push-run/check-runs?per_page=100',
+      body: { check_runs: [{ id: 1, app: { slug: 'github-actions' } }] }
+    )
+    stub_github('https://api.github.com/repos/foo/foo/actions/jobs/1', body: { run_id: 7001 })
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs/7001',
+      body: { event: 'push', conclusion: 'success' }
+    )
+    assert_equal(
+      { succeeded_builds: 0, failed_builds: 0 }, Jp.fetch_workflows(pr),
+      'a workflow run triggered by a push is not a pull-request build'
+    )
+  end
+
+  def test_fetch_workflows_skips_skipped_and_unfinished_runs
+    WebMock.disable_net_connect!
+    rate_limit_up
+    $options = Judges::Options.new({})
+    $global = {}
+    $loog = Loog::NULL
+    pr = { head: { sha: 'partial' }, base: { repo: { full_name: 'foo/foo' } } }
+    stub_github(
+      'https://api.github.com/repos/foo/foo/commits/partial/check-runs?per_page=100',
+      body: { check_runs: (1..3).map { |id| { id: id, app: { slug: 'github-actions' } } } }
+    )
+    (1..3).each do |id|
+      stub_github("https://api.github.com/repos/foo/foo/actions/jobs/#{id}", body: { run_id: 8000 + id })
+    end
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs/8001',
+      body: { event: 'pull_request', conclusion: 'skipped' }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs/8002',
+      body: { event: 'pull_request', conclusion: nil }
+    )
+    stub_github(
+      'https://api.github.com/repos/foo/foo/actions/runs/8003',
+      body: { event: 'pull_request', conclusion: 'failure' }
+    )
+    assert_equal(
+      { succeeded_builds: 0, failed_builds: 1 }, Jp.fetch_workflows(pr),
+      'skipped and unfinished runs are not builds, a failure is one failed build'
+    )
+  end
+
   def test_counts_reactions_when_reaction_user_is_nil
     WebMock.disable_net_connect!
     rate_limit_up
