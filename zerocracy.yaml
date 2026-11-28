@@ -2,11 +2,12 @@
 - added: 8
   cycles: 1
   deleted: 8
+  error: deadlock; recursive locking
   inserted: 8
-  seconds: 1104.394238504
+  seconds: 1175.458033314
   version: 0.61.1
   what: judges-summary
-  when: 2026-11-28 07:20:02.096753601 Z
+  when: 2026-11-28 07:51:16.774419520 Z
 - _id: 163490
   _job: 4759
   _time: 2024-08-18 06:21:21.218738268 Z
@@ -18447,36 +18448,6 @@
   when: 2026-03-16 12:02:58.000000000 Z
   where: github
   who: 113470971
-- _id: 2607070
-  _job: 23143800215
-  _time: 2026-03-16 12:37:42.680820272 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  branch: renovate/judges-0.x-lockfile
-  details: The missing pull zerocracy/baza#1135 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1135
-  repository: 728758275
-  stale: issue
-  tombstone: 2026-11-28 06:39:37.466507250 Z
-  what: pull-was-opened
-  when: 2026-03-14 16:54:42.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2607071
-  _job: 23143800215
-  _time: 2026-03-16 12:37:44.043234936 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  branch: renovate/aws-sdk-s3-1.x-lockfile
-  details: The missing pull zerocracy/baza#1136 has been opened by @renovate[bot].
-  is_human: 0
-  issue: 1136
-  repository: 728758275
-  stale: issue
-  tombstone: 2026-11-28 06:39:37.505526538 Z
-  what: pull-was-opened
-  when: 2026-03-14 16:55:03.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2607082
   _job: 23162237341
   _time: 2026-03-16 19:34:40.444475860 Z
@@ -18538,58 +18509,6 @@
   where: github
   who: 526301
   why: Pushed 1f639221b to the default branch 'master' in zerocracy/baza
-- _id: 2607133
-  _job: 23181713923
-  _time: 2026-03-17 06:37:36.872422685 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  branch: renovate/judges-0.x-lockfile
-  comments: 3
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 2
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/baza#1135 has been "pull-was-closed".
-  done: 2026-11-28 06:39:37.429609431 Z
-  failed_builds: 1
-  files: 3
-  hoc: 27
-  is_human: 0
-  issue: 1135
-  repository: 728758275
-  stale: issue
-  succeeded_builds: 15
-  suggestions: 0
-  what: pull-was-closed
-  when: 2026-03-17 05:18:13.000000000 Z
-  where: github
-  who: 29139614
-- _id: 2607134
-  _job: 23181713923
-  _time: 2026-03-17 06:37:54.794824472 Z
-  _version: 0.19.9/0.60.1/0.17.15
-  branch: renovate/aws-sdk-s3-1.x-lockfile
-  comments: 2
-  comments_appreciated: 0
-  comments_by_author: 1
-  comments_by_reviewers: 1
-  comments_resolved: 0
-  comments_to_code: 0
-  details: Apparently, zerocracy/baza#1136 has been "pull-was-closed".
-  done: 2026-11-28 06:39:37.468897614 Z
-  failed_builds: 0
-  files: 1
-  hoc: 4
-  is_human: 0
-  issue: 1136
-  repository: 728758275
-  stale: issue
-  succeeded_builds: 16
-  suggestions: 0
-  what: pull-was-closed
-  when: 2026-03-17 05:18:11.000000000 Z
-  where: github
-  who: 29139614
 - _id: 2607147
   _job: 23191971489
   _time: 2026-03-17 11:29:20.924457890 Z
@@ -60819,11 +60738,11 @@
   _version: 0.19.9/0.60.2/0.17.17
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 28483695956
+  events_were_scanned: 28496558092
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 8
+  min_issue_was_found: 11
   min_pull_was_found: 7
   repository: 1246623470
   what: iterate
@@ -143790,7 +143709,7 @@
   _version: 0.19.9/0.60.2/0.17.17
   assignees_were_scanned: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 28488223402
+  events_were_scanned: 28497520476
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 2
@@ -149024,6 +148943,7 @@
   - 1076-1105
   - 1107-1119
   - 1123-1131
+  - 1135-1136
   repository: 728758275
   what: tombstone
   where: github
@@ -151279,7 +151199,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 170
   merges_were_scanned: 0
-  min_issue_was_found: 234
+  min_issue_was_found: 254
   min_pull_was_found: 215
   repository: 849726475
   types_were_scanned: 0
@@ -151513,7 +151433,7 @@
   labels_were_scanned: 0
   latest_issue_was_found: 141
   merges_were_scanned: 0
-  min_issue_was_found: 166
+  min_issue_was_found: 0
   min_pull_was_found: 176
   repository: 805238060
   types_were_scanned: 0
@@ -151526,12 +151446,12 @@
   assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 28480691192
+  events_were_scanned: 28497617820
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 1
   merges_were_scanned: 0
-  min_issue_was_found: 29
+  min_issue_was_found: 30
   min_pull_was_found: 84
   repository: 1084843345
   types_were_scanned: 0
@@ -151541,36 +151461,36 @@
   _job: 28953721970
   _time: 2026-07-08 15:19:34.814131920 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1328
-  closures_were_checked: 1439
+  assignees_were_scanned: 1502
+  closures_were_checked: 0
   earliest_issue_was_found: 1
   events_were_scanned: 21559786016
   issues_were_scanned: 1396
-  labels_were_scanned: 1823
+  labels_were_scanned: 1898
   latest_issue_was_found: 315
-  merges_were_scanned: 1809
+  merges_were_scanned: 2007
   min_issue_was_found: 1866
   min_pull_was_found: 852
   repository: 798641472
-  types_were_scanned: 745
+  types_were_scanned: 871
   what: iterate
   where: github
 - _id: 2629842
   _job: 28953721970
   _time: 2026-07-08 15:19:35.116182688 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 449
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 28488919842
+  events_were_scanned: 21559439608
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 156
-  merges_were_scanned: 0
+  merges_were_scanned: 618
   min_issue_was_found: 626
   min_pull_was_found: 234
   repository: 840215648
-  types_were_scanned: 0
+  types_were_scanned: 438
   what: iterate
   where: github
 - _id: 2629843
@@ -151971,18 +151891,18 @@
   _job: 28962790843
   _time: 2026-07-08 17:35:40.165080474 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1112
-  closures_were_checked: 0
+  assignees_were_scanned: 1231
+  closures_were_checked: 955
   earliest_issue_was_found: 1
   events_were_scanned: 21559667613
   issues_were_scanned: 1225
-  labels_were_scanned: 2053
+  labels_were_scanned: 0
   latest_issue_was_found: 317
-  merges_were_scanned: 1271
+  merges_were_scanned: 1337
   min_issue_was_found: 1970
   min_pull_was_found: 841
   repository: 820463873
-  types_were_scanned: 1583
+  types_were_scanned: 1723
   what: iterate
   where: github
 - _id: 2629882
@@ -152628,18 +152548,18 @@
   _job: 28967875038
   _time: 2026-07-08 18:58:43.857993998 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 1390
+  assignees_were_scanned: 0
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 21556968076
+  events_were_scanned: 21560024881
   issues_were_scanned: 1382
   labels_were_scanned: 0
   latest_issue_was_found: 386
-  merges_were_scanned: 0
-  min_issue_was_found: 1250
+  merges_were_scanned: 1201
+  min_issue_was_found: 1251
   min_pull_was_found: 732
   repository: 802720676
-  types_were_scanned: 966
+  types_were_scanned: 1075
   what: iterate
   where: github
 - _id: 2629939
@@ -152774,18 +152694,18 @@
   _job: 28989295262
   _time: 2026-07-09 02:17:35.311871794 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 854
+  assignees_were_scanned: 919
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 21556879671
+  events_were_scanned: 28497953411
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 299
-  merges_were_scanned: 1186
+  merges_were_scanned: 1307
   min_issue_was_found: 1207
   min_pull_was_found: 797
   repository: 799113787
-  types_were_scanned: 607
+  types_were_scanned: 678
   what: iterate
   where: github
 - _id: 2630023
@@ -152810,18 +152730,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:23:40.207441243 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 2556
-  closures_were_checked: 1964
+  assignees_were_scanned: 2724
+  closures_were_checked: 2328
   earliest_issue_was_found: 1
-  events_were_scanned: 21553969142
+  events_were_scanned: 21559554946
   issues_were_scanned: 2725
-  labels_were_scanned: 1702
+  labels_were_scanned: 2975
   latest_issue_was_found: 1073
-  merges_were_scanned: 3053
+  merges_were_scanned: 3141
   min_issue_was_found: 2967
   min_pull_was_found: 1613
   repository: 799177290
-  types_were_scanned: 1655
+  types_were_scanned: 1719
   what: iterate
   where: github
 - _id: 2630036
@@ -152846,18 +152766,18 @@
   _job: 29025041680
   _time: 2026-07-09 14:25:56.841387700 Z
   _version: 0.19.9/0.60.2/0.17.17
-  assignees_were_scanned: 0
+  assignees_were_scanned: 1244
   closures_were_checked: 0
   earliest_issue_was_found: 1
-  events_were_scanned: 28491771861
+  events_were_scanned: 28497810329
   issues_were_scanned: 0
   labels_were_scanned: 0
   latest_issue_was_found: 888
   merges_were_scanned: 0
-  min_issue_was_found: 1311
+  min_issue_was_found: 1314
   min_pull_was_found: 1194
   repository: 728758275
-  types_were_scanned: 0
+  types_were_scanned: 1201
   what: iterate
   where: github
 - _id: 2630038
@@ -605134,10 +605054,6 @@
   comments: 0
   details: It's time to reward @opusstudiohq-max for the code contributed in zerocracy/pages-action#1486,
     the reward amount is 20.
-  greeting: |-
-    Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (22) hits-of-code, as [per policy](https://www.yegor256.com/2014/11/14/hits-of-code.html) contributions under 30 hits-of-code incur this deduction. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+1602](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
-
-    <!-- Thanks for the contribution! You've earned +20 points for this: +24 as a basis; -4 for too few (22) hits-of-code. Please, [keep](https://www.yegor256.com/2018/03/06/speed-vs-quality.html) them coming. Your running score is [+1602](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
   hoc: 22
   href: https://github.com/zerocracy/pages-action/issues/1486/#issuecomment-7235421514
   is_human: 1
@@ -605183,7 +605099,7 @@
   repository: 820463873
   review_comments: 0
   what: pull-was-reviewed
-  when: 2026-11-28 06:57:56.000000000 Z
+  when: &7621 2026-11-28 06:57:56.000000000 Z
   where: github
   who: 526301
 - _id: 2657455
@@ -605196,7 +605112,7 @@
   label: enhancement
   repository: 798641472
   what: label-was-attached
-  when: 2026-11-28 07:00:39.000000000 Z
+  when: &7622 2026-11-28 07:00:39.000000000 Z
   where: github
   who: 526301
 - _id: 2657456
@@ -605209,7 +605125,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-11-28 06:35:57.000000000 Z
+  when: &7625 2026-11-28 06:35:57.000000000 Z
   where: github
   who: 526301
 - _id: 2657457
@@ -605222,7 +605138,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-11-28 06:31:07.000000000 Z
+  when: &7626 2026-11-28 06:31:07.000000000 Z
   where: github
   who: 526301
 - _id: 2657458
@@ -605235,7 +605151,7 @@
   label: enhancement
   repository: 798641472
   what: label-was-attached
-  when: 2026-11-28 06:28:36.000000000 Z
+  when: &7623 2026-11-28 06:28:36.000000000 Z
   where: github
   who: 526301
 - _id: 2657459
@@ -605248,7 +605164,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-11-28 05:54:33.000000000 Z
+  when: &7627 2026-11-28 05:54:33.000000000 Z
   where: github
   who: 526301
 - _id: 2657460
@@ -605261,7 +605177,7 @@
   label: bug
   repository: 798641472
   what: label-was-attached
-  when: 2026-11-28 05:14:29.000000000 Z
+  when: &7628 2026-11-28 05:14:29.000000000 Z
   where: github
   who: 526301
 - _id: 2657461
@@ -605274,7 +605190,7 @@
   label: enhancement
   repository: 798641472
   what: label-was-attached
-  when: 2026-11-28 05:10:08.000000000 Z
+  when: &7624 2026-11-28 05:10:08.000000000 Z
   where: github
   who: 526301
 - _id: 2657462
@@ -605282,9 +605198,379 @@
   _time: 2026-11-28 07:17:00.407838211 Z
   _version: 0.19.16/0.61.1/0.17.23
   details: The issue zerocracy/pgtk#16 has been earlier opened by @yegor256.
+  is_human: 1
   issue: 16
   repository: 1246623470
   what: issue-was-opened
   when: 2026-11-28 06:13:54.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657463
+  _job: 112972
+  _time: 2026-11-28 07:20:54.667842686 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  author: 96509556
+  comments: 1
+  details: The pull request zerocracy/fbe#1328 with 64 HoC created by @thayorns was
+    reviewed by @yegor256 after 1mo4w and 1 comments.
+  hoc: 64
+  is_human: 1
+  issue: 1328
+  repository: 820463873
+  review_comments: 0
+  seconds: 5090744
+  what: code-was-reviewed
+  when: *7621
+  where: github
+  who: 526301
+- _id: 2657464
+  _job: 112972
+  _time: 2026-11-28 07:20:56.842325439 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: 'In the repository #798641472, the user #526301 attached the ''#enhancement''
+    label to the issue #1348 reported by the user #125282851; this means that a feature
+    request was-accepted as valid, by the project team.'
+  is_human: 1
+  issue: 1348
+  reporter: 125282851
+  repository: 798641472
+  what: enhancement-was-accepted
+  when: *7622
+  where: github
+  who: 526301
+- _id: 2657465
+  _job: 112972
+  _time: 2026-11-28 07:20:57.309432613 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: 'In the repository #798641472, the user #526301 attached the ''#enhancement''
+    label to the issue #1351 reported by the user #125282851; this means that a feature
+    request was-accepted as valid, by the project team.'
+  is_human: 1
+  issue: 1351
+  reporter: 125282851
+  repository: 798641472
+  what: enhancement-was-accepted
+  when: *7623
+  where: github
+  who: 526301
+- _id: 2657466
+  _job: 112972
+  _time: 2026-11-28 07:20:57.751508776 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: 'In the repository #798641472, the user #526301 attached the ''#enhancement''
+    label to the issue #1358 reported by the user #125282851; this means that a feature
+    request was-accepted as valid, by the project team.'
+  is_human: 1
+  issue: 1358
+  reporter: 125282851
+  repository: 798641472
+  what: enhancement-was-accepted
+  when: *7624
+  where: github
+  who: 526301
+- _id: 2657467
+  _job: 112972
+  _time: 2026-11-28 07:21:07.432304531 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1349 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1349
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *7625
+  where: github
+  who: 526301
+- _id: 2657468
+  _job: 112972
+  _time: 2026-11-28 07:21:08.237874645 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1350 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1350
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *7626
+  where: github
+  who: 526301
+- _id: 2657469
+  _job: 112972
+  _time: 2026-11-28 07:21:08.691374982 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1355 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1355
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *7627
+  where: github
+  who: 526301
+- _id: 2657470
+  _job: 112972
+  _time: 2026-11-28 07:21:09.145291819 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: "@yegor256 attached the '#bug' label to yegor256/factbase#1356 reported
+    by @morphqdd; this means that a bug was accepted as valid, by the project team."
+  is_human: 1
+  issue: 1356
+  reporter: 125282851
+  repository: 798641472
+  what: bug-was-accepted
+  when: *7628
+  where: github
+  who: 526301
+- _id: 2657471
+  _job: 112972
+  _time: 2026-11-28 07:21:13.505635237 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: -8
+  details: It's time to punish @opusstudiohq-max for the dud submitted in zerocracy/pages-action#1516,
+    the fee amount is -8.
+  greeting: |-
+    Hey, thanks for submitting this ticket! Turns out the team didn't accept it this time, so that's a **-8** points deduction, per policy. No big deal though, these things happen! Reporting bugs and suggesting enhancements is genuinely valuable for the project, so don't let this discourage you. Just try to be a bit more careful next time, and keep [reporting](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) stuff, bugs are always [welcome](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html). Your running score is now [+1594](https://zerocracy.github.io/judges-action/zerocracy-vitals.html), check your [Zerocracy account](https://www.zerocracy.com/) for details.
+
+    <!-- Thanks for submitting this ticket! However, as you see, it was not accepted by the team, which is sad. You've earned -8 points. By reporting bugs or suggesting enhancements, you help our project improve its quality. Please, don't be discouraged. Instead, try to be more careful next time, and [do not hesitate](https://www.yegor256.com/2014/04/13/bugs-are-welcome.html) to [report](https://www.yegor256.com/2018/04/24/right-way-to-report-bugs.html) bugs. Your running score is [+1594](https://zerocracy.github.io/judges-action/zerocracy-vitals.html); don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).  -->
+  is_human: 1
+  issue: 1516
+  repository: 802720676
+  what: dud-was-punished
+  when: 2026-11-28 07:21:13.507802565 Z
+  where: github
+  who: 276356426
+  why: Submitted dud in zerocracy/pages-action#1516
+- _id: 2657472
+  _job: 112972
+  _time: 2026-11-28 07:21:18.272282930 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 0
+  details: It's time to reward @yegor256 for the code review in zerocracy/judges-action#3220,
+    the reward amount is 10.
+  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
+    -8 for absolutely no comments posted.  Calculation inputs: 81 hits-of-code; 0
+    review comments; self-review: no. Your running score is [+6655](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
+    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
+    total number of hits-of-code in the contribution. Then, assume that _comments_
+    is the total number of comments made by all reviewers. Then, assume that _self_
+    is 1 if the review was made for their own code contribution, otherwise zero, and
+    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
+    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+    but not more than **16** points. Then, deduct **5** points if there were less
+    than **9** comments made during review. Then, deduct **8** points if there were
+    absolutely no comments made during review. Then, add **0.375** points for each
+    comment during the review, but not more than **8** points. Then, deduct **4**
+    points if there were less than **24** hits-of-code. Then, make sure the reward
+    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
+  hoc: 81
+  is_human: 1
+  issue: 3220
+  repository: 799177290
+  review_comments: 0
+  seconds: 241695
+  what: code-review-was-rewarded
+  when: 2026-11-28 07:21:18.279988408 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/judges-action#3220
+- _id: 2657473
+  _job: 112972
+  _time: 2026-11-28 07:21:19.147111393 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 1
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1314,
+    the reward amount is 10.
+  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
+    -8 for absolutely no comments posted.  Calculation inputs: 52 hits-of-code; 0
+    review comments; self-review: no. Your running score is [+6665](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
+    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
+    total number of hits-of-code in the contribution. Then, assume that _comments_
+    is the total number of comments made by all reviewers. Then, assume that _self_
+    is 1 if the review was made for their own code contribution, otherwise zero, and
+    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
+    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+    but not more than **16** points. Then, deduct **5** points if there were less
+    than **9** comments made during review. Then, deduct **8** points if there were
+    absolutely no comments made during review. Then, add **0.375** points for each
+    comment during the review, but not more than **8** points. Then, deduct **4**
+    points if there were less than **24** hits-of-code. Then, make sure the reward
+    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
+  hoc: 52
+  is_human: 1
+  issue: 1314
+  repository: 820463873
+  review_comments: 0
+  seconds: 5175724
+  what: code-review-was-rewarded
+  when: 2026-11-28 07:21:19.153670446 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#1314
+- _id: 2657474
+  _job: 112972
+  _time: 2026-11-28 07:21:19.697001927 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 1
+  details: It's time to reward @yegor256 for the code review in zerocracy/fbe#1313,
+    the reward amount is 10.
+  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
+    -8 for absolutely no comments posted.  Calculation inputs: 47 hits-of-code; 0
+    review comments; self-review: no. Your running score is [+6675](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
+    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
+    total number of hits-of-code in the contribution. Then, assume that _comments_
+    is the total number of comments made by all reviewers. Then, assume that _self_
+    is 1 if the review was made for their own code contribution, otherwise zero, and
+    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
+    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+    but not more than **16** points. Then, deduct **5** points if there were less
+    than **9** comments made during review. Then, deduct **8** points if there were
+    absolutely no comments made during review. Then, add **0.375** points for each
+    comment during the review, but not more than **8** points. Then, deduct **4**
+    points if there were less than **24** hits-of-code. Then, make sure the reward
+    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
+  hoc: 47
+  is_human: 1
+  issue: 1313
+  repository: 820463873
+  review_comments: 0
+  seconds: 5177624
+  what: code-review-was-rewarded
+  when: 2026-11-28 07:21:19.703694451 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/fbe#1313
+- _id: 2657475
+  _job: 112972
+  _time: 2026-11-28 07:21:20.244507295 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  award: 10
+  comments: 0
+  details: It's time to reward @yegor256 for the code review in zerocracy/pages-action#1517,
+    the reward amount is 10.
+  greeting: "Thanks for the review! You've earned +10 points for this: +18 as a basis;
+    -8 for absolutely no comments posted.  Calculation inputs: 35 hits-of-code; 0
+    review comments; self-review: no. Your running score is [+6685](https://zerocracy.github.io/judges-action/zerocracy-vitals.html);
+    don't forget to check your [Zerocracy account](https://www.zerocracy.com/) too).
+    \ \n\n<details>\n<summary>Reward policy</summary>\n\nAn author of every code review
+    receives a bonus. Here is how it's calculated: First, assume that _hoc_ is the
+    total number of hits-of-code in the contribution. Then, assume that _comments_
+    is the total number of comments made by all reviewers. Then, assume that _self_
+    is 1 if the review was made for their own code contribution, otherwise zero, and
+    award **18** points. Then, deduct **12** points if they reviewed their own contribution.
+    Then, add **0.015** points for each [hit-of-code](https://www.yegor256.com/2014/11/14/hits-of-code.html),
+    but not more than **16** points. Then, deduct **5** points if there were less
+    than **9** comments made during review. Then, deduct **8** points if there were
+    absolutely no comments made during review. Then, add **0.375** points for each
+    comment during the review, but not more than **8** points. Then, deduct **4**
+    points if there were less than **24** hits-of-code. Then, make sure the reward
+    is not larger than **24** points and not smaller than **4** points.\n\n</details>"
+  hoc: 35
+  is_human: 1
+  issue: 1517
+  repository: 802720676
+  review_comments: 0
+  seconds: 245974
+  what: code-review-was-rewarded
+  when: 2026-11-28 07:21:20.280380813 Z
+  where: github
+  who: 526301
+  why: Reviewed code in zerocracy/pages-action#1517
+- _id: 2657476
+  _job: 46121527159
+  _time: 2026-11-28 07:31:58.350669927 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  branch: '1427'
+  details: The pull request zerocracy/pages-action#1546 has been opened by @yegor256.
+  event_id: 21560024881
+  event_type: PullRequestEvent
+  is_human: 1
+  issue: 1546
+  repository: 802720676
+  what: pull-was-opened
+  when: 2026-11-28 07:06:06.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657477
+  _job: 46121527159
+  _time: 2026-11-28 07:32:13.618948841 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  comments: 0
+  commits: 4
+  details: The pull request zerocracy/judges-action#3223 has been reviewed by @yegor256
+    with 147 HoC and 0 comments.
+  event_id: 21558304614
+  event_type: PullRequestReviewEvent
+  files: 4
+  hoc: 147
+  is_human: 1
+  issue: 3223
+  repository: 799177290
+  review_comments: 0
+  what: pull-was-reviewed
+  when: 2026-11-28 06:26:57.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657478
+  _job: 46121527159
+  _time: 2026-11-28 07:43:54.918487537 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/judges#1343.
+  is_human: 1
+  issue: 1343
+  label: enhancement
+  repository: 799113787
+  what: label-was-attached
+  when: 2026-11-28 06:37:31.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657479
+  _job: 46121527159
+  _time: 2026-11-28 07:43:58.441469237 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "enhancement" label was attached by @yegor256 to the issue yegor256/judges#1346.
+  is_human: 1
+  issue: 1346
+  label: enhancement
+  repository: 799113787
+  what: label-was-attached
+  when: 2026-11-28 06:21:43.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657480
+  _job: 46121527159
+  _time: 2026-11-28 07:44:02.628804677 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/baza.rb#555.
+  is_human: 1
+  issue: 555
+  label: bug
+  repository: 840215648
+  what: label-was-attached
+  when: 2026-11-28 06:52:40.000000000 Z
+  where: github
+  who: 526301
+- _id: 2657481
+  _job: 46121527159
+  _time: 2026-11-28 07:44:37.648356438 Z
+  _version: 0.19.16/0.61.1/0.17.23
+  details: The "bug" label was attached by @yegor256 to the issue zerocracy/pages-action#1520.
+  is_human: 1
+  issue: 1520
+  label: bug
+  repository: 802720676
+  what: label-was-attached
+  when: 2026-11-28 07:05:08.000000000 Z
   where: github
   who: 526301
